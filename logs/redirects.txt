@@ -1,0 +1,4 @@
+https://cloud.google.com/bigquery/docs https://docs.cloud.google.com/bigquery/docs
+https://cloud.google.com/sdk/gcloud/reference/bigquery https://docs.cloud.google.com/sdk/gcloud/reference/bigquery
+https://docs.cloud.google.com/bigquery/pricing https://cloud.google.com/bigquery/pricing
+https://docs.cloud.google.com/bigquery/sla https://cloud.google.com/bigquery/sla

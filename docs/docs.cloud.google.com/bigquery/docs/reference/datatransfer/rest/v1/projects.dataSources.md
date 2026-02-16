@@ -1,0 +1,430 @@
+  - [Resource: DataSource](#DataSource)
+      - [JSON representation](#DataSource.SCHEMA_REPRESENTATION)
+      - [TransferType](#DataSource.TransferType)
+      - [DataSourceParameter](#DataSource.DataSourceParameter)
+          - [JSON representation](#DataSource.DataSourceParameter.SCHEMA_REPRESENTATION)
+      - [Type](#DataSource.Type)
+      - [AuthorizationType](#DataSource.AuthorizationType)
+      - [DataRefreshType](#DataSource.DataRefreshType)
+  - [Methods](#METHODS_SUMMARY)
+
+## Resource: DataSource
+
+Defines the properties and custom parameters for a data source.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;name&quot;: string,
+  &quot;dataSourceId&quot;: string,
+  &quot;displayName&quot;: string,
+  &quot;description&quot;: string,
+  &quot;clientId&quot;: string,
+  &quot;scopes&quot;: [
+    string
+  ],
+  &quot;transferType&quot;: enum (TransferType),
+  &quot;supportsMultipleTransfers&quot;: boolean,
+  &quot;updateDeadlineSeconds&quot;: integer,
+  &quot;defaultSchedule&quot;: string,
+  &quot;supportsCustomSchedule&quot;: boolean,
+  &quot;parameters&quot;: [
+    {
+      object (DataSourceParameter)
+    }
+  ],
+  &quot;helpUrl&quot;: string,
+  &quot;authorizationType&quot;: enum (AuthorizationType),
+  &quot;dataRefreshType&quot;: enum (DataRefreshType),
+  &quot;defaultDataRefreshWindowDays&quot;: integer,
+  &quot;manualRunsDisabled&quot;: boolean,
+  &quot;minimumScheduleInterval&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`  name  `
+
+`  string  `
+
+Output only. Data source resource name.
+
+`  dataSourceId  `
+
+`  string  `
+
+Data source id.
+
+`  displayName  `
+
+`  string  `
+
+User friendly data source name.
+
+`  description  `
+
+`  string  `
+
+User friendly data source description string.
+
+`  clientId  `
+
+`  string  `
+
+Data source client id which should be used to receive refresh token.
+
+`  scopes[]  `
+
+`  string  `
+
+Api auth scopes for which refresh token needs to be obtained. These are scopes needed by a data source to prepare data and ingest them into BigQuery, e.g., <https://www.googleapis.com/auth/bigquery>
+
+`  transferType (deprecated)  `
+
+`  enum ( TransferType  ` )
+
+This item is deprecated\!
+
+Deprecated. This field has no effect.
+
+`  supportsMultipleTransfers (deprecated)  `
+
+`  boolean  `
+
+This item is deprecated\!
+
+Deprecated. This field has no effect.
+
+`  updateDeadlineSeconds  `
+
+`  integer  `
+
+The number of seconds to wait for an update from the data source before the Data Transfer Service marks the transfer as FAILED.
+
+`  defaultSchedule  `
+
+`  string  `
+
+Default data transfer schedule. Examples of valid schedules include: `  1st,3rd monday of month 15:30  ` , `  every wed,fri of jan,jun 13:15  ` , and `  first sunday of quarter 00:00  ` .
+
+`  supportsCustomSchedule  `
+
+`  boolean  `
+
+Specifies whether the data source supports a user defined schedule, or operates on the default schedule. When set to `  true  ` , user can override default schedule.
+
+`  parameters[]  `
+
+`  object ( DataSourceParameter  ` )
+
+Data source parameters.
+
+`  helpUrl  `
+
+`  string  `
+
+Url for the help document for this data source.
+
+`  authorizationType  `
+
+`  enum ( AuthorizationType  ` )
+
+Indicates the type of authorization.
+
+`  dataRefreshType  `
+
+`  enum ( DataRefreshType  ` )
+
+Specifies whether the data source supports automatic data refresh for the past few days, and how it's supported. For some data sources, data might not be complete until a few days later, so it's useful to refresh data automatically.
+
+`  defaultDataRefreshWindowDays  `
+
+`  integer  `
+
+Default data refresh window on days. Only meaningful when `  dataRefreshType  ` = `  SLIDING_WINDOW  ` .
+
+`  manualRunsDisabled  `
+
+`  boolean  `
+
+Disables backfilling and manual run scheduling for the data source.
+
+`  minimumScheduleInterval  `
+
+`  string ( Duration  ` format)
+
+The minimum interval for scheduler to schedule runs.
+
+A duration in seconds with up to nine fractional digits, ending with ' `  s  ` '. Example: `  "3.5s"  ` .
+
+### TransferType
+
+This item is deprecated\!
+
+DEPRECATED. Represents data transfer type.
+
+Enums
+
+`  TRANSFER_TYPE_UNSPECIFIED  `
+
+Invalid or Unknown transfer type placeholder.
+
+`  BATCH  `
+
+Batch data transfer.
+
+`  STREAMING  `
+
+Streaming data transfer. Streaming data source currently doesn't support multiple transfer configs per project.
+
+### DataSourceParameter
+
+A parameter used to define custom fields in a data source definition.
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;paramId&quot;: string,
+  &quot;displayName&quot;: string,
+  &quot;description&quot;: string,
+  &quot;type&quot;: enum (Type),
+  &quot;required&quot;: boolean,
+  &quot;repeated&quot;: boolean,
+  &quot;validationRegex&quot;: string,
+  &quot;allowedValues&quot;: [
+    string
+  ],
+  &quot;minValue&quot;: number,
+  &quot;maxValue&quot;: number,
+  &quot;fields&quot;: [
+    {
+      object (DataSourceParameter)
+    }
+  ],
+  &quot;validationDescription&quot;: string,
+  &quot;validationHelpUrl&quot;: string,
+  &quot;immutable&quot;: boolean,
+  &quot;recurse&quot;: boolean,
+  &quot;deprecated&quot;: boolean,
+  &quot;maxListSize&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`  paramId  `
+
+`  string  `
+
+Parameter identifier.
+
+`  displayName  `
+
+`  string  `
+
+Parameter display name in the user interface.
+
+`  description  `
+
+`  string  `
+
+Parameter description.
+
+`  type  `
+
+`  enum ( Type  ` )
+
+Parameter type.
+
+`  required  `
+
+`  boolean  `
+
+Is parameter required.
+
+`  repeated  `
+
+`  boolean  `
+
+Deprecated. This field has no effect.
+
+`  validationRegex  `
+
+`  string  `
+
+Regular expression which can be used for parameter validation.
+
+`  allowedValues[]  `
+
+`  string  `
+
+All possible values for the parameter.
+
+`  minValue  `
+
+`  number  `
+
+For integer and double values specifies minimum allowed value.
+
+`  maxValue  `
+
+`  number  `
+
+For integer and double values specifies maximum allowed value.
+
+`  fields[]  `
+
+`  object ( DataSourceParameter  ` )
+
+Deprecated. This field has no effect.
+
+`  validationDescription  `
+
+`  string  `
+
+Description of the requirements for this field, in case the user input does not fulfill the regex pattern or min/max values.
+
+`  validationHelpUrl  `
+
+`  string  `
+
+URL to a help document to further explain the naming requirements.
+
+`  immutable  `
+
+`  boolean  `
+
+Cannot be changed after initial creation.
+
+`  recurse  `
+
+`  boolean  `
+
+Deprecated. This field has no effect.
+
+`  deprecated  `
+
+`  boolean  `
+
+If true, it should not be used in new transfers, and it should not be visible to users.
+
+`  maxListSize  `
+
+`  string ( int64 format)  `
+
+For list parameters, the max size of the list.
+
+### Type
+
+Parameter type.
+
+Enums
+
+`  TYPE_UNSPECIFIED  `
+
+Type unspecified.
+
+`  STRING  `
+
+String parameter.
+
+`  INTEGER  `
+
+Integer parameter (64-bits). Will be serialized to json as string.
+
+`  DOUBLE  `
+
+Double precision floating point parameter.
+
+`  BOOLEAN  `
+
+Boolean parameter.
+
+`  RECORD  `
+
+Deprecated. This field has no effect.
+
+`  PLUS_PAGE  `
+
+Page ID for a Google+ Page.
+
+`  LIST  `
+
+List of strings parameter.
+
+### AuthorizationType
+
+The type of authorization needed for this data source.
+
+Enums
+
+`  AUTHORIZATION_TYPE_UNSPECIFIED  `
+
+Type unspecified.
+
+`  AUTHORIZATION_CODE  `
+
+Use OAuth 2 authorization codes that can be exchanged for a refresh token on the backend.
+
+`  GOOGLE_PLUS_AUTHORIZATION_CODE  `
+
+Return an authorization code for a given Google+ page that can then be exchanged for a refresh token on the backend.
+
+`  FIRST_PARTY_OAUTH  `
+
+Use First Party OAuth.
+
+### DataRefreshType
+
+Represents how the data source supports data auto refresh.
+
+Enums
+
+`  DATA_REFRESH_TYPE_UNSPECIFIED  `
+
+The data source won't support data auto refresh, which is default value.
+
+`  SLIDING_WINDOW  `
+
+The data source supports data auto refresh, and runs will be scheduled for the past few days. Does not allow custom values to be set for each transfer config.
+
+`  CUSTOM_SLIDING_WINDOW  `
+
+The data source supports data auto refresh, and runs will be scheduled for the past few days. Allows custom values to be set for each transfer config.
+
+## Methods
+
+### `             checkValidCreds           `
+
+Returns true if valid credentials exist for the given data source and requesting user.
+
+### `             get           `
+
+Retrieves a supported data source and returns its settings.
+
+### `             list           `
+
+Lists supported data sources and returns their settings.

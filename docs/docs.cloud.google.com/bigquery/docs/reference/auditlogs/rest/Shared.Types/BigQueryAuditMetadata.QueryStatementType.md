@@ -1,0 +1,175 @@
+Type of the statement (e.g. SELECT, INSERT, CREATE\_TABLE, CREATE\_MODEL..)
+
+Enums
+
+`  QUERY_STATEMENT_TYPE_UNSPECIFIED  `
+
+Unknown.
+
+`  SELECT  `
+
+SELECT ... FROM \<Table list\> ...
+
+`  ASSERT  `
+
+ASSERT \<condition\> AS 'description'
+
+`  INSERT  `
+
+INSERT INTO \<Table\> ....
+
+`  UPDATE  `
+
+UPDATE \<Table\> SET ...
+
+`  DELETE  `
+
+DELETE \<Table\> ...
+
+`  MERGE  `
+
+MERGE INTO \<Table\> ....
+
+`  TRUNCATE_TABLE  `
+
+TRUNCATE TABLE \<Table\>
+
+`  LOAD_DATA  `
+
+LOAD DATA {OVERWRITE|INTO} \<Table\> .... FROM FILES
+
+`  CREATE_TABLE  `
+
+CREATE TABLE \<Table\> \<column list\>
+
+`  CREATE_TABLE_AS_SELECT  `
+
+CREATE TABLE \<Table\> AS SELECT
+
+`  CREATE_VIEW  `
+
+CREATE VIEW \<View\>
+
+`  CREATE_MODEL  `
+
+CREATE MODEL \<Model\> AS \<Query\>
+
+`  CREATE_MATERIALIZED_VIEW  `
+
+CREATE MATERIALIZED VIEW \<View\> AS ...
+
+`  CREATE_APPROX_VIEW  `
+
+CREATE APPROX\_VIEW \<View\> AS ...
+
+`  CREATE_FUNCTION  `
+
+CREATE FUNCTION \<Function\>(\<Signature\>) AS ...
+
+`  CREATE_TABLE_FUNCTION  `
+
+CREATE TABLE FUNCTION \<Function\>(\<Signature\>) AS ...
+
+`  CREATE_PROCEDURE  `
+
+CREATE PROCEDURE \<Procedure\>
+
+`  CREATE_ROW_ACCESS_POLICY  `
+
+CREATE ROW ACCESS POLICY \<RowAccessPolicy\&gt ON \<Table\>
+
+`  CREATE_SCHEMA  `
+
+CREATE SCHEMA \<Schema\>
+
+`  CREATE_SNAPSHOT_TABLE  `
+
+CREATE SNAPSHOT TABLE \<Snapshot\&gt CLONE \<Table\>
+
+`  DROP_TABLE  `
+
+DROP TABLE \<Table\>
+
+`  DROP_EXTERNAL_TABLE  `
+
+DROP EXTERNAL TABLE \<Table\>
+
+`  DROP_VIEW  `
+
+DROP VIEW \<View\>
+
+`  DROP_MODEL  `
+
+DROP MODEL \<Model\>
+
+`  DROP_MATERIALIZED_VIEW  `
+
+DROP MATERIALIZED VIEW \<View\>
+
+`  DROP_APPROX_VIEW  `
+
+DROP APPROX\_VIEW \<View\>
+
+`  DROP_FUNCTION  `
+
+DROP FUNCTION \<Function\>
+
+`  DROP_PROCEDURE  `
+
+DROP PROCEDURE \<Procedure\>
+
+`  DROP_SCHEMA  `
+
+DROP SCHEMA \<Schema\>
+
+`  DROP_ROW_ACCESS_POLICY  `
+
+DROP ROW ACCESS POLICY \<RowAccessPolicy\&gt ON \<Table\> DROP ALL ROW ACCESS POLICIES ON ON \<Table\>
+
+`  DROP_SNAPSHOT_TABLE  `
+
+DROP SNAPSHOT TABLE \<Snapshot\>
+
+`  ALTER_TABLE  `
+
+ALTER TABLE \<Table\>
+
+`  ALTER_VIEW  `
+
+ALTER VIEW \<View\>
+
+`  ALTER_MATERIALIZED_VIEW  `
+
+ALTER MATERIALIZED\_VIEW \<view\>
+
+`  ALTER_APPROX_VIEW  `
+
+ALTER APPROX\_VIEW \<view\>
+
+`  ALTER_SCHEMA  `
+
+ALTER SCHEMA \<Schema\>
+
+`  SCRIPT  `
+
+Script
+
+`  CREATE_EXTERNAL_TABLE  `
+
+CREATE EXTERNAL TABLE \<TABLE\>
+
+`  EXPORT_DATA  `
+
+EXPORT DATA;
+
+`  CALL  `
+
+CALL \<stored procedure\>
+
+`  ALTER_RECOMMENDATION  `
+
+ALTER RECOMMENDATION state
+
+`  ALTER_INSIGHT  `
+
+ALTER INSIGHT state

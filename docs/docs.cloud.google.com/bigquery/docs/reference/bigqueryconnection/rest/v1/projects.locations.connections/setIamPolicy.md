@@ -1,0 +1,81 @@
+  - [HTTP request](#body.HTTP_TEMPLATE)
+  - [Path parameters](#body.PATH_PARAMETERS)
+  - [Request body](#body.request_body)
+      - [JSON representation](#body.request_body.SCHEMA_REPRESENTATION)
+  - [Response body](#body.response_body)
+  - [Authorization scopes](#body.aspect)
+  - [Try it\!](#try-it)
+
+Sets the access control policy on the specified resource. Replaces any existing policy.
+
+Can return `  NOT_FOUND  ` , `  INVALID_ARGUMENT  ` , and `  PERMISSION_DENIED  ` errors.
+
+### HTTP request
+
+`  POST https://bigqueryconnection.googleapis.com/v1/{resource=projects/*/locations/*/connections/*}:setIamPolicy  `
+
+The URL uses [gRPC Transcoding](https://google.aip.dev/127) syntax.
+
+### Path parameters
+
+Parameters
+
+`  resource  `
+
+`  string  `
+
+REQUIRED: The resource for which the policy is being specified. See [Resource names](https://cloud.google.com/apis/design/resource_names) for the appropriate value for this field.
+
+### Request body
+
+The request body contains data with the following structure:
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>JSON representation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+  &quot;policy&quot;: {
+    object (Policy)
+  },
+  &quot;updateMask&quot;: string
+}</code></pre></td>
+</tr>
+</tbody>
+</table>
+
+Fields
+
+`  policy  `
+
+`  object ( Policy  ` )
+
+REQUIRED: The complete policy to be applied to the `  resource  ` . The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Google Cloud services (such as Projects) might reject them.
+
+`  updateMask  `
+
+`  string ( FieldMask  ` format)
+
+OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used:
+
+`  paths: "bindings, etag"  `
+
+### Response body
+
+If successful, the response body contains an instance of `  Policy  ` .
+
+### Authorization scopes
+
+Requires one of the following OAuth scopes:
+
+  - `  https://www.googleapis.com/auth/bigquery  `
+  - `  https://www.googleapis.com/auth/cloud-platform  `
+
+For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
