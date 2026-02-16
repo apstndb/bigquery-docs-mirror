@@ -2,7 +2,7 @@
 
 # Discovery entry points
 seeds = [
-    "https://cloud.google.com/bigquery",
+    "https://cloud.google.com/bigquery/docs",
     "https://cloud.google.com/sdk/gcloud/reference/bigquery"
 ]
 
