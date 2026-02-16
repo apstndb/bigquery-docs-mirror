@@ -5,7 +5,7 @@ on:
     # Runs at 18:00 UTC every day (03:00 JST)
     # IMPORTANT: Coordinate this schedule with other mirrors sharing the same API key 
     # to avoid simultaneous runs that exhaust your quota.
-    - cron: '0 18 * * *'
+    - cron: '0 19 * * *'
   workflow_dispatch: # Allows manual triggering from the Actions tab
 
 permissions:

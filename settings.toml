@@ -2,17 +2,17 @@
 
 # Discovery entry points
 seeds = [
-    "https://cloud.google.com/YOUR_PRODUCT",
-    "https://cloud.google.com/sdk/gcloud/reference/YOUR_PRODUCT"
+    "https://cloud.google.com/bigquery",
+    "https://cloud.google.com/sdk/gcloud/reference/bigquery"
 ]
 
 # Path prefixes to mirror
 # Include both web documentation and gcloud CLI reference
 prefixes = [
-    "/YOUR_PRODUCT/",
-    "/sdk/gcloud/reference/YOUR_PRODUCT/",
-    "/sdk/gcloud/reference/alpha/YOUR_PRODUCT/",
-    "/sdk/gcloud/reference/beta/YOUR_PRODUCT/"
+    "/bigquery/",
+    "/sdk/gcloud/reference/bigquery/",
+    "/sdk/gcloud/reference/alpha/bigquery/",
+    "/sdk/gcloud/reference/beta/bigquery/"
 ]
 
 # Sitemap URL(s) to discover links
