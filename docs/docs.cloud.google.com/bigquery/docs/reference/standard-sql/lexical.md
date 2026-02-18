@@ -186,17 +186,13 @@ mytable
 
 ## Column names
 
-A column name represents the name of a column in a table.
-
-  - Column names can be quoted identifiers or unquoted identifiers.
-  - If unquoted, identifiers support dashed identifiers when referenced in a `  FROM  ` or `  TABLE  ` clause.
-  - Column names have [additional rules](/bigquery/docs/schemas#column_names) .
+A column name represents the name of a column in a table. Column names can be quoted identifiers or unquoted identifiers. Column names also have [additional rules](/bigquery/docs/schemas#column_names) .
 
 Examples:
 
 ``` text
 columnA
-column-a
+`column-a`
 `287column`
 ```
 
