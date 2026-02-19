@@ -57,7 +57,7 @@ To manage listings and subscriptions, you must have one of the following BigQuer
 
 For more information, see [BigQuery sharing IAM roles](/bigquery/docs/analytics-hub-grant-roles#user_roles) . To learn how to grant these roles to other users, see [Create a listing administrator](#create-listing-administrator) .
 
-Additionally, to create listings, you must also have the `  bigquery.datasets.get  ` and `  bigquery.datasets.update  ` permissions for the datasets for which you want to create listings. The following [BigQuery predefined roles](/bigquery/docs/access-control#bigquery) contain the `  bigquery.datasets.update  ` permission:
+To create listings or to update replica regions for a listing, you must have the `  bigquery.datasets.get  ` and `  bigquery.datasets.update  ` permissions for the datasets where you want to create or update listings. The following [BigQuery predefined roles](/bigquery/docs/access-control#bigquery) contain the `  bigquery.datasets.update  ` permission:
 
   - [BigQuery Data Owner](/bigquery/docs/access-control#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` )
   - [BigQuery Admin](/bigquery/docs/access-control#bigquery.admin) ( `  roles/bigquery.admin  ` )
@@ -392,8 +392,6 @@ To view all the current subscriptions to your listing, select one of the followi
 
 5.  Optional: You can filter results by subscriber details.
 
-**Note:** The subscriptions listed when using the Google Cloud console are colocated with the primary region of the shared dataset. For a listing with multiple regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ), you can view the subscriptions across all the regions by using the SQL or API options.
-
 Alternatively, if you have access to the [shared dataset](/bigquery/docs/analytics-hub-introduction#shared_datasets) , you can follow these steps to list subscribers:
 
 1.  Go to the **BigQuery** page.
@@ -513,8 +511,6 @@ To update a listing, follow these steps:
       - If you disable public discoverability, remove the Analytics Hub Viewer role ( `  roles/analyticshub.viewer  ` ) from `  allUsers  ` and `  allAuthenticatedUsers  ` . Public exchanges can't have private listings, but private exchanges can have public listings.
       - If you enable and save subscriber email logging, this setting cannot be edited. To disable email logging, delete the listing and recreate it without clicking the **Subscriber email logging** toggle.
       - Add or remove regions from the listing ( [Preview](https://cloud.google.com/products#product-launch-stages) ). Before adding multiple regions, verify you've enabled [cross-region dataset replication](/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. When removing regions, delete the shared dataset replica in that region first.
-    
-    **Note:** This option is available only for newly created listings for multiple regions. You cannot add or remove replicas for existing single-region listings.
 
 7.  Preview the listing.
 
@@ -542,10 +538,11 @@ In the body of the request, specify updated values for the following fields:
   - `  categories[]  `
   - `  discoveryType  `
   - `  logLinkedDatasetQueryUserEmail  `
+  - `  bigqueryDataset.replicaLocations  `
 
 For details on these fields, see [Resource: Listing](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#resource:-listing) .
 
-When updating the replica regions for your listing, ensure that you specify all applicable regions. Before updating the listing, verify you've enabled [cross-region dataset replication](/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can add only regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) where the shared dataset is replicated. To remove a region, delete the shared dataset replica for the region before removing it from the listing. You can update replica regions only for newly created listings for multiple regions. You can't convert pre-existing listings to listings for multiple regions.
+When updating the replica regions for your listing, ensure that you specify all applicable regions. Before updating the listing, verify you've enabled [cross-region dataset replication](/bigquery/docs/data-replication#use_dataset_replication) on the shared dataset. You can add only regions ( [Preview](https://cloud.google.com/products#product-launch-stages) ) where the shared dataset is replicated. To remove a region, delete the shared dataset replica for the region before removing it from the listing. You can also convert pre-existing listings to listings for multiple regions.
 
 For more information about the tasks that you can perform on listings using APIs, see [`  projects.locations.dataExchanges.listings  ` methods](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#methods) .
 

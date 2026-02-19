@@ -60,7 +60,12 @@ SET OPTIONS (
   `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
   `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
   `region-REGION.default_storage_billing_model`= NULL,
-  `region-REGION.default_max_time_travel_hours` = NULL);
+  `region-REGION.default_max_time_travel_hours` = NULL,
+  `region-REGION.default_cloud_resource_connection_id` = NULL,
+  `region-REGION.default_sql_dialect_option` = NULL,
+  `region-REGION.enable_reservation_based_fairness` = NULL,
+  `region-REGION.enable_global_queries_execution` = NULL,
+  `region-REGION.enable_global_queries_data_access` = NULL);
 ```
 
 ### Configure project settings
@@ -75,6 +80,7 @@ To configure project settings, use the [`  ALTER PROJECT SET OPTIONS  ` DDL stat
   - Interactive query queue timeout: 10 minutes
   - Batch query queue timeout: 20 minutes
   - Reservation-based fairness: enabled
+  - Global queries: enabled for running and for accessing data
 
 <!-- end list -->
 
@@ -91,7 +97,9 @@ SET OPTIONS (
   `region-REGION.default_max_time_travel_hours` = 72,
   `region-REGION.default_cloud_resource_connection_id` = CONNECTION_ID,
   `region-REGION.default_sql_dialect_option` = 'default_google_sql',
-  `region-REGION.enable_reservation_based_fairness` = true);
+  `region-REGION.enable_reservation_based_fairness` = true,
+  `region-REGION.enable_global_queries_execution` = true,
+  `region-REGION.enable_global_queries_data_access` = true);
 ```
 
 Replace the following:
@@ -116,7 +124,9 @@ SET OPTIONS (
   `region-REGION.default_max_time_travel_hours` = NULL,
   `region-REGION.default_cloud_resource_connection_id` = NULL,
   `region-REGION.default_sql_dialect_option` = NULL,
-  `region-REGION.enable_reservation_based_fairness` = NULL);
+  `region-REGION.enable_reservation_based_fairness` = NULL,
+  `region-REGION.enable_global_queries_execution` = NULL,
+  `region-REGION.enable_global_queries_data_access` = NULL);
 ```
 
 Project-level configurations override organization-level configurations. Project-level configurations can in turn be overridden by [session-level configurations](/bigquery/docs/sessions-write-queries) , which can be overridden by [job-level configurations](/bigquery/docs/running-queries) .
@@ -195,6 +205,10 @@ Use the following settings to control how queries are executed, timed, and queue
       - `  'default_google_sql'  ` : Use GoogleSQL if the query dialect isn't specified at the job level.
       - `  'only_google_sql'  ` : Use GoogleSQL if the query dialect isn't specified at the job level. Reject jobs with query dialect set to legacy SQL.
       - `  NULL  ` : Use the default query dialect setting, which is equivalent to `  'default_legacy_sql'  ` .
+
+  - `  enable_global_queries_execution  ` : The option that determines if [global queries](/bigquery/docs/global-queries) can be run. The default value is `  FALSE  ` , which means that global queries are not enabled.
+
+  - `  enable_global_queries_data_access  ` : The option that determines if [global queries](/bigquery/docs/global-queries) can access data stored in the region. The default value is `  FALSE  ` , which means that global queries can't copy data from this region regardless of the project in which they run.
 
 ### Data management settings
 

@@ -2432,9 +2432,9 @@ You can specify the location to run a job explicitly in the following ways:
   - When you use the bq command-line tool, supply the `  --location  ` [global flag](/bigquery/docs/reference/bq-cli-reference#global_flags) and set the value to your location.
   - When you use the API, specify your region in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/jobs) .
 
-BigQuery returns an error if the specified location does not match the location of the datasets in the request. The location of every dataset involved in the request, including those read from and those written to, must match the location of the job as inferred or specified.
+If the specified location does not match the location of every dataset involved in the request, including those read from and those written to, BigQuery tries to run the query as a [global query](/bigquery/docs/global-queries) . This declaration determines where your data is collected and processed.
 
-Single-region locations don't match multi-region locations, even where the single-region location is contained within the multi-region location. Therefore, a query or job will fail if the location includes both a single-region location and a multi-region location. For example, if a job's location is set to `  US  ` , the job will fail if it references a dataset in `  us-central1  ` . Likewise, a job that references one dataset in `  US  ` and another dataset in `  us-central1  ` will fail. This is also true for `  JOIN  ` statements with tables in both a region and a multi-region.
+Single-region locations don't match multi-region locations, even where the single-region location is contained within the multi-region location. Therefore, a query will be run as a [global query](/bigquery/docs/global-queries) if the location includes both a single-region location and a multi-region location. For example, if a job's location is set to `  US  ` , the job will be a global query if it references a dataset in `  us-central1  ` . Likewise, a job that references one dataset in `  US  ` and another dataset in `  us-central1  ` will be a global query. This is also true for `  JOIN  ` statements with tables in both a region and a multi-region.
 
 [Dynamic queries](/bigquery/docs/reference/standard-sql/procedural-language#execute_immediate) aren't parsed until they execute, so they can't be used to automatically determine the region of a query.
 
@@ -2442,7 +2442,7 @@ Single-region locations don't match multi-region locations, even where the singl
 
 Capacity commitments are a regional resource. When you buy slots, those slots are limited to a specific region or multi-region. If your only capacity commitment is in the `  EU  ` then you can't create a reservation in the `  US  ` . When you create a reservation, you specify a location (region) and a number of slots. Those slots are pulled from your capacity commitment in that region.
 
-Likewise, when you run a job in a region, it only uses a reservation if the location of the job matches the location of a reservation. For example, if you assign a reservation to a project in the `  EU  ` and run a query in that project on a dataset located in the `  US  ` , then that query is not run on your `  EU  ` reservation. In the absence of any `  US  ` reservation, the job is run as on-demand.
+Likewise, when you run a job in a region, it only uses a reservation if the location of the job matches the location of a reservation, unless the job is a [global query](/bigquery/docs/global-queries) . For example, if you assign a reservation to a project in the `  EU  ` and run a query in that project on a dataset located in the `  US  ` , then that query is not run on your `  EU  ` reservation. In the absence of any `  US  ` reservation, the job is run as on-demand.
 
 ## Location considerations
 
@@ -2551,5 +2551,6 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
   - Learn how to [create datasets](/bigquery/docs/datasets) .
   - Learn about [loading data into BigQuery](/bigquery/docs/loading-data) .
   - Learn about BigQuery [pricing](https://cloud.google.com/bigquery/pricing) .
+  - Learn about [global queries](/bigquery/docs/global-queries) .
   - [View all the Google Cloud services available in locations worldwide](/about/locations#region) .
   - [Explore additional location-based concepts](/docs/geography-and-regions) , such as zones, that apply to other Google Cloud services.

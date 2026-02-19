@@ -101,6 +101,7 @@ Keep in mind the following restrictions when using regional endpoints:
   - Regional endpoints don't support [mutual Transport Layer Security (mTLS)](/chrome-enterprise-premium/docs/understand-mtls) .
   - Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](/resource-manager/docs/organization-policy/defining-locations) .
   - [Cross-region dataset replication](/bigquery/docs/data-replication) and [cross-region table copying](/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
+  - Running [global queries](/bigquery/docs/global-queries)
 
 ## Tools for using regional endpoints
 

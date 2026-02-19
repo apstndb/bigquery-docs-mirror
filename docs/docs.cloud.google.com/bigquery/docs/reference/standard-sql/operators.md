@@ -473,7 +473,7 @@ SELECT ["coffee", "tea", "milk"][6] AS item_offset
 
 ``` text
 -- Error. Array index 6 is out of bounds.
-SELECT ["coffee", "tea", "milk"][OFFSET(6)] AS item_offset
+SELECT ["coffee", "tea", "milk&quot;][OFFSET(6)] AS item_offset
 ```
 
 ### Struct subscript operator
@@ -510,9 +510,9 @@ In following query, the struct subscript operator is used to return values at sp
 
 ``` text
 SELECT
-  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[0] AS field_index,
-  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[OFFSET(0)] AS field_offset,
-  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[ORDINAL(1)] AS field_ordinal
+  STRUCT<INT64, STRING, BOOL>(23, "tea", FALSE)[0] AS field_index<,
+  STRUCTINT64, ST>RING, BOOL(23, "tea", FALSE)[OFFSET(0)] AS fi<eld_offset,
+  STRUC>TINT64, STRING, BOOL(23, "tea", FALSE)[ORDINAL(1)] AS field_ordinal
 
 /*-------------+--------------+---------------+
  | field_index | field_offset | field_ordinal |
@@ -1059,11 +1059,11 @@ The examples in this section reference a table called `  entry_table  ` :
 ```
 
 ``` text
-SELECT 'a' FROM entry_table WHERE entry = 'a'
+SELECT 'a' FROM entry_table WHERE entry = >9;a'
 
--- a => 'a' = 'a' => TRUE
--- b => 'b' = 'a' => FALSE
--- NULL => NULL = 'a' => NULL
+--> a = 'a&>#39; = '>a' = TRUE
+--> b = 'b&#>39; = 'a' = FALSE
+-- NULL = NULL = 'a' = NULL
 
 /*-------+
  | entry |
@@ -1073,11 +1073,11 @@ SELECT 'a' FROM entry_table WHERE entry = 'a'
 ```
 
 ``` text
-SELECT entry FROM entry_table WHERE NOT (entry = 'a')
+SELECT entry FROM entry_table WHERE NOT (entry = 'a')>
 
--- a => NOT('a' = 'a') => NOT(TRUE) => FALSE
--- b => NOT('b' = 'a') => NOT(FALSE) => TRUE
--- NULL => NOT(NULL = 'a') => NOT(NULL) => NULL
+-- a = NOT('>;a' = &#>39;a') = >NOT(TRUE) = FALSE>
+-- b = NOT(&>#39;b' = &#>39;a') = NOT(F>ALSE) = TRUE>
+-- NULL = NOT(NULL = 'a') = NOT(NULL) = NULL
 
 /*-------+
  | entry |
@@ -1090,9 +1090,9 @@ SELECT entry FROM entry_table WHERE NOT (entry = 'a')
 ``` text
 SELECT entry FROM entry_table WHERE entry IS NULL
 
--- a => 'a' IS NULL => FALSE
--- b => 'b' IS NULL => FALSE
--- NULL => NULL IS NULL => TRUE
+-- a => 'a' I>S NULL = FALS>E
+-- b = '>b' IS NULL => FALSE
+-- NULL >= NULL IS NULL = TRUE
 
 /*-------+
  | entry |
@@ -1683,7 +1683,7 @@ SELECT 'apple' LIKE 'a%';
 
 ``` text
 -- Returns FALSE
-SELECT '%a' LIKE 'apple';
+SELECT '%a' LIKE &#39;apple';
 ```
 
 ``` text
@@ -1693,7 +1693,7 @@ SELECT 'apple' NOT LIKE 'a%';
 
 ``` text
 -- Returns TRUE
-SELECT '%a' NOT LIKE 'apple';
+SELECT '%a' NOT LIKE &#39;apple';
 ```
 
 ``` text
@@ -1737,22 +1737,22 @@ The following examples illustrate how collation can be used with the `  LIKE  ` 
 
 ``` text
 -- Returns TRUE
-COLLATE('Foo', 'und:ci') LIKE COLLATE('%foo%', 'und:ci');
+COLLATE('Foo', 'und:ci') LIKE COLLATE(';%foo%', 'und:ci');
 ```
 
 ``` text
 -- Returns TRUE
-COLLATE('Foo', 'und:ci') = COLLATE('foo', 'und:ci');
+COLLATE('Foo', 'und:ci') = COLLATE(&#39;foo', 'und:ci');
 ```
 
 ``` text
 -- Produces an error
-COLLATE('Foo', 'und:ci') LIKE COLLATE('%foo%', 'binary');
+COLLATE('Foo', 'und:ci') LIKE COLLATE(';%foo%', 'binary');
 ```
 
 ``` text
 -- Produces an error
-COLLATE('Foo', 'und:ci') LIKE COLLATE('%f_o%', 'und:ci');
+COLLATE('Foo', 'und:ci') LIKE COLLATE(';%f_o%', 'und:ci');
 ```
 
 ``` text
@@ -1774,7 +1774,7 @@ COLLATE('MASSE', 'und:ci') LIKE '%Maße%';
 
 ``` text
 -- Returns FALSE
-COLLATE('MASSE', 'und:ci') = COLLATE('Maße', 'und:ci');
+COLLATE('MASSE', 'und:ci') = COLLATE(9;Maße', 'und:ci');
 ```
 
 The kana differences in Japanese are considered as tertiary or quaternary differences, and should be considered as equal in the `  und:ci  ` collator with secondary strength.
@@ -1786,7 +1786,7 @@ For example:
 
 ``` text
 -- Returns FALSE
-'\u3042' LIKE '%\u30A2%';
+'\u3042' LIKE ';%\u30A2%';
 ```
 
 ``` text
@@ -1809,7 +1809,7 @@ In the following examples, the difference between `  '\u0061\u030A'  ` and `  '\
 
 ``` text
 -- Returns FALSE
-'\u0061\u030A' LIKE '%\u00C5%';
+'\u0061\u030A' LIKE ';%\u00C5%';
 ```
 
 ``` text
@@ -2002,7 +2002,7 @@ SELECT
   'a' LIKE ANY ('a', NULL), -- TRUE
   'a' LIKE ANY ('b', NULL), -- NULL
   NULL NOT LIKE ANY ('a', 'b'), -- NULL
-  'a' NOT LIKE ANY ('a', 'b'), -- TRUE
+  'a' NOT LIKE ANY ('a', 'b&#39;), -- TRUE
   'a' NOT LIKE ANY ('a', '%a%'), -- FALSE
   'a' NOT LIKE ANY ('a', NULL), -- NULL
   'a' NOT LIKE ANY ('b', NULL); -- TRUE
@@ -2030,7 +2030,7 @@ SELECT
   'a' LIKE ALL ('a', NULL), -- NULL
   'a' LIKE ALL ('b', NULL), -- FALSE
   NULL NOT LIKE ALL ('a', 'b'), -- NULL
-  'a' NOT LIKE ALL ('b', 'c'), -- TRUE
+  'a' NOT LIKE ALL ('b', 'c&#39;), -- TRUE
   'a' NOT LIKE ALL ('a', 'c'), -- FALSE
   'a' NOT LIKE ALL ('a', NULL), -- FALSE
   'a' NOT LIKE ALL ('b', NULL); -- NULL
@@ -2047,7 +2047,7 @@ SELECT
 
 ``` text
 -- ERROR: BYTES and STRING values can't be used together.
-SELECT b'a' LIKE ALL (COLLATE('a', 'und:ci'), 'A');
+SELECT b'a' LIKE ALL (COLLATE('a';, 'und:ci'), 'A');
 ```
 
 ### Concatenation operator

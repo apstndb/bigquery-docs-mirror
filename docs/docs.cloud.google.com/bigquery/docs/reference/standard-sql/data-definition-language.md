@@ -7597,6 +7597,18 @@ The following options are supported:
 <td><p>Specifies whether the BigQuery query processor uses the <a href="/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">        query_runtime       </code> value to <code dir="ltr" translate="no">        advanced       </code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.query_runtime` = 'advanced'       </code> . Enables the advanced runtime.</p></td>
 </tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       enable_global_queries_execution      </code></td>
+<td><code dir="ltr" translate="no">       BOOL      </code></td>
+<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
+<p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_execution` = true       </code> . Enables global queries.</p></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       enable_global_queries_data_access      </code></td>
+<td><code dir="ltr" translate="no">       BOOL      </code></td>
+<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
+<p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
+</tr>
 </tbody>
 </table>
 
@@ -7752,6 +7764,18 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
 <td><p>Determines how idle slots are shared. If <code dir="ltr" translate="no">        false       </code> (default), idle slots are equally distributed across all query projects. If <code dir="ltr" translate="no">        true       </code> , idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see <a href="/bigquery/docs/slots#fairness">reservation-based fairness</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_reservation_based_fairness` = true       </code> . Enables reservation-based fairness.</p></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       enable_global_queries_execution      </code></td>
+<td><code dir="ltr" translate="no">       BOOL      </code></td>
+<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
+<p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_execution` = true       </code> . Enables global queries.</p></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       enable_global_queries_data_access      </code></td>
+<td><code dir="ltr" translate="no">       BOOL      </code></td>
+<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
+<p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
 </tr>
 </tbody>
 </table>

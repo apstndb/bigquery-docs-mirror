@@ -46,7 +46,7 @@ BigQuery lets you query the following types of data sources:
 
   - **Data stored in BigQuery.** You can [load data into BigQuery](/bigquery/docs/loading-data) , modify existing data by using [data manipulation language (DML) statements](/bigquery/docs/data-manipulation-language) , or [write query results](/bigquery/docs/writing-results) to a table. You can [query historical data](/bigquery/docs/access-historical-data) from a point in time within your time travel window.
     
-    You can query data stored in single-region or multi-region locations, but you can't run a query against multiple locations even if one is a single-region location and the other is the multi-region location containing that single-region location. For more information, see [Locations, reservations, and jobs](/bigquery/docs/locations#locations_reservations_and_jobs) .
+    You can query data stored in single-region or multi-region locations. A query that accesses data stored in more than one location can be treated as a [global query](/bigquery/docs/global-queries) [(Preview)](/products#product-launch-stages) . Queries that reference data in multiple locations are always treated as global queries, even if one region is a single-region location and the other is a multi-region location that contains the single-region location.
 
   - **External data.** You can query various external data sources such as Cloud Storage, or database services such as Spanner or Cloud SQL. For information about how to set up connections to external sources, see [Introduction to external data sources](/bigquery/docs/external-data-sources)
 
