@@ -180,6 +180,8 @@ spark.addArtifacts("textdistance==4.6.1", "random2", pypi=True)
 
 In the following example, entering `  DataprocSparkSession  ` . and holding the pointer over this class name displays code completion and documentation help.
 
+**Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `  DataprocSparkSession.builder  ` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
+
 ### BigQuery Studio notebook PySpark examples
 
 This section provides BigQuery Studio Python notebook examples with PySpark code to perform the following tasks:

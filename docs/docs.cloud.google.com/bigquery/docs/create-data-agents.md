@@ -31,7 +31,7 @@ To work with data agents, you must have one of the following [Conversational Ana
 
 Additionally, you must have the following roles to create or edit a data agent:
 
-  - Gemini Data Analytics Data Agent Stateless User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ).
+  - Gemini Data Analytics Stateless Chat User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ).
   - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) on any table that the data agent uses as a knowledge source.
   - Dataplex Catalog Viewer ( `  roles/datacatalog.catalogViewer  ` ) on the project
   - If a data table uses [column-level access control](/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](/bigquery/docs/column-level-security-intro#roles) .

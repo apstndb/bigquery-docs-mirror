@@ -48,3 +48,71 @@ Replace the following:
 It can take several minutes for the change to take effect.
 
 Once you've enabled the advanced runtime, qualifying queries in the project or organization use the advanced runtime regardless of which user created the query job.
+
+## Estimate the impact of advanced runtime
+
+To estimate the impact of advanced runtime, you can use the following the SQL query below to identify project queries with the greatest estimated improvement to execution time:
+
+``` text
+  WITH
+    jobs AS (
+      SELECT
+        *,
+        query_info.query_hashes.normalized_literals AS query_hash,
+        TIMESTAMP_DIFF(end_time, start_time, MILLISECOND) AS elapsed_ms,
+        EXISTS(SELECT 1 from UNNEST(JSON_QUERY_ARRAY(query_info.optimization_details.optimizations)) AS o
+               WHERE JSON_VALUE(o, '$.enhanced_vectorization') = 'applied') AS has_advanced_runtime
+      FROM region-LOCATION.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+      WHERE EXTRACT(DATE FROM creation_time) > DATE_SUB(CURRENT_DATE(), INTERVAL 30 DAY)
+    ),
+    most_recent_jobs_without_advanced_runtime AS (
+      SELECT *
+      FROM jobs
+      WHERE NOT has_advanced_runtime
+      QUALIFY ROW_NUMBER() OVER (PARTITION BY query_hash ORDER BY end_time DESC) = 1
+    )
+  SELECT
+    job.job_id,
+    100 * SAFE_DIVIDE(
+      original_job.elapsed_ms - job.elapsed_ms,
+      original_job.elapsed_ms) AS percent_execution_time_saved,
+    job.elapsed_ms AS new_elapsed_ms,
+    original_job.elapsed_ms AS original_elapsed_ms,
+  FROM jobs AS job
+  INNER JOIN most_recent_jobs_without_advanced_runtime AS original_job
+    USING (query_hash)
+  WHERE
+    job.has_advanced_runtime
+    AND original_job.end_time < job.start_time
+  ORDER BY percent_execution_time_saved DESC
+  LIMIT 10;
+```
+
+Replace the following:
+
+  - `  LOCATION  ` : the location of the project
+    
+    If advanced runtime was enabled, the result of the this query is similar to the following:
+    
+    ``` text
+    /*--------------+------------------------------+------------------+-----------------------*
+     |    job_id    | percent_execution_time_saved | new_execution_ms | original_execution_ms |
+     +--------------+------------------------------+------------------+-----------------------+
+     | sample_job1  |           45.38834951456311  |              225 |                   412 |
+     | sample_job2  |           45.19480519480519  |              211 |                   385 |
+     | sample_job3  |           33.246753246753244 |              257 |                   385 |
+     | sample_job4  |           29.28802588996764  |             1311 |                  1854 |
+     | sample_job5  |           28.18181818181818  |             1027 |                  1430 |
+     | sample_job6  |           25.804195804195807 |             1061 |                  1430 |
+     | sample_job7  |           25.734265734265733 |             1062 |                  1430 |
+     | sample_job8  |           25.454545454545453 |             1066 |                  1430 |
+     | sample_job9  |           25.384615384615383 |             1067 |                  1430 |
+     | sample_job10 |           25.034965034965033 |             1072 |                  1430 |
+     *--------------+------------------------------+------------------+-----------------------*/
+    ```
+
+The results of this query is only an estimate of advanced runtime impact. Many factors can influence query performance, including but not limited to slot availability, change in data over time, view or UDF definitions, and differences in query parameter values.
+
+If the result of this query is empty, then either no jobs have used advanced runtime, or all queries were optimized more than 30 days ago.
+
+This query can be applied to other query performance metrics such as `  total_slot_ms  ` and `  total_bytes_billed  ` . For more information, see the schema for [`  INFORMATION_SCHEMA.JOBS  `](/bigquery/docs/information-schema-jobs#schema) .

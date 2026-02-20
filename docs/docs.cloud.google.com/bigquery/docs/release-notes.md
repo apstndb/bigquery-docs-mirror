@@ -6,6 +6,20 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## February 17, 2026
+
+Feature
+
+You can now run [global queries](/bigquery/docs/global-queries) , which let you reference data stored in more than one region in a single query. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+Deprecated
+
+Control of MCP use with organization policies is deprecated. After March 17, 2026, organization policies that use the `  gcp.managed.allowedMCPServices constraint  ` won't work, and you can control MCP use with IAM deny policies. For more information about controlling MCP use, see [Control MCP use with IAM deny policies](/mcp/control-mcp-use-iam) .
+
+Change
+
+After March 17, 2026, when you enable BigQuery, the BigQuery MCP server is automatically enabled.
+
 ## February 12, 2026
 
 Feature

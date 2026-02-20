@@ -131,6 +131,8 @@ You can enable or disable the BigQuery MCP server in a project with the `  gclou
 
 ### Enable the BigQuery MCP server in a project
 
+**Note:** After March 17, 2026, the BigQuery remote MCP server is automatically enabled when you enable BigQuery.
+
 If you're using different projects for your client credentials, such as service account keys, OAuth client ID or API keys, and for hosting your resources, then you must enable the BigQuery service and the BigQuery MCP server on both projects.
 
 To enable the BigQuery MCP server in your Google Cloud project, run the following command:
@@ -199,7 +201,7 @@ For the BigQuery MCP server, enter the following as required:
 
   - **Server name** : BigQuery MCP server
 
-  - **Server URL** or **Endpoint** : bigquery.googleapis.com/mcp
+  - **Server URL** or **Endpoint** : https://bigquery.googleapis.com/mcp
 
   - **Transport** : HTTP
 
@@ -215,8 +217,6 @@ For host-specific guidance, see the following:
 For more general guidance, see [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
 
 ## Available tools
-
-MCP tools that are read-only have the MCP attribute `  mcp.tool.isReadOnly  ` set to `  true  ` . You might want to only allow read-only tools in certain environments through your [organization policy](#organization-level-mcp-control) .
 
 To view details of available MCP tools and their descriptions for the BigQuery MCP server, see the [BigQuery MCP reference](/bigquery/docs/reference/mcp) .
 
@@ -362,9 +362,17 @@ Replace `  PROJECT_ID  ` with the Google Cloud project ID.
 
 Model Armor won't scan MCP traffic on Google Cloud.
 
-### Organization-level MCP control
+### Control MCP use with IAM deny policies
 
-You can create custom organization policies to control the use of MCP servers in your Google Cloud organization using the `  gcp.managed.allowedMCPService  ` constraint. For more information and usage examples, see [Access control with IAM](https://docs.cloud.google.com/mcp/access-control) .
+[Identity and Access Management (IAM) deny policies](/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
+
+For example, you can deny or allow access based on:
+
+  - The principal.
+  - Tool properties like read-only.
+  - The application's OAuth client ID.
+
+For more information, see [Control MCP use with Identity and Access Management](/mcp/control-mcp-use-iam)
 
 ## Quotas and limits
 

@@ -203,7 +203,7 @@ These workflows are for data engineers, analytics engineers, and others who buil
     
       - Ensure data profile scans run on tables to provide rich context for more accurate and useful insights.
     
-    For more information, see [Generate dataset insights](/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](/bigquery/docs/data-insights-overview#profile-scans) .
+    For more information, see [Generate dataset insights](/bigquery/docs/generate-dataset-insights) and [Ground insights to data profiling results](/dataplex/docs/data-profiling-overview) .
 
 ### Workflows for data stewards
 

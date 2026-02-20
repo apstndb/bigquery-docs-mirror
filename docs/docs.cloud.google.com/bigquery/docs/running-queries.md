@@ -1285,6 +1285,12 @@ Requires setting `  JobCreationMode=2  ` in the `  .ini  ` file.
 
 **Note:** you may append `  LogLevel=6  ` and `  LogPath=log.txt  ` to the `  .ini  ` file to enable detailed level logging and extract troubleshooting information, including `  queryId  ` , if needed.
 
+## Global queries
+
+Queries are run in the location of the data that they reference. However, if a query references data stored in more than one location, a global query is executed. When running a global query, BigQuery is able to collect all necessary data from different locations in one place, perform a query, and return the results. Because global queries require transferring data between locations, they require additional permissions and can incur additional costs.
+
+For more information about global queries, see [Global queries](/bigquery/docs/global-queries) .
+
 ## Quotas
 
 For information about quotas related to interactive and batch queries, see [Query jobs](/bigquery/quotas#query_jobs) .

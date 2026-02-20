@@ -384,58 +384,32 @@ Follow these steps to start a translation job, view its progress, and see the re
 
 These steps assume you have source files uploaded into a Cloud Storage bucket already.
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **Tools and guide** .
+2.  In the **SQL translation** panel, click **Start translation** .
 
-3.  In the **Translate SQL** panel, click **Translate** \> **Batch translation** .
-
-4.  The translation configuration page opens. Enter the following details:
+3.  For **Translation configuration** , enter the following:
     
     1.  For **Display name** , type a name for the translation job. The name can contain letters, numbers or underscores.
     2.  For **Processing location** , select the location where you want the translation job to run. For example, if you are in Europe and you don't want your data to cross any location boundaries, select the `  eu  ` region. The translation job performs best when you choose the same location as your source file bucket.
     3.  For **Source dialect** , select the SQL dialect that you want to translate.
-    4.  For **Target dialect** , select **BigQuery** .
+    4.  For **Target dialect** , select **GoogleSQL** .
 
-5.  Click **Next** .
+4.  Click **Next** .
 
-6.  For **Source location** , specify the path to the Cloud Storage folder containing the files to translate. You can type the path in the format `  bucket_name/folder_name/  ` or use the **Browse** option.
-
-7.  Click **Next** .
-
-8.  For **Target location** , specify the path to the destination Cloud Storage folder for the translated files. You can type the path in the format `  bucket_name/folder_name/  ` or use the **Browse** option.
-
-9.  If you're doing translations that don't need to have default object names or source-to-target name mapping specified, skip to Step 11. Otherwise, click **Next** .
-
-10. Fill in the optional settings that you need.
+5.  For **File location details** , specify the Cloud Storage paths to use for translation input and output. You can type the paths in the format `  bucket_name/folder_name/  ` or use the **Browse** option to navigate to a folder.
     
-    1.  Optional. For **Default database** , type a [default database name](/bigquery/docs/output-name-mapping#default_database) to use with the source files. The translator uses this default database name to resolve SQL objects' [fully qualified names](/bigquery/docs/output-name-mapping#name_parts) where the database name is missing.
-    
-    2.  Optional. For **Schema search path** , specify a schema to search when the translator needs to resolve SQL objects' [fully qualified names](/bigquery/docs/output-name-mapping#name_parts) in the source files where the schema name is missing. If the source files use a number of different schema names, click **Add Schema Name** and add a value for each schema name that might be referenced.
-        
-        The translator searches through the metadata files you provided to validate tables with their schema names. If a definite option can't be determined from the metadata, the first schema name you enter is used as the default. For more information on how the default schema name is used, see [default schema](/bigquery/docs/output-name-mapping#default_schema) .
-    
-    3.  Optional. If you want to specify [name mapping rules](/bigquery/docs/output-name-mapping) to rename SQL objects between the source system and BigQuery during translation, you can either provide a [JSON file](/bigquery/docs/output-name-mapping#json_file_format) with the name mapping pair, or you can use the Google Cloud console to specify the values to map.
-        
-        To use a JSON file:
-        
-        1.  Click **Upload JSON file for name mapping** .
-        
-        2.  Browse to the location of a name mapping file in the [appropriate format](/bigquery/docs/output-name-mapping#json_file_format) , select it, and click **Open** .
-            
-            Note that the file size must be less than 5 MB.
-        
-        To use the Google Cloud console:
-        
-        1.  Click **Add name mapping pair** .
-        2.  Add the appropriate parts of the source object name in the **Database** , **Schema** , **Relationship** , and **Attribute** fields in the **Source** column.
-        3.  Add the parts of the target object name in BigQuery in the fields in the **Target** column.
-        4.  For **Type** , select the object type that describes the object you are mapping.
-        5.  Repeat Steps 1 - 4 until you have specified all of the name mapping pairs that you need. Note that you can only specify up to 25 name mapping pairs when using the Google Cloud console.
-    
-    4.  Optional. To generate translation AI suggestions using the Gemini model, select the **Gemini AI suggestions** checkbox. Suggestions are based on the configuration YAML file ending in `  .ai_config.yaml  ` and located in the Cloud Storage directory. Each type of suggestion output is saved in its own sub-directory within your output folder with the naming pattern `  REWRITE TARGET SUGGESTION_TYPE _suggestion  ` . For example, suggestions for the Gemini-enhanced target SQL customization is stored in `  target_sql_query_customization_suggestion  ` and the translation explanation generated by Gemini is stored in `  translation_explanation_suggestion  ` . To learn how to write the configuration YAML file for AI suggestions, see [Create a Gemini-based configuration YAML file](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
+    1.  For **Output directory location** , specify a path to the destination Cloud Storage folder for the translated files. This serves as a root directory for all translation output.
+    2.  Choose one or more **Input directory locations** containing the path to the SQL files to translate.
+    3.  Each input directory can optionally be given an **Output subdirectory name** underneath the root output directory if necessary.
 
-11. Click **Create** to start the translation job.
+6.  Click **Next** .
+
+7.  Select any the optional settings that you need to customize metadata and any additional translation outputs.
+
+8.  You can further customize translation behavior by creating configuration YAML files and placing these files in the input Cloud Storage bucket. These files can be used to set rename objects, enable optimizations, enhance translations with Gemini and more. For more information about configuration YAML files, see [Create a configuration YAML file](/bigquery/docs/config-yaml-translation) .
+
+9.  Click **Create** to start the translation job.
 
 Once the translation job is created, you can see its status in the translation jobs list.
 
@@ -611,19 +585,17 @@ After running the translation job, you can see information about the job in the 
 
 To see translation job details, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
+2.  In the list of translation jobs, locate the job for which you want to see the translation details. Then, click the translation job name. You can see a Sankey visualization that illustrates the overall quality of the job, the number of input lines of code (excluding blank lines and comments), and a list of issues that occurred during the translation process. You should prioritize fixes from left to right. Issues in an early stage can cause additional issues in subsequent stages.
 
-3.  In the list of translation jobs, locate the job for which you want to see the translation details. Then, click the translation job name. You can see a Sankey visualization that illustrates the overall quality of the job, the number of input lines of code (excluding blank lines and comments), and a list of issues that occurred during the translation process. You should prioritize fixes from left to right. Issues in an early stage can cause additional issues in subsequent stages.
+3.  Hold the pointer over the error or warning bars, and review the suggestions to determine next steps to debug the translation job.
 
-4.  Hold the pointer over the error or warning bars, and review the suggestions to determine next steps to debug the translation job.
+4.  Select the **Log Summary** tab to see a summary of the translation issues, including issue categories, suggested actions, and how often each issue occurred. You can click the Sankey visualization bars to filter issues. You can also select an issue category to see log messages associated with that issue category.
 
-5.  Select the **Log Summary** tab to see a summary of the translation issues, including issue categories, suggested actions, and how often each issue occurred. You can click the Sankey visualization bars to filter issues. You can also select an issue category to see log messages associated with that issue category.
+5.  Select the **Log Messages** tab to see more details about each translation issue, including the issue category, the specific issue message, and a link to the file in which the issue occurred. You can click the Sankey visualization bars to filter issues. You can select an issue in the **Log Message** tab to open the [**Code tab**](/bigquery/docs/batch-sql-translator#code-tab) that displays the input and output file if applicable.
 
-6.  Select the **Log Messages** tab to see more details about each translation issue, including the issue category, the specific issue message, and a link to the file in which the issue occurred. You can click the Sankey visualization bars to filter issues. You can select an issue in the **Log Message** tab to open the [**Code tab**](/bigquery/docs/batch-sql-translator#code-tab) that displays the input and output file if applicable.
-
-7.  Click the **Job details** tab to see the translation job configuration details.
+6.  Click the **Job details** tab to see the translation job configuration details.
 
 ### Summary report
 
@@ -631,15 +603,13 @@ The summary report is a CSV file that contains a table of all of the warning and
 
 To see the summary file in the Google Cloud console, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
-3.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
+3.  In the **Job details** tab, in the **Translation report** section, click **translation\_report.csv** .
 
-4.  In the **Job details** tab, in the **Translation report** section, click **translation\_report.csv** .
-
-5.  On the **Object details** page, click the value in the **Authenticated URL** row to see the file in your browser.
+4.  On the **Object details** page, click the value in the **Authenticated URL** row to see the file in your browser.
 
 The following table describes the summary file columns:
 
@@ -716,19 +686,17 @@ The code tab lets you review further information about the input and output file
 
 To access the code tab, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
-3.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
-
-4.  Select **Code tab** . The code tab consists of the following panels:
+3.  Select **Code tab** . The code tab consists of the following panels:
     
       - File explorer: Contains all SQL files used for translation. Click a file to view its translation input and output, and any translation issues from its translation.
       - **Gemini-enhanced input** : The input SQL that was translated by the translation engine. If you have specified Gemini customization rules for the source SQL [in the Gemini configuration](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the translator transforms the original input first and then translates the Gemini-enhanced input. To view the original input, click **View original input** .
       - **Translation output** : The translation result. If you have specified Gemini customization rules for the target SQL in [the Gemini configuration](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the transformation is applied to the translated result as a Gemini-enhanced output. If a Gemini-enhanced output is available, then you can click the **Gemini suggestion** button to review the Gemini-enhanced output.
 
-5.  Optional: To view an input file and its output file in the [BigQuery interactive SQL translator](#debug-interactive-translator) , click **Edit** . You can edit the files and save the output file back to Cloud Storage.
+4.  Optional: To view an input file and its output file in the [BigQuery interactive SQL translator](#debug-interactive-translator) , click **Edit** . You can edit the files and save the output file back to Cloud Storage.
 
 **Note:** You can view log summaries and messages for the overall translation job from the [Results page](/bigquery/docs/batch-sql-translator#explore_the_translation_output)
 
@@ -738,13 +706,11 @@ You can add, rename, view, or edit your configuration YAML files in the **Config
 
 To access the configuration tab, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
-3.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
-
-4.  In the **Translation details** window, click the **Configuration** tab.
+3.  In the **Translation details** window, click the **Configuration** tab.
 
 To add a new configuration file:
 
@@ -776,31 +742,27 @@ You can use the BigQuery interactive SQL translator to review or debug a SQL que
 
 To start an interactive SQL translation by using a batch translation configuration ID, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
-
-3.  In the list of translation jobs, locate the job that you are interested in, and then click more\_vert **More Options \> Open Interactive Translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, and then click more\_vert **More Options \> Open Interactive Translation** .
     
     The BigQuery interactive SQL translator now opens with the corresponding batch translation configuration ID. To view the translation configuration ID for the interactive translation, click **More \> Translation settings** in the interactive SQL translator.
 
 To debug a batch translation file in the interactive SQL translator, follow these steps:
 
-1.  In the Google Cloud console, go to the **BigQuery** page.
+1.  In the Google Cloud console, go to the **SQL Translation** page.
 
-2.  In the navigation menu, click **SQL translation** .
+2.  In the list of translation jobs, locate the job that you are interested in, and then click the job name or click **More options \> Show details** .
 
-3.  In the list of translation jobs, locate the job that you are interested in, and then click the job name or click **More options \> Show details** .
+3.  In the **Translation details** window, click the **Code** tab.
 
-4.  In the **Translation details** window, click the **Code** tab.
+4.  In the file explorer, click your filename to open the file.
 
-5.  In the file explorer, click your filename to open the file.
-
-6.  Next to the output filename, click **Edit** to open the files in the interactive SQL translator ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
+5.  Next to the output filename, click **Edit** to open the files in the interactive SQL translator ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
     
     You see the input and output files populated in the interactive SQL translator that now uses the corresponding batch translation configuration ID.
 
-7.  To save the edited output file back to Cloud Storage, in the interactive SQL translator click **Save \> Save To GCS** .
+6.  To save the edited output file back to Cloud Storage, in the interactive SQL translator click **Save \> Save To GCS** .
 
 ## Limitations
 

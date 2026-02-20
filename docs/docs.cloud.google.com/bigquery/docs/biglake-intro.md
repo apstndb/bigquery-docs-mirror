@@ -91,6 +91,7 @@ This example has two transfers: one from an employees table (with a level filter
   - [Authorized views](/bigquery/docs/authorized-views) and [authorized routines](/bigquery/docs/authorized-routines) referencing BigQuery Omni tables or views are only supported in BigQuery Omni regions.
   - If your cross-cloud query references `  STRUCT  ` or `  JSON  ` columns, no pushdowns are applied to any remote subqueries. To optimize performance, consider creating a view in the BigQuery Omni region that filters `  STRUCT  ` and `  JSON  ` columns and returns only the necessary fields as individual columns.
   - [Collation](/bigquery/docs/reference/standard-sql/collation-concepts) isn't supported by cross-cloud joins.
+  - Cross-cloud joins don't support joining Omni views using the `  ORDER BY  ` clause.
 
 ### Cross-cloud join examples
 

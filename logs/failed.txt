@@ -1,7 +1,6 @@
 200 https://cloud.google.com/bigquery/pricing
 200 https://cloud.google.com/bigquery/sla
-200 https://docs.cloud.google.com/bigquery/docs/global-queries
-200 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/get
+200 https://docs.cloud.google.com/bigquery/docs/klaviyo-data-model
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetResourceInfoRequest
 404 https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/ResourceInfo
 404 https://docs.cloud.google.com/sdk/gcloud/reference/bigquery

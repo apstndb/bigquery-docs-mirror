@@ -262,6 +262,7 @@ https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights
 https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights-sum-ratio
 https://docs.cloud.google.com/bigquery/docs/getting-model-metadata
 https://docs.cloud.google.com/bigquery/docs/getting-support
+https://docs.cloud.google.com/bigquery/docs/global-queries
 https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets
 https://docs.cloud.google.com/bigquery/docs/google-ads-transfer
 https://docs.cloud.google.com/bigquery/docs/google-ads-transformation
@@ -895,6 +896,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/pro
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks/list
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/delete
+https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/get
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/list
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rpc

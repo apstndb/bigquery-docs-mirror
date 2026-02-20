@@ -738,7 +738,7 @@ async function appendRowsPending() {
 
 ### Python
 
-This example shows a simple record with two fields. For a longer example that shows how to send different data types, including `  STRUCT  ` types, see the [append\_rows\_proto2 sample](https://github.com/googleapis/google-cloud-python/packages/google-cloud-bigquery-storage/samples/snippets/append_rows_proto2.py) on GitHub.
+This example shows a simple record with two fields. For a longer example that shows how to send different data types, including `  STRUCT  ` types, see the [append\_rows\_proto2 sample](https://github.com/googleapis/google-cloud-python/blob/main/packages/google-cloud-bigquery-storage/samples/snippets/append_rows_proto2.py) on GitHub.
 
 To learn how to install and use the client library for BigQuery, see [BigQuery client libraries](/bigquery/docs/reference/storage/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquerystorage/latest) .
 
