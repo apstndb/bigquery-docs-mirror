@@ -52,7 +52,7 @@ To run a global query, you must have the `  bigquery.jobs.createGlobalQuery  ` p
 
 ## Query data
 
-To run a global query, you write a SQL query as you would if your data was in a single location. If the data referenced by the query is stored in more than one location, BigQuery tries to execute a global query. In some cases, BigQuery [automatically selects the location](#automatic-location-selection) of the query. Otherwise, you must [specify the location](/bigquery/docs/reference/locations#specify_location) in which to run the query. Data referenced by the query that doesn't reside in the selected location is copied to that location.
+To run a global query, you write a SQL query as you would if your data was in a single location. If the data referenced by the query is stored in more than one location, BigQuery tries to execute a global query. In some cases, BigQuery [automatically selects the location](#automatic-location-selection) of the query. Otherwise, you must [specify the location](/bigquery/docs/locations#specify_locations) in which to run the query. Data referenced by the query that doesn't reside in the selected location is copied to that location.
 
 The following example runs as a global query that unions tables from two different datasets stored in two different locations:
 
@@ -86,7 +86,7 @@ In order to run global queries in an efficient and cost-effective way, it's impo
 
 To use data that resides in different locations, it must be replicated to one location. The following is an abstraction of the global query workflow carried out by BigQuery:
 
-1.  Determine where the query must be executed either from [user's declaration](/bigquery/docs/reference/locations#specify_location) or [automatically](#automatic-location-selection) ). This location is called the *primary* location, and all other locations referenced by the query are *remote* .
+1.  Determine where the query must be executed, either from [user's declaration](/bigquery/docs/locations#specify_locations) or [automatically](#automatic-location-selection) . This location is called the *primary* location, and all other locations referenced by the query are *remote* .
 2.  Run a sub-query in each remote region to collect the data that is needed to finish the query in the primary region.
 3.  Copy this data from remote locations to the primary location.
 4.  Save the data in temporary tables in the primary location for 8 hours.

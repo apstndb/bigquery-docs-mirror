@@ -27,7 +27,7 @@ The `  LOG_ANALYZER  ` modifies data in the following ways:
   - Text is split into individual terms called *tokens* by the following delimiters:
     
     ``` text
-    [ ] < > ( ) { } | ! ; , ' &" *  ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
+    [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
     %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
     %0a %2C %2c %28 %29
     ```
@@ -574,7 +574,7 @@ Now that the search index has been created, you can use the [`  SEARCH  ` functi
 ``` text
 SELECT
   SEARCH(dataset.data_table.text_data
-  &quot;search_data",
+  "search_data",
   analyzer => 'PATTERN_ANALYZER',
   analyzer_options => '''{
     "patterns": [

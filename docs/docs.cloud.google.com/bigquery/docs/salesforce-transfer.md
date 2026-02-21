@@ -1,14 +1,14 @@
 # Load Salesforce data into BigQuery
 
-You can load data from your Salesforce Sales Account to BigQuery using the BigQuery Data Transfer Service for Salesforce connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Salesforce Sales Account to BigQuery.
+You can load data from your Salesforce Sales Cloud to BigQuery using the BigQuery Data Transfer Service for Salesforce connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Salesforce Sales Cloud to BigQuery.
 
 ## Limitations
 
 Salesforce data transfers are subject to the following limitations:
 
-  - The Salesforce connector only supports transfers from a Salesforce Sales Account.
+  - The Salesforce connector only supports transfers from Salesforce Sales Cloud.
   - The Salesforce connector only supports fields included in Salesforce Bulk API V1 version 64.0. Some fields that were included in previous versions of the Salesforce Bulk API might not be supported. For more information about these changes to the Salesforce connector, see [Salesforce Bulk API](/bigquery/docs/transfer-changes#salesforce) .
-  - The Salesforce connector uses Salesforce Bulk API V1 to connect to the Salesforce endpoint to retrieve data.
+  - The Salesforce connector uses Salesforce Bulk API V1 to connect to the Salesforce Sales Cloud endpoint to retrieve data.
       - The Salesforce connector only supports the Salesforce Bulk API V1 to connect to the Salesforce instance, and only supports the transfer of entities which are supported by the Salesforce Bulk API. For more information about what entities are supported, see ['Entity is not supported by the Bulk API' error](https://help.salesforce.com/s/articleView?id=000383508&type=1) .
   - The Salesforce connector does not support the transfer of the following objects that have binary fields.
       - `  Attachment  `

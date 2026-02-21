@@ -148,7 +148,6 @@ In addition to [BigQuery ML-specific limits](/bigquery/quotas#bqml-quotas) , que
 
   - To learn more about machine learning and BigQuery ML, see the following resources:
     
-      - [Applying Machine Learning to your data with Google Cloud](https://www.coursera.org/learn/data-insights-gcp-apply-ml) course at Coursera
       - [Smart analytics and data management](https://cloud.google.com/learn/training/data-engineering-and-analytics) training program
       - [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/)
       - [Machine learning glossary](https://developers.google.com/machine-learning/glossary/)

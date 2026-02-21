@@ -85,8 +85,6 @@ FILTER USING
 
 The resulting behavior is that users in the group `  sales-us@example.com  ` and the user `  jon@example.com  ` can view only rows where the value for `  region  ` is `  US  ` .
 
-The following image shows how the previous two access policies restrict which users and groups can view which rows in the table:
-
 Users that aren't in the `  APAC  ` or `  US  ` groups don't see any rows.
 
 #### Filter row data based on sensitive data

@@ -83,7 +83,7 @@ Agents are software tools that can use AI to complete tasks on your behalf. You 
 
   - Use the [Gemini CLI](/bigquery/docs/develop-with-gemini-cli) to interact with BigQuery data in your terminal by using natural language prompts.
 
-  - Use the [MCP toolbox](/bigquery/docs/pre-built-tools-with-mcp-toolbox) to connect your own AI tool to BigQuery and interact with your data.
+  - Build using the [Open source MCP toolbox](/bigquery/docs/pre-built-tools-with-mcp-toolbox) or [ADK tools](https://google.github.io/adk-docs/integrations/bigquery/) for quick, iterative agent development.
 
 ## What's next
 
@@ -91,4 +91,7 @@ Agents are software tools that can use AI to complete tasks on your behalf. You 
   - For more information about generative AI functions in SQL, see [Generative AI overview](/bigquery/docs/generative-ai-overview) .
   - For more information about searching your data, see [Search indexed data](/bigquery/docs/search) and [Introduction to vector search](/bigquery/docs/vector-search-intro) .
   - For more information about assistive AI features, see [Gemini in BigQuery](/bigquery/docs/gemini-overview) .
-  - For more information about using agents with BigQuery, see [Use BigQuery with MCP, Gemini CLI, and other agents](/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
+  - For more information about using agents with BigQuery, see:
+      - [Use the BigQuery MCP Server](/bigquery/docs/use-bigquery-mcp) .
+      - [Connect LLMs to BigQuery with MCP](/bigquery/docs/pre-built-tools-with-mcp-toolbox) using IDEs such as Antigravity.
+      - [Analyze data with the Gemini CLI](/bigquery/docs/develop-with-gemini-cli) .

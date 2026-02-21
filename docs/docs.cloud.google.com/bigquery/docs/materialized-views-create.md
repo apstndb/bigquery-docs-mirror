@@ -943,7 +943,7 @@ The following limitations only apply to materialized views with the `  allow_non
 
   - Smart-tuning is not applied to the materialized views that include the `  allow_non_incremental_definition  ` option. The only way to benefit from materialized views with the `  allow_non_incremental_definition  ` option is to query them directly.
   - Materialized views without the `  allow_non_incremental_definition  ` option can incrementally refresh a subset of their data. Materialized views with the `  allow_non_incremental_definition  ` option must be refreshed in their entirety.
-  - Materialized views with max\_staleness option validates presence of the column-level security constraints during query execution. See more details about this in [column-level access control](/bigquery/docs/column-level-security-intro#time-travel)
+  - Materialized views with `  max_staleness  ` option validates presence of the column-level security constraints during query execution. See more details about this in [column-level access control](/bigquery/docs/column-level-security-intro#time-travel)
   - For materialized views over Spanner external dataset tables, if the last refresh of a non-incremental materialized view occurred outside the `  max_staleness  ` interval, then queries read the base Spanner external dataset tables, even if the base table hasn't changed. For example, if your `  max_staleness  ` interval is 4 hours and the last refresh occurred 7 hours ago, then the query will read the base Spanner external dataset tables.
 
 ## What's next

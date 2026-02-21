@@ -417,7 +417,7 @@ To estimate costs in the [Google Cloud pricing calculator](https://cloud.google.
 2.  Click **Add to estimate** .
 3.  Select BigQuery.
 4.  Select "On-demand" for **Service type** .
-5.  Choose the location where the your queries will run.
+5.  Choose the location where your queries will run.
 6.  For **Amount of data queried** , enter the estimated bytes read from your dry run or the query validator.
 7.  Enter your estimations of storage usage for **Active storage** , **Long-term storage** , **Streaming inserts** , and **Streaming reads** . You only need to estimate either physical storage or logical storage, depending on the [dataset storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
 8.  The estimate appears in the **Cost details** panel. For more information about the estimated cost, click **Open detailed view** . You can also download and share the cost estimate.
@@ -505,7 +505,7 @@ Instead, you can incrementally load data into a table by using the `  WRITE_APPE
 
 Reducing the [time travel](/bigquery/docs/time-travel) window from the default value of seven days reduces the retention period for data deleted from or changed in a table. You are billed for time travel storage only when using the physical (compressed) [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) .
 
-The time travel window is set at the dataset level. You can also set The default time travel window for new datasets using [configuration settings](/bigquery/docs/default-configuration) .
+The time travel window is set at the dataset level. You can also set the default time travel window for new datasets using [configuration settings](/bigquery/docs/default-configuration) .
 
 ### Use table expiration for destination tables
 
@@ -591,7 +591,7 @@ If the billing amount is larger than the value you calculated by querying the ` 
     
     Performing ML operations in BigQuery
     
-      - BigQuery ML pricing for on-demand queries depends on the type of model being created. Some of these model operations are charged at a higer rate than non-ML queries. Therefore, if you just add up all of the `  total_billed_bytes  ` for the project and use the standard on-demand pricing per-TB rate, this won't be a correct pricing aggregation—you need to account for the pricing difference per-TB.
+      - BigQuery ML pricing for on-demand queries depends on the type of model being created. Some of these model operations are charged at a higher rate than non-ML queries. Therefore, if you just add up all of the `  total_billed_bytes  ` for the project and use the standard on-demand pricing per-TB rate, this won't be a correct pricing aggregation—you need to account for the pricing difference per-TB.
     
     </div>
 

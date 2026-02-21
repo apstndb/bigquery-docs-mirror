@@ -46,7 +46,9 @@ For more information about listing and getting information about datasets, inclu
 
 ## Cross-user caching
 
-If you are using the Enterprise or Enterprise Plus [edition](/bigquery/docs/editions-intro) and have the required permissions to execute a query that is cached in your project for another user, then BigQuery produces the cached result. The cached result is copied into your personal anonymous dataset and remains there for 24 hours from when you ran the query. The same limits and exceptions for single-user caching apply to cross-user caching.
+If you have the required permissions to execute a query, the results of which are cached in your project for another user, then BigQuery returns results from the cache. The cached result is copied into your personal anonymous dataset and remains there for 24 hours from when you ran the query.
+
+Cross-user caching is available if you are using the Enterprise or Enterprise Plus [edition](/bigquery/docs/editions-intro) . The same [limits and exceptions](#cache-exceptions) for single-user caching apply to cross-user caching.
 
 ## Disabling retrieval of cached results
 
