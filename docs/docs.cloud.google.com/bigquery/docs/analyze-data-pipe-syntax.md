@@ -22,49 +22,13 @@ In this tutorial, you build a complex query in pipe syntax using the publicly av
 
 To get started using a BigQuery public dataset, you must create or select a project. The first terabyte of data processed per month is free, so you can start querying public datasets without enabling billing. If you intend to go beyond the [free tier](https://cloud.google.com/bigquery/pricing#free-tier) , you must also enable billing.
 
-Sign in to your Google Cloud account. If you're new to Google Cloud, [create an account](https://console.cloud.google.com/freetrial) to evaluate how our products perform in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project,
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a preexisting project,
+    
+    Enable the BigQuery API.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
 
 For more information about the different ways to run queries, see [Run a query](/bigquery/docs/running-queries) .
 

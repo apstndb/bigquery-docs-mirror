@@ -3229,7 +3229,3 @@ To control access to tables in BigQuery, see [Control access to resources with I
   - For more information about modifying table schemas, see [Modifying table schemas](/bigquery/docs/managing-table-schemas) .
   - For more information about managing tables, see [Managing tables](/bigquery/docs/managing-tables) .
   - To see an overview of `  INFORMATION_SCHEMA  ` , go to [Introduction to BigQuery `  INFORMATION_SCHEMA  `](/bigquery/docs/information-schema-intro) .
-
-## Try it for yourself
-
-If you're new to Google Cloud, create an account to evaluate how BigQuery performs in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.

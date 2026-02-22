@@ -241,7 +241,7 @@ BigQuery
 `  FOR SYSTEM_TIME AS OF timestamp  `
 
   
-Note:BigQuery does not have a direct alternative to Snowflake's BEFORE using a statement ID. The value of *timestamp* cannot be more than 7 days before the current timestamp.
+Note: BigQuery does not have a direct alternative to Snowflake's BEFORE using a statement ID. The value of *timestamp* cannot be more than 7 days before the current timestamp.
 
 `  @[namespace]<stage_name>[/path]  `
 
@@ -285,7 +285,7 @@ BigQuery
 
 `  SELECT col1, col2 FROM table1, table2 WHERE col1 = col2(+)  `
 
-`  SELECT col1, col2 FROM table1 INNER JOIN table2 ON col1 = col2  ` Note:BigQuery does not support the `  (+)  ` syntax for `  JOIN  ` s
+`  SELECT col1, col2 FROM table1 INNER JOIN table2 ON col1 = col2  ` Note: BigQuery does not support the `  (+)  ` syntax for `  JOIN  ` s
 
 ### `     JOIN    ` types
 
@@ -333,13 +333,13 @@ Note: In BigQuery, `  JOIN  ` clauses require a JOIN condition unless it is a CR
 `  WHERE t1.col = t2.col )  `
 
   
-Note:Unlike the output of a non-lateral join, the output from a lateral join includes only the rows generated from the in-line view. The rows on the left-hand side do not need to be joined to the right hand side because the rows on the left-hand side have already been taken into account by being passed into the in-line view.
+Note: Unlike the output of a non-lateral join, the output from a lateral join includes only the rows generated from the in-line view. The rows on the left-hand side do not need to be joined to the right hand side because the rows on the left-hand side have already been taken into account by being passed into the in-line view.
 
 `  SELECT ... FROM table1 as t1 LEFT JOIN table2 as t2  `
 
 `  ON t1.col = t2.col  `
 
-Note:BigQuery does not support a direct alternative for `  LATERAL JOIN  ` s.
+Note: BigQuery does not support a direct alternative for `  LATERAL JOIN  ` s.
 
 ### `     WITH    ` clause
 
@@ -376,7 +376,7 @@ BigQuery
 `  FROM table GROUP BY GROUPING SETS (one, 2)  `
 
   
-Note:Snowflake allows up to 128 grouping sets in the same query block
+Note: Snowflake allows up to 128 grouping sets in the same query block
 
 `  SELECT col1 as one, col2 as two  `
 
@@ -387,7 +387,7 @@ Note:Snowflake allows up to 128 grouping sets in the same query block
 `  FROM table GROUP BY CUBE (one,2)  `
 
   
-Note:Snowflake allows up to 7 elements (128 grouping sets) in each cube
+Note: Snowflake allows up to 7 elements (128 grouping sets) in each cube
 
 `  SELECT col1 as one, col2 as two  `
 
@@ -451,7 +451,7 @@ Note: `  NULL  ` , empty string (''), and $$$$ values are accepted and are treat
 `  LIMIT count OFFSET start  `
 
   
-Note:BigQuery does not support `  FETCH  ` . `  LIMIT  ` replaces `  FETCH  ` .  
+Note: BigQuery does not support `  FETCH  ` . `  LIMIT  ` replaces `  FETCH  ` .  
   
 Note: In BigQuery, `  OFFSET  ` must be used together with a `  LIMIT count  ` . Make sure to set the `  count  ` INT64 value to the minimum necessary ordered rows for best performance. Ordering all result rows unnecessarily will lead to worse query execution performance.
 
@@ -515,15 +515,15 @@ Note: <code dir="ltr" translate="no">       DISTINCT      </code> does not have 
 Note: <code dir="ltr" translate="no">       DISTINCT      </code> does not have any effect</td>
 <td><p><code dir="ltr" translate="no">          APPROX_COUNT_DISTINCT                (expression)       </code></p>
 <br />
-Note:BigQuery does not support <code dir="ltr" translate="no">       APPROX_COUNT_DISTINCT      </code> with Window Functions</td>
+Note: BigQuery does not support <code dir="ltr" translate="no">       APPROX_COUNT_DISTINCT      </code> with Window Functions</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          APPROX_PERCENTILE                (expression, percentile) [OVER ...]       </code></p>
 <br />
-Note:Snowflake does not have the option to <code dir="ltr" translate="no">       RESPECT NULLS      </code></td>
+Note: Snowflake does not have the option to <code dir="ltr" translate="no">       RESPECT NULLS      </code></td>
 <td><p><code dir="ltr" translate="no">          APPROX_QUANTILES                ([DISTINCT] expression,100) [OFFSET((CAST(TRUNC(percentile * 100) as INT64))]       </code></p>
 <br />
-Note:BigQuery does not support <code dir="ltr" translate="no">       APPROX_QUANTILES      </code> with Window Functions</td>
+Note: BigQuery does not support <code dir="ltr" translate="no">       APPROX_QUANTILES      </code> with Window Functions</td>
 </tr>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          APPROX_PERCENTILE_ACCUMULATE                (expression)       </code></p></td>
@@ -540,10 +540,10 @@ Note:BigQuery does not support <code dir="ltr" translate="no">       APPROX_QUAN
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          APPROX_TOP_K                (expression, [number [counters]]       </code></p>
 <br />
-Note:If no number parameter is specified, default is 1. Counters should be significantly larger than number.</td>
+Note: If no number parameter is specified, default is 1. Counters should be significantly larger than number.</td>
 <td><p><code dir="ltr" translate="no">          APPROX_TOP_COUNT                (expression, number)       </code></p>
 <br />
-Note:BigQuery does not support <code dir="ltr" translate="no">       APPROX_TOP_COUNT      </code> with Window Functions.</td>
+Note: BigQuery does not support <code dir="ltr" translate="no">       APPROX_TOP_COUNT      </code> with Window Functions.</td>
 </tr>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          APPROX_TOP_K_ACCUMULATE                (expression, counters)       </code></p></td>
@@ -597,13 +597,13 @@ It is a synonym for <code dir="ltr" translate="no">         APPROXIMATE_JACCARD_
 <td><p><code dir="ltr" translate="no">          AVG                ([DISTINCT] expression) [OVER ...]       </code></p></td>
 <td><p><code dir="ltr" translate="no">          AVG                ([DISTINCT] expression) [OVER ...]       </code></p>
 <br />
-Note:BigQuery's <code dir="ltr" translate="no">       AVG      </code> does not perform automatic casting on <code dir="ltr" translate="no">       STRING      </code> s.</td>
+Note: BigQuery's <code dir="ltr" translate="no">       AVG      </code> does not perform automatic casting on <code dir="ltr" translate="no">       STRING      </code> s.</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          BITAND_AGG                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 <td><p><code dir="ltr" translate="no">          BIT_AND                (expression) [OVER ...]       </code></p>
-Note:BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
+Note: BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
 </tr>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          BITOR_AGG                (expression)       </code></p>
@@ -611,18 +611,18 @@ Note:BigQuery does not implicitly cast character/text columns to the nearest <co
 <td><p><code dir="ltr" translate="no">          BIT_OR                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
+Note: BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          BITXOR_AGG                ([DISTINCT] expression) [OVER ...]       </code></p></td>
 <td><p><code dir="ltr" translate="no">          BIT_XOR                ([DISTINCT] expression) [OVER ...]       </code></p>
 <br />
-Note:BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
+Note: BigQuery does not implicitly cast character/text columns to the nearest <code dir="ltr" translate="no">       INTEGER      </code> .</td>
 </tr>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          BOOLAND_AGG                (expression) [OVER ...]       </code></p>
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td><p><code dir="ltr" translate="no">          LOGICAL_AND                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -630,7 +630,7 @@ Note:Snowflake allows numeric, decimal, and floating point values to be treated 
 <td><p><code dir="ltr" translate="no">          BOOLOR_AGG                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td><p><code dir="ltr" translate="no">          LOGICAL_OR                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -638,7 +638,7 @@ Note:Snowflake allows numeric, decimal, and floating point values to be treated 
 <td><p><code dir="ltr" translate="no">          BOOLXOR_AGG                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ([PARTITION BY &lt;partition_expr&gt; ])       </code></p>
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td>For numeric expression:<br />
 
 <p><code dir="ltr" translate="no">        SELECT       </code></p>
@@ -707,17 +707,17 @@ FROM t</td>
 <td><p><code dir="ltr" translate="no">        SELECT                 HLL                ([DISTINCT] expression1, [,expression2])       </code></p>
 <p><code dir="ltr" translate="no">        [OVER  ...]       </code></p>
 <br />
-Note:Snowflake does not allow you to specify precision.</td>
+Note: Snowflake does not allow you to specify precision.</td>
 <td><p><code dir="ltr" translate="no">        SELECT                 HLL_COUNT.EXTRACT                (sketch) FROM (       </code></p>
 <p><code dir="ltr" translate="no">        SELECT                 HLL_COUNT.INIT                (expression)       </code></p>
 <p><code dir="ltr" translate="no">        AS  sketch     FROM table )       </code></p>
 <br />
-Note:BigQuery does not support <code dir="ltr" translate="no">       HLL_COUNT…      </code> with Window Functions. A user cannot include multiple expressions in a single <code dir="ltr" translate="no">       HLL_COUNT...      </code> function.</td>
+Note: BigQuery does not support <code dir="ltr" translate="no">       HLL_COUNT…      </code> with Window Functions. A user cannot include multiple expressions in a single <code dir="ltr" translate="no">       HLL_COUNT...      </code> function.</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          HLL_ACCUMULATE                ([DISTINCT] expression)       </code></p>
 <br />
-Note:Snowflake does not allow you to specify precision.</td>
+Note: Snowflake does not allow you to specify precision.</td>
 <td><code dir="ltr" translate="no">         HLL_COUNT.INIT       </code> (expression [, precision])</td>
 </tr>
 <tr class="even">
@@ -756,7 +756,7 @@ Note:Snowflake does not allow you to specify precision.</td>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          MEDIAN                (expression) [OVER ...]       </code></p>
 <br />
-Note:Snowflake does not support ability to <code dir="ltr" translate="no">       IGNORE|RESPECT NULLS      </code> and to <code dir="ltr" translate="no">       LIMIT      </code> directly in <code dir="ltr" translate="no">       ARRAY_AGG.      </code></td>
+Note: Snowflake does not support ability to <code dir="ltr" translate="no">       IGNORE|RESPECT NULLS      </code> and to <code dir="ltr" translate="no">       LIMIT      </code> directly in <code dir="ltr" translate="no">       ARRAY_AGG.      </code></td>
 <td><p><code dir="ltr" translate="no">          PERCENTILE_CONT                (       </code></p>
 <p><code dir="ltr" translate="no">        value_expression,       </code></p>
 <p><code dir="ltr" translate="no">        0.5       </code></p>
@@ -965,7 +965,7 @@ Note:Snowflake does not support ability to <code dir="ltr" translate="no">      
 <td><p><code dir="ltr" translate="no">          VAR_POP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
+Note: Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
 <td><p><code dir="ltr" translate="no">          VAR_POP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -973,7 +973,7 @@ Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">     
 <td><p><code dir="ltr" translate="no">          VARIANCE_POP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
+Note: Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
 <td><p><code dir="ltr" translate="no">          VAR_POP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -981,7 +981,7 @@ Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">     
 <td><p><code dir="ltr" translate="no">          VAR_SAMP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
+Note: Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
 <td><p><code dir="ltr" translate="no">          VAR_SAMP                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -989,7 +989,7 @@ Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">     
 <td><p><code dir="ltr" translate="no">          VARIANCE                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p>
 <br />
-Note:Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
+Note: Snowflake supports the ability to cast <code dir="ltr" translate="no">       VARCHAR      </code> s to floating point values.</td>
 <td><p><code dir="ltr" translate="no">          VARIANCE                ([DISTINCT] expression)       </code></p>
 <p><code dir="ltr" translate="no">        [OVER ...]       </code></p></td>
 </tr>
@@ -1048,7 +1048,7 @@ If the data type of an expression is not `  INTEGER  ` , Snowflake attempts to c
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          BITXOR                (expression, expression)       </code></p>
 <br />
-Note:Snowflake does not support <code dir="ltr" translate="no">       DISTINCT.      </code></td>
+Note: Snowflake does not support <code dir="ltr" translate="no">       DISTINCT.      </code></td>
 <td><p><code dir="ltr" translate="no">          BIT_XOR                ([DISTINCT] x) FROM UNNEST([expression1, expression2]) AS x       </code></p>
 <br />
 
@@ -1080,7 +1080,7 @@ The following table shows mappings between common Snowflake conditional expressi
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          BOOLAND                (expression1, expression2)       </code></p>
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td><p><code dir="ltr" translate="no">          LOGICAL_AND                (x)       </code></p>
 <p><code dir="ltr" translate="no">        FROM UNNEST([expression1, expression2]) AS x       </code></p>
 <br />
@@ -1090,13 +1090,13 @@ Note:Snowflake allows numeric, decimal, and floating point values to be treated 
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          BOOLNOT                (expression1)       </code></p>
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td><p><code dir="ltr" translate="no">          NOT                expression       </code></p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         BOOLOR       </code><br />
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td><p><code dir="ltr" translate="no">          LOGICAL_OR                (x) FROM UNNEST([expression1, expression2]) AS x       </code></p>
 <br />
 
@@ -1105,7 +1105,7 @@ Note:Snowflake allows numeric, decimal, and floating point values to be treated 
 <tr class="odd">
 <td><code dir="ltr" translate="no">         BOOLXOR       </code><br />
 <br />
-Note:Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
+Note: Snowflake allows numeric, decimal, and floating point values to be treated as <code dir="ltr" translate="no">       TRUE      </code> if not zero.</td>
 <td>BigQuery does not support a direct alternative to Snowflake's <code dir="ltr" translate="no">       BOOLXOR.      </code></td>
 </tr>
 <tr class="even">
@@ -1121,7 +1121,7 @@ Note:Snowflake allows numeric, decimal, and floating point values to be treated 
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          COALESCE                (expr1, expr2, [,...])       </code></p>
 <br />
-Note:Snowflake requires at least two expressions. BigQuery only requires one.</td>
+Note: Snowflake requires at least two expressions. BigQuery only requires one.</td>
 <td><p><code dir="ltr" translate="no">          COALESCE                (expr1, [,...])       </code></p></td>
 </tr>
 <tr class="even">
@@ -1130,7 +1130,7 @@ Note:Snowflake requires at least two expressions. BigQuery only requires one.</t
 <p><code dir="ltr" translate="no">        [...]       </code></p>
 <p><code dir="ltr" translate="no">        [ELSE result3]       </code></p>
 <p><code dir="ltr" translate="no">        END       </code></p>
-Note:BigQuery supports subqueries in condition statements. This can be used to reproduce Snowflake's <code dir="ltr" translate="no">       DECODE      </code> . User must use <code dir="ltr" translate="no">       IS NULL      </code> instead of <code dir="ltr" translate="no">       = NULL      </code> to match <code dir="ltr" translate="no">       NULL      </code> select expressions with <code dir="ltr" translate="no">       NULL      </code> search expressions.</td>
+Note: BigQuery supports subqueries in condition statements. This can be used to reproduce Snowflake's <code dir="ltr" translate="no">       DECODE      </code> . User must use <code dir="ltr" translate="no">       IS NULL      </code> instead of <code dir="ltr" translate="no">       = NULL      </code> to match <code dir="ltr" translate="no">       NULL      </code> select expressions with <code dir="ltr" translate="no">       NULL      </code> search expressions.</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          EQUAL_NULL                (expression1, expression2)       </code></p></td>
@@ -1183,13 +1183,13 @@ Note:BigQuery supports subqueries in condition statements. This can be used to r
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          REGR_VALX                (expr1,expr2)       </code></p></td>
 <td><p><code dir="ltr" translate="no">          IF                (expr1 IS NULL, NULL, expr2)       </code></p>
-Note:BigQuery does not support a direct alternative to Snowflake's <code dir="ltr" translate="no">       REGR...      </code> functions.</td>
+Note: BigQuery does not support a direct alternative to Snowflake's <code dir="ltr" translate="no">       REGR...      </code> functions.</td>
 </tr>
 <tr class="even">
 <td><p><code dir="ltr" translate="no">          REGR_VALY                (expr1,expr2)       </code></p></td>
 <td><p><code dir="ltr" translate="no">          IF                (expr2 IS NULL, NULL, expr1)       </code></p>
 <br />
-Note:BigQuery does not support a direct alternative to Snowflake's <code dir="ltr" translate="no">       REGR...      </code> functions.</td>
+Note: BigQuery does not support a direct alternative to Snowflake's <code dir="ltr" translate="no">       REGR...      </code> functions.</td>
 </tr>
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">          ZEROIFNULL                (expression)       </code></p></td>

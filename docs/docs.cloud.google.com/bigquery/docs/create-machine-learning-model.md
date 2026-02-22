@@ -36,105 +36,13 @@ For more information on BigQuery ML costs, see [BigQuery ML pricing](https://clo
 
 ## Before you begin
 
-Sign in to your Google Cloud account. If you're new to Google Cloud, [create an account](https://console.cloud.google.com/freetrial) to evaluate how our products perform in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-Make sure that you have the following role or roles on the project: BigQuery Data Editor, BigQuery Job User, Service Usage Admin
-
-#### Check for the roles
-
-1.  In the Google Cloud console, go to the **IAM** page.
-
-2.  Select the project.
-
-3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
-
-4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
-
-#### Grant the roles
-
-1.  In the Google Cloud console, go to the **IAM** page.
-
-2.  Select the project.
-
-3.  Click person\_add **Grant access** .
-
-4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
-
-5.  Click **Select a role** , then search for the role.
-
-6.  To grant additional roles, click add **Add another role** and add each additional role.
-
-7.  Click **Save** .
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-Make sure that you have the following role or roles on the project: BigQuery Data Editor, BigQuery Job User, Service Usage Admin
-
-#### Check for the roles
-
-1.  In the Google Cloud console, go to the **IAM** page.
-
-2.  Select the project.
-
-3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
-
-4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
-
-#### Grant the roles
-
-1.  In the Google Cloud console, go to the **IAM** page.
-
-2.  Select the project.
-
-3.  Click person\_add **Grant access** .
-
-4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
-
-5.  Click **Select a role** , then search for the role.
-
-6.  To grant additional roles, click add **Add another role** and add each additional role.
-
-7.  Click **Save** .
-
-BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+1.  BigQuery is automatically enabled in new projects. To activate BigQuery in a pre-existing project, go to
+    
+    Enable the BigQuery API.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
 
 ## Create a dataset
 

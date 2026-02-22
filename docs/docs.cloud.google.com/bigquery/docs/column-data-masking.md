@@ -22,51 +22,15 @@ Use policy tags to selectively obscure sensitive data.
 
 ### Before you begin
 
-Sign in to your Google Cloud account. If you're new to Google Cloud, [create an account](https://console.cloud.google.com/freetrial) to evaluate how our products perform in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
+1.  BigQuery is automatically enabled in new projects, but you might need to activate it in a pre-existing project.
+    
+    Enable the BigQuery API.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
 
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the Data Catalog and BigQuery Data Policy APIs.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-[Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
-
-Enable the Data Catalog and BigQuery Data Policy APIs.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-BigQuery is automatically enabled in new projects, but you might need to activate it in a pre-existing project.
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-If you are creating a data policy that references a [custom masking routine](/bigquery/docs/column-data-masking-intro#custom_mask) , create the associated masking UDF so that it is available in the following steps.
+2.  If you are creating a data policy that references a [custom masking routine](/bigquery/docs/column-data-masking-intro#custom_mask) , create the associated masking UDF so that it is available in the following steps.
 
 ### Create taxonomies
 

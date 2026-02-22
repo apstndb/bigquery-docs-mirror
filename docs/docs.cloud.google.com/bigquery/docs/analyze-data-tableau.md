@@ -30,49 +30,13 @@ When you finish the tasks that are described in this document, you can avoid con
 
 Before you begin, ensure that you have a project to use, that you have enabled billing for that project, and that you have enabled the BigQuery API.
 
-Sign in to your Google Cloud account. If you're new to Google Cloud, [create an account](https://console.cloud.google.com/freetrial) to evaluate how our products perform in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-If you're using an existing project for this guide, [verify that you have the permissions required to complete this guide](#required_roles) . If you created a new project, then you already have the required permissions.
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-If you're using an existing project for this guide, [verify that you have the permissions required to complete this guide](#required_roles) . If you created a new project, then you already have the required permissions.
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-Enable the BigQuery API.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-For new projects, the BigQuery API is automatically enabled.
+1.  Enable the BigQuery API.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    
+    For new projects, the BigQuery API is automatically enabled.
 
 ### Required roles
 

@@ -1417,11 +1417,25 @@ Not supported.
 
 ### REST
 
-1.  To get the job that identified data quality failures, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/DataQualityResult) .
+1.  To get the job that identified the data quality failures, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/DataQualityResult) .
     
     In the response object, the `  failingRowsQuery  ` field shows the query.
 
 2.  [Run the query in BigQuery](/bigquery/docs/running-queries) to see the records that caused the job to fail.
+
+Dataplex Universal Catalog also runs the debug query, provided it was included during the rule creation. The debug query results are included in each rule's output. This feature is in [Preview](/products#product-launch-stages) .
+
+### Console
+
+Not supported.
+
+### gcloud
+
+Not supported.
+
+### REST
+
+To get the job that identified the data quality failures, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/DataQualityResult) . In the response object, the `  debugQueriesResultSets  ` field shows the results of the debug queries.
 
 ## Manage data quality scans for a specific table
 

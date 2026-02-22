@@ -317,6 +317,7 @@ Delta Lake tables have [BigLake table limitations](/bigquery/docs/biglake-intro#
   - Table column names must adhere to BigQuery [column name restrictions](/bigquery/docs/schemas#column_names) .
   - Materialized views aren't supported.
   - The Read API isn't supported for Delta Lake.
+  - The `  timestamp_ntz  ` data type isn't supported for Delta Lake BigLake tables.
 
 ## Troubleshooting
 

@@ -43,6 +43,8 @@ However, the creation of a table clone is different from the creation of a stand
 
   - If data is added or changed in a table clone, then you are charged for the storage of the added or updated data.
 
+  - When you clone a table, the storage type of the clone is the same as the storage type of the source data. For example, if you clone a table that is classified as active storage, the storage type is active for the clone. Similarly, if the base table is classified as long-term storage, the storage type is long-term for the clone.
+
   - If data is deleted in a table clone, then you are not charged for the storage of the deleted data.
 
   - If data is changed or deleted in the base table that also exists in a table clone, then you are charged for the table clone storage of the changed or deleted data. If there are multiple clones that contain the changed or deleted data, you are only charged for the storage used by the oldest clone.

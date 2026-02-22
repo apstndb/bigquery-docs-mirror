@@ -6,10 +6,6 @@ When you load data from Cloud Storage into a BigQuery table, the dataset that co
 
 For information about loading CSV data from a local file, see [Loading data into BigQuery from a local data source](/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
 
-## Try it for yourself
-
-If you're new to Google Cloud, create an account to evaluate how BigQuery performs in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
 ## Limitations
 
 You are subject to the following limitations when you load data into BigQuery from a Cloud Storage bucket:

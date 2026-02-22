@@ -24,7 +24,7 @@ To create a job in BigQuery, the user account must have the `  bigquery.jobs.cre
   - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
   - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
 
-To export data from a BigQuery table, the user account must have the `  bigquery.tables.export  ` IAM permission . Each of the following IAM roles grants the `  bigquery.tables.export  ` permission:
+To export data from a BigQuery table, the user account must have the `  bigquery.tables.export  ` IAM permission. Each of the following IAM roles grants the `  bigquery.tables.export  ` permission:
 
   - [BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )](/bigquery/docs/access-control#bigquery.dataViewer)
   - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](/bigquery/docs/access-control#bigquery.dataEditor)
@@ -555,7 +555,7 @@ AS (
 
 ## Modify the SQL of a continuous query
 
-You can't update the SQL used in a continuous query while the continuous query job is running. You must cancel the continuous query job, modify the SQL, and then a start a new continuous query job from the point where you stopped the original continuous query job.
+You can't update the SQL used in a continuous query while the continuous query job is running. You must cancel the continuous query job, modify the SQL, and then start a new continuous query job from the point where you stopped the original continuous query job.
 
 Follow these steps to modify the SQL used in a continuous query:
 

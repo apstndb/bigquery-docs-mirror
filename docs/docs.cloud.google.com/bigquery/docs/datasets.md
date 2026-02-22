@@ -673,7 +673,3 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
   - For more information about dataset metadata, see [Getting information about datasets](/bigquery/docs/dataset-metadata) .
   - For more information about changing dataset properties, see [Updating datasets](/bigquery/docs/updating-datasets) .
   - For more information about creating and managing labels, see [Creating and managing labels](/bigquery/docs/labels) .
-
-## Try it for yourself
-
-If you're new to Google Cloud, create an account to evaluate how BigQuery performs in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.

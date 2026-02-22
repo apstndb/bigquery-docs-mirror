@@ -1,13 +1,6 @@
-# Getting information about views
+# Get information about views
 
 This document describes how to list, get information about, and see metadata for views in BigQuery.
-
-You can list views in datasets by:
-
-  - Using the Google Cloud console
-  - Using the `  bq ls  ` command in the bq command-line tool
-  - Calling the [`  tables.list  `](/bigquery/docs/reference/v2/tables/list) API method
-  - Using the client libraries
 
 ## Before you begin
 
@@ -172,14 +165,6 @@ print("Tables contained in '{}':".format(dataset_id))
 for table in tables:
     print("{}.{}.{}".format(table.project, table.dataset_id, table.table_id))
 ```
-
-You can get view metadata by:
-
-  - Using the Google Cloud console
-  - Using the bq command-line tool's `  bq show  ` command
-  - Calling the [`  tables.get  `](/bigquery/docs/reference/v2/tables/get) API method
-  - Using the client libraries
-  - Querying the `  INFORMATION_SCHEMA  ` views
 
 ## Get information about views
 

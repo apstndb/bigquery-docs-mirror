@@ -518,7 +518,3 @@ In addition to the Google-supported client libraries listed in the tables above,
   - [View available BigQuery code samples](/bigquery/docs/samples) .
   - [Query a public dataset with the BigQuery API client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) .
   - [Visualize BigQuery API public data using a Jupyter notebook](/bigquery/docs/visualize-jupyter) .
-
-## Try it for yourself
-
-If you're new to Google Cloud, create an account to evaluate how BigQuery performs in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.

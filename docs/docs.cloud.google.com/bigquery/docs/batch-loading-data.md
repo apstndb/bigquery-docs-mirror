@@ -12,10 +12,6 @@ You can load data into BigQuery from Cloud Storage or from a local file as a bat
 
 You can also use [BigQuery Data Transfer Service](/bigquery/docs/cloud-storage-transfer) to set up recurring loads from Cloud Storage into BigQuery.
 
-## Try it for yourself
-
-If you're new to Google Cloud, create an account to evaluate how BigQuery performs in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
 ## Before you begin
 
 Grant Identity and Access Management (IAM) roles that give users the necessary permissions to perform each task in this document, and create a dataset to store your data.

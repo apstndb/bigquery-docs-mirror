@@ -33,7 +33,7 @@ Select one of the following options:
 6.  In the **External data source** pane, enter the following information:
     
       - For **Connection type** , select **Cloud Spanner** .
-      - For **Connection ID** , enter an identifier for the connection resource. Letter, numbers, and underscores are allowed.
+      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed.
       - For **Location type** , select a BigQuery location (or region) that is [compatible with your external data source region](/bigquery/docs/federated-queries-intro#supported_regions) .
       - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
       - Optional: For **Description** , enter a description for this connection resource.

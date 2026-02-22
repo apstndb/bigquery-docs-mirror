@@ -398,6 +398,12 @@ This error can occur when two different mutating DML statements attempt to concu
 
 To address this error, [list your active sessions](/bigquery/docs/sessions#list-sessions) and check whether any of them contains a query job with status `  ERROR  ` that ran a mutating DML statement on the table. Then, terminate that session.
 
+## Error 412: The job references a table that belongs to a failover dataset
+
+Error string: `  Error 412: The job references a table that belongs to a failover dataset in the ... region (PROJECT_ID:DATASET_ID). However, only jobs that run on a reservation with the "ENTERPRISE_PLUS" edition can modify or write to failover datasets. Please also make sure that the job that is writing to the failover dataset is running in the current primary location.  `
+
+This means that either the job wasn't run under a BigQuery Enterprise Plus edition, or the job ran in a region other than the primary location of the failover dataset. See [managed disaster recovery](/bigquery/docs/managed-disaster-recovery) for more details.
+
 ## User does not have permission
 
 Error strings:

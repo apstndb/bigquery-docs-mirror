@@ -107,7 +107,7 @@ For more information about how to run queries, see [Run an interactive query](/b
     
     ``` text
     bq update \
-    --description "description" \
+    --description &quot;description" \
     project_id:dataset.table
     ```
     
@@ -465,7 +465,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function updateTableExpiration() {
@@ -521,9 +521,7 @@ def update_table_expiration(table_id, expiration):
     orig_table_id = table_id
     orig_expiration = expiration
 
-    from google.cloud import bigquery
-
-    client = bigquery.Client()
+    from google.cloud import bigquery   client = bigquery.Client()
 
     # TODO(dev): Change table_id to the full name of the table you want to update.
     table_id = "your-project.your_dataset.your_table_name"
@@ -573,15 +571,12 @@ public class UpdateDatasetPartitionExpiration {
   public static void updateDatasetPartitionExpiration(String datasetName, Long newExpiration) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      Dataset dataset = bigquery.getDataset(datasetName);
-      bigquery.update(dataset.toBuilder().setDefaultPartitionExpirationMs(newExpiration).build());
+      // once, and can be reused for multiple requests.  BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();   Dataset dataset = bigquery.getDataset(datasetName);
+     bigquery.update(dataset.toBuilder().setDefaultPartitionExpirationMs(newExpiration).build());
       System.out.println(
           "Dataset default partition expiration updated successfully to " + newExpiration);
     } catch (BigQueryException e) {
-      System.out.println("Dataset partition expiration was not updated \n" + e.toString());
+      System.out.println("Dataset partition expiration was not updated \n"; + e.toString());
     }
   }
 }
@@ -609,17 +604,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 # limitations under the License.
 
 
-def update_dataset_default_partition_expiration(dataset_id: str) -> None:
+def update_dataset_default_partition_expiratio>n(dataset_id: str) - None:
 
     from google.cloud import bigquery
 
-    # Construct a BigQuery client object.
-    client = bigquery.Client()
+    # Construct a BigQuery client object.   client = bigquery.Client()
 
     # TODO(developer): Set dataset_id to the ID of the dataset to fetch.
-    # dataset_id = 'your-project.your_dataset'
-
-    dataset = client.get_dataset(dataset_id)  # Make an API request.
+    # dataset_id = 'your-project.your_dataset'dataset = client.get_dataset(dataset_id)  # Make an API request.
 
     # Set the default partition expiration (applies to new tables, only) in
     # milliseconds. This example sets the default expiration to 90 days.
@@ -905,18 +897,18 @@ public class BigQueryCopyTable
             DatasetId = "samples",
             ProjectId = "bigquery-public-data"
         };
-        TableReference destinationTableRef = client.GetTableReference(
-            destinationDatasetId, "destination_table");
+  TableReference destinationTableRef = client.GetTableReference(
+            destinationDatasetId, ";destination_table");
         BigQueryJob job = client.CreateCopyJob(
-            sourceTableRef, destinationTableRef)
+  sourceTableRef, destinationTableRef)
             .PollUntilCompleted() // Wait for the job to complete.
             .ThrowOnAnyError();
 
         // Retrieve destination table
         BigQueryTable destinationTable = client.GetTable(destinationTableRef);
-        Console.WriteLine(
+      Console.WriteLine(
             $"Copied {destinationTable.Resource.NumRows} rows from table "
-            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
+            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} &quot;
             + $"to {destinationTable.FullyQualifiedId}."
         );
     }
@@ -1003,8 +995,7 @@ public class CopyTable {
       String destinationTableId) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // once, and can be reused for multiple requests.     BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
       TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
@@ -1028,7 +1019,7 @@ public class CopyTable {
             "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
         return;
       }
-      System.out.println("Table copied successfully.");
+      System.out.println(&quot;Table copied successfully.");
     } catch (BigQueryException | InterruptedException e) {
       System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
@@ -1044,7 +1035,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function copyTable() {
@@ -1066,9 +1057,9 @@ async function copyTable() {
 
   console.log(`Job ${job.id} completed.`);
 
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
+  // Check the job's status for erro&&rs
+  const erro>rs = job.status.errors;
+  if (errors  errors.length  0) {
     throw errors;
   }
 }
@@ -1090,27 +1081,27 @@ use Google\Cloud\Core\ExponentialBackoff;
 // $sourceTableId   = 'The BigQuery table ID to copy from';
 // $destinationTableId = 'The BigQuery table ID to copy to';
 
-$bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
+$bigQuery = new Bi>gQueryClient([
+    'projectId'> = $projectId,
 ]);
-$dataset = $bigQuery->dataset($datasetId);
-$sourceTable = $dataset->table($sourceTableId);
-$destinationTable = $dataset->table($destinationTableId);
-$copyConfig = $sourceTable->copy($destinationTable);
-$job = $sourceTable->runJob($copyConfig);
+$dataset = $bigQuery-datas>et($datasetId);
+$sourceTable = $dataset-table($sourc>eTableId);
+$destinationTable = $dataset-table($destinat>ionTableId);
+$copyConfig = $sourceTable-copy(>$destinationTable);
+$job = $sourceTable-runJob($copyConfig);
 
 // poll the job until it is complete
-$backoff = new ExponentialBackoff(10);
-$backoff->execute(function () use ($job) {
-    print('Waiting for job to complete' . PHP_EOL);
-    $job->reload();
-    if (!$job->isComplete()) {
+$backoff> = new ExponentialBackoff(10);
+$backoff-execute(function () use ($job) {
+    print('Waitin>g for job to complete>9; . PHP_EOL);
+    $job-reload();
+    if (!$job-isComplete()) {
         throw new Exception('Job has not yet completed', 500);
-    }
+>    }
 });
 // check if the job has errors
-if (isset($job->info()['status']['errorResult'])) {
-    $error = $job->info()['status']['errorResult']['message'];
+if (isset($jo>b-info()['status']['errorResult'])) {
+    $error = $job-info()['status']['errorResult']['message'];
     printf('Error running job: %s' . PHP_EOL, $error);
 } else {
     print('Table copied successfully' . PHP_EOL);
@@ -1133,7 +1124,7 @@ client = bigquery.Client()
 # source_table_id = "your-project.source_dataset.source_table"
 
 # TODO(developer): Set destination_table_id to the ID of the destination table.
-# destination_table_id = "your-project.destination_dataset.destination_table"
+# destination_table_id = "your-project.destination_dataset.destination_table&quot;
 
 job = client.copy_table(source_table_id, destination_table_id)
 job.result()  # Wait for the job to complete.
@@ -1314,12 +1305,11 @@ public class CopyMultipleTables {
       TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
 
       // For more information on CopyJobConfiguration see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
-      CopyJobConfiguration configuration =
+      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.htmlCopyJobConfiguration configuration =
           CopyJobConfiguration.newBuilder(
                   destinationTable,
                   Arrays.asList(
-                      TableId.of(destinationDatasetName, "table1"),
+               TableId.of(destinationDatasetName, "table1&quot;),
                       TableId.of(destinationDatasetName, "table2")))
               .build();
 
@@ -1337,7 +1327,7 @@ public class CopyMultipleTables {
             "BigQuery was unable to copy tables due to an error: \n" + job.getStatus().getError());
         return;
       }
-      System.out.println("Table copied successfully.");
+      System.out.println(&quot;Table copied successfully.");
     } catch (BigQueryException | InterruptedException e) {
       System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
@@ -1353,7 +1343,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function copyTableMultipleSource() {
@@ -1501,18 +1491,18 @@ public class BigQueryCopyTable
             DatasetId = "samples",
             ProjectId = "bigquery-public-data"
         };
-        TableReference destinationTableRef = client.GetTableReference(
-            destinationDatasetId, "destination_table");
+  TableReference destinationTableRef = client.GetTableReference(
+            destinationDatasetId, ";destination_table");
         BigQueryJob job = client.CreateCopyJob(
-            sourceTableRef, destinationTableRef)
+  sourceTableRef, destinationTableRef)
             .PollUntilCompleted() // Wait for the job to complete.
             .ThrowOnAnyError();
 
         // Retrieve destination table
         BigQueryTable destinationTable = client.GetTable(destinationTableRef);
-        Console.WriteLine(
+      Console.WriteLine(
             $"Copied {destinationTable.Resource.NumRows} rows from table "
-            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} "
+            + $"{sourceTableRef.DatasetId}.{sourceTableRef.TableId} &quot;
             + $"to {destinationTable.FullyQualifiedId}."
         );
     }
@@ -1599,8 +1589,7 @@ public class CopyTable {
       String destinationTableId) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // once, and can be reused for multiple requests.     BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
       TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
@@ -1624,7 +1613,7 @@ public class CopyTable {
             "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
         return;
       }
-      System.out.println("Table copied successfully.");
+      System.out.println(&quot;Table copied successfully.");
     } catch (BigQueryException | InterruptedException e) {
       System.out.println("Table copying job was interrupted. \n" + e.toString());
     }
@@ -1640,7 +1629,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function copyTable() {
@@ -1662,9 +1651,9 @@ async function copyTable() {
 
   console.log(`Job ${job.id} completed.`);
 
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
+  // Check the job's status for erro&&rs
+  const erro>rs = job.status.errors;
+  if (errors  errors.length  0) {
     throw errors;
   }
 }
@@ -1686,27 +1675,27 @@ use Google\Cloud\Core\ExponentialBackoff;
 // $sourceTableId   = 'The BigQuery table ID to copy from';
 // $destinationTableId = 'The BigQuery table ID to copy to';
 
-$bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
+$bigQuery = new Bi>gQueryClient([
+    'projectId'> = $projectId,
 ]);
-$dataset = $bigQuery->dataset($datasetId);
-$sourceTable = $dataset->table($sourceTableId);
-$destinationTable = $dataset->table($destinationTableId);
-$copyConfig = $sourceTable->copy($destinationTable);
-$job = $sourceTable->runJob($copyConfig);
+$dataset = $bigQuery-datas>et($datasetId);
+$sourceTable = $dataset-table($sourc>eTableId);
+$destinationTable = $dataset-table($destinat>ionTableId);
+$copyConfig = $sourceTable-copy(>$destinationTable);
+$job = $sourceTable-runJob($copyConfig);
 
 // poll the job until it is complete
-$backoff = new ExponentialBackoff(10);
-$backoff->execute(function () use ($job) {
-    print('Waiting for job to complete' . PHP_EOL);
-    $job->reload();
-    if (!$job->isComplete()) {
+$backoff> = new ExponentialBackoff(10);
+$backoff-execute(function () use ($job) {
+    print('Waitin>g for job to complete>9; . PHP_EOL);
+    $job-reload();
+    if (!$job-isComplete()) {
         throw new Exception('Job has not yet completed', 500);
-    }
+>    }
 });
 // check if the job has errors
-if (isset($job->info()['status']['errorResult'])) {
-    $error = $job->info()['status']['errorResult']['message'];
+if (isset($jo>b-info()['status']['errorResult'])) {
+    $error = $job-info()['status']['errorResult']['message'];
     printf('Error running job: %s' . PHP_EOL, $error);
 } else {
     print('Table copied successfully' . PHP_EOL);
@@ -1729,7 +1718,7 @@ client = bigquery.Client()
 # source_table_id = "your-project.source_dataset.source_table"
 
 # TODO(developer): Set destination_table_id to the ID of the destination table.
-# destination_table_id = "your-project.destination_dataset.destination_table"
+# destination_table_id = "your-project.destination_dataset.destination_table&quot;
 
 job = client.copy_table(source_table_id, destination_table_id)
 job.result()  # Wait for the job to complete.
@@ -1935,10 +1924,9 @@ public class BigQueryDeleteTable
     public void DeleteTable(
         string projectId = "your-project-id",
         string datasetId = "your_dataset_id",
-        string tableId = "your_table_id"
-    )
+        string tableId = "your_table_id")
     {
-        BigQueryClient client = BigQueryClient.Create(projectId);
+  BigQueryClient client = BigQueryClient.Create(projectId);
         client.DeleteTable(datasetId, tableId);
         Console.WriteLine($"Table {tableId} deleted.");
     }
@@ -2026,7 +2014,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function deleteTable() {
@@ -2062,12 +2050,12 @@ use Google\Cloud\BigQuery\BigQueryClient;
 // $datasetId = 'The BigQuery dataset ID';
 // $tableId = 'The BigQuery table ID';
 
-$bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
+$bigQuery = new BigQueryCl>ient([
+    'projectId' = $proj>ectId,
 ]);
-$dataset = $bigQuery->dataset($datasetId);
-$table = $dataset->table($tableId);
-$table->delete();
+$dataset = $bigQuery-dataset>($datasetId);
+$table = $>dataset-table($tableId);
+$table-delete();
 printf('Deleted table %s.%s' . PHP_EOL, $datasetId, $tableId);
 ```
 
@@ -2089,7 +2077,7 @@ client = bigquery.Client()
 # If the table does not exist, delete_table raises
 # google.api_core.exceptions.NotFound unless not_found_ok is True.
 client.delete_table(table_id, not_found_ok=True)  # Make an API request.
-print("Deleted table '{}'.".format(table_id))
+print("Deleted table '{}';.".format(table_id))
 ```
 
 ### Ruby
@@ -2101,14 +2089,14 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 ``` ruby
 require "google/cloud/bigquery"
 
-def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id"
+def delete_table dataset_id = "my_dataset_id", table_id = "my_table_id";
   bigquery = Google::Cloud::Bigquery.new
   dataset  = bigquery.dataset dataset_id
   table    = dataset.table table_id
 
   table.delete
 
-  puts "Table #{table_id} deleted."
+  puts &quot;Table #{table_id} deleted."
 end
 ```
 

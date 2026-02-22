@@ -4,16 +4,6 @@ BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective ana
 
 [Go to the BigQuery product page for more.](https://cloud.google.com/bigquery)
 
-#### Start your proof of concept with $300 in free credit
-
-  - Develop with our latest Generative AI models and tools.
-  - Get free usage of 20+ popular products, including Compute Engine and AI APIs.
-  - No automatic charges, no commitment.
-
-#### Keep exploring with 20+ always-free products.
-
-Access 20+ free products for common use cases, including AI APIs, VMs, data warehouses, and more.
-
 ## Documentation resources
 
 Find quickstarts and guides, review key references, and get help with common issues.
@@ -235,8 +225,3 @@ Code Samples
 Browse all samples for BigQuery
 
 ## Related videos
-
-### Try BigQuery for yourself
-
-Create an account to evaluate how our products perform in real-world scenarios.  
-New customers also get $300 in free credits to run, test, and deploy workloads.

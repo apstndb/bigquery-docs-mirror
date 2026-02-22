@@ -511,6 +511,7 @@ You must have the following to extract metadata from Cloudera:
         --password PASSWORD \
         --url URL_PATH \
         --yarn-application-types "APP_TYPES" \
+        --spark-history-service-names "SPARK_HISTORY_SERVICE_NAMES" \
         --pagination-page-size PAGE_SIZE \
         --start-date START_DATE \
         --end-date END_DATE \
@@ -523,6 +524,7 @@ You must have the following to extract metadata from Cloudera:
       - `  PASSWORD  ` : the password for your Cloudera Manager instance.
       - `  URL_PATH  ` : the URL path to the Cloudera Manager API, for example, `  https://localhost:7183/api/v55/  ` .
       - `  APP_TYPES  ` (optional): the comma-separated YARN application types that are dumped from the cluster. The default value is `  MAPREDUCE,SPARK,Oozie Launcher  ` .
+      - `  SPARK_HISTORY_SERVICE_NAMES  ` (optional): the comma-separated list of service names for your Spark History Server, used to query Spark event logs through Apache Knox for application metadata extraction. If not provided, the default value is `  sparkhistory,spark3history  ` .
       - `  PAGE_SIZE  ` (optional): the number of records per Cloudera response. The default value is `  1000  ` .
       - `  START_DATE  ` (optional): the start date for your history dump in ISO 8601 format, for example `  2025-05-29  ` . The default value is 90 days before the current date.
       - `  END_DATE  ` (optional): the end date for your history dump in ISO 8601 format, for example `  2025-05-30  ` . The default value is the current date.

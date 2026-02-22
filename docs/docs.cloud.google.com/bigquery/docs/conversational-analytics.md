@@ -68,9 +68,9 @@ You can create and manage conversations in BigQuery using the Google Cloud conso
 
 Conversational analytics supports the following BigQuery ML functions in response to chats with data agents and data sources, and in verified SQL queries that you create.
 
-  - [`  AI_FORECAST  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
+  - [`  AI.FORECAST  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
   - [`  AI.DETECT_ANOMALIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
-  - [`  AI_GENERATE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , including [`  AI.GENERATE_BOOL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) , [`  AI.GENERATE_INT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int) , and [`  AI.GENERATE_DOUBLE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
+  - [`  AI.GENERATE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , including [`  AI.GENERATE_BOOL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) , [`  AI.GENERATE_INT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int) , and [`  AI.GENERATE_DOUBLE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
 
 To use the supported `  AI.GENERATE  ` functions, you must have [the required permissions](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 

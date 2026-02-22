@@ -1,6 +1,6 @@
 # Understand slots
 
-A BigQuery slot is a *virtual compute unit* used by BigQuery to execute SQL queries, Python code, or other [job types](/bigquery/docs/managing-jobs) . During the execution of a query, BigQuery automatically determines how many slots are used by the query. The number of slots used depends on the amount of data being processed, the complexity of the query, and the number of slots available. In general, access to more slots lets you run more concurrent queries, and your complex queries can run faster.
+A BigQuery slot is a *virtual compute unit* used by BigQuery to execute SQL queries, Python code, or other [job types](/bigquery/docs/managing-jobs) . During the execution of a query, BigQuery automatically determines how many slots are used by the query. The number of slots used depends on the amount of data being processed, the complexity of the query, and the number of slots available. In general, access to more slots lets you run more concurrent queries, and your complex queries can run faster. You cannot manually change the number of slots used by BigQuery to execute queries.
 
 ## On-demand and capacity-based pricing
 

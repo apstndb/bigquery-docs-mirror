@@ -72,7 +72,7 @@ SET OPTIONS (
 Replace the following:
 
   - `  PROJECT_NAME  ` : the name of the project
-  - `  LOCATION  ` : the location of the project
+  - `  LOCATION  ` : the location in which jobs should attempt to use history-based optimizations
 
 **Note:** After you enable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `  ALTER PROJECT  ` or `  ALTER ORGANIZATION  ` statement: `  ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.  `
 
@@ -90,7 +90,7 @@ SET OPTIONS (
 Replace the following:
 
   - `  PROJECT_NAME  ` : the name of the project
-  - `  LOCATION  ` : the location of the project
+  - `  LOCATION  ` : the location in which jobs should not attempt to use history-based optimizations
 
 **Note:** After you disable history-based optimizations, you can safely ignore the following cautionary message, which is shown for any successful `  ALTER PROJECT  ` or `  ALTER ORGANIZATION  ` statement: `  ALTER PROJECT succeeded. Please make sure no existing queries depend on the old defaults (such as the default time zone) or else these queries will be broken.  `
 

@@ -8,117 +8,21 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 ## Before you begin
 
-Sign in to your Google Cloud account. If you're new to Google Cloud, [create an account](https://console.cloud.google.com/freetrial) to evaluate how our products perform in real-world scenarios. New customers also get $300 in free credits to run, test, and deploy workloads.
-
-[Install](/sdk/docs/install) the Google Cloud CLI. After installation, [initialize](/sdk/docs/initializing) the Google Cloud CLI by running the following command:
-
-``` text
-gcloud init
-```
-
-If you're using an external identity provider (IdP), you must first [sign in to the gcloud CLI with your federated identity](/iam/docs/workforce-log-in-gcloud) .
-
-[Create or select a Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) .
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-  - Create a Google Cloud project:
+1.  Enable the BigQuery API:
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
     
     ``` text
-    gcloud projects create PROJECT_ID
+    gcloud services enable bigquery
     ```
     
-    Replace `  PROJECT_ID  ` with a name for the Google Cloud project you are creating.
+    For new projects, the BigQuery API is automatically enabled.
 
-  - Select the Google Cloud project that you created:
+2.  Optional: [Enable billing](/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](/bigquery/docs/sandbox#setup) .
     
-    ``` text
-    gcloud config set project PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with your Google Cloud project name.
-
-If you're using an existing project for this guide, [verify that you have the permissions required to complete this guide](#required_roles) . If you created a new project, then you already have the required permissions.
-
-Enable the BigQuery API:
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-``` text
-gcloud services enable bigquery
-```
-
-[Install](/sdk/docs/install) the Google Cloud CLI. After installation, [initialize](/sdk/docs/initializing) the Google Cloud CLI by running the following command:
-
-``` text
-gcloud init
-```
-
-If you're using an external identity provider (IdP), you must first [sign in to the gcloud CLI with your federated identity](/iam/docs/workforce-log-in-gcloud) .
-
-[Create or select a Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) .
-
-**Roles required to select or create a project**
-
-  - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-  - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-**Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
-
-  - Create a Google Cloud project:
-    
-    ``` text
-    gcloud projects create PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with a name for the Google Cloud project you are creating.
-
-  - Select the Google Cloud project that you created:
-    
-    ``` text
-    gcloud config set project PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with your Google Cloud project name.
-
-If you're using an existing project for this guide, [verify that you have the permissions required to complete this guide](#required_roles) . If you created a new project, then you already have the required permissions.
-
-Enable the BigQuery API:
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-``` text
-gcloud services enable bigquery
-```
-
-Enable the BigQuery API:
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
-``` text
-gcloud services enable bigquery
-```
-
-For new projects, the BigQuery API is automatically enabled.
-
-Optional: [Enable billing](/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](/bigquery/docs/sandbox#setup) .
-
-**Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
-
-In the Google Cloud console, activate Cloud Shell.
-
-At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ### Required roles
 

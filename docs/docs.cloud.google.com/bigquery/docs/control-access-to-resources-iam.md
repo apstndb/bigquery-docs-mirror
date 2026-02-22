@@ -2807,7 +2807,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 To provide feedback or request support for this feature, email <bigquery-security@google.com> .
 
-You can provide access to a routine by granting an IAM principal\](/iam/docs/principal-identifiers\#allow) a predefined or custom role that determines what the principal can do with the routine. This is also known as attaching an [allow policy](/iam/docs/allow-policies) to a resource. After granting access, you can view the access controls for the routine, and you can revoke access to the routine.
+You can provide access to a routine by granting an [IAM principal](/iam/docs/principal-identifiers#allow) a predefined or custom role that determines what the principal can do with the routine. This is also known as attaching an [allow policy](/iam/docs/allow-policies) to a resource. After granting access, you can view the access controls for the routine, and you can revoke access to the routine.
 
 ### Grant access to a routine
 

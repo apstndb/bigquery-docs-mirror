@@ -14,7 +14,7 @@ BigQuery continuous queries are SQL statements that run continuously. Continuous
   - Writes from [Dataflow to BigQuery](/dataflow/docs/guides/write-to-bigquery)
   - Writes from Datastream to BigQuery using [append-only write mode](/datastream/docs/destination-bigquery#append-only_write_mode)
 
-You can use continuous queries to perform time sensitive tasks, such as creating and immediately acting on insights, applying real time machine learning (ML) inference, and replicating data into other platforms. This lets you use BigQuery as an event-driven data processing engine for your application's decision logic.
+You can use continuous queries to perform time-sensitive tasks, such as creating and immediately acting on insights, applying real-time machine learning (ML) inference, and replicating data into other platforms. This lets you use BigQuery as an event-driven data processing engine for your application's decision logic.
 
 The following diagram shows common continuous query workflows:
 
@@ -25,8 +25,8 @@ Common use cases where you might want to use continuous queries are as follows:
   - **Personalized customer interaction services** : use generative AI to create tailored messages customized for each customer interaction.
   - **Anomaly detection** : build solutions that let you perform anomaly and threat detection on complex data in real time, so that you can react to issues more quickly.
   - **Customizable event-driven pipelines** : use continuous query integration with Pub/Sub to trigger downstream applications based on incoming data.
-  - **Data enrichment and entity extraction** : use continuous queries to perform real time data enrichment and transformation by using SQL functions and ML models.
-  - **Reverse extract-transform-load (ETL)** : perform real time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable or Spanner for application serving.
+  - **Data enrichment and entity extraction** : use continuous queries to perform real-time data enrichment and transformation by using SQL functions and ML models.
+  - **Reverse extract-transform-load (ETL)** : perform real-time reverse ETL into other storage systems more suited for low latency application serving. For example, analyzing or enhancing event data that is written to BigQuery, and then streaming it to Bigtable or Spanner for application serving.
 
 ## Supported operations
 
@@ -132,7 +132,7 @@ Continuous queries are subject to the following limitations:
       - [Wildcard tables](/bigquery/docs/querying-wildcard-tables) .
       - [Change Data Capture (CDC) upsert](/bigquery/docs/change-data-capture) data.
       - [Materialized views](/bigquery/docs/materialized-views-intro) .
-      - [Views](/bigquery/docs/views) that are defined by other continuous query limitations, such as `  JOIN  ` operations, aggregate functions, change data capture enabled tables.
+      - [Views](/bigquery/docs/views) that are defined by other continuous query limitations, such as `  JOIN  ` operations, aggregate functions, change data capture-enabled tables.
 
   - Continuous queries don't support the [column-](/bigquery/docs/column-level-security-intro) and [row-level](/bigquery/docs/row-level-security-intro) security features.
 
@@ -169,7 +169,7 @@ After a continuous query starts running, it actively *listens* for incoming data
 Continuous queries can use [idle slot sharing](/bigquery/docs/slots#idle_slots) to share unused slot resources with other reservations and [job types](/bigquery/docs/reservations-workload-management#assignments) .
 
   - A `  CONTINUOUS  ` [reservation assignment](/bigquery/docs/reservations-assignments) is still required to run a continuous query and can't solely rely on idle slots from other reservations. Thus a `  CONTINUOUS  ` reservation assignment requires either a non-zero slot baseline or a non-zero slot autoscaling configuration.
-  - Only idle baseline slots or committed slots from a `  CONTINUOUS  ` reservation assignment are sharable. [Autoscaled slots](/bigquery/docs/slots-autoscaling-intro) aren't shareable as idle slots for other reservations.
+  - Only idle baseline slots or committed slots from a `  CONTINUOUS  ` reservation assignment are shareable. [Autoscaled slots](/bigquery/docs/slots-autoscaling-intro) aren't shareable as idle slots for other reservations.
 
 ## Pricing
 
