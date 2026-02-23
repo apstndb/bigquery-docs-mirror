@@ -13,7 +13,7 @@ Before you continue, familiarize yourself with [BigQuery sharing data exchanges]
 
 ### Required roles
 
-To get the permissions that you need to use Cloud Marketplace-integrated listings, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to use Cloud Marketplace-integrated listings, ask your administrator to grant you the following IAM roles :
 
   - Create and manage BigQuery sharing listings:
       - [Analytics Hub Admin](/iam/docs/roles-permissions/analyticshub#analyticshub.admin) ( `  roles/analyticshub.admin  ` )

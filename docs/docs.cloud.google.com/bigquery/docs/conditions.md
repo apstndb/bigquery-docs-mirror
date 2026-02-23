@@ -13,7 +13,7 @@ IAM Conditions are useful for granting Identity and Access Management (IAM) perm
 
 ### Required roles
 
-To get the permissions that you need to apply IAM Conditions to BigQuery resources, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to apply IAM Conditions to BigQuery resources, ask your administrator to grant you the following IAM roles :
 
   - For projects: [Project IAM Admin](/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` )
   - For datasets: [BigQuery Data Owner](/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` )

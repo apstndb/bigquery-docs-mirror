@@ -24,7 +24,7 @@ To create a default connection for a project, see the [Default connection overvi
 
 ### Required roles
 
-To get the permissions that you need to manage connections, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to manage connections, ask your administrator to grant you the following IAM roles :
 
   - [View connection details](#view-connections) : [BigQuery Connection User](/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on your dataset
   - [List all connections](#list-connections) : [BigQuery Connection User](/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on your dataset

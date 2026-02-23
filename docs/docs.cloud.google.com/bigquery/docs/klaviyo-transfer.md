@@ -130,6 +130,8 @@ When you save the transfer configuration, the Klaviyo connector automatically tr
 
 To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
+For a list of data that's included in a Klaviyo data transfer, see [Klaviyo data model reference](/bigquery/docs/klaviyo-data-model) .
+
 ## Data type mapping
 
 The following table maps Klaviyo data types to the corresponding BigQuery data types:

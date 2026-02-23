@@ -66,6 +66,7 @@ To create or update a row-level access policy, use one of the following DDL stat
       - Each row-level access policy on a table must have a unique name.
       - Like a `  WHERE  ` clause, the `  filter_expression  ` matches the data that you want to be visible to the members of the `  grantee_list  ` .
       - You can combine a series of users and groups in the `  grantee_list  ` list, if they are comma-separated and quoted separately.
+      - All identities in the `  grantee_list  ` must exist. If any identity does not exist, the policy is not created and the statement fails.
       - You cannot apply row-level access policies on [JSON columns](/bigquery/docs/json-data) . To learn about additional limitations for row-level security, see [Limitations](/bigquery/docs/row-level-security-intro#limitations)
 
 ### Examples

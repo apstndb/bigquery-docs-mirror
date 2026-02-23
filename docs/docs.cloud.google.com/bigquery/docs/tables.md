@@ -20,7 +20,7 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required roles
 
-To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles :
 
   - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project if you're creating a table by loading data or by saving query results to a table.
   - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you're creating the table.

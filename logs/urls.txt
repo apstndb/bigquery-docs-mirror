@@ -365,6 +365,7 @@ https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery
 https://docs.cloud.google.com/bigquery/docs/json-data
 https://docs.cloud.google.com/bigquery/docs/json-web-tokens
 https://docs.cloud.google.com/bigquery/docs/jupyterlab-plugin
+https://docs.cloud.google.com/bigquery/docs/klaviyo-data-model
 https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer
 https://docs.cloud.google.com/bigquery/docs/kmeans-tutorial
 https://docs.cloud.google.com/bigquery/docs/labels-intro

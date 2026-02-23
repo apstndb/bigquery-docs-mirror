@@ -266,7 +266,7 @@ A materialized view replica lets you use the Amazon S3, Iceberg, or Data Cloud m
 
 #### Required roles
 
-To get the permissions that you need to perform the tasks in this section, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to perform the tasks in this section, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to perform the tasks in this section. To see the exact permissions that are required, expand the **Required permissions** section:
 

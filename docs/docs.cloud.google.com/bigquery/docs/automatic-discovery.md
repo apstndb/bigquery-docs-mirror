@@ -111,7 +111,7 @@ Before you begin, assign the IAM permissions to the Dataplex Universal Catalog s
 
 Replace `  PROJECT_NUMBER  ` with the project in which the Dataplex API is enabled.
 
-To ensure that the Dataplex service account has the necessary permissions to create and run a discovery scan, ask your administrator to grant the Dataplex service account the following IAM roles:
+To ensure that the Dataplex service account has the necessary permissions to create and run a discovery scan, ask your administrator to grant the following IAM roles to the Dataplex service account:
 
 **Important:** You must grant these roles to the Dataplex service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
@@ -140,7 +140,7 @@ Your administrator might also be able to give the Dataplex service account these
 
 ### Required roles for the BigQuery connection service account
 
-To ensure that the BigQuery Connection Service account has the necessary permissions to create a discovery scan, ask your administrator to grant the BigQuery Connection Service account the [Dataplex Discovery Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) IAM role on the Cloud Storage bucket.
+To ensure that the BigQuery Connection Service account has the necessary permissions to create a discovery scan, ask your administrator to grant the [Dataplex Discovery Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) IAM role to the BigQuery Connection Service account on the Cloud Storage bucket.
 
 **Important:** You must grant this role to the BigQuery Connection Service account, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
 

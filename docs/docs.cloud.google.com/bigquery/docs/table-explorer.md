@@ -37,7 +37,7 @@ For more information about BigQuery compute pricing, see [Pricing](https://cloud
 
 ### Required roles and permissions
 
-To get the permissions that you need to view table data and generate queries with table explorer, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to view table data and generate queries with table explorer, ask your administrator to grant you the following IAM roles :
 
   - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
   - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that you want to explore.

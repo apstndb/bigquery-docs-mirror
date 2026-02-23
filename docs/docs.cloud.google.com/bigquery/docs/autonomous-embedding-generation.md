@@ -35,7 +35,7 @@ To enable autonomous embedding generation on a table, you must have the necessar
 
 ### Required roles
 
-To get the permissions that you need to enable autonomous embedding generation, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to enable autonomous embedding generation, ask your administrator to grant you the following IAM roles :
 
   - To use a connection resource: [BigQuery Connections User](/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on the connection
   - To create a table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the table

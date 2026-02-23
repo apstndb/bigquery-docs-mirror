@@ -18,7 +18,7 @@ For more details on the format of a label, see [Requirements for labels](/bigque
 
 ### Required IAM roles
 
-To get the permission that you need to add a label to an existing dataset, ask your administrator to grant you the [BigQuery Data Owner](/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to add a label to an existing dataset, ask your administrator to grant you the [BigQuery Data Owner](/iam/docs/roles-permissions/bigquery#bigquery.dataOwner) ( `  roles/bigquery.dataOwner  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.datasets.update  ` permission, which is required to add a label to an existing dataset.
 
@@ -250,7 +250,7 @@ Because views are treated like table resources, you use the `  tables.patch  ` m
 
 ### Required IAM roles
 
-To get the permissions that you need to add a label to an existing table or view, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to add a label to an existing table or view, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to add a label to an existing table or view. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -512,7 +512,7 @@ When you add a label to a job, the label is included in your billing data.
 
 ### Required IAM roles
 
-To get the permission that you need to add a label to a job, ask your administrator to grant you the [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to add a label to a job, ask your administrator to grant you the [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.jobs.create  ` permission, which is required to add a label to a job.
 

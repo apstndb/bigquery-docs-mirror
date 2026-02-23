@@ -45,7 +45,7 @@ gcloud services enable analyticshub.googleapis.com
 
 ### Required roles
 
-To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles :
 
   - Create or delete a TVF in a data clean room:
       - [Analytics Hub Publisher](/iam/docs/roles-permissions/analyticshub#analyticshub.publisher) ( `  roles/analyticshub.publisher  ` ) on the project

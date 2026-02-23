@@ -10,7 +10,7 @@ To create a stored procedure for Spark, ask your administrator to create a [Spar
 
 ### Required roles
 
-To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles :
 
   - [Create a stored procedure for Spark](#create-spark-procedure) :
       - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you create the stored procedure

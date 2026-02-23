@@ -17,7 +17,7 @@ This section describes the roles and permissions that you need to manage dataset
 
 Grant these roles to copy a dataset. Copying datasets is in ( [Beta](https://cloud.google.com/products/#product-launch-stages) ).
 
-To get the permissions that you need to copy datasets, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to copy datasets, ask your administrator to grant you the following IAM roles :
 
   - BigQuery Admin ( `  roles/bigquery.admin  ` ) - the destination project
   - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) - the source dataset

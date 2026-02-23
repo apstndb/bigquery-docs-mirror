@@ -26,7 +26,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Required roles
 
-To get the permissions that you need to manage organization policies, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to manage organization policies, ask your administrator to grant you the following IAM roles :
 
   - [Organization Policy Administrator](/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) on the organization resource
   - To create or update a BigQuery dataset: [BigQuery Admin or BigQuery Editor](/bigquery/docs/access-control#bigquery) ( `  roles/bigquery.admin  ` or `  roles/bigquery.editor  ` ) on the project resource

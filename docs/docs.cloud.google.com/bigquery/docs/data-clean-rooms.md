@@ -81,7 +81,7 @@ Grant Identity and Access Management (IAM) roles to give users the necessary per
 
 ### Required permissions
 
-To get the permissions that you need to use data clean rooms, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use data clean rooms, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use data clean rooms. To see the exact permissions that are required, expand the **Required permissions** section:
 

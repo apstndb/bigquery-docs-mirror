@@ -33,7 +33,7 @@ Ensure that you have a connection to access AWS Glue data.
 
 ### Required permissions
 
-To get the permissions that you need to create a federated dataset, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a federated dataset, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a federated dataset. To see the exact permissions that are required, expand the **Required permissions** section:
 

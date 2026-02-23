@@ -20,7 +20,7 @@ The following sections show you how to configure entity resolution in BigQuery. 
 
 ### Required roles
 
-To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles :
 
   - For the identity provider's service account to read the input dataset and write to the output dataset:
       - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the input dataset
@@ -214,7 +214,7 @@ The following sections show you how to configure entity resolution in BigQuery. 
 
 ### Required roles
 
-To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to run entity resolution jobs, ask your administrator to grant you the following IAM roles :
 
   - For the service account that's associated with your function to read and write to associated datasets and launch jobs:
       - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the project

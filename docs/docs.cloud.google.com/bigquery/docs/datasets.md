@@ -662,6 +662,7 @@ A hidden dataset is a dataset whose name begins with an underscore. You can quer
       - [Authorized routines](/bigquery/docs/authorized-routines)
       - [Authorized views](/bigquery/docs/authorized-views)
   - They don't appear in Data Catalog (deprecated) or Dataplex Universal Catalog.
+  - They can't be used as a source dataset for creating a [dataset replica](/bigquery/docs/data-replication#dataset_replication)
 
 ## Dataset security
 

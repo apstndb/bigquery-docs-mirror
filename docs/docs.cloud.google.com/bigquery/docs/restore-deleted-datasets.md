@@ -10,8 +10,6 @@ This document describes how to restore (or *undelete* ) a deleted dataset in Big
 
 You can restore a dataset to recover it to the state that it was in when it was deleted. You can only restore datasets that are within your [time travel window](/bigquery/docs/time-travel#time_travel) . This recovery includes all of the objects that were contained in the dataset, the dataset properties, and the security settings. For resources that are not recovered, see [Limitations](#limitations) .
 
-**Caution:** Only the most recent dataset for a given dataset ID can be restored. If you delete a dataset and then create a new dataset with the same ID, you lose the ability to undelete the original dataset. However, you still might be able to [recover specific tables from the deleted dataset](/bigquery/docs/managing-datasets#restore-delete-tables) .
-
 For information about restoring a deleted table or snapshot, see the following resources:
 
   - [Restore deleted tables](/bigquery/docs/restore-deleted-tables)
@@ -59,6 +57,8 @@ The following permissions are required to restore a deleted dataset:
 You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
 ## Restore a dataset
+
+**Caution:** Only the most recent dataset for a given dataset ID can be restored. If you delete a dataset and then create a new dataset with the same ID, you lose the ability to undelete the original dataset. However, you still might be able to [recover specific tables from the deleted dataset](/bigquery/docs/managing-datasets#restore-delete-tables) .
 
 To restore a dataset, select one of the following options:
 

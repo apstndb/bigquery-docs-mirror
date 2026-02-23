@@ -34,7 +34,7 @@ To improve the quality of insights, generate [data profiling results](/bigquery/
 
 ### Required roles
 
-To get the permissions that you need to generate, manage, and retrieve dataset insights, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to generate, manage, and retrieve dataset insights, ask your administrator to grant you the following IAM roles :
 
   - To generate, manage, and retrieve insights:
       - Dataplex DataScan Editor ( `  roles/dataplex.dataScanEditor  ` ) or Dataplex DataScan Administrator ( `  roles/dataplex.dataScanAdmin  ` ) on project

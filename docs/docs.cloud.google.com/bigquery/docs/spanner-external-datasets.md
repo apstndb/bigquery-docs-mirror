@@ -10,7 +10,7 @@ When you query Spanner, query results are by default saved in temporary tables. 
 
 ## Required permissions
 
-To get the permission that you need to create an external dataset, ask your administrator to grant you the [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to create an external dataset, ask your administrator to grant you the [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.datasets.create  ` permission, which is required to create an external dataset.
 

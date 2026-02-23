@@ -70,7 +70,7 @@ When you migrate data pipelines from a congested on-premises data warehouse to t
 
 ### Extract and load (EL)
 
-You can use the extact and load (EL) procedure on its own or followed by transformations, in which case it becomes ELT. EL is mentioned separately because several automated services are available that perform this task, mitigating the need for you to create your own ingestion data pipeline. For more details, see [What is BigQuery Data Transfer Service?](/bigquery/docs/dts-introduction) .
+You can use the extract and load (EL) procedure on its own or followed by transformations, in which case it becomes ELT. EL is mentioned separately because several automated services are available that perform this task, mitigating the need for you to create your own ingestion data pipeline. For more details, see [What is BigQuery Data Transfer Service?](/bigquery/docs/dts-introduction) .
 
 ### Change data capture (CDC)
 

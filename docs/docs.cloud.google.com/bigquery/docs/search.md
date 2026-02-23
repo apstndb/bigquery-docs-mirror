@@ -461,7 +461,7 @@ Information on search index usage is also available through the [`  searchStatis
   - `  PARTIALLY_USED  ` : part of the query used search indexes and part did not.
   - `  FULLY_USED  ` : every `  SEARCH  ` function in the query used a search index.
 
-When `  indexUsageMode  ` is `  UNUSED  ` or `  PARTIALLY_USED  ` , the `  indexUnusuedReasons  ` field contains information about why search indexes were not used in the query.
+When `  indexUsageMode  ` is `  UNUSED  ` or `  PARTIALLY_USED  ` , the `  indexUnusedReasons  ` field contains information about why search indexes were not used in the query.
 
 To view `  searchStatistics  ` for a query, run the `  bq show  ` command.
 

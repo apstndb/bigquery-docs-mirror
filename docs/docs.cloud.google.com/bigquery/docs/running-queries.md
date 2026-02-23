@@ -25,7 +25,7 @@ BigQuery saves query results to either a [temporary table (default) or permanent
 
 ## Required roles
 
-To get the permissions that you need to run a query job, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to run a query job, ask your administrator to grant you the following IAM roles :
 
   - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
   - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that your query references. To query views, you also need this role on all underlying tables and views. If you're using [authorized views](/bigquery/docs/authorized-views) or [authorized datasets](/bigquery/docs/authorized-datasets) , you don't need access to the underlying source data.

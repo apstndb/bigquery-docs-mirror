@@ -8,7 +8,7 @@ After you set up your resources with CMEKs, the experience of accessing your Big
 
 ## CMEK with Cloud KMS Autokey
 
-You can either create CMEKs manually to protect your BigQuery resources or use Cloud KMS Autokey. With Autokey, key rings and keys are generated on demand as part of resource creation in BigQuery. Service agents that use the keys for encrypt and decrypt operations are created if they don't already exist and are granted the required Identity and Access Management (IAM) roles. For more information, see [Autokey overview](/kms/docs/autokey-overview) .
+You can either create CMEKs manually to protect your BigQuery resources or use Cloud KMS Autokey. With Autokey, key rings and keys are generated on demand to support resource creation in BigQuery. Service agents that use the keys for encrypt and decrypt operations are created if they don't already exist and are granted the required Identity and Access Management (IAM) roles. For more information, see [Autokey overview](/kms/docs/autokey-overview) .
 
 To learn how to use manually-created CMEKs to protect your BigQuery resources, see [Customer-managed Cloud KMS keys](/bigquery/docs/customer-managed-encryption) .
 

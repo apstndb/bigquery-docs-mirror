@@ -207,7 +207,7 @@ US multi-region
 
 ### Required permissions
 
-To get the permissions that you need to access partition and cluster recommendations, ask your administrator to grant you the [BigQuery Partitioning Clustering Recommender Viewer](/iam/docs/roles-permissions/recommender#recommender.bigqueryPartitionClusterViewer) ( `  roles/recommender.bigqueryPartitionClusterViewer  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to access partition and cluster recommendations, ask your administrator to grant you the [BigQuery Partitioning Clustering Recommender Viewer](/iam/docs/roles-permissions/recommender#recommender.bigqueryPartitionClusterViewer) ( `  roles/recommender.bigqueryPartitionClusterViewer  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to access partition and cluster recommendations. To see the exact permissions that are required, expand the **Required permissions** section:
 

@@ -8,7 +8,7 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required permissions
 
-To get the permission that you need to use the Storage Write API, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to use the Storage Write API, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.tables.updateData  ` permission, which is required to use the Storage Write API.
 

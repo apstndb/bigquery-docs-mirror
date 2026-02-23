@@ -61,7 +61,7 @@ For more information about, see the following pricing pages:
 
 ### Required roles
 
-To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles :
 
   - Create a connection: [BigQuery Connection Admin](/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
   - Grant permissions to the connection's service account: [Project IAM Admin](/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` )

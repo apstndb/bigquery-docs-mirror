@@ -218,7 +218,7 @@ Setup is the foundational work that's required in order to enable the use cases 
 
 Data governance is a principled approach to manage data during its lifecycle, from acquisition to use to disposal. Your data governance program clearly outlines policies, procedures, responsibilities, and controls surrounding data activities. This program helps to ensure that information is collected, maintained, used, and disseminated in way that both meets your organization's data integrity and its security needs. It also helps empower your employees to discover and use the data to its fullest potential.
 
-The [data governance](/bigquery/docs/data-governance) documention helps you understand data governance and the controls that you need when migrating your on-premises data warehouse to BigQuery.
+The [data governance](/bigquery/docs/data-governance) documentation helps you understand data governance and the controls that you need when migrating your on-premises data warehouse to BigQuery.
 
 #### 2\. Migrate schema and data
 
@@ -238,11 +238,11 @@ Some legacy data warehouses include extensions to the SQL standard to enable fun
 
 To learn more about the analytics options when working with BigQuery, see [Overview of BigQuery analytics](/bigquery/docs/query-overview) . This topic provides an overview of the reporting and analysis tools that you can use to get compelling insights from your data.
 
-The section on [feedback loops](/bigquery/docs/migration/pipelines#feedback-loops) in the data pipeline documention describes how you can use a data pipeline to create a feedback loop to provision upstream systems.
+The section on [feedback loops](/bigquery/docs/migration/pipelines#feedback-loops) in the data pipeline documentation describes how you can use a data pipeline to create a feedback loop to provision upstream systems.
 
 #### 5\. Migrate data pipelines
 
-The [data pipelines](/bigquery/docs/migration/pipelines) documention presents procedures, patterns, and technologies to migrate your legacy data pipelines to Google Cloud. It helps you understand what a data pipeline is, what procedures and patterns it can employ, and which migration options and technologies are available in relation to the larger data warehouse migration.
+The [data pipelines](/bigquery/docs/migration/pipelines) documentation presents procedures, patterns, and technologies to migrate your legacy data pipelines to Google Cloud. It helps you understand what a data pipeline is, what procedures and patterns it can employ, and which migration options and technologies are available in relation to the larger data warehouse migration.
 
 #### 6\. Optimize performance
 

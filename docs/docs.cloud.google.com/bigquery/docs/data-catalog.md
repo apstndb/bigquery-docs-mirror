@@ -47,7 +47,7 @@ In this section, you enable the Data Lineage API and grant [Identity and Access 
 
 Lineage information is tracked automatically when you enable the Data Lineage API.
 
-To get the permissions that you need to view lineage graphs, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to view lineage graphs, ask your administrator to grant you the following IAM roles :
 
   - [Data Catalog Viewer](/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `  roles/datacatalog.viewer  ` ) on a Data Catalog resource project.
   - [Data lineage viewer](/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `  roles/datalineage.viewer  ` ) on the project where you use systems supported by data lineage.

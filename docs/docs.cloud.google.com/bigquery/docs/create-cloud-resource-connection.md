@@ -14,7 +14,7 @@ For more information about connections, see [Introduction to connections](/bigqu
 
   - Enable the BigQuery Connection API.
 
-  - To get the permissions that you need to create a Cloud Resource connection, ask your administrator to grant you the following IAM roles:
+  - To get the permissions that you need to create a Cloud Resource connection, ask your administrator to grant you the following IAM roles :
     
       - [BigQuery Connection Admin](/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on the project
       - [Storage Object Viewer](/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on the bucket

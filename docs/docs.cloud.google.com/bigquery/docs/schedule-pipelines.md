@@ -46,7 +46,7 @@ To learn more about service accounts in Dataform, see [About service accounts in
 
 ### Required roles
 
-To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles :
 
   - Delete pipelines: [Dataform Admin](/iam/docs/roles-permissions/dataform#dataform.Admin) ( `  roles/dataform.Admin  ` ) on the pipeline
   - Create, edit, run, and delete pipeline schedules:

@@ -72,7 +72,7 @@ Before you can view or apply materialized view recommendations, you need to [ena
 
 ### Required permissions
 
-To get the permissions that you need to access materialized view recommendations, ask your administrator to grant you the [BigQuery Materialized View Recommender Viewer](/iam/docs/roles-permissions/recommender#recommender.bigqueryMaterializedViewViewer) ( `  roles/recommender.bigqueryMaterializedViewViewer  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to access materialized view recommendations, ask your administrator to grant you the [BigQuery Materialized View Recommender Viewer](/iam/docs/roles-permissions/recommender#recommender.bigqueryMaterializedViewViewer) ( `  roles/recommender.bigqueryMaterializedViewViewer  ` ) IAM role . For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to access materialized view recommendations. To see the exact permissions that are required, expand the **Required permissions** section:
 

@@ -30,6 +30,8 @@ You query a table snapshot's data in the same way as you query other types of Bi
 
   - If new data is added to the base table after the table snapshot was created, then you don't pay for storage of that data in the table snapshot.
 
+  - When you take a snapshot, the storage type of the snapshot is the same as the storage type of the source data. For example, if you take a snapshot of a table that is classified as active storage, the storage type is active for the snapshot. Similarly, if the base table is classified as long-term storage, the storage type is long-term for the snapshot.
+
   - If data is changed or deleted in the base table that also exists in a table snapshot, the following charges occur:
     
       - You are charged for the table snapshot storage of the changed or deleted data.

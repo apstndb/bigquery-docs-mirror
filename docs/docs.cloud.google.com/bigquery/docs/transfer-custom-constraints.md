@@ -30,7 +30,7 @@ You can use a custom organization policy to allow or deny specific operations on
 
 ### Required roles
 
-To get the permissions that you need to manage organization policies, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to manage organization policies, ask your administrator to grant you the following IAM roles :
 
   - [Organization Policy Administrator](/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) on the organization resource
   - Create or update a BigQuery Data Transfer Service transfer configuration: [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) on the project resource

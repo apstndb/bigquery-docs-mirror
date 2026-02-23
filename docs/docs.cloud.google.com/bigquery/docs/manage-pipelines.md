@@ -13,7 +13,7 @@ Pipelines are powered by [Dataform](/dataform/docs/overview) .
 
 ### Required roles
 
-To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles:
+To get the permissions that you need to manage pipelines, ask your administrator to grant you the following IAM roles :
 
   - To delete pipelines: [Dataform Admin](/iam/docs/roles-permissions/dataform#dataform.Admin) ( `  roles/dataform.Admin  ` ) on the pipeline
   - To view and run pipelines: [Dataform Viewer](/iam/docs/roles-permissions/dataform#dataform.Viewer) ( `  roles/dataform.Viewer  ` ) on the project
