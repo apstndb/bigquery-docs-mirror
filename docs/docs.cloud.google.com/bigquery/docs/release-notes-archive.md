@@ -2212,18 +2212,18 @@ BigQuery is now available in the [Israel (me-west1)](/bigquery/docs/locations) r
 
 ## March 30, 2023
 
-Feature
-
-[BigQuery Partner Center](/bigquery/docs/bigquery-ready-overview#partner_center) , which can be used to discover and try validated partner applications, is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). In addition, the [Google Cloud Ready - BigQuery](/bigquery/docs/bigquery-ready-partners) initiative has added 14 new partners.
-
 Announcement
 
 [BigQuery ML documentation](/bigquery/docs/bqml-introduction) is now integrated with BigQuery documentation to unify resources for data analysis and machine learning tasks such as inference. BigQuery ML documentation resources include:
 
   - [Get started with BigQuery ML](/bigquery/docs/create-machine-learning-model)
   - [End-to-end user journey for each model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
-  - [BigQuery ML SQL refence](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+  - [BigQuery ML SQL reference](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
   - [BigQuery ML pricing](https://cloud.google.com/bigquery/pricing#bqml)
+
+Feature
+
+[BigQuery Partner Center](/bigquery/docs/bigquery-ready-overview#partner_center) , which can be used to discover and try validated partner applications, is now [generally available](https://cloud.google.com/products/#product-launch-stages) (GA). In addition, the [Google Cloud Ready - BigQuery](/bigquery/docs/bigquery-ready-partners) initiative has added 14 new partners.
 
 ## March 29, 2023
 
