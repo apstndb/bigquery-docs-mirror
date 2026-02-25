@@ -277,6 +277,10 @@ Data agents contain table metadata and use case-specific query processing instru
 
 For information on creating agents and using conversational analytics, see [Conversational analytics in BigQuery](/bigquery/docs/conversational-analytics) .
 
+## Limitations
+
+The BigQuery Google Cloud console doesn't support [Virtual Private Cloud](/vpc-service-controls/docs/supported-products#console) or [Private Service Connect](/vpc/docs/private-service-connect) .
+
 ## What's next
 
   - To learn about querying a public dataset and using the BigQuery sandbox, see [Try BigQuery using the sandbox](/bigquery/docs/sandbox) .

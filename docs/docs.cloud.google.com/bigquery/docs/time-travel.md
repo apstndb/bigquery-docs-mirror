@@ -171,6 +171,7 @@ If you use physical storage, you can see the bytes used by time travel and fail-
 
   - When a table is created, there is no time travel or fail-safe storage cost.
   - If data is changed or deleted, then you are charged for the storage of the changed or deleted data saved by time travel during the time travel window and the fail-safe period. This is similar to the storage pricing for table snapshots and clones.
+  - Temporary tables aren't billed for fail-safe storage.
 
 ## Data retention example
 

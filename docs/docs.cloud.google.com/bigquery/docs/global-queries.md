@@ -20,13 +20,20 @@ To enable global queries for your project or organization, use the [`  ALTER PRO
   - To allow global queries to copy data from a region, set the `  enable_global_queries_data_access  ` argument to `  true  ` in that region for a project where the data is stored.
   - Global queries can run in one project and pull data from other regions from another project.
 
-The following example shows how to modify these settings at the project level. Suppose you want to run global queries in region REGION\_1 in project PROJECT\_1\_ID and pull data from REGION\_2 in project PROJECT\_2\_ID:
+The following example shows how to modify these settings at the project level. Suppose you want to run global queries in region `  REGION_1  ` in project `  PROJECT_1_ID  ` and pull data from `  REGION_2  ` in project `  PROJECT_2_ID  ` .
+
+You need to enable execution of global queries in `  REGION_1  ` :
 
 ``` text
 ALTER PROJECT `PROJECT_1_ID`
 SET OPTIONS (
   `region-REGION_1.enable_global_queries_execution` = true
 );
+```
+
+And enable copying data by global queries from `  REGION_2  ` :
+
+``` text
 ALTER PROJECT `PROJECT_2_ID`
 SET OPTIONS (
   `region-REGION_2.enable_global_queries_data_access` = true
@@ -40,7 +47,7 @@ Replace the following:
   - `  PROJECT_2_ID  ` : the name of the project where global queries will pull data from
   - `  REGION_2  ` : the region where global queries will pull data from
 
-It can take several minutes for the change to take effect.
+These operations must be run separately as they refer to different regions. It can take several minutes for the change to take effect.
 
 ### Required permission
 
@@ -157,6 +164,7 @@ For information about quotas regarding global queries, see [Query jobs](/bigquer
   - Global queries don't use any cache to avoid transferring data between regions.
   - You can't query pseudocolumns, such `  _PARTITIONTIME  ` , with global queries.
   - You can't query columns using [flexible column names](/bigquery/docs/schemas#flexible-column-names) with global queries.
+  - You can't query [`  INFORMATION_SCHEMA  ` views](/bigquery/docs/information-schema-intro) from a remote region in a global query.
   - When you reference the columns of a BigLake table in a `  WHERE  ` clause, you can't use `  RANGE  ` or `  INTERVAL  ` literals.
   - Global [authorized views](/bigquery/docs/authorized-views) and [authorized routines](/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location).
   - [Materialized views](/bigquery/docs/materialized-views-intro) over global queries are not supported.
