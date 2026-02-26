@@ -28,6 +28,8 @@ The following limitations apply to BigQuery disaster recovery:
 
   - The [`  INFORMATION_SCHEMA.RESERVATIONS  ` view](/bigquery/docs/information-schema-reservations) doesn't have failover details.
 
+  - The primary region's data in the [`  INFORMATION_SCHEMA.JOBS  ` view](/bigquery/docs/information-schema-jobs) isn't replicated to the secondary region. This view only contains the job history for the specific region where the jobs were executed. In the event of a failover, job history from the primary region isn't visible in the secondary region using the `  INFORMATION_SCHEMA.JOBS  ` view.
+
   - If you have multiple failover reservations with the same administration project but whose attached datasets use different secondary locations, don't use one failover reservation with the datasets attached to a different failover reservation.
 
   - If you want to convert an existing reservation to a failover reservation, the existing reservation can't have more than 1,000 [reservation assignments](/bigquery/docs/reservations-workload-management#assignments) .

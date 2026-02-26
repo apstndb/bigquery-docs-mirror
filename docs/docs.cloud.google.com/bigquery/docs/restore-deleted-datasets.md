@@ -1,11 +1,5 @@
 # Restore deleted datasets
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or ask questions related to this preview release, contact <bq-dataset-undelete-feedback@google.com> .
-
 This document describes how to restore (or *undelete* ) a deleted dataset in BigQuery.
 
 You can restore a dataset to recover it to the state that it was in when it was deleted. You can only restore datasets that are within your [time travel window](/bigquery/docs/time-travel#time_travel) . This recovery includes all of the objects that were contained in the dataset, the dataset properties, and the security settings. For resources that are not recovered, see [Limitations](#limitations) .

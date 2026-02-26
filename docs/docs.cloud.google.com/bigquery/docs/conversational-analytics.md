@@ -36,6 +36,7 @@ Data agents consist of one or more knowledge sources, and a set of instructions 
       - Synonyms and business terms for field names
       - Most important fields and defaults for filtering and grouping
   - Create *verified queries* that the data agent can use to shape an agent's response structure and to learn the business logic that your organization uses. Verified queries were previously known as *golden queries* . Verified queries can use [supported BigQuery ML functions](#bigquery-ml-support) .
+  - Create BigQuery custom glossary terms for each agent or import business glossary terms from Dataplex Universal Catalog. These terms help an agent interpret user prompts. For advice on when to use each type, see [Create or review glossary terms](/bigquery/docs/create-data-agents#create-review-glossary-terms) .
 
 ### Manage data agents
 

@@ -31,7 +31,7 @@ SELECT * FROM AI.SEARCH(TABLE mydataset.products, 'description', 'A really fun t
 
 ## Before you begin
 
-To enable autonomous embedding generation on a table, you must have the necessary permissions and connection.
+To enable autonomous embedding generation on a table, you must have the necessary permissions and connection, and enable the [Vertex AI API](https://console.developers.google.com/apis/api/aiplatform.googleapis.com/overview) for your project.
 
 ### Required roles
 

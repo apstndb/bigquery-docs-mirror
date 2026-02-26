@@ -16,6 +16,8 @@ You can use the Hive managed tables migration connector in the BigQuery Data Tra
 
 With the Hive managed tables migration connector, you can register your Hive managed tables with [Dataproc Metastore](/dataproc-metastore/docs/overview) , [BigLake metastore](/bigquery/docs/about-blms) , or [BigLake metastore Iceberg REST Catalog](/bigquery/docs/blms-rest-catalog) while using Cloud Storage as the file storage.
 
+This connector supports both full and metadata-only transfers. Full transfers will transfer both your data and metadata from your source tables to your target metastore. You can make a metadata-only transfer if you already have your data migrated to Cloud Storage.
+
 The following diagram provides an overview of the table migration process from Hadoop cluster.
 
 ## Limitations
@@ -112,28 +114,33 @@ Select one of the following options:
 
 7.  In the **Data source details** section, do the following:
     
-    1.  For **Table name patterns** , specify HDFS data lake tables to transfer by providing table names or patterns that matches tables in the HDFS database. You must use Java regular expression syntax to specify table patterns. For example:
+    1.  For **Transfer strategy** , select one of the following:
+        
+          - `  FULL_TRANSFER  ` : Transfer all data and register metadata with the target metastore. This is the default option.
+          - `  METADATA_ONLY  ` : Register metadata only. You must have data already present in the correct Cloud Storage location referenced in the metadata.
+    
+    2.  For **Table name patterns** , specify HDFS data lake tables to transfer by providing table names or patterns that matches tables in the HDFS database. You must use Java regular expression syntax to specify table patterns. For example:
         
           - `  db1..*  ` matches all tables in db1.
           - `  db1.table1;db2.table2  ` matches table1 in db1 and table2 in db2.
     
-    2.  For **BQMS discovery dump gcs path** , enter the path to the bucket that contains the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](#generate-metadata-dump-for-apache-hive) .
+    3.  For **BQMS discovery dump gcs path** , enter the path to the bucket that contains the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](#generate-metadata-dump-for-apache-hive) .
     
-    3.  Choose the Metastore type from the drop-down list:
+    4.  Choose the Metastore type from the drop-down list:
         
           - `  DATAPROC_METASTORE  ` : Select this option to store your metadata in Dataproc Metastore. You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
           - `  BIGLAKE_METASTORE  ` : Select this option to store your metadata in BigLake metastore. You must provide a BigQuery dataset in **BigQuery dataset** .
           - `  BIGLAKE_REST_CATALOG  ` : Select this option to store your metadata in the BigLake metastore Iceberg REST catalog.
     
-    4.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
+    5.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
     
-    5.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
+    6.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
     
-    6.  Optional: You can enable **Use translation output** to set up a unique Cloud Storage path and database for each table being migrated. To do this, provide the path to the Cloud Storage folder containing the translation results in the **BQMS translation output gcs path** field. For more information, see [Configure Translation output](#configure-translation-output) .
+    7.  Optional: You can enable **Use translation output** to set up a unique Cloud Storage path and database for each table being migrated. To do this, provide the path to the Cloud Storage folder containing the translation results in the **BQMS translation output gcs path** field. For more information, see [Configure Translation output](#configure-translation-output) . This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` .
         
           - If you specify a Translation output Cloud Storage path, the destination Cloud Storage path and BigQuery dataset will be sourced from the files in that path.
     
-    7.  For **Storage type** , select one of the following options:
+    8.  For **Storage type** , select one of the following options. This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` :
         
           - `  HDFS  ` : Select this option if your file storage is `  HDFS  ` . In the **STS agent pool name** field, you must provide the name of the agent pool that you created when you [configured your Storage Transfer Agent](#configure-storage-transfer-agent-hdfs) .
           - `  S3  ` : Select this option if your file storage is `  Amazon S3  ` . In the **Access key ID** and **Secret access key** fields, you must provide the access key ID and secret access key that you created when you [set up your access credentials](#configure-storage-transfer-permission-s3) .
@@ -150,7 +157,9 @@ To schedule Hive managed tables transfer, enter the `  bq mk  ` command and supp
   --service_account_name='SERVICE_ACCOUNT'
   --project_id='PROJECT_ID'
   --location='REGION'
-  --params='{"table_name_patterns":"LIST_OF_TABLES",
+  --params='{
+    "transfer_strategy":"TRANSFER_STRATEGY",
+    "table_name_patterns":"LIST_OF_TABLES",
     "table_metadata_path":"gs://DUMPER_BUCKET/hive-dumper-output.zip",
     "target_gcs_file_path":"gs://MIGRATION_BUCKET",
     "metastore":"METASTORE",
@@ -171,19 +180,22 @@ Replace the following:
   - `  SERVICE_ACCOUNT  ` : the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the required permissions.
   - `  PROJECT_ID  ` : your Google Cloud project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
   - `  REGION  ` : location of this transfer configuration.
+  - `  TRANSFER_STRATEGY  ` : (Optional) Specify one of the following values:
+      - `  FULL_TRANSFER  ` : Transfer all data and register metadata with the target metastore. This is the default value.
+      - `  METADATA_ONLY  ` : Register metadata only. You must have data already present in the correct Cloud Storage location referenced in the metadata.
   - `  LIST_OF_TABLES  ` : a list of entities to be transferred. Use a hierarchical naming spec - `  database . table  ` . This field supports RE2 regular expression to specify tables. For example:
       - `  db1..*  ` : specifies all tables in the database
       - `  db1.table1;db2.table2  ` : a list of tables
   - `  DUMPER_BUCKET  ` : the Cloud Storage bucket containing the `  hive-dumper-output.zip  ` file.
-  - `  MIGRATION_BUCKET  ` : Destination GCS path to which all underlying files will be loaded.
+  - `  MIGRATION_BUCKET  ` : Destination GCS path to which all underlying files will be loaded. Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  METASTORE  ` : The type of metastore to migrate to. Set this to one of the following values:
       - `  DATAPROC_METASTORE  ` : To transfer metadata to Dataproc Metastore.
       - `  BIGLAKE_METASTORE  ` : To transfer metadata to BigLake metastore.
       - `  BIGLAKE_REST_CATALOG  ` : To transfer metadata to BigLake metastore Iceberg REST Catalog.
   - `  DATAPROC_METASTORE_URL  ` : The URL of your Dataproc Metastore. Required if `  metastore  ` is `  DATAPROC_METASTORE  ` .
-  - `  BIGLAKE_METASTORE_DATASET  ` : The BigQuery dataset for your BigLake metastore. Required if `  metastore  ` is `  BIGLAKE_METASTORE  ` .
-  - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](/bigquery/docs/hadoop-transfer#configure-translation-output) .
-  - `  STORAGE_TYPE  ` : Specify the underlying file storage for your tables. Supported types are `  HDFS  ` , `  S3  ` , and `  AZURE  ` .
+  - `  BIGLAKE_METASTORE_DATASET  ` : The BigQuery dataset for your BigLake metastore. Required if `  metastore  ` is `  BIGLAKE_METASTORE  ` and `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
+  - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](/bigquery/docs/hadoop-transfer#configure-translation-output) . Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
+  - `  STORAGE_TYPE  ` : Specify the underlying file storage for your tables. Supported types are `  HDFS  ` , `  S3  ` , and `  AZURE  ` . Required if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  AGENT_POOL_NAME  ` : the name of the agent pool used for creating agents. Required if `  storage_type  ` is `  HDFS  ` .
   - `  AWS_ACCESS_KEY_ID  ` : the access key ID from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
   - `  AWS_SECRET_ACCESS_KEY  ` : the secret access key from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .

@@ -96,6 +96,8 @@ At any point after a table is created, you can update the table's partition expi
 
 When a partition expires, BigQuery deletes that partition. The partition data is retained in accordance with [time travel](/bigquery/docs/time-travel) and [fail-safe](/bigquery/docs/time-travel#fail-safe) policies, and can be charged for, depending on your billing model. Until then, the partition counts for purposes of [table quotas](/bigquery/quotas#partitioned_tables) . To delete a partition immediately, you can [manually delete the partition](#delete_a_partition) .
 
+**Note:** The automatic deletion of an expired partition isn't recorded in BigQuery audit logs.
+
 ### Update the partition expiration
 
 To update a partitioned table's partition expiration:

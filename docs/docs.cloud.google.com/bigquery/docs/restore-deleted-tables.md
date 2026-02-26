@@ -407,6 +407,18 @@ You can't restore a deleted materialized view directly. If you delete a material
 
 If you delete a table that is a base table for a materialized view, the materialized view can no longer be queried or refreshed. If you restore the base table by following the steps in [Restore a table](/bigquery/docs/restore-deleted-tables#restore_a_table) , you must also [recreate](/bigquery/docs/materialized-views-create) any materialized views that use that table.
 
+### External tables
+
+You can't restore a deleted external table directly. If you delete an external table, you must [recreate it](/bigquery/docs/external-data-sources#external_tables) . The recreation process requires knowing the original table's definition, most importantly the following:
+
+  - The schema of the table
+  - The source URI(s) pointing to the external data
+  - The format of the external data
+
+You can obtain this information from [Cloud Logging](https://cloud.google.com/logging) by looking for the table creation log entry. You can also try to get the URI(s) by querying the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](/bigquery/docs/information-schema-table-options) if the table was just deleted.
+
+Deleting the external table doesn't delete the underlying data.
+
 ## What's next
 
   - Learn how to [create and use tables](/bigquery/docs/tables) .

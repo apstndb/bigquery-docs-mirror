@@ -135,7 +135,7 @@ Follow these steps to configure table and field descriptions:
 
 ### Configure advanced features
 
-Configure optional advanced features such as agent instructions, verified queries (previously known as *golden queries* ), and settings.
+Configure optional advanced features such as agent instructions, verified queries (previously known as *golden queries* ), BigQuery custom glossary terms, and agent settings. You can also review business glossary terms imported from Dataplex Universal Catalog.
 
 #### Create agent instructions
 
@@ -143,7 +143,9 @@ The agent should understand context for user questions without needing any custo
 
 In the **Instructions** section, type instructions for the data agent in the **Agent instructions** field. Because the data agent uses these instructions to understand the context for user questions and to provide answers, make the instructions as clear as possible.
 
-If you don't get a satisfactory answer from the agent, then add structured context such as descriptions or examples. If you still don't get a satisfactory answer, then add custom instructions like the examples in the following table. For even more examples of instructions, click **Show examples** .
+If you don't get a satisfactory answer from the agent, then add structured context such as descriptions, examples or glossary terms. If you still don't get a satisfactory answer, add custom instructions like the examples in the following table.
+
+For even more examples of instructions, click **Show examples** .
 
 <table>
 <colgroup>
@@ -224,6 +226,32 @@ To create a verified query for the data agent, formerly known as a *golden query
     5.  Click **Add** . The new agent page reopens.
 
 3.  Repeat these steps as needed to create additional verified queries.
+
+#### Create or review glossary terms
+
+You can create BigQuery custom glossary terms local to an agent, or review business glossary terms imported from Dataplex Universal Catalog that apply to the knowledge sources that you selected for an agent.
+
+  - Because business glossary terms from Dataplex Universal Catalog apply globally to BigQuery resources, if you use Dataplex Universal Catalog, [create and manage](/dataplex/docs/manage-glossaries) business glossary terms in Dataplex Universal Catalog instead of for individual agents.
+  - If you need to modify business glossary terms imported from Dataplex Universal Catalog, you must edit them in Dataplex Universal Catalog and return to conversational analytics to see them.
+  - BigQuery custom glossary terms stay in BigQuery. They don't appear in Dataplex Universal Catalog.
+  - If you're not using Dataplex Universal Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
+
+Follow these steps to create custom glossary terms for an agent:
+
+1.  In the **Glossary** section of the agent **Editor** page, click **Add term** .
+2.  In the **Custom terms** section, you can edit or delete any existing custom terms.
+3.  To create one or more new terms, click **Create term** .
+    1.  Enter a **Term** , a **Definition** , and one or more **Synonyms** separated by a comma.
+    2.  To create the term, click **Add** .
+    3.  If you want to delete the new term, click **Delete** .
+4.  To create more custom terms, repeat these steps.
+
+Follow these steps to view business glossary terms imported from Dataplex Universal Catalog:
+
+1.  In the **Glossary** section of the agent **Editor** page, click **Add term** .
+2.  Navigate to the page section called **Imported from Dataplex Universal Catalog** .
+3.  To modify imported terms in Dataplex Universal Catalog, you must click the link "Go to Dataplex Universal Catalog glossaries."
+4.  After you've modified the terms in Dataplex Universal Catalog, you can return to the agent **Editor** page to view the modified terms.
 
 #### Configure settings
 

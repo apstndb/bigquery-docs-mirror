@@ -23,7 +23,9 @@ To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusag
 
 ### Required roles
 
-The `  dbt-bigquery  ` adapter supports OAuth-based and service account-based authentication.
+The `  dbt-bigquery  ` adapter supports OAuth-based and service account-based authentication. The following sections describe the required roles depending on how you plan to authenticate.
+
+#### OAuth
 
 If you plan to authenticate to the `  dbt-bigquery  ` adapter using OAuth, ask your administrator to grant you the following roles:
 
@@ -32,7 +34,9 @@ If you plan to authenticate to the `  dbt-bigquery  ` adapter using OAuth, ask y
   - [Colab Enterprise User role](/iam/docs/roles-permissions/aiplatform#aiplatform.colabEnterpriseUser) ( `  roles/colabEnterprise.user  ` ) on the project
   - [Storage Admin role](/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) on the staging Cloud Storage bucket for staging code and logs
 
-If you plan to authenticate to the `  dbt-bigquery  ` adapter using a service account, ask your administrator to grant the following roles to the service account you plan to use:
+#### Service account
+
+If you plan to authenticate to the `  dbt-bigquery  ` adapter using a service account in your project, ask your administrator to grant the following roles to the service account you plan to use:
 
   - [BigQuery User role](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
   - [BigQuery Data Editor role](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
@@ -40,6 +44,34 @@ If you plan to authenticate to the `  dbt-bigquery  ` adapter using a service ac
   - [Storage Admin role](/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` )
 
 If you're authenticating using a service account, also ensure you have the [Service Account User role](/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) granted for the service account you plan to use.
+
+#### Service account impersonation
+
+If you plan to authenticate to the `  dbt-bigquery  ` adapter using OAuth but want the data processing and notebook execution to occur under the identity of a service account in the same project in which the jobs are run, ask your administrator to grant you the following roles:
+
+  - [Service Account Token Creator role](/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `  roles/iam.serviceAccountTokenCreator  ` )
+  - [Service Account User](/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` )
+
+The impersonated service account must also have all [roles required for authentication](#service_account) .
+
+#### Cross-project service accounts
+
+If you plan to authenticate to the `  dbt-bigquery  ` adapter using a service account in a different project, the *credential project* , from where the jobs are executed, the *execution project* , ask your administrator to do the following:
+
+1.  Disable the `  constraints/iam.disableCrossProjectServiceAccountUsage  ` constraint in the credential project.
+
+2.  In addition to all [roles required for service account authentication](#service_account) , grant the following roles to the service account in the credential project:
+    
+      - [Vertex AI Service Agent role](/iam/docs/roles-permissions/aiplatform#aiplatform.serviceAgent) (roles/aiplatform.serviceAgent) to `  service- PROJECT_NUMBER @gcp-sa-aiplatform.iam.gserviceaccount.com  `
+      - [Vertex AI Colab Service Agent role](/iam/docs/roles-permissions/aiplatform#aiplatform.colabServiceAgent) (roles/aiplatform.colabServiceAgent) to `  service- PROJECT_NUMBER @gcp-sa-vertex-nb.iam.gserviceaccount.com  `
+      - [Compute Engine Service Agent role](/iam/docs/roles-permissions/compute#compute.serviceAgent) (roles/compute.serviceAgent) to `  service- PROJECT_NUMBER @compute-system.iam.gserviceaccount.com  `
+
+If you plan to authenticate to the `  dbt-bigquery  ` adapter using OAuth but want the data processing and notebook execution to occur under the identity of a service account in a different project from which the jobs are run, ask your administrator to do the following:
+
+  - Follow the steps previously described for [cross-project service accounts](#cross-project_service_accounts) for the service account in another project.
+  - Grant you and the service account the [roles required for service account impersonation](#service_account_impersonation)
+
+#### Shared VPC
 
 If you're using Colab Enterprise in a Shared VPC environment, ask your administrator to grant the following roles and permissions:
 

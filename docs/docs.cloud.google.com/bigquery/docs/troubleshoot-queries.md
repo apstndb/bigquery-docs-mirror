@@ -430,6 +430,14 @@ To give permission to access a table or view, see [Grant access to a table or vi
 
 **Note:** If the user account or service account is impacted by a deny policy, you may receive an `  Access denied  ` error even if the account has the correct permissions. For more information, see [Deny policies](/iam/docs/deny-overview) .
 
+### Permission `     bigquery.reservations.use    ` denied on reservation
+
+Error string:
+
+  - `  Access Denied: Reservation projects/project/locations/region/reservations/reservation_name: Permission bigquery.reservations.use denied on reservation projects/project/locations/region/reservations/reservation_name (or it may not exist)  `
+
+This error occurs when a query is assigned to run in a specific reservation using the `  SET @@reservation  ` statement and the user or service account is missing the `  bigquery.reservations.use  ` permission. You can inspect the failure in Cloud Logging or the BigQuery jobs page to identify which principal tried to perform this operation.
+
 ### Other `     Access Denied    ` errors
 
 Error strings:

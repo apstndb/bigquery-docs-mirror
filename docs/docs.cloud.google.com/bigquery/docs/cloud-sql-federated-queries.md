@@ -194,6 +194,8 @@ Alternatively, if you are querying a PostgreSQL database, you might encounter th
 
   - `  Invalid table-valued function EXTERNAL_QUERY Connect to PostgreSQL server failed: server closed the connection unexpectedly This probably means the server terminated abnormally before or while processing the request.  `  
     **Resolution:** Ensure that valid credentials were used and all prerequisites were followed to create the [connection for Cloud SQL](/bigquery/docs/connect-to-sql) . Check if the service account that is automatically created when a connection to Cloud SQL is created has the Cloud SQL Client ( `  roles/cloudsql.client  ` ) role. The service account is of the following format: `  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` . For detailed instructions, see [Grant access to the service account](/bigquery/docs/connect-to-sql#access-sql) .
+    
+    If your Cloud SQL instance uses a private IP address, ensure that you enabled a private path when you [created the Cloud SQL instance](/sql/docs/postgres/create-instance) . Doing so lets BigQuery access data in Cloud SQL and run queries against this data over a private connection.
 
 ## What's next
 

@@ -443,7 +443,9 @@ To control access to datasets in BigQuery, see [Controlling access to datasets](
 
 ## Delete datasets
 
-When you delete a dataset by using the Google Cloud console, tables and views in the dataset, including their data, are deleted. When you delete a dataset by using the bq command-line tool, you must use the `  -r  ` flag to delete the tables and views.
+When you delete a dataset by using the Google Cloud console, tables and views in the dataset, including their data, are deleted automatically. However, when using any other method, you must either empty the dataset first or specify corresponding flags, parameters or keywords that force removal of the dataset contents.
+
+If you attempt to delete a non-empty dataset without the proper flags or parameters, the operation fails with the following error: `  Dataset project:dataset is still in use  ` .
 
 Deleting a dataset creates one [audit log](/bigquery/docs/introduction-audit-workloads) entry for the dataset deletion. It doesn't create separate log entries for each deleted table within the dataset.
 

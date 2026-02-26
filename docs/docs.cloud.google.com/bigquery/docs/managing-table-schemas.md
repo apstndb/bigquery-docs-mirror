@@ -1391,7 +1391,7 @@ To overwrite `  mytable  ` with the query results, include `  mydataset.mytable 
 
 ## Change a column's mode
 
-The only supported modification you can make to a column's mode is changing it from `  REQUIRED  ` to `  NULLABLE  ` . Changing a column's mode from `  REQUIRED  ` to `  NULLABLE  ` is also called column relaxation. You can also relax a column when you load data to overwrite an existing table, or when you append data to an existing table. You can't change a column's mode from `  NULLABLE  ` to `  REQUIRED  ` .
+The only supported modification you can make to a column's mode is changing it from `  REQUIRED  ` to `  NULLABLE  ` . Changing a column's mode from `  REQUIRED  ` to `  NULLABLE  ` is also called column relaxation. You can also relax a column when you load data to overwrite an existing table, or when you append data to an existing table. You can't change a column's mode from `  NULLABLE  ` to `  REQUIRED  ` or from `  REPEATED  ` to `  NULLABLE  ` . To change a column's mode from `  NULLABLE  ` to `  REQUIRED  ` or from `  REPEATED  ` to `  NULLABLE  ` , you must recreate the table with the updated column modes.
 
 ### Make a column `     NULLABLE    ` in an existing table
 

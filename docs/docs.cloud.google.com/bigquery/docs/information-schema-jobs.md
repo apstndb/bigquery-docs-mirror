@@ -1229,6 +1229,46 @@ The output shows different performance insights about jobs, including slot conte
 +------------+-------------------------+-------------------------------------------------+----------------------------------------------------------------------------+
 ```
 
+### Get jobs with the same query hash
+
+The following query returns the job IDs with the same query hash as a specific job:
+
+``` text
+SELECT
+  j.job_id,
+  j.creation_time,
+  j.query
+FROM
+  `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS j
+WHERE
+  j.job_id != "JOB_IDENTIFIER"
+  AND j.query_info.query_hashes.normalized_literals = (
+    SELECT
+      sub.query_info.query_hashes.normalized_literals
+    FROM
+      `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS sub
+    WHERE
+      sub.job_id = "JOB_IDENTIFIER"
+    LIMIT 1
+  )
+ORDER BY
+  j.creation_time DESC;
+```
+
+**Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
+
+The result is similar to the following:
+
+``` text
++--------------+---------------------------+------------------------------------------------+
+| job_id       |  creation_time            |  query                                         |
++--------------+---------------------------+------------------------------------------------+
+| bquxjob_1    |  2019-10-10 00:00:00 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "a"  |
+| bquxjob_2    |  2019-10-10 00:00:01 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "b"  |
+| bquxjob_3    |  2019-10-10 00:00:02 UTC  |  SELECT ... FROM dataset.table1 WHERE x = "c"  |
++--------------+---------------------------+------------------------------------------------+
+```
+
 ### View average concurrent jobs running alongside a particular job in the same project
 
 The following example demonstrates how to calculate the average number of jobs running at the same time as a specific query job in the same project.

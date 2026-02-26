@@ -6,6 +6,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## February 23, 2026
+
+Feature
+
+You can now [undelete a dataset](/bigquery/docs/restore-deleted-datasets) that is within your time travel window to recover it to the state that it was in when it was deleted. This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## February 17, 2026
 
 Feature
