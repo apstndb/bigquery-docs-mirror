@@ -48,6 +48,8 @@ BigQuery lets you specify which reservation a query should run on at runtime. Th
 
 You must have [access to the reservation](#securable) in order to use the reservation when you run your query.
 
+If the default assigned reservation's edition is Enterprise Plus it can be overridden only with an Enterprise Plus reservation.
+
 To flexibly assign reservations, [run an interactive query](/bigquery/docs/running-queries#queries) and specify the reservation.
 
 ### Combine reservations with on-demand billing
@@ -174,7 +176,7 @@ For example, if you purchased an annual commitment at 6:00 PM on October 5, 2019
 
 You can't delete a commitment once you create it. To delete an annual or three-year commitment, set its renewal plan to `  NONE  ` . After the commitment expires, it is deleted automatically. To learn more about commitment expirations, see [Commitment expiration](/bigquery/docs/reservations-commitments#commitment_expiration) .
 
-If you accidentally purchase a commitment or made a mistake when you configured your commitment, contact [Cloud Billing Support](/support/billing) for help.
+If you accidentally purchase a commitment or make a mistake when you configure your commitment, contact [Cloud Customer Care](https://cloud.google.com/support-hub) for help.
 
 ## Reservation limitations
 

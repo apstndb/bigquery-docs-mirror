@@ -238,7 +238,7 @@ To use natural language SQL generation, follow these steps:
 
 2.  In the **BigQuery Studio** query editor, click pen\_spark and ensure Gemini SQL **Auto-generation** is enabled.
 
-3.  In the BigQuery query editor, enter a SQL query containing a natural language prompt enclosed in a comment in the format of `  /* natural language text */  ` about a table that you recently viewed or queried. Gemini in BigQuery uses the metadata of recently queried tables in an effort to find appropriate data, so you can help guide responses by querying a table. For best results, your natural language prompt should be specific to SQL syntax and your data, and not a general expressions such as "optimize my query."s
+3.  In the BigQuery query editor, enter a SQL query containing a natural language prompt enclosed in a comment in the format of `  /* natural language text */  ` about a table that you recently viewed or queried. Gemini in BigQuery uses the metadata of recently queried tables in an effort to find appropriate data, so you can help guide responses by querying a table. For best results, your natural language prompt should be specific to SQL syntax and your data, and not a general expression such as "optimize my query."
     
     For example, if you recently queried [`  bigquery-public-data.austin_bikeshare.bikeshare_trips  ` table](https://console.cloud.google.com/bigquery?ws=!1m5!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) , you might enter the following:
     
@@ -607,7 +607,7 @@ To generate Gemini Code Assist code in your notebook, do the following:
 
   - To let Gemini Code Assist fetch relevant tables and schemas, turn on [Data Catalog sync](/dataproc-metastore/docs/data-catalog-sync) for Dataproc Metastore instances.
 
-  - Make sure your user account has access to Data Catalog the query tables. To do this, assign the [`  DataCatalog.Viewer  ` role](/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
+  - Make sure your user account has access to Data Catalog to query tables. To do this, assign the [`  DataCatalog.Viewer  ` role](/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) .
 
 ## Turn off Gemini query assistant features
 

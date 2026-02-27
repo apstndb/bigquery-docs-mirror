@@ -29,7 +29,7 @@ GoogleSQL is an ANSI-compliant [Structured Query Language (SQL)](https://en.wiki
 
 ## BigQuery SQL dialects
 
-BigQuery supports the GoogleSQL dialect, but a legacy SQL dialect is also available. If you are new to BigQuery, you should use GoogleSQL as it supports the broadest range of functionality. For example, features such as DDL and DML statements are only supported using GoogleSQL. Legacy SQL is maintained for backward compatibility and we recommend that customers [migrate](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) if they are using legacy SQL.
+BigQuery supports the GoogleSQL dialect, which is the recommended dialect for all new projects. A legacy SQL dialect is also available with [some restrictions](/bigquery/docs/legacy-sql-feature-availability) . We recommend that you [migrate from legacy SQL to GoogleSQL](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) .
 
 ### Changing from the default dialect
 

@@ -5,7 +5,7 @@ As a BigQuery administrator, you can create a Cloud resource connection that ena
   - [Query structured Cloud Storage data](/bigquery/docs/query-cloud-storage-using-biglake) using BigLake tables. [BigLake tables](/bigquery/docs/biglake-intro) enable you to query external data with access delegation.
   - [Query unstructured data in Cloud Storage](/bigquery/docs/object-tables) using [object tables](/bigquery/docs/object-table-introduction) .
   - [Implement remote functions](/bigquery/docs/remote-functions) with any supported languages in Cloud Run functions or Cloud Run.
-  - [Query Spanner data using Spanner external datasets](/bigquery/docs/spanner-external-datasets) . Spanner external datasets with a Cloud resource connection enable you to query external data source with access delegation.
+  - [Query Spanner data using Spanner external datasets](/bigquery/docs/spanner-external-datasets) . Spanner external datasets with a Cloud resource connection enable you to query external data sources with access delegation.
   - Perform generative AI tasks using a [BigQuery ML remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
 
 For more information about connections, see [Introduction to connections](/bigquery/docs/connections-api-intro) .

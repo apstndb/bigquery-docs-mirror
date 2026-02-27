@@ -287,7 +287,7 @@ Continue to the next section to place the agent in draft mode or publish the age
 
 2.  Click **Save** .
 
-3.  To place the data agent in draft mode, which you can re-edit later, click arrow\_back **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My Draft Agents** section on the **Agent Catalog** tab.
+3.  To place the data agent in draft mode, which you can re-edit later, click arrow\_back **Go back** to return to the **Agent Catalog** page. Because your agent is now in draft mode, it appears in the **My draft agents** section on the **Agent Catalog** tab.
     
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
@@ -315,8 +315,8 @@ Continue to the next section to place the agent in draft mode or publish the age
 
 You can find existing agents in the **Agent Catalog** tab, which consists of three sections:
 
-  - **My Agents** : a list of all agents that you create and publish. You can modify and share published agents with others.
-  - **My Draft Agents** : agents that you haven't published yet. You can't share draft agents.
+  - **My agents** : a list of all agents that you create and publish. You can modify and share published agents with others.
+  - **My draft agents** : agents that you haven't published yet. You can't share draft agents.
   - **Shared by others in your organization** : Agents that others create and share with you. If others grant you permissions, you can edit these shared agents.
 
 ### Edit a data agent
@@ -377,7 +377,7 @@ Follow these steps to share a published data agent. You can't share draft agents
 
 2.  Select the **Agent Catalog** tab.
 
-3.  In either the **My Agents** or **Draft Agents** section of the **Agent Catalog** tab, locate the agent card of the data agent that you want to delete.
+3.  In either the **My agents** or **My draft agents** section of the **Agent Catalog** tab, locate the agent card of the data agent that you want to delete.
 
 4.  Click more\_vert **Open actions** \> **Delete** .
 

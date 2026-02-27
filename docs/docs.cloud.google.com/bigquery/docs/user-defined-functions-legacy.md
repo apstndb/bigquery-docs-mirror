@@ -1,6 +1,6 @@
 # User-defined functions in legacy SQL
 
-This document details how to use JavaScript user-defined functions in legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. For information on user-defined functions in GoogleSQL, see [GoogleSQL user-defined functions](/bigquery/docs/user-defined-functions) .
+This document details how to use JavaScript user-defined functions in legacy SQL query syntax. The preferred query syntax for user-defined functions in BigQuery is [GoogleSQL syntax](/bigquery/docs/user-defined-functions) . For more information, see [Legacy SQL feature availability](/bigquery/docs/legacy-sql-feature-availability) .
 
 BigQuery legacy SQL supports user-defined functions (UDFs) written in JavaScript. A UDF is similar to the "Map" function in a MapReduce: it takes a single row as input and produces zero or more rows as output. The output can potentially have a different schema than the input.
 

@@ -231,7 +231,7 @@ The following table shows the required permission and API response for the diffe
 </tbody>
 </table>
 
-If you don't opt into early enforcement, or if you opt out after opting in, BigQuery default's to the previous behavior; the `  bigquery.datasets.update  ` permission lets you update both metadata and access controls.
+If you don't opt into early enforcement, or if you opt out after opting in, BigQuery defaults to the previous behavior; the `  bigquery.datasets.update  ` permission lets you update both metadata and access controls.
 
 #### Example
 
@@ -304,7 +304,7 @@ The following table shows the required permission and API response for the diffe
 </tbody>
 </table>
 
-If you don't opt into early enforcement, or if you opt out after opting in, BigQuery default's to the previous behavior; the `  bigquery.datasets.update  ` permission lets you update both metadata and access controls.
+If you don't opt into early enforcement, or if you opt out after opting in, BigQuery defaults to the previous behavior; the `  bigquery.datasets.update  ` permission lets you update both metadata and access controls.
 
 #### Example
 

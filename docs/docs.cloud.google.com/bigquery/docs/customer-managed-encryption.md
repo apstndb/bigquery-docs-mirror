@@ -40,7 +40,7 @@ You can either create your CMEK keys manually or use Cloud KMS Autokey. Autokey 
 
 For the Google Cloud project that runs Cloud KMS, create a key ring and a key as described in [Creating key rings and keys](/kms/docs/creating-keys) . Create the key ring in a location that matches the location of your BigQuery dataset:
 
-  - Any multi-regional dataset should use a multi-regional key ring from a matching location. For examples, a dataset in region `  US  ` should be protected with a key ring from region `  us  ` , and a dataset in region `  EU  ` should be protected with a key ring from region `  europe  ` .
+  - Any multi-regional dataset should use a multi-regional key ring from a matching location. For example, a dataset in region `  US  ` should be protected with a key ring from region `  us  ` , and a dataset in region `  EU  ` should be protected with a key ring from region `  europe  ` .
 
   - Regional datasets should use matching regional keys. For example, a dataset in region `  asia-northeast1  ` should be protected with a key ring from region `  asia-northeast1  ` .
 
@@ -961,7 +961,7 @@ bq cp \
 SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
 ```
 
-In you want to copy a table that has default encryption to the same table with Cloud KMS protection:
+If you want to copy a table that has default encryption to the same table with Cloud KMS protection:
 
 ``` text
 bq cp -f \
@@ -1612,7 +1612,7 @@ If there is a default key on the dataset, and you rotate the key, any new tables
 
 When you create or truncate a CMEK-protected table, BigQuery generates an intermediate key-encryption key which is then encrypted with the specified Cloud KMS key.
 
-For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, You can expect one call to Cloud KMS [`  cryptoKeys.encrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`  cryptoKeys.decrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
+For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, you can expect one call to Cloud KMS [`  cryptoKeys.encrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`  cryptoKeys.decrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
 
 Either reading from or writing to an existing CMEK-protected table invokes Cloud KMS `  cryptoKeys.decrypt  ` because the intermediate key must be decrypted.
 

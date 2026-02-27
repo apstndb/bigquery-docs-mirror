@@ -160,7 +160,7 @@ model_option_list:
     [, REMOTE_SERVICE_TYPE = { 'CLOUD_AI_VISION_V1' | 'CLOUD_AI_NATURAL_LANGUAGE_V1' |
       'CLOUD_AI_TRANSLATE_V3' } ]
     [, XGBOOST_VERSION = { '0.9' | '1.1' } ]
-    [, TF_VERSION = { '1.15' | '2.8.0' } ]
+    [, TF_VERSION = { '1.15' | '2.8.0' | '2.17.0' } ]
     [, NUM_TRIALS = int64_value, ]
     [, MAX_PARALLEL_TRIALS = int64_value ]
     [, HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' } ]

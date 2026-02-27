@@ -79,7 +79,7 @@ Before you create a YouTube Content Owner data transfer:
   - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
   - [Create a BigQuery dataset](/bigquery/docs/datasets) to store YouTube data.
   - Verify that you have a [YouTube Content Owner](https://support.google.com/youtube/answer/6301188) account. A YouTube Content Owner is not the same as a YouTube channel. Typically, you only have a YouTube Content Owner account if you manage many different channels.
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -123,7 +123,7 @@ For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/ena
 
 Setting up a YouTube Content Owner data transfer requires a:
 
-  - **Content Owner ID** : Provided by YouTube. When you login to YouTube as a Content Owner or Manager, your ID appears in the URL after `  o=  ` . For example, if the URL is `  https://studio.youtube.com/owner/AbCDE_8FghIjK?o=AbCDE_8FghIjK  ` , the Content Owner ID is `  AbCDE_8FghIjK  ` . To select a different Content Manager account, see [Sign in to a Content Manager account](https://support.google.com/youtube/answer/6301172) or [YouTube Channel Switcher](https://www.youtube.com/channel_switcher) . For more information on creating and managing your Content Manager account, see [Configure Content Manager account settings](https://support.google.com/youtube/topic/6032636) .
+  - **Content Owner ID** : Provided by YouTube. When you sign in to YouTube as a Content Owner or Manager, your ID appears in the URL after `  o=  ` . For example, if the URL is `  https://studio.youtube.com/owner/AbCDE_8FghIjK?o=AbCDE_8FghIjK  ` , the Content Owner ID is `  AbCDE_8FghIjK  ` . To select a different Content Manager account, see [Sign in to a Content Manager account](https://support.google.com/youtube/answer/6301172) or [YouTube Channel Switcher](https://www.youtube.com/channel_switcher) . For more information on creating and managing your Content Manager account, see [Configure Content Manager account settings](https://support.google.com/youtube/topic/6032636) .
   - **Table Suffix** : A user-friendly name for the channel provided by you when you set up the transfer. The suffix is appended to the job ID to create the table name, for example reportTypeId\_suffix . The suffix is used to prevent separate data transfers from writing to the same tables. The table suffix must be unique across all transfers that load data into the same dataset, and the suffix should be short to minimize the length of the resulting table name.
 
 If you use the [YouTube Reporting API](https://developers.google.com/youtube/reporting/v1/reference/rest/) and have existing reporting jobs, the BigQuery Data Transfer Service loads your report data. If you don't have existing reporting jobs, setting up the data transfer automatically enables YouTube reporting jobs.

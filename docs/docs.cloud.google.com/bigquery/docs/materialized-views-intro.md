@@ -132,7 +132,7 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
 ### Limitations of materialized views over BigLake tables
 
   - Partitioning of the materialized view is not supported. The base tables can use hive partitioning but the materialized view storage cannot be partitioned in BigLake tables. This means that any deletion in a base table causes a full refresh of the materialized view. For more details see [Incremental updates](/bigquery/docs/materialized-views-use#incremental_updates) .
-  - The [`  -max_staleness  ` option](/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
+  - The [`  --max_staleness  ` option](/bigquery/docs/materialized-views-create#max_staleness) value of the materialized view must be greater than that of the BigLake base table.
   - Joins between BigQuery managed tables and BigLake tables are not supported in a single materialized view definition.
   - BigQuery BI Engine doesn't support acceleration of materialized views over BigLake tables.
 

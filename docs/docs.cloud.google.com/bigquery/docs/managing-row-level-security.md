@@ -121,7 +121,7 @@ FILTER USING (region = 'US');
 
 #### Create a policy and grant access to workforce identities in groups
 
-Create a row access policy that grants access to all workforce identities in in groups using this format `  principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` :
+Create a row access policy that grants access to all workforce identities in groups using this format `  principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` :
 
 ``` text
 CREATE ROW ACCESS POLICY sales_us_filter

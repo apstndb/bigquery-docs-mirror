@@ -370,6 +370,7 @@ https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer
 https://docs.cloud.google.com/bigquery/docs/kmeans-tutorial
 https://docs.cloud.google.com/bigquery/docs/labels-intro
 https://docs.cloud.google.com/bigquery/docs/legacy-nested-repeated
+https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability
 https://docs.cloud.google.com/bigquery/docs/linear-regression-tutorial
 https://docs.cloud.google.com/bigquery/docs/listing-datasets
 https://docs.cloud.google.com/bigquery/docs/listing-models

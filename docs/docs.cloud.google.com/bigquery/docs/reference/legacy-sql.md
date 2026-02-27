@@ -1,6 +1,6 @@
 # Legacy SQL Syntax, Functions and Operators
 
-This document details legacy SQL query syntax, functions and operators. The preferred query syntax for BigQuery is GoogleSQL. For information on GoogleSQL, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax) .
+This document details legacy SQL query syntax, functions and operators. The preferred query syntax for BigQuery is [GoogleSQL syntax](/bigquery/docs/reference/standard-sql/query-syntax) . For more information, see [Legacy SQL feature availability](/bigquery/docs/legacy-sql-feature-availability) .
 
 ## Query syntax
 

@@ -375,7 +375,7 @@ Before using this automation script, complete the [dumper installation prerequis
     
     # --- Helper Functions ---
     
-    log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $@" >> "${LOG_FILE}"}
+    log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $@" >> "${LOG_FILE}"; }
     
     cleanup() {
       local path_to_remove="$1"

@@ -10,6 +10,8 @@ When you cluster a table using multiple columns, the column order determines whi
 
 When you query a clustered table, you don't receive an accurate query cost estimate before query execution because the number of storage blocks to be scanned is not known before query execution. The final cost is determined after query execution is complete and is based on the specific storage blocks that were scanned.
 
+Clustering doesn't guarantee a reduction in the slots required to query a table.
+
 ## When to use clustering
 
 Clustering addresses how a table is stored so it's generally a good first option for improving query performance. You should therefore always consider clustering given the following advantages it provides:

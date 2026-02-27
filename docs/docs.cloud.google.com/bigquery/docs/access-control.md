@@ -1226,6 +1226,14 @@ Repository
 <li><code dir="ltr" translate="no">           bigquery.transfers.update          </code></li>
 </ul>
 <p><code dir="ltr" translate="no">         bigquerymigration.                  translation.                  translate        </code></p>
+<p><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.*          </code></p>
+<ul>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.                      create          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.                      delete          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.                      get          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.                      list          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      aiDevToolsSettings.                      update          </code></li>
+</ul>
 <p><code dir="ltr" translate="no">           cloudaicompanion.                      codeToolsSettings.*          </code></p>
 <ul>
 <li><code dir="ltr" translate="no">           cloudaicompanion.                      codeToolsSettings.                      create          </code></li>
@@ -1286,6 +1294,12 @@ Repository
 </ul>
 <p><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.*          </code></p>
 <ul>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsCreate          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsDelete          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsGet          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsList          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsUpdate          </code></li>
+<li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      aiDevToolsSettingsUse          </code></li>
 <li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      codeToolsSettingsCreate          </code></li>
 <li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      codeToolsSettingsDelete          </code></li>
 <li><code dir="ltr" translate="no">           cloudaicompanion.                      settingBindings.                      codeToolsSettingsGet          </code></li>
@@ -3035,6 +3049,7 @@ This table lists the IAM permissions for BigQuery and the roles that include the
 <li><a href="/iam/docs/roles-permissions/dataplex#dataplex.serviceAgent">Cloud Dataplex Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">           roles/                      dataplex.serviceAgent          </code> )</li>
 <li><a href="/iam/docs/roles-permissions/dataprep#dataprep.serviceAgent">Dataprep Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">           roles/                      dataprep.serviceAgent          </code> )</li>
 <li><a href="/iam/docs/roles-permissions/dlp#dlp.serviceAgent">DLP API Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">           roles/                      dlp.serviceAgent          </code> )</li>
+<li><a href="/iam/docs/roles-permissions/firebase#firebase.managementServiceAgent">Firebase Service Management Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">           roles/                      firebase.managementServiceAgent          </code> )</li>
 <li><a href="/iam/docs/roles-permissions/deploymentmanager#clouddeploymentmanager.serviceAgent">Cloud Deployment Manager Service Agent</a> ( <code class="role-name" dir="ltr" translate="no">           roles/                      clouddeploymentmanager.serviceAgent          </code> )</li>
 </ul></td>
 </tr>

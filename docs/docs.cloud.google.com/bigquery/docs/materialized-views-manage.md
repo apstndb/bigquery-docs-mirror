@@ -283,7 +283,7 @@ Each of the following predefined IAM roles includes the preceding permissions:
 
 For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
 
-To get information about a materialized view, including any dependant [materialized view replicas](/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) :
+To get information about a materialized view, including any dependent [materialized view replicas](/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) :
 
 ### SQL
 

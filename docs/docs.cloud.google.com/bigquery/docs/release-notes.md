@@ -6,6 +6,14 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## February 24, 2026
+
+Feature
+
+You can now [create and review](/bigquery/docs/create-data-agents#create-review-glossary-terms) custom glossary terms in BigQuery for a conversational analytics agent and you can review business glossary terms imported from Dataplex Universal Catalog for an agent. These terms help an agent interpret your prompts.
+
+This feature is now in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## February 23, 2026
 
 Feature

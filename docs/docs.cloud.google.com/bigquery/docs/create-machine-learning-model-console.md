@@ -181,7 +181,7 @@ To create a model:
           - For **USER\_COL** , select the column that contains the user data.
           - For **ITEM\_COL** , select the column that contains the item data.
     
-      - For times series forecasting models, select the following:
+      - For time series forecasting models, select the following:
         
           - For **TIME\_SERIES\_TIMESTAMP\_COL** , select the column that contains the time points to use when training the model.
           - For **TIME\_SERIES\_DATA\_COL** , select the column that contains the data to forecast.
@@ -226,11 +226,11 @@ To create a model:
 
 9.  On the **Model options** page, select **Google and Partner Models** or **Open Models** for the model type, as appropriate for your use case.
 
-10. In the **Remote connection** section, do the one of the following:
+10. In the **Remote connection** section, do one of the following:
     
       - If you have a [default connection](/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
     
-      - If you don't have have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
         
         1.  For **Project** , select the project that contains the connection that you want to use.
         
@@ -280,7 +280,7 @@ To create a model:
     
       - If you have a [default connection](/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
     
-      - If you don't have have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
         
         1.  For **Project** , select the project that contains the connection that you want to use.
         
@@ -325,11 +325,11 @@ To create a model:
 
 9.  On the **Model options** page, select **Cloud AI Services** .
 
-10. In the **Remote connection** section, do the one of the following:
+10. In the **Remote connection** section, do one of the following:
     
       - If you have a [default connection](/bigquery/docs/default-connections) configured, or if you have both the BigQuery Admin and the Project IAM Admin roles, select **Default connection** .
     
-      - If you don't have have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
+      - If you don't have a default connection configured, or if you lack the appropriate roles, select **Cloud resource connection** .
         
         1.  For **Project** , select the project that contains the connection that you want to use.
         

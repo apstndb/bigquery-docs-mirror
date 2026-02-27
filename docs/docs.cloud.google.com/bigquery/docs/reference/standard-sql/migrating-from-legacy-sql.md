@@ -8,7 +8,7 @@ When initially released, BigQuery ran queries using a non-GoogleSQL dialect know
 
 ### Do I have to migrate to GoogleSQL?
 
-We recommend migrating from legacy SQL to GoogleSQL, but it's not required. For example, suppose that you execute many queries that use legacy SQL, but you want to take advantage of a GoogleSQL feature for a new query. You can create new queries using GoogleSQL that run alongside queries using legacy SQL.
+We recommend migrating from legacy SQL to GoogleSQL, but it's not required for existing queries that use legacy SQL in some cases. For more information, see [Legacy SQL feature availability](/bigquery/docs/legacy-sql-feature-availability) .
 
 ### Enabling GoogleSQL
 

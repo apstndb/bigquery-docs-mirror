@@ -44,7 +44,7 @@ You can create a Spark session in a BigQuery Studio Python notebook in the follo
 
 To create a Spark session in a new notebook, do the following:
 
-1.  In the tab bar of the editor pane, click the arrow\_drop\_down arrow drop down next to the **+** sign, and then click **Notebook** .
+1.  In the tab bar of the editor pane, click the arrow\_drop\_down drop-down arrow next to the **+** sign, and then click **Notebook** .
 
 2.  Copy and run the following code in a notebook cell to configure and create a basic Spark session.
 
@@ -85,7 +85,7 @@ You can enter and run the code in a notebook cell to create a Spark session base
 
 To get started quickly, use the `  Query using Spark  ` template to pre-populate your notebook with Spark session template code:
 
-1.  In the tab bar of the editor pane, click the arrow\_drop\_down arrow drop down next to the **+** sign, and then click **Notebook** .
+1.  In the tab bar of the editor pane, click the arrow\_drop\_down drop-down arrow next to the **+** sign, and then click **Notebook** .
 2.  Under **Start with a template** , click **Query using Spark** , then click **Use template** to insert the code in your notebook.
 3.  Specify the variables as explained in the [Notes](#notes) .
 4.  You can delete any additional sample code cells inserted in the notebook.
@@ -114,7 +114,7 @@ Replace the following:
 
   - PROJECT\_ID : Your project ID, which is listed in the **Project info** section of the [Google Cloud console dashboard](https://console.cloud.google.com/home/dashboard) .
 
-  - LOCATION : The [Compute Engine region](/compute/docs/regions-zones#available) where your notebook session will run. If not supplied, the the region of the VM that creates the notebook will be used.
+  - LOCATION : The [Compute Engine region](/compute/docs/regions-zones#available) where your notebook session will run. If not supplied, the region of the VM that creates the notebook will be used.
 
   - SESSION\_TEMPLATE : The name of an existing [interactive session template](/dataproc-serverless/docs/guides/create-serverless-sessions-templates#create-dataproc-serverless-session-template) . Session configuration settings are obtained from the template. The template must also specify the following settings:
     
@@ -146,7 +146,7 @@ spark.addArtifacts("textdistance==4.6.1", "random2", pypi=True)
 
 **Notebook code help:** The BigQuery Studio notebook provides code help when you hold the pointer over a class or method name, and provides code completion help as you input code.
 
-In the following example, entering `  DataprocSparkSession  ` . and holding the pointer over this class name displays code completion and documentation help.
+In the following example, entering `  DataprocSparkSession  ` and holding the pointer over this class name displays code completion and documentation help.
 
 **Tip:** See [Dataproc Spark Connect Client](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python) on GitHub for information on [using `  DataprocSparkSession.builder  ` methods](https://github.com/GoogleCloudDataproc/dataproc-spark-connect-python?tab=readme-ov-file#builder-configuration) to configure Spark Connect sessions.
 
@@ -159,7 +159,7 @@ This section provides BigQuery Studio Python notebook examples with PySpark code
 
 ### Wordcount
 
-The following Pyspark example creates a Spark session, then counts word occurrences in a public `  bigquery-public-data.samples.shakespeare  ` dataset.
+The following PySpark example creates a Spark session, then counts word occurrences in a public `  bigquery-public-data.samples.shakespeare  ` dataset.
 
 ``` text
 # Basic wordcount example
@@ -300,7 +300,7 @@ Perform the following steps to check Iceberg table details in BigQuery:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-2.  In the project resources pane, click your project, then click the your namespace to list the `  sample_iceberg_table  ` table. Click the **Details** table to view the **Open Catalog Table Configuration** information.
+2.  In the project resources pane, click your project, then click your namespace to list the `  sample_iceberg_table  ` table. Click the **Details** table to view the **Open Catalog Table Configuration** information.
     
     The input and output formats are the standard Hadoop `  InputFormat  ` and `  OutputFormat  ` class formats that Iceberg uses.
 
@@ -429,7 +429,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
     
     1.  Remove or comment out any shell script commands.
     
-    2.  Remove code that configures the Spark session, then then specify config parameters as batch workload submit parameters. (see [Submit a Spark batch workload](/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) ).
+    2.  Remove code that configures the Spark session, and then specify config parameters as batch workload submit parameters. (see [Submit a Spark batch workload](/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) ).
         
         Example:
         
@@ -476,7 +476,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
     
     1.  See [Submit the Spark batch workload](/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) for instructions.
         
-          - Make sure to include the --deps-bucket flag to point to the Cloud Storage bucket that contains Your `  requirements.txt  ` file.
+          - Make sure to include the --deps-bucket flag to point to the Cloud Storage bucket that contains your `  requirements.txt  ` file.
             
             Example:
         
@@ -508,7 +508,7 @@ Complete the following steps to run BigQuery Studio notebook code as a batch wor
 
 If a failure occurs in a cell containing Spark code, you can troubleshoot the error by clicking the **Interactive Session Detail View** link in the cell output (see the [Wordcount and Iceberg table examples](#dataproc_serverless_bq_notebook-Wordcount) ).
 
-When you encounter an notebook code error, navigating to the last Spark job in the **Spark UI** often provides additional information to help you debug the failed job.
+When you encounter a notebook code error, navigating to the last Spark job in the **Spark UI** often provides additional information to help you debug the failed job.
 
 ### Known issues and solutions
 

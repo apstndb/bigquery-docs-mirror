@@ -366,7 +366,7 @@ The following SQL features are not supported in materialized views:
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-To request feedback or support for this feature, send an email to [bq-mv-help @google.com](mailto:bq-mv-help@google.com) .
+To request feedback or support for this feature, send an email to <bq-mv-help@google.com> .
 
 Incremental materialized views support `  LEFT OUTER JOIN  ` and `  UNION ALL  ` . Materialized views with `  LEFT OUTER JOIN  ` and `  UNION ALL  ` statements share the limitations of other incremental materialized views. In addition, [smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join.
 
@@ -653,7 +653,7 @@ The following recommendations apply to materialized views with JOINs.
 
 #### Put the most frequently changing table first
 
-Ensure that the largest or most frequently changing table is the first/leftmost table referenced in the view query. Materialized views with joins support incremental queries and refresh when the first or left-most table in the query is appended, but changes to other tables fully invalidate the view cache. In star or snowflake schemas the first or leftmost table should generally be the fact table.
+Ensure that the largest or most frequently changing table is the first/leftmost table referenced in the view query. Materialized views with joins support incremental queries and refresh when the first or leftmost table in the query is appended, but changes to other tables fully invalidate the view cache. In star or snowflake schemas the first or leftmost table should generally be the fact table.
 
 #### Avoid joining on clustering keys
 
@@ -941,7 +941,7 @@ If the data is not older than the `  max_staleness  ` parameter, then this query
 
 The following limitations only apply to materialized views with the `  allow_non_incremental_definition  ` option. With the exception of limitations on supported query syntax, all [materialized view limitations](/bigquery/docs/materialized-views-intro#limitations) still apply.
 
-  - Smart-tuning is not applied to the materialized views that include the `  allow_non_incremental_definition  ` option. The only way to benefit from materialized views with the `  allow_non_incremental_definition  ` option is to query them directly.
+  - Smart tuning is not applied to the materialized views that include the `  allow_non_incremental_definition  ` option. The only way to benefit from materialized views with the `  allow_non_incremental_definition  ` option is to query them directly.
   - Materialized views without the `  allow_non_incremental_definition  ` option can incrementally refresh a subset of their data. Materialized views with the `  allow_non_incremental_definition  ` option must be refreshed in their entirety.
   - Materialized views with `  max_staleness  ` option validates presence of the column-level security constraints during query execution. See more details about this in [column-level access control](/bigquery/docs/column-level-security-intro#time-travel)
   - For materialized views over Spanner external dataset tables, if the last refresh of a non-incremental materialized view occurred outside the `  max_staleness  ` interval, then queries read the base Spanner external dataset tables, even if the base table hasn't changed. For example, if your `  max_staleness  ` interval is 4 hours and the last refresh occurred 7 hours ago, then the query will read the base Spanner external dataset tables.

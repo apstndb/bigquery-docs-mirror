@@ -565,7 +565,7 @@ To enable multiplexing in Go, see [Connection Sharing (Multiplexing)](https://pk
 
 ## Use committed type for exactly-once semantics
 
-If you need exactly-once write semantics, create a write stream in committed type. In committed type, records are available for query as soon as the client receives acknowledgement from the back end.
+If you need exactly-once write semantics, create a write stream in committed type. In committed type, records are available for query as soon as the client receives acknowledgment from the backend.
 
 Committed type provides exactly-once delivery within a stream through the use of record offsets. By using record offsets, the application specifies the next append offset in each call to [`  AppendRows  `](/bigquery/docs/reference/storage/rpc/google.cloud.bigquery.storage.v1#google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows) . The write operation is only performed if the offset value matches the next append offset. For more information, see [Manage stream offsets to achieve exactly-once semantics](/bigquery/docs/write-api-best-practices#manage_stream_offsets_to_achieve_exactly-once_semantics) .
 
