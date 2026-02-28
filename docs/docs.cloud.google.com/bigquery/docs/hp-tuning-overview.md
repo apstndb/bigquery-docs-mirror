@@ -756,6 +756,8 @@ BOOSTER_TYPE = HPARAM_CANDIDATES(['DART', 'GBTREE'])
 DART_NORMALIZE_TYPE = HPARAM_CANDIDATES(['TREE', 'FOREST'])
 ```
 
+Another example is the interaction between `  BOOSTER_TYPE  ` and `  DROPOUT  ` in boosted tree models. The `  DROPOUT  ` parameter can only be tuned when `  BOOSTER_TYPE  ` includes `  'DART'  ` as a candidate. If you define a search space for `  DROPOUT  ` but limit `  BOOSTER_TYPE  ` to only `  HPARAM_CANDIDATES(['GBTREE'])  ` , then the tuning job fails.
+
 ## Search starting point
 
 If you don't specify a search space for a hyperparameter by using `  HPARAM_RANGE  ` or `  HPARAM_CANDIDATES  ` , the search starts from the default value of that hyperparameter, as documented in the `  CREATE MODEL  ` topic for that model type. For example, if you are running hyperparameter tuning for a [boosted tree model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) , and you don't specify a value for the [`  L1_REG  ` hyperparameter](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#l1_reg) , then the search starts from `  0  ` , the default value.

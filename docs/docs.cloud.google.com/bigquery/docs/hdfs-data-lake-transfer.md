@@ -368,7 +368,7 @@ Before using this automation script, complete the [dumper installation prerequis
     
     # Define the unique log and zip file path for this run
     LOG_FILE="${LOCAL_LOG_DIR}/dumper_execution_${EPOCH}.log"
-    ZIP_FILE_NAME="hive-dumper-output_${EPOCH}.zip"
+    ZIP_FILE_NAME="dts-cron-dumper-output_${EPOCH}.zip"
     LOCAL_ZIP_PATH="${LOCAL_BASE_DIR}/${ZIP_FILE_NAME}"
     
     echo "Script execution started. All subsequent output will be logged to: ${LOG_FILE}"

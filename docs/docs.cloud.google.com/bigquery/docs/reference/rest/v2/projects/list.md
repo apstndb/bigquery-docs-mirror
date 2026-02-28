@@ -98,7 +98,7 @@ Use this token to request the next page of results.
 
 `  object  `
 
-Projects to which the user has at least READ access.
+Projects to which the user has at least READ access. This field can be omitted if `  totalItems  ` is 0.
 
 `  projects[].kind  `
 

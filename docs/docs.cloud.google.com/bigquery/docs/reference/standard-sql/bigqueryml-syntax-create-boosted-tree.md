@@ -223,6 +223,8 @@ Specifies the dropout rate, which is the fraction of previous trees to drop duri
 
 If you aren't running hyperparameter tuning, then you can specify a `  FLOAT64  ` value between `  0  ` and `  1.0  ` . The default value is `  0  ` .
 
+**Note:** The `  DROPOUT  ` parameter is only applicable when the `  BOOSTER_TYPE  ` is set to `  'DART'  ` . If you are using hyperparameter tuning, ensure that `  'DART'  ` is included in the `  HPARAM_CANDIDATES  ` for `  BOOSTER_TYPE  ` if you intend to tune `  DROPOUT  ` .
+
 If you are running hyperparameter tuning, use one of the following options:
 
   - The `  HPARAM_RANGE  ` keyword and two `  FLOAT64  ` values that define the range of the hyperparameter. For example, `  DROPOUT = HPARAM_RANGE(0, 0.6)  ` .

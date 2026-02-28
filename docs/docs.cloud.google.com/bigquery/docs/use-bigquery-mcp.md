@@ -18,14 +18,14 @@ Google and Google Cloud MCP servers have the following features and benefits:
   - Optional prompt and response security with Model Armor protection
   - Centralized audit logging
 
-For information about other MCP servers and information about security and governance controls available for Google Cloud MCP servers, see [Google Cloud MCP servers overview](https://docs.cloud.google.com/mcp/overview) .
+For information about other MCP servers and information about security and governance controls available for Google Cloud MCP servers, see [Google Cloud MCP servers overview](/mcp/overview) .
 
 You might use the BigQuery [local MCP server](/bigquery/docs/pre-built-tools-with-mcp-toolbox) for the following reasons:
 
   - You need to build a custom tool over a parameterized SQL query.
   - You don't have permissions to enable or use the MCP server in your project.
 
-For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery MCP server.
+For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery MCP server.
 
 ## Before you begin
 
@@ -151,11 +151,11 @@ For the BigQuery MCP server, enter the following as required:
 
   - **Authentication details** : your Google Cloud credentials, your OAuth Client ID and secret, or an agent identity and credentials
     
-    Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
+    Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](/mcp/authenticate-mcp) .
 
 For host-specific guidance, see the following:
 
-  - [Gemini CLI MCP server setup](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli)
+  - [Gemini CLI MCP server setup](/mcp/configure-mcp-ai-application#gemini-cli)
   - [Claude support: Getting started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
 
 For more general guidance, see [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
@@ -217,94 +217,106 @@ In the prompts, replace the following:
 
 MCP introduces new security risks and considerations due to the wide variety of actions that you can take with MCP tools. To minimize and manage these risks, Google Cloud offers defaults and customizable policies to control the use of MCP tools in your Google Cloud organization or project.
 
-For more information about MCP security and governance, see [AI security and safety](https://docs.cloud.google.com/mcp/ai-security-safety) .
+For more information about MCP security and governance, see [AI security and safety](/mcp/ai-security-safety) .
 
-### Model Armor
+### Use Model Armor
 
 Model Armor is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you deploy AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
 
-Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, Model Armor makes a cross-regional call. For more information, see [Model Armor locations](https://docs.cloud.google.com/security-command-center/docs/regional-endpoints#locations-model-armor) .
-
-#### Enable Model Armor
-
-To enable Model Armor, complete the following steps:
-
-1.  Enable Model Armor on your Google Cloud project.
-    
-    ``` text
-    gcloud services enable modelarmor.googleapis.com \
-        --project=PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with your Google Cloud project ID.
-
-2.  Configure the recommended [floor settings for Model Armor](https://docs.cloud.google.com/security-command-center/docs/configure-model-armor-floor-settings) .
-    
-    ``` text
-    gcloud model-armor floorsettings update \
-        --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
-        --mcp-sanitization=ENABLED \
-        --malicious-uri-filter-settings-enforcement=ENABLED \
-        --pi-and-jailbreak-filter-settings-enforcement=ENABLED \
-        --pi-and-jailbreak-filter-settings-confidence-level=MEDIUM_AND_ABOVE
-    ```
-    
-    Replace `  PROJECT_ID  ` with your Google Cloud project ID.
-    
-    Model Armor is configured to scan for [malicious URLs](https://docs.cloud.google.com/security-command-center/docs/model-armor-overview#ma-malicious-url-detection) and [prompt injection and jailbreak](https://docs.cloud.google.com/security-command-center/docs/model-armor-overview#ma-prompt-injection) attempts.
-    
-    For more information about configurable Model Armor filters, see [Model Armor filters](https://docs.cloud.google.com/security-command-center/docs/model-armor-overview#ma-filters) .
-
-3.  Add Model Armor as a content security provider for MCP services.
-    
-    ``` text
-    gcloud beta services mcp content-security add modelarmor.googleapis.com \
-        --project=PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with the Google Cloud project ID.
-
-4.  Confirm that MCP traffic is sent to Model Armor.
-    
-    ``` text
-    gcloud beta services mcp content-security get \
-        --project=PROJECT_ID
-    ```
-    
-    Replace `  PROJECT_ID  ` with the Google Cloud project ID.
-
-#### Model Armor logging
-
-For information about Model Armor audit and platform logs, see [Model Armor audit logging](/security-command-center/docs/audit-logging-model-armor) .
+Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, Model Armor makes a cross-regional call. For more information, see [Model Armor locations](/model-armor/locations) .
 
 **Caution:** If a request fails, Model Armor logs the entire payload. This might expose sensitive information in the logs.
 
-#### Disable Model Armor in a project
+#### Enable Model Armor
 
-To disable Model Armor in a Google Cloud project, run the following command:
+You must enable Model Armor APIs before you can use Model Armor.
 
-``` text
-gcloud beta services mcp content-security remove modelarmor.googleapis.com \
-    --project=PROJECT_ID
-```
+### Console
 
-Replace `  PROJECT_ID  ` with the Google Cloud project ID.
+1.  Enable the Model Armor API.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
 
-MCP traffic on Google Cloud isn't be scanned by Model Armor for the specified project.
+2.  Select the project where you want to activate Model Armor.
+
+### gcloud
+
+Before you begin, follow these steps using the Google Cloud CLI with the Model Armor API:
+
+1.  In the Google Cloud console, activate Cloud Shell.
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  Run the following command to set the API endpoint for the Model Armor service.
+    
+    ``` text
+    gcloud config set api_endpoint_overrides/modelarmor "https://modelarmor.LOCATION.rep.googleapis.com/"
+    ```
+    
+    Replace `  LOCATION  ` with the region where you want to use Model Armor.
+
+#### Configure protection for Google and Google Cloud remote MCP servers
+
+To protect your MCP tool calls and responses, you create a Model Armor floor setting and then enable MCP content security for your project. A floor setting defines the minimum security filters that apply across the project. This configuration applies a consistent set of filters to all MCP tool calls and responses within the project.
+
+**Tip:** Don't enable the prompt injection and jailbreak filter unless your MCP traffic carries natural language data.
+
+1.  Set up a Model Armor floor setting with MCP sanitization enabled. For more information, see [Configure Model Armor floor settings](https://docs.cloud.google.com/model-armor/configure-floor-settings) .
+    
+    **Note:** If the agent and the MCP server are in different projects, you can create floor settings in both projects (the client project and the resource project). In this case, Model Armor is invoked twice, once for each project.
+    
+    See the following example command:
+    
+    ``` text
+    gcloud model-armor floorsettings update \
+    --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+    --enable-floor-setting-enforcement=TRUE \
+    --add-integrated-services=GOOGLE_MCP_SERVER \
+    --google-mcp-server-enforcement-type=INSPECT_AND_BLOCK \
+    --enable-google-mcp-server-cloud-logging \
+    --malicious-uri-filter-settings-enforcement=ENABLED \
+    --add-rai-settings-filters='[{"confidenceLevel": "HIGH", "filterType": "DANGEROUS"}]'
+    ```
+    
+    Replace `  PROJECT_ID  ` with your Google Cloud project ID.
+    
+    Note the following settings:
+    
+      - `  INSPECT_AND_BLOCK  ` : The enforcement type that inspects content for the Google MCP server and blocks prompts and responses that match the filters.
+      - `  ENABLED  ` : The setting that enables a filter or enforcement.
+      - `  HIGH  ` : The confidence level for the Responsible AI - Dangerous filter settings. You can modify this setting, though lower values might result in more false positives. For more information, see [Configure floor settings](https://docs.cloud.google.com/model-armor/configure-floor-settings) .
+
+2.  For your project, enable Model Armor protection for remote MCP servers.
+    
+    ``` text
+    gcloud beta services mcp content-security add modelarmor.googleapis.com --project=PROJECT_ID
+    ```
+    
+    Replace `  PROJECT_ID  ` with your Google Cloud project ID. After you run this command, Model Armor sanitizes all MCP tool calls and responses from the project, regardless of where the calls and responses originate.
+
+3.  To confirm that Google MCP traffic is sent to Model Armor, run the following command:
+    
+    ``` text
+    gcloud beta services mcp content-security get --project=PROJECT_ID
+    ```
+    
+    Replace `  PROJECT_ID  ` with the Google Cloud project ID.
 
 #### Disable scanning MCP traffic with Model Armor
 
-If you still want to use Model Armor in a project, but you want to stop scanning MCP traffic with Model Armor, then run the following command:
+If you want to use Model Armor in a project, and you want to stop scanning Google MCP traffic with Model Armor, run the following command:
 
 ``` text
 gcloud model-armor floorsettings update \
-    --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
-    --mcp-sanitization=DISABLED
+  --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+  --remove-integrated-services=GOOGLE_MCP_SERVER
 ```
 
 Replace `  PROJECT_ID  ` with the Google Cloud project ID.
 
-Model Armor won't scan MCP traffic on Google Cloud.
+Model Armor won't scan MCP traffic in the project.
 
 ### Control MCP use with IAM deny policies
 
@@ -366,5 +378,5 @@ For more information on BigQuery quotas, see [Quotas and limits](/bigquery/quota
 ## What's next
 
   - Read the [BigQuery MCP reference documentation](/bigquery/docs/reference/mcp) .
-  - Learn more about [Google Cloud MCP servers](https://docs.cloud.google.com/mcp/overview) .
+  - Learn more about [Google Cloud MCP servers](/mcp/overview) .
   - See the MCP [supported products](/mcp/supported-products) .

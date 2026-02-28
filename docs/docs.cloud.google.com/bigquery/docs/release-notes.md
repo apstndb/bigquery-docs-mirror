@@ -6,6 +6,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## February 25, 2026
+
+Change
+
+Effective *June 1, 2026* , BigQuery will limit legacy SQL use. This depends on whether your organization or project uses it from November 1, 2025, to June 1, 2026. If you don't use legacy SQL during this time, you won't be able to use it after June 1, 2026. If you do use it, your existing workloads will keep running, but new ones might not. For more information, see [Legacy SQL feature availability](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability) .
+
 ## February 24, 2026
 
 Feature

@@ -1100,7 +1100,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Optimize and improve the performance of translated SQL
 
-Optional transformations can be applied to translated SQL in order to introduce changes that can improve the query in terms of performance or cost. These optimizations are strictly case dependent and should be evaluated against unmodified SQL output to assess their actual effect on performance.
+Optional transformations can be applied to translated SQL in order to introduce changes that can improve performance or cost. These optimizations are strictly case dependent and should be evaluated against unmodified SQL output to assess their actual effect on performance.
 
 The following configuration YAML enables optional transformations. The configuration accepts a list of optimizations and, for optimizations which accept parameters, a section with optional parameter values.
 
@@ -1168,6 +1168,13 @@ We recommend using this optimization when no other process, such as macro replac
 <td>Adds <code dir="ltr" translate="no">       DISTINCT      </code> clause to subqueries used as value set for <code dir="ltr" translate="no">       [NOT] IN      </code> operator.<br />
 <br />
 We recommend using this optimization when the cardinality (distinct number of values) of the subquery result is significantly lower than the number of values. When this precondition is not met this transformation can have negative effects on performance.</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       APPROXIMATE_RANGE_PARTITIONS      </code></td>
+<td></td>
+<td>Approximates non-contiguous or non-regular integer partitioning schemes by converting them to contiguous, equally sized partition ranges supported by BigQuery. By default, such partitioning schemes don't influence the table partitioning scheme in translated DDL statements.<br />
+<br />
+We recommend using this optimization when the source table uses a non-contiguous partitioning function like the Teradata <code dir="ltr" translate="no">       RANGE_N      </code> function and would benefit from an equally sized partition scheme in BigQuery.</td>
 </tr>
 </tbody>
 </table>

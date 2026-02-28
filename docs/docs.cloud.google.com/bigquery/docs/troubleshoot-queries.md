@@ -404,6 +404,26 @@ Error string: `  Error 412: The job references a table that belongs to a failove
 
 This means that either the job wasn't run under a BigQuery Enterprise Plus edition, or the job ran in a region other than the primary location of the failover dataset. See [managed disaster recovery](/bigquery/docs/managed-disaster-recovery) for more details.
 
+## Legacy SQL errors
+
+The following errors can arise when using legacy SQL.
+
+### `     Cannot be queried with legacy SQL    `
+
+Error string: `  cannot be queried with legacy SQL. Please consider switching to standard SQL  `
+
+This error can occur in one of two scenarios:
+
+  - The query was written in standard SQL, but the option to explicitly use legacy SQL was provisioned. Make sure to run your query using standard SQL by following the [public documentation](/bigquery/docs/introduction-sql#bigquery-sql-dialects) , for example, by supplying `  --use_legacy_sql=false  ` using the bq command-line tool.
+
+  - You are attempting to query a table with collation using legacy SQL, which is [not supported](/bigquery/docs/reference/standard-sql/collation-concepts) .
+
+### Tables with renamed columns cannot be queried with legacy SQL
+
+Error string: `  Table project:dataset.table with renamed columns cannot be queried with legacy SQL. Please consider switching to standard SQL or dropping column my_column  `
+
+This error occurs if you query a table with a renamed column using legacy SQL. Use [standard SQL](/bigquery/docs/\(/bigquery/docs/introduction-sql#bigquery-sql-dialects\)) instead.
+
 ## User does not have permission
 
 Error strings:
