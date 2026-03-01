@@ -300,7 +300,7 @@ In addition to [external table limitations](/bigquery/docs/biglake-intro#limitat
     
       - Each data file can be associated with up to 10,000 delete files.
       - No more than 100,000 equality deletes can be applied to a data file.
-      - You can work around these limitations by either compacting delete files frequently, or creating a view on top of the Iceberg table that avoids frequently mutated partitions.
+      - You can work around these limitations by compacting delete files frequently, creating a view on top of the Iceberg table that avoids frequently mutated partitions, or using position deletes rather than equality deletes.
 
   - BigQuery supports manifest pruning using all [Iceberg partition transformation functions](https://iceberg.apache.org/spec/#partition-transforms) . For information about how to prune partitions, see [Query partitioned tables](/bigquery/docs/querying-partitioned-tables) . Queries referencing Iceberg external tables must contain literals in predicates compared to columns that are partitioned.
 

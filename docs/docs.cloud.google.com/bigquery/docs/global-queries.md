@@ -165,6 +165,7 @@ For information about quotas regarding global queries, see [Query jobs](/bigquer
   - You can't query pseudocolumns, such `  _PARTITIONTIME  ` , with global queries.
   - You can't query columns using [flexible column names](/bigquery/docs/schemas#flexible-column-names) with global queries.
   - You can't query [`  INFORMATION_SCHEMA  ` views](/bigquery/docs/information-schema-intro) from a remote region in a global query.
+  - You can't query [BigLake metastore](/biglake/docs/about-blms) Apache Iceberg tables from a remote region in a global query.
   - When you reference the columns of a BigLake table in a `  WHERE  ` clause, you can't use `  RANGE  ` or `  INTERVAL  ` literals.
   - Global [authorized views](/bigquery/docs/authorized-views) and [authorized routines](/bigquery/docs/authorized-routines) are not supported (when a view or routine in one location is authorized to access dataset in another location).
   - [Materialized views](/bigquery/docs/materialized-views-intro) over global queries are not supported.

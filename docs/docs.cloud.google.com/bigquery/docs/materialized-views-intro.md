@@ -1,87 +1,69 @@
 # Introduction to materialized views
 
-Materialized views are precomputed views that periodically store the results of a SQL query. Materialized views can reduce the total processing time and charges related to querying by storing query results, reducing the amount of data to be scanned for each query. BigQuery verifies that materialized views provide fresh data by computing updates in the background. This process is performed [incrementally](/bigquery/docs/materialized-views-use#incremental_updates) by using only the changed data in the base table, subject to a [number of considerations](/bigquery/docs/materialized-views-use#incremental_updates) . Materialized views can be either queried directly or used by BigQuery to optimize queries to their base tables.
+Materialized views are precomputed views that periodically store the results of a SQL query. In some use cases, materialized views reduce the total processing time and related charges by reducing the amount of data to be scanned for each query. You can query materialized views as you would other data resources.
+
+The following use cases highlight the value of materialized views:
+
+  - **Pre-process data** . Improve query performance by preparing aggregates, filters, joins, and clusters.
+  - **Dashboard acceleration** . Empower BI tools like Looker that frequently query the same aggregate metrics—for example, daily active users.
+  - **Real-time analytics on large streams** . Can provide faster responses on tables that receive high-velocity streaming data.
+  - **Cost management** . Reduce the cost of repetitive, expensive queries over large datasets.
+
+**Note:** Materialized views aren't available when you use reservations created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](/bigquery/docs/editions-intro) .
 
 Key characteristics of materialized views include the following:
 
   - **Zero maintenance** . Materialized views are precomputed in the background when the base tables change. Any incremental data changes from the base tables are automatically added to the materialized views, with no user action required.
   - **Fresh data** . Materialized views return fresh data. If changes to base tables might invalidate the materialized view, then data is read directly from the base tables. If the changes to the base tables don't invalidate the materialized view, then rest of the data is read from the materialized view and only the changes are read from the base tables.
-  - **[Smart tuning](/bigquery/docs/materialized-views-use#smart_tuning)** . If any part of a query against the base table can be resolved by querying the materialized view, then BigQuery reroutes the query to use the materialized view for better performance and efficiency.
+  - **Smart tuning** . If any part of a query against a base table can be resolved by querying the materialized view, then BigQuery reroutes the query to use the materialized view for improved performance and efficiency. For information about how and when smart tuning can improve queries, see [Use materialized views](/bigquery/docs/materialized-views-use#smart_tuning) .
 
-### Compare with logical views
+### Incremental and non-incremental materialized views
 
-The following table summarizes the similarities and differences between BigQuery logical views and materialized views.
+There are two basic kinds of materialized views:
+
+  - *Incremental materialized views* support a limited set of features. To learn more about supported SQL syntax for materialized views, see [Create materialized views](/bigquery/docs/materialized-views-create) . Only incremental materialized views can take advantage of [smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) .
+  - *Non-incremental functions* support most of the syntaxes that incremental materialized views don't support.
+
+When you create materialized views, by default BigQuery only lets you create views based upon *incremental* queries. To create a non-incremental view, you can specify `  allow_non_incremental_definition = true  ` in the materialized view's definition.
+
+The best type of materialized view to use depends on your situation. The following table compares the features of incremental and non-incremental materialized views:
 
 <table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 50%" />
+<col style="width: 30%" />
+</colgroup>
 <thead>
 <tr class="header">
-<th>Component</th>
-<th>Logical views</th>
-<th>Materialized views</th>
+<th><strong>Category</strong></th>
+<th><strong>Incremental</strong></th>
+<th><strong>Non-incremental</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Optimize compute</td>
-<td>No</td>
-<td>Yes</td>
+<td>Query supported</td>
+<td><a href="/bigquery/docs/materialized-views-create#aggregate_requirements">Limited</a></td>
+<td><a href="/bigquery/docs/materialized-views-create#create-non-inc">Most queries</a></td>
 </tr>
 <tr class="even">
-<td>SQL query support</td>
-<td>All</td>
-<td><a href="/bigquery/docs/materialized-views-create#supported-mvs">Limited</a> <sup>1</sup></td>
+<td>Maintenance cost</td>
+<td>Can reduce the cost of frequently used queries. To learn how materialized views are updated, see <a href="/bigquery/docs/materialized-views-use#incremental_updates">incremental updates</a> .</td>
+<td>Every refresh runs the full query.</td>
 </tr>
 <tr class="odd">
-<td>Partitioning and clustering</td>
-<td>N/A</td>
-<td>Yes</td>
+<td>Smart tuning support</td>
+<td>Supported for most views queries.</td>
+<td>No</td>
 </tr>
 <tr class="even">
-<td>Incremental refresh</td>
+<td>Always fresh results</td>
+<td>Supported. Incremental views return fresh query results even when the base tables have changed since the last refresh.</td>
 <td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Additional storage</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td>Query rewrite</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td>Maintenance costs</td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td>Data staleness</td>
-<td>Never</td>
-<td>Optional <sup>2</sup></td>
 </tr>
 </tbody>
 </table>
-
-<sup>1</sup> The [`  --allow_non_incremental_definition  ` option](/bigquery/docs/materialized-views-create#non-incremental) supports an expanded range of SQL queries to create materialized views. For a list of supported materialized views, see [Query limitations](/bigquery/docs/materialized-views-create#query_limitations) .
-
-<sup>2</sup> The [`  --max_staleness  ` option](/bigquery/docs/materialized-views-create#max_staleness) provides consistently high performance with controlled costs when processing large, frequently changing datasets.
-
-## Use cases
-
-Materialized views can optimize queries with high computation cost and small dataset results. Processes that benefit from materialized views include online analytical processing (OLAP) operations that require significant processing with predictable and repeated queries like those in from extract, transform, load (ETL) processes or business intelligence (BI) pipelines.
-
-The following use cases highlight the value of materialized views. Materialized views can improve query performance if you frequently require the following:
-
-  - **Pre-aggregate data** . Aggregation of streaming data.
-  - **Pre-filter data** . Run queries that only read a particular subset of the table.
-  - **Pre-join data** . Query joins, especially between large and small tables.
-  - **Recluster data** . Run queries that would benefit from a clustering scheme that differs from the base tables.
-
-### Smart-tuning
-
-Materialized views can be used to transparently improve the performance of queries without modifying them. You can use a materialized view to optimize sets of queries with common patterns, such as those generated by a BI tool. For more information see [Use materialized views](/bigquery/docs/materialized-views-use#smart_tuning) .
 
 ## Authorized materialized views
 
@@ -116,7 +98,7 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
   - Limits on base table references and other restrictions might apply. For more information about materialized view limits, see [Quotas and limits](/bigquery/quotas#materialized_view_limits) .
   - The data of a materialized view cannot be updated or manipulated directly using operations such as `  COPY  ` , `  EXPORT  ` , `  LOAD  ` , `  WRITE  ` , or data manipulation language (DML) statements.
   - You cannot replace an existing materialized view with a materialized view of the same name.
-  - The view SQL cannot be updated after the materialized view is created.
+  - The materialized view SQL cannot be updated after the materialized view is created.
   - A materialized view must reside in the same organization as its base tables, or in the same project if the project does not belong to an organization.
   - Materialized views use a restricted SQL syntax and a limited set of aggregation functions. For more information, see [Supported materialized views](/bigquery/docs/materialized-views#supported-mvs) .
   - Materialized views cannot be nested on other materialized views.
@@ -125,7 +107,7 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
   - You can set descriptions for materialized views, but you cannot set descriptions for the individual columns in the materialized view.
   - If you delete a base table without first deleting the materialized view, queries and refreshes of the materialized view fail. If you recreate the base table, you must also recreate the materialized view.
   - If a materialized view has a [change data capture-enabled](/bigquery/docs/change-data-capture) base table, then that table can't be referenced in the same query as the materialized view.
-  - Only non-incremental materialized view can have [Spanner external dataset tables base tables](/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `  max_staleness  ` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](/bigquery/docs/materialized-views-create#spanner) .
+  - Only non-incremental materialized view can have [Spanner external dataset base tables](/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `  max_staleness  ` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](/bigquery/docs/materialized-views-create#spanner) .
 
 <sup>1</sup> Logical view reference support is in [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Reference logical views](/bigquery/docs/materialized-views-create#reference_logical_views) .
 
@@ -190,6 +172,7 @@ While the `  avg_paid  ` column is rendered as `  NUMERIC  ` or `  FLOAT64  ` to
 
 ## What's next
 
+  - [Overview of logical and materialized views](/bigquery/docs/logical-materialized-view-overview)
   - [Create materialized views](/bigquery/docs/materialized-views-create)
   - [Use materialized views](/bigquery/docs/materialized-views-use)
   - [Manage materialized views](/bigquery/docs/materialized-views-manage)

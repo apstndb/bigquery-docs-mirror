@@ -112,19 +112,6 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 }
 ```
 
-### BigQuery DataFrames
-
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
-
 ## Create a connection
 
 Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. Create the connection in the same [location](/bigquery/docs/locations) as the dataset you created in the previous step.

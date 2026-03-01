@@ -511,7 +511,7 @@ The following example shows you how to create a Python UDF that imports the `  l
 
 You can use the [`  CREATE FUNCTION  ` option list](/bigquery/docs/reference/standard-sql/data-definition-language#function_option_list) to specify CPU and memory limits for containers that run Python UDFs.
 
-By default, the memory allocated to each container instance is 512 MiB, and the CPU allocated is 0.33 vCPU.
+By default, the memory allocated to each container instance is 512 MiB, and the CPU allocated is 1.0 vCPU.
 
 The following example creates a Python UDF using the `  CREATE FUNCTION  ` option list to specify container limits:
 
