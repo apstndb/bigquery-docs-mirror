@@ -69,6 +69,9 @@ If your transfer configuration is correct, and the appropriate permissions are g
   - Error: `  Network Attachment with connected endpoints cannot be deleted.  `  
     **Resolution:** This error can occur when a user tries to delete their network attachments soon after they have [deleted their transfer](/bigquery/docs/working-with-transfers#delete_a_transfer) . This happens because it can take several days after a transfer deletion before the BigQuery Data Transfer Service can fully remove all resources associated with the transfer, which can prevent the network attachments from being deleted. To resolve this error, wait several days before trying to delete the network attachments. If you want to have the network attachments deleted sooner, you can [contact support](/bigquery/docs/getting-support) .
 
+  - Error: `  Error while reading data, error message: CSV processing encountered too many errors, giving up.  `  
+    **Resolution:** This error can occur when there is a mismatch between the configuration of your CSV file in your data source and the configuration of the CSV in the transfer configuration. For example, this error can occur if **Header rows to skip** is set to `  0  ` , but your source CSV file contains 1 or more header rows. To fix this error, verify that the CSV configuration in the transfer configuration is correct and that it matches the configuration of your source CSV file.
+
 ## Authorization and permission issues
 
 The following are some common permission errors that you can encounter when you transfer data from different data sources:

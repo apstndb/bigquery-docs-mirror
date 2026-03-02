@@ -18,7 +18,7 @@ ML.TRAINING_INFO(
 
   - `  PROJECT_ID  ` : your project ID.
   - `  DATASET  ` : the BigQuery dataset that contains the model.
-  - `  MODEL_NAME  ` : the name of the model.
+  - `  MODEL_NAME  ` : the name of the model. For more information about which models are supported, see [Model creation user journeys](/bigquery/docs/e2e-journey#model_creation_phase) .
 
 ## Output
 
@@ -63,13 +63,24 @@ You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  `
 
 ## Example
 
-The following example retrieves training information from the model `  mydataset.mymodel  ` in your default project:
+The following example retrieves training information from the model `  mydataset.linear_regression  ` in your default project:
 
 ``` text
 SELECT
   *
 FROM
-  ML.TRAINING_INFO(MODEL `mydataset.mymodel`)
+  ML.TRAINING_INFO(MODEL `mydataset.linear_regression`)
+```
+
+The result is similar to the following:
+
+``` text
++--------------+-----------+----------+-----------+---------------+-------------+
+| training_run | iteration | loss     | eval_loss | learning_rate | duration_ms |
++--------------+-----------+----------+-----------+---------------+-------------+
+| 0            | 1         | 16637.8  | 269004.9  | 0.6           | 2720        |
+| 0            | 0         | 145701.3 | 368150.2  | 0.3           | 6313        |
++--------------+-----------+----------+-----------+---------------+-------------+
 ```
 
 ## What's next

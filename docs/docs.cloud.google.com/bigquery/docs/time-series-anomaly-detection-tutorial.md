@@ -95,19 +95,6 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 }
 ```
 
-### BigQuery DataFrames
-
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
-
 ## Prepare the training data
 
 The PM2.5, temperature, and wind speed data are in separate tables. Create the `  bqml_tutorial.seattle_air_quality_daily  ` table of training data by combining the data in these public tables. `  bqml_tutorial.seattle_air_quality_daily  ` contains the following columns:

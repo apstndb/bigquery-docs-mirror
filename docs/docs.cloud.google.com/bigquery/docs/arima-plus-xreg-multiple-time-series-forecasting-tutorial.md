@@ -89,19 +89,6 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 }
 ```
 
-### BigQuery DataFrames
-
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
-
 ## Create a table of input data
 
 Create a table of data that you can use to train and evaluate the model. This table combines columns from the `  bigquery-public-data.iowa_liquor_sales.sales  ` and `  bigquery-public-data.covid19_weathersource_com.postal_code_day_history  ` tables to analyze how weather affects the type and number of items ordered by liquor stores. You also create the following additional columns that you can use as input variables for the model:

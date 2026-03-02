@@ -103,19 +103,6 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 }
 ```
 
-### BigQuery DataFrames
-
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
-
 ## Prepare the sample data
 
 Transform the data from the `  GA360_test.ga_sessions_sample  ` table into a better structure for model training, and then write this data to a BigQuery table. The following query calculates the session duration for each user for each piece of content, which you can then use as implicit feedback to infer the user's preference for that content.

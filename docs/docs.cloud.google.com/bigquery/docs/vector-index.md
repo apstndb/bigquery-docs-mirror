@@ -554,6 +554,8 @@ For example, the following results returned by `  bq show --format=prettyjson -j
 }
 ```
 
+Known issue: The vector index usage might be inaccurate when the query is running, is cancelled, or has failed.
+
 ## Index management options
 
 To create indexes and have BigQuery maintain them, you have two options:

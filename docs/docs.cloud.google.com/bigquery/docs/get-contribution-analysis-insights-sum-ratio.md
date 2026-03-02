@@ -107,19 +107,6 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 }
 ```
 
-### BigQuery DataFrames
-
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
-
 ## Create a table of input data
 
 Create a table that contains test and control data to analyze. The following query creates two intermediate tables, a test table for liquor data from 2021 and a control table with liquor data from 2020, and then performs a union of the intermediate tables to create a table with both test and control rows and the same set of columns.
