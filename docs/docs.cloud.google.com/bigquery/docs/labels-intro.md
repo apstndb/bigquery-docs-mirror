@@ -42,6 +42,10 @@ We don't recommend creating large numbers of unique labels, such as for timestam
 
 Labels can be used as queryable annotations for resources, but can't be used to set conditions on policies. Tags provide a way to conditionally allow or deny policies based on whether a resource has a specific tag, by providing fine-grained control over policies. For more information, see the [Tags overview](/resource-manager/docs/tags/tags-overview) .
 
+## Limitations
+
+  - You can't apply BigQuery labels when using the BigQuery Storage Write API to ingest data.
+
 ## What's next
 
   - Learn how to [add labels](/bigquery/docs/adding-labels) to BigQuery resources.

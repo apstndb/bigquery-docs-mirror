@@ -172,6 +172,12 @@ While brands are ranked across many different categories, all products in the ` 
 <td>Currency of the price range of the item.</td>
 <td>AUD</td>
 </tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       snapshot_date      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td>The date for which the table is computed. Has the format <code dir="ltr" translate="no">       M%Y%m      </code> for monthly tables and <code dir="ltr" translate="no">       W%Y%m%D      </code> for weekly tables.</td>
+<td>M202601, W20260216</td>
+</tr>
 </tbody>
 </table>
 
@@ -236,6 +242,12 @@ While brands are ranked across many different categories, all products in the ` 
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Change in demand compared to the previous period (week or month). Set to <code dir="ltr" translate="no">       UNKNOWN      </code> when no previous rank exists.</td>
 <td>FLAT, SINKER, RISER</td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       snapshot_date      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td>The date for which the table is computed. Has the format <code dir="ltr" translate="no">       M%Y%m      </code> for monthly tables and <code dir="ltr" translate="no">       W%Y%m%D      </code> for weekly tables.</td>
+<td>M202601, W20260216</td>
 </tr>
 </tbody>
 </table>

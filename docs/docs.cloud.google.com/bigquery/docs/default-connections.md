@@ -75,6 +75,12 @@ To configure the default connection for the first time, use one of the following
     
     The default connection user needs the BigQuery Admin role and the Storage Admin or Project IAM Admin role, as appropriate.
 
+  - When the default connection is missing, BigQuery creates a new connection with the following properties:
+    
+      - **Region:** The same region as the dataset.
+      - **Name:** `  __default_cloudresource_connection__  `
+      - **Type:** `  CLOUD_RESOURCE  `
+
 **Important:** Use of a default connection can extend additional privileges to users. For example, if an administrator uses the default connection to create an object table, the default connection's service account is granted the Storage Legacy Bucket Reader and Storage Legacy Object Reader roles on the appropriate Cloud Storage bucket. Any user that has been granted access to use the connection can then also access that Cloud Storage bucket with the permissions granted to these roles.
 
 ## Set the default connection for a project
