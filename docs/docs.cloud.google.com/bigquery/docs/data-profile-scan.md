@@ -16,56 +16,83 @@ To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusag
 
 ## Required roles
 
-To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles on your resource such as the project or table:
+This section describes the IAM roles and permissions needed to use Dataplex Universal Catalog data profile scans.
 
-  - To create, run, update, and delete data profile scans: **Dataplex DataScan Editor** ( `  roles/dataplex.dataScanEditor  ` ) role on the project containing the data scan.
-  - To allow Dataplex Universal Catalog to run data profile scans against BigQuery data, grant the following roles to the [Dataplex Universal Catalog service account](/dataplex/docs/iam-and-access-control#service-agent) : **BigQuery Job User** ( `  roles/bigquery.jobUser  ` ) role on the project running the scan; **BigQuery Data Viewer** ( `  roles/bigquery.dataViewer  ` ) role on the tables being scanned.
-  - To run data profile scans for BigQuery external tables that use Cloud Storage data: grant the [Dataplex Universal Catalog service account](/dataplex/docs/iam-and-access-control#service-agent) the **Storage Object Viewer** ( `  roles/storage.objectViewer  ` ) and **Storage Legacy Bucket Reader** ( `  roles/storage.legacyBucketReader  ` ) roles on the Cloud Storage bucket.
-  - To view data profile scan results, jobs, and history: **Dataplex DataScan Viewer** ( `  roles/dataplex.dataScanViewer  ` ) role on the project containing the data scan.
-  - To export data profile scan results to a BigQuery table: **BigQuery Data Editor** ( `  roles/bigquery.dataEditor  ` ) role on the table.
-  - To publish data profile scan results to Dataplex Universal Catalog: **Dataplex Catalog Editor** ( `  roles/dataplex.catalogEditor  ` ) role on the `  @bigquery  ` entry group.
-  - To view published data profile scan results in BigQuery on the **Data profile** tab: **BigQuery Data Viewer** ( `  roles/bigquery.dataViewer  ` ) role on the table.
+### User roles and permissions
+
+To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles :
+
+  - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project containing the data scan
+  - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project containing the data scan
+  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group
+  - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the table
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+These predefined roles contain the permissions required to create and manage data profile scans. To see the exact permissions that are required, expand the **Required permissions** section:
 
-### Required permissions
+#### Required permissions
 
-If you use custom roles, you need to grant the following IAM permissions:
+The following permissions are required to create and manage data profile scans:
 
-  - To create, run, update, and delete data profile scans:
-      - `  dataplex.datascans.create  ` on project—Create a `  DataScan  `
-      - `  dataplex.datascans.update  ` on data scan—Update the description of a `  DataScan  `
-      - `  dataplex.datascans.delete  ` on data scan—Delete a `  DataScan  `
-      - `  dataplex.datascans.run  ` on data scan—Run a `  DataScan  `
-      - `  dataplex.datascans.get  ` on data scan—View `  DataScan  ` details excluding results
-      - `  dataplex.datascans.list  ` on project—List `  DataScan  ` s
-      - `  dataplex.dataScanJobs.get  ` on data scan job—Read DataScan job resources
-      - `  dataplex.dataScanJobs.list  ` on data scan—List DataScan job resources in a project
-  - To allow Dataplex Universal Catalog to run data profile scans against BigQuery data:
-      - `  bigquery.jobs.create  ` on project—Run jobs
-      - `  bigquery.tables.get  ` on table—Get table metadata
-      - `  bigquery.tables.getData  ` on table—Get table data
-  - To run data profile scans for BigQuery external tables that use Cloud Storage data:
-      - `  storage.buckets.get  ` on bucket—Read bucket metadata
-      - `  storage.objects.get  ` on object—Read object data
-  - To view data profile scan results, jobs, and history:
-      - `  dataplex.datascans.getData  ` on data scan—View `  DataScan  ` details including results
-      - `  dataplex.datascans.list  ` on project—List `  DataScan  ` s
-      - `  dataplex.dataScanJobs.get  ` on data scan job—Read DataScan job resources
-      - `  dataplex.dataScanJobs.list  ` on data scan—List DataScan job resources in a project
-  - To export data profile scan results to a BigQuery table:
-      - `  bigquery.tables.create  ` on dataset—Create tables
-      - `  bigquery.tables.updateData  ` on table—Write data to tables
-  - To publish data profile scan results to Dataplex Universal Catalog:
-      - `  dataplex.entryGroups.useDataProfileAspect  ` on entry group—Allows Dataplex Universal Catalog data profile scans to save their results to Dataplex Universal Catalog
-      - Additionally, you need one of the following permissions:
-          - `  bigquery.tables.update  ` on table—Update table metadata
-          - `  dataplex.entries.update  ` on entry—Update entries
-  - To view published data profile results for a table in BigQuery or Dataplex Universal Catalog:
-      - `  bigquery.tables.get  ` on table—Get table metadata
-      - `  bigquery.tables.getData  ` on table—Get table data
+  - Create, run, update, and delete data profile scans:
+      - `  dataplex.datascans.create  ` on project
+      - `  dataplex.datascans.update  ` on data scan
+      - `  dataplex.datascans.delete  ` on data scan
+      - `  dataplex.datascans.run  ` on data scan
+      - `  dataplex.datascans.get  ` on data scan
+      - `  dataplex.datascans.list  ` on project
+      - `  dataplex.dataScanJobs.get  ` on data scan job
+      - `  dataplex.dataScanJobs.list  ` on data scan
+  - View data profile scan results, jobs, and history:
+      - `  dataplex.datascans.getData  ` on data scan
+      - `  dataplex.datascans.list  ` on project
+      - `  dataplex.dataScanJobs.get  ` on data scan job
+      - `  dataplex.dataScanJobs.list  ` on data scan
+  - Publish data profile scan results to Dataplex Universal Catalog:
+      - `  dataplex.entryGroups.useDataProfileAspect  ` on entry group
+      - `  bigquery.tables.update  ` on table
+      - `  dataplex.entries.update  ` on entry
+  - View published data profile results for a table in BigQuery or Dataplex Universal Catalog:
+      - `  bigquery.tables.get  ` on table
+      - `  bigquery.tables.getData  ` on table
+
+You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+
+### Dataplex Universal Catalog service account roles and permissions
+
+To ensure that the Dataplex Universal Catalog service account has the necessary permissions to run data profile scans and export results, ask your administrator to grant the following IAM roles to the Dataplex Universal Catalog service account:
+
+**Important:** You must grant these roles to the Dataplex Universal Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+
+  - Run data profile scans against BigQuery data:
+      - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on project running the scan
+      - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on tables being scanned
+  - Run data profile scans for BigQuery external tables that use Cloud Storage data:
+      - [Storage Object Viewer](/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on Cloud Storage bucket
+      - [Storage Legacy Bucket Reader](/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `  roles/storage.legacyBucketReader  ` ) on Cloud Storage bucket
+  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on table
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to run data profile scans and export results. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to run data profile scans and export results:
+
+  - Run data profile scans against BigQuery data:
+      - `  bigquery.jobs.create  ` on project
+      - `  bigquery.tables.get  ` on table
+      - `  bigquery.tables.getData  ` on table
+  - Run data profile scans for BigQuery external tables that use Cloud Storage data:
+      - `  storage.buckets.get  ` on bucket
+      - `  storage.objects.get  ` on object
+  - Export data profile scan results to a BigQuery table:
+      - `  bigquery.tables.create  ` on dataset
+      - `  bigquery.tables.updateData  ` on table
+
+Your administrator might also be able to give the Dataplex Universal Catalog service account these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
 If a table uses BigQuery [row-level security](/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `  TRUE  ` .
 

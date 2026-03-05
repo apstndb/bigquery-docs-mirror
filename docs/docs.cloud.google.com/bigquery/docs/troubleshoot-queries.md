@@ -422,7 +422,7 @@ This error can occur in one of two scenarios:
 
 Error string: `  Table project:dataset.table with renamed columns cannot be queried with legacy SQL. Please consider switching to standard SQL or dropping column my_column  `
 
-This error occurs if you query a table with a renamed column using legacy SQL. Use [standard SQL](/bigquery/docs/\(/bigquery/docs/introduction-sql#bigquery-sql-dialects\)) instead.
+This error occurs if you query a table with a renamed column using legacy SQL. Use [standard SQL](/bigquery/docs/introduction-sql#bigquery-sql-dialects) instead.
 
 ## User does not have permission
 

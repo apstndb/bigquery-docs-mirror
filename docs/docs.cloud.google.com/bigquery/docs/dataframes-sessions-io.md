@@ -71,7 +71,7 @@ df = bpd.get_global_session().read_gbq("bigquery-public-data.ml_datasets.penguin
 
 ## In-memory data
 
-You can create `  Dataframes  ` and `  Series  ` objects with built-in Python or NumPy data structures, similar to how you create objects with pandas. Use the following code sample to create an object:
+You can create `  DataFrames  ` and `  Series  ` objects with built-in Python or NumPy data structures, similar to how you create objects with pandas. Use the following code sample to create an object:
 
 ``` python
 import numpy as np

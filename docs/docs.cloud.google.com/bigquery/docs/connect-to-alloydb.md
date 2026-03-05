@@ -42,7 +42,7 @@ Select one of the following options to create an AlloyDB connection:
     
       - For **Connection type** , select **AlloyDB** .
     
-      - For **Connection ID** , enter an identifier for the connection resource. Letter, numbers, and underscores are allowed. For example, `  bq_alloydb_connection  ` .
+      - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `  bq_alloydb_connection  ` .
     
       - For **Data location** , select a BigQuery location (or region) that is [compatible with your external data source region](/bigquery/docs/federated-queries-intro#supported_regions) .
     

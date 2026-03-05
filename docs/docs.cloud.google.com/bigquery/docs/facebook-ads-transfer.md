@@ -253,7 +253,7 @@ bq mk
     --data_source=DATA_SOURCE
     --display_name=DISPLAY_NAME
     --target_dataset=DATASET
-    --params=&#39;PARAMETERS'
+    --params='PARAMETERS'
 ```
 
 Where:

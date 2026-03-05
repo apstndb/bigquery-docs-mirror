@@ -133,7 +133,7 @@ AI.SIMILARITY(
 
   - `  ENDPOINT  ` : a `  STRING  ` value that specifies the Vertex AI endpoint to use for the multimodal embedding model. If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
-  - `  MODEL_PARAMS  ` : a `  JSON  ` literal that provides additional parameters to the model. Only the `  dimension  ` field is supported. You can use the `  dimension  ` field to specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  dimension  ` field , then the model returns a 256-dimensional embedding for each input value.
+  - `  MODEL_PARAMS  ` : a `  JSON  ` literal that provides additional parameters to the model. Only the `  dimension  ` field is supported. You can use the `  dimension  ` field to specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  dimension  ` field, then the model returns a 256-dimensional embedding for each input value.
 
 ## Output
 

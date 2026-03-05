@@ -2016,7 +2016,7 @@ Regions other than [supported European single regions](/bigquery/docs/locations#
 
 <sup>3</sup> To increase the quota, request a [QPM quota adjustment](/docs/quotas/view-manage#requesting_higher_quota) in Vertex AI. Allow 30 minutes for the increased quota value to propagate.
 
-<sup>4</sup> You can increase the quota for Vertex AI `  text-embedding  ` and `  text-multilingual-embedding  ` models to 10,000 RPM without mannual approval. This results in increased throughput of 500,000,000 rows per job or more, based on a call with an average of 50 tokens in each input row.
+<sup>4</sup> You can increase the quota for Vertex AI `  text-embedding  ` and `  text-multilingual-embedding  ` models to 10,000 RPM without manual approval. This results in increased throughput of 500,000,000 rows per job or more, based on a call with an average of 50 tokens in each input row.
 
 <sup>5</sup> This function is limited to a maximum of 5 concurrently running jobs per project.
 

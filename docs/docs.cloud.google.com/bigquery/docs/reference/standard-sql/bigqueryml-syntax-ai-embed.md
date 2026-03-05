@@ -73,7 +73,7 @@ AI.EMBED(
 
   - `  title  ` : A `  STRING  ` value that specifies the document title, which the model uses to improve embedding quality. You can only use this parameter if you specify `  RETRIEVAL_DOCUMENT  ` for the `  task_type  ` value.
 
-  - `  model_params  ` : a `  JSON  ` literal that provides additional parameters to the model. You can use any of the [`  parameters  ` object](/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#parameter-list) fields. One of these fields, `  outputDimensionality  ` , lets you specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  outputDimensionality  ` field , then the model returns 256 embeddings for each input value.
+  - `  model_params  ` : a `  JSON  ` literal that provides additional parameters to the model. You can use any of the [`  parameters  ` object](/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#parameter-list) fields. One of these fields, `  outputDimensionality  ` , lets you specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  outputDimensionality  ` field, then the model returns 256 embeddings for each input value.
 
   - `  connection_id  ` : a `  STRING  ` value specifying the connection to use to communicate with the model, in the format `  PROJECT_ID  ` . `  LOCATION  ` . `  CONNECTION_ID  ` . For example, `  myproject.us.myconnection  ` .
     
@@ -139,7 +139,7 @@ AI.EMBED(
 
   - `  endpoint  ` : a `  STRING  ` value that specifies a supported Vertex AI [multimodal embedding model](/vertex-ai/generative-ai/docs/model-reference/multimodal-embeddings-api) endpoint to use for the multimodal embedding model. The endpoint value that you specify must include the model version, for example `  multimodalembedding@001  ` . If you specify the model name rather than a URL, BigQuery ML automatically identifies the model and uses the model's full endpoint.
 
-  - `  model_params  ` : a `  JSON  ` literal that provides additional parameters to the model. Only the `  dimension  ` field is supported. You can use the `  dimension  ` field to specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  dimension  ` field , then the model returns 256 embeddings for each input value.
+  - `  model_params  ` : a `  JSON  ` literal that provides additional parameters to the model. Only the `  dimension  ` field is supported. You can use the `  dimension  ` field to specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  dimension  ` field, then the model returns 256 embeddings for each input value.
 
 ## Output
 

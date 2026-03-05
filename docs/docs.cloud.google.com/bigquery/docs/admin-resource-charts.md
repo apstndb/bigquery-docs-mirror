@@ -179,6 +179,8 @@ This table aggregates quota errors, access denied errors, and performance insigh
 
 The project operational health dashboard is the default view you get if you don't have access to the entire organization, or your project doesn't own any reservation. This view can help project analysts monitor system health for their projects, much like the operational health dashboard at the organizational level, but it shows only project-level data in its charts and filters.
 
+**Note:** If your project is assigned to a reservation owned by another project, the slot capacity overview chart displays 0 capacity. To view the total slot capacity, view the charts for the project that owns the reservation.
+
 ## View BigQuery resource utilization
 
 BigQuery resource charts help you track past resource use to plan for future needs and troubleshoot performance.

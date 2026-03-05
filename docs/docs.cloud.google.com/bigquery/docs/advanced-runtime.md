@@ -31,7 +31,7 @@ Eligibility for short query optimizations is dynamic and influenced by the follo
 
 ## Enable the advanced runtime
 
-Between September 15, 2025 and early 2026, BigQuery will start using the advanced runtime as the default runtime for all projects. To enable the advanced runtime in an existing project or organization now, use the [`  ALTER PROJECT  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement to change the [default configuration](/bigquery/docs/default-configuration) . In the statement, set the `  query_runtime  ` argument to `  'advanced'  ` . For example:
+Between September 15, 2025 and early 2026, BigQuery will start using the advanced runtime as the default runtime for all new and existing projects. During this transition period, some jobs that run in your projects might be in regions that don't yet use the advanced runtime as the default. To enable the advanced runtime in an existing project or organization now, use the [`  ALTER PROJECT  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement to change the [default configuration](/bigquery/docs/default-configuration) . In the statement, set the `  query_runtime  ` argument to `  'advanced'  ` . For example:
 
 ``` text
 ALTER PROJECT PROJECT_NAME
@@ -47,7 +47,9 @@ Replace the following:
 
 It can take several minutes for the change to take effect.
 
-Once you've enabled the advanced runtime, qualifying queries in the project or organization use the advanced runtime regardless of which user created the query job.
+After you've enabled the advanced runtime, qualifying queries in the project or organization use the advanced runtime regardless of which user creates the query job.
+
+**Note:** When the advanced runtime is enabled as the default behavior, it doesn't change your project or organization configuration settings. The `  INFORMATION_SCHEMA.PROJECT_OPTIONS  ` view, for example, only shows a value for the `  query_runtime  ` option if you've manually enabled the advanced runtime. To verify whether your queries are using the advanced runtime, check your job metadata as described in the following section, [Estimate the impact of the advanced runtime](#estimate-impact-of-advanced-runtime) .
 
 ## Estimate the impact of the advanced runtime
 

@@ -520,7 +520,7 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
         
         To enable automatic undeployment, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
         
-        Model inactivity is defined as the amount of time that has passed since the any of the following operations were performed on the model:
+        Model inactivity is defined as the amount of time that has passed since any of the following operations were performed on the model:
         
           - Running the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
           - Running the [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .

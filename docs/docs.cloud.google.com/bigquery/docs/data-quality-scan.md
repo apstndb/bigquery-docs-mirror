@@ -18,116 +18,107 @@ For more information about automatic data quality, see the [Auto data quality ov
 
 ## Required roles
 
-  - To run a data quality scan on a BigQuery table, you need permission to read the BigQuery table and permission to create a BigQuery job in the project used to scan the table.
-    
-    **Note:** Dataplex Universal Catalog doesn't create a BigQuery job in your project. However, you need this permission to create a `  DryRun  ` job to check for permissions for the table.
+This section describes the IAM roles and permissions needed to use Dataplex Universal Catalog data quality scans.
 
-  - If the BigQuery table and the data quality scan are in different projects, then you need to give the Dataplex Universal Catalog service account of the project containing the data quality scan read permission for the corresponding BigQuery table.
-    
-    **Note:** If you haven't created any data quality or data profile scans or you don't have a Dataplex Universal Catalog lake in this project, create a service identifier by running: `  gcloud beta services identity create --service=dataplex.googleapis.com  ` . This command returns a Dataplex Universal Catalog service identifier if it exists.
+### User roles and permissions
 
-  - If the data quality rules refer to additional tables, then the scan project's service account must have read permissions on the same tables.
+To get the permissions that you need to run and manage data quality scans, ask your administrator to grant you the following IAM roles :
 
-  - To export the scan results to a BigQuery table, ensure that the following permissions are granted:
-    
-      - The **Dataplex Universal Catalog service account** must be granted the BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) IAM role on the results dataset and table. This grants the following permissions:
-        
-          - `  bigquery.datasets.get  `
-          - `  bigquery.tables.create  `
-          - `  bigquery.tables.get  `
-          - `  bigquery.tables.getData  `
-          - `  bigquery.tables.update  `
-          - `  bigquery.tables.updateData  `
+  - Run a data quality scan on a BigQuery table:
+      - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project to run scan jobs
+      - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the BigQuery table to be scanned
+  - Publish data quality scan results to Dataplex Universal Catalog:
+      - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the scanned table
+      - [Dataplex Catalog Editor](/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group in the same location as the table
+  - Perform specific tasks on `  DataScan  ` resources:
+      - [Dataplex DataScan Administrator](/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `  roles/dataplex.dataScanAdmin  ` ) on the project for full access
+      - [Dataplex DataScan Creator](/iam/docs/roles-permissions/dataplex#dataplex.dataScanCreator) ( `  roles/dataplex.dataScanCreator  ` ) on the project to create scans
+      - [Dataplex DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project for write access
+      - [Dataplex DataScan Viewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project to read scan metadata
+      - [Dataplex DataScan DataViewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on the project to read scan data including rules and results
 
-  - If the BigQuery data is organized in a Dataplex Universal Catalog lake, grant the Dataplex Universal Catalog service account the Dataplex Metadata Reader ( `  roles/dataplex.metadataReader  ` ) and Dataplex Viewer ( `  roles/dataplex.viewer  ` ) IAM roles. Alternatively, you need all of the following permissions:
-    
-      - `  dataplex.lakes.list  `
-      - `  dataplex.lakes.get  `
-      - `  dataplex.zones.list  `
-      - `  dataplex.zones.get  `
-      - `  dataplex.entities.list  `
-      - `  dataplex.entities.get  `
-      - `  dataplex.operations.get  `
+For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
-  - If you're scanning a BigQuery external table from Cloud Storage, grant the Dataplex Universal Catalog service account the Storage Object Viewer ( `  roles/storage.objectViewer  ` ) role for the bucket. Alternatively, assign the Dataplex Universal Catalog service account the following permissions:
-    
-      - `  storage.buckets.get  `
-      - `  storage.objects.get  `
+These predefined roles contain the permissions required to run and manage data quality scans. To see the exact permissions that are required, expand the **Required permissions** section:
 
-  - If you want to publish the data quality scan results as Dataplex Universal Catalog metadata, you must be granted the BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) IAM role for the table, and the `  dataplex.entryGroups.useDataQualityScorecardAspect  ` permission on the `  @bigquery  ` entry group in the same location as the table. Alternatively, you must be granted the Dataplex Catalog Editor ( `  roles/dataplex.catalogEditor  ` ) role for the `  @bigquery  ` entry group in the same location as the table.
-    
-    Alternatively, you need all of the following permissions:
-    
-      - `  bigquery.tables.update  ` - on the table
-      - `  dataplex.entryGroups.useDataQualityScorecardAspect  ` - on the `  @bigquery  ` entry group
-    
-    Or, you need all of the following permissions:
-    
-      - `  dataplex.entries.update  ` - on the `  @bigquery  ` entry group
-      - `  dataplex.entryGroups.useDataQualityScorecardAspect  ` - on the `  @bigquery  ` entry group
+#### Required permissions
 
-  - If you need to access columns protected by BigQuery column-level access policies, then assign the Dataplex Universal Catalog service account permissions for those columns. The user creating or updating a data scan also needs permissions for the columns.
+The following permissions are required to run and manage data quality scans:
 
-  - If a table has BigQuery row-level access policies enabled, then you can only scan rows visible to the Dataplex Universal Catalog service account. Note that the individual user's access privileges are not evaluated for row-level policies.
+  - Run a data quality scan on a BigQuery table:
+      - `  bigquery.jobs.create  ` on the project to run scan jobs
+      - `  bigquery.tables.get  ` on the BigQuery table to be scanned
+      - `  bigquery.tables.getData  ` on the BigQuery table to be scanned
+  - Publish data quality scan results to Dataplex Universal Catalog:
+      - `  bigquery.tables.update  ` on the scanned table
+      - `  dataplex.entryGroups.useDataQualityScorecardAspect  ` on the `  @bigquery  ` entry group in the same location as the table
+  - Create a `  DataScan  ` : `  dataplex.datascans.create  ` on the project
+  - Delete a `  DataScan  ` : `  dataplex.datascans.delete  ` on the project
+  - View `  DataScan  ` metadata: `  dataplex.datascans.get  ` on the project
+  - View `  DataScan  ` details including rules and results: `  dataplex.datascans.getData  ` on the project
+  - List `  DataScan  ` s: `  dataplex.datascans.list  ` on the project
+  - Run a `  DataScan  ` : `  dataplex.datascans.run  ` on the project
+  - Update a `  DataScan  ` : `  dataplex.datascans.update  ` on the project
+  - Get or set IAM policy on a `  DataScan  ` :
+      - `  dataplex.datascans.getIamPolicy  ` on the project
+      - `  dataplex.datascans.setIamPolicy  ` on the project
 
-### Required data scan roles
+You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
-To use auto data quality, ask your administrator to grant you one of the following IAM roles:
+If you need to access columns protected by BigQuery column-level access policies, then you also need permissions for those columns.
 
-  - Full access to `  DataScan  ` resources: Dataplex DataScan Administrator ( `  roles/dataplex.dataScanAdmin  ` )
-  - To create `  DataScan  ` resources: Dataplex DataScan Creator ( `  roles/dataplex.dataScanCreator  ` ) on the project
-  - Write access to `  DataScan  ` resources: Dataplex DataScan Editor ( `  roles/dataplex.dataScanEditor  ` )
-  - Read access to `  DataScan  ` resources excluding rules and results: Dataplex DataScan Viewer ( `  roles/dataplex.dataScanViewer  ` )
-  - Read access to `  DataScan  ` resources, including rules and results: Dataplex DataScan DataViewer ( `  roles/dataplex.dataScanDataViewer  ` )
+**Note:** Dataplex Universal Catalog doesn't create a BigQuery job in your project for data quality scans. However, you need the `  bigquery.jobs.create  ` permission to create a `  DryRun  ` job to check for permissions for the table.
 
-The following table lists the `  DataScan  ` permissions:
+### Dataplex Universal Catalog service account roles and permissions
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: center;">Permission name</th>
-<th style="text-align: center;">Grants permission to do the following:</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.create      </code></td>
-<td style="text-align: center;">Create a <code dir="ltr" translate="no">       DataScan      </code></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.delete      </code></td>
-<td style="text-align: center;">Delete a <code dir="ltr" translate="no">       DataScan      </code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.get      </code></td>
-<td style="text-align: center;">View operational metadata such as ID or schedule, but not results and rules</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.getData      </code></td>
-<td style="text-align: center;">View <code dir="ltr" translate="no">       DataScan      </code> details including rules and results</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.list      </code></td>
-<td style="text-align: center;">List <code dir="ltr" translate="no">       DataScan      </code> s</td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.run      </code></td>
-<td style="text-align: center;">Run a <code dir="ltr" translate="no">       DataScan      </code></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.update      </code></td>
-<td style="text-align: center;">Update the description of a <code dir="ltr" translate="no">       DataScan      </code></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.getIamPolicy      </code></td>
-<td style="text-align: center;">View the current IAM permissions on the scan</td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"><code dir="ltr" translate="no">       dataplex.datascans.setIamPolicy      </code></td>
-<td style="text-align: center;">Set IAM permissions on the scan</td>
-</tr>
-</tbody>
-</table>
+If you haven't created any data quality or data profile scans or you don't have a Dataplex Universal Catalog lake in this project, create a service identifier by running: `  gcloud beta services identity create --service=dataplex.googleapis.com  ` . This command returns a Dataplex Universal Catalog service identifier if it exists.
+
+To ensure that the Dataplex Universal Catalog service account of the project containing the data quality scan has the necessary permissions to read data from various sources and export results, ask your administrator to grant the following IAM roles to the Dataplex Universal Catalog service account of the project containing the data quality scan:
+
+**Important:** You must grant these roles to the Dataplex Universal Catalog service account of the project containing the data quality scan, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
+
+  - Read BigQuery table data: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on BigQuery tables to be scanned and any other tables referenced in rules
+  - Export scan results to a BigQuery table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the results dataset and table
+  - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
+      - [Dataplex Metadata Reader](/iam/docs/roles-permissions/dataplex#dataplex.metadataReader) ( `  roles/dataplex.metadataReader  ` ) on Dataplex resources
+      - [Dataplex Viewer](/iam/docs/roles-permissions/dataplex#dataplex.viewer) ( `  roles/dataplex.viewer  ` ) on Dataplex resources
+  - Scan a BigQuery external table from Cloud Storage: [Storage Object Viewer](/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on the Cloud Storage bucket
+
+For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+
+These predefined roles contain the permissions required to read data from various sources and export results. To see the exact permissions that are required, expand the **Required permissions** section:
+
+#### Required permissions
+
+The following permissions are required to read data from various sources and export results:
+
+  - Read BigQuery table data:
+      - `  bigquery.tables.get  ` on BigQuery tables
+      - `  bigquery.tables.getData  ` on BigQuery tables
+  - Export scan results to a BigQuery table:
+      - `  bigquery.datasets.get  ` on results dataset and table
+      - `  bigquery.tables.create  ` on results dataset and table
+      - `  bigquery.tables.get  ` on results dataset and table
+      - `  bigquery.tables.getData  ` on results dataset and table
+      - `  bigquery.tables.update  ` on results dataset and table
+      - `  bigquery.tables.updateData  ` on results dataset and table
+  - Scan BigQuery data organized in a Dataplex Universal Catalog lake:
+      - `  dataplex.lakes.list  ` on Dataplex resources
+      - `  dataplex.lakes.get  ` on Dataplex resources
+      - `  dataplex.zones.list  ` on Dataplex resources
+      - `  dataplex.zones.get  ` on Dataplex resources
+      - `  dataplex.entities.list  ` on Dataplex resources
+      - `  dataplex.entities.get  ` on Dataplex resources
+      - `  dataplex.operations.get  ` on Dataplex resources
+  - Scan a BigQuery external table from Cloud Storage:
+      - `  storage.buckets.get  ` on the Cloud Storage bucket
+      - `  storage.objects.get  ` on the Cloud Storage bucket
+
+Your administrator might also be able to give the Dataplex Universal Catalog service account of the project containing the data quality scan these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+
+If you need to access columns protected by BigQuery column-level access policies, then assign the Dataplex Universal Catalog service account permissions for those columns.
+
+If a table has BigQuery row-level access policies enabled, then you can only scan rows visible to the Dataplex Universal Catalog service account. Note that the individual user's access privileges are not evaluated for row-level policies.
 
 ## Create a data quality scan
 

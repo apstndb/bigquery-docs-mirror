@@ -71,7 +71,7 @@ FROM
 
 `  AI.EVALUATE  ` returns the following columns:
 
-  - `  id_col  ` or `  id_cols  ` : the identifiers of a time series. Only present when evaluating multiple time series at once. The column names and types are inherited from the `  ID_COLS  ` argument.
+  - `  id_cols  ` : one or more values that contain the identifiers of a time series. `  id_cols  ` can be an `  INT64  ` , `  STRING  ` , `  ARRAY<INT64>  ` or `  ARRAY<STRING>  ` value. The column names and types are inherited from the `  ID_COLS  ` argument value specified in the function input.
   - `  mean_absolute_error  ` : a `  FLOAT64  ` value that contains the [mean absolute error](https://en.wikipedia.org/wiki/Mean_absolute_error) for the time series.
   - `  mean_squared_error  ` : a `  FLOAT64  ` value that contains the [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for the time series.
   - `  root_mean_squared_error  ` : a `  FLOAT64  ` value that contains the [root mean squared error](https://en.wikipedia.org/wiki/Root-mean-square_deviation) for the time series.

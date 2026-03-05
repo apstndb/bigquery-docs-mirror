@@ -189,7 +189,7 @@ WHERE
   EXTRACT(YEAR FROM l_commitdate) = 1992;
 ```
 
-**Note:** If you get a `  ResourceExhausted  ` error, retry after sometime. If the issue persists, you can [contact support](/bigquery/docs/getting-support) .
+**Note:** If you get a `  ResourceExhausted  ` error, retry after some time. If the issue persists, you can [contact support](/bigquery/docs/getting-support) .
 
 You can then perform a join operation with the newly created table:
 

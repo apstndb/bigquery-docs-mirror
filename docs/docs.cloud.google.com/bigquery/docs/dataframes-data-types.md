@@ -102,7 +102,7 @@ The following table shows data type equivalents in BigQuery, BigQuery DataFrames
 <td><code dir="ltr" translate="no">       decimal256(76, 38)      </code></td>
 </tr>
 <tr class="even">
-<td>List</td>
+<td>List&lt;T&gt;</td>
 <td><code dir="ltr" translate="no">       ARRAY      </code> <code dir="ltr" translate="no">       &lt;T&gt;      </code></td>
 <td><code dir="ltr" translate="no">       pandas.ArrowDtype(pyarrow.list_(T))      </code></td>
 <td><code dir="ltr" translate="no">       list[T]      </code></td>
@@ -183,11 +183,11 @@ The following sections describe the special data types that BigQuery DataFrames 
 
 ### JSON
 
-Within BigQuery DataFrames, columns using the BigQuery [JSON format](/bigquery/docs/reference/standard-sql/data-types#json_type) (a lightweight standard) are represented by `  pandas.ArrowDtype  ` . The exact underlying Arrow type depends on your library versions. Older environments typically use `  db_dtypes.JSONArrowType()  ` for compatibility, which is an Arrow extension type that acts as a light wrapper around `  pa.string()  ` . In contrast, newer setups (pandas 3.0 and later and PyArrow 19.0 and later) utilize the more recent `  pa.json_(pa.string())  ` representation.
+Within BigQuery DataFrames, columns using the BigQuery [JSON format](/bigquery/docs/reference/standard-sql/data-types#json_type) (a lightweight standard) are represented by `  pandas.ArrowDtype  ` . The exact underlying Arrow type depends on your library versions. Older environments typically use `  db_dtypes.JSONArrowType()  ` for compatibility, which is an Arrow extension type that acts as a light wrapper around `  pa.string()  ` . In contrast, newer setups (pandas 3.0 and later and PyArrow 19.0 and later) use the more recent `  pa.json_(pa.string())  ` representation.
 
 ### `     timedelta    `
 
-The `  timedelta  ` type lacks a direct equivalent within the BigQuery native type system. To manage duration data, BigQuery DataFrames utilizes the `  INT64  ` type as the underlying storage format in BigQuery tables. You can expect the results of your computations to be consistent with the behavior you would expect from equivalent operations performed with the pandas library.
+The `  timedelta  ` type lacks a direct equivalent within the BigQuery built-in type system. To manage duration data, BigQuery DataFrames utilizes the `  INT64  ` type as the underlying storage format in BigQuery tables. You can expect the results of your computations to be consistent with the behavior you would expect from equivalent operations performed with the pandas library.
 
 You can directly load `  timedelta  ` values into BigQuery DataFrames and `  Series  ` objects, as shown in the following example:
 
