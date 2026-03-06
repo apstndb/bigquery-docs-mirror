@@ -1,11 +1,5 @@
 # Generate structured data by using the AI.GENERATE\_TABLE function
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
-
 This document shows you how to generate structured data using a Gemini model, and then format the model's response using a SQL schema.
 
 You do this by completing the following tasks:

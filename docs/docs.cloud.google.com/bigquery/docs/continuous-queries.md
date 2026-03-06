@@ -113,10 +113,6 @@ Additional APIs, IAM permissions, and Google Cloud resources are required to exp
 
 ## Export to Spanner
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Spanner. For more information, see [Export to Spanner (reverse ETL)](/bigquery/docs/export-to-spanner) .
 
 ## Write data to a BigQuery table

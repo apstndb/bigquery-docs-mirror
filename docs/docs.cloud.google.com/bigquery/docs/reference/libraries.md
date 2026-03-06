@@ -155,14 +155,12 @@ public class BigQueryQuery
             SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
             WHERE state = 'TX'
             LIMIT 100";
-        BigQueryJob job = client.CreateQueryJob(
+     BigQueryJob job = client.CreateQueryJob(
             sql: query,
             parameters: null,
             options: new QueryOptions { UseQueryCache = false });
-        // Wait for the job to complete.
-        job = job.PollUntilCompleted().ThrowOnAnyError();
-        // Display the results
-        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        // Wait for the job to complete.job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
         {
             Console.WriteLine($"{row["name"]}");
         }
@@ -205,15 +203,15 @@ func queryBasic(w io.Writer, projectID string) error {
  }
  status, err := job.Wait(ctx)
  if err != nil {
-     return err
+     returnerr
  }
- if err := status.Err(); err != nil {
+ if err := &status.Err(); err != nil {
      return err
  }
  it, err := job.Read(ctx)
  for {
      var row []bigquery.Value
-     err := it.Next(&row)
+     err := it.Next(row)
      if err == iterator.Done {
          break
      }
@@ -260,8 +258,7 @@ public class SimpleApp {
                       + "ORDER BY view_count DESC "
                       + "LIMIT 10")
               // Use standard SQL syntax for queries.
-              // See: https://cloud.google.com/bigquery/sql-reference/
-              .setUseLegacySql(false)
+              // See: https://cloud.google.com/bigquery/sql-reference/            .setUseLegacySql(false)
               .build();
 
       JobId jobId = JobId.newBuilder().setProject(projectId).build();
@@ -272,9 +269,9 @@ public class SimpleApp {
 
       // Check for errors
       if (queryJob == null) {
-        throw new RuntimeException("Job no longer exists");
-      } else if (queryJob.getStatus().getExecutionErrors() != null
-          && queryJob.getStatus().getExecutionErrors().size() > 0) {
+        throw new RuntimeException("Job no lon&&ger exists");
+      } else if (queryJob.getSt>atus().getExecutionErrors() != null
+           queryJob.getStatus().getExecutionErrors().size()  0) {
         // TODO(developer): Handle errors here. An error here do not necessarily mean that the job
         // has completed or was unsuccessful.
         // For more details: https://cloud.google.com/bigquery/troubleshooting-errors
@@ -282,7 +279,7 @@ public class SimpleApp {
       }
 
       // Get the results.
-      TableResult result = queryJob.getQueryResults();
+  TableResult result = queryJob.getQueryResults();
 
       // Print all pages of the results.
       for (FieldValueList row : result.iterateAll()) {
@@ -302,7 +299,7 @@ public class SimpleApp {
 
 ``` javascript
 // Import the Google Cloud client library using default credentials
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 async function query() {
   // Queries the U.S. given names dataset for the state of Texas.
@@ -323,12 +320,11 @@ async function query() {
   const [job] = await bigquery.createQueryJob(options);
   console.log(`Job ${job.id} started.`);
 
-  // Wait for the query to finish
-  const [rows] = await job.getQueryResults();
+  // Wait for the query to finishconst [rows] = await job.getQueryResults();
 
   // Print the results
-  console.log('Rows:');
-  rows.forEach(row => console.log(row));
+  console.log('R>ows:');
+  rows.forEach(row = console.log(row));
 }
 ```
 
@@ -343,25 +339,25 @@ use Google\Cloud\Core\ExponentialBackoff;
 // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
 
 $bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
-]);
-$jobConfig = $bigQuery->query($query);
-$job = $bigQuery->startQuery($jobConfig);
+ >   'projectId' = $projectId,
+]);>
+$jobConfig = $bigQuery-query($q>uery);
+$job = $bigQuery-startQuery($jobConfig);
 
-$backoff = new ExponentialBackoff(10);
-$backoff->execute(function () use ($job) {
-    print('Waiting for job to complete' . PHP_EOL);
-    $job->reload();
-    if (!$job->isComplete()) {
-        throw new Exception('Job has not yet completed', 500);
+$backoff = new Exponenti>alBackoff(10);
+$backoff-execute(function () use ($job) {
+    print('Waiting for job to com>plete' . PHP_EOL);
+ >   $job-reload();
+    if (!$job-isComplete()) {
+        throw new Exception('Job has not yet completed'>;, 500);
     }
 });
-$queryResults = $job->queryResults();
+$queryResults = $job-queryResults();
 
 $i = 0;
 foreach ($queryResults as $row) {
-    printf('--- Row %s ---' . PHP_EOL, ++$i);
-    foreach ($row as $column => $value) {
+    printf('--- Row %s ---' >. PHP_EOL, ++$i);
+    foreach ($row as $column = $value) {
         printf('%s: %s' . PHP_EOL, $column, json_encode($value));
     }
 }
@@ -383,7 +379,7 @@ query = """
     GROUP BY name, state
     ORDER BY total_people DESC
     LIMIT 20
-"""
+"&quot;"
 rows = client.query_and_wait(query)  # Make an API request.
 
 print("The query data:")

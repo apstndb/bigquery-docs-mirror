@@ -130,8 +130,8 @@ You can create a permanent external table by running the [`  CREATE EXTERNAL TAB
     ``` text
     CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
       OPTIONS (
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'[,...]]
+        format =&quot;TABLE_FORMAT",
+        uris = [&#39;BUCKET_PATH'[,...]]
         );
     ```
     
@@ -338,7 +338,7 @@ public class QueryExternalGCSPerm {
     String tableName = "MY_TABLE_NAME";
     String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.csv";
     Schema schema =
-        Schema.of(
+   Schema.of(
             Field.of("name", StandardSQLTypeName.STRING),
             Field.of("post_abbr", StandardSQLTypeName.STRING));
     String query =
@@ -349,8 +349,7 @@ public class QueryExternalGCSPerm {
   public static void queryExternalGCSPerm(
       String datasetName, String tableName, String sourceUri, Schema schema, String query) {
     try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
+      // Initialize client that will be used to send requests. This client only needs to be created    // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       // Skip header row in the file.
@@ -363,11 +362,11 @@ public class QueryExternalGCSPerm {
       bigquery.create(TableInfo.of(tableId, externalTable));
 
       // Example query to find states starting with 'W'
-      TableResult results = bigquery.query(QueryJobConfiguration.of(query));
+      TableResult results = bigquery.query(QueryJobConfiguration>.of(query));
 
-      results
+    >  results
           .iterateAll()
-          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+          .forEach(row - row.forEach(val - System.out.printf("%s,", val.toString())));
 
       System.out.println("Query on external permanent table performed successfully.");
     } catch (BigQueryException | InterruptedException e) {
@@ -385,7 +384,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function queryExternalGCSPerm() {
@@ -425,9 +424,7 @@ async function queryExternalGCSPerm() {
 
   // Run the query as a job
   const [job] = await bigquery.createQueryJob(query);
-  console.log(`Job ${job.id} started.`);
-
-  // Wait for the query to finish
+  console.log(`Job ${job.id} started.`); // Wait for the query to finish
   const [rows] = await job.getQueryResults();
 
   // Print the results
@@ -537,8 +534,8 @@ The following example uses automatic detection of Hive partition keys:
 CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
 WITH PARTITION COLUMNS
 OPTIONS (
-format = 'SOURCE_FORMAT',
-uris = ['GCS_URIS'],
+format = &#39;SOURCE_FORMAT',
+uris = [&#39;GCS_URIS'],
 hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
 require_hive_partition_filter = BOOLEAN);
 ```
@@ -556,8 +553,8 @@ The following example uses custom Hive partition keys and types by listing them 
 CREATE EXTERNAL TABLE `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
 WITH PARTITION COLUMNS (PARTITION_COLUMN_LIST)
 OPTIONS (
-format = 'SOURCE_FORMAT',
-uris = ['GCS_URIS'],
+format = &#39;SOURCE_FORMAT',
+uris = [&#39;GCS_URIS'],
 hive_partition_uri_prefix = 'GCS_URI_SHARED_PREFIX',
 require_hive_partition_filter = BOOLEAN);
 ```
@@ -608,7 +605,7 @@ bq mkdef \
 --hive_partitioning_mode=PARTITIONING_MODE \
 --hive_partitioning_source_uri_prefix=GCS_URI_SHARED_PREFIX \
 --require_hive_partition_filter=BOOLEAN \
- GCS_URIS > DEFINITION_FILE
+ GCS_URIS &gt; DEFINITION_FILE
 ```
 
 Replace the following:
@@ -726,27 +723,25 @@ public class SetHivePartitioningOptions {
       String datasetName, String tableName, String sourceUriPrefix, String sourceUri) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // once, and can be reused for multiple requests.     BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
       // Configuring partitioning options
       HivePartitioningOptions hivePartitioningOptions =
           HivePartitioningOptions.newBuilder()
               .setMode("CUSTOM")
-              .setRequirePartitionFilter(true)
-              .setSourceUriPrefix(sourceUriPrefix)
-              .build();
+            .setRequirePartitionFilter(true)
+              .setSourceUriPrefix(sourceUriPrefix)        .build();
 
       TableId tableId = TableId.of(datasetName, tableName);
-      ExternalTableDefinition customTable =
-          ExternalTableDefinition.newBuilder(sourceUri, FormatOptions.parquet())
+    ExternalTableDefinition customTable =
+      ExternalTableDefinition.newBuilder(sourceUri, FormatOptions.parquet())
               .setAutodetect(true)
               .setHivePartitioningOptions(hivePartitioningOptions)
               .build();
       bigquery.create(TableInfo.of(tableId, customTable));
       System.out.println("External table created using hivepartitioningoptions");
     } catch (BigQueryException e) {
-      System.out.println("External table was not created" + e.toString());
+      System.out.println(&quot;External table was not created" + e.toString());
     }
   }
 }
@@ -775,8 +770,8 @@ Use the [`  CREATE OR REPLACE EXTERNAL TABLE  ` DDL statement](/bigquery/docs/re
       `PROJECT_ID.DATASET.EXTERNAL_TABLE_NAME`
       WITH CONNECTION {`REGION.CONNECTION_ID` | DEFAULT}
       OPTIONS(
-        format ="TABLE_FORMAT",
-        uris = ['BUCKET_PATH'],
+        format =&quot;TABLE_FORMAT",
+        uris = [&#39;BUCKET_PATH'],
         max_staleness = STALENESS_INTERVAL,
         metadata_cache_mode = 'CACHE_MODE'
         );
@@ -848,7 +843,7 @@ Use the [`  bq mkdef  `](/bigquery/docs/reference/bq-cli-reference#bq_mkdef) and
     bq mkdef --connection_id=PROJECT_ID.REGION.CONNECTION_ID \
     --source_format=TABLE_FORMAT \
     --metadata_cache_mode=CACHE_MODE \
-    "BUCKET_PATH" > /tmp/DEFINITION_FILE
+    &quot;BUCKET_PATH&quot; > /tmp/DEFINITION_FILE
     ```
     
     Replace the following:

@@ -173,10 +173,6 @@ When you export a result containing multiple rows with the same `  rowkey  ` val
 
 ## Export continuously
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 To continuously process an export query, see [Create continuous queries](/bigquery/docs/continuous-queries) for instructions and [example code](/bigquery/docs/continuous-queries#spanner-example) .
 
 ## Export optimization
@@ -265,6 +261,6 @@ When you export data to Spanner using the `  EXPORT DATA  ` statement, you are b
 
 To export continuously to Spanner using a continuous query, you must have a [BigQuery Enterprise or Enterprise Plus edition](/bigquery/docs/editions-intro) slot reservation and a [reservation assignment](/bigquery/docs/reservations-workload-management#assignments) that uses the `  CONTINUOUS  ` job type.
 
-BigQuery exports to Spanner that cross regional boundaries are charged using data extraction rates. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) . To avoid data transfer charges, make sure that your BigQuery export runs in the same region as the Spanner [default leader](/spanner/docs/instance-configurations#configure-leader-region) . Continuous query exports don't support exports that cross regional boundaries.
+BigQuery exports to Spanner that cross regional boundaries are charged using data extraction rates. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data_extraction_pricing) . To avoid data transfer charges, make sure that your BigQuery export runs in the same region as the Spanner [default leader](/spanner/docs/instance-configurations#configure-leader-region) .
 
 After the data is exported, you're charged for storing the data in Spanner. For more information, see [Spanner pricing](https://cloud.google.com/spanner/pricing#storage) .
