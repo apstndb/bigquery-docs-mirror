@@ -293,6 +293,7 @@ Tables enabled with fine-grained DML are subject to the following limitations:
 
   - For large tables with frequently mutated partitions exceeding 2TB, fine-grained DML is not recommended. These tables may experience added memory pressure for subsequent queries, which can lead to additional read latency or query errors.
   - Only one mutating DML statement can run at a time on a table that has fine-grained DML enabled. Subsequent jobs are queued as `  PENDING  ` . For more information about mutating DML concurrency behavior, see [UPDATE, DELETE, MERGE DML concurrency](#update_delete_merge_dml_concurrency) .
+  - A table enabled with fine-grained DML can't have partitions [individually deleted](/bigquery/docs/managing-partitioned-tables#delete_a_partition) or [overwritten](/bigquery/docs/writing-results#writing_query_results) . To delete or replace data within a partition, you must use a mutating DML statement, such as `  DELETE  ` , `  UPDATE  ` , `  MERGE  ` , or `  TRUNCATE  ` .
   - You can't use the [`  tabledata.list  ` method](/bigquery/docs/reference/rest/v2/tabledata/list) to read content from a table with fine-grained DML enabled. Instead, query the table with a `  SELECT  ` statement to read table records.
   - A table enabled with fine-grained DML cannot be previewed using the BigQuery console.
   - You can't [copy a table](/bigquery/docs/managing-tables#copy-table) with fine-grained DML enabled after executing an `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statement.

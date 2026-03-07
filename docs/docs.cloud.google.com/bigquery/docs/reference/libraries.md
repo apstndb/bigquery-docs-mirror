@@ -155,12 +155,14 @@ public class BigQueryQuery
             SELECT name FROM `bigquery-public-data.usa_names.usa_1910_2013`
             WHERE state = 'TX'
             LIMIT 100";
-     BigQueryJob job = client.CreateQueryJob(
+        BigQueryJob job = client.CreateQueryJob(
             sql: query,
             parameters: null,
             options: new QueryOptions { UseQueryCache = false });
-        // Wait for the job to complete.job = job.PollUntilCompleted().ThrowOnAnyError();
-        // Display the results        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
+        // Wait for the job to complete.
+        job = job.PollUntilCompleted().ThrowOnAnyError();
+        // Display the results
+        foreach (BigQueryRow row in client.GetQueryResults(job.Reference))
         {
             Console.WriteLine($"{row["name"]}");
         }
@@ -203,15 +205,15 @@ func queryBasic(w io.Writer, projectID string) error {
  }
  status, err := job.Wait(ctx)
  if err != nil {
-     returnerr
+     return err
  }
- if err := &status.Err(); err != nil {
+ if err := status.Err(); err != nil {
      return err
  }
  it, err := job.Read(ctx)
  for {
      var row []bigquery.Value
-     err := it.Next(row)
+     err := it.Next(&row)
      if err == iterator.Done {
          break
      }
@@ -258,7 +260,8 @@ public class SimpleApp {
                       + "ORDER BY view_count DESC "
                       + "LIMIT 10")
               // Use standard SQL syntax for queries.
-              // See: https://cloud.google.com/bigquery/sql-reference/            .setUseLegacySql(false)
+              // See: https://cloud.google.com/bigquery/sql-reference/
+              .setUseLegacySql(false)
               .build();
 
       JobId jobId = JobId.newBuilder().setProject(projectId).build();
@@ -269,9 +272,9 @@ public class SimpleApp {
 
       // Check for errors
       if (queryJob == null) {
-        throw new RuntimeException("Job no lon&&ger exists");
-      } else if (queryJob.getSt>atus().getExecutionErrors() != null
-           queryJob.getStatus().getExecutionErrors().size()  0) {
+        throw new RuntimeException("Job no longer exists");
+      } else if (queryJob.getStatus().getExecutionErrors() != null
+          && queryJob.getStatus().getExecutionErrors().size() > 0) {
         // TODO(developer): Handle errors here. An error here do not necessarily mean that the job
         // has completed or was unsuccessful.
         // For more details: https://cloud.google.com/bigquery/troubleshooting-errors
@@ -279,7 +282,7 @@ public class SimpleApp {
       }
 
       // Get the results.
-  TableResult result = queryJob.getQueryResults();
+      TableResult result = queryJob.getQueryResults();
 
       // Print all pages of the results.
       for (FieldValueList row : result.iterateAll()) {
@@ -299,7 +302,7 @@ public class SimpleApp {
 
 ``` javascript
 // Import the Google Cloud client library using default credentials
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 async function query() {
   // Queries the U.S. given names dataset for the state of Texas.
@@ -320,11 +323,12 @@ async function query() {
   const [job] = await bigquery.createQueryJob(options);
   console.log(`Job ${job.id} started.`);
 
-  // Wait for the query to finishconst [rows] = await job.getQueryResults();
+  // Wait for the query to finish
+  const [rows] = await job.getQueryResults();
 
   // Print the results
-  console.log('R>ows:');
-  rows.forEach(row = console.log(row));
+  console.log('Rows:');
+  rows.forEach(row => console.log(row));
 }
 ```
 
@@ -339,25 +343,25 @@ use Google\Cloud\Core\ExponentialBackoff;
 // $query = 'SELECT id, view_count FROM `bigquery-public-data.stackoverflow.posts_questions`';
 
 $bigQuery = new BigQueryClient([
- >   'projectId' = $projectId,
-]);>
-$jobConfig = $bigQuery-query($q>uery);
-$job = $bigQuery-startQuery($jobConfig);
+    'projectId' => $projectId,
+]);
+$jobConfig = $bigQuery->query($query);
+$job = $bigQuery->startQuery($jobConfig);
 
-$backoff = new Exponenti>alBackoff(10);
-$backoff-execute(function () use ($job) {
-    print('Waiting for job to com>plete' . PHP_EOL);
- >   $job-reload();
-    if (!$job-isComplete()) {
-        throw new Exception('Job has not yet completed'>;, 500);
+$backoff = new ExponentialBackoff(10);
+$backoff->execute(function () use ($job) {
+    print('Waiting for job to complete' . PHP_EOL);
+    $job->reload();
+    if (!$job->isComplete()) {
+        throw new Exception('Job has not yet completed', 500);
     }
 });
-$queryResults = $job-queryResults();
+$queryResults = $job->queryResults();
 
 $i = 0;
 foreach ($queryResults as $row) {
-    printf('--- Row %s ---' >. PHP_EOL, ++$i);
-    foreach ($row as $column = $value) {
+    printf('--- Row %s ---' . PHP_EOL, ++$i);
+    foreach ($row as $column => $value) {
         printf('%s: %s' . PHP_EOL, $column, json_encode($value));
     }
 }
@@ -379,7 +383,7 @@ query = """
     GROUP BY name, state
     ORDER BY total_people DESC
     LIMIT 20
-"&quot;"
+"""
 rows = client.query_and_wait(query)  # Make an API request.
 
 print("The query data:")
@@ -481,6 +485,43 @@ The following list contains links to more resources related to the client librar
   - [Issue tracker](https://github.com/googleapis/google-cloud-ruby/issues)
   - [`  google-bigquery  ` on Stack Overflow](https://stackoverflow.com/search?q=%5Bgoogle-bigquery%5D+%5Bruby%5D)
   - [Source code](https://github.com/googleapis/google-cloud-ruby)
+
+## BigQuery DataFrames (BigFrames)
+
+[BigQuery DataFrames](https://dataframes.bigquery.dev/) is a pythonic DataFrame and machine learning (ML) API powered by the BigQuery engine. It implements the pandas and scikit-learn APIs by pushing the processing down to BigQuery through SQL conversion.
+
+To get started with BigQuery DataFrames, install the library:
+
+``` text
+pip install --upgrade bigframes
+```
+
+The following example shows how to initialize BigQuery DataFrames and perform a simple query.
+
+``` python
+import bigframes.pandas as bpd
+
+# Set BigQuery DataFrames options
+# Note: The project option is not required in all environments.
+# On BigQuery Studio, the project ID is automatically detected.
+bpd.options.bigquery.project = your_gcp_project_id
+
+# Use "partial" ordering mode to generate more efficient queries, but the
+# order of the rows in DataFrames may not be deterministic if you have not
+# explictly sorted it. Some operations that depend on the order, such as
+# head() will not function until you explictly order the DataFrame. Set the
+# ordering mode to "strict" (default) for more pandas compatibility.
+bpd.options.bigquery.ordering_mode = "partial"
+
+# Create a DataFrame from a BigQuery table
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+df = bpd.read_gbq(query_or_table)
+
+# Efficiently preview the results using the .peek() method.
+df.peek()
+```
+
+For more information, see the [BigQuery DataFrames reference documentation](https://dataframes.bigquery.dev/) and [Getting started with BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) .
 
 ## Third-party BigQuery API client libraries
 

@@ -126,6 +126,8 @@ AI.CLASSIFY(
         `  ['positive', 'neutral', 'negative']  `
     
     To handle input that doesn't closely match a category, consider including an `  'Other'  ` category.
+    
+    To use categories that come from a column of a table, you can [define a variable](/bigquery/docs/reference/standard-sql/procedural-language) based on that column and then use that variable as your categories argument.
 
   - `  CONNECTION  ` : a `  STRING  ` value specifying the connection to use to communicate with the model, in the format `  [ PROJECT_ID ]. LOCATION . CONNECTION_ID  ` . For example, `  myproject.us.myconnection  ` .
     
@@ -184,6 +186,23 @@ The result is similar to the following:
 |                               | the bandwidth bills of spammers... |          |
 | ...                           | ...                                | ...      |
 +-------------------------------+------------------------------------+----------+
+```
+
+To extract your categories from a table instead of using an array of string literals directly in your query, you can use variables. Suppose you have a table called `  mydataset.categories  ` with a string column called `  category  ` that contains each of the categories from the previous example. You can rewrite the previous query using a variable in the following way:
+
+``` text
+DECLARE article_types ARRAY<STRING>
+  DEFAULT (SELECT ARRAY_AGG(category) FROM mydataset.categories);
+
+SELECT
+  title,
+  body,
+  AI.CLASSIFY(
+    body,
+    categories => article_types) AS category
+FROM
+  `bigquery-public-data.bbc_news.fulltext`
+LIMIT 100;
 ```
 
 ### Classify text into multiple topics

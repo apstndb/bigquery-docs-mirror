@@ -305,7 +305,50 @@ The dataset replica of the cross region dataset 'project_id:dataset_id' in regio
 
 For more information, see [Promote the secondary replica](/bigquery/docs/data-replication#promote_the_secondary_replica) .
 
-### List dataset replicas
+## Monitor replication
+
+You can monitor the status of your dataset replicas through BigQuery, Cloud Monitoring, or `  INFORMATION_SCHEMA  ` views.
+
+For information about creating alerts on these metrics, see [Create dashboards, charts, and alerts](/bigquery/docs/monitoring-dashboard) .
+
+### View replication status with BigQuery
+
+To view the replication status and latency for a dataset in the Google Cloud console, do the following:
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, expand your project.
+
+3.  Click the dataset that you want to monitor.
+
+4.  In the dataset details pane, click the **Details** tab.
+
+5.  In the **Replicas** section, view **Replication latency** and **Status** . To view more details, including a replication latency chart, click **View details** .
+
+### View replication status with Cloud Monitoring
+
+BigQuery provides the following metrics in Monitoring to help you monitor replication status:
+
+  - **Replication latency** : The staleness of data in the secondary region replicated as part of cross-region replication or managed disaster recovery. This metric serves as a proxy for your recovery point objective (RPO).
+  - **Network egress bytes** : The billed volume of data (in bytes) replicated from the primary region to the secondary region. This metric helps you monitor bandwidth quota utilization.
+
+To view these metrics in Monitoring, do the following:
+
+1.  In the Google Cloud console, go to the **Monitoring** page.
+
+2.  Click **Metrics explorer** .
+
+3.  In the **Select a metric** field, search for and select **BigQuery Dataset** .
+
+4.  Select **Replication latency** ( `  bigquery.googleapis.com/storage/replication/dataset_staleness  ` ) or **Network egress bytes** ( `  bigquery.googleapis.com/storage/replication/network_egress_bytes_count  ` ).
+
+5.  Click **Apply** .
+
+6.  In the **Aggregation** section, select an aggregation method. For the replication latency metric, we recommend selecting **99th percentile** . This aggregation better shows the worst-case performance compared to the average or other aggregations.
+
+7.  Optional: To view metrics for a specific dataset or secondary region, click **Add filter** , select the **dataset\_id** or **location** option, and then enter a value. If you replicate data to multiple secondary regions, you can group by location to view metrics for each region.
+
+### View replication status with `     INFORMATION_SCHEMA    `
 
 To list the dataset replicas in a project, query the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  `](/bigquery/docs/information-schema-schemata-replicas) view.
 
