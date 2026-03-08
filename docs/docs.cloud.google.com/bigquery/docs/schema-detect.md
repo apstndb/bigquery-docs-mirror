@@ -52,7 +52,7 @@ To use schema auto-detection when you load JSON or CSV data:
 
 5.  On the **Create table** page, in the **Source** section:
     
-      - For **Create table from** , select your desired source type.
+      - For **Create table from** , select the source type.
     
       - In the source field, browse for the File/Cloud Storage bucket, or enter the [Cloud Storage URI](#gcs-uri) . Note that you cannot include multiple URIs in the Google Cloud console, but [wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you're creating.
     
@@ -454,13 +454,13 @@ end
 
 Schema auto-detection can be used with CSV, JSON, and Google Sheets external data sources. When schema auto-detection is enabled, BigQuery makes a best-effort attempt to automatically infer the schema from the source data. If you don't enable schema auto-detection for these sources, then you must provide an explicit schema.
 
-You don't need to enable schema auto-detection when you query external Avro, Parquet, ORC, Firestore export, or Datastore export files. These file formats are self-describing, so BigQuery automatically infers the table schema from the source data. For Parquet, Avro, and Orc files, you can optionally provide an explicit schema to override the inferred schema.
+You don't need to enable schema auto-detection when you query external Avro, Parquet, ORC, Firestore export, or Datastore export files. These file formats are self-describing, so BigQuery automatically infers the table schema from the source data. For Parquet, Avro, and ORC files, you can optionally provide an explicit schema to override the inferred schema.
 
 Using the Google Cloud console, you can enable schema auto-detection by checking the **Schema and input parameters** option for **Auto detect** .
 
 Using the bq command-line tool, you can enable schema auto-detection when you create a [table definition file](/bigquery/external-table-definition) for CSV, JSON, or Google Sheets data. When using the bq tool to create a table definition file, pass the `  --autodetect  ` flag to the `  mkdef  ` command to enable schema auto-detection, or pass the `  --noautodetect  ` flag to disable auto-detection.
 
-When you use the `  --autodetect  ` flag, the `  autodetect  ` setting is set to `  true  ` in the table definition file. When you use the `  --noautodetect  ` flag, the `  autodetect  ` setting is set to `  false  ` . If you do not provide a schema definition for the external data source when you create a table definition, and you do not use the `  --noautodetect  ` or `  --autodetect  ` flag, the `  autodetect  ` setting defaults to `  true  ` .
+When you use the `  --autodetect  ` flag, the `  autodetect  ` setting is set to `  true  ` in the table definition file. When you use the `  --noautodetect  ` flag, the `  autodetect  ` setting is set to `  false  ` . If you don't provide a schema definition for the external data source when you create a table definition, and you don't use the `  --noautodetect  ` or `  --autodetect  ` flag, the `  autodetect  ` setting defaults to `  true  ` .
 
 When you create a table definition file by using the API, set the value of the `  autodetect  ` property to `  true  ` or `  false  ` . Setting `  autodetect  ` to `  true  ` enables auto-detection. Setting `  autodetect  ` to `  false  ` disables autodetect.
 

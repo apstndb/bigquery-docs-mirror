@@ -88,7 +88,7 @@ To create a pipeline schedule, follow these steps:
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , and then select a service account.
 
-7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colab notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](/colab/docs/create-runtime-template) .
+7.  If your pipeline contains a notebook, in the **Notebook options** section, in the **Runtime template** field, select a Colaboratory notebook runtime template or the default runtime specifications. For details on creating a Colab notebook runtime template, see [Create a runtime template](/colab/docs/create-runtime-template) .
     
     **Note:** A notebook runtime template must be in the same region as the pipeline.
     

@@ -192,7 +192,7 @@ In some situations, you need to reference a session to continue working within i
 
 You don't need to provide the session ID to run a new query inside a session in the Google Cloud console. You can just continue working in the editor tab that contains the session. However, if you would like to reference your session in the Cloud Shell or an API call, you need to know the ID for the session you created in the console.
 
-Before you complete these steps, make sure that that you have run at least one query in an active session.
+Before you complete these steps, make sure that you have run at least one query in an active session.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

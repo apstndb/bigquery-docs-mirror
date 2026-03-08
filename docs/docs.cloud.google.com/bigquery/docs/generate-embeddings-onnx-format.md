@@ -85,7 +85,7 @@ If you choose to manually convert the files, you must have a local command-line 
 
 ### Export the transformer model to ONNX
 
-Use the Hugging face Optimum CLI to export the `  sentence-transformers/all-MiniLM-L6-v2  ` model to ONNX. For more information about exporting models with the Optimum CLI, see [Export a model to ONNX with `  optimum.exporters.onnx  `](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model#exporting-a-model-to-onnx-using-the-cli) .
+Use the Hugging Face Optimum CLI to export the `  sentence-transformers/all-MiniLM-L6-v2  ` model to ONNX. For more information about exporting models with the Optimum CLI, see [Export a model to ONNX with `  optimum.exporters.onnx  `](https://huggingface.co/docs/optimum-onnx/onnx/usage_guides/export_a_model#exporting-a-model-to-onnx-using-the-cli) .
 
 To export the model, open a command-line environment and follow these steps:
 
@@ -339,7 +339,7 @@ Use the bq command-line tool [`  query  ` command](/bigquery/docs/reference/bq-c
 
 ### API
 
-Use the [`  jobs.insert  ` method](/bigquery/docs/reference/rest/v2/jobs/insert) to import the models.Populate the `  query  ` parameter of the [`  QueryRequest  ` resource](/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) in the request body with the `  CREATE MODEL  ` statement.
+Use the [`  jobs.insert  ` method](/bigquery/docs/reference/rest/v2/jobs/insert) to import the models. Populate the `  query  ` parameter of the [`  QueryRequest  ` resource](/bigquery/docs/reference/rest/v2/jobs/query#QueryRequest) in the request body with the `  CREATE MODEL  ` statement.
 
 1.  Use the following `  query  ` parameter value to create the `  tokenizer  ` model.
     

@@ -554,7 +554,7 @@ Replace the following:
     
       - `  ENDPOINT  ` : the [embedding model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) to use, in this case `  multimodalembedding@001  ` .
         
-        If you specify a URL as the endpoint when you create the remote model, for example `  endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/multimodalembedding@001'  ` , make sure that the project that you specify in the URL is the project in which you have granted the Vertex AI user role to the connection's. service account.
+        If you specify a URL as the endpoint when you create the remote model, for example `  endpoint = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/publishers/google/models/multimodalembedding@001'  ` , make sure that the project that you specify in the URL is the project in which you have granted the Vertex AI user role to the connection's service account.
         
         The `  multimodalembedding@001  ` model must be available in the location where you are creating the remote model. For more information, see [Locations](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
 

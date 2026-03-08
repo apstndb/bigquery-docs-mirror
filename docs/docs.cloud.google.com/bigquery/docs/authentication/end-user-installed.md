@@ -31,7 +31,7 @@ To ensure the app accesses only BigQuery tables that are available to the end us
     
     ### Python
     
-    Install the [oauthlib integration for Google Auth](https://github.com/GoogleCloudPlatform/google-auth-library-python-oauthlib) .
+    Install the [oauthlib integration for Google Auth](https://github.com/googleapis/google-cloud-python/tree/main/packages/google-auth-oauthlib) .
     
     ``` text
     pip install --upgrade google-auth-oauthlib

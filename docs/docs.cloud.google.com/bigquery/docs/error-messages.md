@@ -51,7 +51,7 @@ If you use the [bq command-line tool](/bigquery/bq-command-line-tool) to check j
 </tr>
 <tr class="odd">
 <td>backendError</td>
-<td>500, 503 or 504</td>
+<td>500, 502, 503 or 504</td>
 <td><p>This error indicates that the service is currently unavailable. This can happen due to a number of transient issues, including:<br />
 </p>
 <ul>

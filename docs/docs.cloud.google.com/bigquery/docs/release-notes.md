@@ -6,6 +6,16 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## March 05, 2026
+
+Feature
+
+You can now use an alternate syntax when you call the [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) to improve query performance when you search for a single vector. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
+Change
+
+An updated version of the [Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers#current_odbc_driver) is now available.
+
 ## March 04, 2026
 
 Feature

@@ -87,7 +87,7 @@ The **Usage and utilization by capacity** tab shows max slots and usage as absol
 
 You can choose an edition or on-demand option from the **Source** drop-down to view statistics for different scopes. Selecting an edition populates the **Reservation** drop-down with relevant reservations.
 
-For on-demand options, you can choose either an individual project or the entire organization from the **Recommendations for** drop-down if you have organization level permissions. The Slot Estimator page only shows the project-level information if you only have project level permissions.
+For on-demand options, you can choose either an individual project or the entire organization from the **Recommendations for** drop-down if you have organization-level permissions. The Slot Estimator page only shows the project-level information if you only have project-level permissions.
 
 The statistics for **Usage and utilization by capacity** tab may vary slightly based on different scope:
 
@@ -97,7 +97,7 @@ The statistics for **Usage and utilization by capacity** tab may vary slightly b
 
 ## Model slot performance
 
-When a reservation is selected, you can use the slot estimator to view job performance data and to model the effect of changing the number of max slots. The slot estimator lets you model how performance might change at different capacity levels, ranging from 80% of the minimum value of max slots size in the observation period to 150% of the current max slots. In other words, the decrease in options cannot exceed 20% of minimum capacity of the 30-day timeframe, while the increase in options cannot exceed 50% of current capacity.
+When a reservation is selected, you can use the slot estimator to view job performance data and to model the effect of changing the number of max slots. The slot estimator lets you model how performance might change at different capacity levels, ranging from 80% of the minimum value of max slot size in the observation period to 150% of the current max slots. In other words, the decrease in options cannot exceed 20% of minimum capacity of the 30-day timeframe, while the increase in options cannot exceed 50% of current capacity.
 
 The models assume a replay of the previous 30 days' usage pattern, where everything remains the same except for a change in slots.
 

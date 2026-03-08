@@ -10,7 +10,7 @@ Typical uses for a session include the following:
 
   - **Look up query history by session.** If you want to keep track of a behavior that happened at a particular time during the session, you can view the history of changes that were made during the session.
 
-  - **Create multi-statement transactions over multiple queries.** Within a session, you can begin a transaction, make changes, and view the temporary result before deciding to commit or rollback. You can do this over several queries in the session. If you do not use a session, a multi-statement transaction needs to be completed in a single query.
+  - **Create multi-statement transactions over multiple queries.** Within a session, you can begin a transaction, make changes, and view the temporary result before deciding to commit or rollback. You can do this over several queries in the session. If you don't use a session, a multi-statement transaction needs to be completed in a single query.
 
 ## Pricing
 
@@ -36,62 +36,72 @@ Typical uses for a session include the following:
 
 This section describes the [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) and the [IAM roles](/bigquery/docs/access-control#bigquery) that you need to perform actions with sessions.
 
-Actions
-
-Required permissions
-
-Default roles
-
-Create a new session. Work with an existing session that you created.
-
-`  bigquery.jobs.create  `
-
-`  bigquery.user  `  
-`  bigquery.Jobuser  `  
-`  bigquery.admin  `  
-
-Terminate a session that you created.
-
-`  bigquery.jobs.create  `
-
-`  bigquery.user  `  
-`  bigquery.Jobuser  `  
-`  bigquery.admin  `  
-
-Terminate a session another user created.
-
-`  bigquery.jobs.create  `  
-`  bigquery.jobs.update  `  
-
-`  bigquery.admin  `  
-
-View a list of your sessions in a project. This list includes the IDs for sessions you've created in a project with `  INFORMATION_SCHEMA.JOBS_BY_USER  ` .
-
-`  bigquery.jobs.list  `
-
-`  bigquery.user  `  
-`  bigquery.Jobuser  `  
-`  bigquery.admin  `  
-
-View all sessions for all users in a project. This list includes the IDs for all sessions created in the project with `  INFORMATION_SCHEMA.JOBS  ` .
-
-`  bigquery.jobs.listAll  `
-
-`  bigquery.admin  `
-
-View metadata for sessions created by the current user in the current project with `  INFORMATION_SCHEMA.SESSIONS_BY_USER  ` .
-
-`  bigquery.jobs.list  `
-
-`  bigquery.user  `  
-`  bigquery.Jobuser  `  
-`  bigquery.admin  `  
-
-View metadata for all sessions in the current project with `  INFORMATION_SCHEMA.SESSIONS_BY_PROJECT  ` .
-
-`  bigquery.jobs.listAll  `
-
-`  bigquery.admin  `
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Actions</th>
+<th>Required permissions</th>
+<th>Default roles</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Create a new session. Work with an existing session that you created.</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
+<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
+<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+</td>
+</tr>
+<tr class="even">
+<td>Terminate a session that you created.</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
+<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
+<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+</td>
+</tr>
+<tr class="odd">
+<td>Terminate a session another user created.</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.create      </code><br />
+<code dir="ltr" translate="no">       bigquery.jobs.update      </code><br />
+</td>
+<td><code dir="ltr" translate="no">       bigquery.admin      </code><br />
+</td>
+</tr>
+<tr class="even">
+<td>View a list of your sessions in a project. This list includes the IDs for sessions you've created in a project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.JOBS_BY_USER       </code> .</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.list      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
+<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
+<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+</td>
+</tr>
+<tr class="odd">
+<td>View all sessions for all users in a project. This list includes the IDs for all sessions created in the project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.JOBS       </code> .</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.listAll      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.admin      </code></td>
+</tr>
+<tr class="even">
+<td>View metadata for sessions created by the current user in the current project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.SESSIONS_BY_USER       </code> .</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.list      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.user      </code><br />
+<code dir="ltr" translate="no">       bigquery.Jobuser      </code><br />
+<code dir="ltr" translate="no">       bigquery.admin      </code><br />
+</td>
+</tr>
+<tr class="odd">
+<td>View metadata for all sessions in the current project with <code dir="ltr" translate="no">         INFORMATION_SCHEMA.SESSIONS_BY_PROJECT       </code> .</td>
+<td><code dir="ltr" translate="no">       bigquery.jobs.listAll      </code></td>
+<td><code dir="ltr" translate="no">       bigquery.admin      </code></td>
+</tr>
+</tbody>
+</table>
 
 ## What's next
 

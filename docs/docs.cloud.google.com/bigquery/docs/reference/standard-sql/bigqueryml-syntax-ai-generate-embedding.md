@@ -70,12 +70,6 @@ The model and input table must be in the same region.
 
 ### Open models
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
-
 ``` text
 AI.GENERATE_EMBEDDING(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
@@ -91,7 +85,7 @@ AI.GENERATE_EMBEDDING(
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a remote model over a supported open model.
+  - `  MODEL_NAME  ` : the name of a remote model over a supported [Vertex AI hosted open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding#vertex-open-models) or a [self-deployed open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
     
     You can confirm the type of model by opening the Google Cloud console and looking at the **Model type** field in the model details page.
 
@@ -103,7 +97,7 @@ AI.GENERATE_EMBEDDING(
 
 The model and input table must be in the same region.
 
-### `       multimodalembedding      `
+### Multimodal embedding
 
 ``` text
 # Syntax for standard tables
@@ -271,7 +265,7 @@ AI.GENERATE_EMBEDDING(
   - `  embedding  ` : an `  ARRAY<FLOAT64>  ` value that contains the generated embedding vector.
   - `  status  ` : a `  STRING  ` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
 
-### `       multimodalembedding      `
+### Multimodal embedding
 
   - `  embedding  ` : an `  ARRAY<FLOAT64>  ` value that contains the generated embedding vector.
 
@@ -303,7 +297,7 @@ AI.GENERATE_EMBEDDING(
 
 ## Examples
 
-### `       text-embedding      `
+### Text embedding
 
 This example shows how to generate an embedding of a single piece of sample text by using a remote model that references a `  text-embedding  ` model.
 
@@ -338,7 +332,7 @@ The result is similar to the following:
 +-----------------------+-------------------------------------+--------+-----------------------+
 ```
 
-### `       multimodalembedding      `
+### Multimodal embedding
 
 This example shows how to generate embeddings from visual content by using a remote model that references a `  multimodalembedding  ` model.
 

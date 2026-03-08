@@ -50,7 +50,7 @@ You must have the following information when creating a Salesforce Marketing Clo
 </tbody>
 </table>
 
-#### Setup IP allow list for Salesforce Marketing Cloud transfers
+#### Set up IP allowlist for Salesforce Marketing Cloud transfers
 
 You must configure your Google Cloud environment and your Salesforce Marketing Cloud account to add specific IP addresses to the allowlist for data transfers. This ensures that Salesforce Marketing Cloud only accepts connections from a trusted, static IP address.
 
@@ -304,13 +304,13 @@ If you are having issues setting up a Salesforce Marketing Cloud data transfer, 
     **Resolution:** Try one of the following steps:
     
       - Enable [all available IP addresses for Google Cloud resources](https://www.gstatic.com/ipranges/goog.json) .
-      - Configure your Google Cloud environment and your Salesforce Marketing Cloud account to add static IP addresses to the allow list. For more information, see [Setup IP allow list for Salesforce Marketing Cloud transfers](#sfmc-allowlist) .
+      - Configure your Google Cloud environment and your Salesforce Marketing Cloud account to add static IP addresses to the allowlist. For more information, see [Set up IP allowlist for Salesforce Marketing Cloud transfers](#sfmc-allowlist) .
 
   - Error: `  INVALID_ARGUMENT. Table tableName does not exist in asset TableName  `  
     **Resolution:** Ensure that you have the correct scope permissions configured in the Salesforce Marketing Cloud application. For more information, see [Salesforce Marketing Cloud prerequisites](#sfmc-prereqs) .
 
   - Error: `  FAILED_PRECONDITION: There was an issue connecting to API.  `  
-    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allow list. To resolve this error, follow the steps in [Create a network attachment](/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) and follow the steps to create your network attachment by defining a static IP address.
+    **Resolution:** This error can occur when you include a network attachment with your transfer but have not configured your public NAT and set up your IP allowlist. To resolve this error, follow the steps in [Create a network attachment](/bigquery/docs/connections-with-network-attachment#create_a_network_attachment) and follow the steps to create your network attachment by defining a static IP address.
 
 ## Pricing
 

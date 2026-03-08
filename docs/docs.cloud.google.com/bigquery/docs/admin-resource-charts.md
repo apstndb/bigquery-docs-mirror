@@ -82,6 +82,8 @@ BigQuery gathers the metrics by querying the following [`  INFORMATION_SCHEMA  `
   - [`  INFORMATION_SCHEMA.RESERVATIONS  `](/bigquery/docs/information-schema-reservations)
   - [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](/bigquery/docs/information-schema-table-storage)
 
+For an example query that replicates the slot usage timeline chart found in administrative resource charts, see [Match slot usage behavior from administrative resource charts](/bigquery/docs/information-schema-jobs-timeline#charts_example) .
+
 ### Views
 
 The **Operational health** tab displays the following summary and detailed views.
@@ -192,6 +194,8 @@ The charts gather metrics by querying the following `  INFORMATION_SCHEMA  ` vie
   - [`  INFORMATION_SCHEMA.RESERVATION_CHANGES  `](/bigquery/docs/information-schema-reservation-changes)
 
 The data can be updated in real time, going back a maximum of 30 days.
+
+For an example query that replicates the slot usage timeline chart found in administrative resource charts, see [Match slot usage behavior from administrative resource charts](/bigquery/docs/information-schema-jobs-timeline#charts_example) .
 
 When you view resource utilization, you can configure the following:
 

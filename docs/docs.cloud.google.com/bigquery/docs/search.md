@@ -116,7 +116,7 @@ SELECT * FROM my_dataset.Logs WHERE SEARCH((Source, Message), '`94.60.64.181`');
 
 ### Exclude columns from a search
 
-If a table table has many columns and you want to search most of them, it may be easier to specify only the columns to exclude from the search. The following query searches across all columns of the `  Logs  ` table except for the `  Message  ` column. It returns the rows of any columns other than `  Message  ` that contains the value `  94.60.64.181  ` .
+If a table has many columns and you want to search most of them, it may be easier to specify only the columns to exclude from the search. The following query searches across all columns of the `  Logs  ` table except for the `  Message  ` column. It returns the rows of any columns other than `  Message  ` that contains the value `  94.60.64.181  ` .
 
 ``` text
 SELECT *
@@ -208,7 +208,7 @@ OPTIONS (analyzer = 'LOG_ANALYZER', analyzer_options = '''{
 }''');
 ```
 
-The following tables shows examples of calls to the `  SEARCH  ` function with different text analyzers and their results. The first table calls the `  SEARCH  ` function using the default text analyzer, the `  LOG_ANALYZER  ` :
+The following table shows examples of calls to the `  SEARCH  ` function with different text analyzers and their results. The first table calls the `  SEARCH  ` function using the default text analyzer, the `  LOG_ANALYZER  ` :
 
 <table>
 <thead>

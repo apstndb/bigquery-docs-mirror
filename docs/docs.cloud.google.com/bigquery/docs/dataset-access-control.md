@@ -1,12 +1,14 @@
 # Changes to dataset-level access controls
 
-Starting Mar 17 2026, the `  bigquery.datasets.getIamPolicy  ` Identity and Access Management (IAM) permission is required to view a dataset's access controls and to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](/bigquery/docs/information-schema-object-privileges) view. The `  bigquery.datasets.setIamPolicy  ` permission is required to update a dataset's access controls or to [create a dataset with access controls using the API](#changes_to_api_methods) .
+If you opt into enforcement of the `  enable_fine_grained_dataset_acls_option  ` configuration for dataset-level access controls, the `  bigquery.datasets.getIamPolicy  ` Identity and Access Management (IAM) permission is required to view a dataset's access controls and to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](/bigquery/docs/information-schema-object-privileges) view. The `  bigquery.datasets.setIamPolicy  ` permission is required to update a dataset's access controls or to [create a dataset with access controls using the API](#changes_to_api_methods) .
 
-## Opt into early enforcement
+If you don't opt in, the dataset-level access controls are unchanged.
 
-Before Mar 17, 2026, you can opt into early enforcement of the permission changes. When you opt in, the `  bigquery.datasets.getIamPolicy  ` permission is necessary to get a dataset's access controls, and the `  bigquery.datasets.setIamPolicy  ` permission is necessary to update a dataset's access controls or to create a dataset with access controls using the API.
+## Opt into enforcement
 
-To opt into early enforcement, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  TRUE  ` at the organization or project level. For instructions on enabling configuration settings, see [Manage configuration settings](/bigquery/docs/default-configuration) .
+You can opt into enforcement of the permission changes. When you opt in, the `  bigquery.datasets.getIamPolicy  ` permission is necessary to get a dataset's access controls, and the `  bigquery.datasets.setIamPolicy  ` permission is necessary to update a dataset's access controls or to create a dataset with access controls using the API.
+
+To opt into enforcement, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  TRUE  ` at the organization or project level. If you want to opt out after opt in, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  FALSE  ` at the organization or project level. For instructions on enabling configuration settings, see [Manage configuration settings](/bigquery/docs/default-configuration) .
 
 ### Configuration setting examples
 
@@ -56,9 +58,9 @@ SET OPTIONS (
 
 ## Changes to custom roles
 
-This change to the required permissions impacts existing custom roles that grant `  bigquery.datasets.get  ` , `  bigquery.datasets.create  ` , or `  bigquery.datasets.update  ` permission and don't also grant the `  bigquery.datasets.getIamPolicy  ` or `  bigquery.datasets.setIamPolicy  ` permission.
+If you opt into enforcement of the permission changes, any custom roles that grant `  bigquery.datasets.get  ` , `  bigquery.datasets.create  ` , or `  bigquery.datasets.update  ` permission and don't also grant the `  bigquery.datasets.getIamPolicy  ` or `  bigquery.datasets.setIamPolicy  ` permission are impacted.
 
-Any custom roles that only include the `  bigquery.datasets.get  ` , `  bigquery.datasets.update  ` , or `  bigquery.datasets.create  ` permission must be updated to include the `  bigquery.datasets.getIamPolicy  ` or `  bigquery.datasets.setIamPolicy  ` permission by Mar 17, 2026, if you want to maintain the existing functionality of the custom roles. If your custom roles need to view or update only a dataset's metadata, use the new `  dataset_view  ` and `  update_mode  ` parameters.
+Any custom roles that only include the `  bigquery.datasets.get  ` , `  bigquery.datasets.update  ` , or `  bigquery.datasets.create  ` permission must be updated to include the `  bigquery.datasets.getIamPolicy  ` or `  bigquery.datasets.setIamPolicy  ` permission, if you want to maintain the existing functionality of the custom roles. If your custom roles need to view or update only a dataset's metadata, use the new `  dataset_view  ` and `  update_mode  ` parameters.
 
 BigQuery predefined roles are *not* affected by this change. All predefined roles that grant the `  bigquery.datasets.get  ` permission also grant the `  bigquery.datasets.getIamPolicy  ` permission. All predefined roles that grant the `  bigquery.datasets.update  ` permission also grant the `  bigquery.datasets.setIamPolicy  ` permission.
 

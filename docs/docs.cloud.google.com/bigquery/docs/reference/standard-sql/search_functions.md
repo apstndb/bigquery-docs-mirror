@@ -727,12 +727,29 @@ For helpful analyzer recipes that you can use to enhance analyzer-supported quer
 
 ## `     VECTOR_SEARCH    `
 
+Use the following syntax for batch searches, when you want to perform a vector search for multiple rows in a table or query result:
+
 ``` text
 VECTOR_SEARCH(
   { TABLE base_table | (base_table_query) },
   column_to_search,
   { TABLE query_table | (query_table_query) },
   [, query_column_to_search => query_column_to_search_value]
+  [, top_k => top_k_value ]
+  [, distance_type => distance_type_value ]
+  [, options => options_value ]
+)
+```
+
+Use the following syntax (in [Preview](https://cloud.google.com/products#product-launch-stages) ) for single searches, when you want to find the vectors closest to a single embedding value. When you call the function with this syntax, it's optimized to perform better than if you call the batch version on a table with a single row.
+
+**Note:** To give feedback or request support for this feature, contact <bq-vector-search@google.com>
+
+``` text
+VECTOR_SEARCH(
+  { TABLE base_table | (base_table_query) },
+  column_to_search,
+  query_value => single_query_value,
   [, top_k => top_k_value ]
   [, distance_type => distance_type_value ]
   [, options => options_value ]
@@ -766,8 +783,13 @@ Embeddings are high-dimensional numerical vectors that represent a given entity,
     
       - `  ARRAY<FLOAT64>  ` : All elements in the array must be non- `  NULL  ` and all values in the column must have the same array dimensions as the values in the `  column_to_search  ` column.
       - `  STRING  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) The `  base_table  ` must have [autonomous embedding generation](/bigquery/docs/autonomous-embedding-generation) enabled. The string values are embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. These embeddings are used to return query results but aren't stored anywhere. You must have the BigQuery Connection User role ( `  roles/bigquery.connectionUser  ` ) on the connection that the base table uses for background embedding generation.
+    
+    If you don't specify `  query_column_to_search_value  ` , the function uses the `  column_to_search  ` value or picks the most appropriate column.
 
-If you don't specify `  query_column_to_search_value  ` , the function uses the `  column_to_search  ` value or picks the most appropriate column.
+  - `  query_value  ` : A named argument of one of the following types:
+    
+      - `  ARRAY<FLOAT64>  ` : The `  single_query_value  ` is a single embedding for which to find nearest neighbors.
+      - `  STRING  ` : The `  base_table  ` must have [autonomous embedding generation](/bigquery/docs/autonomous-embedding-generation) enabled. The `  single_query_value  ` is embedded at runtime using the same connection and endpoint specified for the base table's embedding generation. The embedding is used to return query results but isn't stored anywhere. You must have the BigQuery Connection User role ( `  roles/bigquery.connectionUser  ` ) on the connection that the base table uses for background embedding generation.
 
   - `  top_k  ` : A named argument with an `  INT64  ` value. `  top_k_value  ` specifies the number of nearest neighbors to return. The default is `  10  ` . If the value is negative, all values are counted as neighbors and returned.
 
@@ -803,7 +825,7 @@ For each row in the query data, the output contains multiple rows from the base 
 
 The output includes the following columns:
 
-  - `  query  ` : A `  STRUCT  ` value that contains all selected columns from the query data.
+  - `  query  ` : A `  STRUCT  ` value that contains all selected columns from the query data. This column is only included in the output if you use the batch search syntax. For single vector searches, this column is omitted.
   - `  base  ` : A `  STRUCT  ` value that contains all columns from `  base_table  ` or a subset of the columns from `  base_table  ` that you selected in the `  base_table_query  ` query.
   - `  distance  ` : A `  FLOAT64  ` value that represents the distance between the base data and the query data.
 
@@ -944,4 +966,40 @@ FROM
  | cat            |  1.0            | tiger   |  3.0              | 0.019419324309079777  |
  |                | -1.0            |         | -2.0              |                       |
  +----------------+-----------------+---------+-------------------+-----------------------*/
+```
+
+The following example searches the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match the single embedding value `  [1.0, -1.0]  ` . It uses the optimized syntax for single searches:
+
+``` text
+SELECT *
+FROM
+  VECTOR_SEARCH(
+    TABLE mydataset.base_table,
+    'my_embedding',
+    query_value => [1.0, -1.0],
+    top_k => 2);
+
+/*---------+----------------------------------------+
+ | base.id | base.my_embedding | distance           |
+ +---------+-------------------+--------------------+
+ | lion    |  2.0              | 1.8027756377319946 |
+ |         | -2.5              |                    |
+ +---------+-------------------+--------------------+
+ | tiger   |  3.0              | 2.23606797749979   |
+ |         | -2.0              |                    |
+ +---------+-------------------+--------------------*/
+```
+
+Instead of including the embedding value as a literal in your query, you can generate it by using an embedding function such as `  AI.EMBED  ` . The following example shows how you could search the `  my_embedding  ` column of `  base_table  ` for the top two embeddings that match the computed embedding value for `  'butterfly'  ` . It uses the optimized syntax for single searches:
+
+``` text
+SELECT *
+FROM
+  VECTOR_SEARCH(
+    TABLE mydataset.base_table,
+    'my_embedding',
+    query_value => AI.EMBED("butterfly",
+                    endpoint => 'text-embedding-005',
+                    model_params => JSON '{"outputDimensionality": 2}').result,
+    top_k => 2);
 ```

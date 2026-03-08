@@ -14,6 +14,8 @@ As a BigQuery administrator, you can create and manage connections that are used
 
 To create a default connection for a project, see the [Default connection overview](/bigquery/docs/default-connections) .
 
+**Tip:** You can also use the **Pipelines & Connections** page to create and manage connections using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## Before you begin
 
   - Ensure that you have a working [connection](/bigquery/docs/connections-api-intro) . Connections are [type-specific](/bigquery/docs/connections-api-intro#connection_types) and depend on the connected external data source.

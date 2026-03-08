@@ -46,6 +46,8 @@ The following limitations apply to BigQuery disaster recovery:
 
   - For datasets using BigQuery disaster recovery, load and extract jobs cannot use the free shared slot pool. You must create a `  PIPELINE  ` type reservation assignment, as only the Enterprise Plus edition supports writing to MDR configured datasets. This requirement ensures that all data ingestion is handled by the dedicated infrastructure necessary to support MDR's cross-region replication and the recovery point objective (RPO).
 
+  - [Scheduled queries](/bigquery/docs/scheduling-queries) don't automatically redirect to the new primary location after a failover because they are bound to the location specified during their creation. To resume scheduled queries in the new primary location, you must manually recreate them in that location.
+
 ## Locations
 
 The following regions are available when creating a failover reservation:

@@ -367,12 +367,16 @@ You can create a remote model over a deployed open model from either the [Vertex
 
 The following open text generation models in the Vertex AI Model Garden are supported:
 
+  - [Gemma 3n](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma3n)
   - [Gemma 3](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma3)
   - [Gemma 2](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/gemma2)
   - [CodeGemma](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/codegemma)
+  - [MedGemma](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/medgemma)
   - [TxGemma](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/txgemma)
   - [DeepSeek R1](https://console.cloud.google.com/vertex-ai/publishers/deepseek-ai/model-garden/deepseek-r1)
   - [DeepSeek V3](https://console.cloud.google.com/vertex-ai/publishers/deepseek-ai/model-garden/deepseek-v3)
+  - [GPT OSS](https://console.cloud.google.com/vertex-ai/publishers/openai/model-garden/gpt-oss)
+  - [Kimi-K2.5](https://console.cloud.google.com/vertex-ai/publishers/moonshotai/model-garden/kimi-k2-5)
   - [Llama 4](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama4)
   - [Llama 3.3](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama3-3)
   - [Llama 3.2](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama3-2)
@@ -382,18 +386,23 @@ The following open text generation models in the Vertex AI Model Garden are supp
   - [Llama 2](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama2)
   - [Llama 2 (Quantized)](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/llama-2-quantized)
   - [Code Llama](https://console.cloud.google.com/vertex-ai/publishers/meta/model-garden/codellama-7b-hf)
+  - [MiniMax-M2.5](https://console.cloud.google.com/vertex-ai/publishers/minimaxai/model-garden/minimax-m2)
   - [Mistral Self-host (7B & Nemo)](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mistral)
   - [Mixtral](https://console.cloud.google.com/vertex-ai/publishers/mistral-ai/model-garden/mixtral)
   - [Falcon-instruct (PEFT)](https://console.cloud.google.com/vertex-ai/publishers/tiiuae/model-garden/falcon-instruct-7b-peft)
   - [Phi-4](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi4)
   - [Phi-3](https://console.cloud.google.com/vertex-ai/publishers/microsoft/model-garden/phi3)
   - [QwQ](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwq)
+  - [Qwen3.5](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-5)
+  - [Qwen3-Next](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-next)
   - [Qwen2](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen2)
   - [Vicuna](https://console.cloud.google.com/vertex-ai/publishers/lmsys/model-garden/lmsys-vicuna-7b)
 
 The following open embedding generation models in the Vertex AI Model Garden are supported:
 
-  - [E5 Text Embedding](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/e5) ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - [E5 Text Embedding](https://console.cloud.google.com/vertex-ai/publishers/intfloat/model-garden/e5)
+  - [Qwen3 Embedding](https://console.cloud.google.com/vertex-ai/publishers/qwen/model-garden/qwen3-embedding)
+  - [EmbeddingGemma](https://console.cloud.google.com/vertex-ai/publishers/google/model-garden/embeddinggemma)
 
 ### Supported Hugging Face models
 

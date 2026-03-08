@@ -77,6 +77,48 @@ Amplitude is an event-based analytics tool that tracks the behaviors of users ba
   - [Import BigQuery Data into Amplitude](https://www.docs.developers.amplitude.com/data/sources/bigquery/)
   - [Export data to BigQuery](https://www.docs.developers.amplitude.com/data/destinations/bigquery/)
 
+### AskYourDatabase
+
+**Solution**
+
+[AskYourDatabase](https://www.askyourdatabase.com/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+AskYourDatabase is an AI-powered tool that lets users ask questions in plain English and get instant answers from their database. The integration with BigQuery enables it to translate natural language into SQL queries that run against your BigQuery data, making data analysis accessible to business users without any SQL knowledge.
+
+**Partner references**
+
+  - [Connecting to BigQuery](https://www.askyourdatabase.com/docs/connect#bigquery)
+  - [Build an AI Chatbot for BigQuery](https://www.askyourdatabase.com/posts/build-ai-chatbot-for-bigquery)
+
+### Astrato Analytics
+
+**Solution**
+
+[Astrato Analytics](https://www.astrato.io/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+Astrato is a cloud-native business intelligence and analytics platform built for the modern data stack. It lets users create, explore, and share interactive dashboards directly from cloud data warehouses like Google BigQuery, leveraging live data without extracts and offering embedded analytics capabilities.
+
+**Partner references**
+
+  - [Unified AI-Ready analytics directly from BigQuery](https://www.astrato.io/data-integratations/bigquery2)
+  - [Connecting to Google BigQuery from Astrato](https://help.astrato.io/en/articles/6557470-connecting-to-google-bigquery-oauth-jwt)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/astrato-analytics)
+
 ### AtScale
 
 **Solution**
@@ -140,6 +182,24 @@ Braze Data Platform facilitates secure and efficient distribution of product, en
 **Partner references**
 
   - [Data warehouse storage integration for BigQuery](https://www.braze.com/docs/user_guide/data/cloud_ingestion/integrations?tab=bigquery)
+
+### Bytek
+
+**Solution**
+
+[Bytek Platform](https://www.bytek.ai/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+Bytek Prediction Platform is an AI-driven marketing analytics tool that enriches first-party data to generate reliable predictions like Customer Lifetime Value (cLTV), churn risk, and purchase interest. It integrates directly with BigQuery to process data without moving it, helping marketers optimize paid media campaigns and audience segmentation.
+
+**Partner references**
+
+  - [Bytek integrates with BigQuery and joins Cloud Ready program](https://www.bytek.ai/press-releases/bytek-joins-the-google-cloud-ready-bigquery-program/)
 
 ### Carto
 
@@ -422,6 +482,25 @@ Email Meter is an email analytics platform that gives companies detailed insight
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/email-meter)
 
+### GetDot.ai
+
+**Solution**
+
+[Dot](https://www.getdot.ai/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+GetDot.ai is an AI data bot designed to answer business questions instantly. By connecting to your BigQuery data warehouse, it acts as a conversational assistant, providing users with insights and analytics on demand. This integration helps democratize data access, letting non-technical users get the information that they need without waiting on a data team.
+
+**Partner references**
+
+  - [Dot BigQuery Integration](https://www.getdot.ai/integration/bigquery)
+  - [Connecting Dot to BigQuery](https://docs.getdot.ai/integrations/databases/bigquery)
+
 ### GrowthLoop
 
 **Solution**
@@ -577,6 +656,25 @@ MessageGears is a warehouse-native customer engagement platform that delivers ad
 **Partner Advantage page**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/messagegears)
+
+### Metabase
+
+**Solution**
+
+[Metabase](https://www.metabase.com/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+Metabase is an open source BI tool that makes it easy for teams to ask questions and learn from their data using a user-friendly interface. Its built-in connector for BigQuery lets users directly query their data warehouse, create interactive dashboards, and share insights without needing to write complex SQL.
+
+**Partner references**
+
+  - [Metabase BigQuery integration](https://www.metabase.com/data-sources/bigquery)
+  - [Connecting Metabase to BigQuery](https://www.metabase.com/docs/latest/databases/connections/bigquery)
 
 ### Metarouter
 
@@ -802,6 +900,24 @@ Microsoft Power BI is a data analytics and sharing platform that works on-premis
 
 [Connection between Power BI and Google BigQuery](https://docs.microsoft.com/en-us/power-bi/connect-data/desktop-connect-bigquery)
 
+### Preset
+
+**Solution**
+
+[Preset Cloud](https://preset.io/product/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+Preset Cloud is a fully managed service for Apache Superset, the leading open source modern BI platform. It provides a lightweight, scalable, and collaborative interface for data exploration and visualization, enabling teams to create interactive dashboards directly from BigQuery data without proprietary vendor lock-in.
+
+**Partner references**
+
+[Connect to a Google BigQuery database from Preset](https://docs.preset.io/docs/big-query-database)
+
 ### PuppyGraph
 
 **Solution**
@@ -819,6 +935,29 @@ PuppyGraph is the first and only graph analytics engine in the market, empowerin
 **Partner references**
 
 [Connecting to BigQuery](https://docs.puppygraph.com/connecting/connecting-to-bigquery/)
+
+### Pxdata.ai
+
+**Solution**
+
+[Luria AI](https://www.luria.ai/)
+
+**Category**
+
+BI, ML, & Advanced Analytics
+
+**Description**
+
+Luria AI from Pxdata.ai is a data and analytics platform designed to simplify how users interact with their data. As an AI-powered solution, it acts as a user-friendly interface that connects to various data sources, including Google BigQuery. Its purpose is to help users analyze and leverage their data more effectively by automating tasks and providing intuitive insights, democratizing access to complex analytics without requiring technical expertise.
+
+**Partner references**
+
+  - [Luria BigQuery Integration](https://www.luria.ai/integracoes)
+  - [Luria receives Cloud Ready designation](https://www.luria.ai/blog/luria-recebe-selo-google-cloud-ready-bigquery)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/pxdata)
 
 ### Qlik
 
@@ -1272,6 +1411,42 @@ Treasure Data provides an enterprise Customer Data Platform (CDP) to help busine
 </tbody>
 </table>
 
+### Wisdom.AI
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Solution</strong></th>
+<th><a href="https://www.wisdom.ai/product-context-layer-and-governance" class="external">Wisdom Enterprise Context</a></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Category</strong></td>
+<td>BI, ML, &amp; Advanced Analytics</td>
+</tr>
+<tr class="even">
+<td><strong>Description</strong></td>
+<td>WisdomAI is a conversational AI assistant for business intelligence that allows users to ask questions about their data in plain English. It connects to data warehouses like BigQuery to provide instant, secure, and governed insights, effectively giving every employee a personal AI data analyst.</td>
+</tr>
+<tr class="odd">
+<td><strong>Partner references</strong></td>
+<td><ul>
+<li><a href="https://www.wisdom.ai/blog/wisdomai-google-cloud-bigquery-partnership" class="external">WisdomAI and Google Cloud Join Forces to Turn Enterprise Data into Instant Insights</a></li>
+<li><a href="https://docs.wisdom.ai/getting-started/connect-data-sources/connect-to-google-bigquery#connect-to-google-bigquery" class="external">How to connect to BigQuery from Wisdom</a></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Partner Advantage page</strong></td>
+<td><a href="https://cloud.google.com/find-a-partner/partner/wisdomai">Direct link</a></td>
+</tr>
+</tbody>
+</table>
+
 ### Zenlytic
 
 <table>
@@ -1544,6 +1719,29 @@ Alation automatically catalogs data quality information including metrics, repor
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/alation)
 
+### Atlan
+
+**Solution**
+
+[Atlan Data Discovery & Governance](https://atlan.com/)
+
+**Category**
+
+Data Governance, Security, & MDM
+
+**Description**
+
+Atlan is a modern data catalog and governance platform that helps teams find, trust, and understand their data. The integration with BigQuery enables Atlan to automatically crawl and document metadata, lineage, and schemas from your BigQuery environment, providing a single source of truth for your data assets and ensuring proper data governance.
+
+**Partner references**
+
+  - [Atlan BigQuery Integration](https://docs.atlan.com/apps/connectors/data-warehouses/google-bigquery/references/what-does-atlan-crawl-from-google-bigquery)
+  - [Connecting Atlan to BigQuery](https://docs.atlan.com/apps/connectors/data-warehouses/google-bigquery/how-tos/set-up-google-bigquery)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/atlan)
+
 ### Collibra
 
 **Solution**
@@ -1570,6 +1768,25 @@ Collibra Data Intelligence Platform is the system of record for data. Collibra d
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/collibra)
 
+### Datahub
+
+**Solution**
+
+[DataHub Cloud](https://datahub.com/)
+
+**Category**
+
+Data Governance, Security, & MDM
+
+**Description**
+
+Datahub is an open source metadata platform that helps organizations discover, understand, and govern their data assets. The BigQuery connector for Datahub lets it ingest metadata from your BigQuery environment, providing a centralized and searchable catalog for all your tables, views, and data. This improves data discoverability and collaboration across data teams.
+
+**Partner references**
+
+  - [DataHub BigQuery Integration](https://docs.datahub.com/docs/generated/ingestion/sources/bigquery)
+  - [BigQuery Ingestion Guide](https://docs.datahub.com/docs/quick-ingestion-guides/bigquery/overview)
+
 ### Immuta
 
 **Solution**
@@ -1592,6 +1809,24 @@ Immuta provides data access and security mechanisms to complex data policies. Th
 **Partner Advantage page**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/immuta-inc)
+
+### Openlayer
+
+**Solution**
+
+[Openlayer](https://www.openlayer.com/)
+
+**Category**
+
+Data Governance, Security, & MDM
+
+**Description**
+
+Openlayer is an AI governance and observability platform that helps teams validate, track, and monitor machine learning models and AI systems. It acts as a collaboration hub for data scientists and stakeholders to run tests, enforce quality rules, and ensure model performance and compliance before deployment.
+
+**Partner references**
+
+  - [Connect your BigQuery tables to Openlayer for data quality monitoring](https://docs.openlayer.com/integrations/bigquery)
 
 ### Privacera
 
@@ -1739,6 +1974,24 @@ Vaultree offers a data-in-use encryption solution that solves the industry's fun
 [Direct link](https://cloud.google.com/find-a-partner/partner/vaultree)
 
 ## Data Quality, Observability, & FinOps
+
+### Alvin.ai
+
+**Solution**
+
+[Alvin Automated BigQuery Optimization](https://www.alvin.ai/)
+
+**Category**
+
+Data Quality, Observability, & FinOps
+
+**Description**
+
+Alvin.ai is a platform that automatically optimizes BigQuery workloads to reduce costs and improve query performance. It works by intercepting and intelligently optimizing queries before they run on BigQuery, cutting cloud spending with zero ongoing effort.
+
+**Partner references**
+
+  - [How to Mix BigQuery On-Demand and Slot Pricing in Practice](https://www.alvin.ai/blog/how-to-mix-bigquery-on-demand-and-slot-pricing-in-practice)
 
 ### Anomalo
 
@@ -2102,6 +2355,29 @@ Validio is the next generation data quality and reliability platform and offers 
 
 ## ETL & Data Integration
 
+### Ab Initio
+
+**Solution**
+
+[Ab Initio Platform](https://www.abinitio.com/)
+
+**Category**
+
+ETL & Data Integration
+
+**Description**
+
+Ab Initio provides a high-performance software suite for data integration, batch processing, data quality, and metadata management. Its platform is designed to handle the most complex and high-volume data processing workloads, offering robust connectors for building scalable data pipelines on Google Cloud and BigQuery.
+
+**Partner references**
+
+  - [Cloud Connectors](https://www.abinitio.com/en/cloud-native/cloud-connectors/)
+  - [Unlocking enterprise data to accelerate agentic AI: How Ab Initio does it](https://cloud.google.com/blog/products/data-analytics/unlocking-enterprise-data-to-accelerate-agentic-ai-how-ab-initio-does-it)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/ab-initio-software-llc)
+
 ### AgileData
 
 **Solution**
@@ -2379,6 +2655,28 @@ Operational analytics lets you sync data directly from your data warehouse into 
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/census-1)
 
+### ClearBlade
+
+**Solution**
+
+[ClearBlade IoT Core+](https://www.clearblade.com/products/iot-core-plus)
+
+**Category**
+
+ETL & Data Integration
+
+**Description**
+
+ClearBlade IoT Core+ is a fully managed service designed to seamlessly connect, manage, and ingest data from globally dispersed devices. It serves as a direct replacement for Google Cloud IoT Core, letting businesses migrate and modernize their Internet of Things (IoT) infrastructure with enterprise-grade security and scalability running on Google Cloud.
+
+**Partner references**
+
+  - [ClearBlade's Integration with Google Cloud BigQuery](https://www.clearblade.com/blog/clearblades-integration-with-google-cloud-bigquery)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/clearblade)
+
 ### CloudQuery
 
 **Solution**
@@ -2426,6 +2724,41 @@ You can use the Kafka Connect Google BigQuery Sink connector for Confluent Cloud
 **Partner Advantage page**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/confluent-inc)
+
+### Cube Dev
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Solution</strong></th>
+<th><a href="https://cube.dev/product/cube" class="external">Cube Cloud</a></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Category</strong></td>
+<td>ETL &amp; Data Integration</td>
+</tr>
+<tr class="even">
+<td><strong>Description</strong></td>
+<td>Cube Cloud is a universal semantic layer that helps data engineers and developers define consistent metrics and business logic upstream of every data app. It connects to BigQuery to serve unified data to any BI tool, customer-facing application, or LLM, ensuring data consistency and accelerating query performance by using caching.</td>
+</tr>
+<tr class="odd">
+<td><strong>Partner references</strong></td>
+<td><ul>
+<li><a href="https://cube.dev/docs/product/configuration/data-sources/google-bigquery" class="external">Connect to Google BigQuery from Cube</a></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td><strong>Partner Advantage page</strong></td>
+<td><a href="https://cloud.google.com/find-a-partner/partner/cube">Direct link</a></td>
+</tr>
+</tbody>
+</table>
 
 ### Dataddo
 
@@ -3019,6 +3352,29 @@ The world's first and only AI-powered data loading and transformation solution. 
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/precog)
 
+### Prophecy
+
+**Solution**
+
+[Prophecy Data Integration Platform](https://www.prophecy.ai/)
+
+**Category**
+
+ETL & Data Integration
+
+**Description**
+
+Prophecy is a low-code data transformation platform for data engineers. The integration with BigQuery lets users visually build, manage, and deploy data pipelines that read, transform, and write data directly within their BigQuery environment. This simplifies complex data engineering workflows and improves team productivity.
+
+**Partner references**
+
+  - [Prophecy BigQuery Integration](https://docs.prophecy.ai/data-analysis/environment/connections/bigquery)
+  - [Read and write to catalog tables in BigQuery](https://docs.prophecy.ai/data-analysis/gems/source-target/external-table/bigquery)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/prophecy-io)
+
 ### Qlik
 
 <table>
@@ -3112,6 +3468,28 @@ Retool is the fast way to build internal tools. Visually design apps that interf
 **Partner Advantage page**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/retool)
+
+### RisingWave
+
+**Solution**
+
+[RisingWave Platform](https://risingwave.com/)
+
+**Category**
+
+ETL & Data Integration
+
+**Description**
+
+RisingWave is a distributed SQL streaming database engineered to make real-time analytics simple and cost-effective. It lets users ingest, join, and analyze streaming data with the same ease as a traditional database, offering seamless integration to sink processed data into BigQuery for long-term storage and analysis.
+
+**Partner references**
+
+  - [Sink data from RisingWave to Google BigQuery](https://docs.risingwave.com/integrations/destinations/bigquery)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/singularity-data-pte-ltd)
 
 ### Rivery
 
@@ -3213,6 +3591,29 @@ SnapLogic powers the automated enterprise. The company's self-service, AI-powere
 **Partner Advantage page**
 
 [Direct link](https://cloud.google.com/find-a-partner/partner/snaplogic-inc)
+
+### SqlDBM
+
+**Solution**
+
+[SqlDBM](https://sqldbm.com/)
+
+**Category**
+
+ETL & Data Integration
+
+**Description**
+
+SqlDBM is a cloud-native database design and modeling tool that enables teams to develop, document, and manage database schemas collaboratively. It offers native integration with BigQuery, letting users reverse-engineer existing schemas, visualize data relationships, and generate deployment scripts without writing code.
+
+**Partner references**
+
+  - [SqlDBM + BigQuery](https://sqldbm.com/sqldbm-plus-bigquery/)
+  - [Google BigQuery - Direct Connect and Reverse Engineer](https://support.sqldbm.com/hc/en-us/articles/37028460572557-Google-BigQuery-Direct-Connect-and-Reverse-Engineer)
+
+**Partner Advantage page**
+
+[Direct link](https://cloud.google.com/find-a-partner/partner/sqldbm)
 
 ### Stelo Data
 

@@ -49,7 +49,7 @@ New Google Cloud users might be eligible for a [free trial](/free) .
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-Open models that you deploy to Vertex AI are charged per machine-hour. This means billing starts as soon as the endpoint is fully set up, and continues until you un-deploy it. For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#prediction-prices) page.
+Open models that you deploy to Vertex AI are charged per machine-hour. This means billing starts as soon as the endpoint is fully set up, and continues until you undeploy it. For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#prediction-prices) page.
 
 ## Before you begin
 

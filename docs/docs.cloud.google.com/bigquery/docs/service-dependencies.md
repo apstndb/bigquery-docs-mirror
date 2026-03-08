@@ -306,7 +306,7 @@ Before March 2024, these APIs were not automatically enabled by default. If you 
 
 ### Before you begin
 
-To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ) .
+To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ).
 
 ### Manually enable BigQuery code assets
 

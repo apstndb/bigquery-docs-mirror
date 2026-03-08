@@ -1,28 +1,12 @@
 # Introduction to logical views
 
-This document provides an overview of BigQuery support for logical views.
-
-## Overview
-
-A view is a virtual table defined by a SQL query. The default type of view for BigQuery is a *logical view* . Query results contain only the data from the tables and fields specified in the query that defines the view.
+This document provides an overview of BigQuery support for logical views. A view is a virtual table defined by a SQL query. The default type of view for BigQuery is a *logical view* . Query results contain only the data from the tables and fields specified in the query that defines the view.
 
 The query that defines a view is run each time the view is queried.
 
-**Types of views**
-
-Although logical views are the default type of view, if you frequently query a large or computationally expensive view, then you should consider creating a [*materialized view*](/bigquery/docs/materialized-views-intro) , which is a precomputed view that periodically caches the results of a query for increased performance and efficiency.
-
-However, you can often improve performance of a logical view without the need to create a materialized view by querying only a subset of your data, or by [using other techniques.](/bigquery/docs/materialized-views-intro#comparison)
-
-You can also create an [*authorized view*](/bigquery/docs/authorized-views) to share a subset of data from a source dataset to a view in a secondary dataset. You can then share this view to specific users and groups (principals) who can view the data you share and run queries on it, but who can't access the source dataset directly.
-
-You can create an authorized view for either a logical or materialized view. An authorized view for a materialized view is called an *authorized materialized view* .
-
-**Use cases**
-
 Common use cases for views include the following:
 
-  - Provide an easily reusable name for a complex query or a limited set of data that you can then [authorize](/bigquery/docs/authorized-views) other users to access. After you create a view, a user can then [query](/bigquery/docs/running-queries) the view as they would a table.
+  - Provide a reusable name for a complex query or a limited set of data that you can then [authorize](/bigquery/docs/authorized-views) other users to access. After you create a view, a user can then [query](/bigquery/docs/running-queries) the view as they would a table.
   - Abstract and store calculation and join logic in a common object to simplify query use.
   - Provide access to a subset of data and calculation logic without providing access to the base tables.
   - Optimize queries with high computation cost and small dataset results for [several use cases](/bigquery/docs/materialized-views-intro#use_cases) .
@@ -32,9 +16,7 @@ You can also use views in other contexts:
   - As a data source for a visualization tool such as [Looker Studio](/looker/docs) .
   - As a means of sharing data to subscribers of [BigQuery sharing (formerly Analytics Hub)](/bigquery/docs/analytics-hub-introduction) .
 
-## Comparison to materialized views
-
-Logical views are virtual and provide a reusable reference to a set of data, but don't physically store any data. Materialized views are defined using SQL, like a logical view, but physically store the data which BigQuery uses to improve performance. For further comparison, see [materialized views features](/bigquery/docs/materialized-views-intro#comparison) .
+For a comparison of logical, materialized views, and authorized views, see [Overview of logical and materialized views](/bigquery/docs/logical-materialized-view-overview) .
 
 ## Logical views limitations
 
@@ -57,9 +39,7 @@ BigQuery views are subject to the following limitations:
 
 ## Logical views quotas
 
-For information on quotas and limits that apply to views, see [View limits](/bigquery/quotas#view_limits) .
-
-SQL queries used to define views are also subject to the quotas on [query jobs](/bigquery/quotas#query_jobs) .
+For information on quotas and limits that apply to views, see [View limits](/bigquery/quotas#view_limits) . SQL queries used to define views are also subject to the quotas on [query jobs](/bigquery/quotas#query_jobs) .
 
 ## Logical views pricing
 

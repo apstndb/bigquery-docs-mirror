@@ -10,7 +10,7 @@ When you create or update the schedule for a query, the scheduled time for the q
 
   - Scheduled queries use features of [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) . Verify that you have completed all actions required in [Enabling BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
   - Grant Identity and Access Management (IAM) roles that give users the necessary permissions to perform each task in this document.
-  - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEKs works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](#CMEK) .
+  - If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](#CMEK) .
 
 ## Limitations
 
@@ -432,7 +432,7 @@ Optional flags:
 
   - `  --service_account_name  ` is for authenticating your scheduled query with a service account instead of your individual user account.
 
-  - `  --destination_kms_key  ` specifies the [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for the key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](#CMEK) .
+  - `  --destination_kms_key  ` specifies the [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for the key if you use a customer-managed encryption key (CMEK) for this transfer. For information about how CMEK works with the BigQuery Data Transfer Service, see [Specify encryption key with scheduled queries](#CMEK) .
 
 <!-- end list -->
 
@@ -1064,7 +1064,7 @@ Some other situations that could require updating credentials include the follow
     
     `  Cannot modify restricted parameters without taking ownership of the transfer configuration.  `
 
-**Note:** If you are not the owner of the schedule query, you must have the `  bigquery.transfers.update  ` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](#required_permissions) .
+**Note:** If you're not the owner of the scheduled query, you must have the `  bigquery.transfers.update  ` permission on your Google Cloud project to update the scheduled query credentials. For more information, see [Required permissions](#required_permissions) .
 
 ### Console
 

@@ -210,3 +210,4 @@ LIMIT 100;
   - To learn more about reserving capacity for BI Engine, see [Reserve BI Engine capacity](/bigquery/docs/bi-engine-reserve-capacity) .
   - To learn more about writing queries for BigQuery, see [Overview of BigQuery analytics](/bigquery/docs/query-overview) . This document explains tasks such as how to run queries or create user-defined functions (UDFs).
   - To explore BigQuery syntax, see [Introduction to SQL in BigQuery](/bigquery/docs/reference/standard-sql) . In BigQuery, the preferred dialect for SQL queries is standard SQL. BigQuery's older SQL-like syntax is described in [Legacy SQL functions and operators](/bigquery/query-reference) .
+  - To learn more about the quotas and limits of connecting BigQuery data to Looker Studio, see [Connect to BigQuery](/looker/docs/studio/connect-to-google-bigquery#quotas_and_general_limits) .

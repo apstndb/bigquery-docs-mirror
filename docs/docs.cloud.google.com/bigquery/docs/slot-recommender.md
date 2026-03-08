@@ -29,7 +29,7 @@ The recommendation includes the following details:
 **Note:** The recommendations provided are based on historical data, and the actual results may vary depending on the specific characteristics of your workloads.
 
 1.  Ensure that the sum of baseline slots for all reservations under the edition is equal or less than the commitment slots. This ensures that any slot usage exceeding the commitment slots can be covered by autoscale slots. If the baseline slots exceed the commitment slots, you are billed for additional baseline slots.
-2.  Autoscale slots in the settings is chosen so that available capacity matches the peak historical usage. This is to ensure the performance is not impacted. You can also adjust the autoscale slots to a value lower than the maximum, which can increase autoscale utilization. However, please note that when your slot usage cannot be fully covered, it may affect query performance.
+2.  Autoscale slots in the settings is chosen so that available capacity matches the peak historical usage. This is to ensure the performance is not impacted. You can also adjust the autoscale slots to a value lower than the maximum, which can increase autoscale utilization. However, note that when your slot usage cannot be fully covered, it may affect query performance.
 3.  In circumstances where your workload experiences spikes and temporarily exceeds its maximum capacity, the slot recommender mechanism can overestimate its recommendations. In such situations, you may consider maintaining the current settings, assuming that you are satisfied with the current level of performance.
 
 You might see the message `  Slot Estimator doesn't have any recommendations that would be more effective than your current settings  ` even if your slot usage sometimes exceeds your configured maximum. This can occur because BigQuery occasionally overprovisions slots temporarily to boost query speed, at no extra cost. The slot recommender aims to maintain your recent performance, including these bursts. If this P99 usage is higher than your current maximum, any recommendation at or below your current setting wouldn't meet those performance levels, so no change is suggested.
@@ -64,7 +64,7 @@ Each of the following predefined IAM roles includes these permissions:
   - `  Billing Account Viewer  `
   - `  Billing Account Administrator  `
 
-For edition workloads, you need the permissions listed above at the billing account associated with the administrator project. For project level on-demand workloads, you need the permissions at the billing account associated with the project or at the organization level for organization level recommendations.
+For edition workloads, you need the previously listed permissions at the billing account associated with the administrator project. For project-level on-demand workloads, you need the permissions at the billing account associated with the project or at the organization level for organization-level recommendations.
 
 For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
 
@@ -72,7 +72,7 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 
 When you select a specific reservation workload, the slot recommender suggests the maximum reservation size that can enhance job performance. The slot estimator then analyzes the [slot modeling](/bigquery/docs/slot-estimator#model_slot_performance) data and finds the minimum incremental value for the maximum reservation size that is capable of elevating job performance by at least 5%. If your current maximum reservation size meets your historical needs, then no recommendation is made.
 
-**Note:** Recommendation are based on historical data. Job performance can vary based on actual use.
+**Note:** Recommendations are based on historical data. Job performance can vary based on actual use.
 
 To implement a recommendation, click **Apply** to be redirected to the page where you can update the reservation.
 

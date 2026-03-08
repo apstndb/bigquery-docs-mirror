@@ -10,7 +10,7 @@ BigQuery offers a variety of AI functions to help with tasks such as the followi
   - Analyze, detect sentiment, and answer questions about text or unstructured data, such as images.
   - Summarize the key ideas or impressions conveyed by the content.
   - Extract structured data from text.
-  - Classify text or unstructured data into user defined categories.
+  - Classify text or unstructured data into user-defined categories.
   - Generate embeddings to search for similar text, images, and video.
   - Rate inputs in order to rank them by quality, similarity, or other criteria.
 

@@ -447,7 +447,7 @@ To find the service account for the object table connection, follow these steps:
 
 8.  Select the connection that matches the one from the object table's **Connection ID** field.
 
-9.  Copy the value in the **Service account id** field.
+9.  Copy the value in the **Service account ID** field.
 
 To grant the role, follow these steps:
 

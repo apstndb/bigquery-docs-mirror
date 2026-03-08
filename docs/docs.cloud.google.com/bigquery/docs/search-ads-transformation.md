@@ -3467,7 +3467,7 @@ Search Ads 360 API Resource: [keyword\_view](https://developers.google.com/searc
 </tr>
 <tr class="odd">
 <td>ad_group_criterion_engine_id</td>
-<td>ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only,. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_criterion.criterion_id" instead.</td>
+<td>ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_criterion.criterion_id" instead.</td>
 </tr>
 <tr class="even">
 <td>ad_group_criterion_engine_status</td>
