@@ -160,7 +160,7 @@ If a table has BigQuery row-level access policies enabled, then you can only sca
         
           - **On-demand** : Run the data quality scan on demand.
         
-          - **One-time** : Run the data quality scan once now, and remove the scan after the time-to-live period.
+          - **One-time run** : Run the data quality scan once now, and remove the scan after the time-to-live period. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
         
           - **Time to live** : The time-to-live value is the time span between when the scan is executed and when the scan is deleted. A data quality scan without a specified time-to-live is automatically deleted 24 hours after its execution. The time-to-live can range from 0 seconds (immediate deletion) to 365 days.
     

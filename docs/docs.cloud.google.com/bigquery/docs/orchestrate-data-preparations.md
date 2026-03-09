@@ -80,6 +80,8 @@ To deploy a data preparation, follow these steps:
 
 ## Create a schedule
 
+**Tip:** You can also use the **Pipelines & Connections** page to schedule a data preparation using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 To create a schedule that executes the deployed data preparation steps and loads the prepared data into the destination table, you must first schedule a data preparation run. To schedule the run, you must [configure the destination](/bigquery/docs/data-prep-get-suggestions#add-or-change-destination) , and fix any validation errors.
 
 To create a data preparation schedule, follow these steps:

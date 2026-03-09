@@ -297,6 +297,8 @@ You can also use [project default keys](/bigquery/docs/customer-managed-encrypti
 
 ## Set up scheduled queries
 
+**Tip:** You can also use the [**Pipelines & Connections** page](/bigquery/docs/pipeline-connection-page) to set up a scheduled query. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 For a description of the schedule syntax, see [Formatting the schedule](/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . For details about schedule syntax, see [Resource: `  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 ### Console

@@ -12,6 +12,8 @@ This document describes AI-augmented data preparation in BigQuery. Data preparat
 
 You can create and manage data preparations in the **BigQuery Studio** page (see [Open the data preparation editor in BigQuery](/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) ).
 
+**Tip:** You can also use the **Pipelines & Connections** page to create a data preparation using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 When you open a table in BigQuery data preparation, a BigQuery job runs using your credentials. The run creates sample rows from the chosen table and writes the results into a temporary table in the same project. Gemini uses the sample data and schema to generate data preparation suggestions shown in the data preparation editor.
 
 ## Views in the data preparation editor

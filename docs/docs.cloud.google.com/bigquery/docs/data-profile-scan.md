@@ -200,7 +200,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
       - **On-demand** : Run the data profile scan on demand.
     
-      - **One-time** : Run the data profile scan once now, and remove the scan after the time-to-live period.
+      - **One-time run** : Run the data profile scan once now, and remove the scan after the time-to-live period. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
     
       - **Time to live** : The time-to-live value defines the duration a data profile scan remains active after execution. A data profile scan without a specified time-to-live is automatically removed after 24 hours. The time-to-live can range from 0 seconds (immediate deletion) to 365 days.
 
@@ -528,6 +528,8 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
           - **Repeat** : Run the data profile scans on a schedule: hourly, daily, weekly, monthly, or custom. Specify how often the scans should run and at what time. If you choose custom, use [cron](https://en.wikipedia.org/wiki/Cron) format to specify the schedule.
         
           - **On-demand** : Run the data profile scans on demand.
+        
+          - **One-time run** : Run the data profile scan once now, and remove the scan after the time-to-live period. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 9.  Click **Continue** .
 

@@ -61,6 +61,8 @@ For more information about Dataform IAM, see [Control access with IAM](/dataform
 
 ## Create a schedule
 
+**Tip:** You can also use the **Pipelines & Connections** page to create a notebook schedule using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 To create a notebook schedule, follow these steps:
 
 ### **Explorer** pane

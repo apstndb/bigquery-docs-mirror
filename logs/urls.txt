@@ -502,6 +502,7 @@ https://docs.cloud.google.com/bigquery/docs/partitioned-tables
 https://docs.cloud.google.com/bigquery/docs/paypal-transfer
 https://docs.cloud.google.com/bigquery/docs/permissions-for-ai-functions
 https://docs.cloud.google.com/bigquery/docs/pipe-syntax-guide
+https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page
 https://docs.cloud.google.com/bigquery/docs/pipelines-introduction
 https://docs.cloud.google.com/bigquery/docs/play-transfer
 https://docs.cloud.google.com/bigquery/docs/play-transformation

@@ -49,6 +49,8 @@ For a list of supported regions, see [BigQuery Studio locations](/bigquery/docs/
 
 ## Create a pipeline
 
+You can also use the BigQuery **Pipelines & Connections** page in the Google Cloud console to create a Dataform pipeline that uses a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 To create a pipeline, follow these steps:
 
 1.  Go to the **BigQuery** page.

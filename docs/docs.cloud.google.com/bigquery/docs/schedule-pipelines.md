@@ -67,6 +67,8 @@ To use Colab notebook runtime templates when scheduling pipelines, you need the 
 
 ## Create a pipeline schedule
 
+**Tip:** You can also use the **Pipelines & Connections** page to schedule a Dataform pipeline using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 To create a pipeline schedule, follow these steps:
 
 ### **Explorer** pane

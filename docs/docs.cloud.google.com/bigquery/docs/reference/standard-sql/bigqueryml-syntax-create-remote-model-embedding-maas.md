@@ -96,7 +96,7 @@ A `  STRING  ` value that contains the model name of the target Vertex AI embedd
 
 The following [text embedding models](/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models) are supported:
 
-  - `  gemini-embedding-001  ` , which supports both English and multilingual input. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - `  gemini-embedding-001  ` , which supports both English and multilingual input.
   - `  text-embedding-004  `
   - `  text-embedding-005  `
   - `  text-multilingual-embedding-002  `

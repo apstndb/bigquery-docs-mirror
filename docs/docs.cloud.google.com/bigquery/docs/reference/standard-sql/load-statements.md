@@ -288,7 +288,7 @@ Specify a table option list in the following format:
 <td><code dir="ltr" translate="no">       require_partition_filter      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        require_partition_filter=true       </code></p>
-<p>Specifies whether queries on this table must include a a predicate filter that filters on the partitioning column. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
+<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
 <p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
