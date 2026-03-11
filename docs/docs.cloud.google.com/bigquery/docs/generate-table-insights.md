@@ -178,80 +178,87 @@ You can choose to run a standard managed scan or a streamlined one-time scan.
 
 Use this method if you want to manage the scan resource over time.
 
-1.  Create a data documentation data scan using the [`  dataScans.create  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) . You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `  generation_scopes  ` parameter:
-    
-      - To generate schema, table descriptions, and SQL queries, leave `  data_documentation_spec  ` empty or set `  generation_scopes  ` to `  ALL  ` . For example:
-        
-        ``` text
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans?dataScanId=DATASCAN_ID \
-        -d '{
-          "data": {
-            "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-        datasets/DATASET_ID/tables/TABLE_ID"
-          },
-          "executionSpec": {
-            "trigger": { "onDemand": {} }
-          },
-          "type": "DATA_DOCUMENTATION",
-          "dataDocumentationSpec": {
-            "generation_scopes": "ALL"
-          }
-        }'
-        ```
-        
-        Replace the following:
-        
-          - PROJECT\_ID : the ID of your Google Cloud project where the dataset resides
-          - LOCATION : the region where the data scan runs
-          - DATASCAN\_ID : a unique name you provide for this scan
-          - DATASET\_ID : the ID of the BigQuery dataset being scanned
-          - TABLE\_ID : the ID of the BigQuery table being scanned
-    
-      - To generate the schema, table descriptions, and column descriptions, without SQL queries, set `  generation_scopes  ` to `  TABLE_AND_COLUMN_DESCRIPTIONS  ` . For example:
-        
-        ``` text
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans?dataScanId=DATASCAN_ID \
-        -d '{
-          "data": {
-            "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-        datasets/DATASET_ID/tables/TABLE_ID"
-          },
-          "executionSpec": {
-            "trigger": { "onDemand": {} }
-          },
-          "type": "DATA_DOCUMENTATION",
-          "dataDocumentationSpec": {
-            "generation_scopes": "TABLE_AND_COLUMN_DESCRIPTIONS"
-          }
-        }'
-        ```
-    
-      - To generate SQL queries without descriptions, set `  generation_scopes  ` to `  SQL_QUERIES  ` . For example:
-        
-        ``` text
-        gcurl -X POST \
-        https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
-        dataScans?dataScanId=DATASCAN_ID \
-        -d '{
-          "data": {
-            "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
-        datasets/DATASET_ID/tables/TABLE_ID"
-          },
-          "executionSpec": {
-            "trigger": { "onDemand": {} }
-          },
-          "type": "DATA_DOCUMENTATION",
-          "dataDocumentationSpec": {
-            "generation_scopes": "SQL_QUERIES"
-          }
-        }'
-        ```
+1.  Create a data documentation data scan using the [`  dataScans.create  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
-2.  Start the data documentation scan job using the [`  dataScans.run  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+You can customize the scope of the generation to include schema, descriptions, queries, or a combination using the `  generation_scopes  ` parameter. Optionally, you can publish these insights to Dataplex Universal Catalog by setting the `  catalogPublishingEnabled  ` parameter to `  true  ` .
+
+  - To generate schema, table descriptions, and SQL queries, leave `  data_documentation_spec  ` empty or set `  generation_scopes  ` to `  ALL  ` . For example:
+    
+    ``` text
+      gcurl -X POST \
+      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+      dataScans?dataScanId=DATASCAN_ID \
+      -d '{
+        "data": {
+          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+      datasets/DATASET_ID/tables/TABLE_ID"
+        },
+        "executionSpec": {
+          "trigger": { "onDemand": {} }
+        },
+        "type": "DATA_DOCUMENTATION",
+        "dataDocumentationSpec": {
+          "generationScopes": "ALL"
+          "catalogPublishingEnabled": true
+        }
+      }'
+    ```
+    
+    Replace the following:
+    
+      - PROJECT\_ID : the ID of your Google Cloud project where the dataset resides
+      - LOCATION : the region where the data scan runs
+      - DATASCAN\_ID : a unique name you provide for this scan
+      - DATASET\_ID : the ID of the BigQuery dataset being scanned
+      - TABLE\_ID : the ID of the BigQuery table being scanned
+
+  - To generate the schema, table descriptions, and column descriptions, without SQL queries, set `  generation_scopes  ` to `  TABLE_AND_COLUMN_DESCRIPTIONS  ` . For example:
+    
+    ``` text
+      gcurl -X POST \
+      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+      dataScans?dataScanId=DATASCAN_ID \
+      -d '{
+        "data": {
+          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+      datasets/DATASET_ID/tables/TABLE_ID"
+        },
+        "executionSpec": {
+          "trigger": { "onDemand": {} }
+        },
+        "type": "DATA_DOCUMENTATION",
+        "dataDocumentationSpec": {
+          "generationScopes": "TABLE_AND_COLUMN_DESCRIPTIONS"
+          "catalogPublishingEnabled": true
+        }
+      }'
+    ```
+
+  - To generate SQL queries without descriptions, set `  generation_scopes  ` to `  SQL_QUERIES  ` . For example:
+    
+    ``` text
+      gcurl -X POST \
+      https://dataplex.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/\
+      dataScans?dataScanId=DATASCAN_ID \
+      -d '{
+        "data": {
+          "resource": "//bigquery.googleapis.com/projects/PROJECT_ID/\
+      datasets/DATASET_ID/tables/TABLE_ID"
+        },
+        "executionSpec": {
+          "trigger": { "onDemand": {} }
+        },
+        "type": "DATA_DOCUMENTATION",
+        "dataDocumentationSpec": {
+          "generationScopes": "SQL_QUERIES"
+          "catalogPublishingEnabled": true
+        }
+      }'
+    ```
+
+<!-- end list -->
+
+1.  Start the data documentation scan job using the [`  dataScans.run  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
     
     For example:
     
@@ -281,7 +288,10 @@ dataScanId=DATASCAN_ID" \
     tables/TABLE_ID"
   },
   "type": "DATA_DOCUMENTATION",
-  "dataDocumentationSpec": { "generation_scopes": "ALL" },
+  "dataDocumentationSpec": {
+    "generationScopes": "ALL",
+    "catalogPublishingEnabled": true
+  }
   "executionSpec": {
     "trigger": {
       "one_time": {
