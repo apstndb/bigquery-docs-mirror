@@ -289,12 +289,6 @@ AS (
 
 ## Export to Spanner
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To provide feedback or request support for this feature, send email to <bq-cloud-spanner-federation-preview@google.com> .
-
 You can export data from a BigQuery table to a [Spanner](/spanner/docs/overview) table by using the `  EXPORT DATA  ` statement.
 
 ### Spanner export option list

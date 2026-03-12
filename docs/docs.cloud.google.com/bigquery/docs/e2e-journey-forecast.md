@@ -68,7 +68,7 @@ The following table describes the statements and functions you can use to create
 </tbody>
 </table>
 
-<sup>1</sup> The auto.ARIMA algorithm performs hyperparameter tuning for the trend module. Hyperparameter tuning isn't supported for the entire modeling pipeline. See the [modeling pipeline](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) for more details.
+<sup>1</sup> The auto.ARIMA algorithm performs hyperparameter tuning for the trend module. The entire modeling pipeline doesn't support hyperparameter tuning. See the [modeling pipeline](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) for more details.
 
 ## Model use user journeys
 
