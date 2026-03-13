@@ -64,6 +64,7 @@ You can use regional endpoints to keep your data within the following locations:
       - Frankfurt `  europe-west3  `
       - London `  europe-west2  `
       - Milan `  europe-west8  `
+      - Netherlands `  europe-west4  `
       - Paris `  europe-west9  `
       - Zürich `  europe-west6  `
 
@@ -71,17 +72,19 @@ You can use regional endpoints to keep your data within the following locations:
     
       - Dammam `  me-central2  `
 
-  - United States
+  - Americas
     
-      - Iowa `  us-central1  `
-      - South Carolina `  us-east1  `
-      - Northern Virginia `  us-east4  `
       - Columbus, Ohio `  us-east5  `
       - Dallas `  us-south1  `
-      - Oregon `  us-west1  `
-      - Los Angeles `  us-west2  `
-      - Salt Lake City `  us-west3  `
+      - Iowa `  us-central1  `
       - Las Vegas `  us-west4  `
+      - Los Angeles `  us-west2  `
+      - Montréal `  northamerica-northeast1  `
+      - Northern Virginia `  us-east4  `
+      - Oregon `  us-west1  `
+      - Salt Lake City `  us-west3  `
+      - South Carolina `  us-east1  `
+      - Toronto `  northamerica-northeast2  `
 
 ## Supported operations
 

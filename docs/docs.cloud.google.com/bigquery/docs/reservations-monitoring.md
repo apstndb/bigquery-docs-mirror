@@ -16,7 +16,7 @@ You can view the project and reservation slot usage in the following ways:
 
   - **The `  Jobs  ` method.** Use the [`  Jobs  ` API method](/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.
 
-  - **Cloud Monitoring.** You can use [Cloud Monitoring](/bigquery/docs/monitoring-dashboard) to create dashboards to monitor your allocated slots. With a Cloud Monitoring dashboard, you can view your slot usage for each reservation and for each job type, across all projects within the reservation. For more information about the metrics available for the Cloud Monitoring dashboard, see [Metrics available for visualization](/bigquery/docs/monitoring-dashboard#metrics) .
+  - **Cloud Monitoring.** You can use [Cloud Monitoring](/bigquery/docs/monitoring-dashboard) to create dashboards to monitor your allocated slots. With a Cloud Monitoring dashboard, you can view your slot usage for each reservation and for each job type, across all projects within the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are monitoring the metrics. For more information about the metrics available for the Cloud Monitoring dashboard, see [Metrics available for visualization](/bigquery/docs/monitoring-dashboard#metrics) .
 
 **Note:** The number of slots in use might appear higher than your reservation slot count because of how BigQuery provisions resources to reservations. You are not charged for slots beyond your reservation slot count.
 

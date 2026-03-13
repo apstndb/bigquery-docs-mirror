@@ -164,24 +164,24 @@ For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.INSIGHTS  `` .
 The following example joins insights view with the recommendations view to return 3 recommendations for the insights that are ACTIVE in COST category:
 
 ``` text
-WITH 
+WITH
  insights as (SELECT * FROM `region-us`.INFORMATION_SCHEMA.INSIGHTS),
  recs as (SELECT recommender, recommendation_id, additional_details FROM `region-us`.INFORMATION_SCHEMA.RECOMMENDATIONS)
 
-SELECT  
+SELECT
    recommender,
    target_resources,
    LAX_INT64(recs.additional_details.overview.bytesSavedMonthly) / POW(1024, 3) as est_gb_saved_monthly,
    LAX_INT64(recs.additional_details.overview.slotMsSavedMonthly) / (1000 * 3600) as slot_hours_saved_monthly,
    insights.additional_details.observation_period_seconds / 86400 as observation_period_days,
    last_updated_time
-FROM 
-  insights 
-JOIN recs 
-ON 
-  recommendation_id in UNNEST(associated_recommendation_ids) 
-WHERE 
-  state = 'ACTIVE' 
+FROM
+  insights
+JOIN recs
+ON
+  recommendation_id in UNNEST(associated_recommendation_ids)
+WHERE
+  state = 'ACTIVE'
 AND
   category = 'COST'
 LIMIT 3;

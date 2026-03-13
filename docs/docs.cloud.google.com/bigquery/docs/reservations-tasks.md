@@ -319,7 +319,11 @@ To create a predictable reservation with a maximum number of slots, select one o
 
 9.  To expand the **Advanced settings** section, click the expand\_more expander arrow.
     
-    1.  In the **How to use idle slots?** list, select the configuration option.
+    In the **How to use idle slots?** list, select the configuration option.
+    
+      - **Most predictable:** Consumes baseline slots first, then idle slots, and finally autoscaling slots up to the specified maximum number of slots.
+      - **Less predictable:** Consumes baseline and idle slots only, up to the maximum number of slots. No autoscaling slots are used.
+      - **Most variable:** All available idle slots are used to scale above baseline. Then, autoscaling slots are used, up to the difference between the maximum and baseline. This can cause the reservation to exceed the specified maximum number of slots.
 
 10. The breakdown of slots is displayed in the **Cost estimate** table. A summary of the reservation is displayed in the **Capacity summary** table.
 

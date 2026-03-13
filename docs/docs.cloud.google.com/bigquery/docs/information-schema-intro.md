@@ -215,7 +215,7 @@ SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
 
 All `  INFORMATION_SCHEMA  ` views support project qualifiers. If a project qualifier is not specified, the view will default to the project in which the query is executing.
 
-Specifying a project qualifier for organization-level views (e.g. `  STREAMING_TIMELINE_BY_ORGANIZATION  ` ) has no impact on the results.
+Specifying a project qualifier for organization-level views (for example, `  STREAMING_TIMELINE_BY_ORGANIZATION  ` ) has no impact on the results.
 
 ## Limitations
 

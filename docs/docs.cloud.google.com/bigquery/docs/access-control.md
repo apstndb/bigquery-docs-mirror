@@ -258,6 +258,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataform.folders.addContents          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.create          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.delete          </code></li>
+<li><code dir="ltr" translate="no">           dataform.folders.deleteTree          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.get          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.getIamPolicy          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.move          </code></li>
@@ -293,6 +294,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataform.repositories.update          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.create          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.delete          </code></li>
+<li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      deleteTree          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.get          </code></li>
 <li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      getIamPolicy          </code></li>
 <li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      setIamPolicy          </code></li>
@@ -1374,6 +1376,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataform.folders.addContents          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.create          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.delete          </code></li>
+<li><code dir="ltr" translate="no">           dataform.folders.deleteTree          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.get          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.getIamPolicy          </code></li>
 <li><code dir="ltr" translate="no">           dataform.folders.move          </code></li>
@@ -1409,6 +1412,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataform.repositories.update          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.create          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.delete          </code></li>
+<li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      deleteTree          </code></li>
 <li><code dir="ltr" translate="no">           dataform.teamFolders.get          </code></li>
 <li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      getIamPolicy          </code></li>
 <li><code dir="ltr" translate="no">           dataform.                      teamFolders.                      setIamPolicy          </code></li>

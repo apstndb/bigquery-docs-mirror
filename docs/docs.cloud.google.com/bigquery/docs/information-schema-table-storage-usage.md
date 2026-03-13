@@ -23,7 +23,7 @@ When you query the `  INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE  ` view, t
 
 The data in this table is not kept in real time. It takes approximately 72 hours for table data to be reflected in this view.
 
-Storage usage is returned in MiB second. For example, if a project uses 1,000,000 physical bytes for 86,400 seconds (24 hours), the total physical usage is 86,400,000,000 byte seconds, which is converted to 82,397 MiB seconds, as shown in the following example:
+Storage usage is returned in MiB-second. For example, if a project uses 1,000,000 physical bytes for 86,400 seconds (24 hours), the total physical usage is 86,400,000,000 byte-seconds, which is converted to 82,397 MiB-seconds, as shown in the following example:
 
 ``` text
 86,400,000,000 / 1,024 / 1,024 = 82,397

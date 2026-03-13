@@ -962,3 +962,13 @@ To troubleshoot this issue, confirm the following details:
     ``` text
     bq query --nouse_cache --use_legacy_sql=false "SELECT * EXCEPT (customer_pii) FROM my_table;"
     ```
+
+### Project migration considerations
+
+Policy tags and taxonomies are homed within a specific Google Cloud organization and are not automatically re-associated when a project is migrated to a new organization. If you migrate a project that uses policy tags for column-level access control to a different organization, the following issues will occur:
+
+  - The policy tags will no longer be manageable in the Google Cloud console UI within the migrated project.
+  - You won't be able to apply these policy tags to new columns in the migrated project.
+  - Existing column-level access controls may appear to still be in place, but the link to the source taxonomy in the original organization is broken for management purposes.
+
+Resolving this requires manual intervention by Google Cloud Support to re-associate the taxonomy with the new organization. If you have migrated a project with policy tags and encounter these issues, [contact Cloud Customer Care](/support) .

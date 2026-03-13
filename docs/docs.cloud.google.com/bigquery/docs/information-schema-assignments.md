@@ -1,6 +1,6 @@
 # ASSIGNMENTS view
 
-The `  INFORMATION_SCHEMA.ASSIGNMENTS  ` view contains a near real-time list of all current assignments within the administration project. Each row represents a single, current assignment. A current assignment is either pending or active and has not been deleted. For more information about reservation, see [Introduction to Reservations](/bigquery/docs/reservations-intro) .
+The `  INFORMATION_SCHEMA.ASSIGNMENTS  ` view contains a near real-time list of all current assignments within the administration project. Each row represents a single, current assignment. A current assignment is either pending or active and has not been deleted. For more information about reservations, see [Introduction to Reservations](/bigquery/docs/reservations-intro) .
 
 **Note:** The view names `  INFORMATION_SCHEMA.ASSIGNMENTS  ` and `  INFORMATION_SCHEMA.ASSIGNMENTS_BY_PROJECT  ` are synonymous and can be used interchangeably.
 

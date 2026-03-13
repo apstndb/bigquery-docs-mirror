@@ -15,7 +15,7 @@ You can create embeddings for the following types of data:
 
 Depending on the task, the `  AI.GENERATE_EMBEDDING  ` function works in one of the following ways:
 
-  - To generate embeddings from text or visual content, `  AI.GENERATE_EMBEDDING  ` sends the request to a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) ( [Preview](https://cloud.google.com/products#product-launch-stages) ), and then returns the model's response.
+  - To generate embeddings from text or visual content, `  AI.GENERATE_EMBEDDING  ` sends the request to a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
     
     The `  AI.GENERATE_EMBEDDING  ` function works with the Vertex AI model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
     

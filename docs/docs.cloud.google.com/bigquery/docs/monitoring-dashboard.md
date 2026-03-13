@@ -415,7 +415,7 @@ Slots used across projects in reservations
 
 Slots
 
-Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`  INFORMATION_SCHEMA  `](/bigquery/docs/information-schema-reservations) .
+Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`  INFORMATION_SCHEMA  `](/bigquery/docs/information-schema-reservations) . To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are viewing the dashboard.
 
 BigQuery
 
@@ -423,7 +423,7 @@ Slots used by project in reservation
 
 Slots
 
-Number of BigQuery slots allocated for project in the reservation.
+Number of BigQuery slots allocated for project in the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are viewing the dashboard.
 
 BigQuery continuous job
 

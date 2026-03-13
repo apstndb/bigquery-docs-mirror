@@ -1,6 +1,6 @@
 # TABLE\_STORAGE\_BY\_ORGANIZATION view
 
-The `  INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION  ` view contain one row for each table or materialized view for the whole organization associated with the current project.
+The `  INFORMATION_SCHEMA.TABLE_STORAGE_BY_ORGANIZATION  ` view contains one row for each table or materialized view for the whole organization associated with the current project.
 
 The data in this table is not kept in real time, and might be delayed by a few seconds to a few minutes. Storage changes that are caused by partition or table expiration alone, or that are caused by modifications to the dataset time travel window, might take up to a day to be reflected in the `  INFORMATION_SCHEMA.TABLE_STORAGE  ` view. In cases of dataset deletion where the dataset contains more than 1,000 tables, this view won't reflect the change until the [time travel window](/bigquery/docs/time-travel#time_travel) for the deleted dataset has passed.
 
