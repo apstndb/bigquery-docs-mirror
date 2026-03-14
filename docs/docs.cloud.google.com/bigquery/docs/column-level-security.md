@@ -330,7 +330,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 from google.api_core import exceptions
 from google.cloud import bigquery_datapolicies_v2
 
-
 client = bigquery_datapolicies_v2.DataPolicyServiceClient()
 
 
@@ -456,7 +455,7 @@ def get_data_policy_iam_policy(
     location: str,
     data_policy_id: str,
 ) -> None:
-    """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API. 
+    """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
     This is useful for auditing which members have which roles on the policy.
 
     Args:

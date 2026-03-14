@@ -205,14 +205,14 @@ You can [run `  gcpdiag  ` using a wrapper](https://github.com/GoogleCloudPlatfo
 2.  Execute the `  gcpdiag  ` command.
     
     ``` text
-    ./gcpdiag runbook bigquery/failed_query \
+    ./gcpdiag runbook bigquery/failed-query \
        --parameter project_id=PROJECT_ID \
        --parameter bigquery_job_region=JOB_REGION \
        --parameter bigquery_job_id=JOB_ID \
        --parameter bigquery_skip_permission_check=SKIP_PERMISSION_CHECK
     ```
 
-View [available parameters](https://gcpdiag.dev/runbook/diagnostic-trees/bigquery/failed_query/#parameters) for this runbook.
+View [available parameters](https://gcpdiag.dev/runbook/diagnostic-trees/bigquery/failed-query/#parameters) for this runbook.
 
 Replace the following:
 

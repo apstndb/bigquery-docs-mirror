@@ -336,7 +336,7 @@ SELECT
 FROM
   `DATASET.BestSellersProductClusterWeekly_MERCHANT_ID` AS top_products
 WHERE
-  _PARTITIONDATE = 'DATE' AND
+  _PARTITIONDATE = &#39;DATE' AND
   report_category_id = 267 /*Smartphones*/ AND
   country_code = 'US'
 ORDER BY
@@ -357,7 +357,7 @@ WITH latest_top_products AS
   FROM
     `DATASET.BestSellers_TopProducts_MERCHANT_ID`
   WHERE
-    _PARTITIONDATE = 'DATE'
+    _PARTITIONDATE = &#39;DATE'
 ),
 latest_top_products_inventory AS
 (
@@ -391,7 +391,7 @@ WITH latest_top_products AS
   FROM
     `DATASET.BestSellersProductClusterWeekly_MERCHANT_ID`
   WHERE
-    _PARTITIONDATE = 'DATE'
+    _PARTITIONDATE = &#39;DATE'
 ),
 latest_top_products_inventory AS
 (
@@ -423,7 +423,7 @@ SELECT
 FROM
   `DATASET.BestSellersProductClusterMonthly_MERCHANT_ID`
 WHERE
-  _PARTITIONDATE = 'DATE' AND
+  _PARTITIONDATE = &#39;DATE' AND
   product_inventory_status != 'NOT_IN_INVENTORY'
 ORDER BY
   rank;
@@ -443,7 +443,7 @@ SELECT
 FROM
   `DATASET.BestSellers_TopBrands_MERCHANT_ID`
 WHERE
-  _PARTITIONDATE = 'DATE' AND
+  _PARTITIONDATE = &#39;DATE' AND
   ranking_category = 267 /*Smartphones*/ AND
   ranking_country = 'US'
 ORDER BY
@@ -460,7 +460,7 @@ SELECT
 FROM
   `DATASET.BestSellersTopBrandsWeekly_MERCHANT_ID`
 WHERE
-  _PARTITIONDATE = 'DATE' AND
+  _PARTITIONDATE = &#39;DATE' AND
   report_category_id = 267 /*Smartphones*/ AND
   country_code = 'US'
 ORDER BY
@@ -481,7 +481,7 @@ WITH latest_top_brands AS
     FROM
       `DATASET.BestSellers_TopBrands_MERCHANT_ID`
     WHERE
-      _PARTITIONDATE = 'DATE'
+      _PARTITIONDATE = &#39;DATE'
   ),
   latest_products AS
   (
@@ -523,7 +523,7 @@ WITH latest_top_brands AS
     FROM
       `DATASET.BestSellersBrandMonthly_MERCHANT_ID`
     WHERE
-      _PARTITIONDATE = 'DATE'
+      _PARTITIONDATE = &#39;DATE'
   ),
   latest_products AS
   (

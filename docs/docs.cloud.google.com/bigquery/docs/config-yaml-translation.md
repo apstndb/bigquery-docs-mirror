@@ -1051,6 +1051,49 @@ A SQL translation with this configuration YAML file might look like the followin
 </tbody>
 </table>
 
+### Setting `     NLS_DATE_FORMAT    `
+
+**Preview**
+
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+The following configuration YAML sets the `  NLS_DATE_FORMAT  ` parameter to the format `  DD/MM/YYYY  ` . We recommend that you specify `  NLS_DATE_FORMAT  ` for implicit uses of date format and casts. If not set, the default format for translation, `  DD-MON-RR  ` , is used.
+
+``` text
+type: environment
+session:
+  dateFormat: DD/MM/YYYY
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       oracle-input.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(dt date default &#39;31/12/1999&#39;);
+    insert into x values (&#39;01/01/2000&#39;);
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+      (
+        DT DATETIME DEFAULT DATETIME &#39;1999-12-31 00:00:00&#39;
+      )
+      ;
+      INSERT INTO testdb.testschema.x (DT)
+        VALUES (DATETIME &#39;2000-01-01 00:00:00&#39;)
+      ;
+    </code></pre></td>
+</tr>
+</tbody>
+</table>
+
 ### Global output name rewrite
 
 **Preview**

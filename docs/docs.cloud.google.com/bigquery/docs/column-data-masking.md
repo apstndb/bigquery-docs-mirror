@@ -113,7 +113,7 @@ const {status} = require('@grpc/grpc-js');
 const dataPolicyServiceClient = new DataPolicyServiceClient();
 
 /**
- * Creates a data policy to apply a data masking rule to a specific BigQuery table column. 
+ * Creates a data policy to apply a data masking rule to a specific BigQuery table column.
  * This is a primary mechanism for implementing column-level security in BigQuery.
  *
  * @param {string} projectId The Google Cloud project ID (for example, 'example-project-id')
@@ -176,7 +176,7 @@ client = bigquery_datapolicies_v2.DataPolicyServiceClient()
 
 
 def create_data_policy(project_id: str, location: str, data_policy_id: str) -> None:
-    """Creates a data policy to apply a data masking rule to a specific BigQuery table column. 
+    """Creates a data policy to apply a data masking rule to a specific BigQuery table column.
     This is a primary mechanism for implementing column-level security in BigQuery.
 
     Args:
@@ -388,7 +388,6 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 from google.api_core import exceptions
 from google.cloud import bigquery_datapolicies_v2
 
-
 client = bigquery_datapolicies_v2.DataPolicyServiceClient()
 
 
@@ -518,7 +517,7 @@ def get_data_policy_iam_policy(
     location: str,
     data_policy_id: str,
 ) -> None:
-    """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API. 
+    """Get the IAM policy for a specified data policy resource from the BigQuery Data Policy API.
     This is useful for auditing which members have which roles on the policy.
 
     Args:
@@ -786,13 +785,13 @@ async function updateDataPolicy(projectId, location, dataPolicyId) {
     const [response] = await client.updateDataPolicy(request);
     console.log(`Successfully updated data policy: ${response.name}`);
     console.log(
-      `New masking expression: ${response.dataMaskingPolicy.predefinedExpression}`
+      `New masking expression: ${response.dataMaskingPolicy.predefinedExpression}`,
     );
   } catch (err) {
     if (err.code === status.NOT_FOUND) {
       console.error(
         `Error: Data policy '${resourceName}' not found. ` +
-          'Make sure the data policy exists and the project, location, and data policy ID are correct.'
+          'Make sure the data policy exists and the project, location, and data policy ID are correct.',
       );
     } else {
       console.error('Error updating data policy:', err.message, err);
@@ -815,11 +814,7 @@ from google.protobuf import field_mask_pb2
 client = bigquery_datapolicies_v2.DataPolicyServiceClient()
 
 
-def update_data_policy(
-    project_id: str,
-    location: str,
-    data_policy_id: str
-) -> None:
+def update_data_policy(project_id: str, location: str, data_policy_id: str) -> None:
     """Updates the data masking configuration of an existing data policy.
 
     This example demonstrates how to use a FieldMask to selectively update the
@@ -851,9 +846,7 @@ def update_data_policy(
     )
 
     # Use a field mask to selectively update only the data masking policy.
-    update_mask = field_mask_pb2.FieldMask(
-        paths=["data_masking_policy"]
-    )
+    update_mask = field_mask_pb2.FieldMask(paths=["data_masking_policy"])
     request = bigquery_datapolicies_v2.UpdateDataPolicyRequest(
         data_policy=updated_data_policy,
         update_mask=update_mask,

@@ -200,7 +200,7 @@ Reservation predictability allows you to set the absolute maximum number of cons
 
 To enable reservation predictability, you must set the value of both the maximum slots and the scaling mode on the reservation. The number of maximum slots must be a positive number, and greater than the number of baseline slots assigned to the reservation. To learn more about working with reservation predictability, see [Create a reservation with dedicated slots](/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) . You can't configure the value for `  autoscale_max_slots  ` when you set the maximum slots value on the reservation.
 
-The value of `  ignore_idle_slots  ` must align with the scaling mode. If the scaling mode is `  ALL_SLOTS  ` or `  IDLE_SLOTS_ONLY  ` , `  ignore_idle_slots  ` must be false. If the scaling mode is `  AUTSOCALE_ONLY  ` , `  ignore_idle_slots  ` must be true.
+The value of `  ignore_idle_slots  ` must align with the scaling mode. If the scaling mode is `  ALL_SLOTS  ` or `  IDLE_SLOTS_ONLY  ` , `  ignore_idle_slots  ` must be false. If the scaling mode is `  AUTOSCALE_ONLY  ` , `  ignore_idle_slots  ` must be true.
 
 You can configure your reservations to consume only the following combinations of capacity resources up to the defined maximum:
 

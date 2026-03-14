@@ -80,12 +80,6 @@ BigQuery might truncate substeps when the query's execution graph was complex en
 
 #### Query text heatmap
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-To request feedback or support for this feature, send an email to <bq-performance-troubleshooting+feedback@google.com>
-
 BigQuery can map some stage steps to portions of query text. The query text heatmap shows all corresponding query text with stage steps. It highlights the query text based on the total slot-time of stages whose steps have mapped query text.
 
 The following image shows the highlighted query text:
