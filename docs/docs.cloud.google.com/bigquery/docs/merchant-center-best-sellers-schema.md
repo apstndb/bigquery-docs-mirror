@@ -49,49 +49,49 @@ While brands are ranked across many different categories, all products in the ` 
 <tr class="even">
 <td><code dir="ltr" translate="no">       report_category_id      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td><a href="https://support.google.com/merchants/answer/6324436">Google product category id</a> of the sold products.</td>
+<td><a href="https://support.google.com/merchants/answer/6324436">Google product category ID</a> of the sold products.</td>
 <td>1234</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       title      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Title of the best selling product cluster.</td>
+<td>Title of the best-selling product cluster.</td>
 <td>TN2351 black USB</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       brand      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Brand of the best selling product cluster. Set to null when no brand exists.</td>
+<td>Brand of the best-selling product cluster. Set to null when no brand exists.</td>
 <td>Brand Name</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       category_l1      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google product category of the best selling product cluster. Set to an empty string when no category exists.</td>
+<td>Google product category of the best-selling product cluster. Set to an empty string when no category exists.</td>
 <td>Animals &amp; Pet Supplies</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       category_l2      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google product category of the best selling product cluster. Set to an empty string when no category exists.</td>
+<td>Google product category of the best-selling product cluster. Set to an empty string when no category exists.</td>
 <td>Pet Supplies</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       category_l3      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google product category of the best selling product cluster. Set to an empty string when no category exists.</td>
+<td>Google product category of the best-selling product cluster. Set to an empty string when no category exists.</td>
 <td>Dog Supplies</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       category_l4      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google product category of the best selling product cluster. Set to an empty string when no category exists.</td>
+<td>Google product category of the best-selling product cluster. Set to an empty string when no category exists.</td>
 <td>Dog Beds</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       category_l5      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google product category of the best selling product cluster.</td>
+<td>Google product category of the best-selling product cluster.</td>
 <td></td>
 </tr>
 <tr class="even">
@@ -198,31 +198,31 @@ While brands are ranked across many different categories, all products in the ` 
 <tr class="odd">
 <td><code dir="ltr" translate="no">       brand      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Best selling brand.</td>
+<td>Best-selling brand.</td>
 <td>Brand Name</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       category_id      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td><a href="https://support.google.com/merchants/answer/6324436">Google product category ID</a> of the best selling brand.</td>
+<td><a href="https://support.google.com/merchants/answer/6324436">Google product category ID</a> of the best-selling brand.</td>
 <td>1234</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       country_code      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Country in which the best selling brand has been sold. For more information, see the <a href="https://support.google.com/merchants/answer/13299535#Availability">list of included countries</a> .</td>
+<td>Country in which the best-selling brand has been sold. For more information, see the <a href="https://support.google.com/merchants/answer/13299535#Availability">list of included countries</a> .</td>
 <td>CH</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       rank      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Rank of the best selling brand (the lower the more sold).</td>
+<td>Rank of the best-selling brand (the lower the more sold).</td>
 <td>5</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       previous_rank      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Rank of the best selling brand in the previous period (week or month). Set to <code dir="ltr" translate="no">       0      </code> when no previous rank exists.</td>
+<td>Rank of the best-selling brand in the previous period (week or month). Set to <code dir="ltr" translate="no">       0      </code> when no previous rank exists.</td>
 <td>5</td>
 </tr>
 <tr class="even">

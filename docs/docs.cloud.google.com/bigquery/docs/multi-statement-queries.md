@@ -12,7 +12,7 @@ A multi-statement query consists of one or more SQL statements separated by semi
 
 ### Write a multi-statement query
 
-You can write a multi-statement query in BigQuery. The following multi-query statement query declares a variable and uses the variable inside an [`  IF  `](/bigquery/docs/reference/standard-sql/procedural-language#if) statement:
+You can write a multi-statement query in BigQuery. The following multi-statement query declares a variable and uses the variable inside an [`  IF  `](/bigquery/docs/reference/standard-sql/procedural-language#if) statement:
 
 ``` text
 DECLARE day INT64;

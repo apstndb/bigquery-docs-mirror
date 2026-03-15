@@ -18,7 +18,7 @@ The products and product issues report includes product data provided to the Goo
 
 ### Regional Inventories
 
-The regional inventories report includes additional product data about regional availability and pricing overrides of your products.For information on how this data is loaded into BigQuery, see the Google Merchant Center [regional inventories table schema](/bigquery/docs/merchant-center-regional-inventories-schema) .
+The regional inventories report includes additional product data about regional availability and pricing overrides of your products. For information on how this data is loaded into BigQuery, see the Google Merchant Center [regional inventories table schema](/bigquery/docs/merchant-center-regional-inventories-schema) .
 
 ### Local Inventories
 

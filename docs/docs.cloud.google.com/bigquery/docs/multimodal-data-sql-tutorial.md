@@ -449,7 +449,7 @@ Use a Gemini model to generate the following data for the pet store products:
 
 Create a Python UDF to convert product images to grayscale.
 
-The Python UDF uses open source libraries , and also uses parallel execution to transform multiple images simultaneously.
+The Python UDF uses open source libraries, and also uses parallel execution to transform multiple images simultaneously.
 
 1.  In the query editor of the **BigQuery** page, run the following query to create the `  to_grayscale  ` UDF:
     

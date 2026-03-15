@@ -37,7 +37,7 @@ To analyze object table data by using a remote function, you must generate and p
 
 For general instructions on creating a remote function, see [Working with remote functions](/bigquery/docs/remote-functions) .
 
-When you create a remote function to analyze object table data, you must pass in [signed URLS](/bigquery/docs/object-table-introduction#signed_urls) that have been generated for the objects in the object table. You can do this by using an input parameter with a `  STRING  ` data type. The signed URLS are made available to the remote function as input data in the [`  calls  ` field of the HTTP `  POST  ` request](/bigquery/docs/remote-functions#input_format) . An example of a request is:
+When you create a remote function to analyze object table data, you must pass in [signed URLs](/bigquery/docs/object-table-introduction#signed_urls) that have been generated for the objects in the object table. You can do this by using an input parameter with a `  STRING  ` data type. The signed URLs are made available to the remote function as input data in the [`  calls  ` field of the HTTP `  POST  ` request](/bigquery/docs/remote-functions#input_format) . An example of a request is:
 
 ``` text
 {

@@ -1323,7 +1323,7 @@ The result is similar to the following:
 
 ### Get bytes processed by extract jobs
 
-The following example computes the `  total_bytes_processed  ` value for `  EXTRACT  ` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](/bigquery/docs/exporting-data#quota_policy) . The total bytes processed can be used to monitor the aggregate usage and verify that extract jobs stays below the 50 TB per-day limit:
+The following example computes the `  total_bytes_processed  ` value for `  EXTRACT  ` job types. For information about quotas for extract jobs, see [Quota policy for extract jobs](/bigquery/docs/exporting-data#quota_policy) . The total bytes processed can be used to monitor the aggregate usage and verify that extract jobs stays below the 50 TiB per-day limit:
 
 ``` text
 SELECT

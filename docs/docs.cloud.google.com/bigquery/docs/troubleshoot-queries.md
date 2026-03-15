@@ -4,21 +4,25 @@ This document is intended to help you troubleshoot common issues related to runn
 
 ## Troubleshoot slow queries
 
-When troubleshooting slow query performance, consider the following common causes:
+To troubleshoot slow query performance, do the following:
 
-1.  Check the [Google Cloud Service Health](https://status.cloud.google.com/) page for known BigQuery service outages that might impact query performance.
+  - Check the [Google Cloud Service Health](https://status.cloud.google.com/) page for known BigQuery service outages that might impact query performance.
 
-2.  Review the job timeline for your query on the [job details page](/bigquery/docs/managing-jobs#view-job) to see how long each stage of the query took to run.
+  - Review the job timeline for your query on the [administrative jobs explorer](/bigquery/docs/admin-jobs-explorer) to see how long each stage of the query took to run.
     
       - If most of the elapsed time was due to long creation times, [contact Cloud Customer Care](/support) for assistance.
     
       - If most of the elapsed time was due to long execution times, then review your [query performance insights](/bigquery/docs/query-insights) . Query performance insights can inform you if your query ran longer than the average execution time, and suggest possible causes. Possible causes might include query slot contention or an insufficient shuffle quota. For more information about each query performance issue and possible resolutions, see [Interpret query performance insights](/bigquery/docs/query-insights#interpret_query_performance_insights) .
 
-3.  Review the `  finalExecutionDurationMs  ` field in the [`  JobStatistics  `](/bigquery/docs/reference/rest/v2/Job#JobStatistics) for your query job. The query might have been retried. The `  finalExecutionDurationMs  ` field contains the duration in milliseconds of the execution of the final attempt of this job.
+  - Review the `  finalExecutionDurationMs  ` field in the [`  JobStatistics  `](/bigquery/docs/reference/rest/v2/Job#JobStatistics) object type for your query job. The query might have been retried. The `  finalExecutionDurationMs  ` field contains the duration in milliseconds of the execution of the final attempt of this job.
 
-4.  Review the bytes processed in the [query job details page](/bigquery/docs/managing-jobs#view-job) to see if it is higher than expected. You can do this by comparing the number of bytes processed by the current query with another query job that completed in an acceptable amount of time. If there is a large discrepancy of bytes processed between the two queries, then perhaps the query was slow due to a large data volume. For information on optimizing your queries to handle large data volumes, see [Optimize query computation](/bigquery/docs/best-practices-performance-compute) .
+  - Review the bytes processed in the [query job details page](/bigquery/docs/managing-jobs#view-job) to see if it is higher than expected. You can do this by comparing the number of bytes processed by the current query with another query job that completed in an acceptable amount of time. If there is a large discrepancy of bytes processed between the two queries, then perhaps the query was slow due to a large data volume. For information on optimizing your queries to handle large data volumes, see [Optimize query computation](/bigquery/docs/best-practices-performance-compute) .
     
     You can also identify queries in your project that process a large amount of data by searching for the most expensive queries using the [`  INFORMATION_SCHEMA.JOBS  ` view](/bigquery/docs/information-schema-jobs#most_expensive_queries_by_project) .
+
+  - Review your reservation usage and check for slot contention. For more information, see [Workload statistics analysis](#workload-statistics-analysis) .
+
+  - Check previous and recent executions for the same query hash to see if new [query performance insights](/bigquery/docs/query-insights) are available for the slower jobs, such as a change in data input scale. You can filter by query hash in the [administrative jobs explorer](/bigquery/docs/admin-jobs-explorer#filter-jobs) .
 
 ### Compare a slow and fast execution of the same query
 
@@ -80,6 +84,10 @@ Compare the [query performance insights](/bigquery/docs/query-insights) for each
 
 Pay attention to both the insights provided for the slow job as well as differences between insights produced for the fast job to identify stage changes affecting performance.
 
+#### Reservation assignment
+
+Check if there are differences in the reservation assigned to the two jobs. A change in reservation or a move from on-demand to a reservation can impact performance. For more information, see [Workload management models and reservation size](#workload-management-models-and-reservation-size) .
+
 A more thorough job execution metadata analysis requires going through the single stages of query execution by comparing the [`  ExplainQueryStage  `](/bigquery/docs/reference/rest/v2/Job#explainquerystage) objects for the two jobs.
 
 To get started, look at the `  Wait ms  ` and `  Shuffle output bytes  ` metrics described in the [interpret query stage information](/bigquery/docs/query-insights#interpret_query_stage_information) section.
@@ -100,8 +108,8 @@ You can also compute the [average number of slots per millisecond used by a job]
 
 A job performing a similar amount of work with a larger amount of average slots per second completes faster. A lower average slot usage per second can be caused by the following:
 
-1.  There were no additional resources available due to a resource contention between different jobs - the reservation was maxed out.
-2.  The job didn't request more slots during a large part of the execution. For example, this can happen when there is data skew.
+  - There were no additional resources available due to a resource contention between different jobs—the reservation was maxed out.
+  - The job didn't request more slots during a large part of the execution. For example, this can happen when there is data skew.
 
 #### Workload management models and reservation size
 
@@ -169,7 +177,7 @@ If you still can't find the reason to explain slower than expected query perform
 
 To use Gemini Cloud Assist to help you [identify the cause of a query failure](/bigquery/docs/use-cloud-assist#analyze_jobs) , do the following:
 
-1.  In the Google Cloud console, go the **BigQuery** page.
+1.  In the Google Cloud console, go to the **BigQuery** page.
 
 2.  On the Google Cloud toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
@@ -627,7 +635,7 @@ The following sections describe how to troubleshoot connectivity issues when try
 
 Use the [Google IP Dig tool](https://toolbox.googleapps.com/apps/dig/#A/) to resolve the BigQuery DNS endpoint `  bigquery.googleapis.com  ` to a single 'A' record IP. Make sure this IP is not blocked in your firewall settings.
 
-In general we recommend allowlisting Google DNS names. The IP ranges shared in the <https://www.gstatic.com/ipranges/goog.json> and <https://www.gstatic.com/ipranges/cloud.json> files change often; therefore, we recommended allowlisting Google DNS names instead. Here is a list of common DNS names we recommend to add to the allowlist:
+In general we recommend allowlisting Google DNS names. The IP ranges shared in the <https://www.gstatic.com/ipranges/goog.json> and <https://www.gstatic.com/ipranges/cloud.json> files change often; therefore, we recommend allowlisting Google DNS names instead. Here is a list of common DNS names we recommend to add to the allowlist:
 
   - `  *.1e100.net  `
   - `  *.google.com  `

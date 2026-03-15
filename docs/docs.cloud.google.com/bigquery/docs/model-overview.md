@@ -10,7 +10,7 @@ A typical model development workflow in BigQuery ML looks similar to the followi
 4.  [Evaluate the model](/bigquery/docs/evaluate-overview) to assess how it might perform on data outside of the training set, and also to compare it to other models if appropriate.
 5.  [Perform inference](/bigquery/docs/inference-overview) to analyze data by using the model.
 6.  Provide [explainability](/bigquery/docs/xai-overview) for the model, to clarify how particular features influenced a given prediction and also the model overall.
-7.  Learn more about the components that comprize the model by using [model weights](/bigquery/docs/weights-overview) .
+7.  Learn more about the components that comprise the model by using [model weights](/bigquery/docs/weights-overview) .
 
 Because you can use many different kinds of models in BigQuery ML, the functions available for each model vary. For more information about supported SQL statements and functions for each model type, see the following documents:
 

@@ -379,9 +379,9 @@ For more information on setting metadata caching options, see [Create object tab
 
   - Queries over object tables are subject to the same limitations as all other BigQuery queries. For more information, see [Quotas](/bigquery/quotas#query_jobs) .
 
-  - Remote functions that process unstructured data from object tables are subject to to the same [limitations](/bigquery/docs/remote-functions#limitations) as all other remote functions.
+  - Remote functions that process unstructured data from object tables are subject to the same [limitations](/bigquery/docs/remote-functions#limitations) as all other remote functions.
 
-  - Signed URLs generated for the objects in an object tables expire after 6 hours, which is the [query execution time limit](/bigquery/quotas#query_jobs) .
+  - Signed URLs generated for the objects in an object table expire after 6 hours, which is the [query execution time limit](/bigquery/quotas#query_jobs) .
 
   - Inference with BigQuery ML is not supported with on-demand pricing or with the Standard edition.
 

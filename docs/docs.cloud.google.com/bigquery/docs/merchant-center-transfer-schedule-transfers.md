@@ -21,7 +21,7 @@ Before you create a Merchant Center data transfer:
       - `  europe-north1 (Finland)  ` ,
       - `  europe-west2 (London)  ` ,
       - `  europe-west6 (Zurich)  ` .
-  - If you intend to setup transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service Run Notifications](/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. Pub/Sub permissions are not required if you just set up email notifications. For more information, see [BigQuery Data Transfer Service Run Notifications](/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 

@@ -19,7 +19,7 @@ To do this, you must first choose an appropriate model, upload it to Cloud Stora
 
   - The combined size of the image files associated with the object table must be less than 1 TB.
 
-  - The model must be one of following:
+  - The model must be one of the following:
     
       - A [TensorFlow](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [TensorFlow Lite](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) model in [SavedModel](https://www.tensorflow.org/guide/saved_model) format.
       - A PyTorch model in [ONNX format](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) .
@@ -33,7 +33,7 @@ To do this, you must first choose an appropriate model, upload it to Cloud Stora
   - The model input tensor must meet the following criteria:
     
       - Have a data type of `  tf.float32  ` with values in `  [0, 1)  ` or have a data type of `  tf.uint8  ` with values in `  [0, 255)  ` .
-      - Have the shape `  [batch_size, weight, height, 3]  ` , where:
+      - Have the shape `  [batch_size, width, height, 3]  ` , where:
           - `  batch_size  ` must be `  -1  ` , `  None  ` , or `  1  ` .
           - `  width  ` and `  height  ` must be greater than 0.
 
@@ -159,7 +159,7 @@ You can use these as part of the `  ML.PREDICT  ` function, or run them on a tab
 
 ## Run inference
 
-Once you have an appropriate model loaded, and optionally preprocessed the image data,you can run inference on the image data.
+Once you have an appropriate model loaded, and optionally preprocessed the image data, you can run inference on the image data.
 
 To run inference:
 
@@ -178,7 +178,7 @@ Replace the following:
   - `  DATASET_ID  ` : the ID of the dataset that contains the model and object table.
   - `  MODEL_NAME  ` : the name of the model.
   - `  IMAGE_DATA  ` : the image data, represented either by the output of the `  ML.DECODE_IMAGE  ` function, or by a table column containing image data output by `  ML.DECODE_IMAGE  ` or other image processing functions.
-  - `  MODEL_INPUT  ` : the name of an input field for the model.You can find this information by [inspecting the model](/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section.
+  - `  MODEL_INPUT  ` : the name of an input field for the model. You can find this information by [inspecting the model](/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section.
   - `  TABLE_NAME  ` : the name of the object table.
 
 ### Examples

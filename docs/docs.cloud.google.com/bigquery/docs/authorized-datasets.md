@@ -304,7 +304,13 @@ The following table summarizes the necessary [Identity and Access Management (IA
 
 You don't need any additional permissions to [delete a view](/bigquery/docs/managing-views#delete_views) from an authorized dataset.
 
-**Note:** The `  bigquery.datasets.update  ` permission is not required for creating or updating a view in an authorized dataset. However, `  bigquery.datasets.update  ` is required for managing authorized views. For more information, see [Required roles](/bigquery/docs/authorized-views#required_permissions) .
+**Note:** The `  bigquery.datasets.update  ` permission isn't required on the shared dataset (or any other referenced datasets) to create or update a view within an authorized dataset. This permission is strictly reserved for administrative management of the dataset's authorization list, including the following:
+
+  - Authorizing a dataset: initially granting a dataset access to a shared dataset.
+
+  - Managing individual authorized views: adding or removing a specific view from a shared dataset's authorized list.
+    
+    For more information, see [Required roles](/bigquery/docs/authorized-views#required_permissions) .
 
 **Note:** Statements that manage views, such as `  ALTER VIEW  ` , can apply to both regular views and authorized views. Verify that you are managing the correct view when running these statements.
 

@@ -29,28 +29,6 @@ Eligibility for short query optimizations is dynamic and influenced by the follo
   - The overall query structure.
   - The [historical statistics](/bigquery/docs/history-based-optimizations) of past query executions.
 
-## Enable the advanced runtime
-
-Between September 15, 2025 and early 2026, BigQuery will start using the advanced runtime as the default runtime for all new and existing projects. During this transition period, some jobs that run in your projects might be in regions that don't yet use the advanced runtime as the default. To enable the advanced runtime in an existing project or organization now, use the [`  ALTER PROJECT  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement to change the [default configuration](/bigquery/docs/default-configuration) . In the statement, set the `  query_runtime  ` argument to `  'advanced'  ` . For example:
-
-``` text
-ALTER PROJECT PROJECT_NAME
-SET OPTIONS (
-  `region-LOCATION.query_runtime` = 'advanced'
-);
-```
-
-Replace the following:
-
-  - `  PROJECT_NAME  ` : the name of the project
-  - `  LOCATION  ` : the location in which jobs should attempt to use the advanced runtime
-
-It can take several minutes for the change to take effect.
-
-After you've enabled the advanced runtime, qualifying queries in the project or organization use the advanced runtime regardless of which user creates the query job.
-
-**Note:** When the advanced runtime is enabled as the default behavior, it doesn't change your project or organization configuration settings. The `  INFORMATION_SCHEMA.PROJECT_OPTIONS  ` view, for example, only shows a value for the `  query_runtime  ` option if you've manually enabled the advanced runtime. To verify whether your queries are using the advanced runtime, check your job metadata as described in the following section, [Estimate the impact of the advanced runtime](#estimate-impact-of-advanced-runtime) .
-
 ## Estimate the impact of the advanced runtime
 
 To estimate the impact of the advanced runtime, you can use the following SQL query to identify project queries with the greatest estimated improvement to execution time:
@@ -97,7 +75,7 @@ Replace the following:
 
   - `  LOCATION  ` : the location in which job performance should be measured
 
-If the advanced runtime was enabled and applied, the results of this query may be similar to the following:
+If the advanced runtime was applied, the results of this query may be similar to the following:
 
 ``` text
 /*--------------+----------------------------+----------------+---------------------*

@@ -29,7 +29,7 @@ When you have metadata caching enabled, you specify the maximum interval of meta
 
 You can choose to refresh the cache either automatically or manually:
 
-  - For automatic refreshes, the cache is refreshed at a system defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in the datastore are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
+  - For automatic refreshes, the cache is refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes. Refreshing the cache automatically is a good approach if the files in the datastore are added, deleted, or modified at random intervals. If you need to control the timing of the refresh, for example to trigger the refresh at the end of an extract-transform-load job, use manual refresh.
   - For manual refreshes, you run the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the metadata cache on whatever schedule you determine. For BigLake tables, you can refresh the metadata selectively by providing subdirectories of the table data directory. This approach lets you avoid unnecessary metadata processing. Refreshing the cache manually is a good approach if the files in the datastore are added, deleted, or modified at known intervals—for example, as the output of a pipeline.
 
 Both manual and automatic cache refreshes are executed with [`  INTERACTIVE  `](/bigquery/docs/running-queries) query priority.

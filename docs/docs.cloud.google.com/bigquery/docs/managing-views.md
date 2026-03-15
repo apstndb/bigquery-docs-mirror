@@ -37,9 +37,21 @@ Additionally, if you have the `  bigquery.datasets.create  ` permission, you can
 
 To update the view's SQL query, you must also have permissions to query any tables referenced by the view's SQL query.
 
-**Note:** To update the SQL of an [authorized view](/bigquery/docs/authorized-views) , or a view in an [authorized dataset](/bigquery/docs/authorized-datasets) , you need additional permissions. For more information, see [required permissions for authorized views](/bigquery/docs/authorized-views#required_permissions) and [required permissions for views in authorized datasets](/bigquery/docs/authorized-datasets#permissions_datasets) .
+**Note:** To update the SQL of an [authorized view](/bigquery/docs/authorized-views) , or a view in an [authorized dataset](/bigquery/docs/authorized-datasets) , you must have the `  bigquery.datasets.update  ` permission on the dataset that contains the view. You don't need this permission on the datasets that the view reads from or those that contain referenced UDFs. The methods used to update a view—for example, `  CREATE OR REPLACE VIEW  ` —are identical for both standard and authorized views. Updating a view preserves its authorization status. That is, if a view is already authorized, it remains authorized after the update; if the view isn't authorized, the update results in a standard view. For more information, see the [required permissions for authorized views](/bigquery/docs/authorized-views#required_permissions) and the [required permissions for views in authorized datasets](/bigquery/docs/authorized-datasets#permissions_datasets) .
 
 For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+
+#### Example: View referencing cross-project UDFs and datasets
+
+Consider a setup where you're updating a view in *Project A* ( `  authorized_dataset  ` ). This view query joins tables from *Project B* ( `  shared_dataset  ` ) and calls a UDF in *Project C* ( `  udf_dataset  ` ).
+
+The following permissions are required:
+
+  - *Project A* : `  bigquery.tables.update  ` on the specific view resource you update.
+  - *Project B* : `  bigquery.datasets.get  ` and `  bigquery.tables.getData  ` on the referenced shared resources.
+  - *Project C* : `  bigquery.routines.get  ` on the specific UDF you call.
+
+Crucially, your identity doesn't require the `  bigquery.datasets.update  ` permission on *Project B* or *Project C* to perform this update.
 
 ### Updating a view's SQL query
 
