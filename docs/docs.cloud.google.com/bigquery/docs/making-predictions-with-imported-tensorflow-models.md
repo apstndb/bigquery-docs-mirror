@@ -20,9 +20,11 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ## Before you begin
 
-1.  Ensure that the BigQuery API is enabled.
+1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
-2.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
+2.  Ensure that the BigQuery API is enabled.
+
+3.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 

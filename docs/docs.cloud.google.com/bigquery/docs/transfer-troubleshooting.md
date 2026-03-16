@@ -72,20 +72,23 @@ If your transfer configuration is correct, and the appropriate permissions are g
   - Error: `  Error while reading data, error message: CSV processing encountered too many errors, giving up.  `  
     **Resolution:** This error can occur when there is a mismatch between the configuration of your CSV file in your data source and the configuration of the CSV in the transfer configuration. For example, this error can occur if **Header rows to skip** is set to `  0  ` , but your source CSV file contains 1 or more header rows. To fix this error, verify that the CSV configuration in the transfer configuration is correct and that it matches the configuration of your source CSV file.
 
-  - Error: `  Permission bigquery.tables.create denied.  `  
-    **Symptom:** `  none Error code 7 : Access Denied : Dataset [PROJECT_ID]:[DATASET_ID] : Permission bigquery.tables.create denied on dataset [PROJECT_ID]:[DATASET_ID] (or it may not exist).  `
+  - Error: `  Error 400: DTS service agent needs iam.serviceAccounts.getAccessToken permission or [SERVICE_ACCOUNT] doesn't exist.  `  
+    **Root Cause:** This error indicates that the BigQuery Data Transfer Service (DTS) service agent lacks the necessary permission to impersonate the service account used for the transfer. This typically happens in cross-project authorization scenarios or when the transfer is configured using Infrastructure-as-Code (IaC) tools like Terraform.
     
-    A Cloud Storage transfer fails with an access denied error for table creation, even if the destination table already exists and the service account has standard data editor roles.
+    **Resolution:** Grant the Service Account Token Creator role ( `  roles/iam.serviceAccountTokenCreator  ` ) to the DTS service agent on the specific service account it needs to impersonate.
     
-    **Cause:** This error occurs when a Cloud Storage transfer run involves more than 10,000 files. For transfers exceeding 10,000 files, the service shards data into temporary staging tables created dynamically. This requires the `  bigquery.tables.create  ` permission even if a project is enrolled for high-volume transfers (or has an approved quota increase), the transfer still fails if this permission is missing.
+    ``` text
+    gcloud iam service-accounts add-iam-policy-binding service_account \
+    --member serviceAccount:service-destination_project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+    --role roles/iam.serviceAccountTokenCreator
+    ```
     
-    **Resolution:** To successfully transfer more than 10,000 files, ensure you meet both of the following requirements:
+    Where:
 
 <!-- end list -->
 
-1.  **Verify Quota and Feature Enrollment:** Ensure that your project is enrolled for high-volume Cloud Storage transfers (exceeding 10,000 files). If you need to transfer more than 10,000 files, [contact support](/bigquery/docs/getting-support) to request a quota increase for the maximum files per transfer run.
-
-2.  **Grant Required IAM Permissions:** Grant the service account or user identity running the transfer the `  bigquery.tables.create  ` permission on the destination dataset. This permission is included in the BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) and BigQuery Admin ( `  roles/bigquery.admin  ` ) roles. If you continue to see failures after granting the necessary permissions, you may need to [contact support](/bigquery/docs/getting-support) to confirm your allowlist status. : **Alternative:** If you can't grant the required permissions or increase the quota, you must reduce the number of files per transfer run to 10,000 or fewer; for example, by using more specific URI wildcards or splitting the transfer into multiple smaller configurations.
+  - service\_account is the email of the account used to authorize the transfer.
+  - destination\_project\_number is the project number where the transfer configuration resides. To learn how to identify your project number, see [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects) .
 
 ## Authorization and permission issues
 

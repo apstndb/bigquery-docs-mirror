@@ -36,7 +36,15 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ## Before you begin
 
-1.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
+1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+
+2.  Enable the BigQuery and Cloud Storage APIs.
+    
+    **Roles required to enable APIs**
+    
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+
+3.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 

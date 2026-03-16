@@ -2,6 +2,8 @@
 
 The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
+**Caution:** The assignee and the reservation must be in the same organization and in the same location. If you move the assignee to a different organization after the assignment is created, [reservations monitoring](/bigquery/docs/reservations-monitoring) will be inaccurate.
+
 ## Create reservation assignments
 
 To use the slots that you purchase, you create an *assignment* which assigns a project, folder, or organization to a slot reservation. You can't assign or allocate a specific number of slots at the assignment level; slots are managed and assigned at the reservation level.

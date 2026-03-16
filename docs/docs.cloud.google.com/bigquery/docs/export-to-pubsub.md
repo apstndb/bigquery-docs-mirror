@@ -92,6 +92,8 @@ Use the [`  EXPORT DATA  ` statement](/bigquery/docs/reference/standard-sql/expo
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  On the command line, run the continuous query by using the [`  bq query  ` command](/bigquery/docs/reference/bq-cli-reference#bq_query) with the following flags:
     

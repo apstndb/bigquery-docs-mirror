@@ -5791,6 +5791,8 @@ GROUP BY item;
  +----------+------------------*/
 ```
 
+In this example, `  max_groups_contributed  ` is set to `  2  ` because each professor contributes to at most two groups (that is, each has at most two distinct `  item  ` values). A value of `  2  ` or greater is needed to avoid dropping contributions from any professor. Alternatively, `  max_groups_contributed  ` could be set to `  NULL  ` to not limit contributions.
+
 #### Limit the groups in which a privacy unit ID can exist
 
 A privacy unit column can exist within multiple groups. For example, in the `  professors  ` table, the privacy unit column `  123  ` exists in the `  pencil  ` and `  pen  ` group. You can set `  max_groups_contributed  ` to different values to limit how many groups each privacy unit column will be included in.

@@ -75,6 +75,12 @@ Where:
 
 For more information about cross-project resource configuration, see [Configuring for a resource in a different project](/iam/docs/attach-service-accounts#attaching-different-project) in the Identity and Access Management service account impersonation documentation.
 
+When you enable the BigQuery Data Transfer Service API through the Google Cloud console, Google automatically attempts to grant the required permissions. However, if you enable the API or create transfers through Terraform, the Google Cloud CLI, or other programmatic methods, you must manually establish the required permissions. To authorize a transfer using a service account from a different project, consider the following:
+
+  - **Establish permissions for cross-project transfers:** To securely access cross-project data sources, grant the DTS service agent (resident in the destination project) the `  roles/iam.serviceAccountTokenCreator  ` role on the source service account identity.
+
+  - **Enforce the principle of least privilege:** Grant this role at the resource level (on the specific service account being used) rather than the project level.
+
 ### Manual Service Agent Creation
 
 If you want to trigger service agent creation before you interact with the API, for example, if you need to grant extra roles to the service agent, you can use one of the following approaches:

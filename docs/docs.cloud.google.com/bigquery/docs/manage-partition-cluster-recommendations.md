@@ -1,6 +1,6 @@
 # Manage partition and cluster recommendations
 
-This document describes how the partition and cluster recommender works, how to view your recommendations and insights, and how can apply partition and cluster recommendations.
+This document describes how the partition and cluster recommender works, how to view your recommendations and insights, and how to apply partition and cluster recommendations.
 
 ## How the recommender works
 
@@ -585,7 +585,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
     FROM
       DATASET.INFORMATION_SCHEMA.TABLES
     WHERE
-      table_name = 'DATASET.ORIGINAL_TABLE;'
+      table_name = 'ORIGINAL_TABLE'
     ```
     
     The output is the full data definition language (DDL) statement of ORIGINAL\_TABLE , including the `  PARTITION BY  ` clause. For more information about the arguments in your DDL output, see [`  CREATE TABLE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
@@ -637,7 +637,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
     
     ``` text
     ALTER TABLE DATASET.ORIGINAL_TABLE
-    RENAME TO DATASET.BACKUP_TABLE
+    RENAME TO BACKUP_TABLE
     ```
     
     Replace `  BACKUP_TABLE  ` with a name for your backup table—for example, `  backup_mytable  ` .
@@ -646,7 +646,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
     
     ``` text
     ALTER TABLE DATASET.COPIED_TABLE
-    RENAME TO DATASET.ORIGINAL_TABLE
+    RENAME TO ORIGINAL_TABLE
     ```
     
     Your original table is now clustered according to the cluster recommendation.
@@ -704,7 +704,7 @@ The following procedure uses an example recommendation to partition a table by t
     
     ``` text
     ALTER TABLE DATASET.ORIGINAL_TABLE
-    RENAME TO DATASET.BACKUP_TABLE
+    RENAME TO BACKUP_TABLE
     ```
     
     Replace `  BACKUP_TABLE  ` with a name for your backup table—for example, `  backup_mytable  ` .
@@ -713,7 +713,7 @@ The following procedure uses an example recommendation to partition a table by t
     
     ``` text
     ALTER TABLE DATASET.COPIED_TABLE
-    RENAME TO DATASET.ORIGINAL_TABLE
+    RENAME TO ORIGINAL_TABLE
     ```
     
     Your original table is now partitioned according to the partition recommendation.
