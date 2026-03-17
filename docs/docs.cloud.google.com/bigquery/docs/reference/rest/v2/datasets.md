@@ -103,7 +103,8 @@ Represents a BigQuery dataset.
   &quot;resourceTags&quot;: {
     string: string,
     ...
-  }
+  },
+  &quot;catalogSource&quot;: string
 }</code></pre></td>
 </tr>
 </tbody>
@@ -299,7 +300,9 @@ Output only. Same as `  type  ` in `  ListFormatDataset  ` . The type of the dat
   - DEFAULT - only accessible by owner and authorized accounts,
   - PUBLIC - accessible by everyone,
   - LINKED - linked dataset,
-  - EXTERNAL - dataset with definition in external metadata catalog.
+  - EXTERNAL - dataset with definition in external metadata catalog,
+  - BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API,
+  - BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API.
 
 `  linkedDatasetSource  `
 
@@ -371,6 +374,15 @@ Optional. Updates storageBillingModel for the dataset.
 `  map (key: string, value: string)  `
 
 Optional. The [tags](https://cloud.google.com/bigquery/docs/tags) attached to this dataset. Tag keys are globally unique. Tag key is expected to be in the namespaced format, for example "123456789012/environment" where 123456789012 is the ID of the parent organization or project resource for this tag key. Tag value is expected to be the short name, for example "Production". See [Tag definitions](https://cloud.google.com/iam/docs/tags-access-control#definitions) for more details.
+
+`  catalogSource  `
+
+`  string  `
+
+Output only. The origin of the dataset, one of:
+
+  - (Unset) - Native BigQuery Dataset
+  - BIGLAKE - Dataset is backed by a namespace stored natively in Biglake
 
 ## DatasetReference
 

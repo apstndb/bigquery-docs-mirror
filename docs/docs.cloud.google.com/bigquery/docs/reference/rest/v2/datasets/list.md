@@ -91,6 +91,8 @@ If successful, the response body contains data with the following structure:
       },
       &quot;friendlyName&quot;: string,
       &quot;location&quot;: string,
+      &quot;type&quot;: string,
+      &quot;catalogSource&quot;: string,
       &quot;externalDatasetReference&quot;: {
         object (ExternalDatasetReference)
       }
@@ -165,6 +167,28 @@ An alternate name for the dataset. The friendly name is purely decorative in nat
 `  string  `
 
 The geographic location where the dataset resides.
+
+`  datasets[].type  `
+
+`  string  `
+
+Output only. Same as `  type  ` in `  Dataset  ` . The type of the dataset, one of:
+
+  - DEFAULT - only accessible by owner and authorized accounts,
+  - PUBLIC - accessible by everyone,
+  - LINKED - linked dataset,
+  - EXTERNAL - dataset with definition in external metadata catalog,
+  - BIGLAKE\_ICEBERG - a Biglake dataset accessible through the Iceberg API,
+  - BIGLAKE\_HIVE - a Biglake dataset accessible through the Hive API.
+
+`  datasets[].catalogSource  `
+
+`  string  `
+
+Output only. The origin of the dataset, one of:
+
+  - (Unset) - Native BigQuery Dataset.
+  - BIGLAKE - Dataset is backed by a namespace stored natively in Biglake.
 
 `  datasets[].externalDatasetReference  `
 
