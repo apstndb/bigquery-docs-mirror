@@ -425,17 +425,13 @@ https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-migrati
 https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-local-inventories-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema
-https://docs.cloud.google.com/bigquery/docs/merchant-center-price-benchmarks-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-migration
 https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema
-https://docs.cloud.google.com/bigquery/docs/merchant-center-product-inventory-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-query-your-data
 https://docs.cloud.google.com/bigquery/docs/merchant-center-regional-inventories-schema
-https://docs.cloud.google.com/bigquery/docs/merchant-center-top-brands-schema
-https://docs.cloud.google.com/bigquery/docs/merchant-center-top-products-schema
 https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer
 https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers
 https://docs.cloud.google.com/bigquery/docs/metadata-caching-external-tables
