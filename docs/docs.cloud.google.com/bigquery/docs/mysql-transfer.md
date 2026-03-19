@@ -1,6 +1,6 @@
 # Load MySQL data into BigQuery
 
-You can load data from MySQL to BigQuery using the BigQuery Data Transfer Service for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
+You can load data from MySQL to BigQuery by using the BigQuery Data Transfer Service for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
 
 ## Before you begin
 
@@ -66,6 +66,22 @@ MySQL data transfers are subject to following limitations:
           - `  DATE  `
       - MySQL data transfers that don't use primary key or indexed columns can't support more than 2,000,000 records per table.
 
+### Incremental transfer limitations
+
+Incremental MySQL transfers are subject to the following limitations:
+
+  - You can only choose `  TIMESTAMP  ` columns as watermark columns.
+  - Incremental ingestion is only supported for assets with valid watermark columns.
+  - Values in a watermark column must be monotonically increasing.
+  - Incremental transfers cannot sync delete operations in the source table.
+  - A single transfer configuration can only support either incremental or full ingestion.
+  - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+  - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
+  - You cannot change the watermark column or the primary key after the first incremental ingestion run.
+  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](/bigquery/docs/clustered-tables#limitations) .
+  - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
+  - We recommend that you create indexes on the watermark column. This connector uses watermark columns for filters in incremental transfers, so indexing these columns can improve performance.
+
 ## Data ingestion options
 
 The following sections provide information about the data ingestion options when you set up a MySQL data transfer.
@@ -74,31 +90,109 @@ The following sections provide information about the data ingestion options when
 
 The MySQL connector supports the configuration for transport level security (TLS) to encrypt your data transfers into BigQuery. The MySQL connector supports the following TLS configurations:
 
-  - **Encrypt data, and verify CA and hostname** : This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted Certificate Authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
-      - If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode.
-      - Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
-  - **Encrypt data, and verify CA only** : This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
-      - Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
-  - **Encryption only** : This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
-      - This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
-      - Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
-  - **No encryption or verification** : This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
-      - We don't recommend using this mode in an environment where sensitive data is handled.
-      - We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
+  - The *Encrypt data, and verify CA and hostname* mode. This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted certificate authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
+    
+    If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode. Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
+
+  - The *Encrypt data, and verify CA only* mode. This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
+    
+    Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
+
+  - The *Encryption only* mode. This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
+    
+    This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
+    
+    Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
+
+  - The *No encryption or verification* mode. This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
+    
+    We don't recommend using this mode in an environment where sensitive data is handled. We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
 
 #### Trusted Server Certificate (PEM)
 
-If you are using either the **Encrypt data, and verify CA and hostname** mode or the **Encrypt data, and verify CA** mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
+If you are using either the *Encrypt data, and verify CA and hostname* mode or the *Encrypt data, and verify CA* mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
 
   - If you are using a certificate signed by a private CA within your organization or a self-signed certificate, you must provide the full certificate chain or the single self-signed certificate. This is required for certificates issued by internal CAs of managed cloud provider services, such as the Amazon Relational Database Service (RDS).
   - If your database server certificate is signed by a public CA (for example, Let's Encrypt, DigiCert, or GlobalSign), you don't need to provide a certificate. The root certificates for these public CAs are pre-installed and trusted by the BigQuery Data Transfer Service.
 
-You can provide PEM-encoded certificates in the **Trusted PEM Certificate** field when you create a MySQL transfer configuration, with the following requirements:
+You can specify PEM-encoded certificates in the **Trusted PEM Certificate** field in the transfer configuration, with the following requirements:
 
   - The certificate must be a valid PEM-encoded certificate chain.
   - The certificate must be entirely correct. Any missing certificates in the chain or incorrect content causes the TLS connection to fail.
-  - For a single certificate, you can provide single, self-signed certificate from the database server.
+  - For a single certificate, you can provide a single, self-signed certificate from the database server.
   - For a full certificate chain issued by a private CA, you must provide the full chain of trust. This includes the certificate from the database server and any intermediate and root CA certificates.
+
+### Full or incremental transfers
+
+You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a MySQL transfer](#set-up-a-mysql-data-transfer) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+**Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+
+You can configure a *full* data transfer to transfer all data from your MySQL datasets with each data transfer.
+
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+
+#### Append write mode
+
+The append write mode only inserts new rows to your destination table. This option strictly appends transferred data without checking for existing records, so this mode can potentially cause data duplication in the destination table.
+
+When you select the append mode, you must select a watermark column. A watermark column is required for the MySQL connector to track changes in the source table.
+
+For MySQL transfers, we recommend selecting a column that is only updated when the record was created, and that won't change with subsequent updates—for example, the `  CREATED_AT  ` column.
+
+#### Upsert write mode
+
+The upsert write mode either updates a row or inserts a new row in your destination table by checking for a primary key. You can specify a primary key to let the MySQL connector determine what changes are needed to keep your destination table up to date with your source table. If the specified primary key is present in the destination BigQuery table during a data transfer, then the MySQL connector updates that row with new data from the source table. If a primary key is not present during a data transfer, then the MySQL connector inserts a new row.
+
+When you select the upsert mode, you must select a watermark column and a primary key:
+
+  - A watermark column is required for the MySQL connector to track changes in the source table.
+    
+    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+
+<!-- end list -->
+
+  - The primary key can be one or more columns on your table that are required for the MySQL connector to determine if it needs to insert or update a row.
+    
+    Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
+    
+    To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
+
+### Incremental ingestion behavior
+
+When you make changes to the table schema in your data source, incremental data transfers from those tables are reflected in BigQuery in the following ways:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Changes to data source</th>
+<th>Incremental ingestion behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adding a new column</td>
+<td>A new column is added to the destination BigQuery table. Any previous records for this column will have null values.</td>
+</tr>
+<tr class="even">
+<td>Deleting a column</td>
+<td>The deleted column remains in the destination BigQuery table. New entries to this deleted column are populated with null values.</td>
+</tr>
+<tr class="odd">
+<td>Changing the data type in a column</td>
+<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
+</tr>
+<tr class="even">
+<td>Renaming a column</td>
+<td>The original column remains in the destination BigQuery table as is, while a new column is added to the destination table with the updated name.</td>
+</tr>
+</tbody>
+</table>
 
 ## Load MySQL data into BigQuery
 
@@ -112,16 +206,7 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 
 3.  In the **Source type** section, for **Source** , select **MySQL** .
 
-4.  In the **Transfer config name** section, for **Display name** , enter a name for the transfer. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-
-5.  In the **Schedule options** section, do the following:
-    
-      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
-      - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
-
-6.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
-
-7.  In the **Data source details** section, do the following:
+4.  In the **Data source details** section, do the following:
     
       - For **Network attachment** , select an existing network attachment or click **Create Network Attachment** . For more information, see the [Network connections](#network-connections) section of this document.
     
@@ -139,10 +224,27 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
     
       - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) .
     
-      - For **MySQL objects to transfer** , do one of the following:
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+    
+      - For **Ingestion type** , select **Full** or **Incremental** .
         
-          - Click **Browse** to select the MySQL tables that are required for the transfer, and then click **Select** .
-          - Manually enter the names of the tables in the MySQL objects to transfer.
+          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](#full_or_incremental_transfers) .
+    
+      - For **MySQL objects to transfer** , click **Browse** .
+        
+        Select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
+        
+          - If you have selected **Append** as your incremental write mode, you must select a column as the watermark column.
+          - If you have selected **Upsert** as your incremental write mode, you must select a column as the watermark column, and then select one or more columns as the primary key.
+
+5.  In the **Transfer config name** section, for **Display name** , enter a name for the transfer. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+
+6.  In the **Schedule options** section, do the following:
+    
+      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
+
+7.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
 
 8.  Optional: In the **Notification options** section, do the following:
     
@@ -184,12 +286,17 @@ Replace the following:
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user. connector.connectionType
       - `  connector.connectionType  ` (optional): the connection type to determine the connection URL. This can be `  SERVICE  ` , `  SID  ` , or `  TNS  ` . When not provided, this defaults to `  SERVICE  ` .
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
       - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
           - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
           - `  DISABLE  ` for no encryption or verification
       - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
+      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](#full_or_incremental_transfers) .
+      - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
+      - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
+      - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
       - `  assets  ` : a list of the names of the MySQL tables to be transferred from the MySQL database as part of the transfer.
 
 For example, the following command creates a MySQL transfer called `  My Transfer  ` :
@@ -207,8 +314,20 @@ bq mk
         "connector.database":"DB1",
         "connector.endpoint.host":"54.74.220.23",
         "connector.endpoint.port":3306
+        "ingestionType":"incremental",
+        "writeMode":"WRITE_MODE_APPEND",
+        "watermarkColumns":["createdAt","createdAt"],
+        "primaryKeys":[['dep_id'], ['report_by','report_title']],
         "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
         "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
+```
+
+When specifying multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  dep_id  ` corresponds to the table `  DB1/USER1/DEPARTMENT  ` , while `  report_by  ` and `  report_title  ` corresponds to the table `  DB1/USER1/EMPLOYEES  ` .
+
+``` text
+      "primaryKeys":[['dep_id'], ['report_by','report_title']],
+      "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
+  
 ```
 
 ### API
@@ -221,140 +340,179 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
+**Note:** On March 16, 2027, the MySQL connector will update some of its data type mapping. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+
 The following table maps MySQL data types to the corresponding BigQuery data types.
 
 <table>
 <colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>MySQL data type</th>
 <th>BigQuery data type</th>
+<th><a href="/bigquery/docs/transfer-changes#Mar16-mysql">Updated BigQuery data type</a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       BIT      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       TINYINT      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       BOOL      </code> , <code dir="ltr" translate="no">       BOOLEAN      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code>
 <p>In a MySQL database, the <code dir="ltr" translate="no">        BOOL       </code> and <code dir="ltr" translate="no">        BOOLEAN       </code> data types are internally stored as <code dir="ltr" translate="no">        TINYINT(1)       </code> , which supports values in the range <code dir="ltr" translate="no">        -128       </code> to <code dir="ltr" translate="no">        127       </code> . For this reason, <code dir="ltr" translate="no">        BOOL       </code> and <code dir="ltr" translate="no">        BOOLEAN       </code> data types are mapped to <code dir="ltr" translate="no">        INTEGER       </code> when transferred to BigQuery. For more information, see <a href="https://dev.mysql.com/doc/refman/8.4/en/numeric-type-syntax.html">Numeric Data Type Syntax</a> .</p></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       SMALLINT      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       MEDIUMINT      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       INT      </code> , <code dir="ltr" translate="no">       INTEGER      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       BIGINT      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       DOUBLE      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       DECIMAL      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       DATE      </code></td>
 <td><code dir="ltr" translate="no">       DATE      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       DATETIME      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       TIME      </code></td>
 <td><code dir="ltr" translate="no">       TIME      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       YEAR      </code></td>
 <td><code dir="ltr" translate="no">       DATE      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       CHAR      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       VARCHAR      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       BINARY      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       VARBINARY      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       TINYBLOB      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       TINYTEXT      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       BLOB      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       TEXT      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       MEDIUMBLOB      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       MEDIUMTEXT      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       LONGBLOB      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       LONGTEXT      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       ENUM      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       SET      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       JSON      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><code dir="ltr" translate="no">       JSON      </code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       GEOMETRY      </code></td>
+<td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
 </tr>
 </tbody>
 </table>
@@ -369,6 +527,6 @@ For pricing information about MySQL transfers, see [Data Transfer Service pricin
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](/bigquery/docs/dts-introduction) .
-  - For information on using transfers, including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](/bigquery/docs/working-with-transfers) .
+  - Read [an overview about the BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
+  - Learn about [managing transfers](/bigquery/docs/working-with-transfers) , including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history.
   - Learn how to [load data with cross-cloud operations](/bigquery/docs/load-data-using-cross-cloud-transfer) .

@@ -2419,9 +2419,9 @@ Azure - East US 2
 
 ## Specify locations
 
-When loading data, querying data, or exporting data, BigQuery determines the location to run the job based on the datasets referenced in the request. For example, if a query references a table in a dataset stored in the `  asia-northeast1  ` region, the query job will run in that region.
+To ensure that BigQuery queries are stored in a specific region or multi-region, specify the location with the job request. Specifying the location ensures that the query is run in the correct location when you use the global BigQuery endpoint.
 
-If a query does not reference any tables or other resources contained within datasets, and no destination table is provided, the query job will run in the `  US  ` multi-region. To ensure that BigQuery queries are stored in a specific region or multi-region, specify the location with the job request to route the query accordingly when using the global BigQuery endpoint. If you don't specify the location, queries may be temporarily stored in BigQuery router logs when the query is used for determining the processing location in BigQuery.
+If you don't specify the location, queries might be temporarily stored in BigQuery router logs when the query is used for determining the processing location in BigQuery.
 
 If the [project](/bigquery/docs/resource-hierarchy#projects) has a capacity-based reservation in a region other than the `  US  ` and the query does not reference any tables or other resources contained within datasets, then you must explicitly specify the location of the capacity-based reservation when submitting the job. Capacity-based commitments are tied to a location, such as `  US  ` or `  EU  ` . If you run a job outside the location of your capacity, pricing for that job automatically shifts to on-demand pricing.
 
@@ -2432,11 +2432,23 @@ You can specify the location to run a job explicitly in the following ways:
   - When you use the bq command-line tool, supply the `  --location  ` [global flag](/bigquery/docs/reference/bq-cli-reference#global_flags) and set the value to your location.
   - When you use the API, specify your region in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/jobs) .
 
-If the specified location does not match the location of every dataset involved in the request, including those read from and those written to, BigQuery tries to run the query as a [global query](/bigquery/docs/global-queries) . This declaration determines where your data is collected and processed.
+BigQuery returns an error if the specified location does not match the location of the datasets in the request. The location of every dataset involved in the request, including those read from and those written to, must match the location of the job as inferred or specified.
 
 Single-region locations don't match multi-region locations, even where the single-region location is contained within the multi-region location. Therefore, a query will be run as a [global query](/bigquery/docs/global-queries) if the location includes both a single-region location and a multi-region location. For example, if a job's location is set to `  US  ` , the job will be a global query if it references a dataset in `  us-central1  ` . Likewise, a job that references one dataset in `  US  ` and another dataset in `  us-central1  ` will be a global query. This is also true for `  JOIN  ` statements with tables in both a region and a multi-region.
 
 [Dynamic queries](/bigquery/docs/reference/standard-sql/procedural-language#execute_immediate) aren't parsed until they execute, so they can't be used to automatically determine the region of a query.
+
+## Default location
+
+If you don't [explicitly specify a location](/bigquery/docs/locations#specify_locations) , the location is determined in one of the following ways:
+
+  - The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `  asia-northeast1  ` region, the query job runs in `  asia-northeast1  ` .
+  - The region specified for a connection referenced in a request.
+  - The location of a destination table.
+
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, the default location is used. If default location isn't set, the job runs in the `  US  ` multi-region.
+
+For more information about configuring the default location, see [Specify global settings](/bigquery/docs/default-configuration#global-settings) .
 
 ## Locations, reservations, and jobs
 

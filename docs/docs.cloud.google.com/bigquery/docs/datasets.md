@@ -5,15 +5,20 @@ This document describes how to create datasets in BigQuery.
 You can create datasets in the following ways:
 
   - Using the Google Cloud console.
+
   - Using a SQL query.
+
   - Using the `  bq mk  ` command in the bq command-line tool.
+
   - Calling the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) API method.
+
   - Using the client libraries.
+
   - Copying an existing dataset.
-
-To see steps for copying a dataset, including across regions, see [Copying datasets](/bigquery/docs/copying-datasets) .
-
-Copying datasets is currently in [beta](https://cloud.google.com/products/#product-launch-stages) .
+    
+    To see steps for copying a dataset, including across regions, see [Copying datasets](/bigquery/docs/copying-datasets) .
+    
+    Copying datasets is currently in [beta](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to work with regular datasets that store data in BigQuery. To learn how to work with Spanner external datasets see [Create Spanner external datasets](/bigquery/docs/spanner-external-datasets) . To learn how to work with AWS Glue federated datasets see [Create AWS Glue federated datasets](/bigquery/docs/glue-federated-datasets) .
 
@@ -57,6 +62,10 @@ For more information about IAM roles in BigQuery, see [Predefined roles and perm
 **Note:** The creator of a dataset is automatically assigned the [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) role](/bigquery/docs/access-control#bigquery.dataOwner) on that dataset. So, a user or service account that has the ability to create a dataset also has the ability to delete it, even though that permission wasn't explicitly granted.
 
 ## Create datasets
+
+When you create a dataset, you typically specify a location where the data is stored. If you don't specify a location, the [default location](/bigquery/docs/default-configuration#global-settings) is used. For more information, see [Specify locations](/bigquery/docs/locations#specify_locations) .
+
+**Note:** If you choose `  EU  ` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://cloud.google.com/terms/service-terms#13-google-bigquery-service) .
 
 To create a dataset:
 
@@ -147,8 +156,6 @@ To create a dataset in a project other than your default project, add the projec
       - `  KEY_2 : VALUE_2  ` : the key-value pair that you want to set as the second label
     
       - `  LOCATION  ` : the dataset's [location](/bigquery/docs/locations) . After a dataset is created, the location can't be changed.
-        
-        **Note:** If you choose `  EU  ` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://cloud.google.com/terms/service-terms#13-google-bigquery-service) .
     
       - `  HOURS  ` : the duration in hours of the time travel window for the new dataset. The `  HOURS  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.
     
@@ -186,8 +193,6 @@ bq --location=LOCATION mk \
 Replace the following:
 
   - `  LOCATION  ` : the dataset's [location](/bigquery/docs/locations) . After a dataset is created, the location can't be changed. You can set a default value for the location by using the [`  .bigqueryrc  ` file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
-    
-    **Note:** If you choose **EU** for the dataset location, your Core BigQuery Customer Data resides in the EU. Core BigQuery Customer Data is defined in the [Service Specific Terms](https://cloud.google.com/terms/service-terms#13-google-bigquery-service) .
 
   - `  KMS_KEY_NAME  ` : the name of the default Cloud Key Management Service key used to protect newly created tables in this dataset unless a different key is supplied at the time of creation. You cannot create a Google-encrypted table in a dataset with this parameter set.
 

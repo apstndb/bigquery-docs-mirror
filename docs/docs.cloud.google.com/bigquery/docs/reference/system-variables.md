@@ -58,7 +58,7 @@ BigQuery supports the following system variables for [multi-statement queries](/
 <td><code dir="ltr" translate="no">       @@reservation      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Read and write</td>
-<td>[ <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> ]. Specifies the reservation where the job is run. Must be in the following format: <code dir="ltr" translate="no">       projects/               project_id              /locations/               location              /reservations/               reservation_id       </code> . The location of the reservation must match the location the query is running in.</td>
+<td>Lets you specify or override the reservation to use for running the following statements. Must be in the following format: <code dir="ltr" translate="no">       projects/               project_id              /locations/               location              /reservations/               reservation_id       </code> . The location of the reservation must match the location where the query is running. If <code dir="ltr" translate="no">       @@reservation      </code> is <code dir="ltr" translate="no">       NULL      </code> , the reservation is automatically detected based on <a href="/bigquery/docs/reservations-assignments">assignment settings</a> matching the query properties.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       @@row_count      </code></td>

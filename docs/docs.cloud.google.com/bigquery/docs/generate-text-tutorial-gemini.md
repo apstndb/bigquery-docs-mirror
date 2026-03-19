@@ -1,64 +1,63 @@
-# Generate text by using a Gemini model and the AI.GENERATE\_TEXT function
-
-This tutorial shows you how to create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`  gemini-2.5-flash  ` model](/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and then how to use that model with the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords from and perform sentiment analysis on movie reviews from the `  bigquery-public-data.imdb.reviews  ` public table.
-
-## Required roles
-
-To run this tutorial, you need the following Identity and Access Management (IAM) roles:
-
-  - Create and use BigQuery datasets, connections, and models: BigQuery Admin ( `  roles/bigquery.admin  ` ).
-  - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ).
-
-These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-  - Create a dataset: `  bigquery.datasets.create  `
-  - Create, delegate, and use a connection: `  bigquery.connections.*  `
-  - Set the default connection: `  bigquery.config.*  `
-  - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
-  - Create a model and run inference:
-      - `  bigquery.jobs.create  `
-      - `  bigquery.models.create  `
-      - `  bigquery.models.getData  `
-      - `  bigquery.models.updateData  `
-      - `  bigquery.models.updateMetadata  `
-
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+This tutorial shows you how to create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that's based on the [`  gemini-2.5-flash  ` model](/vertex-ai/generative-ai/docs/learn/models#gemini-models) , and how to use that model with the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to extract keywords and perform sentiment analysis.
 
 ## Costs
 
 In this document, you use the following billable components of Google Cloud:
 
-  - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
-  - **Vertex AI** : You incur costs for calls to the Vertex AI service that's represented by the remote model.
+  - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bigquery-ml-pricing) . You incur costs for the data that you process in BigQuery.
+  - [Vertex AI](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) . You incur costs for calls to the Vertex AI service that's represented by the remote model.
 
 To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
 
 New Google Cloud users might be eligible for a [free trial](/free) .
 
-For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
-
-For more information about Vertex AI pricing, see the [Vertex AI pricing](https://cloud.google.com/vertex-ai/pricing#generative_ai_models) page.
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](#clean-up) .
 
 ## Before you begin
 
-1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
-    
-    **Roles required to select or create a project**
-    
-      - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-    
-    **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+### Console
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  Make sure that you have the following role or roles on the project:
+    
+    #### Check for the roles
+    
+    1.  In the Google Cloud console, go to the **IAM** page.
+    
+    2.  Select the project.
+    
+    3.  In the **Principal** column, find all rows that identify you or a group that you're included in. To learn which groups you're included in, contact your administrator.
+    
+    4.  For all rows that specify or include you, check the **Role** column to see whether the list of roles includes the required roles.
+    
+    #### Grant the roles
+    
+    1.  In the Google Cloud console, go to the **IAM** page.
+    
+    2.  Select the project.
+    
+    3.  Click person\_add **Grant access** .
+    
+    4.  In the **New principals** field, enter your user identifier. This is typically the email address for a Google Account.
+    
+    5.  Click **Select a role** , then search for the role.
+    
+    6.  To grant additional roles, click add **Add another role** and add each additional role.
+    
+    7.  Click **Save** .
 
-3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
+### gcloud
+
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles:
     
-    **Roles required to enable APIs**
+    ``` text
+    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
+    ```
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : Your project ID.
+      - `  USER_IDENTIFIER  ` : The identifier for your user account. For example, `  myemail@example.com  ` .
+      - `  ROLE  ` : The IAM role that you grant to your user account.
 
 ## Create a dataset
 
@@ -76,23 +75,22 @@ Create a BigQuery dataset to store your ML model.
     
       - For **Dataset ID** , enter `  bqml_tutorial  ` .
     
-      - For **Location type** , select **Multi-region** , and then select **US (multiple regions in United States)** .
+      - For **Location type** , select **Multi-region** , and then select **US** .
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
 
 ### bq
 
-To create a new dataset, use the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag. For a full list of possible parameters, see the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) reference.
+To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` and a description of `  BigQuery ML tutorial dataset  ` :
+1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
     ``` text
-    bq --location=US mk -d \
-     --description "BigQuery ML tutorial dataset." \
-     bqml_tutorial
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
     ```
-    
-    Instead of using the `  --dataset  ` flag, the command uses the `  -d  ` shortcut. If you omit `  -d  ` and `  --dataset  ` , the command defaults to creating a dataset.
 
 2.  Confirm that the dataset was created:
     
@@ -114,9 +112,7 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 
 ## Create a connection
 
-Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. Create the connection in the same [location](/bigquery/docs/locations) as the dataset you created in the previous step.
-
-You can skip this step if you either have a default connection configured, or you have the BigQuery Admin role.
+Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) in the `  US  ` multiregion, where you created the dataset. Then get the connection's service account.
 
 Select one of the following options:
 
@@ -405,7 +401,7 @@ To grant the role, follow these steps:
 
 ## Create the remote model
 
-Create a remote model that represents a hosted Vertex AI model:
+Use the [`  CREATE MODEL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) statement to create a remote model that represents a hosted Vertex AI model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -427,7 +423,7 @@ Replace the following:
     
     When you [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
 
-The query takes several seconds to complete, after which the model `  gemini_model  ` appears in the `  bqml_tutorial  ` dataset. Because the query uses a `  CREATE MODEL  ` statement to create a model, there are no query results.
+The query takes several seconds to complete, after which the model `  gemini_model  ` appears in the `  bqml_tutorial  ` dataset. There are no query results.
 
 ## Perform keyword extraction
 
@@ -520,6 +516,10 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 ## Clean up
 
+To avoid incurring charges to your Google Cloud account for the resources used in this tutorial, either delete the project that contains the resources, or keep the project and delete the individual resources.
+
+### Delete the project
+
 **Caution** : Deleting a project has the following effects:
 
   - **Everything in the project is deleted.** If you used an existing project for the tasks in this document, when you delete it, you also delete any other work you've done in the project.
@@ -527,8 +527,63 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-In the Google Cloud console, go to the **Manage resources** page.
+Delete a Google Cloud project:
 
-In the project list, select the project that you want to delete, and then click **Delete** .
+``` text
+gcloud projects delete PROJECT_ID
+```
 
-In the dialog, type the project ID, and then click **Shut down** to delete the project.
+### Delete individual resources
+
+If you want to reuse the project, then delete the resources that you created for the tutorial.
+
+### Console
+
+1.  Go to the BigQuery page.
+
+2.  Delete the `  bqml_tutorial  ` dataset. Deleting the dataset also deletes the remote model.
+    
+    1.  In the **Explorer** pane, expand your project and click **Datasets**
+    
+    2.  In the **Datasets** list, click the dataset.
+    
+    3.  In the details pane, click delete **Delete** .
+    
+    4.  In the **Delete dataset** dialog, click **Delete** .
+
+3.  Delete the connection.
+    
+    1.  In the **Explorer** pane, expand your project and click **Connections** .
+    
+    2.  In the **Datasets** list, click the connection.
+    
+    3.  In the details pane, click delete **Delete** .
+    
+    4.  In the **Delete connection** dialog, enter `  delete  ` to confirm deletion.
+    
+    5.  Click **Delete** .
+
+### gcloud
+
+1.  Delete the `  bqml_tutorial  ` dataset and the remote model.
+    
+    ``` text
+    bq rm --dataset --recursive bqml_tutorial
+    ```
+
+2.  Delete the connection.
+    
+    ``` text
+    bq rm --connection PROJECT_ID.REGION.CONNECTION_ID
+    ```
+    
+    Replace the following:
+    
+      - PROJECT\_ID : your Google Cloud project ID
+      - REGION : the connection region
+      - CONNECTION\_ID : the connection ID
+
+## What's next
+
+  - [Choose a text generation function](/bigquery/docs/choose-text-generation-function)
+  - [Tune a model using your data](/bigquery/docs/generate-text-tuning)

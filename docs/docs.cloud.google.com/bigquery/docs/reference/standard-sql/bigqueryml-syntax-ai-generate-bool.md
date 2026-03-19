@@ -246,32 +246,9 @@ SELECT
 FROM mydataset.cities;
 ```
 
-## Best Practices
+## Manage Inference Costs
 
-This function passes your input to a Gemini model and incurs charges in Vertex AI each time it's called. For information about how to view these charges, see [Track costs](/bigquery/docs/generative-ai-overview#track_costs) . To minimize Vertex AI charges when you use `  AI.GENERATE_BOOL  ` on a subset of data using the `  LIMIT  ` clause, materialize the selected data to a table first. For example, the first of the following examples is preferable to the second one:
-
-``` text
-CREATE TABLE mydataset.cities
-AS (
-  SELECT city_name from mydataset.customers LIMIT 10.
-);
-
-SELECT
-  city,
-  AI.GENERATE_BOOL(
-    ('Is ', city, ' a US city?')).result
-FROM mydataset.cities;
-```
-
-``` text
-SELECT
-  city,
-  AI.GENERATE_BOOL(
-    ('Is ', city, ' a US city?')).result
-FROM (SELECT city_name from mydataset.customers LIMIT 10);
-```
-
-Writing the query results to a table beforehand helps you to ensure that you are sending as few rows as possible to the model.
+Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `  JOIN  ` or `  ORDER BY ... LIMIT  ` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table. For information about how to view inference charges that you incur in Vertex AI, see [Track costs](/bigquery/docs/generative-ai-overview#track_costs) .
 
 ## Use Vertex AI Provisioned Throughput
 

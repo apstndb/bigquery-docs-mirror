@@ -70,7 +70,6 @@ https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor
 https://docs.cloud.google.com/bigquery/docs/bi-engine-query
 https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity
 https://docs.cloud.google.com/bigquery/docs/biglake-audit-logging
-https://docs.cloud.google.com/bigquery/docs/biglake-intro
 https://docs.cloud.google.com/bigquery/docs/bigquery-cud
 https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction
 https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial

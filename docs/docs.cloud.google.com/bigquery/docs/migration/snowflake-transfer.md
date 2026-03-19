@@ -40,27 +40,73 @@ You can specify how data is loaded into BigQuery by selecting either the **Full*
 
 **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
-You can select **Full** to transfer all data from your Snowflake datasets with each data transfer.
+You can configure a *full* data transfer to transfer all data from your Snowflake datasets with each data transfer.
 
-Alternatively, you can select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you select **Incremental** for your data transfer, you must specify either the **Append** or **Upsert** write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
-#### **Append** write mode
+#### Append write mode
 
-The **Append** write mode only inserts new rows to your destination table. This option strictly appends transferred data without checking for existing records, so this mode can potentially cause data duplication in the destination table.
+The append write mode only inserts new rows to your destination table. This option strictly appends transferred data without checking for existing records, so this mode can potentially cause data duplication in the destination table.
 
-When you select the **Append** mode, you must select a watermark column. A watermark column is required for the Snowflake connector to track changes in the source table.
+When you select the append mode, you must select a watermark column. A watermark column is required for the Snowflake connector to track changes in the source table.
 
-#### **Upsert** write mode
+For Snowflake transfers, we recommend selecting a column that is only updated when the record was created, and that won't change with subsequent updates—for example, the `  CREATED_AT  ` column.
 
-The **Upsert** write mode either updates a row or inserts a new row in your destination table by checking for a primary key. You can specify a primary key to let the Snowflake connector determine what changes are needed to keep your destination table up-to-date with your source table. If the specified primary key is present in the destination BigQuery table during a data transfer, then the Snowflake connector updates that row with new data from the source table. If a primary key is not present during a data transfer, then the Snowflake connector inserts a new row.
+#### Upsert write mode
 
-When you select the **Upsert** mode, you must select a watermark column and a primary key:
+The upsert write mode either updates a row or inserts a new row in your destination table by checking for a primary key. You can specify a primary key to let the Snowflake connector determine what changes are needed to keep your destination table up to date with your source table. If the specified primary key is present in the destination BigQuery table during a data transfer, then the Snowflake connector updates that row with new data from the source table. If a primary key is not present during a data transfer, then the Snowflake connector inserts a new row.
+
+When you select the upsert mode, you must select a watermark column and a primary key:
+
+  - A watermark column is required for the Snowflake connector to track changes in the source table.
+    
+    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+
+<!-- end list -->
 
   - The primary key can be one or more columns on your table that are required for the Snowflake connector to determine if it needs to insert or update a row.
-      - Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
-      - To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the **Append** write mode instead.
+    
+    Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
+    
+    To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
 
 To use the upsert write mode with your incremental data transfer, you must [define primary keys in your custom schema file](/bigquery/docs/migration/snowflake-transfer#defining_primary_keys_for_incremental_transfers) .
+
+### Incremental ingestion behavior
+
+When you make changes to the table schema in your data source, incremental data transfers from those tables are reflected in BigQuery in the following ways:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Changes to data source</th>
+<th>Incremental ingestion behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adding a new column</td>
+<td>A new column is added to the destination BigQuery table. Any previous records for this column will have null values.</td>
+</tr>
+<tr class="even">
+<td>Deleting a column</td>
+<td>The deleted column remains in the destination BigQuery table. New entries to this deleted column are populated with null values.</td>
+</tr>
+<tr class="odd">
+<td>Changing the data type in a column</td>
+<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
+</tr>
+<tr class="even">
+<td>Renaming a column</td>
+<td>The original column remains in the destination BigQuery table as is, while a new column is added to the destination table with the updated name.</td>
+</tr>
+</tbody>
+</table>
 
 ## Before you begin
 

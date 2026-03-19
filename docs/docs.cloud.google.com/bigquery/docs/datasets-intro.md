@@ -8,9 +8,17 @@ A dataset is contained within a specific [project](/docs/overview#projects) . Da
 
 ## Location
 
-You specify a location for storing your BigQuery data when you create a dataset. For a list of BigQuery dataset locations, see [BigQuery locations](/bigquery/docs/locations) . After you create the dataset, the location cannot be changed , but you can [copy datasets to different locations](/bigquery/docs/copying-datasets) , or manually [move (recreate) the dataset in a different location](/bigquery/docs/managing-datasets#recreate-dataset) .
+You specify a location for storing your BigQuery data when you create a dataset. For a list of BigQuery dataset locations, see [BigQuery locations](/bigquery/docs/locations) . BigQuery stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms) . For example, if you choose `  EU  ` or an EU-based region for the dataset location, your Core BigQuery Customer Data resides in the EU.
 
-BigQuery processes queries in the same location as the dataset that contains the tables you're querying. BigQuery stores your data in the selected location in accordance with the [Service Specific Terms](https://cloud.google.com/terms/service-terms) .
+After you create the dataset, the location cannot be changed, but you can [copy datasets to different locations](/bigquery/docs/copying-datasets) , or manually [move (recreate) the dataset in a different location](/bigquery/docs/managing-datasets#recreate-dataset) .
+
+If you don't [explicitly specify a location](/bigquery/docs/locations#specify_locations) , the location is determined in one of the following ways:
+
+  - The location of the datasets referenced in the request. For example, if a query references a table or view in a dataset stored in the `  asia-northeast1  ` region, the query job runs in `  asia-northeast1  ` .
+  - The region specified for a connection referenced in a request.
+  - The location of a destination table.
+
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, the default location is used. If default location isn't set, the job runs in the `  US  ` multi-region.
 
 ## Data retention
 

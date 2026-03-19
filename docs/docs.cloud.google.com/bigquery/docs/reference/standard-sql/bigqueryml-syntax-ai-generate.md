@@ -350,7 +350,7 @@ SELECT
 
 ## Manage Inference Costs
 
-Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `  JOIN  ` or `  ORDER BY ... LIMIT  ` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table.
+Inference using the Vertex AI Gemini model can be a relatively expensive operation. Due to the nature of query processing in BigQuery, the actual number of rows processed by the model might differ from what you expect, particularly when running complex queries, such as `  JOIN  ` or `  ORDER BY ... LIMIT  ` clauses. To strictly control the number of rows processed by your complex queries, we recommended that you write the results of your query to a separate table beforehand, and then perform the Gemini inference directly on that materialized table. For information about how to view inference charges that you incur in Vertex AI, see [Track costs](/bigquery/docs/generative-ai-overview#track_costs) .
 
 ## Use Vertex AI Provisioned Throughput
 

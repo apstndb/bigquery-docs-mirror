@@ -22,7 +22,7 @@ Typical uses for a session include the following:
 
 ## Limitations
 
-  - Every query in a session is run in the location where the session was created.
+  - Every query in a session is run in the location where the session was created. If the location isn't specified, or if it can't be inferred from the query that creates the session, the session is created in the [default location](/bigquery/docs/default-configuration#global-settings) .
 
   - A session is automatically terminated after 24 hours of inactivity.
 

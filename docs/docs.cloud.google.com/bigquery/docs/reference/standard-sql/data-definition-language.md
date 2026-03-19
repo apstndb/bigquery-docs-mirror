@@ -12,6 +12,7 @@ Data definition language (DDL) statements let you create and modify BigQuery res
   - [Indexes](/bigquery/docs/search-intro)
   - [Capacity commitments and reservations](/bigquery/docs/reservations-intro)
   - [Row-level access policies](/bigquery/docs/managing-row-level-security)
+  - [Default configuration settings](/bigquery/docs/default-configuration)
 
 ## Required permissions
 
@@ -55,7 +56,7 @@ bq query --use_legacy_sql=false \
 
 Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
 
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values for DDL support:
+DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
 
   - `  CREATE_TABLE  `
   - `  CREATE_TABLE_AS_SELECT  `
@@ -7609,6 +7610,12 @@ The following options are supported:
 <td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
 </tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       default_location      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><p>The <a href="/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
+<p>Example: <code dir="ltr" translate="no">        `default_location` = 'europe-west6'       </code> . Sets the default location to the <code dir="ltr" translate="no">        europe-west6       </code> region.</p></td>
+</tr>
 </tbody>
 </table>
 
@@ -7776,6 +7783,12 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
 <td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       default_location      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><p>The <a href="/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>
+<p>Example: <code dir="ltr" translate="no">        `default_location` = 'europe-west6'       </code> . Sets the default location to the <code dir="ltr" translate="no">        europe-west6       </code> region.</p></td>
 </tr>
 </tbody>
 </table>
