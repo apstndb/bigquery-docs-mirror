@@ -345,6 +345,14 @@ Replace the following:
   - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
     **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
+## Dry run query estimates
+
+When you perform a dry run of a query that references the `  INFORMATION_SCHEMA.JOBS  ` view, the estimated bytes processed might be significantly higher than the actual bytes processed during query execution.
+
+This overestimation occurs because the dry run calculation only accounts for filters on the `  creation_time  ` partitioning column of the underlying data. It doesn't account for filters on [clustering columns](#schema) —like the implicit `  project_id  ` filter or the `  user_email  ` filter—if specified in the `  WHERE  ` clause. The actual data scanned can be significantly less than the dry run estimate, especially for projects or users with fewer jobs.
+
+If you don't specify a filter on `  creation_time  ` , partition pruning doesn't occur, and the dry run estimate reflects a scan of all partitions of the underlying data. However, data clustering might still reduce the actual bytes processed compared to this estimate.
+
 ## Examples
 
 To run the query against a project other than your default project, add the project ID in the following format:
@@ -359,6 +367,8 @@ Replace the following:
   - `  REGION_NAME  ` : the region for your project.
 
 For example, ``  `myproject`.`region-us-central1`.INFORMATION_SCHEMA.JOBS  `` .
+
+**Note:** For maximum query efficiency, filter on the `  creation_time  ` column whenever possible. This allows BigQuery to prune partitions, which improves query performance and reduces costs.
 
 ### Compare on-demand job usage to billing data
 

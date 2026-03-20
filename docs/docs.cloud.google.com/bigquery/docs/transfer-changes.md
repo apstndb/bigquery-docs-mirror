@@ -526,6 +526,88 @@ Summary of schema changes:
   - **Data type changes:** Revenue fields change from `  INTEGER  ` to `  FLOAT  ` in BigQuery to accurately represent floating-point micro values as returned by the API.
   - **New table and field naming convention:** Field names in new tables use `  camelCase  ` (for example, `  eventCount  ` ) for consistency with the Google Analytics API, replacing the previous `  snake_case  ` (for example, `  event_count  ` ).
 
+## Microsoft SQL Server
+
+The BigQuery Data Transfer Service for Microsoft SQL Server connector periodically updates to adapt to new changes introduced by Microsoft SQL Server.
+
+The following sections outline the changes organized by release date.
+
+### March 16, 2027
+
+The Microsoft SQL Server connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
+
+<table>
+<thead>
+<tr class="header">
+<th>Microsoft SQL Server data type</th>
+<th>Deprecated BigQuery data type mapping</th>
+<th>Updated BigQuery data type mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       datetime      </code></td>
+<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       datetime2      </code></td>
+<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       smalldatetime      </code></td>
+<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+</tr>
+</tbody>
+</table>
+
+You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
+
+Starting September 16, 2026, all transfer configurations will use the updated data type mapping by default. Support for the deprecated data type mapping will end on March 16, 2027.
+
+## MySQL
+
+The BigQuery Data Transfer Service for MySQL connector periodically updates to adapt to new changes introduced by MySQL.
+
+The following sections outline the changes organized by release date.
+
+### March 16, 2027
+
+The MySQL connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
+
+<table>
+<thead>
+<tr class="header">
+<th>MySQL data type</th>
+<th>Deprecated BigQuery data type mapping</th>
+<th>Updated BigQuery data type mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       JSON      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       JSON      </code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       GEOMETRY      </code></td>
+<td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
+</tr>
+</tbody>
+</table>
+
+You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
+
+Starting September 16, 2026, all transfer configurations will use the updated data type mapping by default. Support for the deprecated data type mapping will end on March 16, 2027.
+
 ## Google Play Console
 
 The BigQuery Data Transfer Service for Google Play connector periodically updates to support new reports and changes of current reports introduced by Google Play.
@@ -566,6 +648,47 @@ The column `  Product_Type  ` will change from a numeric representation to a hum
 #### New column
 
 A new column `  Sales_Channel  ` will be added to the Earnings report. This field provides information on where the sale originates from.
+
+## PostgreSQL
+
+The BigQuery Data Transfer Service for PostgreSQL connector periodically updates to adapt to new changes introduced by PostgreSQL.
+
+The following sections outline the changes organized by release date.
+
+### March 16, 2027
+
+The PostgreSQL connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
+
+<table>
+<thead>
+<tr class="header">
+<th>PostgreSQL data type</th>
+<th>Deprecated BigQuery data type mapping</th>
+<th>Updated BigQuery data type mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       timestamp[(p)][without time zone]      </code></td>
+<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       json      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       JSON      </code></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       jsonb      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       JSON      </code></td>
+</tr>
+</tbody>
+</table>
+
+You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
+
+Starting September 16, 2026, all transfer configurations will use the updated data type mapping by default. Support for the deprecated data type mapping will end on March 16, 2027.
 
 ## Salesforce Bulk API
 
@@ -655,6 +778,42 @@ The following table shows the fields deprecated with the Salesforce connector GA
 </tr>
 </tbody>
 </table>
+
+## ServiceNow
+
+The BigQuery Data Transfer Service for ServiceNow connector periodically updates to adapt to new changes introduced by ServiceNow.
+
+The following sections outline the changes organized by release date.
+
+### March 16, 2027
+
+The ServiceNow connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
+
+<table>
+<thead>
+<tr class="header">
+<th>ServiceNow data type</th>
+<th>Deprecated BigQuery data type mapping</th>
+<th>Updated BigQuery data type mapping</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       glide_list      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       list      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+</tr>
+</tbody>
+</table>
+
+You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
+
+Starting September 16, 2026, all transfer configurations will use the updated data type mapping by default. Support for the deprecated data type mapping will end on March 16, 2027.
 
 ## YouTube Reporting API
 

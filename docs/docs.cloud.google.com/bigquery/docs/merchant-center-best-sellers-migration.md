@@ -6,7 +6,7 @@ This product is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-This document helps you migrate from the older version of the best sellers reports to its [newer version](/bigquery/docs/merchant-center-best-sellers-schema) . The older version of the report that exports the [`  BestSellers_TopBrands_  `](/bigquery/docs/merchant-center-top-brands-schema) , [`  BestSellers_TopProducts_  `](/bigquery/docs/merchant-center-top-products-schema) , and [`  BestSellers_TopProducts_Inventory_  `](/bigquery/docs/merchant-center-product-inventory-schema) tables will be deprecated on September 1, 2025.
+This document helps you migrate from the older version of the best sellers reports to its [newer version](/bigquery/docs/merchant-center-best-sellers-schema) . The older version of the report that exports the `  BestSellers_TopBrands_  ` , `  BestSellers_TopProducts_  ` , and `  BestSellers_TopProducts_Inventory_  ` tables will be deprecated on September 1, 2025.
 
 The new best sellers report offers the following:
 
@@ -47,7 +47,7 @@ The old report contains a single aggregation of best sellers data over an unspec
 
 ### Compare `     BestSellers_TopBrands    ` with `     BestSellersBrandWeekly    ` and `     BestSellersBrandMonthly    `
 
-The following table helps you identify fields in the [`  BestSellers_TopBrands  ` table](/bigquery/docs/merchant-center-top-brands-schema#schema) that have equivalent replacements in the [`  BestSellersBrandWeekly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) and [`  BestSellersBrandMonthly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) tables. Replacements for some fields from the old table aren't available.
+The following table helps you identify fields in the `  BestSellers_TopBrands  ` table that have equivalent replacements in the [`  BestSellersBrandWeekly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) and [`  BestSellersBrandMonthly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-brand) tables. Replacements for some fields from the old table aren't available.
 
 <table>
 <thead>
@@ -130,7 +130,7 @@ The following table helps you identify fields in the [`  BestSellers_TopBrands  
 
 ### Compare `     BestSellers_TopProducts    ` with `     BestSellersProductClusterWeekly    ` and `     BestSellersProductClusterMonthly    `
 
-The following table helps you identify fields in the [`  BestSellers_TopProducts  ` table](/bigquery/docs/merchant-center-top-products-schema#schema) that have equivalent replacements in the [`  BestSellersProductClusterWeekly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) and [`  BestSellersProductClusterMonthly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) tables. Replacements for some fields from the old table aren't available.
+The following table helps you identify fields in the `  BestSellers_TopProducts  ` table that have equivalent replacements in the [`  BestSellersProductClusterWeekly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) and [`  BestSellersProductClusterMonthly  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-product-cluster) tables. Replacements for some fields from the old table aren't available.
 
 <table>
 <thead>
@@ -261,7 +261,7 @@ The following table helps you identify fields in the [`  BestSellers_TopProducts
 
 ### Inventory mapping of best sellers data
 
-In the old best sellers report, the best sellers data is mapped to the merchant's inventory data in a [new generated table](/bigquery/docs/merchant-center-product-inventory-schema#schema) , using the `  rank_id  ` column from the [`  TopProducts  ` table](/bigquery/docs/merchant-center-top-products-schema#schema) .
+In the old best sellers report, the best sellers data is mapped to the merchant's inventory data in a new generated table, using the `  rank_id  ` column from the `  TopProducts  ` table.
 
 In the new best sellers report, the `  entity_id  ` column is exported in the `  BestSellersProductCluster  ` tables, which is mapped to all the product IDs from the merchant's inventory in the [`  BestSellersEntityProductMapping  `](/bigquery/docs/merchant-center-best-sellers-schema#best-sellers-mapping) table.
 

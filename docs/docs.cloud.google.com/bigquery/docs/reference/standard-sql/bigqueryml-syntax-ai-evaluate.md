@@ -16,6 +16,7 @@ FROM
     [, model => 'MODEL']
     [, id_cols => ID_COLS]
     [, horizon => HORIZON]
+    [, context_window => CONTEXT_WINDOW]
   )
 ```
 
@@ -66,6 +67,93 @@ FROM
       - `  ARRAY<INT64>  `
 
   - `  HORIZON  ` : an `  INT64  ` value that specifies the number of forecasted time points to evaluate. The default value is `  1024  ` . The valid input range is `  [1, 10,000]  ` .
+
+  - `  CONTEXT_WINDOW  ` : an `  INT64  ` value that specifies the context window length used by BigQuery ML's built-in TimesFM model. The context window length determines how many of the most recent data points from the input time series are used by the model. For example, if your time series date range is March 1 to April 15, data points are selected starting at April 15 and working backwards. Valid values for models are as follows:
+    
+    <table>
+    <thead>
+    <tr class="header">
+    <th><strong>Model Name</strong></th>
+    <th><strong>Supported Context Window Length</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>TimesFM 2.0</td>
+    <td>64, 128, 256, 512, 1024, 2048</td>
+    </tr>
+    <tr class="even">
+    <td>TimesFM 2.5</td>
+    <td>64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    If you don't specify a `  CONTEXT_WINDOW  ` value, the `  AI.EVALUATE  ` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. The following table shows the relationships between the number of time series data points in the input data, the selected context window length, and the corresponding supported TimesFM model name:
+    
+    <table>
+    <thead>
+    <tr class="header">
+    <th><strong>Number of time series data points</strong></th>
+    <th><strong>Context window length</strong></th>
+    <th><strong>Supported Model Names</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td>(1, 64]</td>
+    <td>64</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="even">
+    <td>(65, 128]</td>
+    <td>128</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="odd">
+    <td>(129, 256]</td>
+    <td>256</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="even">
+    <td>(257, 512]</td>
+    <td>512</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="odd">
+    <td>(513, 1024]</td>
+    <td>1,024</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="even">
+    <td>(1025, 2048]</td>
+    <td>2,048</td>
+    <td>TimesFM 2.0, TimesFM 2.5</td>
+    </tr>
+    <tr class="odd">
+    <td>(2049, 4096]</td>
+    <td>4,096</td>
+    <td>TimesFM 2.5</td>
+    </tr>
+    <tr class="even">
+    <td>(4097, 8192]</td>
+    <td>8,192</td>
+    <td>TimesFM 2.5</td>
+    </tr>
+    <tr class="odd">
+    <td>(8193, 15360]</td>
+    <td>15,360</td>
+    <td>TimesFM 2.5</td>
+    </tr>
+    <tr class="even">
+    <td>15360</td>
+    <td>15,360</td>
+    <td>TimesFM 2.5</td>
+    </tr>
+    </tbody>
+    </table>
+    
+    For the `  TimesFM 2.0  ` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `  TimesFM 2.5  ` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
 ## Output
 

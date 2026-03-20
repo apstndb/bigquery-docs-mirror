@@ -30,68 +30,11 @@ When you [generate code using the SQL editor](/bigquery/docs/write-sql-gemini) ,
 
 ### Specify the default organization-level or project-level location
 
-A BigQuery administrator can specify an organization-level or project-level default location where Gemini requests are processed. The default location is cached for the duration of the user's session while they are editing within the current SQL editor tab.
+A BigQuery administrator can specify an organization-level or project-level default location where Gemini requests are processed. The default location is cached for the duration of the user's session while they are editing within the current SQL editor tab. The default location is used when Gemini in BigQuery operations don't explicitly specify a location and a location cannot be inferred from the request.
 
-#### Prerequisite
+For more information on configuring the default location, see [Specify global settings](/bigquery/docs/default-configuration#global-settings) .
 
-To the specify the organization-level or project-level default location where data is processed, a BigQuery administrator must first opt in to the BigQuery feature by completing this [form](https://docs.google.com/forms/d/e/1FAIpQLSexsL9QmmqL7pOS_WIX02nntswdvaUucOXDamE9j7zuOX5suA/viewform) and then receive an email confirming that the feature was enabled.
-
-#### Required roles
-
-To specify a default organization or project location, you must be granted the [BigQuery Admin role](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ), which includes the `  bigquery.config.update  ` permission that is required to specify a configuration setting. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
-
-#### Set the default location
-
-To set an organization-level or project-level default location, complete the following steps:
-
-1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the navigation pane, click explore **Explorer** .
-
-3.  Select the organization or project for which you want to specify a default location.
-
-4.  In the BigQuery SQL editor, enter the following statement:
-    
-      - Organization-level settings:
-        
-        ``` text
-        ALTER ORGANIZATION SET OPTIONS(default_location='my-default-region');
-        ```
-    
-      - Project-level settings:
-        
-        ``` text
-        ALTER PROJECT SET OPTIONS(default_location='my-default-region');
-        ```
-
-This command sets the value of `  default_location  ` to `  my-default-region  ` .
-
-### Verify default location for data processing
-
-To verify the default location for data processing of a Gemini in BigQuery-assisted SQL query, follow these steps:
-
-1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the BigQuery Studio SQL editor, run the following query:
-    
-    ``` text
-    SELECT
-        COALESCE(
-            (
-                SELECT
-                    option_value
-                FROM INFORMATION_SCHEMA.PROJECT_OPTIONS
-                WHERE option_name = 'default_location'
-            ),
-            (
-                SELECT
-                    option_value
-                FROM INFORMATION_SCHEMA.ORGANIZATION_OPTIONS
-                WHERE option_name = 'default_location'
-            ));
-    ```
-
-The result shows the `  default_location  ` value set to the value you defined as `  my-default-region  ` . This query returns the default location of the project if defined. Otherwise, the query returns the default location for the organization. The location where Gemini in BigQuery operations run is not explicitly specified by the user.
+For more information on verifying the default location configuration, see [Retrieve configuration settings](/bigquery/docs/default-configuration#retrieve-configuration) .
 
 ## BigQuery data insights
 

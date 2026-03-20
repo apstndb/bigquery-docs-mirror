@@ -57,13 +57,13 @@ SET OPTIONS
 
   - `  DEPLOY_MODEL  ` : a `  BOOL  ` value that determines the model's deployment status in Vertex AI. You can use this option to control costs by undeploying or redeploying the model as needed. We recommend undeploying an unused Vertex AI endpoint, because otherwise the endpoint continues to generate charges for the compute resources that it uses, even when it is idle. For more information on Vertex AI compute pricing, see [Prediction and explanation](https://cloud.google.com/vertex-ai/pricing#prediction-prices) .
     
-    You can only use this option with an [open model that BigQuery manages in Vertex AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+    You can only use this option with an [open model that BigQuery manages in Vertex AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
     
     If the model was previously undeployed, setting this option to `  TRUE  ` redeploys the model to a Vertex AI endpoint. If the model is already deployed, this operation has no effect. Model redeployment requires a "cold start" period while the endpoint resources are provisioned. The cold start period can take up to 30 minutes, depending on the size of the model and the number of [machine replicas](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#max-replica-count) specified for the model.
     
     Setting this option to `  FALSE  ` undeploys the model from a Vertex AI endpoint. If the model is already undeployed, this operation has no effect.
 
-  - `  ENDPOINT_IDLE_TTL  ` : an `  INTERVAL  ` value that specifies the duration of inactivity after which the model is automatically undeployed from the Vertex AI endpoint. You can only use this option with an [open model that BigQuery manages in Vertex AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+  - `  ENDPOINT_IDLE_TTL  ` : an `  INTERVAL  ` value that specifies the duration of inactivity after which the model is automatically undeployed from the Vertex AI endpoint. You can only use this option with an [open model that BigQuery manages in Vertex AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) .
     
     To enable automatic undeployment, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
     

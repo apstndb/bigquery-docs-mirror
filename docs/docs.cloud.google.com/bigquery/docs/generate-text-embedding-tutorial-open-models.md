@@ -1,11 +1,5 @@
 # Generate text embeddings by using an open model and the AI.GENERATE\_EMBEDDING function
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
-
 This tutorial shows you how to create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) that's based on the open-source text embedding model [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) , and then how to use that model with the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to embed movie reviews from the `  bigquery-public-data.imdb.reviews  ` public table.
 
 ## Required permissions
@@ -86,23 +80,22 @@ Create a BigQuery dataset to store your ML model.
     
       - For **Dataset ID** , enter `  bqml_tutorial  ` .
     
-      - For **Location type** , select **Multi-region** , and then select **US (multiple regions in United States)** .
+      - For **Location type** , select **Multi-region** , and then select **US** .
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
 
 ### bq
 
-To create a new dataset, use the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag. For a full list of possible parameters, see the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) reference.
+To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` and a description of `  BigQuery ML tutorial dataset  ` :
+1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
     ``` text
-    bq --location=US mk -d \
-     --description "BigQuery ML tutorial dataset." \
-     bqml_tutorial
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
     ```
-    
-    Instead of using the `  --dataset  ` flag, the command uses the `  -d  ` shortcut. If you omit `  -d  ` and `  --dataset  ` , the command defaults to creating a dataset.
 
 2.  Confirm that the dataset was created:
     

@@ -8,15 +8,11 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
 
 ## Before you begin
 
-1.  Enable the BigQuery API:
+1.  Enable the BigQuery API.
     
     **Roles required to enable APIs**
     
     To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-    
-    ``` text
-    gcloud services enable bigquery
-    ```
     
     For new projects, the BigQuery API is automatically enabled.
 
@@ -227,11 +223,11 @@ To delete the project:
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-Delete a Google Cloud project:
+In the Google Cloud console, go to the **Manage resources** page.
 
-``` text
-gcloud projects delete PROJECT_ID
-```
+In the project list, select the project that you want to delete, and then click **Delete** .
+
+In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete the resources
 

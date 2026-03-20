@@ -1000,11 +1000,11 @@ To delete the project:
 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
-Delete a Google Cloud project:
+In the Google Cloud console, go to the **Manage resources** page.
 
-``` text
-gcloud projects delete PROJECT_ID
-```
+In the project list, select the project that you want to delete, and then click **Delete** .
+
+In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ### Delete the resources
 

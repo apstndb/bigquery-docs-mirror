@@ -253,7 +253,7 @@ You can also create a listing from a dataset by doing the following:
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** To request support or provide feedback for this feature, contact <bq-data-sharing-feedback@google.com> .
+Note: To request support or provide feedback for this feature, contact <bq-data-sharing-feedback@google.com> .
 
 You can share [SQL stored procedures](/bigquery/docs/procedures) when creating listings with BigQuery datasets. Since stored procedures can create, drop, and manipulate tables, as well as invoke other stored procedures, additional authorization is needed.
 

@@ -1,6 +1,6 @@
 # The CREATE MODEL statement for self-deployed open models
 
-This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over open text embedding ( [Preview](https://cloud.google.com/products#product-launch-stages) ) and text generation models deployed to [Vertex AI](/vertex-ai/docs) . When you self-deploy a model, the model runs within your project and VPC network, giving you full control over the deployment environment. We recommend using self-deployed models when your application requires custom control over model weights, hardware configurations, compliance, or location. For more information, see the [Overview of self-deployed models](/vertex-ai/generative-ai/docs/model-garden/self-deployed-models) and read about [when to use self-deplyed models](/vertex-ai/generative-ai/docs/open-models/choose-serving-option#self-deploy-model-garden) .
+This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over open text embedding and text generation models deployed to [Vertex AI](/vertex-ai/docs) . When you self-deploy a model, the model runs within your project and VPC network, giving you full control over the deployment environment. We recommend using self-deployed models when your application requires custom control over model weights, hardware configurations, compliance, or location. For more information, see the [Overview of self-deployed models](/vertex-ai/generative-ai/docs/model-garden/self-deployed-models) and read about [when to use self-deployed models](/vertex-ai/generative-ai/docs/open-models/choose-serving-option#self-deploy-model-garden) .
 
 After you create a remote model, you can use it with the [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function, depending on the model type.
 
@@ -431,12 +431,6 @@ To find supported Hugging Face models, do the following:
 If you are creating a remote model over a [supported open model](#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement.
 
 ### Automatically deployed models
-
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
 
 If you choose to automatically deploy the open model, the service uses the credentials of the connection that you specify in the `  CREATE MODEL  ` statement to deploy the open model to a Vertex AI [shared public endpoint](/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) . The Vertex AI endpoint is created in the same project in which you create the remote model. The Vertex AI resource IDs for the BigQuery-managed model and endpoint begin with `  bq-managed-  ` . The location of the endpoint is determined as follows:
 

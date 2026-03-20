@@ -90,6 +90,7 @@ Add ServiceNow data into BigQuery by setting up a transfer configuration using o
       - For **Password** , enter the ServiceNow password.
       - For **Client ID** , enter the client ID from your OAuth credentials. To generate credentials, see [Create OAuth Credentials](https://docs.oracle.com/cd/B13789_01/server.101/b10759/statements_9013.htm) .
       - For **Client secret** , enter the client secret from your OAuth credentials.
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](/bigquery/docs/servicenow-transfer#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-servicenow) .
       - For **ServiceNow tables to transfer** , enter the names of the ServiceNow tables to transfer, or click **Browse** and select the tables that you want to transfer.
       - For **Value type** , choose one of the following:
           - To transfer the values stored in the database, choose **Actual** .
@@ -195,6 +196,11 @@ Replace the following:
     <td>Optional</td>
     <td>Specify a network attachment to configure this data transfer to use a single, consistent IP address. You can use this option if your ServiceNow instance is secured to only accept traffic from specific IP addresses. For more information about defining IP addresses in ServiceNow, see <a href="https://www.servicenow.com/docs/csh?topicname=sc-ip-addresses-access-allowlist.html&amp;version=latest">Define allowed ServiceNow internal IP addresses</a> .</td>
     </tr>
+    <tr class="odd">
+    <td><code dir="ltr" translate="no">           connector.legacyMapping          </code></td>
+    <td>Required</td>
+    <td>Set to <code dir="ltr" translate="no">           true          </code> (default) to use the <a href="#data_type_mapping">legacy data type mapping</a> . Set to <code dir="ltr" translate="no">           false          </code> to use the updated data type mapping. For more information about the data type mapping updates, see <a href="/bigquery/docs/transfer-changes#Mar16-servicenow">March 16, 2027</a> .</td>
+    </tr>
     </tbody>
     </table>
     
@@ -224,6 +230,8 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
+**Note:** On March 16, 2027, the ServiceNow connector will update some of its data type mapping. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-servicenow) .
+
 The following table shows how data types are mapped in a ServiceNow data transfer:
 
 <table>
@@ -231,68 +239,94 @@ The following table shows how data types are mapped in a ServiceNow data transfe
 <tr class="header">
 <th>ServiceNow data type</th>
 <th>BigQuery data type</th>
+<th><a href="/bigquery/docs/transfer-changes#Mar16-servicenow">Updated BigQuery data type</a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       decimal      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT64      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       integer      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       boolean      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       glide_date      </code></td>
 <td><code dir="ltr" translate="no">       DATE      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       glide_date_time      </code></td>
 <td><code dir="ltr" translate="no">       DATETIME      </code></td>
+<td></td>
 </tr>
 <tr class="even">
+<td><code dir="ltr" translate="no">       glide_list      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       ARRAY      </code></td>
+</tr>
+<tr class="odd">
 <td><code dir="ltr" translate="no">       glide_time      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
+<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">       reference      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">       currency      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">       sys_class_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">       domain_id      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code dir="ltr" translate="no">       domain_path      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code dir="ltr" translate="no">       guid      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       translated_html      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
-<td><code dir="ltr" translate="no">       journal      </code></td>
+<td><code dir="ltr" translate="no">       translated_html      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
+<td><code dir="ltr" translate="no">       journal      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
+</tr>
+<tr class="even">
 <td><code dir="ltr" translate="no">       string      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       list      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><code dir="ltr" translate="no">       ARRAY      </code></td>
 </tr>
 </tbody>
 </table>

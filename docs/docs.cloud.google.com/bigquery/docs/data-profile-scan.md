@@ -200,9 +200,9 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
       - **On-demand** : Run the data profile scan on demand.
     
-      - **One-time run** : Run the data profile scan once now, and remove the scan after the time-to-live period. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
-    
-      - **Time to live** : The time-to-live value defines the duration a data profile scan remains active after execution. A data profile scan without a specified time-to-live is automatically removed after 24 hours. The time-to-live can range from 0 seconds (immediate deletion) to 365 days.
+      - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+        
+          - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
 12. Click **Continue** .
 
@@ -529,7 +529,9 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
         
           - **On-demand** : Run the data profile scans on demand.
         
-          - **One-time run** : Run the data profile scan once now, and remove the scan after the time-to-live period. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+          - **One-time run** : Run the data profile scan once now, and remove the scan after the auto-deletion time. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+            
+              - **Set post-scan results auto-deletion** : The auto-deletion time defines the duration a data profile scan remains active after execution. A data profile scan without a specified auto-deletion time is automatically removed after 24 hours. The auto-deletion time can range from 0 seconds (immediate deletion) to 365 days.
 
 9.  Click **Continue** .
 

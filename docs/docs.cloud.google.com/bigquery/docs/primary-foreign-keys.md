@@ -96,7 +96,7 @@ Primary keys and foreign keys are subject to the following limitations:
   - Key constraints are unenforced in BigQuery. You are responsible for maintaining the constraints at all times. Queries over tables with violated constraints might return incorrect results.
   - Primary keys can't exceed 16 columns.
   - Foreign keys must have values that are present in the referenced table column. These values can be `  NULL  ` .
-  - Primary keys and foreign keys must be of one of the following types: `  BIGNUMERIC  ` , `  BOOLEAN  ` , `  DATE  ` , `  DATETIME  ` , `  INT64  ` , `  NUMERIC  ` , `  STRING  ` , or `  TIMESTAMP  ` .
+  - Primary keys and foreign keys must be of one of the following types: `  BIGNUMERIC  ` , `  BOOLEAN  ` , `  BYTES  ` , `  DATE  ` , `  DATETIME  ` , `  INT64  ` , `  NUMERIC  ` , `  STRING  ` , or `  TIMESTAMP  ` .
   - Primary keys and foreign keys can only be set on top-level columns.
   - Primary keys can't be named.
   - Tables with primary key constraints can't be renamed.

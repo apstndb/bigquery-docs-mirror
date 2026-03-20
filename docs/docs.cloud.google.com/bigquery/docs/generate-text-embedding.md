@@ -5,7 +5,7 @@ This document shows you how to create a BigQuery ML [remote model](/bigquery/doc
 The following types of remote models are supported:
 
   - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Vertex AI embedding models](/vertex-ai/generative-ai/docs/models#embeddings-models) .
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) over [supported open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) over [supported open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) .
 
 ## Required roles
 
@@ -425,11 +425,38 @@ If you are creating a remote model over a [supported open model](/bigquery/docs/
 
 Create a remote model:
 
+### Vertex AI models
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  Using the SQL editor, create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
+    
+    ``` text
+    CREATE OR REPLACE MODEL
+    `PROJECT_ID.DATASET_ID.MODEL_NAME`
+    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
+    OPTIONS (ENDPOINT = 'ENDPOINT');
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : your project ID.
+    
+      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](/bigquery/docs/locations) as the connection that you are using.
+    
+      - `  MODEL_NAME  ` : the name of the model.
+    
+      - `  REGION  ` : the region used by the connection.
+    
+      - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
+        
+        You can get this value by [viewing the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    
+      - `  ENDPOINT  ` : the name of an embedding model to use. For more information, see [`  ENDPOINT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+        
+        The Vertex AI model that you specify must be available in the location where you are creating the remote model. For more information, see [Locations](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
+
 ### New open models
-
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
@@ -565,37 +592,6 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
     
       - `  ENDPOINT_ID  ` : the ID of the HTTPS endpoint used by the open model. You can get the endpoint ID by locating the open model on the [Online prediction](https://console.cloud.google.com/vertex-ai/online-prediction/endpoints) page and copying the value in the **ID** field.
 
-### All other models
-
-1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  Using the SQL editor, create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
-    
-    ``` text
-    CREATE OR REPLACE MODEL
-    `PROJECT_ID.DATASET_ID.MODEL_NAME`
-    REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = 'ENDPOINT');
-    ```
-    
-    Replace the following:
-    
-      - `  PROJECT_ID  ` : your project ID.
-    
-      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](/bigquery/docs/locations) as the connection that you are using.
-    
-      - `  MODEL_NAME  ` : the name of the model.
-    
-      - `  REGION  ` : the region used by the connection.
-    
-      - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
-        
-        You can get this value by [viewing the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
-    
-      - `  ENDPOINT  ` : the name of an embedding model to use. For more information, see [`  ENDPOINT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
-        
-        The Vertex AI model that you specify must be available in the location where you are creating the remote model. For more information, see [Locations](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
-
 ## Generate text embeddings
 
 Generate text embeddings with the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) by using text data from a table column or a query.
@@ -686,7 +682,7 @@ FROM
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
+Note: To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
 
 Generate text embeddings by using a remote model over an open embedding model:
 

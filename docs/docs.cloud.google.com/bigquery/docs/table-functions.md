@@ -37,7 +37,7 @@ AS (
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** To request support or provide feedback for this feature, email <bq-dcr-eng@google.com> .
+Note: To request support or provide feedback for this feature, email <bq-dcr-eng@google.com> .
 
 You can set TVF parameters to be tables. Following the table parameter name, you must specify the required table schema explicitly, the same way that you specify the fields of a struct. The table argument that you pass to the TVF can contain additional columns besides those specified in the parameter schema, and the columns can appear in any order.
 

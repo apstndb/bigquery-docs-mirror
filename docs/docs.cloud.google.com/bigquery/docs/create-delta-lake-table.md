@@ -14,12 +14,6 @@ Delta Lake tables also support all BigLake features when you configure them as [
 
 ## Before you begin
 
-Enable the BigQuery Connection and BigQuery Reservation APIs.
-
-**Roles required to enable APIs**
-
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
-
 1.  In the Google Cloud console, on the project selector page, select or create a Google Cloud project.
     
     **Roles required to select or create a project**

@@ -113,6 +113,15 @@ There is no default limit on how many TiB in queries a user can run per day. You
 <td>100 GB</td>
 <td>A single copy job that is a part of a <a href="/bigquery/docs/global-queries">global query</a> can't transfer more than 100 GB.</td>
 </tr>
+<tr class="even">
+<td>Global project-level options updates</td>
+<td>5</td>
+<td><p>When you run a DDL statement that changes <a href="/bigquery/docs/default-configuration#global-settings">global configuration options</a> , you can run up to five statements every 10 seconds. This limit applies to the following DDL statements:</p>
+<ul>
+<li><a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement"><code dir="ltr" translate="no">          ALTER PROJECT SET OPTIONS         </code></a></li>
+<li><a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement"><code dir="ltr" translate="no">          ALTER ORGANIZATION SET OPTIONS         </code></a></li>
+</ul></td>
+</tr>
 </tbody>
 </table>
 

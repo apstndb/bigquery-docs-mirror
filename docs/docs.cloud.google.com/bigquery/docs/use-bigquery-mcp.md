@@ -75,7 +75,7 @@ You can enable or disable the BigQuery MCP server in a project with the `  gclou
 
 ### Enable the BigQuery MCP server in a project
 
-**Note:** After March 17, 2026, the BigQuery remote MCP server is automatically enabled when you enable BigQuery.
+**Note:** Starting on March 17, 2026, separate enablement for MCP servers will be removed. When the BigQuery API is enabled in a project, you can use BigQuery through its remote MCP endpoint. This update will be released gradually across different regions.
 
 If you're using different projects for your client credentials, such as service account keys, OAuth client ID or API keys, and for hosting your resources, then you must enable the BigQuery service and the BigQuery MCP server on both projects.
 

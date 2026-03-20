@@ -1,15 +1,19 @@
 # Load PostgreSQL data into BigQuery
 
-You can load data from PostgreSQL to BigQuery using the BigQuery Data Transfer Service for PostgreSQL connector. The connector supports PostgreSQL instances hosted in your on-premises environment, Cloud SQL, as well as other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from PostgreSQL to BigQuery.
+You can load data from PostgreSQL to BigQuery by using the BigQuery Data Transfer Service for PostgreSQL connector. The connector supports PostgreSQL instances hosted in your on-premises environment, Cloud SQL, and other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from PostgreSQL to BigQuery.
 
 ## Limitations
 
 PostgreSQL data transfers are subject to following limitations:
 
   - The maximum number of simultaneous transfer runs to a single PostgreSQL database is determined by [the maximum number of concurrent connections supported by the PostgreSQL database](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-MAX-CONNECTIONS) . The number of concurrent transfer jobs should be limited to a value less than the maximum number of concurrent connections supported by the PostgreSQL database.
-  - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
-      - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
-  - During a data transfer, the PostgreSQL connector identifies indexed and partitioned key columns to transfer your data in parallel batches. For this reason, we recommend that you specify primary key columns or use indexed columns in your table to improve the performance and reduce the error rate in your data transfers.
+
+  - A single transfer configuration can only support one data transfer run at a given time. When a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer are skipped.
+    
+    To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the repeat frequency.
+
+  - During a data transfer, the PostgreSQL connector identifies indexed and partitioned key columns to transfer your data in parallel batches. For this reason, we recommend that you specify primary key columns or use indexed columns in your table to improve the performance and reduce the error rate in your data transfers. Consider the following:
+    
       - If you have indexed or primary key constraints, only the following column types are supported for creating parallel batches:
           - `  INTEGER  `
           - `  TINYINT  `
@@ -23,6 +27,22 @@ PostgreSQL data transfers are subject to following limitations:
           - `  DATE  `
       - PostgreSQL data transfers that don't use primary key or indexed columns can't support more than 2,000,000 records per table.
 
+### Incremental transfer limitations
+
+Incremental PostgreSQL transfers are subject to the following limitations:
+
+  - You can only choose `  TIMESTAMP  ` columns as watermark columns.
+  - Incremental ingestion is only supported for assets with valid watermark columns.
+  - Values in a watermark column must be monotonically increasing.
+  - Incremental transfers cannot sync delete operations in the source table.
+  - A single transfer configuration can only support either incremental or full ingestion.
+  - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+  - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
+  - You cannot change the watermark column or the primary key after the first incremental ingestion run.
+  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](/bigquery/docs/clustered-tables#limitations) .
+  - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
+  - We recommend that you create indexes on the watermark column. This connector uses watermark columns for filters in incremental transfers, so indexing these columns can improve performance.
+
 ## Data ingestion options
 
 The following sections provide information about the data ingestion options when you set up a PostgreSQL data transfer.
@@ -31,31 +51,109 @@ The following sections provide information about the data ingestion options when
 
 The PostgreSQL connector supports the configuration for transport level security (TLS) to encrypt your data transfers into BigQuery. The PostgreSQL connector supports the following TLS configurations:
 
-  - **Encrypt data, and verify CA and hostname** : This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted Certificate Authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
-      - If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode.
-      - Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
-  - **Encrypt data, and verify CA only** : This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
-      - Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
-  - **Encryption only** : This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
-      - This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
-      - Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
-  - **No encryption or verification** : This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
-      - We don't recommend using this mode in an environment where sensitive data is handled.
-      - We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
+  - The *Encrypt data, and verify CA and hostname* mode. This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted certificate authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
+    
+    If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode. Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
+
+  - The *Encrypt data, and verify CA only* mode. This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
+    
+    Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
+
+  - The *Encryption only* mode. This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
+    
+    This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
+    
+    Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
+
+  - The *No encryption or verification* mode. This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
+    
+    We don't recommend using this mode in an environment where sensitive data is handled. We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
 
 #### Trusted Server Certificate (PEM)
 
-If you are using either the **Encrypt data, and verify CA and hostname** mode or the **Encrypt data, and verify CA** mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
+If you are using either the *Encrypt data, and verify CA and hostname* mode or the *Encrypt data, and verify CA* mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
 
   - If you are using a certificate signed by a private CA within your organization or a self-signed certificate, you must provide the full certificate chain or the single self-signed certificate. This is required for certificates issued by internal CAs of managed cloud provider services, such as the Amazon Relational Database Service (RDS).
   - If your database server certificate is signed by a public CA (for example, Let's Encrypt, DigiCert, or GlobalSign), you don't need to provide a certificate. The root certificates for these public CAs are pre-installed and trusted by the BigQuery Data Transfer Service.
 
-You can provide PEM-encoded certificates in the **Trusted PEM Certificate** field when you create a PostgreSQL transfer configuration, with the following requirements:
+You can specify PEM-encoded certificates in the **Trusted PEM Certificate** field in the transfer configuration, with the following requirements:
 
   - The certificate must be a valid PEM-encoded certificate chain.
   - The certificate must be entirely correct. Any missing certificates in the chain or incorrect content causes the TLS connection to fail.
-  - For a single certificate, you can provide single, self-signed certificate from the database server.
+  - For a single certificate, you can provide a single, self-signed certificate from the database server.
   - For a full certificate chain issued by a private CA, you must provide the full chain of trust. This includes the certificate from the database server and any intermediate and root CA certificates.
+
+### Full or incremental transfers
+
+You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a PostgreSQL transfer](#set-up) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
+
+**Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
+
+You can configure a *full* data transfer to transfer all data from your PostgreSQL datasets with each data transfer.
+
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+
+#### Append write mode
+
+The append write mode only inserts new rows to your destination table. This option strictly appends transferred data without checking for existing records, so this mode can potentially cause data duplication in the destination table.
+
+When you select the append mode, you must select a watermark column. A watermark column is required for the PostgreSQL connector to track changes in the source table.
+
+For PostgreSQL transfers, we recommend selecting a column that is only updated when the record was created, and that won't change with subsequent updates—for example, the `  CREATED_AT  ` column.
+
+#### Upsert write mode
+
+The upsert write mode either updates a row or inserts a new row in your destination table by checking for a primary key. You can specify a primary key to let the PostgreSQL connector determine what changes are needed to keep your destination table up to date with your source table. If the specified primary key is present in the destination BigQuery table during a data transfer, then the PostgreSQL connector updates that row with new data from the source table. If a primary key is not present during a data transfer, then the PostgreSQL connector inserts a new row.
+
+When you select the upsert mode, you must select a watermark column and a primary key:
+
+  - A watermark column is required for the PostgreSQL connector to track changes in the source table.
+    
+    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+
+<!-- end list -->
+
+  - The primary key can be one or more columns on your table that are required for the PostgreSQL connector to determine if it needs to insert or update a row.
+    
+    Select columns that contain non-null values that are unique across all rows of the table. We recommend columns that include system-generated identifiers, unique reference codes (for example, auto-incrementing IDs), or immutable time-based sequence IDs.
+    
+    To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
+
+### Incremental ingestion behavior
+
+When you make changes to the table schema in your data source, incremental data transfers from those tables are reflected in BigQuery in the following ways:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Changes to data source</th>
+<th>Incremental ingestion behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Adding a new column</td>
+<td>A new column is added to the destination BigQuery table. Any previous records for this column will have null values.</td>
+</tr>
+<tr class="even">
+<td>Deleting a column</td>
+<td>The deleted column remains in the destination BigQuery table. New entries to this deleted column are populated with null values.</td>
+</tr>
+<tr class="odd">
+<td>Changing the data type in a column</td>
+<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
+</tr>
+<tr class="even">
+<td>Renaming a column</td>
+<td>The original column remains in the destination BigQuery table as is, while a new column is added to the destination table with the updated name.</td>
+</tr>
+</tbody>
+</table>
 
 ## Before you begin
 
@@ -112,16 +210,7 @@ Add PostgreSQL data into BigQuery by setting up a transfer configuration using o
 
 3.  In the **Source type** section, for **Source** , select **PostgreSQL** .
 
-4.  In the **Transfer config name** section, for **Display name** , enter a name for the transfer. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-
-5.  In the **Schedule options** section, do the following:
-    
-      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
-      - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
-
-6.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
-
-7.  In the **Data source details** section, do the following:
+4.  In the **Data source details** section, do the following:
     
       - For **Network attachment** , select an existing network attachment or click **Create Network Attachment** . For more information, see the [Network connections](#network-connections) section of this document.
     
@@ -139,10 +228,27 @@ Add PostgreSQL data into BigQuery by setting up a transfer configuration using o
     
       - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/postgresql-transfer#trusted_server_certificate_pem) .
     
-      - For **PostgreSQL objects to transfer** , do one of the following:
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-postgresql) . database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/postgresql-transfer#trusted_server_certificate_pem) .
+    
+      - For **Ingestion type** , select **Full** or **Incremental** .
         
-          - Click **Browse** to select the PostgreSQL tables that are required for the transfer, and then click **Select** .
-          - Manually enter the names of the tables in the PostgreSQL objects to transfer.
+          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](#full_or_incremental_transfers) .
+    
+      - For **PostgreSQL objects to transfer** , click **Browse** .
+        
+        Select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
+        
+          - If you have selected **Append** as your incremental write mode, you must select a column as the watermark column.
+          - If you have selected **Upsert** as your incremental write mode, you must select a column as the watermark column, and then select one or more columns as the primary key.
+
+5.  In the **Transfer config name** section, for **Display name** , enter a name for the transfer. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+
+6.  In the **Schedule options** section, do the following:
+    
+      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
+
+7.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
 
 8.  Optional: In the **Notification options** section, do the following:
     
@@ -189,6 +295,10 @@ Replace the following:
           - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
           - `  DISABLE  ` for no encryption or verification
       - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](/bigquery/docs/postgresql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
+      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](#full_or_incremental_transfers) .
+      - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
+      - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
+      - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
       - `  assets  ` : a list of the names of the PostgreSQL tables to be transferred from the PostgreSQL database as part of the transfer.
 
 For example, the following command creates a PostgreSQL transfer called `  My Transfer  ` :
@@ -205,8 +315,20 @@ bq mk
         "connector.database":"DB1",
         "connector.endpoint.host":"192.168.0.1",
         "connector.endpoint.port":5432,
+        "ingestionType":"incremental",
+        "writeMode":"WRITE_MODE_APPEND",
+        "watermarkColumns":["createdAt","createdAt"],
+        "primaryKeys":[['dep_id'], ['report_by','report_title']],
         "connector.tls.mode": "ENCRYPT_VERIFY_CA_AND_HOST",
         "connector.tls.trustedServerCertificate": "PEM-encoded certificate"}'
+```
+
+When you specify multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  dep_id  ` corresponds to the table `  DB1/USER1/DEPARTMENT  ` , while `  report_by  ` and `  report_title  ` corresponds to the table `  DB1/USER1/EMPLOYEES  ` .
+
+``` text
+      "primaryKeys":[['dep_id'], ['report_by','report_title']],
+      "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
+  
 ```
 
 ### API
@@ -219,6 +341,8 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
+**Note:** On March 16, 2027, the PostgreSQL connector will update some of its data type mapping. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-postgresql) .
+
 The following table maps PostgreSQL data types to the corresponding BigQuery data types.
 
 <table>
@@ -226,232 +350,289 @@ The following table maps PostgreSQL data types to the corresponding BigQuery dat
 <tr class="header">
 <th>PostgreSQL data type</th>
 <th>BigQuery data type</th>
+<th><a href="/bigquery/docs/transfer-changes#Mar16-postgresql">Updated BigQuery data type</a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       array      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bigint      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bigserial      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bit(n)      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bit varying(n)      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       boolean      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       box      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bytea      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       character      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       character varying      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       cidr      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       circle      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       circularstring      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       compoundcurve      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       curvepolygon      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       date      </code></td>
 <td><code dir="ltr" translate="no">       DATE      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       double precision      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       enum      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       geometrycollection      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       inet      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       integer      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       interval      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       json      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><code dir="ltr" translate="no">       JSON      </code></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       jsonb      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><code dir="ltr" translate="no">       JSON      </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       line      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       linestring      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       lseg      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       macaddr      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       macaddr8      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       money      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       multicurve      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       multilinestring      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       multipoint      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       multipolygon      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       multisurface      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       numeric(precision, scale)/decimal(precision, scale)      </code></td>
 <td><code dir="ltr" translate="no">       NUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       path      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       point      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       polygon      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       polyhedralsurface      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       range      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       real      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       serial      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       smallint      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       smallserial      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       text      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       time [ (p) ] [ without timezone ]      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       time [ (p) ] with time zone      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tin      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       timestamp [ (p) ] [ without timezone ]      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       timestamp [ (p) ] with time zone      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       triangle      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tsquery      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tsvector      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       uuid      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       xml      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -466,6 +647,6 @@ For pricing information about PostgreSQL transfers, see [Data Transfer Service p
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](/bigquery/docs/dts-introduction) .
-  - For information on using transfers, including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](/bigquery/docs/working-with-transfers) .
+  - Read [an overview about the BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
+  - Learn about [managing transfers](/bigquery/docs/working-with-transfers) , including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history.
   - Learn how to [load data with cross-cloud operations](/bigquery/docs/load-data-using-cross-cloud-transfer) .

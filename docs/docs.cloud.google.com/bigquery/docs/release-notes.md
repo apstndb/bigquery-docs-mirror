@@ -6,6 +6,26 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## March 17, 2026
+
+Feature
+
+In BigQuery ML, you can now [automatically deploy](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#automatically_deployed_models) open models to Vertex AI endpoints. Automatically deployed models offer the following benefits:
+
+  - [Automatic Vertex AI resource management](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-resources)
+  - Reserve open model resources by [using Compute Engine reservations](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity)
+  - [Automatic or immediate open model undeployment](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) to save costs
+
+This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
+## March 16, 2026
+
+Feature
+
+BigQuery now lets you configure a [global default location](/bigquery/docs/default-configuration#global-settings) . This setting is used if the location isn't set or can't be inferred from the request. You can set the default location at the organization or project level.
+
+This feature is [generally available](https://cloud.google.com/products/#product-launch-stages) (GA).
+
 ## March 12, 2026
 
 Change

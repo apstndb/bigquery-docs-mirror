@@ -1392,7 +1392,7 @@ Assigns a project, folder, or organization to a reservation. The following flags
 
 For more information, see [Work with reservation assignments](/bigquery/docs/reservations-assignments) .
 
-#### `     bq mk --alpha=reservation_groups --reservation-group    `
+#### `     bq mk --reservation-group    `
 
 Create a reservation group. The following flags are supported:
 
@@ -1400,8 +1400,6 @@ Create a reservation group. The following flags are supported:
     Specifies the location of the reservation.
   - **`  --project_id= PROJECT_ID  `**  
     Specifies the project that owns the reservation.
-
-Must be configured with the `  --alpha=reservation_groups  ` flag ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
 
 For more information, see [Work with reservation groups](/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) .
 

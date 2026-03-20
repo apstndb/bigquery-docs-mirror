@@ -12,6 +12,18 @@ The function works by sending requests to a Vertex AI Gemini model, and then ret
 
 You can use the `  AI.GENERATE_INT  ` function to perform tasks such as classification and sentiment analysis.
 
+For example, the following query rates the sentiment of BBC news article titles:
+
+``` text
+SELECT
+  title,
+  AI.GENERATE_INT(
+    ("Rate the sentiment of this article title from 1 (very negative) to 5 (very positive): ", title)
+  ).result AS sentiment_score
+FROM `bigquery-public-data.bbc_news.fulltext`
+LIMIT 3;
+```
+
 Prompt design can strongly affect the responses returned by the model. For more information, see [Introduction to prompting](/vertex-ai/generative-ai/docs/learn/prompts/introduction-prompt-design) .
 
 ## Input

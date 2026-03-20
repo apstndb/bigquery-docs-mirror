@@ -4,7 +4,7 @@
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
+Note: To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
 You can load data from Microsoft SQL Server to BigQuery using the BigQuery Data Transfer Service for Microsoft SQL Server connector. The Microsoft SQL Server connector supports data loads from Microsoft SQL Server instances hosted in on-premises environments and other cloud providers, such as Cloud SQL, Amazon Web Services (AWS), or Microsoft Azure. With the BigQuery Data Transfer Service, you can create on-demand and recurring data transfer jobs to transfer data from your Microsoft SQL Server instance into BigQuery.
 
@@ -23,30 +23,36 @@ The following section provides information about the data ingestion options when
 
 The Microsoft SQL Server connector supports the configuration for transport level security (TLS) to encrypt your data transfers into BigQuery. The Microsoft SQL Server connector supports the following TLS configurations:
 
-  - **Encrypt data, and verify CA and hostname** : This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted Certificate Authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
-      - If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode.
-      - Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
-  - **Encrypt data, and verify CA only** : This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
-      - Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
-  - **Encryption only** : This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
-      - This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
-      - Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
-  - **No encryption or verification** : This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
-      - We don't recommend using this mode in an environment where sensitive data is handled.
-      - We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
+  - The *Encrypt data, and verify CA and hostname* mode. This mode performs a full validation of the server using TLS over the TCPS protocol. It encrypts all data in transit and verifies that the database server's certificate is signed by a trusted certificate authority (CA). This mode also checks that the hostname you're connecting to exactly matches the Common Name (CN) or a Subject Alternative Name (SAN) on the server's certificate. This mode prevents attackers from using a valid certificate for a different domain to impersonate your database server.
+    
+    If your hostname does not match the certificate CN or SAN, the connection fails. You must configure a DNS resolution to match the certificate or use a different security mode. Use this mode for the most secure option to prevent person-in-the-middle (PITM) attacks.
+
+  - The *Encrypt data, and verify CA only* mode. This mode encrypts all data using TLS over the TCPS protocol and verifies that the server's certificate is signed by a CA that the client trusts. However, this mode does not verify the server's hostname. This mode successfully connects as long as the certificate is valid and issued by a trusted CA, regardless of whether the hostname in the certificate matches the hostname you are connecting to.
+    
+    Use this mode if you want to ensure that you are connecting to a server whose certificate is signed by a trusted CA, but the hostname is not verifiable or you don't have control over the hostname configuration.
+
+  - The *Encryption only* mode. This mode encrypts all data transferred between the client and the server. It does not perform any certificate or hostname validation.
+    
+    This mode provides some level of security by protecting data in transit, but it can be vulnerable to PITM attacks.
+    
+    Use this mode if you need to ensure all data is encrypted but can't or don't want to verify the server's identity. We recommend using this mode when working with private VPCs.
+
+  - The *No encryption or verification* mode. This mode does not encrypt any data and does not perform any certificate or hostname verification. All data is sent as plain text.
+    
+    We don't recommend using this mode in an environment where sensitive data is handled. We only recommend using this mode for testing purposes on an isolated network where security is not a concern.
 
 #### Trusted Server Certificate (PEM)
 
-If you are using either the **Encrypt data, and verify CA and hostname** mode or the **Encrypt data, and verify CA** mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
+If you are using either the *Encrypt data, and verify CA and hostname* mode or the *Encrypt data, and verify CA* mode, then you can also provide one or more PEM-encoded certificates. These certificates are required in some scenarios where the BigQuery Data Transfer Service needs to verify the identity of your database server during the TLS connection:
 
   - If you are using a certificate signed by a private CA within your organization or a self-signed certificate, you must provide the full certificate chain or the single self-signed certificate. This is required for certificates issued by internal CAs of managed cloud provider services, such as the Amazon Relational Database Service (RDS).
   - If your database server certificate is signed by a public CA (for example, Let's Encrypt, DigiCert, or GlobalSign), you don't need to provide a certificate. The root certificates for these public CAs are pre-installed and trusted by the BigQuery Data Transfer Service.
 
-You can provide PEM-encoded certificates in the **Trusted PEM Certificate** field when you create a Microsoft SQL Server transfer configuration, with the following requirements:
+You can specify PEM-encoded certificates in the **Trusted PEM Certificate** field in the transfer configuration, with the following requirements:
 
   - The certificate must be a valid PEM-encoded certificate chain.
   - The certificate must be entirely correct. Any missing certificates in the chain or incorrect content causes the TLS connection to fail.
-  - For a single certificate, you can provide single, self-signed certificate from the database server.
+  - For a single certificate, you can provide a single, self-signed certificate from the database server.
   - For a full certificate chain issued by a private CA, you must provide the full chain of trust. This includes the certificate from the database server and any intermediate and root CA certificates.
 
 ## Before you begin
@@ -107,6 +113,7 @@ Select one of the following options:
       - For **Password** , enter the password of the Microsoft SQL Server user initiating the Microsoft SQL Server database connection.
       - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](#tls_configuration) .
       - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) .
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#mar16-sqlserver) .
       - For **Microsoft SQL Server objects to transfer** , browse the Microsoft SQL Server table or manually enter the names of the tables that are required for the transfer.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
@@ -159,6 +166,7 @@ Replace the following:
       - `  connector.endpoint.port  ` : the port number of the database.
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user.
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#mar16-sqlserver) .
       - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
@@ -192,6 +200,8 @@ To manually run a data transfer outside of your regular schedule, you can start 
 
 ## Data type mapping
 
+**Note:** On March 16, 2027, the Microsoft SQL Server connector will update some of its data type mapping, as indicated in the following table. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
+
 The following table maps Microsoft SQL Server data types to the corresponding BigQuery data types:
 
 <table>
@@ -199,148 +209,184 @@ The following table maps Microsoft SQL Server data types to the corresponding Bi
 <tr class="header">
 <th>Microsoft SQL Server data type</th>
 <th>BigQuery data type</th>
+<th><a href="/bigquery/docs/transfer-changes#Mar16-sqlserver">Updated BigQuery data type</a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tinyint      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       smallint      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       int      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bigint      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bit      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       decimal      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       numeric      </code></td>
 <td><code dir="ltr" translate="no">       NUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       money      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       smallmoney      </code></td>
 <td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       float      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       real      </code></td>
 <td><code dir="ltr" translate="no">       FLOAT      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       date      </code></td>
 <td><code dir="ltr" translate="no">       DATE      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       time      </code></td>
 <td><code dir="ltr" translate="no">       TIME      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       datetime2      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       datetimeoffset      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       datetime      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       smalldatetime      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
+<td><code dir="ltr" translate="no">       DATETIME      </code></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       char      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       varchar      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       text      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       nchar      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       nvarchar      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       ntext      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       binary      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       varbinary      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       image      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       geography      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       geometry      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       hierarchyid      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       rowversion      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       sql_variant      </code></td>
 <td><code dir="ltr" translate="no">       BYTES      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       uniqueidentifier      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       xml      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       json      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       vector      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
+<td></td>
 </tr>
 </tbody>
 </table>

@@ -261,6 +261,41 @@ You can monitor the query queue length for your reservation by using [BigQuery a
 
 You can also monitor the queue length in Cloud Monitoring by viewing the [job count](/monitoring/api/metrics_gcp_a_b#gcp-bigquery) metric and filtering by the number of jobs in a **pending** state.
 
+## Troubleshooting long queue times
+
+A query job might appear slow because it spends a significant amount of time waiting in a queue before execution starts. This duration is the *queue time* . Queued jobs show a `  PENDING  ` state.
+
+### Identify long queue times
+
+You can identify long queue times using the following methods:
+
+  - **`  INFORMATION_SCHEMA  `** : The [`  INFORMATION_SCHEMA.JOBS*  ` views](/bigquery/docs/information-schema-jobs) can provide insights into query queue times. For example, you can calculate the queue time for specific jobs by subtracting `  creation_time  ` from `  start_time  ` , or identify jobs that have `  state="PENDING"  ` for an extended duration. The [sample query](#monitoring) can serve as a starting point to observe your query load and identify when the dynamic concurrency threshold is reached.
+  - **Monitoring** : Use the [`  bigquery.googleapis.com/job/num_in_flight  `](/monitoring/api/metrics_gcp_a_b#bigquery/job/num_in_flight) metric in Monitoring, filtered by `  state=pending  ` , to monitor the queue length over time.
+  - You can also use [BigQuery administrative resource charts](/bigquery/docs/admin-resource-charts) , as described in the [Monitoring](#monitoring) section.
+
+### Common causes
+
+The following list describes several common causes of long queue times:
+
+  - **Concurrency limits** : The project or reservation has reached the maximum number of allowed concurrent queries, which is either dynamically determined or [manually configured](#set_the_maximum_concurrency_target) . Once this limit is reached, new queries are forced to wait.
+  - **Slot contention** : There are insufficient slots available to handle the workload. This causes actively running queries to execute more slowly, occupying their concurrent query slots for longer periods and increasing the queue times for other queries.
+  - **Workload spikes** : There is a sudden increase in the number of submitted queries.
+  - **Inefficient queries** : Individual queries are not optimized. Even when the query volume is low, these inefficient queries can continue consuming excessive slots for extended periods, reducing the turnover rate of active queries. This prevents new queries from starting and forces them to wait in the queue.
+
+### Resolve long queue times
+
+To resolve long queue times, consider the following actions:
+
+  - **Assess your workload** : Determine if your query volume or complexity has increased recently.
+  - **Check reservation utilization** : Use [administrative resource charts](/bigquery/docs/admin-resource-charts) to verify if the reservation is frequently at peak slot usage.
+  - **Review concurrency** : Compare the number of running queries to the number of pending queries.
+  - **Optimize and adjust** :
+      - Use [batch query priority](/bigquery/docs/running-queries#batch) for less time-sensitive workloads, which have a higher queue limit.
+      - [Optimize long-running queries](/bigquery/docs/best-practices-performance-overview) .
+      - [Increase reservation slots](/bigquery/docs/reservations-tasks#update_a_reservation) if you are consistently hitting capacity.
+      - Smooth out query submission spikes.
+      - Adjust the [maximum concurrency target](#set_the_maximum_concurrency_target) for your reservation, if applicable.
+
 ## Limitations
 
   - Each on-demand project can queue up to 1,000 interactive queries and 20,000 batch queries at one time. Queries that exceed this limit return a quota error. You cannot request an increase in these limits.

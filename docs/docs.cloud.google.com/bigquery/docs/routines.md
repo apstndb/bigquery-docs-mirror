@@ -3,7 +3,7 @@
 In BigQuery, *routines* are a resource type that includes the following:
 
   - [Stored procedures](/bigquery/docs/procedures#writing_a_procedure) .
-  - [User-defined functions](/bigquery/docs/user-defined-functions) (UDFs), including [remote functions](/bigquery/docs/remote-functions) .
+  - [User-defined functions](/bigquery/docs/user-defined-functions) (UDFs), including [remote functions](/bigquery/docs/remote-functions) and [user-defined aggregate functions](/bigquery/docs/user-defined-aggregates) .
   - [Table functions](/bigquery/docs/table-functions) .
 
 This document describes tasks that are common to all routine types in BigQuery.
@@ -25,6 +25,7 @@ Depending on the routine type, run one of the following DDL statements:
   - [Stored procedure: `  CREATE PROCEDURE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
   - [User-defined function: `  CREATE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
   - [Table function: `  CREATE TABLE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
+  - [User-defined aggregate function: `  CREATE AGGREGATE FUNCTION  `](/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
 
 ### API
 

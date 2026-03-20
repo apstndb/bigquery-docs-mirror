@@ -893,7 +893,6 @@ To create a reservation, use the `  bq mk  ` command with the `  --reservation  
 bq mk \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
-    --alpha=reservation_groups \
     --reservation_group \
     RESERVATION_GROUP_NAME
 ```
@@ -932,7 +931,6 @@ To update the reservation and set the reservation group, use the `  bq update  `
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
-    --alpha=reservation_groups \
     --reservation_group_name=RESERVATION_GROUP_NAME \
     --reservation RESERVATION_NAME
 ```
@@ -960,13 +958,12 @@ To list the reservation group information for your reservations, do the followin
 
 ### bq
 
-To list the reservations and include the reservation group information, use the `  bq ls  ` command with the `  --reservation  ` and `  --alpha=reservation_groups  ` flags:
+To list the reservations and include the reservation group information, use the `  bq ls  ` command with the `  --reservation  ` flag:
 
 ``` text
 bq ls \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
-    --alpha=reservation_groups \
     --reservation
 ```
 
@@ -1017,7 +1014,6 @@ To remove the reservation from the reservation group, use the `  bq update  ` co
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
-    --alpha=reservation_groups \
     --reservation_group_name="" \
     --reservation RESERVATION_NAME
 ```

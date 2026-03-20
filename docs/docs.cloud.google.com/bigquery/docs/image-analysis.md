@@ -85,23 +85,22 @@ Create a BigQuery dataset to store your ML model.
     
       - For **Dataset ID** , enter `  bqml_tutorial  ` .
     
-      - For **Location type** , select **Multi-region** , and then select **US (multiple regions in United States)** .
+      - For **Location type** , select **Multi-region** , and then select **US** .
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
 
 ### bq
 
-To create a new dataset, use the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag. For a full list of possible parameters, see the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) reference.
+To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
-1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` and a description of `  BigQuery ML tutorial dataset  ` :
+1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
     ``` text
-    bq --location=US mk -d \
-     --description "BigQuery ML tutorial dataset." \
-     bqml_tutorial
+    bq mk --dataset \
+      --location=US \
+      --description "BigQuery ML tutorial dataset." \
+      bqml_tutorial
     ```
-    
-    Instead of using the `  --dataset  ` flag, the command uses the `  -d  ` shortcut. If you omit `  -d  ` and `  --dataset  ` , the command defaults to creating a dataset.
 
 2.  Confirm that the dataset was created:
     
