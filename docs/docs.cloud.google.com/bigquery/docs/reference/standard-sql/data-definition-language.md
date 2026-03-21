@@ -4680,7 +4680,6 @@ FILTER USING (filter_expression);
     
     The filter expression cannot contain the following:
     
-      - References to other tables, such as [subqueries](/bigquery/docs/reference/standard-sql/subqueries) .
       - SQL statements such as `  SELECT  ` , `  CREATE  ` , or `  UPDATE  ` .
       - User-defined functions.
 

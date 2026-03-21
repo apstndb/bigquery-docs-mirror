@@ -307,9 +307,9 @@ Model Armor won't scan MCP traffic in the project.
 
 For example, you can deny or allow access based on:
 
-  - The principal.
-  - Tool properties like read-only.
-  - The application's OAuth client ID.
+  - The principal
+  - Tool properties like read-only
+  - The application's OAuth client ID
 
 For more information, see [Control MCP use with Identity and Access Management](/mcp/control-mcp-use-iam) .
 

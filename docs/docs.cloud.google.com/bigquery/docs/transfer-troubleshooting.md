@@ -570,6 +570,9 @@ The following are common issues you might encounter when [creating a PostgreSQL 
   - Error: `  INVALID_ARGUMENT. Connection to the host and port failed. Please check that the host, port, encryptionMode and network attachment are correct.  `  
     **Resolution:** Ensure the host, port, encryption mode, and network settings are correctly configured. Verify network connectivity and that the database server is accessible. If `  EncryptionMode  ` is set to `  FULL  ` , confirm that the server supports the required protocols, has a valid certificate, and allows secure connections. If `  EncryptionMode  ` is set to `  DISABLE  ` , check that the server permits non-SSL connections. Review the application and database logs for connection-related or SSL/TLS-related errors.
 
+  - Error: `  INVALID_ARGUMENT: For Asset "postgres"."auth"."sessions", row count exceeds the max supported unIndexed read size of 2000000 records.  `  
+    **Resolution:** This error can occur when you are trying to transfer more than 2,000,000 records from a PostgreSQL table to a BigQuery table and there isn't a primary key or indexed column in PostgreSQL table. To resolve this issue, add a primary key or indexed column in your table. For more information, see [Limitations](/bigquery/docs/postgresql-transfer#limitations) .
+
 ## Salesforce transfer issues
 
 The following are common errors encountered when [creating a Salesforce transfer](/bigquery/docs/salesforce-transfer) .

@@ -20,7 +20,7 @@ This section describes the IAM roles and permissions needed to use Dataplex Univ
 
 ### User roles and permissions
 
-To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles :
+To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles:
 
   - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project containing the data scan
   - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project containing the data scan
@@ -418,7 +418,6 @@ def sample_create_data_scan():
 
     # Initialize request argument(s)
     data_scan = dataplex_v1.DataScan()
-    data_scan.data_quality_spec.rules.dimension = "dimension_value"
     data_scan.data.entity = "entity_value"
 
     request = dataplex_v1.CreateDataScanRequest(
@@ -1593,7 +1592,6 @@ def sample_update_data_scan():
 
     # Initialize request argument(s)
     data_scan = dataplex_v1.DataScan()
-    data_scan.data_quality_spec.rules.dimension = "dimension_value"
     data_scan.data.entity = "entity_value"
 
     request = dataplex_v1.UpdateDataScanRequest(

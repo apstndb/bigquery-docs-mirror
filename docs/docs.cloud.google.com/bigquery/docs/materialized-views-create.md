@@ -283,7 +283,11 @@ You can grant access to a materialized view at the [dataset level](/bigquery/doc
 
 Querying a materialized view requires access to the view as well as its base tables. To share a materialized view, you can grant permissions to the base tables or configure a materialized view as an authorized view. For more information, see [Authorized views](/bigquery/docs/authorized-views) .
 
-To control access to views in BigQuery, see [Authorized views](/bigquery/docs/authorized-views) .
+### Access control restrictions
+
+  - If a user's query of a materialized view includes base table columns that they can't access due to column-level security, then the query fails with the message `  Access Denied  ` .
+
+  - If a user queries a materialized view but doesn't have full access to all rows in the materialized view's base tables, then BigQuery runs the query against the base tables instead of reading materialized view data. This ensures the query respects all access control constraints. This limitation also applies when querying tables with data-masked columns.
 
 ## Materialized views query support
 
@@ -310,11 +314,11 @@ as_alias:
     [ AS ] alias
 ```
 
-### Query limitations
+## Query limitations
 
-Materialized views have the following limitations.
+Incremental materialized views have the following limitations.
 
-#### Aggregate requirements
+### Aggregate requirements
 
 Aggregates in the materialized view query must be outputs. Computing, filtering, or joining based on an aggregated value is not supported. For example, creating a view from the following query is not supported because it produces a value computed from an aggregate, `  COUNT(*) / 10 as cnt  ` .
 
@@ -344,7 +348,7 @@ Only the following aggregation functions are supported:
   - `  MIN_BY  ` (but not over `  STRUCT  ` )
   - `  SUM  `
 
-#### Unsupported SQL features
+### Unsupported SQL features
 
 The following SQL features are not supported in materialized views:
 
@@ -360,7 +364,7 @@ The following SQL features are not supported in materialized views:
   - `  FOR SYSTEM_TIME AS OF  ` .
   - [Generative AI functions](/bigquery/docs/generative-ai-overview) .
 
-##### `     LEFT OUTER JOIN    ` and `     UNION ALL    ` support
+#### `     LEFT OUTER JOIN    ` and `     UNION ALL    ` support
 
 **Preview**
 
@@ -370,7 +374,7 @@ To request feedback or support for this feature, send an email to <bq-mv-help@go
 
 Incremental materialized views support `  LEFT OUTER JOIN  ` and `  UNION ALL  ` . Materialized views with `  LEFT OUTER JOIN  ` and `  UNION ALL  ` statements share the limitations of other incremental materialized views. In addition, [smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join.
 
-###### Examples
+##### Examples
 
 The following example creates an aggregate incremental materialized view with a `  LEFT JOIN  ` . This view is incrementally updated when data appends to the left table.
 
@@ -402,11 +406,6 @@ AS (
   GROUP BY 1
 );
 ```
-
-#### Access control restrictions
-
-  - If a user's query of a materialized view includes base table columns that they cannot access due to column-level security, then the query fails with the message `  Access Denied  ` .
-  - If a user queries a materialized view but doesn't have full access to all rows in the materialized views' base tables, then BigQuery runs the query against the base tables instead of reading materialized view data. This ensures the query respects all access control constraints. This limitation also applies when querying tables with data-masked columns.
 
 ### `     WITH    ` clause and common table expressions (CTEs)
 
@@ -446,7 +445,7 @@ To create [materialized views over BigLake tables](/bigquery/docs/materialized-v
 
 #### Example
 
-Creation of a simple aggregate view using a BigLake base table:
+Creation of an aggregate view using a BigLake base table:
 
 ``` text
 CREATE MATERIALIZED VIEW sample_dataset.sample_mv
@@ -516,7 +515,7 @@ The `  metadata.json  ` file of your Iceberg table must have the following speci
 
   - [Partitioning](https://iceberg.apache.org/spec/#partitioning) (for the partitioned materialized view)
 
-### Partitioned materialized views
+## Partitioned materialized views
 
 Materialized views on partitioned tables can be partitioned. Partitioning a materialized view is similar to partitioning a normal table, in that it provides benefit when queries often access a subset of the partitions. In addition, partitioning a materialized view can improve the view's behavior when data in the base table or tables is modified or deleted. For more information, see [Partition alignment](/bigquery/docs/materialized-views-use#partition_alignment) .
 
@@ -526,7 +525,7 @@ If the base table is partitioned by ingestion time, then a materialized view can
 
 If the base table is partitioned, consider partitioning your materialized view as well to reduce [refresh job maintenance](/bigquery/docs/materialized-views-manage) cost and query cost.
 
-#### Partition expiration
+### Partition expiration
 
 Partition expiration can't be set on materialized views. A materialized view implicitly inherits the partition expiration time from the base table. Materialized view partitions are aligned with the base table partitions, so they expire synchronously.
 
@@ -612,7 +611,7 @@ AS (
 );
 ```
 
-### Cluster materialized views
+## Cluster materialized views
 
 You can cluster materialized views by their output columns, subject to the BigQuery [clustered table limitations](/bigquery/docs/clustered-tables#limitations) . Aggregate output columns cannot be used as clustering columns. Adding clustering columns to materialized views can improve the performance of queries that include filters on those columns.
 
@@ -630,11 +629,13 @@ Materialized view queries can reference logical views but are subject to the fol
   - If the logical view changes, then the materialized view becomes invalid and must be fully refreshed.
   - [Smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) is not supported.
 
-## Considerations when creating materialized views
+## Best practices when creating materialized views
+
+You should consider the following best practices when creating materialized views.
 
 ### Which materialized views to create
 
-When creating a materialized view, ensure your materialized view definition reflects query patterns against the base tables. Materialized views are more effective when they serve a broad set of queries rather than just one specific query pattern.
+When you create a materialized view, ensure your materialized view definition reflects query patterns against the base tables. Materialized views are more effective when they serve a broad set of queries rather than just one specific query pattern.
 
 For example, consider a query on a table where users often filter by the columns `  user_id  ` or `  department  ` . You can group by these columns and optionally cluster by them, instead of adding filters like `  user_id = 123  ` into the materialized view.
 
@@ -647,13 +648,13 @@ CREATE MATERIALIZED VIEW ...
   GROUP BY date
 ```
 
-### Joins
+### Joins in materialized views
 
-The following recommendations apply to materialized views with JOINs.
+The following recommendations apply to materialized views with `  JOIN  ` statements.
 
 #### Put the most frequently changing table first
 
-Ensure that the largest or most frequently changing table is the first/leftmost table referenced in the view query. Materialized views with joins support incremental queries and refresh when the first or leftmost table in the query is appended, but changes to other tables fully invalidate the view cache. In star or snowflake schemas the first or leftmost table should generally be the fact table.
+Ensure that the largest or most frequently changing table is the first or leftmost table referenced in the view query. Materialized views with joins support incremental queries and refresh when the first or leftmost table in the query is appended, but changes to other tables fully invalidate the view cache. In star or snowflake schemas the first or leftmost table should generally be the fact table.
 
 #### Avoid joining on clustering keys
 

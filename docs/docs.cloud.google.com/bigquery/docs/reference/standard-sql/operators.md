@@ -2112,6 +2112,7 @@ Creates one or more variables. Each variable can be used in subsequent expressio
 
   - A variable can only be assigned once within a `  WITH  ` expression.
   - Variables created during `  WITH  ` may not be used in analytic or aggregate function arguments. For example, `  WITH(a AS ..., SUM(a))  ` produces an error.
+  - A `  WITH  ` expression cannot be used within a user-defined function with `  ANY TYPE  ` arguments.
   - Each variable's expression is evaluated only once.
 
 **Examples**

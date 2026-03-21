@@ -6,7 +6,7 @@ This product is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-This document helps you migrate from the [price benchmarks](/bigquery/docs/merchant-center-price-benchmarks-schema) report, which will be deprecated on September 1, 2025, to the new [price competitiveness](/bigquery/docs/merchant-center-price-competitiveness-schema) report.
+This document helps you migrate from the price benchmarks report, which will be deprecated on September 1, 2025, to the new [price competitiveness](/bigquery/docs/merchant-center-price-competitiveness-schema) report.
 
 The new price competitiveness report offers the following:
 
@@ -15,7 +15,7 @@ The new price competitiveness report offers the following:
 
 ## Compare price benchmarks and price competitiveness table schemas
 
-The following table helps you identify fields in the [`  Products_PriceBenchmarks  ` table](/bigquery/docs/merchant-center-price-benchmarks-schema#schema) that have equivalent replacements in the [`  PriceCompetitiveness_  ` table](/bigquery/docs/merchant-center-price-competitiveness-schema#schema) :
+The following table helps you identify fields in the `  Products_PriceBenchmarks  ` table that have equivalent replacements in the [`  PriceCompetitiveness_  ` table](/bigquery/docs/merchant-center-price-competitiveness-schema#schema) :
 
 <table>
 <thead>

@@ -505,7 +505,7 @@ To assign a query to run in a specific reservation, do one of the following:
 
 ### SQL
 
-You can use the `  @@reservation  ` system variable to assign the reservation your query runs in:
+Set the `  @@reservation  ` system variable in the session to assign the reservation your query runs in:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 

@@ -15,7 +15,7 @@ Users who are preparing the data and the Dataform service accounts that are runn
 
 #### Get user access for data preparation
 
-To get the permissions that you need to prepare data in BigQuery, ask your administrator to grant you the following IAM roles :
+To get the permissions that you need to prepare data in BigQuery, ask your administrator to grant you the following IAM roles:
 
   - [BigQuery Studio User](/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` ) on the project
   - [Gemini for Google Cloud User](/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` ) on the project

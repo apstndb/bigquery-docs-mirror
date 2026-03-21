@@ -20,7 +20,7 @@ If you replicate a dataset, BigQuery stores the data in the region that you spec
 
 Initially, the replica in the primary region is the *primary replica* , and the replica in the secondary region is the *secondary replica* .
 
-The primary replica is writeable, and the secondary replica is read-only. Writes to the primary replica are asynchronously replicated to the secondary replica. Within each region, the data is stored redundantly in two zones. Network traffic never leaves the Google Cloud network.
+The primary replica is writable, and the secondary replica is read-only. Writes to the primary replica are asynchronously replicated to the secondary replica. Within each region, the data is stored redundantly in two zones. Network traffic never leaves the Google Cloud network.
 
 The following diagram shows the replication that occurs when a dataset is replicated:
 
@@ -55,7 +55,7 @@ Using dataset replication is dependent on the following colocation requirements.
 
 #### Cloud Storage
 
-Querying data on Cloud Storage requires that the Cloud Storage bucket is colocated with the replica. Use the [external tables location considerations](/bigquery/docs/external-tables#data-locations) when deciding where to place your replica.
+Querying data on Cloud Storage requires that the Cloud Storage bucket is co-located with the replica. Use the [external tables location considerations](/bigquery/docs/external-tables#data-locations) when deciding where to place your replica.
 
 ## Limitations
 
@@ -64,7 +64,7 @@ BigQuery dataset replication is subject to the following limitations:
   - Streaming data written to the primary replica from the [BigQuery Storage Write API](/bigquery/docs/write-api) or the [`  tabledata.insertAll  `](/bigquery/docs/reference/rest/v2/tabledata/insertAll) method, which is then replicated into the secondary replica, is best-effort and may see high replication delay.
   - Streaming upserts written to the primary replica from [Datastream](https://cloud.google.com/datastream-for-bigquery) or [BigQuery change data capture ingestion](/bigquery/docs/change-data-capture) , which is then replicated into the secondary replica, is best-effort and may see high replication delay. Once replicated, the upserts in the secondary replica are merged into the secondary replica's table baseline as per the table's configured [`  max_staleness  `](/bigquery/docs/change-data-capture#manage_table_staleness) value.
   - You can't enable [fine-grained DML](/bigquery/docs/data-manipulation-language#fine-grained_dml) on a table in a replicated dataset, and you can't replicate a dataset that contains a table with fine-grained DML enabled.
-  - Replication and switchover are managed through SQL [data definition language (DDL) statements](/bigquery/docs/reference/standard-sql/data-definition-language) .
+  - Replication and switchover can be managed through the Google Cloud console or SQL [data definition language (DDL) statements](/bigquery/docs/reference/standard-sql/data-definition-language) .
   - You are limited to one replica of each dataset for each region or multi-region. You cannot create two secondary replicas of the same dataset in the same destination region.
   - Resources within replicas are subject to the limitations as described in [Resource behavior](#resource-behavior) .
   - [Policy tags](/bigquery/docs/managing-policy-tags-across-locations) and associated data policies are not replicated to the secondary replica. Any queries that reference columns with policy tags in regions other than the original region fail, even if that replica is promoted.
@@ -245,6 +245,28 @@ To get the permissions that you need to manage replicas, ask your administrator 
 
 ### Replicate a dataset
 
+To replicate a dataset, select one of the following options:
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click the dataset that you want to replicate.
+
+3.  Click the **Details** tab.
+
+4.  In the **Replicas** section, click **Create replica** .
+
+5.  In the **Create dataset replica** pane, do the following:
+    
+    1.  In the **Location type** section, select a location type for the replica.
+    2.  In the **Region** list, select a region for the replica.
+    3.  Optional: To use customer-managed encryption keys (CMEK), expand the **Advanced options** section, and then select the **Customer-managed encryption key (CMEK)** option.
+
+6.  Click **Create replica** .
+
+### SQL
+
 To replicate a dataset, use the [`  ALTER SCHEMA ADD REPLICA  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_add_replica_statement) .
 
 You can add a replica to any dataset that's located in a region or multi-region that is not already replicated in that region or multi-region. After you add a replica, it takes time for the initial copy operation to complete. You can still run queries referencing the primary replica while the data is being replicated, with no reduction in query processing capacity. You can't replicate data within the geo-locations within a multi-region.
@@ -267,26 +289,60 @@ After the secondary replica has been created, you can query it by explicitly [se
 
 ### Promote the secondary replica
 
-If the primary region is online, you can promote the secondary replica. Promotion switches the secondary replica to be the writeable primary. This operation completes within a few seconds if the secondary replica is caught up with the primary replica. If the secondary replica is not caught up, the promotion can't complete until it is caught up. The secondary replica can't be promoted to the primary if the region containing the primary has an outage.
+If the primary region is online, you can promote the secondary replica. Promotion switches the secondary replica to be the writable primary. This operation completes within a few seconds if the secondary replica is caught up with the primary replica. If the secondary replica is not caught up, the promotion can't complete until it is caught up. The secondary replica can't be promoted to the primary if the region containing the primary has an outage.
 
 Note the following:
 
   - All writes to tables return errors while promotion is in process. The old primary replica becomes non-writable immediately when the promotion begins.
   - Tables that aren't fully replicated at the time the promotion is initiated return stale reads.
 
+To promote a replica to be the primary replica, select one of the following options:
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click the dataset you want to promote.
+
+3.  Click the **Details** tab.
+
+4.  In the **Replicas** section, find the replica that you want to promote, and then click **Make primary** .
+
+5.  In the **Promote replica** dialog, type `  confirm  ` in the text field, and then click **Confirm** .
+
+### SQL
+
 To promote a replica to be the primary replica, use the [`  ALTER SCHEMA SET OPTIONS  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_set_options_statement) and set the `  primary_replica  ` option.
 
-Note the following: - You must explicitly set the job location to the secondary region in query settings. See [BigQuery specify locations](/bigquery/docs/locations#specify_locations) .
+Note the following:
+
+  - You must explicitly set the job location to the secondary region in query settings. For more information, see [BigQuery specify locations](/bigquery/docs/locations#specify_locations) .
 
 The following example promotes the `  us-east4  ` replica to be the primary:
 
 ``` text
-ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4')
+ALTER SCHEMA my_dataset SET OPTIONS(primary_replica = 'us-east4');
 ```
 
 To confirm when the secondary replica has successfully been promoted, you can query the `  replica_primary_assignment_complete  ` column in the [`  INFORMATION_SCHEMA.SCHEMATA_REPLICAS  `](/bigquery/docs/information-schema-schemata-replicas) view.
 
 ### Remove a dataset replica
+
+To remove a replica and stop replicating the dataset, select one of the following options:
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the **Explorer** pane, click the dataset where you want to remove a replica.
+
+3.  Click the **Details** tab.
+
+4.  In the **Replicas** section, find the replica that you want to remove, click more\_vert **More actions** , and then click **Delete** .
+
+5.  In the **Delete dataset replica?** dialog, type `  delete  ` in the text field, and then click **Delete** .
+
+### SQL
 
 To remove a replica and stop replicating the dataset, use the [`  ALTER SCHEMA DROP REPLICA  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_drop_replica_statement) .
 
@@ -448,7 +504,7 @@ Replicated data policies are read-only in secondary regions. You can't [update t
 
 ### Naming conflicts
 
-The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and it's replica in the secondary regions, the IDs in the format of `  projects/ PROJECT_NUMBER /locations/ LOCATION_ID /dataPolicies/ DATA_POLICY_ID  ` are identical, except for the value of `  LOCATION_ID  ` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
+The data policy resource is the same between the primary and secondary regions, except for the location. For a data policy and its replica in the secondary regions, the IDs in the format of `  projects/ PROJECT_NUMBER /locations/ LOCATION_ID /dataPolicies/ DATA_POLICY_ID  ` are identical, except for the value of `  LOCATION_ID  ` . Replication fails if a data policy with a conflicting ID already exists in the secondary region. You must resolve the naming conflict in either the primary or secondary region before replication proceeds.
 
 ### Custom masking policies
 

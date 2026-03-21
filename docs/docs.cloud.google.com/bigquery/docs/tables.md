@@ -20,7 +20,7 @@ Grant Identity and Access Management (IAM) roles that give users the necessary p
 
 ### Required roles
 
-To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles :
+To get the permissions that you need to create a table, ask your administrator to grant you the following IAM roles:
 
   - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project if you're creating a table by loading data or by saving query results to a table.
   - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you're creating the table.
@@ -1172,7 +1172,7 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
 
 You can create a table with one or more [`  ObjectRef  `](/bigquery/docs/objectref-columns) columns in order to store metadata about unstructured data that is related to the other structured data in the table. For example, in a products table, you could create an `  ObjectRef  ` column to store product image information along with the other product data. The unstructured data itself is stored in Cloud Storage, and is made available in BigQuery by using an [object table](/bigquery/docs/object-table-introduction) .
 
-To learn how to create a multimodal table, see [Analyze multimodal data with SQL and Python UDFs](/bigquery/docs/multimodal-data-sql-tutorial) .
+To learn how to create a multimodal table, see [Analyze multimodal data with SQL and BigQuery DataFrames](/bigquery/docs/multimodal-data-sql-tutorial) .
 
 ## Control access to tables
 
