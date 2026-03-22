@@ -13,12 +13,17 @@ You can get information about partitioned tables in the following ways:
 
 ### Getting partition metadata using `     INFORMATION_SCHEMA    ` views
 
-When you query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, the query results contain one row for each partition. For example, the following query lists all of the table partitions in the dataset named `  mydataset  ` :
+When you query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, the query results contain one row for each partition. For example, the following query lists all of the partitions for a specific table within a dataset:
 
 ``` text
-SELECT table_name, partition_id, total_rows
-FROM `mydataset.INFORMATION_SCHEMA.PARTITIONS`
-WHERE partition_id IS NOT NULL
+#standardSQL
+SELECT
+  partition_id
+FROM
+  `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+WHERE
+  table_name = 'TABLE_NAME'
+  AND partition_id IS NOT NULL --filter out non-partitioned tables
 ```
 
 For more information, see [`  INFORMATION_SCHEMA.PARTITIONS  `](/bigquery/docs/information-schema-partitions) .
@@ -32,12 +37,12 @@ Query the `  __PARTITIONS_SUMMARY__  ` meta-table as follows:
 ``` text
 #legacySQL
 SELECT
-  column
+  partition_id
 FROM
-  [dataset.table$__PARTITIONS_SUMMARY__]
+  [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__]
 ```
 
-**Note:** GoogleSQL does not support the partition decorator separator ( `  $  ` ), so you cannot query `  __PARTITIONS_SUMMARY__  ` in GoogleSQL.
+**Note:** For migration to GoogleSQL refer to the [legacy SQL migration documentation](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#migrating_partition_meta_table_decorator) .
 
 The `  __PARTITIONS_SUMMARY__  ` meta-table has the following columns:
 

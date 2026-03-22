@@ -199,7 +199,7 @@ You can specify a set of agent instructions to be reused across multiple data pi
 
 ### Import additional local files as agent instructions
 
-You can also import other instruction files for the Data Engineering Agent into the `  GEMINI.md  ` file using `  @file.md  ` syntax. For more information, see [Memory Import Processor](https://github.com/google-gemini/gemini-cli/blob/main/docs/core/memport.md) .
+You can also import other instruction files for the Data Engineering Agent into the `  GEMINI.md  ` file using `  @file.md  ` syntax. For more information, see [Memory Import Processor](https://geminicli.com/docs/reference/memport/) .
 
 ## Troubleshoot data pipeline errors
 

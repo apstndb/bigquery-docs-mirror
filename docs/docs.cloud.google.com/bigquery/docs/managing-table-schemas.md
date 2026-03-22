@@ -6,6 +6,8 @@ You can make most schema modifications described in this document by using SQL [
 
 You can modify a table schema in all the ways described on this page by [exporting](/bigquery/docs/exporting-data) your table data to Cloud Storage, and then [loading](/bigquery/docs/loading-data) the data into a new table with the modified schema definition. BigQuery load and extract jobs are free, but you incur costs for storing the exported data in Cloud Storage. The following sections describe other ways of performing various types of schema modifications.
 
+Schema updates in BigQuery don't cause data loss.
+
 **Note:** When you update a schema, the changes might not be immediately reflected in the [`  INFORMATION_SCHEMA.TABLES  `](/bigquery/docs/information-schema-tables) and [`  INFORMATION_SCHEMA.COLUMNS  `](/bigquery/docs/information-schema-columns) views. To view immediate schema changes, call the [`  tables.get  ` method](/bigquery/docs/reference/rest/v2/tables/get) .
 
 ## Add a column
@@ -17,6 +19,8 @@ You can add columns to an existing table's schema definition by using one of the
   - Append data to a table with a load or query job.
 
 Any column you add must adhere to BigQuery's rules for [column names](/bigquery/docs/schemas#column_names) . For more information on creating schema components, see [Specifying a schema](/bigquery/docs/schemas) .
+
+It isn't possible to add columns in the middle of a table schema. New columns and nested fields are always added at the end of the table or field. The only way to create a new column in the middle of a table schema is to create a new table with the chosen schema and copy the data from the original table.
 
 ### Add an empty column
 
@@ -139,7 +143,7 @@ To add empty columns to a table's schema using a JSON schema file:
     ]
     ```
 
-3.  Add the new columns to the end of the schema definition. If you attempt to add new columns elsewhere in the array, the following error is returned: `  BigQuery error in update operation: Precondition Failed  ` .
+3.  Add the new columns to the end of the schema definition. If you attempt to add new columns elsewhere in the array, the following error is returned: `  BigQuery error in update operation: Precondition Failed  ` . Modifying schema order after table creation doesn't have an effect on column or nested field order.
     
     Using a JSON file, you can specify descriptions, `  NULLABLE  ` or `  REPEATED  ` modes, and `  RECORD  ` types for new columns. For example, using the schema definition from the previous step, your new JSON array would look like the following. In this example, a new `  NULLABLE  ` column is added named `  column4  ` . `  column4  ` includes a description.
     
@@ -458,7 +462,7 @@ To add a nested column to a `  RECORD  ` using a JSON schema file:
     ]
     ```
 
-3.  Add the new nested column to the end of the `  fields  ` array. In this example, `  nested3  ` is the new nested column.
+3.  Add the new nested column to the end of the `  fields  ` array. Nested fields are always added at the end of the field. In this example, `  nested3  ` is the new nested column.
     
     ``` text
       [
@@ -577,7 +581,7 @@ Replace the following:
   - `  LOCATION  ` : the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  FORMAT  ` : the format of the schema. `  NEWLINE_DELIMITED_JSON  ` , `  CSV  ` , `  AVRO  ` , `  PARQUET  ` , `  ORC  ` , or `  DATASTORE_BACKUP  ` .
   - `  PROJECT_ID  ` : your project ID.
-  - `  DATASET  ` : the name of the dataset that contains the table.
+  - `  DATASET  ` : the name of the dataset that contains the table you're updating.
   - `  TABLE  ` : the name of the table you're appending.
   - `  PATH_TO_SOURCE  ` : a fully-qualified [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) , a comma-separated list of URIs, or the path to a data file on your local machine.
   - `  SCHEMA  ` : the path to a local JSON schema file. A schema file is required only for CSV and JSON files when `  --autodetect  ` is unspecified. Avro and Datastore schemas are inferred from the source data.
@@ -2501,3 +2505,5 @@ The statement does not immediately free up the storage that is associated with t
     ```
 
   - Export the data to Cloud Storage, delete the unwanted columns, and then load the data into a new table with the correct schema.
+
+Schema updates can't drop nested fields.

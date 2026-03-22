@@ -1647,3 +1647,48 @@ WHERE
 ORDER BY
   max DESC
 ```
+
+## Migrating the partition meta-table decorator
+
+In legacy SQL, you can query the [`  __PARTITIONS_SUMMARY__  ` meta-table](/bigquery/docs/managing-partitioned-tables#get_partition_metadata) to get partition metadata for a specific table.
+
+``` text
+#legacySQL
+SELECT
+  partition_id,
+  project_id,
+  dataset_id,
+  table_id,
+  creation_time,
+  last_modified_time
+FROM
+  [DATASET_ID.TABLE_NAME$__PARTITIONS_SUMMARY__];
+```
+
+In GoogleSQL, you can query the [`  INFORMATION_SCHEMA.PARTITIONS  `](/bigquery/docs/information-schema-partitions) view instead.
+
+**Note:** `  INFORMATION_SCHEMA.PARTITIONS  ` is in [Preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see the [documentation](/bigquery/docs/information-schema-partitions) .
+
+To migrate a query that uses `  __PARTITIONS_SUMMARY__  ` and keep the output schema and error handling consistent, use the following GoogleSQL query:
+
+``` text
+#standardSQL
+SELECT
+  IF(partition_id IS NOT NULL, partition_id, ERROR('Table is not partitioned')) AS partition_id,
+  table_catalog AS project_id,
+  table_schema AS dataset_id,
+  table_name AS table_id,
+  NULL AS creation_time, -- Partition creation time not available
+  UNIX_MILLIS(last_modified_time) AS last_modified_time
+FROM
+  `DATASET_ID.INFORMATION_SCHEMA.PARTITIONS`
+WHERE
+  table_name = 'TABLE_NAME';
+```
+
+**Warning:** Partition-level `  creation_time  ` isn't available in `  INFORMATION_SCHEMA.PARTITIONS  ` and is set to `  NULL  ` in the example. For table-level creation time, use the [`  INFORMATION_SCHEMA.TABLES  ` `  creation_time  `](/bigquery/docs/information-schema-tables#schema) field.
+
+The permissions required to access the partition metadata differ between legacy SQL and GoogleSQL:
+
+  - Legacy SQL: The [meta-table](/bigquery/docs/managing-partitioned-tables#get_partition_metadata) requires the `  bigquery.tables.getData  ` permission.
+  - GoogleSQL: The `  INFORMATION_SCHEMA.PARTITIONS  ` view requires the [`  bigquery.tables.get  ` and `  bigquery.tables.list  `](/bigquery/docs/information-schema-partitions#required_permissions) permissions. This change in permissions for GoogleSQL lets you grant metadata-only roles (for example, [`  roles/bigquery.metadataViewer  `](/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ) without providing access to the underlying table data.

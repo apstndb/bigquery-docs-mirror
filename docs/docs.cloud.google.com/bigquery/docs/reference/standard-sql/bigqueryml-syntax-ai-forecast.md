@@ -17,6 +17,7 @@ FROM
     [, model => 'MODEL']
     [, id_cols => ID_COLS]
     [, horizon => HORIZON]
+    [, forecast_end_timestamp => FORECAST_END_TIMESTAMP]
     [, confidence_level => CONFIDENCE_LEVEL]
     [, output_historical_time_series => OUTPUT_HISTORICAL_TIME_SERIES]
     [, context_window => CONTEXT_WINDOW]
@@ -61,7 +62,9 @@ FROM
       - `  ARRAY<STRING>  `
       - `  ARRAY<INT64>  `
 
-  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of time series data points to forecast. The default value is `  10  ` . The valid input range is `  [1, 10,000]  ` .
+  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of time series data points to forecast. The default value is `  10  ` . The valid input range is `  [1, 10,000]  ` . This argument can't be used with the `  forecast_end_timestamp  ` argument.
+
+  - `  FORECAST_END_TIMESTAMP  ` : a timestamp literal value that specifies the end timestamp for the forecasted values. The horizon is calculated based on the end timestamp and the frequency provided from the input table for each time series. If the calculated horizon is out of the valid range `  [1, 10,000]  ` , the query returns an error. You can then adjust the `  forecast_end_timestamp  ` value so that the calculated horizon is within the valid range. This argument can't be used with the `  horizon  ` argument.
 
   - `  CONFIDENCE_LEVEL  ` : a `  FLOAT64  ` value that specifies the percentage of the future values that fall in the prediction interval. The default value is `  0.95  ` . The valid input range is `  [0, 1)  ` .
 
