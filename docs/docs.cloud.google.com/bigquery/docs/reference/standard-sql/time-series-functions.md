@@ -73,6 +73,8 @@ The following operations add rows to the `  APPENDS  ` change history:
   - `  end_timestamp  ` : a `  TIMESTAMP  ` value indicating the latest time at which a change is included in the output. `  end_timestamp  ` is exclusive; for example, if you specify `  2023-12-31 08:00:00  ` for `  start_timestamp  ` and `  2023-12-31 12:00:00  ` for `  end_timestamp  ` , all changes made from 8 AM December 31, 2023 through 11:59 AM December 31, 2023 are returned.
     
     If the `  end_timestamp  ` value is `  NULL  ` , all changes made up to the start time of the query are included.
+    
+    If the `  end_timestamp  ` value is a future date or time, the query fails.
 
 **Details**
 
@@ -233,6 +235,8 @@ The following operations add rows to the `  CHANGES  ` change history:
   - `  end_timestamp  ` : a `  TIMESTAMP  ` value indicating the latest time at which a change is included in the output. `  end_timestamp  ` is exclusive; for example, if you specify `  2023-12-31 08:00:00  ` for `  start_timestamp  ` and `  2023-12-31 12:00:00  ` for `  end_timestamp  ` , all changes made from 8 AM December 31, 2023 through 11:59 AM December 31, 2023 are returned. The maximum time range allowed between `  start_timestamp  ` and `  end_timestamp  ` is one day.
     
     If the `  end_timestamp  ` value is `  NULL  ` , all changes made up to the start time of the query are included.
+    
+    If the `  end_timestamp  ` value is a future date or time, the query fails.
 
 **Details**
 

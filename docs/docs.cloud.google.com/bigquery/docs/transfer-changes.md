@@ -130,6 +130,53 @@ The following sections outline the changes when updating to a new Google Ads API
 
 For more information about the Google Ads API release schedule, see [Timetable](https://developers.google.com/google-ads/api/docs/sunset-dates#timetable) .
 
+### June 15, 2026
+
+The [Google Ads connector](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v22](https://developers.google.com/google-ads/api/fields/v22/overview) to [v23](https://developers.google.com/google-ads/api/fields/v23/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v22-v23) .
+
+Deprecated columns
+
+New columns
+
+Tables affected
+
+`  campaign_start_date  `
+
+`  campaign_start_date_time  `
+
+`  Campaign  `
+
+`  campaign_end_date  `
+
+`  campaign_end_date_time  `
+
+By April 3, 2026, the Google Ads connector will add the columns `  campaign_start_date_time  ` and `  campaign_end_date_time  ` to the table schema and populate them with `  null  ` . After the update to Google Ads API v23 on June 15, 2026, these new columns will be populated with new values and new data type [datetime](/bigquery/docs/reference/standard-sql/data-types#datetime_type) . `  campaign_start_date  ` and `  campaign_end_date  ` will be deprecated and populated with `  null  ` , but will still remain in the table schema.
+
+For each pair of columns, only one column is populated with values from the Google Ads API while the other is populated with `  null  ` . To prepare for the Google Ads API v23 update, update your queries to specify one of the two columns. If your SQL query selects the deprecated columns, update the query so that it specifies the correct column, for example:
+
+``` text
+IFNULL(DATE(campaign_start_date_time), campaign_start_date)
+```
+
+### June 8, 2026
+
+The following column will be deprecated on June 8, 2026. The column will be populated with `  null  ` for new data transferred.
+
+<table>
+<thead>
+<tr class="header">
+<th>Deprecated columns</th>
+<th>Tables affected</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       ad_group_ad_ad_call_ad_phone_number      </code></td>
+<td><code dir="ltr" translate="no">       Ad      </code></td>
+</tr>
+</tbody>
+</table>
+
 ### March 2, 2026
 
 The [Google Ads connector](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v21](https://developers.google.com/google-ads/api/fields/v21/overview) to [v22](https://developers.google.com/google-ads/api/fields/v22/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v21-v22) .

@@ -6,6 +6,12 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## March 19, 2026
+
+Feature
+
+You can now use a [custom organization policy](/bigquery/docs/reservation-custom-constraints) to allow or deny specific operations on routines. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## March 17, 2026
 
 Feature
@@ -48,7 +54,7 @@ Updates to [conversational analytics](/bigquery/docs/conversational-analytics) i
   - BQML support: BigQuery conversational analytics now supports [a set of BigQuery ML functions](/bigquery/docs/conversational-analytics#bigquery-ml-support) , including AI.FORECAST, AI.DETECT\_ANOMALIES, and AI.GENERATE. These functions let you perform advanced analytics tasks with simple conversational prompts.
   - Chat with BigQuery results: You can now start conversations and chat with query results in BigQuery Studio (SQL editor).
   - Enhanced support for partitioned tables: BigQuery conversational analytics can now use BigQuery table partitioning. The agent can optimize SQL queries by using partitioned columns such as date ranges on a date-partitioned table. This can improve query performance and reduce costs.
-  - Labels for agent-generated queries: BigQuery jobs initiated by the conversational analytics agent are now labeled in [BigQuery Job History](/bigquery/docs/managing-jobs) in the Google Cloud Console. You can identify, filter, and analyze the jobs run by the conversational analytics agent by referencing labels similar to `  {‘ca-bq-job’: ‘true’}  ` . These labels can help with the following tasks:
+  - Labels for agent-generated queries: BigQuery jobs initiated by the conversational analytics agent are now labeled in [BigQuery Job History](/bigquery/docs/managing-jobs) in the Google Cloud Console. You can identify, filter, and analyze the jobs run by the conversational analytics agent by referencing labels similar to `  {'ca-bq-job': 'true'}  ` . These labels can help with the following tasks:
       - Monitor and attribute cost.
       - Audit agent activity.
       - Analyze agent-generated query performance.

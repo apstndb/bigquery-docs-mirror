@@ -86,7 +86,6 @@ https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer-parameters
 https://docs.cloud.google.com/bigquery/docs/boosted-tree-classifier-tutorial
 https://docs.cloud.google.com/bigquery/docs/bqml-introduction
 https://docs.cloud.google.com/bigquery/docs/cached-results
-https://docs.cloud.google.com/bigquery/docs/change-data-capture
 https://docs.cloud.google.com/bigquery/docs/change-history
 https://docs.cloud.google.com/bigquery/docs/choose-document-processing-function
 https://docs.cloud.google.com/bigquery/docs/choose-ml-text-function
@@ -1081,7 +1080,6 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-sy
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-robust-scaler
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-roc
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-standard-scaler
-https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tf-idf
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-describe
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-tfdv-validate
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train

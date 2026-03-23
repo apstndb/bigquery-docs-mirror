@@ -108,6 +108,14 @@ You can export your query results to Cloud Storage in the Google Cloud console w
 
 To check on the progress of the job, expand the **Job history** pane and look for the job with the `  EXTRACT  ` type.
 
+## Restrict downloading query results
+
+To prevent users from downloading query results from the Google Cloud console, use one of the following methods:
+
+  - Configure a [VPC Service Controls](/vpc-service-controls/docs/overview) perimeter to prevent data exfiltration. This blocks users from downloading and exporting data outside the established perimeter boundaries.
+
+  - Contact [Cloud Customer Care](/support) to request that your Google Cloud project or organization be added to a restricted list. This disables the data download and export options directly within the Google Cloud console.
+
 ## What's next
 
   - Learn how to programmatically [export a table to a JSON file](/bigquery/docs/samples/bigquery-extract-table-json) .
