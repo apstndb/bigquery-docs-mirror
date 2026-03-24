@@ -319,6 +319,10 @@ Replace the following:
 
 **Note:** When you query `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` to find a summary cost of query jobs, exclude the `  SCRIPT  ` statement type, otherwise some values might be counted twice. The `  SCRIPT  ` row includes summary values for all child jobs that were executed as part of this job.
 
+## Limitations
+
+The `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view includes jobs run by projects that belong to the current organization. Jobs run by projects from other organizations aren't available in this view, even when those jobs access resources in the current organization, such as shared datasets. For example, if you share a dataset with a project from another organization, any jobs that the project runs to access data in the dataset aren't included in this view.
+
 ## Examples
 
 To run the query against a project other than your default project, add the project ID in the following format:

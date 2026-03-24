@@ -5316,6 +5316,7 @@ Here are some general rules and constraints to consider when working with CTEs:
   - `  CREATE RECURSIVE VIEW  ` isn't supported. To work around this, use the `  WITH RECURSIVE  ` clause as the `  query_expression  ` in the `  CREATE VIEW  ` statement. For more information, see [CREATE VIEW](/bigquery/docs/reference/standard-sql/data-definition-language#create_view_statement) .
   - A local CTE overrides an outer CTE or table with the same name.
   - A CTE on a subquery may not reference correlated columns from the outer query.
+  - UNION DISTINCT isn't allowed inside WITH RECURSIVE.
 
 ##### Base term rules
 
