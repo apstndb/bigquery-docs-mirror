@@ -117,7 +117,7 @@ To reduce the toil of data preparation, BigQuery lets you clean data with Gemini
 
 You can validate the results in a preview of your data before executing the changes on all your data.
 
-For more information, see [Introduction to BigQuery data preparation](/bigquery/docs/data-prep-introduction) .
+For more information, see [BigQuery data preparation overview](/bigquery/docs/data-prep-introduction) .
 
 ## What's next
 

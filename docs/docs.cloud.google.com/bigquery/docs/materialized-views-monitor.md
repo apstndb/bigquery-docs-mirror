@@ -272,4 +272,4 @@ If your query uses materialized views and is running slower than expected, do th
 
 1.  Verify that the intended materialized views are actually being used by the query. For detailed instructions, see [Monitor materialized view usage](#monitor_materialized_view_usage) .
 2.  [Check the freshness of your materialized view](#view_last_refresh_status) .
-3.  Review the materialized view definition and the data it references and consider [techniques to optimize your materialized view usage](/bigquery/docs/materialized-views-create#considerations_when_creating_materialized_views) .
+3.  Review the materialized view definition and the data it references and consider [techniques to optimize your materialized view usage](/bigquery/docs/materialized-views-create#best_practices_when_creating_materialized_views) .

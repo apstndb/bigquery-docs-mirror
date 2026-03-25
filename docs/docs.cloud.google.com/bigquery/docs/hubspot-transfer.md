@@ -189,6 +189,7 @@ Add HubSpot data into BigQuery by setting up a transfer configuration using one 
     
       - For **Access token** , enter your private access token key. For more information, see [HubSpot prerequisites]() .
       - For **HubSpot objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
+          - You can select custom HubSpot objects, which appear in the **Browse** menu in the format `  CUSTOM_OBJECT_NAME __c  ` .
 
 5.  In the **Destination settings** section, for **Dataset** , choose the dataset that you created to store your data.
 
@@ -233,6 +234,7 @@ Replace the following:
   - `  PARAMETERS  ` : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . The following are the parameters for a HubSpot data transfer:
     
       - `  assets  ` : the path to the HubSpot objects to be transferred to BigQuery.
+          - You can specify custom HubSpot objects using the format `  CUSTOM_OBJECT_NAME __c  ` .
       - `  connector.authentication.oauth.accessToken  ` : the HubSpot private access token key.
 
 The following command creates a HubSpot data transfer in the default project.
