@@ -844,7 +844,7 @@ You can view the explicitly set access controls for a dataset by choosing one of
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a dataset must specify the `  object_name  ` .
 
@@ -2237,7 +2237,7 @@ To view the access controls for a table or view, choose one of the following opt
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  ` view](/bigquery/docs/information-schema-object-privileges) . Queries to retrieve access controls for a table or view must specify the `  object_schema  ` and `  object_name  ` .
 

@@ -179,3 +179,25 @@ The results should look like the following:
 | large_table | logs_index  | CREATE SEARCH INDEX `logs_index` ON `my_project.my_dataset.large_table`(ALL COLUMNS) | 100                 | LOG_ANALYZER   |
 +-------------+-------------+--------------------------------------------------------------------------------------+---------------------+----------------+
 ```
+
+## Troubleshooting
+
+To enable this view, you can set the value of `  enable_info_schema_storage  ` to `  TRUE  ` on your project or organization. For more information on managing your configuration, see [Manage configuration settings](/bigquery/docs/default-configuration) .
+
+If you haven't configured this setting, you will see the following error:
+
+``` text
+INFORMATION_SCHEMA.SEARCH_INDEXES hasn't been enabled for project <myproject>.
+Consider using one of the following SQL statements to enable data collection:
+ALTER PROJECT `<myproject>`
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+Or to enable for the entire organization:
+ALTER ORGANIZATION
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+After enabling, please allow around 1 day for the complete historical data to
+become available.
+```
+
+Run the SQL statements described in the error message to enable the view.

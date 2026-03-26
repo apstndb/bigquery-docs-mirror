@@ -17,7 +17,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ### Console
 
-1.  Make sure that you have the following role or roles on the project:
+1.  Make sure that you have the following role or roles on the project: **BigQuery Admin** , **Project IAM Admin**
     
     #### Check for the roles
     
@@ -47,7 +47,7 @@ When you finish the tasks that are described in this document, you can avoid con
 
 ### gcloud
 
-1.  Grant roles to your user account. Run the following command once for each of the following IAM roles:
+1.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `  roles/bigquery.admin, roles/resourcemanager.projectIamAdmin  `
     
     ``` text
     gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE

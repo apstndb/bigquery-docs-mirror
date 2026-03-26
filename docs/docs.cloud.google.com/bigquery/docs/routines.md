@@ -25,7 +25,7 @@ Depending on the routine type, run one of the following DDL statements:
   - [Stored procedure: `  CREATE PROCEDURE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure)
   - [User-defined function: `  CREATE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement)
   - [Table function: `  CREATE TABLE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement)
-  - [User-defined aggregate function: `  CREATE AGGREGATE FUNCTION  `](/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
+  - [User-defined aggregate function: `  CREATE AGGREGATE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#sql-create-udaf-function)
 
 ### API
 

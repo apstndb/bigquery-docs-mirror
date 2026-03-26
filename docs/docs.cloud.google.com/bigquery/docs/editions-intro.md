@@ -105,8 +105,22 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td><strong><a href="/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
 <td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
 <code dir="ltr" translate="no">       PIPELINE      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       CONTINUOUS      </code> , <code dir="ltr" translate="no">       PIPELINE      </code> , <code dir="ltr" translate="no">       ML_EXTERNAL      </code> , <code dir="ltr" translate="no">       BACKGROUND      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       CONTINUOUS      </code> , <code dir="ltr" translate="no">       PIPELINE      </code> , <code dir="ltr" translate="no">       ML_EXTERNAL      </code> , <code dir="ltr" translate="no">       BACKGROUND      </code></td>
+<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
+<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
+<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
+<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
+<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
+<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
+<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
+<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
 <td>On-demand pricing doesn't support assignments</td>
 </tr>
 <tr class="even">
@@ -261,8 +275,22 @@ Don't use edition tiers to restrict access to specific features, because the fea
 <td><strong><a href="/bigquery/docs/reservations-assignments">Supported assignment types</a></strong></td>
 <td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
 <code dir="ltr" translate="no">       PIPELINE      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       CONTINUOUS      </code> , <code dir="ltr" translate="no">       PIPELINE      </code> , <code dir="ltr" translate="no">       ML_EXTERNAL      </code> , <code dir="ltr" translate="no">       BACKGROUND      </code></td>
-<td><code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       CONTINUOUS      </code> , <code dir="ltr" translate="no">       PIPELINE      </code> , <code dir="ltr" translate="no">       ML_EXTERNAL      </code> , <code dir="ltr" translate="no">       BACKGROUND      </code></td>
+<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
+<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
+<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
+<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
+<td><code dir="ltr" translate="no">       QUERY      </code> ,<br />
+<code dir="ltr" translate="no">       CONTINUOUS      </code> ,<br />
+<code dir="ltr" translate="no">       PIPELINE      </code> ,<br />
+<code dir="ltr" translate="no">       ML_EXTERNAL      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_COLUMN_METADATA_INDEX      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_CHANGE_DATA_CAPTURE      </code> ,<br />
+<code dir="ltr" translate="no">       BACKGROUND_SEARCH_INDEX_REFRESH      </code></td>
 <td>On-demand pricing doesn't support assignments</td>
 </tr>
 <tr class="even">

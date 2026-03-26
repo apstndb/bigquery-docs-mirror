@@ -45,6 +45,8 @@ To test your data preparation steps and validate the results in your destination
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** . This is the default option.
       - To use a service account, select **Execute with selected service account** , and then select a service account. If the service account needs additional permissions, grant it the required roles by clicking **Grant all** .
+    
+    **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
 
 7.  Click **Save** .
 
@@ -104,6 +106,8 @@ To create a data preparation schedule, follow these steps:
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , and then select a service account.
+    
+    **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
 
 8.  Schedule a frequency.
 
@@ -123,6 +127,8 @@ To create a data preparation schedule, follow these steps:
     
       - To use your Google Account user credentials ( [Preview](https://cloud.google.com/products#product-launch-stages) ), select **Execute with my user credentials** .
       - To use a service account, select **Execute with selected service account** , and then select a service account.
+    
+    **Note:** If your data preparation uses Google Drive as a data source, you must select **Execute with selected service account** . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
 
 6.  In the **Schedule frequency** section, do the following:
     

@@ -8,7 +8,7 @@ To create a list of materialized views, see [List materialized views](/bigquery/
 
 To discover materialized views, query the [`  INFORMATION_SCHEMA.TABLES  ` view](/bigquery/docs/information-schema-tables) . To retrieve the properties of a materialized view, query the [`  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view](/bigquery/docs/information-schema-table-options) .
 
-Materialized views are not listed in the [`  INFORMATION_SCHEMA.VIEWS  ` views](/bigquery/docs/information-schema-views) table.
+Materialized views are not listed in the [`  INFORMATION_SCHEMA.VIEWS  ` view](/bigquery/docs/information-schema-views) table.
 
 ## Monitor automatic refresh
 

@@ -24,12 +24,6 @@ The following sections describe the functions that BigQuery offers to help you g
 
 ### Generate single embeddings
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature during the preview, contact <bqml-feedback@google.com> .
-
 You can use the [`  AI.EMBED  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) with Vertex AI embedding models to generate a single embedding of your input.
 
 The `  AI.EMBED  ` function supports the following types of input:
@@ -68,7 +62,7 @@ The following search functions are available:
 
   - [`  AI.SEARCH  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-search) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Search for results that are close to a string that you provide. You can use this function if your table has [autonomous embedding generation](#autonomous_embedding_generation) enabled.
 
-  - [`  AI.SIMILARITY  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) ( [Preview](https://cloud.google.com/products#product-launch-stages) ): Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `  VECTOR_SEARCH  ` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
+  - [`  AI.SIMILARITY  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity) : Compare two inputs by computing the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between their embeddings. This function works well if you want to perform a small number of comparisons and you haven't precomputed any embeddings. You should use `  VECTOR_SEARCH  ` when performance is critical and you're working with a large number of embeddings. [Compare their functionality](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-similarity#related_functions) to choose the best function for your use case.
 
 Optionally, you can create a [vector index](/bigquery/docs/vector-index) by using the [`  CREATE VECTOR INDEX  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) . When a vector index is used, the `  VECTOR_SEARCH  ` and `  AI.SEARCH  ` functions use the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) search technique to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, these functions use [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record. You can also choose to use brute force to get exact results even when a vector index is available.
 

@@ -132,12 +132,22 @@ For more information, see <a href="/bigquery/docs/reference/standard-sql/statist
 <td>Synonym for <code dir="ltr" translate="no">       ANY_VALUE(x HAVING MIN y)      </code> .</td>
 </tr>
 <tr class="even">
+<td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont"><code dir="ltr" translate="no">        PERCENTILE_CONT       </code></a></td>
+<td>Computes the specified percentile for a value, using linear interpolation.<br />
+For more information, see <a href="/bigquery/docs/reference/standard-sql/navigation_functions">Navigation functions</a> .</td>
+</tr>
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont"><code dir="ltr" translate="no">        PERCENTILE_CONT       </code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       PERCENTILE_CONT      </code> .<br />
 <br />
 Computes a differentially-private percentile across privacy unit columns in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.<br />
 <br />
 For more information, see <a href="/bigquery/docs/reference/standard-sql/aggregate-dp-functions">Differential privacy functions</a> .</td>
+</tr>
+<tr class="even">
+<td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc"><code dir="ltr" translate="no">        PERCENTILE_DISC       </code></a></td>
+<td>Computes the specified percentile for a discrete value.<br />
+For more information, see <a href="/bigquery/docs/reference/standard-sql/navigation_functions">Navigation functions</a> .</td>
 </tr>
 <tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg"><code dir="ltr" translate="no">        ST_CENTROID_AGG       </code></a></td>

@@ -106,6 +106,10 @@ The interactive SQL translator is available in the following processing location
 
 **Asia Pacific**
 
+Bangkok
+
+`  asia-southeast3  `
+
 Delhi
 
 `  asia-south2  `

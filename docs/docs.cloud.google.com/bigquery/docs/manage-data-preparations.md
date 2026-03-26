@@ -2,7 +2,7 @@
 
 This document describes how to manage your BigQuery data preparations, including managing access, versioning, performance, and metadata. It also describes how to perform basic tasks, such as viewing and downloading your data preparations.
 
-Data preparations are [BigQuery](/bigquery/docs/query-overview#bigquery-studio) resources powered by [Dataform](/dataform/docs/overview) . For more information, see [Introduction to BigQuery data preparation](/bigquery/docs/data-prep-introduction) .
+Data preparations are [BigQuery](/bigquery/docs/query-overview#bigquery-studio) resources powered by [Dataform](/dataform/docs/overview) . For more information, see [BigQuery data preparation overview](/bigquery/docs/data-prep-introduction) .
 
 ## Before you begin
 

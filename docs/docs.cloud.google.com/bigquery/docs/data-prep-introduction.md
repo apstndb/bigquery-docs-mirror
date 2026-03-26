@@ -1,4 +1,4 @@
-# Introduction to BigQuery data preparation
+# BigQuery data preparation overview
 
 This document describes AI-augmented data preparation in BigQuery. Data preparations are [BigQuery](/bigquery/docs/query-overview#bigquery-studio) resources, which use Gemini in BigQuery to analyze your data and provide intelligent suggestions for cleaning, transforming, and enriching it. You can significantly reduce the time and effort required for manual data preparation tasks. Scheduling of data preparations is powered by [Dataform](/dataform/docs/overview) .
 
@@ -10,7 +10,7 @@ This document describes AI-augmented data preparation in BigQuery. Data preparat
 
 ## Data preparation entry points
 
-You can create and manage data preparations in the **BigQuery Studio** page (see [Open the data preparation editor in BigQuery](/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) ).
+You can create and manage data preparations in the **BigQuery Studio** page (see [Start a data preparation session](/bigquery/docs/data-prep-get-suggestions#open-data-prep-editor) ).
 
 **Tip:** You can also use the **Pipelines & Connections** page to create a data preparation using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 

@@ -174,7 +174,7 @@ In this section, you install the `  pydeck  ` and `  h3  ` packages. [`  pydeck 
 
 You then import the `  h3  ` and `  pydeck  ` libraries and the following Python geospatial libraries:
 
-  - [`  geopandas  `](https://geopandas.org/en/stable/index.html) to extend the datatypes used by [`  pandas  `](https://pandas.pydata.org/) to allow spatial operations on geometric types.
+  - [`  geopandas  `](https://geopandas.org/en/stable/index.html) to extend the data types used by [`  pandas  `](https://pandas.pydata.org/) to allow spatial operations on geometric types.
   - [`  shapely  `](https://shapely.readthedocs.io/en/stable/index.html) for manipulation and analysis of individual planar geometric objects.
   - [`  branca  `](https://python-visualization.github.io/branca/) to generate HTML and JavaScript colormaps.
   - [`  geemap.deck  `](https://geemap.org/deck/) for visualization with `  pydeck  ` and `  earthengine-api  ` .
@@ -488,7 +488,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 ## Create a choropleth map
 
-If you are exploring data with polgyons that are difficult to convert to `  GeoJSON  ` format, you can use a [polygon layer](https://deck.gl/docs/api-reference/layers/polygon-layer) from the `  deck.gl  ` framework instead. A polygon layer can process input data of specific types such as an array of points.
+If you are exploring data with polygons that are difficult to convert to `  GeoJSON  ` format, you can use a [polygon layer](https://deck.gl/docs/api-reference/layers/polygon-layer) from the `  deck.gl  ` framework instead. A polygon layer can process input data of specific types such as an array of points.
 
 In this section, you use a polygon layer to render an array of points and use the results to render a choropleth map. The choropleth map shows the density of bike share stations by neighborhood by joining data from the San Francisco Neighborhoods dataset with the San Francisco Ford GoBike Share dataset.
 

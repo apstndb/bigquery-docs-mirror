@@ -1,11 +1,5 @@
 # The AI.SIMILARITY function
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature during the preview, contact <bqml-feedback@google.com> .
-
 This document describes the `  AI.SIMILARITY  ` function, which lets you find the [cosine similarity](https://wikipedia.org/wiki/Cosine_similarity) between two inputs. Values closer to 1 indicate more similar inputs and values closer to 0 indicate less similar inputs.
 
 ``` text
@@ -38,8 +32,8 @@ When you analyze image data, the content must be in one of the supported image f
 ``` text
 AI.SIMILARITY(
   content1 => 'CONTENT1',
-  content2 => 'CONTENT2',
-  endpoint => 'ENDPOINT'
+  content2 => 'CONTENT2'
+  [, endpoint => 'ENDPOINT']
   [, model_params => MODEL_PARAMS]
   [, connection_id => 'CONNECTION_ID']
 )
@@ -53,7 +47,7 @@ AI.SIMILARITY(
 
   - `  CONTENT2  ` : a `  STRING  ` value that provides the second value to compare. The value of `  CONTENT2  ` can be a string literal, the name of a table column, or the output of an expression that evaluates to a string.
 
-  - `  ENDPOINT  ` : a `  STRING  ` value that specifies the Vertex AI endpoint to use for the text embedding model. If you specify the model name, such as `  'text-embedding-005'  ` , rather than a URL, then BigQuery ML automatically identifies the model and uses the model's full endpoint.
+  - `  ENDPOINT  ` : a `  STRING  ` value that specifies the Vertex AI endpoint to use for the text embedding model. If you specify the model name, such as `  'text-embedding-005'  ` , rather than a URL, then BigQuery ML automatically identifies the model and uses the model's full endpoint. If you don't specify an endpoint, then BigQuery ML selects a model that works with the type of data that you provide.
 
   - `  MODEL_PARAMS  ` : a `  JSON  ` literal that provides additional parameters to the model. You can use any of the [`  parameters  ` object](/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#parameter-list) fields. One of these fields, `  outputDimensionality  ` , lets you specify the number of dimensions to use when generating embeddings. For example, if you specify `  256  ` for the `  outputDimensionality  ` field, then the model returns a 256-dimensional embedding for each input value.
 

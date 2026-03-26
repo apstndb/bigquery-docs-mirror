@@ -285,24 +285,24 @@ The following example shows different storage bytes in GiB at the dataset(s) lev
 SELECT
   table_schema AS dataset_name,
   -- Logical
-  SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,  
-  SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib, 
-  SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib, 
+  SUM(total_logical_bytes) / power(1024, 3) AS total_logical_gib,
+  SUM(active_logical_bytes) / power(1024, 3) AS active_logical_gib,
+  SUM(long_term_logical_bytes) / power(1024, 3) AS long_term_logical_gib,
   -- Physical
   SUM(total_physical_bytes) / power(1024, 3) AS total_physical_gib,
   SUM(active_physical_bytes) / power(1024, 3) AS active_physical_gib,
   SUM(active_physical_bytes - time_travel_physical_bytes) / power(1024, 3) AS active_no_tt_physical_gib,
   SUM(long_term_physical_bytes) / power(1024, 3) AS long_term_physical_gib,
   SUM(time_travel_physical_bytes) / power(1024, 3) AS time_travel_physical_gib,
-  SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib 
+  SUM(fail_safe_physical_bytes) / power(1024, 3) AS fail_safe_physical_gib
 FROM
-  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE 
-WHERE 
+  `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE
+WHERE
   table_type ='BASE TABLE'
-GROUP BY 
-  table_schema  
-ORDER BY 
-  dataset_name 
+GROUP BY
+  table_schema
+ORDER BY
+  dataset_name
 ```
 
 ##### Example 3:
@@ -382,3 +382,25 @@ The result is similar to following:
 +--------------+--------------------+-----------------------+---------------------+------------------------+--------------------------+-----------------------------+------------------------------+----------------------------------+-------------------------------+----------------------------------+--------------------------------+
 | dataset1     |               10.0 |                  10.0 |                 1.0 |                    1.0 |                     10.0 |                        10.0 |                          0.2 |                              0.1 |                          0.04 |                             0.02 |                           0.24 |
 ```
+
+## Troubleshooting
+
+To enable this view, you can set the value of `  enable_info_schema_storage  ` to `  TRUE  ` on your project or organization. For more information on managing your configuration, see [Manage configuration settings](/bigquery/docs/default-configuration) .
+
+If you haven't configured this setting, you will see the following error:
+
+``` text
+INFORMATION_SCHEMA.TABLE_STORAGE hasn't been enabled for project <myproject>.
+Consider using one of the following SQL statements to enable data collection:
+ALTER PROJECT `<myproject>`
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+Or to enable for the entire organization:
+ALTER ORGANIZATION
+SET OPTIONS (`region-<region>.enable_info_schema_storage` = TRUE)
+
+After enabling, please allow around 1 day for the complete historical data to
+become available.
+```
+
+Run the SQL statements described in the error message to enable the view.

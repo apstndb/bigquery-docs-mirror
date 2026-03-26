@@ -113,7 +113,7 @@ Select one of the following options:
       - For **Password** , enter the password of the Microsoft SQL Server user initiating the Microsoft SQL Server database connection.
       - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](#tls_configuration) .
       - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) .
-      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#mar16-sqlserver) .
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
       - For **Microsoft SQL Server objects to transfer** , browse the Microsoft SQL Server table or manually enter the names of the tables that are required for the transfer.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
@@ -166,7 +166,7 @@ Replace the following:
       - `  connector.endpoint.port  ` : the port number of the database.
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user.
-      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#mar16-sqlserver) .
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
       - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only

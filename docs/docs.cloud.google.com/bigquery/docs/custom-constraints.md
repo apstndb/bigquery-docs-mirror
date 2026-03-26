@@ -1,8 +1,13 @@
-# Manage BigQuery resources using custom constraints
+# Use organization policies to apply custom constraints to BigQuery resources
+
+**Preview — routines, models**
+
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This page shows you how to use Organization Policy Service custom constraints to restrict specific operations on the following Google Cloud resources:
 
   - `  bigquery.googleapis.com/Dataset  `
+  - `  bigquery.googleapis.com/Routine  `
 
 To learn more about Organization Policy, see [Custom organization policies](/organization-policy/overview#custom-organization-policies) .
 
@@ -16,9 +21,13 @@ Organization Policy provides built-in [managed constraints](/organization-policy
 
 By default, organization policies are inherited by the descendants of the resources on which you enforce the policy. For example, if you enforce a policy on a folder, Google Cloud enforces the policy on all projects in the folder. To learn more about this behavior and how to change it, refer to [Hierarchy evaluation rules](/organization-policy/hierarchy-evaluation#disallow_inheritance) .
 
+### Benefits
+
+You can use a custom organization policy to allow or deny specific operations on BigQuery resources such as datasets and routines. This lets you control costs and manage access to your Google Cloud resources to help you meet your organization's compliance and security requirements. Restrictions on resources are fine-grained. They can be applied at the project, folder, or organization level.
+
 ## Limitations
 
-  - [`  PolicyViolationInfo  `](/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo) isn't published in the [BigQuery audit logs](/bigquery/docs/reference/auditlogs) when access is denied due to custom constraints. The error message provides the `  constraintId  ` that denied the operation.
+  - [`  PolicyViolationInfo  `](/dotnet/docs/reference/Google.Cloud.Audit/latest/Google.Cloud.Audit.PolicyViolationInfo) isn't published in the [BigQuery audit logs](/bigquery/docs/reference/auditlogs) when access is denied due to custom constraints on resources other than datasets. The error message provides the `  constraintId  ` that denied the operation.
 
 ## Before you begin
 
@@ -26,27 +35,13 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Required roles
 
-To get the permissions that you need to manage organization policies, ask your administrator to grant you the following IAM roles:
+To get the permission that you need to manage organization policies, ask your administrator to grant you the [Organization Policy Administrator](/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) IAM role on the organization resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
-  - [Organization Policy Administrator](/iam/docs/roles-permissions/orgpolicy#orgpolicy.policyAdmin) ( `  roles/orgpolicy.policyAdmin  ` ) on the organization resource
-  - To create or update a BigQuery dataset: [BigQuery Admin or BigQuery Editor](/bigquery/docs/access-control#bigquery) ( `  roles/bigquery.admin  ` or `  roles/bigquery.editor  ` ) on the project resource
+This predefined role contains the `  orgpolicy.*  ` permission, which is required to manage organization policies.
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+You might also be able to get this permission with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
-These predefined roles contain the permissions required to manage organization policies. To see the exact permissions that are required, expand the **Required permissions** section:
-
-#### Required permissions
-
-The following permissions are required to manage organization policies:
-
-  - `  orgpolicy.*  ` on the organization resource
-  - To create or update a BigQuery dataset:
-      - `  bigquery.datasets.create  ` on the project resource
-      - `  bigquery.datasets.get  ` on the project resource
-      - `  bigquery.datasets.list  ` on the project resource
-      - `  bigquery.datasets.update  ` on the project resource
-
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+Additional permissions are required for creating and managing BigQuery resources. For more information, see [Predefined roles and permissions](/bigquery/docs/access-control) .
 
 ## Set up a custom constraint
 
@@ -212,13 +207,13 @@ To create a custom constraint, follow these steps:
     - CREATE
     condition: "datasetReference.datasetId.startsWith('test')"
     actionType: DENY
-    displayName: Reject test datasets
-    description: All new datasets can't begin with 'test'.
+    displayName: Reject test datasets.
+    description: Deny new dataset names that begin with 'test'.
     ```
     
     Replace `  ORGANIZATION_ID  ` with your organization ID.
     
-    This defines a constraint where for every new dataset, if the dataset ID begins with `  test  ` , the operation is denied.
+    This defines a constraint that denies the creation of new datasets if the dataset name begins with 'test'.
 
 2.  Apply the constraint:
     
@@ -274,7 +269,7 @@ Now create a policy and apply it to the custom constraint that you created.
     custom.enforceDatasetId     -              SET               COCsm5QGENiXi2E=
     ```
 
-After you apply the policy, wait for about two minutes for Google Cloud to start enforcing the policy.
+After you apply the policy, it can take up to two minutes for Google Cloud to start enforcing it.
 
 ### Test the policy
 
@@ -292,6 +287,38 @@ The output is the following:
 ``` text
 Operation denied by custom org policies: ["customConstraints/custom.enforceDatasetId": "All new datasets can't begin with 'test'."]
 ```
+
+## Example custom organization policies for common use cases
+
+This table provides syntax examples for some common custom constraints.
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Description</th>
+<th>Constraint syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Deny new routines with names that begin with 'test'.</td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRoutineId
+    resourceTypes:
+    - bigquery.googleapis.com/Routine
+    methodTypes:
+    - CREATE
+    condition: &quot;resource.routineReference.routineId.startsWith(&#39;test&#39;)&quot;
+    actionType: DENY
+    displayName: Reject test routines.
+    description: Deny new routines with names that begin with &#39;test&#39;.
+    </code></pre></td>
+</tr>
+</tbody>
+</table>
 
 ## BigQuery supported resources
 
@@ -337,9 +364,16 @@ bigquery.googleapis.com/Dataset
 
 `  resource.storageBillingModel  `
 
+bigquery.googleapis.com/Routine
+
+`  resource.routineReference.datasetId  `
+
+`  resource.routineReference.projectId  `
+
+`  resource.routineReference.routineId  `
+
 ## What's next
 
-  - Learn how to [Update dataset properties](/bigquery/docs/updating-datasets) .
   - Learn more about [Organization Policy Service](/organization-policy/overview) .
   - Learn more about how to [create and manage organization policies](/organization-policy/create-organization-policies) .
   - See the full list of managed [organization policy constraints](/organization-policy/reference/org-policy-constraints) .

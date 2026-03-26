@@ -1,11 +1,5 @@
 # The AI.EMBED function
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature during the preview, contact <bqml-feedback@google.com> .
-
 This document describes the `  AI.EMBED  ` function, which lets you create [embeddings](#embeddings) from text or image data in BigQuery. For example, the following query creates an embedding for a piece of text:
 
 ``` text

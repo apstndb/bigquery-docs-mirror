@@ -94,6 +94,10 @@ The translation API is available in the following processing locations:
 
 **Asia Pacific**
 
+Bangkok
+
+`  asia-southeast3  `
+
 Delhi
 
 `  asia-south2  `

@@ -158,7 +158,7 @@ Replace the following:
 
 The previous example enables [schema auto-detection](/bigquery/docs/schema-detect) . For more control over how BigQuery converts the values inside the `  properties  ` object, you can provide an explicit schema instead. For more information, see [Specify schemas](/bigquery/docs/schemas#specify_schemas) . If you provide an explicit schema, then don't include a top-level `  type  ` column in the schema definition. For each member of the `  properties  ` member, define separate columns, not a single nested column.
 
-As defined by [RFC 7946](https://tools.ietf.org/html/rfc7946) , a complete GeoJSON data structure is a single JSON object. Many systems export GeoJSON data as a single `  FeatureCollection  ` object that contains all of the geometries. To load this format into BigQuery, you must convert the file by removing the root-level `  FeatureCollection  ` object and splitting the individual feature objects into separate lines. For example, the following command uses the `  jq  ` command-line tool to split a GeoJSON file into newline- delimited format:
+As defined by [RFC 7946](https://tools.ietf.org/html/rfc7946) , a complete GeoJSON data structure is a single JSON object. Many systems export GeoJSON data as a single `  FeatureCollection  ` object that contains all of the geometries. To load this format into BigQuery, you must convert the file by removing the root-level `  FeatureCollection  ` object and splitting the individual feature objects into separate lines. For example, the following command uses the `  jq  ` command-line tool to split a GeoJSON file into newline-delimited format:
 
 ``` text
 cat ~/file1.json | jq -c '.features[]' > converted.json
@@ -303,7 +303,7 @@ Geospatial analytics does not support the following features in geospatial forma
   - Linear reference systems. This includes the "M" suffix in WKT format.
   - WKT geometry objects other than geometry primitives or multipart geometries. In particular, geospatial analytics supports only Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon, and GeometryCollection.
 
-See [`  ST_GEOGFROMGEOJSON  `](/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) and [`  ST_GEOGFROMTEXT  `](/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) for constraints specific to GeoJson and WKT input formats.
+See [`  ST_GEOGFROMGEOJSON  `](/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson) and [`  ST_GEOGFROMTEXT  `](/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext) for constraints specific to GeoJSON and WKT input formats.
 
 ## Integrate geospatial raster data with Google Earth Engine
 

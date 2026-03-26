@@ -25,27 +25,27 @@ The following is an example of how history-based optimizations work with BigQuer
 <tr class="even">
 <td>2</td>
 <td>30</td>
-<td>First history based-optimization applied.</td>
+<td>First history-based optimization applied.</td>
 </tr>
 <tr class="odd">
 <td>3</td>
 <td>20</td>
-<td>Second history based-optimization applied.</td>
+<td>Second history-based optimization applied.</td>
 </tr>
 <tr class="even">
 <td>4</td>
 <td>21</td>
-<td>No additional history based-optimizations to apply.</td>
+<td>No additional history-based optimizations to apply.</td>
 </tr>
 <tr class="odd">
 <td>5</td>
 <td>19</td>
-<td>No additional history based-optimizations to apply.</td>
+<td>No additional history-based optimizations to apply.</td>
 </tr>
 <tr class="even">
 <td>6</td>
 <td>20</td>
-<td>No additional history based-optimizations to apply.</td>
+<td>No additional history-based optimizations to apply.</td>
 </tr>
 </tbody>
 </table>
@@ -54,7 +54,7 @@ History-based optimizations are only applied when there is high confidence that 
 
 ## Roles and permissions
 
-  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `  ALTER PROJECT  ` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required permissions for default configurations, see [Required permissions](/bigquery/docs/default-configuration#create-configuration) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](#enable-history-based-optimization) .
+  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `  ALTER PROJECT  ` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](#enable-history-based-optimization) .
 
   - To review the history-based optimizations for a job using the `  INFORMATION_SCHEMA.JOBS  ` view, you must have the required role. For more information, see [Required role](/bigquery/docs/information-schema-jobs#required_role) for `  INFORMATION_SCHEMA.JOBS  ` view.
 
@@ -130,13 +130,13 @@ The results look similar to the following:
  |            |     },                                                          |
  |            |     {                                                           |
  |            |       "semi_join_reduction": "store_sales.store_date,RIGHT"     |
- |            |     },                                                          |
+ |            |     },
  |            |     {                                                           |
  |            |       "join_commutation": "web_returns.web_item"                |
- |            |     },                                                          |
+ |            |     },
  |            |     {                                                           |
  |            |       "parallelism_adjustment": "applied"                       |
- |            |     },                                                          |
+ |            |     },
  |            |   ]                                                             |
  |            | }                                                               |
  *------------+-----------------------------------------------------------------*/

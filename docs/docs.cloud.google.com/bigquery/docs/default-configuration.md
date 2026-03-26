@@ -76,10 +76,10 @@ To configure the `  default_location  ` at the organization level, follow these 
 1.  To configure the `  default_location  ` at the organization level, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
     
     ``` text
-      ALTER ORGANIZATION
-      SET OPTIONS (
-      `default_location` = 'LOCATION'
-      );
+    ALTER ORGANIZATION
+    SET OPTIONS (
+    `default_location` = 'LOCATION'
+    );
     ```
     
     Replace `  LOCATION  ` with a region or multi-region [location](/bigquery/docs/locations) . This value is the location used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined.
@@ -87,38 +87,15 @@ To configure the `  default_location  ` at the organization level, follow these 
 2.  To clear the `  default_location  ` at the organization level, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
     
     ``` text
-      ALTER ORGANIZATION
-      SET OPTIONS (
-      `default_location` = NULL
-      );
+    ALTER ORGANIZATION
+    SET OPTIONS (
+    `default_location` = NULL
+    );
     ```
 
 ### API
 
 Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
-
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
-
-  - `  CREATE_TABLE  `
-  - `  CREATE_TABLE_AS_SELECT  `
-  - `  DROP_TABLE  `
-  - `  CREATE_VIEW  `
-  - `  DROP_VIEW  `
-
-`  statistics.query  ` has 2 additional fields:
-
-`  ddlOperationPerformed  ` : The DDL operation performed, possibly dependent on the existence of the DDL target. Current values include:
-
-  - `  CREATE  ` : The query created the DDL target.
-  - `  SKIP  ` : No-op. Examples — `  CREATE TABLE IF NOT EXISTS  ` was submitted, and the table exists. Or `  DROP TABLE IF EXISTS  ` was submitted, and the table does not exist.
-  - `  REPLACE  ` : The query replaced the DDL target. Example — `  CREATE OR REPLACE TABLE  ` was submitted, and the table already exists.
-  - `  DROP  ` : The query deleted the DDL target.
-
-`  ddlTargetTable  ` : When you submit a `  CREATE TABLE/VIEW  ` statement or a `  DROP TABLE/VIEW  ` statement, the target table is returned as an object with 3 fields:
-
-  - "projectId": string
-  - "datasetId": string
-  - "tableId": string
 
 ### Configure global project settings
 
@@ -175,10 +152,10 @@ To configure the `  default_location  ` at the project level, follow these steps
 1.  To configure the `  default_location  ` at the project level, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
     
     ``` text
-      ALTER PROJECT PROJECT_ID
-      SET OPTIONS (
-      `default_location` = 'LOCATION'
-      );
+    ALTER PROJECT PROJECT_ID
+    SET OPTIONS (
+    `default_location` = 'LOCATION'
+    );
     ```
     
     Replace the following:
@@ -189,38 +166,15 @@ To configure the `  default_location  ` at the project level, follow these steps
 2.  Alternatively, to clear the `  default_location  ` at the project level, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` . If you clear the `  default_location  ` at the project level, organization-level default settings are used, if they exist. Otherwise, the system default setting is used.
     
     ``` text
-      ALTER PROJECT PROJECT_ID
-      SET OPTIONS (
-      `default_location` = NULL
-      );
+    ALTER PROJECT PROJECT_ID
+    SET OPTIONS (
+    `default_location` = NULL
+    );
     ```
 
 ### API
 
 Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
-
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
-
-  - `  CREATE_TABLE  `
-  - `  CREATE_TABLE_AS_SELECT  `
-  - `  DROP_TABLE  `
-  - `  CREATE_VIEW  `
-  - `  DROP_VIEW  `
-
-`  statistics.query  ` has 2 additional fields:
-
-`  ddlOperationPerformed  ` : The DDL operation performed, possibly dependent on the existence of the DDL target. Current values include:
-
-  - `  CREATE  ` : The query created the DDL target.
-  - `  SKIP  ` : No-op. Examples — `  CREATE TABLE IF NOT EXISTS  ` was submitted, and the table exists. Or `  DROP TABLE IF EXISTS  ` was submitted, and the table does not exist.
-  - `  REPLACE  ` : The query replaced the DDL target. Example — `  CREATE OR REPLACE TABLE  ` was submitted, and the table already exists.
-  - `  DROP  ` : The query deleted the DDL target.
-
-`  ddlTargetTable  ` : When you submit a `  CREATE TABLE/VIEW  ` statement or a `  DROP TABLE/VIEW  ` statement, the target table is returned as an object with 3 fields:
-
-  - "projectId": string
-  - "datasetId": string
-  - "tableId": string
 
 ## Specify regional settings
 
@@ -237,6 +191,7 @@ To configure regional organization settings, follow these steps. The following e
   - Query timeout: 30 minutes (1,800,000 milliseconds)
   - Interactive query queue timeout: 10 minutes (600,000 milliseconds)
   - Batch query queue timeout: 20 minutes (1,200,000 milliseconds)
+  - `  INFORMATION_SCHEMA  ` : enabled
 
 To see all regional organization settings, go to [`  organization_set_options_list  `](/bigquery/docs/reference/standard-sql/data-definition-language#organization_set_options_list) .
 
@@ -256,7 +211,8 @@ To see all regional organization settings, go to [`  organization_set_options_li
       `region-REGION.default_kms_key_name` = KMS_KEY,
       `region-REGION.default_query_job_timeout_ms` = 1800000,
       `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
-      `region-REGION.default_batch_query_queue_timeout_ms` = 1200000);
+      `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
+      `region-REGION.enable_info_schema_storage` = true);
     ```
     
     Replace the following:
@@ -273,7 +229,8 @@ To see all regional organization settings, go to [`  organization_set_options_li
       `region-REGION.default_kms_key_name` = NULL,
       `region-REGION.default_query_job_timeout_ms` = NULL,
       `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
-      `region-REGION.default_batch_query_queue_timeout_ms` = NULL);
+      `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
+      `region-REGION.enable_info_schema_storage` = NULL);
     ```
 
 5.  Click **Run** .
@@ -321,29 +278,6 @@ SET OPTIONS (
 
 Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
 
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
-
-  - `  CREATE_TABLE  `
-  - `  CREATE_TABLE_AS_SELECT  `
-  - `  DROP_TABLE  `
-  - `  CREATE_VIEW  `
-  - `  DROP_VIEW  `
-
-`  statistics.query  ` has 2 additional fields:
-
-`  ddlOperationPerformed  ` : The DDL operation performed, possibly dependent on the existence of the DDL target. Current values include:
-
-  - `  CREATE  ` : The query created the DDL target.
-  - `  SKIP  ` : No-op. Examples — `  CREATE TABLE IF NOT EXISTS  ` was submitted, and the table exists. Or `  DROP TABLE IF EXISTS  ` was submitted, and the table does not exist.
-  - `  REPLACE  ` : The query replaced the DDL target. Example — `  CREATE OR REPLACE TABLE  ` was submitted, and the table already exists.
-  - `  DROP  ` : The query deleted the DDL target.
-
-`  ddlTargetTable  ` : When you submit a `  CREATE TABLE/VIEW  ` statement or a `  DROP TABLE/VIEW  ` statement, the target table is returned as an object with 3 fields:
-
-  - "projectId": string
-  - "datasetId": string
-  - "tableId": string
-
 ### Configure regional project settings
 
 You can configure regional settings at the project level by using the [`  ALTER PROJECT SET OPTIONS  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) . When you specify the configuration, you must specify the region where it applies. You can only use one region in each statement.
@@ -361,6 +295,7 @@ The following example specifies several regional, project-level settings, includ
   - Batch query queue timeout: 20 minutes (1,200,000 milliseconds)
   - Reservation-based fairness: enabled
   - Global queries: enabled for running and for accessing data
+  - `  INFORMATION_SCHEMA  ` : enabled
 
 To see all regional project settings, go to [`  project_set_options_list  `](/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) .
 
@@ -382,8 +317,9 @@ To see all regional project settings, go to [`  project_set_options_list  `](/bi
      `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
      `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
      `region-REGION.enable_reservation_based_fairness` = true,
-    `region-REGION.enable_global_queries_execution` = true,
-    `region-REGION.enable_global_queries_data_access` = true);
+     `region-REGION.enable_global_queries_execution` = true,
+     `region-REGION.enable_global_queries_data_access` = true,
+     `region-REGION.enable_info_schema_storage` = true);
     ```
     
     Replace the following:
@@ -402,7 +338,8 @@ To see all regional project settings, go to [`  project_set_options_list  `](/bi
       `region-REGION.default_query_job_timeout_ms` = NULL,
       `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
       `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
-      `region-REGION.enable_reservation_based_fairness` = false);
+      `region-REGION.enable_reservation_based_fairness` = false,
+      `region-REGION.enable_info_schema_storage` = NULL);
     ```
 
 5.  Click **Run** .
@@ -412,15 +349,15 @@ To see all regional project settings, go to [`  project_set_options_list  `](/bi
 1.  To configure the regional project settings, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
     
     ``` text
-      ALTER PROJECT PROJECT_ID
-      SET OPTIONS (
-      `region-REGION.default_time_zone`= 'America/Chicago',
-      -- Ensure all service accounts under the organization have permission to KMS_KEY
-      `region-REGION.default_kms_key_name` = KMS_KEY,
-      `region-REGION.default_query_job_timeout_ms` = 1800000,
-      `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
-      `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
-      `region-REGION.enable_reservation_based_fairness` = true);
+    ALTER PROJECT PROJECT_ID
+    SET OPTIONS (
+    `region-REGION.default_time_zone`= 'America/Chicago',
+    -- Ensure all service accounts under the organization have permission to KMS_KEY
+    `region-REGION.default_kms_key_name` = KMS_KEY,
+    `region-REGION.default_query_job_timeout_ms` = 1800000,
+    `region-REGION.default_interactive_query_queue_timeout_ms` = 600000,
+    `region-REGION.default_batch_query_queue_timeout_ms` = 1200000,
+    `region-REGION.enable_reservation_based_fairness` = true);
     ```
     
     Replace the following:
@@ -432,14 +369,14 @@ To see all regional project settings, go to [`  project_set_options_list  `](/bi
 2.  Alternatively, to clear the regional project settings, enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the following DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` :
     
     ``` text
-      ALTER ORGANIZATION
-      SET OPTIONS (
-      `region-REGION.default_time_zone` = NULL,
-      `region-REGION.default_kms_key_name` = NULL,
-      `region-REGION.default_query_job_timeout_ms` = NULL,
-      `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
-      `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
-      `region-REGION.enable_reservation_based_fairness` = false,
+    ALTER ORGANIZATION
+    SET OPTIONS (
+    `region-REGION.default_time_zone` = NULL,
+    `region-REGION.default_kms_key_name` = NULL,
+    `region-REGION.default_query_job_timeout_ms` = NULL,
+    `region-REGION.default_interactive_query_queue_timeout_ms` = NULL,
+    `region-REGION.default_batch_query_queue_timeout_ms` = NULL,
+    `region-REGION.enable_reservation_based_fairness` = false,
     `region-REGION.enable_global_queries_execution` = NULL,
     `region-REGION.enable_global_queries_data_access` = NULL);
     ```
@@ -447,29 +384,6 @@ To see all regional project settings, go to [`  project_set_options_list  `](/bi
 ### API
 
 Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
-
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
-
-  - `  CREATE_TABLE  `
-  - `  CREATE_TABLE_AS_SELECT  `
-  - `  DROP_TABLE  `
-  - `  CREATE_VIEW  `
-  - `  DROP_VIEW  `
-
-`  statistics.query  ` has 2 additional fields:
-
-`  ddlOperationPerformed  ` : The DDL operation performed, possibly dependent on the existence of the DDL target. Current values include:
-
-  - `  CREATE  ` : The query created the DDL target.
-  - `  SKIP  ` : No-op. Examples — `  CREATE TABLE IF NOT EXISTS  ` was submitted, and the table exists. Or `  DROP TABLE IF EXISTS  ` was submitted, and the table does not exist.
-  - `  REPLACE  ` : The query replaced the DDL target. Example — `  CREATE OR REPLACE TABLE  ` was submitted, and the table already exists.
-  - `  DROP  ` : The query deleted the DDL target.
-
-`  ddlTargetTable  ` : When you submit a `  CREATE TABLE/VIEW  ` statement or a `  DROP TABLE/VIEW  ` statement, the target table is returned as an object with 3 fields:
-
-  - "projectId": string
-  - "datasetId": string
-  - "tableId": string
 
 ## Retrieve configuration settings
 
@@ -614,6 +528,8 @@ Use the following settings to define rules for data creation, security, and life
     **Note:** to set a default Cloud KMS key, you must grant the Encrypter/Decrypter role to all BigQuery service accounts that are used within the project or organization. If a service account within the project or organization doesn't have appropriate permissions, all queries run by the service account fail. For information about assigning the Encrypter/Decrypter role, see [Assign the Encrypter/Decrypter role](/bigquery/docs/customer-managed-encryption#assign_role) . If you set a default Cloud KMS key without first assigning the appropriate roles, you can clear the default key by setting the value to `  NULL  ` . For examples, see [Configure organization settings](#configure-organization-settings) and [Configure project settings](#configure-project-settings) .
 
   - `  default_max_time_travel_hours  ` : The default time travel window in hours for new datasets. This duration must be within the range of 48 to 168, inclusive, and must be divisible by 24. Changing the default max time travel hours does not affect existing datasets. For more information, see [Time Travel and data retention](/bigquery/docs/time-travel#time_travel) .
+
+  - `  enable_info_schema_storage  ` : The option that provides access to [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](/bigquery/docs/information-schema-table-storage) and [`  SEARCH_INDEXES  `](/bigquery/docs/information-schema-search-indexes) views and their variants. By default, this option is not enabled. If you query these views for the first time without setting this option to `  TRUE  ` , the query fails and provides instructions to enable it. After this option is enabled, queries succeed immediately and return data generated from that point forward. A complete backfill of historical data can take approximately one day to become available in the views. If you used these views before this setting was introduced, this option is already enabled.
 
 ### Cost and resource settings
 

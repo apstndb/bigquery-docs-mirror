@@ -368,6 +368,8 @@ bigquerydatatransfer.googleapis.com/TransferConfig
 
 `  resource.encryptionConfiguration.kmsKeyName  `
 
+`  resource.managedTableType  `
+
 `  resource.name  `
 
 `  resource.notificationPubsubTopic  `

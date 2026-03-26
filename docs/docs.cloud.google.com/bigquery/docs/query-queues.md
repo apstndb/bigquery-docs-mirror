@@ -292,7 +292,7 @@ To resolve long queue times, consider the following actions:
   - **Optimize and adjust** :
       - Use [batch query priority](/bigquery/docs/running-queries#batch) for less time-sensitive workloads, which have a higher queue limit.
       - [Optimize long-running queries](/bigquery/docs/best-practices-performance-overview) .
-      - [Increase reservation slots](/bigquery/docs/reservations-tasks#update_a_reservation) if you are consistently hitting capacity.
+      - [Increase reservation slots](/bigquery/docs/reservations-tasks#update_reservations) if you are consistently hitting capacity.
       - Smooth out query submission spikes.
       - Adjust the [maximum concurrency target](#set_the_maximum_concurrency_target) for your reservation, if applicable.
 

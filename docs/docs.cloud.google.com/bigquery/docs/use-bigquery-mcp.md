@@ -169,6 +169,7 @@ The BigQuery MCP tools are subject to the following limitations:
 
   - The [`  execute_sql  `](/bigquery/docs/reference/mcp/execute_sql) tool doesn't support querying Google Drive external tables.
   - By default, the `  execute_sql  ` tool limits query processing time to three minutes. Queries that run longer than three minutes are automatically canceled.
+  - Query results are limited to a maximum of 3,000 rows.
 
 ### List tools
 

@@ -1613,14 +1613,14 @@ SELECT 1 IS NOT DISTINCT FROM NULL
 ### `     LIKE    ` operator
 
 ``` text
-expression_1 [NOT] LIKE expression_2
+expression [NOT] LIKE pattern
 ```
 
 **Description**
 
-`  LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression_1  ` matches a pattern specified by the second operand `  expression_2  ` , otherwise returns `  FALSE  ` .
+`  LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression  ` matches a pattern specified by the second operand `  pattern  ` , otherwise returns `  FALSE  ` .
 
-`  NOT LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression_1  ` doesn't match a pattern specified by the second operand `  expression_2  ` , otherwise returns `  FALSE  ` .
+`  NOT LIKE  ` returns `  TRUE  ` if the string in the first operand `  expression  ` doesn't match a pattern specified by the second operand `  pattern  ` , otherwise returns `  FALSE  ` .
 
 Expressions can contain these characters:
 
@@ -1630,7 +1630,7 @@ Expressions can contain these characters:
 
 This operator supports [collation](/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs) , but caveats apply:
 
-  - Each `  %  ` character in `  expression_2  ` represents an *arbitrary string specifier* . An arbitrary string specifier can represent any sequence of `  0  ` or more characters.
+  - Each `  %  ` character in `  pattern  ` represents an *arbitrary string specifier* . An arbitrary string specifier can represent any sequence of `  0  ` or more characters.
 
   - A character in the expression represents itself and is considered a *single character specifier* unless:
     
@@ -1640,7 +1640,7 @@ This operator supports [collation](/bigquery/docs/reference/standard-sql/collati
 
   - These additional rules apply to the underscore ( `  _  ` ) character:
     
-      - If the collator isn't `  und:ci  ` , an error is produced when an underscore isn't escaped in `  expression_2  ` .
+      - If the collator isn't `  und:ci  ` , an error is produced when an underscore isn't escaped in `  pattern  ` .
     
       - If the collator isn't `  und:ci  ` , the underscore isn't allowed when the operands have collation specified.
     

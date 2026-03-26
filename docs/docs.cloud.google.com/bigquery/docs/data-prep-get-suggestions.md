@@ -1,8 +1,8 @@
 # Prepare data with Gemini
 
-This document describes how to generate and manage SQL code suggestions for your data preparations in BigQuery.
+This document explains how to clean and transform your data within BigQuery data preparations using SQL code suggestions from Gemini.
 
-For more information, see [Introduction to BigQuery data preparation](/bigquery/docs/data-prep-introduction) .
+For more information, see [BigQuery data preparation overview](/bigquery/docs/data-prep-introduction) .
 
 ## Before you begin
 
@@ -10,9 +10,9 @@ For more information, see [Introduction to BigQuery data preparation](/bigquery/
 
   - Give the [required Identity and Access Management (IAM) roles and permissions](/bigquery/docs/manage-data-preparations#required-roles) .
 
-## Open the data preparation editor in BigQuery
+## Start a data preparation session
 
-You can open the data preparation editor in BigQuery by creating a new data preparation, creating one from an existing table or Cloud Storage file, or opening an existing data preparation. For more information about what happens when you create a data preparation, see [Data preparation entry points](/bigquery/docs/data-prep-introduction#entry-points) .
+Open the BigQuery data preparation editor by creating a new data preparation, starting one from an existing table or a Cloud Storage or Google Drive file, or opening an existing data preparation. For more information about what happens when you create a data preparation, see [Data preparation entry points](/bigquery/docs/data-prep-introduction#entry-points) .
 
 On the **BigQuery** page, you can go to the data preparation editor in the following ways:
 
@@ -50,15 +50,9 @@ To create a new data preparation from an existing table, follow these steps:
     
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
-### Create from a Cloud Storage file
+### Create from a file
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, contact <bq-datapreparation-feedback@google.com> .
-
-To create a new data preparation from a file in Cloud Storage, follow these steps:
+To create a new data preparation from a file in Cloud Storage or Google Drive, follow these steps:
 
 #### Load the file
 
@@ -66,36 +60,43 @@ To create a new data preparation from a file in Cloud Storage, follow these step
 
 2.  In the **Create new** list, click **Data preparation** . The data preparation editor is displayed in a new untitled data preparation tab.
 
-3.  In the list of data sources, click **Google Cloud Storage** . The **Prepare data** dialog opens.
+3.  In the list of data sources, click **Google Cloud Storage** or **Google Drive** . The **Prepare data** dialog opens.
 
-4.  In the **Source** section, select the file from a Cloud Storage bucket or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv  ` . Wildcard searches, such as `  *.csv  ` , are supported.  
-      
-    The file format is automatically detected. Supported formats are Avro, CSV, JSONL, ORC, and Parquet. Other compatible file types, such as DAT, TSV, and TXT, are read as the CSV format.
+4.  In the **Source** section, select your file:
+    
+      - **Cloud Storage** : Select the file from a Cloud Storage bucket, or enter the path of your source. For example, enter a path to your CSV file: `  STORAGE_BUCKET_NAME / FILE_NAME .csv  ` . Wildcard searches, such as `  *.csv  ` , are supported.
+      - **Google Drive** : Select the file from Google Drive by entering its URI. To load a subset of that data, you can enter a specific sheet name and a range.
+    
+    **Note:** If you use Google Drive as a data source, you must use a service account to [run or schedule the data preparation](/bigquery/docs/orchestrate-data-preparations) . End-user credentials are not supported for this operation. You must also share the Google Drive file with the service account.
+    
+    The file format is automatically detected. Supported formats are Avro, CSV, JSONL, ORC, and Parquet. Other compatible file types, such as DAT, TSV, and TXT, are read as the CSV format. The Google Drive option also supports the Google Sheets format.
 
 5.  Define the external staging table where you'll upload files. In the **Staging table** section, enter the project, dataset, and table names for the new table.
 
 6.  In the **Schema** section, review the schema. Gemini checks your file for column names. If it doesn't find any, it provides suggestions.  
       
-    By default, your data preparation file loads data as strings. You can define more specific data types when you [prepare the file data](#prepare-gcs-file-data) .
+    By default, your data preparation file loads data as strings. You can define more specific data types when you [prepare the file data](#prepare-file-data) .
 
 7.  Optional: In **Advanced options** , you can add more information, such as the number of errors allowed before the job fails. Gemini provides additional options based on your file's content.
 
-8.  Click **Create** . The data preparation editor for the file opens, showing a preview of your data on the **Data** tab, and an initial set of data preparation suggestions from Gemini.
+8.  Optional: To preview the new staging table in the data preparation editor, select **Generate preview** .
 
-9.  Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
+9.  Click **Create** . The data preparation editor for the file opens, showing a preview of your data on the **Data** tab, and an initial set of data preparation suggestions from Gemini.
 
-10. Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
+10. Optional: To simplify your view, turn on full screen mode by clicking fullscreen **Full screen** .
+
+11. Optional: To view data preparation details, version history, add new comments, or reply to existing comments, use the toolbar.
     
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 #### Prepare the file
 
-In the data view, prepare the staged Cloud Storage data that you loaded by following these steps:
+In the data view, prepare the staged data that you loaded by following these steps:
 
 1.  Optional: Define stronger data types for relevant columns by browsing the suggestion list for transformation suggestions or selecting a column and generating suggestions for it.
 2.  Optional: Define validation rules. For more information, see [Configure the error table and add a validation rule](#configure-validation) .
 3.  [Add a destination table](#add-or-change-destination) .
-4.  To load the Cloud Storage data into the destination table, [run the data preparation](#run-data-prep) .
+4.  To load the data into the destination table, [run the data preparation](#run-data-prep) .
 5.  Optional: [Schedule the data preparation run](/bigquery/docs/orchestrate-data-preparations) .
 6.  Optional: [Optimize data preparation by incrementally processing data](/bigquery/docs/manage-data-preparations#optimize) .
 
