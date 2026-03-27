@@ -49,12 +49,6 @@ Depending on the task, the `  ML.GENERATE_EMBEDDING  ` function works in one of 
 
 ### `       gemini-embedding-001      `
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-Note: To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
-
 ``` text
 ML.GENERATE_EMBEDDING(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
@@ -192,12 +186,6 @@ ML.GENERATE_EMBEDDING(
 The model and input table must be in the same region.
 
 ### Open models
-
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-Note: To give feedback or request support for this feature, contact <bqml-feedback@google.com> .
 
 ``` text
 ML.GENERATE_EMBEDDING(

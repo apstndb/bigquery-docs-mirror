@@ -190,10 +190,30 @@ Updates information in an existing routine.
 
 Methods
 
+`  batchDelete  `
+
+`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies:batchDelete  `  
+Deletes provided row access policies.
+
+`  delete  `
+
+`  DELETE /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+Deletes a row access policy.
+
+`  get  `
+
+`  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+Gets the specified row access policy by policy ID.
+
 `  getIamPolicy  `
 
 `  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:getIamPolicy  `  
 Gets the access control policy for a resource.
+
+`  insert  `
+
+`  POST /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies  `  
+Creates a row access policy.
 
 `  list  `
 
@@ -204,6 +224,11 @@ Lists all row access policies on the specified table.
 
 `  POST /bigquery/v2/{resource=projects/*/datasets/*/tables/*/rowAccessPolicies/*}:testIamPermissions  `  
 Returns permissions that a caller has on the specified resource.
+
+`  update  `
+
+`  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
+Updates a row access policy.
 
 ## REST Resource: [v2.tabledata](/bigquery/docs/reference/rest/v2/tabledata)
 

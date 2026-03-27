@@ -70,11 +70,11 @@ To save query results to Google Sheets, use the Google Cloud console:
 
 6.  When the results are returned, click the **Save results** and select **Google Sheets** .
 
-7.  If necessary, follow the prompts to log into your user account and click **Allow** to give BigQuery permission to write the data to your Google Drive `  MY Drive  ` folder.
+7.  If necessary, follow the prompts to log into your user account and click **Allow** to give BigQuery permission to write the data to your Google Drive `  My Drive  ` folder.
     
     After following the prompts, you should receive an email confirming that BigQuery client tools have been connected to your user account. The email contains information on the permissions you granted along with steps to remove the permissions.
 
-8.  When the results are saved, a message similar to the following appears below the query results in the Google Cloud console: `  Saved to Sheets as "results-20190225-103531. Open  ` . Click the link in the message to view your results in Google Sheets, or navigate to your `  My Drive  ` folder and open the file manually.
+8.  When the results are saved, a message similar to the following appears below the query results in the Google Cloud console: `  Saved to Sheets as "results-20190225-103531"  ` . Click the link in the message to view your results in Google Sheets, or navigate to your `  My Drive  ` folder and open the file manually.
     
     When you save query results to Google Sheets, the filename begins with `  results-[DATE]  ` where `  [DATE]  ` is today's date in the format `  YYYYMMDD  ` .
     

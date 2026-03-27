@@ -208,7 +208,7 @@ state: READY
 
 #### Online prediction
 
-For more information about about running online predictions against a deployed model, see [Get online inferences from a custom trained model](/vertex-ai/docs/predictions/get-online-predictions) .
+For more information about running online predictions against a deployed model, see [Get online inferences from a custom trained model](/vertex-ai/docs/predictions/get-online-predictions) .
 
 1\) Create a newline-delimited JSON file for inputs, for example `  instances.json  ` file with the following content:
 

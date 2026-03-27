@@ -6,6 +6,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## March 25, 2026
+
+Feature
+
+In BigQuery Data Transfer Service, you can [monitor resource-level status reporting for Hive managed tables](/bigquery/docs/hdfs-data-lake-transfer#monitor-transfer-status) to track progress and view granular error details for individual tables. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+## March 24, 2026
+
+Feature
+
+You can now use the [BigQuery Data Transfer Service remote MCP server](/bigquery/docs/reference/datatransfer/mcp) to enable AI agents to create, manage, and run data transfers. This feature is in [Preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## March 23, 2026
 
 Feature

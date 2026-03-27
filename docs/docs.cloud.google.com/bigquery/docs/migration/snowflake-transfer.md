@@ -120,8 +120,9 @@ Before you set up a Snowflake transfer, you must perform all the steps listed in
 6.  Optional: [Schema detection and mapping](#schema_detection_and_mapping)
 7.  [Assess your Snowflake for any unsupported data types](#assess-snowflake-data)
 8.  Optional: [Enable incremental transfers](#enable_incremental_transfers)
-9.  [Gather transfer information](#gather_transfer_information)
-10. If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the transfers, see [Specify encryption key with transfers](#CMEK) .
+9.  Optional: [Enable private connectivity](#enable_private_connectivity)
+10. [Gather transfer information](#gather_transfer_information)
+11. If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the transfers, see [Specify encryption key with transfers](#CMEK) .
 
 ### Prepare your Google Cloud project
 
@@ -1045,6 +1046,10 @@ ALTER TABLE DATABASE_NAME.SCHEMA_NAME.TABLE_NAME SET CHANGE_TRACKING = TRUE;
 
 If change tracking is not enabled for a table, then the Snowflake connector defaults to a full data transfer for that table.
 
+### Enable private connectivity
+
+If you want to create a private Snowflake data transfer, you must [configure your network for private connectivity](/bigquery/docs/migration/snowflake-private-connectivity) .
+
 ### Gather transfer information
 
 Gather the information that you need to set up the migration with the BigQuery Data Transfer Service:
@@ -1121,6 +1126,12 @@ Select one of the following options:
     20. For **SAS Token** , enter the [SAS token generated for the container](#azure_sas_token) . Only required when your **Cloud Provider** is `  AZURE  ` .
     
     21. For **GCS URI** , enter the [URI of the Cloud Storage](#preparing-gcs-bucket) to use as a staging area. Only required when your **Cloud Provider** is `  GCP  ` .
+    
+    22. For **Use Private Network** , if you are creating a [private data transfer](/bigquery/docs/migration/snowflake-private-connectivity) , select **True** .
+    
+    23. For **PSC Service Attachment** , if you are creating a private data transfer, enter the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+    
+    24. For **Private Network Service** , if you are creating a private data transfer, enter the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
 
 7.  Optional: In the **Notification options** section, do the following:
     
@@ -1165,7 +1176,7 @@ Replace the following:
   - service\_account : (Optional) the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required roles](#required-roles) .
   - parameters : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
 
-Parameters required for an Snowflake transfer configuration are:
+You can configure the following parameters for your Snowflake transfer configuration:
 
   - `  account_identifier  ` : specify a unique identifier for your Snowflake account, which is a combination of your organization name and account name. The identifier is the prefix of Snowflake account URL and not the complete URL. For example, `  account_identifier .snowflakecomputing.com  ` .
 
@@ -1220,6 +1231,12 @@ Parameters required for an Snowflake transfer configuration are:
   - `  azure_sas_token  ` : enter the [SAS token](#azure_sas_token) . Only required when your `  cloud_provider  ` is `  AZURE  ` .
 
   - `  staging_gcs_uri  ` : enter the [URI of the Cloud Storage](#preparing-gcs-bucket) to use as a staging area. Only required when your `  cloud_provider  ` is `  GCP  ` .
+
+  - `  use_private_network  ` : if you are creating a [private data transfer](/bigquery/docs/migration/snowflake-private-connectivity) , set to `  TRUE  ` .
+
+  - `  service_attachment  ` : if you are creating a private data transfer, specify the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+
+  - `  private_network_service  ` : if you are creating a private data transfer, specify the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
 
 For example, for an AWS-hosted Snowflake account, the following command creates a Snowflake transfer named `  Snowflake transfer config  ` with a target dataset named `  your_bq_dataset  ` and a project with the ID of `  your_project_id  ` .
 

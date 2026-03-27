@@ -36,6 +36,10 @@ Retrieves a supported data source and returns its settings.
 
 Returns information about a data transfer config.
 
+`  GetTransferResource  `
+
+Returns a transfer resource.
+
 `  GetTransferRun  `
 
 Returns information about the particular transfer run.
@@ -51,6 +55,10 @@ Returns information about all transfer configs owned by a project in the specifi
 `  ListTransferLogs  `
 
 Returns log messages for the transfer run.
+
+`  ListTransferResources  `
+
+Returns information about transfer resources.
 
 `  ListTransferRuns  `
 

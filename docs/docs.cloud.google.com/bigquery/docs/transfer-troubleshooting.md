@@ -90,6 +90,11 @@ If your transfer configuration is correct, and the appropriate permissions are g
   - service\_account is the email of the account used to authorize the transfer.
   - destination\_project\_number is the project number where the transfer configuration resides. To learn how to identify your project number, see [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects) .
 
+<!-- end list -->
+
+  - Error: `  For asset " ASSET ", no eligible column found for splitting (Reason: Primary or Indexed Key columns found, but none are of supported types (INTEGER, TINYINT, SMALLINT, FLOAT, REAL, DOUBLE, NUMERIC, BIGINT, DECIMAL, DATE, BOOLEAN))  `  
+    **Resolution:** This error can occur when you are trying to transfer more than 2,000,000 records from a source table to a BigQuery table and there isn't a primary key or indexed column of supported data type in the source table. To resolve this issue, configure a column with one of the supported data types as primary key or indexed column in your source table. For more information, see the limitations section of your transfer source guide.
+
 ## Authorization and permission issues
 
 The following are some common permission errors that you can encounter when you transfer data from different data sources:

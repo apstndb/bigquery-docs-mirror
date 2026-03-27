@@ -17,18 +17,26 @@
   - `  EventDrivenSchedule  ` (message)
   - `  GetDataSourceRequest  ` (message)
   - `  GetTransferConfigRequest  ` (message)
+  - `  GetTransferResourceRequest  ` (message)
   - `  GetTransferRunRequest  ` (message)
+  - `  HierarchyDetail  ` (message)
   - `  ListDataSourcesRequest  ` (message)
   - `  ListDataSourcesResponse  ` (message)
   - `  ListTransferConfigsRequest  ` (message)
   - `  ListTransferConfigsResponse  ` (message)
   - `  ListTransferLogsRequest  ` (message)
   - `  ListTransferLogsResponse  ` (message)
+  - `  ListTransferResourcesRequest  ` (message)
+  - `  ListTransferResourcesResponse  ` (message)
   - `  ListTransferRunsRequest  ` (message)
   - `  ListTransferRunsRequest.RunAttempt  ` (enum)
   - `  ListTransferRunsResponse  ` (message)
   - `  ManagedTableType  ` (enum)
   - `  ManualSchedule  ` (message)
+  - `  PartitionDetail  ` (message)
+  - `  ResourceDestination  ` (enum)
+  - `  ResourceTransferState  ` (enum)
+  - `  ResourceType  ` (enum)
   - `  ScheduleOptions  ` (message)
   - `  ScheduleOptionsV2  ` (message)
   - `  ScheduleTransferRunsRequest  ` (message)
@@ -36,12 +44,19 @@
   - `  StartManualTransferRunsRequest  ` (message)
   - `  StartManualTransferRunsRequest.TimeRange  ` (message)
   - `  StartManualTransferRunsResponse  ` (message)
+  - `  TableDetail  ` (message)
   - `  TimeBasedSchedule  ` (message)
   - `  TransferConfig  ` (message)
   - `  TransferMessage  ` (message)
   - `  TransferMessage.MessageSeverity  ` (enum)
+  - `  TransferResource  ` (message)
+  - `  TransferResourceStatusDetail  ` (message)
   - `  TransferRun  ` (message)
+  - `  TransferRunBrief  ` (message)
   - `  TransferState  ` (enum)
+  - `  TransferStatusMetric  ` (message)
+  - `  TransferStatusSummary  ` (message)
+  - `  TransferStatusUnit  ` (enum)
   - `  TransferType  ` (enum) **(deprecated)**
   - `  UnenrollDataSourcesRequest  ` (message)
   - `  UpdateTransferConfigRequest  ` (message)
@@ -239,6 +254,32 @@ This API allows users to manage their data transfers into BigQuery.
 </colgroup>
 <thead>
 <tr class="header">
+<th>GetTransferResource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><code dir="ltr" translate="no">           rpc GetTransferResource(                         GetTransferResourceRequest            </code> ) returns ( <code dir="ltr" translate="no">              TransferResource            </code> )</p>
+<p>Returns a transfer resource.</p>
+<dl>
+<dt>Authorization scopes</dt>
+<dd><p>Requires the following OAuth scope:</p>
+<ul>
+<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+</ul>
+<p>For more information, see the <a href="/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
+</dd>
+</dl></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
 <th>GetTransferRun</th>
 </tr>
 </thead>
@@ -324,6 +365,32 @@ This API allows users to manage their data transfers into BigQuery.
 <tr class="odd">
 <td><p><code dir="ltr" translate="no">           rpc ListTransferLogs(                         ListTransferLogsRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListTransferLogsResponse            </code> )</p>
 <p>Returns log messages for the transfer run.</p>
+<dl>
+<dt>Authorization scopes</dt>
+<dd><p>Requires the following OAuth scope:</p>
+<ul>
+<li><code dir="ltr" translate="no">              https://www.googleapis.com/auth/cloud-platform             </code></li>
+</ul>
+<p>For more information, see the <a href="/docs/authentication#authorization-gcp">Authentication Overview</a> .</p>
+</dd>
+</dl></td>
+</tr>
+</tbody>
+</table>
+
+<table>
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ListTransferResources</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><p><code dir="ltr" translate="no">           rpc ListTransferResources(                         ListTransferResourcesRequest            </code> ) returns ( <code dir="ltr" translate="no">              ListTransferResourcesResponse            </code> )</p>
+<p>Returns information about transfer resources.</p>
 <dl>
 <dt>Authorization scopes</dt>
 <dd><p>Requires the following OAuth scope:</p>
@@ -1025,6 +1092,25 @@ Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) p
 
   - `  bigquery.transfers.get  `
 
+## GetTransferResourceRequest
+
+Request message for `  GetTransferResource  ` RPC.
+
+Fields
+
+`  name  `
+
+`  string  `
+
+Required. The name of the transfer resource in the form of:
+
+  - `  projects/{project}/transferConfigs/{transfer_config}/transferResources/{transfer_resource}  `
+  - `  projects/{project}/locations/{location}/transferConfigs/{transfer_config}/transferResources/{transfer_resource}  `
+
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
+
+  - `  bigquery.transfers.get  `
+
 ## GetTransferRunRequest
 
 A request to get data transfer run information.
@@ -1046,6 +1132,26 @@ If you are using the regionalized method, the name should be in the following fo
 Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  name  ` :
 
   - `  bigquery.transfers.get  `
+
+## HierarchyDetail
+
+Details about the hierarchy.
+
+Fields
+
+Union field `  detail  ` . Details about the hierarchy can be one of table/partition. `  detail  ` can be only one of the following:
+
+`  table_detail  `
+
+`  TableDetail  `
+
+Optional. Table details related to hierarchy.
+
+`  partition_detail  `
+
+`  PartitionDetail  `
+
+Optional. Partition details related to hierarchy.
 
 ## ListDataSourcesRequest
 
@@ -1209,6 +1315,76 @@ Output only. The stored pipeline transfer messages.
 
 Output only. The next-pagination token. For multiple-page list results, this token can be used as the `  GetTransferRunLogRequest.page_token  ` to request the next page of list results.
 
+## ListTransferResourcesRequest
+
+Request for the `  ListTransferResources  ` RPC.
+
+Fields
+
+`  parent  `
+
+`  string  `
+
+Required. Name of transfer configuration for which transfer resources should be retrieved. The name should be in one of the following forms:
+
+  - `  projects/{project}/transferConfigs/{transfer_config}  `
+  - `  projects/{project}/locations/{location_id}/transferConfigs/{transfer_config}  `
+
+Authorization requires the following [IAM](https://cloud.google.com/iam/docs/) permission on the specified resource `  parent  ` :
+
+  - `  bigquery.transfers.get  `
+
+`  page_size  `
+
+`  int32  `
+
+Optional. The maximum number of transfer resources to return. The maximum value is 1000; values above 1000 will be coerced to 1000. The default page size is the maximum value of 1000 results.
+
+`  page_token  `
+
+`  string  `
+
+Optional. A page token, received from a previous `  ListTransferResources  ` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `  ListTransferResources  ` must match the call that provided the page token.
+
+`  filter  `
+
+`  string  `
+
+Optional. Filter for the transfer resources. Currently supported filters include:
+
+  - Resource name: `  name  ` - Wildcard supported
+  - Resource type: `  type  `
+  - Resource destination: `  destination  `
+  - Latest resource state: `  latest_status_detail.state  `
+  - Last update time: `  update_time  ` - RFC-3339 format
+  - Parent table name: `  hierarchy_detail.partition_detail.table  `
+
+Multiple filters can be applied using the `  AND/OR  ` operator.
+
+Examples:
+
+  - `  name="*123" AND (type="TABLE" OR latest_status_detail.state="SUCCEEDED")  `
+  - `  update_time >= "2012-04-21T11:30:00-04:00"  `
+  - `  hierarchy_detail.partition_detail.table = "table1"  `
+
+## ListTransferResourcesResponse
+
+Response for the `  ListTransferResources  ` RPC.
+
+Fields
+
+`  transfer_resources[]  `
+
+`  TransferResource  `
+
+Output only. The transfer resources.
+
+`  next_page_token  `
+
+`  string  `
+
+Output only. A token, which can be sent as `  page_token  ` to retrieve the next page. If this field is omitted, there are no subsequent pages.
+
 ## ListTransferRunsRequest
 
 A request to list data transfer runs.
@@ -1310,6 +1486,96 @@ The managed table is a BigQuery table for Apache Iceberg (formerly BigLake manag
 This type has no fields.
 
 Options customizing manual transfers schedule.
+
+## PartitionDetail
+
+Partition details related to hierarchy.
+
+Fields
+
+`  table  `
+
+`  string  `
+
+Optional. Name of the table which has the partitions.
+
+## ResourceDestination
+
+The destination for a transferred resource.
+
+Enums
+
+`  RESOURCE_DESTINATION_UNSPECIFIED  `
+
+Default value.
+
+`  RESOURCE_DESTINATION_BIGQUERY  `
+
+BigQuery.
+
+`  RESOURCE_DESTINATION_DATAPROC_METASTORE  `
+
+Dataproc Metastore.
+
+`  RESOURCE_DESTINATION_BIGLAKE_METASTORE  `
+
+BigLake Metastore.
+
+`  RESOURCE_DESTINATION_BIGLAKE_REST_CATALOG  `
+
+BigLake REST Catalog.
+
+`  RESOURCE_DESTINATION_BIGLAKE_HIVE_CATALOG  `
+
+BigLake Hive Catalog.
+
+## ResourceTransferState
+
+The transfer state of an individual resource (e.g., a table or partition). This may differ from the overall transfer run's state. For instance, a resource can be transferred successfully even if the run as a whole fails.
+
+Enums
+
+`  RESOURCE_TRANSFER_STATE_UNSPECIFIED  `
+
+Default value.
+
+`  RESOURCE_TRANSFER_PENDING  `
+
+Resource is waiting to be transferred.
+
+`  RESOURCE_TRANSFER_RUNNING  `
+
+Resource transfer is running.
+
+`  RESOURCE_TRANSFER_SUCCEEDED  `
+
+Resource transfer is a success.
+
+`  RESOURCE_TRANSFER_FAILED  `
+
+Resource transfer failed.
+
+`  RESOURCE_TRANSFER_CANCELLED  `
+
+Resource transfer was cancelled.
+
+## ResourceType
+
+Type of resource being transferred.
+
+Enums
+
+`  RESOURCE_TYPE_UNSPECIFIED  `
+
+Default value.
+
+`  RESOURCE_TYPE_TABLE  `
+
+Table resource type.
+
+`  RESOURCE_TYPE_PARTITION  `
+
+Partition resource type.
 
 ## ScheduleOptions
 
@@ -1472,6 +1738,18 @@ Fields
 `  TransferRun  `
 
 The transfer runs that were created.
+
+## TableDetail
+
+Table details related to hierarchy.
+
+Fields
+
+`  partition_count  `
+
+`  int64  `
+
+Optional. Total number of partitions being tracked within the table.
 
 ## TimeBasedSchedule
 
@@ -1683,6 +1961,90 @@ Warning message.
 
 Error message.
 
+## TransferResource
+
+Resource (table/partition) that is being transferred.
+
+Fields
+
+`  name  `
+
+`  string  `
+
+Identifier. Resource name.
+
+`  type  `
+
+`  ResourceType  `
+
+Optional. Resource type.
+
+`  destination  `
+
+`  ResourceDestination  `
+
+Optional. Resource destination.
+
+`  latest_run  `
+
+`  TransferRunBrief  `
+
+Optional. Run details for the latest run.
+
+`  latest_status_detail  `
+
+`  TransferResourceStatusDetail  `
+
+Optional. Status details for the latest run.
+
+`  last_successful_run  `
+
+`  TransferRunBrief  `
+
+Output only. Run details for the last successful run.
+
+`  hierarchy_detail  `
+
+`  HierarchyDetail  `
+
+Optional. Details about the hierarchy.
+
+`  update_time  `
+
+`  Timestamp  `
+
+Output only. Time when the resource was last updated.
+
+## TransferResourceStatusDetail
+
+Status details of the resource being transferred.
+
+Fields
+
+`  state  `
+
+`  ResourceTransferState  `
+
+Optional. Transfer state of the resource.
+
+`  summary  `
+
+`  TransferStatusSummary  `
+
+Optional. Transfer status summary of the resource.
+
+`  error  `
+
+`  Status  `
+
+Optional. Transfer error details for the resource.
+
+`  completed_percentage  `
+
+`  double  `
+
+Output only. Percentage of the transfer completed. Valid values: 0-100.
+
 ## TransferRun
 
 Represents a data transfer run.
@@ -1783,6 +2145,24 @@ Union field `  destination  ` . Data transfer destination. `  destination  ` can
 
 Output only. The BigQuery target dataset id.
 
+## TransferRunBrief
+
+Basic information about a transfer run.
+
+Fields
+
+`  run  `
+
+`  string  `
+
+Optional. Run URI. The format must be: `  projects/{project}/locations/{location}/transferConfigs/{transfer_config}/run/{run}  `
+
+`  start_time  `
+
+`  Timestamp  `
+
+Optional. Start time of the transfer run.
+
 ## TransferState
 
 Represents data transfer run state.
@@ -1812,6 +2192,78 @@ Data transfer failed (5).
 `  CANCELLED  `
 
 Data transfer is cancelled (6).
+
+## TransferStatusMetric
+
+Metrics for tracking the transfer status.
+
+Fields
+
+`  completed  `
+
+`  int64  `
+
+Optional. Number of units transferred successfully.
+
+`  pending  `
+
+`  int64  `
+
+Optional. Number of units pending transfer.
+
+`  failed  `
+
+`  int64  `
+
+Optional. Number of units that failed to transfer.
+
+`  total  `
+
+`  int64  `
+
+Optional. Total number of units for the transfer.
+
+`  unit  `
+
+`  TransferStatusUnit  `
+
+Optional. Unit for measuring progress (e.g., BYTES).
+
+## TransferStatusSummary
+
+Status summary of the resource being transferred.
+
+Fields
+
+`  metrics[]  `
+
+`  TransferStatusMetric  `
+
+Optional. List of transfer status metrics.
+
+`  progress_unit  `
+
+`  TransferStatusUnit  `
+
+Input only. Unit based on which transfer status progress should be calculated.
+
+## TransferStatusUnit
+
+Unit of the transfer status.
+
+Enums
+
+`  TRANSFER_STATUS_UNIT_UNSPECIFIED  `
+
+Default value.
+
+`  TRANSFER_STATUS_UNIT_BYTES  `
+
+Bytes.
+
+`  TRANSFER_STATUS_UNIT_OBJECTS  `
+
+Objects.
 
 ## TransferType
 

@@ -1,6 +1,6 @@
 # Transform data with data manipulation language (DML)
 
-The BigQuery data manipulation language (DML) lets you to update, insert, and delete data from your BigQuery tables.
+The BigQuery data manipulation language (DML) lets you update, insert, and delete data from your BigQuery tables.
 
 You can execute DML statements just as you would a `  SELECT  ` statement, with the following conditions:
 
@@ -78,17 +78,17 @@ To delete all rows in a table, use the `  TRUNCATE TABLE  ` statement instead. F
 
 ### `     TRUNCATE    ` statement
 
-Use the TRUNCATE statement to remove all rows from a table, but leave the table metadata intact, including table schema, description, and labels. The following example removes all rows from the table `  dataset.Inventory  ` .
+Use the `  TRUNCATE  ` statement to remove all rows from a table, but leave the table metadata intact, including table schema, description, and labels. The following example removes all rows from the table `  dataset.Inventory  ` .
 
 ``` text
 TRUNCATE dataset.Inventory
 ```
 
-To delete specific rows in a table. Use the DELETE statement instead. For more information about the TRUNCATE statement, see [`  TRUNCATE  ` statement](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) .
+To delete specific rows in a table, use the `  DELETE  ` statement instead. For more information about the `  TRUNCATE  ` statement, see [`  TRUNCATE  ` statement](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) .
 
 ### `     UPDATE    ` statement
 
-Use the `  UPDATE  ` statement to update existing rows in a table. The `  UPDATE  ` statement must also include the WHERE keyword to specify a condition. The following example reduces the `  quantity  ` value of rows by 10 for products that contain the string `  milk  ` .
+Use the `  UPDATE  ` statement to update existing rows in a table. The `  UPDATE  ` statement must also include the `  WHERE  ` keyword to specify a condition. The following example reduces the `  quantity  ` value of rows by 10 for products that contain the string `  milk  ` .
 
 ``` text
 UPDATE dataset.Inventory
@@ -111,7 +111,7 @@ WHERE product LIKE '%milk%'
 
 ### `     MERGE    ` statement
 
-The MERGE statement combines the `  INSERT  ` , `  UPDATE  ` , and `  DELETE  ` operations into a single statement and performs the operations atomically to merge data from one table to another. For more information and examples about the MERGE statement, see [`  MERGE  ` statement](/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) .
+The `  MERGE  ` statement combines the `  INSERT  ` , `  UPDATE  ` , and `  DELETE  ` operations into a single statement and performs the operations atomically to merge data from one table to another. For more information and examples about the `  MERGE  ` statement, see [`  MERGE  ` statement](/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement) .
 
 ## Concurrent jobs
 
@@ -121,7 +121,7 @@ BigQuery manages the concurrency of DML statements that add, modify, or delete r
 
 ### INSERT DML concurrency
 
-During any 24 hour period, the first 1500 `  INSERT  ` statements run immediately after they are submitted. After this limit is reached, the concurrency of `  INSERT  ` statements that write to a table is limited to 10. Additional `  INSERT  ` statements are added to a `  PENDING  ` queue. Up to 100 `  INSERT  ` statements can be queued against a table at any given time. When an `  INSERT  ` statement completes, the next `  INSERT  ` statement is removed from the queue and run.
+During any 24-hour period, the first 1500 `  INSERT  ` statements run immediately after they are submitted. After this limit is reached, the concurrency of `  INSERT  ` statements that write to a table is limited to 10. Additional `  INSERT  ` statements are added to a `  PENDING  ` queue. Up to 100 `  INSERT  ` statements can be queued against a table at any given time. When an `  INSERT  ` statement completes, the next `  INSERT  ` statement is removed from the queue and run.
 
 If you must run DML `  INSERT  ` statements more frequently, consider streaming data to your table using the [Storage Write API](/bigquery/docs/write-api) .
 
@@ -159,7 +159,7 @@ Fine-grained DML is a performance enhancement designed to optimize these mutatin
 
 There are some performance considerations to be aware of when using fine-grained DML:
 
-  - Fine-grained DML operations process deleted data in a hybrid approach that distributes rewrite costs across numerous table mutations. Each DML operation might processes a portion of the deleted data, and then offload the remaining deleted data processing to a background garbage collection process. For more information, see [deleted data considerations](#deleted_data_considerations) .
+  - Fine-grained DML operations process deleted data in a hybrid approach that distributes rewrite costs across numerous table mutations. Each DML operation might process a portion of the deleted data, and then offload the remaining deleted data processing to a background garbage collection process. For more information, see [deleted data considerations](#deleted_data_considerations) .
   - Tables with frequent mutating DML operations might experience increased latency for subsequent `  SELECT  ` queries and DML jobs. To evaluate the impact of enabling this feature, benchmark the performance of a realistic sequence of DML operations and subsequent reads.
   - Enabling fine-grained DML won't reduce the amount of scanned bytes of the mutating DML statement itself.
 
@@ -291,13 +291,13 @@ WHERE
 
 Tables enabled with fine-grained DML are subject to the following limitations:
 
-  - For large tables with frequently mutated partitions exceeding 2TB, fine-grained DML is not recommended. These tables may experience added memory pressure for subsequent queries, which can lead to additional read latency or query errors.
+  - For large tables with frequently mutated partitions exceeding 2 TB, fine-grained DML is not recommended. These tables may experience added memory pressure for subsequent queries, which can lead to additional read latency or query errors.
   - Only one mutating DML statement can run at a time on a table that has fine-grained DML enabled. Subsequent jobs are queued as `  PENDING  ` . For more information about mutating DML concurrency behavior, see [UPDATE, DELETE, MERGE DML concurrency](#update_delete_merge_dml_concurrency) .
   - A table enabled with fine-grained DML can't have partitions [individually deleted](/bigquery/docs/managing-partitioned-tables#delete_a_partition) or [overwritten](/bigquery/docs/writing-results#writing_query_results) . To delete or replace data within a partition, you must use a mutating DML statement, such as `  DELETE  ` , `  UPDATE  ` , `  MERGE  ` , or `  TRUNCATE  ` .
   - You can't use the [`  tabledata.list  ` method](/bigquery/docs/reference/rest/v2/tabledata/list) to read content from a table with fine-grained DML enabled. Instead, query the table with a `  SELECT  ` statement to read table records.
   - A table enabled with fine-grained DML cannot be previewed using the BigQuery console.
   - You can't [copy a table](/bigquery/docs/managing-tables#copy-table) with fine-grained DML enabled after executing an `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statement.
-  - You can't create a [table snapshot](/bigquery/docs/table-snapshots-intro) or [table clone](/bigquery/docs/table-clones-intro) of a table with fine-grained DML enabled enabled after executing an `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statement.
+  - You can't create a [table snapshot](/bigquery/docs/table-snapshots-intro) or [table clone](/bigquery/docs/table-clones-intro) of a table with fine-grained DML enabled after executing an `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statement.
   - You can't enable fine-grained DML on a table in a [replicated dataset](/bigquery/docs/data-replication) , and you can't replicate a dataset that contains a table with fine-grained DML enabled.
   - DML statements executed in a [multi-statement transaction](/bigquery/docs/transactions) aren't optimized with fine-grained DML.
   - You can't enable fine-grained DML on temporary tables created with the [`  CREATE TEMP TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement.

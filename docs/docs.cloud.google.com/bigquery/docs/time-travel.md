@@ -55,9 +55,7 @@ If you reduce the time travel window duration, delete a table, and then realize 
 
 ### Time travel and row-level access
 
-If a table has, or has had, [row-level access policies](/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table.
-
-The following [Identity and Access Management (IAM)](/bigquery/docs/access-control) permission is required:
+If a table has, or has had, [row-level access policies](/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table. The following [Identity and Access Management (IAM)](/bigquery/docs/access-control) permission is required to restore tables with row access policies:
 
 <table>
 <thead>
@@ -74,7 +72,7 @@ The following [Identity and Access Management (IAM)](/bigquery/docs/access-contr
 </tbody>
 </table>
 
-The following BigQuery role provides the required permission:
+The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission can't be added to a [custom role](/iam/docs/creating-custom-roles) . The following roles provide the required permission:
 
 <table>
 <colgroup>
@@ -92,12 +90,18 @@ The following BigQuery role provides the required permission:
 <td><a href="/bigquery/docs/access-control#bigquery.admin"><code dir="ltr" translate="no">        roles/bigquery.admin       </code></a></td>
 <td>The table whose historical data is being accessed</td>
 </tr>
+<tr class="even">
+<td><a href="/bigquery/docs/access-control#bigquery.studioAdmin"><code dir="ltr" translate="no">        roles/bigquery.studioAdmin       </code></a></td>
+<td>The table whose historical data is being accessed</td>
+</tr>
+<tr class="odd">
+<td><a href="/iam/docs/roles-permissions/iam#iam.databasesAdmin"><code dir="ltr" translate="no">        roles/iam.databasesAdmin       </code></a></td>
+<td>The table whose historical data is being accessed</td>
+</tr>
 </tbody>
 </table>
 
-The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission can't be added to a [custom role](/iam/docs/creating-custom-roles) .
-
-**Note:** The **`  roles/owner  `** role does not contain all the permissions present in the **`  roles/bigquery.admin  `** role, so you must grant the **`  roles/bigquery.admin  `** role to any user who restores tables that have or had row-level access policies applied to them.
+**Note:** The **`  roles/owner  `** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
 
   - Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
     

@@ -105,7 +105,7 @@ Preprocessing model for TRANSFORM clause: [TensorFlow SavedModel](https://www.te
 
 `  gcs_bucket/ ....(model files) transform/ assets/ f1.txt/ f2.txt/ saved_model.pb variables/ variables.data-00-of-01 variables.index  `
 
-The model doesn't contain the information about the feature engineering performed outside the [`  TRANSFORM  ` clause](/bigquery/docs/bigqueryml-transform) during training. For example, anything in the `  SELECT  ` statement . So you would need to manually convert the input data before feeding into the preprocessing model.
+The model doesn't contain the information about the feature engineering performed outside the [`  TRANSFORM  ` clause](/bigquery/docs/bigqueryml-transform) during training. For example, anything in the `  SELECT  ` statement. So you would need to manually convert the input data before feeding into the preprocessing model.
 
 ### Supported data types
 
@@ -256,7 +256,7 @@ To export a model, select one of the following:
 
 6.  In the **Export model to Google Cloud Storage** dialog:
     
-      - For **Select GCS location** , browse for the bucket or folder location where you want to to export the model, and click **Select** .
+      - For **Select GCS location** , browse for the bucket or folder location where you want to export the model, and click **Select** .
       - Click **Submit** to export the model.
 
 To check on the progress of the job, in the **Explorer** pane, click **Job history** , and look for an **EXTRACT** type job.
@@ -979,7 +979,7 @@ You can visualize the boosted trees using the [plot\_tree](https://xgboost.readt
 
 2.  Download the `  model.bst  ` file from the Cloud Storage bucket.
 
-3.  In a [Colab noteboook](https://colab.sandbox.google.com/notebooks/welcome.ipynb) , upload the `  model.bst  ` file to `  Files  ` .
+3.  In a [Colab notebook](https://colab.sandbox.google.com/notebooks/welcome.ipynb) , upload the `  model.bst  ` file to `  Files  ` .
 
 4.  Run the following code in the notebook:
     

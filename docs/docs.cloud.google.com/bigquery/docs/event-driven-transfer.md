@@ -110,7 +110,7 @@ Before configuring a Cloud Storage event-driven transfer, you must perform the f
     
     For more information about service agents, see [Service agents](/iam/docs/service-agents) .
 
-2.  Grant the [Pub/Sub Subscriber role](/iam/docs/roles-permissions/pubsub#pubsub.subscriber) ( `  pubsub.subscriber  ` )to the BigQuery Data Transfer Service agent.
+2.  Grant the [Pub/Sub Subscriber role](/iam/docs/roles-permissions/pubsub#pubsub.subscriber) ( `  pubsub.subscriber  ` ) to the BigQuery Data Transfer Service agent.
     
     ### Cloud console
     

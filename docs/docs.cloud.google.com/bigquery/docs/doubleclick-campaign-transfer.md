@@ -72,7 +72,7 @@ Before you create a Campaign Manager data transfer:
 
   - **Ensure that your organization has access to Campaign Manager Data Transfer** **v2 (Campaign Manager DTv2) files.** These files are delivered by the Campaign Manager team to a Cloud Storage bucket. To gain access to Campaign Manager DTv2 files, your next step depends on if you have a direct contract with Campaign Manager. In both cases, additional charges might apply.
     
-      - If you have a contract with Campaign Manager, contact [Campaign Manager support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) to setup Campaign Manager DTv2 files.
+      - If you have a contract with Campaign Manager, contact [Campaign Manager support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) to set up Campaign Manager DTv2 files.
       - If you do **not** have a contract with Campaign Manager, your agency or Campaign Manager reseller may have access to Campaign Manager DTv2 files. Contact your agency or reseller for access to these files.
     
     After completing this step, you will receive a Cloud Storage bucket name similar to the following:
@@ -204,7 +204,7 @@ Where:
   - project\_id is your project ID.
   - dataset is the target dataset for the data transfer configuration.
   - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Campaign Manager, you must supply the `  bucket  ` and `  network_id  ` , parameters. `  bucket  ` is the Cloud Storage bucket that contains your Campaign Manager DTv2 files. `  network_id  ` is your network, floodlight, or advertiser ID.
+  - parameters contains the parameters for the created data transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Campaign Manager, you must supply the `  bucket  ` and `  network_id  ` parameters. `  bucket  ` is the Cloud Storage bucket that contains your Campaign Manager DTv2 files. `  network_id  ` is your network, floodlight, or advertiser ID.
   - data\_source is the data source — `  dcm_dt  ` (Campaign Manager).
 
 **Caution:** You cannot configure notifications using the command-line tool.
@@ -441,7 +441,7 @@ ORDER BY
 
 ### Impressions, clicks, activities and distinct users by campaign
 
-The following SQL sample query analyzes the number of impressions, clicks, activities, and distinct users by campaign over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma separated list of all the Campaign Manager campaigns of interest within the scope of the query.
+The following SQL sample query analyzes the number of impressions, clicks, activities, and distinct users by campaign over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
 ``` text
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
@@ -536,7 +536,7 @@ ORDER BY
 
 ### Campaign activity
 
-The following SQL sample query analyzes campaign activity over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma separated list of all the Campaign Manager campaigns of interest within the scope of the query.
+The following SQL sample query analyzes campaign activity over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
 ``` text
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)

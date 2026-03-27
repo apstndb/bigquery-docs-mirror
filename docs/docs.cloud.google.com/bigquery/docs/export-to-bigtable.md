@@ -122,7 +122,7 @@ These supported data types are similar to reading from [external Bigtable tables
 
   - If a Bigtable value with a given row key, column family, column qualifier, and timestamp doesn't exist prior to the export, the exported `  NULL  ` values have no effect on the Bigtable row.
 
-  - When exporting a `  NULL  ` value of the `  STRUCT  ` or `  JSON  ` type, all column values belonging to the corresponding column family of the affected row are deleted. You should cast the `  NULL  ` value to the `  STRUCT  ` or `  JSON  ` type in order for the SQL engine to attach a correct type to it. The following query deletes all data from column family `  column_family1  ` with a set of given rowkeys:
+  - When exporting a `  NULL  ` value of the `  STRUCT  ` or `  JSON  ` type, all column values belonging to the corresponding column family of the affected row are deleted. You should cast the `  NULL  ` value to the `  STRUCT  ` or `  JSON  ` type in order for the SQL engine to attach a correct type to it. The following query deletes all data from column family `  column_family1  ` with a set of given row keys:
     
     ``` text
     EXPORT DATA OPTIONS (...) AS
@@ -212,7 +212,7 @@ If you use exported values with Bigtable APIs, such as [`  ReadModifyWriteRow  `
 
 By default, standalone result columns of types other than `  STRUCT  ` or `  JSON  ` are interpreted as values for destination column families equal to result column name, and column qualifier equal to an empty string.
 
-To demonstrate how these data types are written, consider the follow SQL example, where `  column  ` and `  column2  ` are standalone result columns:
+To demonstrate how these data types are written, consider the following SQL example, where `  column  ` and `  column2  ` are standalone result columns:
 
 ``` text
 SELECT
@@ -413,7 +413,7 @@ Exporting to Bigtable merges new values into the table instead of replacing enti
 
 ## Export optimization
 
-You can change the throughput at which records are exported from BigQuery to Bigtable by modifying the number of nodes in the [Bigtable destination cluster](/bigtable/docs/instances-clusters-nodes) . The throughput (rows written per second) linearly scales with the numbers of nodes in the destination cluster. For example, if you double the number of nodes in your destination cluster, your export throughput will roughly double.
+You can change the throughput at which records are exported from BigQuery to Bigtable by modifying the number of nodes in the [Bigtable destination cluster](/bigtable/docs/instances-clusters-nodes) . The throughput (rows written per second) linearly scales with the number of nodes in the destination cluster. For example, if you double the number of nodes in your destination cluster, your export throughput will roughly double.
 
 ## Pricing
 

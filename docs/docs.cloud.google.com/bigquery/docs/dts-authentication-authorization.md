@@ -39,7 +39,7 @@ A transfer owner refers to the user identity that the BigQuery Data Transfer Ser
 
 The transfer owner and transfer creator can have the same user identity, but it is not a requirement. There are multiple ways of setting the transfer owner to be a different user than the transfer creator:
 
-  - When creating a transfer, you can set the owner to a service account if the data source supports services accounts.
+  - When creating a transfer, you can set the owner to a service account if the data source supports service accounts.
   - Once a transfer has been created, you can transfer ownership to a new user account (or to a service account if the data source supports service accounts) that has the `  bigquery.transfers.update  ` and `  bigquery.transfers.get  ` permissions. You must be logged in to the new account when you [update the credentials](/bigquery/docs/working-with-transfers#update_credentials) .
 
 ## Read-access authorization for external data sources

@@ -149,7 +149,7 @@ SQL pushdowns have various limitations that vary depending on the external data 
 #### Limitations for query federation when using `     EXTERNAL_QUERY    `
 
   - SQL pushdowns are only applied to federated queries of the form `  SELECT * FROM T  ` .
-  - Only column pruning and filter pushdowns are supported. Specifically compute, join, limit, order by and aggregation pushdowns aren't supported.
+  - Only column pruning and filter pushdowns are supported. Specifically, compute, join, limit, order by and aggregation pushdowns aren't supported.
   - For filter pushdowns, literals must be of one of the following types: `  BOOL  ` , `  INT64  ` , `  FLOAT64  ` , `  STRING  ` , `  DATE  ` , `  DATETIME  ` , `  TIMESTAMP  ` . Literals that are structs aren't supported.
   - SQL function pushdowns are applied only for functions that are supported by both BigQuery and a destination database.
   - SQL pushdowns are only supported for AlloyDB, Cloud SQL, and Spanner.
@@ -157,7 +157,7 @@ SQL pushdowns have various limitations that vary depending on the external data 
 
 #### Limitations for query federation when using Spanner external datasets
 
-  - Column pruning, filter, compute and partial aggregation pushdowns are supported. Specifically join, limit and order by pushdowns aren't supported.
+  - Column pruning, filter, compute and partial aggregation pushdowns are supported. Specifically, join, limit and order by pushdowns aren't supported.
   - For filter pushdowns, literals must be one of the following types: `  BOOL  ` , `  INT64  ` , `  FLOAT64  ` , `  STRING  ` , `  DATE  ` , `  DATETIME  ` , `  TIMESTAMP  ` , `  BYTE  ` or Arrays. Literals that are structs aren't supported.
   - SQL function pushdowns are applied only for functions that are supported by both BigQuery and Spanner.
 

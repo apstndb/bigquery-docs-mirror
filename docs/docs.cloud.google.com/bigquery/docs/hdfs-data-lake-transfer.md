@@ -487,72 +487,112 @@ We recommend performing a few trial runs of the script manually to determine the
 
 **Note:** This orchestration is not compatible with translation output. If translation output is enabled, you must run the dumper tool manually.
 
-## Monitor Hive managed tables transfers
+## Monitor and view transfer status
 
-After you schedule Hive managed tables transfer, you can monitor the transfer job with bq command-line tool commands. For information about monitoring your transfer jobs, see [View your transfers](/bigquery/docs/working-with-transfers#view_your_transfers) .
+**Preview**
 
-### Track table migration status
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-You can also run the `  dwh-dts-status  ` tool to monitor the status of all transferred tables within a transfer configuration or a particular database. You can also use the `  dwh-dts-status  ` tool to list all transfer configurations in a project.
+**Note:** To get support or provide feedback for this feature, contact [dts-preview-support@google.com](/bigquery/docs/dts-preview-support@google.com) .
 
-#### Before you begin
+You can monitor resource-level transfers for individual tables to track progress, view granular error details, and query the state of specific resources being migrated.
 
-Before you can use the `  dwh-dts-status  ` tool, do the following:
+To view the progress and status of your resources, select one of the following options:
 
-1.  Get the `  dwh-dts-status  ` tool by downloading the `  dwh-migration-tool  ` package from the [`  dwh-migration-tools  ` GitHub repository](https://github.com/google/dwh-migration-tools/releases) .
+### Console
 
-2.  Authenticate your account to Google Cloud with the following command:
+1.  In the Google Cloud console, go to the **Data transfers** page.
+
+2.  Click your transfer configuration from the list.
+
+3.  On the **Transfer details** page, click the **Tables transferred** tab.
+
+4.  View the list of resources being transferred. You can see details like the following:
     
-    ``` text
-    gcloud auth application-default login
-    ```
-    
-    For more information, see [How Application Default Credentials work](/docs/authentication/application-default-credentials) .
+      - **Last transfer status** : the current state of the resource based on the latest resource transfer, including completion progress.
+      - **Table name** : the name of the resource being transferred. Click the resource name to see a detailed view of the resource.
+      - **Latest run** : the last transfer run that updated the resource.
+      - **Status summary** : granular progress metrics or error messages if the transfer failed.
+      - **Last successful run** : the last run that successfully transferred the resource.
 
-3.  Verify that the user has the `  bigquery.admin  ` and `  logging.viewer  ` role. For more information about IAM roles, see [Access control reference](/bigquery/docs/access-control) .
+Use the filter bar to search for specific resources by name or filter by their current status, for example, **Failed transfers** . The **Table name** filter supports wildcard matching—for example, using `  *  ` —but wildcard matching isn't supported for other filter fields.
 
-#### List all transfer configurations in a project
+### API
 
-To list all transfer configurations in a project, use the following command:
+You can query the status of transfer resources using the BigQuery Data Transfer Service API.
+
+**List all resources and their statuses**
+
+To list all resources and their statuses, use the [`  projects.locations.transferConfigs.transferResources.list  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/list) .
+
+Run the API request with the following information:
 
 ``` text
-  ./dwh-dts-status --list-transfer-configs --project-id=[PROJECT_ID] --location=[LOCATION]
+  GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources
+  Example Response (abridged) (JSON):
+  {
+    "transferResources": [
+      {
+        "name": "projects/.../transferResources/table1",
+        "latestStatusDetail": {
+          "state": "RESOURCE_TRANSFER_SUCCEEDED",
+          "completedPercentage": 100.0
+        },
+        "updateTime": "2026-02-03T22:42:06Z"
+      }
+    ]
+  }
+  
 ```
+
+`  curl  ` command:
+
+``` text
+  curl -X GET 
+
+  "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources" 
+
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" 
+
+  -H "Accept: application/json"
+  
+```
+
+You can filter the results by resource name or state. For example, to find all failed transfers, add `  ?filter=latestStatusDetail.state="RESOURCE_TRANSFER_FAILED"  ` to the request URL.
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the Google Cloud project ID that is running the transfers.
+  - `  CONFIG_ID  ` : the ID of the transfer configuration.
   - `  LOCATION  ` : the location where the transfer configuration was created.
+  - `  PROJECT_ID  ` : the ID of the Google Cloud project that's running the transfers.
 
-This command outputs a table with a list of transfer configuration names and IDs.
+**Get a specific resource**
 
-#### View statuses of all tables in a configuration
+To get the status of a specific table or partition, use the [`  projects.locations.transferConfigs.transferResources.get  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/get) .
 
-To view the status of all tables included in a transfer configuration, use the following command:
+Run the API request with the following information:
 
 ``` text
-  ./dwh-dts-status --list-status-for-config --project-id=[PROJECT_ID] --config-id=[CONFIG_ID] --location=[LOCATION]
+  GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID
+  
+```
+
+`  curl  ` command:
+
+``` text
+  curl -X GET 
+
+  "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID" 
+
+  -H "Authorization: Bearer $(gcloud auth print-access-token)" 
+
+  -H "Accept: application/json"
+  
 ```
 
 Replace the following:
 
-  - `  PROJECT_ID  ` : the Google Cloud project ID that is running the transfers.
+  - `  CONFIG_ID  ` : the ID of the transfer configuration.
   - `  LOCATION  ` : the location where the transfer configuration was created.
-  - `  CONFIG_ID  ` : the ID of the specified transfer configuration.
-
-This command outputs a table with a list of tables, and their transfer status, in the specified transfer configuration. The transfer status can be one of the following values: `  PENDING  ` , `  RUNNING  ` , `  SUCCEEDED  ` , `  FAILED  ` , `  CANCELLED  ` .
-
-#### View statuses of all tables in a database
-
-To view the status of all tables transferred from a specific database, use the following command:
-
-``` text
-  ./dwh-dts-status --list-status-for-database --project-id=[PROJECT_ID] --database=[DATABASE]
-```
-
-Replace the following:
-
-  - `  PROJECT_ID  ` : the Google Cloud project ID that is running the transfers.
-  - `  DATABASE  ` :the name of the specified database.
-
-This command outputs a table with a list of tables, and their transfer status, in the specified database. The transfer status can be one of the following values: `  PENDING  ` , `  RUNNING  ` , `  SUCCEEDED  ` , `  FAILED  ` , `  CANCELLED  ` .
+  - `  PROJECT_ID  ` : the ID of the Google Cloud project that's running the transfers.
+  - `  RESOURCE_ID  ` : the ID of the resource, for example, the table name.

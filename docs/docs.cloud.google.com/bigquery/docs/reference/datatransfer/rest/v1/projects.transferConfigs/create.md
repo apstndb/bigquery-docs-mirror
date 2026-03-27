@@ -46,8 +46,8 @@ Optional OAuth2 authorization code to use with this transfer configuration. This
 https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=authorization_code&client_id=clientId&scope=data_source_scopes
 ```
 
-  - The clientId is the OAuth clientId of the data source as returned by dataSources.list method.
-  - data\_source\_scopes are the scopes returned by dataSources.list method.
+  - The clientId is the OAuth clientId of the data source as returned by ListDataSources method.
+  - data\_source\_scopes are the scopes returned by ListDataSources method.
 
 Note that this should not be set when `  serviceAccountName  ` is used to create the transfer config.
 
@@ -61,8 +61,8 @@ Optional version info. This parameter replaces `  authorizationCode  ` which is 
 https://bigquery.cloud.google.com/datatransfer/oauthz/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=version_info&client_id=clientId&scope=data_source_scopes
 ```
 
-  - The clientId is the OAuth clientId of the data source as returned by dataSources.list method.
-  - data\_source\_scopes are the scopes returned by dataSources.list method.
+  - The clientId is the OAuth clientId of the data source as returned by ListDataSources method.
+  - data\_source\_scopes are the scopes returned by ListDataSources method.
 
 Note that this should not be set when `  serviceAccountName  ` is used to create the transfer config.
 

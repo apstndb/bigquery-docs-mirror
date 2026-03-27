@@ -20,7 +20,21 @@ To learn more about authenticating with service accounts, see [Introduction to a
 
 BigQuery Data Transfer Service can use service account credentials for transfers with the following:
 
-\* [Cloud Storage](/bigquery/docs/cloud-storage-transfer) \* [Amazon Redshift](/bigquery/docs/migration/redshift-overview) \* [Amazon S3](/bigquery/docs/s3-transfer-intro) \* [Campaign Manager](/bigquery/docs/doubleclick-campaign-transfer) \* [Carbon Footprint](/carbon-footprint/docs/export) \* [Dataset Copy](/bigquery/docs/copying-datasets) \* [Display & Video 360](/bigquery/docs/display-video-transfer) \* [Google Ad Manager](/bigquery/docs/doubleclick-publisher-transfer) \* [Google Ads](/bigquery/docs/google-ads-transfer) \* [Google Merchant Center](/bigquery/docs/merchant-center-transfer) \* [Google Play](/bigquery/docs/play-transfer) \* [Scheduled Queries](/bigquery/docs/scheduling-queries#using_a_service_account) \* [Search Ads 360](/bigquery/docs/search-ads-transfer) \* [Teradata](/bigquery/docs/migration/teradata-overview) \* [YouTube Content Owner](/bigquery/docs/youtube-content-owner-transfer)
+  - [Cloud Storage](/bigquery/docs/cloud-storage-transfer)
+  - [Amazon Redshift](/bigquery/docs/migration/redshift-overview)
+  - [Amazon S3](/bigquery/docs/s3-transfer-intro)
+  - [Campaign Manager](/bigquery/docs/doubleclick-campaign-transfer)
+  - [Carbon Footprint](/carbon-footprint/docs/export)
+  - [Dataset Copy](/bigquery/docs/copying-datasets)
+  - [Display & Video 360](/bigquery/docs/display-video-transfer)
+  - [Google Ad Manager](/bigquery/docs/doubleclick-publisher-transfer)
+  - [Google Ads](/bigquery/docs/google-ads-transfer)
+  - [Google Merchant Center](/bigquery/docs/merchant-center-transfer)
+  - [Google Play](/bigquery/docs/play-transfer)
+  - [Scheduled Queries](/bigquery/docs/scheduling-queries#using_a_service_account)
+  - [Search Ads 360](/bigquery/docs/search-ads-transfer)
+  - [Teradata](/bigquery/docs/migration/teradata-overview)
+  - [YouTube Content Owner](/bigquery/docs/youtube-content-owner-transfer)
 
 ## Before you begin
 

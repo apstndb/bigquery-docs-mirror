@@ -250,7 +250,7 @@ This product or feature is subject to the "Pre-GA Offerings Terms" in the Genera
 When you query your Bigtable data from BigQuery, you have the following options for compute:
 
   - Cluster nodes, which is the default.
-  - [Data Boost](/bigtable/docs/data-boost-overview) (Preview), a serverless compute option that lets you isolate your analytics traffic without impacting the application serving-traffic that your clusters' nodes are handling.
+  - [Data Boost](/bigtable/docs/data-boost-overview) (Preview), a serverless compute option that lets you isolate your analytics traffic without impacting the application-serving traffic that your clusters' nodes are handling.
 
 To use Data Boost, you or your administrator must create a definition file that specifies a Data Boost app profile in the Bigtable URI. For more information, see [Create a Bigtable external table](/bigquery/docs/create-bigtable-external-table) .
 

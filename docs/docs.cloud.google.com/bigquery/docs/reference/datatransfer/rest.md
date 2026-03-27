@@ -7,9 +7,11 @@ Schedule queries or transfer external data from SaaS applications to Google BigQ
   - [REST Resource: v1.projects.locations.transferConfigs](#v1.projects.locations.transferConfigs)
   - [REST Resource: v1.projects.locations.transferConfigs.runs](#v1.projects.locations.transferConfigs.runs)
   - [REST Resource: v1.projects.locations.transferConfigs.runs.transferLogs](#v1.projects.locations.transferConfigs.runs.transferLogs)
+  - [REST Resource: v1.projects.locations.transferConfigs.transferResources](#v1.projects.locations.transferConfigs.transferResources)
   - [REST Resource: v1.projects.transferConfigs](#v1.projects.transferConfigs)
   - [REST Resource: v1.projects.transferConfigs.runs](#v1.projects.transferConfigs.runs)
   - [REST Resource: v1.projects.transferConfigs.runs.transferLogs](#v1.projects.transferConfigs.runs.transferLogs)
+  - [REST Resource: v1.projects.transferConfigs.transferResources](#v1.projects.transferConfigs.transferResources)
 
 ## Service: bigquerydatatransfer.googleapis.com
 
@@ -165,6 +167,20 @@ Methods
 `  GET /v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs  `  
 Returns log messages for the transfer run.
 
+## REST Resource: [v1.projects.locations.transferConfigs.transferResources](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources)
+
+Methods
+
+`  get  `
+
+`  GET /v1/{name=projects/*/locations/*/transferConfigs/*/transferResources/*}  `  
+Returns a transfer resource.
+
+`  list  `
+
+`  GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/transferResources  `  
+Returns information about transfer resources.
+
 ## REST Resource: [v1.projects.transferConfigs](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs)
 
 Methods
@@ -231,3 +247,17 @@ Methods
 
 `  GET /v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs  `  
 Returns log messages for the transfer run.
+
+## REST Resource: [v1.projects.transferConfigs.transferResources](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources)
+
+Methods
+
+`  get  `
+
+`  GET /v1/{name=projects/*/transferConfigs/*/transferResources/*}  `  
+Returns a transfer resource.
+
+`  list  `
+
+`  GET /v1/{parent=projects/*/transferConfigs/*}/transferResources  `  
+Returns information about transfer resources.

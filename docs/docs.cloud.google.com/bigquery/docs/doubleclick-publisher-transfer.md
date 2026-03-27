@@ -122,7 +122,7 @@ Before you create a Google Ad Manager data transfer:
       
     ```
     
-    The Google Cloud team does **NOT** have the ability to generate or grant access to Google Ad Manager DT files on your behalf. Contact, Google Ad Manager [support](https://support.google.com/admanager/answer/3059042?&ref_topic=7519191) , for access to Google Ad Manager DT files.
+    The Google Cloud team does **NOT** have the ability to generate or grant access to Google Ad Manager DT files on your behalf. Contact Google Ad Manager [support](https://support.google.com/admanager/answer/3059042?&ref_topic=7519191) , for access to Google Ad Manager DT files.
 
   - [Enable API access](https://support.google.com/admanager/answer/3088588) to your Google Ad Manager network.
 
@@ -241,7 +241,7 @@ Where:
   - project\_id is your project ID.
   - dataset is the target dataset for the transfer configuration.
   - name is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the data transfer if you need to modify it later.
-  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Google Ad Manager, you must supply the `  bucket  ` and `  network_code  ` , parameters.
+  - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` . For Google Ad Manager, you must supply the `  bucket  ` and `  network_code  ` parameters.
       - `  bucket  ` : The Cloud Storage bucket that contains your Google Ad Manager DT files.
       - `  network_code  ` : Network code
       - `  load_match_tables  ` : Whether to load match tables. By default set to `  True  `

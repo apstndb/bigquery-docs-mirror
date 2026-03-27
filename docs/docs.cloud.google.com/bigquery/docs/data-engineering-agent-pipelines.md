@@ -35,7 +35,7 @@ The Data Engineering Agent has the following limitations:
       - Javascript within any SQLx
   - The Data Engineering Agent cannot execute pipelines. Users need to review and run or schedule pipelines.
   - The Data Engineering Agent cannot validate SQL that's dependent on non-existent intermediary resources without full pipeline invocation (user-triggered).
-  - The Data Engineering Agent cannot search any web-links or URLs provided through instructions or direct prompts.
+  - The Data Engineering Agent cannot search any web links or URLs provided through instructions or direct prompts.
   - When importing files in an [agent instruction file](#create_agent_instructions_for_the_data_engineering_agent) , the `  @  ` import syntax only supports paths that begin with `  ./  ` , `  /  ` , or a letter.
   - The [data preview](#review_a_data_pipeline) feature is only supported for tables, declarations, or queries with the `  hasOutput  ` flag set to `  true  ` .
 
@@ -216,7 +216,7 @@ If the generated data pipeline encounters any errors, you can prompt the data en
 4.  Once the analysis is complete, the Data Engineering Agent generates a report in the **Observations and Hypothesis** section. This report includes:
     
       - Observations and data points extracted from the data pipeline execution logs
-      - Probably causes for the failure
+      - Probable causes for the failure
       - A set of actionable steps or recommendations to resolve the identified issue
 
 With the troubleshooting report by the Data Engineering Agent, you can implement the recommendations manually. You can also instruct the Data Engineering Agent to apply the fix for you with the following steps:

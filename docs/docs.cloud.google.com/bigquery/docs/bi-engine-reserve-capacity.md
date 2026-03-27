@@ -30,7 +30,7 @@ To reserve on-demand BI Engine capacity, follow these steps:
     
       - Choose your location. The location should match the [location of the datasets](/bigquery/docs/locations) you are querying.
     
-      - Adjust the slider to the amount of memory capacity you're reserving. The following example sets the capacity to 2 GB. The current maximum is 250 GB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process.
+      - Adjust the slider to the amount of memory capacity you're reserving. The following example sets the capacity to 2 GiB. The current maximum is 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process.
 
 4.  Click **Next** .
 
@@ -71,7 +71,7 @@ Use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](/bigquery/docs/refer
     
       - `  PROJECT_ID  ` : the optional ID of the project that will benefit from BI Engine acceleration. If omitted, the default project is used.
       - `  LOCATION_ID  ` : the [location](/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
-      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gigabytes, 1 to 250 GB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
+      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
       - `  TABLE_PROJECT_ID . DATASET . TABLE  ` : the optional list of [preferred tables](/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `  TABLE_PROJECT_ID . DATASET . TABLE or DATASET . TABLE  ` . If the project is omitted, then the default project is used.
 
 3.  Click play\_circle **Run** .
@@ -92,7 +92,7 @@ bq --project_id=PROJECT_ID update \
 Replace the following:
 
   - `  PROJECT_ID  ` : the ID of your project
-  - `  SIZE  ` : the reservation memory capacity in gigabytes, 1 to 250 GB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process.
+  - `  SIZE  ` : the reservation memory capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process.
   - `  LOCATION  ` : the location of the dataset you are querying
 
 ### Estimate and measure capacity
@@ -177,7 +177,7 @@ You can use the [`  ALTER BI_CAPACITY SET OPTIONS  ` DDL statement](/bigquery/do
     
       - `  PROJECT_ID  ` : optional ID of the project that will benefit from BI Engine acceleration. If omitted, the default project is used.
       - `  LOCATION_ID  ` : the [location](/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
-      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gigabytes, 1 to 250 GB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
+      - `  VALUE  ` : the `  INT64  ` size of the reservation for BI Engine capacity in gibibyte, 1 to 250 GiB. You can [request an increase](https://docs.google.com/forms/d/e/1FAIpQLSdkGV6kwVN_Wz34sjWF4wPofmGkTsPofRKGEth0M9JLpeZcUA/viewform) of the maximum reservation capacity for your projects. Reservation increases are available in most regions, and can take from 3 days to one week to process. Setting `  VALUE  ` replaces the existing value if there is one. Setting to `  NULL  ` clears the value for that option.
       - `  TABLE_PROJECT_ID. DATASET . TABLE  ` : optional list of [preferred tables](/bigquery/docs/bi-engine-intro#preferred_tables) to which acceleration should be applied. Format: `  TABLE_PROJECT_ID . DATASET . TABLE or DATASET . TABLE  ` . If the project is omitted, then the default project is used.
 
 3.  Click play\_circle **Run** .
