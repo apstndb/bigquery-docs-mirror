@@ -8,9 +8,23 @@ To get the latest product updates delivered to you, add the URL of this page to 
 
 ## March 25, 2026
 
+Announcement
+
+The [Gemini for Google Cloud API](https://docs.cloud.google.com/gemini/docs/overview) (cloudaicompanion.googleapis.com) is now enabled for existing BigQuery projects in the European jurisdiction.
+
+Feature
+
+You can now use the [BigQuery Migration Service MCP server](/bigquery/docs/use-bigquery-migration-mcp) to perform SQL translation tasks, including translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations.
+
+This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 Feature
 
 In BigQuery Data Transfer Service, you can [monitor resource-level status reporting for Hive managed tables](/bigquery/docs/hdfs-data-lake-transfer#monitor-transfer-status) to track progress and view granular error details for individual tables. This feature is in [preview](https://cloud.google.com/products#product-launch-stages) .
+
+Feature
+
+You can use the [BigQuery migration assessment for Snowflake](/bigquery/docs/migration-assessment) to assess the complexity of migrating from Snowflake to BigQuery. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
 
 ## March 24, 2026
 

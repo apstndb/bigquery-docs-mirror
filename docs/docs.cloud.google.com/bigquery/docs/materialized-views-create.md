@@ -796,6 +796,16 @@ This query returns data from the last refresh if the data is not older than the 
 
 If you stream data into the base tables of a materialized view with the `  max_staleness  ` option, then the query of the materialized view might exclude records that were streamed into its tables before the beginning of the staleness interval. As a result, a materialized view that includes data from multiple tables and `  max_staleness  ` option might not represent a point-in-time snapshot of those tables.
 
+#### Streaming data and time travel limitations
+
+While BigQuery datasets have a default [time travel window](/bigquery/docs/time-travel) of 7 days, the **streaming storage buffer** only retains data for 3 days. This creates the following limitation for materialized views:
+
+  - **Query failure:** If a materialized view uses the `  max_staleness  ` option and hasn't been refreshed for more than 3 days, queries against the view fail with the the error message `  Streaming data from <materialized_view_name> is temporarily unavailable  ` .
+
+  - **Cause:** The failure occurs because the query rewrite process attempts to read incremental changes (deltas) from the streaming storage buffer. If the required data is older than the 3-day retention period, the system can't retrieve the deltas needed for the incremental rewrite.
+
+To avoid these errors, ensure your [refresh policy](/bigquery/docs/materialized-views-manage#automatic-refresh) updates the materialized view at least once every 3 days.
+
 ### Smart tuning and the `     max_staleness    ` option
 
 Smart tuning automatically rewrites queries to use materialized views whenever possible regardless of the `  max_staleness  ` option, even if the query does not reference a materialized view. The `  max_staleness  ` option on a materialized view does not affect the results of the rewritten query. The `  max_staleness  ` option only affects queries that directly query the materialized view.

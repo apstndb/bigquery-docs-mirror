@@ -30,6 +30,7 @@ Additionally, you can use the [cost estimation functionality in Google Cloud Mig
 
 ## What's next
 
+  - For more information on using the BigQuery Migration Service MCP server, see [Learn how to use the BigQuery Migration Service MCP server](/bigquery/docs/use-bigquery-migration-mcp) .
   - For more information on batch SQL translator, see [Batch SQL translator](/bigquery/docs/batch-sql-translator) .
   - For more information on using the interactive SQL translator, see [Interactive SQL translator](/bigquery/docs/interactive-sql-translator) .
   - For more information on BigQuery migration assessment, see [BigQuery migration assessment](/bigquery/docs/migration-assessment) .

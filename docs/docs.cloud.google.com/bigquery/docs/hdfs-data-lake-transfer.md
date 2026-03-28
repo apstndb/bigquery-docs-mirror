@@ -558,7 +558,7 @@ Run the API request with the following information:
   
 ```
 
-You can filter the results by resource name or state. For example, to find all failed transfers, add `  ?filter=latestStatusDetail.state="RESOURCE_TRANSFER_FAILED"  ` to the request URL.
+You can filter the results by resource name or state. For example, to find all failed transfers, add `  ?filter=latest_status_detail.state="RESOURCE_TRANSFER_FAILED"  ` to the request URL.
 
 Replace the following:
 

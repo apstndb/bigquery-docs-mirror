@@ -327,10 +327,6 @@ Amazon Redshift Serverless stores usage logs for seven days. If a wider range is
 
 ### Snowflake
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 ### Requirements
 
 You must meet the following requirements in order to extract metadata and query logs from Snowflake:
@@ -832,10 +828,6 @@ The limit for the total uncompressed size of all the query history files is 5 TB
 Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
 
 ### Snowflake
-
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Upload the metadata and the zip file(s) containing query logs and usage histories to your Cloud Storage bucket. When uploading these files to Cloud Storage, the following requirements must be met:
 
@@ -1386,10 +1378,6 @@ The **Appendix** section contains this view:
     Provides the assessment execution details including the list of processed files, errors and report completeness. You can use this page to investigate missing data in the report and to better understand the report's completeness.
 
 ### Snowflake
-
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The report consists of different sections that can be used either separately or together. The following diagram organizes these sections into three common user goals to help you assess your migration needs:
 

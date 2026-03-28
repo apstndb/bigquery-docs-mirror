@@ -71,9 +71,9 @@ Conversational analytics supports the following BigQuery ML functions in respons
 
   - [`  AI.FORECAST  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast)
   - [`  AI.DETECT_ANOMALIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies)
-  - [`  AI.GENERATE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) , including [`  AI.GENERATE_BOOL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool) , [`  AI.GENERATE_INT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int) , and [`  AI.GENERATE_DOUBLE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
+  - [`  AI.GENERATE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate)
 
-To use the supported `  AI.GENERATE  ` functions, you must have [the required permissions](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
+To use the supported `  AI.GENERATE  ` function, you must have [the required permissions](/bigquery/docs/permissions-for-ai-functions#run_generative_ai_queries_with_end-user_credentials) to run generative AI queries.
 
 ### BigQuery ML use cases
 

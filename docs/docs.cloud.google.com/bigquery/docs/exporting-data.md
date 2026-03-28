@@ -180,6 +180,8 @@ Use the [`  EXPORT DATA  ` statement](/bigquery/docs/reference/standard-sql/expo
 
 For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
 
+**Note:** `  LIMIT  ` clauses in `  EXPORT DATA  ` statements can often lead to slow export job execution. For this reason, we don't recommend using `  LIMIT  ` clauses in `  EXPORT DATA  ` statements.
+
 ### bq
 
 Use the [`  bq extract  `](/bigquery/docs/reference/bq-cli-reference#bq_extract) command with the `  --destination_format  ` flag.

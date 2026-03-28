@@ -71,16 +71,28 @@ MySQL data transfers are subject to following limitations:
 Incremental MySQL transfers are subject to the following limitations:
 
   - You can only choose `  TIMESTAMP  ` columns as watermark columns.
+
   - Incremental ingestion is only supported for assets with valid watermark columns.
+
   - Values in a watermark column must be monotonically increasing.
+
   - Incremental transfers cannot sync delete operations in the source table.
+
   - A single transfer configuration can only support either incremental or full ingestion.
+
   - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
+
   - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
+
   - You cannot change the watermark column or the primary key after the first incremental ingestion run.
+
   - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](/bigquery/docs/clustered-tables#limitations) .
+
   - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
+
   - We recommend that you create indexes on the watermark column. This connector uses watermark columns for filters in incremental transfers, so indexing these columns can improve performance.
+
+  - When making an incremental transfer, you must use the updated data type mapping.
 
 ## Data ingestion options
 
@@ -224,7 +236,7 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
     
       - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) .
     
-      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. If you are making an incremental transfer, this value must be **false** . For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
     
       - For **Ingestion type** , select **Full** or **Incremental** .
         
@@ -286,7 +298,7 @@ Replace the following:
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user. connector.connectionType
       - `  connector.connectionType  ` (optional): the connection type to determine the connection URL. This can be `  SERVICE  ` , `  SID  ` , or `  TNS  ` . When not provided, this defaults to `  SERVICE  ` .
-      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. If you are making an incremental transfer, this value must be `  false  ` . For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
       - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only

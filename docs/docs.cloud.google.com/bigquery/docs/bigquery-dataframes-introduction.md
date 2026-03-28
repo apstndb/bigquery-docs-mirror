@@ -2,7 +2,32 @@
 
 BigQuery DataFrames is a set of open source Python libraries that let you take advantage of BigQuery data processing by using familiar Python APIs. BigQuery DataFrames provides a Pythonic DataFrame powered by the BigQuery engine, and it implements the pandas and scikit-learn APIs by pushing the processing down to BigQuery through SQL conversion. This lets you use BigQuery to explore and process terabytes of data, and also train machine learning (ML) models, all with Python APIs.
 
-The following diagram describes the workflow of BigQuery DataFrames:
+If you are familiar with pandas, you can use BigQuery DataFrames to work with BigQuery data with minimal changes to your code. For example, you can use familiar pandas methods to analyze data from a BigQuery table:
+
+``` python
+import bigframes.pandas as bpd
+
+# Load data from BigQuery
+query_or_table = "bigquery-public-data.ml_datasets.penguins"
+bq_df = bpd.read_gbq(query_or_table)
+
+# Inspect one of the columns (or series) of the DataFrame:
+bq_df["body_mass_g"]
+
+# Compute the mean of this series:
+average_body_mass = bq_df["body_mass_g"].mean()
+print(f"average_body_mass: {average_body_mass}")
+
+# Find the heaviest species using the groupby operation to calculate the
+# mean body_mass_g:
+(
+    bq_df["body_mass_g"]
+    .groupby(by=bq_df["species"])
+    .mean()
+    .sort_values(ascending=False)
+    .head(10)
+)
+```
 
 **Note:** There are breaking changes to some default parameters in BigQuery DataFrames version 2.0. To learn about these changes and how to migrate to version 2.0, see [Migrate to BigQuery DataFrames 2.0](/bigquery/docs/migrate-dataframes) .
 

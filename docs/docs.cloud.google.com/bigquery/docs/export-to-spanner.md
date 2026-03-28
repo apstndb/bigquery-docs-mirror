@@ -171,6 +171,329 @@ Replace the following:
 
 When you export a result containing multiple rows with the same `  rowkey  ` value, values written to Spanner end up in the same Spanner row. Only single matching BigQuery row (there is no guarantee which one) will be present in the Spanner row set produced by export.
 
+## Export using a `     CLOUD_RESOURCE    ` Connection
+
+You can delegate write permissions to a BigQuery [`  CLOUD_RESOURCE  `](/bigquery/docs/create-cloud-resource-connection) connection to run exports without giving a user access direct access to the Spanner database.
+
+Before you export to Spanner with a `  CLOUD_RESOURCE  ` connection, do the following:
+
+### Create a connection
+
+You can create or use an existing [`  CLOUD_RESOURCE  ` connection](/bigquery/docs/create-cloud-resource-connection) to connect to Spanner.
+
+Select one of the following options:
+
+### Console
+
+1.  Go to the **BigQuery** page.
+
+2.  In the left pane, click explore **Explorer** :
+    
+    If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
+
+3.  In the **Explorer** pane, expand your project name, and then click **Connections** .
+
+4.  On the **Connections** page, click **Create connection** .
+
+5.  For **Connection type** , choose **Vertex AI remote models, remote functions, BigLake and Spanner (Cloud Resource)** .
+
+6.  In the **Connection ID** field, enter a name for your connection.
+
+7.  For **Location type** , select a location for your connection. The connection should be colocated with your other resources such as datasets.
+
+8.  Click **Create connection** .
+
+9.  Click **Go to connection** .
+
+10. In the **Connection info** pane, copy the service account ID for use in a later step.
+
+### bq
+
+1.  In a command-line environment, create a connection:
+    
+    ``` text
+    bq mk --connection --location=REGION --project_id=PROJECT_ID \
+        --connection_type=CLOUD_RESOURCE CONNECTION_ID
+    ```
+    
+    The `  --project_id  ` parameter overrides the default project.
+    
+    Replace the following:
+    
+      - `  REGION  ` : your [connection region](/bigquery/docs/locations#supported_locations)
+      - `  PROJECT_ID  ` : your Google Cloud project ID
+      - `  CONNECTION_ID  ` : an ID for your connection
+    
+    When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
+    
+    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](/sdk/docs/quickstart) :
+    
+    ``` console
+    Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
+    ```
+
+2.  Retrieve and copy the service account ID for use in a later step:
+    
+    ``` text
+    bq show --connection PROJECT_ID.REGION.CONNECTION_ID
+    ```
+    
+    The output is similar to the following:
+    
+    ``` console
+    name                          properties
+    1234.REGION.CONNECTION_ID     {"serviceAccountId": "connection-1234-9u56h9@gcp-sa-bigquery-condel.iam.gserviceaccount.com"}
+    ```
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+
+``` python
+import google.api_core.exceptions
+from google.cloud import bigquery_connection_v1
+
+client = bigquery_connection_v1.ConnectionServiceClient()
+
+
+def create_connection(
+    project_id: str,
+    location: str,
+    connection_id: str,
+):
+    """Creates a BigQuery connection to a Cloud Resource.
+
+    Cloud Resource connection creates a service account which can then be
+    granted access to other Google Cloud resources for federated queries.
+
+    Args:
+        project_id: The Google Cloud project ID.
+        location: The location of the connection (for example, "us-central1").
+        connection_id: The ID of the connection to create.
+    """
+
+    parent = client.common_location_path(project_id, location)
+
+    connection = bigquery_connection_v1.Connection(
+        friendly_name="Example Connection",
+        description="A sample connection for a Cloud Resource.",
+        cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
+    )
+
+    try:
+        created_connection = client.create_connection(
+            parent=parent, connection_id=connection_id, connection=connection
+        )
+        print(f"Successfully created connection: {created_connection.name}")
+        print(f"Friendly name: {created_connection.friendly_name}")
+        print(
+            f"Service Account: {created_connection.cloud_resource.service_account_id}"
+        )
+
+    except google.api_core.exceptions.AlreadyExists:
+        print(f"Connection with ID '{connection_id}' already exists.")
+        print("Please use a different connection ID.")
+    except Exception as e:
+        print(f"An unexpected error occurred while creating the connection: {e}")
+```
+
+### Node.js
+
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+
+``` javascript
+const {ConnectionServiceClient} =
+  require('@google-cloud/bigquery-connection').v1;
+const {status} = require('@grpc/grpc-js');
+
+const client = new ConnectionServiceClient();
+
+/**
+ * Creates a new BigQuery connection to a Cloud Resource.
+ *
+ * A Cloud Resource connection creates a service account that can be granted access
+ * to other Google Cloud resources.
+ *
+ * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
+ * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
+ * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
+ */
+async function createConnection(projectId, location, connectionId) {
+  const parent = client.locationPath(projectId, location);
+
+  const connection = {
+    friendlyName: 'Example Connection',
+    description: 'A sample connection for a Cloud Resource',
+    // The service account for this cloudResource will be created by the API.
+    // Its ID will be available in the response.
+    cloudResource: {},
+  };
+
+  const request = {
+    parent,
+    connectionId,
+    connection,
+  };
+
+  try {
+    const [response] = await client.createConnection(request);
+
+    console.log(`Successfully created connection: ${response.name}`);
+    console.log(`Friendly name: ${response.friendlyName}`);
+
+    console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
+  } catch (err) {
+    if (err.code === status.ALREADY_EXISTS) {
+      console.log(`Connection '${connectionId}' already exists.`);
+    } else {
+      console.error(`Error creating connection: ${err.message}`);
+    }
+  }
+}
+```
+
+### Terraform
+
+Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
+
+**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](/resource-manager/reference/rest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+
+The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
+
+``` terraform
+# This queries the provider for project information.
+data "google_project" "default" {}
+
+# This creates a cloud resource connection in the US region named my_cloud_resource_connection.
+# Note: The cloud resource nested object has only one output field - serviceAccountId.
+resource "google_bigquery_connection" "default" {
+  connection_id = "my_cloud_resource_connection"
+  project       = data.google_project.default.project_id
+  location      = "US"
+  cloud_resource {}
+}
+```
+
+To apply your Terraform configuration in a Google Cloud project, complete the steps in the following sections.
+
+## Prepare Cloud Shell
+
+1.  Launch [Cloud Shell](https://shell.cloud.google.com/) .
+
+2.  Set the default Google Cloud project where you want to apply your Terraform configurations.
+    
+    You only need to run this command once per project, and you can run it in any directory.
+    
+    ``` text
+    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
+    ```
+    
+    Environment variables are overridden if you set explicit values in the Terraform configuration file.
+
+## Prepare the directory
+
+Each Terraform configuration file must have its own directory (also called a *root module* ).
+
+1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
+    
+    ``` text
+    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
+    ```
+
+2.  If you are following a tutorial, you can copy the sample code in each section or step.
+    
+    Copy the sample code into the newly created `  main.tf  ` .
+    
+    Optionally, copy the code from GitHub. This is recommended when the Terraform snippet is part of an end-to-end solution.
+
+3.  Review and modify the sample parameters to apply to your environment.
+
+4.  Save your changes.
+
+5.  Initialize Terraform. You only need to do this once per directory.
+    
+    ``` text
+    terraform init
+    ```
+    
+    Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
+    
+    ``` text
+    terraform init -upgrade
+    ```
+
+## Apply the changes
+
+1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
+    
+    ``` text
+    terraform plan
+    ```
+    
+    Make corrections to the configuration as necessary.
+
+2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
+    
+    ``` text
+    terraform apply
+    ```
+    
+    Wait until Terraform displays the "Apply complete\!" message.
+
+3.  [Open your Google Cloud project](https://console.cloud.google.com/) to view the results. In the Google Cloud console, navigate to your resources in the UI to make sure that Terraform has created or updated them.
+
+**Note:** Terraform samples typically assume that the required APIs are enabled in your Google Cloud project.
+
+After you create the connection, open it. In the **Connection info** pane, copy the service account ID. You will need this ID when you configure permissions for the connection. When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
+
+### Set up access
+
+You must give the service account that is associated with the new connection write access to your Spanner instance or database. We recommend that you use the **Cloud Spanner Database User** ( `  roles/spanner.databaseUser  ` ) predefined IAM role. These steps require the service account ID that you copied when you created your connection.
+
+To grant access to database-level roles for the service account, do the following:
+
+1.  Go to the Spanner instances page.
+
+2.  Click the name of the instance that contains your database.
+
+3.  In the **Overview** tab, select the checkbox for your database.
+
+4.  The **Info panel** dialog appears. Click **Add principal** .
+
+5.  For **New principals** , enter the service account ID that you copied earlier.
+
+6.  In the **Select a role** field, select a role with `  spanner.databases.write  ` permissions. We recommend that you use the **Cloud Spanner Database User** role.
+
+7.  Click **Save** .
+
+### Run the export using the `     CLOUD_RESOURCE    ` connection
+
+With the connection created and the appropriate access granted to it, you can run the export using the `  CLOUD_RESOURCE  ` connection. The following example shows an `  EXPORT  ` command that exports with a `  CLOUD_RESOURCE  ` connection.
+
+``` text
+EXPORT DATA WITH CONNECTION `PROJECT_ID.LOCATION.CONNECTION_NAME` OPTIONS (
+  uri="https://spanner.googleapis.com/projects/PROJECT_ID/instances/INSTANCE_ID/databases/DATABASE_ID",
+  format='CLOUD_SPANNER',
+  spanner_options="""{ "table": "SPANNER_TABLE_NAME" }"""
+)
+AS SELECT * FROM my_bq_dataset.table1;
+```
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : the name of your Google Cloud project.
+  - `  LOCATION  ` : the location where you created the connection—for example, `  us  ` .
+  - `  CONNECTION_NAME  ` : the name of the connection being used to run the export—for example, `  myconnection  ` .
+  - `  INSTANCE_ID  ` : the name of your Spanner database instance.
+  - `  DATABASE_ID  ` : the name of your Spanner database.
+  - `  SPANNER_TABLE_NAME  ` : The name of the existing destination Spanner table.
+
 ## Export continuously
 
 To continuously process an export query, see [Create continuous queries](/bigquery/docs/continuous-queries) for instructions and [example code](/bigquery/docs/continuous-queries#spanner-example) .

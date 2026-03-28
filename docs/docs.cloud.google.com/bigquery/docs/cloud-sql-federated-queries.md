@@ -197,6 +197,17 @@ Alternatively, if you are querying a PostgreSQL database, you might encounter th
     
     If your Cloud SQL instance uses a private IP address, ensure that you enabled a private path when you [created the Cloud SQL instance](/sql/docs/postgres/create-instance) . Doing so lets BigQuery access data in Cloud SQL and run queries against this data over a private connection.
 
+**Issue:** Failed to connect to MySQL database. When you run a federated query against Cloud SQL data, you might encounter the following error:
+
+  - `  Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2059): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory at [1:15]  `  
+    **Resolution:**
+    
+    This error might occur for database users on a newly created instance running Cloud SQL version 8.4 because [caching\_sha2\_password authentication](https://dev.mysql.com/doc/refman/8.4/en/native-pluggable-authentication.html) is the default for new MySQL versions (8.4 and above).
+    
+    If your Cloud SQL instance runs a MySQL version earlier than MySQL 8.4, then upgrading the Cloud SQL instance to version 8.4 won't affect the database connection for the existing database users.
+    
+    Because only existing users can query Cloud SQL, even after the Cloud SQL instance upgrades to the 8.4 version, you should send federated queries to Cloud SQL with connection settings that use a database user that existed on a MySQL version earlier than 8.4.
+
 ## What's next
 
   - Learn about [federated queries](/bigquery/docs/federated-queries-intro) .

@@ -453,6 +453,7 @@ https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql
 https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc
 https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro
+https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-sql
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer
 https://docs.cloud.google.com/bigquery/docs/migration/snowflake-tutorials
@@ -768,6 +769,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/Email
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListDataSourcesResponse
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferConfigsResponse
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferLogsResponse
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferResourcesResponse
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferRunsResponse
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/RunAttempt
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ScheduleTransferRunsResponse
@@ -792,6 +794,9 @@ https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs/delete
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs/get
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs/list
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/get
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/list
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/delete
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/get
@@ -810,6 +815,9 @@ https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/proje
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs/delete
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs/get
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs/list
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources/get
+https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources/list
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/create
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/delete
 https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs/get
@@ -833,6 +841,12 @@ https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_dataset_ids
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_table_ids
 https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_overview
 https://docs.cloud.google.com/bigquery/docs/reference/migration
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/generate_ddl_suggestion
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/get_translation
+https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution
 https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/ErrorInfo
@@ -1282,6 +1296,7 @@ https://docs.cloud.google.com/bigquery/docs/updating-datasets
 https://docs.cloud.google.com/bigquery/docs/updating-labels
 https://docs.cloud.google.com/bigquery/docs/updating-model-metadata
 https://docs.cloud.google.com/bigquery/docs/use-bigquery-mcp
+https://docs.cloud.google.com/bigquery/docs/use-bigquery-migration-mcp
 https://docs.cloud.google.com/bigquery/docs/use-cloud-assist
 https://docs.cloud.google.com/bigquery/docs/use-service-accounts
 https://docs.cloud.google.com/bigquery/docs/use-spark
