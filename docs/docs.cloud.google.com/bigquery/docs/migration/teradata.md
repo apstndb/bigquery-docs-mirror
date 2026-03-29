@@ -501,6 +501,10 @@ The configuration file created in the initialization step looks similar to this 
     
       - `  tpt-template-path  ` : Use this configuration to provide a custom TPT extraction script as input. You can use this parameter to apply transformations to your migration data.
     
+      - `  tpt-export-count  ` : The export operator is responsible for extracting data from the Teradata database. This parameter overrides the default export count in the TPT script. It should be less than or equal to the value of the `  max-sessions  ` parameter to ensure that each instance has enough pipes to the database.
+    
+      - `  tpt-file-writer-count  ` : The file writer operator is responsible for taking the data received from the export operator and writing it to a physical file on your storage system. This parameter overrides the default file writer count in the TPT script. Ideally, the file writer count must match the export count; otherwise, the transfer becomes a bottleneck at either the extraction or the writer end.
+    
       - `  schema-mapping-rule-path  ` : **(Optional)** The path to a configuration file that contains a schema mapping to override the default mapping rules. Some mapping types work only with Teradata Parallel Transporter (TPT) mode.
         
         Example: Mapping from Teradata type `  TIMESTAMP  ` to BigQuery type `  DATETIME  ` :
@@ -566,6 +570,57 @@ The configuration file created in the initialization step looks similar to this 
       - `  gcs-module-writer-instances  ` : **(Optional)** This parameter specifies number of Cloud Storage writer instances. By default, the value is 1. You can increase this value to increase throughput during the writing phase of the TPT export.
 
 **Note:** all configuration parameters listed above can be overridden for a particular agent run by using a startup flag with the full parameter path. For example: `  java -cp … --teradata-config.local-processing-space=<value>  `
+
+#### Optimize agent data extraction
+
+By fine tuning the agent parameters, you can optimize the data extraction process and make the overall transfer process efficient.
+
+The following table provides information about parameters you can use to tune your migration:
+
+<table>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Recommended Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong><code dir="ltr" translate="no">        gcs-module-writer-instances       </code></strong></td>
+<td>4</td>
+<td>Increases parallelization for TPT extraction and Cloud Storage write operations. Tune this value to balance transfer optimization and Teradata instance load.</td>
+</tr>
+<tr class="even">
+<td><strong><code dir="ltr" translate="no">        gcs-module-connection-count       </code></strong></td>
+<td>10</td>
+<td>Sets the number of TCP connections to Cloud Storage. Increasing this value improves parallelization during the Cloud Storage upload phase.</td>
+</tr>
+<tr class="odd">
+<td><strong><code dir="ltr" translate="no">        gcs-module-buffer-size       </code></strong></td>
+<td>32m</td>
+<td>Defines the size of the buffers for TCP connections. Testing indicates that <code dir="ltr" translate="no">       32m      </code> provides optimal results.</td>
+</tr>
+<tr class="even">
+<td><strong><code dir="ltr" translate="no">        tpt-export-count       </code></strong></td>
+<td>Must be less than or equal to the <code dir="ltr" translate="no">       max-sessions      </code> value.</td>
+<td>Overrides the default export operator count in the TPT script. The value should be less than or equal to the <code dir="ltr" translate="no">       max-sessions      </code> value to ensure that each instance has enough pipes to the database.</td>
+</tr>
+<tr class="odd">
+<td><strong><code dir="ltr" translate="no">        tpt-file-writer-count       </code></strong></td>
+<td>Should be equal to the <code dir="ltr" translate="no">       export-count      </code> value.</td>
+<td>Overrides the default file writer operator count in the TPT script. Ideally, this value should match the <code dir="ltr" translate="no">       tpt-export-count      </code> value to avoid bottlenecks.</td>
+</tr>
+</tbody>
+</table>
+
+Consider the following best practices for configuration:
+
+  - **Memory constraint:** Ensure that the following calculation is less than the total VM memory running the agent: `  gcs-module-writer-instances * gcs-module-buffer-size * gcs-module-buffer-count < Total VM Memory  `
+  - **Tuning order:**
+    1.  Adjust the `  gcs-module-writer-instances  ` parameter value first to find the best balance of performance and load.
+    2.  If further performance gains are needed, increase the `  gcs-module-connection-count  ` value.
+  - **Automatic scaling:** By default, the `  gcs-module-buffer-size  ` parameter value is typically set to twice the connection count, but we recommend explicitly tuning the value to `  32m  ` for these workloads.
 
 ## Run the migration agent
 

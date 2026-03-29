@@ -14,7 +14,7 @@ You can use the Hive managed tables migration connector in the BigQuery Data Tra
   - Amazon S3
   - Azure Blob Storage or Azure Data Lake Storage Gen2
 
-With the Hive managed tables migration connector, you can register your Hive managed tables with [Dataproc Metastore](/dataproc-metastore/docs/overview) , [BigLake metastore](/bigquery/docs/about-blms) , or [BigLake metastore Iceberg REST Catalog](/bigquery/docs/blms-rest-catalog) while using Cloud Storage as the file storage.
+With the Hive managed tables migration connector, you can register your Hive managed tables with [Dataproc Metastore](/dataproc-metastore/docs/overview) or [BigLake metastore Iceberg REST Catalog](/bigquery/docs/blms-rest-catalog) while using Cloud Storage as the file storage.
 
 This connector supports both full and metadata-only transfers. Full transfers will transfer both your data and metadata from your source tables to your target metastore. You can make a metadata-only transfer if you already have your data migrated to Cloud Storage.
 
@@ -24,7 +24,7 @@ The following diagram provides an overview of the table migration process from H
 
 Hive managed tables transfers are subject to the following limitations:
 
-  - To migrate Apache Iceberg tables, you must register the tables with BigLake metastore to allow write access for open-source engines (such as Apache Spark or Flink), and to allow read access for BigQuery.
+  - To migrate Apache Iceberg tables, you must register the tables with the BigLake metastore Iceberg REST catalog to allow write access for open-source engines (such as Apache Spark or Flink).
   - To migrate Hive managed tables, you must register the tables with Dataproc Metastore to allow write access for open-source engines, and to allow read access for BigQuery.
   - You must use the bq command-line tool to migrate Hive managed tables to BigQuery.
 
@@ -55,7 +55,6 @@ A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is creat
       - `  roles/storagetransfer.admin  `
       - `  roles/serviceusage.serviceUsageConsumer  `
       - `  roles/storage.objectAdmin  `
-          - If you are migrating metadata for BigLake Iceberg tables, you must also grant the `  roles/bigquery.admin  ` role.
           - If you are migrating metadata to BigLake metastore Iceberg REST Catalog, you must also grant the `  roles/biglake.admin  ` role.
 
 3.  Grant the service agent the `  roles/iam.serviceAccountTokenCreator  ` role with the following command:
@@ -129,7 +128,6 @@ Select one of the following options:
     4.  Choose the Metastore type from the drop-down list:
         
           - `  DATAPROC_METASTORE  ` : Select this option to store your metadata in Dataproc Metastore. You must provide the URL for the Dataproc Metastore in **Dataproc metastore url** .
-          - `  BIGLAKE_METASTORE  ` : Select this option to store your metadata in BigLake metastore. You must provide a BigQuery dataset in **BigQuery dataset** .
           - `  BIGLAKE_REST_CATALOG  ` : Select this option to store your metadata in the BigLake metastore Iceberg REST catalog.
     
     5.  For **Destination gcs path** , enter a path to a Cloud Storage bucket to store your migrated data.
@@ -164,7 +162,6 @@ To schedule Hive managed tables transfer, enter the `  bq mk  ` command and supp
     "target_gcs_file_path":"gs://MIGRATION_BUCKET",
     "metastore":"METASTORE",
     "destination_dataproc_metastore":"DATAPROC_METASTORE_URL",
-    "destination_bigquery_dataset":"BIGLAKE_METASTORE_DATASET",
     "translation_output_gcs_path":"gs://TRANSLATION_OUTPUT_BUCKET/metadata/config/default_database/",
     "storage_type":"STORAGE_TYPE",
     "agent_pool_name":"AGENT_POOL_NAME",
@@ -190,10 +187,8 @@ Replace the following:
   - `  MIGRATION_BUCKET  ` : Destination GCS path to which all underlying files will be loaded. Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  METASTORE  ` : The type of metastore to migrate to. Set this to one of the following values:
       - `  DATAPROC_METASTORE  ` : To transfer metadata to Dataproc Metastore.
-      - `  BIGLAKE_METASTORE  ` : To transfer metadata to BigLake metastore.
       - `  BIGLAKE_REST_CATALOG  ` : To transfer metadata to BigLake metastore Iceberg REST Catalog.
   - `  DATAPROC_METASTORE_URL  ` : The URL of your Dataproc Metastore. Required if `  metastore  ` is `  DATAPROC_METASTORE  ` .
-  - `  BIGLAKE_METASTORE_DATASET  ` : The BigQuery dataset for your BigLake metastore. Required if `  metastore  ` is `  BIGLAKE_METASTORE  ` and `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](/bigquery/docs/hadoop-transfer#configure-translation-output) . Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  STORAGE_TYPE  ` : Specify the underlying file storage for your tables. Supported types are `  HDFS  ` , `  S3  ` , and `  AZURE  ` . Required if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  AGENT_POOL_NAME  ` : the name of the agent pool used for creating agents. Required if `  storage_type  ` is `  HDFS  ` .
@@ -248,7 +243,7 @@ You can configure a unique Cloud Storage path and database for each migrated tab
               schema: TARGET_DATABASE
     ```
     
-      - Replace `  SOURCE_DATABASE  ` and `  TARGET_DATABASE  ` with the name of source database name and Dataproc Metastore database or BigQuery dataset depending on the chosen metastore. Ensure that the BigQuery dataset exists if you are configuring the database for BigLake metastore.
+      - Replace `  SOURCE_DATABASE  ` and `  TARGET_DATABASE  ` with the name of source database name and Dataproc Metastore database.
     
     For more information about these configuration YAML, see [Guidelines to create a configuration YAML file](/bigquery/docs/config-yaml-translation#yaml_guidelines) .
 
@@ -316,11 +311,11 @@ Before using this automation script, complete the [dumper installation prerequis
     usage() {
       echo "Usage: $0 [options]"
       echo ""
-      echo "Runs the dwh-migration-dumper tool and uploads its output to provided GCS path."
+      echo "Runs the dwh-migration-dumper tool and uploads its output to provided Cloud Storage path."
       echo ""
       echo "Options:"
       echo "  --dumper-executable   The full path to the dumper executable. (Required)"
-      echo "  --gcs-base-path       The base GCS path for output files. (Required)"
+      echo "  --gcs-base-path       The base Cloud Storage path for output files. (Required)"
       echo "  --local-base-dir      The local base directory for logs and temp files. (Required)"
       echo "  -h, --help                  Display this help message and exit."
       exit 1
@@ -392,7 +387,7 @@ Before using this automation script, complete the [dumper installation prerequis
           local gcs_log_path_on_failure="${GCS_BASE_PATH}/logs/$(basename "${LOG_FILE}")"
           log "Uploading log file to ${gcs_log_path_on_failure} for debugging..."
           # Attempt to upload the log file on failure, but don't let this command cause the script to exit.
-          gsutil cp "${LOG_FILE}" "${gcs_log_path_on_failure}" > /dev/null 2>&1 || log "WARNING: Failed to upload log file to GCS."
+          gsutil cp "${LOG_FILE}" "${gcs_log_path_on_failure}" > /dev/null 2>&1 || log "WARNING: Failed to upload log file to Cloud Storage."
     
       else
           # SUCCESS PATH
@@ -426,7 +421,7 @@ Before using this automation script, complete the [dumper installation prerequis
     
     log "*****Script Start*****"
     log "Dumper Executable: ${DUMPER_EXECUTABLE}"
-    log "GCS Base Path: ${GCS_BASE_PATH}"
+    log "Cloud Storage Base Path: ${GCS_BASE_PATH}"
     log "Local Base Directory: ${LOCAL_BASE_DIR}"
     
     # Use an array to build the command safely
@@ -436,16 +431,16 @@ Before using this automation script, complete the [dumper installation prerequis
     )
     
     log "Starting dumper tool execution..."
-    log "COMMAND: ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
+    log "COMMAND: JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
     
-    "${DUMPER_EXECUTABLE}" "${dumper_command_args[@]}" >> "${LOG_FILE}" 2>&1
+    JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" "${DUMPER_EXECUTABLE}" "${dumper_command_args[@]}" >> "${LOG_FILE}" 2>&1
     
     log "Dumper process finished."
     
     # Validate the output from the dumper execution for success or failure.
     validate_dumper_output "${LOG_FILE}"
     
-    # Upload the ZIP file to GCS
+    # Upload the ZIP file to Cloud Storage
     gcs_zip_path="${GCS_BASE_PATH}/${ZIP_FILE_NAME}"
     log "Uploading ${LOCAL_ZIP_PATH} to ${gcs_zip_path}..."
     
@@ -456,7 +451,7 @@ Before using this automation script, complete the [dumper installation prerequis
     fi
     
     gsutil cp "${LOCAL_ZIP_PATH}" "${gcs_zip_path}" >> "${LOG_FILE}" 2>&1
-    log "Upload to GCS successful."
+    log "Upload to Cloud Storage successful."
     
     # The script will now exit with code 0. The trap will call cleanup and log the script end.
     ```

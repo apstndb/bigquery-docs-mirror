@@ -33,7 +33,7 @@ Additionally, you must have the following roles to create or edit a data agent:
 
   - Gemini Data Analytics Stateless Chat User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ).
   - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) on any table that the data agent uses as a knowledge source.
-  - Dataplex Catalog Viewer ( `  roles/datacatalog.catalogViewer  ` ) on the project
+  - Data Catalog Viewer ( `  roles/datacatalog.catalogViewer  ` ) on the project
   - If a data table uses [column-level access control](/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](/bigquery/docs/column-level-security-intro#roles) .
   - If a data table uses [row-level access control](/bigquery/docs/row-level-security-intro) , you must have the row-level access policy on that table. For more information, see [Create or update row-level access policies](/bigquery/docs/managing-row-level-security#create-policy) .
   - If a data table uses [data masking](/bigquery/docs/column-data-masking-intro) , Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) on the appropriate data policy. For more information, see [Roles for querying masked data](/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .

@@ -119,15 +119,15 @@ AI.GENERATE(
 
 <!-- end list -->
 
-  - `  ENDPOINT  ` : a `  STRING  ` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `  ENDPOINT  ` value, BigQuery ML selects a recent stable version of Gemini to use. The default endpoint is `  gemini-2.5-flash  ` . You can also specify the [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, to use `  gemini-3-pro-preview  ` , specify the following endpoint:
+  - `  ENDPOINT  ` : a `  STRING  ` value that specifies the Vertex AI endpoint to use for the model. You can specify any [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](/vertex-ai/generative-ai/docs/models#preview_models) Gemini model. If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the model. If you don't specify an `  ENDPOINT  ` value, BigQuery ML selects a recent stable version of Gemini to use. The default endpoint is `  gemini-2.5-flash  ` . You can also specify the [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) . For example, specify the following endpoint:
     
     ``` text
-    https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/gemini-3-pro-preview
+    https://aiplatform.googleapis.com/v1/projects/PROJECT_ID/locations/global/publishers/google/models/GEMINI_ENDPOINT
     ```
     
     **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
     
-    **Note:** Using Gemini 2.5 models incurs charges for the [thinking process](/vertex-ai/generative-ai/docs/thinking) . You can set a budget for the thinking process for Gemini 2.5 Flash and Gemini 2.5 Flash-Lite models by using the `  model_params  ` argument to set the `  thinking_budget  ` parameter. For an example, see [Set the thinking budget for a Gemini 2.5 Flash model](#thinking-budget) . You can't set a budget for Gemini 2.5 Pro models.
+    Using Gemini 2.5 and later models incurs charges for the [thinking process](/vertex-ai/generative-ai/docs/thinking) . You can control the thinking process by using the `  model_params  ` argument to set fields in the [`  ThinkingConfig  ` object](/vertex-ai/generative-ai/docs/reference/rest/v1/GenerationConfig#ThinkingConfig) . Setting these fields lets you balance the model's reasoning depth with response latency and cost. For tasks where extensive internal reasoning isn't required, you can adjust the thinking configuration to receive faster responses and reduce token usage. For more information, see [Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget) and [Thinking levels](https://ai.google.dev/gemini-api/docs/thinking#thinking-levels) . For examples of this, see [Disable the thinking budget](#thinking-budget) and [Use a context cache and low thinking level](#context-cache-thinking-level) .
 
   - `  MODEL_PARAMS  ` : a `  JSON  ` literal that provides additional parameters to the model. The `  MODEL_PARAMS  ` value must conform to the [`  generateContent  ` request body format](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.publishers.models/generateContent#request-body) . You can provide a value for any field in the request body except for the `  contents  ` field; the `  contents  ` field is populated with the `  PROMPT  ` argument value.
 
@@ -322,6 +322,8 @@ FROM UNNEST(['Seattle', 'NYC', 'Austin']) AS name;
 
 ### Disable the thinking budget
 
+Disabling the thinking budget is useful for tasks that don't require complex reasoning. By setting the `  thinking_budget  ` to `  0  ` , you can reduce the model's response latency and lower the cost of the request by avoiding additional "thinking" tokens. For more information, see [Thinking budgets](https://ai.google.dev/gemini-api/docs/thinking#set-budget) .
+
 The following query shows how to use the `  model_params  ` argument to set the model's thinking budget to `  0  ` for the request:
 
 ``` text
@@ -334,6 +336,8 @@ SELECT
 
 ### Use a context cache and low thinking level
 
+For Gemini 3.0 and later models, the `  thinking_level  ` parameter replaces the `  thinking_budget  ` parameter. Setting a lower thinking level prioritizes latency and cost savings for the instruction following. For more information, see [Thinking levels](https://ai.google.dev/gemini-api/docs/thinking#thinking-levels) .
+
 The following query shows how to use the `  model_params  ` argument to specify a [context cache](/vertex-ai/generative-ai/docs/context-cache/context-cache-overview) and use a low thinking level:
 
 ``` text
@@ -341,7 +345,7 @@ SELECT
   AI.GENERATE(
     "Give me a summary of the document in context.",
     endpoint =>
-      "projects/PROJECT_NUMBER/locations/global/publishers/google/models/gemini-3-flash-preview",
+      "projects/PROJECT_NUMBER/locations/global/publishers/google/models/GEMINI_ENDPOINT",
     model_params =>
       JSON
         '''{"cachedContent": "projects/PROJECT_NUMBER/locations/LOCATION/cachedContents/CACHED_CONTENT_ID",

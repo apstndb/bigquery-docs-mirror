@@ -67,19 +67,19 @@ For more information about enabling the Gemini for Google Cloud API, see [Enable
 
 To create, manage, and retrieve data insights, ask your administrator to grant you the following Identity and Access Management (IAM) roles:
 
-  - [Dataplex Universal Catalog DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) or [Dataplex Universal Catalog DataScan Administrator](/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `  roles/dataplex.dataScanAdmin  ` ) on the project where you want to generate insights.
+  - [Dataplex DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) or [Dataplex DataScan Administrator](/iam/docs/roles-permissions/dataplex#dataplex.dataScanAdmin) ( `  roles/dataplex.dataScanAdmin  ` ) on the project where you want to generate insights.
   - [BigQuery Data Viewer](/bigquery/docs/access-control#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the BigQuery tables for which you want to generate insights.
   - [BigQuery Data Editor](/bigquery/docs/access-control#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the BigQuery tables for which you want to generate insights.
   - [BigQuery User](/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` ) or [BigQuery Studio User](/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` ) on the project where you want to generate insights.
 
 To get read-only access to the generated insights, ask your administrator to grant you the following IAM role:
 
-  - [Dataplex Universal Catalog DataScan DataViewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on the project containing the BigQuery tables for which you want to view insights.
+  - [Dataplex DataScan DataViewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on the project containing the BigQuery tables for which you want to view insights.
 
 To publish data insights to Dataplex Universal Catalog, ask your administrator to grant you the following IAM roles on the resource:
 
-  - Publish descriptions as aspects: [Dataplex Universal Catalog Catalog Editor](/dataplex/docs/iam-roles#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` )
-  - Publish queries as aspects: [Dataplex Universal Catalog Entry and EntryLink Owner](/dataplex/docs/iam-roles#dataplex.entryOwner) ( `  roles/dataplex.entryOwner  ` )
+  - Publish descriptions as aspects: [Dataplex Catalog Editor](/dataplex/docs/iam-roles#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` )
+  - Publish queries as aspects: [Dataplex Entry and EntryLink Owner](/dataplex/docs/iam-roles#dataplex.entryOwner) ( `  roles/dataplex.entryOwner  ` )
 
 To enable APIs, ask your administrator to grant you the following IAM role:
 
