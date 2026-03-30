@@ -1,6 +1,6 @@
 # Load Salesforce Marketing Cloud data into BigQuery
 
-You can load data from Salesforce Marketing Cloud to BigQuery using the BigQuery Data Transfer Service for Salesforce Marketing Cloud connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Salesforce Marketing Cloud to BigQuery.
+You can load data from Salesforce Marketing Cloud to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Salesforce Marketing Cloud connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Salesforce Marketing Cloud to BigQuery.
 
 ## Limitations
 

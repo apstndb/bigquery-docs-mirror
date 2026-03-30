@@ -483,6 +483,18 @@ When you load data into BigQuery storage, the data is subject to BigQuery [stora
 
 If you have a table that is not modified for 90 consecutive days, the price of storage for that table automatically drops by 50 percent. If you have a partitioned table, each partition is considered separately for eligibility for long-term pricing, subject to the same rules as non-partitioned tables.
 
+Be aware that, once tables and table partitions are in long-term storage, any modifications to data, metadata, or partitioning, can cause these resources to move back to active BigQuery storage. The following are examples of actions that might result in this move:
+
+  - Insert, update, truncate, merge, or delete statements that change table data
+
+  - Loading, streaming, or appending data to the table
+
+  - `  ALTER  ` statements that change the table schema
+
+  - Adding or modifying table properties like description, labels, or expiration
+
+  - Modifying table metadata
+
 ### Configure the storage billing model
 
 **Best practice:** Optimize the storage billing model based on your usage patterns.
@@ -641,6 +653,10 @@ The [BigQuery time travel feature](/bigquery/docs/time-travel) retains deleted d
 #### Storage costs reduced with no modifications to the data
 
 In BigQuery users pay for active and long-term storage. Active storage charges include any table or table partition that has not been modified for 90 consecutive days, whereas long-term storage charges include tables and partitions that haven't been modified for 90 consecutive days. Overall storage cost reduction can be observed when data transitions to long-term storage, which is around 50% cheaper than active storage. Read about [storage pricing](https://cloud.google.com/bigquery/pricing?e=48754805#storage-pricing) for more details.
+
+#### Storage cost increased with no significant data increase
+
+Storage costs can increase if data in long-term storage moves to active BigQuery storage as a result of certain actions on table data, metadata, or partitions. For more details, see [Use long-term storage](/bigquery/docs/best-practices-costs#store-data-bigquery) .
 
 #### INFORMATION\_SCHEMA storage calculations don't match billing
 

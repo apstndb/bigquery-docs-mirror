@@ -190,6 +190,7 @@ https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transformation
 https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer
 https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transformation
 https://docs.cloud.google.com/bigquery/docs/dts-authentication-authorization
+https://docs.cloud.google.com/bigquery/docs/dts-data-sources-intro
 https://docs.cloud.google.com/bigquery/docs/dts-introduction
 https://docs.cloud.google.com/bigquery/docs/dts-locations
 https://docs.cloud.google.com/bigquery/docs/dts-monitor

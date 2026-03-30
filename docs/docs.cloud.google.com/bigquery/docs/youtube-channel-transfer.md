@@ -1,6 +1,6 @@
 # Load YouTube Channel data into BigQuery
 
-You can load data from YouTube Channel to BigQuery using the BigQuery Data Transfer Service for YouTube Channel connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from YouTube Channel to BigQuery.
+You can load data from YouTube Channel to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for YouTube Channel connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from YouTube Channel to BigQuery.
 
 ## Connector overview
 

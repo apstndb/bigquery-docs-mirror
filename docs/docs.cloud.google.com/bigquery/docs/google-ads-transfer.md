@@ -1,6 +1,6 @@
 # Load Google Ads data into BigQuery
 
-You can load data from Google Ads (formerly known as Google AdWords) to BigQuery using the BigQuery Data Transfer Service for Google Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Google Ads to BigQuery.
+You can load data from Google Ads (formerly known as Google AdWords) to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Google Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Google Ads to BigQuery.
 
 To learn about recent data source changes, see [BigQuery Data Transfer Service data source change log](/bigquery/docs/transfer-changes) .
 

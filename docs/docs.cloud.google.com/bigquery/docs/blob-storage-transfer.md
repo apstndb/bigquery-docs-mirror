@@ -1,6 +1,6 @@
 # Load Blob Storage data into BigQuery
 
-You can load data from Blob Storage to BigQuery using the BigQuery Data Transfer Service for Blob Storage connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Blob Storage to BigQuery.
+You can load data from Blob Storage to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Blob Storage connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Blob Storage to BigQuery.
 
 ## Before you begin
 

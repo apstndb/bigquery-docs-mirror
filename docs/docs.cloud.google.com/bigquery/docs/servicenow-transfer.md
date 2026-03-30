@@ -1,6 +1,6 @@
 # Load ServiceNow data into BigQuery
 
-You can load data from ServiceNow to BigQuery using the BigQuery Data Transfer Service for ServiceNow connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from ServiceNow to BigQuery.
+You can load data from ServiceNow to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for ServiceNow connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from ServiceNow to BigQuery.
 
 ## Limitations
 

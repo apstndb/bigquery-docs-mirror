@@ -1,6 +1,6 @@
 # Load MySQL data into BigQuery
 
-You can load data from MySQL to BigQuery by using the BigQuery Data Transfer Service for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
+You can load data from MySQL to BigQuery by using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
 
 ## Before you begin
 

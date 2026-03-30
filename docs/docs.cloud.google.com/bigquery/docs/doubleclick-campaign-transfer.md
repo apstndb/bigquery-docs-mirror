@@ -1,6 +1,6 @@
 # Load Campaign Manager data into BigQuery
 
-You can load data from Campaign Manager to BigQuery using the BigQuery Data Transfer Service for Campaign Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Campaign Manager to BigQuery.
+You can load data from Campaign Manager to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Campaign Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Campaign Manager to BigQuery.
 
 ## Connector overview
 

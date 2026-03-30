@@ -6,7 +6,7 @@ This product is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for Comparison Shopping Service (CSS) Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-This document shows you how to schedule and manage recurring load jobs for CSS Center reporting data using the BigQuery Data Transfer Service.
+This document shows you how to schedule and manage recurring load jobs for CSS Center reporting data using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
 
 ## Before you begin
 

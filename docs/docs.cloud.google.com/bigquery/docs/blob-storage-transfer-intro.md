@@ -1,6 +1,6 @@
 # Introduction to Blob Storage transfers
 
-The BigQuery Data Transfer Service for Azure Blob Storage lets you automatically schedule and manage recurring load jobs from Azure Blob Storage and [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) into BigQuery.
+The [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Azure Blob Storage lets you automatically schedule and manage recurring load jobs from Azure Blob Storage and [Azure Data Lake Storage Gen2](https://learn.microsoft.com/en-us/azure/storage/blobs/data-lake-storage-introduction) into BigQuery.
 
 ## Supported file formats
 

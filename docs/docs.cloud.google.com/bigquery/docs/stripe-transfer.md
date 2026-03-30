@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Stripe to BigQuery using the Stripe connector with the BigQuery Data Transfer Service. By using the Stripe connector, you can schedule recurring transfer jobs that add your latest data from Stripe to BigQuery.
+You can load data from Stripe to BigQuery using the Stripe connector with the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) . By using the Stripe connector, you can schedule recurring transfer jobs that add your latest data from Stripe to BigQuery.
 
 ## Limitations
 

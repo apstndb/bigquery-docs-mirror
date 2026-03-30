@@ -1,6 +1,6 @@
 # Load Salesforce data into BigQuery
 
-You can load data from your Salesforce Sales Cloud to BigQuery using the BigQuery Data Transfer Service for Salesforce connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Salesforce Sales Cloud to BigQuery.
+You can load data from your Salesforce Sales Cloud to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Salesforce connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Salesforce Sales Cloud to BigQuery.
 
 ## Limitations
 

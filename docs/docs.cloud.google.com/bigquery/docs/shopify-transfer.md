@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Shopify to BigQuery using the BigQuery Data Transfer Service for Shopify connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Shopify to BigQuery.
+You can load data from Shopify to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Shopify connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Shopify to BigQuery.
 
 The Shopify connector supports the data transfer of GraphQL-based resources, such as `  Collections  ` and `  Orders  ` , from the following resources:
 

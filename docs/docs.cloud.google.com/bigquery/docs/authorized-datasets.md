@@ -105,7 +105,7 @@ You can authorize a dataset's current and future views to access another dataset
 2.  Write the existing metadata (including the access control list) for the dataset you want to share into a JSON file by using the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
     ``` text
-    bq show --format=prettyjson PROJECT:SHARED_DATASET &gt; FILE_PATH
+    bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
     ```
 
 3.  Use a text editor to add the dataset that you want to authorize into the existing `  access  ` section of the JSON file that was created at FILE\_PATH .
@@ -117,8 +117,8 @@ You can authorize a dataset's current and future views to access another dataset
      ...
      {
        "dataset": {
-         "dataset&quot;: {
-           "project_id&quot;: "PROJECT",
+         "dataset": {
+           "project_id": "PROJECT",
            "dataset_id": "AUTHORIZED_DATASET"
          },
          "target_types": "VIEWS"
@@ -156,8 +156,8 @@ You can authorize a dataset's current and future views to access another dataset
      ...
      {
        "dataset": {
-         "dataset&quot;: {
-           "project_id&quot;: "PROJECT",
+         "dataset": {
+           "project_id": "PROJECT",
            "dataset_id": "AUTHORIZED_DATASET"
          },
          "target_types": "VIEWS"
@@ -206,7 +206,7 @@ To revoke the access granted to the views in an authorized dataset, remove the a
 2.  Write the existing metadata (including the access control list) for the shared dataset into a JSON file by using the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_show) command.
     
     ``` text
-    bq show --format=prettyjson PROJECT:SHARED_DATASET &gt; FILE_PATH
+    bq show --format=prettyjson PROJECT:SHARED_DATASET > FILE_PATH
     ```
 
 3.  Use a text editor to remove the authorized dataset from the `  access  ` section of the JSON file that was created at FILE\_PATH , as follows:
@@ -215,7 +215,7 @@ To revoke the access granted to the views in an authorized dataset, remove the a
       {
         "dataset": {
           "dataset": {
-            &quot;project_id": &quot;PROJECT",
+            "project_id": "PROJECT",
             "dataset_id": "AUTHORIZED_DATASET"
           },
           "target_types": "VIEWS"
@@ -251,7 +251,7 @@ To revoke the access granted to the views in an authorized dataset, remove the a
      {
        "dataset": {
          "dataset": {
-           &quot;project_id": &quot;PROJECT",
+           "project_id": "PROJECT",
            "dataset_id": "AUTHORIZED_DATASET"
          },
          "target_types": "VIEWS"

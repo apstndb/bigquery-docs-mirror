@@ -137,7 +137,7 @@ Anywhere Cache provides an SSD-backed zonal read cache for your Cloud Storage bu
   - **Accelerated query performance** : Faster data reads from Cloud Storage for your BigQuery workloads.
   - **Reduced network data transfer costs** : Reduced data transfer fees for BigQuery workloads backed by multi-region buckets. Data that is read from a cache incurs lower networking costs than data that is read directly from a multi-region bucket.
 
-BigQuery is a regional service, but its underlying compute resources can shift between zones for load balancing, so we recommend enabling Anywhere Cache in all zones within the region where your BigQuery workload is run. This ensures that an Anywhere Cache is available regardless of which zone BigQuery compute uses. For more information, see [Anywhere Cache pricing](/storage/pricing#anywhere-cache) .
+BigQuery is a regional service, but its underlying compute resources can shift between zones for load balancing, so we recommend enabling Anywhere Cache in all zones within the region where your BigQuery workload is run. This ensures that an Anywhere Cache is available regardless of which zone BigQuery compute uses. For more information, see [Anywhere Cache pricing](https://cloud.google.com/storage/pricing#rapid-cache) .
 
 To determine if Anywhere Cache is right for you, we recommend using the [Anywhere Cache recommender](/storage/docs/anywhere-cache-recommender) . The Anywhere Cache recommender provides recommendations and insights for creating caches in bucket-zone pairs by analyzing your data usage and storage.
 

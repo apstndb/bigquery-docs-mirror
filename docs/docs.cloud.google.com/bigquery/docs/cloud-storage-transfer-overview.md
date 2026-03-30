@@ -1,6 +1,6 @@
 # Introduction to Cloud Storage transfers
 
-The BigQuery Data Transfer Service for Cloud Storage lets you schedule recurring data loads from [Cloud Storage buckets](/storage/docs/buckets) to BigQuery. The path to the data stored in Cloud Storage and the destination table can both be [parameterized](/bigquery/docs/gcs-transfer-parameters) , allowing you to load data from Cloud Storage buckets organized by date.
+The [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Cloud Storage lets you schedule recurring data loads from [Cloud Storage buckets](/storage/docs/buckets) to BigQuery. The path to the data stored in Cloud Storage and the destination table can both be [parameterized](/bigquery/docs/gcs-transfer-parameters) , allowing you to load data from Cloud Storage buckets organized by date.
 
 ## Supported file formats
 

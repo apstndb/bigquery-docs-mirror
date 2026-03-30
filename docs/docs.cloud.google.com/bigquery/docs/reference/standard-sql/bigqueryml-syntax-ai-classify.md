@@ -274,7 +274,7 @@ OPTIONS (
 SELECT
   signed_url,
   AI.CLASSIFY(
-    images.ref,
+    STRUCT(OBJ.GET_ACCESS_URL(images.ref, 'r')),
     ['box', 'ball', 'bottle', 'stand', 'other'],
     endpoint => 'gemini-2.5-flash') AS category
 FROM

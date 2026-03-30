@@ -156,7 +156,7 @@ For more details, see the complete list of [pipe operators](/bigquery/docs/refer
 Common use cases for pipe syntax include the following:
 
   - **Ad-hoc analysis and incremental query building** : The logical order of operations makes it easier to write and debug queries. The prefix of any query up to a pipe symbol `  |>  ` is a valid query, which helps you view intermediate results in a long query. The productivity gains can speed up the development process across your organization.
-  - **Log analytics** : There exist other types of pipe-like syntax that are popular among log analytics users. Pipe syntax provides a familiar structure that simplifies onboarding for those users to [Log Analytics](/logging/docs/log-analytics#analytics) and BigQuery.
+  - **Log analytics** : There exist other types of pipe-like syntax that are popular among log analytics users. Pipe syntax provides a familiar structure that simplifies onboarding for those users to [Observability Analytics](/logging/docs/log-analytics#analytics) and BigQuery.
 
 ## Additional features in pipe syntax
 

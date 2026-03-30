@@ -1,6 +1,6 @@
 # Load Cloud Storage data into BigQuery
 
-You can load data from Cloud Storage to BigQuery using the BigQuery Data Transfer Service for Cloud Storage connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Cloud Storage to BigQuery.
+You can load data from Cloud Storage to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Cloud Storage connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Cloud Storage to BigQuery.
 
 ## Before you begin
 

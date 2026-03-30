@@ -1,6 +1,6 @@
 # Introduction to Amazon S3 transfers
 
-The BigQuery Data Transfer Service for Amazon S3 lets you automatically schedule and manage recurring load jobs from Amazon S3 into BigQuery.
+The [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Amazon S3 lets you automatically schedule and manage recurring load jobs from Amazon S3 into BigQuery.
 
 ## Supported file formats
 

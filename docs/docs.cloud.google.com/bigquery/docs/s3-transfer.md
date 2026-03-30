@@ -1,6 +1,6 @@
 # Load Amazon S3 data into BigQuery
 
-You can load data from Amazon S3 to BigQuery using the BigQuery Data Transfer Service for Amazon S3 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Amazon S3 to BigQuery.
+You can load data from Amazon S3 to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Amazon S3 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Amazon S3 to BigQuery.
 
 ## Before you begin
 

@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from PayPal to BigQuery using the PayPal connector with the BigQuery Data Transfer Service. With the PayPal connector, you can schedule recurring transfer jobs that add your latest data from PayPal to BigQuery.
+You can load data from PayPal to BigQuery using the PayPal connector with the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) . With the PayPal connector, you can schedule recurring transfer jobs that add your latest data from PayPal to BigQuery.
 
 The PayPal connector supports production and sandbox PayPal accounts.
 

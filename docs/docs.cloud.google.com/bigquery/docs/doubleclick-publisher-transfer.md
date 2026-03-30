@@ -1,6 +1,6 @@
 # Load Google Ad Manager data into BigQuery
 
-You can load data from Google Ad Manager to BigQuery using the BigQuery Data Transfer Service for Google Ad Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Ad Manager to BigQuery.
+You can load data from Google Ad Manager to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Google Ad Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Ad Manager to BigQuery.
 
 ## Connector overview
 

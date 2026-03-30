@@ -1,6 +1,6 @@
 # Load PostgreSQL data into BigQuery
 
-You can load data from PostgreSQL to BigQuery by using the BigQuery Data Transfer Service for PostgreSQL connector. The connector supports PostgreSQL instances hosted in your on-premises environment, Cloud SQL, and other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from PostgreSQL to BigQuery.
+You can load data from PostgreSQL to BigQuery by using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for PostgreSQL connector. The connector supports PostgreSQL instances hosted in your on-premises environment, Cloud SQL, and other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from PostgreSQL to BigQuery.
 
 ## Limitations
 

@@ -1,6 +1,6 @@
 # Load YouTube Content Owner data into BigQuery
 
-You can load data from YouTube Content Owner to BigQuery using the BigQuery Data Transfer Service for YouTube Content Owner connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from YouTube Content Owner to BigQuery.
+You can load data from YouTube Content Owner to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for YouTube Content Owner connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from YouTube Content Owner to BigQuery.
 
 ## Connector overview
 

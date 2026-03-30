@@ -1,6 +1,6 @@
 # Load Search Ads 360 data into BigQuery
 
-You can load data from Search Ads 360 to BigQuery using the BigQuery Data Transfer Service for Search Ads 360 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Search Ads 360 to BigQuery.
+You can load data from Search Ads 360 to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Search Ads 360 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Search Ads 360 to BigQuery.
 
 ## Connector overview
 

@@ -1,6 +1,6 @@
 # Load Google Analytics 4 data into BigQuery
 
-You can load data from Google Analytics 4 to BigQuery using the BigQuery Data Transfer Service for Google Analytics 4 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Analytics 4 to BigQuery.
+You can load data from Google Analytics 4 to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Google Analytics 4 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Analytics 4 to BigQuery.
 
 ## Connector overview
 

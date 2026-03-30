@@ -116,7 +116,7 @@ You can run queries on logs without creating additional load jobs:
 
   - **Cloud Logging** lets you [route logs to a BigQuery destination](/logging/docs/export/configure_export) .
 
-  - **Log Analytics** lets you [run queries that analyze your log data](/logging/docs/log-analytics#analytics) .
+  - **Observability Analytics** lets you [run queries that analyze your log data](/logging/docs/log-analytics#analytics) .
 
 ## What's next
 

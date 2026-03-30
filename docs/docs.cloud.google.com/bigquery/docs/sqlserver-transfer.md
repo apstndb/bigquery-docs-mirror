@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 Note: To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Microsoft SQL Server to BigQuery using the BigQuery Data Transfer Service for Microsoft SQL Server connector. The Microsoft SQL Server connector supports data loads from Microsoft SQL Server instances hosted in on-premises environments and other cloud providers, such as Cloud SQL, Amazon Web Services (AWS), or Microsoft Azure. With the BigQuery Data Transfer Service, you can create on-demand and recurring data transfer jobs to transfer data from your Microsoft SQL Server instance into BigQuery.
+You can load data from Microsoft SQL Server to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Microsoft SQL Server connector. The Microsoft SQL Server connector supports data loads from Microsoft SQL Server instances hosted in on-premises environments and other cloud providers, such as Cloud SQL, Amazon Web Services (AWS), or Microsoft Azure. With the BigQuery Data Transfer Service, you can create on-demand and recurring data transfer jobs to transfer data from your Microsoft SQL Server instance into BigQuery.
 
 ## Limitations
 

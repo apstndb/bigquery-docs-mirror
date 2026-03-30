@@ -6,7 +6,7 @@ This feature is subject to the "Pre-GA Offerings Terms" in the General Service T
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Klaviyo to BigQuery using the BigQuery Data Transfer Service for Klaviyo connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Klaviyo to BigQuery.
+You can load data from Klaviyo to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Klaviyo connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Klaviyo to BigQuery.
 
 ## Before you begin
 

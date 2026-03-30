@@ -233,7 +233,7 @@ ON
       """You will be provided an image of a pet product.
       Determine if the image is of the following pet toy: """,
       products.product_name,
-      images.ref
+      OBJ.GET_ACCESS_URL(images.ref, 'r')
     ),
     endpoint => 'gemini-2.5-flash')
 WHERE

@@ -4,7 +4,9 @@
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-This document describes how to use the BigQuery Model Context Protocol (MCP) server to connect to BigQuery from AI applications such as Gemini CLI, agent mode in Gemini Code Assist, Claude Code, or in AI applications you're developing.
+This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can use the BigQuery remote MCP server to perform tasks such as running queries, getting metadata, and listing resources..
+
+The BigQuery remote MCP server is enabled when you enable the BigQuery API.
 
 [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) (MCP) standardizes how large language models (LLMs) and AI applications or agents connect to outside data sources. MCP servers let you use their tools, resources, and prompts to take actions and get updated data from their backend service.
 
@@ -45,7 +47,6 @@ For more information about how to use our local MCP server, see [Connect LLMs to
 
 To get the permissions that you need to enable the BigQuery MCP server, ask your administrator to grant you the following IAM roles on the project where you want to enable the BigQuery MCP server:
 
-  - Enable APIs and MCP servers in the project: [Service Usage Admin](/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) ( `  roles/serviceusage.serviceUsageAdmin  ` )
   - Make MCP tool calls: [MCP Tool User](/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
   - Run BigQuery jobs: [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
   - Query BigQuery data: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
@@ -58,9 +59,6 @@ These predefined roles contain the permissions required to enable the BigQuery M
 
 The following permissions are required to enable the BigQuery MCP server:
 
-  - Enable MCP servers in a project:
-      - `  serviceusage.mcppolicy.get  `
-      - `  serviceusage.mcppolicy.update  `
   - Make MCP tool calls: `  mcp.tools.call  `
   - Run BigQuery jobs: `  bigquery.jobs.create  `
   - Query BigQuery data: `  bigquery.tables.getData  `
@@ -68,42 +66,6 @@ The following permissions are required to enable the BigQuery MCP server:
 You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
 **Note:** Additional BigQuery permissions might be required depending on the task. For information about BigQuery permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
-
-## Enable or disable the BigQuery MCP server
-
-You can enable or disable the BigQuery MCP server in a project with the `  gcloud beta services mcp enable  ` command. For more information, see the following sections.
-
-### Enable the BigQuery MCP server in a project
-
-**Note:** Starting on March 17, 2026, separate enablement for MCP servers will be removed. When the BigQuery API is enabled in a project, you can use BigQuery through its remote MCP endpoint. This update will be released gradually across different regions.
-
-If you're using different projects for your client credentials, such as service account keys, OAuth client ID or API keys, and for hosting your resources, then you must enable the BigQuery service and the BigQuery MCP server on both projects.
-
-To enable the BigQuery MCP server in your Google Cloud project, run the following command:
-
-``` text
-gcloud beta services mcp enable bigquery.googleapis.com \
-    --project=PROJECT_ID
-```
-
-Replace the following:
-
-  - `  PROJECT_ID  ` : the Google Cloud project ID
-
-The BigQuery MCP server is enabled for use in your Google Cloud project. If the BigQuery service isn't enabled for your Google Cloud project, you're prompted to enable the service before enabling the BigQuery MCP server.
-
-As a security best practice, we recommend that you enable MCP servers only for the services required for your AI application to function.
-
-### Disable the BigQuery MCP server in a project
-
-To disable the BigQuery MCP server in your Google Cloud project, run the following command:
-
-``` text
-gcloud beta services mcp disable bigquery.googleapis.com \
-    --project=PROJECT_ID
-```
-
-The BigQuery MCP server is disabled for use in your Google Cloud project.
 
 ## Authentication and authorization
 
@@ -221,9 +183,9 @@ For more information about MCP security and governance, see [AI security and saf
 
 ### Use Model Armor
 
-Model Armor is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you deploy AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
+[Model Armor](/model-armor/overview) is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you are deploying AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
 
-Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, Model Armor makes a cross-regional call. For more information, see [Model Armor locations](/model-armor/locations) .
+Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, then Model Armor makes a cross-regional call. For more information, see [Model Armor locations](/model-armor/locations) .
 
 **Caution:** If a request fails, Model Armor logs the entire payload. This might expose sensitive information in the logs.
 

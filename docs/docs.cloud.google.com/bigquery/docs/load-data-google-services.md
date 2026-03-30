@@ -40,7 +40,7 @@ To set up exports of your Cloud Billing data, see [Export Cloud Billing data to 
 
 You can route logs from [Cloud Logging](/logging) to BigQuery tables for additional analytics and joins. For Google Cloud services, log data becomes available for querying approximately 1 minute after it is generated.
 
-To use BigQuery as a part of Log Analytics, see [Log Analytics](/logging/docs/analyze/query-and-view) .
+To use BigQuery as a part of Observability Analytics, see [Observability Analytics](/logging/docs/analyze/query-and-view) .
 
 To set up exports of your Cloud Logging data, see [Route logs to supported sinks](/logging/docs/export/configure_export_v2) .
 

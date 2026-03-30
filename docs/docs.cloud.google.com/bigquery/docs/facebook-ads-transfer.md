@@ -1,6 +1,6 @@
 # Load Facebook Ads data into BigQuery
 
-You can load data from Facebook Ads to BigQuery using the BigQuery Data Transfer Service for Facebook Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Facebook Ads to BigQuery.
+You can load data from Facebook Ads to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Facebook Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Facebook Ads to BigQuery.
 
 ## Connector overview
 
