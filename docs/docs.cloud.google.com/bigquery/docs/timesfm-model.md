@@ -8,7 +8,7 @@ Using BigQuery ML's built-in TimesFM model with the [`  AI.FORECAST  ` function]
 
 To try using a TimesFM model with the `  AI.FORECAST  ` function, see [Forecast multiple time series with a TimesFM univariate model](/bigquery/docs/timesfm-time-series-forecasting-tutorial) .
 
-To use the TimesFM model to detect anomalies in time series data, use the [`  AI.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+To use the TimesFM model to detect anomalies in time series data, use the [`  AI.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) .
 
 To evaluate forecasted values from the TimesFM model against the actual values, use the [`  AI.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-evaluate) .
 

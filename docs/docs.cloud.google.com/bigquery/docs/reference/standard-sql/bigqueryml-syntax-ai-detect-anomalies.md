@@ -1,11 +1,5 @@
 # The AI.DETECT\_ANOMALIES function
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, contact <bqml-feedback@google.com> .
-
 This document describes the `  AI.DETECT_ANOMALIES  ` function, which lets you detect anomalies in time series data by using BigQuery ML's built-in [TimesFM model](/bigquery/docs/timesfm-model) .
 
 For example, imagine you have historical and current data about sales of a product. You could run a query similar to the following to detect anomalous spikes or drops in sales:

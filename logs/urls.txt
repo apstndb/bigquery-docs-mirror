@@ -469,7 +469,6 @@ https://docs.cloud.google.com/bigquery/docs/model-overview
 https://docs.cloud.google.com/bigquery/docs/monitoring
 https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard
 https://docs.cloud.google.com/bigquery/docs/multi-statement-queries
-https://docs.cloud.google.com/bigquery/docs/multimodal-data-dataframes-tutorial
 https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial
 https://docs.cloud.google.com/bigquery/docs/mysql-transfer
 https://docs.cloud.google.com/bigquery/docs/nested-repeated
