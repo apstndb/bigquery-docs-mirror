@@ -488,7 +488,7 @@ We recommend performing a few trial runs of the script manually to determine the
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** To get support or provide feedback for this feature, contact [dts-preview-support@google.com](/bigquery/docs/dts-preview-support@google.com) .
+**Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
 You can monitor resource-level transfers for individual tables to track progress, view granular error details, and query the state of specific resources being migrated.
 
