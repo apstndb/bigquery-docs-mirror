@@ -23,7 +23,7 @@ For a comparison of logical, materialized views, and authorized views, see [Over
 BigQuery views are subject to the following limitations:
 
   - Views are read-only. For example, you can't run queries that insert, update, or delete data.
-  - The dataset that contains your view and the dataset that contains the tables referenced by the view must be in the same [location](/bigquery/docs/locations) .
+  - If your view references tables from remote [locations](/bigquery/docs/locations) , you must enable [global queries](/bigquery/docs/global-queries) before you create the view.
   - A reference inside of a view must be qualified with a dataset. The default dataset doesn't affect a view body.
   - You cannot use the `  TableDataList  ` JSON API method to retrieve data from a view. For more information, see [Tabledata: list](/bigquery/docs/reference/rest/v2/tabledata/list) .
   - You cannot mix GoogleSQL and legacy SQL queries when using views. A GoogleSQL query cannot reference a view defined using legacy SQL syntax.

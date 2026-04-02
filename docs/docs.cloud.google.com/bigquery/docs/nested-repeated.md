@@ -257,7 +257,7 @@ func createTableComplexSchema(w io.Writer, projectID, datasetID, tableID string)
  defer client.Close()
 
  sampleSchema := bigquery.Schema{
-     {Name: "id&quot;, Type: bigquery.StringFieldType},
+     {Name: "id", Type: bigquery.StringFieldType},
      {Name: "first_name", Type: bigquery.StringFieldType},
      {Name: "last_name", Type: bigquery.StringFieldType},
      {Name: "dob", Type: bigquery.DateFieldType},
@@ -265,16 +265,16 @@ func createTableComplexSchema(w io.Writer, projectID, datasetID, tableID string)
          Type:     bigquery.RecordFieldType,
          Repeated: true,
          Schema: bigquery.Schema{
-             {Name: &quot;status";, Type: bigquery.StringFieldType},
-     {Name: "address", Type: bigquery.StringFieldType},
-          {Name: "city", Type: bigquery.StringFieldType},
-          {Name: "state",& Type: bigquery.StringFieldType},
+             {Name: "status", Type: bigquery.StringFieldType},
+             {Name: "address", Type: bigquery.StringFieldType},
+             {Name: "city", Type: bigquery.StringFieldType},
+             {Name: "state", Type: bigquery.StringFieldType},
              {Name: "zip", Type: bigquery.StringFieldType},
              {Name: "numberOfYears", Type: bigquery.StringFieldType},
          }},
  }
 
- metaData := bigquery.TableMetadata{
+ metaData := &bigquery.TableMetadata{
      Schema: sampleSchema,
  }
  tableRef := client.Dataset(datasetID).Table(tableID)
@@ -320,31 +320,31 @@ public class NestedRepeatedSchema {
       // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-    TableId tableId = TableId.of(datasetName, tableName);
+      TableId tableId = TableId.of(datasetName, tableName);
 
       Schema schema =
           Schema.of(
-         Field.of(";id", StandardSQLTypeName.STRING),
-       Field.of(&quot;first_name", StandardSQLTypeName.STRING),
-              Field.of("last_name&quot;, StandardSQLTypeName.STRING),
+              Field.of("id", StandardSQLTypeName.STRING),
+              Field.of("first_name", StandardSQLTypeName.STRING),
+              Field.of("last_name", StandardSQLTypeName.STRING),
               Field.of("dob", StandardSQLTypeName.DATE),
-         // create the nested and repeated field
+              // create the nested and repeated field
               Field.newBuilder(
                       "addresses",
-                StandardSQLTypeName.STRUCT,
+                      StandardSQLTypeName.STRUCT,
                       Field.of("status", StandardSQLTypeName.STRING),
-                 Field.of("address";, StandardSQLTypeName.STRING),
-                 Field.of("city", StandardSQLTypeName.STRING),
-       Field.of("state", StandardSQLTypeName.STRING),
-     Field.of("zip", StandardSQLTypeName.STRING),
-                      Field.of(&quot;numberOfYears", StandardSQLTypeName.STRING))
+                      Field.of("address", StandardSQLTypeName.STRING),
+                      Field.of("city", StandardSQLTypeName.STRING),
+                      Field.of("state", StandardSQLTypeName.STRING),
+                      Field.of("zip", StandardSQLTypeName.STRING),
+                      Field.of("numberOfYears", StandardSQLTypeName.STRING))
                   .setMode(Mode.REPEATED)
-         .build());
+                  .build());
 
       TableDefinition tableDefinition = StandardTableDefinition.of(schema);
       TableInfo tableInfo = TableInfo.newBuilder(tableId, tableDefinition).build();
 
-     bigquery.create(tableInfo);
+      bigquery.create(tableInfo);
       System.out.println("Table with nested and repeated schema created successfully");
     } catch (BigQueryException e) {
       System.out.println("Table was not created. \n" + e.toString());
@@ -361,7 +361,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library and create a client
-const {BigQuery} = require(&#39;@google-cloud/bigquery');
+const {BigQuery} = require('@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function nestedRepeatedSchema() {
@@ -419,17 +419,18 @@ table_id = "your-project.your_dataset.your_table_name"
 
 schema = [
     bigquery.SchemaField("id", "STRING", mode="NULLABLE"),
-    bigquery.SchemaField("first_name", &quot;STRING", mode="NULLABLE"),
-    bigquery.SchemaField("last_name", "STRING", mode=";NULLABLE"),
+    bigquery.SchemaField("first_name", "STRING", mode="NULLABLE"),
+    bigquery.SchemaField("last_name", "STRING", mode="NULLABLE"),
     bigquery.SchemaField("dob", "DATE", mode="NULLABLE"),
     bigquery.SchemaField(
         "addresses",
-        &quot;RECORD&quot;,
+        "RECORD",
         mode="REPEATED",
         fields=[
             bigquery.SchemaField("status", "STRING", mode="NULLABLE"),
-            bigquery.SchemaField("address", "STRING", mode="NULLABLE"),     bigquery.SchemaField("city", "STRING", mode="NULLABLE&quot;),
-       bigquery.SchemaField("state";, "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("address", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("city", "STRING", mode="NULLABLE"),
+            bigquery.SchemaField("state", "STRING", mode="NULLABLE"),
             bigquery.SchemaField("zip", "STRING", mode="NULLABLE"),
             bigquery.SchemaField("numberOfYears", "STRING", mode="NULLABLE"),
         ],

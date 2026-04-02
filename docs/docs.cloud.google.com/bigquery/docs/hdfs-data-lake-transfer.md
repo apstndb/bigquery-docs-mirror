@@ -55,6 +55,7 @@ A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is creat
       - `  roles/storagetransfer.admin  `
       - `  roles/serviceusage.serviceUsageConsumer  `
       - `  roles/storage.objectAdmin  `
+      - `  roles/storage.admin  `
           - If you are migrating metadata to BigLake metastore Iceberg REST Catalog, you must also grant the `  roles/biglake.admin  ` role.
 
 3.  Grant the service agent the `  roles/iam.serviceAccountTokenCreator  ` role with the following command:
@@ -63,32 +64,39 @@ A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is creat
     gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator
     ```
 
+4.  Grant the Storage Transfer Service service agent ( `  project-<var>PROJECT_NUMBER</var>@storage-transfer-service.iam.gserviceaccount.com  ` ) the following roles in the project:
+    
+      - `  roles/storage.admin  `
+      - If you are migrating from HDFS, you must also grant the `  roles/storagetransfer.serviceAgent  ` role.
+    
+    You can also configure more granular permissions. For more information, see the source-specific permissions guides:
+    
+      - [HDFS permissions](/storage-transfer/docs/file-system-permissions)
+      - [Amazon S3 and Microsoft Azure permissions](/storage-transfer/docs/iam-cloud)
+
 ### Configure your Storage Transfer Agent for HDFS data lakes
 
 Required when the file is stored in HDFS. To set up the storage transfer agent required for an HDFS data lake transfer, do the following:
 
-1.  [Configure permissions](/storage-transfer/docs/file-system-permissions) to run the storage transfer agent on your Hadoop cluster.
-2.  [Install Docker](/storage-transfer/docs/on-prem-set-up#install_docker) on on-premises agent machines.
-3.  [Create a Storage Transfer Service agent pool](/storage-transfer/docs/on-prem-agent-pools#create-pool) in your Google Cloud project.
-4.  [Install agents](/storage-transfer/docs/create-transfers/agent-based/hdfs#install_agents) on your on-premises agent machines.
+1.  [Install Docker](/storage-transfer/docs/on-prem-set-up#install_docker) on on-premises agent machines.
+2.  [Create a Storage Transfer Service agent pool](/storage-transfer/docs/on-prem-agent-pools#create-pool) in your Google Cloud project.
+3.  [Install agents](/storage-transfer/docs/create-transfers/agent-based/hdfs#install_agents) on your on-premises agent machines.
 
 ### Configure Storage Transfer Service permissions for Amazon S3
 
 Required when the file is stored in Amazon S3. Transfers from Amazon S3 are agentless transfers, which require specific permissions. To configure the Storage Transfer Service for a Amazon S3 transfer, do the following:
 
-1.  [Configure agentless transfer permissions](/storage-transfer/docs/iam-cloud) .
-2.  [Setup access credentials for AWS Amazon S3](/storage-transfer/docs/source-amazon-s3#access_credentials) .
+1.  [Setup access credentials for AWS Amazon S3](/storage-transfer/docs/source-amazon-s3#access_credentials) .
       - Note the access key ID and secret access key after setting up your access credentials.
-3.  [Add IP ranges](/storage-transfer/docs/source-amazon-s3#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your AWS project uses IP restrictions.
+2.  [Add IP ranges](/storage-transfer/docs/source-amazon-s3#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your AWS project uses IP restrictions.
 
 ### Configure Storage Transfer Service permissions for Microsoft Azure Storage
 
 Required when the file is stored in Azure Blob Storage or Azure Data Lake Storage Gen2. Transfers from Microsoft Azure Storage are agentless transfers, which require specific permissions. To configure the Storage Transfer Service for a Microsoft Azure Storage transfer, do the following:
 
-1.  [Configure agentless transfer permissions](/storage-transfer/docs/iam-cloud) .
-2.  [Generate a Shared Access Signature (SAS) token](/storage-transfer/docs/source-microsoft-azure#sas-token) for your Microsoft Azure storage account.
+1.  [Generate a Shared Access Signature (SAS) token](/storage-transfer/docs/source-microsoft-azure#sas-token) for your Microsoft Azure storage account.
       - Note the SAS token after generating it.
-3.  [Add IP ranges](/storage-transfer/docs/source-microsoft-azure#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your Microsoft Azure storage account uses IP restrictions.
+2.  [Add IP ranges](/storage-transfer/docs/source-microsoft-azure#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your Microsoft Azure storage account uses IP restrictions.
 
 ## Schedule Hive managed tables transfer
 
@@ -134,15 +142,13 @@ Select one of the following options:
     
     6.  Optional: For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created.
     
-    7.  Optional: You can enable **Use translation output** to set up a unique Cloud Storage path and database for each table being migrated. To do this, provide the path to the Cloud Storage folder containing the translation results in the **BQMS translation output gcs path** field. For more information, see [Configure Translation output](#configure-translation-output) . This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` .
-        
-          - If you specify a Translation output Cloud Storage path, the destination Cloud Storage path and BigQuery dataset will be sourced from the files in that path.
-    
-    8.  For **Storage type** , select one of the following options. This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` :
+    7.  For **Storage type** , select one of the following options. This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` :
         
           - `  HDFS  ` : Select this option if your file storage is `  HDFS  ` . In the **STS agent pool name** field, you must provide the name of the agent pool that you created when you [configured your Storage Transfer Agent](#configure-storage-transfer-agent-hdfs) .
           - `  S3  ` : Select this option if your file storage is `  Amazon S3  ` . In the **Access key ID** and **Secret access key** fields, you must provide the access key ID and secret access key that you created when you [set up your access credentials](#configure-storage-transfer-permission-s3) .
           - `  AZURE  ` : Select this option if your file storage is `  Azure Blob Storage  ` . In the **SAS token** field, you must provide the SAS token that you created when you [set up your access credentials](#configure-storage-transfer-permission-azure) .
+    
+    8.  Optional: For **Partition Filter gcs path** , enter a full Cloud Storage path to a custom filter JSON file to [filter partitions](#filter-partitions) .
 
 ### bq
 
@@ -162,12 +168,14 @@ To schedule Hive managed tables transfer, enter the `  bq mk  ` command and supp
     "target_gcs_file_path":"gs://MIGRATION_BUCKET",
     "metastore":"METASTORE",
     "destination_dataproc_metastore":"DATAPROC_METASTORE_URL",
+    "destination_bigquery_dataset":"BIGLAKE_METASTORE_DATASET",
     "translation_output_gcs_path":"gs://TRANSLATION_OUTPUT_BUCKET/metadata/config/default_database/",
     "storage_type":"STORAGE_TYPE",
     "agent_pool_name":"AGENT_POOL_NAME",
     "aws_access_key_id":"AWS_ACCESS_KEY_ID",
     "aws_secret_access_key":"AWS_SECRET_ACCESS_KEY",
-    "azure_sas_token":"AZURE_SAS_TOKEN"
+    "azure_sas_token":"AZURE_SAS_TOKEN",
+    "partition_filter_gcs_path":"FILTER_GCS_PATH"
     }'
 ```
 
@@ -189,12 +197,13 @@ Replace the following:
       - `  DATAPROC_METASTORE  ` : To transfer metadata to Dataproc Metastore.
       - `  BIGLAKE_REST_CATALOG  ` : To transfer metadata to BigLake metastore Iceberg REST Catalog.
   - `  DATAPROC_METASTORE_URL  ` : The URL of your Dataproc Metastore. Required if `  metastore  ` is `  DATAPROC_METASTORE  ` .
-  - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](/bigquery/docs/hadoop-transfer#configure-translation-output) . Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
+  - `  BIGLAKE_METASTORE_DATASET  ` : The BigQuery dataset for your BigLake metastore. Required if `  metastore  ` is `  BIGLAKE_METASTORE  ` and `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  STORAGE_TYPE  ` : Specify the underlying file storage for your tables. Supported types are `  HDFS  ` , `  S3  ` , and `  AZURE  ` . Required if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  AGENT_POOL_NAME  ` : the name of the agent pool used for creating agents. Required if `  storage_type  ` is `  HDFS  ` .
   - `  AWS_ACCESS_KEY_ID  ` : the access key ID from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
   - `  AWS_SECRET_ACCESS_KEY  ` : the secret access key from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
   - `  AZURE_SAS_TOKEN  ` : the SAS token from [access credentials](#configure-storage-transfer-permission-azure) . Required if `  storage_type  ` is `  AZURE  ` .
+  - `  FILTER_GCS_PATH  ` : (Optional) A full Cloud Storage path to a custom filter JSON file to [filter partitions](#filter-partitions) .
 
 Run this command to create the transfer configuration and start the Hive managed tables transfer. Transfers are scheduled to run every 24 hours by default, but can be configured with [transfer scheduling options](#transfer_scheduling_options) .
 
@@ -213,6 +222,58 @@ When a transfer configuration is set up with a recurring schedule, every subsequ
 By default, transfers are scheduled to run every 24 hours by default. To configure how often transfers are run, add the `  --schedule  ` flag to the transfer configuration, and specify a transfer schedule using [the `  schedule  ` syntax](/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . Hive managed tables transfers must have a minimum of 24 hours between transfer runs.
 
 For one-time transfers, you can add the `  end_time  ` flag to the transfer configuration to only run the transfer once.
+
+### Filter partitions
+
+You can transfer a subset of partitions from your Hive managed tables by providing a custom filter JSON file stored in Cloud Storage. When scheduling the transfer, supply the full Cloud Storage path to this JSON file using the `  partition_filter_gcs_path  ` parameter.
+
+The following is an example of the filter JSON file structure:
+
+``` text
+{
+  "filters": [
+    {
+      "table": "db1.table1",
+      "condition": "IN",
+      "partition": ["partition1=value1/partition2=value2"]
+    },
+    {
+      "table": "db1.table2",
+      "condition": "LESS_THAN",
+      "partition": ["partition1;value1"]
+    },
+    {
+      "table": "db1.table3",
+      "condition": "GREATER_THAN",
+      "partition": ["partition1;value1"]
+    },
+    {
+      "table": "db1.table4",
+      "condition": "RANGE",
+      "partition": ["partition1;value1;value2"]
+    }
+  ]
+}
+```
+
+#### Filter conditions
+
+The `  condition  ` field in the JSON file supports the following values, each with a specific format for the `  partition  ` array:
+
+  - **`  IN  `** : Specifies the exact partition paths to include. The `  partition  ` array contains strings representing the exact directory structure of the partitions relative to the table base path (for example, `  ["partition_key1=value1/partition_key2=value2"]  ` ). You can specify multiple paths in the array.
+  - **`  LESS_THAN  `** : Includes partitions where the primary partition key value is less than or equal to the specified value. The `  partition  ` array must contain a single string in the format `  ["<partition_key>;<value>"]  ` .
+  - **`  GREATER_THAN  `** : Includes partitions where the primary partition key value is greater than or equal to the specified value. The `  partition  ` array must contain a single string in the format `  ["<partition_key>;<value>"]  ` .
+  - **`  RANGE  `** : Includes partitions where the primary partition key value falls within the specified range (inclusive). The `  partition  ` array must contain a single string in the format `  ["<partition_key>;<start_value>;<end_value>"]  ` .
+
+The filter conditions are subject to the following rules and restrictions:
+
+  - **Inclusive values:** Filter conditions for `  GREATER_THAN  ` , `  LESS_THAN  ` , and `  RANGE  ` are inclusive of the values provided. For example, a `  LESS_THAN  ` filter with a value of `  2023  ` includes partitions up to and including `  2023  ` .
+  - **Partition deletion:** If an existing destination partition satisfies the partition filter and is no longer present at the source, then it is dropped from the destination metastore. However, the underlying data files for that partition aren't deleted from the Cloud Storage destination bucket.
+  - **Single table restrictions:**
+      - Multiple filters on the same table aren't allowed.
+      - You can't mix different condition types (for example: `  GREATER_THAN  ` and `  IN  ` ) on the same table.
+  - **Target partition column:** Filter conditions like `  GREATER_THAN  ` , `  LESS_THAN  ` , and `  RANGE  ` must target the primary partition column.
+  - **Prefix limitations:** The specified filter combination must not resolve to more than 1000 prefixes per table. For example, a filter like `  year>2020  ` on a table partitioned by `  year/month/day  ` must result in fewer than 1000 unique `  year=  ` prefixes.
 
 ### Configure Translation output
 
@@ -243,7 +304,7 @@ You can configure a unique Cloud Storage path and database for each migrated tab
               schema: TARGET_DATABASE
     ```
     
-      - Replace `  SOURCE_DATABASE  ` and `  TARGET_DATABASE  ` with the name of source database name and Dataproc Metastore database.
+      - Replace `  SOURCE_DATABASE  ` and `  TARGET_DATABASE  ` with the name of source database name and Dataproc Metastore database or BigQuery dataset depending on the chosen metastore. Ensure that the BigQuery dataset exists if you are configuring the database for BigLake metastore.
     
     For more information about these configuration YAML, see [Guidelines to create a configuration YAML file](/bigquery/docs/config-yaml-translation#yaml_guidelines) .
 
@@ -479,8 +540,6 @@ Before using this automation script, complete the [dumper installation prerequis
 To avoid data staleness, the metadata dump must be ready before your scheduled transfer begins. Configure the `  cron  ` job frequency accordingly.
 
 We recommend performing a few trial runs of the script manually to determine the average time it takes for the dumper tool to generate its output. Use this timing to set a `  cron  ` schedule that safely precedes your DTS transfer run and ensures freshness.
-
-**Note:** This orchestration is not compatible with translation output. If translation output is enabled, you must run the dumper tool manually.
 
 ## Monitor and view transfer status
 

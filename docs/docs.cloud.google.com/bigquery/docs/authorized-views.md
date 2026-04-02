@@ -67,6 +67,10 @@ For more information, see [Authorized datasets](/bigquery/docs/authorized-datase
 
 [Grant Identity and Access Management (IAM) roles](#required_permissions) that give users the necessary permissions to query the authorized views or authorized materialized views that you share.
 
+### Authorized views and VPC Service Controls
+
+When using authorized views in a VPC Service Controls perimeter, ingress rules allowing principals access to the project containing the view must also include access to any projects that contain the source data from which the view is accessing data. The principal does not need Identity and Access Management permissions on the source data projects, but the ingress rule must permit access to BigQuery in the data source project in addition to the project containing the view.
+
 ### Required roles
 
 To create or update an authorized view, you need permissions to the dataset that contains the view and to the dataset that provides access to the view.

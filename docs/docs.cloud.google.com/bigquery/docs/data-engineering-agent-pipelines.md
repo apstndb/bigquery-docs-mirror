@@ -84,14 +84,17 @@ To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusag
 
 ### Required roles
 
-To get the permissions that you need to use the Data Engineering Agent, ask your administrator to grant you the following IAM roles on the project:
+To get the permission that you need to use the Data Engineering Agent, ask your administrator to grant you the following IAM roles on the project:
 
   - [Dataform Code Editor](/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
   - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobuser) ( `  roles/bigquery.jobuser  ` )
+  - [Gemini Data Analytics Stateless Chat User](/iam/docs/roles-permissions/geminidataanalytics#geminidataanalytics.dataAgentStatelessUser) ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` )
 
 For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+This predefined role contains the `  geminidataanalytics.locations.useDataEngineeringAgent  ` permission, which is required to use the Data Engineering Agent.
+
+You might also be able to get this permission with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
 
 ## Generate a data pipeline with the Data Engineering Agent
 

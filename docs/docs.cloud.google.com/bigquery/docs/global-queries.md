@@ -16,38 +16,49 @@ Verify that global queries are enabled for your project and ensure that you have
 
 To enable global queries for your project or organization, use the [`  ALTER PROJECT SET OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION SET OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) to change the [default configuration](/bigquery/docs/default-configuration) .
 
-  - To run global queries in a region, set the `  enable_global_queries_execution  ` argument to `  true  ` in that region for a project where the query is run.
-  - To allow global queries to copy data from a region, set the `  enable_global_queries_data_access  ` argument to `  true  ` in that region for a project where the data is stored.
+  - To run global queries in a region, set the `  enable_global_queries_execution  ` argument to `  true  ` in that region for the project **running** the query.
+  - To allow global queries to copy data from a region, set the `  enable_global_queries_data_access  ` argument to `  true  ` in that region for the project **containing the data** .
+  - Any time your query accesses remote tables, these options are checked.
   - Global queries can run in one project and pull data from other regions from another project.
 
-The following example shows how to modify these settings at the project level. Suppose you want to run global queries in region `  REGION_1  ` in project `  PROJECT_1_ID  ` and pull data from `  REGION_2  ` in project `  PROJECT_2_ID  ` .
+### Example: Cross-project configuration
 
-You need to enable execution of global queries in `  REGION_1  ` :
+The following example shows how to run a query in one project that accesses a table in another project.
 
-``` text
-ALTER PROJECT `PROJECT_1_ID`
-SET OPTIONS (
-  `region-REGION_1.enable_global_queries_execution` = true
-);
-```
-
-And enable copying data by global queries from `  REGION_2  ` :
+Suppose you have a project `  query_project  ` running jobs in the `  us-central1  ` region, and you want to run a query that accesses a table `  data_project.dataset.my_table  ` located in the `  europe-west1  ` region:
 
 ``` text
-ALTER PROJECT `PROJECT_2_ID`
-SET OPTIONS (
-  `region-REGION_2.enable_global_queries_data_access` = true
-);
+SET @@location='us-central1';
+SELECT
+  *
+FROM
+  `query_project.dataset.my_table`
+  JOIN `data_project.dataset.my_other_table` USING id;
 ```
 
-Replace the following:
+To allow this global query to execute successfully, the following configuration is required:
 
-  - `  PROJECT_1_ID  ` : the name of the project where global queries will be run
-  - `  REGION_1  ` : the region where global queries will be run
-  - `  PROJECT_2_ID  ` : the name of the project where global queries will pull data from
-  - `  REGION_2  ` : the region where global queries will pull data from
+1.  You need to enable execution of global queries in the project ( `  query_project  ` ) in the region running a global query ( `  us-central1  ` ):
+    
+    ``` text
+    ALTER PROJECT `query_project`
+    SET OPTIONS (
+    `region-us-central1.enable_global_queries_execution` = TRUE
+    );
+    ```
 
-These operations must be run separately as they refer to different regions. It can take several minutes for the change to take effect.
+2.  You need to enable copying data by global queries from the project containing the data ( `  data_project  ` ) for its region ( `  europe-west1  ` ):
+    
+    ``` text
+    ALTER PROJECT `data_project`
+    SET OPTIONS (
+    `region-europe-west1.enable_global_queries_data_access` = TRUE
+    );
+    ```
+
+To create and use [views](/bigquery/docs/views-intro) that contain remote tables, the same principles apply: the project running the queries must have `  enable_global_queries_execution  ` enabled.
+
+These `  ALTER PROJECT  ` operations must be run separately as they refer to different projects and regions. It can take several minutes for the change to take effect.
 
 ### Required permission
 
@@ -173,4 +184,4 @@ For information about quotas regarding global queries, see [Query jobs](/bigquer
   - Global queries are not executed atomically. In cases where data replication succeeds, but the overall query fails, you are still billed for the data replication.
   - Temporary tables created in remote regions as part of global queries execution are only encrypted using [Customer-managed encryption keys (CMEK)](/bigquery/docs/customer-managed-encryption) if a CMEK key that was configured to encrypt the global query results (either on a table, dataset, or project level) is global. To ensure that remote temporary tables are always protected using CMEK, set a default KMS key for the project running global queries in the remote region.
   - Global queries are not supported in [Assured Workloads](/assured-workloads/docs/overview) .
-  - You can query a maximum of 10 tables per region in a global query.
+  - A single global query can access up to 10 remote tables per region.

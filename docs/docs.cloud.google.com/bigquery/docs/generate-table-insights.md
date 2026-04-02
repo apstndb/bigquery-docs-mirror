@@ -36,8 +36,8 @@ When generating table insights, BigQuery provides two modes:
 <td><p>Use this mode for enterprise-wide data documentation that persists and is reusable, or when building catalog-driven governance workflows.</p></td>
 </tr>
 <tr class="even">
-<td><strong>Generate without publish</strong></td>
-<td><p>Creates table insights such as descriptions, natural language questions, and SQL queries on demand. <strong>Generate without publish</strong> doesn't publish insights to Dataplex Universal Catalog.</p></td>
+<td><strong>Generate without publishing</strong></td>
+<td><p>Creates table insights such as descriptions, natural language questions, and SQL queries on demand. <strong>Generate without publishing</strong> doesn't publish insights to Dataplex Universal Catalog.</p></td>
 <td><p>Use this mode for quick, ad hoc exploration to avoid cluttering the catalog.</p></td>
 </tr>
 </tbody>
@@ -115,9 +115,9 @@ To generate insights for a BigQuery table, you must access the table entry in Bi
 
 4.  To generate insights and publish them to Dataplex Universal Catalog, click **Generate and publish** ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
     
-    To generate insights without publishing them to Dataplex Universal Catalog, click **Generate without publish** .
+    To generate insights without publishing them to Dataplex Universal Catalog, click **Generate without publishing** .
     
-    For more information about the differences between the **Generate and publish** and **Generate without publish** modes, see [Modes for generating insights](#modes_for_generating_table_data_insights) .
+    For more information about the differences between the **Generate and publish** and **Generate without publishing** modes, see [Modes for generating insights](#modes_for_generating_table_data_insights) .
 
 5.  Select a region to generate insights and click **Generate** .
     

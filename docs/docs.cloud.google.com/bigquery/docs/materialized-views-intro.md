@@ -108,6 +108,7 @@ When you create a materialized view over an Amazon S3 BigLake table, the data in
   - If you delete a base table without first deleting the materialized view, queries and refreshes of the materialized view fail. If you recreate the base table, you must also recreate the materialized view.
   - If a materialized view has a [change data capture-enabled](/bigquery/docs/change-data-capture) base table, then that table can't be referenced in the same query as the materialized view.
   - Only non-incremental materialized view can have [Spanner external dataset base tables](/bigquery/docs/spanner-external-datasets) . If a non-incremental materialized view's last refresh occurred outside the `  max_staleness  ` interval, then the query reads the base Spanner external dataset tables. To learn more about Spanner external dataset tables, see [Create materialized views over Spanner external datasets](/bigquery/docs/materialized-views-create#spanner) .
+  - Query results are not cached if the query runs against non-incremental materialized views that reference [Spanner external dataset tables](/bigquery/docs/spanner-external-datasets) .
 
 <sup>1</sup> Logical view reference support is in [preview](https://cloud.google.com/products/#product-launch-stages) . For more information, see [Reference logical views](/bigquery/docs/materialized-views-create#reference_logical_views) .
 
