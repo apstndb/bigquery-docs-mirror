@@ -15,7 +15,7 @@ For more information about how to compute the number of bytes processed by a DML
 
   - Rows that were recently written using the `  tabledata.insertall  ` streaming method can't be modified with data manipulation language (DML), such as `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , or `  TRUNCATE  ` statements. The recent writes are those that occurred within the last 30 minutes. All other rows in the table remain modifiable by using `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , or `  TRUNCATE  ` statements. The streamed data can take up to 90 minutes to become available for copy operations.
     
-    Alternatively, rows that were recently written using the Storage Write API can be modified using `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statements. For more information, see [Use data manipulation language (DML) with recently streamed data](/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) .
+    Alternatively, rows that were recently written using the Storage Write API can be modified using `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , or `  TRUNCATE  ` statements. For more information, see [Use data manipulation language (DML) with recently streamed data](/bigquery/docs/write-api#use_data_manipulation_language_dml_with_recently_streamed_data) .
 
   - Correlated subqueries within a `  when_clause  ` , `  search_condition  ` , `  merge_update_clause  ` or `  merge_insert_clause  ` are not supported for `  MERGE  ` statements.
 

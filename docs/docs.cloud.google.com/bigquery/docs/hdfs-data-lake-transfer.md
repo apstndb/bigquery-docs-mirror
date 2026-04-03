@@ -26,7 +26,15 @@ Hive managed tables transfers are subject to the following limitations:
 
   - To migrate Apache Iceberg tables, you must register the tables with the BigLake metastore Iceberg REST catalog to allow write access for open-source engines (such as Apache Spark or Flink).
   - To migrate Hive managed tables, you must register the tables with Dataproc Metastore to allow write access for open-source engines, and to allow read access for BigQuery.
-  - You must use the bq command-line tool to migrate Hive managed tables to BigQuery.
+  - File names must comply with [Cloud Storage object naming requirements](/storage/docs/objects#naming) .
+  - Storage Transfer Service has specific behaviors if data is changed at the source while a transfer is in progress. We don't recommend writing to tables while the table is being actively migrated.
+  - Cloud Storage has a 5 TiB limit for single objects. Files within your Apache Hive tables larger than 5 TiB will fail to transfer.
+
+For a list of other limitations, see [Storage Transfer Service Known Limitations](/storage-transfer/docs/known-limitations) .
+
+### Quotas and concurrency limits
+
+When you migrate data from Hive managed tables, Storage Transfer Service quotas and limits apply. For more information, see [Quotas & Limits](/storage-transfer/quotas) .
 
 ## Before you begin
 
@@ -131,7 +139,7 @@ Select one of the following options:
           - `  db1..*  ` matches all tables in db1.
           - `  db1.table1;db2.table2  ` matches table1 in db1 and table2 in db2.
     
-    3.  For **BQMS discovery dump gcs path** , enter the path to the bucket that contains the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](#generate-metadata-dump-for-apache-hive) .
+    3.  For **BQMS discovery dump gcs path** , enter the path to the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](#generate-metadata-dump-for-apache-hive) . If you are using [dumper output orchestration with `  cron  `](#dumper-output-orchestration) , provide the Cloud Storage folder path configured in `  --gcs-base-path  ` , which contains dumper output ZIP files.
     
     4.  Choose the Metastore type from the drop-down list:
         
@@ -191,7 +199,7 @@ Replace the following:
   - `  LIST_OF_TABLES  ` : a list of entities to be transferred. Use a hierarchical naming spec - `  database . table  ` . This field supports RE2 regular expression to specify tables. For example:
       - `  db1..*  ` : specifies all tables in the database
       - `  db1.table1;db2.table2  ` : a list of tables
-  - `  DUMPER_BUCKET  ` : the Cloud Storage bucket containing the `  hive-dumper-output.zip  ` file.
+  - `  DUMPER_BUCKET  ` : the Cloud Storage bucket containing the `  hive-dumper-output.zip  ` file. If you are using [dumper output orchestration with `  cron  `](#dumper-output-orchestration) , then change `  table_metadata_path  ` to be the Cloud Storage folder path configured with `  --gcs-base-path  ` in cron setup—for example: `  "table_metadata_path":"<var>GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT</var>"  ` .
   - `  MIGRATION_BUCKET  ` : Destination GCS path to which all underlying files will be loaded. Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  METASTORE  ` : The type of metastore to migrate to. Set this to one of the following values:
       - `  DATAPROC_METASTORE  ` : To transfer metadata to Dataproc Metastore.
@@ -347,7 +355,17 @@ You can automate incremental transfers by using a [`  cron  `](https://man7.org/
 
 #### Before you begin
 
-Before using this automation script, complete the [dumper installation prerequisites](/bigquery/docs/generate-metadata#prerequisites) . To run the script, you must have the dwh-migration-dumper tool installed and the necessary IAM permissions configured.
+Before using this automation script, you must do the following:
+
+1.  Complete all [dumper installation prerequisites](/bigquery/docs/generate-metadata#prerequisites) , including installing the `  dwh-migration-dumper  ` tool and configuring IAM permissions.
+
+2.  [Install the Google Cloud CLI](/sdk/docs/install) . The script uses the `  gsutil  ` command-line tool to upload dumper output to Cloud Storage.
+
+3.  Authenticate with Google Cloud to allow `  gsutil  ` to upload files to Cloud Storage with the following command:
+    
+    ``` text
+    gcloud auth application-default login
+    ```
 
 #### Scheduling the automation
 
@@ -368,16 +386,43 @@ Before using this automation script, complete the [dumper installation prerequis
     GCS_BASE_PATH="gs://PATH_TO_DUMPER_OUTPUT"
     LOCAL_BASE_DIR="LOCAL_BASE_DIRECTORY_PATH"
     
+    # Optional arguments for cloud environments
+    DUMPER_HOST=""
+    DUMPER_PORT=""
+    HIVE_KERBEROS_URL=""
+    HIVEQL_RPC_PROTECTION=""
+    KERBEROS_AUTHENTICATION="false"
+    
     # Function to display usage information
     usage() {
       echo "Usage: $0 [options]"
       echo ""
       echo "Runs the dwh-migration-dumper tool and uploads its output to provided Cloud Storage path."
       echo ""
-      echo "Options:"
-      echo "  --dumper-executable   The full path to the dumper executable. (Required)"
-      echo "  --gcs-base-path       The base Cloud Storage path for output files. (Required)"
-      echo "  --local-base-dir      The local base directory for logs and temp files. (Required)"
+      echo "Required Options:"
+      echo "  --dumper-executable   The full path to the dumper executable."
+      echo "  --gcs-base-path       The base Cloud Storage folder to upload dumper output files to. The script generates timestamped ZIP files in this folder."
+      echo "  --local-base-dir      The local base directory for logs and temp files."
+      echo ""
+      echo "Optional Hive connection options:"
+      echo "  --host              The hostname for the dumper connection."
+      echo "  --port              The port number for the dumper connection."
+      echo ""
+      echo "To use Kerberos authentication, include the following options."
+      echo "If --kerberos-authentication is specified, then --host, --port,"
+      echo "--hive-kerberos-url and --hiveql-rpc-protection are all required:"
+      echo ""
+      echo "  --kerberos-authentication   Enable Kerberos authentication."
+      echo "  --hive-kerberos-url    The Hive Kerberos URL."
+      echo "  --hiveql-rpc-protection "
+      echo "                            The hiveql-rpc-protection level, equal to the value of"
+      echo "                            'hadoop.rpc.protection' in '/etc/hadoop/conf/core-site.xml',"
+      echo "                            with one of the following values:"
+      echo "                            - authentication"
+      echo "                            - integrity"
+      echo "                            - privacy"
+      echo ""
+      echo "Other Options:"
       echo "  -h, --help                  Display this help message and exit."
       exit 1
     }
@@ -400,6 +445,30 @@ Before using this automation script, complete the [dumper installation prerequis
               shift
               shift
               ;;
+          --host)
+              DUMPER_HOST="$2"
+              shift
+              shift
+              ;;
+          --port)
+              DUMPER_PORT="$2"
+              shift
+              shift
+              ;;
+          --hive-kerberos-url)
+              HIVE_KERBEROS_URL="$2"
+              shift
+              shift
+              ;;
+          --hiveql-rpc-protection)
+              HIVEQL_RPC_PROTECTION="$2"
+              shift
+              shift
+              ;;
+          --kerberos-authentication)
+              KERBEROS_AUTHENTICATION="true"
+              shift
+              ;;
           -h|--help)
               usage
               ;;
@@ -416,6 +485,18 @@ Before using this automation script, complete the [dumper installation prerequis
       echo "Run with --help for more information." >&2
       exit 1
     fi
+    
+    # If Kerberos authentication is enabled, check for required fields.
+    if [[ "$KERBEROS_AUTHENTICATION" == "true" ]]; then
+      if [[ -z "$DUMPER_HOST" || -z "$DUMPER_PORT" || -z "$HIVE_KERBEROS_URL" || -z "$HIVEQL_RPC_PROTECTION" ]]; then
+          echo "ERROR: If --kerberos-authentication is enabled, --host, --port, --hive-kerberos-url and --hiveql-rpc-protection must be provided." >&2
+          echo "Run with --help for more information." >&2
+          exit 1
+      fi
+    fi
+    
+    # Remove trailing slashes from GCS_BASE_PATH, if any.
+    GCS_BASE_PATH=$(echo "${GCS_BASE_PATH}" | sed 's:/*$::')
     
     # Create unique timestamp and directories for this run
     EPOCH=$(date +%s)
@@ -491,8 +572,26 @@ Before using this automation script, complete the [dumper installation prerequis
       "--output" "${LOCAL_ZIP_PATH}"
     )
     
+    # Add optional arguments if they are provided
+    if [[ -n "${DUMPER_HOST}" ]]; then
+    dumper_command_args+=("--host" "${DUMPER_HOST}")
+    log "Using Host: ${DUMPER_HOST}"
+    fi
+    if [[ -n "${DUMPER_PORT}" ]]; then
+    dumper_command_args+=("--port" "${DUMPER_PORT}")
+    log "Using Port: ${DUMPER_PORT}"
+    fi
+    if [[ -n "${HIVE_KERBEROS_URL}" ]]; then
+    dumper_command_args+=("--hive-kerberos-url" "${HIVE_KERBEROS_URL}")
+    log "Using Hive Kerberos URL: ${HIVE_KERBEROS_URL}"
+    fi
+    if [[ -n "${HIVEQL_RPC_PROTECTION}" ]]; then
+    dumper_command_args+=("-Dhiveql.rpc.protection=${HIVEQL_RPC_PROTECTION}")
+    log "Using HiveQL RPC Protection: ${HIVEQL_RPC_PROTECTION}"
+    fi
+    
     log "Starting dumper tool execution..."
-    log "COMMAND: JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
+    log "COMMAND: JAVA_OPTS=\"-Djavax.security.auth.useSubjectCredsOnly=false\" ${DUMPER_EXECUTABLE} ${dumper_command_args[*]}"
     
     JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" "${DUMPER_EXECUTABLE}" "${dumper_command_args[@]}" >> "${LOG_FILE}" 2>&1
     
@@ -523,14 +622,46 @@ Before using this automation script, complete the [dumper installation prerequis
     chmod +x PATH_TO_SCRIPT
     ```
 
-3.  Schedule the script using `  crontab  ` , replacing the variables with appropriate values for your job. Add an entry to schedule the job. The following example runs the script every day at 2:30 AM:
+3.  Schedule the script using `  crontab  ` , replacing the variables with appropriate values for your job. Add an entry to schedule the job. The following examples run the script every day at 2:30 AM:
+    
+    If you are running on a host that has direct access to Apache Hive and does not require Kerberos authentication, use the following command:
+    
+    **Without Kerberos authentication**
     
     ``` text
     # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer.
-    30 2 * * * PATH_TO_SCRIPT \
-      --dumper-executable PATH_TO_DUMPER_EXECUTABLE \
-      --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT \
+    30 2 * * * PATH_TO_SCRIPT 
+    
+      --dumper-executable PATH_TO_DUMPER_EXECUTABLE 
+    
+      --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT 
+    
       --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES
+    ```
+    
+    If your Apache Hive instance requires Kerberos authentication, use the following command:
+    
+    **With Kerberos authentication**
+    
+    ``` text
+    # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer with Kerberos authentication.
+    30 2 * * * PATH_TO_SCRIPT 
+    
+      --dumper-executable PATH_TO_DUMPER_EXECUTABLE 
+    
+      --gcs-base-path GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT 
+    
+      --local-base-dir LOCAL_PATH_TO_SAVE_INTERMEDIARY_FILES 
+    
+      --kerberos-authentication 
+    
+      --host HIVE_HOST 
+    
+      --port HIVE_PORT 
+    
+      --hive-kerberos-url HIVE_KERBEROS_URL 
+    
+      --hiveql-rpc-protection HIVEQL_RPC_PROTECTION
     ```
 
 4.  When creating the transfer, ensure the `  table_metadata_path  ` field is set to the same Cloud Storage path you configured for `  GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT  ` . This is the path containing the dumper output ZIP files.

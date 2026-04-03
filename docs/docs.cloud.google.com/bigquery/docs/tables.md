@@ -1164,12 +1164,6 @@ For more information about loading data, see [Introduction to loading data into 
 
 ### Create a multimodal table
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bq-objectref-feedback@google.com> .
-
 You can create a table with one or more [`  ObjectRef  `](/bigquery/docs/objectref-columns) columns in order to store metadata about unstructured data that is related to the other structured data in the table. For example, in a products table, you could create an `  ObjectRef  ` column to store product image information along with the other product data. The unstructured data itself is stored in Cloud Storage, and is made available in BigQuery by using an [object table](/bigquery/docs/object-table-introduction) .
 
 To learn how to create a multimodal table, see [Analyze multimodal data with SQL and BigQuery DataFrames](/bigquery/docs/multimodal-data-sql-tutorial) .

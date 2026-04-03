@@ -6,6 +6,18 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## March 31, 2026
+
+Feature
+
+BigQuery [`  ObjectRef  ` values](/bigquery/docs/work-with-objectref) now support the following:
+
+  - You can run [`  ObjectRef  ` functions](/bigquery/docs/reference/standard-sql/objectref_functions) with either [direct access or delegated access](/bigquery/docs/work-with-objectref#authorizer_and_permissions) .
+  - The [`  OBJ.MAKE_REF  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref) automatically fetches the latest Cloud Storage metadata and populates this in the `  ref.details  ` field.
+  - The [`  OBJ.GET_READ_URL  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_read_url) returns a `  STRUCT  ` value with a read URL and status columns and renders image results in the Cloud console. Use this function when you don't require a write URL.
+
+These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## March 30, 2026
 
 Feature
@@ -75,7 +87,7 @@ You can clean, transform, and enrich data from files in Cloud Storage and Google
 
 Feature
 
-You can now use a [custom organization policy](/bigquery/docs/reservation-custom-constraints) to allow or deny specific operations on routines. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+You can now use a [custom organization policy](/bigquery/docs/custom-constraints) to allow or deny specific operations on routines. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
 ## March 17, 2026
 

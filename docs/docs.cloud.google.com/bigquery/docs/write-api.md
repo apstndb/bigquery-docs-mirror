@@ -236,7 +236,7 @@ For metrics to monitor your data ingestion with the Storage Write API, use the [
 
 ## Use data manipulation language (DML) with recently streamed data
 
-You can use data manipulation language (DML), such as the `  UPDATE  ` , `  DELETE  ` , or `  MERGE  ` statements, to modify rows that were recently written to a BigQuery table by the BigQuery Storage Write API. Recent writes are those that occurred within the last 30 minutes.
+You can use data manipulation language (DML), such as the `  UPDATE  ` , `  DELETE  ` , `  MERGE  ` , or `  TRUNCATE  ` statements, to modify rows that were recently written to a BigQuery table by the BigQuery Storage Write API. Recent writes are those that occurred within the last 30 minutes.
 
 For more information about using DML to modify your streamed data, see [Using data manipulation language](/bigquery/docs/data-manipulation-language) .
 

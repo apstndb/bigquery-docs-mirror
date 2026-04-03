@@ -889,734 +889,738 @@ Formats ASCII characters in a <code dir="ltr" translate="no">       BYTES      <
 <td>Returns access URLs for a Cloud Storage object.</td>
 </tr>
 <tr class="odd">
+<td><a href="/bigquery/docs/reference/standard-sql/objectref_functions#objget_read_url"><code dir="ltr" translate="no">        OBJ.GET_READ_URL       </code></a></td>
+<td>Returns a read URL and status for a Cloud Storage object.</td>
+</tr>
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/objectref_functions#objmake_ref"><code dir="ltr" translate="no">        OBJ.MAKE_REF       </code></a></td>
 <td>Creates an <code dir="ltr" translate="no">       ObjectRef      </code> value that contains reference information for a Cloud Storage object.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#octet_length"><code dir="ltr" translate="no">        OCTET_LENGTH       </code></a></td>
 <td>Alias for <code dir="ltr" translate="no">       BYTE_LENGTH      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/conversion_functions#parse_bignumeric"><code dir="ltr" translate="no">        PARSE_BIGNUMERIC       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       BIGNUMERIC      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/date_functions#parse_date"><code dir="ltr" translate="no">        PARSE_DATE       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime"><code dir="ltr" translate="no">        PARSE_DATETIME       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       DATETIME      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/json_functions#parse_json"><code dir="ltr" translate="no">        PARSE_JSON       </code></a></td>
 <td>Converts a JSON-formatted <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       JSON      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/conversion_functions#parse_numeric"><code dir="ltr" translate="no">        PARSE_NUMERIC       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       NUMERIC      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#parse_time"><code dir="ltr" translate="no">        PARSE_TIME       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       TIME      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp"><code dir="ltr" translate="no">        PARSE_TIMESTAMP       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/numbering_functions#percent_rank"><code dir="ltr" translate="no">        PERCENT_RANK       </code></a></td>
 <td>Gets the percentile rank (from 0 to 1) of each row within a window.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#percentile_cont"><code dir="ltr" translate="no">        PERCENTILE_CONT       </code></a></td>
 <td>Computes the specified percentile for a value, using linear interpolation.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_percentile_cont"><code dir="ltr" translate="no">        PERCENTILE_CONT       </code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       PERCENTILE_CONT      </code> .<br />
 <br />
 Computes a differentially-private percentile across privacy unit columns in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#percentile_disc"><code dir="ltr" translate="no">        PERCENTILE_DISC       </code></a></td>
 <td>Computes the specified percentile for a discrete value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#pow"><code dir="ltr" translate="no">        POW       </code></a></td>
 <td>Produces the value of <code dir="ltr" translate="no">       X      </code> raised to the power of <code dir="ltr" translate="no">       Y      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#power"><code dir="ltr" translate="no">        POWER       </code></a></td>
 <td>Synonym of <code dir="ltr" translate="no">       POW      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#rand"><code dir="ltr" translate="no">        RAND       </code></a></td>
 <td>Generates a pseudo-random value of type <code dir="ltr" translate="no">       FLOAT64      </code> in the range of <code dir="ltr" translate="no">       [0, 1)      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range"><code dir="ltr" translate="no">        RANGE       </code></a></td>
 <td>Constructs a range of <code dir="ltr" translate="no">       DATE      </code> , <code dir="ltr" translate="no">       DATETIME      </code> , or <code dir="ltr" translate="no">       TIMESTAMP      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">        RANGE_BUCKET       </code></a></td>
 <td>Scans through a sorted array and returns the 0-based position of a point's upper bound.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_contains"><code dir="ltr" translate="no">        RANGE_CONTAINS       </code></a></td>
 <td>Signature 1: Checks if one range is in another range.<br />
 <br />
 Signature 2: Checks if a value is in a range.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_end"><code dir="ltr" translate="no">        RANGE_END       </code></a></td>
 <td>Gets the upper bound of a range.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_intersect"><code dir="ltr" translate="no">        RANGE_INTERSECT       </code></a></td>
 <td>Gets a segment of two ranges that intersect.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_overlaps"><code dir="ltr" translate="no">        RANGE_OVERLAPS       </code></a></td>
 <td>Checks if two ranges overlap.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">        RANGE_SESSIONIZE       </code></a></td>
 <td>Produces a table of sessionized ranges.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_start"><code dir="ltr" translate="no">        RANGE_START       </code></a></td>
 <td>Gets the lower bound of a range.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/numbering_functions#rank"><code dir="ltr" translate="no">        RANK       </code></a></td>
 <td>Gets the rank (1-based) of each row within a window.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_contains"><code dir="ltr" translate="no">        REGEXP_CONTAINS       </code></a></td>
 <td>Checks if a value is a partial match for a regular expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_extract"><code dir="ltr" translate="no">        REGEXP_EXTRACT       </code></a></td>
 <td>Produces a substring that matches a regular expression.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_extract_all"><code dir="ltr" translate="no">        REGEXP_EXTRACT_ALL       </code></a></td>
 <td>Produces an array of all substrings that match a regular expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_instr"><code dir="ltr" translate="no">        REGEXP_INSTR       </code></a></td>
 <td>Finds the position of a regular expression match in a value, optionally starting the search at a given offset or occurrence.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_replace"><code dir="ltr" translate="no">        REGEXP_REPLACE       </code></a></td>
 <td>Produces a <code dir="ltr" translate="no">       STRING      </code> value where all substrings that match a regular expression are replaced with a specified value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#regexp_substr"><code dir="ltr" translate="no">        REGEXP_SUBSTR       </code></a></td>
 <td>Synonym for <code dir="ltr" translate="no">       REGEXP_EXTRACT      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#repeat"><code dir="ltr" translate="no">        REPEAT       </code></a></td>
 <td>Produces a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value that consists of an original value, repeated.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#replace"><code dir="ltr" translate="no">        REPLACE       </code></a></td>
 <td>Replaces all occurrences of a pattern with another pattern in a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#reverse"><code dir="ltr" translate="no">        REVERSE       </code></a></td>
 <td>Reverses a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#right"><code dir="ltr" translate="no">        RIGHT       </code></a></td>
 <td>Gets the specified rightmost portion from a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#round"><code dir="ltr" translate="no">        ROUND       </code></a></td>
 <td>Rounds <code dir="ltr" translate="no">       X      </code> to the nearest integer or rounds <code dir="ltr" translate="no">       X      </code> to <code dir="ltr" translate="no">       N      </code> decimal places after the decimal point.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/numbering_functions#row_number"><code dir="ltr" translate="no">        ROW_NUMBER       </code></a></td>
 <td>Gets the sequential row number (1-based) of each row within a window.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#rpad"><code dir="ltr" translate="no">        RPAD       </code></a></td>
 <td>Appends a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value with a pattern.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#rtrim"><code dir="ltr" translate="no">        RTRIM       </code></a></td>
 <td>Identical to the <code dir="ltr" translate="no">       TRIM      </code> function, but only removes trailing characters.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#s2_cellidfrompoint"><code dir="ltr" translate="no">        S2_CELLIDFROMPOINT       </code></a></td>
 <td>Gets the S2 cell ID covering a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#s2_coveringcellids"><code dir="ltr" translate="no">        S2_COVERINGCELLIDS       </code></a></td>
 <td>Gets an array of S2 cell IDs that cover a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#safe_add"><code dir="ltr" translate="no">        SAFE_ADD       </code></a></td>
 <td>Equivalent to the addition operator ( <code dir="ltr" translate="no">       X + Y      </code> ), but returns <code dir="ltr" translate="no">       NULL      </code> if overflow occurs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting"><code dir="ltr" translate="no">        SAFE_CAST       </code></a></td>
 <td>Similar to the <code dir="ltr" translate="no">       CAST      </code> function, but returns <code dir="ltr" translate="no">       NULL      </code> when a runtime error is produced.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#safe_convert_bytes_to_string"><code dir="ltr" translate="no">        SAFE_CONVERT_BYTES_TO_STRING       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       BYTES      </code> value to a <code dir="ltr" translate="no">       STRING      </code> value and replace any invalid UTF-8 characters with the Unicode replacement character, <code dir="ltr" translate="no">       U+FFFD      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide"><code dir="ltr" translate="no">        SAFE_DIVIDE       </code></a></td>
 <td>Equivalent to the division operator ( <code dir="ltr" translate="no">       X / Y      </code> ), but returns <code dir="ltr" translate="no">       NULL      </code> if an error occurs.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#safe_multiply"><code dir="ltr" translate="no">        SAFE_MULTIPLY       </code></a></td>
 <td>Equivalent to the multiplication operator ( <code dir="ltr" translate="no">       X * Y      </code> ), but returns <code dir="ltr" translate="no">       NULL      </code> if overflow occurs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#safe_negate"><code dir="ltr" translate="no">        SAFE_NEGATE       </code></a></td>
 <td>Equivalent to the unary minus operator ( <code dir="ltr" translate="no">       -X      </code> ), but returns <code dir="ltr" translate="no">       NULL      </code> if overflow occurs.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#safe_subtract"><code dir="ltr" translate="no">        SAFE_SUBTRACT       </code></a></td>
 <td>Equivalent to the subtraction operator ( <code dir="ltr" translate="no">       X - Y      </code> ), but returns <code dir="ltr" translate="no">       NULL      </code> if overflow occurs.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/search_functions#search"><code dir="ltr" translate="no">        SEARCH       </code></a></td>
 <td>Checks to see whether a table or other search data contains a set of search terms.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sec"><code dir="ltr" translate="no">        SEC       </code></a></td>
 <td>Computes the secant of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sech"><code dir="ltr" translate="no">        SECH       </code></a></td>
 <td>Computes the hyperbolic secant of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/security_functions#session_user"><code dir="ltr" translate="no">        SESSION_USER       </code></a></td>
 <td>Get the email address or principal identifier of the user that's running the query.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha1"><code dir="ltr" translate="no">        SHA1       </code></a></td>
 <td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-1 algorithm.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha256"><code dir="ltr" translate="no">        SHA256       </code></a></td>
 <td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-256 algorithm.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha512"><code dir="ltr" translate="no">        SHA512       </code></a></td>
 <td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-512 algorithm.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sign"><code dir="ltr" translate="no">        SIGN       </code></a></td>
 <td>Produces -1 , 0, or +1 for negative, zero, and positive arguments respectively.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sin"><code dir="ltr" translate="no">        SIN       </code></a></td>
 <td>Computes the sine of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sinh"><code dir="ltr" translate="no">        SINH       </code></a></td>
 <td>Computes the hyperbolic sine of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#soundex"><code dir="ltr" translate="no">        SOUNDEX       </code></a></td>
 <td>Gets the Soundex codes for words in a <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#split"><code dir="ltr" translate="no">        SPLIT       </code></a></td>
 <td>Splits a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using a delimiter.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#sqrt"><code dir="ltr" translate="no">        SQRT       </code></a></td>
 <td>Computes the square root of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_angle"><code dir="ltr" translate="no">        ST_ANGLE       </code></a></td>
 <td>Takes three point <code dir="ltr" translate="no">       GEOGRAPHY      </code> values, which represent two intersecting lines, and returns the angle between these lines.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_area"><code dir="ltr" translate="no">        ST_AREA       </code></a></td>
 <td>Gets the area covered by the polygons in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_asbinary"><code dir="ltr" translate="no">        ST_ASBINARY       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value to a <code dir="ltr" translate="no">       BYTES      </code> WKB geography value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_asgeojson"><code dir="ltr" translate="no">        ST_ASGEOJSON       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value to a <code dir="ltr" translate="no">       STRING      </code> GeoJSON geography value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_astext"><code dir="ltr" translate="no">        ST_ASTEXT       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value to a <code dir="ltr" translate="no">       STRING      </code> WKT geography value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_azimuth"><code dir="ltr" translate="no">        ST_AZIMUTH       </code></a></td>
 <td>Gets the azimuth of a line segment formed by two point <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_boundary"><code dir="ltr" translate="no">        ST_BOUNDARY       </code></a></td>
 <td>Gets the union of component boundaries in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_boundingbox"><code dir="ltr" translate="no">        ST_BOUNDINGBOX       </code></a></td>
 <td>Gets the bounding box for a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_buffer"><code dir="ltr" translate="no">        ST_BUFFER       </code></a></td>
 <td>Gets the buffer around a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value, using a specific number of segments.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_bufferwithtolerance"><code dir="ltr" translate="no">        ST_BUFFERWITHTOLERANCE       </code></a></td>
 <td>Gets the buffer around a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value, using tolerance.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_centroid"><code dir="ltr" translate="no">        ST_CENTROID       </code></a></td>
 <td>Gets the centroid of a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_centroid_agg"><code dir="ltr" translate="no">        ST_CENTROID_AGG       </code></a></td>
 <td>Gets the centroid of a set of <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_closestpoint"><code dir="ltr" translate="no">        ST_CLOSESTPOINT       </code></a></td>
 <td>Gets the point on a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value which is closest to any point in a second <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_clusterdbscan"><code dir="ltr" translate="no">        ST_CLUSTERDBSCAN       </code></a></td>
 <td>Performs DBSCAN clustering on a group of <code dir="ltr" translate="no">       GEOGRAPHY      </code> values and produces a 0-based cluster number for this row.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_contains"><code dir="ltr" translate="no">        ST_CONTAINS       </code></a></td>
 <td>Checks if one <code dir="ltr" translate="no">       GEOGRAPHY      </code> value contains another <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_convexhull"><code dir="ltr" translate="no">        ST_CONVEXHULL       </code></a></td>
 <td>Returns the convex hull for a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_coveredby"><code dir="ltr" translate="no">        ST_COVEREDBY       </code></a></td>
 <td>Checks if all points of a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value are on the boundary or interior of another <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_covers"><code dir="ltr" translate="no">        ST_COVERS       </code></a></td>
 <td>Checks if all points of a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value are on the boundary or interior of another <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_difference"><code dir="ltr" translate="no">        ST_DIFFERENCE       </code></a></td>
 <td>Gets the point set difference between two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_dimension"><code dir="ltr" translate="no">        ST_DIMENSION       </code></a></td>
 <td>Gets the dimension of the highest-dimensional element in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_disjoint"><code dir="ltr" translate="no">        ST_DISJOINT       </code></a></td>
 <td>Checks if two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values are disjoint (don't intersect).</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_distance"><code dir="ltr" translate="no">        ST_DISTANCE       </code></a></td>
 <td>Gets the shortest distance in meters between two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_dump"><code dir="ltr" translate="no">        ST_DUMP       </code></a></td>
 <td>Returns an array of simple <code dir="ltr" translate="no">       GEOGRAPHY      </code> components in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_dwithin"><code dir="ltr" translate="no">        ST_DWITHIN       </code></a></td>
 <td>Checks if any points in two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values are within a given distance.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_endpoint"><code dir="ltr" translate="no">        ST_ENDPOINT       </code></a></td>
 <td>Gets the last point of a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_equals"><code dir="ltr" translate="no">        ST_EQUALS       </code></a></td>
 <td>Checks if two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values represent the same <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_extent"><code dir="ltr" translate="no">        ST_EXTENT       </code></a></td>
 <td>Gets the bounding box for a group of <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_exteriorring"><code dir="ltr" translate="no">        ST_EXTERIORRING       </code></a></td>
 <td>Returns a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value that corresponds to the outermost ring of a polygon <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogfrom"><code dir="ltr" translate="no">        ST_GEOGFROM       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value into a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromgeojson"><code dir="ltr" translate="no">        ST_GEOGFROMGEOJSON       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> GeoJSON geometry value into a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromtext"><code dir="ltr" translate="no">        ST_GEOGFROMTEXT       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> WKT geometry value into a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogfromwkb"><code dir="ltr" translate="no">        ST_GEOGFROMWKB       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       BYTES      </code> or hexadecimal-text <code dir="ltr" translate="no">       STRING      </code> WKT geometry value into a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint"><code dir="ltr" translate="no">        ST_GEOGPOINT       </code></a></td>
 <td>Creates a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value for a given longitude and latitude.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geogpointfromgeohash"><code dir="ltr" translate="no">        ST_GEOGPOINTFROMGEOHASH       </code></a></td>
 <td>Gets a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value that's in the middle of a bounding box defined in a <code dir="ltr" translate="no">       STRING      </code> GeoHash value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geohash"><code dir="ltr" translate="no">        ST_GEOHASH       </code></a></td>
 <td>Converts a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value to a <code dir="ltr" translate="no">       STRING      </code> GeoHash value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_geometrytype"><code dir="ltr" translate="no">        ST_GEOMETRYTYPE       </code></a></td>
 <td>Gets the Open Geospatial Consortium (OGC) geometry type for a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_hausdorffdistance"><code dir="ltr" translate="no">        ST_HAUSDORFFDISTANCE       </code></a></td>
 <td>Gets the discrete Hausdorff distance between two geometries.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_hausdorffdwithin"><code dir="ltr" translate="no">        ST_HAUSDORFFDWITHIN       </code></a></td>
 <td>Checks if the Hausdorff distance between two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values is within a given distance.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_interiorrings"><code dir="ltr" translate="no">        ST_INTERIORRINGS       </code></a></td>
 <td>Gets the interior rings of a polygon <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_intersection"><code dir="ltr" translate="no">        ST_INTERSECTION       </code></a></td>
 <td>Gets the point set intersection of two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_intersects"><code dir="ltr" translate="no">        ST_INTERSECTS       </code></a></td>
 <td>Checks if at least one point appears in two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_intersectsbox"><code dir="ltr" translate="no">        ST_INTERSECTSBOX       </code></a></td>
 <td>Checks if a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value intersects a rectangle.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_isclosed"><code dir="ltr" translate="no">        ST_ISCLOSED       </code></a></td>
 <td>Checks if all components in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value are closed.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_iscollection"><code dir="ltr" translate="no">        ST_ISCOLLECTION       </code></a></td>
 <td>Checks if the total number of points, linestrings, and polygons is greater than one in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_isempty"><code dir="ltr" translate="no">        ST_ISEMPTY       </code></a></td>
 <td>Checks if a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value is empty.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_isring"><code dir="ltr" translate="no">        ST_ISRING       </code></a></td>
 <td>Checks if a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value is a closed, simple linestring.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_length"><code dir="ltr" translate="no">        ST_LENGTH       </code></a></td>
 <td>Gets the total length of lines in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_lineinterpolatepoint"><code dir="ltr" translate="no">        ST_LINEINTERPOLATEPOINT       </code></a></td>
 <td>Gets a point at a specific fraction in a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_linelocatepoint"><code dir="ltr" translate="no">        ST_LINELOCATEPOINT       </code></a></td>
 <td>Gets a section of a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value between the start point and a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_linesubstring"><code dir="ltr" translate="no">        ST_LINESUBSTRING       </code></a></td>
 <td>Gets a segment of a single linestring at a specific starting and ending fraction.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_makeline"><code dir="ltr" translate="no">        ST_MAKELINE       </code></a></td>
 <td>Creates a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value by concatenating the point and linestring vertices of <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_makepolygon"><code dir="ltr" translate="no">        ST_MAKEPOLYGON       </code></a></td>
 <td>Constructs a polygon <code dir="ltr" translate="no">       GEOGRAPHY      </code> value by combining a polygon shell with polygon holes.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_makepolygonoriented"><code dir="ltr" translate="no">        ST_MAKEPOLYGONORIENTED       </code></a></td>
 <td>Constructs a polygon <code dir="ltr" translate="no">       GEOGRAPHY      </code> value, using an array of linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> values. The vertex ordering of each linestring determines the orientation of each polygon ring.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_maxdistance"><code dir="ltr" translate="no">        ST_MAXDISTANCE       </code></a></td>
 <td>Gets the longest distance between two non-empty <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_npoints"><code dir="ltr" translate="no">        ST_NPOINTS       </code></a></td>
 <td>An alias of <code dir="ltr" translate="no">       ST_NUMPOINTS      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_numgeometries"><code dir="ltr" translate="no">        ST_NUMGEOMETRIES       </code></a></td>
 <td>Gets the number of geometries in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_numpoints"><code dir="ltr" translate="no">        ST_NUMPOINTS       </code></a></td>
 <td>Gets the number of vertices in the a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_perimeter"><code dir="ltr" translate="no">        ST_PERIMETER       </code></a></td>
 <td>Gets the length of the boundary of the polygons in a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_pointn"><code dir="ltr" translate="no">        ST_POINTN       </code></a></td>
 <td>Gets the point at a specific index of a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats"><code dir="ltr" translate="no">        ST_REGIONSTATS       </code></a></td>
 <td>Computes statistics describing the pixels in a geospatial raster image that intersect a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_simplify"><code dir="ltr" translate="no">        ST_SIMPLIFY       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value into a simplified <code dir="ltr" translate="no">       GEOGRAPHY      </code> value, using tolerance.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_snaptogrid"><code dir="ltr" translate="no">        ST_SNAPTOGRID       </code></a></td>
 <td>Produces a <code dir="ltr" translate="no">       GEOGRAPHY      </code> value, where each vertex has been snapped to a longitude/latitude grid.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_startpoint"><code dir="ltr" translate="no">        ST_STARTPOINT       </code></a></td>
 <td>Gets the first point of a linestring <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_touches"><code dir="ltr" translate="no">        ST_TOUCHES       </code></a></td>
 <td>Checks if two <code dir="ltr" translate="no">       GEOGRAPHY      </code> values intersect and their interiors have no elements in common.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_union"><code dir="ltr" translate="no">        ST_UNION       </code></a></td>
 <td>Gets the point set union of multiple <code dir="ltr" translate="no">       GEOGRAPHY      </code> values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_union_agg"><code dir="ltr" translate="no">        ST_UNION_AGG       </code></a></td>
 <td>Aggregates over <code dir="ltr" translate="no">       GEOGRAPHY      </code> values and gets their point set union.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_within"><code dir="ltr" translate="no">        ST_WITHIN       </code></a></td>
 <td>Checks if one <code dir="ltr" translate="no">       GEOGRAPHY      </code> value contains another <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_x"><code dir="ltr" translate="no">        ST_X       </code></a></td>
 <td>Gets the longitude from a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/geography_functions#st_y"><code dir="ltr" translate="no">        ST_Y       </code></a></td>
 <td>Gets the latitude from a point <code dir="ltr" translate="no">       GEOGRAPHY      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#starts_with"><code dir="ltr" translate="no">        STARTS_WITH       </code></a></td>
 <td>Checks if a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value is a prefix of another value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev"><code dir="ltr" translate="no">        STDDEV       </code></a></td>
 <td>An alias of the <code dir="ltr" translate="no">       STDDEV_SAMP      </code> function.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop"><code dir="ltr" translate="no">        STDDEV_POP       </code></a></td>
 <td>Computes the population (biased) standard deviation of the values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp"><code dir="ltr" translate="no">        STDDEV_SAMP       </code></a></td>
 <td>Computes the sample (unbiased) standard deviation of the values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/json_functions#string_for_json"><code dir="ltr" translate="no">        STRING       </code> (JSON)</a></td>
 <td>Converts a JSON string to a SQL <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#string"><code dir="ltr" translate="no">        STRING       </code> (Timestamp)</a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to a <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg"><code dir="ltr" translate="no">        STRING_AGG       </code></a></td>
 <td>Concatenates non- <code dir="ltr" translate="no">       NULL      </code> <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#strpos"><code dir="ltr" translate="no">        STRPOS       </code></a></td>
 <td>Finds the position of the first occurrence of a subvalue inside another value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#substr"><code dir="ltr" translate="no">        SUBSTR       </code></a></td>
 <td>Gets a portion of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#substring"><code dir="ltr" translate="no">        SUBSTRING       </code></a></td>
 <td>Alias for <code dir="ltr" translate="no">       SUBSTR      </code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#sum"><code dir="ltr" translate="no">        SUM       </code></a></td>
 <td>Gets the sum of non- <code dir="ltr" translate="no">       NULL      </code> values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/aggregate-dp-functions#dp_sum"><code dir="ltr" translate="no">        SUM       </code> (Differential Privacy)</a></td>
 <td><code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> -supported <code dir="ltr" translate="no">       SUM      </code> .<br />
 <br />
 Gets the differentially-private sum of non- <code dir="ltr" translate="no">       NULL      </code> , non- <code dir="ltr" translate="no">       NaN      </code> values in a query with a <code dir="ltr" translate="no">       DIFFERENTIAL_PRIVACY      </code> clause.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#tan"><code dir="ltr" translate="no">        TAN       </code></a></td>
 <td>Computes the tangent of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#tanh"><code dir="ltr" translate="no">        TANH       </code></a></td>
 <td>Computes the hyperbolic tangent of <code dir="ltr" translate="no">       X      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze"><code dir="ltr" translate="no">        TEXT_ANALYZE       </code></a></td>
 <td>Extracts terms (tokens) from text and converts them into a tokenized document.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/text-analysis-functions#tf_idf"><code dir="ltr" translate="no">        TF_IDF       </code></a></td>
 <td>Evaluates how relevant a term (token) is to a tokenized document in a set of tokenized documents.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#time"><code dir="ltr" translate="no">        TIME       </code></a></td>
 <td>Constructs a <code dir="ltr" translate="no">       TIME      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#time_add"><code dir="ltr" translate="no">        TIME_ADD       </code></a></td>
 <td>Adds a specified time interval to a <code dir="ltr" translate="no">       TIME      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#time_diff"><code dir="ltr" translate="no">        TIME_DIFF       </code></a></td>
 <td>Gets the number of unit boundaries between two <code dir="ltr" translate="no">       TIME      </code> values at a particular time granularity.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#time_sub"><code dir="ltr" translate="no">        TIME_SUB       </code></a></td>
 <td>Subtracts a specified time interval from a <code dir="ltr" translate="no">       TIME      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/time_functions#time_trunc"><code dir="ltr" translate="no">        TIME_TRUNC       </code></a></td>
 <td>Truncates a <code dir="ltr" translate="no">       TIME      </code> value at a particular granularity.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp"><code dir="ltr" translate="no">        TIMESTAMP       </code></a></td>
 <td>Constructs a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add"><code dir="ltr" translate="no">        TIMESTAMP_ADD       </code></a></td>
 <td>Adds a specified time interval to a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/time-series-functions#timestamp_bucket"><code dir="ltr" translate="no">        TIMESTAMP_BUCKET       </code></a></td>
 <td>Gets the lower bound of the timestamp bucket that contains a timestamp.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_diff"><code dir="ltr" translate="no">        TIMESTAMP_DIFF       </code></a></td>
 <td>Gets the number of unit boundaries between two <code dir="ltr" translate="no">       TIMESTAMP      </code> values at a particular time granularity.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros"><code dir="ltr" translate="no">        TIMESTAMP_MICROS       </code></a></td>
 <td>Converts the number of microseconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis"><code dir="ltr" translate="no">        TIMESTAMP_MILLIS       </code></a></td>
 <td>Converts the number of milliseconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds"><code dir="ltr" translate="no">        TIMESTAMP_SECONDS       </code></a></td>
 <td>Converts the number of seconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_sub"><code dir="ltr" translate="no">        TIMESTAMP_SUB       </code></a></td>
 <td>Subtracts a specified time interval from a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc"><code dir="ltr" translate="no">        TIMESTAMP_TRUNC       </code></a></td>
 <td>Truncates a <code dir="ltr" translate="no">       TIMESTAMP      </code> or <code dir="ltr" translate="no">       DATETIME      </code> value at a particular granularity.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#to_base32"><code dir="ltr" translate="no">        TO_BASE32       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       BYTES      </code> value to a base32-encoded <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#to_base64"><code dir="ltr" translate="no">        TO_BASE64       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       BYTES      </code> value to a base64-encoded <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#to_code_points"><code dir="ltr" translate="no">        TO_CODE_POINTS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value into an array of extended ASCII code points.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#to_hex"><code dir="ltr" translate="no">        TO_HEX       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       BYTES      </code> value to a hexadecimal <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/json_functions#to_json"><code dir="ltr" translate="no">        TO_JSON       </code></a></td>
 <td>Converts a SQL value to a JSON value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/json_functions#to_json_string"><code dir="ltr" translate="no">        TO_JSON_STRING       </code></a></td>
 <td>Converts a SQL value to a JSON-formatted <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#translate"><code dir="ltr" translate="no">        TRANSLATE       </code></a></td>
 <td>Within a value, replaces each source character with the corresponding target character.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#trim"><code dir="ltr" translate="no">        TRIM       </code></a></td>
 <td>Removes the specified leading and trailing Unicode code points or bytes from a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#trunc"><code dir="ltr" translate="no">        TRUNC       </code></a></td>
 <td>Rounds a number like <code dir="ltr" translate="no">       ROUND(X)      </code> or <code dir="ltr" translate="no">       ROUND(X, N)      </code> , but always rounds towards zero and never overflows.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/utility-functions#typeof"><code dir="ltr" translate="no">        TYPEOF       </code></a></td>
 <td>Gets the name of the data type for an expression.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#unicode"><code dir="ltr" translate="no">        UNICODE       </code></a></td>
 <td>Gets the Unicode code point for the first character in a value.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/date_functions#unix_date"><code dir="ltr" translate="no">        UNIX_DATE       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       DATE      </code> value to the number of days since 1970-01-01.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros"><code dir="ltr" translate="no">        UNIX_MICROS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of microseconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis"><code dir="ltr" translate="no">        UNIX_MILLIS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of milliseconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds"><code dir="ltr" translate="no">        UNIX_SECONDS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of seconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/string_functions#upper"><code dir="ltr" translate="no">        UPPER       </code></a></td>
 <td>Formats alphabetic characters in a <code dir="ltr" translate="no">       STRING      </code> value as uppercase.<br />
 <br />
 Formats ASCII characters in a <code dir="ltr" translate="no">       BYTES      </code> value as uppercase.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop"><code dir="ltr" translate="no">        VAR_POP       </code></a></td>
 <td>Computes the population (biased) variance of the values.</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp"><code dir="ltr" translate="no">        VAR_SAMP       </code></a></td>
 <td>Computes the sample (unbiased) variance of the values.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">        VARIANCE       </code></a></td>
 <td>An alias of <code dir="ltr" translate="no">       VAR_SAMP      </code> .</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><a href="/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">        VECTOR_SEARCH       </code></a></td>
 <td>Performs a vector search on embeddings to find semantically similar entities.</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><a href="/bigquery/docs/reference/standard-sql/vectorindex_functions#vector_indexstatistics"><code dir="ltr" translate="no">        VECTOR_INDEX.STATISTICS       </code></a></td>
 <td>Calculate how much an indexed table's data has drifted between when a vector index was trained and the present.</td>
 </tr>

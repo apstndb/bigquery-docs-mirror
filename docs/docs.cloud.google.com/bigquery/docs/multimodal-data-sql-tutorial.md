@@ -1,11 +1,5 @@
 # Analyze multimodal data with SQL and BigQuery DataFrames
 
-**Preview**
-
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** To provide feedback or request support for this feature, send an email to <bq-objectref-feedback@google.com> .
-
 This tutorial shows you how to [analyze multimodal data](/bigquery/docs/analyze-multimodal-data) by using SQL queries and [BigQuery DataFrames](/bigquery/docs/bigquery-dataframes-introduction) .
 
 This tutorial uses the product catalog from the public Cymbal pet store dataset.
@@ -1187,7 +1181,7 @@ In a production scenario, we recommend creating a [vector index](/bigquery/docs/
       'embedding',
       (SELECT embedding FROM AI.GENERATE_EMBEDDING(
         MODEL `cymbal_pets.embedding_model`,
-        (SELECT OBJ.FETCH_METADATA(OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png', 'us.cymbal_conn')) as content)
+        (SELECT OBJ.MAKE_REF('gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png', 'us.cymbal_conn') as content)
       ))
     );
     ```

@@ -167,4 +167,4 @@ For REST API, instead of sending a REST request to a [service endpoint](/bigquer
 
 ## Restrict global API endpoint usage
 
-To help enforce the use of regional endpoints, use the `  constraints/gcp.restrictEndpointUsage  ` organization policy constraint to block requests to the global API endpoint. For more information, see [Restricting endpoint usage](/assured-workloads/docs/restrict-endpoint-usage) .
+To help enforce the use of regional endpoints, use the `  constraints/gcp.restrictEndpointUsage  ` organization policy constraint to block requests to the global API endpoint. For more information, see [Restrict endpoint usage](/docs/security/compliance/restrict-endpoint-usage) .

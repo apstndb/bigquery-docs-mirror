@@ -192,7 +192,7 @@ OPTIONS (
 
 -- Filter images in the object table
 SELECT
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
 FROM
   `cymbal_pets.product_images`
 WHERE
@@ -259,7 +259,7 @@ OPTIONS (
 
 -- Filter audios in the object table
 SELECT
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
 FROM
   `audio_repo.prompt_audio`
 WHERE

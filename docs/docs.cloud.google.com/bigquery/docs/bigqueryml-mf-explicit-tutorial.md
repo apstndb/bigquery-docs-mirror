@@ -366,7 +366,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.score()  `](/python/docs/reference/bigframes/latest/bigframes.ml.decomposition.MatrixFactorization#bigframes_ml_decomposition_MatrixFactorization_score) to evaluate the model.
+Call [`  model.score()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.score) to evaluate the model.
 
 ``` python
 # Evaluate the model using the score() function
@@ -425,7 +425,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.predict()  `](/python/docs/reference/bigframes/latest/bigframes.ml.decomposition.MatrixFactorization#bigframes_ml_decomposition_MatrixFactorization_predict) to get predicted ratings.
+Call [`  model.predict()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
 
 ``` python
 # Use predict() to get the predicted rating for each movie for 5 users
@@ -518,7 +518,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
 
-Call [`  model.predict()  `](/python/docs/reference/bigframes/latest/bigframes.ml.decomposition.MatrixFactorization#bigframes_ml_decomposition_MatrixFactorization_predict) to get predicted ratings.
+Call [`  model.predict()  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.decomposition.MatrixFactorization#bigframes.ml.decomposition.MatrixFactorization.predict) to get predicted ratings.
 
 ``` python
 # import bigframes.bigquery as bbq

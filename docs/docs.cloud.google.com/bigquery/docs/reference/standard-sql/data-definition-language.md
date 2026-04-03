@@ -1318,7 +1318,7 @@ The table option list specifies the:
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following example creates a table named `  embedded_table  ` in `  mydataset  ` with an [autonomous embedding generation](/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from `  content  ` column:
+The following example creates a table named `  embedded_table  ` in `  mydataset  ` with an [automatically generated embedding](/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from the `  content  ` column:
 
 ``` text
 CREATE TABLE mydataset.embedded_table (
@@ -6157,6 +6157,28 @@ When you create a new column for your table, you can specifically assign a new c
 ``` text
 ALTER TABLE mydataset.mytable
 ADD COLUMN word STRING COLLATE 'und:ci'
+```
+
+#### Adding an automatically generated embedding column
+
+**Preview**
+
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+The following example adds an [automatically generated embedding](/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from `  content  ` column to the existing table `  embedded_table  ` in `  mydataset  ` :
+
+``` text
+ALTER TABLE mydataset.embedded_table
+  ADD COLUMN embedding
+    STRUCT, status STRING>
+    GENERATED ALWAYS AS (
+      AI.EMBED(
+        content,
+        connection_id => "US.embed_connection",
+        endpoint => "text-embedding-005")
+    )
+    STORED OPTIONS (asynchronous = TRUE)
+;
 ```
 
 ## `     ALTER TABLE ADD FOREIGN KEY    ` statement

@@ -184,7 +184,7 @@ OPTIONS (
 
 SELECT
   uri,
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
   ai.similarity(
     "aquarium device",
     ref,

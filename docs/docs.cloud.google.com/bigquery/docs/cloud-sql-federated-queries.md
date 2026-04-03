@@ -202,11 +202,28 @@ Alternatively, if you are querying a PostgreSQL database, you might encounter th
   - `  Invalid table-valued function EXTERNAL_QUERY Failed to connect to MySQL database. Error: MysqlErrorCode(2059): Authentication plugin 'caching_sha2_password' cannot be loaded: /usr/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory at [1:15]  `  
     **Resolution:**
     
-    This error might occur for database users on a newly created instance running Cloud SQL version 8.4 because [caching\_sha2\_password authentication](https://dev.mysql.com/doc/refman/8.4/en/native-pluggable-authentication.html) is the default for new MySQL versions (8.4 and above).
+    This error occurs for database users that use [caching\_sha2\_password authentication](https://dev.mysql.com/doc/refman/8.4/en/native-pluggable-authentication.html) , which isn't supported for federated queries.
     
-    If your Cloud SQL instance runs a MySQL version earlier than MySQL 8.4, then upgrading the Cloud SQL instance to version 8.4 won't affect the database connection for the existing database users.
+    If you use a Cloud SQL instance running MySQL version 8.0 or earlier, you can change the authentication plugin for users connecting from BigQuery. To change the authentication plugin, run the following command on the Cloud SQL instance:
     
-    Because only existing users can query Cloud SQL, even after the Cloud SQL instance upgrades to the 8.4 version, you should send federated queries to Cloud SQL with connection settings that use a database user that existed on a MySQL version earlier than 8.4.
+    ``` text
+    ALTER USER 'USERNAME'@'%' IDENTIFIED WITH mysql_native_password BY 'PASSWORD';
+    ```
+    
+    Replace the following:
+    
+      - `  USERNAME  ` : the database user account that BigQuery uses to authenticate and connect to your Cloud SQL for MySQL instance.
+      - `  PASSWORD  ` : the password for the database user.
+    
+    If you use a Cloud SQL instance running MySQL version 8.4, there's no workaround available, because the `  mysql_native_password  ` plugin is deprecated for version 8.4. We don't recommend downgrading an existing database from 8.4 to 8.0 as a solution for production workloads.
+    
+    Upgrading a Cloud SQL instance that runs a MySQL version earlier than 8.4 to version 8.4 doesn't affect existing database connections, provided that you don't change the authentication plugin for users before the upgrade.
+    
+    Because only users created with the `  mysql_native_password  ` plugin (typically those created before upgrading to version 8.4) can be used for federated queries, even after the MySQL instance upgrades to the 8.4 version, you should send federated queries to MySQL with connection settings that use a database user that existed on a MySQL version earlier than 8.4.
+
+## Limitations
+
+  - The MySQL `  caching_sha2_password  ` plugin isn't supported for federated queries. As a result, federated queries for MySQL 8.0 and 8.4 using this plugin will fail. For more information, see [Troubleshooting](/bigquery/docs/cloud-sql-federated-queries#troubleshooting) .
 
 ## What's next
 

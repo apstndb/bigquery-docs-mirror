@@ -341,7 +341,7 @@ Before trying this sample, follow the BigQuery DataFrames setup instructions in 
 
 To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
 
-Use the [`  predict  `](/python/docs/reference/bigframes/latest/bigframes.ml.llm.PaLM2TextGenerator#bigframes_ml_llm_PaLM2TextGenerator_predict) function to run the ONNX model.
+Use the [`  predict  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.imported.ONNXModel.html#bigframes.ml.imported.ONNXModel.predict) function to run the ONNX model.
 
 ``` python
 import bigframes.pandas as bpd

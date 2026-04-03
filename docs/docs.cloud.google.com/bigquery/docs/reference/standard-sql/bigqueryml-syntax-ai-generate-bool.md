@@ -231,7 +231,7 @@ To determine which animals are mammals, call the `  AI.GENERATE_BOOL  ` function
 ``` text
 SELECT
   uri,
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
   AI.GENERATE_BOOL(("Is this cat food?", OBJ.GET_ACCESS_URL(ref, 'r'))).result
 FROM bqml_tutorial.product_images
 WHERE uri LIKE '%cat%';

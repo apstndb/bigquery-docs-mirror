@@ -290,7 +290,7 @@ Run the query that creates your logistic regression model:
 
 ### BigQuery DataFrames
 
-Use the [`  fit  `](/python/docs/reference/bigframes/latest/bigframes.ml.linear_model.LogisticRegression#bigframes_ml_linear_model_LogisticRegression_fit) method to train the model and the [`  to_gbq  `](/python/docs/reference/bigframes/latest/bigframes.ml.linear_model.LogisticRegression#bigframes_ml_linear_model_LogisticRegression_to_gbq) method to save it to your dataset.
+Use the `  fit  ` method to train the model and the [`  to_gbq  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LogisticRegression.html#bigframes.ml.linear_model.LogisticRegression.to_gbq) method to save it to your dataset.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
 
@@ -363,7 +363,7 @@ Run the `  ML.EVALUATE  ` query:
 
 ### BigQuery DataFrames
 
-Use the [`  score  `](/python/docs/reference/bigframes/latest/bigframes.ml.linear_model.LogisticRegression#bigframes_ml_linear_model_LogisticRegression_score) method to evaluate model against the actual data.
+Use the [`  score  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LogisticRegression.html#bigframes.ml.linear_model.LogisticRegression.score) method to evaluate model against the actual data.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
 
@@ -429,7 +429,7 @@ The `  predicted_income_bracket  ` column contains the predicted income bracket 
 
 ### BigQuery DataFrames
 
-Use the [`  predict  `](/python/docs/reference/bigframes/latest/bigframes.ml.linear_model.LogisticRegression#bigframes_ml_linear_model_LogisticRegression_predict) method to make predictions about the likely income bracket.
+Use the [`  predict  `](https://dataframes.bigquery.dev/reference/api/bigframes.ml.linear_model.LogisticRegression.html#bigframes.ml.linear_model.LogisticRegression.predict) method to make predictions about the likely income bracket.
 
 Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
 

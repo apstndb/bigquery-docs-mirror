@@ -887,8 +887,8 @@ The following limits apply to BigQuery tables with data stored on Cloud Storage 
 </tr>
 <tr class="even">
 <td>Maximum number of files in the source Cloud Storage bucket</td>
-<td>Approximately 60,000,000 files</td>
-<td>An external table can reference a Cloud Storage bucket containing up to approximately 60,000,000 files. For <a href="/bigquery/docs/hive-partitioned-queries-gcs">externally partitioned</a> tables, this limit is applied before <a href="/bigquery/docs/hive-partitioned-queries-gcs#partition_pruning">partition pruning</a> .</td>
+<td>Approximately 300,000,000 files</td>
+<td>An external table can reference a Cloud Storage bucket containing up to approximately 300,000,000 files. For <a href="/bigquery/docs/hive-partitioned-queries-gcs">externally partitioned</a> tables, this limit is applied before <a href="/bigquery/docs/hive-partitioned-queries-gcs#partition_pruning">partition pruning</a> .</td>
 </tr>
 </tbody>
 </table>

@@ -103,9 +103,8 @@ The following table describes the fixed schema used by object tables:
 <td>STRUCT</td>
 <td>NULLABLE</td>
 <td>Google-managed Cloud Storage metadata stored in the <a href="/bigquery/docs/reference/standard-sql/objectref_functions#objectref"><code dir="ltr" translate="no">        ObjectRef       </code> format</a> .<br />
-( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )<br />
 <br />
-You can use this column <a href="/bigquery/docs/objectref-columns">to maintain <code dir="ltr" translate="no">        ObjectRef       </code> values in standard tables</a> . <code dir="ltr" translate="no">       ObjectRef      </code> values let you integrate object data with structured data. This column is created only if you are on the allowlist for the <a href="/bigquery/docs/analyze-multimodal-data">multimodal data preview</a> .</td>
+You can use this column <a href="/bigquery/docs/objectref-columns">to maintain <code dir="ltr" translate="no">        ObjectRef       </code> values in standard tables</a> . <code dir="ltr" translate="no">       ObjectRef      </code> values let you integrate object data with structured data.</td>
 </tr>
 </tbody>
 </table>
@@ -391,7 +390,7 @@ For more information on setting metadata caching options, see [Create object tab
       - [`  ML.CONVERT_IMAGE_TYPE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-convert-image-type)
       - [`  ML.RESIZE_IMAGE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-resize-image)
 
-  - Object tables have a maximum of 60 million rows. To take part in a [Preview](https://cloud.google.com/products#product-launch-stages) launch that increases the maximum rows to 300 million, fill out [this request form](https://forms.gle/u8cKbjWSkiytuNzy8) .
+  - Object tables can have a maximum of 300 million rows.
 
   - `  UNION ALL  ` operations that combine both empty and non-empty object tables are not supported and might return an error.
 

@@ -1320,6 +1320,7 @@ https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio
 https://docs.cloud.google.com/bigquery/docs/vpc-sc
 https://docs.cloud.google.com/bigquery/docs/vs-code-extension
 https://docs.cloud.google.com/bigquery/docs/weights-overview
+https://docs.cloud.google.com/bigquery/docs/work-with-objectref
 https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries
 https://docs.cloud.google.com/bigquery/docs/working-with-connections
 https://docs.cloud.google.com/bigquery/docs/working-with-time-series

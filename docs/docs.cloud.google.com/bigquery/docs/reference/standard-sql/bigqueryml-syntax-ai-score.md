@@ -209,7 +209,7 @@ OPTIONS (
 
 -- Find the top 5 most fun pet products
 SELECT
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
   AI.SCORE(
     ('Rate the product from 1-10 based on how fun it looks for a pet: ',
      OBJ.GET_ACCESS_URL(ref, 'r'))) AS fun_score

@@ -361,7 +361,7 @@ Follow these steps to view the model's evaluation information:
 
 ## Use the `       ML.PREDICT      ` function to predict a station's cluster
 
-Identify the cluster to which a particular station belongs by using the `  ML.PREDICT  ` SQL function or the [`  predict  ` BigQuery DataFrames function](/python/docs/reference/bigframes/latest/bigframes.ml.cluster.KMeans#bigframes_ml_cluster_KMeans_predict) .
+Identify the cluster to which a particular station belongs by using the `  ML.PREDICT  ` SQL function or the [`  predict  ` BigQuery DataFrames function](https://dataframes.bigquery.dev/reference/api/bigframes.ml.cluster.KMeans.html#bigframes.ml.cluster.KMeans.predict) .
 
 ### SQL
 

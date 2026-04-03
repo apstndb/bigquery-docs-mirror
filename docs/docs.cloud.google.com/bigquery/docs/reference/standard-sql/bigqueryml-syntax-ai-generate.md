@@ -276,12 +276,12 @@ CREATE OR REPLACE EXTERNAL TABLE bqml_tutorial.product_images
     uris = ['gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png']);
 ```
 
-You can use `  AI.GENERATE  ` to describe images and what's in them. To do that, construct your prompt from a natural language instruction and an `  ObjectRefRuntime  ` of the image. The following query asks Gemini what each image is. It specifies an `  output_schema  ` to structure the results with one column to name the items in the image and another column to provide a description of the image.
+You can use `  AI.GENERATE  ` to describe images and what's in them. To do that, construct your prompt from a natural language instruction and an `  ObjectRef  ` for the image. The following query asks Gemini what each image is. It specifies an `  output_schema  ` to structure the results with one column to name the items in the image and another column to provide a description of the image.
 
 ``` text
 SELECT
   uri,
-  STRING(OBJ.GET_ACCESS_URL(ref,'r').access_urls.read_url) AS signed_url,
+  OBJ.GET_READ_URL(ref) AS signed_url,
   AI.GENERATE(
     ("What is this: ", OBJ.GET_ACCESS_URL(ref, 'r')),
     output_schema =>
