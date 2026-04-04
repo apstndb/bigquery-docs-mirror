@@ -207,22 +207,118 @@ You can use the following data masking rules:
     
     **Important:** SHA-256 is a deterministic hashing function; an initial value always resolves to the same hash value. However, it does not require encryption keys. This makes it possible for a malicious actor to use a brute force attack to determine the original value, by running all possible original values through the SHA-256 algorithm and seeing which one produces a hash that matches the hash returned by data masking.
 
-  - **Random hash** . Returns a hash of the column's value using a salted hash algorithm. Random hash provides stronger security than the standard `  Hash (SHA-256)  ` rule.
+  - **Random hash** . Returns a hash of the column's value using a salted hash algorithm. Random hash provides stronger security than the standard `  Hash (SHA-256)  ` rule. You can only use this rule with columns that use the `  STRING  ` or `  BYTES  ` data types.
     
       - **Non-deterministic:** A unique random value (salt) is generated for each query. The same column value produces different hash results across different queries. This helps prevent brute-force attacks and analysis of masked data patterns over time.
       - **Joinability control:**
           - Joins on columns masked with `  RANDOM_HASH  ` are only possible *within the same query* .
           - Joins across different queries aren't possible because of the per-query random salt.
           - Joins are supported only if the data policies applied to the columns belong to the *same Google Cloud project* . This is enforced by including the data policy's project ID in the hash input.
-      - **Use case:** Suitable when you need the referential integrity of hashing for joins within a query but require stronger security level against offline attacks than standard `  SHA-256  ` .
-      - **Supported data types:** Can be used with columns of `  STRING  ` or `  BYTES  ` data types.
       - **Limitations:**
-          - Random hash is a predefined masking rule, and it can't be used in custom masking routines.
           - Random hash is only supported with data policies that are set on columns, not policy tags.
 
   - **Last four characters** . Returns the last 4 characters of the column's value, replacing the rest of the string with `  XXXXX  ` . If the column's value is equal to or less than 4 characters in length, then it returns the column's value after it has been run through the [SHA-256](/bigquery/docs/reference/standard-sql/hash_functions#sha256) hash function. You can only use this rule with columns that use the `  STRING  ` data type.
 
   - **Nullify** . Returns `  NULL  ` instead of the column value. Use this when you want to hide both the value and the data type of the column. When this data masking rule is applied to a column, it makes it less useful in query [`  JOIN  `](/bigquery/docs/reference/standard-sql/query-syntax#join_types) operations for users with Masked Reader access. This is because a `  NULL  ` value isn't sufficiently unique to be useful when joining tables.
+
+### Data masking rule comparison
+
+The following table compares the different data masking options available in BigQuery, considering their ability to be used in joins and their relative security strength:
+
+  - **Joinability:** Refers to whether the masked data can be used in SQL `  JOIN  ` operations. Masking methods that produce a consistent output for a given input (deterministic for the scope of the join) and preserve sufficient uniqueness can be used.
+  - **Security Strength:** Indicates the level of protection against de-anonymization or reverse-engineering the original data. This is a relative comparison.
+
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Masking Option</th>
+<th>Type</th>
+<th>Joinability</th>
+<th>Security Strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nullify</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Highest:</strong> Replaces data with <code dir="ltr" translate="no">       NULL      </code> . No information leakage about the original value.</td>
+</tr>
+<tr class="even">
+<td>Default masking value</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Highest:</strong> Replaces data with a default value based on the data type. No information leakage about the original value.</td>
+</tr>
+<tr class="odd">
+<td>Email mask</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Moderate:</strong> Redacts the username (for example, <code dir="ltr" translate="no">       user@example.com      </code> becomes <code dir="ltr" translate="no">       XXXXX@example.com      </code> ), but the domain name remains visible. The unmasked domain can be sensitive, as it reveals organizational affiliation. This information can potentially be used in de-anonymization efforts by correlating with other data. The effectiveness of this mask is reduced if the pool of potential individuals within the domain is small, making it easier to infer the original user. If the value is not a valid email address, it's hashed using SHA-256 ( <strong>Moderate:</strong> security strength).</td>
+</tr>
+<tr class="even">
+<td>First four characters</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Low to Moderate:</strong> Returns the first 4 characters, replacing the rest with <code dir="ltr" translate="no">       XXXXX      </code> . If the string is 4 characters or less, it's hashed using SHA-256. When SHA-256 is used on these short strings, the security is <strong>Very Low</strong> because the limited input space (1–4 characters) makes it trivial to compute a rainbow table for all possible inputs, enabling reverse lookup.</td>
+</tr>
+<tr class="odd">
+<td>Last four characters</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Low to Moderate:</strong> Returns the last 4 characters, prepending <code dir="ltr" translate="no">       XXXXX      </code> to replace the rest. If the string is 4 characters or less, it's hashed using SHA-256. Similar to 'First Four Characters', the security is <strong>Very Low</strong> when SHA-256 is used on short strings due to the ease of reverse lookups.</td>
+</tr>
+<tr class="even">
+<td>Date year mask</td>
+<td>Predefined</td>
+<td>No</td>
+<td><strong>Moderate:</strong> Shows only the year, truncating the rest of the date (for example, <code dir="ltr" translate="no">       2030-07-17      </code> becomes <code dir="ltr" translate="no">       2030-01-01      </code> ). Leaks partial information and is vulnerable to statistical analysis.</td>
+</tr>
+<tr class="odd">
+<td>Random hash</td>
+<td>Predefined</td>
+<td>Yes (within the same query)</td>
+<td><strong>High:</strong> Uses a unique, secret random salt generated by the service <em>per query execution</em> in the hashing computation. This provides good security against precomputed table attacks (for example, rainbow tables). Output is consistent for the same input value <em>only within the same query execution</em> . Joins across different query executions are not possible due to the changing per query salt.</td>
+</tr>
+<tr class="even">
+<td>Hash (SHA-256)</td>
+<td>Predefined</td>
+<td>Yes</td>
+<td><strong>Moderate:</strong> While SHA-256 offers strong <em>collision resistance</em> in a cryptographic sense, it is susceptible to various attacks in this masking context. As a deterministic hash, it's vulnerable to rainbow table attacks, known-plaintext attacks, and statistical analysis. Joins across different query executions are possible here.</td>
+</tr>
+<tr class="odd">
+<td>Custom masking routine – SHA-256</td>
+<td>Custom</td>
+<td>Yes</td>
+<td><strong>Moderate:</strong> Same security properties as predefined SHA-256. Offers strong <em>collision resistance</em> , but is susceptible to rainbow table, known-plaintext, and statistical analysis attacks due to its deterministic nature.</td>
+</tr>
+<tr class="even">
+<td>Custom masking routine – Salted SHA-256</td>
+<td>Custom</td>
+<td>Yes</td>
+<td><strong>High (contingent on proper salt protection):</strong> Enhanced security over standard SHA-256 by using a <em>consistent, secret</em> salt hardcoded within the custom UDF definition. The security hinges on the secrecy of the salt. Access to the UDF definition must be restricted. BigQuery redacting constants from execution details helps prevent salt exposure. Unlike <code dir="ltr" translate="no">       RANDOM_HASH      </code> , the salt is consistent across queries using this <em>specific</em> UDF, supporting joins across queries.</td>
+</tr>
+<tr class="odd">
+<td>Custom masking routine – AEAD Encryption</td>
+<td>Custom</td>
+<td>Yes</td>
+<td><strong>High (contingent on proper key management):</strong> Can provide strong security and joinability.<br />
+<strong>Important Consideration:</strong> To use AEAD encryption with a KMS wrapped keyset, the querying user typically needs the <code dir="ltr" translate="no">       cloudkms.cryptoKeyVersions.useToDecryptViaDelegation      </code> permission on the KMS key. This permission enables the user to use the wrapped keyset for <em>both</em> encryption and decryption. Hence, the <em>wrapped keyset</em> must be protected. If the user has access to the <em>wrapped key</em> they will be able to decrypt (unmask) sensitive column data.</td>
+</tr>
+</tbody>
+</table>
+
+### Hash collisions and join integrity
+
+Hashing techniques, such as SHA-256 and Random Hash, carry a theoretical risk of [hash collisions](https://en.wikipedia.org/wiki/Hash_collision) , where two different original values produce the same hash value. When columns are masked using these rules and subsequently used in a `  JOIN  ` operation, a collision can lead to improper data associations (false matches) in the query results.
+
+However, the statistical probability of a SHA-256 collision is practically negligible for any real-world dataset. Users can therefore rely on hashing-based masking rules for join integrity with extremely high confidence.
 
 ### Data masking rule hierarchy
 

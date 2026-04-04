@@ -216,3 +216,507 @@ To resolve this issue, consider the following strategies:
   - Retrieve the full log message by using the BigQuery API [jobs.get](/bigquery/docs/reference/rest/v2/jobs/get) method.
 
   - Reduce the size of the metadata in the log message; for example, by using wildcards on common path prefixes to reduce the size of the `  sourceUri  ` list.
+
+This document lists the audited methods for BigQuery. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
+
+  - [Types of audit logs](/logging/docs/audit#types)
+  - [Audit log entry structure](/logging/docs/audit#audit_log_entry_structure)
+  - [Storing and routing audit logs](/logging/docs/audit#storing_and_routing_audit_logs)
+  - [Cloud Logging pricing summary](/stackdriver/pricing#logs-pricing-summary)
+  - [Enable Data Access audit logs](/logging/docs/audit/configure-data-access)
+
+## Service name
+
+To view the BigQuery audit logs, do the following:
+
+1.  In the Google Cloud console, go to the Logs Explorer page:
+
+2.  Copy and paste the following query into the **Query** field of the Logs Explorer, and then click **Run query** .
+    
+    ``` text
+        protoPayload.serviceName="bigquery.googleapis.com"
+      
+    ```
+
+## Methods by permission type
+
+Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](/logging/docs/audit#admin-activity) audit logs.
+
+API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](/logging/docs/audit/understanding-audit-logs#lro) .
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Permission type</th>
+<th>Methods</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       ADMIN_WRITE      </code></td>
+<td><code dir="ltr" translate="no">       datasetservice.delete      </code><br />
+<code dir="ltr" translate="no">       datasetservice.insert      </code><br />
+<code dir="ltr" translate="no">       datasetservice.update      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.DatasetService.DeleteDataset      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.DatasetService.InsertDataset      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.DatasetService.PatchDataset      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.DatasetService.UndeleteDataset      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.DatasetService.UpdateDataset      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.JobService.InsertJob      </code> (LRO)<br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.JobService.Query      </code> (LRO)<br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.RoutineService.DeleteRoutine      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.RoutineService.InsertRoutine      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.TableService.DeleteTable      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.TableService.InsertTable      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.TableService.PatchTable      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.TableService.UpdateTable      </code><br />
+<code dir="ltr" translate="no">       google.iam.v1.IAMPolicy.SetIamPolicy      </code><br />
+<code dir="ltr" translate="no">       jobservice.getqueryresults      </code><br />
+<code dir="ltr" translate="no">       jobservice.insert      </code><br />
+<code dir="ltr" translate="no">       jobservice.query      </code><br />
+<code dir="ltr" translate="no">       tabledataservice.list      </code><br />
+<code dir="ltr" translate="no">       tableservice.delete      </code><br />
+<code dir="ltr" translate="no">       tableservice.insert      </code><br />
+<code dir="ltr" translate="no">       tableservice.update      </code></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       DATA_READ      </code></td>
+<td><code dir="ltr" translate="no">       google.cloud.bigquery.v2.JobService.GetQueryResults      </code><br />
+<code dir="ltr" translate="no">       google.cloud.bigquery.v2.TableDataService.List      </code></td>
+</tr>
+</tbody>
+</table>
+
+## API interface audit logs
+
+For information about how and which permissions are evaluated for each method, see the Identity and Access Management documentation for BigQuery.
+
+### `     datasetservice    `
+
+The following audit logs are associated with methods belonging to `  datasetservice  ` .
+
+#### `     delete    `
+
+  - **Method** : `  datasetservice.delete  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.delete - ADMIN_WRITE  `
+      - `  bigquery.models.delete - ADMIN_WRITE  `
+      - `  bigquery.routines.delete - ADMIN_WRITE  `
+      - `  bigquery.tables.delete - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="datasetservice.delete"  `  
+
+#### `     insert    `
+
+  - **Method** : `  datasetservice.insert  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="datasetservice.insert"  `  
+
+#### `     update    `
+
+  - **Method** : `  datasetservice.update  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="datasetservice.update"  `  
+
+### `     google.cloud.bigquery.v2.DatasetService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.DatasetService  ` .
+
+#### `     DeleteDataset    `
+
+  - **Method** : `  google.cloud.bigquery.v2.DatasetService.DeleteDataset  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.delete - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset"  `  
+
+#### `     InsertDataset    `
+
+  - **Method** : `  google.cloud.bigquery.v2.DatasetService.InsertDataset  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.InsertDataset"  `  
+
+#### `     PatchDataset    `
+
+  - **Method** : `  google.cloud.bigquery.v2.DatasetService.PatchDataset  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.PatchDataset"  `  
+
+#### `     UndeleteDataset    `
+
+  - **Method** : `  google.cloud.bigquery.v2.DatasetService.UndeleteDataset  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.create - ADMIN_WRITE  `
+      - `  bigquery.datasets.get - ADMIN_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.UndeleteDataset"  `  
+
+#### `     UpdateDataset    `
+
+  - **Method** : `  google.cloud.bigquery.v2.DatasetService.UpdateDataset  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.datasets.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.UpdateDataset"  `  
+
+### `     google.cloud.bigquery.v2.JobService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.JobService  ` .
+
+#### `     DeleteJob    `
+
+  - **Method** : `  google.cloud.bigquery.v2.JobService.DeleteJob  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.JobService.DeleteJob"  `  
+
+#### `     GetQueryResults    `
+
+  - **Method** : `  google.cloud.bigquery.v2.JobService.GetQueryResults  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.JobService.GetQueryResults"  `  
+
+#### `     InsertJob    `
+
+  - **Method** : `  google.cloud.bigquery.v2.JobService.InsertJob  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+      - `  bigquery.tables.updateData - DATA_WRITE  `
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.JobService.InsertJob"  `  
+
+#### `     Query    `
+
+  - **Method** : `  google.cloud.bigquery.v2.JobService.Query  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.JobService.Query"  `  
+
+### `     google.cloud.bigquery.v2.ModelService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.ModelService  ` .
+
+#### `     DeleteModel    `
+
+  - **Method** : `  google.cloud.bigquery.v2.ModelService.DeleteModel  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.ModelService.DeleteModel"  `  
+
+#### `     PatchModel    `
+
+  - **Method** : `  google.cloud.bigquery.v2.ModelService.PatchModel  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.ModelService.PatchModel"  `  
+
+### `     google.cloud.bigquery.v2.RoutineService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.RoutineService  ` .
+
+#### `     DeleteRoutine    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RoutineService.DeleteRoutine  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.routines.delete - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RoutineService.DeleteRoutine"  `  
+
+#### `     InsertRoutine    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RoutineService.InsertRoutine  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.routines.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RoutineService.InsertRoutine"  `  
+
+#### `     UpdateRoutine    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RoutineService.UpdateRoutine  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RoutineService.UpdateRoutine"  `  
+
+### `     google.cloud.bigquery.v2.RowAccessPolicyService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.RowAccessPolicyService  ` .
+
+#### `     BatchDeleteRowAccessPolicies    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.BatchDeleteRowAccessPolicies"  `  
+
+#### `     CreateRowAccessPolicy    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.rowAccessPolicies.create - ADMIN_WRITE  `
+      - `  bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.CreateRowAccessPolicy"  `  
+
+#### `     DeleteRowAccessPolicy    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.rowAccessPolicies.delete - ADMIN_WRITE  `
+      - `  bigquery.rowAccessPolicies.setIamPolicy - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.DeleteRowAccessPolicy"  `  
+
+#### `     UpdateRowAccessPolicy    `
+
+  - **Method** : `  google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.rowAccessPolicies.setIamPolicy - PERMISSION_TYPE_UNSPECIFIED  `
+      - `  bigquery.rowAccessPolicies.update - PERMISSION_TYPE_UNSPECIFIED  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.RowAccessPolicyService.UpdateRowAccessPolicy"  `  
+
+### `     google.cloud.bigquery.v2.TableDataService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.TableDataService  ` .
+
+#### `     List    `
+
+  - **Method** : `  google.cloud.bigquery.v2.TableDataService.List  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.TableDataService.List"  `  
+
+### `     google.cloud.bigquery.v2.TableService    `
+
+The following audit logs are associated with methods belonging to `  google.cloud.bigquery.v2.TableService  ` .
+
+#### `     DeleteTable    `
+
+  - **Method** : `  google.cloud.bigquery.v2.TableService.DeleteTable  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.delete - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable"  `  
+
+#### `     InsertTable    `
+
+  - **Method** : `  google.cloud.bigquery.v2.TableService.InsertTable  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.TableService.InsertTable"  `  
+
+#### `     PatchTable    `
+
+  - **Method** : `  google.cloud.bigquery.v2.TableService.PatchTable  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.TableService.PatchTable"  `  
+
+#### `     UpdateTable    `
+
+  - **Method** : `  google.cloud.bigquery.v2.TableService.UpdateTable  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.v2.TableService.UpdateTable"  `  
+
+### `     google.iam.v1.IAMPolicy    `
+
+The following audit logs are associated with methods belonging to `  google.iam.v1.IAMPolicy  ` .
+
+#### `     SetIamPolicy    `
+
+  - **Method** : `  google.iam.v1.IAMPolicy.SetIamPolicy  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.setIamPolicy - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="google.iam.v1.IAMPolicy.SetIamPolicy"  `  
+
+### `     jobservice    `
+
+The following audit logs are associated with methods belonging to `  jobservice  ` .
+
+#### `     cancel    `
+
+  - **Method** : `  jobservice.cancel  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="jobservice.cancel"  `  
+
+#### `     getqueryresults    `
+
+  - **Method** : `  jobservice.getqueryresults  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="jobservice.getqueryresults"  `  
+
+#### `     insert    `
+
+  - **Method** : `  jobservice.insert  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+      - `  bigquery.tables.update - ADMIN_WRITE  `
+      - `  bigquery.tables.updateData - DATA_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="jobservice.insert"  `  
+
+#### `     query    `
+
+  - **Method** : `  jobservice.query  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="jobservice.query"  `  
+
+### `     tabledataservice    `
+
+The following audit logs are associated with methods belonging to `  tabledataservice  ` .
+
+#### `     list    `
+
+  - **Method** : `  tabledataservice.list  `  
+  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Permissions** :
+      - `  bigquery.jobs.create - ADMIN_WRITE  `
+      - `  bigquery.tables.getData - DATA_READ  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="tabledataservice.list"  `  
+
+### `     tableservice    `
+
+The following audit logs are associated with methods belonging to `  tableservice  ` .
+
+#### `     delete    `
+
+  - **Method** : `  tableservice.delete  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.delete - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="tableservice.delete"  `  
+
+#### `     insert    `
+
+  - **Method** : `  tableservice.insert  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.create - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="tableservice.insert"  `  
+
+#### `     update    `
+
+  - **Method** : `  tableservice.update  `  
+  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Permissions** :
+      - `  bigquery.tables.delete - ADMIN_WRITE  `
+      - `  bigquery.tables.update - ADMIN_WRITE  `
+  - **Method is a long-running or streaming operation** : No.  
+  - **Filter for this method** : `  protoPayload.methodName="tableservice.update"  `  
+
+## System events
+
+System Event audit logs are generated by GCP systems, not direct user action. For more information, see [System Event audit logs](/logging/docs/audit#system-event) .
+
+<table>
+<thead>
+<tr class="header">
+<th>Method Name</th>
+<th>Filter For This Event</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>InternalTableExpired</td>
+<td><code dir="ltr" translate="no">       protoPayload.methodName="InternalTableExpired"      </code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+## Methods that don't produce audit logs
+
+A method might not produce audit logs for one or more of the following reasons:
+
+  - It is a high volume method involving significant log generation and storage costs.
+  - It has low auditing value.
+  - Another audit or platform log already provides method coverage.
+
+The following methods don't produce audit logs:
+
+  - `  google.cloud.bigquery.v2.DatasetService.GetDataset  `
+  - `  google.cloud.bigquery.v2.DatasetService.ListDatasets  `
+  - `  google.cloud.bigquery.v2.JobService.GetJob  `
+  - `  google.cloud.bigquery.v2.JobService.ListJobs  `
+  - `  google.cloud.bigquery.v2.ModelService.GetModel  `
+  - `  google.cloud.bigquery.v2.ModelService.ListModels  `
+  - `  google.cloud.bigquery.v2.ProjectService.GetServiceAccount  `
+  - `  google.cloud.bigquery.v2.ProjectService.ListProjects  `
+  - `  google.cloud.bigquery.v2.RoutineService.GetRoutine  `
+  - `  google.cloud.bigquery.v2.RoutineService.ListRoutines  `
+  - `  google.cloud.bigquery.v2.RowAccessPolicyService.GetRowAccessPolicy  `
+  - `  google.cloud.bigquery.v2.RowAccessPolicyService.ListRowAccessPolicies  `
+  - `  google.cloud.bigquery.v2.TableDataService.InsertAll  `
+  - `  google.cloud.bigquery.v2.TableService.GetTable  `
+  - `  google.cloud.bigquery.v2.TableService.ListTables  `
+  - `  google.iam.v1.IAMPolicy.GetIamPolicy  `

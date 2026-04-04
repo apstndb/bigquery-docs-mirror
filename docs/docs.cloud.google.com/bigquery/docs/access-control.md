@@ -1523,6 +1523,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataprocrm.workloads.get          </code></li>
 <li><code dir="ltr" translate="no">           dataprocrm.workloads.list          </code></li>
 </ul>
+<p><code dir="ltr" translate="no">         geminidataanalytics.                  locations.                  useDataEngineeringAgent        </code></p>
 <p><code dir="ltr" translate="no">         resourcemanager.projects.get        </code></p>
 <p><code dir="ltr" translate="no">         resourcemanager.projects.list        </code></p></td>
 </tr>
@@ -1663,6 +1664,7 @@ Repository
 <li><code dir="ltr" translate="no">           dataprocrm.workloads.get          </code></li>
 <li><code dir="ltr" translate="no">           dataprocrm.workloads.list          </code></li>
 </ul>
+<p><code dir="ltr" translate="no">         geminidataanalytics.                  locations.                  useDataEngineeringAgent        </code></p>
 <p><code dir="ltr" translate="no">         resourcemanager.projects.get        </code></p>
 <p><code dir="ltr" translate="no">         resourcemanager.projects.list        </code></p></td>
 </tr>

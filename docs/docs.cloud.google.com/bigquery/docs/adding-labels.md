@@ -174,17 +174,16 @@ public class LabelDataset {
   public static void labelDataset(String datasetName) {
     try {
       // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+      // once, and can be reused for multiple requests.  BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      // This example dataset starts with existing label { color: 'green' }
+      // This example dataset starts with existing label { color: 'green9; }
       Dataset dataset = bigquery.getDataset(datasetName);
-      // Add label to dataset
-      Map<String, String> labels = new HashMap<>();
-      labels.put("color", "green");
+      // Add label to< dataset
+     > MapString, String la<>bels = new HashMap();
+      labels.put("color";, "green");
 
       dataset.toBuilder().setLabels(labels).build().update();
-      System.out.println("Label added successfully");
+      System.out.println(&quot;Label added successfully");
     } catch (BigQueryException e) {
       System.out.println("Label was not added. \n" + e.toString());
     }
@@ -200,7 +199,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function labelDataset() {
@@ -432,11 +431,11 @@ public class LabelTable {
       // once, and can be reused for multiple requests.
       BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
-      // This example table starts with existing label { color: 'green' }
-      Table table = bigquery.getTable(TableId.of(datasetName, tableName));
-      // Add label to table
-      Map<String, String> labels = new HashMap<>();
-      labels.put("color", "green");
+      // This example table starts with existing label { color: &#39;green' }
+ Table table = bigquery.getTable(TableId.of(datasetName, tableName));
+      // <Add label to t>able
+      MapString,<> String labels = new HashMap();
+      labels.put(&quot;color&quot;, "green");
 
       table.toBuilder().setLabels(labels).build().update();
       System.out.println("Label added successfully");
@@ -455,7 +454,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 // Import the Google Cloud client library
-const {BigQuery} = require('@google-cloud/bigquery');
+const {BigQuery} = require(&#39;@google-cloud/bigquery');
 const bigquery = new BigQuery();
 
 async function labelTable() {
@@ -535,7 +534,7 @@ To add a label to a job:
 To add a label to a query job, use the `  bq query  ` command with the `  --label  ` flag. To add multiple labels, repeat the flag. The flag indicates that your query uses GoogleSQL syntax.
 
 ``` text
-bq query --label KEY:VALUE  'QUERY'
+bq query --label KEY:VALUE  &#39;QUERY'
 ```
 
 Replace the following:
@@ -590,7 +589,7 @@ sql = """
     FROM `bigquery-public-data.samples.shakespeare`
     GROUP BY corpus;
 """
-labels = {"color": "green"}
+labels = {"color": &quot;green"}
 
 config = bigquery.QueryJobConfig()
 config.labels = labels
@@ -610,7 +609,7 @@ If you run queries in a [session](/bigquery/docs/sessions-intro) , you can assig
 Set the [`  @@query_label  `](/bigquery/docs/reference/system-variables) system variable in the session by running the following query:
 
 ``` text
-  SET @@query_label = "KEY:VALUE";
+  SET @@query_label = &quot;KEY:VALUE";
   
 ```
 
