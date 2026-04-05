@@ -1189,7 +1189,11 @@ We recommend using this optimization when non-trivial CTEs are referenced multip
 <td><code class="prettyprint lang-yaml" dir="ltr" translate="no">       bigint: N      </code></td>
 <td>Rewrites zero-scale <code dir="ltr" translate="no">       NUMERIC/BIGNUMERIC      </code> attributes to <code dir="ltr" translate="no">       INT64      </code> type if the precision is within <code dir="ltr" translate="no">       N      </code> . If <code dir="ltr" translate="no">       N      </code> is omitted, the default value is <code dir="ltr" translate="no">       18      </code> .<br />
 <br />
-We recommend using this optimization when translating from source dialects that don't have integer types. Changing column types requires reviewing all downstream uses for type compatibility and semantic changes. For example, fractional divisions becoming integer divisions, code expecting numeric values</td>
+We recommend using this optimization when you translate from source dialects that don't have integer types. Changing column types requires reviewing all downstream uses for type compatibility and semantic changes. For example, fractional divisions becoming integer divisions, or code expecting numeric values.<br />
+<br />
+Snowflake translations have this optimization for zero-scale numerics up to precision 38 enabled by default. This optimization ensures that a Snowflake <code dir="ltr" translate="no">       INTEGER      </code> , which is implicitly represented as <code dir="ltr" translate="no">       NUMBER(38,0)      </code> in Snowflake, translates to a BigQuery <code dir="ltr" translate="no">       INT64      </code> instead of a <code dir="ltr" translate="no">       BIGNUMERIC(38)      </code> .<br />
+<br />
+If your application uses numbers with precisions that are over 18, we recommend disabling this functionality to ensure that BigQuery can process the full range of values needed by your application.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       DROP_TEMP_TABLE      </code></td>
@@ -1218,6 +1222,74 @@ We recommend using this optimization when the cardinality (distinct number of va
 <td>Approximates non-contiguous or non-regular integer partitioning schemes by converting them to contiguous, equally sized partition ranges supported by BigQuery. By default, such partitioning schemes don't influence the table partitioning scheme in translated DDL statements.<br />
 <br />
 We recommend using this optimization when the source table uses a non-contiguous partitioning function like the Teradata <code dir="ltr" translate="no">       RANGE_N      </code> function and would benefit from an equally sized partition scheme in BigQuery.</td>
+</tr>
+</tbody>
+</table>
+
+#### Optimization examples
+
+The following optimization converts zero-scale numeric types with precision less than or equal to 38 to `  INT64  ` in BigQuery.
+
+``` text
+# An INTEGER is internally represented as NUMBER(38,0) in Snowflake.
+# To convert Snowflake INTEGER to INT64 in BigQuery, enable the rewrite for precision <= 38.
+# Note that this can produce incorrect results if your application logic uses more than 18 digits of precision.
+#
+# This configuration is enabled by default for the Snowflake Dialect.
+type: optimizer
+transformations:
+  - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
+    parameters:
+      bigint: 38
+```
+
+A SQL translation with this optimization might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i INT64, n INT64);
+    </code></pre></td>
+</tr>
+</tbody>
+</table>
+
+The following configuration disables the optimization in dialects, such as Snowflake, where it is enabled by default. This configuration converts numeric types to either `  NUMERIC  ` or `  BIGNUMERIC  ` depending on the input precision, instead of the default of `  INT64  ` .
+
+``` text
+type: optimizer
+transformations:
+  - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
+    enabled: false
+```
+
+A SQL translation with this optimization might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i BIGNUMERIC(38), n NUMERIC(29));
+    </code></pre></td>
 </tr>
 </tbody>
 </table>

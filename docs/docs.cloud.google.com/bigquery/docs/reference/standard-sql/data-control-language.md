@@ -34,6 +34,10 @@ The following permissions are required to run `  GRANT  ` and `  REVOKE  ` state
 <td>View</td>
 <td><code dir="ltr" translate="no">       bigquery.tables.setIamPolicy      </code></td>
 </tr>
+<tr class="even">
+<td>Project</td>
+<td><p><code dir="ltr" translate="no">        resourcemanager.projects.setIamPolicy       </code></p></td>
+</tr>
 </tbody>
 </table>
 
@@ -53,7 +57,7 @@ GRANT role_list
 
   - `  role_list  ` : A role or list of comma separated roles that contains the permissions you want to grant. For more information on the types of roles available, see [Roles and permissions](/iam/docs/roles-overview) .
 
-  - `  resource_type  ` : The type of resource the role is applied to. Supported values include: `  SCHEMA  ` (equivalent to dataset), `  TABLE  ` , `  VIEW  ` , `  EXTERNAL TABLE  ` .
+  - `  resource_type  ` : The type of resource the role is applied to. Supported values include: `  SCHEMA  ` (equivalent to dataset), `  TABLE  ` , `  VIEW  ` , `  EXTERNAL TABLE  ` , and `  PROJECT  ` .
 
   - `  resource_name  ` : The name of the resource you want to grant the permission on.
 
@@ -64,6 +68,11 @@ GRANT role_list
 Specify users using the following formats:
 
 <table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>User Type</th>
@@ -102,18 +111,32 @@ Specify users using the following formats:
 <td><code dir="ltr" translate="no">       specialGroup:               allUsers       </code></td>
 <td><code dir="ltr" translate="no">       specialGroup:allUsers      </code></td>
 </tr>
+<tr class="odd">
+<td>Connection</td>
+<td><p><code dir="ltr" translate="no">        connection:                 [$project_id.]$location.$connection_id        </code></p>
+<p>If <code dir="ltr" translate="no">          $project_id        </code> is omitted, the project where you run this DCL statement is used.</p></td>
+<td><code dir="ltr" translate="no">       connection:my-bq-project.us.my-connection      </code></td>
+</tr>
 </tbody>
 </table>
 
 For more information about each type of user in the table, see [Concepts related to identity](/iam/docs/overview#concepts_related_identity) .
 
-### Example
+### Examples
 
 The following example grants the `  bigquery.dataViewer  ` role to the users `  raha@example-pet-store.com  ` and `  sasha@example-pet-store.com  ` on a dataset named `  myDataset  ` :
 
 ``` text
 GRANT `roles/bigquery.dataViewer` ON SCHEMA `myProject`.myDataset
 TO "user:raha@example-pet-store.com", "user:sasha@example-pet-store.com"
+```
+
+The following example grants the `  aiplatform.user  ` and `  run.invoker  ` roles to the `  my-connection  ` and `  other-connection  ` connections on the `  my-vertex-project  ` project:
+
+``` text
+GRANT `roles/aiplatform.user`, `roles/run.invoker`
+ON PROJECT `my-vertex-project`
+TO "connection:my-bq-project.us.my-connection", "connection:another-bq-project.eu.other-connection";
 ```
 
 ## `     REVOKE    ` statement
@@ -132,17 +155,25 @@ REVOKE role_list
 
   - `  role_list  ` : A role or list of comma separated roles that contains the permissions you want to remove. For more information on the types of roles available, see [Roles and permissions](/iam/docs/roles-overview) .
 
-  - `  resource_type  ` : The type of resource that the role will be removed from. Supported values include: `  SCHEMA  ` (equivalent to dataset), `  TABLE  ` , `  VIEW  ` , `  EXTERNAL TABLE  ` .
+  - `  resource_type  ` : The type of resource that the role will be removed from. Supported values include: `  SCHEMA  ` (equivalent to dataset), `  TABLE  ` , `  VIEW  ` , `  EXTERNAL TABLE  ` , and `  PROJECT  ` .
 
   - `  resource_name  ` : The name of the resource you want to revoke the role on.
 
   - [`  user_list  `](#user_list) : A comma separated list of users that the role is revoked from.
 
-### Example
+### Examples
 
 The following example removes the `  bigquery.admin  ` role on the `  myDataset  ` dataset from the `  example-team@example-pet-store.com  ` group and a service account:
 
 ``` text
 REVOKE `roles/bigquery.admin` ON SCHEMA `myProject`.myDataset
 FROM "group:example-team@example-pet-store.com", "serviceAccount:user@test-project.iam.gserviceaccount.com"
+```
+
+The following example revokes the `  run.invoker  ` role on the `  my-vertex-project  ` project from the `  my-connection  ` connection:
+
+``` text
+REVOKE `roles/run.invoker`
+ON PROJECT `my-vertex-project`
+FROM "connection:my-bq-project.us.my-connection";
 ```

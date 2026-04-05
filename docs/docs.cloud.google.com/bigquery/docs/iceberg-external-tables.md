@@ -2,7 +2,7 @@
 
 Apache Iceberg external tables let you access [Apache Iceberg](https://iceberg.apache.org/docs/latest/) tables with finer-grained access control in a read-only format.
 
-Iceberg is an open source table format that supports petabyte scale data tables. The Iceberg open specification lets you run multiple query engines on a single copy of data stored in an object store. Apache Iceberg external tables (hereafter called *Iceberg external tables* ) support [Iceberg specification version 2](https://iceberg.apache.org/spec/#version-2-row-level-deletes) , including merge-on-read.
+Iceberg is an open source table format that supports petabyte scale data tables. The Iceberg open specification lets you run multiple query engines on a single copy of data stored in an object store. Apache Iceberg external tables (hereafter called *Iceberg external tables* ) support [Iceberg version 2](https://iceberg.apache.org/spec/#version-2-row-level-deletes) , including merge-on-read. Support for [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) , including binary deletion vectors, is in [Preview](https://cloud.google.com/products/#product-launch-stages) . To provide feedback or ask questions that are related to this Preview feature, contact <biglake-help@google.com> .
 
 As a BigQuery administrator, you can enforce row- and column-level access control including data masking on tables. For information about how to set up access control at the table level, see [Set up access control policies](#set-access-control) . Table access policies are also enforced when you use the BigQuery Storage API as a data source for the table in Dataproc and Serverless Spark.
 
@@ -306,12 +306,18 @@ In addition to [external table limitations](/bigquery/docs/biglake-intro#limitat
 
   - Only Apache Parquet data files are supported.
 
+  - The following [Iceberg version 3](https://iceberg.apache.org/spec/#version-3-extended-types-and-capabilities) features aren't supported:
+    
+      - New data types: nanosecond timestamp(tz), unknown, variant, geometry, geography
+      - Initial default values
+      - Table encryption keys
+
 ## Merge-on-read costs
 
 On-demand billing for merge-on-read data is the sum of scans of the following data:
 
   - All logical bytes read in the data file (including rows that are marked as deleted by position and equality deletes).
-  - Logical bytes read loading the equality delete and position deletes files to find the deleted rows in a data file.
+  - Logical bytes read loading the equality delete, position delete, and deletion vector files to find the deleted rows in a data file.
 
 ## Require partition filter
 

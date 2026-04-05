@@ -226,6 +226,16 @@ When you view the tables and views in BigQuery, the value for suffix is the tabl
 </thead>
 <tbody>
 <tr class="odd">
+<td><strong>Financial summary reports</strong></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://developers.google.com/youtube/reporting/v1/reports/system_managed/financial-summaries#monthly-payments-summary">Monthly payments summary</a></td>
+<td>p_content_owner_payments_summary_a1_ suffix</td>
+<td>content_owner_payments_summary_a1_ suffix</td>
+</tr>
+<tr class="odd">
 <td><strong>Ads revenue reports</strong></td>
 <td></td>
 <td></td>

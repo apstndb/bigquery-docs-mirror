@@ -93,12 +93,6 @@ Since the search index was created on `  ALL COLUMNS  ` , any columns added to t
 
 ### Index with column granularity
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
-**Note:** For support during the preview, contact <bq-search@googlegroups.com> .
-
 When you create a search index, you can specify the column granularity for an indexed column. Column granularity lets BigQuery optimize certain kinds of search queries by storing additional column information in your search index. To set the column granularity for an indexed column, use the `  index_granularity  ` option in the `  index_column_option_list  ` when you run a [`  CREATE SEARCH INDEX  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) .
 
 Internally, BigQuery tables are organized into files. When you create an index, BigQuery creates a mapping from tokens to the files that contain those tokens. When you run a search query, BigQuery scans all of the files that contain the tokens. This might be inefficient if your search token rarely appears in the column that you're searching but is common in a different column.

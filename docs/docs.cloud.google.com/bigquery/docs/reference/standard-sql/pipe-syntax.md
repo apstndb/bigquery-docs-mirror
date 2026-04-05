@@ -346,7 +346,7 @@ FROM Produce
 ### `     SET    ` pipe operator
 
 ``` text
-|> SET column_name = expression [, ...]
+|> SET column = expression [, ...]
 ```
 
 **Description**
@@ -388,7 +388,7 @@ FROM (SELECT 2 AS x, 3 AS y) AS t
 ### `     DROP    ` pipe operator
 
 ``` text
-|> DROP column_name [, ...]
+|> DROP column [, ...]
 ```
 
 **Description**

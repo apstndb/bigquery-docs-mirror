@@ -5,7 +5,7 @@ This document shows you how to set up permissions for running generative AI quer
 There are two ways to set up permissions to run queries that use `  AI.*  ` functions:
 
   - Run the query using your end-user credentials
-  - Create a BigQuery ML connection to run the query using a service account
+  - Create a BigQuery connection to run the query using a service account
 
 In most cases, you can use end-user credentials and leave the `  CONNECTION  ` argument blank. If your query job is expected to run for 48 hours or longer, you should use a BigQuery connection and include it in the `  CONNECTION  ` argument.
 
@@ -26,13 +26,15 @@ You might also be able to get the required permissions through [custom roles](/i
 
 ### Grant the required roles to the user or group
 
-You can use the Google Cloud console to grant the required roles for a principal. The principal is the user or group that runs the query that uses `  AI.*  ` functions to call a Vertex AI foundation model.
+You can use the Google Cloud console or SQL to grant the required roles for a principal. The principal is the user or group that runs the query that uses `  AI.*  ` functions to call a Vertex AI foundation model.
+
+### Console
 
 1.  In the Google Cloud console, go to the **IAM** page.
 
 2.  Select your project.
 
-3.  To grant roles to a principal:
+3.  To grant roles to a principal, do the following:
     
     1.  Go to the **IAM & Admin** page.
     
@@ -53,6 +55,29 @@ You can use the Google Cloud console to grant the required roles for a principal
     8.  Search for or browse to the **BigQuery Job User** role and select it.
     
     9.  Click **Save** .
+
+### SQL
+
+Use the [`  GRANT  ` statement](/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+    
+    ``` text
+    GRANT `roles/aiplatform.user`, `roles/bigquery.jobUser`
+    ON PROJECT `PROJECT_ID`
+    TO "USER_OR_GROUP";
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : the project where you plan to use `  AI.*  ` functions.
+      - `  USER_OR_GROUP  ` : the user or group to grant access to, in the `  user: USER @ DOMAIN  ` or `  group: GROUP @ DOMAIN  ` format.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
 
 To modify roles for a principal who already has roles on the project, see [Grant additional roles to the same principal](/iam/docs/grant-role-console#grant-other-roles) .
 
@@ -91,6 +116,33 @@ Select one of the following options:
 9.  Click **Go to connection** .
 
 10. In the **Connection info** pane, copy the service account ID for use in a later step.
+
+### SQL
+
+Use the [`  CREATE CONNECTION  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+    
+    ``` text
+    CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
+    OPTIONS (
+      connection_type = "CLOUD_RESOURCE",
+      friendly_name = "FRIENDLY_NAME",
+      description = "DESCRIPTION"
+      );
+    ```
+    
+    Replace the following:
+    
+      - `  CONNECTION_NAME  ` : the name of the connection in either the `  PROJECT_ID . LOCATION . CONNECTION_ID  ` , `  LOCATION . CONNECTION_ID  ` , or `  CONNECTION_ID  ` format. If the project or location are omitted, then they are inferred from the project and location where the statement is run.
+      - `  FRIENDLY_NAME  ` (optional): a descriptive name for the connection.
+      - `  DESCRIPTION  ` (optional): a description of the connection.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
 
 ### bq
 
@@ -358,6 +410,29 @@ Select one of the following options:
 5.  Search for the **Vertex AI User** role, select it, and then click **Apply** .
 
 6.  Click **Save** .
+
+### SQL
+
+Use the [`  GRANT  ` statement](/bigquery/docs/reference/standard-sql/data-control-language#grant_statement) :
+
+1.  In the Google Cloud console, go to the **BigQuery** page.
+
+2.  In the query editor, enter the following statement:
+    
+    ``` text
+    GRANT `roles/aiplatform.user`
+    ON PROJECT `PROJECT_ID`
+    TO "connection:CONNECTION_NAME";
+    ```
+    
+    Replace the following:
+    
+      - `  PROJECT_ID  ` : the project where you plan to use Vertex AI.
+      - `  CONNECTION_NAME  ` : the name of the connection in either the `  PROJECT_ID . LOCATION . CONNECTION_ID  ` or `  LOCATION . CONNECTION_ID  ` format. If the project is omitted, then it is inferred from the project where the statement is run.
+
+3.  Click play\_circle **Run** .
+
+For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
 
 ### gcloud
 

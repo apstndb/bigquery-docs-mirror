@@ -50,7 +50,7 @@ In each of the following queries, replace dataset with your dataset name. Replac
 
 ### Products and product issues sample queries
 
-The following queries analyze data from the products and products issues report.
+The following queries analyze data from the products and product issues report.
 
 #### Products and product issues statistics
 

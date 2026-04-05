@@ -6,6 +6,22 @@ You can see the latest product updates for all of Google Cloud on the [Google Cl
 
 To get the latest product updates delivered to you, add the URL of this page to your [feed reader](https://wikipedia.org/wiki/Comparison_of_feed_aggregators) , or add the [feed URL](https://docs.cloud.google.com/feeds/bigquery-release-notes.xml) directly.
 
+## April 02, 2026
+
+Feature
+
+You can now use the [`  CREATE CONNECTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) , [`  ALTER CONNECTION SET OPTIONS  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_connection_set_options_statement) , and [`  DROP CONNECTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#drop_connection_statement) data definition language (DDL) statements to manage Cloud resource connections with GoogleSQL. Additionally, you can now use the [`  connection  ` user type](/bigquery/docs/reference/standard-sql/data-control-language#user_list) and [`  PROJECT  ` resource type](/bigquery/docs/reference/standard-sql/data-control-language#arguments) with `  GRANT  ` and `  REVOKE  ` data control language (DCL) statements to manage connection and project access. These features are [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+Feature
+
+The [BigQuery Migration Service supports SQL translations from Snowflake SQL to GoogleSQL](/bigquery/docs/migration/snowflake-migration-intro) . This feature is now [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
+With this change, the translation service supports a wider variety of Snowflake SQL and has improved support for several data types. Among other changes, the translation service maps Snowflake `  INTEGER  ` and zero-scale `  NUMERIC  ` types up to precision 38 to `  INT64  ` type in GoogleSQL for improved performance by default.
+
+Feature
+
+You can set the [column granularity](/bigquery/docs/search-index#column-granularity) when you [create a search index](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , which stores additional column information in your search index to further optimize your search query performance. This feature is [generally available](https://cloud.google.com/products#product-launch-stages) (GA).
+
 ## March 31, 2026
 
 Feature

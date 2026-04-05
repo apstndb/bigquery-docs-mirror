@@ -8,6 +8,7 @@ Data definition language (DDL) statements let you create and modify BigQuery res
   - [Table clones](/bigquery/docs/table-clones-intro)
   - [Table snapshots](/bigquery/docs/table-snapshots-intro)
   - [Views](/bigquery/docs/views)
+  - [Connections](/bigquery/docs/connections-api-intro)
   - [User-defined functions](#create_function_statement) (UDFs)
   - [Indexes](/bigquery/docs/search-intro)
   - [Capacity commitments and reservations](/bigquery/docs/reservations-intro)
@@ -5117,8 +5118,7 @@ The following options are supported:
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_index_column_granularity      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>In <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> .</p>
-<p>Example: <code dir="ltr" translate="no">        default_index_column_granularity='GLOBAL'       </code></p>
+<td><p>Example: <code dir="ltr" translate="no">        default_index_column_granularity='GLOBAL'       </code></p>
 <p>The default granularity of information to store for each indexed column. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
 </tr>
 </tbody>
@@ -5143,8 +5143,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       index_granularity      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>In <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> .</p>
-<p>Example: <code dir="ltr" translate="no">        index_granularity='GLOBAL'       </code></p>
+<td><p>Example: <code dir="ltr" translate="no">        index_granularity='GLOBAL'       </code></p>
 <p>The granularity of information to store for the indexed column. This setting overrides the default granularity specified in the <code dir="ltr" translate="no">        default_index_column_granularity       </code> field of the index options. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
 </tr>
 </tbody>
@@ -5423,6 +5422,95 @@ The user or service account that creates a data policy must have the `  bigquery
 The `  bigquery.dataPolicies.create  ` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
 If you are creating a data policy that references a custom masking routine, you also need [routine permissions](/bigquery/docs/routines#permissions) .
+
+## `     CREATE CONNECTION    ` statement
+
+Creates a connection. For more information, see [Introduction to connections](/bigquery/docs/connections-api-intro) .
+
+### Syntax
+
+``` text
+CREATE CONNECTION [IF NOT EXISTS] `[[project_id.]location.]connection_id`
+OPTIONS (connection_option_list);
+```
+
+### Arguments
+
+  - `  project_id  ` (Optional): The ID of the project to create the connection in. If omitted, the project where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](/bigquery/docs/locations) to create the connection in. If omitted, the location where you run this DDL statement is used.
+  - `  connection_id  ` : A name for the connection.
+  - [`  connection_option_list  `](#connection_option_list) : The options to set for the connection.
+
+### `     connection_option_list    `
+
+Specify options in the `  NAME=VALUE, ...  ` format. The following options are supported:
+
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><code dir="ltr" translate="no">       NAME      </code></th>
+<th><code dir="ltr" translate="no">       TYPE      </code></th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       connection_type      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><p>Required. Not modifiable.</p>
+<p>The connection type. Only <code dir="ltr" translate="no">        "CLOUD_RESOURCE"       </code> is supported for <a href="/bigquery/docs/create-cloud-resource-connection">Cloud resource connections</a> .</p></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       friendly_name      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><p>Optional.</p>
+<p>A descriptive name for the connection.</p></td>
+</tr>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       description      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td><p>Optional.</p>
+<p>A description of the connection.</p></td>
+</tr>
+</tbody>
+</table>
+
+### Required permissions
+
+This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+
+<table>
+<thead>
+<tr class="header">
+<th>Permission</th>
+<th>Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       bigquery.connections.create      </code></td>
+<td>The project that you're creating the connection in.</td>
+</tr>
+</tbody>
+</table>
+
+### Example
+
+The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` :
+
+``` text
+CREATE CONNECTION IF NOT EXISTS `us.my_cloud_resource_connection`
+OPTIONS (
+  connection_type = "CLOUD_RESOURCE",
+  friendly_name = "My Resource Connection",
+  description = "Connection to access Cloud resources"
+  );
+```
 
 ## `     ALTER SCHEMA SET DEFAULT COLLATE    ` statement
 
@@ -8275,6 +8363,80 @@ The user or service account that updates a data policy must have the `  bigquery
 
 The `  bigquery.dataPolicies.update  ` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
+## `     ALTER CONNECTION SET OPTIONS    ` statement
+
+Modifies an existing connection.
+
+### Syntax
+
+``` text
+ALTER CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`
+SET OPTIONS (alter_connection_option_list);
+```
+
+### Arguments
+
+  - `  project_id  ` (Optional): The ID of the project that the connection is in. If omitted, the project where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
+  - `  connection_id  ` : The name of the connection.
+  - [`  alter_connection_option_list  `](#alter_connection_option_list) : The options to alter for the connection.
+
+### `     alter_connection_option_list    `
+
+Specify options in the `  NAME=VALUE, ...  ` format. You can modify the following options:
+
+<table>
+<thead>
+<tr class="header">
+<th><code dir="ltr" translate="no">       NAME      </code></th>
+<th><code dir="ltr" translate="no">       TYPE      </code></th>
+<th>Details</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       friendly_name      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td>A descriptive name for the connection.</td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       description      </code></td>
+<td><code dir="ltr" translate="no">       STRING      </code></td>
+<td>A description of the connection.</td>
+</tr>
+</tbody>
+</table>
+
+### Required permissions
+
+This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+
+<table>
+<thead>
+<tr class="header">
+<th>Permission</th>
+<th>Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       bigquery.connections.update      </code></td>
+<td>The project that the connection is in.</td>
+</tr>
+</tbody>
+</table>
+
+### Examples
+
+The following example modifies the description of the `  my_cloud_resource_connection  ` connection:
+
+``` text
+ALTER CONNECTION `us.my_cloud_resource_connection`
+SET OPTIONS (
+  description = "Updated description for my Cloud resource connection"
+  );
+```
+
 ## `     DROP SCHEMA    ` statement
 
 Deletes a dataset.
@@ -9192,6 +9354,49 @@ DROP DATA_POLICY [ IF EXISTS ] `myproject.region-us.data_policy_name`;
 ### Required permissions
 
 The user or service account that creates a data policy must have the `  bigquery.dataPolicies.delete  ` permission. This permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
+
+## `     DROP CONNECTION    ` statement
+
+Deletes an existing connection.
+
+### Syntax
+
+``` text
+DROP CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`;
+```
+
+### Arguments
+
+  - `  project_id  ` (Optional): The ID of the project that the connection is in. If omitted, the project where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
+  - `  connection_id  ` : The name of the connection to delete.
+
+### Required permissions
+
+This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+
+<table>
+<thead>
+<tr class="header">
+<th>Permission</th>
+<th>Resource</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       bigquery.connections.delete      </code></td>
+<td>The project that the connection is in.</td>
+</tr>
+</tbody>
+</table>
+
+### Example
+
+The following example deletes the `  my_cloud_resource_connection  ` connection:
+
+``` text
+DROP CONNECTION IF EXISTS `us.my_cloud_resource_connection`;
+```
 
 ## Table path syntax
 

@@ -196,7 +196,7 @@ To add a task to a pipeline, follow these steps:
     
     2.  Search for an existing data preparation.
     
-    3.  Select a data preparation name and press enter.
+    3.  Select a data preparation name and press **Enter** .
     
     4.  Click **Save** .
     

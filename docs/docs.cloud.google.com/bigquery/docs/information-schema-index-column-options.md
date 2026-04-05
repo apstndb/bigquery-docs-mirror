@@ -1,9 +1,5 @@
 # SEARCH\_INDEX\_COLUMN\_OPTIONS view
 
-**Preview**
-
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
-
 The `  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMN_OPTIONS  ` view contains one row for each option set on a search-indexed column in the tables in a dataset.
 
 ## Required permissions

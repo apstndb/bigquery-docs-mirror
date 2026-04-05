@@ -20,7 +20,7 @@ Before you create a CSS Center data transfer:
       - `  asia-northeast1 (Tokyo)  ` ,
       - `  asia-southeast1 (Singapore)  ` ,
       - `  australia-southeast1 (Sydney)  ` ,
-      - `  europe-north1 (Findland)  ` ,
+      - `  europe-north1 (Finland)  ` ,
       - `  europe-west2 (London)  ` ,
       - `  europe-west6 (Zurich)  ` .
   - You must have your CSS domain ID in order to create a CSS Center data transfer.

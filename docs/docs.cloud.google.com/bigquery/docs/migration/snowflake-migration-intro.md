@@ -26,6 +26,65 @@ For more information about setting up a Snowflake data transfer, see [Schedule a
 
 When you make a Snowflake data transfer using the Snowflake connector, you can set up an incremental transfer that only transfers data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. For more information, see [Schedule a Snowflake transfer](/bigquery/docs/migration/snowflake-transfer) .
 
+## Migrate other Snowflake features
+
+Consider the following Snowflake features as you plan your migration to BigQuery.
+
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use case</th>
+<th>Snowflake Feature</th>
+<th>BigQuery Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Staging raw data files for load and export</td>
+<td>Data can be uploaded and downloaded to <a href="https://docs.snowflake.com/en/user-guide/data-load-considerations-stage">staging</a> with `GET` and `PUT` commands. Queries and `COPY` commands can read and write to stages.</td>
+<td>BigQuery relies on Cloud Storage for staging file data and supports reading from and writing to several other sources and Google Cloud services. Use Cloud Storage to upload and download raw data files.<br />
+<br />
+See <a href="/bigquery/docs/loading-data">Introduction to loading data</a> for more details on a variety of ways to load data from Cloud Storage and other sources and <a href="/bigquery/docs/export-intro">Introduction to data export</a> for more details on exporting to Cloud Storage and other sources.</td>
+</tr>
+<tr class="even">
+<td>Precomputing common query results</td>
+<td><a href="https://docs.snowflake.com/en/user-guide/dynamic-tables-about">Dynamic tables</a> can be defined with a query and refreshed on a schedule.</td>
+<td><a href="/bigquery/docs/materialized-views-manage#automatic-refresh">Materialized views</a> can be configured to persist and automatically refresh SQL query computation.</td>
+</tr>
+<tr class="odd">
+<td>Small DML operations</td>
+<td>Snowflake <a href="https://docs.snowflake.com/en/user-guide/tables-hybrid">Hybrid tables</a> allow for small DML writes.</td>
+<td><a href="/bigquery/docs/data-manipulation-language#fine-grained_dml">Fine-grained DML</a> can be used in BigQuery to improve latency and throughput of small writes.<br />
+<br />
+For advanced hybrid transactional/analytic processing (HTAP) use cases, consider using <a href="/bigquery/docs/spanner-external-datasets">Spanner external datasets</a> .</td>
+</tr>
+<tr class="even">
+<td>Notebooks and visualization</td>
+<td>Snowflake <a href="https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit">Streamlit</a> applications can visualize data with python code.</td>
+<td>BigQuery <a href="/bigquery/docs/notebooks-introduction">notebooks</a> and the <a href="/bigquery/docs/dataframes-visualizations">BigFrames</a> python library can be used to explore and visualize data in python. For information about integrations with Looker and other analysis and visualization tools, see <a href="/bigquery/docs/data-analysis-tools-intro">Introduction to analysis and business intelligence tools</a> .</td>
+</tr>
+<tr class="odd">
+<td>Physical data layout</td>
+<td>Snowflake supports clustering and micro-partitioning to organize data on disk.</td>
+<td>BigQuery supports explicit <a href="/bigquery/docs/partitioned-tables">partitioning</a> and <a href="/bigquery/docs/clustered-tables">clustering</a> to give users precise control over how data is distributed and organized, which can improve cost and runtime performance.<br />
+<br />
+The SQL translation service automatically handles table clustering translation and can be <a href="/bigquery/docs/config-yaml-translation#set_partition_expiration">configured</a> to customize partitioning and clustering when migrating DDLs.</td>
+</tr>
+<tr class="even">
+<td>External Functions &amp; Procedures</td>
+<td>Snowflake supports functions and stored procedures implemented in several external languages.</td>
+<td>BigQuery supports external function calls through Cloud Run functions. You can also use [user-defined functions](/bigquery/docs/user-defined-functions) (UDF) like SQL UDF, which are executed in BigQuery.<br />
+<br />
+BigQuery supports SQL for stored procedures. For other languages, we recommend using external functions or client-side application logic.</td>
+</tr>
+</tbody>
+</table>
+
 ## BigQuery security features
 
 When you migrate from Snowflake to BigQuery, consider how Google Cloud handles security differently from Snowflake.
@@ -72,18 +131,6 @@ BigQuery supports [table-level access control](/bigquery/docs/table-access-contr
 For more granular access, you can also use [column-level access control](/bigquery/docs/column-level-security-intro) or [row-level security](/bigquery/docs/row-level-security-intro) . This type of control provides fine-grained access to sensitive columns by using policy tags or type-based data classifications.
 
 You can also create [authorized views](/bigquery/docs/authorized-views) to limit data access for more fine-grained access control so that specified users can query a view without having read access to the underlying tables.
-
-## Migrate other Snowflake features
-
-Consider the following Snowflake features as you plan your migration to BigQuery. In some cases, you can use other services in Google Cloud to complete your migration.
-
-  - **Time travel:** In BigQuery, you can use [time travel](/bigquery/docs/time-travel) to access data from any point within the last seven days. If you need to access data beyond seven days, consider [exporting regularly scheduled snapshots](/bigquery/docs/scheduling-queries) .
-
-  - **Streams:** BigQuery supports [change data capture (CDC)](https://wikipedia.org/wiki/Change_data_capture) with [Datastream](/datastream/docs) . You can also use CDC software, like [Debezium](https://debezium.io/) , to write records to BigQuery with [Dataflow](/dataflow/docs) . For more information on manually designing a CDC pipeline with BigQuery, see [Migrating data warehouses to BigQuery: Change data capture (CDC)](/bigquery/docs/migration/pipelines#cdc) .
-
-  - **Tasks:** BigQuery lets you schedule queries and streams or stream integration into queries with [Datastream](/datastream/docs) .
-
-  - **External functions:** BigQuery supports external function calls through [Cloud Run functions](/functions/docs/concepts/overview) . You can also use user-defined functions (UDF) like [SQL UDF](/bigquery/docs/user-defined-functions) , although these functions are executed inside of BigQuery.
 
 ## Supported data types, properties, and file formats
 

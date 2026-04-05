@@ -21,7 +21,7 @@ You can specify BigLake Iceberg table in BigQuery as the destination table type 
 Transfers to BigLake Iceberg table in BigQuery are subject to the following limitations:
 
   - **Append-only:** Data is only appended to the destination table. Overwriting, updating, or deleting existing data is not supported.
-  - **Partitioning limitations:** Partitioning is supported on the destination BigLake Iceberg table in BigQuery, but some limitations apply. For more information, see [Partitioning limitations](/biglake/docs/biglake-iceberg-tables-in-bigquery#use_partitioning) .
+  - **Partitioning limitations:** Partitioning is supported on the destination BigLake Iceberg table in BigQuery, but some limitations apply. For more information, see [Partitioning limitations](/biglake/docs/lakehouse-iceberg-rest-catalog-transactions-partitioning#partitioning_limitations) .
   - **No backfills:** Transfers do not support [backfills](/bigquery/docs/samples/bigquerydatatransfer-schedule-backfill) .
 
 ## Pricing

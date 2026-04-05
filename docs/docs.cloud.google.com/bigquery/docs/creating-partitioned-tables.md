@@ -1268,8 +1268,8 @@ Replace the following:
   - PROJECT\_ID : Your project ID.
   - SOURCE\_DATASET : The dataset that contains the date-sharded tables.
   - SOURCE\_TABLE : The prefix of your date-sharded tables.
-  - DESTINATION\_DATASET ; The dataset for the new partitioned table.
-  - DESTINATION\_TABLE ; The name of the partitioned table to create.
+  - DESTINATION\_DATASET : The dataset for the new partitioned table.
+  - DESTINATION\_TABLE : The name of the partitioned table to create.
 
 The `  partition  ` command does not support the `  --label  ` , `  --expiration  ` , `  --add_tags  ` , or `  --description  ` flags. You can add labels, a table expiration, [tags](/bigquery/docs/tags) , and a description to the table after it is created.
 
