@@ -302,9 +302,9 @@ STRUCT(
       [, TOP_P AS top_p]
       [, TEMPERATURE AS temperature]
       [, STOP_SEQUENCES AS stop_sequences]
-    |
     }
-    [, MODEL_PARAMS AS model_params]
+    |
+    [MODEL_PARAMS AS model_params]
   }
   [, FLATTEN_JSON_OUTPUT AS flatten_json_output])
 )
@@ -369,9 +369,9 @@ STRUCT(
       [, TOP_P AS top_p]
       [, TEMPERATURE AS temperature]
       [, STOP_SEQUENCES AS stop_sequences]
-    |
     }
-    [, MODEL_PARAMS AS model_params]
+    |
+    [MODEL_PARAMS AS model_params]
   }
   [, FLATTEN_JSON_OUTPUT AS flatten_json_output])
 )
@@ -434,6 +434,7 @@ STRUCT(
       [, TOP_K AS top_k]
       [, TOP_P AS top_p]
       [, TEMPERATURE AS temperature]
+      [, USE_CHAT_MODE AS use_chat_mode]
     }
     |
     [, MODEL_PARAMS AS model_params]
@@ -483,6 +484,14 @@ STRUCT(
   - `  TEMPERATURE  ` : a `  FLOAT64  ` value in the range `  [0.0,1.0]  ` that controls the degree of randomness in token selection. Lower `  TEMPERATURE  ` values are good for prompts that require a more deterministic and less open-ended or creative response, while higher `  TEMPERATURE  ` values can lead to more diverse or creative results. A `  TEMPERATURE  ` value of `  0  ` is deterministic, meaning that the highest probability response is always selected. If you don't specify a value, the model determines an appropriate value.
 
   - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the JSON content returned by the function is parsed into separate columns. The default is `  FALSE  ` .
+
+<!-- end list -->
+
+  - `  USE_CHAT_MODE  ` : a `  BOOL  ` value that controls how the function interacts with models that support chat-based interactions.
+    
+      - If omitted, the function attempts to use the model's chat mode. If the model endpoint doesn't support chat mode, the function automatically falls back to using a standard non-chat request.
+      - If `  TRUE  ` , the function uses chat mode. If the model endpoint doesn't support chat mode, the query fails. This is useful to ensure you are using the intended interaction type.
+      - If `  FALSE  ` , the function disables chat mode. You are responsible for constructing the complete prompt, including any necessary formatting or templates expected by the model for non-chat interactions.
 
 <!-- end list -->
 

@@ -374,6 +374,7 @@ STRUCT(
       [, TOP_K AS top_k]
       [, TOP_P AS top_p]
       [, TEMPERATURE AS temperature]
+      [, USE_CHAT_MODE AS use_chat_mode]
     }
     |
     [, MODEL_PARAMS AS model_params]
@@ -411,6 +412,12 @@ STRUCT(
     Tokens are selected from the most to least probable until the sum of their probabilities equals the `  TOP_P  ` value. For example, if tokens A, B, and C have a probability of `  0.3  ` , `  0.2  ` , and `  0.1  ` , and the `  TOP_P  ` value is `  0.5  ` , then the model selects either A or B as the next token by using the `  TEMPERATURE  ` value and doesn't consider C.
 
   - `  TEMPERATURE  ` : a `  FLOAT64  ` value in the range `  [0.0,1.0]  ` that controls the degree of randomness in token selection. Lower `  TEMPERATURE  ` values are good for prompts that require a more deterministic and less open-ended or creative response, while higher `  TEMPERATURE  ` values can lead to more diverse or creative results. A `  TEMPERATURE  ` value of `  0  ` is deterministic, meaning that the highest probability response is always selected. If you don't specify a value, the model determines an appropriate value.
+
+  - `  USE_CHAT_MODE  ` : a `  BOOL  ` value that controls how the function interacts with models that support chat-based interactions.
+    
+      - If omitted, the function attempts to use the model's chat mode. If the model endpoint doesn't support chat mode, the function automatically falls back to using a standard non-chat request.
+      - If `  TRUE  ` , the function uses chat mode. If the model endpoint doesn't support chat mode, the query fails. This is useful to ensure you are using the intended interaction type.
+      - If `  FALSE  ` , the function disables chat mode. You are responsible for constructing the complete prompt, including any necessary formatting or templates expected by the model for non-chat interactions.
 
   - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 

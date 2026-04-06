@@ -366,7 +366,7 @@ When the query has a filter predicate on the `  _FILE_NAME  ` pseudocolumn, BigQ
 
 ## Optimize external table queries
 
-Consider enabling Anywhere Cache when querying Cloud Storage data with external tables. Anywhere Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets, which can potentially improve query performance and reduce query costs when querying external tables. For more information, see [Optimize Cloud Storage external table queries](/bigquery/docs/external-tables#cloud-storage-query-optimization) .
+Consider enabling Rapid Cache when querying Cloud Storage data with external tables. Rapid Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets, which can potentially improve query performance and reduce query costs when querying external tables. For more information, see [Optimize Cloud Storage external table queries](/bigquery/docs/external-tables#cloud-storage-query-optimization) .
 
 ## What's next
 

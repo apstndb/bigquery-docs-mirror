@@ -395,11 +395,11 @@ If you create a large, multi-stage query, each time you run it, BigQuery reads a
 
 Instead, break your query into stages where each stage materializes the query results by writing them to a [destination table](/bigquery/querying-data#permanent-table) . Querying the smaller destination table reduces the amount of data that is read and lowers costs. The cost of storing the materialized results is much less than the cost of processing large amounts of data.
 
-### Use Anywhere Cache to query Cloud Storage with external tables
+### Use Rapid Cache to query Cloud Storage with external tables
 
-**Best practice:** Consider enabling Anywhere Cache when querying Cloud Storage data with external tables.
+**Best practice:** Consider enabling Rapid Cache when querying Cloud Storage data with external tables.
 
-Anywhere Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets, which can potentially improve query performance and reduce query costs when querying external tables. For more information, see [Optimize Cloud Storage external table queries](/bigquery/docs/external-tables#cloud-storage-query-optimization) .
+Rapid Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets, which can potentially improve query performance and reduce query costs when querying external tables. For more information, see [Optimize Cloud Storage external table queries](/bigquery/docs/external-tables#cloud-storage-query-optimization) .
 
 ## Control workload costs
 

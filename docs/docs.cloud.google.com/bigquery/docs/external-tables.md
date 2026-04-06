@@ -130,16 +130,16 @@ For more information about using Cloud Storage to store and move large datasets,
 
 ## Optimize Cloud Storage external table queries
 
-To optimize performance and potentially reduce costs when querying data in Cloud Storage with external tables, consider enabling [Anywhere Cache](/storage/docs/anywhere-cache) .
+To optimize performance and potentially reduce costs when querying data in Cloud Storage with external tables, consider enabling [Rapid Cache](/storage/docs/rapid/rapid-cache) .
 
-Anywhere Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets. When enabled, BigQuery leverages Anywhere Cache to serve object read requests, providing you with:
+Rapid Cache provides an SSD-backed zonal read cache for your Cloud Storage buckets. When enabled, BigQuery leverages Rapid Cache to serve object read requests, providing you with:
 
   - **Accelerated query performance** : Faster data reads from Cloud Storage for your BigQuery workloads.
   - **Reduced network data transfer costs** : Reduced data transfer fees for BigQuery workloads backed by multi-region buckets. Data that is read from a cache incurs lower networking costs than data that is read directly from a multi-region bucket.
 
-BigQuery is a regional service, but its underlying compute resources can shift between zones for load balancing, so we recommend enabling Anywhere Cache in all zones within the region where your BigQuery workload is run. This ensures that an Anywhere Cache is available regardless of which zone BigQuery compute uses. For more information, see [Anywhere Cache pricing](https://cloud.google.com/storage/pricing#rapid-cache) .
+BigQuery is a regional service, but its underlying compute resources can shift between zones for load balancing, so we recommend enabling Rapid Cache in all zones within the region where your BigQuery workload is run. This ensures that a cache instance is available regardless of which zone BigQuery compute uses. For more information, see [Rapid Cache pricing](https://cloud.google.com/storage/pricing#rapid-cache) .
 
-To determine if Anywhere Cache is right for you, we recommend using the [Anywhere Cache recommender](/storage/docs/anywhere-cache-recommender) . The Anywhere Cache recommender provides recommendations and insights for creating caches in bucket-zone pairs by analyzing your data usage and storage.
+To determine if Rapid Cache is right for you, we recommend using the [Rapid Cache recommender](/storage/docs/rapid/rapid-cache-recommender) . The Rapid Cache recommender provides recommendations and insights for creating caches in bucket-zone pairs by analyzing your data usage and storage.
 
 ## Pricing
 

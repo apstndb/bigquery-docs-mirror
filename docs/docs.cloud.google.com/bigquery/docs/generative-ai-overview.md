@@ -36,17 +36,13 @@ The following categories of AI functions to help you accomplish these tasks:
 
   - **[Managed AI functions](#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality.
     
-      - Filter your data with natural language conditions
-        
-          - `  AI.IF  `
+      - `  AI.IF  ` : filter your data with natural language conditions.
     
-      - Rate input, such as by quality or sentiment
-        
-          - `  AI.SCORE  `
+      - `  AI.SCORE  ` : rate input, such as by quality or sentiment.
     
-      - Classify input into user-defined categories
-        
-          - `  AI.CLASSIFY  `
+      - `  AI.CLASSIFY  ` : classify input into user-defined categories.
+    
+      - `  AI.AGG  ` : aggregate input to summarize or analyze your data.
 
   - **[Task-specific functions](#task-specific_functions) :** These functions use Cloud AI APIs to help you perform tasks such as natural language processing, machine translation, document processing, audio transcription, and computer vision.
 
@@ -113,11 +109,12 @@ For more information about how to generate embeddings and use them to perform th
 
 This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Managed AI functions are purpose-built to automate routine tasks, such as classification, ordering, or filtering. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `  BOOL  ` , `  FLOAT64  ` or `  STRING  ` , and doesn't include additional status information from the model. The following managed AI functions are available:
+Managed AI functions are purpose-built to automate routine tasks, such as classification, ordering, aggregation, or filtering. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `  BOOL  ` , `  FLOAT64  ` or `  STRING  ` , and doesn't include additional status information from the model. The following managed AI functions are available:
 
   - [`  AI.IF  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : Filter text or multi-modal data, such as in a `  WHERE  ` or `  JOIN  ` clause, based on a prompt. For example, you could filter product descriptions by those that describe an item that would make a good gift.
   - [`  AI.SCORE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : Rate inputs based on a prompt in order to rank rows by quality, similarity, or other criteria. You can use this function in an `  ORDER BY  ` clause to extract the top K items according to score. For example, you could find the top 10 most positive or negative user reviews for a product.
   - [`  AI.CLASSIFY  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : Classify text into user-defined categories. You can use this function in a `  GROUP BY  ` clause to group inputs according to the categories that you define. For example, you could classify support tickets by whether they relate to billing, shipping, product quality, or something else.
+  - [`  AI.AGG  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) : Aggregate input based on natural language instructions to summarize or analyze your data. For example, you could scan logs of user application sessions to determine where customers are having difficulty, or you could summarize the contents of a large set of images.
 
 For a tutorial that shows examples of how to use these functions, see [Perform semantic analysis with managed AI functions](/bigquery/docs/semantic-analysis) .
 

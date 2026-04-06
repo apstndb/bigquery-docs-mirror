@@ -104,7 +104,7 @@ After you opt into early enforcement, the following REST v2 API dataset methods 
 
 ### datasets.get method
 
-The [`  datasets.get  ` method](/bigquery/docs/reference/rest/v2/datasets/get) has an additional [path parameter](/bigquery/docs/reference/rest/v2/datasets/get#path-parameters) named `  dataset_view  ` .
+The [`  datasets.get  ` method](/bigquery/docs/reference/rest/v2/datasets/get) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/get#query-parameters) named `  dataset_view  ` .
 
 This parameter gives you more control over the information returned by the `  datasets.get  ` method. Rather than always returning both access controls and metadata, the `  dataset_view  ` parameter lets you specify whether to return just metadata, just access controls, or both.
 
@@ -177,7 +177,7 @@ Replace the following:
 
 ### datasets.update method
 
-The [`  datasets.update  ` method](/bigquery/docs/reference/rest/v2/datasets/update) has an additional [path parameter](/bigquery/docs/reference/rest/v2/datasets/update#path-parameters) named `  update_mode  ` .
+The [`  datasets.update  ` method](/bigquery/docs/reference/rest/v2/datasets/update) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/update#query-parameters) named `  update_mode  ` .
 
 This parameter gives you more control over the fields updated by the `  datasets.update  ` method. Rather than always allowing updates to both access controls and metadata, the `  update_mode  ` parameter lets you specify whether to update just metadata, just access controls, or both.
 
@@ -251,7 +251,7 @@ Replace the following:
 
 ### datasets.patch method
 
-The [`  datasets.patch  ` method](/bigquery/docs/reference/rest/v2/datasets/patch) has an additional [path parameter](/bigquery/docs/reference/rest/v2/datasets/patch#path-parameters) named `  update_mode  ` .
+The [`  datasets.patch  ` method](/bigquery/docs/reference/rest/v2/datasets/patch) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/patch#query-parameters) named `  update_mode  ` .
 
 This parameter gives you more control over the fields updated by the `  datasets.patch  ` method. Rather than always allowing updates to both access controls and metadata, the `  update_mode  ` parameter lets you specify whether to update just metadata, just access controls, or both.
 

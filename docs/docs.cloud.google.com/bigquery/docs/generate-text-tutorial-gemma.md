@@ -145,17 +145,6 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
 2.  In the query editor, enter the following statement to perform keyword extraction on 10 movie reviews:
     
     ``` text
-    -- This function takes your instruction and wraps it with chat template for
-    -- better output quality.
-    -- This is usually the recommended way when using Gemma instruction-tuned models.
-    CREATE TEMP FUNCTION FormatPromptWithChatTemplate(user_instruction STRING) AS (
-      CONCAT(
-        '<start_of_turn>user\n',
-        user_instruction,
-        '<end_of_turn>\n<start_of_turn>model\n'
-      )
-    );
-    
     SELECT
       *
     FROM
@@ -163,8 +152,7 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
         MODEL `bqml_tutorial.gemma_model`,
         (
           SELECT
-            FormatPromptWithChatTemplate(
-              'Extract the key words from the movie review below: ' || review)
+            'Extract the key words from the movie review below: ' || review
               AS prompt,
             *
           FROM
@@ -176,29 +164,27 @@ Perform keyword extraction on [IMDB](https://www.imdb.com/) movie reviews by usi
           100 AS max_output_tokens));
     ```
     
-    For more information about using chat templates with Gemma, see [Gemma formatting and system instructions](https://ai.google.dev/gemma/docs/core/prompt-structure) .
-    
     The output is similar to the following, with non-generated columns omitted for clarity:
     
     ``` text
     +----------------------------------------------+-------------------------+-----------------------------+-----+
     | result                                       | status                  | prompt                      | ... |
-    +----------------------------------------------+-------------------------------------------------------+-----+
-    | Here are some key words from the             |                         | <start_of_turn>user         |     |
-    | movie review: * **Romance:**                 |                         | Extract the key words from  |     |
-    | "romantic tryst," "elope" * **Comedy:**      |                         | the movie review below:     |     |
-    | "Contrived Comedy" * **Burglary:**           |                         | Linda Arvidson (as Jennie)  |     |
-    | "burglar," "rob," "booty" * **Chase:**       |                         | and Harry Solter (as Frank) |     |
-    | "chases," "escape" * **Director:** "D.W.     |                         | are enjoying a romantic     |     |
-    | Griffith" * **Actors:** "Linda Arvidson,"... |                         | tryst, when in walks her... |     |
     +----------------------------------------------+-------------------------+-----------------------------+-----+
-    | Here are some key words from the             |                         | <start_of_turn>user         |     |
-    | movie review: * **Elderbush Gilch:** The     |                         | Extract the key words from  |     |
-    | name of the movie being reviewed. *          |                         | the movie review below:     |     |
-    | **Disappointment:** The reviewer's           |                         | This is the second addition |     |
-    | overall feeling about the film. *            |                         | to Frank Baum's personally  |     |
-    | **Dim-witted:** Describes the story          |                         | produced trilogy of Oz      |     |
-    | line negatively. * **Moronic, sadistic,...   |                         | films. It's essentially ... |     |
+    | Here are some key words from the             |                         | Extract the key words from  |     |
+    | movie review: * **Romance:**                 |                         | the movie review below:     |     |
+    | "romantic tryst," "elope" * **Comedy:**      |                         | Linda Arvidson (as Jennie)  |     |
+    | "Contrived Comedy" * **Burglary:**           |                         | and Harry Solter (as Frank) |     |
+    | "burglar," "rob," "booty" * **Chase:**       |                         | are enjoying a romantic     |     |
+    | "chases," "escape" * **Director:** "D.W.     |                         | tryst, when in walks her... |     |
+    | Griffith" * **Actors:** "Linda Arvidson,"... |                         |                             |     |
+    +----------------------------------------------+-------------------------+-----------------------------+-----+
+    | Here are some key words from the             |                         | Extract the key words from  |     |
+    | movie review: * **Elderbush Gilch:** The     |                         | the movie review below:     |     |
+    | name of the movie being reviewed. *          |                         | This is the second addition |     |
+    | **Disappointment:** The reviewer's           |                         | to Frank Baum's personally  |     |
+    | overall feeling about the film. *            |                         | produced trilogy of Oz      |     |
+    | **Dim-witted:** Describes the story          |                         | films. It's essentially ... |     |
+    | line negatively. * **Moronic, sadistic,...   |                         |                             |     |
     +----------------------------------------------+-------------------------+-----------------------------+-----+
     ```
     
@@ -218,17 +204,6 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
 2.  In the query editor, run the following statement to perform sentiment analysis on 10 movie reviews:
     
     ``` text
-    -- This function takes your instruction and wraps it with chat template for
-    -- better output quality.
-    -- This is usually the recommended way when using Gemma instruction-tuned models.
-    CREATE TEMP FUNCTION FormatPromptWithChatTemplate(user_instruction STRING) AS (
-      CONCAT(
-        '<start_of_turn>user\n',
-        user_instruction,
-        '<end_of_turn>\n<start_of_turn>model\n'
-      )
-    );
-    
     SELECT
       *
     FROM
@@ -236,9 +211,8 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
         MODEL `bqml_tutorial.gemma_model`,
         (
           SELECT
-            FormatPromptWithChatTemplate(
-              'Analyze the sentiment of the following movie review and classify it as either POSITIVE or NEGATIVE. \nMovie Review: '
-              || review) AS prompt,
+            'Analyze the sentiment of the following movie review and classify it as either POSITIVE or NEGATIVE. \nMovie Review: '
+              || review AS prompt,
             *
           FROM
             `bigquery-public-data.imdb.reviews`
@@ -249,16 +223,13 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
           128 AS max_output_tokens));
     ```
     
-    For more information about using chat templates with Gemma, see [Gemma formatting and system instructions](https://ai.google.dev/gemma/docs/core/prompt-structure) .
-    
     The output is similar to the following, with non-generated columns omitted for clarity:
     
     ``` text
     +-----------------------------+-------------------------+-----------------------------+-----+
     | result                      | status                  | prompt                      | ... |
-    +-----------------------------+-------------------------------------------------------+-----+
-    | **NEGATIVE**                |                         | <start_of_turn>user         |     |
-    |                             |                         | Analyze the sentiment of    |     |
+    +-----------------------------+-------------------------+-----------------------------+-----+
+    | **NEGATIVE**                |                         | Analyze the sentiment of    |     |
     |                             |                         | movie review and classify   |     |
     |                             |                         | it as either POSITIVE or    |     |
     |                             |                         | NEGATIVE. Movie Review:     |     |
@@ -266,8 +237,7 @@ Perform sentiment analysis on [IMDB](https://www.imdb.com/) movie reviews by usi
     |                             |                         | made some great short       |     |
     |                             |                         | comedies in the late...     |     |
     +-----------------------------+-------------------------+-----------------------------+-----+
-    | **NEGATIVE**                |                         | <start_of_turn>user         |     |
-    |                             |                         | Analyze the sentiment of    |     |
+    | **NEGATIVE**                |                         | Analyze the sentiment of    |     |
     |                             |                         | movie review and classify   |     |
     |                             |                         | it as either POSITIVE or    |     |
     |                             |                         | NEGATIVE. Movie Review:     |     |

@@ -1017,6 +1017,7 @@ https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_fun
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights
+https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies
 https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed
