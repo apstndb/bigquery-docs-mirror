@@ -6,7 +6,7 @@ This tutorial uses the product catalog from the public Cymbal pet store dataset.
 
 ## Objectives
 
-  - Use [`  ObjectRef  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectref) values to store image data alongside structured data in a BigQuery [standard table](/bigquery/docs/tables-intro#standard-tables) .
+  - Use [`  ObjectRef  `](/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](/bigquery/docs/tables-intro#standard-tables) .
   - Generate text based on image data from a standard table by using the [`  AI.GENERATE_TABLE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
   - Transform existing images to create new images by using a Python UDF.
   - Chunk PDFs for further analysis by using a Python UDF.

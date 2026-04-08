@@ -549,6 +549,8 @@ Important troubleshooting considerations:
 
   - Take into account that a *Daily* time period in the Cloud Billing report starts at midnight US and Canadian Pacific Time (UTC-8), and observes daylight saving time shifts in the United States—adjust your calculations and data aggregations to match the same timeframes.
 
+  - When you compare the Cloud Billing UI to the [Cloud Billing data export](/billing/docs/how-to/export-data-bigquery) , to BigQuery, make sure that you aggregate based on `  usage_start_time  ` and `  usage_end_time  ` , not the `  export_time  ` .
+
   - Filter by project if there are multiple projects attached to the billing account and you want to review charges coming from a specific project.
 
   - Make sure to select the correct region when performing investigations.

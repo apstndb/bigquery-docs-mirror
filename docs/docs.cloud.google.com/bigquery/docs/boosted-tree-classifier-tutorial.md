@@ -395,13 +395,13 @@ prediction_data = input_data[input_data["dataframe"] == "prediction"]
 predictions = tree_model.predict(prediction_data)
 predictions.peek()
 # Output:
-# predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_bracket_probs.prob
-#                   <=50K                                   >50K                   0.05183430016040802
-#                                                           <50K                   0.94816571474075317
-#                   <=50K                                   >50K                   0.00365859130397439
-#                                                           <50K                   0.99634140729904175
-#                   <=50K                                   >50K                   0.037775970995426178
-#                                                           <50K                   0.96222406625747681
+# predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_brack<et_probs.prob
+#                   =50K >                                  50K                   0.05183430016040802
+#                         <                                  50K                   0.9481<6571474075317
+#                   =50K >                                  50K                   0.00365859130397439
+#                         <                                  50K                   0.9963<4140729904175
+#                   =50K >                                  50K                   0.037775970995426178
+#                         <                                  50K                   0.96222406625747681
 ```
 
 The `  predicted_income_bracket  ` contains the predicted value from the model. The `  predicted_income_bracket_probs.label  ` shows the two labels that the model had to choose between, and the `  predicted_income_bracket_probs.prob  ` column shows the probability of the given label being the correct one.

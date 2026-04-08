@@ -102,7 +102,7 @@ The following table describes the fixed schema used by object tables:
 <td><code dir="ltr" translate="no">       ref      </code></td>
 <td>STRUCT</td>
 <td>NULLABLE</td>
-<td>Google-managed Cloud Storage metadata stored in the <a href="/bigquery/docs/reference/standard-sql/objectref_functions#objectref"><code dir="ltr" translate="no">        ObjectRef       </code> format</a> .<br />
+<td>Google-managed Cloud Storage metadata stored in the <a href="/bigquery/docs/work-with-objectref"><code dir="ltr" translate="no">        ObjectRef       </code> format</a> .<br />
 <br />
 You can use this column <a href="/bigquery/docs/objectref-columns">to maintain <code dir="ltr" translate="no">        ObjectRef       </code> values in standard tables</a> . <code dir="ltr" translate="no">       ObjectRef      </code> values let you integrate object data with structured data.</td>
 </tr>

@@ -16,7 +16,7 @@ The following sections describe the table types that BigQuery supports.
 
 ### Standard BigQuery tables
 
-Standard BigQuery tables contain structured data and are stored in BigQuery storage in a columnar format. You can also store references to unstructured data in standard tables by using struct columns that adhere to the [`  ObjectRef  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectref) format. For more information about working with `  ObjectRef  ` values, see [Specify ObjectRef columns in table schemas](/bigquery/docs/objectref-columns) .
+Standard BigQuery tables contain structured data and are stored in BigQuery storage in a columnar format. You can also store references to unstructured data in standard tables by using struct columns that adhere to the [`  ObjectRef  `](/bigquery/docs/work-with-objectref) format. For more information about working with `  ObjectRef  ` values, see [Specify ObjectRef columns in table schemas](/bigquery/docs/objectref-columns) .
 
 BigQuery has the following table types:
 

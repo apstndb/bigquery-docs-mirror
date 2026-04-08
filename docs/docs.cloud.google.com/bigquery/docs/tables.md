@@ -2466,12 +2466,12 @@ The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       column_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the column.</td>
+<td>The name of the top-level column.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       field_path      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The path to a column <a href="/bigquery/docs/nested-repeated">nested</a> within a `RECORD` or `STRUCT` column.</td>
+<td>The name of the top-level column or the path to the column <a href="/bigquery/docs/nested-repeated">nested</a> within a <code dir="ltr" translate="no">       RECORD      </code> or <code dir="ltr" translate="no">       STRUCT      </code> column.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       data_type      </code></td>

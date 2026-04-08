@@ -675,9 +675,23 @@ global:
     timestamp: DATETIME
 ```
 
-In dialects like Teradata, datetime-related functions such as `  current_date  ` , `  current_time  ` , or `  current_timestamp  ` return timestamps based on the configured time zone, either local or session. BigQuery, on the other hand, always returns timestamps in UTC. To ensure consistent behavior between the two dialects, it is necessary to configure the time zone accordingly.
+### Setting default time zone
 
-In the following example, the configuration YAML converts a `  TIMESTAMP  ` and a `  TIMESTAMP WITH TIME ZONE  ` data type to `  DATETIME  ` , with the target time zone set to `  Europe/Paris  ` .
+**Preview**
+
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+
+Database dialects have varying semantics and names for different date and time related data types. The translation service standardizes on the following terminology in its YAML configuration, regardless of the name of the input dialect's data type:
+
+  - A `  datetime  ` is a combination of `  Y-M-D H:M:S  ` that is not fixed to any particular time zone. `  datetime  ` represents a wall-clock time and not a particular instant.
+  - A `  timestamp  ` represents a particular, or absolute time instant and as such, is implicitly fixed to a particular time zone, which might be a session-level or database setting.
+  - A `  timestamptz  ` represents a particular instant like a `  timestamp  ` , but unlike a `  timestamp  ` it carries with it a particular time zone offset. While they represent the same instant, `  2019-06-01 12:00:00+4  ` and `  2019-06-01 06:00:00-2  ` are considered different `  timestamptz  ` values.
+
+In dialects like Teradata, datetime-related functions such as `  current_date  ` , `  current_time  ` , or `  current_timestamp  ` return timestamps based on an implicitly configured session time zone parameter. BigQuery, on the other hand, always returns timestamps in UTC. To ensure consistent behavior between the two dialects, it might be necessary to configure a time zone accordingly.
+
+We recommend that you specify the default time zone for translation if your source database has a default that is not UTC. This will ensure correct behavior of the translated query by preserving the time zone.
+
+In the following example, the configuration YAML converts a `  TIMESTAMP  ` and a `  TIMESTAMPTZ  ` data type to `  DATETIME  ` , with the target time zone set to `  Europe/Paris  ` .
 
 ``` text
 type: experimental_object_rewriter
@@ -700,23 +714,101 @@ A SQL translation with this configuration YAML file might look like the followin
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a timestamp);
-      select a from x where a &gt; current_timestamp(0);
+<td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
+
+      select c_timestamp from x where c_timestamp &gt; current_timestamp(0);
+      select c_timestamptz from x where c_timestamptz &gt; cast(current_timestamp(0) as timestamp_tz);
+      select c_datetime from x where c_datetime &gt; cast(current_timestamp(0) as timestamp_ntz);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
 <td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
-        a TIMESTAMP
+        c_timestamp DATETIME,
+        c_timestamptz DATETIME,
+        c_datetime DATETIME
       )
       ;
       SELECT
-          x.a
+          x.c_timestamp
         FROM
           test.x
-        WHERE x.a &gt; datetime_trunc(current_datetime(&#39;Europe/Paris&#39;), SECOND)
+        WHERE x.c_timestamp &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+      ;
+      SELECT
+          x.c_timestamptz
+        FROM
+          test.x
+        WHERE x.c_timestamptz &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+      ;
+      SELECT
+          x.c_datetime
+        FROM
+          test.x
+        WHERE x.c_datetime &gt; datetime(current_timestamp(), &#39;Europe/Paris&#39;)
+      ;
+    </code></pre></td>
+</tr>
+</tbody>
+</table>
+
+In the following example, the configuration YAML converts a `  DATETIME  ` data type to `  TIMESTAMP  ` .
+
+By default, `  TIMESTAMPTZ  ` is converted to `  TIMESTAMP  ` with no configuration required.
+
+``` text
+type: experimental_object_rewriter
+global:
+  typeConvert:
+    datetime:
+      target: TIMESTAMP
+```
+
+A SQL translation with this configuration YAML file might look like the following:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
+
+      select c_timestamp from x where c_timestamp &gt; current_timestamp(0);
+      select c_timestamptz from x where c_timestamptz &gt; cast(current_timestamp(0) as timestamp_tz);
+      select c_datetime from x where c_datetime &gt; cast(current_timestamp(0) as timestamp_ntz);
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+      (
+        c_timestamp TIMESTAMP,
+        c_timestamptz TIMESTAMP,
+        c_datetime TIMESTAMP
+      )
+      ;
+      SELECT
+          x.c_timestamp
+        FROM
+          test.x
+        WHERE x.c_timestamp &gt; current_timestamp()
+      ;
+      SELECT
+          x.c_timestamptz
+        FROM
+          test.x
+        WHERE x.c_timestamptz &gt; current_timestamp()
+      ;
+      SELECT
+          x.c_datetime
+        FROM
+          test.x
+        WHERE x.c_datetime &gt; current_timestamp()
       ;
     </code></pre></td>
 </tr>

@@ -147,7 +147,7 @@ Use the [`  CREATE CONNECTION  ` statement](/bigquery/docs/reference/standard-sq
     CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
     OPTIONS (
       connection_type = "CLOUD_RESOURCE",
-      friendly_name = &quot;FRIENDLY_NAME";,
+      friendly_name = "FRIENDLY_NAME",
       description = "DESCRIPTION"
       );
     ```
@@ -227,7 +227,9 @@ def create_connection(
         project_id: The Google Cloud project ID.
         location: The location of the connection (for example, "us-central1").
         connection_id: The ID of the connection to create.
-    """    parent = client.common_location_path(project_id, location)
+    """
+
+    parent = client.common_location_path(project_id, location)
 
     connection = bigquery_connection_v1.Connection(
         friendly_name="Example Connection",
@@ -260,7 +262,7 @@ To authenticate to BigQuery, set up Application Default Credentials. For more in
 
 ``` javascript
 const {ConnectionServiceClient} =
-  require(&#39;@google-cloud/bigquery-connection').v1;
+  require('@google-cloud/bigquery-connection').v1;
 const {status} = require('@grpc/grpc-js');
 
 const client = new ConnectionServiceClient();
@@ -452,7 +454,7 @@ Replace the following:
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
     REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
-    OPTIONS (ENDPOINT = &#39;ENDPOINT');
+    OPTIONS (ENDPOINT = 'ENDPOINT');
     ```
     
     Replace the following:
@@ -565,7 +567,7 @@ SELECT
 FROM
 AI.GENERATE_TABLE( MODEL `mydataset.gemini_model`,
   TABLE `mydataset.mytable`,
-  STRUCT("keywords <ARRAYSTRING>, sentiment STRING" AS output_schema));
+  STRUCT("keywords ARRAY<STRING>, sentiment STRING" AS output_schema));
 ```
 
 The following example shows a request that takes prompt data from a query and provides a SQL schema to format the model's response:
@@ -580,6 +582,6 @@ FROM
         'John Smith is a 20-year old single man living at 1234 NW 45th St, Kirkland WA, 98033. He has two phone numbers 123-123-1234, and 234-234-2345. He is 200.5 pounds.'
           AS prompt
     ),
-    STRUCT("a<ddress STRUCTstreet_address STRING, city STRING, state STRING, zip_code STRING>, age INT64, is_married BOOL, name STRING, ph<one_number ARRAYSTRING>, weight_in_pounds FLOAT64"
+    STRUCT("address STRUCT<street_address STRING, city STRING, state STRING, zip_code STRING>, age INT64, is_married BOOL, name STRING, phone_number ARRAY<STRING>, weight_in_pounds FLOAT64"
         AS output_schema, 8192 AS max_output_tokens));
 ```

@@ -1,6 +1,6 @@
 # COLUMN\_FIELD\_PATHS view
 
-The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view contains one row for each column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
+The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view contains one row for each top-level column or column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
 ## Required permissions
 
@@ -20,7 +20,7 @@ For more information about BigQuery permissions, see [Access control with IAM](/
 
 ## Schema
 
-Query results contain one row for each column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
+Query results contain one row for each top-level column or column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
 When you query the `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view, the query results contain one row for each column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
@@ -58,12 +58,12 @@ The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       column_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the column.</td>
+<td>The name of the top-level column.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       field_path      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The path to a column <a href="/bigquery/docs/nested-repeated">nested</a> within a `RECORD` or `STRUCT` column.</td>
+<td>The name of the top-level column or the path to the column <a href="/bigquery/docs/nested-repeated">nested</a> within a <code dir="ltr" translate="no">       RECORD      </code> or <code dir="ltr" translate="no">       STRUCT      </code> column.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       data_type      </code></td>

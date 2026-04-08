@@ -970,7 +970,7 @@ You can't use an asterisk wildcard when you create external tables linked to Dat
 The following Cloud Storage retrieval and data transfer fees apply to BigQuery requests:
 
   - Retrieval fees for Nearline, Coldline, and Archive storage classes are charged according to existing [pricing documentation](https://cloud.google.com/storage/pricing#retrieval-pricing) and [retrieval SKUs](/bigquery/docs/skus?filter=95FF-2EF5-5EA1%20Retrieval&currency=USD) .
-  - Inter-region network data transfer fees are charged when a BigQuery job in one location reads data stored in a Cloud Storage bucket in a different location. These charges are covered by following SKUs:
+  - [Inter-region network data transfer fees](https://cloud.google.com/storage/pricing#network-buckets) are charged when a BigQuery job in one location reads data stored in a Cloud Storage bucket in a different location. These charges are covered by following SKUs:
       - Google Cloud Storage Data Transfer between continent 1 and continent 2. For example, see [Google Cloud Storage Data Transfer between Northern America and Europe](/bigquery/docs/skus?currency=USD&filter=C7FF-4F9E-C0DB&e=48754805) for data transfer from `  us-central1  ` to `  europe-west1  ` .
       - Network Data Transfer Google Cloud Inter Region within a continent. For example, see [Network Data Transfer Google Cloud Inter Region within Northern America](/bigquery/docs/skus?currency=USD&filter=8878-37D4-D2AC&e=48754805) for data transfer from `  us-east4  ` to `  US  ` .
 

@@ -70,6 +70,7 @@ https://docs.cloud.google.com/bigquery/docs/bi-engine-monitor
 https://docs.cloud.google.com/bigquery/docs/bi-engine-query
 https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity
 https://docs.cloud.google.com/bigquery/docs/biglake-audit-logging
+https://docs.cloud.google.com/bigquery/docs/biglake-intro
 https://docs.cloud.google.com/bigquery/docs/bigquery-cud
 https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction
 https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial
@@ -252,6 +253,7 @@ https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma
 https://docs.cloud.google.com/bigquery/docs/generate-video-embedding
 https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding
 https://docs.cloud.google.com/bigquery/docs/generative-ai-overview
+https://docs.cloud.google.com/bigquery/docs/geospatial-data
 https://docs.cloud.google.com/bigquery/docs/geospatial-get-started
 https://docs.cloud.google.com/bigquery/docs/geospatial-intro
 https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane

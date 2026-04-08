@@ -305,6 +305,35 @@ If you anticipate that you might want to restore a table later than what is allo
 
 You cannot restore a logical view directly. For more information, see [Restore a view](/bigquery/docs/managing-views#restore_a_view) .
 
+### Identify when a table was deleted
+
+Use the following filter in Logs Explorer in the Google Cloud console to identify the audit entry that shows the expiration or deletion for a specified table:
+
+``` text
+resource.type="bigquery_resource"
+protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID/tables/TABLE_ID"
+(protoPayload.methodName="google.cloud.bigquery.v2.TableService.DeleteTable" OR protoPayload.methodName="tableservice.delete" OR protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.statementType="DROP_TABLE" OR protoPayload.methodName="InternalTableExpired")
+```
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : your project ID.
+  - `  DATASET_ID  ` : the ID of the dataset that contained the table.
+  - `  TABLE_ID  ` : the ID of the deleted table.
+
+Alternatively, use the following filter to find the expiration or deletion for the dataset that contained the table:
+
+``` text
+resource.type="bigquery_dataset"
+protoPayload.resourceName="projects/PROJECT_ID/datasets/DATASET_ID"
+(protoPayload.methodName="google.cloud.bigquery.v2.DatasetService.DeleteDataset" OR protoPayload.methodName="datasetservice.delete")
+```
+
+Replace the following:
+
+  - `  PROJECT_ID  ` : your project ID.
+  - `  DATASET_ID  ` : the ID of the dataset that contained the table.
+
 ## Identify the cause of table deletion
 
 You can use the [`  INFORMATION_SCHEMA.TABLE_STORAGE  `](/bigquery/docs/information-schema-table-storage) view to determine how a table was deleted.

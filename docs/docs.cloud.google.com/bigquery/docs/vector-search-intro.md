@@ -29,7 +29,7 @@ You can use the [`  AI.EMBED  ` function](/bigquery/docs/reference/standard-sql/
 The `  AI.EMBED  ` function supports the following types of input:
 
   - Text data.
-  - Image data represented by [`  ObjectRef  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectref) values.
+  - Image data represented by [`  ObjectRef  `](/bigquery/docs/work-with-objectref) values.
   - Image data represented by [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values.
 
 ### Generate a table of embeddings

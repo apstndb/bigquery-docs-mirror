@@ -650,6 +650,8 @@ WHERE date(creation_time)= CURRENT_DATE()
 
 There is no charge for batch loading data into BigQuery using the shared slot pool. For more information, see [BigQuery data ingestion pricing](https://cloud.google.com/bigquery/pricing#data_ingestion_pricing) .
 
+If you attempt to load data from a Cloud Storage bucket that's in a different location than the destination BigQuery dataset, [data transfer charges](https://cloud.google.com/storage/pricing#network-buckets) apply.
+
 ## Example use case
 
 Suppose there is a nightly batch processing pipeline that needs to be completed by a fixed deadline. Data needs to be available by this deadline for further processing by another batch process to generate reports to be sent to a regulator. This use case is common in regulated industries such as finance.

@@ -613,12 +613,25 @@ The following are common errors encountered when [creating a Salesforce transfer
 
 ## Shopify transfer issues
 
+  - Error: `  [NOT_FOUND] Your app doesn't have a publication for this shop.  `  
+    **Resolution:** This error can occur when there is an issue with the way the custom app is set up. We recommend uninstalling and reinstalling the custom app with the following steps.
+    
+    1.  [Uninstall your Shopify app](https://help.shopify.com/en/manual/apps/uninstalling-apps) .
+    2.  [Create a custom app](https://help.shopify.com/en/manual/apps/install-setup-apps#create-and-install-a-custom-app) with the following configurations.
+        1.  During app creation, select **Custom distribution** . You'll need to provide your store domain or admin URL. Once configured, Shopify generates a link to complete your app installation. For more information, see [Select distribution method](https://shopify.dev/docs/apps/launch/distribution/select-distribution-method) .
+        2.  During app creation, click **API access request** and select **Enable storefront** and enable the `  read_all_orders  ` scope.
+        3.  Install the custom app.
+    3.  With the custom app reinstalled, rerun the data transfer.
+
   - Error: `  PERMISSION_DENIED: Permission denied. Your API key may lack required access to the provided account. Please also check for typos like whitespace or if the provided accountId even exists  `  
     **Resolution:** Verify that the Shopify Admin API access token is correct, and verify that the Shopify app has all the [required access roles](/bigquery/docs/shopify-transfer#shopify-prerequisites) .
+
   - Error: `  INVALID_ARGUMENT: Table ' NAME ' does not exist in asset " ASSET "  `  
     **Resolution:** Check that the specified asset name is valid and does not contain any leading or trailing spaces. When [creating a Shopify transfer](/bigquery/docs/shopify-transfer#shopify-transfer-setup) , we recommend that you click **Browse** to select the asset from the list of available objects.
+
   - Error: `  UNAUTHENTICATED: Authentication failed. Please verify your Shopify access token.  `  
     **Resolution:** Check that your Shopify Admin API access token is correct. For more information, see [Shopify prerequisites](/bigquery/docs/shopify-transfer#shopify-prerequisites) .
+
   - Error: `  UNKNOWN: An unknown error occurred while processing the request.  `  
     **Resolution:** Verify that the Shopify Admin API access token and the shop name is correct, and then retry the transfer job. If the issue persists, [contact Cloud Customer Care](/bigquery/docs/getting-support) .
 

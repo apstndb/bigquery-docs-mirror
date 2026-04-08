@@ -83,6 +83,8 @@ The following BigQuery features work transparently with materialized views:
 
   - **[Cost estimation using dry run](/bigquery/docs/best-practices-costs#perform-dry-run) :** A dry run repeats query rewrite logic using the available materialized views and provides a cost estimate. You can use this feature as a way to test whether a specific query uses any materialized views.
 
+  - **[Cross-region data replication](/bigquery/docs/data-replication) :** Materialized views can be created on top of BigQuery tables that have cross-region replication enabled, but only on the primary region. If the secondary region is used, you can encounter the following error message: `  The dataset replica of the cross region dataset {PROJECT}:{DATASET} in region {REGION} is read-only because it's not the primary replica.  `
+
 ### BigLake metadata cache-enabled tables
 
 **Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](/biglake/docs/introduction) .

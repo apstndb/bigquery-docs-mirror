@@ -7,7 +7,7 @@ Embeddings are high-dimensional numerical vectors that represent a given entity.
 You can create embeddings for the following types of data:
 
   - Text data from standard tables.
-  - Visual data that is returned as [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`  OBJ.GET_ACCESS_URL  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`  ObjectRef  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectref) values from standard tables as input to the `  OBJ.GET_ACCESS_URL  ` function. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - Visual data that is returned as [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`  OBJ.GET_ACCESS_URL  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`  ObjectRef  `](/bigquery/docs/work-with-objectref) values from standard tables as input to the `  OBJ.GET_ACCESS_URL  ` function. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
   - Visual data in [object tables](/bigquery/docs/object-table-introduction) .
   - Output data from [PCA](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
 
