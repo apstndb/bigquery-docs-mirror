@@ -1,6 +1,6 @@
 # Migrate schema and data from Teradata
 
-The combination of the BigQuery Data Transfer Service and a special migration agent allows you to copy your data from a Teradata on-premises data warehouse instance to BigQuery. This document describes the step-by-step process of migrating data from Teradata using the BigQuery Data Transfer Service.
+The combination of the BigQuery Data Transfer Service and a special migration agent lets you copy your data from a Teradata on-premises data warehouse instance to BigQuery. This document describes the step-by-step process of migrating data from Teradata using the BigQuery Data Transfer Service.
 
 ## Before you begin
 
@@ -23,7 +23,7 @@ Ensure that the principal creating the transfer has the following roles in the p
 
 ### Create a dataset
 
-[Create a BigQuery dataset](/bigquery/docs/datasets) to store your data. You do not need to create any tables.
+[Create a BigQuery dataset](/bigquery/docs/datasets) to store your data. You don't need to create any tables.
 
 ### Create a Cloud Storage bucket
 
@@ -120,7 +120,7 @@ If you are creating a recurring transfer, we strongly recommend that you specify
     
       - Choose **Migration: Teradata** .
     
-      - For **Transfer config name** , enter a display name for the transfer such as `  My Migration  ` . The display name can be any value that lets you easily identify the transfer if you need to modify it later.
+      - For **Transfer config name** , enter a display name for the transfer such as `  My Migration  ` . The display name can be any value that lets you identify the transfer if you need to modify it later.
     
       - Optional: For **Schedule options** , you can leave the default value of **Daily** (based on creation time) or choose another time if you want a recurring, incremental transfer. Otherwise, choose **On-demand** for a one-time transfer.
     
@@ -130,7 +130,7 @@ If you are creating a recurring transfer, we strongly recommend that you specify
     
       - For **Database type** , choose **Teradata** .
     
-      - For **Cloud Storage bucket** , browse for the name of the Cloud Storage bucket for staging the migration data. Do not type in the prefix `  gs://  ` – enter only the bucket name.
+      - For **Cloud Storage bucket** , browse for the name of the Cloud Storage bucket for staging the migration data. Don't type in the prefix `  gs://  ` – enter only the bucket name.
     
       - For **Database name** , enter the name of the source database in Teradata.
     
@@ -358,7 +358,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
         If you are initializing the migration agent for a transfer you have already [set up](#set_up_a_transfer) , then do the following:
         
         1.  Type the **Resource name** of the transfer. You can find this in the **Configuration** tab of the **Transfer details** page for the transfer.
-        2.  When prompted, type a path and file name for the migration agent configuration file that will be created. You refer to this file when you [run the migration agent](#run_the_migration_agent) to start the transfer.
+        2.  When prompted, type a path and filename for the migration agent configuration file that will be created. You refer to this file when you [run the migration agent](#run_the_migration_agent) to start the transfer.
         3.  Skip the remaining steps.
         
         If you are using the migration agent to set up a transfer, press **Enter** to skip to the next prompt.
@@ -384,7 +384,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
         
         1.  Type `  yes  ` .
         
-        2.  Type the username of a teradata user who has read access to the system tables and the tables you want to migrate.
+        2.  Type the username of a Teradata user who has read access to the system tables and the tables you want to migrate.
         
         3.  Type the password for that user.
             
@@ -402,7 +402,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
     
     15. Type a display name for the transfer configuration.
     
-    16. Type a path and file name for the migration agent configuration file that will be created.
+    16. Type a path and filename for the migration agent configuration file that will be created.
 
 3.  After entering all the requested parameters, the migration agent creates a configuration file and outputs it to the local path that you specified. See the next section for a closer look at the configuration file.
 
@@ -466,7 +466,7 @@ The configuration file created in the initialization step looks similar to this 
         secret_resource_id=projects/my-project/secrets/my-secret-name/versions/1
         ```
         
-        When using a credentials file, take care to control access to the folder where you store it on the local file system, because it will not be encrypted. If no path is provided, you will be prompted for a username and password when you start an agent.
+        When using a credentials file, take care to control access to the folder where you store it on the local file system, because it isn't encrypted. If no path is provided, you will be prompted for a username and password when you start an agent.
         
         Authentication modes, such as LDAP, are not supported.
     
@@ -480,7 +480,7 @@ The configuration file created in the initialization step looks similar to this 
         
         For each table, the migration agent generates a TPT script, starts a `  tbuild  ` process and waits for completion. Once the `  tbuild  ` process completes, the agent lists and uploads the extracted files to Cloud Storage, and then deletes the TPT script. For more information, see [Extraction method](/bigquery/docs/migration/teradata-overview#extraction_method) .
         
-        Warning: An agent generates and saves a TPT script into a file in the local extraction folder. The script contains a Teradata username and password. Take appropriate steps to restrict access to files in the local extraction folder, because the username and password will not be encrypted.
+        Warning: An agent generates and saves a TPT script into a file in the local extraction folder. The script contains a Teradata username and password. Take appropriate steps to restrict access to files in the local extraction folder, because the username and password aren't encrypted.
     
       - `  transfer-views  ` : Directs the migration agent to also transfer data from views. Use this only when you require data customization during migration. In other cases, migrate views to [BigQuery Views](/bigquery/docs/views-intro) . This option has the following prerequisites:
         
@@ -569,7 +569,7 @@ The configuration file created in the initialization step looks similar to this 
     
       - `  gcs-module-writer-instances  ` : **(Optional)** This parameter specifies number of Cloud Storage writer instances. By default, the value is 1. You can increase this value to increase throughput during the writing phase of the TPT export.
 
-**Note:** all configuration parameters listed above can be overridden for a particular agent run by using a startup flag with the full parameter path. For example: `  java -cp … --teradata-config.local-processing-space=<value>  `
+**Note:** All configuration parameters listed earlier can be overridden for a particular agent run by using a startup flag with the full parameter path. For example: `  java -cp … --teradata-config.local-processing-space=<value>  `
 
 #### Optimize agent data extraction
 
@@ -616,11 +616,16 @@ The following table provides information about parameters you can use to tune yo
 
 Consider the following best practices for configuration:
 
-  - **Memory constraint:** Ensure that the following calculation is less than the total VM memory running the agent: `  gcs-module-writer-instances * gcs-module-buffer-size * gcs-module-buffer-count < Total VM Memory  `
-  - **Tuning order:**
+  - **Memory constraint** : Ensure that the result of the following calculation is less than the total memory of the virtual machine (VM) running the agent. Use consistent units for all values in your calculation.
+    
+    $$ \\text{gcs-module-writer-instances} \\times \\text{gcs-module-buffer-size} \\times \\text{gcs-module-buffer-count} \< \\text{Total VM memory} $$
+
+  - **Tuning order** :
+    
     1.  Adjust the `  gcs-module-writer-instances  ` parameter value first to find the best balance of performance and load.
     2.  If further performance gains are needed, increase the `  gcs-module-connection-count  ` value.
-  - **Automatic scaling:** By default, the `  gcs-module-buffer-size  ` parameter value is typically set to twice the connection count, but we recommend explicitly tuning the value to `  32m  ` for these workloads.
+
+  - **Automatic scaling** : By default, the `  gcs-module-buffer-size  ` parameter value is typically set to twice the connection count, but we recommend explicitly tuning the value to `  32m  ` for these workloads.
 
 ## Run the migration agent
 
@@ -658,15 +663,15 @@ After initializing the migration agent and creating the configuration file, use 
 
 2.  When prompted, type the username and password for the database connection. If the username and password are valid, the data migration starts.
     
-    **Optional** In the command to start the migration, you can also use a flag that passes a credentials file to the agent, instead of entering the username and password each time. See the optional parameter [`  database-credentials-file-path  `](#configuration_file_for_the_migration_agent) in the agent configuration file for more information. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it will not be encrypted.
+    **Optional** In the command to start the migration, you can also use a flag that passes a credentials file to the agent, instead of entering the username and password each time. See the optional parameter [`  database-credentials-file-path  `](#configuration_file_for_the_migration_agent) in the agent configuration file for more information. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it isn't encrypted.
 
 3.  Leave this session open until the migration is completed. If you created a recurring migration transfer, keep this session open indefinitely. If this session is interrupted, current and future transfer runs fail.
 
 4.  Periodically monitor if the agent is running. If a transfer run is in progress and no agent responds within 24 hours, the transfer run fails.
 
-5.  If the migration agent stops working while the transfer is in progress or scheduled, the Google Cloud console shows the error status and prompts you to restart the agent. To start the migration agent again, resume from the beginning of this section, [running the migration agent](#running_the_migration_agent) , with the command for [running the migration agent](#running_the_migration_agent) . You do not need to repeat the initialization command. The transfer resumes from the point where tables were not completed.
+5.  If the migration agent stops working while the transfer is in progress or scheduled, the Google Cloud console shows the error status and prompts you to restart the agent. To restart the migration agent, return to the start of this section. You don't need to repeat the initialization command. The transfer resumes from the point where tables were not completed.
     
-    WARNING: The extracted data from Teradata is not encrypted. Please take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](/storage/docs/access-control/using-iam-permissions) .
+    WARNING: The extracted data from Teradata is not encrypted. Take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](/storage/docs/access-control/using-iam-permissions) .
 
 ## Track the progress of the migration
 

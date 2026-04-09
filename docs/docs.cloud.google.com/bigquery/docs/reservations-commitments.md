@@ -95,7 +95,7 @@ To create a capacity commitment, use the [`  CREATE CAPACITY  ` DDL statement](/
     OPTIONS (
       slot_count = NUMBER_OF_SLOTS,
       edition = EDITION,
-      plan = 'PLAN_TYPE',
+      plan = &#39;PLAN_TYPE',
       renewal_plan = 'RENEWAL_PLAN_TYPE');
     ```
     
@@ -191,7 +191,7 @@ To view the commitments for an administration project, query the [`  INFORMATION
     FROM
       `region-LOCATION`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT
     WHERE
-      project_id = 'ADMIN_PROJECT_ID'
+      project_id = &#39;ADMIN_PROJECT_ID'
       AND slot_count = 100;
     ```
     
@@ -440,7 +440,7 @@ For example, the following policy denies all users the permission to create capa
     "bigquery.googleapis.com/capacityCommitments.create"
   ],
   "exceptionPrincipals": [
-    "principal://goog/subject/lucian@example.com"
+    &quot;principal://goog/subject/lucian@example.com"
   ]
 }
 ```

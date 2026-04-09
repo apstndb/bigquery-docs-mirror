@@ -133,7 +133,6 @@ https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection
 https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake
 https://docs.cloud.google.com/bigquery/docs/create-conversations
 https://docs.cloud.google.com/bigquery/docs/create-data-agents
-https://docs.cloud.google.com/bigquery/docs/create-delta-lake-table
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model
 https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console
 https://docs.cloud.google.com/bigquery/docs/create-manage-folders
@@ -220,7 +219,6 @@ https://docs.cloud.google.com/bigquery/docs/exporting-models
 https://docs.cloud.google.com/bigquery/docs/extend-differential-privacy
 https://docs.cloud.google.com/bigquery/docs/external-data-bigtable
 https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage
-https://docs.cloud.google.com/bigquery/docs/external-data-drive
 https://docs.cloud.google.com/bigquery/docs/external-data-sources
 https://docs.cloud.google.com/bigquery/docs/external-table-definition
 https://docs.cloud.google.com/bigquery/docs/external-tables

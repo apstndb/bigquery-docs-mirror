@@ -1,6 +1,6 @@
 # Use organization policies to apply custom constraints to BigQuery resources
 
-**Preview — Constraints on routines**
+**Preview — Constraints on tables, data access policies, row access polcies, and routines**
 
 This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
@@ -8,6 +8,9 @@ This page shows you how to use Organization Policy Service custom constraints to
 
   - `  bigquery.googleapis.com/Dataset  `
   - `  bigquery.googleapis.com/Routine  `
+  - `  bigquery.googleapis.com/Table  `
+  - `  bigquery.googleapis.com/RowAccessPolicy  `
+  - `  bigquerydatapolicy.googleapis.com/DataPolicy  `
 
 To learn more about Organization Policy, see [Custom organization policies](/organization-policy/overview#custom-organization-policies) .
 
@@ -23,7 +26,7 @@ By default, organization policies are inherited by the descendants of the resour
 
 ### Benefits
 
-You can use a custom organization policy to allow or deny specific operations on BigQuery resources such as datasets and routines. This lets you control costs and manage access to your Google Cloud resources to help you meet your organization's compliance and security requirements. Restrictions on resources are fine-grained. They can be applied at the project, folder, or organization level.
+You can use a custom organization policy to allow or deny specific operations on BigQuery resources such as datasets, tables, data access policies, row access policies, and routines. This lets you control costs and manage access to your Google Cloud resources to help you meet your organization's compliance and security requirements. Restrictions on resources are fine-grained. They can be applied at the project, folder, or organization level.
 
 ## Limitations
 
@@ -306,6 +309,47 @@ This table provides syntax examples for some common custom constraints.
 </thead>
 <tbody>
 <tr class="odd">
+<td>Deny new tables with names that begin with 'test'.</td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceTableId
+    resourceTypes:
+    - bigquery.googleapis.com/Table
+    methodTypes:
+    - CREATE
+    condition: &quot;resource.tableReference.tableId.startsWith(&#39;test&#39;)&quot;
+    actionType: DENY
+    displayName: Reject test tables.
+    description: Deny new table names that begin with &#39;test&#39;.
+    </code></pre></td>
+</tr>
+<tr class="even">
+<td>Deny new row access policies with names that begin with 'test'.</td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRowAccessPolicyId
+    resourceTypes:
+    - bigquery.googleapis.com/RowAccessPolicies
+    methodTypes:
+    - CREATE
+    condition: &quot;resource.rowAccessPolicyReference.policyId.startsWith(&#39;test&#39;)&quot;
+    actionType: DENY
+    displayName: Reject &#39;test&#39; row access policies.
+    description: Deny new row access policies with names that begin with &#39;test&#39;.
+    </code></pre></td>
+</tr>
+<tr class="odd">
+<td>Deny new data access policies with predefined expressions that begin with 'SHA256' (Secure Hash Algorithm 256-bit).</td>
+<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforcePredefinedExpression
+    resourceTypes:
+    - bigquerydatapolicy.googleapis.com/DataPolicy
+    methodTypes:
+    - CREATE
+    condition: &quot;resource.dataMaskingPolicy.predefinedExpression.startsWith(&#39;SHA256&#39;)&quot;
+    actionType: DENY
+    displayName: Reject SHA256 data policies.
+    description: Deny new data access policies with predefined expressions that
+    begin with &#39;SHA256&#39;.
+    expression.
+    </code></pre></td>
+</tr>
+<tr class="even">
 <td>Deny new routines with names that begin with 'test'.</td>
 <td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="YAML" translate="no"><code>    name: organizations/ORGANIZATION_ID/customConstraints/custom.enforceRoutineId
     resourceTypes:
@@ -372,6 +416,30 @@ bigquery.googleapis.com/Routine
 `  resource.routineReference.projectId  `
 
 `  resource.routineReference.routineId  `
+
+bigquery.googleapis.com/RowAccessPolicy
+
+`  resource.rowAccessPolicyReference.datasetId  `
+
+`  resource.rowAccessPolicyReference.policyId  `
+
+`  resource.rowAccessPolicyReference.projectId  `
+
+`  resource.rowAccessPolicyReference.tableId  `
+
+bigquery.googleapis.com/Table
+
+`  resource.tableReference.datasetId  `
+
+`  resource.tableReference.projectId  `
+
+`  resource.tableReference.tableId  `
+
+bigquerydatapolicy.googleapis.com/DataPolicy
+
+`  resource.dataMaskingPolicy.predefinedExpression  `
+
+`  resource.dataPolicyType  `
 
 ## What's next
 

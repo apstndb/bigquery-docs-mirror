@@ -12,6 +12,10 @@ Feature
 
 You can now use the [`  AI.AGG  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) to semantically aggregate unstructured input data based on natural language instructions. This feature is in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
+Feature
+
+You can now use a [custom organization policy](/bigquery/docs/custom-constraints) to allow or deny specific operations on these BigQuery resources: tables, data policies, and row access policies. This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+
 ## April 02, 2026
 
 Feature
