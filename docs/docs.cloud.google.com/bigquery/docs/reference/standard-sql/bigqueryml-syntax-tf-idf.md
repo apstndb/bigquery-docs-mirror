@@ -6,32 +6,26 @@ This function uses a TF-IDF algorithm to compute the relevance of terms in a set
 
   - TF-IDF:
     
-    ``` text
-    term frequency * inverse document frequency
-    ```
+        term frequency * inverse document frequency
 
   - Term frequency:
     
-    ``` text
-    (count of term in document) / (document size)
-    ```
+        (count of term in document) / (document size)
 
   - Inverse document frequency:
     
-    ``` text
-    log(1 + num_documents / (1 + token_document_count))
-    ```
+        log(1 + num_documents / (1 + token_document_count))
 
 Terms are added to a dictionary of terms if they satisfy the criteria for `  top_k  ` and `  frequency_threshold  ` , otherwise they are considered the *unknown term* . The unknown term is always the first term in the dictionary and represented as `  0  ` . The rest of the dictionary is ordered alphabetically.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.TF_IDF(
   tokenized_document
   [, top_k]
@@ -62,41 +56,37 @@ Definitions:
 
 ## Quotas
 
-See [Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions) .
+See [Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Example
 
 The following example creates a table `  ExampleTable  ` and applies the `  ML.TF_IDF  ` function:
 
-``` text
-WITH
-  ExampleTable AS (
-    SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f
-    UNION ALL
-    SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f
-    UNION ALL
-    SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f
-    UNION ALL
-    SELECT 4 AS id, ['you', 'like', 'pie', NULL] AS f
-  )
-SELECT id, ML.TF_IDF(f, 3, 1) OVER () AS results
-FROM ExampleTable
-ORDER BY id;
-```
+    WITH
+      ExampleTable AS (
+        SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f
+        UNION ALL
+        SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f
+        UNION ALL
+        SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f
+        UNION ALL
+        SELECT 4 AS id, ['you', 'like', 'pie', NULL] AS f
+      )
+    SELECT id, ML.TF_IDF(f, 3, 1) OVER () AS results
+    FROM ExampleTable
+    ORDER BY id;
 
 The output is similar to the following:
 
-``` text
-+----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| id |                                                                                     results                                                                                     |
-+----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|  1 | [{"index":"0","value":"0.12679902142647365"},{"index":"1","value":"0.1412163100645339"},{"index":"2","value":"0.1412163100645339"},{"index":"3","value":"0.29389333245105953"}] |
-|  2 |                                                                                        [{"index":"0","value":"0.5705955964191315"},{"index":"3","value":"0.14694666622552977"}] |
-|  3 |                                             [{"index":"0","value":"0.380397064279421"},{"index":"1","value":"0.21182446509680086"},{"index":"3","value":"0.14694666622552977"}] |
-|  4 |                                             [{"index":"0","value":"0.380397064279421"},{"index":"2","value":"0.21182446509680086"},{"index":"3","value":"0.14694666622552977"}] |
-+----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-```
+    +----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | id |                                                                                     results                                                                                     |
+    +----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |  1 | [{"index":"0","value":"0.12679902142647365"},{"index":"1","value":"0.1412163100645339"},{"index":"2","value":"0.1412163100645339"},{"index":"3","value":"0.29389333245105953"}] |
+    |  2 |                                                                                        [{"index":"0","value":"0.5705955964191315"},{"index":"3","value":"0.14694666622552977"}] |
+    |  3 |                                             [{"index":"0","value":"0.380397064279421"},{"index":"1","value":"0.21182446509680086"},{"index":"3","value":"0.14694666622552977"}] |
+    |  4 |                                             [{"index":"0","value":"0.380397064279421"},{"index":"2","value":"0.21182446509680086"},{"index":"3","value":"0.14694666622552977"}] |
+    +----+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ## What's next
 
-  - Learn more about [TF-IDF](/bigquery/docs/reference/standard-sql/text-analysis-functions#tf_idf) outside of machine learning.
+  - Learn more about [TF-IDF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#tf_idf) outside of machine learning.

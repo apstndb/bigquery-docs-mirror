@@ -1,6 +1,6 @@
 # Use tuning and evaluation to improve model performance
 
-This document shows you how to create a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Vertex AI `  gemini-2.0-flash-001  ` model](/vertex-ai/generative-ai/docs/learn/models#gemini-models) . You then use [supervised tuning](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) to tune the model with new training data, followed by evaluating the model with the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that references a [Vertex AI `  gemini-2.0-flash-001  ` model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models#gemini-models) . You then use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) to tune the model with new training data, followed by evaluating the model with the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
 
 Tuning can help you address scenarios where you need to customize the hosted Vertex AI model, such as when the expected behavior of the model is hard to concisely define in a prompt, or when prompts don't produce expected results consistently enough. Supervised tuning also influences the model in the following ways:
 
@@ -33,7 +33,7 @@ These predefined roles contain the permissions required to perform the tasks in 
       - `  bigquery.models.updateData  `
       - `  bigquery.models.updateMetadata  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Before you begin
 
@@ -42,17 +42,21 @@ You might also be able to get these permissions with [custom roles](/iam/docs/cr
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery, BigQuery Connection, Vertex AI, and Compute Engine APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com,compute.googleapis.com)
 
 ## Costs
 
@@ -62,9 +66,9 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery ML:** You incur costs for the model that you create and the processing that you perform in BigQuery ML.
   - **Vertex AI:** You incur costs for calls to and supervised tuning of the `  gemini-2.0-flash-001  ` model.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information, see the following resources:
 
@@ -79,6 +83,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -94,11 +100,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -107,15 +113,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -131,31 +137,31 @@ Create tables of training and evaluation data based on the public [task955\_wiki
 
 2.  In the Cloud Shell, run the following commands to create tables of test and evaluation data:
     
-    ``` text
-    python3 -m pip install pandas pyarrow fsspec huggingface_hub
-    
-    python3 -c "import pandas as pd; df_train = pd.read_parquet('hf://datasets/Lots-of-LoRAs/task955_wiki_auto_style_transfer/data/train-00000-of-00001.parquet').drop('id', axis=1); df_train['output'] = [x[0] for x in df_train['output']]; df_train.to_json('wiki_auto_style_transfer_train.jsonl', orient='records', lines=True);"
-    
-    python3 -c "import pandas as pd; df_valid = pd.read_parquet('hf://datasets/Lots-of-LoRAs/task955_wiki_auto_style_transfer/data/valid-00000-of-00001.parquet').drop('id', axis=1); df_valid['output'] = [x[0] for x in df_valid['output']]; df_valid.to_json('wiki_auto_style_transfer_valid.jsonl', orient='records', lines=True);"
-    
-    bq rm -t bqml_tutorial.wiki_auto_style_transfer_train
-    
-    bq rm -t bqml_tutorial.wiki_auto_style_transfer_valid
-    
-    bq load --source_format=NEWLINE_DELIMITED_JSON bqml_tutorial.wiki_auto_style_transfer_train wiki_auto_style_transfer_train.jsonl input:STRING,output:STRING
-    
-    bq load --source_format=NEWLINE_DELIMITED_JSON bqml_tutorial.wiki_auto_style_transfer_valid wiki_auto_style_transfer_valid.jsonl input:STRING,output:STRING
-    ```
+        python3 -m pip install pandas pyarrow fsspec huggingface_hub
+        
+        python3 -c "import pandas as pd; df_train = pd.read_parquet('hf://datasets/Lots-of-LoRAs/task955_wiki_auto_style_transfer/data/train-00000-of-00001.parquet').drop('id', axis=1); df_train['output'] = [x[0] for x in df_train['output']]; df_train.to_json('wiki_auto_style_transfer_train.jsonl', orient='records', lines=True);"
+        
+        python3 -c "import pandas as pd; df_valid = pd.read_parquet('hf://datasets/Lots-of-LoRAs/task955_wiki_auto_style_transfer/data/valid-00000-of-00001.parquet').drop('id', axis=1); df_valid['output'] = [x[0] for x in df_valid['output']]; df_valid.to_json('wiki_auto_style_transfer_valid.jsonl', orient='records', lines=True);"
+        
+        bq rm -t bqml_tutorial.wiki_auto_style_transfer_train
+        
+        bq rm -t bqml_tutorial.wiki_auto_style_transfer_valid
+        
+        bq load --source_format=NEWLINE_DELIMITED_JSON bqml_tutorial.wiki_auto_style_transfer_train wiki_auto_style_transfer_train.jsonl input:STRING,output:STRING
+        
+        bq load --source_format=NEWLINE_DELIMITED_JSON bqml_tutorial.wiki_auto_style_transfer_valid wiki_auto_style_transfer_valid.jsonl input:STRING,output:STRING
 
 ## Create a baseline model
 
-Create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over the Vertex AI `  gemini-2.0-flash-001  ` model.
+Create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over the Vertex AI `  gemini-2.0-flash-001  ` model.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement to create a remote model:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.gemini_baseline`
     REMOTE WITH CONNECTION DEFAULT
     OPTIONS (ENDPOINT ='gemini-2.0-flash-001');
@@ -165,13 +171,15 @@ Create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-
 
 ## Check baseline model performance
 
-Run the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with the remote model to see how it performs on the evaluation data without any tuning.
+Run the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with the remote model to see how it performs on the evaluation data without any tuning.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT result, ground_truth
     FROM
       AI.GENERATE_TEXT(
@@ -188,13 +196,15 @@ Run the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/
 
 ## Evaluate the baseline model
 
-To perform a more detailed evaluation of the model performance, use the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . This function computes model metrics that measure the accuracy and quality of the generated text, in order to see how the model's responses compare to ideal esponses.
+To perform a more detailed evaluation of the model performance, use the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) . This function computes model metrics that measure the accuracy and quality of the generated text, in order to see how the model's responses compare to ideal esponses.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.EVALUATE(
@@ -225,13 +235,15 @@ You can see that the baseline model performance isn't bad, but the similarity of
 
 ## Create a tuned model
 
-Create a remote model very similar to the one you created in [Create a model](#create_a_baseline_model) , but this time specifying the [`  AS SELECT  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) to provide the training data in order to tune the model.
+Create a remote model very similar to the one you created in [Create a model](https://docs.cloud.google.com/bigquery/docs/tune-evaluate#create_a_baseline_model) , but this time specifying the [`  AS SELECT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) to provide the training data in order to tune the model.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the query editor, run the following statement to create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) :
     
-    ``` text
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+
+2.  In the query editor, run the following statement to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned) :
+    
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.gemini_tuned`
       REMOTE
         WITH CONNECTION DEFAULT
@@ -252,10 +264,12 @@ Create a remote model very similar to the one you created in [Create a model](#c
 Run the `  AI.GENERATE_TEXT  ` function to see how the tuned model performs on the evaluation data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT result, ground_truth
     FROM
       AI.GENERATE_TEXT(
@@ -275,10 +289,12 @@ Run the `  AI.GENERATE_TEXT  ` function to see how the tuned model performs on t
 Use the `  ML.EVALUATE  ` function to see how the tuned model's responses compare to ideal responses.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.EVALUATE(
@@ -317,6 +333,8 @@ You can see that even though the training dataset used only 1,408 examples, ther
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

@@ -1,41 +1,16 @@
 # Impact on writes from column-level access control
 
-This page explains the impact to writes when you use BigQuery column-level access control to restrict access to data at the column level. For general information about column-level access control, see [Introduction to BigQuery column-level access control](/bigquery/docs/column-level-security-intro) .
+This page explains the impact to writes when you use BigQuery column-level access control to restrict access to data at the column level. For general information about column-level access control, see [Introduction to BigQuery column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .
 
 Column-level access control requires a user to have read permission for columns that are protected by policy tags. Some write operations need to read column data before actually writing into a column. For those operations, BigQuery checks the user's read permission to ensure the user has access to the column. For example, if a user is updating data that includes writing to a protected column, the user must have read permission for the protected column. If the user is inserting a new data row that includes writing to a protected column, the user doesn't need read access for the protected column. But, the user who writes such a row won't be able to read the newly written data unless the user has read permission for the protected columns.
 
 The following sections provide details about different types of write operations. The examples in this topic use `  customers  ` tables with the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Field name</th>
-<th>Type</th>
-<th>Mode</th>
-<th>Policy tag</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       user_id      </code></td>
-<td>STRING</td>
-<td>REQUIRED</td>
-<td><code dir="ltr" translate="no">       policy-tag-1      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       credit_score      </code></td>
-<td>INTEGER</td>
-<td>NULLABLE</td>
-<td><code dir="ltr" translate="no">       policy-tag-2      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ssn      </code></td>
-<td>STRING</td>
-<td>NULLABLE</td>
-<td><code dir="ltr" translate="no">       policy-tag-3      </code></td>
-</tr>
-</tbody>
-</table>
+| Field name                    | Type    | Mode     | Policy tag                    |
+| ----------------------------- | ------- | -------- | ----------------------------- |
+| `        user_id       `      | STRING  | REQUIRED | `        policy-tag-1       ` |
+| `        credit_score       ` | INTEGER | NULLABLE | `        policy-tag-2       ` |
+| `        ssn       `          | STRING  | NULLABLE | `        policy-tag-3       ` |
 
 ## Using BigQuery data manipulation language (DML)
 
@@ -45,7 +20,7 @@ For an `  INSERT  ` statement, BigQuery does not check Fine-Grained Reader permi
 
 ### Deleting, updating, and merging data
 
-For `  DELETE  ` , `  UPDATE  ` , and `  MERGE  ` statements, BigQuery checks for the Fine-Grained Reader permission on the scanned columns. Columns aren't scanned by these statements unless you include a [`  WHERE  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#where_clause) , or some other clause or subquery that requires the query to read data.
+For `  DELETE  ` , `  UPDATE  ` , and `  MERGE  ` statements, BigQuery checks for the Fine-Grained Reader permission on the scanned columns. Columns aren't scanned by these statements unless you include a [`  WHERE  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) , or some other clause or subquery that requires the query to read data.
 
 ### Loading data
 
@@ -63,9 +38,7 @@ For a copy operation, BigQuery checks whether the user has the Fine-Grained Read
 
 **Example:**
 
-``` text
-INSERT INTO customers VALUES('alice', 85, '123-456-7890');
-```
+    INSERT INTO customers VALUES('alice', 85, '123-456-7890');
 
 <table>
 <colgroup>
@@ -100,10 +73,8 @@ INSERT INTO customers VALUES('alice', 85, '123-456-7890');
 
 **Example:**
 
-``` text
-UPDATE customers SET credit_score = 0
-  WHERE user_id LIKE 'alice%' AND credit_score < 30
-```
+    UPDATE customers SET credit_score = 0
+      WHERE user_id LIKE 'alice%' AND credit_score < 30
 
 <table>
 <colgroup>
@@ -137,9 +108,7 @@ UPDATE customers SET credit_score = 0
 
 **Example:**
 
-``` text
-DELETE customers WHERE credit_score = 0
-```
+    DELETE customers WHERE credit_score = 0
 
 <table>
 <colgroup>
@@ -176,11 +145,9 @@ DELETE customers WHERE credit_score = 0
 
 **Example:**
 
-``` text
-load --source_format=CSV samples.customers \
-  ./customers_data.csv \
-  ./customers_schema.json
-```
+    load --source_format=CSV samples.customers \
+      ./customers_data.csv \
+      ./customers_schema.json
 
 <table>
 <colgroup>
@@ -213,7 +180,7 @@ load --source_format=CSV samples.customers \
 
 ### Streaming
 
-No policy tags are checked when streaming with the legacy `  insertAll  ` streaming API or the Storage Write API. For [BigQuery change data capture ingestion](/bigquery/docs/change-data-capture) , the policy tags are checked on the primary key columns.
+No policy tags are checked when streaming with the legacy `  insertAll  ` streaming API or the Storage Write API. For [BigQuery change data capture ingestion](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , the policy tags are checked on the primary key columns.
 
 ## Copy examples
 
@@ -221,9 +188,7 @@ No policy tags are checked when streaming with the legacy `  insertAll  ` stream
 
 **Example:**
 
-``` text
-cp -a samples.customers samples.customers_dest
-```
+    cp -a samples.customers samples.customers_dest
 
 <table>
 <colgroup>
@@ -260,12 +225,10 @@ cp -a samples.customers samples.customers_dest
 
 **Example:**
 
-``` text
-query --use_legacy_sql=false \
---max_rows=0 \
---destination_table samples.customers_dest \
---append_table "SELECT * FROM samples.customers LIMIT 10;"
-```
+    query --use_legacy_sql=false \
+    --max_rows=0 \
+    --destination_table samples.customers_dest \
+    --append_table "SELECT * FROM samples.customers LIMIT 10;"
 
 <table>
 <colgroup>

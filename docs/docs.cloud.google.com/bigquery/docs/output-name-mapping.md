@@ -2,22 +2,22 @@
 
 **Preview**
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-**Note:** Object name mapping using JSON is only supported by the legacy batch API. If you are using the [BigQuery Migration API](/bigquery/docs/api-sql-translator) or starting batch jobs from the Google Cloud console, use [YAML-based object name mapping](/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
+**Note:** Object name mapping using JSON is only supported by the legacy batch API. If you are using the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) or starting batch jobs from the Google Cloud console, use [YAML-based object name mapping](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#output_name_mapping) instead.
 
-This document describes how to configure *name mapping* to rename SQL objects during [batch translation](/bigquery/docs/batch-sql-translator) .
+This document describes how to configure *name mapping* to rename SQL objects during [batch translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
 
 ## Overview
 
 Name mapping lets you identify the names of SQL objects in your source files, and specify target names for those objects in BigQuery. You can use some or all of the following components to configure name mapping for an object:
 
   - A name mapping rule, composed of:
-      - Source [name parts](#name_parts) that provide the fully qualified name of the object in the source system.
-      - A [type](#object_types) that identifies the source object's type.
+      - Source [name parts](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#name_parts) that provide the fully qualified name of the object in the source system.
+      - A [type](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#object_types) that identifies the source object's type.
       - Target name parts that provide the name of the object in BigQuery.
-  - A [default database](#default_database) name to use with any source objects that don't specify one.
-  - A [default schema](#default_schema) name to use with any source objects that don't specify one.
+  - A [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) name to use with any source objects that don't specify one.
+  - A [default schema](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) name to use with any source objects that don't specify one.
 
 ### Name parts
 
@@ -142,13 +142,13 @@ X
 
 ### Default database
 
-If you want to append a BigQuery project name to all translated objects, the easiest thing to do is to specify a default database name when you [create a translation job](/bigquery/docs/batch-sql-translator#submit_a_translation_job) . This works for source files where three-part naming is used, or where four-part naming is used but the highest level object name isn't specified.
+If you want to append a BigQuery project name to all translated objects, the easiest thing to do is to specify a default database name when you [create a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) . This works for source files where three-part naming is used, or where four-part naming is used but the highest level object name isn't specified.
 
 For example, if you specify the default database name `  myproject  ` , then a source statement like `  SELECT * FROM database.table  ` is translated to `  SELECT * FROM myproject.database.table  ` . If you have objects that already use a database name part, like `  SELECT * FROM database.schema.table  ` , then you have to use a name mapping rule to rename `  database.schema.table  ` to `  myproject.schema.table  ` .
 
 ### Default schema
 
-If you want to fully qualify all object names in the source files that don't use four-part naming, you can provide both a [default database name](#default_database) and a default schema name when you [create a translation job](/bigquery/docs/batch-sql-translator#submit_a_translation_job) . The default schema name is provided as the first schema name in the schema search path option.
+If you want to fully qualify all object names in the source files that don't use four-part naming, you can provide both a [default database name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and a default schema name when you [create a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) . The default schema name is provided as the first schema name in the schema search path option.
 
 For example, if you specify the default database name `  myproject  ` and the default schema name `  myschema  ` , then the following source statements:
 
@@ -170,37 +170,12 @@ A name change that affects a higher-level object affects the target object, and 
 
 For example, if you specify the following name mapping rule with an object type of `  schema  ` :
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       sales_db      </code></td>
-<td><code dir="ltr" translate="no">       sales      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       cust_mgmt      </code></td>
-<td><code dir="ltr" translate="no">       cms      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                 | **Target**             |
+| ------------- | -------------------------- | ---------------------- |
+| Database      | `        sales_db       `  | `        sales       ` |
+| Schema        | `        cust_mgmt       ` | `        cms       `   |
+| Relation      |                            |                        |
+| Attribute     |                            |                        |
 
 When it is applied, the database and schema name parts of all `  relation  ` and `  attribute  ` objects under the `  sales_db.cust_mgmt  ` schema are also changed. For instance, a `  relation  ` object named `  sales_db.cust_mgmt.history  ` becomes `  sales.cms.history  ` .
 
@@ -208,37 +183,12 @@ Conversely, name changes that target lower-level objects don't affect higher- or
 
 For example, if you specify the following name mapping rule with an object type of `  relation  ` :
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       sales_db      </code></td>
-<td><code dir="ltr" translate="no">       sales      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       cust_mgmt      </code></td>
-<td><code dir="ltr" translate="no">       cms      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       clients      </code></td>
-<td><code dir="ltr" translate="no">       accounts      </code></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                 | **Target**                |
+| ------------- | -------------------------- | ------------------------- |
+| Database      | `        sales_db       `  | `        sales       `    |
+| Schema        | `        cust_mgmt       ` | `        cms       `      |
+| Relation      | `        clients       `   | `        accounts       ` |
+| Attribute     |                            |                           |
 
 When it is applied, no other objects at the `  sales_db  ` or `  sales_db.cust_mgmt  ` level of the object hierarchy have their name changed.
 
@@ -302,9 +252,9 @@ Name changes don't cascade across name rules. For example, if you created a name
 
 ## Handle source objects that don't have four-part names
 
-Some source systems, like Teradata, use three name parts to fully qualify object names. Many source systems also allow you to use partially qualified names in their SQL dialects, for example using `  database1.schema1.table1  ` , `  schema1.table1  ` , and `  table1  ` to refer to the same object in different contexts. If your source files contain objects that don't use four-part object names, you can use name mapping in combination with specifying a [default database name](#default_database) and a [default schema name](#default_schema) to achieve the name mapping that you want.
+Some source systems, like Teradata, use three name parts to fully qualify object names. Many source systems also allow you to use partially qualified names in their SQL dialects, for example using `  database1.schema1.table1  ` , `  schema1.table1  ` , and `  table1  ` to refer to the same object in different contexts. If your source files contain objects that don't use four-part object names, you can use name mapping in combination with specifying a [default database name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and a [default schema name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) to achieve the name mapping that you want.
 
-For examples of using name mapping rules with a default database name or a default schema name, see [Change the database name part for objects with varying levels of name completion](/bigquery/docs/output-name-mapping#partial-database) and [Change a partially qualified relation object name](/bigquery/docs/output-name-mapping#partial-relation) .
+For examples of using name mapping rules with a default database name or a default schema name, see [Change the database name part for objects with varying levels of name completion](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#partial-database) and [Change a partially qualified relation object name](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#partial-relation) .
 
 ## Name mapping examples
 
@@ -316,37 +266,12 @@ The following example renames the database name part from `  td_project  ` to ` 
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       td_project      </code></td>
-<td><code dir="ltr" translate="no">       bq_project      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                  | **Target**                  |
+| ------------- | --------------------------- | --------------------------- |
+| Database      | `        td_project       ` | `        bq_project       ` |
+| Schema        |                             |                             |
+| Relation      |                             |                             |
+| Attribute     |                             |                             |
 
 **Type**
 
@@ -366,7 +291,7 @@ The following example renames the database name part from `  td_project  ` to ` 
 
 The following example renames database name part `  project  ` to `  bq_project  ` for all object types, and also adds `  bq_project  ` as the database name part for objects that don't specify one.
 
-To do this, you must specify a default database value when configuring the translation job, in addition to specifying name mapping rules. For more information on specifying a default database name, see [Submit a translation job](/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+To do this, you must specify a default database value when configuring the translation job, in addition to specifying name mapping rules. For more information on specifying a default database name, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
 **Default database value**
 
@@ -374,37 +299,12 @@ To do this, you must specify a default database value when configuring the trans
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       project      </code></td>
-<td><code dir="ltr" translate="no">       bq_project      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**               | **Target**                  |
+| ------------- | ------------------------ | --------------------------- |
+| Database      | `        project       ` | `        bq_project       ` |
+| Schema        |                          |                             |
+| Relation      |                          |                             |
+| Attribute     |                          |                             |
 
 **Type**
 
@@ -428,37 +328,12 @@ You can also change the parts of a `  relation  ` object name in the same manner
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       warehouse1      </code></td>
-<td><code dir="ltr" translate="no">       myproject      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       database1      </code></td>
-<td><code dir="ltr" translate="no">       mydataset      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                  | **Target**                 |
+| ------------- | --------------------------- | -------------------------- |
+| Database      | `        warehouse1       ` | `        myproject       ` |
+| Schema        | `        database1       `  | `        mydataset       ` |
+| Relation      |                             |                            |
+| Attribute     |                             |                            |
 
 **Type**
 
@@ -480,37 +355,12 @@ The following example renames `  mydb.myschema.mytable  ` to `  mydb.myschema.ta
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-<td><code dir="ltr" translate="no">       table1      </code></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                | **Target**                |
+| ------------- | ------------------------- | ------------------------- |
+| Database      | `        mydb       `     | `        mydb       `     |
+| Schema        | `        myschema       ` | `        myschema       ` |
+| Relation      | `        mytable       `  | `        table1       `   |
+| Attribute     |                           |                           |
 
 **Type**
 
@@ -534,37 +384,12 @@ The following example renames `  myschema.mytable  ` to `  mydb.myschema.table1 
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-<td><code dir="ltr" translate="no">       table1      </code></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                | **Target**                |
+| ------------- | ------------------------- | ------------------------- |
+| Database      | `        mydb       `     | `        mydb       `     |
+| Schema        | `        myschema       ` | `        myschema       ` |
+| Relation      | `        mytable       `  | `        table1       `   |
+| Attribute     |                           |                           |
 
 **Type**
 
@@ -584,37 +409,12 @@ The following example renames all instances of the `  relation alias  ` object `
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       table      </code></td>
-<td><code dir="ltr" translate="no">       t      </code></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**             | **Target**         |
+| ------------- | ---------------------- | ------------------ |
+| Database      |                        |                    |
+| Schema        |                        |                    |
+| Relation      | `        table       ` | `        t       ` |
+| Attribute     |                        |                    |
 
 **Type**
 
@@ -634,37 +434,12 @@ The following example renames `  mydb.myschema.myfunction  ` to `  mydb.myschema
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       myprocedure      </code></td>
-<td><code dir="ltr" translate="no">       procedure1      </code></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                   | **Target**                  |
+| ------------- | ---------------------------- | --------------------------- |
+| Database      | `        mydb       `        | `        mydb       `       |
+| Schema        | `        myschema       `    | `        myschema       `   |
+| Relation      | `        myprocedure       ` | `        procedure1       ` |
+| Attribute     |                              |                             |
 
 **Type**
 
@@ -686,37 +461,12 @@ The following example renames `  mydb.myschema.mytable.myfield  ` to `  mydb.mys
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td><code dir="ltr" translate="no">       myfield      </code></td>
-<td><code dir="ltr" translate="no">       field1      </code></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                | **Target**              |
+| ------------- | ------------------------- | ----------------------- |
+| Database      | `        mydb       `     |                         |
+| Schema        | `        myschema       ` |                         |
+| Relation      | `        mytable       `  |                         |
+| Attribute     | `        myfield       `  | `        field1       ` |
 
 **Type**
 
@@ -736,37 +486,12 @@ The following example renames `  mydb.myschema.mytable.myfield  ` to `  mydb.mys
 
 **Source and target name parts**
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name part</strong></th>
-<th><strong>Source</strong></th>
-<th><strong>Target</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Database</td>
-<td><code dir="ltr" translate="no">       mydb      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Schema</td>
-<td><code dir="ltr" translate="no">       myschema      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Relation</td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Attribute</td>
-<td><code dir="ltr" translate="no">       myfield      </code></td>
-<td><code dir="ltr" translate="no">       field1      </code></td>
-</tr>
-</tbody>
-</table>
+| **Name part** | **Source**                | **Target**              |
+| ------------- | ------------------------- | ----------------------- |
+| Database      | `        mydb       `     |                         |
+| Schema        | `        myschema       ` |                         |
+| Relation      | `        mytable       `  |                         |
+| Attribute     | `        myfield       `  | `        field1       ` |
 
 **Type**
 
@@ -784,31 +509,29 @@ The following example renames `  mydb.myschema.mytable.myfield  ` to `  mydb.mys
 
 If you choose to specify name mapping rules by using a JSON file rather than the Google Cloud console, the JSON file must follow this format:
 
-``` text
-{
-  "name_map": [
     {
-      "source": {
-        "type": "string",
-        "database": "string",
-        "schema": "string",
-        "relation": "string",
-        "attribute": "string"
-      },
-      "target": {
-        "database": "string",
-        "schema": "string",
-        "relation": "string",
-        "attribute": "string"
-      }
+      "name_map": [
+        {
+          "source": {
+            "type": "string",
+            "database": "string",
+            "schema": "string",
+            "relation": "string",
+            "attribute": "string"
+          },
+          "target": {
+            "database": "string",
+            "schema": "string",
+            "relation": "string",
+            "attribute": "string"
+          }
+        }
+      ]
     }
-  ]
-}
-```
 
 The file size must be less than 5 MB.
 
-For more information on specifying name mapping rules for a translation job, see [Submit a translation job](/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
+For more information on specifying name mapping rules for a translation job, see [Submit a translation job](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) .
 
 ### JSON examples
 
@@ -823,31 +546,29 @@ The name mapping rules in this example make the following object name changes:
 
 <!-- end list -->
 
-``` text
-{
-  "name_map": [{
-    "source": {
-      "type": "RELATION",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2"
+    {
+      "name_map": [{
+        "source": {
+          "type": "RELATION",
+          "database": "project",
+          "schema": "dataset2",
+          "relation": "table2"
+        },
+        "target": {
+          "database": "bq_project",
+          "schema": "bq_dataset2",
+          "relation": "bq_table2"
+        }
+      }, {
+        "source": {
+          "type": "DATABASE",
+          "database": "project"
+        },
+        "target": {
+          "database": "bq_project"
+        }
+      }]
     }
-  }, {
-    "source": {
-      "type": "DATABASE",
-      "database": "project"
-    },
-    "target": {
-      "database": "bq_project"
-    }
-  }]
-}
-```
 
 #### Example 2
 
@@ -857,36 +578,34 @@ The name mapping rules in this example make the following object name changes:
 
 <!-- end list -->
 
-``` text
-{
-  "name_map": [{
-    "source": {
-      "type": "ATTRIBUTE",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2",
-      "attribute": "field1"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2",
-      "attribute": "bq_field"
+    {
+      "name_map": [{
+        "source": {
+          "type": "ATTRIBUTE",
+          "database": "project",
+          "schema": "dataset2",
+          "relation": "table2",
+          "attribute": "field1"
+        },
+        "target": {
+          "database": "bq_project",
+          "schema": "bq_dataset2",
+          "relation": "bq_table2",
+          "attribute": "bq_field"
+        }
+      }, {
+        "source": {
+          "type": "ATTRIBUTE_ALIAS",
+          "database": "project",
+          "schema": "dataset2",
+          "relation": "table2",
+          "attribute": "field1"
+        },
+        "target": {
+          "database": "bq_project",
+          "schema": "bq_dataset2",
+          "relation": "bq_table2",
+          "attribute": "bq_field"
+        }
+      }]
     }
-  }, {
-    "source": {
-      "type": "ATTRIBUTE_ALIAS",
-      "database": "project",
-      "schema": "dataset2",
-      "relation": "table2",
-      "attribute": "field1"
-    },
-    "target": {
-      "database": "bq_project",
-      "schema": "bq_dataset2",
-      "relation": "bq_table2",
-      "attribute": "bq_field"
-    }
-  }]
-}
-```

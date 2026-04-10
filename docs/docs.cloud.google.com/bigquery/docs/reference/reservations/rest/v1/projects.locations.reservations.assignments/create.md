@@ -1,10 +1,10 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Query parameters](#body.QUERY_PARAMETERS)
-  - [Request body](#body.request_body)
-  - [Response body](#body.response_body)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.PATH_PARAMETERS)
+  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.QUERY_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.request_body)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.response_body)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments/create#try-it)
 
 Creates an assignment object which allows the given project to submit jobs of a certain type using slots from the specified reservation.
 
@@ -70,4 +70,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery  `
   - `  https://www.googleapis.com/auth/cloud-platform  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

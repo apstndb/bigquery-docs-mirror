@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support, provide feedback, or inquire about the limitations of this feature, contact <dts-migration-preview-support@google.com> .
 
@@ -27,7 +27,7 @@ Data transfers made using the Snowflake connector are subject to the following l
 
 Incremental Snowflake transfers are subject to the following limitations:
 
-  - You must provide primary key columns to use the upsert write mode. For more information, see [Defining primary keys for incremental transfers](#defining_primary_keys_for_incremental_transfers) .
+  - You must provide primary key columns to use the upsert write mode. For more information, see [Defining primary keys for incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#defining_primary_keys_for_incremental_transfers) .
   - Primary keys must be unique in the source table. If duplicates exist, the results of the merge operation in BigQuery might be inconsistent and not match the source data.
   - The automatic handling of schema changes with incremental transfers is not supported. If the schema of a source table changes, you must manually update the BigQuery table schema.
   - Incremental transfers work best when changes in your source data are concentrated within a small number of partitions. Incremental transfer performance can degrade significantly if updates are scattered across the source table, as this requires scanning many partitions. If you have many rows that are changed between data transfers, then we recommend that you use a full transfer instead.
@@ -36,13 +36,13 @@ Incremental Snowflake transfers are subject to the following limitations:
 
 ## Data ingestion behavior
 
-You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up a Snowflake transfer](#set-up-transfer) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
+You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#set-up-transfer) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your Snowflake datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 
@@ -50,7 +50,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the Snowflake connector to track changes in the source table.
 
-For Snowflake transfers, we recommend selecting a column that is only updated when the record was created, and that won't change with subsequent updates—for example, the `  CREATED_AT  ` column.
+For Snowflake transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates. For example, the `  CREATED_AT  ` column.
 
 #### Upsert write mode
 
@@ -59,8 +59,7 @@ The upsert write mode either updates a row or inserts a new row in your destinat
 When you select the upsert mode, you must select a watermark column and a primary key:
 
   - A watermark column is required for the Snowflake connector to track changes in the source table.
-    
-    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+      - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
 
 <!-- end list -->
 
@@ -70,7 +69,7 @@ When you select the upsert mode, you must select a watermark column and a primar
     
     To prevent potential data loss or data corruption, the primary key columns that you select must have unique values. If you have doubts about the uniqueness of your chosen primary key column, then we recommend that you use the append write mode instead.
 
-To use the upsert write mode with your incremental data transfer, you must [define primary keys in your custom schema file](/bigquery/docs/migration/snowflake-transfer#defining_primary_keys_for_incremental_transfers) .
+To use the upsert write mode with your incremental data transfer, you must [define primary keys in your custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#defining_primary_keys_for_incremental_transfers) .
 
 ### Incremental ingestion behavior
 
@@ -98,7 +97,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -112,33 +111,33 @@ When you make changes to the table schema in your data source, incremental data 
 
 Before you set up a Snowflake transfer, you must perform all the steps listed in this section. The following is a list of all required steps.
 
-1.  [Prepare your Google Cloud project](#preparing-gcp-project)
-2.  [Required BigQuery roles](#required-roles)
-3.  [Prepare your staging bucket](#preparing-staging-bucket)
-4.  [Create a Snowflake user with the required permissions](#create-snowflake-user)
-5.  [Add network policies](#add_network_policies)
-6.  Optional: [Schema detection and mapping](#schema_detection_and_mapping)
-7.  [Assess your Snowflake for any unsupported data types](#assess-snowflake-data)
-8.  Optional: [Enable incremental transfers](#enable_incremental_transfers)
-9.  Optional: [Enable private connectivity](#enable_private_connectivity)
-10. [Gather transfer information](#gather_transfer_information)
-11. If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the transfers, see [Specify encryption key with transfers](#CMEK) .
+1.  [Prepare your Google Cloud project](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcp-project)
+2.  [Required BigQuery roles](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required-roles)
+3.  [Prepare your staging bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-staging-bucket)
+4.  [Create a Snowflake user with the required permissions](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user)
+5.  [Add network policies](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#add_network_policies)
+6.  Optional: [Schema detection and mapping](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#schema_detection_and_mapping)
+7.  [Assess your Snowflake for any unsupported data types](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#assess-snowflake-data)
+8.  Optional: [Enable incremental transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#enable_incremental_transfers)
+9.  Optional: [Enable private connectivity](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#enable_private_connectivity)
+10. [Gather transfer information](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#gather_transfer_information)
+11. If you plan on specifying a customer-managed encryption key (CMEK), ensure that your [service account has permissions to encrypt and decrypt](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) , and that you have the [Cloud KMS key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) required to use CMEK. For information about how CMEK works with the transfers, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#CMEK) .
 
 ### Prepare your Google Cloud project
 
 Create and configure your Google Cloud project for a Snowflake transfer with the following steps:
 
-1.  [Create a Google Cloud project](/resource-manager/docs/creating-managing-projects) or select an existing project.
+1.  [Create a Google Cloud project](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects) or select an existing project.
     
     **Note:** If you don't plan on keeping the resources created during this Snowflake transfer, create a new Google Cloud project instead of selecting an existing one. You can then delete the project once you are done with your Snowflake transfer.
 
-2.  Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
+2.  Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
-3.  [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data. You don't need to create any tables.
+3.  [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data. You don't need to create any tables.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -156,9 +155,9 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 **Note:** For ease of selection of your service account and the Cloud Storage bucket URI during transfer creation, we recommend that you grant the `  iam.serviceAccounts.list  ` and `  storage.buckets.list  ` permissions on the user creating the transfer configuration.
 
@@ -193,23 +192,21 @@ To allow read access on your Azure container, [generate a SAS Token](https://lea
 
 For Google Cloud-hosted Snowflake accounts, create a Cloud Storage bucket to stage the Snowflake data before it is loaded into BigQuery.
 
-1.  [Create a Cloud Storage bucket](/storage/docs/creating-buckets) .
+1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
 
 2.  <span id="storage-gcs-integration-bucket">[Create and configure a Snowflake storage integration object](https://docs.snowflake.com/en/user-guide/data-load-gcs-config) to allow Snowflake to write data into the Cloud Storage bucket as an external stage.</span>
 
-3.  To allow access to staging bucket, Grant [DTS service agent](/bigquery/docs/enable-transfer-service#service_agent) the `  roles/storage.objectViewer  ` role with the following command:
+3.  To allow access to staging bucket, Grant [DTS service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) the `  roles/storage.objectViewer  ` role with the following command:
     
-    ``` text
-    gcloud storage buckets add-iam-policy-binding gs://STAGING_BUCKET_NAME \
-      --member=serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
-      --role=roles/storage.objectViewer
-    ```
+        gcloud storage buckets add-iam-policy-binding gs://STAGING_BUCKET_NAME \
+          --member=serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
+          --role=roles/storage.objectViewer
 
 ### Create a Snowflake user with the required permissions
 
 During a Snowflake transfer, the Snowflake connector connects to your Snowflake account using a JDBC connection. You must create a new Snowflake user with a custom role that only has the necessary privileges to perform the data transfer:
 
-``` text
+``` 
   // Create and configure new role, MIGRATION_ROLE
   GRANT USAGE
     ON WAREHOUSE WAREHOUSE_NAME
@@ -907,42 +904,40 @@ For incremental transfers in **Upsert** mode, you must identify one or more colu
 
 The following example shows a custom schema file that defines `  O_ORDERKEY  ` and `  O_ORDERDATE  ` as primary keys for the `  orders  ` table:
 
-``` text
-{
-  "databases": [
     {
-      "name": "my_db",
-      "originalName": "my_db",
-      "tables": [
+      "databases": [
         {
-          "name": "orders",
-          "originalName": "orders",
-          "columns": [
+          "name": "my_db",
+          "originalName": "my_db",
+          "tables": [
             {
-              "name": "O_ORDERKEY",
-              "originalName": "O_ORDERKEY",
-              "usageType": [
-                "PRIMARY_KEY"
-              ]
-            },
-            {
-              "name": "O_ORDERDATE",
-              "originalName": "O_ORDERDATE",
-              "usageType": [
-                "PRIMARY_KEY"
+              "name": "orders",
+              "originalName": "orders",
+              "columns": [
+                {
+                  "name": "O_ORDERKEY",
+                  "originalName": "O_ORDERKEY",
+                  "usageType": [
+                    "PRIMARY_KEY"
+                  ]
+                },
+                {
+                  "name": "O_ORDERDATE",
+                  "originalName": "O_ORDERDATE",
+                  "usageType": [
+                    "PRIMARY_KEY"
+                  ]
+                }
               ]
             }
           ]
         }
       ]
     }
-  ]
-}
-```
 
 #### Default Schema Detection
 
-The Snowflake connector can automatically detect your Snowflake table schema. To use automatic schema detection, you can leave the **Translation output GCS path** field blank when you [set up a Snowflake transfer](#set-up-transfer) .
+The Snowflake connector can automatically detect your Snowflake table schema. To use automatic schema detection, you can leave the **Translation output GCS path** field blank when you [set up a Snowflake transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#set-up-transfer) .
 
 The following list shows how the Snowflake connector maps your Snowflake data types into BigQuery:
 
@@ -968,38 +963,36 @@ To define your schema manually (for example, to override certain schema attribut
       - The following Parquet data types are unsupported:
         
           - `  TIMESTAMP_TZ  ` , `  TIMESTAMP_LTZ  `
-          - For more information, see [Assess Snowflake data](#assess-snowflake-data) .
+          - For more information, see [Assess Snowflake data](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#assess-snowflake-data) .
     
       - The following Parquet data types are unsupported, but can be converted:
         
           - `  TIMESTAMP_NTZ  `
           - `  OBJECT  ` , `  VARIANT  ` , `  ARRAY  `
         
-        Use the [global type conversion configuration YAML](/bigquery/docs/config-yaml-translation#global_type_conversion) to override the default behavior of these data types when you run translation engine.
+        Use the [global type conversion configuration YAML](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#global_type_conversion) to override the default behavior of these data types when you run translation engine.
         
         The configuration YAML might look similar to the following example:
         
-        ``` text
-        type: experimental_object_rewriter
-        global:
-          typeConvert:
-            datetime: TIMESTAMP
-            json: VARCHAR
-        ```
+            type: experimental_object_rewriter
+            global:
+              typeConvert:
+                datetime: TIMESTAMP
+                json: VARCHAR
 
 The BigQuery Data Transfer Service for Snowflake connector uses the BigQuery migration service translation engine for schema mapping when migrating Snowflake tables into BigQuery. To complete a Snowflake data transfer, you must first generate metadata for translation, then run the translation engine:
 
-1.  Run the `  dwh-migration-tool  ` for Snowflake. For more information, see [Generate metadata for translation and assessment](/bigquery/docs/generate-metadata#snowflake) .
+1.  Run the `  dwh-migration-tool  ` for Snowflake. For more information, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata#snowflake) .
 
 2.  Upload the generated `  metadata.zip  ` file to a Cloud Storage bucket. The `  metadata.zip  ` file is used as input for the translation engine.
 
-3.  Run the batch translation service, specifying the `  target_types  ` field as `  metadata  ` . For more information, see [Translate SQL queries with the translation API](/bigquery/docs/api-sql-translator) .
+3.  Run the batch translation service, specifying the `  target_types  ` field as `  metadata  ` . For more information, see [Translate SQL queries with the translation API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) .
     
       - The following is an example of a command to run a batch translation for Snowflake:
     
     <!-- end list -->
     
-    ``` text
+    ``` 
       curl -d "{
       \"name\": \"sf_2_bq_translation\",
       \"displayName\": \"Snowflake to BigQuery Translation\",
@@ -1028,39 +1021,37 @@ The BigQuery Data Transfer Service for Snowflake connector uses the BigQuery mig
 
 In a Snowflake transfer, a service account is used to read data from the translation engine output in the specified Cloud Storage path. You must grant the service account the `  storage.objects.get  ` and the `  storage.objects.list  ` permissions.
 
-We recommend that the service account belongs to the same Google Cloud project where the transfer configuration and destination dataset is created. If the service account is in a Google Cloud project that is different from the project that created the BigQuery data transfer, then you must [enable cross-project service account authorization](/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization) .
+We recommend that the service account belongs to the same Google Cloud project where the transfer configuration and destination dataset is created. If the service account is in a Google Cloud project that is different from the project that created the BigQuery data transfer, then you must [enable cross-project service account authorization](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#cross-project_service_account_authorization) .
 
-For more information, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+For more information, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### Assess Snowflake data
 
-BigQuery writes data from Snowflake to Cloud Storage as Parquet files. Parquet files don't support the [`  TIMESTAMP_TZ  ` and `  TIMESTAMP_LTZ  `](https://community.snowflake.com/s/article/How-To-Unload-Timestamp-data-in-a-Parquet-file) data types. If your data contains these types, you can export it to Amazon S3 as CSV files and then import the CSV files into BigQuery. For more information, see [Overview of Amazon S3 transfers](/bigquery/docs/s3-transfer-intro) .
+BigQuery writes data from Snowflake to Cloud Storage as Parquet files. Parquet files don't support the [`  TIMESTAMP_TZ  ` and `  TIMESTAMP_LTZ  `](https://community.snowflake.com/s/article/How-To-Unload-Timestamp-data-in-a-Parquet-file) data types. If your data contains these types, you can export it to Amazon S3 as CSV files and then import the CSV files into BigQuery. For more information, see [Overview of Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
 
 ### Enable incremental transfers
 
 Before you can set up an incremental Snowflake transfer, you must enable change tracking on each source table with the following command:
 
-``` text
-ALTER TABLE DATABASE_NAME.SCHEMA_NAME.TABLE_NAME SET CHANGE_TRACKING = TRUE;
-```
+    ALTER TABLE DATABASE_NAME.SCHEMA_NAME.TABLE_NAME SET CHANGE_TRACKING = TRUE;
 
 If change tracking is not enabled for a table, then the Snowflake connector defaults to a full data transfer for that table.
 
 ### Enable private connectivity
 
-If you want to create a private Snowflake data transfer, you must [configure your network for private connectivity](/bigquery/docs/migration/snowflake-private-connectivity) .
+If you want to create a private Snowflake data transfer, you must [configure your network for private connectivity](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity) .
 
 ### Gather transfer information
 
 Gather the information that you need to set up the migration with the BigQuery Data Transfer Service:
 
   - Your Snowflake account identifier, which is the prefix in your Snowflake account URL. For example, `  ACCOUNT_IDENTIFIER .snowflakecomputing.com  ` .
-  - The username and the associated private key with appropriate permissions to your Snowflake database. It can just have the [required permissions to execute the data transfer](#create-snowflake-user) .
+  - The username and the associated private key with appropriate permissions to your Snowflake database. It can just have the [required permissions to execute the data transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user) .
   - The URI of the staging bucket that you want to use for the transfer:
-      - For an AWS-hosted Snowflake account, an [Amazon S3 bucket URI](#preparing-s3-bucket) is required along with access credentials.
-      - For an Azure-hosted Snowflake, an [Azure Blob Storage account and container](#preparing-azure-container) is required.
-      - <span id="staging_bucket_uri">For a Google Cloud-hosted Snowflake account, a [Cloud Storage bucket URI](#preparing-gcs-bucket) is required. We recommend that you set up a lifecycle policy for this bucket to avoid unnecessary charges.</span>
-  - The URI of the Cloud Storage bucket where you have stored the [schema mapping files obtained from the translation engine](#schema_detection_and_mapping) .
+      - For an AWS-hosted Snowflake account, an [Amazon S3 bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) is required along with access credentials.
+      - For an Azure-hosted Snowflake, an [Azure Blob Storage account and container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) is required.
+      - <span id="staging_bucket_uri">For a Google Cloud-hosted Snowflake account, a [Cloud Storage bucket URI](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) is required. We recommend that you set up a lifecycle policy for this bucket to avoid unnecessary charges.</span>
+  - The URI of the Cloud Storage bucket where you have stored the [schema mapping files obtained from the translation engine](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#schema_detection_and_mapping) .
 
 ## Set up a Snowflake transfer
 
@@ -1069,6 +1060,8 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -1076,19 +1069,19 @@ Select one of the following options:
 
 4.  In the **Transfer config name** section, enter a name for the transfer, such as `  My migration  ` , in the **Display name** field. The display name can be any value that lets you identify the transfer if you need to modify it later.
 
-5.  In the **Destination settings** section, choose [the dataset you created](#preparing-gcp-project) from the **Dataset** list.
+5.  In the **Destination settings** section, choose [the dataset you created](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcp-project) from the **Dataset** list.
 
 6.  In the **Data source details** section, do the following:
     
     1.  For **Account identifier** , enter a unique identifier for your Snowflake account, which is a combination of your organization name and account name. The identifier is the prefix of Snowflake account URL and not the complete URL. For example, `  ACCOUNT_IDENTIFIER .snowflakecomputing.com  ` .
     
-    2.  For **Username** , enter the username of the Snowflake user whose credentials and authorization is used to access your database to transfer the Snowflake tables. We recommend using [the user that you created for this transfer](#create-snowflake-user) .
+    2.  For **Username** , enter the username of the Snowflake user whose credentials and authorization is used to access your database to transfer the Snowflake tables. We recommend using [the user that you created for this transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user) .
     
-    3.  For **Auth mechanism** , select a Snowflake user authentication method. For more information, see [Generate key pair for authentication](#generate_key_pair_for_authentication)
+    3.  For **Auth mechanism** , select a Snowflake user authentication method. For more information, see [Generate key pair for authentication](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#generate_key_pair_for_authentication)
     
     4.  For **Password** , enter the password of the Snowflake user. This field is required if you have selected **PASSWORD** in the **Auth mechanism** field.
     
-    5.  For **Private key** , enter the private key linked with the [public key associated with the Snowflake user](#create-snowflake-user) . This field is required if you have selected **KEY\_PAIR** in the **Auth mechanism** field.
+    5.  For **Private key** , enter the private key linked with the [public key associated with the Snowflake user](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user) . This field is required if you have selected **KEY\_PAIR** in the **Auth mechanism** field.
     
     6.  For **Is Private key encrypted** , select this field if the private key is encrypted with a passphrase.
     
@@ -1096,7 +1089,7 @@ Select one of the following options:
     
     8.  For **Warehouse** , enter a [warehouse](https://docs.snowflake.com/en/user-guide/warehouses-tasks) that is used for the execution of this data transfer.
     
-    9.  For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created. The service account must have the `  storage.objects.list  ` and `  storage.objects.get  ` [required permissions](#required_service_account_permissions) .
+    9.  For **Service account** , enter a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created. The service account must have the `  storage.objects.list  ` and `  storage.objects.get  ` [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required_service_account_permissions) .
     
     10. For **Database** , enter the name of the Snowflake database that contains the tables included in this data transfer.
     
@@ -1107,9 +1100,9 @@ Select one of the following options:
           - `  lineitem;ordertb  ` matches tables that are named `  lineitem  ` and `  ordertb  ` .
           - `  .*  ` matches all tables.
     
-    13. For **Ingestion mode** , select **FULL** or **INCREMENTAL** . For more information, see [Data ingestion behavior](#data-ingestion) .
+    13. For **Ingestion mode** , select **FULL** or **INCREMENTAL** . For more information, see [Data ingestion behavior](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#data-ingestion) .
     
-    14. Optional: For **Translation output GCS path** , specify a path to the Cloud Storage folder that contains the [schema mapping files from the translation engine](#schema_detection_and_mapping) . You can leave this empty to have the Snowflake connector automatically detect your schema.
+    14. Optional: For **Translation output GCS path** , specify a path to the Cloud Storage folder that contains the [schema mapping files from the translation engine](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#schema_detection_and_mapping) . You can leave this empty to have the Snowflake connector automatically detect your schema.
         
           - The path should follow the format `  translation_target_base_uri /metadata/config/db/schema/  ` and must end with `  /  ` .
     
@@ -1117,28 +1110,28 @@ Select one of the following options:
     
     16. For **Cloud provider** , select `  AWS  ` or `  AZURE  ` or `  GCP  ` depending on which cloud provider is hosting your Snowflake account.
     
-    17. For **Amazon S3 URI** , enter the [URI of the Amazon S3 bucket](#preparing-s3-bucket) to use as a staging area. Only required when your **Cloud Provider** is `  AWS  ` .
+    17. For **Amazon S3 URI** , enter the [URI of the Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) to use as a staging area. Only required when your **Cloud Provider** is `  AWS  ` .
     
-    18. For **Access key ID** and **Secret access key** , enter the [access key pair](#snowflake_key_pair) . Only required when your **Cloud Provider** is `  AWS  ` .
+    18. For **Access key ID** and **Secret access key** , enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) . Only required when your **Cloud Provider** is `  AWS  ` .
     
-    19. For **Azure Storage Account** and **Azure Storage Container** , enter the [storage account and container name of the Azure Blob Storage](#preparing-azure-container) to use as a staging area. Only required when your **Cloud Provider** is `  AZURE  ` .
+    19. For **Azure Storage Account** and **Azure Storage Container** , enter the [storage account and container name of the Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area. Only required when your **Cloud Provider** is `  AZURE  ` .
     
-    20. For **SAS Token** , enter the [SAS token generated for the container](#azure_sas_token) . Only required when your **Cloud Provider** is `  AZURE  ` .
+    20. For **SAS Token** , enter the [SAS token generated for the container](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#azure_sas_token) . Only required when your **Cloud Provider** is `  AZURE  ` .
     
-    21. For **GCS URI** , enter the [URI of the Cloud Storage](#preparing-gcs-bucket) to use as a staging area. Only required when your **Cloud Provider** is `  GCP  ` .
+    21. For **GCS URI** , enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) to use as a staging area. Only required when your **Cloud Provider** is `  GCP  ` .
     
-    22. For **Use Private Network** , if you are creating a [private data transfer](/bigquery/docs/migration/snowflake-private-connectivity) , select **True** .
+    22. For **Use Private Network** , if you are creating a [private data transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity) , select **True** .
     
-    23. For **PSC Service Attachment** , if you are creating a private data transfer, enter the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+    23. For **PSC Service Attachment** , if you are creating a private data transfer, enter the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
     
-    24. For **Private Network Service** , if you are creating a private data transfer, enter the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+    24. For **Private Network Service** , if you are creating a private data transfer, enter the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
 
 7.  Optional: In the **Notification options** section, do the following:
     
     1.  Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-    2.  For **Select a Pub/Sub topic** , choose your [topic](/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer.
+    2.  For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
-8.  If you use [CMEKs](/bigquery/docs/customer-managed-encryption) , in the **Advanced options** section, select **Customer-managed key** . A list of your available CMEKs appears for you to choose from. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](#CMEK) .
+8.  If you use [CMEKs](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) , in the **Advanced options** section, select **Customer-managed key** . A list of your available CMEKs appears for you to choose from. For information about how CMEKs work with the BigQuery Data Transfer Service, see [Specify encryption key with transfers](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#CMEK) .
 
 9.  Click **Save** .
 
@@ -1156,7 +1149,7 @@ Enter the `  bq mk  ` command and supply the transfer creation flag `  --transfe
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq mk \
     --transfer_config \
     --project_id=project_id \
@@ -1173,7 +1166,7 @@ Replace the following:
   - data\_source : the data source, `  snowflake_migration  ` .
   - dataset : the BigQuery target dataset for the transfer configuration.
   - name : the display name for the transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - service\_account : (Optional) the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required roles](#required-roles) .
+  - service\_account : (Optional) the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required roles](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required-roles) .
   - parameters : the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
 
 You can configure the following parameters for your Snowflake transfer configuration:
@@ -1182,11 +1175,11 @@ You can configure the following parameters for your Snowflake transfer configura
 
   - `  username  ` : specify the username of the Snowflake user whose credentials and authorization is used to access your database to transfer the Snowflake tables.
 
-  - `  auth_mechanism  ` : specify the Snowflake user authentication method. Supported values are `  PASSWORD  ` and `  KEY_PAIR  ` . For more information, see [Generate key pair for authentication](#generate_key_pair_for_authentication) .
+  - `  auth_mechanism  ` : specify the Snowflake user authentication method. Supported values are `  PASSWORD  ` and `  KEY_PAIR  ` . For more information, see [Generate key pair for authentication](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#generate_key_pair_for_authentication) .
 
   - `  password  ` : specify the password of the Snowflake user. This field is required if you have specified `  PASSWORD  ` in the `  auth_mechanism  ` field.
 
-  - `  private_key  ` : specify the private key linked with the [public key associated with the Snowflake user](#create-snowflake-user) . This field is required if you have specified `  KEY_PAIR  ` in the `  auth_mechanism  ` field.
+  - `  private_key  ` : specify the private key linked with the [public key associated with the Snowflake user](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#create-snowflake-user) . This field is required if you have specified `  KEY_PAIR  ` in the `  auth_mechanism  ` field.
 
   - `  is_private_key_encrypted  ` : specify `  true  ` if the private key is encrypted with a passphrase.
 
@@ -1194,7 +1187,7 @@ You can configure the following parameters for your Snowflake transfer configura
 
   - `  warehouse  ` : specify a [warehouse](https://docs.snowflake.com/en/user-guide/warehouses-tasks) that is used for the execution of this data transfer.
 
-  - `  service_account  ` : specify a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created. The service account must have the `  storage.objects.list  ` and `  storage.objects.get  ` [required permissions](#required_service_account_permissions) .
+  - `  service_account  ` : specify a service account to use with this data transfer. The service account should belong to the same Google Cloud project where the transfer configuration and destination dataset is created. The service account must have the `  storage.objects.list  ` and `  storage.objects.get  ` [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#required_service_account_permissions) .
 
   - `  database  ` : specify the name of the Snowflake database that contains the tables included in this data transfer.
 
@@ -1208,9 +1201,9 @@ You can configure the following parameters for your Snowflake transfer configura
         
         You can also leave this field blank to migrate all tables from the specified schema.
 
-  - `  ingestion_mode  ` : specify the ingestion mode for the transfer. Supported values are `  FULL  ` and `  INCREMENTAL  ` . For more information, see [Data ingestion behavior](#data-ingestion) .
+  - `  ingestion_mode  ` : specify the ingestion mode for the transfer. Supported values are `  FULL  ` and `  INCREMENTAL  ` . For more information, see [Data ingestion behavior](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#data-ingestion) .
 
-  - `  translation_output_gcs_path  ` : (Optional) specify a path to the Cloud Storage folder that contains the [schema mapping files from the translation engine](#schema_detection_and_mapping) . You can leave this empty to have the Snowflake connector automatically detect your schema.
+  - `  translation_output_gcs_path  ` : (Optional) specify a path to the Cloud Storage folder that contains the [schema mapping files from the translation engine](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#schema_detection_and_mapping) . You can leave this empty to have the Snowflake connector automatically detect your schema.
     
       - The path should follow the format `  gs:// translation_target_base_uri /metadata/config/db/schema/  ` and must end with `  /  ` .
 
@@ -1218,29 +1211,29 @@ You can configure the following parameters for your Snowflake transfer configura
 
   - `  cloud_provider  ` : enter `  AWS  ` or `  AZURE  ` or `  GCP  ` depending on which cloud provider is hosting your Snowflake account.
 
-  - `  staging_s3_uri  ` : enter the [URI of the S3 bucket](#preparing-s3-bucket) to use as a staging area. Only required when your `  cloud_provider  ` is `  AWS  ` .
+  - `  staging_s3_uri  ` : enter the [URI of the S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-s3-bucket) to use as a staging area. Only required when your `  cloud_provider  ` is `  AWS  ` .
 
-  - `  aws_access_key_id  ` : enter the [access key pair](#snowflake_key_pair) . Only required when your `  cloud_provider  ` is `  AWS  ` .
+  - `  aws_access_key_id  ` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) . Only required when your `  cloud_provider  ` is `  AWS  ` .
 
-  - `  aws_secret_access_key  ` : enter the [access key pair](#snowflake_key_pair) . Only required when your `  cloud_provider  ` is `  AWS  ` .
+  - `  aws_secret_access_key  ` : enter the [access key pair](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#snowflake_key_pair) . Only required when your `  cloud_provider  ` is `  AWS  ` .
 
-  - `  azure_storage_account  ` : enter the [storage account name](#preparing-azure-container) to use as a staging area. Only required when your `  cloud_provider  ` is `  AZURE  ` .
+  - `  azure_storage_account  ` : enter the [storage account name](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area. Only required when your `  cloud_provider  ` is `  AZURE  ` .
 
-  - `  staging_azure_container  ` : enter the [container within Azure Blob Storage](#preparing-azure-container) to use as a staging area. Only required when your `  cloud_provider  ` is `  AZURE  ` .
+  - `  staging_azure_container  ` : enter the [container within Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-azure-container) to use as a staging area. Only required when your `  cloud_provider  ` is `  AZURE  ` .
 
-  - `  azure_sas_token  ` : enter the [SAS token](#azure_sas_token) . Only required when your `  cloud_provider  ` is `  AZURE  ` .
+  - `  azure_sas_token  ` : enter the [SAS token](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#azure_sas_token) . Only required when your `  cloud_provider  ` is `  AZURE  ` .
 
-  - `  staging_gcs_uri  ` : enter the [URI of the Cloud Storage](#preparing-gcs-bucket) to use as a staging area. Only required when your `  cloud_provider  ` is `  GCP  ` .
+  - `  staging_gcs_uri  ` : enter the [URI of the Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer#preparing-gcs-bucket) to use as a staging area. Only required when your `  cloud_provider  ` is `  GCP  ` .
 
-  - `  use_private_network  ` : if you are creating a [private data transfer](/bigquery/docs/migration/snowflake-private-connectivity) , set to `  TRUE  ` .
+  - `  use_private_network  ` : if you are creating a [private data transfer](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity) , set to `  TRUE  ` .
 
-  - `  service_attachment  ` : if you are creating a private data transfer, specify the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+  - `  service_attachment  ` : if you are creating a private data transfer, specify the service attachment URI. For more information, see [Create a private Snowflake transfer configuration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
 
-  - `  private_network_service  ` : if you are creating a private data transfer, specify the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
+  - `  private_network_service  ` : if you are creating a private data transfer, specify the self-link of the NLB service. For more information, see [Create a private Snowflake transfer configuration](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-private-connectivity#create-transfer-config) .
 
 For example, for an AWS-hosted Snowflake account, the following command creates a Snowflake transfer named `  Snowflake transfer config  ` with a target dataset named `  your_bq_dataset  ` and a project with the ID of `  your_project_id  ` .
 
-``` text
+``` notranslate
   PARAMS='{
   "account_identifier": "your_account_identifier",
   "auth_mechanism": "KEY_PAIR",
@@ -1272,21 +1265,21 @@ bq mk --transfer_config \
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 If multiple transfers are created for the same Snowflake tables or if the same transfer configuration is run multiple times, the data in the existing BigQuery destination tables is overwritten.
 
 ## Specify encryption key with transfers
 
-You can specify [customer-managed encryption keys (CMEKs)](/kms/docs/cmek) to encrypt data for a transfer run. You can use a CMEK to support transfers from [Snowflake](/bigquery/docs/migration/snowflake-migration-intro) .
+You can specify [customer-managed encryption keys (CMEKs)](https://docs.cloud.google.com/kms/docs/cmek) to encrypt data for a transfer run. You can use a CMEK to support transfers from [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-migration-intro) .
 
 When you specify a CMEK with a transfer, the BigQuery Data Transfer Service applies the CMEK to any intermediate on-disk cache of ingested data so that the entire data transfer workflow is CMEK compliant.
 
 You cannot update an existing transfer to add a CMEK if the transfer was not originally created with a CMEK. For example, you cannot change a destination table that was originally default encrypted to now be encrypted with CMEK. Conversely, you also cannot change a CMEK-encrypted destination table to have a different type of encryption.
 
-You can update a CMEK for a transfer if the transfer configuration was originally created with a CMEK encryption. When you update a CMEK for a transfer configuration, the BigQuery Data Transfer Service propagates the CMEK to the destination tables at the next run of the transfer, where the BigQuery Data Transfer Service replaces any outdated CMEKs with the new CMEK during the transfer run. For more information, see [Update a transfer](/bigquery/docs/working-with-transfers#update_a_transfer) .
+You can update a CMEK for a transfer if the transfer configuration was originally created with a CMEK encryption. When you update a CMEK for a transfer configuration, the BigQuery Data Transfer Service propagates the CMEK to the destination tables at the next run of the transfer, where the BigQuery Data Transfer Service replaces any outdated CMEKs with the new CMEK during the transfer run. For more information, see [Update a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#update_a_transfer) .
 
-You can also use [project default keys](/bigquery/docs/customer-managed-encryption#project_default_key) . When you specify a project default key with a transfer, the BigQuery Data Transfer Service uses the project default key as the default key for any new transfer configurations.
+You can also use [project default keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#project_default_key) . When you specify a project default key with a transfer, the BigQuery Data Transfer Service uses the project default key as the default key for any new transfer configurations.
 
 **Note:** For Snowflake transfers, CMEK encryption handles encryption of the data in the BigQuery destination tables as well as encryption of data in the intermediate Cloud Storage tenant bucket used during the transfer process for Snowflake on Amazon S3 or Azure Blob Storage.
 
@@ -1294,7 +1287,7 @@ You can also use [project default keys](/bigquery/docs/customer-managed-encrypti
 
 BigQuery has a load quota of 15 TB for each load job for each table. Internally, Snowflake compresses the table data, so the exported table size is larger than the table size reported by Snowflake. If you plan to migrate a table larger than 15 TB, please contact contact <dts-migration-preview-support@google.com> .
 
-Because of [Amazon S3's consistency model](/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files won't be included in the transfer to BigQuery.
+Because of [Amazon S3's consistency model](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files won't be included in the transfer to BigQuery.
 
 ## Pricing
 
@@ -1305,5 +1298,5 @@ For information on BigQuery Data Transfer Service pricing, see the [Pricing](htt
 
 ## What's next
 
-  - Learn more about the [BigQuery Data Transfer Service](/bigquery/docs/transfer-service-overview) .
-  - Migrate SQL code with the [Batch SQL translation](/bigquery/docs/batch-sql-translator) .
+  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/transfer-service-overview) .
+  - Migrate SQL code with the [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .

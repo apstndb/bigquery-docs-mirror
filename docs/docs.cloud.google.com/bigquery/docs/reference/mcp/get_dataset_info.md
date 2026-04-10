@@ -15,7 +15,7 @@ The following sample demonstrate how to use `  curl  ` to invoke the `  get_data
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
 curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -52,7 +52,7 @@ Request for a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string
 }</code></pre></td>
@@ -91,7 +91,7 @@ Represents a BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;id&quot;: string,
@@ -368,7 +368,7 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetId&quot;: string,
   &quot;projectId&quot;: string
 }</code></pre></td>
@@ -403,7 +403,7 @@ Optional. The ID of the project containing this dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -431,7 +431,7 @@ The string value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -459,7 +459,7 @@ The int64 value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>
@@ -490,7 +490,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;role&quot;: string,
   &quot;userByEmail&quot;: string,
   &quot;groupByEmail&quot;: string,
@@ -602,7 +602,7 @@ Optional. condition for the binding. If CEL expression in this field is true, th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string
@@ -644,7 +644,7 @@ Required. The ID of the table. The ID can contain Unicode characters in category
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;routineId&quot;: string
@@ -686,7 +686,7 @@ Required. The ID of the routine. The ID must contain only letters (a-z, A-Z), nu
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: {
     object (DatasetReference)
   },
@@ -725,7 +725,7 @@ Which resources in the dataset this entry applies to. Currently, only views are 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;expression&quot;: string,
   &quot;title&quot;: string,
   &quot;description&quot;: string,
@@ -774,7 +774,7 @@ Optional. String indicating the location of the expression for error reporting, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -802,7 +802,7 @@ Optional. Describes the Cloud KMS encryption key that will be used to protect de
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -830,7 +830,7 @@ The bool value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceDataset&quot;: {
     object (DatasetReference)
   }
@@ -860,7 +860,7 @@ The source dataset reference contains project numbers and not project ids.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;linkState&quot;: enum (LinkState)
 }</code></pre></td>
 </tr>
@@ -888,7 +888,7 @@ Output only. Specifies whether Linked Dataset is currently in a linked state or 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;externalSource&quot;: string,
   &quot;connection&quot;: string
 }</code></pre></td>
@@ -925,7 +925,7 @@ Format: projects/{project\_id}/locations/{location\_id}/connections/{connection\
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parameters&quot;: {
     string: string,
     ...
@@ -965,7 +965,7 @@ Optional. The storage location URI for all tables in the dataset. Equivalent to 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>
@@ -996,7 +996,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tagKey&quot;: string,
   &quot;tagValue&quot;: string
 }</code></pre></td>
@@ -1031,7 +1031,7 @@ Required. The friendly short name of the tag value, e.g. "production".
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: enum (RestrictionType)
 }</code></pre></td>
 </tr>
@@ -1059,7 +1059,7 @@ Output only. Specifies the type of dataset/table restriction.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>

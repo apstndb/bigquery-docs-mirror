@@ -24,7 +24,7 @@ Learn how to build a time series model that you can use to forecast retail deman
 
 ### Forecast from Google Sheets using BigQuery ML
 
-Learn how to operationalize machine learning with your business processes by combining [Connected Sheets](/bigquery/docs/connected-sheets) with a forecasting model in BigQuery ML. This pattern walks you through the process for building a forecasting model for website traffic using Google Analytics data. You can extend this pattern to work with other data types and other machine learning models.
+Learn how to operationalize machine learning with your business processes by combining [Connected Sheets](https://docs.cloud.google.com/bigquery/docs/connected-sheets) with a forecasting model in BigQuery ML. This pattern walks you through the process for building a forecasting model for website traffic using Google Analytics data. You can extend this pattern to work with other data types and other machine learning models.
 
   - Blog post: [How to use a machine learning model from Google Sheets using BigQuery ML](https://cloud.google.com/blog/topics/developers-practitioners/how-use-machine-learning-model-google-sheet-using-bigquery-ml)
   - Sample code: [BigQuery ML forecasting with Sheets](https://github.com/googleworkspace/ml-integration-samples/tree/master/apps-script/BQMLForecasting)

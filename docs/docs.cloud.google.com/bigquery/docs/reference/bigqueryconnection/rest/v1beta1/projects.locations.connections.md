@@ -1,11 +1,11 @@
-  - [Resource: Connection](#Connection)
-      - [JSON representation](#Connection.SCHEMA_REPRESENTATION)
-  - [CloudSqlProperties](#CloudSqlProperties)
-      - [JSON representation](#CloudSqlProperties.SCHEMA_REPRESENTATION)
-  - [DatabaseType](#DatabaseType)
-  - [CloudSqlCredential](#CloudSqlCredential)
-      - [JSON representation](#CloudSqlCredential.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Connection](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#Connection)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#Connection.SCHEMA_REPRESENTATION)
+  - [CloudSqlProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#CloudSqlProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#CloudSqlProperties.SCHEMA_REPRESENTATION)
+  - [DatabaseType](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#DatabaseType)
+  - [CloudSqlCredential](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#CloudSqlCredential)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#CloudSqlCredential.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections#METHODS_SUMMARY)
 
 ## Resource: Connection
 
@@ -22,7 +22,7 @@ Configuration parameters to establish connection with an external data source, e
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
@@ -101,7 +101,7 @@ Connection properties specific to the Cloud SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;instanceId&quot;: string,
   &quot;database&quot;: string,
   &quot;type&quot;: enum (DatabaseType),
@@ -181,7 +181,7 @@ Credential info for the Cloud SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;username&quot;: string,
   &quot;password&quot;: string
 }</code></pre></td>

@@ -4,7 +4,7 @@ A [Model Context Protocol (MCP) server](https://modelcontextprotocol.io/docs/lea
 
 You must [enable MCP servers](https://docs.cloud.google.com/mcp/enable-disable-mcp-servers) and [set up authentication](https://docs.cloud.google.com/mcp/authenticate-mcp) before use. For more information about using Google and Google Cloud remote MCP servers, see [Google Cloud MCP servers overview](https://docs.cloud.google.com/mcp/overview) .
 
-BigQuery Migration MCP server provides tools to work with BigQuery Migration Services, such as [SQL translation](/bigquery/docs/api-sql-translator) .
+BigQuery Migration MCP server provides tools to work with BigQuery Migration Services, such as [SQL translation](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) .
 
 ### Server Endpoints
 
@@ -22,23 +22,23 @@ The bigquerymigration.googleapis.com MCP server has the following tools:
 
 MCP Tools
 
-[translate\_query](/bigquery/docs/reference/migration/mcp/tools_list/translate_query)
+[translate\_query](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/translate_query)
 
 Translates a single query into BigQuery SQL syntax.
 
-[get\_translation](/bigquery/docs/reference/migration/mcp/tools_list/get_translation)
+[get\_translation](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/get_translation)
 
 Gets the SQL translation for a given translation ID.
 
-[explain\_translation](/bigquery/docs/reference/migration/mcp/tools_list/explain_translation)
+[explain\_translation](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/explain_translation)
 
 Explains the SQL translation for a given translation ID.
 
-[generate\_ddl\_suggestion](/bigquery/docs/reference/migration/mcp/tools_list/generate_ddl_suggestion)
+[generate\_ddl\_suggestion](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/generate_ddl_suggestion)
 
 Generates DDL statement suggestions for a given input query.
 
-[fetch\_ddl\_suggestion](/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion)
+[fetch\_ddl\_suggestion](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp/tools_list/fetch_ddl_suggestion)
 
 Fetches DDL suggestion for a given suggestion ID.
 
@@ -57,7 +57,7 @@ To get the MCP tool specifications for all tools in an MCP server, use the `  to
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                      curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
 --data &#39;{

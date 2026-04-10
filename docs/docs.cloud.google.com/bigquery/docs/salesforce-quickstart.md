@@ -4,6 +4,8 @@ Data Cloud users can access their Data Cloud data natively in BigQuery. You can 
 
 Data Cloud works with BigQuery based on the following architecture:
 
+![Data Cloud architecture.](https://docs.cloud.google.com/static/bigquery/images/data-cloud-architecture.png)
+
 ## Before you begin
 
 Before working with Data Cloud data, you must be a Data Cloud user. If you have VPC Service Controls enabled on your project, you will need additional permissions.
@@ -24,14 +26,14 @@ This documentation demonstrates how to share data from Data Cloud to BigQuery - 
 To access a Data Cloud dataset in BigQuery, you must first link the dataset to BigQuery with the following steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Salesforce Data Cloud**
     
     Data Cloud datasets are displayed. You can find the dataset by name using the following naming pattern:
     
-    ``` text
-    listing_DATA_SHARE_NAME_TARGET_NAME
-    ```
+        listing_DATA_SHARE_NAME_TARGET_NAME
     
     Replace the following:
     
@@ -52,7 +54,7 @@ Once the linked dataset is created, you can explore the dataset and the tables i
 
 All of these objects are represented as views in BigQuery. These views point to hidden tables that are stored in Amazon S3.
 
-**Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data Cloud Sharing producer project.
+**Note:** If you are using VPC Service Controls and Analytics Hub API is restricted, then you will need to create a [Egress rules](https://docs.cloud.google.com/bigquery/docs/analytics-hub-vpc-sc-rules) in the VPC Service Controls perimeter to include the Data Cloud Sharing producer project.
 
 ## Work with Data Cloud data
 
@@ -77,7 +79,7 @@ The following datasets store additional objects:
 
 Using BigQuery Omni, you can run ad-hoc queries to analyze the Data Cloud data through the subscribed dataset. The following example shows a simple query that queries the customers table from Data Cloud.
 
-``` text
+``` notranslate
 SELECT name__c, age__c
   FROM `listing_nto_john.nto_customers__dll`
   WHERE age > 40
@@ -86,9 +88,9 @@ SELECT name__c, age__c
 
 ### Run cross-cloud queries
 
-Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `  john  ` .
+Cross-cloud queries let you join any of the tables in the BigQuery Omni region and tables in the BigQuery regions. For more information about cross-cloud queries, see this [blog post](https://docs.cloud.google.com/blog/products/data-analytics/announcing-bigquery-omni-cross-cloud-joins) . In this example, we retrieve total sales for a customer named `  john  ` .
 
-``` text
+``` notranslate
 -- Get combined sales for a customer from both offline and online sales
 USING (
   SELECT total_price FROM `listing_nto_john.nto_orders__dll`
@@ -103,7 +105,7 @@ USING (
 
 You can use Create Table As Select (CTAS) to move data from Data Cloud tables in the BigQuery Omni region to the `  US  ` region.
 
-``` text
+``` notranslate
 -- Move all the orders for March to the US region
 CREATE OR REPLACE TABLE us_data.online_orders_march
   AS SELECT * FROM listing_nto_john.nto_orders__dll
@@ -124,7 +126,7 @@ You can access CCMVs from Ads Data Hub and join it with other Ads Data Hub data.
 
 To create a local materialized view:
 
-``` text
+``` notranslate
 -- Create a local materialized view that keeps track of total sales by day
 
 CREATE MATERIALIZED VIEW `aws_data.total_sales`
@@ -139,6 +141,8 @@ CREATE MATERIALIZED VIEW `aws_data.total_sales`
 You must authorize materialized views to create a CCMV. You can either authorize the view ( `  aws_data.total_sales  ` ) or the dataset ( `  aws_data  ` ). To authorize the materialized view:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Open the source dataset `  listing_nto_john  ` .
 
@@ -150,7 +154,7 @@ You must authorize materialized views to create a CCMV. You can either authorize
 
 Create a new replica materialized view in the `  US  ` region. The materialized view periodically replicates whenever there is a source data change to keep the replica up to date.
 
-``` text
+``` notranslate
 -- Create a replica MV in the us region.
 CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
   AS REPLICA OF `aws_data.total_sales`;
@@ -160,7 +164,7 @@ CREATE MATERIALIZED VIEW `us_data.total_sales_replica`
 
 The following example runs a query on a replica materialized view:
 
-``` text
+``` notranslate
 -- Find total sales for the current month for the dashboard
 
 SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
@@ -171,16 +175,16 @@ SELECT EXTRACT(MONTH FROM CURRENT_DATE()) as month, SUM(sales)
 
 ## Using Data Cloud data with `     INFORMATION_SCHEMA    `
 
-Data Cloud datasets support BigQuery `  INFORMATION_SCHEMA  ` views. The data in `  INFORMATION_SCHEMA  ` views is synced regularly from Data Cloud and may be stale. The `  SYNC_STATUS  ` column in the [`  TABLES  `](/bigquery/docs/information-schema-tables) and [`  SCHEMATA  `](/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
+Data Cloud datasets support BigQuery `  INFORMATION_SCHEMA  ` views. The data in `  INFORMATION_SCHEMA  ` views is synced regularly from Data Cloud and may be stale. The `  SYNC_STATUS  ` column in the [`  TABLES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) and [`  SCHEMATA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-datasets-schemata) views shows the last completed sync time, any errors that prevent BigQuery from providing fresh data, and any steps that are required to fix the error.
 
 `  INFORMATION_SCHEMA  ` queries don't reflect datasets that have been recently created before the initial sync.
 
-Data Cloud datasets are subject to the same [limitations](/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `  INFORMATION_SCHEMA  ` in dataset-scoped queries.
+Data Cloud datasets are subject to the same [limitations](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#limitations) as other linked datasets, such as only being accessible in `  INFORMATION_SCHEMA  ` in dataset-scoped queries.
 
 ## What's next
 
-  - Learn about [BigQuery Omni](/bigquery/docs/omni-introduction) .
+  - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
 
-  - Learn about [cross-cloud joins](/bigquery/docs/biglake-intro#cross-cloud_joins) .
+  - Learn about [cross-cloud joins](https://docs.cloud.google.com/bigquery/docs/biglake-intro#cross-cloud_joins) .
 
-  - Learn about [materialized views](/bigquery/docs/materialized-views-intro) .
+  - Learn about [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .

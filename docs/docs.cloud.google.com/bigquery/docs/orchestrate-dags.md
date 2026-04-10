@@ -1,6 +1,6 @@
 # Schedule Airflow DAGs
 
-This document describes how to schedule [Airflow directed acyclic graphs (DAGs)](/composer/docs/composer-3/composer-overview#about-airflow) from [Cloud Composer 3](/composer/docs/composer-3/composer-overview) on the **Scheduling** page in BigQuery, including how to trigger DAGs manually, and how to view the history and logs of past DAG runs.
+This document describes how to schedule [Airflow directed acyclic graphs (DAGs)](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview#about-airflow) from [Cloud Composer 3](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview) on the **Scheduling** page in BigQuery, including how to trigger DAGs manually, and how to view the history and logs of past DAG runs.
 
 ## About managing Airflow DAGs in BigQuery
 
@@ -14,7 +14,7 @@ During a DAG run, Airflow schedules and executes individual tasks that make up a
 
 To learn more about Airflow's core concepts such as Airflow DAGs, DAG runs, tasks, or operators, see the [Core Concepts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/index.html) page in the Airflow documentation.
 
-To learn more about Cloud Composer environments, see the [Cloud Composer 3 overview](/composer/docs/composer-3/composer-overview) page in the Cloud Composer documentation.
+To learn more about Cloud Composer environments, see the [Cloud Composer 3 overview](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview) page in the Cloud Composer documentation.
 
 ## Before you begin
 
@@ -22,22 +22,24 @@ Enable the Cloud Composer API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=composer.googleapis.com)
 
 Make sure that your Google Cloud project has at least one Cloud Composer 3 environment, with at least one already uploaded DAG file:
 
-  - To get started with Airflow DAGs, follow the instructions in the [Run an Apache Airflow DAG in Cloud Composer 3](/composer/docs/composer-3/run-apache-airflow-dag) guide. As a part of this guide, you create a Cloud Composer 3 environment with the default configuration, upload a DAG to it, and check that Airflow runs it.
-  - For detailed instructions to upload an Airflow DAG to a Cloud Composer 3 environment, see [Add and update DAGs](/composer/docs/composer-3/manage-dags) .
-  - For detailed instructions to create a Cloud Composer 3 environment, see [Create Cloud Composer environments](/composer/docs/composer-3/create-environments) .
+  - To get started with Airflow DAGs, follow the instructions in the [Run an Apache Airflow DAG in Cloud Composer 3](https://docs.cloud.google.com/composer/docs/composer-3/run-apache-airflow-dag) guide. As a part of this guide, you create a Cloud Composer 3 environment with the default configuration, upload a DAG to it, and check that Airflow runs it.
+  - For detailed instructions to upload an Airflow DAG to a Cloud Composer 3 environment, see [Add and update DAGs](https://docs.cloud.google.com/composer/docs/composer-3/manage-dags) .
+  - For detailed instructions to create a Cloud Composer 3 environment, see [Create Cloud Composer environments](https://docs.cloud.google.com/composer/docs/composer-3/create-environments) .
 
 ### Required permissions
 
 To get the permissions that you need to schedule Airflow DAGs, ask your administrator to grant you the following IAM roles on the project:
 
-  - To view Airflow DAGs and their details: [Environment and Storage Object Viewer](/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectViewer) ( `  roles/composer.environmentAndStorageObjectViewer  ` )
-  - To trigger and pause Airflow DAGs: [Environment and Storage Object User](/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectUser) ( `  roles/composer.environmentAndStorageObjectUser  ` )
+  - To view Airflow DAGs and their details: [Environment and Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectViewer) ( `  roles/composer.environmentAndStorageObjectViewer  ` )
+  - To trigger and pause Airflow DAGs: [Environment and Storage Object User](https://docs.cloud.google.com/iam/docs/roles-permissions/composer#composer.environmentAndStorageObjectUser) ( `  roles/composer.environmentAndStorageObjectUser  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to schedule Airflow DAGs. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -48,9 +50,9 @@ The following permissions are required to schedule Airflow DAGs:
   - To view Airflow DAGs and their details: `  composers.dags.list, composer.environments.list  `
   - To trigger and pause Airflow DAGs: `  composers.dags.list, composer.environments.list, composer.dags.execute  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about Cloud Composer 3 IAM, see [Access control with IAM](/composer/docs/composer-3/access-control) in Cloud Composer documentation.
+For more information about Cloud Composer 3 IAM, see [Access control with IAM](https://docs.cloud.google.com/composer/docs/composer-3/access-control) in Cloud Composer documentation.
 
 ## Manually trigger an Airflow DAG
 
@@ -59,6 +61,8 @@ When you manually trigger an Airflow DAG, Airflow runs the DAG once, independent
 To manually trigger a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     
@@ -71,6 +75,8 @@ To manually trigger a selected Airflow DAG, follow these steps:
 To view details of a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected DAG.
 
@@ -97,6 +103,8 @@ To view details of a selected Airflow DAG, follow these steps:
 To view Airflow DAGs from all Cloud Composer 3 environments in your Google Cloud project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Optional: To display additional columns with DAG details, click view\_column **Column display options** , and then select columns and click **OK** .
 
@@ -105,6 +113,8 @@ To view Airflow DAGs from all Cloud Composer 3 environments in your Google Cloud
 To pause a selected Airflow DAG, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to the **Scheduling** page](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Do either of the following:
     
@@ -114,9 +124,9 @@ To pause a selected Airflow DAG, follow these steps:
 
 ## Troubleshooting
 
-For instructions to troubleshoot Airflow DAGs, see [Troubleshooting Airflow DAGs](/composer/docs/composer-3/troubleshooting-dags) in Cloud Composer documentation.
+For instructions to troubleshoot Airflow DAGs, see [Troubleshooting Airflow DAGs](https://docs.cloud.google.com/composer/docs/composer-3/troubleshooting-dags) in Cloud Composer documentation.
 
 ## What's next
 
-  - Learn more about [writing Airflow DAGs](/composer/docs/composer-3/write-dags) .
-  - Learn more about [Airflow in Cloud Composer 3](/composer/docs/composer-3/composer-overview#about-airflow) .
+  - Learn more about [writing Airflow DAGs](https://docs.cloud.google.com/composer/docs/composer-3/write-dags) .
+  - Learn more about [Airflow in Cloud Composer 3](https://docs.cloud.google.com/composer/docs/composer-3/composer-overview#about-airflow) .

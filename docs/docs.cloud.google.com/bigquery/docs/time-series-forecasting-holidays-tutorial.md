@@ -2,7 +2,7 @@
 
 This tutorial shows you how to do the following tasks:
 
-  - Create an [`  ARIMA_PLUS  ` time-series forecasting model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) that uses only built-in holidays.
+  - Create an [`  ARIMA_PLUS  ` time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) that uses only built-in holidays.
   - Create an `  ARIMA_PLUS  ` time-series forecasting model that uses custom holidays in addition to built-in holidays.
   - Visualize the forecasted results from these models.
   - Inspect a model to see which holidays it models.
@@ -27,7 +27,7 @@ This tutorial uses the `  bigquery-public-data.wikipedia.pageviews_*  ` public t
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Costs
 
@@ -35,9 +35,9 @@ In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery:** You incur costs for the data you process in BigQuery.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
@@ -50,6 +50,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -65,11 +67,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -78,15 +80,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -99,10 +101,12 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 Aggregate the Wikipedia page view data for the [Google I/O](https://en.wikipedia.org/wiki/Google_I/O) page into a single table, grouped by day:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE `bqml_tutorial.googleio_page_views`
     AS
     SELECT
@@ -123,10 +127,12 @@ Aggregate the Wikipedia page view data for the [Google I/O](https://en.wikipedia
 Create a model that forecasts daily page views for the Wikipedia "Google I/O" page, based on page view data before 2022 and taking built-in holidays into account:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio`
       OPTIONS (
         model_type = 'ARIMA_PLUS',
@@ -146,13 +152,15 @@ Create a model that forecasts daily page views for the Wikipedia "Google I/O" pa
 
 ## Visualize the forecasted results
 
-After you create the model using built-in holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](/bigquery/docs/visualize-looker-studio) :
+After you create the model using built-in holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       original.date,
       original.views AS original_views,
@@ -180,11 +188,17 @@ After you create the model using built-in holidays, join the original data from 
 
 4.  In the Looker Studio tab, click **Add a chart** , and then click the time series chart:
     
+    ![Add a time series chart.](https://docs.cloud.google.com/static/bigquery/images/time-series-chart.png)
+    
     Place the chart on the report.
 
 5.  On the **Setup** tab of the **Chart** pane, click **Add metric** and select **adjusted\_views\_without\_custom\_holiday** :
     
+    ![Add an additional metric.](https://docs.cloud.google.com/static/bigquery/images/added-metric.png)
+    
     The chart looks similar to the following:
+    
+    ![Time-series chart of forecasting results using built-in holidays](https://docs.cloud.google.com/static/bigquery/images/built-in-holidays-chart.png)
     
     You can see that the forecasting model captures the general trend pretty well. However, it isn't capturing the increased traffic related to previous Google I/O events, and it isn't able to generate an accurate forecast for
     
@@ -195,10 +209,12 @@ After you create the model using built-in holidays, join the original data from 
 As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#History) , the Google I/O event occurred on different dates between 2017 and 2022. To take this variation into account, create a model that forecasts page views for the Wikipedia "Google\_I/O" page through 2022, based on page view data from before 2022, and using custom holidays to represent the Google I/O event each year. In this model, you also adjust the holiday effect window to cover three days around the event date, to better capture some potential page traffic before and after the event.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.forecast_googleio_with_custom_holiday`
       OPTIONS (
         model_type = 'ARIMA_PLUS',
@@ -239,13 +255,15 @@ As you can see in [Google I/O history](https://en.wikipedia.org/wiki/Google_I/O#
 
 ## Visualize the forecasted results
 
-After you create the model using custom holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](/bigquery/docs/visualize-looker-studio) :
+After you create the model using custom holidays, join the original data from the `  bqml_tutorial.googleio_page_views  ` table with the forecasted value from the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) , and then visualize it by [using Looker Studio](https://docs.cloud.google.com/bigquery/docs/visualize-looker-studio) :
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       original.date,
       original.views AS original_views,
@@ -278,17 +296,21 @@ After you create the model using custom holidays, join the original data from th
     
     The chart looks similar to the following:
     
+    ![Time-series chart of forecasting results using custom holidays](https://docs.cloud.google.com/static/bigquery/images/custom-holidays-chart.png)
+    
     As you can see, the custom holidays boosted the performance of the forecasting model. It now effectively captures the increase of page views caused by Google I/O.
 
 ## Inspect holiday information
 
-Inspect the list of holidays that were taken into account during modeling by using the [`  ML.HOLIDAY_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) :
+Inspect the list of holidays that were taken into account during modeling by using the [`  ML.HOLIDAY_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-holiday-info) :
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.HOLIDAY_INFO(
@@ -296,16 +318,20 @@ Inspect the list of holidays that were taken into account during modeling by usi
     ```
     
     The results show both Google I/O and the built-in holidays in the list of holidays:
+    
+    ![Results from the ML.HOLIDAY\_INFO function.](https://docs.cloud.google.com/static/bigquery/images/holiday-info-results.png)
 
 ## Evaluate the effects of the custom holidays
 
-Evaluate the effects of the custom holidays on the forecasted results by using the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) :
+Evaluate the effects of the custom holidays on the forecasted results by using the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) :
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       time_series_timestamp,
       holiday_effect_GoogleIO,
@@ -321,16 +347,20 @@ Evaluate the effects of the custom holidays on the forecasted results by using t
     ```
     
     The results show that Google I/O contributes a large amount of holiday effect to the forecasted results:
+    
+    ![Results from the ML.EXPLAIN\_FORECAST function.](https://docs.cloud.google.com/static/bigquery/images/explain-forecast-results.png)
 
 ## Compare model performance
 
-Use the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to compare the performance of the first model created without custom holidays and the second model created with custom holidays. To see how the second model performs when it comes to forecasting a future custom holiday, set the time range to the week of Google I/O in 2022:
+Use the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to compare the performance of the first model created without custom holidays and the second model created with custom holidays. To see how the second model performs when it comes to forecasting a future custom holiday, set the time range to the week of Google I/O in 2022:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       "original" AS model_type,
       *
@@ -372,6 +402,8 @@ Use the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqu
     ```
     
     The results show that the second model offers a significant performance improvement:
+    
+    ![Results from the ML.EXPLAIN\_FORECAST function.](https://docs.cloud.google.com/static/bigquery/images/compare-holiday-results.png)
 
 ## Clean up
 
@@ -383,6 +415,8 @@ Use the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqu
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

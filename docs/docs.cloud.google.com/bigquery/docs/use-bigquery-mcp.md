@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can use the BigQuery remote MCP server to perform tasks such as running queries, getting metadata, and listing resources..
 
@@ -20,14 +20,14 @@ Google and Google Cloud MCP servers have the following features and benefits:
   - Optional prompt and response security with Model Armor protection
   - Centralized audit logging
 
-For information about other MCP servers and information about security and governance controls available for Google Cloud MCP servers, see [Google Cloud MCP servers overview](/mcp/overview) .
+For information about other MCP servers and information about security and governance controls available for Google Cloud MCP servers, see [Google Cloud MCP servers overview](https://docs.cloud.google.com/mcp/overview) .
 
-You might use the BigQuery [local MCP server](/bigquery/docs/pre-built-tools-with-mcp-toolbox) for the following reasons:
+You might use the BigQuery [local MCP server](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) for the following reasons:
 
   - You need to build a custom tool over a parameterized SQL query.
   - You don't have permissions to enable or use the MCP server in your project.
 
-For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery MCP server.
+For more information about how to use our local MCP server, see [Connect LLMs to BigQuery with MCP](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) . The following sections apply only to the BigQuery MCP server.
 
 ## Before you begin
 
@@ -35,23 +35,25 @@ For more information about how to use our local MCP server, see [Connect LLMs to
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
     
     For new projects, the BigQuery API is automatically enabled.
 
-2.  Optional: [Enable billing](/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](/bigquery/docs/sandbox#setup) .
+2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
     
-    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
+    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ### Required roles
 
 To get the permissions that you need to enable the BigQuery MCP server, ask your administrator to grant you the following IAM roles on the project where you want to enable the BigQuery MCP server:
 
-  - Make MCP tool calls: [MCP Tool User](/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
-  - Run BigQuery jobs: [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Query BigQuery data: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
+  - Make MCP tool calls: [MCP Tool User](https://docs.cloud.google.com/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
+  - Run BigQuery jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - Query BigQuery data: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to enable the BigQuery MCP server. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -63,13 +65,13 @@ The following permissions are required to enable the BigQuery MCP server:
   - Run BigQuery jobs: `  bigquery.jobs.create  `
   - Query BigQuery data: `  bigquery.tables.getData  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-**Note:** Additional BigQuery permissions might be required depending on the task. For information about BigQuery permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+**Note:** Additional BigQuery permissions might be required depending on the task. For information about BigQuery permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Authentication and authorization
 
-BigQuery MCP servers use the [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) protocol with [Identity and Access Management (IAM)](/iam/docs/overview) for authentication and authorization. All [Google Cloud identities](/docs/authentication/identity-products) are supported for authentication to MCP servers.
+BigQuery MCP servers use the [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) protocol with [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/overview) for authentication and authorization. All [Google Cloud identities](https://docs.cloud.google.com/docs/authentication/identity-products) are supported for authentication to MCP servers.
 
 The BigQuery MCP server doesn't accept API keys.
 
@@ -79,20 +81,9 @@ OAuth 2.0 uses scopes and credentials to determine if an authenticated principal
 
 BigQuery has the following MCP tool OAuth scopes:
 
-<table>
-<thead>
-<tr class="header">
-<th>Scope URI for gcloud CLI</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       https://www.googleapis.com/auth/bigquery      </code></td>
-<td>View and manage your data in BigQuery and see the email address for your Google Account.</td>
-</tr>
-</tbody>
-</table>
+| Scope URI for gcloud CLI                                  | Description                                                                              |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `        https://www.googleapis.com/auth/bigquery       ` | View and manage your data in BigQuery and see the email address for your Google Account. |
 
 Additional scopes might be required on the resources accessed during a tool call. To view a list of scopes required for BigQuery, see [OAuth 2.0 scopes for BigQuery API v2](https://developers.google.com/identity/protocols/oauth2/scopes#bigquery) .
 
@@ -112,24 +103,24 @@ For the BigQuery MCP server, enter the following as required:
 
   - **Authentication details** : your Google Cloud credentials, your OAuth Client ID and secret, or an agent identity and credentials
     
-    Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](/mcp/authenticate-mcp) .
+    Which authentication details you choose depend on how you want to authenticate. For more information, see [Authenticate to MCP servers](https://docs.cloud.google.com/mcp/authenticate-mcp) .
 
 For host-specific guidance, see the following:
 
-  - [Gemini CLI MCP server setup](/mcp/configure-mcp-ai-application#gemini-cli)
+  - [Gemini CLI MCP server setup](https://docs.cloud.google.com/mcp/configure-mcp-ai-application#gemini-cli)
   - [Claude support: Getting started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp)
 
 For more general guidance, see [Connect to remote MCP servers](https://modelcontextprotocol.io/docs/develop/connect-remote-servers) .
 
 ## Available tools
 
-To view details of available MCP tools and their descriptions for the BigQuery MCP server, see the [BigQuery MCP reference](/bigquery/docs/reference/mcp) .
+To view details of available MCP tools and their descriptions for the BigQuery MCP server, see the [BigQuery MCP reference](https://docs.cloud.google.com/bigquery/docs/reference/mcp) .
 
 ### Limitations
 
 The BigQuery MCP tools are subject to the following limitations:
 
-  - The [`  execute_sql  `](/bigquery/docs/reference/mcp/execute_sql) tool doesn't support querying Google Drive external tables.
+  - The [`  execute_sql  `](https://docs.cloud.google.com/bigquery/docs/reference/mcp/execute_sql) tool doesn't support querying Google Drive external tables.
   - By default, the `  execute_sql  ` tool limits query processing time to three minutes. Queries that run longer than three minutes are automatically canceled.
   - Query results are limited to a maximum of 3,000 rows.
 
@@ -137,16 +128,14 @@ The BigQuery MCP tools are subject to the following limitations:
 
 Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `  tools/list  ` HTTP request directly to the BigQuery MCP server. The `  tools/list  ` method doesn't require authentication.
 
-``` text
-POST /mcp HTTP/1.1
-Host: bigquery.googleapis.com
-Content-Type: application/json
-
-{
-  "jsonrpc": "2.0",
-  "method": "tools/list",
-}
-```
+    POST /mcp HTTP/1.1
+    Host: bigquery.googleapis.com
+    Content-Type: application/json
+    
+    {
+      "jsonrpc": "2.0",
+      "method": "tools/list",
+    }
 
 ## Sample use cases
 
@@ -179,13 +168,13 @@ In the prompts, replace the following:
 
 MCP introduces new security risks and considerations due to the wide variety of actions that you can take with MCP tools. To minimize and manage these risks, Google Cloud offers defaults and customizable policies to control the use of MCP tools in your Google Cloud organization or project.
 
-For more information about MCP security and governance, see [AI security and safety](/mcp/ai-security-safety) .
+For more information about MCP security and governance, see [AI security and safety](https://docs.cloud.google.com/mcp/ai-security-safety) .
 
 ### Use Model Armor
 
-[Model Armor](/model-armor/overview) is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you are deploying AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
+[Model Armor](https://docs.cloud.google.com/model-armor/overview) is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you are deploying AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
 
-Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, then Model Armor makes a cross-regional call. For more information, see [Model Armor locations](/model-armor/locations) .
+Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, then Model Armor makes a cross-regional call. For more information, see [Model Armor locations](https://docs.cloud.google.com/model-armor/locations) .
 
 **Caution:** If a request fails, Model Armor logs the entire payload. This might expose sensitive information in the logs.
 
@@ -199,7 +188,9 @@ You must enable Model Armor APIs before you can use Model Armor.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=modelarmor.googleapis.com)
 
 2.  Select the project where you want to activate Model Armor.
 
@@ -209,13 +200,13 @@ Before you begin, follow these steps using the Google Cloud CLI with the Model A
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Run the following command to set the API endpoint for the Model Armor service.
     
-    ``` text
-    gcloud config set api_endpoint_overrides/modelarmor "https://modelarmor.LOCATION.rep.googleapis.com/"
-    ```
+        gcloud config set api_endpoint_overrides/modelarmor "https://modelarmor.LOCATION.rep.googleapis.com/"
     
     Replace `  LOCATION  ` with the region where you want to use Model Armor.
 
@@ -231,16 +222,14 @@ Set up a Model Armor floor setting with MCP sanitization enabled. For more infor
 
 See the following example command:
 
-``` text
-gcloud model-armor floorsettings update \
---full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
---enable-floor-setting-enforcement=TRUE \
---add-integrated-services=GOOGLE_MCP_SERVER \
---google-mcp-server-enforcement-type=INSPECT_AND_BLOCK \
---enable-google-mcp-server-cloud-logging \
---malicious-uri-filter-settings-enforcement=ENABLED \
---add-rai-settings-filters='[{"confidenceLevel": "MEDIUM_AND_ABOVE", "filterType": "DANGEROUS"}]'
-```
+    gcloud model-armor floorsettings update \
+    --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+    --enable-floor-setting-enforcement=TRUE \
+    --add-integrated-services=GOOGLE_MCP_SERVER \
+    --google-mcp-server-enforcement-type=INSPECT_AND_BLOCK \
+    --enable-google-mcp-server-cloud-logging \
+    --malicious-uri-filter-settings-enforcement=ENABLED \
+    --add-rai-settings-filters='[{"confidenceLevel": "MEDIUM_AND_ABOVE", "filterType": "DANGEROUS"}]'
 
 Replace `  PROJECT_ID  ` with your Google Cloud project ID.
 
@@ -254,11 +243,9 @@ Note the following settings:
 
 If you want to stop scanning Google MCP traffic with Model Armor, run the following command:
 
-``` text
-gcloud model-armor floorsettings update \
-  --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
-  --remove-integrated-services=GOOGLE_MCP_SERVER
-```
+    gcloud model-armor floorsettings update \
+      --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+      --remove-integrated-services=GOOGLE_MCP_SERVER
 
 Replace `  PROJECT_ID  ` with the Google Cloud project ID.
 
@@ -266,7 +253,7 @@ Model Armor won't scan MCP traffic in the project.
 
 ### Control MCP use with IAM deny policies
 
-[Identity and Access Management (IAM) deny policies](/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
+[Identity and Access Management (IAM) deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
 
 For example, you can deny or allow access based on:
 
@@ -274,7 +261,7 @@ For example, you can deny or allow access based on:
   - Tool properties like read-only
   - The application's OAuth client ID
 
-For more information, see [Control MCP use with Identity and Access Management](/mcp/control-mcp-use-iam) .
+For more information, see [Control MCP use with Identity and Access Management](https://docs.cloud.google.com/mcp/control-mcp-use-iam) .
 
 ## Quotas and limits
 
@@ -282,47 +269,18 @@ The BigQuery MCP server doesn't have its own quotas. There is no limit on the nu
 
 You are still subject to the quotas enforced by the APIs called by the MCP server tools. The following API methods are called by the MCP server tools:
 
-<table>
-<thead>
-<tr class="header">
-<th>Tool</th>
-<th>API method</th>
-<th>Quotas</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       list_dataset_ids      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/datasets/list"><code dir="ltr" translate="no">        datasets.list       </code></a></td>
-<td><a href="/bigquery/quotas#dataset_limits">Dataset quotas and limits</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       list_table_ids      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables/list"><code dir="ltr" translate="no">        tables.list       </code></a></td>
-<td><a href="/bigquery/quotas#table_limits">Table quotas and limits</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       get_dataset_info      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/datasets/get"><code dir="ltr" translate="no">        datasets.get       </code></a></td>
-<td><a href="/bigquery/quotas#dataset_limits">Dataset quotas and limits</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       get_table_info      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables/get"><code dir="ltr" translate="no">        tables.get       </code></a></td>
-<td><a href="/bigquery/quotas#table_limits">Table quotas and limits</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       execute_sql      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/jobs/query"><code dir="ltr" translate="no">        jobs.Query       </code></a></td>
-<td><a href="/bigquery/quotas#query_jobs">Query job quotas and limits</a></td>
-</tr>
-</tbody>
-</table>
+| Tool                              | API method                                                                                                      | Quotas                                                                                    |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `        list_dataset_ids       ` | [`         datasets.list        `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/list) | [Dataset quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) |
+| `        list_table_ids       `   | [`         tables.list        `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list)     | [Table quotas and limits](https://docs.cloud.google.com/bigquery/quotas#table_limits)     |
+| `        get_dataset_info       ` | [`         datasets.get        `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get)   | [Dataset quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) |
+| `        get_table_info       `   | [`         tables.get        `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get)       | [Table quotas and limits](https://docs.cloud.google.com/bigquery/quotas#table_limits)     |
+| `        execute_sql       `      | [`         jobs.Query        `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query)       | [Query job quotas and limits](https://docs.cloud.google.com/bigquery/quotas#query_jobs)   |
 
-For more information on BigQuery quotas, see [Quotas and limits](/bigquery/quotas) .
+For more information on BigQuery quotas, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .
 
 ## What's next
 
-  - Read the [BigQuery MCP reference documentation](/bigquery/docs/reference/mcp) .
-  - Learn more about [Google Cloud MCP servers](/mcp/overview) .
-  - See the MCP [supported products](/mcp/supported-products) .
+  - Read the [BigQuery MCP reference documentation](https://docs.cloud.google.com/bigquery/docs/reference/mcp) .
+  - Learn more about [Google Cloud MCP servers](https://docs.cloud.google.com/mcp/overview) .
+  - See the MCP [supported products](https://docs.cloud.google.com/mcp/supported-products) .

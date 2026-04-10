@@ -1,6 +1,6 @@
 # SEARCH\_INDEXES\_BY\_ORGANIZATION view
 
-[BigQuery search indexes](/bigquery/docs/search-intro) provide free index management until your organization reaches the [limit](/bigquery/quotas#index_limits) in a given region. You can use the `  INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  ` view to understand your current consumption towards that limit, broken down by projects and tables. The `  INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  ` view contains one row for each search index for the whole organization associated with the current project.
+[BigQuery search indexes](https://docs.cloud.google.com/bigquery/docs/search-intro) provide free index management until your organization reaches the [limit](https://docs.cloud.google.com/bigquery/quotas#index_limits) in a given region. You can use the `  INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  ` view to understand your current consumption towards that limit, broken down by projects and tables. The `  INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  ` view contains one row for each search index for the whole organization associated with the current project.
 
 **Note:** The data in the `  INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  ` view isn't kept in real time, and might be delayed by a few seconds to a few minutes.
 
@@ -18,9 +18,9 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.metadataViewer  `
 
-This schema view is only available to users with defined [Google Cloud organizations](/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) .
+This schema view is only available to users with defined [Google Cloud organizations](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) .
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -110,38 +110,25 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [`               PROJECT_ID              `.]`region-               REGION              `.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION      </code></td>
-<td>Organization that contains the specified project</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                                     | Resource scope                                   | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
+| ``        [`               PROJECT_ID              `.]`region-               REGION              `.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION       `` | Organization that contains the specified project | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
 
-  - `  REGION  ` : the [region](/bigquery/docs/locations) for your project. For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  `` .
+  - `  REGION  ` : the [region](https://docs.cloud.google.com/bigquery/docs/locations) for your project. For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION  `` .
     
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Index throttling
 
-If an index is throttled, its table size is not counted towards your organization's limit. This throttling occurs when the base table size falls under 10 GB or exceeds your organization's [limit](/bigquery/quotas#index_limits) . When an index is throttled, its management jobs are paused, causing the index to become stale and eventually temporarily disabled. Consequently, search queries are unable to use the index.
+If an index is throttled, its table size is not counted towards your organization's limit. This throttling occurs when the base table size falls under 10 GB or exceeds your organization's [limit](https://docs.cloud.google.com/bigquery/quotas#index_limits) . When an index is throttled, its management jobs are paused, causing the index to become stale and eventually temporarily disabled. Consequently, search queries are unable to use the index.
 
-You can set up alerts to get notified when a certain threshold is exceeded, similar to [setting up alerts for scheduled queries](/bigquery/docs/create-alert-scheduled-query) . For example, set up an alert when the table size exceeds 70% of the quota limit, so that you have time to act.
+You can set up alerts to get notified when a certain threshold is exceeded, similar to [setting up alerts for scheduled queries](https://docs.cloud.google.com/bigquery/docs/create-alert-scheduled-query) . For example, set up an alert when the table size exceeds 70% of the quota limit, so that you have time to act.
 
 ## Examples
 
@@ -151,7 +138,7 @@ This section includes example queries of the `  INFORMATION_SCHEMA.SEARCH_INDEXE
 
 The following example illustrates if the total indexed base table size across an organization, utilizing shared slots within the US multi-region, exceeds 100 TB:
 
-``` text
+``` notranslate
 WITH
  indexed_base_table_size AS (
  SELECT
@@ -183,19 +170,17 @@ WHERE total_logical_bytes >= 109951162777600 -- 100 TB
 
 The result is similar to the following:
 
-``` text
-+---------------------+
-| total_logical_bytes |
-+---------------------+
-|     109951162777601 |
-+---------------------+
-```
+    +---------------------+
+    | total_logical_bytes |
+    +---------------------+
+    |     109951162777601 |
+    +---------------------+
 
 #### Find total indexed base table size by projects in a region
 
 The following example gives the breakdown on each project in a US multi-region with the total size of indexed base tables:
 
-``` text
+``` notranslate
 SELECT
  search_index.project_id,
  search_index.use_background_reservation,
@@ -220,23 +205,21 @@ GROUP BY search_index.project_id, search_index.use_background_reservation
 
 The result is similar to the following:
 
-``` text
-+---------------------+----------------------------+---------------------+
-|     project_id      | use_background_reservation | total_logical_bytes |
-+---------------------+----------------------------+---------------------+
-| projecta            |     true                   |     971329178274633 |
-+---------------------+----------------------------+---------------------+
-| projectb            |     false                  |     834638211024843 |
-+---------------------+----------------------------+---------------------+
-| projectc            |     false                  |     562910385625126 |
-+---------------------+----------------------------+---------------------+
-```
+    +---------------------+----------------------------+---------------------+
+    |     project_id      | use_background_reservation | total_logical_bytes |
+    +---------------------+----------------------------+---------------------+
+    | projecta            |     true                   |     971329178274633 |
+    +---------------------+----------------------------+---------------------+
+    | projectb            |     false                  |     834638211024843 |
+    +---------------------+----------------------------+---------------------+
+    | projectc            |     false                  |     562910385625126 |
+    +---------------------+----------------------------+---------------------+
 
 #### Find throttled search indexes
 
 This following example returns all search indexes that are throttled within the organization and region:
 
-``` text
+``` notranslate
 SELECT project_id, index_schema, table_name, index_name
 FROM
  `region-us`.INFORMATION_SCHEMA.SEARCH_INDEXES_BY_ORGANIZATION
@@ -248,11 +231,9 @@ WHERE
 
 The result is similar to the following:
 
-``` text
-+--------------------+--------------------+---------------+----------------+
-|     project_id     |    index_schema    |  table_name   |   index_name   |
-+--------------------+--------------------+---------------+----------------+
-|     projecta       |     dataset_us     |   table1      |    index1      |
-|     projectb       |     dataset_us     |   table1      |    index1      |
-+--------------------+--------------------+---------------+----------------+
-```
+    +--------------------+--------------------+---------------+----------------+
+    |     project_id     |    index_schema    |  table_name   |   index_name   |
+    +--------------------+--------------------+---------------+----------------+
+    |     projecta       |     dataset_us     |   table1      |    index1      |
+    |     projectb       |     dataset_us     |   table1      |    index1      |
+    +--------------------+--------------------+---------------+----------------+

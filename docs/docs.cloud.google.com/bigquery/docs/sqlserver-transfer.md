@@ -2,18 +2,18 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Note: To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Microsoft SQL Server to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Microsoft SQL Server connector. The Microsoft SQL Server connector supports data loads from Microsoft SQL Server instances hosted in on-premises environments and other cloud providers, such as Cloud SQL, Amazon Web Services (AWS), or Microsoft Azure. With the BigQuery Data Transfer Service, you can create on-demand and recurring data transfer jobs to transfer data from your Microsoft SQL Server instance into BigQuery.
+You can load data from Microsoft SQL Server to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Microsoft SQL Server connector. The Microsoft SQL Server connector supports data loads from Microsoft SQL Server instances hosted in on-premises environments and other cloud providers, such as Cloud SQL, Amazon Web Services (AWS), or Microsoft Azure. With the BigQuery Data Transfer Service, you can create on-demand and recurring data transfer jobs to transfer data from your Microsoft SQL Server instance into BigQuery.
 
 ## Limitations
 
 Microsoft SQL Server data transfer jobs are subject to the following limitations:
 
   - There is a limited number of simultaneous connections to a Microsoft SQL Server database. Therefore, the number of simultaneous transfer runs to a single Microsoft SQL Server database is also limited. Ensure that the number of concurrent transfer jobs is less than the maximum number of concurrent connections supported by the Microsoft SQL Server database.
-  - Some Microsoft SQL Server data types might be mapped to the `  STRING  ` type in BigQuery to avoid data loss. For example, certain numeric types in Microsoft SQL Server that don't have precision and scale defined might be mapped to `  STRING  ` in BigQuery. For more information, see [Data type mapping](#data_type_mapping) .
+  - Some Microsoft SQL Server data types might be mapped to the `  STRING  ` type in BigQuery to avoid data loss. For example, certain numeric types in Microsoft SQL Server that don't have precision and scale defined might be mapped to `  STRING  ` in BigQuery. For more information, see [Data type mapping](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#data_type_mapping) .
 
 ## Data ingestion options
 
@@ -65,12 +65,12 @@ You must have created a user account in the Microsoft SQL Server database. For m
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data.
+  - Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
 
 #### Required roles
 
-To get the permissions that you need to create a Microsoft SQL Server data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a Microsoft SQL Server data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a Microsoft SQL Server data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -81,15 +81,15 @@ The following permissions are required to create a Microsoft SQL Server data tra
   - `  bigquery.transfers.update  `
   - `  bigquery.datasets.get  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Network configuration
 
 You must set up specific network configurations when a public IP address isn't available for the Microsoft SQL Server database connection. For more information, see the following sections:
 
-  - [Configure a connection to Google Cloud instance](/bigquery/docs/cloud-sql-instance-access)
-  - [Configure a connection to AWS](/bigquery/docs/aws-vpn-network-attachment)
-  - [Configure a connection to Azure](/bigquery/docs/azure-vpn-network-attachment)
+  - [Configure a connection to Google Cloud instance](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access)
+  - [Configure a connection to AWS](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment)
+  - [Configure a connection to Azure](https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment)
 
 ## Set up a Microsoft SQL Server data transfer
 
@@ -98,6 +98,8 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **Data transfers** page.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -111,9 +113,9 @@ Select one of the following options:
       - For **Database name** , enter the name of the Microsoft SQL Server database.
       - For **Username** , enter the username of the Microsoft SQL Server user initiating the Microsoft SQL Server database connection.
       - For **Password** , enter the password of the Microsoft SQL Server user initiating the Microsoft SQL Server database connection.
-      - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](#tls_configuration) .
-      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) .
-      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
+      - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#tls_configuration) .
+      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) .
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#data_type_mapping) . Select **false** to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) .
       - For **Microsoft SQL Server objects to transfer** , browse the Microsoft SQL Server table or manually enter the names of the tables that are required for the transfer.
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
@@ -122,23 +124,23 @@ Select one of the following options:
 
 7.  In the **Schedule options** section, do the following:
     
-      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notifications** toggle to the on position. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To configure Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](/pubsub/docs/admin) name or click **Create a topic** to create one.
+      - To configure Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/admin) name or click **Create a topic** to create one.
 
-9.  Optional: In the **Advanced options** section, select an encryption type for this transfer. You can select either a Google-owned and Google-managed encryption key or a customer-owned Cloud Key Management Service key. For more information about encryption keys, see [Customer-managed encryption keys (CMEK)](/kms/docs/cmek) .
+9.  Optional: In the **Advanced options** section, select an encryption type for this transfer. You can select either a Google-owned and Google-managed encryption key or a customer-owned Cloud Key Management Service key. For more information about encryption keys, see [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) .
 
 10. Click **Save** .
 
 ### bq
 
-Enter the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
 bq mk \
     --transfer_config \
     --project_id=PROJECT_ID \
@@ -166,18 +168,18 @@ Replace the following:
       - `  connector.endpoint.port  ` : the port number of the database.
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user.
-      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
-      - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) .
+      - `  connector.tls.mode  ` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
           - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
           - `  DISABLE  ` for no encryption or verification
-      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) . Required only if the value of `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
+      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer#trusted_server_certificate_pem) . Required only if the value of `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
       - `  assets  ` : a list of the names of the Microsoft SQL Server tables to be transferred from the Microsoft SQL Server database as part of the transfer.
 
 For example, the following command creates a Microsoft SQL Server transfer called `  My Transfer  ` :
 
-``` text
+``` notranslate
 bq mk \
     --transfer_config
     --target_dataset=mydataset
@@ -196,200 +198,51 @@ bq mk \
 
 When you save the transfer configuration, the Microsoft SQL Server connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Microsoft SQL Server connector transfers all available data from Microsoft SQL Server into BigQuery.
 
-To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Data type mapping
 
-**Note:** On March 16, 2027, the Microsoft SQL Server connector will update some of its data type mapping, as indicated in the following table. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-sqlserver) .
+**Note:** On March 16, 2027, the Microsoft SQL Server connector will update some of its data type mapping, as indicated in the following table. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) .
 
 The following table maps Microsoft SQL Server data types to the corresponding BigQuery data types:
 
-<table>
-<thead>
-<tr class="header">
-<th>Microsoft SQL Server data type</th>
-<th>BigQuery data type</th>
-<th><a href="/bigquery/docs/transfer-changes#Mar16-sqlserver">Updated BigQuery data type</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       tinyint      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       smallint      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       int      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigint      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bit      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       decimal      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       numeric      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       money      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       smallmoney      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       float      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       real      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       date      </code></td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       time      </code></td>
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       datetime2      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       datetimeoffset      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       datetime      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       smalldatetime      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       char      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       varchar      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       text      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       nchar      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       nvarchar      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ntext      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       binary      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       varbinary      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       image      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       geography      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       geometry      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       hierarchyid      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       rowversion      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sql_variant      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       uniqueidentifier      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       xml      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       json      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       vector      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Microsoft SQL Server data type    | BigQuery data type          | [Updated BigQuery data type](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-sqlserver) |
+| --------------------------------- | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `        tinyint       `          | `        INTEGER       `    |                                                                                                            |
+| `        smallint       `         | `        INTEGER       `    |                                                                                                            |
+| `        int       `              | `        INTEGER       `    |                                                                                                            |
+| `        bigint       `           | `        BIGNUMERIC       ` |                                                                                                            |
+| `        bit       `              | `        BOOLEAN       `    |                                                                                                            |
+| `        decimal       `          | `        BIGNUMERIC       ` |                                                                                                            |
+| `        numeric       `          | `        NUMERIC       `    |                                                                                                            |
+| `        money       `            | `        BIGNUMERIC       ` |                                                                                                            |
+| `        smallmoney       `       | `        BIGNUMERIC       ` |                                                                                                            |
+| `        float       `            | `        FLOAT       `      |                                                                                                            |
+| `        real       `             | `        FLOAT       `      |                                                                                                            |
+| `        date       `             | `        DATE       `       |                                                                                                            |
+| `        time       `             | `        TIME       `       |                                                                                                            |
+| `        datetime2       `        | `        TIMESTAMP       `  | `        DATETIME       `                                                                                  |
+| `        datetimeoffset       `   | `        TIMESTAMP       `  |                                                                                                            |
+| `        datetime       `         | `        TIMESTAMP       `  | `        DATETIME       `                                                                                  |
+| `        smalldatetime       `    | `        TIMESTAMP       `  | `        DATETIME       `                                                                                  |
+| `        char       `             | `        STRING       `     |                                                                                                            |
+| `        varchar       `          | `        STRING       `     |                                                                                                            |
+| `        text       `             | `        STRING       `     |                                                                                                            |
+| `        nchar       `            | `        STRING       `     |                                                                                                            |
+| `        nvarchar       `         | `        STRING       `     |                                                                                                            |
+| `        ntext       `            | `        STRING       `     |                                                                                                            |
+| `        binary       `           | `        BYTES       `      |                                                                                                            |
+| `        varbinary       `        | `        BYTES       `      |                                                                                                            |
+| `        image       `            | `        BYTES       `      |                                                                                                            |
+| `        geography       `        | `        STRING       `     |                                                                                                            |
+| `        geometry       `         | `        STRING       `     |                                                                                                            |
+| `        hierarchyid       `      | `        BYTES       `      |                                                                                                            |
+| `        rowversion       `       | `        BYTES       `      |                                                                                                            |
+| `        sql_variant       `      | `        BYTES       `      |                                                                                                            |
+| `        uniqueidentifier       ` | `        STRING       `     |                                                                                                            |
+| `        xml       `              | `        STRING       `     |                                                                                                            |
+| `        json       `             | `        STRING       `     |                                                                                                            |
+| `        vector       `           | `        STRING       `     |                                                                                                            |
 
 The `  json  ` and `  vector  ` data types are only supported in Azure.
 
@@ -401,7 +254,7 @@ The Microsoft SQL Server doesn't have vector support for the `  vector  ` data t
 
 ## Troubleshoot
 
-To troubleshoot issues for your data transfer, see [Microsoft SQL Server transfer issues](/bigquery/docs/transfer-troubleshooting#sqlserver-issues) .
+To troubleshoot issues for your data transfer, see [Microsoft SQL Server transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#sqlserver-issues) .
 
 ## Pricing
 
@@ -409,5 +262,5 @@ There is no cost to transfer Microsoft SQL Server data into BigQuery while this 
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](/bigquery/docs/dts-introduction) .
-  - For information on using transfers, including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](/bigquery/docs/working-with-transfers) .
+  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service?](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - For information on using transfers, including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .

@@ -1,11 +1,11 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Request body](#body.request_body)
-      - [JSON representation](#body.request_body.SCHEMA_REPRESENTATION)
-  - [Response body](#body.response_body)
-      - [JSON representation](#body.TableDataInsertAllResponse.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.PATH_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.request_body)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.request_body.SCHEMA_REPRESENTATION)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.response_body)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.TableDataInsertAllResponse.SCHEMA_REPRESENTATION)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll#try-it)
 
 Streams data into BigQuery one record at a time without needing to run a load job.
 
@@ -52,7 +52,7 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;skipInvalidRows&quot;: boolean,
   &quot;ignoreUnknownValues&quot;: boolean,
@@ -138,7 +138,7 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;insertErrors&quot;: [
     {
@@ -189,4 +189,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/cloud-platform  `
   - `  https://www.googleapis.com/auth/bigquery.insertdata  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

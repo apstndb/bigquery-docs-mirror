@@ -4,7 +4,7 @@ This document describes the `  ML.ARIMA_EVALUATE  ` function, which you can use 
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.ARIMA_EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   [, STRUCT(SHOW_ALL_CANDIDATE_MODELS AS show_all_candidate_models)])
@@ -84,7 +84,7 @@ When the `  non_seasonal_d  ` value is not `  1  ` , `  has_drift  ` is set to `
 
 The following example retrieves the evaluation metrics of the best model from the model `  mydataset.mymodel  ` in your default project:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -93,5 +93,5 @@ FROM
 
 ## What's next
 
-  - For information about model evaluation, see [BigQuery ML model evaluation overview](/bigquery/docs/evaluate-overview) .
-  - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast) .
+  - For information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
+  - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .

@@ -18,18 +18,18 @@ BigQuery DataFrames provides three libraries:
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the following IAM roles on your project:
 
-  - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
   - Use BigQuery DataFrames in a BigQuery notebook:
-      - [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-      - [Notebook Runtime User](/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-      - [Code Creator](/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+      - [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
+      - [Notebook Runtime User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
+      - [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-When you're performing end user authentication in an interactive environment like a notebook, Python REPL, or the command line, BigQuery DataFrames prompts for authentication, if needed. Otherwise, see [how to set up application default credentials](/docs/authentication/provide-credentials-adc) for various environments.
+When you're performing end user authentication in an interactive environment like a notebook, Python REPL, or the command line, BigQuery DataFrames prompts for authentication, if needed. Otherwise, see [how to set up application default credentials](https://docs.cloud.google.com/docs/authentication/provide-credentials-adc) for various environments.
 
 ## Configure installation options
 
@@ -41,23 +41,21 @@ You need to specify the [location](https://dataframes.bigquery.dev/reference/api
 
 You can define the location and project in your notebook in the following way:
 
-``` python
-import bigframes.pandas as bpd
-
-PROJECT_ID = "bigframes-dev"  # @param {type:"string"}
-REGION = "US"  # @param {type:"string"}
-
-# Set BigQuery DataFrames options
-# Note: The project option is not required in all environments.
-# On BigQuery Studio, the project ID is automatically detected.
-bpd.options.bigquery.project = PROJECT_ID
-
-# Note: The location option is not required.
-# It defaults to the location of the first table or query
-# passed to read_gbq(). For APIs where a location can't be
-# auto-detected, the location defaults to the "US" location.
-bpd.options.bigquery.location = REGION
-```
+    import bigframes.pandas as bpd
+    
+    PROJECT_ID = "bigframes-dev"  # @param {type:"string"}
+    REGION = "US"  # @param {type:"string"}
+    
+    # Set BigQuery DataFrames options
+    # Note: The project option is not required in all environments.
+    # On BigQuery Studio, the project ID is automatically detected.
+    bpd.options.bigquery.project = PROJECT_ID
+    
+    # Note: The location option is not required.
+    # It defaults to the location of the first table or query
+    # passed to read_gbq(). For APIs where a location can't be
+    # auto-detected, the location defaults to the "US" location.
+    bpd.options.bigquery.location = REGION
 
 ### Data processing location
 
@@ -65,8 +63,8 @@ BigQuery DataFrames is designed for scale, which it achieves by keeping data and
 
 ## What's next
 
-  - Learn about [manipulating data](/bigquery/docs/dataframes-data-manipulation) with BigQuery DataFrames.
-  - Learn how to [generate BigQuery DataFrames code with Gemini](/bigquery/docs/write-sql-gemini#dataframe) .
+  - Learn about [manipulating data](https://docs.cloud.google.com/bigquery/docs/dataframes-data-manipulation) with BigQuery DataFrames.
+  - Learn how to [generate BigQuery DataFrames code with Gemini](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#dataframe) .
   - Learn how to [analyze package downloads from PyPI with BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/dataframes/pypi.ipynb) .
   - View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.
   - Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .

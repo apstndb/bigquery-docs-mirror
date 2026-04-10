@@ -14,7 +14,7 @@ To query the `  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view, you need the `
   - BigQuery User ( `  roles/bigquery.user  ` )
   - BigQuery Admin ( `  roles/bigquery.admin  ` )
 
-For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -50,7 +50,7 @@ The `  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view has the following schema
 <tr class="even">
 <td><code dir="ltr" translate="no">       edition      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The edition associated with this reservation. For more information about editions, see <a href="/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
+<td>The edition associated with this reservation. For more information about editions, see <a href="https://docs.cloud.google.com/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       ignore_idle_slots      </code></td>
@@ -121,12 +121,12 @@ The `  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view has the following schema
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_slots      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The maximum number of slots that this reservation can use, which includes baseline slots ( <code dir="ltr" translate="no">       slot_capacity      </code> ), idle slots (if <code dir="ltr" translate="no">       ignore_idle_slots      </code> is false), and autoscale slots. This field is specified by users for using the <a href="/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
+<td>The maximum number of slots that this reservation can use, which includes baseline slots ( <code dir="ltr" translate="no">       slot_capacity      </code> ), idle slots (if <code dir="ltr" translate="no">       ignore_idle_slots      </code> is false), and autoscale slots. This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       scaling_mode      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code dir="ltr" translate="no">       max_slots      </code> . This field is specified by users for using the <a href="/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
+<td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code dir="ltr" translate="no">       max_slots      </code> . This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       period_autoscale_slot_seconds      </code></td>
@@ -136,7 +136,7 @@ The `  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view has the following schema
 <tr class="odd">
 <td><code dir="ltr" translate="no">       is_creation_region      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td><p>Specifies if the current region is the location where the reservation was created. This location is used to determine the pricing of the baseline reservation slots. For a failover <a href="/bigquery/docs/managed-disaster-recovery">disaster recovery (DR)</a> reservation, a <code dir="ltr" translate="no">        TRUE       </code> value indicates the original primary location, while for a non-DR reservation, a <code dir="ltr" translate="no">        TRUE       </code> value denotes the reservation's location.</p>
+<td><p>Specifies if the current region is the location where the reservation was created. This location is used to determine the pricing of the baseline reservation slots. For a failover <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">disaster recovery (DR)</a> reservation, a <code dir="ltr" translate="no">        TRUE       </code> value indicates the original primary location, while for a non-DR reservation, a <code dir="ltr" translate="no">        TRUE       </code> value denotes the reservation's location.</p>
 <p>For a non-failover reservation, this value is always <code dir="ltr" translate="no">        TRUE       </code> . For a failover reservation, the value depends on the region: <code dir="ltr" translate="no">        TRUE       </code> for the original primary and <code dir="ltr" translate="no">        FALSE       </code> for the original secondary.</p></td>
 </tr>
 </tbody>
@@ -146,30 +146,17 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region and resource scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region and resource scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE[_BY_PROJECT]      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                                       | Resource scope | Region scope               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE[_BY_PROJECT]       `` | Project level  | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Examples
 
@@ -177,7 +164,7 @@ Replace the following:
 
 The following example shows per-second autoscaling of `  YOUR_RESERVATION_ID  ` across all jobs:
 
-``` text
+``` notranslate
 SELECT s.start_time, s.autoscale_current_slots
 FROM `region-us.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` m
 JOIN m.per_second_details s
@@ -188,17 +175,15 @@ ORDER BY period_start, s.start_time
 
 The result is similar to the following:
 
-``` text
-+---------------------+-------------------------+
-|     start_time      | autoscale_current_slots |
-+---------------------+-------------------------+
-| 2025-09-28 00:00:00 |                    1600 |
-| 2025-09-28 00:00:01 |                    1600 |
-| 2025-09-28 00:00:02 |                    1600 |
-| 2025-09-28 00:00:03 |                    1600 |
-| 2025-09-28 00:00:04 |                    1600 |
-+---------------------+-------------------------+
-```
+    +---------------------+-------------------------+
+    |     start_time      | autoscale_current_slots |
+    +---------------------+-------------------------+
+    | 2025-09-28 00:00:00 |                    1600 |
+    | 2025-09-28 00:00:01 |                    1600 |
+    | 2025-09-28 00:00:02 |                    1600 |
+    | 2025-09-28 00:00:03 |                    1600 |
+    | 2025-09-28 00:00:04 |                    1600 |
+    +---------------------+-------------------------+
 
 **Note:** The `  period_start  ` column is a partitioning key, so it's important to filter by `  period_start  ` to make the query efficient.
 
@@ -206,15 +191,13 @@ The result is similar to the following:
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-``` text
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION
-```
+    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION
 
 For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_TIMELINE_BY_ORGANIZATION  `` .
 
 The following example shows per-second slot usage from projects assigned to `  YOUR_RESERVATION_ID  ` across all jobs:
 
-``` text
+``` notranslate
 SELECT
   jobs.period_start,
   SUM(jobs.period_slot_ms) / 1000 AS period_slot_seconds,
@@ -243,21 +226,19 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+-----------------------+---------------------+--------------------------+------------------------------+
-|     period_start      | period_slot_seconds | estimated_slots_assigned | estimated_slots_max_assigned |
-+-----------------------+---------------------+--------------------------+------------------------------+
-|2021-06-08 21:33:59 UTC|       100.000       |         100              |           100                |
-|2021-06-08 21:33:58 UTC|        96.753       |         100              |           100                |
-|2021-06-08 21:33:57 UTC|        41.668       |         100              |           100                |
-+-----------------------+---------------------+--------------------------+------------------------------+
-```
+    +-----------------------+---------------------+--------------------------+------------------------------+
+    |     period_start      | period_slot_seconds | estimated_slots_assigned | estimated_slots_max_assigned |
+    +-----------------------+---------------------+--------------------------+------------------------------+
+    |2021-06-08 21:33:59 UTC|       100.000       |         100              |           100                |
+    |2021-06-08 21:33:58 UTC|        96.753       |         100              |           100                |
+    |2021-06-08 21:33:57 UTC|        41.668       |         100              |           100                |
+    +-----------------------+---------------------+--------------------------+------------------------------+
 
 #### Example: Slot usage by reservation
 
 The following example shows per-second slot usage for each reservation in the last day:
 
-``` text
+``` notranslate
 SELECT
   jobs.period_start,
   res.reservation_id,
@@ -288,13 +269,11 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+-----------------------+----------------+---------------------+--------------------------+------------------------------+
-|     period_start      | reservation_id | period_slot_seconds | estimated_slots_assigned | estimated_slots_max_assigned |
-+-----------------------+----------------+---------------------+--------------------------+------------------------------+
-|2021-06-08 21:33:59 UTC|     prod01     |       100.000       |             100          |              100             |
-|2021-06-08 21:33:58 UTC|     prod02     |       177.201       |             200          |              500             |
-|2021-06-08 21:32:57 UTC|     prod01     |        96.753       |             100          |              100             |
-|2021-06-08 21:32:56 UTC|     prod02     |       182.329       |             200          |              500             |
-+-----------------------+----------------+---------------------+--------------------------+------------------------------+
-```
+    +-----------------------+----------------+---------------------+--------------------------+------------------------------+
+    |     period_start      | reservation_id | period_slot_seconds | estimated_slots_assigned | estimated_slots_max_assigned |
+    +-----------------------+----------------+---------------------+--------------------------+------------------------------+
+    |2021-06-08 21:33:59 UTC|     prod01     |       100.000       |             100          |              100             |
+    |2021-06-08 21:33:58 UTC|     prod02     |       177.201       |             200          |              500             |
+    |2021-06-08 21:32:57 UTC|     prod01     |        96.753       |             100          |              100             |
+    |2021-06-08 21:32:56 UTC|     prod02     |       182.329       |             200          |              500             |
+    +-----------------------+----------------+---------------------+--------------------------+------------------------------+

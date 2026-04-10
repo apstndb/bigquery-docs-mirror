@@ -2,11 +2,11 @@
 
 This document describes the `  ML.DISTANCE  ` scalar function, which lets you compute the distance between two vectors.
 
-**Note:** The [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) is another vector function that calculates the distance between vectors. You should use the `  VECTOR_SEARCH  ` function if you need to search a dataset for vectors similar to an input vector. You should use the `  ML.DISTANCE  ` function if you need to compare two specific vectors to determine the distance between them.
+**Note:** The [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) is another vector function that calculates the distance between vectors. You should use the `  VECTOR_SEARCH  ` function if you need to search a dataset for vectors similar to an input vector. You should use the `  ML.DISTANCE  ` function if you need to compare two specific vectors to determine the distance between them.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.DISTANCE(vector1, vector2 [, type])
 ```
 
@@ -48,7 +48,7 @@ Get the Euclidean distance for two tensors of `  ARRAY<FLOAT64>  ` values:
 
 1.  Create the table `  t1  ` :
     
-    ``` text
+    ``` notranslate
     CREATE TABLE mydataset.t1
     (
     v1 ARRAY<FLOAT64>,
@@ -58,27 +58,25 @@ Get the Euclidean distance for two tensors of `  ARRAY<FLOAT64>  ` values:
 
 2.  Populate `  t1  ` :
     
-    ``` text
+    ``` notranslate
     INSERT mydataset.t1 (v1,v2)
     VALUES ([4.1,0.5,1.0], [3.0,0.0,2.5])
     ```
 
 3.  Calculate the Euclidean norm for `  v1  ` and `  v2  ` :
     
-    ``` text
+    ``` notranslate
     SELECT v1, v2, ML.DISTANCE(v1, v2, 'EUCLIDEAN') AS output FROM mydataset.t1
     ```
     
     This query produces the following output:
     
-    ``` text
-    +---------------+---------------+-------------------+
-    | v1            | v2            | output            |
-    +---------------+---------------+-------------------|
-    | [4.1,0.5,1.0] | [3.0,0.0,2.5] | 1.926136028425822 |
-    +------------+------------------+-------------------+
-    ```
+        +---------------+---------------+-------------------+
+        | v1            | v2            | output            |
+        +---------------+---------------+-------------------|
+        | [4.1,0.5,1.0] | [3.0,0.0,2.5] | 1.926136028425822 |
+        +------------+------------------+-------------------+
 
 ## What's next
 
-  - For information about the supported SQL statements and functions for each model type, see [End-to-end user journey for each model](/bigquery/docs/e2e-journey) .
+  - For information about the supported SQL statements and functions for each model type, see [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

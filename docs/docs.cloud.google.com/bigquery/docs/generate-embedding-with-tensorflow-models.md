@@ -6,42 +6,13 @@ This tutorial shows you how to generate NNLM, SWIVEL, and BERT text embeddings i
 
 The NNLM, SWIVEL, and BERT models vary in size, accuracy, scalability, and cost. Use the following table to help you determine which model to use:
 
-<table>
-<thead>
-<tr class="header">
-<th>Model</th>
-<th>Model size</th>
-<th>Embedding dimension</th>
-<th>Use case</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://tfhub.dev/google/nnlm-en-dim50-with-normalization/2">NNLM</a></td>
-<td>&lt;150MB</td>
-<td>50</td>
-<td>Short phrases, news, tweets, reviews</td>
-<td>Neural Network Language Model</td>
-</tr>
-<tr class="even">
-<td><a href="https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1">SWIVEL</a></td>
-<td>&lt;150MB</td>
-<td>20</td>
-<td>Short phrases, news, tweets, reviews</td>
-<td>Submatrix-wise Vector Embedding Learner</td>
-</tr>
-<tr class="odd">
-<td><a href="https://tfhub.dev/tensorflow/bert_en_cased_L-12_H-768_A-12/4">BERT</a></td>
-<td>~200MB</td>
-<td>768</td>
-<td>Short phrases, news, tweets, reviews, short paragraphs</td>
-<td>Bidirectional Encoder Representations from Transformers</td>
-</tr>
-</tbody>
-</table>
+| Model                                                                | Model size | Embedding dimension | Use case                                               | Description                                             |
+| -------------------------------------------------------------------- | ---------- | ------------------- | ------------------------------------------------------ | ------------------------------------------------------- |
+| [NNLM](https://tfhub.dev/google/nnlm-en-dim50-with-normalization/2)  | \<150MB    | 50                  | Short phrases, news, tweets, reviews                   | Neural Network Language Model                           |
+| [SWIVEL](https://tfhub.dev/google/tf2-preview/gnews-swivel-20dim/1)  | \<150MB    | 20                  | Short phrases, news, tweets, reviews                   | Submatrix-wise Vector Embedding Learner                 |
+| [BERT](https://tfhub.dev/tensorflow/bert_en_cased_L-12_H-768_A-12/4) | \~200MB    | 768                 | Short phrases, news, tweets, reviews, short paragraphs | Bidirectional Encoder Representations from Transformers |
 
-In this tutorial, the NNLM and SWIVEL models are [imported TensorFlow models](/bigquery/docs/making-predictions-with-imported-tensorflow-models) , and the BERT model is a [remote model on Vertex AI](/bigquery/docs/bigquery-ml-remote-model-tutorial) .
+In this tutorial, the NNLM and SWIVEL models are [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models) , and the BERT model is a [remote model on Vertex AI](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial) .
 
 ## Required permissions
 
@@ -78,9 +49,9 @@ In this document, you use the following billable components of Google Cloud:
   - **Cloud Storage:** You incur costs for the objects that you store in Cloud Storage.
   - **Vertex AI:** If you follow the instructions for generating the BERT model, then you incur costs for deploying the model to an endpoint.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information, see the following resources:
 
@@ -99,13 +70,15 @@ To create a dataset named `  tf_models_tutorial  ` to store the models that you 
 
 ### SQL
 
-Use the [`  CREATE SCHEMA  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
+Use the [`  CREATE SCHEMA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE SCHEMA `PROJECT_ID.tf_models_tutorial`;
     ```
     
@@ -113,15 +86,17 @@ Use the [`  CREATE SCHEMA  ` statement](/bigquery/docs/reference/standard-sql/da
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-
-2.  To create the dataset, run the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
     
-    ``` text
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
+
+2.  To create the dataset, run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
+    
+    ``` notranslate
     bq mk --dataset --location=us PROJECT_ID:tf_models_tutorial
     ```
     
@@ -135,39 +110,31 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
-    ``` text
-    pip install bigquery-ml-utils
-    ```
+        pip install bigquery-ml-utils
 
 2.  Generate an NNLM model. The following Python code loads an NNLM model from TensorFlow Hub and prepares it for BigQuery:
     
-    ``` text
-    from bigquery_ml_utils import model_generator
-    import tensorflow_text
-    
-    # Establish an instance of TextEmbeddingModelGenerator.
-    text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
-    
-    # Generate an NNLM model.
-    text_embedding_model_generator.generate_text_embedding_model('nnlm', OUTPUT_MODEL_PATH)
-    ```
+        from bigquery_ml_utils import model_generator
+        import tensorflow_text
+        
+        # Establish an instance of TextEmbeddingModelGenerator.
+        text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
+        
+        # Generate an NNLM model.
+        text_embedding_model_generator.generate_text_embedding_model('nnlm', OUTPUT_MODEL_PATH)
     
     Replace `  OUTPUT_MODEL_PATH  ` with a path to a local folder where you can temporarily store the model.
 
 3.  Optional: Print the generated model's signature:
     
-    ``` text
-    import tensorflow as tf
-    
-    reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
-    print(reload_embedding_model.signatures["serving_default"])
-    ```
+        import tensorflow as tf
+        
+        reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
+        print(reload_embedding_model.signatures["serving_default"])
 
-4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](/sdk/gcloud/reference/storage) :
+4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud/reference/storage) :
     
-    ``` text
-    gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/nnlm_model --recursive
-    ```
+        gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/nnlm_model --recursive
     
     Replace `  BUCKET_PATH  ` with the name of the Cloud Storage bucket to which you are copying the model.
 
@@ -175,39 +142,31 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
-    ``` text
-    pip install bigquery-ml-utils
-    ```
+        pip install bigquery-ml-utils
 
 2.  Generate a SWIVEL model. The following Python code loads a SWIVEL model from TensorFlow Hub and prepares it for BigQuery:
     
-    ``` text
-    from bigquery_ml_utils import model_generator
-    import tensorflow_text
-    
-    # Establish an instance of TextEmbeddingModelGenerator.
-    text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
-    
-    # Generate a SWIVEL model.
-    text_embedding_model_generator.generate_text_embedding_model('swivel', OUTPUT_MODEL_PATH)
-    ```
+        from bigquery_ml_utils import model_generator
+        import tensorflow_text
+        
+        # Establish an instance of TextEmbeddingModelGenerator.
+        text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
+        
+        # Generate a SWIVEL model.
+        text_embedding_model_generator.generate_text_embedding_model('swivel', OUTPUT_MODEL_PATH)
     
     Replace `  OUTPUT_MODEL_PATH  ` with a path to a local folder where you can temporarily store the model.
 
 3.  Optional: Print the generated model's signature:
     
-    ``` text
-    import tensorflow as tf
-    
-    reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
-    print(reload_embedding_model.signatures["serving_default"])
-    ```
+        import tensorflow as tf
+        
+        reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
+        print(reload_embedding_model.signatures["serving_default"])
 
-4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](/sdk/gcloud/reference/storage) :
+4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud/reference/storage) :
     
-    ``` text
-    gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/swivel_model --recursive
-    ```
+        gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/swivel_model --recursive
     
     Replace `  BUCKET_PATH  ` with the name of the Cloud Storage bucket to which you are copying the model.
 
@@ -215,39 +174,31 @@ For more detailed instructions on generating text embeddings using pretrained Te
 
 1.  Install the [`  bigquery-ml-utils  ` library](https://github.com/GoogleCloudPlatform/bigquery-ml-utils#installation) using pip:
     
-    ``` text
-    pip install bigquery-ml-utils
-    ```
+        pip install bigquery-ml-utils
 
 2.  Generate a BERT model. The following Python code loads a BERT model from TensorFlow Hub and prepares it for BigQuery:
     
-    ``` text
-    from bigquery_ml_utils import model_generator
-    import tensorflow_text
-    
-    # Establish an instance of TextEmbeddingModelGenerator.
-    text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
-    
-    # Generate a BERT model.
-    text_embedding_model_generator.generate_text_embedding_model('bert', OUTPUT_MODEL_PATH)
-    ```
+        from bigquery_ml_utils import model_generator
+        import tensorflow_text
+        
+        # Establish an instance of TextEmbeddingModelGenerator.
+        text_embedding_model_generator = model_generator.TextEmbeddingModelGenerator()
+        
+        # Generate a BERT model.
+        text_embedding_model_generator.generate_text_embedding_model('bert', OUTPUT_MODEL_PATH)
     
     Replace `  OUTPUT_MODEL_PATH  ` with a path to a local folder where you can temporarily store the model.
 
 3.  Optional: Print the generated model's signature:
     
-    ``` text
-    import tensorflow as tf
-    
-    reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
-    print(reload_embedding_model.signatures["serving_default"])
-    ```
+        import tensorflow as tf
+        
+        reload_embedding_model = tf.saved_model.load(OUTPUT_MODEL_PATH)
+        print(reload_embedding_model.signatures["serving_default"])
 
-4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](/sdk/gcloud/reference/storage) :
+4.  To copy the generated model from your local folder to a Cloud Storage bucket, use the [Google Cloud CLI](https://docs.cloud.google.com/sdk/gcloud/reference/storage) :
     
-    ``` text
-    gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/bert_model --recursive
-    ```
+        gcloud storage cp OUTPUT_MODEL_PATH gs://BUCKET_PATH/bert_model --recursive
     
     Replace `  BUCKET_PATH  ` with the name of the Cloud Storage bucket to which you are copying the model.
 
@@ -257,13 +208,15 @@ Select one of the following models:
 
 ### NNLM
 
-Use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL tf_models_tutorial.nnlm_model
     OPTIONS (
       model_type = 'TENSORFLOW',
@@ -274,17 +227,19 @@ Use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/big
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### SWIVEL
 
-Use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+Use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL tf_models_tutorial.swivel_model
     OPTIONS (
       model_type = 'TENSORFLOW',
@@ -295,7 +250,7 @@ Use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/big
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### BERT
 
@@ -304,6 +259,8 @@ To load the BERT model into BigQuery, import the BERT model to Vertex AI, deploy
 To import the BERT model to Vertex AI, follow these steps:
 
 1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
+    
+    [Go to Model registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click **Import** , and then do the following:
     
@@ -320,6 +277,8 @@ To import the BERT model to Vertex AI, follow these steps:
 To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, follow these steps:
 
 1.  In the Google Cloud console, go to the Vertex AI **Model registry** page.
+    
+    [Go to Model registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click on the name of your model.
 
@@ -335,15 +294,17 @@ To deploy the BERT model to a Vertex AI endpoint and connect it to BigQuery, fol
 
 8.  Click **Deploy** .
 
-9.  [Create a BigQuery Cloud resource connection](/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) and [grant access](/bigquery/docs/bigquery-ml-remote-model-tutorial#set_up_connection_access) to the connection's service account.
+9.  [Create a BigQuery Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection#create-cloud-resource-connection) and [grant access](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#set_up_connection_access) to the connection's service account.
 
-To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
+To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL tf_models_tutorial.bert_model
     INPUT(content STRING)
     OUTPUT(embedding ARRAY<FLOAT64>)
@@ -360,7 +321,7 @@ To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MOD
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection
         
-        When you [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, this is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** , for example `  projects/myproject/locations/connection_location/connections/ myconnection  `
     
       - `  ENDPOINT_LOCATION  ` : the location of your Vertex AI endpoint. For example: "us-central1".
     
@@ -368,15 +329,15 @@ To create a remote model based on the Vertex AI endpoint, use the [`  CREATE MOD
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ## Generate text embeddings
 
-In this section, you use the [`  ML.PREDICT()  ` inference function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate text embeddings of the `  review  ` column from the public dataset `  bigquery-public-data.imdb.reviews  ` . The query limits the table to 500 rows to reduce the amount of data processed.
+In this section, you use the [`  ML.PREDICT()  ` inference function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to generate text embeddings of the `  review  ` column from the public dataset `  bigquery-public-data.imdb.reviews  ` . The query limits the table to 500 rows to reduce the amount of data processed.
 
 ### NNLM
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -394,21 +355,19 @@ FROM
 
 The result is similar to the following:
 
-``` text
-+-----------------------+----------------------------------------+
-| embedding             | content                                |
-+-----------------------+----------------------------------------+
-|  0.08599445223808289  | Isabelle Huppert must be one of the... |
-| -0.04862852394580841  |                                        |
-| -0.017750458791851997 |                                        |
-|  0.8658871650695801   |                                        |
-| ...                   |                                        |
-+-----------------------+----------------------------------------+
-```
+    +-----------------------+----------------------------------------+
+    | embedding             | content                                |
+    +-----------------------+----------------------------------------+
+    |  0.08599445223808289  | Isabelle Huppert must be one of the... |
+    | -0.04862852394580841  |                                        |
+    | -0.017750458791851997 |                                        |
+    |  0.8658871650695801   |                                        |
+    | ...                   |                                        |
+    +-----------------------+----------------------------------------+
 
 ### SWIVEL
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -426,21 +385,19 @@ FROM
 
 The result is similar to the following:
 
-``` text
-+----------------------+----------------------------------------+
-| embedding            | content                                |
-+----------------------+----------------------------------------+
-|  2.5952553749084473  | Isabelle Huppert must be one of the... |
-| -4.015787601470947   |                                        |
-|  3.6275434494018555  |                                        |
-| -6.045154333114624   |                                        |
-| ...                  |                                        |
-+----------------------+----------------------------------------+
-```
+    +----------------------+----------------------------------------+
+    | embedding            | content                                |
+    +----------------------+----------------------------------------+
+    |  2.5952553749084473  | Isabelle Huppert must be one of the... |
+    | -4.015787601470947   |                                        |
+    |  3.6275434494018555  |                                        |
+    | -6.045154333114624   |                                        |
+    | ...                  |                                        |
+    +----------------------+----------------------------------------+
 
 ### BERT
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -458,17 +415,15 @@ FROM
 
 The result is similar to the following:
 
-``` text
-+--------------+---------------------+----------------------------------------+
-| embedding    | remote_model_status | content                                |
-+--------------+---------------------+----------------------------------------+
-| -0.694072425 | null                | Isabelle Huppert must be one of the... |
-|  0.439208865 |                     |                                        |
-|  0.99988997  |                     |                                        |
-| -0.993487895 |                     |                                        |
-| ...          |                     |                                        |
-+--------------+---------------------+----------------------------------------+
-```
+    +--------------+---------------------+----------------------------------------+
+    | embedding    | remote_model_status | content                                |
+    +--------------+---------------------+----------------------------------------+
+    | -0.694072425 | null                | Isabelle Huppert must be one of the... |
+    |  0.439208865 |                     |                                        |
+    |  0.99988997  |                     |                                        |
+    | -0.993487895 |                     |                                        |
+    | ...          |                     |                                        |
+    +--------------+---------------------+----------------------------------------+
 
 ## Clean up
 
@@ -480,6 +435,8 @@ The result is similar to the following:
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

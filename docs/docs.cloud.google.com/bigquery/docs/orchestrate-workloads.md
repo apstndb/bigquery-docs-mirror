@@ -12,123 +12,76 @@ Scheduling tools assist with tasks that are involved in managing complex data wo
 
 We recommend using Dataform, Workflows, Cloud Composer, or Vertex AI Pipelines for most use cases. Consult the following chart for a side-by-side comparison:
 
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th><a href="#dataform">Dataform</a></th>
-<th><a href="#workflows">Workflows</a></th>
-<th><a href="#composer">Cloud Composer</a></th>
-<th><a href="#vertex">Vertex AI Pipelines</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Focus</td>
-<td>Data transformation</td>
-<td>Microservices</td>
-<td>ETL or ELT</td>
-<td>Machine learning</td>
-</tr>
-<tr class="even">
-<td>Complexity</td>
-<td>*</td>
-<td>**</td>
-<td>***</td>
-<td>**</td>
-</tr>
-<tr class="odd">
-<td>User profile</td>
-<td>Data analyst or administrator</td>
-<td>Data architect</td>
-<td>Data engineer</td>
-<td>Data analyst</td>
-</tr>
-<tr class="even">
-<td>Code type</td>
-<td>JavaScript, SQL, <a href="/bigquery/docs/orchestrate-notebooks">Python notebooks</a></td>
-<td>YAML or JSON</td>
-<td>Python</td>
-<td>Python</td>
-</tr>
-<tr class="odd">
-<td>Serverless?</td>
-<td>Yes</td>
-<td>Yes</td>
-<td>Fully managed</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td>Not suitable for</td>
-<td>Chains of external services</td>
-<td>Data transformation and processing</td>
-<td>Low latency or event-driven pipelines</td>
-<td>Infrastructure tasks</td>
-</tr>
-</tbody>
-</table>
+|                  | [Dataform](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#dataform)                 | [Workflows](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#workflows) | [Cloud Composer](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#composer) | [Vertex AI Pipelines](https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads#vertex) |
+| ---------------- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Focus            | Data transformation                                                                                    | Microservices                                                                            | ETL or ELT                                                                                   | Machine learning                                                                                |
+| Complexity       | \*                                                                                                     | \*\*                                                                                     | \*\*\*                                                                                       | \*\*                                                                                            |
+| User profile     | Data analyst or administrator                                                                          | Data architect                                                                           | Data engineer                                                                                | Data analyst                                                                                    |
+| Code type        | JavaScript, SQL, [Python notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) | YAML or JSON                                                                             | Python                                                                                       | Python                                                                                          |
+| Serverless?      | Yes                                                                                                    | Yes                                                                                      | Fully managed                                                                                | Yes                                                                                             |
+| Not suitable for | Chains of external services                                                                            | Data transformation and processing                                                       | Low latency or event-driven pipelines                                                        | Infrastructure tasks                                                                            |
 
 The following sections detail these scheduling tools and several others.
 
 ### Scheduled queries
 
-The simplest form of workload scheduling is [scheduling recurring queries](/bigquery/docs/scheduling-queries) directly in BigQuery. While this is the least complex approach to scheduling, we recommend it only for straightforward query chains with no external dependencies. Queries scheduled in this way must be written in [GoogleSQL](/bigquery/docs/reference/standard-sql/query-syntax) and can include [data definition language (DDL)](/bigquery/docs/reference/standard-sql/data-definition-language) and [data manipulation language (DML)](/bigquery/docs/data-manipulation-language) statements.
+The simplest form of workload scheduling is [scheduling recurring queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) directly in BigQuery. While this is the least complex approach to scheduling, we recommend it only for straightforward query chains with no external dependencies. Queries scheduled in this way must be written in [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) and can include [data definition language (DDL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) and [data manipulation language (DML)](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) statements.
 
 **Scheduling method** : time-driven
 
 ### Dataform
 
-[Dataform](/dataform/docs/overview) is a free, SQL-based, opinionated transformation framework that schedules complex data transformation tasks in BigQuery. When raw data is loaded into BigQuery, Dataform helps you create an organized, tested, version-controlled collection of datasets and tables. Use Dataform to schedule runs for your [data preparations](/bigquery/docs/orchestrate-data-preparations) , [notebooks](/bigquery/docs/orchestrate-notebooks) , and [BigQuery pipelines](/bigquery/docs/schedule-pipelines) .
+[Dataform](https://docs.cloud.google.com/dataform/docs/overview) is a free, SQL-based, opinionated transformation framework that schedules complex data transformation tasks in BigQuery. When raw data is loaded into BigQuery, Dataform helps you create an organized, tested, version-controlled collection of datasets and tables. Use Dataform to schedule runs for your [data preparations](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations) , [notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [BigQuery pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
 
 **Scheduling method** : time-driven
 
-**Note:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in Dataform. Instead, you need to use BigQuery execution and scheduling capabilities. For more information, see [Scheduling queries](/bigquery/docs/scheduling-queries) , [Schedule notebooks](/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](/bigquery/docs/schedule-pipelines) .
+**Note:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in Dataform. Instead, you need to use BigQuery execution and scheduling capabilities. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
 
 ### Workflows
 
-[Workflows](/workflows/docs/overview) is a serverless tool that schedules HTTP-based services with very low latency. It is best for chaining microservices together, automating infrastructure tasks, integrating with external systems, or creating a sequence of operations in Google Cloud. To learn more about using Workflows with BigQuery, see [Run multiple BigQuery jobs in parallel](/workflows/docs/tutorials/bigquery-parallel-jobs) .
+[Workflows](https://docs.cloud.google.com/workflows/docs/overview) is a serverless tool that schedules HTTP-based services with very low latency. It is best for chaining microservices together, automating infrastructure tasks, integrating with external systems, or creating a sequence of operations in Google Cloud. To learn more about using Workflows with BigQuery, see [Run multiple BigQuery jobs in parallel](https://docs.cloud.google.com/workflows/docs/tutorials/bigquery-parallel-jobs) .
 
 **Scheduling method** : event-driven and time-driven
 
 ### Cloud Composer
 
-[Cloud Composer](/composer/docs/concepts/overview) is a fully managed tool built on Apache Airflow. It is best for extract, transform, load (ETL) or extract, load, transform (ELT) workloads as it supports several [operator](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) types and patterns, as well as task execution across other Google Cloud products and external targets. To learn more about using Cloud Composer with BigQuery, see [Run a data analytics DAG in Google Cloud](/composer/docs/data-analytics-googlecloud) .
+[Cloud Composer](https://docs.cloud.google.com/composer/docs/concepts/overview) is a fully managed tool built on Apache Airflow. It is best for extract, transform, load (ETL) or extract, load, transform (ELT) workloads as it supports several [operator](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) types and patterns, as well as task execution across other Google Cloud products and external targets. To learn more about using Cloud Composer with BigQuery, see [Run a data analytics DAG in Google Cloud](https://docs.cloud.google.com/composer/docs/data-analytics-googlecloud) .
 
 **Scheduling method** : time-driven
 
 ### Vertex AI Pipelines
 
-[Vertex AI Pipelines](/vertex-ai/docs/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines specially designed for scheduling machine learning workloads. It automates and connects all tasks of your model development and deployment, from training data to code, giving you a complete view of how your models work. To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
+[Vertex AI Pipelines](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction) is a serverless tool based on Kubeflow Pipelines specially designed for scheduling machine learning workloads. It automates and connects all tasks of your model development and deployment, from training data to code, giving you a complete view of how your models work. To learn more about using Vertex AI Pipelines with BigQuery, see [Export and deploy a BigQuery machine learning model for prediction](https://codelabs.developers.google.com/codelabs/bqml-vertex-prediction#0) .
 
 **Scheduling method** : event-driven
 
 ### Apigee Integration
 
-[Apigee Integration](/apigee/docs/api-platform/integration/what-is-apigee-integration) is an extension of the Apigee platform that includes connectors and data transformation tools. It is best for integrating with external enterprise applications, like Salesforce. To learn more about using Apigee Integration with BigQuery, see [Get started with Apigee Integration and a Salesforce trigger](/apigee/docs/api-platform/integration/getting-started-salesforce-updates) .
+[Apigee Integration](https://docs.cloud.google.com/apigee/docs/api-platform/integration/what-is-apigee-integration) is an extension of the Apigee platform that includes connectors and data transformation tools. It is best for integrating with external enterprise applications, like Salesforce. To learn more about using Apigee Integration with BigQuery, see [Get started with Apigee Integration and a Salesforce trigger](https://docs.cloud.google.com/apigee/docs/api-platform/integration/getting-started-salesforce-updates) .
 
 **Scheduling method** : event-driven and time-driven
 
 ### Cloud Data Fusion
 
-[Cloud Data Fusion](/data-fusion) is a data integration tool that offers code-free ELT/ETL pipelines and over 150 preconfigured connectors and transformations. To learn more about using Cloud Data Fusion with BigQuery, see [Replicating data from MySQL to BigQuery](/data-fusion/docs/tutorials/replicating-data/mysql-to-bigquery) .
+[Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) is a data integration tool that offers code-free ELT/ETL pipelines and over 150 preconfigured connectors and transformations. To learn more about using Cloud Data Fusion with BigQuery, see [Replicating data from MySQL to BigQuery](https://docs.cloud.google.com/data-fusion/docs/tutorials/replicating-data/mysql-to-bigquery) .
 
 **Scheduling method** : event-driven and time-driven
 
 ### Cloud Scheduler
 
-[Cloud Scheduler](/scheduler/docs/overview) is a fully managed scheduler for jobs like batch streaming or infrastructure operations that should occur on defined time intervals. To learn more about using Cloud Scheduler with BigQuery, see [Scheduling workflows with Cloud Scheduler](/scheduler/docs/tut-workflows) .
+[Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/overview) is a fully managed scheduler for jobs like batch streaming or infrastructure operations that should occur on defined time intervals. To learn more about using Cloud Scheduler with BigQuery, see [Scheduling workflows with Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/tut-workflows) .
 
 **Scheduling method** : time-driven
 
 ### Cloud Tasks
 
-[Cloud Tasks](/tasks/docs/dual-overview) is a fully managed service for asynchronous task distribution of jobs that can execute independently, outside of your main workload. It is best for delegating slow background operations or managing API call rates. To learn more about using Cloud Tasks with BigQuery, see [Add a task to a Cloud Tasks queue](/tasks/docs/add-task-queue) .
+[Cloud Tasks](https://docs.cloud.google.com/tasks/docs/dual-overview) is a fully managed service for asynchronous task distribution of jobs that can execute independently, outside of your main workload. It is best for delegating slow background operations or managing API call rates. To learn more about using Cloud Tasks with BigQuery, see [Add a task to a Cloud Tasks queue](https://docs.cloud.google.com/tasks/docs/add-task-queue) .
 
 **Scheduling method** : event-driven
 
 ### Third-party tools
 
-You can also connect to BigQuery using a number of popular third-party tools such as CData and SnapLogic. The BigQuery Ready program offers a [full list of validated partner solutions](/bigquery/docs/bigquery-ready-partners) .
+You can also connect to BigQuery using a number of popular third-party tools such as CData and SnapLogic. The BigQuery Ready program offers a [full list of validated partner solutions](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) .
 
 ## Messaging tools
 
@@ -136,21 +89,21 @@ Many data workloads require additional messaging connections between decoupled m
 
 ### Pub/Sub
 
-[Pub/Sub](/pubsub/docs/overview) is an asynchronous messaging tool for data integration pipelines. It is designed to ingest and distribute data like server events and user interactions. It can also be used for parallel processing and data streaming from IoT devices. To learn more about using Pub/Sub with BigQuery, see [Stream from Pub/Sub to BigQuery](/dataflow/docs/tutorials/dataflow-stream-to-bigquery) .
+[Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) is an asynchronous messaging tool for data integration pipelines. It is designed to ingest and distribute data like server events and user interactions. It can also be used for parallel processing and data streaming from IoT devices. To learn more about using Pub/Sub with BigQuery, see [Stream from Pub/Sub to BigQuery](https://docs.cloud.google.com/dataflow/docs/tutorials/dataflow-stream-to-bigquery) .
 
 ### Eventarc
 
-[Eventarc](/eventarc/docs/overview) is an event-driven tool that lets you manage the flow of state changes throughout your data pipeline. This tool has a wide range of use cases including automated error remediation, resource labeling, image retouching, and more. To learn more about using Eventarc with BigQuery, see [Build a BigQuery processing pipeline with Eventarc](/eventarc/docs/run/bigquery) .
+[Eventarc](https://docs.cloud.google.com/eventarc/docs/overview) is an event-driven tool that lets you manage the flow of state changes throughout your data pipeline. This tool has a wide range of use cases including automated error remediation, resource labeling, image retouching, and more. To learn more about using Eventarc with BigQuery, see [Build a BigQuery processing pipeline with Eventarc](https://docs.cloud.google.com/eventarc/docs/run/bigquery) .
 
 ## What's next
 
-  - Learn to [schedule recurring queries directly in BigQuery](/bigquery/docs/scheduling-queries) .
-  - Get started with [Dataform](/dataform/docs/overview) .
-  - Get started with [Workflows](/workflows/docs/overview) .
-  - Get started with [Cloud Composer](/composer/docs/concepts/overview) .
-  - Get started with [Vertex AI Pipelines](/vertex-ai/docs/pipelines/introduction) .
-  - Get started with [Apigee Integration](/apigee/docs/api-platform/integration/what-is-apigee-integration) .
-  - Get started with [Cloud Data Fusion](/data-fusion) .
-  - Get started with [Cloud Scheduler](/scheduler/docs/overview) .
-  - Get started with [Pub/Sub](/pubsub/docs/overview) .
-  - Get started with [Eventarc](/eventarc/docs/overview) .
+  - Learn to [schedule recurring queries directly in BigQuery](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) .
+  - Get started with [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
+  - Get started with [Workflows](https://docs.cloud.google.com/workflows/docs/overview) .
+  - Get started with [Cloud Composer](https://docs.cloud.google.com/composer/docs/concepts/overview) .
+  - Get started with [Vertex AI Pipelines](https://docs.cloud.google.com/vertex-ai/docs/pipelines/introduction) .
+  - Get started with [Apigee Integration](https://docs.cloud.google.com/apigee/docs/api-platform/integration/what-is-apigee-integration) .
+  - Get started with [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion) .
+  - Get started with [Cloud Scheduler](https://docs.cloud.google.com/scheduler/docs/overview) .
+  - Get started with [Pub/Sub](https://docs.cloud.google.com/pubsub/docs/overview) .
+  - Get started with [Eventarc](https://docs.cloud.google.com/eventarc/docs/overview) .

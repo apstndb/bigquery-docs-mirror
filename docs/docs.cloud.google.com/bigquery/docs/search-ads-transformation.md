@@ -2,7 +2,7 @@
 
 This document describes how you can transform your reports for Search Ads 360.
 
-To see the Search Ads 360 report transformation that uses the old Search Ads 360 reporting API, see [Search Ads 360 report transformation (Deprecated)](/bigquery/docs/sa360-transformation) .
+To see the Search Ads 360 report transformation that uses the old Search Ads 360 reporting API, see [Search Ads 360 report transformation (Deprecated)](https://docs.cloud.google.com/bigquery/docs/sa360-transformation) .
 
 ## Table mapping for Search Ads 360 reports
 
@@ -321,4515 +321,1318 @@ Search Ads 360 Table Name: Account
 
 Search Ads 360 API Resource: [customer](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_account_level</td>
-<td>The account level of the customer: Manager, Sub-manager, Associate manager or Service account.</td>
-</tr>
-<tr class="even">
-<td>customer_account_type</td>
-<td>Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.</td>
-</tr>
-<tr class="odd">
-<td>customer_creation_time</td>
-<td>The timestamp when this customer was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="even">
-<td>customer_currency_code</td>
-<td>The currency in which the account operates. A subset of the currency codes from the ISO 4217 standard is supported.</td>
-</tr>
-<tr class="odd">
-<td>customer_descriptive_name</td>
-<td>Optional, non-unique descriptive name of the customer.</td>
-</tr>
-<tr class="even">
-<td>customer_manager_descriptive_name</td>
-<td>The descriptive name of the manager.</td>
-</tr>
-<tr class="odd">
-<td>customer_sub_manager_descriptive_name</td>
-<td>The descriptive name of the sub manager.</td>
-</tr>
-<tr class="even">
-<td>customer_associate_manager_descriptive_name</td>
-<td>The descriptive name of the associate manager.</td>
-</tr>
-<tr class="odd">
-<td>customer_engine_id</td>
-<td>ID of the account in the external engine account.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>customer_manager_id</td>
-<td>The customer ID of the manager.</td>
-</tr>
-<tr class="even">
-<td>customer_sub_manager_id</td>
-<td>The customer ID of the sub manager.</td>
-</tr>
-<tr class="odd">
-<td>customer_associate_manager_id</td>
-<td>The customer ID of the associate manager.</td>
-</tr>
-<tr class="even">
-<td>customer_last_modified_time</td>
-<td>The datetime when this customer was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>customer_status</td>
-<td>The status of the customer.</td>
-</tr>
-<tr class="even">
-<td>customer_time_zone</td>
-<td>The local timezone ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                       | Description                                                                                                                                |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| customer\_account\_level                        | The account level of the customer: Manager, Sub-manager, Associate manager or Service account.                                             |
+| customer\_account\_type                         | Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.                           |
+| customer\_creation\_time                        | The timestamp when this customer was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.            |
+| customer\_currency\_code                        | The currency in which the account operates. A subset of the currency codes from the ISO 4217 standard is supported.                        |
+| customer\_descriptive\_name                     | Optional, non-unique descriptive name of the customer.                                                                                     |
+| customer\_manager\_descriptive\_name            | The descriptive name of the manager.                                                                                                       |
+| customer\_sub\_manager\_descriptive\_name       | The descriptive name of the sub manager.                                                                                                   |
+| customer\_associate\_manager\_descriptive\_name | The descriptive name of the associate manager.                                                                                             |
+| customer\_engine\_id                            | ID of the account in the external engine account.                                                                                          |
+| customer\_id                                    | The ID of the customer.                                                                                                                    |
+| customer\_manager\_id                           | The customer ID of the manager.                                                                                                            |
+| customer\_sub\_manager\_id                      | The customer ID of the sub manager.                                                                                                        |
+| customer\_associate\_manager\_id                | The customer ID of the associate manager.                                                                                                  |
+| customer\_last\_modified\_time                  | The datetime when this customer was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format. |
+| customer\_status                                | The status of the customer.                                                                                                                |
+| customer\_time\_zone                            | The local timezone ID of the customer.                                                                                                     |
 
 Search Ads 360 Table Name: AccountAssetStats
 
 Search Ads 360 API Resource: [customer\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_asset_asset</td>
-<td>Required. Immutable. The asset which is linked to the customer.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer\_asset\_asset                       | Required. Immutable. The asset which is linked to the customer.                                                                                                                                                                                                 |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                        | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
 
 Search Ads 360 Table Name: AccountConversionActionAndAssetStats
 
 Search Ads 360 API Resource: [asset\_set\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/asset_set_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>asset_set_asset_asset</td>
-<td>Immutable. The asset which this asset set asset is linking to.</td>
-</tr>
-<tr class="even">
-<td>asset_set_asset_asset_set</td>
-<td>Immutable. The asset set which this asset set asset is linking to.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| asset\_set\_asset\_asset                   | Immutable. The asset which this asset set asset is linking to.                                                                                                                     |
+| asset\_set\_asset\_asset\_set              | Immutable. The asset set which this asset set asset is linking to.                                                                                                                 |
+| customer\_id                               | The ID of the customer.                                                                                                                                                            |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                        |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                      |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions. |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                  |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                            |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                         |
 
 Search Ads 360 Table Name: AccountConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [customer](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_engine_id</td>
-<td>ID of the account in the external engine account.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer\_engine\_id                       | ID of the account in the external engine account.                                                                                                                                  |
+| customer\_id                               | The ID of the customer.                                                                                                                                                            |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                        |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                      |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions. |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                  |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                            |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                         |
+| segments\_device                           | Device to which metrics apply.                                                                                                                                                     |
 
 Search Ads 360 Table Name: AccountDeviceStats
 
 Search Ads 360 API Resource: [customer](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_engine_id</td>
-<td>ID of the account in the external engine account.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer\_engine\_id                                 | ID of the account in the external engine account.                                                                                                                                                                                                               |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                             |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: AccountStats
 
 Search Ads 360 API Resource: [customer](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/customer)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_engine_id</td>
-<td>ID of the account in the external engine account.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_content_budget_lost_impression_share</td>
-<td>The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_content_impression_share</td>
-<td>The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="odd">
-<td>metrics_content_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_historical_quality_score</td>
-<td>The historical quality score.</td>
-</tr>
-<tr class="odd">
-<td>metrics_search_budget_lost_impression_share</td>
-<td>The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_search_impression_share</td>
-<td>The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="odd">
-<td>metrics_search_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                         | Description                                                                                                                                                                                                                                                   |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer\_engine\_id                              | ID of the account in the external engine account.                                                                                                                                                                                                             |
+| customer\_id                                      | The ID of the customer.                                                                                                                                                                                                                                       |
+| metrics\_content\_budget\_lost\_impression\_share | The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001. |
+| metrics\_content\_impression\_share               | The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.           |
+| metrics\_content\_rank\_lost\_impression\_share   | The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.                    |
+| metrics\_historical\_quality\_score               | The historical quality score.                                                                                                                                                                                                                                 |
+| metrics\_search\_budget\_lost\_impression\_share  | The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001. |
+| metrics\_search\_impression\_share                | The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.             |
+| metrics\_search\_rank\_lost\_impression\_share    | The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.                      |
+| segments\_date                                    | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                    |
 
 Search Ads 360 Table Name: Ad
 
 Search Ads 360 API Resource: [ad\_group\_ad](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_ad)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_ad_ad_display_url</td>
-<td>The URL that appears in the ad description for some ad formats.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_expanded_dynamic_search_ad_description1</td>
-<td>The first line of the ad's description.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_expanded_dynamic_search_ad_description2</td>
-<td>The second line of the ad's description.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_expanded_text_ad_description1</td>
-<td>The first line of the ad's description.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_expanded_text_ad_description2</td>
-<td>The second line of the ad's description.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_expanded_text_ad_headline</td>
-<td>The headline of the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_expanded_text_ad_headline2</td>
-<td>The second headline of the ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_expanded_text_ad_headline3</td>
-<td>The third headline of the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_final_urls</td>
-<td>The list of possible final URLs after all cross-domain redirects for the ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_id</td>
-<td>The ID of the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_name</td>
-<td>The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad. The name field is only supported for DisplayUploadAd, ImageAd, ShoppingComparisonListingAd and VideoAd.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_text_ad_description1</td>
-<td>The first line of the ad's description.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_text_ad_description2</td>
-<td>The second line of the ad's description.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_text_ad_headline</td>
-<td>The headline of the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_ad_type</td>
-<td>The type of ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_creation_time</td>
-<td>The timestamp when this ad group ad was created. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_engine_id</td>
-<td>ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_ad.ad.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_engine_status</td>
-<td>Additional status of the ad in the external engine account. Possible statuses (depending on the type of external account) include active, eligible, pending review.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_labels</td>
-<td>The resource names of labels attached to this ad group ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_last_modified_time</td>
-<td>The datetime when this ad group ad was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_ad_status</td>
-<td>The status of the ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                      | Description                                                                                                                                                                                                                                   |
+| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_ad\_ad\_display\_url                                | The URL that appears in the ad description for some ad formats.                                                                                                                                                                               |
+| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description1 | The first line of the ad's description.                                                                                                                                                                                                       |
+| ad\_group\_ad\_ad\_expanded\_dynamic\_search\_ad\_description2 | The second line of the ad's description.                                                                                                                                                                                                      |
+| ad\_group\_ad\_ad\_expanded\_text\_ad\_description1            | The first line of the ad's description.                                                                                                                                                                                                       |
+| ad\_group\_ad\_ad\_expanded\_text\_ad\_description2            | The second line of the ad's description.                                                                                                                                                                                                      |
+| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline                | The headline of the ad.                                                                                                                                                                                                                       |
+| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline2               | The second headline of the ad.                                                                                                                                                                                                                |
+| ad\_group\_ad\_ad\_expanded\_text\_ad\_headline3               | The third headline of the ad.                                                                                                                                                                                                                 |
+| ad\_group\_ad\_ad\_final\_urls                                 | The list of possible final URLs after all cross-domain redirects for the ad.                                                                                                                                                                  |
+| ad\_group\_ad\_ad\_id                                          | The ID of the ad.                                                                                                                                                                                                                             |
+| ad\_group\_ad\_ad\_name                                        | The name of the ad. This is only used to be able to identify the ad. It does not need to be unique and does not affect the served ad. The name field is only supported for DisplayUploadAd, ImageAd, ShoppingComparisonListingAd and VideoAd. |
+| ad\_group\_ad\_ad\_text\_ad\_description1                      | The first line of the ad's description.                                                                                                                                                                                                       |
+| ad\_group\_ad\_ad\_text\_ad\_description2                      | The second line of the ad's description.                                                                                                                                                                                                      |
+| ad\_group\_ad\_ad\_text\_ad\_headline                          | The headline of the ad.                                                                                                                                                                                                                       |
+| ad\_group\_ad\_ad\_type                                        | The type of ad.                                                                                                                                                                                                                               |
+| ad\_group\_ad\_creation\_time                                  | The timestamp when this ad group ad was created. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                      |
+| ad\_group\_ad\_engine\_id                                      | ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_ad.ad.id" instead.                                       |
+| ad\_group\_ad\_engine\_status                                  | Additional status of the ad in the external engine account. Possible statuses (depending on the type of external account) include active, eligible, pending review.                                                                           |
+| ad\_group\_ad\_labels                                          | The resource names of labels attached to this ad group ad.                                                                                                                                                                                    |
+| ad\_group\_ad\_last\_modified\_time                            | The datetime when this ad group ad was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                 |
+| ad\_group\_ad\_status                                          | The status of the ad.                                                                                                                                                                                                                         |
+| ad\_group\_id                                                  | The ID of the ad group.                                                                                                                                                                                                                       |
+| campaign\_id                                                   | The ID of the campaign.                                                                                                                                                                                                                       |
+| customer\_id                                                   | The ID of the customer.                                                                                                                                                                                                                       |
 
 Search Ads 360 Table Name: AdConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [ad\_group\_ad](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_ad)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_ad_ad_id</td>
-<td>The ID of the ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_engine_id</td>
-<td>ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_ad.ad.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_by_conversion_date</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value_by_conversion_date</td>
-<td>The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_by_conversion_date</td>
-<td>The number of cross-device conversions by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value_by_conversion_date</td>
-<td>The sum of cross-device conversions value by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                        | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_ad\_ad\_id                                            | The ID of the ad.                                                                                                                                                                                                                                                                                                                                                                            |
+| ad\_group\_ad\_engine\_id                                        | ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_ad.ad.id" instead.                                                                                                                                                                                      |
+| ad\_group\_id                                                    | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                      |
+| campaign\_id                                                     | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                      |
+| customer\_id                                                     | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                      |
+| metrics\_all\_conversions                                        | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                                                                                                                                                  |
+| metrics\_all\_conversions\_by\_conversion\_date                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) . |
+| metrics\_all\_conversions\_value                                 | The value of all conversions.                                                                                                                                                                                                                                                                                                                                                                |
+| metrics\_all\_conversions\_value\_by\_conversion\_date           | The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                               |
+| metrics\_cross\_device\_conversions                              | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                                                                           |
+| metrics\_cross\_device\_conversions\_by\_conversion\_date        | The number of cross-device conversions by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                               |
+| metrics\_cross\_device\_conversions\_value                       | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions\_value\_by\_conversion\_date | The sum of cross-device conversions value by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                            |
+| segments.conversion\_action\_name                                | Conversion action name.                                                                                                                                                                                                                                                                                                                                                                      |
+| segments\_date                                                   | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                                                                                   |
+| segments\_device                                                 | Device to which metrics apply.                                                                                                                                                                                                                                                                                                                                                               |
 
 Search Ads 360 Table Name: AdDeviceStats
 
 Search Ads 360 API Resource: [ad\_group\_ad](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_ad)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_ad_ad_id</td>
-<td>The ID of the ad.</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_engine_id</td>
-<td>ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_ad.ad.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_ad\_ad\_id                                | The ID of the ad.                                                                                                                                                                                                                                               |
+| ad\_group\_ad\_engine\_id                            | ID of the ad in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_ad.ad.id" instead.                                                         |
+| ad\_group\_id                                        | The ID of the ad group.                                                                                                                                                                                                                                         |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                             |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: AdGroup
 
 Search Ads 360 API Resource: [ad\_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_bid_modifier_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent. Use 0 to opt out of a Device type.</td>
-</tr>
-<tr class="even">
-<td>ad_group_bid_modifier_device_type</td>
-<td>Type of the device.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_cpc_bid_micros</td>
-<td>The maximum CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_creation_time</td>
-<td>The timestamp when this ad group was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_end_date</td>
-<td>Date when the ad group ends serving ads. By default, the ad group ends on the ad group's end date. If this field is set, then the ad group ends at the end of the specified date in the customer's time zone. This field is only available for Microsoft Advertising and Facebook gateway accounts. Format: YYYY-MM-DD Example: 2019-03-14</td>
-</tr>
-<tr class="even">
-<td>ad_group_engine_id</td>
-<td>ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_engine_status</td>
-<td>The Engine Status for ad group.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_labels</td>
-<td>The resource names of labels attached to this ad group.</td>
-</tr>
-<tr class="even">
-<td>ad_group_language_code</td>
-<td>The language of the ads and keywords in an ad group. This field is only available for Microsoft Advertising accounts.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_last_modified_time</td>
-<td>The datetime when this ad group was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_name</td>
-<td>The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_start_date</td>
-<td>Date when this ad group starts serving ads. By default, the ad group starts now or the ad group's start date, whichever is later. If this field is set, then the ad group starts at the beginning of the specified date in the customer's time zone. This field is only available for Microsoft Advertising and Facebook gateway accounts. Format: YYYY-MM-DD Example: 2019-03-14</td>
-</tr>
-<tr class="even">
-<td>ad_group_status</td>
-<td>The status of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_targeting_setting_target_restrictions</td>
-<td>The per-targeting-dimension setting to restrict the reach of your campaign or ad group.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                           | Description                                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_bid\_modifier\_bid\_modifier             | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. The range is 1.0 - 6.0 for PreferredContent. Use 0 to opt out of a Device type.                                                                                                                                                                                               |
+| ad\_group\_bid\_modifier\_device\_type              | Type of the device.                                                                                                                                                                                                                                                                                                                                                               |
+| ad\_group\_cpc\_bid\_micros                         | The maximum CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_creation\_time                           | The timestamp when this ad group was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                   |
+| ad\_group\_end\_date                                | Date when the ad group ends serving ads. By default, the ad group ends on the ad group's end date. If this field is set, then the ad group ends at the end of the specified date in the customer's time zone. This field is only available for Microsoft Advertising and Facebook gateway accounts. Format: YYYY-MM-DD Example: 2019-03-14                                        |
+| ad\_group\_engine\_id                               | ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead.                                                                                                                                                                                  |
+| ad\_group\_engine\_status                           | The Engine Status for ad group.                                                                                                                                                                                                                                                                                                                                                   |
+| ad\_group\_id                                       | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_labels                                   | The resource names of labels attached to this ad group.                                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_language\_code                           | The language of the ads and keywords in an ad group. This field is only available for Microsoft Advertising accounts.                                                                                                                                                                                                                                                             |
+| ad\_group\_last\_modified\_time                     | The datetime when this ad group was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                        |
+| ad\_group\_name                                     | The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.                                                                                    |
+| ad\_group\_start\_date                              | Date when this ad group starts serving ads. By default, the ad group starts now or the ad group's start date, whichever is later. If this field is set, then the ad group starts at the beginning of the specified date in the customer's time zone. This field is only available for Microsoft Advertising and Facebook gateway accounts. Format: YYYY-MM-DD Example: 2019-03-14 |
+| ad\_group\_status                                   | The status of the ad group.                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_targeting\_setting\_target\_restrictions | The per-targeting-dimension setting to restrict the reach of your campaign or ad group.                                                                                                                                                                                                                                                                                           |
+| bidding\_strategy\_id                               | The ID of the bidding strategy.                                                                                                                                                                                                                                                                                                                                                   |
+| campaign\_id                                        | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                           |
+| customer\_id                                        | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                           |
 
 Search Ads 360 Table Name: AdGroupAssetStats
 
 Search Ads 360 API Resource: [ad\_group\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_asset_ad_group</td>
-<td>Required. Immutable. The ad group to which the asset is linked.</td>
-</tr>
-<tr class="even">
-<td>ad_group_asset_asset</td>
-<td>Required. Immutable. The asset which is linked to the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_engine_id</td>
-<td>ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_asset\_ad\_group                  | Required. Immutable. The ad group to which the asset is linked.                                                                                                                                                                                                 |
+| ad\_group\_asset\_asset                      | Required. Immutable. The asset which is linked to the ad group.                                                                                                                                                                                                 |
+| ad\_group\_engine\_id                        | ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead.                                                                |
+| ad\_group\_id                                | The ID of the ad group.                                                                                                                                                                                                                                         |
+| campaign\_id                                 | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                        | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
 
 Search Ads 360 Table Name: AdGroupAudienceConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [ad\_group\_audience\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_audience_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17.</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions                   | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                 |
+| metrics\_cross\_device\_conversions\_value            | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                  |
+| segments.conversion\_action\_name                     | Conversion action name.                                                                                                                                                                                                                                                                                                            |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17.                                                                                                                                                                                                                                                        |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: AdGroupAudienceDeviceStats
 
 Search Ads 360 API Resource: [ad\_group\_audience\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_audience_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_average\_cpc                                 | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                                       |
+| metrics\_average\_cpm                                 | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                                                                                       |
+| metrics\_clicks                                       | The number of clicks.                                                                                                                                                                                                                                                                                                              |
+| metrics\_client\_account\_conversions                 | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                    |
+| metrics\_client\_account\_conversions\_value          | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                     |
+| metrics\_client\_account\_view\_through\_conversions  | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                                                                                          |
+| metrics\_cost\_micros                                 | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                                                                                             |
+| metrics\_ctr                                          | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                                                                                      |
+| metrics\_impressions                                  | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                                                                                 |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: AdGroupConversionActionAndAssetStats
 
 Search Ads 360 API Resource: [ad\_group\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_asset_ad_group</td>
-<td>Required. Immutable. The ad group to which the asset is linked.</td>
-</tr>
-<tr class="even">
-<td>ad_group_asset_asset</td>
-<td>Required. Immutable. The asset which is linked to the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_engine_id</td>
-<td>ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2018-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                                      |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| ad\_group\_asset\_ad\_group                | Required. Immutable. The ad group to which the asset is linked.                                                                                                                                  |
+| ad\_group\_asset\_asset                    | Required. Immutable. The asset which is linked to the ad group.                                                                                                                                  |
+| ad\_group\_engine\_id                      | ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead. |
+| ad\_group\_id                              | The ID of the ad group.                                                                                                                                                                          |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                                          |
+| customer\_id                               | The ID of the customer.                                                                                                                                                                          |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                      |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                                    |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.               |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                                |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                                          |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2018-04-17                                                                                                                       |
 
 Search Ads 360 Table Name: AdGroupConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [ad\_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_engine_id</td>
-<td>Output only. ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>Output only. The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>Output only. The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>Output only. The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>Output only. The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_engine\_id                      | Output only. ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead. |
+| ad\_group\_id                              | Output only. The ID of the ad group.                                                                                                                                                                          |
+| bidding\_strategy\_id                      | Output only. The ID of the bidding strategy.                                                                                                                                                                  |
+| campaign\_id                               | Output only. The ID of the campaign.                                                                                                                                                                          |
+| customer\_id                               | Output only. The ID of the customer.                                                                                                                                                                          |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                   |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                                                 |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                            |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                                             |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                                                       |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                    |
+| segments\_device                           | Device to which metrics apply.                                                                                                                                                                                |
 
 Search Ads 360 Table Name: AdGroupCriterion
 
 Search Ads 360 API Resource: [ad\_group\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_creation_time</td>
-<td>The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_last_modified_time</td>
-<td>The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_status</td>
-<td>The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_type</td>
-<td>The type of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_name</td>
-<td>The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.</td>
-</tr>
-<tr class="even">
-<td>ad_group_status</td>
-<td>The status of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>campaign_name</td>
-<td>The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.</td>
-</tr>
-<tr class="odd">
-<td>campaign_status</td>
-<td>The status of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_account_type</td>
-<td>Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.</td>
-</tr>
-<tr class="odd">
-<td>customer_descriptive_name</td>
-<td>Optional, non-unique descriptive name of the customer.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ad\_group\_criterion\_creation\_time                  | The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ad\_group\_criterion\_last\_modified\_time            | The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_status                          | The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added. |
+| ad\_group\_criterion\_type                            | The type of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.                                                                                                                                                                                                                                         |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                                                                                                                                                                                                                                                            |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ad\_group\_name                                       | The name of the ad group. This field is required and should not be empty when creating new ad groups. It must contain fewer than 255 UTF-8 full-width characters. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.                                                                                                                                                                                                                                                                             |
+| ad\_group\_status                                     | The status of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| campaign\_name                                        | The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.                                                                                                                                                                                                                                                                                                                                         |
+| campaign\_status                                      | The status of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| customer\_account\_type                               | Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| customer\_descriptive\_name                           | Optional, non-unique descriptive name of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Search Ads 360 Table Name: AdGroupDeviceStats
 
 Search Ads 360 API Resource: [ad\_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_engine_id</td>
-<td>ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_engine\_id                                | ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead.                                                                |
+| ad\_group\_id                                        | The ID of the ad group.                                                                                                                                                                                                                                         |
+| bidding\_strategy\_id                                | The ID of the bidding strategy.                                                                                                                                                                                                                                 |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                             |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: AdGroupLabel
 
 Search Ads 360 API Resource: [ad\_group\_label](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_label)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_label_ad_group</td>
-<td>The ad group to which the label is attached.</td>
-</tr>
-<tr class="even">
-<td>ad_group_label_label</td>
-<td>The label assigned to the ad group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_label_owner_customer_id</td>
-<td>The ID of the Customer which owns the label.</td>
-</tr>
-<tr class="even">
-<td>ad_group_label_resource_name</td>
-<td>The resource name of the ad group label. Ad group label resource names have the form: customers/{customer_id}/adGroupLabels/{ad_group_id}~{label_id}</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name             | Description                                                                                                                                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_label\_ad\_group           | The ad group to which the label is attached.                                                                                                              |
+| ad\_group\_label\_label               | The label assigned to the ad group.                                                                                                                       |
+| ad\_group\_label\_owner\_customer\_id | The ID of the Customer which owns the label.                                                                                                              |
+| ad\_group\_label\_resource\_name      | The resource name of the ad group label. Ad group label resource names have the form: customers/{customer\_id}/adGroupLabels/{ad\_group\_id}\~{label\_id} |
+| campaign\_id                          | The ID of the campaign.                                                                                                                                   |
+| customer\_id                          | The ID of the customer.                                                                                                                                   |
 
 Search Ads 360 Table Name: AdGroupStats
 
 Search Ads 360 API Resource: [ad\_group](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_engine_id</td>
-<td>ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad_group.id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_content_impression_share</td>
-<td>The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="odd">
-<td>metrics_content_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_historical_quality_score</td>
-<td>The historical quality score.</td>
-</tr>
-<tr class="odd">
-<td>metrics_search_impression_share</td>
-<td>The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="even">
-<td>metrics_search_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                       | Description                                                                                                                                                                                                                                         |
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_engine\_id                           | ID of the ad group in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "ad\_group.id" instead.                                                    |
+| ad\_group\_id                                   | The ID of the ad group.                                                                                                                                                                                                                             |
+| bidding\_strategy\_id                           | The ID of the bidding strategy.                                                                                                                                                                                                                     |
+| campaign\_id                                    | The ID of the campaign.                                                                                                                                                                                                                             |
+| customer\_id                                    | The ID of the customer.                                                                                                                                                                                                                             |
+| metrics\_content\_impression\_share             | The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999. |
+| metrics\_content\_rank\_lost\_impression\_share | The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.          |
+| metrics\_historical\_quality\_score             | The historical quality score.                                                                                                                                                                                                                       |
+| metrics\_search\_impression\_share              | The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.   |
+| metrics\_search\_rank\_lost\_impression\_share  | The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.            |
+| segments\_date                                  | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17.                                                                                                                                                                         |
 
 Search Ads 360 Table Name: AgeRangeConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [age\_range\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/age_range_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions                   | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                 |
+| metrics\_cross\_device\_conversions\_value            | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                  |
+| segments.conversion\_action\_name                     | Conversion action name.                                                                                                                                                                                                                                                                                                            |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: AgeRangeDeviceStats
 
 Search Ads 360 API Resource: [age\_range\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/age_range_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_average\_cpc                                 | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                                       |
+| metrics\_average\_cpm                                 | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                                                                                       |
+| metrics\_clicks                                       | The number of clicks.                                                                                                                                                                                                                                                                                                              |
+| metrics\_client\_account\_conversions                 | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                    |
+| metrics\_client\_account\_conversions\_value          | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                     |
+| metrics\_client\_account\_view\_through\_conversions  | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                                                                                          |
+| metrics\_cost\_micros                                 | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                                                                                             |
+| metrics\_ctr                                          | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                                                                                      |
+| metrics\_impressions                                  | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                                                                                 |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: Asset
 
 Search Ads 360 API Resource: [asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>asset_creation_time</td>
-<td>The timestamp when this asset was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="even">
-<td>asset_engine_status</td>
-<td>The Engine Status of the asset.</td>
-</tr>
-<tr class="odd">
-<td>asset_final_urls</td>
-<td>A list of possible final URLs after all cross domain redirects.</td>
-</tr>
-<tr class="even">
-<td>asset_id</td>
-<td>The ID of the asset.</td>
-</tr>
-<tr class="odd">
-<td>asset_last_modified_time</td>
-<td>The datetime when this asset was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>asset_sitelink_asset.description1</td>
-<td>First line of the description for the sitelink. If set, the length should be between 1 and 35, inclusive, and description2 must also be set.</td>
-</tr>
-<tr class="odd">
-<td>asset_sitelink_asset.description2</td>
-<td>Second line of the description for the sitelink. If set, the length should be between 1 and 35, inclusive, and description1 must also be set.</td>
-</tr>
-<tr class="even">
-<td>asset_sitelink_asset_link_text</td>
-<td>URL display text for the sitelink. The length of this string should be between 1 and 25, inclusive.</td>
-</tr>
-<tr class="odd">
-<td>asset_status</td>
-<td>The status of the asset.</td>
-</tr>
-<tr class="even">
-<td>asset_tracking_url_template</td>
-<td>URL template for constructing a tracking URL.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name           | Description                                                                                                                                   |
+| ----------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| asset\_creation\_time               | The timestamp when this asset was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                  |
+| asset\_engine\_status               | The Engine Status of the asset.                                                                                                               |
+| asset\_final\_urls                  | A list of possible final URLs after all cross domain redirects.                                                                               |
+| asset\_id                           | The ID of the asset.                                                                                                                          |
+| asset\_last\_modified\_time         | The datetime when this asset was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.       |
+| asset\_sitelink\_asset.description1 | First line of the description for the sitelink. If set, the length should be between 1 and 35, inclusive, and description2 must also be set.  |
+| asset\_sitelink\_asset.description2 | Second line of the description for the sitelink. If set, the length should be between 1 and 35, inclusive, and description1 must also be set. |
+| asset\_sitelink\_asset\_link\_text  | URL display text for the sitelink. The length of this string should be between 1 and 25, inclusive.                                           |
+| asset\_status                       | The status of the asset.                                                                                                                      |
+| asset\_tracking\_url\_template      | URL template for constructing a tracking URL.                                                                                                 |
+| customer\_id                        | The ID of the customer.                                                                                                                       |
 
 Search Ads 360 Table Name: AssetSetStats
 
 Search Ads 360 API Resource: [asset\_set\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/asset_set_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>asset_set_asset_asset</td>
-<td>Immutable. The asset which this asset set asset is linking to.</td>
-</tr>
-<tr class="even">
-<td>asset_set_asset_asset_set</td>
-<td>Immutable. The asset set which this asset set asset is linking to.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| asset\_set\_asset\_asset                     | Immutable. The asset which this asset set asset is linking to.                                                                                                                                                                                                  |
+| asset\_set\_asset\_asset\_set                | Immutable. The asset set which this asset set asset is linking to.                                                                                                                                                                                              |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                        | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
 
 Search Ads 360 Table Name: BidStrategy
 
 Search Ads 360 API Resource: [bidding\_strategy](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/bidding_strategy)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_name</td>
-<td>The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_status</td>
-<td>The status of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_cpa_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_cpa_cpc_bid_floor_micros</td>
-<td>Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_cpa_target_cpa_micros</td>
-<td>Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_impression_share_cpc_bid_ceiling_micros</td>
-<td>The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_outrank_share_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_roas_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_roas_cpc_bid_floor_micros</td>
-<td>Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_roas_target_roas</td>
-<td>The chosen revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_spend_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_spend_target_spend_micros</td>
-<td>The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target. This field is deprecated and should no longer be used.</td>
-</tr>
-<tr class="even">
-<td>segments_conversion_action</td>
-<td>Resource name of the conversion action.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                               | Description                                                                                                                                                                                                                                                                    |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| bidding\_strategy\_id                                                   | The ID of the bidding strategy.                                                                                                                                                                                                                                                |
+| bidding\_strategy\_name                                                 | The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).                                                                              |
+| bidding\_strategy\_status                                               | The status of the bidding strategy.                                                                                                                                                                                                                                            |
+| bidding\_strategy\_target\_cpa\_cpc\_bid\_ceiling\_micros               | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                        |
+| bidding\_strategy\_target\_cpa\_cpc\_bid\_floor\_micros                 | Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                        |
+| bidding\_strategy\_target\_cpa\_target\_cpa\_micros                     | Average CPA target. This target should be greater than or equal to minimum billable unit based on the currency for the account.                                                                                                                                                |
+| bidding\_strategy\_target\_impression\_share\_cpc\_bid\_ceiling\_micros | The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.                                                                                              |
+| bidding\_strategy\_target\_outrank\_share\_cpc\_bid\_ceiling\_micros    | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.                                                                                                                                                              |
+| bidding\_strategy\_target\_roas\_cpc\_bid\_ceiling\_micros              | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                        |
+| bidding\_strategy\_target\_roas\_cpc\_bid\_floor\_micros                | Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                        |
+| bidding\_strategy\_target\_roas\_target\_roas                           | The chosen revenue (based on conversion data) per unit of spend. Value must be between 0.01 and 1000.0, inclusive.                                                                                                                                                             |
+| bidding\_strategy\_target\_spend\_cpc\_bid\_ceiling\_micros             | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.                                                                                                                                                              |
+| bidding\_strategy\_target\_spend\_target\_spend\_micros                 | The spend target under which to maximize clicks. A TargetSpend bidder will attempt to spend the smaller of this value or the natural throttling spend amount. If not specified, the budget is used as the spend target. This field is deprecated and should no longer be used. |
+| segments\_conversion\_action                                            | Resource name of the conversion action.                                                                                                                                                                                                                                        |
 
 Search Ads 360 Table Name: BidStrategyStats
 
 Search Ads 360 API Resource: [bidding\_strategy](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/bidding_strategy)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_by_conversion_date</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value_by_conversion_date</td>
-<td>The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_by_conversion_date</td>
-<td>The number of cross-device conversions by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value_by_conversion_date</td>
-<td>The sum of cross-device conversions value by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                        | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bidding\_strategy\_id                                            | The ID of the bidding strategy.                                                                                                                                                                                                                                                                                                                                                              |
+| metrics\_all\_conversions                                        | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                                                                                                                                                  |
+| metrics\_all\_conversions\_by\_conversion\_date                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) . |
+| metrics\_all\_conversions\_value                                 | The value of all conversions.                                                                                                                                                                                                                                                                                                                                                                |
+| metrics\_all\_conversions\_value\_by\_conversion\_date           | The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                               |
+| metrics\_average\_cpc                                            | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                                                                                                 |
+| metrics\_average\_cpm                                            | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                                                                                                                                                 |
+| metrics\_clicks                                                  | The number of clicks.                                                                                                                                                                                                                                                                                                                                                                        |
+| metrics\_client\_account\_conversions                            | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                                                                              |
+| metrics\_client\_account\_conversions\_value                     | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                                                                               |
+| metrics\_client\_account\_view\_through\_conversions             | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                                                                                                                                                    |
+| metrics\_cost\_micros                                            | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                                                                                                                                                       |
+| metrics\_cross\_device\_conversions                              | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                                                                           |
+| metrics\_cross\_device\_conversions\_by\_conversion\_date        | The number of cross-device conversions by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                               |
+| metrics\_cross\_device\_conversions\_value                       | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions\_value\_by\_conversion\_date | The sum of cross-device conversions value by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                            |
+| metrics\_ctr                                                     | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                                                                                                                                                |
+| metrics\_impressions                                             | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                                                                                                                                           |
+| segments\_date                                                   | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                                                                                   |
 
 Search Ads 360 Table Name: Campaign
 
 Search Ads 360 API Resource: [campaign](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>accessible_bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>accessible_bidding_strategy_name</td>
-<td>The name of the bidding strategy.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_name</td>
-<td>The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).</td>
-</tr>
-<tr class="odd">
-<td>campaign_advertising_channel_sub_type</td>
-<td>Optional refinement to advertising_channel_type. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.</td>
-</tr>
-<tr class="even">
-<td>campaign_advertising_channel_type</td>
-<td>The primary serving target for ads within the campaign. The targeting options can be refined in network_settings. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed.</td>
-</tr>
-<tr class="odd">
-<td>campaign_bidding_strategy_type</td>
-<td>The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the bidding_strategy field to create a portfolio bidding strategy. This field is read-only.</td>
-</tr>
-<tr class="even">
-<td>campaign_budget_amount_micros</td>
-<td>The amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit. Monthly spend is capped at 30.4 times this amount.</td>
-</tr>
-<tr class="odd">
-<td>campaign_budget_delivery_method</td>
-<td>The delivery method that determines the rate at which the campaign budget is spent. Defaults to STANDARD if unspecified in a create operation.</td>
-</tr>
-<tr class="even">
-<td>campaign_budget_period</td>
-<td>Period over which to spend the budget. Defaults to DAILY if not specified.</td>
-</tr>
-<tr class="odd">
-<td>campaign_creation_time</td>
-<td>The timestamp when this campaign was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="even">
-<td>campaign_end_date</td>
-<td>The last day of the campaign in serving customer's timezone in YYYY-MM-DD format. On create, defaults to 2037-12-30, which means the campaign will run indefinitely. To set an existing campaign to run indefinitely, set this field to 2037-12-30.</td>
-</tr>
-<tr class="odd">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>campaign_labels</td>
-<td>The resource names of labels attached to this campaign.</td>
-</tr>
-<tr class="even">
-<td>campaign_last_modified_time</td>
-<td>The datetime when this campaign was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>campaign_name</td>
-<td>The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.</td>
-</tr>
-<tr class="even">
-<td>campaign_network_settings_target_content_network</td>
-<td>Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.</td>
-</tr>
-<tr class="odd">
-<td>campaign_network_settings_target_google_search</td>
-<td>Whether ads will be served with google.com search results.</td>
-</tr>
-<tr class="even">
-<td>campaign_network_settings_target_partner_search_network</td>
-<td>Whether ads will be served on the Google Partner Network. This is available only to some select Google partner accounts.</td>
-</tr>
-<tr class="odd">
-<td>campaign_network_settings_target_search_network</td>
-<td>Whether ads will be served on partner sites in the Google Search Network (requires target_google_search to also be true).</td>
-</tr>
-<tr class="even">
-<td>campaign_start_date</td>
-<td>The date when campaign started in serving customer's timezone in YYYY-MM-DD format.</td>
-</tr>
-<tr class="odd">
-<td>campaign_status</td>
-<td>The status of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                     | Description                                                                                                                                                                                                                                                                                          |
+| ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| accessible\_bidding\_strategy\_id                             | The ID of the bidding strategy.                                                                                                                                                                                                                                                                      |
+| accessible\_bidding\_strategy\_name                           | The name of the bidding strategy.                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_id                                         | The ID of the bidding strategy.                                                                                                                                                                                                                                                                      |
+| bidding\_strategy\_name                                       | The name of the bidding strategy. All bidding strategies within an account must be named distinctly. The length of this string should be between 1 and 255, inclusive, in UTF-8 bytes, (trimmed).                                                                                                    |
+| campaign\_advertising\_channel\_sub\_type                     | Optional refinement to advertising\_channel\_type. Must be a valid sub-type of the parent channel type. Can be set only when creating campaigns. After campaign is created, the field can not be changed.                                                                                            |
+| campaign\_advertising\_channel\_type                          | The primary serving target for ads within the campaign. The targeting options can be refined in network\_settings. This field is required and should not be empty when creating new campaigns. Can be set only when creating campaigns. After the campaign is created, the field can not be changed. |
+| campaign\_bidding\_strategy\_type                             | The type of bidding strategy. A bidding strategy can be created by setting either the bidding scheme to create a standard bidding strategy or the bidding\_strategy field to create a portfolio bidding strategy. This field is read-only.                                                           |
+| campaign\_budget\_amount\_micros                              | The amount of the budget, in the local currency for the account. Amount is specified in micros, where one million is equivalent to one currency unit. Monthly spend is capped at 30.4 times this amount.                                                                                             |
+| campaign\_budget\_delivery\_method                            | The delivery method that determines the rate at which the campaign budget is spent. Defaults to STANDARD if unspecified in a create operation.                                                                                                                                                       |
+| campaign\_budget\_period                                      | Period over which to spend the budget. Defaults to DAILY if not specified.                                                                                                                                                                                                                           |
+| campaign\_creation\_time                                      | The timestamp when this campaign was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                      |
+| campaign\_end\_date                                           | The last day of the campaign in serving customer's timezone in YYYY-MM-DD format. On create, defaults to 2037-12-30, which means the campaign will run indefinitely. To set an existing campaign to run indefinitely, set this field to 2037-12-30.                                                  |
+| campaign\_engine\_id                                          | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.                                                                                                      |
+| campaign\_id                                                  | The ID of the campaign.                                                                                                                                                                                                                                                                              |
+| campaign\_labels                                              | The resource names of labels attached to this campaign.                                                                                                                                                                                                                                              |
+| campaign\_last\_modified\_time                                | The datetime when this campaign was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                           |
+| campaign\_name                                                | The name of the campaign. This field is required and should not be empty when creating new campaigns. It must not contain any null (code point 0x0), NL line feed (code point 0xA) or carriage return (code point 0xD) characters.                                                                   |
+| campaign\_network\_settings\_target\_content\_network         | Whether ads will be served on specified placements in the Google Display Network. Placements are specified using the Placement criterion.                                                                                                                                                            |
+| campaign\_network\_settings\_target\_google\_search           | Whether ads will be served with google.com search results.                                                                                                                                                                                                                                           |
+| campaign\_network\_settings\_target\_partner\_search\_network | Whether ads will be served on the Google Partner Network. This is available only to some select Google partner accounts.                                                                                                                                                                             |
+| campaign\_network\_settings\_target\_search\_network          | Whether ads will be served on partner sites in the Google Search Network (requires target\_google\_search to also be true).                                                                                                                                                                          |
+| campaign\_start\_date                                         | The date when campaign started in serving customer's timezone in YYYY-MM-DD format.                                                                                                                                                                                                                  |
+| campaign\_status                                              | The status of the campaign.                                                                                                                                                                                                                                                                          |
+| customer\_id                                                  | The ID of the customer.                                                                                                                                                                                                                                                                              |
 
 Search Ads 360 Table Name: CampaignAssetStats
 
 Search Ads 360 API Resource: [campaign\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_asset_asset</td>
-<td>Immutable. The asset which is linked to the campaign.</td>
-</tr>
-<tr class="even">
-<td>campaign_asset_campaign</td>
-<td>Immutable. The campaign to which the asset is linked.</td>
-</tr>
-<tr class="odd">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_asset\_asset                       | Immutable. The asset which is linked to the campaign.                                                                                                                                                                                                           |
+| campaign\_asset\_campaign                    | Immutable. The campaign to which the asset is linked.                                                                                                                                                                                                           |
+| campaign\_engine\_id                         | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.                                                                 |
+| campaign\_id                                 | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                        | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
 
 Search Ads 360 Table Name: CampaignAudienceConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [campaign\_audience\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_audience_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_criterion\_id         | The ID of the criterion.                                                                                                                                                           |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                            |
+| customer\_id                               | The ID of the customer.                                                                                                                                                            |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                        |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                      |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions. |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                  |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                            |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                         |
+| segments\_device                           | Device to which metrics apply.                                                                                                                                                     |
 
 Search Ads 360 Table Name: CampaignAudienceDeviceStats
 
 Search Ads 360 API Resource: [campaign\_audience\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_audience_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                        |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: CampaignConversionActionAndAssetStats
 
 Search Ads 360 API Resource: [campaign\_asset](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_asset)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_asset_campaign</td>
-<td>Immutable. The campaign to which the asset is linked.</td>
-</tr>
-<tr class="odd">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>campain_asset_asset</td>
-<td>Immutable. The asset which is linked to the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                                     |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_id                              | The ID of the ad group.                                                                                                                                                                         |
+| campaign\_asset\_campaign                  | Immutable. The campaign to which the asset is linked.                                                                                                                                           |
+| campaign\_engine\_id                       | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead. |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                                         |
+| campain\_asset\_asset                      | Immutable. The asset which is linked to the campaign.                                                                                                                                           |
+| customer\_id                               | The ID of the customer.                                                                                                                                                                         |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                     |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                                   |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.              |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                               |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                                         |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                      |
 
 Search Ads 360 Table Name: CampaignConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [campaign](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_by_conversion_date</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value_by_conversion_date</td>
-<td>The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_by_conversion_date</td>
-<td>The number of cross-device conversions by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value_by_conversion_date</td>
-<td>The sum of cross-device conversions value by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                        | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bidding\_strategy\_id                                            | The ID of the bidding strategy.                                                                                                                                                                                                                                                                                                                                                              |
+| campaign\_engine\_id                                             | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.                                                                                                                                                                                              |
+| campaign\_id                                                     | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                      |
+| customer\_id                                                     | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                      |
+| metrics\_all\_conversions                                        | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                                                                                                                                                  |
+| metrics\_all\_conversions\_by\_conversion\_date                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) . |
+| metrics\_all\_conversions\_value                                 | The value of all conversions.                                                                                                                                                                                                                                                                                                                                                                |
+| metrics\_all\_conversions\_value\_by\_conversion\_date           | The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                               |
+| metrics\_cross\_device\_conversions                              | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                                                                           |
+| metrics\_cross\_device\_conversions\_by\_conversion\_date        | The number of cross-device conversions by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                               |
+| metrics\_cross\_device\_conversions\_value                       | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions\_value\_by\_conversion\_date | The sum of cross-device conversions value by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                            |
+| segments.conversion\_action\_name                                | Conversion action name.                                                                                                                                                                                                                                                                                                                                                                      |
+| segments\_date                                                   | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                                                                                   |
+| segments\_device                                                 | Device to which metrics apply.                                                                                                                                                                                                                                                                                                                                                               |
 
 Search Ads 360 Table Name: CampaignCriterion
 
 Search Ads 360 API Resource: [campaign\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_last_modified_time</td>
-<td>The datetime when this campaign criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_status</td>
-<td>The status of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_type</td>
-<td>The type of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                           |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers. |
+| campaign\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                              |
+| campaign\_criterion\_last\_modified\_time            | The datetime when this campaign criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.  |
+| campaign\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                |
+| campaign\_criterion\_status                          | The status of the criterion.                                                                                                                          |
+| campaign\_criterion\_type                            | The type of the criterion.                                                                                                                            |
+| campaign\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                          |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                               |
+| customer\_id                                         | The ID of the customer.                                                                                                                               |
 
 Search Ads 360 Table Name: CampaignDeviceStats
 
 Search Ads 360 API Resource: [campaign](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bidding\_strategy\_id                                | The ID of the bidding strategy.                                                                                                                                                                                                                                 |
+| campaign\_engine\_id                                 | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.                                                                 |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                             |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: CampaignLabel
 
 Search Ads 360 API Resource: [campaign\_label](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_label)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>campaign_label_campaign</td>
-<td>The campaign to which the label is attached.</td>
-</tr>
-<tr class="odd">
-<td>campaign_label_label</td>
-<td>The label assigned to the campaign.</td>
-</tr>
-<tr class="even">
-<td>campaign_label_owner_customer_id</td>
-<td>The ID of the Customer which owns the label.</td>
-</tr>
-<tr class="odd">
-<td>campaign_label_resource_name</td>
-<td>Name of the resource. Campaign label resource names have the form: customers/{customer_id}/campaignLabels/{campaign_id}~{label_id}</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name            | Description                                                                                                                            |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_id                         | The ID of the campaign.                                                                                                                |
+| campaign\_label\_campaign            | The campaign to which the label is attached.                                                                                           |
+| campaign\_label\_label               | The label assigned to the campaign.                                                                                                    |
+| campaign\_label\_owner\_customer\_id | The ID of the Customer which owns the label.                                                                                           |
+| campaign\_label\_resource\_name      | Name of the resource. Campaign label resource names have the form: customers/{customer\_id}/campaignLabels/{campaign\_id}\~{label\_id} |
+| customer\_id                         | The ID of the customer.                                                                                                                |
 
 Search Ads 360 Table Name: CampaignStats
 
 Search Ads 360 API Resource: [campaign](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_engine_id</td>
-<td>ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_content_budget_lost_impression_share</td>
-<td>The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value greater than 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_content_impression_share</td>
-<td>The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value lower than 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="odd">
-<td>metrics_content_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value greater than 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="even">
-<td>metrics_conversions</td>
-<td>The number of conversions. This only includes conversion actions which include_in_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_conversions_value</td>
-<td>The sum of conversion values for the conversions included in the "conversions" field. This metric is useful only if you entered a value for your conversion actions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_historical_quality_score</td>
-<td>The historical quality score.</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>metrics_search_budget_lost_impression_share</td>
-<td>The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="odd">
-<td>metrics_search_impression_share</td>
-<td>The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.</td>
-</tr>
-<tr class="even">
-<td>metrics_search_rank_lost_impression_share</td>
-<td>The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.</td>
-</tr>
-<tr class="odd">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                          |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| bidding\_strategy\_id                                | The ID of the bidding strategy.                                                                                                                                                                                                                                      |
+| campaign\_engine\_id                                 | ID of the campaign in the external engine account. This field is for non-Google Ads account only. For example: Yahoo Japan, Microsoft, Baidu. For Google Ads entity, use "campaign.id" instead.                                                                      |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                              |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                              |
+| metrics\_all\_conversions                            | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                          |
+| metrics\_all\_conversions\_value                     | The value of all conversions.                                                                                                                                                                                                                                        |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                         |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                         |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                                |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.      |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.       |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                            |
+| metrics\_content\_budget\_lost\_impression\_share    | The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value greater than 0.9 is reported as 0.9001. |
+| metrics\_content\_impression\_share                  | The impressions you've received on the Display Network divided by the estimated number of impressions you were eligible to receive. Note: Content impression share is reported in the range of 0.1 to 1. Any value lower than 0.1 is reported as 0.0999.             |
+| metrics\_content\_rank\_lost\_impression\_share      | The estimated percentage of impressions on the Display Network that your ads didn't receive due to poor Ad Rank. Note: Content rank lost impression share is reported in the range of 0 to 0.9. Any value greater than 0.9 is reported as 0.9001.                    |
+| metrics\_conversions                                 | The number of conversions. This only includes conversion actions which include\_in\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                      |
+| metrics\_conversions\_value                          | The sum of conversion values for the conversions included in the "conversions" field. This metric is useful only if you entered a value for your conversion actions.                                                                                                 |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                               |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                        |
+| metrics\_historical\_quality\_score                  | The historical quality score.                                                                                                                                                                                                                                        |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                   |
+| metrics\_search\_budget\_lost\_impression\_share     | The estimated percent of times that your ad was eligible to show on the Search Network but didn't because your budget was too low. Note: Search budget lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.        |
+| metrics\_search\_impression\_share                   | The impressions you've received on the Search Network divided by the estimated number of impressions you were eligible to receive. Note: Search impression share is reported in the range of 0.1 to 1. Any value below 0.1 is reported as 0.0999.                    |
+| metrics\_search\_rank\_lost\_impression\_share       | The estimated percentage of impressions on the Search Network that your ads didn't receive due to poor Ad Rank. Note: Search rank lost impression share is reported in the range of 0 to 0.9. Any value above 0.9 is reported as 0.9001.                             |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                                  |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                           |
 
 Search Ads 360 Table Name: CartDataSalesStats
 
 Search Ads 360 API Resource: [cart\_data\_sales\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_cross_sell_gross_profit_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_cross_sell_gross_profit_micros</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_cross_sell_revenue_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_cross_sell_revenue_micros</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_cross_sell_units_sold</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_cross_sell_units_sold</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_lead_gross_profit_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_lead_gross_profit_micros</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_lead_revenue_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_lead_revenue_micros</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_lead_units_sold</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.client_account_lead_units_sold</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_sell_gross_profit_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.cross_sell_gross_profit_micros</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_sell_revenue_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.cross_sell_revenue_micros</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_sell_units_sold</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.cross_sell_units_sold</td>
-</tr>
-<tr class="odd">
-<td>metrics_lead_gross_profit_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.lead_gross_profit_micros</td>
-</tr>
-<tr class="even">
-<td>metrics_lead_revenue_micros</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.lead_revenue_micros</td>
-</tr>
-<tr class="odd">
-<td>metrics_lead_units_sold</td>
-<td>https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart_data_sales_view#metrics.lead_units_sold</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_product_brand</td>
-<td>Brand of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_item_id</td>
-<td>Item ID of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_sold_brand</td>
-<td>Brand of the product sold.</td>
-</tr>
-<tr class="even">
-<td>segments_product_sold_item_id</td>
-<td>Item ID of the product sold.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_sold_title</td>
-<td>Title of the product sold.</td>
-</tr>
-<tr class="even">
-<td>segments_product_sold_type_l1</td>
-<td>Type (level 1) of the product sold.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_sold_type_l2</td>
-<td>Type (level 2) of the product sold.</td>
-</tr>
-<tr class="even">
-<td>segments_product_sold_type_l3</td>
-<td>Type (level 3) of the product sold.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_sold_type_l4</td>
-<td>Type (level 4) of the product sold.</td>
-</tr>
-<tr class="even">
-<td>segments_product_sold_type_l5</td>
-<td>Type (level 5) of the product sold.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_title</td>
-<td>Title of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_type_l1</td>
-<td>Type (level 1) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_type_l2</td>
-<td>Type (level 2) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_type_l3</td>
-<td>Type (level 3) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_type_l4</td>
-<td>Type (level 4) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_type_l5</td>
-<td>Type (level 5) of the product.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                    | Description                                                                                                                                                     |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_id                                                | The ID of the ad group.                                                                                                                                         |
+| campaign\_id                                                 | The ID of the campaign.                                                                                                                                         |
+| customer\_id                                                 | The ID of the customer.                                                                                                                                         |
+| metrics\_client\_account\_cross\_sell\_gross\_profit\_micros | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_cross\_sell\_gross\_profit\_micros |
+| metrics\_client\_account\_cross\_sell\_revenue\_micros       | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_cross\_sell\_revenue\_micros       |
+| metrics\_client\_account\_cross\_sell\_units\_sold           | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_cross\_sell\_units\_sold           |
+| metrics\_client\_account\_lead\_gross\_profit\_micros        | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_lead\_gross\_profit\_micros        |
+| metrics\_client\_account\_lead\_revenue\_micros              | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_lead\_revenue\_micros              |
+| metrics\_client\_account\_lead\_units\_sold                  | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.client\_account\_lead\_units\_sold                  |
+| metrics\_cross\_sell\_gross\_profit\_micros                  | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.cross\_sell\_gross\_profit\_micros                  |
+| metrics\_cross\_sell\_revenue\_micros                        | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.cross\_sell\_revenue\_micros                        |
+| metrics\_cross\_sell\_units\_sold                            | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.cross\_sell\_units\_sold                            |
+| metrics\_lead\_gross\_profit\_micros                         | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.lead\_gross\_profit\_micros                         |
+| metrics\_lead\_revenue\_micros                               | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.lead\_revenue\_micros                               |
+| metrics\_lead\_units\_sold                                   | https://developers.google.com/search-ads/reporting/api/reference/fields/v0/cart\_data\_sales\_view\#metrics.lead\_units\_sold                                   |
+| segments\_date                                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                      |
+| segments\_product\_brand                                     | Brand of the product.                                                                                                                                           |
+| segments\_product\_item\_id                                  | Item ID of the product.                                                                                                                                         |
+| segments\_product\_sold\_brand                               | Brand of the product sold.                                                                                                                                      |
+| segments\_product\_sold\_item\_id                            | Item ID of the product sold.                                                                                                                                    |
+| segments\_product\_sold\_title                               | Title of the product sold.                                                                                                                                      |
+| segments\_product\_sold\_type\_l1                            | Type (level 1) of the product sold.                                                                                                                             |
+| segments\_product\_sold\_type\_l2                            | Type (level 2) of the product sold.                                                                                                                             |
+| segments\_product\_sold\_type\_l3                            | Type (level 3) of the product sold.                                                                                                                             |
+| segments\_product\_sold\_type\_l4                            | Type (level 4) of the product sold.                                                                                                                             |
+| segments\_product\_sold\_type\_l5                            | Type (level 5) of the product sold.                                                                                                                             |
+| segments\_product\_title                                     | Title of the product.                                                                                                                                           |
+| segments\_product\_type\_l1                                  | Type (level 1) of the product.                                                                                                                                  |
+| segments\_product\_type\_l2                                  | Type (level 2) of the product.                                                                                                                                  |
+| segments\_product\_type\_l3                                  | Type (level 3) of the product.                                                                                                                                  |
+| segments\_product\_type\_l4                                  | Type (level 4) of the product.                                                                                                                                  |
+| segments\_product\_type\_l5                                  | Type (level 5) of the product.                                                                                                                                  |
 
 Search Ads 360 Table Name: Conversion
 
 Search Ads 360 API Resource: [conversion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>conversion_ad_id</td>
-<td>Ad ID. A value of 0 indicates that the ad is unattributed.</td>
-</tr>
-<tr class="odd">
-<td>conversion_advertiser_conversion_id</td>
-<td>For offline conversions, this is an ID provided by advertisers. If an advertiser doesn't specify such an ID, Search Ads 360 generates one. For online conversions, this is equal to the id column or the floodlight_order_id column depending on the advertiser's Floodlight instructions.</td>
-</tr>
-<tr class="even">
-<td>conversion_attribution_type</td>
-<td>What the conversion is attributed to: Visit or Keyword+Ad.</td>
-</tr>
-<tr class="odd">
-<td>conversion_click_id</td>
-<td>A unique string, for the visit that the conversion is attributed to, that is passed to the landing page as the click id URL parameter.</td>
-</tr>
-<tr class="even">
-<td>conversion_conversion_date_time</td>
-<td>The timestamp of the conversion event.</td>
-</tr>
-<tr class="odd">
-<td>conversion_conversion_last_modified_date_time</td>
-<td>The timestamp of the last time the conversion was modified.</td>
-</tr>
-<tr class="even">
-<td>conversion_conversion_quantity</td>
-<td>The quantity of items recorded by the conversion, as determined by the qty url parameter. The advertiser is responsible for dynamically populating the parameter (such as number of items sold in the conversion), otherwise it defaults to 1.</td>
-</tr>
-<tr class="odd">
-<td>conversion_conversion_revenue_micros</td>
-<td>The adjusted revenue in micros for the conversion event. This will always be in the currency of the serving account.</td>
-</tr>
-<tr class="even">
-<td>conversion_conversion_visit_date_time</td>
-<td>The timestamp of the visit that the conversion is attributed to.</td>
-</tr>
-<tr class="odd">
-<td>conversion_criterion_id</td>
-<td>Search Ads 360 criterion ID. A value of 0 indicates that the criterion is unattributed.</td>
-</tr>
-<tr class="even">
-<td>conversion_floodlight_order_id</td>
-<td>The Floodlight order ID provided by the advertiser for the conversion.</td>
-</tr>
-<tr class="odd">
-<td>conversion_floodlight_original_revenue</td>
-<td>The original, unchanged revenue associated with the Floodlight event (in the currency of the current report), before Floodlight currency instruction modifications.</td>
-</tr>
-<tr class="even">
-<td>conversion_id</td>
-<td>The ID of the conversion</td>
-</tr>
-<tr class="odd">
-<td>conversion_merchant_id</td>
-<td>The SearchAds360 inventory account ID containing the product that was clicked on. SearchAds360 generates this ID when you link an inventory account in SearchAds360.</td>
-</tr>
-<tr class="even">
-<td>conversion_product_channel</td>
-<td>The sales channel of the product that was clicked on: Online or Local.</td>
-</tr>
-<tr class="odd">
-<td>conversion_product_country_code</td>
-<td>The country (ISO-3166-format) registered for the inventory feed that contains the product clicked on.</td>
-</tr>
-<tr class="even">
-<td>conversion_product_id</td>
-<td>The ID of the product clicked on.</td>
-</tr>
-<tr class="odd">
-<td>conversion_product_language_code</td>
-<td>The language (ISO-639-1) that has been set for the Merchant Center feed containing data about the product.</td>
-</tr>
-<tr class="even">
-<td>conversion_product_store_id</td>
-<td>The store in the Local Inventory Ad that was clicked on. This should match the store IDs used in your local products feed.</td>
-</tr>
-<tr class="odd">
-<td>conversion_status</td>
-<td>The status of the conversion, either ENABLED or REMOVED.</td>
-</tr>
-<tr class="even">
-<td>conversion_visit_id</td>
-<td>The SearchAds360 visit ID that the conversion is attributed to.</td>
-</tr>
-<tr class="odd">
-<td>customer_account_type</td>
-<td>Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.</td>
-</tr>
-<tr class="even">
-<td>customer_descriptive_name</td>
-<td>Optional, non-unique descriptive name of the customer.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                          | Description                                                                                                                                                                                                                                                                                  |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id                | The ID of the criterion.                                                                                                                                                                                                                                                                     |
+| ad\_group\_id                                      | The ID of the ad group.                                                                                                                                                                                                                                                                      |
+| campaign\_id                                       | The ID of the campaign.                                                                                                                                                                                                                                                                      |
+| conversion\_ad\_id                                 | Ad ID. A value of 0 indicates that the ad is unattributed.                                                                                                                                                                                                                                   |
+| conversion\_advertiser\_conversion\_id             | For offline conversions, this is an ID provided by advertisers. If an advertiser doesn't specify such an ID, Search Ads 360 generates one. For online conversions, this is equal to the id column or the floodlight\_order\_id column depending on the advertiser's Floodlight instructions. |
+| conversion\_attribution\_type                      | What the conversion is attributed to: Visit or Keyword+Ad.                                                                                                                                                                                                                                   |
+| conversion\_click\_id                              | A unique string, for the visit that the conversion is attributed to, that is passed to the landing page as the click id URL parameter.                                                                                                                                                       |
+| conversion\_conversion\_date\_time                 | The timestamp of the conversion event.                                                                                                                                                                                                                                                       |
+| conversion\_conversion\_last\_modified\_date\_time | The timestamp of the last time the conversion was modified.                                                                                                                                                                                                                                  |
+| conversion\_conversion\_quantity                   | The quantity of items recorded by the conversion, as determined by the qty url parameter. The advertiser is responsible for dynamically populating the parameter (such as number of items sold in the conversion), otherwise it defaults to 1.                                               |
+| conversion\_conversion\_revenue\_micros            | The adjusted revenue in micros for the conversion event. This will always be in the currency of the serving account.                                                                                                                                                                         |
+| conversion\_conversion\_visit\_date\_time          | The timestamp of the visit that the conversion is attributed to.                                                                                                                                                                                                                             |
+| conversion\_criterion\_id                          | Search Ads 360 criterion ID. A value of 0 indicates that the criterion is unattributed.                                                                                                                                                                                                      |
+| conversion\_floodlight\_order\_id                  | The Floodlight order ID provided by the advertiser for the conversion.                                                                                                                                                                                                                       |
+| conversion\_floodlight\_original\_revenue          | The original, unchanged revenue associated with the Floodlight event (in the currency of the current report), before Floodlight currency instruction modifications.                                                                                                                          |
+| conversion\_id                                     | The ID of the conversion                                                                                                                                                                                                                                                                     |
+| conversion\_merchant\_id                           | The SearchAds360 inventory account ID containing the product that was clicked on. SearchAds360 generates this ID when you link an inventory account in SearchAds360.                                                                                                                         |
+| conversion\_product\_channel                       | The sales channel of the product that was clicked on: Online or Local.                                                                                                                                                                                                                       |
+| conversion\_product\_country\_code                 | The country (ISO-3166-format) registered for the inventory feed that contains the product clicked on.                                                                                                                                                                                        |
+| conversion\_product\_id                            | The ID of the product clicked on.                                                                                                                                                                                                                                                            |
+| conversion\_product\_language\_code                | The language (ISO-639-1) that has been set for the Merchant Center feed containing data about the product.                                                                                                                                                                                   |
+| conversion\_product\_store\_id                     | The store in the Local Inventory Ad that was clicked on. This should match the store IDs used in your local products feed.                                                                                                                                                                   |
+| conversion\_status                                 | The status of the conversion, either ENABLED or REMOVED.                                                                                                                                                                                                                                     |
+| conversion\_visit\_id                              | The SearchAds360 visit ID that the conversion is attributed to.                                                                                                                                                                                                                              |
+| customer\_account\_type                            | Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.                                                                                                                                                                             |
+| customer\_descriptive\_name                        | Optional, non-unique descriptive name of the customer.                                                                                                                                                                                                                                       |
+| customer\_id                                       | The ID of the customer.                                                                                                                                                                                                                                                                      |
+| segments.conversion\_action\_name                  | Conversion action name.                                                                                                                                                                                                                                                                      |
+| segments\_date                                     | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                   |
+| segments\_device                                   | Device to which metrics apply.                                                                                                                                                                                                                                                               |
 
 Search Ads 360 Table Name: ConversionAction
 
 Search Ads 360 API Resource: [conversion\_action](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/conversion_action)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>conversion_action_creation_time</td>
-<td>Timestamp of the Floodlight activity's creation, formatted in ISO 8601.</td>
-</tr>
-<tr class="even">
-<td>conversion_action_floodlight_settings_activity_group_tag</td>
-<td>String used to identify a Floodlight activity group when reporting conversions.</td>
-</tr>
-<tr class="odd">
-<td>conversion_action_floodlight_settings_activity_id</td>
-<td>ID of the Floodlight activity in DoubleClick Campaign Manager (DCM).</td>
-</tr>
-<tr class="even">
-<td>conversion_action_floodlight_settings_activity_tag</td>
-<td>String used to identify a Floodlight activity when reporting conversions.</td>
-</tr>
-<tr class="odd">
-<td>conversion_action_name</td>
-<td>The name of the conversion action. This field is required and should not be empty when creating new conversion actions.</td>
-</tr>
-<tr class="even">
-<td>conversion_action_status</td>
-<td>The status of this conversion action for conversion event accrual.</td>
-</tr>
-<tr class="odd">
-<td>conversion_action_type</td>
-<td>The type of this conversion action.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                      | Description                                                                                                             |
+| -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| conversion\_action\_creation\_time                             | Timestamp of the Floodlight activity's creation, formatted in ISO 8601.                                                 |
+| conversion\_action\_floodlight\_settings\_activity\_group\_tag | String used to identify a Floodlight activity group when reporting conversions.                                         |
+| conversion\_action\_floodlight\_settings\_activity\_id         | ID of the Floodlight activity in DoubleClick Campaign Manager (DCM).                                                    |
+| conversion\_action\_floodlight\_settings\_activity\_tag        | String used to identify a Floodlight activity when reporting conversions.                                               |
+| conversion\_action\_name                                       | The name of the conversion action. This field is required and should not be empty when creating new conversion actions. |
+| conversion\_action\_status                                     | The status of this conversion action for conversion event accrual.                                                      |
+| conversion\_action\_type                                       | The type of this conversion action.                                                                                     |
 
 Search Ads 360 Table Name: GenderConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [gender\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/gender_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions                   | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                 |
+| metrics\_cross\_device\_conversions\_value            | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                  |
+| segments.conversion\_action\_name                     | Conversion action name.                                                                                                                                                                                                                                                                                                            |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: GenderDeviceStats
 
 Search Ads 360 API Resource: [gender\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/gender_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_average\_cpc                                 | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                                       |
+| metrics\_average\_cpm                                 | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                                                                                       |
+| metrics\_clicks                                       | The number of clicks.                                                                                                                                                                                                                                                                                                              |
+| metrics\_client\_account\_conversions                 | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                    |
+| metrics\_client\_account\_conversions\_value          | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                     |
+| metrics\_client\_account\_view\_through\_conversions  | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                                                                                          |
+| metrics\_cost\_micros                                 | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                                                                                             |
+| metrics\_ctr                                          | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                                                                                      |
+| metrics\_impressions                                  | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                                                                                 |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: Keyword
 
 Search Ads 360 API Resource: [keyword\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_creation_time</td>
-<td>The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_effective_cpc_bid_micros</td>
-<td>The effective CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_engine_id</td>
-<td>ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_criterion.criterion_id" instead.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_engine_status</td>
-<td>The Engine Status for ad group criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_final_url_suffix</td>
-<td>URL template for appending params to final URL.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_final_urls</td>
-<td>The list of possible final URLs after all cross-domain redirects for the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_keyword_match_type</td>
-<td>The match type of the keyword.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_keyword_text</td>
-<td>The text of the keyword (at most 80 characters and 10 words).</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_labels</td>
-<td>The resource names of labels attached to this ad group criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_last_modified_time</td>
-<td>The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_quality_info_quality_score</td>
-<td>The quality score. This field may not be populated if Google does not have enough information to determine a value.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_status</td>
-<td>The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_tracking_url_template</td>
-<td>The URL template for constructing a tracking URL.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_cpa_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_cpa_cpc_bid_floor_micros</td>
-<td>Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_impression_share_cpc_bid_ceiling_micros</td>
-<td>The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_outrank_share_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_roas_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_target_roas_cpc_bid_floor_micros</td>
-<td>Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_target_spend_cpc_bid_ceiling_micros</td>
-<td>Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_cpc\_bid\_micros                                  | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ad\_group\_criterion\_creation\_time                                    | The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ad\_group\_criterion\_criterion\_id                                     | The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ad\_group\_criterion\_effective\_cpc\_bid\_micros                       | The effective CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ad\_group\_criterion\_engine\_id                                        | ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_criterion.criterion\_id" instead.                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_engine\_status                                    | The Engine Status for ad group criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ad\_group\_criterion\_final\_url\_suffix                                | URL template for appending params to final URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ad\_group\_criterion\_final\_urls                                       | The list of possible final URLs after all cross-domain redirects for the ad.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ad\_group\_criterion\_keyword\_match\_type                              | The match type of the keyword.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_keyword\_text                                     | The text of the keyword (at most 80 characters and 10 words).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ad\_group\_criterion\_labels                                            | The resource names of labels attached to this ad group criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ad\_group\_criterion\_last\_modified\_time                              | The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_quality\_info\_quality\_score                     | The quality score. This field may not be populated if Google does not have enough information to determine a value.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ad\_group\_criterion\_status                                            | The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added. |
+| ad\_group\_criterion\_tracking\_url\_template                           | The URL template for constructing a tracking URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ad\_group\_id                                                           | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_id                                                   | The ID of the bidding strategy.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| bidding\_strategy\_target\_cpa\_cpc\_bid\_ceiling\_micros               | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_target\_cpa\_cpc\_bid\_floor\_micros                 | Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_target\_impression\_share\_cpc\_bid\_ceiling\_micros | The highest CPC bid the automated bidding system is permitted to specify. This is a required field entered by the advertiser that sets the ceiling and specified in local micros.                                                                                                                                                                                                                                                                                                                                                                                          |
+| bidding\_strategy\_target\_outrank\_share\_cpc\_bid\_ceiling\_micros    | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| bidding\_strategy\_target\_roas\_cpc\_bid\_ceiling\_micros              | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_target\_roas\_cpc\_bid\_floor\_micros                | Minimum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy. This should only be set for portfolio bid strategies.                                                                                                                                                                                                                                                                                                                                                                                                    |
+| bidding\_strategy\_target\_spend\_cpc\_bid\_ceiling\_micros             | Maximum bid limit that can be set by the bid strategy. The limit applies to all keywords managed by the strategy.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| campaign\_id                                                            | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| customer\_id                                                            | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Search Ads 360 Table Name: KeywordConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [keyword\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_engine_id</td>
-<td>ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_criterion.criterion_id" instead.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_by_conversion_date</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value_by_conversion_date</td>
-<td>The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_by_conversion_date</td>
-<td>The number of cross-device conversions by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value_by_conversion_date</td>
-<td>The sum of cross-device conversions value by conversion date. For more information about <code dir="ltr" translate="no">       by_conversion_date      </code> columns, see <a href="https://support.google.com/sa360/answer/9250611">About the "All conversions" column</a> .</td>
-</tr>
-<tr class="odd">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                                        | Description                                                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id                              | The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_engine\_id                                 | ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_criterion.criterion\_id" instead.                                                                                                                                                       |
+| ad\_group\_id                                                    | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                      |
+| bidding\_strategy\_id                                            | The ID of the bidding strategy.                                                                                                                                                                                                                                                                                                                                                              |
+| campaign\_id                                                     | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                      |
+| customer\_id                                                     | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                      |
+| metrics\_all\_conversions                                        | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                                                                                                                                                  |
+| metrics\_all\_conversions\_by\_conversion\_date                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) . |
+| metrics\_all\_conversions\_value                                 | The value of all conversions.                                                                                                                                                                                                                                                                                                                                                                |
+| metrics\_all\_conversions\_value\_by\_conversion\_date           | The value of all conversions. When this column is selected with date, the values in date column means the conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                               |
+| metrics\_cross\_device\_conversions                              | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                                                                           |
+| metrics\_cross\_device\_conversions\_by\_conversion\_date        | The number of cross-device conversions by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                               |
+| metrics\_cross\_device\_conversions\_value                       | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions\_value\_by\_conversion\_date | The sum of cross-device conversions value by conversion date. For more information about `        by_conversion_date       ` columns, see [About the "All conversions" column](https://support.google.com/sa360/answer/9250611) .                                                                                                                                                            |
+| segments.conversion\_action\_name                                | Conversion action name.                                                                                                                                                                                                                                                                                                                                                                      |
+| segments\_date                                                   | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                                                                                   |
+| segments\_device                                                 | Device to which metrics apply.                                                                                                                                                                                                                                                                                                                                                               |
 
 Search Ads 360 Table Name: KeywordDeviceStats
 
 Search Ads 360 API Resource: [keyword\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_engine_id</td>
-<td>ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad_group_criterion.criterion_id" instead.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>metrics_visits</td>
-<td>Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id                  | The ID of the criterion.                                                                                                                                                                                                                                        |
+| ad\_group\_criterion\_engine\_id                     | ID of the ad group criterion in the external engine account. This field is for SearchAds 360 account only. For example: Yahoo Japan, Microsoft, Baidu. For non-SearchAds 360 entity, use "ad\_group\_criterion.criterion\_id" instead.                          |
+| ad\_group\_id                                        | The ID of the ad group.                                                                                                                                                                                                                                         |
+| bidding\_strategy\_id                                | The ID of the bidding strategy.                                                                                                                                                                                                                                 |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| metrics\_visits                                      | Clicks that Search Ads 360 has successfully recorded and forwarded to an advertiser's landing page.                                                                                                                                                             |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: KeywordStats
 
 Search Ads 360 API Resource: [keyword\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/keyword_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>bidding_strategy_id</td>
-<td>The ID of the bidding strategy.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_historical_quality_score</td>
-<td>The historical quality score.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name           | Description                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id | The ID of the criterion.                                                   |
+| ad\_group\_id                       | The ID of the ad group.                                                    |
+| bidding\_strategy\_id               | The ID of the bidding strategy.                                            |
+| campaign\_id                        | The ID of the campaign.                                                    |
+| customer\_id                        | The ID of the customer.                                                    |
+| metrics\_historical\_quality\_score | The historical quality score.                                              |
+| segments\_date                      | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17 |
 
 Search Ads 360 Table Name: LocationConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [location\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/location_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_criterion\_id         | The ID of the criterion.                                                                                                                                                           |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                            |
+| customer\_id                               | The ID of the customer.                                                                                                                                                            |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                        |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                      |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions. |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                  |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                            |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                         |
+| segments\_device                           | Device to which metrics apply.                                                                                                                                                     |
 
 Search Ads 360 Table Name: LocationDeviceStats
 
 Search Ads 360 API Resource: [location\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/location_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="even">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                        |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                                     | Device to which metrics apply.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: NegativeAdGroupCriterion
 
 Search Ads 360 API Resource: [ad\_group\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_creation_time</td>
-<td>The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_last_modified_time</td>
-<td>The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_status</td>
-<td>The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_type</td>
-<td>The type of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for web page targeting. The list of web page targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_creation\_time                  | The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ad\_group\_criterion\_last\_modified\_time            | The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_status                          | The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added. |
+| ad\_group\_criterion\_type                            | The type of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for web page targeting. The list of web page targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.                                                                                                                                                                                                                                       |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Search Ads 360 Table Name: NegativeAdGroupKeyword
 
 Search Ads 360 API Resource: [ad\_group\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/ad_group_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_creation_time</td>
-<td>The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_keyword_match_type</td>
-<td>The match type of the keyword.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_keyword_text</td>
-<td>The text of the keyword (at most 80 characters and 10 words).</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_last_modified_time</td>
-<td>The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_status</td>
-<td>The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_creation\_time       | The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ad\_group\_criterion\_criterion\_id        | The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| ad\_group\_criterion\_keyword\_match\_type | The match type of the keyword.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_keyword\_text        | The text of the keyword (at most 80 characters and 10 words).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ad\_group\_criterion\_last\_modified\_time | The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_status               | The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added. |
+| ad\_group\_id                              | The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| customer\_id                               | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 Search Ads 360 Table Name: NegativeCampaignCriterion
 
 Search Ads 360 API Resource: [campaign\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_last_modified_time</td>
-<td>The datetime when this campaign criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_status</td>
-<td>The status of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_type</td>
-<td>The type of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                                                                                        |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| campaign\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| campaign\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| campaign\_criterion\_last\_modified\_time            | The datetime when this campaign criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                               |
+| campaign\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| campaign\_criterion\_status                          | The status of the criterion.                                                                                                                                                                                                                                                                                                       |
+| campaign\_criterion\_type                            | The type of the criterion.                                                                                                                                                                                                                                                                                                         |
+| campaign\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| campaign\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| campaign\_id                                         | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
 
 Search Ads 360 Table Name: NegativeCampaignKeyword
 
 Search Ads 360 API Resource: [campaign\_criterion](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/campaign_criterion)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_keyword_match_type</td>
-<td>The match type of the keyword.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_keyword_text</td>
-<td>The text of the keyword (at most 80 characters and 10 words).</td>
-</tr>
-<tr class="even">
-<td>campaign_criterion_last_modified_time</td>
-<td>The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="odd">
-<td>campaign_criterion_status</td>
-<td>The status of the criterion.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                 | Description                                                                                                                                          |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| campaign\_criterion\_criterion\_id        | The ID of the criterion.                                                                                                                             |
+| campaign\_criterion\_keyword\_match\_type | The match type of the keyword.                                                                                                                       |
+| campaign\_criterion\_keyword\_text        | The text of the keyword (at most 80 characters and 10 words).                                                                                        |
+| campaign\_criterion\_last\_modified\_time | The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format. |
+| campaign\_criterion\_status               | The status of the criterion.                                                                                                                         |
+| campaign\_id                              | The ID of the campaign.                                                                                                                              |
+| customer\_id                              | The ID of the customer.                                                                                                                              |
 
 Search Ads 360 Table Name: ProductAdvertised
 
 Search Ads 360 API Resource: [shopping\_performance\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/shopping_performance_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_product_bidding_category_level1</td>
-<td>Bidding category (level 1) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_bidding_category_level2</td>
-<td>Bidding category (level 2) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_bidding_category_level3</td>
-<td>Bidding category (level 3) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_bidding_category_level4</td>
-<td>Bidding category (level 4) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_bidding_category_level5</td>
-<td>Bidding category (level 5) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_brand</td>
-<td>Brand of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_channel</td>
-<td>Channel of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_channel_exclusivity</td>
-<td>Channel exclusivity of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_condition</td>
-<td>Condition of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_country</td>
-<td>Resource name of the geo target constant for the country of sale of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_custom_attribute0</td>
-<td>Custom attribute 0 of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_custom_attribute1</td>
-<td>Custom attribute 1 of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_custom_attribute2</td>
-<td>Custom attribute 2 of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_custom_attribute3</td>
-<td>Custom attribute 3 of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_custom_attribute4</td>
-<td>Custom attribute 4 of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_item_id</td>
-<td>Item ID of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_language</td>
-<td>Resource name of the language constant for the language of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_store_id</td>
-<td>Store ID of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_title</td>
-<td>Title of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_type_l1</td>
-<td>Type (level 1) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_type_l2</td>
-<td>Type (level 2) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_type_l3</td>
-<td>Type (level 3) of the product.</td>
-</tr>
-<tr class="even">
-<td>segments_product_type_l4</td>
-<td>Type (level 4) of the product.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_type_l5</td>
-<td>Type (level 5) of the product.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_id                                | The ID of the ad group.                                                                                                                                                                                                                                         |
+| campaign\_id                                 | The ID of the campaign.                                                                                                                                                                                                                                         |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_product\_bidding\_category\_level1 | Bidding category (level 1) of the product.                                                                                                                                                                                                                      |
+| segments\_product\_bidding\_category\_level2 | Bidding category (level 2) of the product.                                                                                                                                                                                                                      |
+| segments\_product\_bidding\_category\_level3 | Bidding category (level 3) of the product.                                                                                                                                                                                                                      |
+| segments\_product\_bidding\_category\_level4 | Bidding category (level 4) of the product.                                                                                                                                                                                                                      |
+| segments\_product\_bidding\_category\_level5 | Bidding category (level 5) of the product.                                                                                                                                                                                                                      |
+| segments\_product\_brand                     | Brand of the product.                                                                                                                                                                                                                                           |
+| segments\_product\_channel                   | Channel of the product.                                                                                                                                                                                                                                         |
+| segments\_product\_channel\_exclusivity      | Channel exclusivity of the product.                                                                                                                                                                                                                             |
+| segments\_product\_condition                 | Condition of the product.                                                                                                                                                                                                                                       |
+| segments\_product\_country                   | Resource name of the geo target constant for the country of sale of the product.                                                                                                                                                                                |
+| segments\_product\_custom\_attribute0        | Custom attribute 0 of the product.                                                                                                                                                                                                                              |
+| segments\_product\_custom\_attribute1        | Custom attribute 1 of the product.                                                                                                                                                                                                                              |
+| segments\_product\_custom\_attribute2        | Custom attribute 2 of the product.                                                                                                                                                                                                                              |
+| segments\_product\_custom\_attribute3        | Custom attribute 3 of the product.                                                                                                                                                                                                                              |
+| segments\_product\_custom\_attribute4        | Custom attribute 4 of the product.                                                                                                                                                                                                                              |
+| segments\_product\_item\_id                  | Item ID of the product.                                                                                                                                                                                                                                         |
+| segments\_product\_language                  | Resource name of the language constant for the language of the product.                                                                                                                                                                                         |
+| segments\_product\_store\_id                 | Store ID of the product.                                                                                                                                                                                                                                        |
+| segments\_product\_title                     | Title of the product.                                                                                                                                                                                                                                           |
+| segments\_product\_type\_l1                  | Type (level 1) of the product.                                                                                                                                                                                                                                  |
+| segments\_product\_type\_l2                  | Type (level 2) of the product.                                                                                                                                                                                                                                  |
+| segments\_product\_type\_l3                  | Type (level 3) of the product.                                                                                                                                                                                                                                  |
+| segments\_product\_type\_l4                  | Type (level 4) of the product.                                                                                                                                                                                                                                  |
+| segments\_product\_type\_l5                  | Type (level 5) of the product.                                                                                                                                                                                                                                  |
 
 Search Ads 360 Table Name: ProductAdvertisedConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [shopping\_performance\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/shopping_performance_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>segments.conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_item_id</td>
-<td>Item ID of the product.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                  | Description                                                                                                                                                                        |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_id                              | The ID of the ad group.                                                                                                                                                            |
+| campaign\_id                               | The ID of the campaign.                                                                                                                                                            |
+| customer\_id                               | The ID of the customer.                                                                                                                                                            |
+| metrics\_all\_conversions                  | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                        |
+| metrics\_all\_conversions\_value           | The value of all conversions.                                                                                                                                                      |
+| metrics\_cross\_device\_conversions        | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions. |
+| metrics\_cross\_device\_conversions\_value | The sum of the value of cross-device conversions.                                                                                                                                  |
+| segments.conversion\_action\_name          | Conversion action name.                                                                                                                                                            |
+| segments\_date                             | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                         |
+| segments\_device                           | Device to which metrics apply.                                                                                                                                                     |
+| segments\_product\_item\_id                | Item ID of the product.                                                                                                                                                            |
 
 Search Ads 360 Table Name: ProductAdvertisedDeviceStats
 
 Search Ads 360 API Resource: [shopping\_performance\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/shopping_performance_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="odd">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="even">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="odd">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="even">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-<tr class="odd">
-<td>segments_product_item_id</td>
-<td>Item ID of the product.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                    | Description                                                                                                                                                                                                                                                     |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| customer\_id                                 | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_average\_cpc                        | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_clicks                              | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions        | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_cost\_micros                        | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_ctr                                 | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                         | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                               | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
+| segments\_device                             | Device to which metrics apply.                                                                                                                                                                                                                                  |
+| segments\_product\_item\_id                  | Item ID of the product.                                                                                                                                                                                                                                         |
 
 Search Ads 360 Table Name: ProductGroup
 
 Search Ads 360 API Resource: [product\_group\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/product_group_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_creation_time</td>
-<td>Output only. The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>Output only. The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_effective_cpc_bid_micros</td>
-<td>Output only. The effective CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_engine_status</td>
-<td>Output only. The Engine Status for ad group criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_final_urls</td>
-<td>The list of possible final URLs after all cross-domain redirects for the ad.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_last_modified_time</td>
-<td>Output only. The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_listing_group_type</td>
-<td>Type of the listing group.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_status</td>
-<td>The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_tracking_url_template</td>
-<td>The URL template for constructing a tracking URL.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_id</td>
-<td>Output only. The ID of the ad group.</td>
-</tr>
-<tr class="even">
-<td>campaign_id</td>
-<td>Output only. The ID of the campaign.</td>
-</tr>
-<tr class="odd">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="even">
-<td>product_group_view_resource_name</td>
-<td>Output only. The resource name of the product group view. Product group view resource names have the form: customers/{customer_id}/productGroupViews/{ad_group_id}~{criterion_id}</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_cpc\_bid\_micros            | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ad\_group\_criterion\_creation\_time              | Output only. The timestamp when this ad group criterion was created. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_criterion\_id               | Output only. The ID of the criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_effective\_cpc\_bid\_micros | Output only. The effective CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_engine\_status              | Output only. The Engine Status for ad group criterion.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ad\_group\_criterion\_final\_urls                 | The list of possible final URLs after all cross-domain redirects for the ad.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ad\_group\_criterion\_last\_modified\_time        | Output only. The datetime when this ad group criterion was last modified. The datetime is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss.ssssss" format.                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ad\_group\_criterion\_listing\_group\_type        | Type of the listing group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ad\_group\_criterion\_status                      | The status of the criterion. This is the status of the ad group criterion entity, set by the client. Note: UI reports may incorporate additional information that affects whether a criterion is eligible to run. In some cases a criterion that's REMOVED in the API can still show as enabled in the UI. For example, campaigns by default show to users of all age ranges unless excluded. The UI will show each age range as "enabled", since they're eligible to see the ads; but AdGroupCriterion.status will show "removed", since no positive criterion was added. |
+| ad\_group\_criterion\_tracking\_url\_template     | The URL template for constructing a tracking URL.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| ad\_group\_id                                     | Output only. The ID of the ad group.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| campaign\_id                                      | Output only. The ID of the campaign.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| customer\_id                                      | The ID of the customer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| product\_group\_view\_resource\_name              | Output only. The resource name of the product group view. Product group view resource names have the form: customers/{customer\_id}/productGroupViews/{ad\_group\_id}\~{criterion\_id}                                                                                                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: ProductGroupStats
 
 Search Ads 360 API Resource: [product\_group\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/product_group_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>Output only. The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>Output only. The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>Output only. The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_all_conversions</td>
-<td>The total number of conversions. This includes all conversions regardless of the value of include_in_conversions_metric.</td>
-</tr>
-<tr class="even">
-<td>metrics_all_conversions_value</td>
-<td>The value of all conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                            | Description                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id                  | Output only. The ID of the criterion.                                                                                                                                                                                                                           |
+| ad\_group\_id                                        | Output only. The ID of the ad group.                                                                                                                                                                                                                            |
+| campaign\_id                                         | Output only. The ID of the campaign.                                                                                                                                                                                                                            |
+| customer\_id                                         | The ID of the customer.                                                                                                                                                                                                                                         |
+| metrics\_all\_conversions                            | The total number of conversions. This includes all conversions regardless of the value of include\_in\_conversions\_metric.                                                                                                                                     |
+| metrics\_all\_conversions\_value                     | The value of all conversions.                                                                                                                                                                                                                                   |
+| metrics\_average\_cpc                                | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                    |
+| metrics\_average\_cpm                                | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                    |
+| metrics\_clicks                                      | The number of clicks.                                                                                                                                                                                                                                           |
+| metrics\_client\_account\_conversions                | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions. |
+| metrics\_client\_account\_conversions\_value         | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.  |
+| metrics\_client\_account\_view\_through\_conversions | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                       |
+| metrics\_cost\_micros                                | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                          |
+| metrics\_cross\_device\_conversions                  | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                              |
+| metrics\_cross\_device\_conversions\_value           | The sum of the value of cross-device conversions.                                                                                                                                                                                                               |
+| metrics\_ctr                                         | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                   |
+| metrics\_impressions                                 | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                              |
+| segments\_date                                       | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                      |
 
 Search Ads 360 Table Name: Visit
 
 Search Ads 360 API Resource: [visit](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/visit)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_account_type</td>
-<td>Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.</td>
-</tr>
-<tr class="odd">
-<td>customer_descriptive_name</td>
-<td>Optional, non-unique descriptive name of the customer.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>segments_ad_network_type</td>
-<td>Ad network type.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-<tr class="even">
-<td>visit_ad_id</td>
-<td>Ad ID. A value of 0 indicates that the ad is unattributed.</td>
-</tr>
-<tr class="odd">
-<td>visit_click_id</td>
-<td>A unique string for each visit that is passed to the landing page as the click id URL parameter.</td>
-</tr>
-<tr class="even">
-<td>visit_criterion_id</td>
-<td>Search Ads 360 keyword ID. A value of 0 indicates that the keyword is unattributed..</td>
-</tr>
-<tr class="odd">
-<td>visit_id</td>
-<td>The ID of the visit.</td>
-</tr>
-<tr class="even">
-<td>visit_merchant_id</td>
-<td>The Search Ads 360 inventory account ID containing the product that was clicked on. Search Ads 360 generates this ID when you link an inventory account in Search Ads 360.</td>
-</tr>
-<tr class="odd">
-<td>visit_product_channel</td>
-<td>The sales channel of the product that was clicked on: Online or Local.</td>
-</tr>
-<tr class="even">
-<td>visit_product_country_code</td>
-<td>The country (ISO-3166 format) registered for the inventory feed that contains the product clicked on.</td>
-</tr>
-<tr class="odd">
-<td>visit_product_id</td>
-<td>The ID of the product clicked on.</td>
-</tr>
-<tr class="even">
-<td>visit_product_language_code</td>
-<td>The language (ISO-639-1) that has been set for the Merchant Center feed containing data about the product.</td>
-</tr>
-<tr class="odd">
-<td>visit_product_store_id</td>
-<td>The store in the Local Inventory Ad that was clicked on. This should match the store IDs used in your local products feed.</td>
-</tr>
-<tr class="even">
-<td>visit_visit_date_time</td>
-<td>The timestamp of the visit event. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name           | Description                                                                                                                                                                |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_criterion\_id | The ID of the criterion.                                                                                                                                                   |
+| ad\_group\_id                       | The ID of the ad group.                                                                                                                                                    |
+| campaign\_id                        | The ID of the campaign.                                                                                                                                                    |
+| customer\_account\_type             | Engine account type. For example: Google Ads, Microsoft Advertising, Yahoo Japan, Baidu, Facebook, Engine Track.                                                           |
+| customer\_descriptive\_name         | Optional, non-unique descriptive name of the customer.                                                                                                                     |
+| customer\_id                        | The ID of the customer.                                                                                                                                                    |
+| segments\_ad\_network\_type         | Ad network type.                                                                                                                                                           |
+| segments\_date                      | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                 |
+| segments\_device                    | Device to which metrics apply.                                                                                                                                             |
+| visit\_ad\_id                       | Ad ID. A value of 0 indicates that the ad is unattributed.                                                                                                                 |
+| visit\_click\_id                    | A unique string for each visit that is passed to the landing page as the click id URL parameter.                                                                           |
+| visit\_criterion\_id                | Search Ads 360 keyword ID. A value of 0 indicates that the keyword is unattributed..                                                                                       |
+| visit\_id                           | The ID of the visit.                                                                                                                                                       |
+| visit\_merchant\_id                 | The Search Ads 360 inventory account ID containing the product that was clicked on. Search Ads 360 generates this ID when you link an inventory account in Search Ads 360. |
+| visit\_product\_channel             | The sales channel of the product that was clicked on: Online or Local.                                                                                                     |
+| visit\_product\_country\_code       | The country (ISO-3166 format) registered for the inventory feed that contains the product clicked on.                                                                      |
+| visit\_product\_id                  | The ID of the product clicked on.                                                                                                                                          |
+| visit\_product\_language\_code      | The language (ISO-639-1) that has been set for the Merchant Center feed containing data about the product.                                                                 |
+| visit\_product\_store\_id           | The store in the Local Inventory Ad that was clicked on. This should match the store IDs used in your local products feed.                                                 |
+| visit\_visit\_date\_time            | The timestamp of the visit event. The timestamp is in the customer's time zone and in "yyyy-MM-dd HH:mm:ss" format.                                                        |
 
 Search Ads 360 Table Name: WebpageConversionActionAndDeviceStats
 
 Search Ads 360 API Resource: [webpage\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/webpage_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cross_device_conversions</td>
-<td>Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all_conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_cross_device_conversions_value</td>
-<td>The sum of the value of cross-device conversions.</td>
-</tr>
-<tr class="odd">
-<td>segments_conversion_action_name</td>
-<td>Conversion action name.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_cross\_device\_conversions                   | Conversions from when a customer clicks on an ad on one device, then converts on a different device or browser. Cross-device conversions are already included in all\_conversions.                                                                                                                                                 |
+| metrics\_cross\_device\_conversions\_value            | The sum of the value of cross-device conversions.                                                                                                                                                                                                                                                                                  |
+| segments\_conversion\_action\_name                    | Conversion action name.                                                                                                                                                                                                                                                                                                            |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 Search Ads 360 Table Name: WebpageDeviceStats
 
 Search Ads 360 API Resource: [webpage\_view](https://developers.google.com/search-ads/reporting/api/reference/fields/v0/webpage_view)
 
-<table>
-<thead>
-<tr class="header">
-<th>Search Ads 360 Field Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_criterion_age_range_type</td>
-<td>Type of the age range.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_bid_modifier</td>
-<td>The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_cpc_bid_micros</td>
-<td>The CPC (cost-per-click) bid.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_criterion_id</td>
-<td>The ID of the criterion.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_gender_type</td>
-<td>Type of the gender.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_location_geo_target_constant</td>
-<td>The geo target constant resource name.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_user_list_user_list</td>
-<td>The User List resource name.</td>
-</tr>
-<tr class="even">
-<td>ad_group_criterion_webpage_conditions</td>
-<td>Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations.</td>
-</tr>
-<tr class="odd">
-<td>ad_group_criterion_webpage_coverage_percentage</td>
-<td>Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.</td>
-</tr>
-<tr class="even">
-<td>ad_group_id</td>
-<td>The ID of the ad group.</td>
-</tr>
-<tr class="odd">
-<td>campaign_id</td>
-<td>The ID of the campaign.</td>
-</tr>
-<tr class="even">
-<td>customer_id</td>
-<td>The ID of the customer.</td>
-</tr>
-<tr class="odd">
-<td>metrics_average_cpc</td>
-<td>The total cost of all clicks divided by the total number of clicks received.</td>
-</tr>
-<tr class="even">
-<td>metrics_average_cpm</td>
-<td>Average cost-per-thousand impressions (CPM).</td>
-</tr>
-<tr class="odd">
-<td>metrics_clicks</td>
-<td>The number of clicks.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_conversions</td>
-<td>The number of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="odd">
-<td>metrics_client_account_conversions_value</td>
-<td>The value of client account conversions. This only includes conversion actions which include_in_client_account_conversions_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.</td>
-</tr>
-<tr class="even">
-<td>metrics_client_account_view_through_conversions</td>
-<td>The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.</td>
-</tr>
-<tr class="odd">
-<td>metrics_cost_micros</td>
-<td>The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.</td>
-</tr>
-<tr class="even">
-<td>metrics_ctr</td>
-<td>The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).</td>
-</tr>
-<tr class="odd">
-<td>metrics_impressions</td>
-<td>Count of how often your ad has appeared on a search results page or website on the Google Network.</td>
-</tr>
-<tr class="even">
-<td>segments_date</td>
-<td>Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17</td>
-</tr>
-<tr class="odd">
-<td>segments_device</td>
-<td>Device to which metrics apply.</td>
-</tr>
-</tbody>
-</table>
+| Search Ads 360 Field Name                             | Description                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ad\_group\_criterion\_age\_range\_type                | Type of the age range.                                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_bid\_modifier                   | The modifier for the bid when the criterion matches. The modifier must be in the range: 0.1 - 10.0. Most targetable criteria types support modifiers.                                                                                                                                                                              |
+| ad\_group\_criterion\_cpc\_bid\_micros                | The CPC (cost-per-click) bid.                                                                                                                                                                                                                                                                                                      |
+| ad\_group\_criterion\_criterion\_id                   | The ID of the criterion.                                                                                                                                                                                                                                                                                                           |
+| ad\_group\_criterion\_gender\_type                    | Type of the gender.                                                                                                                                                                                                                                                                                                                |
+| ad\_group\_criterion\_location\_geo\_target\_constant | The geo target constant resource name.                                                                                                                                                                                                                                                                                             |
+| ad\_group\_criterion\_user\_list\_user\_list          | The User List resource name.                                                                                                                                                                                                                                                                                                       |
+| ad\_group\_criterion\_webpage\_conditions             | Conditions, or logical expressions, for webpage targeting. The list of webpage targeting conditions are and-ed together when evaluated for targeting. An empty list of conditions indicates all pages of the campaign's website are targeted. This field is required for CREATE operations and is prohibited on UPDATE operations. |
+| ad\_group\_criterion\_webpage\_coverage\_percentage   | Website criteria coverage percentage. This is the computed percentage of website coverage based on the website target, negative website target and negative keywords in the ad group and campaign. For instance, when coverage returns as 1, it indicates it has 100% coverage.                                                    |
+| ad\_group\_id                                         | The ID of the ad group.                                                                                                                                                                                                                                                                                                            |
+| campaign\_id                                          | The ID of the campaign.                                                                                                                                                                                                                                                                                                            |
+| customer\_id                                          | The ID of the customer.                                                                                                                                                                                                                                                                                                            |
+| metrics\_average\_cpc                                 | The total cost of all clicks divided by the total number of clicks received.                                                                                                                                                                                                                                                       |
+| metrics\_average\_cpm                                 | Average cost-per-thousand impressions (CPM).                                                                                                                                                                                                                                                                                       |
+| metrics\_clicks                                       | The number of clicks.                                                                                                                                                                                                                                                                                                              |
+| metrics\_client\_account\_conversions                 | The number of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                    |
+| metrics\_client\_account\_conversions\_value          | The value of client account conversions. This only includes conversion actions which include\_in\_client\_account\_conversions\_metric attribute is set to true. If you use conversion-based bidding, your bid strategies will optimize for these conversions.                                                                     |
+| metrics\_client\_account\_view\_through\_conversions  | The total number of view-through conversions. These happen when a customer sees an image or rich media ad, then later completes a conversion on your site without interacting with (for example, clicking on) another ad.                                                                                                          |
+| metrics\_cost\_micros                                 | The sum of your cost-per-click (CPC) and cost-per-thousand impressions (CPM) costs during this period.                                                                                                                                                                                                                             |
+| metrics\_ctr                                          | The number of clicks your ad receives (Clicks) divided by the number of times your ad is shown (Impressions).                                                                                                                                                                                                                      |
+| metrics\_impressions                                  | Count of how often your ad has appeared on a search results page or website on the Google Network.                                                                                                                                                                                                                                 |
+| segments\_date                                        | Date to which metrics apply, in yyyy-MM-dd format. For example: 2024-04-17                                                                                                                                                                                                                                                         |
+| segments\_device                                      | Device to which metrics apply.                                                                                                                                                                                                                                                                                                     |
 
 ## Search Ads 360 Match Tables
 
@@ -4841,7 +1644,7 @@ Below is a list of Match Tables in Search Ads 360 transfer:
   - Ad
   - AdGroup
   - AdGroupCriterion
-  - Any [ID mapping table](/bigquery/docs/search-ads-transfer#id-mapping)
+  - Any [ID mapping table](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#id-mapping)
   - Asset
   - BidStrategy
   - Campaign

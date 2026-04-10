@@ -1,4 +1,4 @@
-In this tutorial, you register a Vertex AI endpoint as a remote model in BigQuery. Then, you use the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions using the remote model.
+In this tutorial, you register a Vertex AI endpoint as a remote model in BigQuery. Then, you use the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions using the remote model.
 
 You can use remote models when a model is too large to import into BigQuery. They are also useful when you want to have a single point of inference for online, batch, and micro-batch use cases.
 
@@ -18,25 +18,27 @@ In this document, you use the following billable components of Google Cloud:
 
   - [BigQuery](https://cloud.google.com/bigquery/pricing)
   - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
-  - [Vertex AI](/vertex-ai/pricing)
+  - [Vertex AI](https://docs.cloud.google.com/vertex-ai/pricing)
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](#clean-up) .
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#clean-up) .
 
 ## Before you begin
 
-1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery, Vertex AI, Cloud Storage, and BigQuery Connection APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,aiplatform.googleapis.com,storage-component.googleapis.com,bigqueryconnection.googleapis.com)
 
-3.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
+3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 
@@ -46,13 +48,15 @@ If you are using an existing project do the following.
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery Studio Admin](/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` )
-  - [Vertex AI User](/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` )
-  - [BigQuery Connection Admin](/bigquery/docs/access-control#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
+  - [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` )
+  - [Vertex AI User](https://docs.cloud.google.com/iam/docs/roles-permissions/aiplatform#aiplatform.user) ( `  roles/aiplatform.user  ` )
+  - [BigQuery Connection Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
 
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -63,6 +67,8 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -76,7 +82,7 @@ Make sure that you have the following role or roles on the project:
 
 7.  Click **Save** .
 
-For more information about IAM permissions in BigQuery, see [BigQuery permissions](/bigquery/docs/access-control#bq-permissions) .
+For more information about IAM permissions in BigQuery, see [BigQuery permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) .
 
 ## Import the model to the Vertex AI Model Registry
 
@@ -89,6 +95,8 @@ The model is a TensorFlow model that's named `  saved_model.pb  ` . It is a cust
 Follow these steps to import the model.
 
 1.  In the Google Cloud console, go to the Vertex AI **Model Registry** page.
+    
+    [Go to Model Registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  Click **Import** .
 
@@ -127,6 +135,8 @@ After the import is complete, your model appears on the **Model Registry** page.
 Follow these steps to deploy the model to an endpoint.
 
 1.  In the Google Cloud console go to the Vertex AI **Model Registry** page.
+    
+    [Go to Model Registry](https://console.cloud.google.com/vertex-ai/models)
 
 2.  In the **Name** column, click **`  bert_sentiment  `** .
 
@@ -163,6 +173,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -178,11 +190,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -191,15 +203,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -214,8 +226,12 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 ### Console
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -247,7 +263,7 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 
 1.  Create a connection:
     
-    ``` text
+    ``` notranslate
     bq mk --connection --location=US --project_id=PROJECT_ID \
         --connection_type=CLOUD_RESOURCE bqml_tutorial
     ```
@@ -256,7 +272,7 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
     
     When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
     
-    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](/sdk/docs/quickstart) :
+    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
     ``` console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
@@ -264,7 +280,7 @@ You must have a Cloud resource connection to connect to a Vertex AI endpoint.
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` text
+    ``` notranslate
     bq show --connection PROJECT_ID.us.bqml_tutorial
     ```
     
@@ -284,6 +300,8 @@ Grant the Vertex AI User role to the Cloud resource connection's service account
 To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
 
@@ -295,21 +313,23 @@ To grant the role, follow these steps:
 
 ## Create a BigQuery ML remote model
 
-You create a BigQuery ML remote model by using the `  CREATE MODEL  ` statement with the `  REMOTE WITH CONNECTION  ` clause. For more information on the `  CREATE MODEL  ` statement, see [The CREATE MODEL statement for remote models over custom models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
+You create a BigQuery ML remote model by using the `  CREATE MODEL  ` statement with the `  REMOTE WITH CONNECTION  ` clause. For more information on the `  CREATE MODEL  ` statement, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
 
 You create your model in the `  US  ` multi-region location. In a BigQuery multi-region ( `  US  ` , `  EU  ` ) dataset, you can only create a remote model that connects to an endpoint deployed in a region within the same multi-region location ( `  US  ` , `  EU  ` ).
 
-When you create the remote model, you need the endpoint ID that was generated when you [deployed the model](#deploy-model) to Vertex AI. Also, the input and output field names and types need to be exactly same as the Vertex AI model's input and output. In this example, the input is a text `  STRING  ` , and the output is an `  ARRAY  ` of type `  FLOAT64  ` .
+When you create the remote model, you need the endpoint ID that was generated when you [deployed the model](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#deploy-model) to Vertex AI. Also, the input and output field names and types need to be exactly same as the Vertex AI model's input and output. In this example, the input is a text `  STRING  ` , and the output is an `  ARRAY  ` of type `  FLOAT64  ` .
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  For **Create new** , click **SQL query** .
 
 3.  In the query editor, enter this `  CREATE MODEL  ` statement, and then click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
     INPUT (text STRING)
     OUTPUT(scores ARRAY<FLOAT64>)
@@ -324,7 +344,7 @@ When you create the remote model, you need the endpoint ID that was generated wh
     
     When the operation is complete, you see a message similar to `  Successfully created model named bert_sentiment  ` .
     
-    Your new model appears in the **Resources** panel. Models are indicated by the model icon: .
+    Your new model appears in the **Resources** panel. Models are indicated by the model icon: ![model icon](https://docs.cloud.google.com/static/bigquery/images/model-icon.png) .
     
     If you select the new model in the **Resources** panel, information about the model appears below the **Query editor** .
 
@@ -332,7 +352,7 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
 1.  Create the remote model by entering the following `  CREATE MODEL  ` statement:
     
-    ``` text
+    ``` notranslate
     bq query --use_legacy_sql=false \
     "CREATE OR REPLACE MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`
     INPUT (text STRING)
@@ -348,13 +368,13 @@ When you create the remote model, you need the endpoint ID that was generated wh
 
 2.  After you create the model, verify that the model appears in the dataset:
     
-    ``` text
+    ``` notranslate
     bq ls -m bqml_tutorial
     ```
     
     The output is similar to the following:
     
-    ``` text
+    ``` notranslate
     Id               Model Type   Labels    Creation Time
     ---------------- ------------ -------- -----------------
     bert_sentiment                         28 Jan 17:39:43
@@ -369,12 +389,14 @@ In this example, 10,000 records are selected and sent for prediction. The remote
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Create new** section, click **SQL query** .
 
 3.  In the query editor, enter this query that uses the `  ML.PREDICT  ` function, and then click **Run** .
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM ML.PREDICT (
         MODEL `PROJECT_ID.bqml_tutorial.bert_sentiment`,
@@ -387,12 +409,14 @@ In this example, 10,000 records are selected and sent for prediction. The remote
     ```
     
     The query results should look similar to the following:
+    
+    ![Query results](https://docs.cloud.google.com/static/bigquery/images/bert-sentiment-predict.png)
 
 ### bq
 
 Enter this command to run the query that uses `  ML.PREDICT  ` .
 
-``` text
+``` notranslate
 bq query --use_legacy_sql=false \
 'SELECT *
 FROM ML.PREDICT (
@@ -422,6 +446,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -437,30 +463,28 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 Delete a Google Cloud project:
 
-``` text
-gcloud projects delete PROJECT_ID
-```
+    gcloud projects delete PROJECT_ID
 
 ### Delete individual resources
 
 Alternatively, to remove the individual resources used in this tutorial:
 
-1.  [Delete the model](/bigquery/docs/deleting-models) .
+1.  [Delete the model](https://docs.cloud.google.com/bigquery/docs/deleting-models) .
 
-2.  Optional: [Delete the dataset](/bigquery/docs/managing-datasets#delete-datasets) .
+2.  Optional: [Delete the dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
-3.  [Undeploy the model and delete the endpoint](/vertex-ai/docs/general/deployment#undeploy_a_model_and_delete_the_endpoint) .
+3.  [Undeploy the model and delete the endpoint](https://docs.cloud.google.com/vertex-ai/docs/general/deployment#undeploy_a_model_and_delete_the_endpoint) .
 
-4.  [Delete the model from the Model Registry](/vertex-ai/docs/model-registry/delete-model) .
+4.  [Delete the model from the Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/delete-model) .
 
-5.  [Delete the Cloud resource connection](/bigquery/docs/working-with-connections#delete-connections) .
+5.  [Delete the Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/working-with-connections#delete-connections) .
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery ML](/bigquery/docs/bqml-introduction) .
-  - For more information about using the `  CREATE MODEL  ` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
-  - For more information on using a BigQuery notebook, see [Introduction to notebooks](/bigquery/docs/notebooks-introduction) .
-  - For more information about BigQuery regions and multi-regions, see the [Supported locations](/bigquery/docs/locations#supported_locations) page.
-  - To learn more about importing models in Vertex AI Model Registry, see [Import models to Vertex AI](/vertex-ai/docs/model-registry/import-model) .
-  - To learn more about model versioning in Vertex AI Model Registry, see [Model versioning with Model Registry](/vertex-ai/docs/model-registry/versioning) .
-  - For information on using Vertex AI VPC Service Controls, see [VPC Service Controls with Vertex AI](/vertex-ai/docs/general/vpc-service-controls) .
+  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+  - For more information about using the `  CREATE MODEL  ` statement for remote models, see [The CREATE MODEL statement for remote models over custom models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https) .
+  - For more information on using a BigQuery notebook, see [Introduction to notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+  - For more information about BigQuery regions and multi-regions, see the [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) page.
+  - To learn more about importing models in Vertex AI Model Registry, see [Import models to Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/model-registry/import-model) .
+  - To learn more about model versioning in Vertex AI Model Registry, see [Model versioning with Model Registry](https://docs.cloud.google.com/vertex-ai/docs/model-registry/versioning) .
+  - For information on using Vertex AI VPC Service Controls, see [VPC Service Controls with Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/general/vpc-service-controls) .

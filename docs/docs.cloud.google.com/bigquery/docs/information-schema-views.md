@@ -16,7 +16,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.metadataViewer  `
   - `  roles/bigquery.dataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -24,92 +24,40 @@ When you query the `  INFORMATION_SCHEMA.VIEWS  ` view, the query results contai
 
 The `  INFORMATION_SCHEMA.VIEWS  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the project that contains the dataset</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       table_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the dataset that contains the view also referred to as the dataset <code dir="ltr" translate="no">       id      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the view also referred to as the table <code dir="ltr" translate="no">       id      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       view_definition      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The SQL query that defines the view</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       check_option      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The value returned is always <code dir="ltr" translate="no">       NULL      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       use_standard_sql      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       YES      </code> if the view was created by using a GoogleSQL query; <code dir="ltr" translate="no">       NO      </code> if <code dir="ltr" translate="no">       useLegacySql      </code> is set to <code dir="ltr" translate="no">       true      </code></td>
-</tr>
-</tbody>
-</table>
+| Column name                       | Data type               | Value                                                                                                                                                         |
+| --------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        table_catalog       `    | `        STRING       ` | The name of the project that contains the dataset                                                                                                             |
+| `        table_schema       `     | `        STRING       ` | The name of the dataset that contains the view also referred to as the dataset `        id       `                                                            |
+| `        table_name       `       | `        STRING       ` | The name of the view also referred to as the table `        id       `                                                                                        |
+| `        view_definition       `  | `        STRING       ` | The SQL query that defines the view                                                                                                                           |
+| `        check_option       `     | `        STRING       ` | The value returned is always `        NULL       `                                                                                                            |
+| `        use_standard_sql       ` | `        STRING       ` | `        YES       ` if the view was created by using a GoogleSQL query; `        NO       ` if `        useLegacySql       ` is set to `        true       ` |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
-Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.VIEWS      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.VIEWS      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                          | Resource scope | Region scope               |
+| ---------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.VIEWS       `` | Project level  | `          REGION        ` |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.VIEWS       `        | Dataset level  | Dataset location           |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 For example:
 
-``` text
--- Returns metadata for views in a single dataset.
-SELECT * FROM myDataset.INFORMATION_SCHEMA.VIEWS;
-
--- Returns metadata for all views in a region.
-SELECT * FROM region-us.INFORMATION_SCHEMA.VIEWS;
-```
+    -- Returns metadata for views in a single dataset.
+    SELECT * FROM myDataset.INFORMATION_SCHEMA.VIEWS;
+    
+    -- Returns metadata for all views in a region.
+    SELECT * FROM region-us.INFORMATION_SCHEMA.VIEWS;
 
 ## Examples
 
@@ -119,7 +67,7 @@ The following example retrieves all columns from the `  INFORMATION_SCHEMA.VIEWS
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: ``  ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, ``  `myproject`.mydataset.INFORMATION_SCHEMA.VIEWS  `` .
 
-``` text
+``` notranslate
 SELECT
   * EXCEPT (check_option)
 FROM
@@ -130,7 +78,7 @@ FROM
 
 The result is similar to the following:
 
-``` text
+``` 
   +----------------+---------------+---------------+---------------------------------------------------------------------+------------------+
   | table_catalog  | table_schema  |  table_name   |                        view_definition                              | use_standard_sql |
   +----------------+---------------+---------------+---------------------------------------------------------------------+------------------+
@@ -147,7 +95,7 @@ The following example retrieves the SQL query and query syntax used to define ` 
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: ``  ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, ``  `myproject`.mydataset.INFORMATION_SCHEMA.VIEWS  `` .
 
-``` text
+``` notranslate
 SELECT
   table_name, view_definition, use_standard_sql
 FROM
@@ -160,7 +108,7 @@ WHERE
 
 The result is similar to the following:
 
-``` text
+``` 
   +---------------+---------------------------------------------------------------+------------------+
   |  table_name   |                        view_definition                        | use_standard_sql |
   +---------------+---------------------------------------------------------------+------------------+

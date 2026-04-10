@@ -1,6 +1,6 @@
 # RESERVATION\_CHANGES view
 
-The `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view contains a near real-time list of all changes to reservations within the administration project. Each row represents a change to a single reservation. For more information, see [Introduction to reservations](/bigquery/docs/reservations-intro) .
+The `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view contains a near real-time list of all changes to reservations within the administration project. Each row represents a change to a single reservation. For more information, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
 **Note:** The view names `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` and `  INFORMATION_SCHEMA.RESERVATION_CHANGES_BY_PROJECT  ` are synonymous and can be used interchangeably.
 
@@ -14,7 +14,7 @@ To query the `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view, you need the `  
   - BigQuery User ( `  roles/bigquery.user  ` )
   - BigQuery Admin ( `  roles/bigquery.admin  ` )
 
-For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -72,7 +72,7 @@ The `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       user_email      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Email address of the user or subject of the <a href="/iam/docs/workforce-identity-federation">workforce identity federation</a> that made the change. <code dir="ltr" translate="no">       google      </code> for changes made by Google. <code dir="ltr" translate="no">       NULL      </code> if the email address is unknown.</td>
+<td>Email address of the user or subject of the <a href="https://docs.cloud.google.com/iam/docs/workforce-identity-federation">workforce identity federation</a> that made the change. <code dir="ltr" translate="no">       google      </code> for changes made by Google. <code dir="ltr" translate="no">       NULL      </code> if the email address is unknown.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       target_job_concurrency      </code></td>
@@ -92,17 +92,17 @@ The `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view has the following schema:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       edition      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The edition associated with this reservation. For more information about editions, see <a href="/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
+<td>The edition associated with this reservation. For more information about editions, see <a href="https://docs.cloud.google.com/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       primary_location      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The current location of the reservation's primary replica. This field is only set for reservations using the <a href="/bigquery/docs/managed-disaster-recovery">managed disaster recovery feature</a> .</td>
+<td>The current location of the reservation's primary replica. This field is only set for reservations using the <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">managed disaster recovery feature</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       secondary_location      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The current location of the reservation's secondary replica. This field is only set for reservations using the <a href="/bigquery/docs/managed-disaster-recovery">managed disaster recovery feature</a> .</td>
+<td>The current location of the reservation's secondary replica. This field is only set for reservations using the <a href="https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery">managed disaster recovery feature</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       original_primary_location      </code></td>
@@ -122,12 +122,12 @@ The `  INFORMATION_SCHEMA.RESERVATION_CHANGES  ` view has the following schema:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       max_slots      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The maximum number of slots that this reservation can use, which includes baseline slots ( <code dir="ltr" translate="no">       slot_capacity      </code> ), idle slots (if <code dir="ltr" translate="no">       ignore_idle_slots      </code> is false), and autoscale slots. This field is specified by users for using the <a href="/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
+<td>The maximum number of slots that this reservation can use, which includes baseline slots ( <code dir="ltr" translate="no">       slot_capacity      </code> ), idle slots (if <code dir="ltr" translate="no">       ignore_idle_slots      </code> is false), and autoscale slots. This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       scaling_mode      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code dir="ltr" translate="no">       max_slots      </code> . This field is specified by users for using the <a href="/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
+<td>The scaling mode for the reservation, which determines how the reservation scales from baseline to <code dir="ltr" translate="no">       max_slots      </code> . This field is specified by users for using the <a href="https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable">reservation predictability feature</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -140,36 +140,23 @@ This view contains current reservations and deleted reservations that are kept f
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              ].`region-               REGION              `.INFORMATION_SCHEMA.RESERVATION_CHANGES[_BY_PROJECT]      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                                     | Resource scope | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              ].`region-               REGION              `.INFORMATION_SCHEMA.RESERVATION_CHANGES[_BY_PROJECT]       `` | Project level  | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Example
 
 The following example gets the history of changes for a given reservation. Use this information to see the list of changes made to a specific reservation, such as creating or deleting the reservation.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM

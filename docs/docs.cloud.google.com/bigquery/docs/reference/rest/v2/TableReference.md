@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/TableReference#SCHEMA_REPRESENTATION)
 
 <table>
 <colgroup>
@@ -11,7 +11,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string

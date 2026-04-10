@@ -4,9 +4,9 @@ You can use BigQuery to explore data with Looker Studio, a self-service business
 
 Looker Studio offers a premium version, Looker Studio Pro, which includes enhanced enterprise capabilities, including permissions management with Identity and Access Management, team workspaces for collaboration, a mobile app, and technical support.
 
-You can use BigQuery BI Engine to improve report performance while reducing compute costs. To learn about BI Engine, see [Introduction to BI Engine](/bigquery/docs/bi-engine-intro) .
+You can use BigQuery BI Engine to improve report performance while reducing compute costs. To learn about BI Engine, see [Introduction to BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
-These examples use Looker Studio to visualize data in the BigQuery [`  austin_bikeshare  `](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public data sets, see [BigQuery public datasets](/bigquery/public-data) .
+These examples use Looker Studio to visualize data in the BigQuery [`  austin_bikeshare  `](https://console.cloud.google.com/bigquery?cloudshell=false&d=austin_bikeshare&p=bigquery-public-data&t=bikeshare_trips&page=table&ws=!1m10!1m4!4m3!1sbigquery-public-data!2sfaa!3sus_airports!1m4!4m3!1sbigquery-public-data!2saustin_bikeshare!3sbikeshare_trips) dataset. For more information about public data sets, see [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
 
 ### Explore query results
 
@@ -15,10 +15,14 @@ You can construct an arbitrary SQL query and visualize the data in Looker Studio
 **Note:** You can visualize a maximum of 5,000 rows of data in Looker Studio charts.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Select your [billing project](/billing/docs/concepts#billing_account) .
+2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
 3.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -30,7 +34,7 @@ You can construct an arbitrary SQL query and visualize the data in Looker Studio
 
 7.  In the query editor, construct your query. For example:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -50,6 +54,8 @@ You can construct an arbitrary SQL query and visualize the data in Looker Studio
     The report editor displays your query results as Looker Studio charts.
 
 The following image shows some features of a Looker Studio report:
+
+![image](https://docs.cloud.google.com/static/bigquery/images/looker-studio-features.jpg)
 
 **Legend** :
 
@@ -85,7 +91,7 @@ Looker Studio supports many different visualization types. To add more charts to
 3.  Click the canvas to add the chart to the report.
 4.  Use the **Chart** properties pane to configure the chart.
 
-For more information about adding charts to a report, see [Add charts to your report](https://support.google.com/looker-studio/answer/6293184?) .
+For more information about adding charts to a report, see [Add charts to your report](https://support.google.com/looker-studio/answer/6293184) .
 
 ### Explore table schema
 
@@ -94,10 +100,14 @@ You can export table schema to see the metadata of your data in Looker Studio. T
 **Note:** BigQuery queries can return a maximum of 20 MB of data. If you explore very large table schemas, Looker Studio might truncate the results.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  Select your [billing project](/billing/docs/concepts#billing_account) .
+2.  Select your [billing project](https://docs.cloud.google.com/billing/docs/concepts#billing_account) .
 
 3.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 4.  In the **Explorer** pane, enter `  bigquery-public-data  ` in the **Type to search** field.
 
@@ -106,6 +116,8 @@ You can export table schema to see the metadata of your data in Looker Studio. T
 6.  In the toolbar, click file\_upload **Export** . If Export is not visible, select more\_vert **More actions** , and then click **Export** .
 
 7.  Click **Explore with Looker Studio** .
+    
+    ![image](https://docs.cloud.google.com/static/bigquery/images/looker-studio-export.jpg)
 
 ### Share reports
 
@@ -130,7 +142,7 @@ When data source credentials are set to the current user, the user is called *da
 
 ### View Looker Studio information schema details
 
-You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`  INFORMATION_SCHEMA.JOBS  ` view](/bigquery/docs/information-schema-jobs) . Every Looker Studio job has `  looker_studio_report_id  ` and `  looker_studio_datasource_id  ` labels. Those IDs appear at the end of the Looker Studio URLs when opening a report or data source page. For example, a report with the URL of `  https://lookerstudio.google.com/navigation/reporting/XXXX-YYY-ZZ  ` has a report ID of "XXXX-YYY-ZZ".
+You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Looker Studio job has `  looker_studio_report_id  ` and `  looker_studio_datasource_id  ` labels. Those IDs appear at the end of the Looker Studio URLs when opening a report or data source page. For example, a report with the URL of `  https://lookerstudio.google.com/navigation/reporting/XXXX-YYY-ZZ  ` has a report ID of "XXXX-YYY-ZZ".
 
 The following examples show how to view reports and data sources:
 
@@ -138,7 +150,7 @@ The following examples show how to view reports and data sources:
 
 To view the report and data source URL for each Looker Studio BigQuery job by running the following query:
 
-``` text
+``` notranslate
 -- Standard labels used by Looker Studio.
 DECLARE requestor_key STRING DEFAULT 'requestor';
 DECLARE requestor_value STRING DEFAULT 'looker_studio';
@@ -175,7 +187,7 @@ LIMIT
 
 To view the jobs produced, you run the following query:
 
-``` text
+``` notranslate
 -- Specify report and data source id, which can be found in the end of Looker Studio URLs.
 DECLARE user_report_id STRING DEFAULT '*report id here*';
 DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
@@ -207,7 +219,7 @@ LIMIT 100;
 
 ## What's next
 
-  - To learn more about reserving capacity for BI Engine, see [Reserve BI Engine capacity](/bigquery/docs/bi-engine-reserve-capacity) .
-  - To learn more about writing queries for BigQuery, see [Overview of BigQuery analytics](/bigquery/docs/query-overview) . This document explains tasks such as how to run queries or create user-defined functions (UDFs).
-  - To explore BigQuery syntax, see [Introduction to SQL in BigQuery](/bigquery/docs/reference/standard-sql) . In BigQuery, the preferred dialect for SQL queries is standard SQL. BigQuery's older SQL-like syntax is described in [Legacy SQL functions and operators](/bigquery/query-reference) .
-  - To learn more about the quotas and limits of connecting BigQuery data to Looker Studio, see [Connect to BigQuery](/looker/docs/studio/connect-to-google-bigquery#quotas_and_general_limits) .
+  - To learn more about reserving capacity for BI Engine, see [Reserve BI Engine capacity](https://docs.cloud.google.com/bigquery/docs/bi-engine-reserve-capacity) .
+  - To learn more about writing queries for BigQuery, see [Overview of BigQuery analytics](https://docs.cloud.google.com/bigquery/docs/query-overview) . This document explains tasks such as how to run queries or create user-defined functions (UDFs).
+  - To explore BigQuery syntax, see [Introduction to SQL in BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) . In BigQuery, the preferred dialect for SQL queries is standard SQL. BigQuery's older SQL-like syntax is described in [Legacy SQL functions and operators](https://docs.cloud.google.com/bigquery/query-reference) .
+  - To learn more about the quotas and limits of connecting BigQuery data to Looker Studio, see [Connect to BigQuery](https://docs.cloud.google.com/looker/docs/studio/connect-to-google-bigquery#quotas_and_general_limits) .

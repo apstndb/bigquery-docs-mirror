@@ -1,10 +1,10 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [QueryParameterType](#QueryParameterType)
-      - [JSON representation](#QueryParameterType.SCHEMA_REPRESENTATION)
-  - [QueryParameterValue](#QueryParameterValue)
-      - [JSON representation](#QueryParameterValue.SCHEMA_REPRESENTATION)
-  - [RangeValue](#RangeValue)
-      - [JSON representation](#RangeValue.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#SCHEMA_REPRESENTATION)
+  - [QueryParameterType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterType.SCHEMA_REPRESENTATION)
+  - [QueryParameterValue](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#QueryParameterValue.SCHEMA_REPRESENTATION)
+  - [RangeValue](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#RangeValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/QueryParameter#RangeValue.SCHEMA_REPRESENTATION)
 
 A parameter given to a query.
 
@@ -19,7 +19,7 @@ A parameter given to a query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;parameterType&quot;: {
     object (QueryParameterType)
@@ -67,7 +67,7 @@ The type of a query parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string,
   &quot;arrayType&quot;: {
     object (QueryParameterType)
@@ -148,7 +148,7 @@ The value of a query parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string,
   &quot;arrayValues&quot;: [
     {
@@ -210,7 +210,7 @@ Represents the value of a range.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;start&quot;: {
     object (QueryParameterValue)
   },

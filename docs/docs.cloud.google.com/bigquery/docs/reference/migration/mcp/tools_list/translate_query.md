@@ -15,7 +15,7 @@ The following sample demonstrate how to use `  curl  ` to invoke the `  translat
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
 curl --location &#39;https://bigquerymigration.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -52,7 +52,7 @@ Request message for `  TranslateQuery  ` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parent&quot;: string,
   &quot;inputQuery&quot;: string,
   &quot;sourceDialect&quot;: string,
@@ -105,7 +105,7 @@ Response message for `  TranslateQuery  ` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;translatedQuery&quot;: string,
   &quot;translationId&quot;: string,
   &quot;translationState&quot;: string,
@@ -167,7 +167,7 @@ The error information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;severity&quot;: string,
   &quot;category&quot;: string,
   &quot;message&quot;: string,
@@ -230,7 +230,7 @@ Name of the object that is impacted by the log message.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: string,
   &quot;domain&quot;: string,
   &quot;metadata&quot;: {
@@ -279,7 +279,7 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>

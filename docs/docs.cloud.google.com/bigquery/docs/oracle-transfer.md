@@ -1,16 +1,16 @@
 # Load Oracle data into BigQuery
 
-You can load data from Oracle to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Oracle connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Oracle to BigQuery.
+You can load data from Oracle to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Oracle connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Oracle to BigQuery.
 
 ## Limitations
 
 Oracle transfers are subject to the following limitations:
 
   - The maximum number of simultaneous connections to an Oracle database is limited, and as a result, the number of simultaneous transfer runs to a single Oracle database is limited to that maximum amount.
-  - You must [set up a network attachment](/vpc/docs/create-manage-network-attachments) in cases where a public IP is not available for an Oracle database connection, with the following requirements:
+  - You must [set up a network attachment](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments) in cases where a public IP is not available for an Oracle database connection, with the following requirements:
       - The data source must be accessible from the subnet where the network attachment resides.
       - The network attachment must not be in the subnet within the range `  240.0.0.0/24  ` .
-      - Network attachments cannot be deleted if there are active connections to the attachment. To delete a network attachment, [contact Cloud Customer Care](/bigquery/docs/getting-support) .
+      - Network attachments cannot be deleted if there are active connections to the attachment. To delete a network attachment, [contact Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) .
       - For the `  us  ` multi-region, the network attachment must be in the `  us-central1  ` region. For the `  eu  ` multi-region, the network attachment must be in the `  europe-west4  ` region.
   - The minimum interval time between recurring Oracle transfers is 15 minutes. The default interval for a recurring transfer is 24 hours.
   - A single transfer configuration can only support one data transfer run at a given time. In the case where a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
@@ -42,7 +42,7 @@ Incremental Oracle transfers are subject to the following limitations:
   - You cannot update objects in the `  asset  ` list after the first incremental ingestion run.
   - You cannot change the write mode in a transfer configuration after the first incremental ingestion run.
   - You cannot change the watermark column or the primary key after the first incremental ingestion run.
-  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](/bigquery/docs/clustered-tables#limitations) .
+  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
   - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
 
 ## Data ingestion options
@@ -87,13 +87,13 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 ### Full or incremental transfers
 
-You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up an Oracle transfer](#oracle-transfer-setup) . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) .
+You can specify how data is loaded into BigQuery by selecting either the **Full** or **Incremental** write preference in the transfer configuration when you [set up an Oracle transfer](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#oracle-transfer-setup) . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) .
 
 **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your Oracle datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 
@@ -146,7 +146,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -168,46 +168,23 @@ The following sections describe the steps that you need to take before you creat
 
 You must also have the following Oracle database information when creating an Oracle transfer.
 
-<table>
-<thead>
-<tr class="header">
-<th>Parameter Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       database      </code></td>
-<td>Name of the database.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       host      </code></td>
-<td><p>Hostname or IP address of the database.</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       port      </code></td>
-<td><p>Port number of the database.</p></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       username      </code></td>
-<td><p>Username to access the database.</p></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       password      </code></td>
-<td><p>Password to access the database.</p></td>
-</tr>
-</tbody>
-</table>
+| Parameter Name            | Description                             |
+| ------------------------- | --------------------------------------- |
+| `        database       ` | Name of the database.                   |
+| `        host       `     | Hostname or IP address of the database. |
+| `        port       `     | Port number of the database.            |
+| `        username       ` | Username to access the database.        |
+| `        password       ` | Password to access the database.        |
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, verify that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+  - If you intend to set up transfer run notifications for Pub/Sub, verify that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -225,9 +202,9 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ## Load Oracle data into BigQuery
 
@@ -236,6 +213,8 @@ Add Oracle data into BigQuery by setting up a transfer configuration using one o
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -250,10 +229,10 @@ Add Oracle data into BigQuery by setting up a transfer configuration using one o
       - For **Connection type** , enter the connection URL type, either `  SERVICE  ` , `  SID  ` , or `  TNS  ` .
       - For **Username** , enter the username of the user initiating the Oracle database connection.
       - For **Password** , enter the password of the user initiating the Oracle database connection.
-      - For **TLS Mode** , select an option from the drop-down menu. For more information about TLS modes, see [TLS configuration](/bigquery/docs/oracle-transfer#tls_configuration) .
-      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/oracle-transfer#trusted_server_certificate_pem) .
+      - For **TLS Mode** , select an option from the drop-down menu. For more information about TLS modes, see [TLS configuration](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#tls_configuration) .
+      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#trusted_server_certificate_pem) .
       - For **Ingestion type** , select **Full** or **Incremental** .
-          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](/bigquery/docs/oracle-transfer#full_or_incremental_transfers) .
+          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#full_or_incremental_transfers) .
       - For **Oracle objects to transfer** , click **Browse** :
           - Select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
           - If you have selected **Append** as your incremental write mode, you must select a column as the watermark column.
@@ -265,21 +244,21 @@ Add Oracle data into BigQuery by setting up a transfer configuration using one o
 
 7.  In the **Schedule options** section:
     
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
+      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
 ### bq
 
-Enter the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --project_id=PROJECT_ID
@@ -308,13 +287,13 @@ Where:
       - `  connector.endpoint.host  ` : the hostname or IP of the database.
       - `  connector.endpoint.port  ` : the port number that the Oracle database is using for incoming connections, such as `  1520  ` .
       - `  connector.connectionType  ` : the connection URL type, either `  SERVICE  ` , `  SID  ` , or `  TNS  ` .
-      - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
+      - `  connector.tls.mode  ` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
           - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
           - `  DISABLE  ` for no encryption or verification
-      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
-      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](#full_or_incremental_transfers) .
+      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
+      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/oracle-transfer#full_or_incremental_transfers) .
       - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
       - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
       - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
@@ -322,7 +301,7 @@ Where:
 
 When specifying multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  dep_id  ` corresponds to the table `  DB1/USER1/DEPARTMENT  ` , while `  report_by  ` and `  report_title  ` corresponds to the table `  DB1/USER1/EMPLOYEES  ` .
 
-``` text
+``` notranslate
       "primaryKeys":[['dep_id'], ['report_by','report_title']],
       "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
   
@@ -330,7 +309,7 @@ When specifying multiple assets during an incremental transfer, the values of th
 
 For example, the following command creates an Oracle data transfer in the default project with all the required parameters:
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --target_dataset=mydataset
@@ -355,145 +334,56 @@ bq mk
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 When you save the transfer configuration, the Oracle connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Oracle connector transfers all available data from Oracle into BigQuery.
 
-To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Data type mapping
 
 The following table maps Oracle data types to the corresponding BigQuery data types.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle data type</th>
-<th>BigQuery data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BFILE      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BINARY_DOUBLE      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BINARY_FLOAT      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BLOB      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CHAR      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CLOB      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INTERVAL DAY TO SECOND      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INTERVAL YEAR TO MONTH      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LONG      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LONG RAW      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NCHAR      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NCLOB      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NUMBER (without precision and scale)      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NUMBER (with precision and scale lower than the BigQuery Numeric range)      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NUMBER (with precision and scale lower than the BigQuery BigNumeric range)      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NUMBER (with precision and scale greater than the BigQuery BigNumeric range)      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NVARCHAR2      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RAW      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ROWID      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TIMESTAMP WITH LOCAL TIME ZONE      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP WITH TIME ZONE      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UROWID      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       VARCHAR      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       VARCHAR2      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle data type                                                                              | BigQuery data type          |
+| --------------------------------------------------------------------------------------------- | --------------------------- |
+| `        BFILE       `                                                                        | `        BYTES       `      |
+| `        BINARY_DOUBLE       `                                                                | `        FLOAT       `      |
+| `        BINARY_FLOAT       `                                                                 | `        FLOAT       `      |
+| `        BLOB       `                                                                         | `        BYTES       `      |
+| `        CHAR       `                                                                         | `        STRING       `     |
+| `        CLOB       `                                                                         | `        STRING       `     |
+| `        DATE       `                                                                         | `        DATETIME       `   |
+| `        FLOAT       `                                                                        | `        FLOAT       `      |
+| `        INTERVAL DAY TO SECOND       `                                                       | `        STRING       `     |
+| `        INTERVAL YEAR TO MONTH       `                                                       | `        STRING       `     |
+| `        LONG       `                                                                         | `        STRING       `     |
+| `        LONG RAW       `                                                                     | `        BYTES       `      |
+| `        NCHAR       `                                                                        | `        STRING       `     |
+| `        NCLOB       `                                                                        | `        STRING       `     |
+| `        NUMBER (without precision and scale)       `                                         | `        STRING       `     |
+| `        NUMBER (with precision and scale lower than the BigQuery Numeric range)       `      | `        NUMERIC       `    |
+| `        NUMBER (with precision and scale lower than the BigQuery BigNumeric range)       `   | `        BIGNUMERIC       ` |
+| `        NUMBER (with precision and scale greater than the BigQuery BigNumeric range)       ` | `        STRING       `     |
+| `        NVARCHAR2       `                                                                    | `        STRING       `     |
+| `        RAW       `                                                                          | `        BYTES       `      |
+| `        ROWID       `                                                                        | `        STRING       `     |
+| `        TIMESTAMP       `                                                                    | `        DATETIME       `   |
+| `        TIMESTAMP WITH LOCAL TIME ZONE       `                                               | `        DATETIME       `   |
+| `        TIMESTAMP WITH TIME ZONE       `                                                     | `        TIMESTAMP       `  |
+| `        UROWID       `                                                                       | `        STRING       `     |
+| `        VARCHAR       `                                                                      | `        STRING       `     |
+| `        VARCHAR2       `                                                                     | `        STRING       `     |
 
 ## Troubleshoot transfer setup
 
-If you are having issues setting up your data transfer, see [Oracle transfer issues](/bigquery/docs/transfer-troubleshooting#oracle-issues) .
+If you are having issues setting up your data transfer, see [Oracle transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#oracle-issues) .
 
 ## Pricing
 
-For pricing information about Oracle transfers, see [Data Transfer Service pricing](/bigquery/pricing#bqdts) .
+For pricing information about Oracle transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#bqdts) .
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Working with transfers](/bigquery/docs/working-with-transfers) .
-  - Learn how to [load data with cross-cloud operations](/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
+  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

@@ -2,13 +2,13 @@
 
 **Preview**
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-When you query your Google Merchant Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+When you query your Google Merchant Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) in the GoogleSQL documentation.
+The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) in the GoogleSQL documentation.
 
 ## Google Merchant Center sample queries
 
@@ -20,7 +20,7 @@ In each of the following queries, replace dataset with your dataset name. Replac
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   COUNT(*) AS num_products,
@@ -40,7 +40,7 @@ ORDER BY
 
 The following SQL sample query provides the number of products that are not approved for display in Shopping Ads, separated by country. Disapproval can result from the destination being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   disapproved_country,
@@ -61,7 +61,7 @@ ORDER BY
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by country.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   applicable_country,

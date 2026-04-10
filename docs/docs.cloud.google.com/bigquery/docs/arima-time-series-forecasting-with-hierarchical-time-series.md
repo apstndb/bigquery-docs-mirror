@@ -1,14 +1,14 @@
 # Forecast hierarchical time series with an ARIMA\_PLUS univariate model
 
-This tutorial teaches you how to use an [`  ARIMA_PLUS  ` univariate time series model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast hierarchical time series. It forecasts the future value for a given column, based on the historical values for that column, and also calculates roll-up values for that column for one or more dimensions of interest.
+This tutorial teaches you how to use an [`  ARIMA_PLUS  ` univariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) to forecast hierarchical time series. It forecasts the future value for a given column, based on the historical values for that column, and also calculates roll-up values for that column for one or more dimensions of interest.
 
-Forecasted values are calculated for each time point, for each value in one or more columns that specify the dimensions of interest. For example, if you wanted to forecast daily traffic incidents and specified a dimension column containing state data, the forecasted data would contain values for each day for State A, then values for each day for State B, and so forth. If you wanted to forecast daily traffic incidents and specified dimension columns containing state and city data, the forecasted data would contain values for each day for State A and City A, then values for each day for State A and City B, and so forth. In hierarchical time series models, [hierarchical reconciliation](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#hierarchical_reconciliation) is used to roll up and reconcile each child time series with its parent. For example, the sum of the forecasted values for all of the cities in State A must be equal to the forecasted value for State A.
+Forecasted values are calculated for each time point, for each value in one or more columns that specify the dimensions of interest. For example, if you wanted to forecast daily traffic incidents and specified a dimension column containing state data, the forecasted data would contain values for each day for State A, then values for each day for State B, and so forth. If you wanted to forecast daily traffic incidents and specified dimension columns containing state and city data, the forecasted data would contain values for each day for State A and City A, then values for each day for State A and City B, and so forth. In hierarchical time series models, [hierarchical reconciliation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#hierarchical_reconciliation) is used to roll up and reconcile each child time series with its parent. For example, the sum of the forecasted values for all of the cities in State A must be equal to the forecasted value for State A.
 
 In this tutorial, you create two time series models over the same data, one that uses hierarchical forecasting and one that doesn't. This lets you compare the results returned by the models.
 
 This tutorial uses data from the public [`  bigquery-public-data.iowa_liquor.sales.sales  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=iowa_liquor_sales&t=sales&page=table) table. This table contains information for over 1 million liquor products in different stores using public Iowa liquor sales data.
 
-Before reading this tutorial, we highly recommend that you read [Forecast multiple time series with a univariate model](/bigquery/docs/arima-single-time-series-forecasting-tutorial) .
+Before reading this tutorial, we highly recommend that you read [Forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial) .
 
 ## Required Permissions
 
@@ -26,14 +26,14 @@ Before reading this tutorial, we highly recommend that you read [Forecast multip
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Objectives
 
 In this tutorial, you use the following:
 
-  - Creating a multiple time series model and a multiple hierarchical time series model to forecast bottle sales values by using the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Retrieving the forecasted bottle sales values from the models by using the [`  ML.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+  - Creating a multiple time series model and a multiple hierarchical time series model to forecast bottle sales values by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+  - Retrieving the forecasted bottle sales values from the models by using the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
 
 ## Costs
 
@@ -52,7 +52,9 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Create a dataset
 
@@ -61,6 +63,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -76,11 +80,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -89,15 +93,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -111,17 +115,19 @@ Create a time series model, using the Iowa liquor sales data.
 
 The following GoogleSQL query creates a model that forecasts the daily total number of bottles sold in 2015 in Polk, Linn and Scott counties.
 
-In the following query, the `  OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)  ` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. You use the [`  TIME_SERIES_ID  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_id_col) of the `  CREATE MODEL  ` statement to specify one or more columns in the input data for which you want to get forecasts. The [`  auto_arima_max_order  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) of the `  CREATE MODEL  ` statement controls the search space for hyperparameter tuning in the `  auto.ARIMA  ` algorithm. The [`  decompose_time_series  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) of the `  CREATE MODEL  ` statement defaults to `  TRUE  ` , so that information about the time series data is returned when you evaluate the model in the next step.
+In the following query, the `  OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)  ` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. You use the [`  TIME_SERIES_ID  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_id_col) of the `  CREATE MODEL  ` statement to specify one or more columns in the input data for which you want to get forecasts. The [`  auto_arima_max_order  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima_max_order) of the `  CREATE MODEL  ` statement controls the search space for hyperparameter tuning in the `  auto.ARIMA  ` algorithm. The [`  decompose_time_series  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) of the `  CREATE MODEL  ` statement defaults to `  TRUE  ` , so that information about the time series data is returned when you evaluate the model in the next step.
 
-The `  OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)  ` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. By default, [`  auto_arima=TRUE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima) , so the `  auto.ARIMA  ` algorithm automatically tunes the hyperparameters in `  ARIMA_PLUS  ` models. The algorithm fits dozens of candidate models and chooses the best model, which is the model with the lowest [Akaike information criterion (AIC)](https://en.wikipedia.org/wiki/Akaike_information_criterion) . Setting the [`  holiday_region  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to `  US  ` allows a more accurate modeling on those United States holidays time points if there are United States holiday patterns in the time series.
+The `  OPTIONS(model_type='ARIMA_PLUS', time_series_timestamp_col='date', ...)  ` clause indicates that you are creating an [ARIMA](https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average) -based time series model. By default, [`  auto_arima=TRUE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#auto_arima) , so the `  auto.ARIMA  ` algorithm automatically tunes the hyperparameters in `  ARIMA_PLUS  ` models. The algorithm fits dozens of candidate models and chooses the best model, which is the model with the lowest [Akaike information criterion (AIC)](https://en.wikipedia.org/wiki/Akaike_information_criterion) . Setting the [`  holiday_region  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) to `  US  ` allows a more accurate modeling on those United States holidays time points if there are United States holiday patterns in the time series.
 
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast`
       OPTIONS (
         MODEL_TYPE = 'ARIMA_PLUS',
@@ -156,10 +162,12 @@ In the following query, the `  STRUCT(20 AS horizon, 0.8 AS confidence_level)  `
 Follow these steps to forecast data with the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.FORECAST(
@@ -169,6 +177,8 @@ Follow these steps to forecast data with the model:
     ```
     
     The results should look similar to the following:
+    
+    ![Multiple time series with a univariate model](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-regular-time-series.png)
     
     The output starts with the forecasted data for the first time series; `  store_number=2190  ` , `  zip_code=50314  ` , `  city=DES MOINES  ` , `  county=POLK  ` . As you scroll through the data, you see the forecasts for each subsequent unique time series. In order to generate forecasts that aggregate totals for different dimensions, such as forecasts for a specific county, you must generate a hierarchical forecast.
 
@@ -183,10 +193,12 @@ In the following query, the `  HIERARCHICAL_TIME_SERIES_COLS  ` option in the ` 
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.liquor_forecast_hierarchical`
       OPTIONS (
         MODEL_TYPE = 'ARIMA_PLUS',
@@ -220,10 +232,12 @@ Retrieve hierarchical forecast data from the model by using the `  ML.FORECAST  
 Follow these steps to forecast data with the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -236,7 +250,11 @@ Follow these steps to forecast data with the model:
     
     The results should look similar to the following:
     
+    ![Hierarchical Time Series Example.](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-time-series.png)
+    
     Notice how the aggregated forecast is displayed for the city of LeClaire, `  store_number=NULL  ` , `  zip_code=NULL  ` , `  city=LECLAIRE  ` , `  county=SCOTT  ` . As you look at the rest of the rows, notice the forecasts for the other subgroups. For example, the following image shows the forecasts aggregated for the zip code `  52753  ` , `  store_number=NULL  ` , `  zip_code=52753  ` , `  city=LECLAIRE  ` , `  county=SCOTT  ` :
+    
+    ![Hierarchical Time Series Example.](https://docs.cloud.google.com/static/bigquery/images/arima-time-series-forecasting-with-hierarchical-time-series-2.png)
 
 ## Clean up
 
@@ -250,6 +268,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -270,14 +290,16 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [forecast a single time series with a univariate model](/bigquery/docs/arima-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast multiple time series with a univariate model](/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
-  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](/bigquery/docs/arima-speed-up-tutorial) .
-  - Learn how to [forecast a single time series with a multivariate model](/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](/bigquery/docs/bqml-introduction) .
+  - Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
+  - Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
+  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
+  - Learn how to [forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
+  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

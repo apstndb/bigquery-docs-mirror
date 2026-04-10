@@ -1,12 +1,14 @@
 # Sharing VPC Service Controls rules
 
-This document describes the ingress and egress rules that you need to let publishers and subscribers in BigQuery sharing (formerly Analytics Hub) access data from projects that have VPC Service Controls perimeters. This document assumes you're familiar with [VPC Service Controls perimeters](/vpc-service-controls/docs/service-perimeters) , [shared datasets](/bigquery/docs/analytics-hub-introduction#shared_datasets) , [data exchanges](/bigquery/docs/analytics-hub-introduction#data_exchanges) , [listings](/bigquery/docs/analytics-hub-introduction#listings) , and [linked datasets](/bigquery/docs/analytics-hub-introduction#linked_datasets) .
+This document describes the ingress and egress rules that you need to let publishers and subscribers in BigQuery sharing (formerly Analytics Hub) access data from projects that have VPC Service Controls perimeters. This document assumes you're familiar with [VPC Service Controls perimeters](https://docs.cloud.google.com/vpc-service-controls/docs/service-perimeters) , [shared datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#shared_datasets) , [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) , [listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) , and [linked datasets](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#linked_datasets) .
 
 A *caller project* is the network or client Google Cloud project that initiates the request, such as a SQL query or a Google Cloud CLI command.
 
 ## Create a data exchange
 
 In the following diagram, the projects that contain the data exchange and the shared dataset are in different service perimeters:
+
+![VPC Service Controls rule when creating a data exchange.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-create-exchange.png)
 
 **Figure 1.** VPC Service Controls rules for creating a data exchange.
 
@@ -16,30 +18,18 @@ In figure 1, the following components are labeled:
   - **Project R** : the caller project.
   - **Project E** : hosts the data exchange and listings.
 
-As a BigQuery sharing administrator, when you [create a data exchange](/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) in a different project than the caller project, you must add the following ingress and egress rules:
+As a BigQuery sharing administrator, when you [create a data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) in a different project than the caller project, you must add the following ingress and egress rules:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Project</strong></th>
-<th><strong>Rule</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Project R</td>
-<td>Egress rule for project E</td>
-</tr>
-<tr class="even">
-<td>Project E (data exchange)</td>
-<td>Ingress rule for project R</td>
-</tr>
-</tbody>
-</table>
+| **Project**               | **Rule**                   |
+| ------------------------- | -------------------------- |
+| Project R                 | Egress rule for project E  |
+| Project E (data exchange) | Ingress rule for project R |
 
 ## Create a listing
 
 In the following diagram, the projects that contain the data exchange and the shared dataset are in different service perimeters:
+
+![VPC Service Controls rule when creating a listing.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-create-listing.png)
 
 **Figure 2.** VPC Service Controls rules for creating a listing.
 
@@ -86,6 +76,8 @@ When you create a listing in a data exchange that is in a different project than
 
 In the following diagram, the projects that contain the listing and the linked dataset for that listing are in different service perimeters:
 
+![VPC Service Controls rule when subscribing to a listing.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-subscribe-listing.png)
+
 **Figure 3.** VPC Service Controls rules for subscribing to a listing.
 
 In figure 3, the following components are labeled:
@@ -131,6 +123,8 @@ As a BigQuery sharing subscriber, when you subscribe to a listing in a data exch
 
 In the following diagram, the caller project and the project that contain the linked dataset are in different service perimeters:
 
+![VPC Service Controls rule when querying a table in the linked dataset.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-query-tables-ld.png)
+
 **Figure 4.** VPC Service Controls rules for querying a linked dataset.
 
 In figure 4, the following components are labeled:
@@ -142,24 +136,10 @@ In figure 4, the following components are labeled:
 
 When you, as a BigQuery sharing subscriber, query a table in the linked dataset, you must add the following ingress and egress rules:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Project</strong></th>
-<th><strong>Rule</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Project R</td>
-<td>Egress rule for project L</td>
-</tr>
-<tr class="even">
-<td>Project L (linked dataset)</td>
-<td>Ingress rule for project R</td>
-</tr>
-</tbody>
-</table>
+| **Project**                | **Rule**                   |
+| -------------------------- | -------------------------- |
+| Project R                  | Egress rule for project L  |
+| Project L (linked dataset) | Ingress rule for project R |
 
 ## Query views in a linked dataset
 
@@ -168,6 +148,8 @@ This section describes the required VPC Service Controls rules for querying a vi
 ### Scenario 1
 
 In the following diagram, the projects that contain the linked dataset and the base tables associated with the view are in different service perimeters. The view (Project S) and the base table associated with the view (Project V) are in different projects:
+
+![view and base tables are in different projects.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-query-views-ld.png)
 
 **Figure 5.** VPC Service Controls rules for querying a view in a linked dataset.
 
@@ -215,6 +197,8 @@ When you, as a BigQuery sharing subscriber, query a view in a linked dataset, yo
 
 In the following diagram, the view (Project V) and the base table associated with the view (Project V) are in the same project:
 
+![view and base tables are in the same project.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-query-view-ld-same-proj.png)
+
 **Figure 6.** VPC Service Controls rules for querying a view in a linked dataset.
 
 In figure 6, the following components are labeled:
@@ -226,28 +210,16 @@ In figure 6, the following components are labeled:
 
 When you, as a BigQuery sharing subscriber, query a view in a linked dataset, you must add the following ingress and egress rules:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Project</strong></th>
-<th><strong>Rule</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Project R</td>
-<td><p>Egress rule for project L</p></td>
-</tr>
-<tr class="even">
-<td>Project L (linked dataset)</td>
-<td><p>Ingress rule for project R</p></td>
-</tr>
-</tbody>
-</table>
+| **Project**                | **Rule**                   |
+| -------------------------- | -------------------------- |
+| Project R                  | Egress rule for project L  |
+| Project L (linked dataset) | Ingress rule for project R |
 
 ## Query authorized views in a linked dataset
 
 In the following diagram, the authorized view and the base table associated with the authorized view (Project V) are in the same project:
+
+![authorized view and base tables are in the same project.](https://docs.cloud.google.com/static/bigquery/images/analytics-hub-query-auth-view-ld-same-proj.png)
 
 **Figure 7.** VPC Service Controls rules for querying a view in a linked dataset.
 
@@ -262,30 +234,16 @@ In figure 7, the following components are labeled:
 
 When you, as a BigQuery sharing subscriber, query a view in a linked dataset, you must add the following ingress and egress rules:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Project</strong></th>
-<th><strong>Rule</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Project R</td>
-<td><p>Egress rule for project L</p></td>
-</tr>
-<tr class="even">
-<td>Project L (linked dataset)</td>
-<td><p>Ingress rule for project R</p></td>
-</tr>
-</tbody>
-</table>
+| **Project**                | **Rule**                   |
+| -------------------------- | -------------------------- |
+| Project R                  | Egress rule for project L  |
+| Project L (linked dataset) | Ingress rule for project R |
 
 ## Limitations
 
-BigQuery sharing doesn't support [method-based rules](/vpc-service-controls/docs/ingress-egress-rules) . You must allow all methods to enable method-based rules. For example:
+BigQuery sharing doesn't support [method-based rules](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) . You must allow all methods to enable method-based rules. For example:
 
-``` text
+``` 
           ingressTo:
             operations:
             - methodSelectors:
@@ -297,7 +255,7 @@ BigQuery sharing doesn't support [method-based rules](/vpc-service-controls/docs
 
 If BigQuery resources are also protected by service perimeters, you must allow ingress and egress rules for the BigQuery service. Allowing ingress and egress rules is not required when you create a data exchange. The ingress and egress rules for BigQuery are similar to those for BigQuery sharing. For example:
 
-``` text
+``` 
           ingressTo:
             operations:
             - methodSelectors:
@@ -309,9 +267,9 @@ If BigQuery resources are also protected by service perimeters, you must allow i
 
 ## What's next
 
-  - Learn about [troubleshooting VPC Service Controls problems](/vpc-service-controls/docs/troubleshooting) .
-  - Learn about [ingress and egress rules](/vpc-service-controls/docs/ingress-egress-rules) .
-  - Learn about [configuring ingress and egress policies](/vpc-service-controls/docs/configuring-ingress-egress-policies) .
-  - Learn about [creating a listing](/bigquery/docs/analytics-hub-manage-listings#create_a_listing) .
-  - Learn about [subscribing to a listing](/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) .
-  - Learn about [Sharing audit logging](/bigquery/docs/analytics-hub-audit-logging) .
+  - Learn about [troubleshooting VPC Service Controls problems](https://docs.cloud.google.com/vpc-service-controls/docs/troubleshooting) .
+  - Learn about [ingress and egress rules](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules) .
+  - Learn about [configuring ingress and egress policies](https://docs.cloud.google.com/vpc-service-controls/docs/configuring-ingress-egress-policies) .
+  - Learn about [creating a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings#create_a_listing) .
+  - Learn about [subscribing to a listing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) .
+  - Learn about [Sharing audit logging](https://docs.cloud.google.com/bigquery/docs/analytics-hub-audit-logging) .

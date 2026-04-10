@@ -9,7 +9,7 @@ The combination of the BigQuery Data Transfer Service and a special migration ag
 Ensure that the principal creating the transfer has the following roles in the project containing the transfer job:
 
   - Logs Viewer ( `  roles/logging.viewer  ` )
-  - Storage Admin ( `  roles/storage.admin  ` ), or a [custom role](/iam/docs/creating-custom-roles) that grants the following permissions:
+  - Storage Admin ( `  roles/storage.admin  ` ), or a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that grants the following permissions:
       - `  storage.objects.create  `
       - `  storage.objects.get  `
       - `  storage.objects.list  `
@@ -23,11 +23,11 @@ Ensure that the principal creating the transfer has the following roles in the p
 
 ### Create a dataset
 
-[Create a BigQuery dataset](/bigquery/docs/datasets) to store your data. You don't need to create any tables.
+[Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data. You don't need to create any tables.
 
 ### Create a Cloud Storage bucket
 
-[Create a Cloud Storage bucket](/storage/docs/creating-buckets) for staging the data during the transfer job.
+[Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) for staging the data during the transfer job.
 
 ### Prepare the local environment
 
@@ -37,8 +37,8 @@ Complete the tasks in this section to prepare your local environment for the tra
 
   - The migration agent uses a JDBC connection with the Teradata instance and Google Cloud APIs. Ensure that network access is not blocked by a firewall.
   - Ensure that Java Runtime Environment 8 or later is installed.
-  - Ensure that you have enough storage space for the extraction method you have chosen, as described in [Extraction method](/bigquery/docs/migration/teradata-overview#extraction_method) .
-  - If you have decided to use Teradata Parallel Transporter (TPT) extraction, ensure that the [`  tbuild  `](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) utility is installed. For more information on choosing an extraction method, see [Extraction method](/bigquery/docs/migration/teradata-overview#extraction_method) .
+  - Ensure that you have enough storage space for the extraction method you have chosen, as described in [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
+  - If you have decided to use Teradata Parallel Transporter (TPT) extraction, ensure that the [`  tbuild  `](https://docs.teradata.com/r/Teradata-Parallel-Transporter-Reference/July-2017/Teradata-PT-Utility-Commands/Command-Syntax/tbuild) utility is installed. For more information on choosing an extraction method, see [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
 
 #### Teradata connection details
 
@@ -56,17 +56,17 @@ Complete the tasks in this section to prepare your local environment for the tra
 
 #### Set the `     GOOGLE_APPLICATION_CREDENTIALS    ` variable
 
-[Set the environment variable `  GOOGLE_APPLICATION_CREDENTIALS  `](/docs/authentication/set-up-adc-local-dev-environment#local-key) to the service account key you downloaded in the [Before you begin](#before_you_begin) section.
+[Set the environment variable `  GOOGLE_APPLICATION_CREDENTIALS  `](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment#local-key) to the service account key you downloaded in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/migration/teradata#before_you_begin) section.
 
 ### Update the VPC Service Controls egress rule
 
-Add a BigQuery Data Transfer Service managed Google Cloud project (project number: 990232121269) to the [egress rule](/vpc-service-controls/docs/ingress-egress-rules#egress_rules_reference) in the VPC Service Controls perimeter.
+Add a BigQuery Data Transfer Service managed Google Cloud project (project number: 990232121269) to the [egress rule](https://docs.cloud.google.com/vpc-service-controls/docs/ingress-egress-rules#egress_rules_reference) in the VPC Service Controls perimeter.
 
 The communication channel between the agent running on premises and BigQuery Data Transfer Service is by publishing Pub/Sub messages to a per transfer topic. BigQuery Data Transfer Service needs to send commands to the agent to extract data, and the agent needs to publish messages back to BigQuery Data Transfer Service to update the status and return data extraction responses.
 
 ### Create a custom schema file
 
-To use a [custom schema file](/bigquery/docs/migration/teradata-overview#custom_schema_file) instead of automatic schema detection, create one manually, or have the migration agent create one for you when you [initialize the agent](#initialize_the_migration_agent) .
+To use a [custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#custom_schema_file) instead of automatic schema detection, create one manually, or have the migration agent create one for you when you [initialize the agent](https://docs.cloud.google.com/bigquery/docs/migration/teradata#initialize_the_migration_agent) .
 
 If you create a schema file manually and you intend to use the Google Cloud console to create a transfer, upload the schema file to a Cloud Storage bucket in the same project you plan to use for the transfer.
 
@@ -76,16 +76,16 @@ If you create a schema file manually and you intend to use the Google Cloud cons
 
 ### Setup credential file for access module
 
-A credential file is required if you are using the [access module for Cloud Storage with the Teradata Parallel Transporter (TPT) utility](/bigquery/docs/migration/teradata-overview#extraction_method) for extraction.
+A credential file is required if you are using the [access module for Cloud Storage with the Teradata Parallel Transporter (TPT) utility](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) for extraction.
 
-Before you create a credential file, you must have [created a service account key](/iam/docs/keys-create-delete#creating) . From your downloaded service account key file, obtain the following information:
+Before you create a credential file, you must have [created a service account key](https://docs.cloud.google.com/iam/docs/keys-create-delete#creating) . From your downloaded service account key file, obtain the following information:
 
   - `  client_email  `
   - `  private_key  ` : Copy all characters within `  -----BEGIN PRIVATE KEY-----  ` and `  -----END PRIVATE KEY-----  ` , including all `  /n  ` characters and without the enclosing double quotes.
 
 Once you have the required information, create a credential file. The following is an example credential file with a default location of `  $HOME/.gcs/credentials  ` :
 
-``` text
+``` notranslate
 [default]
 gcs_access_key_id = ACCESS_ID
 gcs_secret_access_key = ACCESS_KEY
@@ -96,7 +96,7 @@ Replace the following:
   - `  ACCESS_ID  ` : the access key ID, or the `  client_email  ` value in your service account key file.
   - `  ACCESS_KEY  ` : the secret access key, or the `  private_key  ` value in your service account key file.
 
-**Note:** you can modify the location of the credential file with the `  gcs-module-config-dir  ` parameter when you [set up the transfer](#set_up_a_transfer)
+**Note:** you can modify the location of the credential file with the `  gcs-module-config-dir  ` parameter when you [set up the transfer](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_up_a_transfer)
 
 ## Set up a transfer
 
@@ -106,11 +106,13 @@ If you want a custom schema file created automatically, use the migration agent 
 
 You can't create an on-demand transfer by using the bq command-line tool; you must use the Google Cloud console or the BigQuery Data Transfer Service API instead.
 
-If you are creating a recurring transfer, we strongly recommend that you specify a schema file so that data from subsequent transfers can be properly partitioned when it is loaded into BigQuery. Without a schema file, the BigQuery Data Transfer Service infers the table schema from the source data being transferred, and all information about partitioning, clustering, primary keys, and change tracking is lost. In addition, subsequent transfers skip previously migrated tables after the initial transfer. For more information on how to create a schema file, see [Custom schema file](/bigquery/docs/migration/teradata-overview#custom_schema_file) .
+If you are creating a recurring transfer, we strongly recommend that you specify a schema file so that data from subsequent transfers can be properly partitioned when it is loaded into BigQuery. Without a schema file, the BigQuery Data Transfer Service infers the table schema from the source data being transferred, and all information about partitioning, clustering, primary keys, and change tracking is lost. In addition, subsequent transfers skip previously migrated tables after the initial transfer. For more information on how to create a schema file, see [Custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#custom_schema_file) .
 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Data transfers** .
 
@@ -125,6 +127,8 @@ If you are creating a recurring transfer, we strongly recommend that you specify
       - Optional: For **Schedule options** , you can leave the default value of **Daily** (based on creation time) or choose another time if you want a recurring, incremental transfer. Otherwise, choose **On-demand** for a one-time transfer.
     
       - For **Destination settings** , choose the appropriate dataset.
+        
+        ![New Teradata migration general.](https://docs.cloud.google.com/static/bigquery/images/teradata-migration-general-console.png)
 
 5.  In the **Data source details** section, continue with specific details for your Teradata transfer.
     
@@ -143,21 +147,21 @@ If you are creating a recurring transfer, we strongly recommend that you specify
     
       - For **Service account email** , enter the email address associated with the service account's credentials used by an migration agent.
     
-      - Optional: For **Schema file path** , enter the path and filename of a custom schema file. For more information about creating a custom schema file, see [Custom schema file](/bigquery/docs/migration/teradata-overview#custom_schema_file) . You can leave this field blank to have BigQuery [automatically detect your source table schema](/bigquery/docs/migration/teradata-overview#default_schema_detection) for you.
+      - Optional: For **Schema file path** , enter the path and filename of a custom schema file. For more information about creating a custom schema file, see [Custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#custom_schema_file) . You can leave this field blank to have BigQuery [automatically detect your source table schema](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#default_schema_detection) for you.
     
-      - Optional: For **Translation output root directory** , enter the path and filename of the schema mapping file provided by the BigQuery translation engine. For more information about generating a schema mapping file, see [Using translation engine output for schema](/bigquery/docs/migration/teradata-overview#using_translation_engine_output_for_schema) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ). You can leave this field blank to have BigQuery [automatically detect your source table schema](/bigquery/docs/migration/teradata-overview#default_schema_detection) for you.
+      - Optional: For **Translation output root directory** , enter the path and filename of the schema mapping file provided by the BigQuery translation engine. For more information about generating a schema mapping file, see [Using translation engine output for schema](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#using_translation_engine_output_for_schema) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ). You can leave this field blank to have BigQuery [automatically detect your source table schema](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#default_schema_detection) for you.
     
-      - Optional: For **Enable direct unload to GCS** , select the checkbox to enable the [access module for Cloud Storage](/bigquery/docs/migration/teradata-overview#extraction_method) .
+      - Optional: For **Enable direct unload to GCS** , select the checkbox to enable the [access module for Cloud Storage](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
 
-6.  In the **Service Account** menu, select a [service account](/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](/bigquery/docs/use-service-accounts) .
+6.  In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
     
-      - If you signed in with a [federated identity](/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
-      - The service account must have the [required permissions](#set_required_permissions) .
+      - If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
+      - The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_required_permissions) .
 
 7.  Optional: In the **Notification options** section, do the following:
     
       - Click the **Email notifications** toggle if you want the transfer administrator to receive an email notification when a transfer run fails.
-      - Click the **Pub/Sub notifications** toggle to configure Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer. For **Select a Pub/Sub topic** , choose your [topic](/pubsub/docs/overview#types) name or click **Create a topic** .
+      - Click the **Pub/Sub notifications** toggle to configure Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer. For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** .
 
 8.  Click **Save** .
 
@@ -171,7 +175,7 @@ When you create a Cloud Storage transfer using the bq tool, the transfer configu
 
 You cannot configure notifications using the bq tool.
 
-Enter the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) command and supply the transfer creation flag `  --transfer_config  ` . The following flags are also required:
+Enter the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) command and supply the transfer creation flag `  --transfer_config  ` . The following flags are also required:
 
   - `  --data_source  `
   - `  --display_name  `
@@ -180,7 +184,7 @@ Enter the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-transfer-co
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq mk \
 --transfer_config \
 --project_id=project ID \
@@ -196,7 +200,7 @@ Where:
   - project ID is your project ID. If `  --project_id  ` isn't supplied to specify a particular project, the default project is used.
   - dataset is the dataset you want to target ( `  --target_dataset  ` ) for the transfer configuration.
   - name is the display name ( `  --display_name  ` ) for the transfer configuration. The transfer's display name can be any value that lets you identify the transfer if you need to modify it later.
-  - service\_account is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all the listed [required permissions](#set_required_permissions) .
+  - service\_account is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all the listed [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_required_permissions) .
   - parameters contains the parameters ( `  --params  ` ) for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
       - For Teradata migrations, use the following parameters:
           - `  bucket  ` is the Cloud Storage bucket that will act as a staging area during the migration.
@@ -211,7 +215,7 @@ Where:
 
 For example, the following command creates a Teradata transfer named `  My Transfer  ` using Cloud Storage bucket `  mybucket  ` and target dataset `  mydataset  ` . The transfer will migrate all tables from the Teradata data warehouse `  mydatabase  ` and the optional schema file is `  myschemafile.json  ` .
 
-``` text
+``` notranslate
 bq mk \
 --transfer_config \
 --project_id=123456789876 \
@@ -232,78 +236,76 @@ Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create a teradata transfer config.
-public class CreateTeradataTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String databaseType = "Teradata";
-    String bucket = "cloud-sample-data";
-    String databaseName = "MY_DATABASE_NAME";
-    String tableNamePatterns = "*";
-    String serviceAccount = "MY_SERVICE_ACCOUNT";
-    String schemaFilePath = "/your-schema-path";
-    Map<String, Value> params = new HashMap<>();
-    params.put("database_type", Value.newBuilder().setStringValue(databaseType).build());
-    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-    params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
-    params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
-    params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
-    params.put("schema_file_path", Value.newBuilder().setStringValue(schemaFilePath).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Teradata Config Name")
-            .setDataSourceId("on_premises")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .setSchedule("every 24 hours")
-            .build();
-    createTeradataTransfer(projectId, transferConfig);
-  }
-
-  public static void createTeradataTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Cloud teradata transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.print("Cloud teradata transfer was not created." + ex.toString());
+    import com.google.api.gax.rpc.ApiException;
+    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+    import com.google.protobuf.Struct;
+    import com.google.protobuf.Value;
+    import java.io.IOException;
+    import java.util.HashMap;
+    import java.util.Map;
+    
+    // Sample to create a teradata transfer config.
+    public class CreateTeradataTransfer {
+    
+      public static void main(String[] args) throws IOException {
+        // TODO(developer): Replace these variables before running the sample.
+        final String projectId = "MY_PROJECT_ID";
+        String datasetId = "MY_DATASET_ID";
+        String databaseType = "Teradata";
+        String bucket = "cloud-sample-data";
+        String databaseName = "MY_DATABASE_NAME";
+        String tableNamePatterns = "*";
+        String serviceAccount = "MY_SERVICE_ACCOUNT";
+        String schemaFilePath = "/your-schema-path";
+        Map<String, Value> params = new HashMap<>();
+        params.put("database_type", Value.newBuilder().setStringValue(databaseType).build());
+        params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
+        params.put("database_name", Value.newBuilder().setStringValue(databaseName).build());
+        params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
+        params.put("agent_service_account", Value.newBuilder().setStringValue(serviceAccount).build());
+        params.put("schema_file_path", Value.newBuilder().setStringValue(schemaFilePath).build());
+        TransferConfig transferConfig =
+            TransferConfig.newBuilder()
+                .setDestinationDatasetId(datasetId)
+                .setDisplayName("Your Teradata Config Name")
+                .setDataSourceId("on_premises")
+                .setParams(Struct.newBuilder().putAllFields(params).build())
+                .setSchedule("every 24 hours")
+                .build();
+        createTeradataTransfer(projectId, transferConfig);
+      }
+    
+      public static void createTeradataTransfer(String projectId, TransferConfig transferConfig)
+          throws IOException {
+        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+          ProjectName parent = ProjectName.of(projectId);
+          CreateTransferConfigRequest request =
+              CreateTransferConfigRequest.newBuilder()
+                  .setParent(parent.toString())
+                  .setTransferConfig(transferConfig)
+                  .build();
+          TransferConfig config = client.createTransferConfig(request);
+          System.out.println("Cloud teradata transfer created successfully :" + config.getName());
+        } catch (ApiException ex) {
+          System.out.print("Cloud teradata transfer was not created." + ex.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Migration agent
 
-You can optionally set up the transfer directly from the migration agent. For more information, see [Initialize the migration agent](#initialize_the_migration_agent) .
+You can optionally set up the transfer directly from the migration agent. For more information, see [Initialize the migration agent](https://docs.cloud.google.com/bigquery/docs/migration/teradata#initialize_the_migration_agent) .
 
 ## Initialize the migration agent
 
@@ -313,7 +315,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
 
 1.  Open a new session. On the command line, issue the initialization command, which follows this form:
     
-    ``` text
+    ``` notranslate
     java -cp \
     OS-specific-separated-paths-to-jars (JDBC and agent) \
     com.google.cloud.bigquery.dms.Agent \
@@ -324,7 +326,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
     
     ### Unix, Linux, Mac OS
     
-    ``` text
+    ``` notranslate
     java -cp \
     /usr/local/migration/terajdbc4.jar:/usr/local/migration/mirroring-agent.jar \
     com.google.cloud.bigquery.dms.Agent \
@@ -335,7 +337,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
     
     Copy all the files into the `  C:\migration  ` folder (or adjust the paths in the command), then run:
     
-    ``` text
+    ``` notranslate
     java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --initialize
     ```
 
@@ -343,7 +345,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
     
     1.  Choose whether to save the Teradata Parallel Transporter (TPT) template to disk. If you are planning to use the TPT extraction method, you can modify the saved template with parameters that suit your Teradata instance.
     
-    2.  Type the path to a local directory that the transfer job can use for file extraction. Ensure you have the minimum recommended storage space as described in [Extraction method](/bigquery/docs/migration/teradata-overview#extraction_method) .
+    2.  Type the path to a local directory that the transfer job can use for file extraction. Ensure you have the minimum recommended storage space as described in [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
     
     3.  Type the database hostname.
     
@@ -355,10 +357,10 @@ If you are going to use the migration agent to create a custom schema file, ensu
     
     7.  Choose whether to specify a BigQuery Data Transfer Service config name.
         
-        If you are initializing the migration agent for a transfer you have already [set up](#set_up_a_transfer) , then do the following:
+        If you are initializing the migration agent for a transfer you have already [set up](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_up_a_transfer) , then do the following:
         
         1.  Type the **Resource name** of the transfer. You can find this in the **Configuration** tab of the **Transfer details** page for the transfer.
-        2.  When prompted, type a path and filename for the migration agent configuration file that will be created. You refer to this file when you [run the migration agent](#run_the_migration_agent) to start the transfer.
+        2.  When prompted, type a path and filename for the migration agent configuration file that will be created. You refer to this file when you [run the migration agent](https://docs.cloud.google.com/bigquery/docs/migration/teradata#run_the_migration_agent) to start the transfer.
         3.  Skip the remaining steps.
         
         If you are using the migration agent to set up a transfer, press **Enter** to skip to the next prompt.
@@ -390,7 +392,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
             
             The migration agent creates the schema file and outputs its location.
         
-        4.  Modify the schema file to mark partitioning, clustering, primary keys and change tracking columns, and verify that you want to use this schema for the transfer configuration. See [Custom schema file](/bigquery/docs/migration/teradata-overview#custom_schema_file) for tips.
+        4.  Modify the schema file to mark partitioning, clustering, primary keys and change tracking columns, and verify that you want to use this schema for the transfer configuration. See [Custom schema file](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#custom_schema_file) for tips.
         
         5.  Press `  Enter  ` to skip to the next prompt.
         
@@ -410,7 +412,7 @@ If you are going to use the migration agent to create a custom schema file, ensu
 
 The configuration file created in the initialization step looks similar to this example:
 
-``` text
+``` 
 {
   "agent-id": "81f452cd-c931-426c-a0de-c62f726f6a6f",
   "transfer-configuration": {
@@ -454,17 +456,13 @@ The configuration file created in the initialization step looks similar to this 
     
       - `  database-credentials-file-path  ` : **(Optional)** The path to a file that contains credentials for connecting to the Teradata database automatically. The file should contain two lines for the credentials. You can use a username/password, as shown in the following example:
         
-        ``` text
-        username=abc
-        password=123
-        ```
+            username=abc
+            password=123
         
         You can also use a secret from [SecretManager](https://cloud.google.com/secret-manager) instead:
         
-        ``` text
-        username=abc
-        secret_resource_id=projects/my-project/secrets/my-secret-name/versions/1
-        ```
+            username=abc
+            secret_resource_id=projects/my-project/secrets/my-secret-name/versions/1
         
         When using a credentials file, take care to control access to the folder where you store it on the local file system, because it isn't encrypted. If no path is provided, you will be prompted for a username and password when you start an agent.
         
@@ -478,11 +476,11 @@ The configuration file created in the initialization step looks similar to this 
     
       - `  use-tpt  ` : Directs the migration agent to use Teradata Parallel Transporter (TPT) as an extraction method.
         
-        For each table, the migration agent generates a TPT script, starts a `  tbuild  ` process and waits for completion. Once the `  tbuild  ` process completes, the agent lists and uploads the extracted files to Cloud Storage, and then deletes the TPT script. For more information, see [Extraction method](/bigquery/docs/migration/teradata-overview#extraction_method) .
+        For each table, the migration agent generates a TPT script, starts a `  tbuild  ` process and waits for completion. Once the `  tbuild  ` process completes, the agent lists and uploads the extracted files to Cloud Storage, and then deletes the TPT script. For more information, see [Extraction method](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview#extraction_method) .
         
         Warning: An agent generates and saves a TPT script into a file in the local extraction folder. The script contains a Teradata username and password. Take appropriate steps to restrict access to files in the local extraction folder, because the username and password aren't encrypted.
     
-      - `  transfer-views  ` : Directs the migration agent to also transfer data from views. Use this only when you require data customization during migration. In other cases, migrate views to [BigQuery Views](/bigquery/docs/views-intro) . This option has the following prerequisites:
+      - `  transfer-views  ` : Directs the migration agent to also transfer data from views. Use this only when you require data customization during migration. In other cases, migrate views to [BigQuery Views](https://docs.cloud.google.com/bigquery/docs/views-intro) . This option has the following prerequisites:
         
           - You can only use this option with Teradata versions 16.10 and higher.
           - A view should have an integer column "partition" defined, pointing to an ID of partition for the given row in the underlying table.
@@ -509,30 +507,28 @@ The configuration file created in the initialization step looks similar to this 
         
         Example: Mapping from Teradata type `  TIMESTAMP  ` to BigQuery type `  DATETIME  ` :
         
-        ``` text
-        {
-        "rules": [
-          {
-            "database": {
-                "name": "database.*",
-                "tables": [
-                   {
-                     "name": "table.*"
-                   }
-                ]
-            },
-            "match": {
-              "type": "COLUMN_TYPE",
-              "value": "TIMESTAMP"
-            },
-            "action": {
-              "type": "MAPPING",
-              "value": "DATETIME"
+            {
+            "rules": [
+              {
+                "database": {
+                    "name": "database.*",
+                    "tables": [
+                       {
+                         "name": "table.*"
+                       }
+                    ]
+                },
+                "match": {
+                  "type": "COLUMN_TYPE",
+                  "value": "TIMESTAMP"
+                },
+                "action": {
+                  "type": "MAPPING",
+                  "value": "DATETIME"
+                }
+              }
+            ]
             }
-          }
-        ]
-        }
-        ```
         
         Attributes:
         
@@ -547,7 +543,7 @@ The configuration file created in the initialization step looks similar to this 
     
       - `  compress-output  ` : **(Optional)** dictates whether data should be compressed before storing on Cloud Storage. This is only applied in **tpt-mode** . By default this value is `  false  ` .
     
-      - `  gcs-module-config-dir  ` : **(Optional)** the path to the [credentials file](/bigquery/docs/migration/teradata#setup_credential_file_for_access_module) to access the Cloud Storage bucket. The default directory is `  $HOME/.gcs  ` , but you can use this parameter to change the directory.
+      - `  gcs-module-config-dir  ` : **(Optional)** the path to the [credentials file](https://docs.cloud.google.com/bigquery/docs/migration/teradata#setup_credential_file_for_access_module) to access the Cloud Storage bucket. The default directory is `  $HOME/.gcs  ` , but you can use this parameter to change the directory.
     
       - `  gcs-module-connection-count  ` : **(Optional)** Specifies the number of TCP connections to the Cloud Storage service. The default value is 10.
     
@@ -577,42 +573,13 @@ By fine tuning the agent parameters, you can optimize the data extraction proces
 
 The following table provides information about parameters you can use to tune your migration:
 
-<table>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Recommended Value</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong><code dir="ltr" translate="no">        gcs-module-writer-instances       </code></strong></td>
-<td>4</td>
-<td>Increases parallelization for TPT extraction and Cloud Storage write operations. Tune this value to balance transfer optimization and Teradata instance load.</td>
-</tr>
-<tr class="even">
-<td><strong><code dir="ltr" translate="no">        gcs-module-connection-count       </code></strong></td>
-<td>10</td>
-<td>Sets the number of TCP connections to Cloud Storage. Increasing this value improves parallelization during the Cloud Storage upload phase.</td>
-</tr>
-<tr class="odd">
-<td><strong><code dir="ltr" translate="no">        gcs-module-buffer-size       </code></strong></td>
-<td>32m</td>
-<td>Defines the size of the buffers for TCP connections. Testing indicates that <code dir="ltr" translate="no">       32m      </code> provides optimal results.</td>
-</tr>
-<tr class="even">
-<td><strong><code dir="ltr" translate="no">        tpt-export-count       </code></strong></td>
-<td>Must be less than or equal to the <code dir="ltr" translate="no">       max-sessions      </code> value.</td>
-<td>Overrides the default export operator count in the TPT script. The value should be less than or equal to the <code dir="ltr" translate="no">       max-sessions      </code> value to ensure that each instance has enough pipes to the database.</td>
-</tr>
-<tr class="odd">
-<td><strong><code dir="ltr" translate="no">        tpt-file-writer-count       </code></strong></td>
-<td>Should be equal to the <code dir="ltr" translate="no">       export-count      </code> value.</td>
-<td>Overrides the default file writer operator count in the TPT script. Ideally, this value should match the <code dir="ltr" translate="no">       tpt-export-count      </code> value to avoid bottlenecks.</td>
-</tr>
-</tbody>
-</table>
+| Parameter                                          | Recommended Value                                                      | Description                                                                                                                                                                                                     |
+| -------------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`         gcs-module-writer-instances        `** | 4                                                                      | Increases parallelization for TPT extraction and Cloud Storage write operations. Tune this value to balance transfer optimization and Teradata instance load.                                                   |
+| **`         gcs-module-connection-count        `** | 10                                                                     | Sets the number of TCP connections to Cloud Storage. Increasing this value improves parallelization during the Cloud Storage upload phase.                                                                      |
+| **`         gcs-module-buffer-size        `**      | 32m                                                                    | Defines the size of the buffers for TCP connections. Testing indicates that `        32m       ` provides optimal results.                                                                                      |
+| **`         tpt-export-count        `**            | Must be less than or equal to the `        max-sessions       ` value. | Overrides the default export operator count in the TPT script. The value should be less than or equal to the `        max-sessions       ` value to ensure that each instance has enough pipes to the database. |
+| **`         tpt-file-writer-count        `**       | Should be equal to the `        export-count       ` value.            | Overrides the default file writer operator count in the TPT script. Ideally, this value should match the `        tpt-export-count       ` value to avoid bottlenecks.                                          |
 
 Consider the following best practices for configuration:
 
@@ -635,7 +602,7 @@ After initializing the migration agent and creating the configuration file, use 
     
     The migration agent must keep running for the entire period of the transfer. If you run the agent remotely, for example by using SSH, make sure it remains active even if the remote connection is closed. You can do this by using \`tmux\` or similar utilities.
     
-    ``` text
+    ``` notranslate
     java -cp \
     OS-specific-separated-paths-to-jars (JDBC and agent) \
     com.google.cloud.bigquery.dms.Agent \
@@ -644,7 +611,7 @@ After initializing the migration agent and creating the configuration file, use 
     
     ### Unix, Linux, Mac OS
     
-    ``` text
+    ``` notranslate
     java -cp \
     /usr/local/migration/Teradata/JDBC/terajdbc4.jar:mirroring-agent.jar \
     com.google.cloud.bigquery.dms.Agent \
@@ -655,7 +622,7 @@ After initializing the migration agent and creating the configuration file, use 
     
     Copy all the files into the `  C:\migration  ` folder (or adjust the paths in the command), then run:
     
-    ``` text
+    ``` notranslate
     java -cp C:\migration\terajdbc4.jar;C:\migration\mirroring-agent.jar com.google.cloud.bigquery.dms.Agent --configuration-file=config.json
     ```
     
@@ -663,7 +630,7 @@ After initializing the migration agent and creating the configuration file, use 
 
 2.  When prompted, type the username and password for the database connection. If the username and password are valid, the data migration starts.
     
-    **Optional** In the command to start the migration, you can also use a flag that passes a credentials file to the agent, instead of entering the username and password each time. See the optional parameter [`  database-credentials-file-path  `](#configuration_file_for_the_migration_agent) in the agent configuration file for more information. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it isn't encrypted.
+    **Optional** In the command to start the migration, you can also use a flag that passes a credentials file to the agent, instead of entering the username and password each time. See the optional parameter [`  database-credentials-file-path  `](https://docs.cloud.google.com/bigquery/docs/migration/teradata#configuration_file_for_the_migration_agent) in the agent configuration file for more information. When using a credentials file, take appropriate steps to control access to the folder where you store it on the local file system, because it isn't encrypted.
 
 3.  Leave this session open until the migration is completed. If you created a recurring migration transfer, keep this session open indefinitely. If this session is interrupted, current and future transfer runs fail.
 
@@ -671,22 +638,24 @@ After initializing the migration agent and creating the configuration file, use 
 
 5.  If the migration agent stops working while the transfer is in progress or scheduled, the Google Cloud console shows the error status and prompts you to restart the agent. To restart the migration agent, return to the start of this section. You don't need to repeat the initialization command. The transfer resumes from the point where tables were not completed.
     
-    WARNING: The extracted data from Teradata is not encrypted. Take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](/storage/docs/access-control/using-iam-permissions) .
+    WARNING: The extracted data from Teradata is not encrypted. Take appropriate steps to restrict access to extracted files in the local machine's extraction folder, and ensure that your Cloud Storage bucket is not publicly available. Read more about controlling access to Cloud Storage buckets with [IAM roles](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions) .
 
 ## Track the progress of the migration
 
-You can view the status of the migration in the Google Cloud console. You can also set up Pub/Sub or email notifications. See [BigQuery Data Transfer Service notifications](/bigquery/docs/transfer-run-notifications) .
+You can view the status of the migration in the Google Cloud console. You can also set up Pub/Sub or email notifications. See [BigQuery Data Transfer Service notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 The BigQuery Data Transfer Service schedules and initiates a transfer run on a schedule specified upon the creation of transfer configuration. It is important that the migration agent is running when a transfer run is active. If there are no updates from the agent side within 24 hours, a transfer run fails.
 
 Example of migration status in the Google Cloud console:
 
+![Migration status](https://docs.cloud.google.com/static/bigquery/images/teradata-migration-status.png)
+
 ## Upgrade the migration agent
 
-If a new version of the migration agent is available, you must manually update the migration agent. To receive notices about the BigQuery Data Transfer Service, subscribe to the [release notes](/bigquery/docs/release-notes) .
+If a new version of the migration agent is available, you must manually update the migration agent. To receive notices about the BigQuery Data Transfer Service, subscribe to the [release notes](https://docs.cloud.google.com/bigquery/docs/release-notes) .
 
 ## What's next
 
-  - Try a [test migration](/bigquery/docs/migration/teradata-tutorial) of Teradata to BigQuery.
-  - Learn more about the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - Migrate SQL code with the [Batch SQL translation](/bigquery/docs/batch-sql-translator) .
+  - Try a [test migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial) of Teradata to BigQuery.
+  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - Migrate SQL code with the [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .

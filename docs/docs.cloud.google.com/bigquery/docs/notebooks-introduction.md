@@ -1,12 +1,12 @@
 # Introduction to notebooks
 
-This document provides an introduction to [Colab Enterprise notebooks](/colab/docs/introduction) in BigQuery. You can use notebooks to complete analysis and machine learning (ML) workflows by using SQL, Python, and other common packages and APIs. Notebooks offer improved collaboration and management with the following options:
+This document provides an introduction to [Colab Enterprise notebooks](https://docs.cloud.google.com/colab/docs/introduction) in BigQuery. You can use notebooks to complete analysis and machine learning (ML) workflows by using SQL, Python, and other common packages and APIs. Notebooks offer improved collaboration and management with the following options:
 
   - Share notebooks with specific users and groups by using Identity and Access Management (IAM).
   - Review the notebook version history.
   - Revert to or branch from previous versions of the notebook.
 
-Notebooks are [BigQuery Studio](/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](/dataform/docs/overview) . [Saved queries](/bigquery/docs/saved-queries-introduction) are also code assets. All code assets are stored in a default [region](#supported_regions) . Updating the default region changes the region for all code assets created after that point.
+Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . [Saved queries](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction) are also code assets. All code assets are stored in a default [region](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction#supported_regions) . Updating the default region changes the region for all code assets created after that point.
 
 Notebook capabilities are available only in the Google Cloud console.
 
@@ -14,19 +14,19 @@ Notebook capabilities are available only in the Google Cloud console.
 
 Notebooks in BigQuery offer the following benefits:
 
-  - [BigQuery DataFrames](/python/docs/reference/bigframes/latest) is integrated into notebooks, no setup required. BigQuery DataFrames is a Python API that you can use to analyze BigQuery data at scale by using the [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [scikit-learn](https://scikit-learn.org/stable/modules/classes.html) APIs.
-  - Assistive code development powered by [Gemini generative AI](/bigquery/docs/write-sql-gemini) .
+  - [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) is integrated into notebooks, no setup required. BigQuery DataFrames is a Python API that you can use to analyze BigQuery data at scale by using the [pandas DataFrame](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html) and [scikit-learn](https://scikit-learn.org/stable/modules/classes.html) APIs.
+  - Assistive code development powered by [Gemini generative AI](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
   - Auto-completion of SQL statements, the same as in the BigQuery editor.
   - The ability to save, share, and manage versions of notebooks.
   - The ability to use [matplotlib](https://matplotlib.org/) , [seaborn](https://seaborn.pydata.org/) , and other popular libraries to visualize data at any point in your workflow.
-  - The ability to write and [execute SQL](/bigquery/docs/create-notebooks#cells) in a cell that can reference Python variables from your notebook.
-  - Interactive [DataFrame visualization](/bigquery/docs/create-notebooks#cells) that supports aggregation and customization.
+  - The ability to write and [execute SQL](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) in a cell that can reference Python variables from your notebook.
+  - Interactive [DataFrame visualization](https://docs.cloud.google.com/bigquery/docs/create-notebooks#cells) that supports aggregation and customization.
 
 ## Notebook gallery
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or to request product enhancements, contact <bigquery-notebook-gallery@google.com> .
 
@@ -39,22 +39,26 @@ The notebook gallery provides templates for every skill level. The gallery inclu
 To get started with the notebook gallery, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  From from the BigQuery Studio home page, click **View notebook gallery** .
+    
+    ![The View notebook gallery link on the BigQuery Studio home page.](https://docs.cloud.google.com/bigquery/images/template-gallery.png)
 
-For more information on using notebook gallery templates, see [Create a notebook using the notebook gallery](/bigquery/docs/create-notebooks#create-notebook-console) .
+For more information on using notebook gallery templates, see [Create a notebook using the notebook gallery](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) .
 
 ## Runtime management
 
-BigQuery uses [Colab Enterprise runtimes](/colab/docs/create-runtime) to run notebooks.
+BigQuery uses [Colab Enterprise runtimes](https://docs.cloud.google.com/colab/docs/create-runtime) to run notebooks.
 
 A notebook runtime is a Compute Engine virtual machine allocated to a particular user to enable code execution in a notebook. Multiple notebooks can share the same runtime. However, each runtime belongs to only one user and can't be used by others. Notebook runtimes are created based on template, which are typically defined by users with administrative privileges. You can change to a runtime that uses a different template type at any time.
 
 ## Notebook security
 
-You control access to notebooks by using Identity and Access Management (IAM) roles. For more information, see [Grant access to notebooks](/bigquery/docs/create-notebooks#grant_access_to_notebooks) .
+You control access to notebooks by using Identity and Access Management (IAM) roles. For more information, see [Grant access to notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) .
 
-To detect vulnerabilities in Python packages that you use in your notebooks, install and use [Notebook Security Scanner](/security-command-center/docs/enable-notebook-security-scanner) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+To detect vulnerabilities in Python packages that you use in your notebooks, install and use [Notebook Security Scanner](https://docs.cloud.google.com/security-command-center/docs/enable-notebook-security-scanner) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 ## Supported regions
 
@@ -82,13 +86,13 @@ Dallas
 
 `  us-south1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -106,7 +110,7 @@ Montréal
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 North Virginia
 
@@ -116,13 +120,13 @@ Oklahoma
 
 `  us-central2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -132,13 +136,13 @@ Santiago
 
 `  southamerica-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
@@ -148,7 +152,7 @@ Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Asia Pacific**
 
@@ -206,7 +210,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -216,7 +220,7 @@ Finland
 
 `  europe-north1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
@@ -226,13 +230,13 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
 `  europe-southwest1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
@@ -242,19 +246,19 @@ Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
 `  europe-west9  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
 `  europe-north2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
@@ -268,7 +272,7 @@ Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Middle East**
 
@@ -290,13 +294,15 @@ For pricing information about BigQuery Studio notebooks, see [Notebook runtime p
 
 ## Monitor slot usage
 
-You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ\_STUDIO\_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebook.
+You can monitor your BigQuery Studio notebook slot usage by viewing your [Cloud Billing report](https://docs.cloud.google.com/billing/docs/reports) in the Google Cloud console. In the Cloud Billing report, apply a filter with the label **goog-bq-feature-type** with the value **BQ\_STUDIO\_NOTEBOOK** to view slot usage and costs from BigQuery Studio notebook.
+
+![BigQuery Studio notebook slot usage report.](https://docs.cloud.google.com/static/bigquery/images/studio-notebook-slot-usage.png)
 
 ## Troubleshooting
 
-For more information, see [Troubleshoot Colab Enterprise](/colab/docs/troubleshooting) .
+For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.google.com/colab/docs/troubleshooting) .
 
 ## What's next
 
-  - Learn how to [create notebooks](/bigquery/docs/create-notebooks) .
-  - Learn how to [manage notebooks](/bigquery/docs/manage-notebooks) .
+  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+  - Learn how to [manage notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks) .

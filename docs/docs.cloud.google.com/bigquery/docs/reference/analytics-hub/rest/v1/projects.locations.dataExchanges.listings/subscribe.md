@@ -1,39 +1,39 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Request body](#body.request_body)
-      - [JSON representation](#body.request_body.SCHEMA_REPRESENTATION)
-  - [Response body](#body.response_body)
-      - [JSON representation](#body.SubscribeListingResponse.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](#body.aspect)
-  - [DestinationPubSubSubscription](#DestinationPubSubSubscription)
-      - [JSON representation](#DestinationPubSubSubscription.SCHEMA_REPRESENTATION)
-  - [PubSubSubscription](#PubSubSubscription)
-      - [JSON representation](#PubSubSubscription.SCHEMA_REPRESENTATION)
-  - [PushConfig](#PushConfig)
-      - [JSON representation](#PushConfig.SCHEMA_REPRESENTATION)
-  - [OidcToken](#OidcToken)
-      - [JSON representation](#OidcToken.SCHEMA_REPRESENTATION)
-  - [PubsubWrapper](#PubsubWrapper)
-  - [NoWrapper](#NoWrapper)
-      - [JSON representation](#NoWrapper.SCHEMA_REPRESENTATION)
-  - [BigQueryConfig](#BigQueryConfig)
-      - [JSON representation](#BigQueryConfig.SCHEMA_REPRESENTATION)
-  - [CloudStorageConfig](#CloudStorageConfig)
-      - [JSON representation](#CloudStorageConfig.SCHEMA_REPRESENTATION)
-  - [TextConfig](#TextConfig)
-  - [AvroConfig](#AvroConfig)
-      - [JSON representation](#AvroConfig.SCHEMA_REPRESENTATION)
-  - [ExpirationPolicy](#ExpirationPolicy)
-      - [JSON representation](#ExpirationPolicy.SCHEMA_REPRESENTATION)
-  - [DeadLetterPolicy](#DeadLetterPolicy)
-      - [JSON representation](#DeadLetterPolicy.SCHEMA_REPRESENTATION)
-  - [RetryPolicy](#RetryPolicy)
-      - [JSON representation](#RetryPolicy.SCHEMA_REPRESENTATION)
-  - [MessageTransform](#MessageTransform)
-      - [JSON representation](#MessageTransform.SCHEMA_REPRESENTATION)
-  - [JavaScriptUDF](#JavaScriptUDF)
-      - [JSON representation](#JavaScriptUDF.SCHEMA_REPRESENTATION)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.PATH_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.request_body)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.request_body.SCHEMA_REPRESENTATION)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.response_body)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.SubscribeListingResponse.SCHEMA_REPRESENTATION)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#body.aspect)
+  - [DestinationPubSubSubscription](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DestinationPubSubSubscription)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DestinationPubSubSubscription.SCHEMA_REPRESENTATION)
+  - [PubSubSubscription](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#PubSubSubscription)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#PubSubSubscription.SCHEMA_REPRESENTATION)
+  - [PushConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#PushConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#PushConfig.SCHEMA_REPRESENTATION)
+  - [OidcToken](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#OidcToken)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#OidcToken.SCHEMA_REPRESENTATION)
+  - [PubsubWrapper](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#PubsubWrapper)
+  - [NoWrapper](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#NoWrapper)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#NoWrapper.SCHEMA_REPRESENTATION)
+  - [BigQueryConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigQueryConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#BigQueryConfig.SCHEMA_REPRESENTATION)
+  - [CloudStorageConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#CloudStorageConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#CloudStorageConfig.SCHEMA_REPRESENTATION)
+  - [TextConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#TextConfig)
+  - [AvroConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AvroConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#AvroConfig.SCHEMA_REPRESENTATION)
+  - [ExpirationPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#ExpirationPolicy.SCHEMA_REPRESENTATION)
+  - [DeadLetterPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DeadLetterPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#DeadLetterPolicy.SCHEMA_REPRESENTATION)
+  - [RetryPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#RetryPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#RetryPolicy.SCHEMA_REPRESENTATION)
+  - [MessageTransform](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#MessageTransform)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#MessageTransform.SCHEMA_REPRESENTATION)
+  - [JavaScriptUDF](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#JavaScriptUDF)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#JavaScriptUDF.SCHEMA_REPRESENTATION)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings/subscribe#try-it)
 
 Subscribes to a listing.
 
@@ -70,7 +70,7 @@ The request body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field destination can be only one of the following:
   &quot;destinationDataset&quot;: {
@@ -118,7 +118,7 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;subscription&quot;: {
     object (Subscription)
   }
@@ -142,7 +142,7 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery  `
   - `  https://www.googleapis.com/auth/cloud-platform  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .
 
 ## DestinationPubSubSubscription
 
@@ -159,7 +159,7 @@ Defines the destination Pub/Sub subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;pubsubSubscription&quot;: {
     object (PubSubSubscription)
   }
@@ -191,7 +191,7 @@ Defines the destination Pub/Sub subscription. If none of `  pushConfig  ` , `  b
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;pushConfig&quot;: {
     object (PushConfig)
@@ -376,7 +376,7 @@ Configuration for a push delivery endpoint.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;pushEndpoint&quot;: string,
   &quot;attributes&quot;: {
     string: string,
@@ -466,7 +466,7 @@ Contains information needed for generating an [OpenID Connect token](https://dev
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;serviceAccountEmail&quot;: string,
   &quot;audience&quot;: string
 }</code></pre></td>
@@ -509,7 +509,7 @@ Sets the `  data  ` field as the HTTP body for delivery.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;writeMetadata&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -539,7 +539,7 @@ Configuration for a BigQuery subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;table&quot;: string,
   &quot;useTopicSchema&quot;: boolean,
   &quot;writeMetadata&quot;: boolean,
@@ -604,7 +604,7 @@ Configuration for a Cloud Storage subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;bucket&quot;: string,
   &quot;filenamePrefix&quot;: string,
   &quot;filenameSuffix&quot;: string,
@@ -716,7 +716,7 @@ Configuration for writing message data in Avro format. Message payloads and meta
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;writeMetadata&quot;: boolean,
   &quot;useTopicSchema&quot;: boolean
 }</code></pre></td>
@@ -753,7 +753,7 @@ A policy that specifies the conditions for resource expiration (i.e., automatic 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;ttl&quot;: string
 }</code></pre></td>
 </tr>
@@ -787,7 +787,7 @@ If validation on any of the fields fails at subscription creation/updation, the 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;deadLetterTopic&quot;: string,
   &quot;maxDeliveryAttempts&quot;: integer
 }</code></pre></td>
@@ -840,7 +840,7 @@ Retry Policy is implemented on a best effort basis. At times, the delay between 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;minimumBackoff&quot;: string,
   &quot;maximumBackoff&quot;: string
 }</code></pre></td>
@@ -881,7 +881,7 @@ All supported message transforms types.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enabled&quot;: boolean,
   &quot;disabled&quot;: boolean,
 
@@ -934,7 +934,7 @@ User-defined JavaScript function that can transform or filter a Pub/Sub message.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;functionName&quot;: string,
   &quot;code&quot;: string
 }</code></pre></td>
@@ -956,7 +956,7 @@ Required. Name of the JavasScript function that should applied to Pub/Sub messag
 
 Required. JavaScript code that contains a function `  functionName  ` with the below signature:
 
-``` text
+``` 
   /**
   * Transforms a Pub/Sub message.
 

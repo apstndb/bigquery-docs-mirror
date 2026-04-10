@@ -1,18 +1,18 @@
 # Create continuous queries
 
-This document describes how to run a [continuous query](/bigquery/docs/continuous-queries-introduction) in BigQuery.
+This document describes how to run a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) in BigQuery.
 
 BigQuery continuous queries are SQL statements that run continuously. Continuous queries let you analyze incoming data in BigQuery in real time, and then either export the results to Bigtable, Pub/Sub, or Spanner, or write the results to a BigQuery table.
 
 ## Choose an account type
 
-You can create and run a continuous query job by using a user account, or you can create a continuous query job by using a user account and then run it by using a [service account](/iam/docs/service-account-overview) . You must use a service account to run a continuous query that exports results to a Pub/Sub topic.
+You can create and run a continuous query job by using a user account, or you can create a continuous query job by using a user account and then run it by using a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) . You must use a service account to run a continuous query that exports results to a Pub/Sub topic.
 
-When you use a user account, a continuous query runs for up to two days. When you use a service account, a continuous query runs for up to 150 days. For more information, see [Authorization](/bigquery/docs/continuous-queries-introduction#authorization) .
+When you use a user account, a continuous query runs for up to two days. When you use a service account, a continuous query runs for up to 150 days. For more information, see [Authorization](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#authorization) .
 
 ## Required permissions
 
-This section describes the permissions that you need to create and run a continuous query. As an alternative to the Identity and Access Management (IAM) roles mentioned, you could get the required permissions through [custom roles](/iam/docs/creating-custom-roles) .
+This section describes the permissions that you need to create and run a continuous query. As an alternative to the Identity and Access Management (IAM) roles mentioned, you could get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) .
 
 ### Permissions when using a user account
 
@@ -20,24 +20,24 @@ This section provides information about the roles and permissions required to cr
 
 To create a job in BigQuery, the user account must have the `  bigquery.jobs.create  ` IAM permission. Each of the following IAM roles grants the `  bigquery.jobs.create  ` permission:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](/bigquery/docs/access-control#bigquery.user)
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
 To export data from a BigQuery table, the user account must have the `  bigquery.tables.export  ` IAM permission. Each of the following IAM roles grants the `  bigquery.tables.export  ` permission:
 
-  - [BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )](/bigquery/docs/access-control#bigquery.dataViewer)
-  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](/bigquery/docs/access-control#bigquery.dataEditor)
-  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](/bigquery/docs/access-control#bigquery.dataOwner)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer)
+  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
 To update data in a BigQuery table, the user account must have the `  bigquery.tables.updateData  ` IAM permission. Each of the following IAM roles grants the `  bigquery.tables.updateData  ` permission:
 
-  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](/bigquery/docs/access-control#bigquery.dataEditor)
-  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](/bigquery/docs/access-control#bigquery.dataOwner)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
-If the user account must enable the APIs required for your continuous query use case, the user account must have the [Service Usage Admin ( `  roles/serviceusage.serviceUsageAdmin  ` )](/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role.
+If the user account must enable the APIs required for your continuous query use case, the user account must have the [Service Usage Admin ( `  roles/serviceusage.serviceUsageAdmin  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role.
 
 ### Permissions when using a service account
 
@@ -47,28 +47,28 @@ This section provides information about the roles and permissions required by th
 
 To create a job in BigQuery, the user account must have the `  bigquery.jobs.create  ` IAM permission. Each of the following IAM roles grants the `  bigquery.jobs.create  ` permission:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](/bigquery/docs/access-control#bigquery.user)
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
-To submit a job that runs using a service account, the user account must have the [Service Account User ( `  roles/iam.serviceAccountUser  ` )](/iam/docs/service-account-permissions#user-role) role. If you are using the same user account to create the service account, then the user account must have the [Service Account Admin ( `  roles/iam.serviceAccountAdmin  ` )](/iam/docs/roles-permissions/iam#iam.serviceAccountUser) role. For information on how to limit a user's access to single service account, rather than to all service accounts within a project, see [Grant a single role](/iam/docs/manage-access-service-accounts#grant-single-role) .
+To submit a job that runs using a service account, the user account must have the [Service Account User ( `  roles/iam.serviceAccountUser  ` )](https://docs.cloud.google.com/iam/docs/service-account-permissions#user-role) role. If you are using the same user account to create the service account, then the user account must have the [Service Account Admin ( `  roles/iam.serviceAccountAdmin  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) role. For information on how to limit a user's access to single service account, rather than to all service accounts within a project, see [Grant a single role](https://docs.cloud.google.com/iam/docs/manage-access-service-accounts#grant-single-role) .
 
-If the user account must enable the APIs required for your continuous query use case, the user account must have the [Service Usage Admin ( `  roles/serviceusage.serviceUsageAdmin  ` )](/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role.
+If the user account must enable the APIs required for your continuous query use case, the user account must have the [Service Usage Admin ( `  roles/serviceusage.serviceUsageAdmin  ` )](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageAdmin) role.
 
 #### Service account permissions
 
 To export data from a BigQuery table, the service account must have the `  bigquery.tables.export  ` IAM permission. Each of the following IAM roles grants the `  bigquery.tables.export  ` permission:
 
-  - [BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )](/bigquery/docs/access-control#bigquery.dataViewer)
-  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](/bigquery/docs/access-control#bigquery.dataEditor)
-  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](/bigquery/docs/access-control#bigquery.dataOwner)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer)
+  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
 To update data in a BigQuery table, the service account must have the `  bigquery.tables.updateData  ` IAM permission. Each of the following IAM roles grants the `  bigquery.tables.updateData  ` permission:
 
-  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](/bigquery/docs/access-control#bigquery.dataEditor)
-  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](/bigquery/docs/access-control#bigquery.dataOwner)
-  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](/bigquery/docs/access-control#bigquery.admin)
+  - [BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataEditor)
+  - [BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataOwner)
+  - [BigQuery Admin ( `  roles/bigquery.admin  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)
 
 ## Before you begin
 
@@ -77,66 +77,70 @@ To update data in a BigQuery table, the service account must have the `  bigquer
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
 ### Create a reservation
 
-[Create an Enterprise or Enterprise Plus edition reservation](/bigquery/docs/reservations-tasks#create_reservations) , and then [create a reservation assignment](/bigquery/docs/reservations-assignments#create_reservation_assignments) with a `  CONTINUOUS  ` job type. This reservation can use [autoscaling](/bigquery/docs/continuous-queries-introduction#slots_autoscaling) and [idle slot sharing](/bigquery/docs/slots#idle_slots) . There are [reservation limitations](/bigquery/docs/continuous-queries-introduction#reservation_limitations) that apply to reservation assignments for continuous queries.
+[Create an Enterprise or Enterprise Plus edition reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) , and then [create a reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#create_reservation_assignments) with a `  CONTINUOUS  ` job type. This reservation can use [autoscaling](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#slots_autoscaling) and [idle slot sharing](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) . There are [reservation limitations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#reservation_limitations) that apply to reservation assignments for continuous queries.
 
 ## Export to Pub/Sub
 
-Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Pub/Sub. For more information, see [Export to Pub/Sub](/bigquery/docs/export-to-pubsub) .
+Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Pub/Sub. For more information, see [Export to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
 
 ### Embed custom attributes as metadata in Pub/Sub messages
 
-You can use [Pub/Sub attributes](/pubsub/docs/publisher#using-attributes) to provide additional information about the message, such as its priority, origin, destination, or additional metadata. You can also use attributes to [filter messages on the subscription](/pubsub/docs/subscription-message-filter) .
+You can use [Pub/Sub attributes](https://docs.cloud.google.com/pubsub/docs/publisher#using-attributes) to provide additional information about the message, such as its priority, origin, destination, or additional metadata. You can also use attributes to [filter messages on the subscription](https://docs.cloud.google.com/pubsub/docs/subscription-message-filter) .
 
 Within a continuous query result, if a column is named `  _ATTRIBUTES  ` , then its values are copied to the Pub/Sub message attributes. The provided fields within `  _ATTRIBUTES  ` are used as attribute keys.
 
 The `  _ATTRIBUTES  ` column must be of `  JSON  ` type, in the format `  ARRAY<STRUCT<STRING, STRING>>  ` or `  STRUCT<STRING>  ` .
 
-For an example, see [export data to a Pub/Sub topic](/bigquery/docs/continuous-queries#pubsub-example) .
+For an example, see [export data to a Pub/Sub topic](https://docs.cloud.google.com/bigquery/docs/continuous-queries#pubsub-example) .
 
 ## Export to Bigtable
 
-Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Bigtable. For more information, see [Export to Bigtable](/bigquery/docs/export-to-bigtable) .
+Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Bigtable. For more information, see [Export to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
 
 ## Export to Spanner
 
-Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Spanner. For more information, see [Export to Spanner (reverse ETL)](/bigquery/docs/export-to-spanner) .
+Additional APIs, IAM permissions, and Google Cloud resources are required to export data to Spanner. For more information, see [Export to Spanner (reverse ETL)](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .
 
 ## Write data to a BigQuery table
 
-You can write data to a BigQuery table by using an [`  INSERT  ` statement](/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
+You can write data to a BigQuery table by using an [`  INSERT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) .
 
 ## Use AI functions
 
-Additional APIs, IAM permissions, and Google Cloud resources are required to use a [supported](/bigquery/docs/continuous-queries-introduction#supported_operations) AI function in a continuous query. For more information, see one of the following topics, based on your use case:
+Additional APIs, IAM permissions, and Google Cloud resources are required to use a [supported](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) AI function in a continuous query. For more information, see one of the following topics, based on your use case:
 
-  - [Generate text by using the `  AI.GENERATE_TEXT  ` function](/bigquery/docs/generate-text-tutorial)
-  - [Generate text embeddings by using the `  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/generate-text-embedding)
-  - [Understand text with the `  ML.UNDERSTAND_TEXT  ` function](/bigquery/docs/understand-text)
-  - [Translate text with the `  ML.TRANSLATE  ` function](/bigquery/docs/translate-text)
+  - [Generate text by using the `  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial)
+  - [Generate text embeddings by using the `  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
+  - [Understand text with the `  ML.UNDERSTAND_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/understand-text)
+  - [Translate text with the `  ML.TRANSLATE  ` function](https://docs.cloud.google.com/bigquery/docs/translate-text)
 
-When you use an AI function in a continuous query, consider whether the query output will remain within the [quota](/bigquery/quotas#cloud_ai_service_functions) for the function. If you exceed the quota, you might have to separately handle the records that don't get processed.
+When you use an AI function in a continuous query, consider whether the query output will remain within the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for the function. If you exceed the quota, you might have to separately handle the records that don't get processed.
 
 ## Specify a starting time for the continuous query
 
-You must use the [`  APPENDS  ` function](/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `  FROM  ` clause of a continuous query to specify the earliest data to process. For example, `  APPENDS(TABLE my_table, start_timestamp)  ` .
+You must use the [`  APPENDS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends) in the `  FROM  ` clause of a continuous query to specify the earliest data to process. For example, `  APPENDS(TABLE my_table, start_timestamp)  ` .
 
 The `  start_timestamp  ` argument defines the point in time at which the continuous query begins processing data. For example, `  APPENDS(TABLE my_table, CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE)  ` tells BigQuery to process data that was added to the table `  my_table  ` at most 10 minutes before the start of the continuous query. Data that's subsequently added to `  my_table  ` is processed as it comes in. There is no imposed delay on data processing.
 
-When specifying the `  start_timestamp  ` argument, the value must fall within the table's [time travel](/bigquery/docs/time-travel) window, which defaults to seven days for standard tables. Setting the `  start_timestamp  ` to `  NULL  ` defaults to the table's creation time. Using a value of `  NULL  ` isn't recommended because an error is returned if the table was created earlier than the time travel window. A query using `  NULL  ` might succeed for a newly created table but fail later if the table's creation timestamp ages out of the seven day window.
+When specifying the `  start_timestamp  ` argument, the value must fall within the table's [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) window, which defaults to seven days for standard tables. Setting the `  start_timestamp  ` to `  NULL  ` defaults to the table's creation time. Using a value of `  NULL  ` isn't recommended because an error is returned if the table was created earlier than the time travel window. A query using `  NULL  ` might succeed for a newly created table but fail later if the table's creation timestamp ages out of the seven day window.
 
 Don't provide an `  end_timestamp  ` argument to the `  APPENDS  ` function when you use it in a continuous query.
 
@@ -144,7 +148,7 @@ Don't provide an `  end_timestamp  ` argument to the `  APPENDS  ` function when
 
 The following example shows how to start a continuous query from a particular point in time by using the `  APPENDS  ` function, when querying a BigQuery table that is receiving streaming taxi ride information:
 
-``` text
+``` notranslate
 EXPORT DATA
   OPTIONS (format = 'CLOUD_PUBSUB',
     uri = 'https://pubsub.googleapis.com/projects/myproject/topics/taxi-real-time-rides') AS (
@@ -171,7 +175,7 @@ The following example shows how to backfill older data from a BigQuery table rec
 
 1.  Run a standard query to backfill data up to a particular point in time:
     
-    ``` text
+    ``` notranslate
     INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
     SELECT
       timestamp,
@@ -192,7 +196,7 @@ The following example shows how to backfill older data from a BigQuery table rec
 
 2.  Run a continuous query from the point in time at which the query stopped:
     
-    ``` text
+    ``` notranslate
     INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
     SELECT
       timestamp,
@@ -215,13 +219,15 @@ The following example shows how to backfill older data from a BigQuery table rec
 
 ## Run a continuous query by using a user account
 
-This section describes how to run a continuous query by using a user account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by a user account runs for a maximum of two days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](/bigquery/docs/continuous-queries-monitor#retry) .
+This section describes how to run a continuous query by using a user account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by a user account runs for a maximum of two days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#retry) .
 
 Follow these steps to run a continuous query:
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click settings **More** .
     
@@ -229,7 +235,7 @@ Follow these steps to run a continuous query:
     2.  Click **Confirm** .
     3.  Optional: To control how long the query runs, click **Query settings** and set the **Job timeout** in milliseconds.
 
-3.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) .
+3.  In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
 
 4.  Click **Run** .
 
@@ -237,22 +243,24 @@ Follow these steps to run a continuous query:
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
-
-2.  In Cloud Shell, run the continuous query by using the [`  bq query  ` command](/bigquery/docs/reference/bq-cli-reference#bq_query) with the `  --continuous  ` flag:
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
     
-    ``` text
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+
+2.  In Cloud Shell, run the continuous query by using the [`  bq query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the `  --continuous  ` flag:
+    
+    ``` notranslate
     bq query --use_legacy_sql=false --continuous=true
     'QUERY'
     ```
     
-    Replace `  QUERY  ` with the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) . You can control how long the query runs by using the `  --job_timeout_ms  ` flag.
+    Replace `  QUERY  ` with the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) . You can control how long the query runs by using the `  --job_timeout_ms  ` flag.
 
 ### API
 
-Run the continuous query by calling the [`  jobs.insert  ` method](/bigquery/docs/reference/rest/v2/jobs/insert) . You must set the `  continuous  ` field to `  true  ` in the [`  JobConfigurationQuery  `](/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) of the [`  Job  ` resource](/bigquery/docs/reference/rest/v2/Job) that you pass in. You can optionally control how long the query runs by setting the [`  jobTimeoutMs  ` field](/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) .
+Run the continuous query by calling the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) . You must set the `  continuous  ` field to `  true  ` in the [`  JobConfigurationQuery  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) of the [`  Job  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) that you pass in. You can optionally control how long the query runs by setting the [`  jobTimeoutMs  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) .
 
-``` text
+``` notranslate
 curl --request POST \
   "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
   --header "Authorization: Bearer $(gcloud auth print-access-token)" \
@@ -264,21 +272,23 @@ curl --request POST \
 Replace the following:
 
   - `  PROJECT_ID  ` : your project ID.
-  - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) .
+  - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
 
 ## Run a continuous query by using a service account
 
-This section describes how to run a continuous query by using a service account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by using a service account can run for up to 150 days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](/bigquery/docs/continuous-queries-monitor#retry) .
+This section describes how to run a continuous query by using a service account. After the continuous query is running, you can close the Google Cloud console, terminal window, or application without interrupting query execution. A continuous query run by using a service account can run for up to 150 days and then automatically stops. To continue processing new incoming data, start a new continuous query and [specify a starting point](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) . To automate this process, see [retry failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#retry) .
 
 Follow these steps to use a service account to run a continuous query:
 
 ### Console
 
-1.  [Create a service account](/iam/docs/service-accounts-create) .
+1.  [Create a service account](https://docs.cloud.google.com/iam/docs/service-accounts-create) .
 
-2.  [Grant](/iam/docs/granting-changing-revoking-access) the required [permissions](#service_account_permissions) to the service account.
+2.  [Grant](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) the required [permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#service_account_permissions) to the service account.
 
 3.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 4.  In the query editor, click **More** .
 
@@ -294,21 +304,23 @@ Follow these steps to use a service account to run a continuous query:
 
 10. Click **Save** .
 
-11. In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) .
+11. In the query editor, type in the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
 
 12. Click **Run** .
 
 ### bq
 
-1.  [Create a service account](/iam/docs/service-accounts-create) .
+1.  [Create a service account](https://docs.cloud.google.com/iam/docs/service-accounts-create) .
 
-2.  [Grant](/iam/docs/granting-changing-revoking-access) the required [permissions](#service_account_permissions) to the service account.
+2.  [Grant](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) the required [permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#service_account_permissions) to the service account.
 
 3.  In the Google Cloud console, activate Cloud Shell.
     
-    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
-4.  On the command line, run the continuous query by using the [`  bq query  ` command](/bigquery/docs/reference/bq-cli-reference#bq_query) with the following flags:
+4.  On the command line, run the continuous query by using the [`  bq query  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) with the following flags:
     
       - Set the `  --continuous  ` flag to `  true  ` to make the query continuous.
       - Use the `  --connection_property  ` flag to specify a service account to use.
@@ -316,7 +328,7 @@ Follow these steps to use a service account to run a continuous query:
     
     <!-- end list -->
     
-    ``` text
+    ``` notranslate
     bq query --project_id=PROJECT_ID --use_legacy_sql=false \
     --continuous=true --connection_property=service_account=SERVICE_ACCOUNT_EMAIL \
     'QUERY'
@@ -326,22 +338,22 @@ Follow these steps to use a service account to run a continuous query:
     
       - `  PROJECT_ID  ` : your project ID.
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email from the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
-      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) .
+      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
 
 ### API
 
-1.  [Create a service account](/iam/docs/service-accounts-create) .
+1.  [Create a service account](https://docs.cloud.google.com/iam/docs/service-accounts-create) .
 
-2.  [Grant](/iam/docs/granting-changing-revoking-access) the required [permissions](#service_account_permissions) to the service account.
+2.  [Grant](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) the required [permissions](https://docs.cloud.google.com/bigquery/docs/continuous-queries#service_account_permissions) to the service account.
 
-3.  Run the continuous query by calling the [`  jobs.insert  ` method](/bigquery/docs/reference/rest/v2/jobs/insert) . Set the following fields in the [`  JobConfigurationQuery  ` resource](/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) of the [`  Job  ` resource](/bigquery/docs/reference/rest/v2/Job) that you pass in:
+3.  Run the continuous query by calling the [`  jobs.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) . Set the following fields in the [`  JobConfigurationQuery  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery) of the [`  Job  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) that you pass in:
     
       - Set the `  continuous  ` field to `  true  ` to make the query continuous.
       - Use the `  connectionProperties  ` field to specify a service account to use.
     
-    You can optionally control how long the query runs by setting the [`  jobTimeoutMs  ` field](/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) in the [`  JobConfiguration  ` resource](/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
+    You can optionally control how long the query runs by setting the [`  jobTimeoutMs  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.FIELDS.job_timeout_ms) in the [`  JobConfiguration  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
     
-    ``` text
+    ``` notranslate
     curl --request POST \
       "https://bigquery.googleapis.com/bigquery/v2/projects/PROJECT_ID/jobs" \
       --header "Authorization: Bearer $(gcloud auth print-access-token)" \
@@ -353,14 +365,16 @@ Follow these steps to use a service account to run a continuous query:
     Replace the following:
     
       - `  PROJECT_ID  ` : your project ID.
-      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](/bigquery/docs/continuous-queries-introduction#supported_operations) .
+      - `  QUERY  ` : the SQL statement for the continuous query. The SQL statement must only contain [supported operations](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#supported_operations) .
       - `  SERVICE_ACCOUNT_EMAIL  ` : the service account email. You can get the service account email on the [**Service accounts** page](https://console.cloud.google.com/iam-admin/serviceaccounts) of the Google Cloud console.
 
 ## Create a custom job ID
 
-Every query job is assigned a job ID that you can use to search for and manage the job. By default, job IDs are randomly generated. To make it easier to search for the job ID of a continuous query using [job history](/bigquery/docs/managing-jobs#list_jobs_in_a_project) or [jobs explorer](/bigquery/docs/admin-jobs-explorer#filter-jobs) , you can assign a custom job ID prefix:
+Every query job is assigned a job ID that you can use to search for and manage the job. By default, job IDs are randomly generated. To make it easier to search for the job ID of a continuous query using [job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#list_jobs_in_a_project) or [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) , you can assign a custom job ID prefix:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click **More** .
 
@@ -382,7 +396,7 @@ The following SQL examples show common use cases for continuous queries.
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data to a Pub/Sub topic in real time with message attributes:
 
-``` text
+``` notranslate
 EXPORT DATA
   OPTIONS (
     format = 'CLOUD_PUBSUB',
@@ -412,7 +426,7 @@ AS (
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and exports the data into a Bigtable table in real time:
 
-``` text
+``` notranslate
 EXPORT DATA
   OPTIONS (
     format = 'CLOUD_BIGTABLE',
@@ -443,7 +457,7 @@ AS (
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and then exports the data into a Spanner table in real time:
 
-``` text
+``` notranslate
 EXPORT DATA
  OPTIONS (
    format = 'CLOUD_SPANNER',
@@ -482,7 +496,7 @@ EXPORT DATA
 
 The following example shows a continuous query that filters and transforms data from a BigQuery table that is receiving streaming taxi ride information, and then writes the data to another BigQuery table in real time. This makes the data available for further downstream analysis.
 
-``` text
+``` notranslate
 INSERT INTO `myproject.real_time_taxi_streaming.transformed_taxirides`
 SELECT
   timestamp,
@@ -507,7 +521,7 @@ WHERE
 
 The following example shows a continuous query which uses a Vertex AI model to generate an advertisement for taxi riders based on their current latitude and longitude, and then exports the results into a Pub/Sub topic in real time:
 
-``` text
+``` notranslate
 EXPORT DATA
   OPTIONS (
     format = 'CLOUD_PUBSUB',
@@ -559,15 +573,15 @@ You can't update the SQL used in a continuous query while the continuous query j
 
 Follow these steps to modify the SQL used in a continuous query:
 
-1.  [View the job details](/bigquery/docs/managing-jobs#view-job) for the continuous query job that you want to update, and note the job ID.
+1.  [View the job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) for the continuous query job that you want to update, and note the job ID.
 
 2.  If possible, pause collection of upstream data. If you can't do this, you might get some data duplication when the continuous query is restarted.
 
-3.  [Cancel the continuous query](/bigquery/docs/continuous-queries#cancel_a_continuous_query) that you want to modify.
+3.  [Cancel the continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries#cancel_a_continuous_query) that you want to modify.
 
-4.  Get the `  end_time  ` value for the original continuous query job by using the `  INFORMATION_SCHEMA  ` [`  JOBS  ` view](/bigquery/docs/information-schema-jobs) :
+4.  Get the `  end_time  ` value for the original continuous query job by using the `  INFORMATION_SCHEMA  ` [`  JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) :
     
-    ``` text
+    ``` notranslate
     SELECT end_time
     FROM `PROJECT_ID.region-REGION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
     WHERE
@@ -582,7 +596,7 @@ Follow these steps to modify the SQL used in a continuous query:
       - `  REGION  ` : the region used by your project.
       - `  JOB_ID  ` : the continuous query job ID that you identified in Step 1.
 
-5.  Modify the continuous query SQL statement to [start the continuous query from a particular point in time](/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) , using the `  end_time  ` value that you retrieved in Step 5 as the starting point.
+5.  Modify the continuous query SQL statement to [start the continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) , using the `  end_time  ` value that you retrieved in Step 5 as the starting point.
 
 6.  Modify the continuous query SQL statement to reflect your needed changes.
 
@@ -590,18 +604,18 @@ Follow these steps to modify the SQL used in a continuous query:
 
 ## Cancel a continuous query
 
-You can [cancel](/bigquery/docs/managing-jobs#cancel_jobs) a continuous query job just like any other job. It might take up to a minute for the query to stop running after the job is cancelled.
+You can [cancel](https://docs.cloud.google.com/bigquery/docs/managing-jobs#cancel_jobs) a continuous query job just like any other job. It might take up to a minute for the query to stop running after the job is cancelled.
 
-If you cancel and then restart a query, the restarted query behaves like a new, independent query. The restarted query doesn't start processing data where the previous job stopped and can't reference the previous query's results. See [Start a continuous query from a particular point in time](#start_a_continuous_query_from_a_particular_point_in_time) .
+If you cancel and then restart a query, the restarted query behaves like a new, independent query. The restarted query doesn't start processing data where the previous job stopped and can't reference the previous query's results. See [Start a continuous query from a particular point in time](https://docs.cloud.google.com/bigquery/docs/continuous-queries#start_a_continuous_query_from_a_particular_point_in_time) .
 
 ## Monitor queries and handle errors
 
 A continuous query might be interrupted due to factors such as data inconsistencies, schema changes, temporary service disruptions, or maintenance. Although BigQuery handles some transient errors, best practices for improving job resiliency include the following:
 
-  - [Monitor continuous queries](/bigquery/docs/continuous-queries-monitor) .
-  - [Alert on failed queries](/bigquery/docs/continuous-queries-monitor#alert) .
-  - [Retry failed queries](/bigquery/docs/continuous-queries-monitor#retry) .
+  - [Monitor continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor) .
+  - [Alert on failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#alert) .
+  - [Retry failed queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor#retry) .
 
 ## What's next
 
-  - [Monitor continuous queries](/bigquery/docs/continuous-queries-monitor)
+  - [Monitor continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-monitor)

@@ -41,7 +41,7 @@ The `  PriceInsights_  ` table has the following schema:
 <tr class="odd">
 <td><code dir="ltr" translate="no">         id       </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Content API REST ID of the product in the form: <code dir="ltr" translate="no">       channel:content_language:feed_label:offer_id      </code> , similar to the way it's defined in the <a href="/bigquery/docs/merchant-center-products-schema">products table schema</a> . This field is a primary key.</td>
+<td>Content API REST ID of the product in the form: <code dir="ltr" translate="no">       channel:content_language:feed_label:offer_id      </code> , similar to the way it's defined in the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">products table schema</a> . This field is a primary key.</td>
 <td>online:en:AU:666840730</td>
 </tr>
 <tr class="even">

@@ -1,6 +1,6 @@
-  - [Resource: DataExchange](#DataExchange)
-      - [JSON representation](#DataExchange.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges#DataExchange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges#DataExchange.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges#METHODS_SUMMARY)
 
 ## Resource: DataExchange
 
@@ -17,7 +17,7 @@ A data exchange is a container that lets you share data. Along with the descript
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,

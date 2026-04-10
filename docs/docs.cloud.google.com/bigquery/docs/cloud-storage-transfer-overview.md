@@ -1,6 +1,6 @@
 # Introduction to Cloud Storage transfers
 
-The [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Cloud Storage lets you schedule recurring data loads from [Cloud Storage buckets](/storage/docs/buckets) to BigQuery. The path to the data stored in Cloud Storage and the destination table can both be [parameterized](/bigquery/docs/gcs-transfer-parameters) , allowing you to load data from Cloud Storage buckets organized by date.
+The [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Cloud Storage lets you schedule recurring data loads from [Cloud Storage buckets](https://docs.cloud.google.com/storage/docs/buckets) to BigQuery. The path to the data stored in Cloud Storage and the destination table can both be [parameterized](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) , allowing you to load data from Cloud Storage buckets organized by date.
 
 ## Supported file formats
 
@@ -14,34 +14,34 @@ The BigQuery Data Transfer Service supports loading data from Cloud Storage in o
 
 ## Supported compression types
 
-The BigQuery Data Transfer Service for Cloud Storage supports loading compressed data. The compression types supported by BigQuery Data Transfer Service are the same as the compression types supported by BigQuery load jobs. For more information, see [Loading compressed and uncompressed data](/bigquery/docs/batch-loading-data#loading_compressed_and_uncompressed_data) .
+The BigQuery Data Transfer Service for Cloud Storage supports loading compressed data. The compression types supported by BigQuery Data Transfer Service are the same as the compression types supported by BigQuery load jobs. For more information, see [Loading compressed and uncompressed data](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_compressed_and_uncompressed_data) .
 
 ## Data ingestion for Cloud Storage transfers
 
-You can specify how data is loaded into BigQuery by selecting a **Write Preference** in the transfer configuration when you [set up a Cloud Storage transfer](/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer) .
+You can specify how data is loaded into BigQuery by selecting a **Write Preference** in the transfer configuration when you [set up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer) .
 
-There are two types of write preferences available, [incremental transfers](#incremental_transfers) and [truncated transfers](#truncated_transfers) .
+There are two types of write preferences available, [incremental transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#incremental_transfers) and [truncated transfers](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview#truncated_transfers) .
 
 ### Incremental transfers
 
-A transfer configuration with an **`  APPEND  `** or **`  WRITE_APPEND  `** write preference, also called an incremental transfer, incrementally appends new data since the previous successful transfer to a BigQuery destination table. When a transfer configuration runs with an **`  APPEND  `** write preference, the BigQuery Data Transfer Service filters for files which have been modified since the previous successful transfer run. To determine when a file is modified, BigQuery Data Transfer Service looks at the file metadata for a "last modified time" property. For example, the BigQuery Data Transfer Service looks at the [`  updated  ` timestamp property](/storage/docs/metadata#timestamps) in a Cloud Storage file. If the BigQuery Data Transfer Service finds any files with a "last modified time" that have occurred after the timestamp of the last successful transfer, the BigQuery Data Transfer Service transfers those files in an incremental transfer.
+A transfer configuration with an **`  APPEND  `** or **`  WRITE_APPEND  `** write preference, also called an incremental transfer, incrementally appends new data since the previous successful transfer to a BigQuery destination table. When a transfer configuration runs with an **`  APPEND  `** write preference, the BigQuery Data Transfer Service filters for files which have been modified since the previous successful transfer run. To determine when a file is modified, BigQuery Data Transfer Service looks at the file metadata for a "last modified time" property. For example, the BigQuery Data Transfer Service looks at the [`  updated  ` timestamp property](https://docs.cloud.google.com/storage/docs/metadata#timestamps) in a Cloud Storage file. If the BigQuery Data Transfer Service finds any files with a "last modified time" that have occurred after the timestamp of the last successful transfer, the BigQuery Data Transfer Service transfers those files in an incremental transfer.
 
-To demonstrate how incremental transfers work, consider the following Cloud Storage transfer example. A user creates a file in a Cloud Storage bucket at time 2023-07-01T00:00Z named `  file_1  ` . The [`  updated  ` timestamp](/storage/docs/metadata#timestamps) for `  file_1  ` is the time that the file was created. The user then creates an incremental transfer from the Cloud Storage bucket, scheduled to run once daily at time 03:00Z, starting from 2023-07-01T03:00Z.
+To demonstrate how incremental transfers work, consider the following Cloud Storage transfer example. A user creates a file in a Cloud Storage bucket at time 2023-07-01T00:00Z named `  file_1  ` . The [`  updated  ` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `  file_1  ` is the time that the file was created. The user then creates an incremental transfer from the Cloud Storage bucket, scheduled to run once daily at time 03:00Z, starting from 2023-07-01T03:00Z.
 
   - At 2023-07-01T03:00Z, the first transfer run starts. As this is the first transfer run for this configuration, BigQuery Data Transfer Service attempts to load all files matching the source URI into the destination BigQuery table. The transfer run succeeds and BigQuery Data Transfer Service successfully loads `  file_1  ` into the destination BigQuery table.
   - The next transfer run, at 2023-07-02T03:00Z, detects no files where the `  updated  ` timestamp property is greater than the last successful transfer run (2023-07-01T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
 The preceding example shows how the BigQuery Data Transfer Service looks at the `  updated  ` timestamp property of the source file to determine if any changes were made to the source files, and to transfer those changes if any were detected.
 
-Following the same example, suppose that the user then creates another file in the Cloud Storage bucket at time 2023-07-03T00:00Z, named `  file_2  ` . The [`  updated  ` timestamp](/storage/docs/metadata#timestamps) for `  file_2  ` is the time that the file was created.
+Following the same example, suppose that the user then creates another file in the Cloud Storage bucket at time 2023-07-03T00:00Z, named `  file_2  ` . The [`  updated  ` timestamp](https://docs.cloud.google.com/storage/docs/metadata#timestamps) for `  file_2  ` is the time that the file was created.
 
   - The next transfer run, at 2023-07-03T03:00Z, detects that `  file_2  ` has an `  updated  ` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). Suppose that when the transfer run starts it fails due to a transient error. In this scenario, `  file_2  ` is not loaded into the destination BigQuery table. The last successful transfer run timestamp remains at 2023-07-01T03:00Z.
   - The next transfer run, at 2023-07-04T03:00Z, detects that `  file_2  ` has an `  updated  ` timestamp greater than the last successful transfer run (2023-07-01T03:00Z). This time, the transfer run completes without issue, so it successfully loads `  file_2  ` into the destination BigQuery table.
   - The next transfer run, at 2023-07-05T03:00Z, detects no files where the `  updated  ` timestamp is greater than the last successful transfer run (2023-07-04T03:00Z). The transfer run succeeds without loading any additional data into the destination BigQuery table.
 
-The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
+The preceding example shows that when a transfer fails, no files are transferred to the BigQuery destination table. Any file changes are transferred at the next successful transfer run. Any subsequent successful transfers following a failed transfer does not cause duplicate data. In the case of a failed transfer, you can also choose to [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) outside its regularly scheduled time.
 
-**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`  updated  `](/storage/docs/metadata#timestamps) .
+**Warning:** BigQuery Data Transfer Service relies on the "last modified time" property in each source file to determine which files to transfer, as seen in the incremental transfer examples. Modifying these properties can cause the transfer to skip certain files, or load the same file multiple times. This property can have different names in each storage system supported by BigQuery Data Transfer Service. For example, Cloud Storage objects call this property [`  updated  `](https://docs.cloud.google.com/storage/docs/metadata#timestamps) .
 
 ### Truncated transfers
 
@@ -60,6 +60,8 @@ BigQuery does not support Cloud Storage resource paths that include multiple con
 To retrieve the Cloud Storage resource path:
 
 1.  Open the Cloud Storage console.
+    
+    [Cloud Storage console](https://console.cloud.google.com/storage/browser)
 
 2.  Browse to the location of the object (file) that contains the source data.
 
@@ -69,7 +71,7 @@ To retrieve the Cloud Storage resource path:
 
 4.  Copy the value provided in the **gsutil URI** field, which begins with `  gs://  ` .
 
-**Note:** You can also use the [`  gcloud storage ls  `](/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
+**Note:** You can also use the [`  gcloud storage ls  `](https://docs.cloud.google.com/sdk/gcloud/reference/storage/ls) command to list buckets or objects.
 
 ### Wildcard support for Cloud Storage resource paths
 
@@ -85,43 +87,29 @@ Neither can you match on prefixes without wildcards. For example, `  gs://bucket
 
 However, you can use multiple wildcards for filenames within buckets. For example, `  gs://bucket/dir/*/*.csv  ` matches `  gs://bucket/dir/subdir/file.csv  ` .
 
-For examples of wildcard support in combination with parameterized table names, see [Runtime parameters in transfers](/bigquery/docs/gcs-transfer-parameters) .
+For examples of wildcard support in combination with parameterized table names, see [Runtime parameters in transfers](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) .
 
 ## Quotas and limits
 
 The BigQuery Data Transfer Service uses load jobs to load Cloud Storage data into BigQuery.
 
-All BigQuery [quotas and limits](/bigquery/quotas#load_jobs) on load jobs apply to recurring Cloud Storage load jobs, with the following additional considerations:
+All BigQuery [quotas and limits](https://docs.cloud.google.com/bigquery/quotas#load_jobs) on load jobs apply to recurring Cloud Storage load jobs, with the following additional considerations:
 
-<table>
-<thead>
-<tr class="header">
-<th>Value</th>
-<th>Limit</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Maximum size per load job transfer run</td>
-<td>15 TB</td>
-</tr>
-<tr class="even">
-<td>Maximum number of files per transfer run</td>
-<td>10,000 files</td>
-</tr>
-</tbody>
-</table>
+| Value                                    | Limit        |
+| ---------------------------------------- | ------------ |
+| Maximum size per load job transfer run   | 15 TB        |
+| Maximum number of files per transfer run | 10,000 files |
 
 ## Pricing
 
-After data is transferred to BigQuery, standard BigQuery [storage](/bigquery/pricing#storage) and [query](/bigquery/pricing#queries) pricing applies.
+After data is transferred to BigQuery, standard BigQuery [storage](https://docs.cloud.google.com/bigquery/pricing#storage) and [query](https://docs.cloud.google.com/bigquery/pricing#queries) pricing applies.
 
-For cross-location transfers from Cloud Storage, pricing is determined by the location of the Cloud Storage bucket and the location of the destination BigQuery dataset. For more information, see [Data transfer within Google Cloud](/storage/pricing#network-buckets) .
+For cross-location transfers from Cloud Storage, pricing is determined by the location of the Cloud Storage bucket and the location of the destination BigQuery dataset. For more information, see [Data transfer within Google Cloud](https://docs.cloud.google.com/storage/pricing#network-buckets) .
 
 For more information about pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 
-  - Learn about [setting up a Cloud Storage transfer](/bigquery/docs/cloud-storage-transfer) .
-  - Learn about [runtime parameters in Cloud Storage transfers](/bigquery/docs/gcs-transfer-parameters) .
-  - Learn more about the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
+  - Learn about [setting up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
+  - Learn about [runtime parameters in Cloud Storage transfers](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters) .
+  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

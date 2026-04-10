@@ -1,14 +1,14 @@
 # The CREATE MODEL statement for K-means models
 
-This document describes the `  CREATE MODEL  ` statement for creating [k-means](https://en.wikipedia.org/wiki/K-means_clustering) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for creating [k-means](https://en.wikipedia.org/wiki/K-means_clustering) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-You can use k-means models with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to cluster data, and you can use k-means models with the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview) .
+You can use k-means models with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to cluster data, and you can use k-means models with the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -65,9 +65,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = { 'KMEANS' }
-```
+    MODEL_TYPE = { 'KMEANS' }
 
 **Description**
 
@@ -102,9 +100,7 @@ When running hyperparameter tuning, the valid range is `  [2, 100]  ` , the defa
 
 **Syntax**
 
-``` text
-KMEANS_INIT_METHOD = { 'RANDOM' | 'KMEANS++' | 'CUSTOM' }
-```
+    KMEANS_INIT_METHOD = { 'RANDOM' | 'KMEANS++' | 'CUSTOM' }
 
 **Description**
 
@@ -116,11 +112,11 @@ To use the same centroids in repeated `  CREATE MODEL  ` queries, specify the op
 
 This option accepts the following values:
 
-  - `  RANDOM  ` : Initializes the centroids by randomly selecting a number of data points equal to the [`  NUM_CLUSTERS  `](#num_clusters) value from the input data. This is the default value.
+  - `  RANDOM  ` : Initializes the centroids by randomly selecting a number of data points equal to the [`  NUM_CLUSTERS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value from the input data. This is the default value.
 
-  - `  KMEANS++  ` : Initializes a number of centroids equal to the [`  NUM_CLUSTERS  `](#num_clusters) value by using the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) algorithm. Using this approach usually trains a better model than using random cluster initialization.
+  - `  KMEANS++  ` : Initializes a number of centroids equal to the [`  NUM_CLUSTERS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) value by using the [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) algorithm. Using this approach usually trains a better model than using random cluster initialization.
 
-  - `  CUSTOM  ` : Initializes the centroids using a provided column of type `  BOOL  ` . BigQuery ML uses the rows with a value of `  TRUE  ` as the initial centroids. You specify the column to use by using the [`  KMEANS_INIT_COL  `](#kmeans_init_col) option.
+  - `  CUSTOM  ` : Initializes the centroids using a provided column of type `  BOOL  ` . BigQuery ML uses the rows with a value of `  TRUE  ` as the initial centroids. You specify the column to use by using the [`  KMEANS_INIT_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_col) option.
     
     When you use this option, if the values in the column identified by `  'KMEANS_INIT_COL'  ` remain constant, then repeated `  CREATE MODEL  ` queries use the same centroids.
 
@@ -132,9 +128,9 @@ This option accepts the following values:
 
 **Description**
 
-The name of the column to use to initialize the centroids. This column must have a type of `  BOOL  ` . If this column contains a value of `  TRUE  ` for a given row, then BigQuery ML uses that row as an initial centroid. The number of `  TRUE  ` rows in this column must be equal to the value you have specified for the [`  NUM_CLUSTERS  `](#num_clusters) option.
+The name of the column to use to initialize the centroids. This column must have a type of `  BOOL  ` . If this column contains a value of `  TRUE  ` for a given row, then BigQuery ML uses that row as an initial centroid. The number of `  TRUE  ` rows in this column must be equal to the value you have specified for the [`  NUM_CLUSTERS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_clusters) option.
 
-You can only use this option if you have specified `  CUSTOM  ` for the [`  KMEANS_INIT_METHOD  `](#kmeans_init_method) option.
+You can only use this option if you have specified `  CUSTOM  ` for the [`  KMEANS_INIT_METHOD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#kmeans_init_method) option.
 
 You can't use this column as a feature; BigQuery ML automatically excludes it.
 
@@ -146,9 +142,7 @@ A `  STRING  ` value.
 
 **Syntax**
 
-``` text
-DISTANCE_TYPE = { 'EUCLIDEAN' | 'COSINE' }
-```
+    DISTANCE_TYPE = { 'EUCLIDEAN' | 'COSINE' }
 
 **Description**
 
@@ -174,13 +168,11 @@ This option accepts the following values:
 
 **Syntax**
 
-``` text
-STANDARDIZE_FEATURES = { TRUE | FALSE }
-```
+    STANDARDIZE_FEATURES = { TRUE | FALSE }
 
 **Description**
 
-Determines whether to [standardize numerical features](https://en.wikipedia.org/wiki/Feature_scaling) . This setting doesn't affect [automatic preprocessing](/bigquery/docs/auto-preprocessing) of non-numerical features.
+Determines whether to [standardize numerical features](https://en.wikipedia.org/wiki/Feature_scaling) . This setting doesn't affect [automatic preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing) of non-numerical features.
 
 **Arguments**
 
@@ -204,13 +196,11 @@ An `  INT64  ` value. The default value is `  20  ` .
 
 **Syntax**
 
-``` text
-EARLY_STOP = { TRUE | FALSE }
-```
+    EARLY_STOP = { TRUE | FALSE }
 
 **Description**
 
-Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](#min_rel_progress) .
+Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#min_rel_progress) .
 
 **Arguments**
 
@@ -224,7 +214,7 @@ A `  BOOL  ` value. The default value is `  TRUE  ` .
 
 **Description**
 
-The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
+The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
 
 **Arguments**
 
@@ -234,15 +224,13 @@ A `  FLOAT64  ` value. The default value is `  0.01  ` .
 
 **Syntax**
 
-``` text
-WARM_START = { TRUE | FALSE }
-```
+    WARM_START = { TRUE | FALSE }
 
 **Description**
 
 Determines whether to train a model with new training data, new model options, or both. Unless you explicitly override them, the initial options used to train the model are used for the warm start run.
 
-In a warm start run, the iteration numbers are reset to start from zero. Use the training run or iteration information returned by the [`  ML.TRAINING_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to distinguish the warm start run from the original run.
+In a warm start run, the iteration numbers are reset to start from zero. Use the training run or iteration information returned by the [`  ML.TRAINING_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to distinguish the warm start run from the original run.
 
 The value of the `  MODEL_TYPE  ` and the training data schema must remain constant in a warm start models retrain.
 
@@ -274,31 +262,29 @@ An `  INT64  ` value between `  1  ` and `  100  ` , inclusive.
 
 **Description**
 
-The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_trials) .
 
 **Arguments**
 
 An `  INT64  ` value between `  1  ` and `  5  ` , inclusive. The default value is `  1  ` .
 
-**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `     HPARAM_TUNING_ALGORITHM    `
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
-```
+    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
 
 **Description**
 
-The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_trials) .
 
 **Arguments**
 
 Specify one of the following values:
 
-  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
   - `  RANDOM_SEARCH  ` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
@@ -308,19 +294,17 @@ Specify one of the following values:
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_OBJECTIVES = { 'DAVIES_BOULDIN_INDEX' }
-```
+    HPARAM_TUNING_OBJECTIVES = { 'DAVIES_BOULDIN_INDEX' }
 
-**Description** The hyperparameter tuning objective for the model. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+**Description** The hyperparameter tuning objective for the model. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_trials) .
 
 **Arguments**
 
-The possible objectives are a subset of the [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the `  DAVIES_BOULDIN_INDEX  ` objective is used.
+The possible objectives are a subset of the [model evaluation metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the `  DAVIES_BOULDIN_INDEX  ` objective is used.
 
 ### `     MODEL_REGISTRY    `
 
-The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model) .
+The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/create_vertex#register-model) .
 
 ### `     VERTEX_AI_MODEL_ID    `
 
@@ -332,7 +316,7 @@ You can only set the `  VERTEX_AI_MODEL_ID  ` option when the `  MODEL_REGISTRY 
 
 ### `     VERTEX_AI_MODEL_VERSION_ALIASES    `
 
-The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](/vertex-ai/docs/model-registry/model-alias) .
+The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](https://docs.cloud.google.com/vertex-ai/docs/model-registry/model-alias) .
 
 You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MODEL_REGISTRY  ` option is set to `  VERTEX_AI  ` .
 
@@ -344,31 +328,29 @@ You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MO
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ### `     query_statement    `
 
-The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
+The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
 
 ## Hyperparameter tuning
 
-K-means models support [hyperparameter tuning](/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
+K-means models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
 
-Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](#hparam_tuning_objectives) to tune for a different metric if you need to.
+Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans#hparam_tuning_objectives) to tune for a different metric if you need to.
 
-For more information about the training objectives and hyperparameters supported for k-means models, see [`  KMEANS  `](/bigquery/docs/hp-tuning-overview#kmeans) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial) .
+For more information about the training objectives and hyperparameters supported for k-means models, see [`  KMEANS  `](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#kmeans) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## `     CREATE MODEL    ` examples
 
@@ -378,7 +360,7 @@ The following examples create models named `  mymodel  ` in `  mydataset  ` in y
 
 This example creates a k-means model with four clusters using the default `  distance_type  ` value of `  euclidean_distance  ` .
 
-``` text
+``` notranslate
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
@@ -396,7 +378,7 @@ FROM
 
 This example creates a k-means model with three clusters using the random cluster initialization method.
 
-``` text
+``` notranslate
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
@@ -413,7 +395,7 @@ FROM
 
 This example creates a k-means model with three clusters using the custom cluster initialization method. `  init_col  ` identifies the column of type `  BOOL  ` that contains the values which specify whether a given row is an initial centroid. This column should only contain three rows with the value `  TRUE  ` .
 
-``` text
+``` notranslate
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
@@ -432,7 +414,7 @@ FROM
 
 This example creates a k-means model and uses hyperparameter tuning to improve model performance.
 
-``` text
+``` notranslate
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS

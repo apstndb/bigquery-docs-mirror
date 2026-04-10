@@ -2,24 +2,24 @@
 
 This document shows you how to use configuration YAML files to transform SQL code while migrating it to BigQuery. It provides guidelines to create your own configuration YAML files, and provides examples for various translation transformations that are supported by this feature.
 
-When using the [BigQuery interactive SQL translator](/bigquery/docs/interactive-sql-translator) , using the [BigQuery Migration API](/bigquery/docs/api-sql-translator) , or performing a [batch SQL translation](/bigquery/docs/batch-sql-translator) , you can provide configuration YAML files to modify a SQL query translation. Using configuration YAML files allows for further customization when translating SQL queries from your source database.
+When using the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) , using the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) , or performing a [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) , you can provide configuration YAML files to modify a SQL query translation. Using configuration YAML files allows for further customization when translating SQL queries from your source database.
 
 You can specify a configuration YAML file to use in a SQL translation in the following ways:
 
-  - If you are using the interactive SQL translator, [specify the file path to the configuration file or batch translation job ID in the translation settings](/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) .
+  - If you are using the interactive SQL translator, [specify the file path to the configuration file or batch translation job ID in the translation settings](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) .
   - If you are using the BigQuery Migration API, place the configuration YAML in the same Cloud Storage bucket as the input SQL files.
   - If you are performing a batch SQL translation, place the configuration YAML in the same Cloud Storage bucket as the input SQL files.
   - If you are using the [batch translation Python client](https://github.com/google/dwh-migration-tools/tree/main/client#readme) , place the configuration YAML file in the local translation input folder.
 
 **Note:** For API-based translations, we recommend using the BigQuery Migration API instead of the batch SQL translation API or client.
 
-The interactive SQL translator, BigQuery Migration API, the batch SQL translator, and the batch translation Python client supports the use of multiple configuration YAML files in a single translation job. See [Applying multiple YAML configurations](/bigquery/docs/config-yaml-translation#yaml_multiple) for more information.
+The interactive SQL translator, BigQuery Migration API, the batch SQL translator, and the batch translation Python client supports the use of multiple configuration YAML files in a single translation job. See [Applying multiple YAML configurations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_multiple) for more information.
 
 ## Configuration YAML file requirements
 
 Before creating a configuration YAML file, review the following information to ensure that your YAML file is compatible to use with the BigQuery Migration Service:
 
-  - You must upload the configuration YAML files in the directory of the Cloud Storage bucket that contains your SQL translation input files. For information on how to create buckets and upload files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+  - You must upload the configuration YAML files in the directory of the Cloud Storage bucket that contains your SQL translation input files. For information on how to create buckets and upload files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
   - The file size for a single configuration YAML file must not exceed 1 MB.
   - The total file size of all configuration YAML files used in a single SQL translation job must not exceed 4 MB.
   - If you are using `  regex  ` syntax for name matching, use [RE2/J](https://github.com/google/re2j) .
@@ -34,28 +34,24 @@ This section provides some general guidelines to create a configuration YAML fil
 
 Each configuration file must contain a header specifying the type of configuration. The `  object_rewriter  ` type is used to specify SQL translations in a configuration YAML file. The following example uses the `  object_rewriter  ` type to transform a name case:
 
-``` text
-type: object_rewriter
-global:
-  case:
-    all: UPPERCASE
-```
+    type: object_rewriter
+    global:
+      case:
+        all: UPPERCASE
 
 ### Entity selection
 
 To perform entity-specific transformations, specify the entity in the configuration file. All `  match  ` properties are optional; only use the `  match  ` properties needed for a transformation. The following configuration YAML exposes properties to be matched in order to select specific entities:
 
-``` text
-match:
-  database: <literal_name>
-  schema: <literal_name>
-  relation: <literal_name>
-  attribute: <literal_name>
-  databaseRegex: <regex>
-  schemaRegex: <regex>
-  relationRegex: <regex>
-  attributeRegex: <regex>
-```
+    match:
+      database: <literal_name>
+      schema: <literal_name>
+      relation: <literal_name>
+      attribute: <literal_name>
+      databaseRegex: <regex>
+      schemaRegex: <regex>
+      relationRegex: <regex>
+      attributeRegex: <regex>
 
 Description of each `  match  ` property:
 
@@ -70,58 +66,48 @@ Description of each `  match  ` property:
 
 For example, the following configuration YAML specifies the `  match  ` properties to select the `  testdb.acme.employee  ` table for a temporary table transformation.
 
-``` text
-type: object_rewriter
-relation:
--
-  match:
-    database: testdb
-    schema: acme
-    relation: employee
-  temporary: true
-```
+    type: object_rewriter
+    relation:
+    -
+      match:
+        database: testdb
+        schema: acme
+        relation: employee
+      temporary: true
 
 You can use the `  databaseRegex  ` , `  schemaRegex  ` , `  relationRegex  ` , and `  attributeRegex  ` properties to specify regular expressions in order to select a subset of entities. The following example changes all relations from `  tmp_schema  ` schema in `  testdb  ` to temporary, as long as their name starts with `  tmp_  ` :
 
-``` text
-type: object_rewriter
-relation:
--
-  match:
-    schema: tmp_schema
-    relationRegex: "tmp_.*"
-  temporary: true
-```
+    type: object_rewriter
+    relation:
+    -
+      match:
+        schema: tmp_schema
+        relationRegex: "tmp_.*"
+      temporary: true
 
 Both literal and `  regex  ` properties are matched in a case-insensitive manner. You can enforce case-sensitive matching by using a `  regex  ` with a disabled `  i  ` flag, as seen in the following example:
 
-``` text
-match:
-  relationRegex: "(?-i:<actual_regex>)"
-```
+    match:
+      relationRegex: "(?-i:<actual_regex>)"
 
 You can also specify fully-qualified entities using an equivalent short-string syntax. A short-string syntax expects exactly 3 (for relation selection) or 4 (for attribute selection) name segments delimited with dots, as the example `  testdb.acme.employee  ` . The segments are then internally interpreted as if they were passed as `  database  ` , `  schema  ` , `  relation  ` and `  attribute  ` respectively. This means that names are matched literally, thus regular expressions are not allowed in short syntax. The following example shows the use of short-string syntax to specify a fully-qualified entity in a configuration YAML file:
 
-``` text
-type: object_rewriter
-relation:
--
-  match : "testdb.acme.employee"
-  temporary: true
-```
+    type: object_rewriter
+    relation:
+    -
+      match : "testdb.acme.employee"
+      temporary: true
 
 If a table contains a dot in the name, you cannot specify the name using a short syntax. In this case, you must use an object match. The following example changes the `  testdb.acme.stg.employee  ` table to temporary:
 
-``` text
-type: object_rewriter
-relation:
--
-  match:
-    database: testdb
-    schema: acme
-    relation: stg.employee
-  temporary: true
-```
+    type: object_rewriter
+    relation:
+    -
+      match:
+        database: testdb
+        schema: acme
+        relation: stg.employee
+      temporary: true
 
 The configuration YAML accepts `  key  ` as an alias to `  match  ` .
 
@@ -133,7 +119,7 @@ However, you can set the `  default_database  ` property of the BigQuery Migrati
 
 ### Supported target attribute types
 
-You can use the configuration YAML file to [perform attribute type transformations](#change_type_of_a_column_attribute) , where you transform the data type of a column from the source type to a target type. The configuration YAML file supports the following target types:
+You can use the configuration YAML file to [perform attribute type transformations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_type_of_a_column_attribute) , where you transform the data type of a column from the source type to a target type. The configuration YAML file supports the following target types:
 
   - `  BOOLEAN  `
   - `  TINYINT  `
@@ -162,18 +148,16 @@ The following examples use Teradata or Hive as the input SQL dialect and BigQuer
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the upper or lower-casing of object names:
 
-``` text
-type: object_rewriter
-global:
-  case:
-    all: UPPERCASE
-    database: LOWERCASE
-    attribute: LOWERCASE
-```
+    type: object_rewriter
+    global:
+      case:
+        all: UPPERCASE
+        database: LOWERCASE
+        attribute: LOWERCASE
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -185,13 +169,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a int);
       select * from x;
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE testdb.TESTSCHEMA.X
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE testdb.TESTSCHEMA.X
       (
         a INT64
       )
@@ -210,17 +194,15 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes a regular table to a [temporary table](/bigquery/docs/writing-results#temporary_and_permanent_tables) :
+The following configuration YAML changes a regular table to a [temporary table](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) :
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    temporary: true
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        temporary: true
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -232,12 +214,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TEMPORARY TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TEMPORARY TABLE x
     (
       a INT64
     )
@@ -251,18 +233,16 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes a regular table to an [ephemeral table](/bigquery/docs/managing-tables#updating_a_tables_expiration_time) with a 60 second expiration.
+The following configuration YAML changes a regular table to an [ephemeral table](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) with a 60 second expiration.
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    ephemeral:
-      expireAfterSeconds: 60
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        ephemeral:
+          expireAfterSeconds: 60
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -274,12 +254,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a INT64
     )
@@ -295,18 +275,16 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes the [expiration of a partitioned table](/bigquery/docs/managing-partitioned-tables#partition-expiration) to 1 day:
+The following configuration YAML changes the [expiration of a partitioned table](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration) to 1 day:
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    partitionLifetime:
-      expireAfterSeconds: 86400
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        partitionLifetime:
+          expireAfterSeconds: 86400
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -318,12 +296,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int) partition by (a);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int) partition by (a);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a INT64,
       b INT64
@@ -341,19 +319,17 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes the [external location and format for a table](/bigquery/docs/external-data-sources#external_tables) :
+The following configuration YAML changes the [external location and format for a table](https://docs.cloud.google.com/bigquery/docs/external-data-sources#external_tables) :
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    external:
-      locations: "gs://path/to/department/files"
-      format: ORC
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        external:
+          locations: "gs://path/to/department/files"
+          format: ORC
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -365,12 +341,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE EXTERNAL TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE EXTERNAL TABLE testdb.testschema.x
     (
       a INT64
     )
@@ -389,18 +365,16 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML sets the description of a table:
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    description:
-      text: "Example description."
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        description:
+          text: "Example description."
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -412,12 +386,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a INT64
     )
@@ -431,22 +405,20 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table partitioning
 
-The following configuration YAML changes the [partitioning scheme of a table](/bigquery/docs/partitioned-tables) :
+The following configuration YAML changes the [partitioning scheme of a table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) :
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    partition:
-      simple:
-        add: [a]
-  -
-    match: "testdb.testschema.y"
-    partition:
-      simple:
-        remove: [a]
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        partition:
+          simple:
+            add: [a]
+      -
+        match: "testdb.testschema.y"
+        partition:
+          simple:
+            remove: [a]
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -458,13 +430,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a date, b int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a date, b int);
     create table y(a date, b int) partition by (a);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a DATE,
       b INT64
@@ -483,20 +455,18 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### Set or change table clustering
 
-The following configuration YAML changes the [clustering scheme of a table](/bigquery/docs/clustered-tables) :
+The following configuration YAML changes the [clustering scheme of a table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) :
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    clustering:
-      add: [a]
-  -
-    match: "testdb.testschema.y"
-    clustering:
-      remove: [b]
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        clustering:
+          add: [a]
+      -
+        match: "testdb.testschema.y"
+        clustering:
+          remove: [b]
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -508,13 +478,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       hive-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int);
     create table y(a int, b int) clustered by (b) into 16 buckets;
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a INT64,
       b INT64
@@ -535,23 +505,21 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the data type for an attribute of a column:
 
-``` text
-type: object_rewriter
-attribute:
-  -
-    match:
-      database: testdb
-      schema: testschema
-      attributeRegex: "a+"
-    type:
-      target: NUMERIC(10,2)
-```
+    type: object_rewriter
+    attribute:
+      -
+        match:
+          database: testdb
+          schema: testschema
+          attributeRegex: "a+"
+        type:
+          target: NUMERIC(10,2)
 
-You can transform the source data type to any of the [supported target attribute types](#supported_target_attribute_types) .
+You can transform the source data type to any of the [supported target attribute types](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#supported_target_attribute_types) .
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -563,12 +531,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int, aa int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int, b int, aa int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
     (
       a NUMERIC(31, 2),
       b INT64,
@@ -586,18 +554,16 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML marks the source table as being an external table that points to data stored in an external data lake, specified by a data lake connection.
 
-``` text
-type: object_rewriter
-relation:
--
-  key: "testdb.acme.employee"
-  external:
-    connection_id: "connection_test"
-```
+    type: object_rewriter
+    relation:
+    -
+      key: "testdb.acme.employee"
+      external:
+        connection_id: "connection_test"
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -609,7 +575,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       hive-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    CREATE TABLE x
     (
       a VARCHAR(150),
       b INT
@@ -618,7 +584,7 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE EXTERNAL TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE EXTERNAL TABLE x
     (
       a STRING,
       b INT64
@@ -635,29 +601,27 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, the BigQuery Migration Service attempts to automatically detect the character encoding of input files. In cases where BigQuery Migration Service might misidentify the encoding of a file, you can use a configuration YAML to specify the character encoding explicitly.
 
 The following configuration YAML specifies the explicit character encoding of the input file as `  ISO-8859-1  ` .
 
-``` text
-type: experimental_input_formats
-formats:
-- source:
-    pathGlob: "*.sql"
-  contents:
-    raw:
-      charset: iso-8859-1
-```
+    type: experimental_input_formats
+    formats:
+    - source:
+        pathGlob: "*.sql"
+      contents:
+        raw:
+          charset: iso-8859-1
 
 ### Global type conversion
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML changes a data type to another across all scripts, and specifies a source data type to avoid in the transpiled script. This is different from the [Change type of a column attribute](/bigquery/docs/config-yaml-translation#change_type_of_a_column_attribute) configuration, where only the data type for a single attribute is changed.
+The following configuration YAML changes a data type to another across all scripts, and specifies a source data type to avoid in the transpiled script. This is different from the [Change type of a column attribute](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_type_of_a_column_attribute) configuration, where only the data type for a single attribute is changed.
 
 BigQuery supports the following data type conversions:
 
@@ -668,18 +632,16 @@ BigQuery supports the following data type conversions:
 
 In the following example, the configuration YAML converts a `  TIMESTAMP  ` data type to `  DATETIME  ` .
 
-``` text
-type: experimental_object_rewriter
-global:
-  typeConvert:
-    timestamp: DATETIME
-```
+    type: experimental_object_rewriter
+    global:
+      typeConvert:
+        timestamp: DATETIME
 
 ### Setting default time zone
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Database dialects have varying semantics and names for different date and time related data types. The translation service standardizes on the following terminology in its YAML configuration, regardless of the name of the input dialect's data type:
 
@@ -693,17 +655,15 @@ We recommend that you specify the default time zone for translation if your sour
 
 In the following example, the configuration YAML converts a `  TIMESTAMP  ` and a `  TIMESTAMPTZ  ` data type to `  DATETIME  ` , with the target time zone set to `  Europe/Paris  ` .
 
-``` text
-type: experimental_object_rewriter
-global:
-  typeConvert:
-    timestamp:
-      target: DATETIME
-      timezone: Europe/Paris
-    timestamptz:
-      target: DATETIME
-      timezone: Europe/Paris
-```
+    type: experimental_object_rewriter
+    global:
+      typeConvert:
+        timestamp:
+          target: DATETIME
+          timezone: Europe/Paris
+        timestamptz:
+          target: DATETIME
+          timezone: Europe/Paris
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -715,7 +675,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
 
       select c_timestamp from x where c_timestamp &gt; current_timestamp(0);
       select c_timestamptz from x where c_timestamptz &gt; cast(current_timestamp(0) as timestamp_tz);
@@ -724,7 +684,7 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         c_timestamp DATETIME,
         c_timestamptz DATETIME,
@@ -758,13 +718,11 @@ In the following example, the configuration YAML converts a `  DATETIME  ` data 
 
 By default, `  TIMESTAMPTZ  ` is converted to `  TIMESTAMP  ` with no configuration required.
 
-``` text
-type: experimental_object_rewriter
-global:
-  typeConvert:
-    datetime:
-      target: TIMESTAMP
-```
+    type: experimental_object_rewriter
+    global:
+      typeConvert:
+        datetime:
+          target: TIMESTAMP
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -776,7 +734,7 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(c_timestamp timestamp_ltz, c_timestamptz timestamp_tz, c_datetime timestamp_ntz);
 
       select c_timestamp from x where c_timestamp &gt; current_timestamp(0);
       select c_timestamptz from x where c_timestamptz &gt; cast(current_timestamp(0) as timestamp_tz);
@@ -785,7 +743,7 @@ A SQL translation with this configuration YAML file might look like the followin
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         c_timestamp TIMESTAMP,
         c_timestamptz TIMESTAMP,
@@ -819,7 +777,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the star projection, `  GROUP BY  ` , and `  ORDER BY  ` clauses in `  SELECT  ` statements.
 
@@ -837,11 +795,9 @@ The following configuration YAML changes the star projection, `  GROUP BY  ` , a
 
 In the following example, the configuration YAML configures the star projection to `  EXPAND  ` .
 
-``` text
-type: experimental_statement_rewriter
-select:
-  starProjection: EXPAND
-```
+    type: experimental_statement_rewriter
+    select:
+      starProjection: EXPAND
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -853,13 +809,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a int, b TIMESTAMP);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a int, b TIMESTAMP);
       select * from x;
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         a INT64,
         b DATETIME
@@ -878,13 +834,11 @@ A SQL translation with this configuration YAML file might look like the followin
 
 ### UDF specification
 
-The following configuration YAML specifies the signature of user-defined functions (UDFs) that are used in the source scripts. Much like [metadata zip files](/bigquery/docs/generate-metadata) , UDF definitions can help to produce a more accurate translation of input scripts.
+The following configuration YAML specifies the signature of user-defined functions (UDFs) that are used in the source scripts. Much like [metadata zip files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , UDF definitions can help to produce a more accurate translation of input scripts.
 
-``` text
-type: metadata
-udfs:
-  - "date parse_short_date(dt int)"
-```
+    type: metadata
+    udfs:
+      - "date parse_short_date(dt int)"
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -896,13 +850,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(dt int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(dt int);
       select parse_short_date(dt) + 1 from x;
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         dt INT64
       )
@@ -921,15 +875,13 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, BigQuery Migration Service increases numeric precision to the highest precision available for a given scale. The following configuration YAML overrides this behavior by configuring the precision strictness to retain the decimal precision of the source statement.
 
-``` text
-type: experimental_statement_rewriter
-common:
-  decimalPrecision: STRICT
-```
+    type: experimental_statement_rewriter
+    common:
+      decimalPrecision: STRICT
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -941,12 +893,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a decimal(3,0));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a decimal(3,0));
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         a NUMERIC(3)
       )
@@ -960,7 +912,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 By default, BigQuery Migration Service omits string precision when translating `  CHAR  ` and `  VARCHAR  ` columns. This can help prevent truncation errors when values are written. Some SQL dialects, such as Teradata, truncate values that exceed the maximum precision on write, while BigQuery returns an error in this scenario.
 
@@ -968,11 +920,9 @@ If your application doesn't rely on the source dialect's truncation behavior, co
 
 The following configuration YAML overrides this behavior by configuring the precision strictness to retain the string precision of the source statement.
 
-``` text
-type: experimental_statement_rewriter
-common:
-  stringPrecision: STRICT
-```
+    type: experimental_statement_rewriter
+    common:
+      stringPrecision: STRICT
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -984,12 +934,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a varchar(3));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table x(a varchar(3));
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE x
       (
         a STRING(3)
       )
@@ -1003,7 +953,7 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 You can use configuration YAML to map SQL object names. You can change different parts of the name depending on the object being mapped.
 
@@ -1013,15 +963,13 @@ Use static name mapping to map the name of an entity. If you only want to change
 
 The following configuration YAML changes the name of the table from `  my_db.my_schema.my_table  ` to `  my_new_db.my_schema.my_new_table  ` .
 
-``` text
-type: experimental_object_rewriter
-relation:
--
-  match: "my_db.my_schema.my_table"
-  outputName:
-    database: "my_new_db"
-    relation: "my_new_table"
-```
+    type: experimental_object_rewriter
+    relation:
+    -
+      match: "my_db.my_schema.my_table"
+      outputName:
+        database: "my_new_db"
+        relation: "my_new_table"
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -1033,12 +981,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table my_db.my_schema.my_table(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table my_db.my_schema.my_table(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE my_new_db.my_schema.my_new_table
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE my_new_db.my_schema.my_new_table
       (
         a INT64
       )
@@ -1051,17 +999,15 @@ You can use static name mapping to update the region used by names in the [publi
 
 The following example changes the names in the `  bqutil.fn  ` UDF from using the default `  us  ` multi-region to using the `  europe_west2  ` region:
 
-``` text
-type: experimental_object_rewriter
-function:
--
-  match:
-    database: bqutil
-    schema: fn
-  outputName:
-    database: bqutil
-    schema: fn_europe_west2
-```
+    type: experimental_object_rewriter
+    function:
+    -
+      match:
+        database: bqutil
+        schema: fn
+      outputName:
+        database: bqutil
+        schema: fn_europe_west2
 
 #### Dynamic name mapping
 
@@ -1069,16 +1015,14 @@ Use dynamic name mapping to change several objects at the same time, and create 
 
 The following configuration YAML changes the name of all tables by adding the prefix `  stg_  ` to those that belong to the `  staging  ` schema, and then moves those tables to the `  production  ` schema.
 
-``` text
-type: experimental_object_rewriter
-relation:
--
-  match:
-    schema: staging
-  outputName:
-    schema: production
-    relation: "stg_${relation}"
-```
+    type: experimental_object_rewriter
+    relation:
+    -
+      match:
+        schema: staging
+      outputName:
+        schema: production
+        relation: "stg_${relation}"
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -1090,12 +1034,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table staging.my_table(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table staging.my_table(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE production.stg_my_table
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE production.stg_my_table
       (
         a INT64
       )
@@ -1109,16 +1053,14 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following configuration YAML specifies a [default database](/bigquery/docs/output-name-mapping#default_database) and [schema search path](/bigquery/docs/output-name-mapping#default_schema) .
+The following configuration YAML specifies a [default database](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_database) and [schema search path](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#default_schema) .
 
-``` text
-type: environment
-session:
-  defaultDatabase: myproject
-  schemaSearchPath: [myschema1, myschema2]
-```
+    type: environment
+    session:
+      defaultDatabase: myproject
+      schemaSearchPath: [myschema1, myschema2]
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -1130,13 +1072,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      SELECT * FROM database.table
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      SELECT * FROM database.table
       SELECT * FROM table1
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      SELECT * FROM myproject.database.table.
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      SELECT * FROM myproject.database.table.
       SELECT * FROM myproject.myschema1.table1
     </code></pre></td>
 </tr>
@@ -1147,15 +1089,13 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML sets the `  NLS_DATE_FORMAT  ` parameter to the format `  DD/MM/YYYY  ` . We recommend that you specify `  NLS_DATE_FORMAT  ` for implicit uses of date format and casts. If not set, the default format for translation, `  DD-MON-RR  ` , is used.
 
-``` text
-type: environment
-session:
-  dateFormat: DD/MM/YYYY
-```
+    type: environment
+    session:
+      dateFormat: DD/MM/YYYY
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -1167,13 +1107,13 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       oracle-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(dt date default &#39;31/12/1999&#39;);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(dt date default &#39;31/12/1999&#39;);
     insert into x values (&#39;01/01/2000&#39;);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TABLE testdb.testschema.x
       (
         DT DATETIME DEFAULT DATETIME &#39;1999-12-31 00:00:00&#39;
       )
@@ -1190,22 +1130,20 @@ A SQL translation with this configuration YAML file might look like the followin
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The following configuration YAML changes the output names of all objects (database, schema, relation, and attributes) in the script according to the configured rules.
 
-``` text
-type: experimental_object_rewriter
-global:
-  outputName:
-    regex:
-      - match: '\s'
-        replaceWith: '_'
-      - match: '>='
-        replaceWith: 'gte'
-      - match: '^[^a-zA-Z_].*'
-        replaceWith: '_$0'
-```
+    type: experimental_object_rewriter
+    global:
+      outputName:
+        regex:
+          - match: '\s'
+            replaceWith: '_'
+          - match: '>='
+            replaceWith: 'gte'
+          - match: '^[^a-zA-Z_].*'
+            replaceWith: '_$0'
 
 A SQL translation with this configuration YAML file might look like the following:
 
@@ -1217,12 +1155,12 @@ A SQL translation with this configuration YAML file might look like the followin
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table &quot;test special chars &gt;= 12&quot;(&quot;42eid&quot; int, &quot;custom column&quot; varchar(10));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      create table &quot;test special chars &gt;= 12&quot;(&quot;42eid&quot; int, &quot;custom column&quot; varchar(10));
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE test_special_chars_employees_gte_12
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE test_special_chars_employees_gte_12
       (
         _42eid INT64,
         custom_column STRING
@@ -1239,14 +1177,12 @@ Optional transformations can be applied to translated SQL in order to introduce 
 
 The following configuration YAML enables optional transformations. The configuration accepts a list of optimizations and, for optimizations which accept parameters, a section with optional parameter values.
 
-``` text
-type: optimizer
-transformations:
-  - name: PRECOMPUTE_INDEPENDENT_SUBSELECTS
-  - name: REWRITE_CTE_TO_TEMP_TABLE
-    parameters:
-      threshold: 1
-```
+    type: optimizer
+    transformations:
+      - name: PRECOMPUTE_INDEPENDENT_SUBSELECTS
+      - name: REWRITE_CTE_TO_TEMP_TABLE
+        parameters:
+          threshold: 1
 
 <table>
 <colgroup>
@@ -1322,18 +1258,16 @@ We recommend using this optimization when the source table uses a non-contiguous
 
 The following optimization converts zero-scale numeric types with precision less than or equal to 38 to `  INT64  ` in BigQuery.
 
-``` text
-# An INTEGER is internally represented as NUMBER(38,0) in Snowflake.
-# To convert Snowflake INTEGER to INT64 in BigQuery, enable the rewrite for precision <= 38.
-# Note that this can produce incorrect results if your application logic uses more than 18 digits of precision.
-#
-# This configuration is enabled by default for the Snowflake Dialect.
-type: optimizer
-transformations:
-  - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
-    parameters:
-      bigint: 38
-```
+    # An INTEGER is internally represented as NUMBER(38,0) in Snowflake.
+    # To convert Snowflake INTEGER to INT64 in BigQuery, enable the rewrite for precision <= 38.
+    # Note that this can produce incorrect results if your application logic uses more than 18 digits of precision.
+    #
+    # This configuration is enabled by default for the Snowflake Dialect.
+    type: optimizer
+    transformations:
+      - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
+        parameters:
+          bigint: 38
 
 A SQL translation with this optimization might look like the following:
 
@@ -1345,12 +1279,12 @@ A SQL translation with this optimization might look like the following:
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i INT64, n INT64);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i INT64, n INT64);
     </code></pre></td>
 </tr>
 </tbody>
@@ -1358,12 +1292,10 @@ A SQL translation with this optimization might look like the following:
 
 The following configuration disables the optimization in dialects, such as Snowflake, where it is enabled by default. This configuration converts numeric types to either `  NUMERIC  ` or `  BIGNUMERIC  ` depending on the input precision, instead of the default of `  INT64  ` .
 
-``` text
-type: optimizer
-transformations:
-  - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
-    enabled: false
-```
+    type: optimizer
+    transformations:
+      - name: REWRITE_ZERO_SCALE_NUMERIC_AS_INTEGER
+        enabled: false
 
 A SQL translation with this optimization might look like the following:
 
@@ -1375,12 +1307,12 @@ A SQL translation with this optimization might look like the following:
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       snowflake-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>      CREATE TABLE numbers(i INTEGER, n NUMERIC(10,0));
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i BIGNUMERIC(38), n NUMERIC(29));
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>      CREATE TABLE numbers(i BIGNUMERIC(38), n NUMERIC(29));
     </code></pre></td>
 </tr>
 </tbody>
@@ -1415,71 +1347,59 @@ The following examples create Gemini-based configuration YAML files which you ca
 
 #### Remove the upper function in the default translation output query
 
-``` text
-translation_rules:
-- instruction: "Remove upper() function"
-  examples:
-  - input: "upper(X)"
-    output: "X"
-```
+    translation_rules:
+    - instruction: "Remove upper() function"
+      examples:
+      - input: "upper(X)"
+        output: "X"
 
 #### Create multiple translation rules to customize the translation output
 
-``` text
-translation_rules:
-- instruction: "Remove upper() function"
-  suggestion_type: QUERY_CUSTOMIZATION
-  rewrite_target: TARGET_SQL
-  examples:
-  - input: "upper(X)"
-    output: "X"
-- instruction: "Insert a comment at the head that explains each statement in detail.
-  suggestion_type: QUERY_CUSTOMIZATION
-  rewrite_target: TARGET_SQL
-```
+    translation_rules:
+    - instruction: "Remove upper() function"
+      suggestion_type: QUERY_CUSTOMIZATION
+      rewrite_target: TARGET_SQL
+      examples:
+      - input: "upper(X)"
+        output: "X"
+    - instruction: "Insert a comment at the head that explains each statement in detail.
+      suggestion_type: QUERY_CUSTOMIZATION
+      rewrite_target: TARGET_SQL
 
 #### Remove SQL comments from the translation input query
 
-``` text
-translation_rules:
-- instruction: "Remove all the sql comments in the input sql query."
-  suggestion_type: QUERY_CUSTOMIZATION
-  rewrite_target: SOURCE_SQL
-```
+    translation_rules:
+    - instruction: "Remove all the sql comments in the input sql query."
+      suggestion_type: QUERY_CUSTOMIZATION
+      rewrite_target: SOURCE_SQL
 
 #### Generate translation explanations using default LLM prompt
 
 This example uses the default LLM prompts provided by the translation service to generate text explanations:
 
-``` text
-translation_rules:
-- suggestion_type: "TRANSLATION_EXPLANATION"
-```
+    translation_rules:
+    - suggestion_type: "TRANSLATION_EXPLANATION"
 
 #### Generates translation explanations using your own natural language prompts
 
-``` text
-translation_rules:
-- suggestion_type: "TRANSLATION_EXPLANATION"
-  instruction: "Explain the syntax differences between the source Teradata query and the translated GoogleSQL query."
-```
+    translation_rules:
+    - suggestion_type: "TRANSLATION_EXPLANATION"
+      instruction: "Explain the syntax differences between the source Teradata query and the translated GoogleSQL query."
 
 #### Multiple suggestion types in a single configuration YAML file
 
-``` text
-translation_rules:
-- suggestion_type: "TRANSLATION_EXPLANATION"
-  instruction: "Explain the syntax differences between the source Teradata query and the translated GoogleSQL query."
-- instruction: "Remove upper() function"
-  suggestion_type: QUERY_CUSTOMIZATION
-  rewrite_target: TARGET_SQL
-  examples:
-  - input: "upper(X)"
-    output: "X"
-- instruction: "Remove all the sql comments in the input sql query."
-  suggestion_type: QUERY_CUSTOMIZATION
-  rewrite_target: SOURCE_SQL
-```
+    translation_rules:
+    - suggestion_type: "TRANSLATION_EXPLANATION"
+      instruction: "Explain the syntax differences between the source Teradata query and the translated GoogleSQL query."
+    - instruction: "Remove upper() function"
+      suggestion_type: QUERY_CUSTOMIZATION
+      rewrite_target: TARGET_SQL
+      examples:
+      - input: "upper(X)"
+        output: "X"
+    - instruction: "Remove all the sql comments in the input sql query."
+      suggestion_type: QUERY_CUSTOMIZATION
+      rewrite_target: SOURCE_SQL
 
 ## Applying multiple YAML configurations
 
@@ -1489,24 +1409,20 @@ The following example lists two separate configuration YAML files that were prov
 
 `  change-type-example.config.yaml  ` :
 
-``` text
-type: object_rewriter
-attribute:
-  -
-    match: "testdb.testschema.x.a"
-    type:
-      target: NUMERIC(10,2)
-```
+    type: object_rewriter
+    attribute:
+      -
+        match: "testdb.testschema.x.a"
+        type:
+          target: NUMERIC(10,2)
 
 `  make-temp-example.config.yaml  ` :
 
-``` text
-type: object_rewriter
-relation:
-  -
-    match: "testdb.testschema.x"
-    temporary: true
-```
+    type: object_rewriter
+    relation:
+      -
+        match: "testdb.testschema.x"
+        temporary: true
 
 A SQL translation with these two configuration YAML files might look like the following:
 
@@ -1518,12 +1434,12 @@ A SQL translation with these two configuration YAML files might look like the fo
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       teradata-input.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="SQL" translate="no"><code>    create table x(a int);
     </code></pre></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       bq-output.sql      </code></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TEMPORARY TABLE x
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="GoogleSQL" translate="no"><code>    CREATE TEMPORARY TABLE x
     (
       a NUMERIC(31, 2)
     )

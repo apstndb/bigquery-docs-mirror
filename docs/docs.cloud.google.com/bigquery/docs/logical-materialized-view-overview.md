@@ -29,60 +29,23 @@ Although logical views are the default type of view, if you frequently query a l
 
 The following table summarizes the similarities and differences between BigQuery logical views and materialized views:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Dimension</strong></th>
-<th><strong>Logical view</strong></th>
-<th><strong>Materialized view</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Data Persistence</strong></td>
-<td>None (virtual)</td>
-<td>Physical (stored on disk)</td>
-</tr>
-<tr class="even">
-<td><strong>Execution</strong></td>
-<td>Every time the view is called</td>
-<td>Precomputed; background refresh</td>
-</tr>
-<tr class="odd">
-<td><strong>Data Staleness</strong></td>
-<td>Never</td>
-<td>Optional <sup>1</sup> (via refresh)</td>
-</tr>
-<tr class="even">
-<td><strong>Performance</strong></td>
-<td>Variable (base table dependent)</td>
-<td>Consistent and fast</td>
-</tr>
-<tr class="odd">
-<td><strong>SQL Complexity</strong></td>
-<td>Unlimited</td>
-<td><a href="/bigquery/docs/materialized-views-create">Limited</a></td>
-</tr>
-<tr class="even">
-<td><strong>Optimized For</strong></td>
-<td>Security and abstraction</td>
-<td>Speed and cost reduction</td>
-</tr>
-<tr class="odd">
-<td><strong>Maintenance &amp; storage costs</strong></td>
-<td>No</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Dimension**                   | **Logical view**                | **Materialized view**                                                            |
+| ------------------------------- | ------------------------------- | -------------------------------------------------------------------------------- |
+| **Data Persistence**            | None (virtual)                  | Physical (stored on disk)                                                        |
+| **Execution**                   | Every time the view is called   | Precomputed; background refresh                                                  |
+| **Data Staleness**              | Never                           | Optional <sup>1</sup> (via refresh)                                              |
+| **Performance**                 | Variable (base table dependent) | Consistent and fast                                                              |
+| **SQL Complexity**              | Unlimited                       | [Limited](https://docs.cloud.google.com/bigquery/docs/materialized-views-create) |
+| **Optimized For**               | Security and abstraction        | Speed and cost reduction                                                         |
+| **Maintenance & storage costs** | No                              | Yes                                                                              |
 
-<sup>1</sup> The [`  --max_staleness  ` option](/bigquery/docs/materialized-views-create#max_staleness) improves query performance with controlled costs when processing large, frequently changing datasets.
+<sup>1</sup> The [`  --max_staleness  ` option](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) improves query performance with controlled costs when processing large, frequently changing datasets.
 
 ### When to use logical views
 
   - **Semantic layering** . Rename complex column names into business-friendly terms for non-technical users.
   - **Rapid development** . Use when logic is in flux and you don't want to manage the overhead of physical storage.
-  - **Consolidated data sources** . Provide a data source for visualization tools such as [Looker Studio](/looker/docs) or [BigQuery sharing (formerly Analytics Hub)](/bigquery/docs/analytics-hub-introduction) .
+  - **Consolidated data sources** . Provide a data source for visualization tools such as [Looker Studio](https://docs.cloud.google.com/looker/docs) or [BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) .
 
 ### When to use materialized views
 
@@ -93,7 +56,7 @@ The following table summarizes the similarities and differences between BigQuery
 
 ## Authorized views
 
-You can also create an [*authorized view*](/bigquery/docs/authorized-views) to share a subset of data from a source dataset to a view in a secondary dataset. You can then share this view to specific users and groups (principals) who can view the data that you share and run queries on it, but who can't access the source dataset directly.
+You can also create an [*authorized view*](https://docs.cloud.google.com/bigquery/docs/authorized-views) to share a subset of data from a source dataset to a view in a secondary dataset. You can then share this view to specific users and groups (principals) who can view the data that you share and run queries on it, but who can't access the source dataset directly.
 
 You can create an authorized view for either a logical or materialized view. An authorized view for a materialized view is called an *authorized materialized view* .
 
@@ -101,11 +64,11 @@ You can create an authorized view for either a logical or materialized view. An 
 
 For a well-architected BigQuery environment, *logical views* are a useful tool for consolidating the data you need. Reserve *materialized views* for use as a performance optimization tool for specific, high-traffic query patterns that involve heavy aggregation.
 
-To learn how to monitor the use and performance of materialized views, see [`  MATERIALIZED_VIEWS  ` view](/bigquery/docs/information-schema-materialized-views) .
+To learn how to monitor the use and performance of materialized views, see [`  MATERIALIZED_VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-materialized-views) .
 
 ## What's next
 
-  - [Introduction to logical views](/bigquery/docs/views-intro)
-  - [Create logical views](/bigquery/docs/views)
-  - [Introduction to materialized views](/bigquery/docs/materialized-views-intro)
-  - [Create materialized views](/bigquery/docs/materialized-views-create)
+  - [Introduction to logical views](https://docs.cloud.google.com/bigquery/docs/views-intro)
+  - [Create logical views](https://docs.cloud.google.com/bigquery/docs/views)
+  - [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro)
+  - [Create materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create)

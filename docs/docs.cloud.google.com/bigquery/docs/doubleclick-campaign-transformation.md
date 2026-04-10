@@ -4,169 +4,36 @@ When your Campaign Manager (formerly known as DoubleClick Campaign Manager) data
 
 When you view the tables and views in BigQuery, the value for campaign\_manager\_id is your Campaign Manager Network, Advertiser, or Floodlight ID.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Campaign Manager file</strong></th>
-<th><strong>BigQuery table</strong></th>
-<th><strong>BigQuery view</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Data Transfer files</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format">impression</a></td>
-<td>p_impression_ campaign_manager_id</td>
-<td>impression_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format">click</a></td>
-<td>p_click_ campaign_manager_id</td>
-<td>click_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format">activity</a></td>
-<td>p_activity_ campaign_manager_id</td>
-<td>activity_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format">rich_media</a></td>
-<td>p_rich_media_ campaign_manager_id</td>
-<td>rich_media_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><strong>Match Tables</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#activity_cats">activity_cats</a></td>
-<td>p_match_table_activity_cats_ campaign_manager_id</td>
-<td>match_table_activity_cats_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#activity_types">activity_types</a></td>
-<td>p_match_table_activity_types_ campaign_manager_id</td>
-<td>match_table_activity_types_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#ads">ads</a></td>
-<td>p_match_table_ads_ campaign_manager_id</td>
-<td>match_table_ads_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#ad_placement_assignments">ad_placement_assignments</a></td>
-<td>p_match_table_ad_placement_assignments_ campaign_manager_id</td>
-<td>match_table_ad_placement_assignments_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#advertisers">advertisers</a></td>
-<td>p_match_table_advertisers_ campaign_manager_id</td>
-<td>match_table_advertisers_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#assets">assets</a></td>
-<td>p_match_table_assets_ campaign_manager_id</td>
-<td>match_table_assets_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#browsers">browsers</a></td>
-<td>p_match_table_browsers_ campaign_manager_id</td>
-<td>match_table_browsers_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#campaigns">campaigns</a></td>
-<td>p_match_table_campaigns_ campaign_manager_id</td>
-<td>match_table_campaigns_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#cities">cities</a></td>
-<td>p_match_table_cities_ campaign_manager_id</td>
-<td>match_table_cities_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#creatives">creatives</a></td>
-<td>p_match_table_creatives_ campaign_manager_id</td>
-<td>match_table_creatives_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#creative_ad_assignments">creative_ad_assignments</a></td>
-<td>p_match_table_creative_ad_assignments_ campaign_manager_id</td>
-<td>match_table_creative_ad_assignments_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_creative_fields">custom_creative_fields</a></td>
-<td>p_match_table_custom_creative_fields_ campaign_manager_id</td>
-<td>match_table_custom_creative_fields_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#paid_search">paid_search</a></td>
-<td>p_match_table_paid_search_ campaign_manager_id</td>
-<td>match_table_paid_search_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#designated_market_areas">designated_market_areas</a></td>
-<td>p_match_table_designated_market_areas_ campaign_manager_id</td>
-<td>match_table_designated_market_areas_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#keyword_value">keyword_value</a></td>
-<td>p_match_table_keyword_value_ campaign_manager_id</td>
-<td>match_table_keyword_value_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td>null user ID reason categories</td>
-<td>Unsupported</td>
-<td>Unsupported</td>
-</tr>
-<tr class="odd">
-<td>rich media standard event and event type IDs</td>
-<td>Unsupported</td>
-<td>Unsupported</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_rich_media">custom_rich_media</a></td>
-<td>p_match_table_custom_rich_media_ campaign_manager_id</td>
-<td>match_table_custom_rich_media_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#operating_systems">operating_systems</a></td>
-<td>p_match_table_operating_systems_ campaign_manager_id</td>
-<td>match_table_operating_systems_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#placements">placements</a></td>
-<td>p_match_table_placements_ campaign_manager_id</td>
-<td>match_table_placements_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#placement_cost">placement_cost</a></td>
-<td>p_match_table_placement_cost_ campaign_manager_id</td>
-<td>match_table_placement_cost_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#sites">sites</a></td>
-<td>p_match_table_sites_ campaign_manager_id</td>
-<td>match_table_sites_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#states">states</a></td>
-<td>p_match_table_states_ campaign_manager_id</td>
-<td>match_table_states_ campaign_manager_id</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_floodlight_variables">custom_floodlight_variables</a></td>
-<td>p_match_table_custom_floodlight_variables_ campaign_manager_id</td>
-<td>match_table_custom_floodlight_variables_ campaign_manager_id</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#landing_page_url">landing_page_url</a></td>
-<td>p_match_table_landing_page_url_ campaign_manager_id</td>
-<td>match_table_landing_page_url_ campaign_manager_id</td>
-</tr>
-</tbody>
-</table>
+| **Campaign Manager file**                                                                                                                      | **BigQuery table**                                                     | **BigQuery view**                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Data Transfer files**                                                                                                                        |                                                                        |                                                                     |
+| [impression](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format)                                                 | p\_impression\_ campaign\_manager\_id                                  | impression\_ campaign\_manager\_id                                  |
+| [click](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format)                                                      | p\_click\_ campaign\_manager\_id                                       | click\_ campaign\_manager\_id                                       |
+| [activity](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format)                                                   | p\_activity\_ campaign\_manager\_id                                    | activity\_ campaign\_manager\_id                                    |
+| [rich\_media](https://developers.google.com/doubleclick-advertisers/dtv2/reference/file-format)                                                | p\_rich\_media\_ campaign\_manager\_id                                 | rich\_media\_ campaign\_manager\_id                                 |
+| **Match Tables**                                                                                                                               |                                                                        |                                                                     |
+| [activity\_cats](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#activity_cats)                              | p\_match\_table\_activity\_cats\_ campaign\_manager\_id                | match\_table\_activity\_cats\_ campaign\_manager\_id                |
+| [activity\_types](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#activity_types)                            | p\_match\_table\_activity\_types\_ campaign\_manager\_id               | match\_table\_activity\_types\_ campaign\_manager\_id               |
+| [ads](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#ads)                                                   | p\_match\_table\_ads\_ campaign\_manager\_id                           | match\_table\_ads\_ campaign\_manager\_id                           |
+| [ad\_placement\_assignments](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#ad_placement_assignments)       | p\_match\_table\_ad\_placement\_assignments\_ campaign\_manager\_id    | match\_table\_ad\_placement\_assignments\_ campaign\_manager\_id    |
+| [advertisers](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#advertisers)                                   | p\_match\_table\_advertisers\_ campaign\_manager\_id                   | match\_table\_advertisers\_ campaign\_manager\_id                   |
+| [assets](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#assets)                                             | p\_match\_table\_assets\_ campaign\_manager\_id                        | match\_table\_assets\_ campaign\_manager\_id                        |
+| [browsers](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#browsers)                                         | p\_match\_table\_browsers\_ campaign\_manager\_id                      | match\_table\_browsers\_ campaign\_manager\_id                      |
+| [campaigns](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#campaigns)                                       | p\_match\_table\_campaigns\_ campaign\_manager\_id                     | match\_table\_campaigns\_ campaign\_manager\_id                     |
+| [cities](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#cities)                                             | p\_match\_table\_cities\_ campaign\_manager\_id                        | match\_table\_cities\_ campaign\_manager\_id                        |
+| [creatives](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#creatives)                                       | p\_match\_table\_creatives\_ campaign\_manager\_id                     | match\_table\_creatives\_ campaign\_manager\_id                     |
+| [creative\_ad\_assignments](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#creative_ad_assignments)         | p\_match\_table\_creative\_ad\_assignments\_ campaign\_manager\_id     | match\_table\_creative\_ad\_assignments\_ campaign\_manager\_id     |
+| [custom\_creative\_fields](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_creative_fields)           | p\_match\_table\_custom\_creative\_fields\_ campaign\_manager\_id      | match\_table\_custom\_creative\_fields\_ campaign\_manager\_id      |
+| [paid\_search](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#paid_search)                                  | p\_match\_table\_paid\_search\_ campaign\_manager\_id                  | match\_table\_paid\_search\_ campaign\_manager\_id                  |
+| [designated\_market\_areas](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#designated_market_areas)         | p\_match\_table\_designated\_market\_areas\_ campaign\_manager\_id     | match\_table\_designated\_market\_areas\_ campaign\_manager\_id     |
+| [keyword\_value](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#keyword_value)                              | p\_match\_table\_keyword\_value\_ campaign\_manager\_id                | match\_table\_keyword\_value\_ campaign\_manager\_id                |
+| null user ID reason categories                                                                                                                 | Unsupported                                                            | Unsupported                                                         |
+| rich media standard event and event type IDs                                                                                                   | Unsupported                                                            | Unsupported                                                         |
+| [custom\_rich\_media](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_rich_media)                     | p\_match\_table\_custom\_rich\_media\_ campaign\_manager\_id           | match\_table\_custom\_rich\_media\_ campaign\_manager\_id           |
+| [operating\_systems](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#operating_systems)                      | p\_match\_table\_operating\_systems\_ campaign\_manager\_id            | match\_table\_operating\_systems\_ campaign\_manager\_id            |
+| [placements](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#placements)                                     | p\_match\_table\_placements\_ campaign\_manager\_id                    | match\_table\_placements\_ campaign\_manager\_id                    |
+| [placement\_cost](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#placement_cost)                            | p\_match\_table\_placement\_cost\_ campaign\_manager\_id               | match\_table\_placement\_cost\_ campaign\_manager\_id               |
+| [sites](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#sites)                                               | p\_match\_table\_sites\_ campaign\_manager\_id                         | match\_table\_sites\_ campaign\_manager\_id                         |
+| [states](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#states)                                             | p\_match\_table\_states\_ campaign\_manager\_id                        | match\_table\_states\_ campaign\_manager\_id                        |
+| [custom\_floodlight\_variables](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#custom_floodlight_variables) | p\_match\_table\_custom\_floodlight\_variables\_ campaign\_manager\_id | match\_table\_custom\_floodlight\_variables\_ campaign\_manager\_id |
+| [landing\_page\_url](https://developers.google.com/doubleclick-advertisers/dtv2/reference/match-tables#landing_page_url)                       | p\_match\_table\_landing\_page\_url\_ campaign\_manager\_id            | match\_table\_landing\_page\_url\_ campaign\_manager\_id            |

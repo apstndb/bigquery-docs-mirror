@@ -9,7 +9,7 @@ To query the `  INFORMATION_SCHEMA.SESSIONS_BY_USER  ` view, you need the `  big
   - Project Viewer
   - BigQuery User
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -19,57 +19,16 @@ The `  INFORMATION_SCHEMA.SESSIONS_BY_*  ` view has the following schema:
 
 **Note:** The underlying data is partitioned by the `  creation_time  ` column and clustered by `  project_id  ` and `  user_email  ` .
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       creation_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>( <em>Partitioning column</em> ) Creation time of this session. Partitioning is based on the UTC time of this timestamp.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       expiration_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>( <em>Partitioning column</em> ) Expiration time of this session. Partitioning is based on the UTC time of this timestamp.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       is_active      </code></td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td>Is the session is still active? <code dir="ltr" translate="no">       TRUE      </code> if yes, otherwise <code dir="ltr" translate="no">       FALSE      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       last_modified_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>( <em>Partitioning column</em> ) Time when the session was last modified. Partitioning is based on the UTC time of this timestamp.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       project_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>( <em>Clustering column</em> ) ID of the project.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       project_number      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Number of the project.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       session_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>ID of the session. For example, <code dir="ltr" translate="no">       bquxsession_1234      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       user_email      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>( <em>Clustering column</em> ) Email address or service account of the user who ran the session.</td>
-</tr>
-</tbody>
-</table>
+| Column name                         | Data type                  | Value                                                                                                                       |
+| ----------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `        creation_time       `      | `        TIMESTAMP       ` | ( *Partitioning column* ) Creation time of this session. Partitioning is based on the UTC time of this timestamp.           |
+| `        expiration_time       `    | `        TIMESTAMP       ` | ( *Partitioning column* ) Expiration time of this session. Partitioning is based on the UTC time of this timestamp.         |
+| `        is_active       `          | `        BOOL       `      | Is the session is still active? `        TRUE       ` if yes, otherwise `        FALSE       ` .                            |
+| `        last_modified_time       ` | `        TIMESTAMP       ` | ( *Partitioning column* ) Time when the session was last modified. Partitioning is based on the UTC time of this timestamp. |
+| `        project_id       `         | `        STRING       `    | ( *Clustering column* ) ID of the project.                                                                                  |
+| `        project_number       `     | `        INTEGER       `   | Number of the project.                                                                                                      |
+| `        session_id       `         | `        STRING       `    | ID of the session. For example, `        bquxsession_1234       ` .                                                         |
+| `        user_email       `         | `        STRING       `    | ( *Clustering column* ) Email address or service account of the user who ran the session.                                   |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -79,44 +38,29 @@ This view contains currently running sessions and the history of sessions comple
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.SESSIONS_BY_USER      </code></td>
-<td>Sessions created by the current user in the specified project.</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                     | Resource scope                                                 | Region scope               |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.SESSIONS_BY_USER       `` | Sessions created by the current user in the specified project. | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Example
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-``` text
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER
-```
+    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.SESSIONS_BY_USER
 
 For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.SESSIONS_BY_USER  `` .
 
 The following example lists sessions that were created by the current user:
 
-``` text
+``` notranslate
 SELECT
   session_id,
   creation_time
@@ -132,11 +76,9 @@ ORDER BY
 
 The results should look like the following:
 
-``` text
-+-------------------------------------------------------------------------+
-| session_id                                        | creation_time       |
-+-------------------------------------------------------------------------+
-| CgwKCmZhbGl1LXRlc3QQARokMGQ5YWWYzZmE0YjhkMDBm     | 2021-06-01 08:04:26 |
-| CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZTczwZjA1NDc2 | 2021-05-31 22:43:02 |
-+-------------------------------------------------------------------------+
-```
+    +-------------------------------------------------------------------------+
+    | session_id                                        | creation_time       |
+    +-------------------------------------------------------------------------+
+    | CgwKCmZhbGl1LXRlc3QQARokMGQ5YWWYzZmE0YjhkMDBm     | 2021-06-01 08:04:26 |
+    | CgwKCmZhbGl1LXRlc3QQARokMDAzYjI0OWQtZTczwZjA1NDc2 | 2021-05-31 22:43:02 |
+    +-------------------------------------------------------------------------+

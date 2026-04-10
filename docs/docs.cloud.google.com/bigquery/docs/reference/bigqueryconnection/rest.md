@@ -1,7 +1,7 @@
 Allows users to manage BigQuery connections to external data sources.
 
-  - [REST Resource: v1beta1.projects.locations.connections](#v1beta1.projects.locations.connections)
-  - [REST Resource: v1.projects.locations.connections](#v1.projects.locations.connections)
+  - [REST Resource: v1beta1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest#v1beta1.projects.locations.connections)
+  - [REST Resource: v1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest#v1.projects.locations.connections)
 
 ## Service: bigqueryconnection.googleapis.com
 
@@ -20,7 +20,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigqueryconnection.googleapis.com  `
 
-## REST Resource: [v1beta1.projects.locations.connections](/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections)
+## REST Resource: [v1beta1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1beta1/projects.locations.connections)
 
 Methods
 
@@ -69,7 +69,7 @@ Returns permissions that a caller has on the specified resource.
 `  PATCH /v1beta1/{name=projects/*/locations/*/connections/*/credential}  `  
 Sets the credential for the specified connection.
 
-## REST Resource: [v1.projects.locations.connections](/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections)
+## REST Resource: [v1.projects.locations.connections](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections)
 
 Methods
 

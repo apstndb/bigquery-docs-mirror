@@ -17,14 +17,14 @@ In this tutorial, you complete the following tasks:
 
 In this document, you use the following billable components of Google Cloud:
 
-  - [BigQuery](/bigquery/pricing)
-  - [BI Engine](/bigquery/pricing#bi-engine-pricing)
+  - [BigQuery](https://docs.cloud.google.com/bigquery/pricing)
+  - [BI Engine](https://docs.cloud.google.com/bigquery/pricing#bi-engine-pricing)
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](#clean-up) .
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau#clean-up) .
 
 ## Before you begin
 
@@ -34,7 +34,9 @@ Before you begin, ensure that you have a project to use, that you have enabled b
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
     For new projects, the BigQuery API is automatically enabled.
 
@@ -42,23 +44,27 @@ Before you begin, ensure that you have a project to use, that you have enabled b
 
 To get the permissions that you need to create a dataset, create a table, copy data, query data, and create a BI Engine reservation, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run copy jobs and query jobs: [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, copy data into a table, and query a table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
-  - Create a BI Engine reservation: [BigQuery Resource Admin](/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `  roles/bigquery.resourceAdmin  ` )
+  - Run copy jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - Create a dataset, create a table, copy data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Create a BI Engine reservation: [BigQuery Resource Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceAdmin) ( `  roles/bigquery.resourceAdmin  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-Additional permissions might be needed if you have are using a custom OAuth client in Tableau Desktop to connect to BigQuery. For more information, see [Troubleshooting Errors](#troubleshooting_errors) .
+Additional permissions might be needed if you have are using a custom OAuth client in Tableau Desktop to connect to BigQuery. For more information, see [Troubleshooting Errors](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau#troubleshooting_errors) .
 
 ## Create a BigQuery dataset
 
 The first step is to create a BigQuery dataset to store your BI Engine-managed table. To create your dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -70,15 +76,17 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
     
       - For **Dataset ID** , enter `  biengine_tutorial  ` .
     
-      - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](/bigquery/docs/locations#multi-regions) where public datasets are stored.
+      - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) where public datasets are stored.
     
       - For this tutorial, you can select **Enable table expiration** , and then specify the number of days before the table expires.
+        
+        ![Create dataset page](https://docs.cloud.google.com/static/bigquery/images/create-dataset-biengine.png)
 
 6.  Leave all of the other default settings in place and click **Create dataset** .
 
 ## Create a table by copying data from a public dataset
 
-This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](/bigquery/public-data) . Public datasets are datasets that BigQuery hosts for you to access and integrate into your applications.
+This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](https://docs.cloud.google.com/bigquery/public-data) . Public datasets are datasets that BigQuery hosts for you to access and integrate into your applications.
 
 In this section, you create a table by copying data from the [San Francisco 311 service requests](https://console.cloud.google.com/marketplace/details/san-francisco-public-data/sf-311?filter=solution-type:dataset) dataset. You can explore the dataset by using the [Google Cloud console](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_311&page=dataset) .
 
@@ -87,8 +95,12 @@ In this section, you create a table by copying data from the [San Francisco 311 
 To create your table, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, search for the `  san_francisco_311  ` dataset.
 
@@ -97,6 +109,8 @@ To create your table, follow these steps:
 5.  Click the `  311_service_requests  ` table.
 
 6.  In the toolbar, click **Copy** .
+    
+    ![Highlight of the copy option.](https://docs.cloud.google.com/static/bigquery/images/looker-311-table-copy.png)
 
 7.  In the **Copy table** dialog, in the **Destination** section, do the following:
     
@@ -105,6 +119,8 @@ To create your table, follow these steps:
       - For **Dataset** , select **biengine\_tutorial** .
     
       - For **Table** , enter `  311_service_requests_copy  ` .
+        
+        ![The copy table window with destination options](https://docs.cloud.google.com/static/bigquery/images/copy-311-table.png)
 
 8.  Click **Copy** .
 
@@ -114,6 +130,8 @@ To create your table, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
     
+    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
+    
     **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  Click add **Create reservation** .
@@ -122,9 +140,11 @@ To create your table, follow these steps:
     
       - In the **Project** list, verify your Google Cloud project.
     
-      - In the **Location** list, select a location. The location should match the [location of the datasets](/bigquery/docs/locations) that you're querying.
+      - In the **Location** list, select a location. The location should match the [location of the datasets](https://docs.cloud.google.com/bigquery/docs/locations) that you're querying.
     
       - Adjust the **GiB of Capacity** slider to the amount of memory capacity that you're reserving. The following example sets the capacity to 2 GiB. The maximum is 250 GiB.
+        
+        ![BI Engine capacity location](https://docs.cloud.google.com/static/bigquery/images/step-1.png)
 
 4.  Click **Next** .
 
@@ -143,6 +163,8 @@ To create your table, follow these steps:
 8.  If you accept the terms of agreement, click **Create** .
 
 After you confirm your reservation, the details are displayed on the **Reservations** page.
+
+![Confirmed reservation](https://docs.cloud.google.com/static/bigquery/images/reservation.png)
 
 ## Connect to a dataset from Tableau Desktop
 
@@ -202,6 +224,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -213,6 +237,8 @@ Alternatively, if you intend to keep the project, then you can avoid additional 
 To delete your reservation, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
+    
+    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
     
     **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
@@ -226,12 +252,10 @@ To delete your reservation, follow these steps:
 
 If you are using a custom OAuth configuration in Tableau Desktop to connect to BigQuery, some users might experience issues connecting to a Tableau server and encounter the following error message:
 
-``` text
-the app is blocked
-```
+    the app is blocked
 
-To resolve this error, verify that the user is assigned to a role that has all the [required permissions](#required_permissions) to connect Tableau to BigQuery. If the problem persists, add the user to the [OAuth Config Viewer role](/iam/docs/roles-permissions/oauthconfig#oauthconfig.viewer) ( `  roles/oauthconfig.viewer  ` ).
+To resolve this error, verify that the user is assigned to a role that has all the [required permissions](https://docs.cloud.google.com/bigquery/docs/analyze-data-tableau#required_permissions) to connect Tableau to BigQuery. If the problem persists, add the user to the [OAuth Config Viewer role](https://docs.cloud.google.com/iam/docs/roles-permissions/oauthconfig#oauthconfig.viewer) ( `  roles/oauthconfig.viewer  ` ).
 
 ## What's next
 
-  - For an overview of the BI Engine, see [Introduction to BI Engine](/bigquery/docs/bi-engine-intro) .
+  - For an overview of the BI Engine, see [Introduction to BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .

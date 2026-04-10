@@ -4,7 +4,7 @@ This document describes the `  ML.PRINCIPAL_COMPONENTS  ` function, which lets y
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.PRINCIPAL_COMPONENTS(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -33,13 +33,13 @@ ML.PRINCIPAL_COMPONENTS(
       - `  categorical_value.category  ` : a `  STRING  ` value that contains the name of each category.
       - `  categorical_value.value  ` : a `  FLOAT64  ` value that contains the value of `  categorical_value.category  ` for the principal component that `  principal_component_id  ` identifies.
 
-The output is in descending order by the eigenvalues of the principal components, which you can get by using the [`  ML.PRINCIPAL_COMPONENT_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info) .
+The output is in descending order by the eigenvalues of the principal components, which you can get by using the [`  ML.PRINCIPAL_COMPONENT_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info) .
 
 ## Example
 
 The following example retrieves the principal components from the model `  mydataset.mymodel  ` in your default project:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -48,5 +48,5 @@ FROM
 
 ## What's next
 
-  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](/bigquery/docs/weights-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

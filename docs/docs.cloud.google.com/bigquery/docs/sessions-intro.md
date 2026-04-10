@@ -1,6 +1,6 @@
 # Introduction to sessions
 
-This guide describes how to enable, create, and track changes in a BigQuery session. It is intended for users who are familiar with [BigQuery](/bigquery/docs) and [GoogleSQL](/bigquery/docs/reference/standard-sql/query-syntax) .
+This guide describes how to enable, create, and track changes in a BigQuery session. It is intended for users who are familiar with [BigQuery](https://docs.cloud.google.com/bigquery/docs) and [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) .
 
 You can capture your SQL activities in a BigQuery session. Temporary tables, temporary functions, and variables can be used throughout the session to interactively build one or more queries. Multiple sessions can be active at the same time and the history for each session is saved. You can view the history of a session for up to 20 days after the session is terminated.
 
@@ -16,13 +16,13 @@ Typical uses for a session include the following:
 
   - There are no additional costs for using sessions.
 
-  - For projects that use on-demand pricing, queries against `  INFORMATION_SCHEMA  ` incur charges. For more information, see [`  INFORMATION_SCHEMA  ` pricing](/bigquery/docs/information-schema-intro#pricing) .
+  - For projects that use on-demand pricing, queries against `  INFORMATION_SCHEMA  ` incur charges. For more information, see [`  INFORMATION_SCHEMA  ` pricing](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#pricing) .
 
   - You are charged for temporary tables that you create in sessions. Storage charges are based on how much data is stored in the tables. For information about storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) .
 
 ## Limitations
 
-  - Every query in a session is run in the location where the session was created. If the location isn't specified, or if it can't be inferred from the query that creates the session, the session is created in the [default location](/bigquery/docs/default-configuration#global-settings) .
+  - Every query in a session is run in the location where the session was created. If the location isn't specified, or if it can't be inferred from the query that creates the session, the session is created in the [default location](https://docs.cloud.google.com/bigquery/docs/default-configuration#global-settings) .
 
   - A session is automatically terminated after 24 hours of inactivity.
 
@@ -34,7 +34,7 @@ Typical uses for a session include the following:
 
 ## Roles and permissions
 
-This section describes the [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) and the [IAM roles](/bigquery/docs/access-control#bigquery) that you need to perform actions with sessions.
+This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) and the [IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that you need to perform actions with sessions.
 
 <table>
 <colgroup>
@@ -105,5 +105,5 @@ This section describes the [Identity and Access Management (IAM) permissions](/b
 
 ## What's next
 
-  - Learn more about how to [write queries in sessions](/bigquery/docs/sessions-write-queries) .
-  - Learn more about how to [work with sessions](/bigquery/docs/sessions) , including how to create, use, terminate, and list your sessions.
+  - Learn more about how to [write queries in sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries) .
+  - Learn more about how to [work with sessions](https://docs.cloud.google.com/bigquery/docs/sessions) , including how to create, use, terminate, and list your sessions.

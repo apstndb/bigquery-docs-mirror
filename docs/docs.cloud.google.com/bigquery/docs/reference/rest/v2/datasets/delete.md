@@ -1,10 +1,10 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Query parameters](#body.QUERY_PARAMETERS)
-  - [Request body](#body.request_body)
-  - [Response body](#body.response_body)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.PATH_PARAMETERS)
+  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.QUERY_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.request_body)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.response_body)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/delete#try-it)
 
 Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.
 
@@ -55,4 +55,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery  `
   - `  https://www.googleapis.com/auth/cloud-platform  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

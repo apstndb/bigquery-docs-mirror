@@ -2,19 +2,19 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to generate dataset insights for BigQuery datasets. Dataset insights help you understand relationships between tables in a dataset by generating relationship graphs and cross-table queries.
 
 Dataset insights help you accelerate the exploration of datasets with multiple tables by automatically discovering and visualizing relationships between tables in a graph, identifying primary-key and foreign-key relationships, and generating sample cross-table queries. This is useful for understanding data structure without documentation, discovering schema-defined, usage-based, or AI-inferred relationships between tables, and generating complex queries that join multiple tables.
 
-For an overview of table and dataset insights, see [Data insights overview](/bigquery/docs/data-insights) .
+For an overview of table and dataset insights, see [Data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 
 ## Before you begin
 
-Data insights are generated using [Gemini in BigQuery](/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](/gemini/docs/bigquery/set-up-gemini) .
+Data insights are generated using [Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/overview) . To start generating insights, you must first [set up Gemini in BigQuery](https://docs.cloud.google.com/gemini/docs/bigquery/set-up-gemini) .
 
-**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](/bigquery/docs/gemini-set-up#turn-off) .
+**Note** : Gemini in BigQuery is part of Gemini for Google Cloud and doesn't support the same compliance and security offerings as BigQuery. You should only set up Gemini in BigQuery for BigQuery projects that don't require [compliance offerings that aren't supported by Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/discover/certifications) . For information about how to turn off or prevent access to Gemini in BigQuery, see [Turn off Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off) .
 
 ### Enable APIs
 
@@ -24,13 +24,15 @@ To use data insights, enable the following APIs in your project: Dataplex API, B
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-For more information about enabling the Gemini for Google Cloud API, see [Enable the Gemini for Google Cloud API in a Google Cloud project](/gemini/docs/discover/set-up-gemini#enable-api) .
+[Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com,bigquery.googleapis.com,cloudaicompanion.googleapis.com)
+
+For more information about enabling the Gemini for Google Cloud API, see [Enable the Gemini for Google Cloud API in a Google Cloud project](https://docs.cloud.google.com/gemini/docs/discover/set-up-gemini#enable-api) .
 
 ### Complete a data profile scan
 
-To improve the quality of insights, generate [data profiling results](/bigquery/docs/data-profile-scan) for tables in your dataset.
+To improve the quality of insights, generate [data profiling results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) for tables in your dataset.
 
 ### Required roles
 
@@ -38,15 +40,15 @@ To get the permissions that you need to generate, manage, and retrieve dataset i
 
   - To generate, manage, and retrieve insights:
       - Dataplex DataScan Editor ( `  roles/dataplex.dataScanEditor  ` ) or Dataplex DataScan Administrator ( `  roles/dataplex.dataScanAdmin  ` ) on project
-      - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on tables
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on tables
       - BigQuery User ( `  roles/bigquery.user  ` ) or BigQuery Studio User ( `  roles/bigquery.studioUser  ` ) on project.
   - To view insights:
-      - [Dataplex DataScan DataViewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on project
-      - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on dataset
+      - [Dataplex DataScan DataViewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanDataViewer) ( `  roles/dataplex.dataScanDataViewer  ` ) on project
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on dataset
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 To see the exact permissions that are required to generate insights, expand the **Required permissions** section:
 
@@ -64,6 +66,8 @@ To see the exact permissions that are required to generate insights, expand the 
 ## Generate dataset insights
 
 1.  In the Google Cloud console, go to **BigQuery Studio** .
+    
+    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, select the project and then the dataset for which you want to generate insights.
 
@@ -73,7 +77,7 @@ To see the exact permissions that are required to generate insights, expand the 
     
     If your dataset is in a multi-region, you might be prompted to select a region to generate insights. Select a region corresponding to the multi-region where the insights scan is going to be created.
     
-    It takes a few minutes for the insights to be populated. The quality of insights improves if the tables in the dataset have [data profiling results](/bigquery/docs/data-profile-scan) .
+    It takes a few minutes for the insights to be populated. The quality of insights improves if the tables in the dataset have [data profiling results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan) .
 
 After insights are generated, BigQuery displays a dataset description, a relationship graph, a relationship table, and sample cross-table queries.
 
@@ -112,6 +116,6 @@ Based on the discovered relationships, Gemini generates sample queries. These ar
 
 ## What's next
 
-  - Learn about [data insights overview](/bigquery/docs/data-insights) .
-  - Learn how to [generate table insights](/bigquery/docs/generate-table-insights) .
-  - Learn more about [Dataplex Universal Catalog data profiling](/dataplex/docs/data-profiling-overview) .
+  - Learn about [data insights overview](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - Learn how to [generate table insights](https://docs.cloud.google.com/bigquery/docs/generate-table-insights) .
+  - Learn more about [Dataplex Universal Catalog data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .

@@ -2,7 +2,7 @@
 
 **Preview**
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document describes how to create metadata and query log files by using the `  dwh-migration-dumper  ` command-line extraction tool. The metadata files describe the SQL objects in your source system.
 
@@ -14,7 +14,7 @@ The BigQuery migration assessment uses metadata files and query log files to ana
 
 You can use the `  dwh-migration-dumper  ` tool to extract metadata information from the database platform that you are migrating to BigQuery. While using the extraction tool isn't required for translation, it is required for BigQuery migration assessment and we strongly recommend using it for all migration tasks.
 
-For more information, see [Create metadata files](/bigquery/docs/batch-sql-translator#create_metadata_files) .
+For more information, see [Create metadata files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#create_metadata_files) .
 
 You can use the `  dwh-migration-dumper  ` tool to extract metadata from the following database platforms:
 
@@ -72,15 +72,15 @@ To install the `  dwh-migration-dumper  ` tool, follow these steps:
     
     ### Bash
     
-    ``` text
+    ``` notranslate
     sha256sum --check SHA256SUMS.txt
     ```
     
-    If verification fails, see [Troubleshooting](#corrupted_zip_file) .
+    If verification fails, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#corrupted_zip_file) .
     
     ### Windows PowerShell
     
-    ``` text
+    ``` notranslate
     (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
     ```
     
@@ -98,9 +98,7 @@ To install the `  dwh-migration-dumper  ` tool, follow these steps:
 
 The `  dwh-migration-dumper  ` tool uses the following format:
 
-``` text
-dwh-migration-dumper [FLAGS]
-```
+    dwh-migration-dumper [FLAGS]
 
 Running the `  dwh-migration-dumper  ` tool creates an output file named `  dwh-migration-<source platform>-metadata.zip  ` —for example, `  dwh-migration-teradata-metadata.zip  ` , in your working directory.
 
@@ -112,7 +110,7 @@ Use the following instructions to learn how to run the `  dwh-migration-dumper  
 
 To allow the `  dwh-migration-dumper  ` tool to connect to Teradata, download their JDBC driver from Teradata's [download page](https://downloads.teradata.com/download/connectivity/jdbc-driver) .
 
-The following table describes the commonly used flags for extracting Teradata metadata and query logs by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Teradata metadata and query logs by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 <table>
 <colgroup>
@@ -361,25 +359,21 @@ See <code dir="ltr" translate="no">          -Dteradata-logs.log-date-column    
 
 The following example shows how to extract metadata for two Teradata databases on the local host:
 
-``` text
-dwh-migration-dumper \
-  --connector teradata \
-  --user user \
-  --password password \
-  --database database1,database2 \
-  --driver path/terajdbc4.jar
-```
+    dwh-migration-dumper \
+      --connector teradata \
+      --user user \
+      --password password \
+      --database database1,database2 \
+      --driver path/terajdbc4.jar
 
 The following example shows how to extract query logs for Assessment on the local host for authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector teradata-logs \
-  --assessment \
-  --user user \
-  --password password \
-  --driver path/terajdbc4.jar
-```
+    dwh-migration-dumper \
+      --connector teradata-logs \
+      --assessment \
+      --user user \
+      --password password \
+      --driver path/terajdbc4.jar
 
 #### Tables and views extracted by the `       dwh-migration-dumper      ` tool
 
@@ -425,7 +419,7 @@ You can use any of the following Amazon Redshift authentication and authorizatio
 
 To authenticate with the username and password, use the Amazon Redshift default PostgreSQL JDBC driver. To authenticate with AWS IAM, use the Amazon Redshift JDBC driver, which you can download from their [download page](https://docs.aws.amazon.com/redshift/latest/mgmt/jdbc20-download-driver.html) .
 
-The following table describes the commonly used flags for extracting Amazon Redshift metadata and query logs by using the `  dwh-migration-dumper  ` tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Amazon Redshift metadata and query logs by using the `  dwh-migration-dumper  ` tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 <table>
 <colgroup>
@@ -554,52 +548,44 @@ The following table describes the commonly used flags for extracting Amazon Reds
 
 The following example shows how to extract metadata from an Amazon Redshift database on a specified host, using AWS IAM keys for authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector redshift \
-  --database database \
-  --driver path/redshift-jdbc42-version.jar \
-  --host host.region.redshift.amazonaws.com \
-  --iam-accesskeyid access_key_ID \
-  --iam-secretaccesskey secret_access-key \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector redshift \
+      --database database \
+      --driver path/redshift-jdbc42-version.jar \
+      --host host.region.redshift.amazonaws.com \
+      --iam-accesskeyid access_key_ID \
+      --iam-secretaccesskey secret_access-key \
+      --user user
 
 The following example shows how to extract metadata from an Amazon Redshift database on the default host, using the username and password for authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector redshift \
-  --database database \
-  --password password \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector redshift \
+      --database database \
+      --password password \
+      --user user
 
 The following example shows how to extract metadata from an Amazon Redshift database on a specified host, using an AWS IAM profile for authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector redshift \
-  --database database \
-  --driver path/redshift-jdbc42-version.jar \
-  --host host.region.redshift.amazonaws.com \
-  --iam-profile profile \
-  --user user \
-  --assessment
-```
+    dwh-migration-dumper \
+      --connector redshift \
+      --database database \
+      --driver path/redshift-jdbc42-version.jar \
+      --host host.region.redshift.amazonaws.com \
+      --iam-profile profile \
+      --user user \
+      --assessment
 
 The following example shows how to extract query logs for Assessment from an Amazon Redshift database on a specified host, using an AWS IAM profile for authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector redshift-raw-logs \
-  --database database \
-  --driver path/redshift-jdbc42-version.jar \
-  --host 123.456.789.012 \
-  --iam-profile profile \
-  --user user \
-  --assessment
-```
+    dwh-migration-dumper \
+      --connector redshift-raw-logs \
+      --database database \
+      --driver path/redshift-jdbc42-version.jar \
+      --host 123.456.789.012 \
+      --iam-profile profile \
+      --user user \
+      --assessment
 
 #### Tables and views extracted by the `       dwh-migration-dumper      ` tool
 
@@ -652,7 +638,7 @@ For information about the system views and tables in Redshift, see [Redshift sys
 
 The `  dwh-migration-dumper  ` tool only supports authentication to Apache Hive metastore through Kerberos. So the `  --user  ` and `  --password  ` flags aren't used, instead use the `  --hive-kerberos-url  ` flag to supply the Kerberos authentication details.
 
-The following table describes the commonly used flags for extracting Apache Hive, Impala, Spark, Presto, or Trino metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Apache Hive, Impala, Spark, Presto, or Trino metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 <table>
 <colgroup>
@@ -736,330 +722,138 @@ The following table describes the commonly used flags for extracting Apache Hive
 
 The following example shows how to extract metadata for a Hive 2.3.7 database on a specified host, without authentication and using an alternate port for connection:
 
-``` text
-dwh-migration-dumper \
-  --connector hiveql \
-  --hive-metastore-version 2.3.7 \
-  --host host \
-  --port port
-```
+    dwh-migration-dumper \
+      --connector hiveql \
+      --hive-metastore-version 2.3.7 \
+      --host host \
+      --port port
 
 To use Kerberos authentication, sign in as a user that has read permissions to the Hive metastore and generate a Kerberos ticket. Then, generate the metadata zip file with the following command:
 
-``` text
-JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
-  dwh-migration-dumper \
-  --connector hiveql \
-  --host host \
-  --port port \
-  --hive-kerberos-url principal/kerberos_host
-```
+    JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
+      dwh-migration-dumper \
+      --connector hiveql \
+      --host host \
+      --port port \
+      --hive-kerberos-url principal/kerberos_host
 
 ### Azure Synapse or Microsoft SQL Server
 
 To allow the `  dwh-migration-dumper  ` tool to connect to Azure Synapse or Microsoft SQL Server, download their JDBC driver from Microsoft's [download page](https://docs.microsoft.com/en-us/sql/connect/jdbc/microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15) .
 
-The following table describes the commonly used flags for extracting Azure Synapse or Microsoft SQL Server metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Azure Synapse or Microsoft SQL Server metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>sqlserver</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>The name of the database to connect to.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --driver        </code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --host        </code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --password        </code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --port        </code></td>
-<td>1433</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --user        </code></td>
-<td></td>
-<td>The username to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                                                                                        | **Required** |
+| -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `          --connector         ` |                   | The name of the connector to use, in this case **sqlserver** .                                                                                         | Yes          |
+| `          --database         `  |                   | The name of the database to connect to.                                                                                                                | Yes          |
+| `          --driver         `    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
+| `          --host         `      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
+| `          --password         `  |                   | The password to use for the database connection.                                                                                                       | Yes          |
+| `          --port         `      | 1433              | The port of the database server.                                                                                                                       | No           |
+| `          --user         `      |                   | The username to use for the database connection.                                                                                                       | Yes          |
 
 #### Examples
 
 The following example shows how to extract metadata from an Azure Synapse database on a specified host:
 
-``` text
-dwh-migration-dumper \
-  --connector sqlserver \
-  --database database \
-  --driver path/mssql-jdbc.jar \
-  --host server_name.sql.azuresynapse.net \
-  --password password \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector sqlserver \
+      --database database \
+      --driver path/mssql-jdbc.jar \
+      --host server_name.sql.azuresynapse.net \
+      --password password \
+      --user user
 
 ### Greenplum
 
 To allow the `  dwh-migration-dumper  ` tool to connect to Greenplum, download their JDBC driver from VMware Greenplum's [download page](https://docs.vmware.com/en/VMware-Greenplum/7/greenplum-database/datadirect-datadirect_jdbc.html) .
 
-The following table describes the commonly used flags for extracting Greenplum metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Greenplum metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>greenplum</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>The name of the database to connect to.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --driver        </code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --host        </code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --password        </code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>If not specified, the extraction tool uses a secure prompt to request it.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --port        </code></td>
-<td>5432</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --user        </code></td>
-<td></td>
-<td>The username to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
+| -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| `          --connector         ` |                   | The name of the connector to use, in this case **greenplum** .                                                                                         | Yes                                                                       |
+| `          --database         `  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
+| `          --driver         `    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
+| `          --host         `      | localhost         | The hostname or IP address of the database server.                                                                                                     | No                                                                        |
+| `          --password         `  |                   | The password to use for the database connection.                                                                                                       | If not specified, the extraction tool uses a secure prompt to request it. |
+| `          --port         `      | 5432              | The port of the database server.                                                                                                                       | No                                                                        |
+| `          --user         `      |                   | The username to use for the database connection.                                                                                                       | Yes                                                                       |
 
 #### Examples
 
 The following example shows how to extract metadata for a Greenplum database on a specified host:
 
-``` text
-dwh-migration-dumper \
-  --connector greenplum \
-  --database database \
-  --driver path/greenplum.jar \
-  --host host \
-  --password password \
-  --user user \
-```
+    dwh-migration-dumper \
+      --connector greenplum \
+      --database database \
+      --driver path/greenplum.jar \
+      --host host \
+      --password password \
+      --user user \
 
 ### Netezza
 
 To allow the `  dwh-migration-dumper  ` tool to connect to IBM Netezza, you must get their JDBC driver. You can usually get the driver from the `  /nz/kit/sbin  ` directory on your IBM Netezza appliance host. If you can't locate it there, ask your system administrator for help, or read [Installing and Configuring JDBC](https://www.ibm.com/docs/en/psfa/latest?topic=configuration-installing-configuring-jdbc) in the IBM Netezza documentation.
 
-The following table describes the commonly used flags for extracting IBM Netezza metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting IBM Netezza metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>netezza</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>A list of the databases to extract, separated by commas.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --driver        </code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --host        </code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --password        </code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --port        </code></td>
-<td>5480</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --user        </code></td>
-<td></td>
-<td>The username to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                                                                                        | **Required** |
+| -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `          --connector         ` |                   | The name of the connector to use, in this case **netezza** .                                                                                           | Yes          |
+| `          --database         `  |                   | A list of the databases to extract, separated by commas.                                                                                               | Yes          |
+| `          --driver         `    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
+| `          --host         `      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
+| `          --password         `  |                   | The password to use for the database connection.                                                                                                       | Yes          |
+| `          --port         `      | 5480              | The port of the database server.                                                                                                                       | No           |
+| `          --user         `      |                   | The username to use for the database connection.                                                                                                       | Yes          |
 
 #### Examples
 
 The following example shows how to extract metadata for two IBM Netezza databases on a specified host:
 
-``` text
-dwh-migration-dumper \
-  --connector netezza \
-  --database database1,database2 \
-  --driver path/nzjdbc.jar \
-  --host host \
-  --password password \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector netezza \
+      --database database1,database2 \
+      --driver path/nzjdbc.jar \
+      --host host \
+      --password password \
+      --user user
 
 ### PostgreSQL
 
 To allow the `  dwh-migration-dumper  ` tool to connect to PostgreSQL, download their JDBC driver from PostgreSQL's [download page](https://jdbc.postgresql.org/) .
 
-The following table describes the commonly used flags for extracting PostgreSQL metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting PostgreSQL metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>postgresql</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>The name of the database to connect to.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --driver        </code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --host        </code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --password        </code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>If not specified, the extraction tool uses a secure prompt to request it.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --port        </code></td>
-<td>5432</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --user        </code></td>
-<td></td>
-<td>The username to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                                                                                        | **Required**                                                              |
+| -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| `          --connector         ` |                   | The name of the connector to use, in this case **postgresql** .                                                                                        | Yes                                                                       |
+| `          --database         `  |                   | The name of the database to connect to.                                                                                                                | Yes                                                                       |
+| `          --driver         `    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes                                                                       |
+| `          --host         `      | localhost         | The hostname or IP address of the database server.                                                                                                     | No                                                                        |
+| `          --password         `  |                   | The password to use for the database connection.                                                                                                       | If not specified, the extraction tool uses a secure prompt to request it. |
+| `          --port         `      | 5432              | The port of the database server.                                                                                                                       | No                                                                        |
+| `          --user         `      |                   | The username to use for the database connection.                                                                                                       | Yes                                                                       |
 
 #### Examples
 
 The following example shows how to extract metadata for a PostgreSQL database on a specified host:
 
-``` text
-dwh-migration-dumper \
-  --connector postgresql \
-  --database database \
-  --driver path/postgresql-version.jar \
-  --host host \
-  --password password \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector postgresql \
+      --database database \
+      --driver path/postgresql-version.jar \
+      --host host \
+      --password password \
+      --user user
 
 ### Oracle
 
 To allow the `  dwh-migration-dumper  ` tool to connect to Oracle, download their JDBC driver from Oracle's [download page](https://www.oracle.com/database/technologies/appdev/jdbc-downloads.html) .
 
-The following table describes the commonly used flags for extracting Oracle metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Oracle metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 <table>
 <colgroup>
@@ -1133,19 +927,17 @@ The following table describes the commonly used flags for extracting Oracle meta
 
 The following example shows how to extract metadata for an Oracle database on a specified host, using the Oracle service for the connection:
 
-``` text
-dwh-migration-dumper \
-  --connector oracle \
-  --driver path/ojdbc8.jar \
-  --host host \
-  --oracle-service service_name \
-  --password password \
-  --user user
-```
+    dwh-migration-dumper \
+      --connector oracle \
+      --driver path/ojdbc8.jar \
+      --host host \
+      --oracle-service service_name \
+      --password password \
+      --user user
 
 ### Snowflake
 
-The following table describes the commonly used flags for extracting Snowflake metadata by using the `  dwh-migration-dumper  ` tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Snowflake metadata by using the `  dwh-migration-dumper  ` tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 <table>
 <colgroup>
@@ -1223,7 +1015,7 @@ The following table describes the commonly used flags for extracting Snowflake m
 <tr class="even">
 <td><code dir="ltr" translate="no">         --role        </code></td>
 <td></td>
-<td>The Snowflake role to use for authorization. You only need to specify this for large installations where you need to get metadata from the <code dir="ltr" translate="no">         SNOWFLAKE.ACCOUNT_USAGE        </code> schema instead of <code dir="ltr" translate="no">         INFORMATION_SCHEMA        </code> . For more information, see <a href="#large-instance">Working with large Snowflake instances</a> .</td>
+<td>The Snowflake role to use for authorization. You only need to specify this for large installations where you need to get metadata from the <code dir="ltr" translate="no">         SNOWFLAKE.ACCOUNT_USAGE        </code> schema instead of <code dir="ltr" translate="no">         INFORMATION_SCHEMA        </code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/generate-metadata#large-instance">Working with large Snowflake instances</a> .</td>
 <td>No</td>
 </tr>
 <tr class="odd">
@@ -1245,55 +1037,47 @@ The following table describes the commonly used flags for extracting Snowflake m
 
 The following example shows how to extract metadata for assessment:
 
-``` text
-dwh-migration-dumper \
-  --connector snowflake \
-  --assessment \
-  --host "account.snowflakecomputing.com" \
-  --role role \
-  --user user \
-  --private-key-file private-key-file \
-  --private-key-password private-key-password \
-  --warehouse warehouse
-```
+    dwh-migration-dumper \
+      --connector snowflake \
+      --assessment \
+      --host "account.snowflakecomputing.com" \
+      --role role \
+      --user user \
+      --private-key-file private-key-file \
+      --private-key-password private-key-password \
+      --warehouse warehouse
 
 The following example shows how to extract metadata for a typically sized Snowflake database on the local host:
 
-``` text
-dwh-migration-dumper \
-  --connector snowflake \
-  --database database \
-  --user user \
-  --private-key-file private-key-file \
-  --private-key-password private-key-password \
-  --warehouse warehouse
-```
+    dwh-migration-dumper \
+      --connector snowflake \
+      --database database \
+      --user user \
+      --private-key-file private-key-file \
+      --private-key-password private-key-password \
+      --warehouse warehouse
 
 The following example shows how to extract metadata for a large Snowflake database on a specified host:
 
-``` text
-dwh-migration-dumper \
-  --connector snowflake \
-  --database database \
-  --host "account.snowflakecomputing.com" \
-  --role role \
-  --user user \
-  --private-key-file private-key-file \
-  --private-key-password private-key-password \
-  --warehouse warehouse
-```
+    dwh-migration-dumper \
+      --connector snowflake \
+      --database database \
+      --host "account.snowflakecomputing.com" \
+      --role role \
+      --user user \
+      --private-key-file private-key-file \
+      --private-key-password private-key-password \
+      --warehouse warehouse
 
 Alternatively, you can use the following example to extract metadata using password-based authentication:
 
-``` text
-dwh-migration-dumper \
-  --connector snowflake \
-  --database database \
-  --host "account.snowflakecomputing.com" \
-  --password password \
-  --user user \
-  --warehouse warehouse
-```
+    dwh-migration-dumper \
+      --connector snowflake \
+      --database database \
+      --host "account.snowflakecomputing.com" \
+      --password password \
+      --user user \
+      --warehouse warehouse
 
 #### Working with large Snowflake instances
 
@@ -1303,147 +1087,65 @@ The `  dwh-migration-dumper  ` tool reads metadata from the Snowflake `  INFORMA
 
 2.  Create a database from the `  SNOWFLAKE.ACCOUNT_USAGE  ` share:
     
-    ``` text
-    -- CREATE DATABASE database FROM SHARE SNOWFLAKE.ACCOUNT_USAGE;
-    ```
+        -- CREATE DATABASE database FROM SHARE SNOWFLAKE.ACCOUNT_USAGE;
 
 3.  Create a role:
     
-    ``` text
-    CREATE ROLE role;
-    ```
+        CREATE ROLE role;
 
 4.  Grant `  IMPORTED  ` privileges on the new database to the role:
     
-    ``` text
-    GRANT IMPORTED PRIVILEGES ON DATABASE database TO ROLE role;
-    ```
+        GRANT IMPORTED PRIVILEGES ON DATABASE database TO ROLE role;
 
 5.  Grant the role to the user you intend to use to run the `  dwh-migration-dumper  ` tool:
     
-    ``` text
-    GRANT ROLE role TO USER user;
-    ```
+        GRANT ROLE role TO USER user;
 
 ### Vertica
 
 To allow the `  dwh-migration-dumper  ` tool to connect to Vertica, download their JDBC driver from their [download page](https://www.vertica.com/download/vertica/client-drivers/) .
 
-The following table describes the commonly used flags for extracting Vertica metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting Vertica metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>vertica</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>The name of the database to connect to.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --driver        </code></td>
-<td></td>
-<td>The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --host        </code></td>
-<td>localhost</td>
-<td>The hostname or IP address of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --password        </code></td>
-<td></td>
-<td>The password to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --port        </code></td>
-<td>5433</td>
-<td>The port of the database server.</td>
-<td>No</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --user        </code></td>
-<td></td>
-<td>The username to use for the database connection.</td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                                                                                        | **Required** |
+| -------------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ |
+| `          --connector         ` |                   | The name of the connector to use, in this case **vertica** .                                                                                           | Yes          |
+| `          --database         `  |                   | The name of the database to connect to.                                                                                                                | Yes          |
+| `          --driver         `    |                   | The absolute or relative path to the driver JAR file to use for this connection. You can specify multiple driver JAR files, separating them by commas. | Yes          |
+| `          --host         `      | localhost         | The hostname or IP address of the database server.                                                                                                     | No           |
+| `          --password         `  |                   | The password to use for the database connection.                                                                                                       | Yes          |
+| `          --port         `      | 5433              | The port of the database server.                                                                                                                       | No           |
+| `          --user         `      |                   | The username to use for the database connection.                                                                                                       | Yes          |
 
 #### Examples
 
 The following example shows how to extract metadata from a Vertica database on the local host:
 
-``` text
-dwh-migration-dumper \
-  --driver path/vertica-jdbc.jar \
-  --connector vertica \
-  --database database
-  --user user
-  --password password
-```
+    dwh-migration-dumper \
+      --driver path/vertica-jdbc.jar \
+      --connector vertica \
+      --database database
+      --user user
+      --password password
 
 ### BigQuery
 
-The following table describes the commonly used flags for extracting BigQuery metadata by using the extraction tool. For information about all supported flags, see [global flags](#global_flags) .
+The following table describes the commonly used flags for extracting BigQuery metadata by using the extraction tool. For information about all supported flags, see [global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Default value</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Required</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --connector        </code></td>
-<td></td>
-<td>The name of the connector to use, in this case <strong>bigquery</strong> .</td>
-<td>Yes</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         --database        </code></td>
-<td></td>
-<td><p>The list of projects to extract metadata and query logs from, separated by commas.</p></td>
-<td>Yes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         --schema        </code></td>
-<td></td>
-<td><p>The list of datasets to extract metadata and query logs from, separated by commas.</p></td>
-<td>Yes</td>
-</tr>
-</tbody>
-</table>
+| **Name**                         | **Default value** | **Description**                                                                    | **Required** |
+| -------------------------------- | ----------------- | ---------------------------------------------------------------------------------- | ------------ |
+| `          --connector         ` |                   | The name of the connector to use, in this case **bigquery** .                      | Yes          |
+| `          --database         `  |                   | The list of projects to extract metadata and query logs from, separated by commas. | Yes          |
+| `          --schema         `    |                   | The list of datasets to extract metadata and query logs from, separated by commas. | Yes          |
 
 #### Examples
 
 The following example shows how to extract metadata from a Vertica database on the local host:
 
-``` text
-dwh-migration-dumper \
-  --connector bigquery \
-  --database PROJECT1, PROJECT2
-  --schema DATASET1, DATASET2
-```
+    dwh-migration-dumper \
+      --connector bigquery \
+      --database PROJECT1, PROJECT2
+      --schema DATASET1, DATASET2
 
 ## Global flags
 
@@ -1494,7 +1196,7 @@ The following table describes the flags that can be used with any of the support
 <td>The path of the output zip file. For example, <code dir="ltr" translate="no">       dir1/dir2/teradata-metadata.zip      </code> . If you don't specify a path, the output file is created in your working directory. If you specify the path to a directory, the default zip filename is created in the specified directory. If the directory does not exist, it is created.
 <p>To use Cloud Storage, use the following format:<br />
 <code dir="ltr" translate="no">        gs://&lt;BUCKET&gt;/&lt;PATH&gt;       </code> .</p>
-<p>To authenticate using Google Cloud credentials, see <a href="/docs/authentication/client-libraries">Authenticate for using client libraries</a> .</p></td>
+<p>To authenticate using Google Cloud credentials, see <a href="https://docs.cloud.google.com/docs/authentication/client-libraries">Authenticate for using client libraries</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       --password      </code></td>
@@ -1550,19 +1252,15 @@ You can increase maximum memory by exporting the `  JAVA_OPTS  ` environment var
 
 ### Linux
 
-``` text
-export JAVA_OPTS="-Xmx4G"
-```
+    export JAVA_OPTS="-Xmx4G"
 
 ### Windows
 
-``` text
-set JAVA_OPTS="-Xmx4G"
-```
+    set JAVA_OPTS="-Xmx4G"
 
 You can reduce the number of processing threads (default is 32) by including the `  --thread-pool-size  ` flag. This option is supported for `  hiveql  ` and `  redshift*  ` connectors only.
 
-``` text
+``` notranslate
 dwh-migration-dumper --thread-pool-size=1
 ```
 
@@ -1576,7 +1274,7 @@ To validate the `  dwh-migration-dumper  ` tool zip file, download the [`  SHA25
 
 ### Bash
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
@@ -1587,7 +1285,7 @@ The `  OK  ` result confirms successful checksum verification. Any other message
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
@@ -1605,7 +1303,7 @@ Example:
 
 ### Bash
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   -Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV \
   -Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl \
@@ -1614,7 +1312,7 @@ dwh-migration-dumper \
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 dwh-migration-dumper `
   "-Dteradata-logs.query-logs-table=historicdb.ArchivedQryLogV" `
   "-Dteradata-logs.sql-logs-table=historicdb.ArchivedDBQLSqlTbl" `
@@ -1634,7 +1332,7 @@ The following command shows the usage of the `  -Dteradata.metadata.max-text-len
 
 ### Bash
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata \
   -Dteradata.metadata.max-text-length=10000
@@ -1642,7 +1340,7 @@ dwh-migration-dumper \
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 dwh-migration-dumper `
   --connector teradata `
   "-Dteradata.metadata.max-text-length=10000"
@@ -1652,7 +1350,7 @@ The following command shows the usage of the `  -Dteradata-logs.max-sql-length  
 
 ### Bash
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata-logs \
   -Dteradata-logs.max-sql-length=10000
@@ -1660,7 +1358,7 @@ dwh-migration-dumper \
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 dwh-migration-dumper `
   --connector teradata-logs `
   "-Dteradata-logs.max-sql-length=10000"
@@ -1676,7 +1374,7 @@ Instead of providing the `  oracle-service  ` , `  host  ` and `  port  ` flags,
 
 Example dumper command:
 
-``` text
+``` 
   dwh-migration-dumper \
     --connector oracle-stats \
     --url "jdbc:oracle:thin:@tcps://host:port/oracle_service" \
@@ -1688,7 +1386,7 @@ Example dumper command:
 
 In addition to changing connection protocol to TCPS you might need to provide the trustStore SSL configuration that is required to verify Oracle server certificate. A missing SSL configuration will result in an `  Unable to find valid certification path  ` error message. To resolve this, set the JAVA\_OPTS environment variable:
 
-``` text
+``` 
   set JAVA_OPTS=-Djavax.net.ssl.trustStore="jks_file_location" -Djavax.net.ssl.trustStoreType=JKS -Djavax.net.ssl.trustStorePassword="password"
 ```
 
@@ -1696,4 +1394,4 @@ Depending on your Oracle server configuration, you might also need to provide th
 
 ## What's next
 
-After you run the `  dwh-migration-dumper  ` tool, [upload the output](/bigquery/docs/batch-sql-translator#upload-files) to Cloud Storage along with the source files for translation.
+After you run the `  dwh-migration-dumper  ` tool, [upload the output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) to Cloud Storage along with the source files for translation.

@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/Shared.Types/Status#SCHEMA_REPRESENTATION)
 
 The `  Status  ` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc) . Each `  Status  ` message contains three pieces of data: error code, error message, and error details.
 
@@ -6,19 +6,17 @@ You can find out more about this error model and how to work with it in the [API
 
 JSON representation
 
-``` text
-{
-  "code": integer,
-  "message": string,
-  "details": [
     {
-      "@type": string,
-      field1: ...,
-      ...
+      "code": integer,
+      "message": string,
+      "details": [
+        {
+          "@type": string,
+          field1: ...,
+          ...
+        }
+      ]
     }
-  ]
-}
-```
 
 Fields
 

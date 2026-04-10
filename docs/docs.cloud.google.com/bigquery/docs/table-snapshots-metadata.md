@@ -1,29 +1,18 @@
 # View table snapshot metadata
 
-This document describes how to view the metadata for a BigQuery table snapshot in the Google Cloud console, by querying the [`  TABLE_SNAPSHOTS  `](/bigquery/docs/information-schema-snapshots) view of the `  INFORMATION_SCHEMA  ` table, by using the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_show) command, or by calling the [`  tables.get  `](/bigquery/docs/reference/rest/v2/tables/get) API. It is intended for users who are familiar with BigQuery [tables](/bigquery/docs/tables-intro) and [table snapshots](/bigquery/docs/table-snapshots-intro) .
+This document describes how to view the metadata for a BigQuery table snapshot in the Google Cloud console, by querying the [`  TABLE_SNAPSHOTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) view of the `  INFORMATION_SCHEMA  ` table, by using the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command, or by calling the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) API. It is intended for users who are familiar with BigQuery [tables](https://docs.cloud.google.com/bigquery/docs/tables-intro) and [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permission](/bigquery/docs/access-control#bq-permissions) that you need to view the metadata for a table snapshot, and the [predefined IAM roles](/bigquery/docs/access-control#bigquery) that grant those permissions.
+This section describes the [Identity and Access Management (IAM) permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to view the metadata for a table snapshot, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
 
 ### Permissions
 
 To view a table snapshot's metadata, you need the following permission:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Permission</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table snapshot</td>
-</tr>
-</tbody>
-</table>
+| **Permission**                       | **Resource**       |
+| ------------------------------------ | ------------------ |
+| `        bigquery.tables.get       ` | The table snapshot |
 
 ### Roles
 
@@ -66,8 +55,12 @@ You can view the metadata for a table snapshot by using one of the following opt
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -83,13 +76,15 @@ You can view the metadata for a table snapshot by using one of the following opt
 
 ### SQL
 
-To see metadata for a table snapshot, query the [`  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` view](/bigquery/docs/information-schema-snapshots) :
+To see metadata for a table snapshot, query the [`  INFORMATION_SCHEMA.TABLE_SNAPSHOTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-snapshots) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -106,13 +101,15 @@ To see metadata for a table snapshot, query the [`  INFORMATION_SCHEMA.TABLE_SNA
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 Enter the following command in the Cloud Shell:
 
-``` text
+[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
+
+``` notranslate
 bq show \
 --format=prettyjson \
 PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
@@ -126,7 +123,7 @@ Replace the following:
 
 The output is similar to the following:
 
-``` text
+``` notranslate
 {
   "creationTime": "1593194331936",
    ...
@@ -149,34 +146,17 @@ The output is similar to the following:
 
 ### API
 
-Call the [`  tables.get  `](/bigquery/docs/reference/rest/v2/tables/get) method with the following parameters:
+Call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method with the following parameters:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Parameter</strong></th>
-<th><strong>Value</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
-<td>The project ID of the project that contains the snapshot.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         datasetId        </code></td>
-<td>The name of the dataset that contains the snapshot.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         tableId        </code></td>
-<td>The name of the snapshot.</td>
-</tr>
-</tbody>
-</table>
+| **Parameter**                  | **Value**                                                 |
+| ------------------------------ | --------------------------------------------------------- |
+| `          projectId         ` | The project ID of the project that contains the snapshot. |
+| `          datasetId         ` | The name of the dataset that contains the snapshot.       |
+| `          tableId         `   | The name of the snapshot.                                 |
 
 The response body is similar to the following:
 
-``` json
+``` lang-json
 {
   "kind": "bigquery#table",
   "etag": "...",
@@ -213,5 +193,5 @@ The response body is similar to the following:
 
 ## What's next
 
-  - [Update a table snapshot's description, expiration date, or access policy](/bigquery/docs/table-snapshots-update) .
-  - [Delete a table snapshot](/bigquery/docs/table-snapshots-delete) .
+  - [Update a table snapshot's description, expiration date, or access policy](https://docs.cloud.google.com/bigquery/docs/table-snapshots-update) .
+  - [Delete a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete) .

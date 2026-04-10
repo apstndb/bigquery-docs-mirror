@@ -2,42 +2,17 @@ GoogleSQL for BigQuery supports the following hash functions.
 
 ## Function list
 
-<table>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint"><code dir="ltr" translate="no">        FARM_FINGERPRINT       </code></a></td>
-<td>Computes the fingerprint of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the FarmHash Fingerprint64 algorithm.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/hash_functions#md5"><code dir="ltr" translate="no">        MD5       </code></a></td>
-<td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the MD5 algorithm.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha1"><code dir="ltr" translate="no">        SHA1       </code></a></td>
-<td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-1 algorithm.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha256"><code dir="ltr" translate="no">        SHA256       </code></a></td>
-<td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-256 algorithm.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/hash_functions#sha512"><code dir="ltr" translate="no">        SHA512       </code></a></td>
-<td>Computes the hash of a <code dir="ltr" translate="no">       STRING      </code> or <code dir="ltr" translate="no">       BYTES      </code> value, using the SHA-512 algorithm.</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                      | Summary                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [`         FARM_FINGERPRINT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) | Computes the fingerprint of a `        STRING       ` or `        BYTES       ` value, using the FarmHash Fingerprint64 algorithm. |
+| [`         MD5        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#md5)                           | Computes the hash of a `        STRING       ` or `        BYTES       ` value, using the MD5 algorithm.                           |
+| [`         SHA1        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha1)                         | Computes the hash of a `        STRING       ` or `        BYTES       ` value, using the SHA-1 algorithm.                         |
+| [`         SHA256        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha256)                     | Computes the hash of a `        STRING       ` or `        BYTES       ` value, using the SHA-256 algorithm.                       |
+| [`         SHA512        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#sha512)                     | Computes the hash of a `        STRING       ` or `        BYTES       ` value, using the SHA-512 algorithm.                       |
 
 ## `     FARM_FINGERPRINT    `
 
-``` text
-FARM_FINGERPRINT(value)
-```
+    FARM_FINGERPRINT(value)
 
 **Description**
 
@@ -49,31 +24,27 @@ INT64
 
 **Examples**
 
-``` text
-WITH example AS (
-  SELECT 1 AS x, "foo" AS y, true AS z UNION ALL
-  SELECT 2 AS x, "apple" AS y, false AS z UNION ALL
-  SELECT 3 AS x, "" AS y, true AS z
-)
-SELECT
-  *,
-  FARM_FINGERPRINT(CONCAT(CAST(x AS STRING), y, CAST(z AS STRING)))
-    AS row_fingerprint
-FROM example;
-/*---+-------+-------+----------------------+
- | x | y     | z     | row_fingerprint      |
- +---+-------+-------+----------------------+
- | 1 | foo   | true  | -1541654101129638711 |
- | 2 | apple | false | 2794438866806483259  |
- | 3 |       | true  | -4880158226897771312 |
- +---+-------+-------+----------------------*/
-```
+    WITH example AS (
+      SELECT 1 AS x, "foo" AS y, true AS z UNION ALL
+      SELECT 2 AS x, "apple" AS y, false AS z UNION ALL
+      SELECT 3 AS x, "" AS y, true AS z
+    )
+    SELECT
+      *,
+      FARM_FINGERPRINT(CONCAT(CAST(x AS STRING), y, CAST(z AS STRING)))
+        AS row_fingerprint
+    FROM example;
+    /*---+-------+-------+----------------------+
+     | x | y     | z     | row_fingerprint      |
+     +---+-------+-------+----------------------+
+     | 1 | foo   | true  | -1541654101129638711 |
+     | 2 | apple | false | 2794438866806483259  |
+     | 3 |       | true  | -4880158226897771312 |
+     +---+-------+-------+----------------------*/
 
 ## `     MD5    `
 
-``` text
-MD5(input)
-```
+    MD5(input)
 
 **Description**
 
@@ -89,22 +60,18 @@ This function returns 16 bytes.
 
 **Example**
 
-``` text
-SELECT MD5("Hello World") as md5;
-
--- Note that the result of MD5 is of type BYTES, displayed as a base64-encoded string.
-/*--------------------------+
- | md5                      |
- +--------------------------+
- | sQqNsWTgdUEFt6mb5y4/5Q== |
- +--------------------------*/
-```
+    SELECT MD5("Hello World") as md5;
+    
+    -- Note that the result of MD5 is of type BYTES, displayed as a base64-encoded string.
+    /*--------------------------+
+     | md5                      |
+     +--------------------------+
+     | sQqNsWTgdUEFt6mb5y4/5Q== |
+     +--------------------------*/
 
 ## `     SHA1    `
 
-``` text
-SHA1(input)
-```
+    SHA1(input)
 
 **Description**
 
@@ -120,22 +87,18 @@ This function returns 20 bytes.
 
 **Example**
 
-``` text
-SELECT SHA1("Hello World") as sha1;
-
--- Note that the result of SHA1 is of type BYTES, displayed as a base64-encoded string.
-/*------------------------------+
- | sha1                         |
- +------------------------------+
- | Ck1VqNd45QIvq3AZd8XYQLvEhtA= |
- +------------------------------*/
-```
+    SELECT SHA1("Hello World") as sha1;
+    
+    -- Note that the result of SHA1 is of type BYTES, displayed as a base64-encoded string.
+    /*------------------------------+
+     | sha1                         |
+     +------------------------------+
+     | Ck1VqNd45QIvq3AZd8XYQLvEhtA= |
+     +------------------------------*/
 
 ## `     SHA256    `
 
-``` text
-SHA256(input)
-```
+    SHA256(input)
 
 **Description**
 
@@ -149,15 +112,11 @@ This function returns 32 bytes.
 
 **Example**
 
-``` text
-SELECT SHA256("Hello World") as sha256;
-```
+    SELECT SHA256("Hello World") as sha256;
 
 ## `     SHA512    `
 
-``` text
-SHA512(input)
-```
+    SHA512(input)
 
 **Description**
 
@@ -171,6 +130,4 @@ This function returns 64 bytes.
 
 **Example**
 
-``` text
-SELECT SHA512("Hello World") as sha512;
-```
+    SELECT SHA512("Hello World") as sha512;

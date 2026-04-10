@@ -11,8 +11,8 @@ The BigQuery API allows you to upload certain types of binary data, or media. Th
 
 You can make upload requests in any of the following ways. Specify the method you are using with the `  uploadType  ` request parameter.
 
-  - [Multipart upload](#multipart) : `  uploadType=multipart  ` . For quick transfer of smaller files and metadata; transfers the file along with metadata that describes it, all in a single request.
-  - [Resumable upload](#resumable) : `  uploadType=resumable  ` . For reliable transfer, especially important with larger files. With this method, you use a session initiating request, which optionally can include metadata. This is a good strategy to use for most applications, since it also works for smaller files at the cost of one additional HTTP request per upload.
+  - [Multipart upload](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#multipart) : `  uploadType=multipart  ` . For quick transfer of smaller files and metadata; transfers the file along with metadata that describes it, all in a single request.
+  - [Resumable upload](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#resumable) : `  uploadType=resumable  ` . For reliable transfer, especially important with larger files. With this method, you use a session initiating request, which optionally can include metadata. This is a good strategy to use for most applications, since it also works for smaller files at the cost of one additional HTTP request per upload.
 
 When you upload media, you use a special URI. In fact, methods that support media uploads have two URI endpoints:
 
@@ -30,9 +30,7 @@ If you have metadata that you want to send along with the data to upload, you ca
 
 To use multipart upload, make a `  POST  ` request to the method's **/upload** URI and add the query parameter `  uploadType=multipart  ` , for example:
 
-``` text
-POST https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=multipart
-```
+    POST https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=multipart
 
 The top-level HTTP headers to use when making a multipart upload request include:
 
@@ -46,7 +44,7 @@ Each part of the multipart request needs an additional `  Content-Type  ` header
 1.  **Metadata part:** Must come first, and `  Content-Type  ` must match one of the accepted metadata formats.
 2.  **Media part:** Must come second, and `  Content-Type  ` must match one the method's accepted media MIME types.
 
-See the API [reference](/bigquery/docs/reference/rest/v2/jobs/insert) for each method's list of accepted media MIME types and size limits for uploaded files.
+See the API [reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) for each method's list of accepted media MIME types and size limits for uploaded files.
 
 **Note:** To create or update the metadata portion only, without uploading the associated data, simply send a `  POST  ` or `  PUT  ` request to the standard resource endpoint: `  https://www.googleapis.com/bigquery/v2/projects/ projectId /jobs  `
 
@@ -54,68 +52,64 @@ See the API [reference](/bigquery/docs/reference/rest/v2/jobs/insert) for each m
 
 The example below shows a multipart upload request for the BigQuery API.
 
-``` text
-POST /upload/bigquery/v2/projects/projectId/jobs?uploadType=multipart HTTP/1.1
-Host: www.googleapis.com
-Authorization: Bearer your_auth_token
-Content-Type: multipart/related; boundary=foo_bar_baz
-Content-Length: number_of_bytes_in_entire_request_body
-
---foo_bar_baz
-Content-Type: application/json; charset=UTF-8
-
-{
-  "configuration": {
-    "load": {
-      "sourceFormat": "NEWLINE_DELIMITED_JSON",
-      "schema": {
-        "fields": [
-          {"name": "f1", "type": "STRING"},
-          {"name": "f2", "type": "INTEGER"}
-        ]
-      },
-      "destinationTable": {
-        "projectId": "projectId",
-        "datasetId": "datasetId",
-        "tableId": "tableId"
+    POST /upload/bigquery/v2/projects/projectId/jobs?uploadType=multipart HTTP/1.1
+    Host: www.googleapis.com
+    Authorization: Bearer your_auth_token
+    Content-Type: multipart/related; boundary=foo_bar_baz
+    Content-Length: number_of_bytes_in_entire_request_body
+    
+    --foo_bar_baz
+    Content-Type: application/json; charset=UTF-8
+    
+    {
+      "configuration": {
+        "load": {
+          "sourceFormat": "NEWLINE_DELIMITED_JSON",
+          "schema": {
+            "fields": [
+              {"name": "f1", "type": "STRING"},
+              {"name": "f2", "type": "INTEGER"}
+            ]
+          },
+          "destinationTable": {
+            "projectId": "projectId",
+            "datasetId": "datasetId",
+            "tableId": "tableId"
+          }
+        }
       }
     }
-  }
-}
-
-
---foo_bar_baz
-Content-Type: */*
-
-CSV, JSON, AVRO, PARQUET, or ORC data
---foo_bar_baz--
-```
+    
+    
+    --foo_bar_baz
+    Content-Type: */*
+    
+    CSV, JSON, AVRO, PARQUET, or ORC data
+    --foo_bar_baz--
 
 If the request succeeds, the server returns the HTTP `  200 OK  ` status code along with any metadata:
 
-``` text
-HTTP/1.1 200
-Content-Type: application/json
-
-{
-  "configuration": {
-    "load": {
-      "sourceFormat": "NEWLINE_DELIMITED_JSON",
-      "schema": {
-        "fields": [
-          {"name": "f1", "type": "STRING"},
-          {"name": "f2", "type": "INTEGER"}
-        ]
-      },
-      "destinationTable": {
-        "projectId": "projectId",
-        "datasetId": "datasetId",
-        "tableId": "tableId"
+    HTTP/1.1 200
+    Content-Type: application/json
+    
+    {
+      "configuration": {
+        "load": {
+          "sourceFormat": "NEWLINE_DELIMITED_JSON",
+          "schema": {
+            "fields": [
+              {"name": "f1", "type": "STRING"},
+              {"name": "f2", "type": "INTEGER"}
+            ]
+          },
+          "destinationTable": {
+            "projectId": "projectId",
+            "datasetId": "datasetId",
+            "tableId": "tableId"
+          }
+        }
       }
     }
-  }
-}
-```
 
 ### Resumable upload
 
@@ -123,11 +117,11 @@ To upload data files more reliably, you can use the resumable upload protocol. T
 
 The steps for using resumable upload include:
 
-1.  [Start a resumable session](#start-resumable) . Make an initial request to the upload URI that includes the metadata, if any.
-2.  [Save the resumable session URI](#save-session-uri) . Save the session URI returned in the response of the initial request; you'll use it for the remaining requests in this session.
-3.  [Upload the file](#upload-resumable) . Send the media file to the resumable session URI.
+1.  [Start a resumable session](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#start-resumable) . Make an initial request to the upload URI that includes the metadata, if any.
+2.  [Save the resumable session URI](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#save-session-uri) . Save the session URI returned in the response of the initial request; you'll use it for the remaining requests in this session.
+3.  [Upload the file](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#upload-resumable) . Send the media file to the resumable session URI.
 
-In addition, apps that use resumable upload need to have code to [resume an interrupted upload](#resume-upload) . If an upload is interrupted, find out how much data was successfully received, and then resume the upload starting from that point.
+In addition, apps that use resumable upload need to have code to [resume an interrupted upload](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#resume-upload) . If an upload is interrupted, find out how much data was successfully received, and then resume the upload starting from that point.
 
 **Note:** An upload URI expires after one week.
 
@@ -135,9 +129,7 @@ In addition, apps that use resumable upload need to have code to [resume an inte
 
 To initiate a resumable upload, make a `  POST  ` request to the method's **/upload** URI and add the query parameter `  uploadType=resumable  ` , for example:
 
-``` text
-POST https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable
-```
+    POST https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable
 
 For this initiating request, the body is either empty or it contains the metadata only; you'll transfer the actual contents of the file you want to upload in subsequent requests.
 
@@ -148,40 +140,38 @@ Use the following HTTP headers with the initial request:
   - If providing metadata: `  Content-Type  ` . Set according to the metadata's data type.
   - `  Content-Length  ` . Set to the number of bytes provided in the body of this initial request. Not required if you are using [chunked transfer encoding](https://datatracker.ietf.org/doc/html/rfc7230#section-4.1) .
 
-See the API [reference](/bigquery/docs/reference/rest/v2/jobs/insert) for each method's list of accepted media MIME types and size limits for uploaded files.
+See the API [reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) for each method's list of accepted media MIME types and size limits for uploaded files.
 
 ##### Example: Resumable session initiation request
 
 The following example shows how to initiate a resumable session for the BigQuery API.
 
-``` text
-POST /upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable HTTP/1.1
-Host: www.googleapis.com
-Authorization: Bearer your_auth_token
-Content-Length: 38
-Content-Type: application/json; charset=UTF-8
-X-Upload-Content-Type: */*
-X-Upload-Content-Length: 2000000
-
-{
-  "configuration": {
-    "load": {
-      "sourceFormat": "NEWLINE_DELIMITED_JSON",
-      "schema": {
-        "fields": [
-          {"name": "f1", "type": "STRING"},
-          {"name": "f2", "type": "INTEGER"}
-        ]
-      },
-      "destinationTable": {
-        "projectId": "projectId",
-        "datasetId": "datasetId",
-        "tableId": "tableId"
+    POST /upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable HTTP/1.1
+    Host: www.googleapis.com
+    Authorization: Bearer your_auth_token
+    Content-Length: 38
+    Content-Type: application/json; charset=UTF-8
+    X-Upload-Content-Type: */*
+    X-Upload-Content-Length: 2000000
+    
+    {
+      "configuration": {
+        "load": {
+          "sourceFormat": "NEWLINE_DELIMITED_JSON",
+          "schema": {
+            "fields": [
+              {"name": "f1", "type": "STRING"},
+              {"name": "f2", "type": "INTEGER"}
+            ]
+          },
+          "destinationTable": {
+            "projectId": "projectId",
+            "datasetId": "datasetId",
+            "tableId": "tableId"
+          }
+        }
       }
     }
-  }
-}
-```
 
 **Note:** For an initial resumable update request without metadata, leave the body of the request empty, and set the `  Content-Length  ` header to `  0  ` .
 
@@ -195,11 +185,9 @@ If the session initiation request succeeds, the API server responds with a `  20
 
 Here is the response to the request in Step 1:
 
-``` text
-HTTP/1.1 200 OK
-Location: https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable&upload_id=xa298sd_sdlkj2
-Content-Length: 0
-```
+    HTTP/1.1 200 OK
+    Location: https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable&upload_id=xa298sd_sdlkj2
+    Content-Length: 0
 
 The value of the `  Location  ` header, as shown in the above example response, is the session URI you'll use as the HTTP endpoint for doing the actual file upload or querying the upload status.
 
@@ -209,9 +197,7 @@ Copy and save the session URI so you can use it for subsequent requests.
 
 To upload the file, send a `  PUT  ` request to the upload URI that you obtained in the previous step. The format of the upload request is:
 
-``` text
-PUT session_uri
-```
+    PUT session_uri
 
 The HTTP headers to use when making the resumable file upload requests includes `  Content-Length  ` . Set this to the number of bytes you are uploading in this request, which is generally the upload file size.
 
@@ -219,17 +205,17 @@ The HTTP headers to use when making the resumable file upload requests includes 
 
 Here is a resumable request to upload the entire 2,000,000 byte CSV, JSON, AVRO, PARQUET, or ORC file for the current example.
 
-``` text
-PUT https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable&upload_id=xa298sd_sdlkj2 HTTP/1.1
-Content-Length: 2000000
-Content-Type: */*
-
-bytes 0-1999999
-```
+    PUT https://www.googleapis.com/upload/bigquery/v2/projects/projectId/jobs?uploadType=resumable&upload_id=xa298sd_sdlkj2 HTTP/1.1
+    Content-Length: 2000000
+    Content-Type: */*
+    
+    bytes 0-1999999
 
 If the request succeeds, the server responds with an `  HTTP 201 Created  ` , along with any metadata associated with this resource. If the initial request of the resumable session had been a `  PUT  ` , to update an existing resource, the success response would be `  200 OK  ` , along with any metadata associated with this resource.
 
-If the upload request is interrupted or if you receive an `  HTTP 503 Service Unavailable  ` or any other `  5xx  ` response from the server, follow the procedure outlined in [resume an interrupted upload](#resume-upload) .
+If the upload request is interrupted or if you receive an `  HTTP 503 Service Unavailable  ` or any other `  5xx  ` response from the server, follow the procedure outlined in [resume an interrupted upload](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#resume-upload) .
+
+-----
 
 ##### Uploading the file in chunks
 
@@ -248,27 +234,23 @@ Chunk size restriction: All chunks must be a multiple of 256 KB (256 x 1024 byte
 
 A request that sends the first 524,288 bytes might look like this:
 
-``` text
-PUT {session_uri} HTTP/1.1
-Host: www.googleapis.com
-Content-Length: 524288
-Content-Type: */*
-Content-Range: bytes 0-524287/2000000
-
-bytes 0-524288
-```
+    PUT {session_uri} HTTP/1.1
+    Host: www.googleapis.com
+    Content-Length: 524288
+    Content-Type: */*
+    Content-Range: bytes 0-524287/2000000
+    
+    bytes 0-524288
 
 If the request succeeds, the server responds with `  308 Resume Incomplete  ` , along with a `  Range  ` header that identifies the total number of bytes that have been stored so far:
 
-``` text
-HTTP/1.1 308 Resume Incomplete
-Content-Length: 0
-Range: bytes=0-524287
-```
+    HTTP/1.1 308 Resume Incomplete
+    Content-Length: 0
+    Range: bytes=0-524287
 
 Use the upper value returned in the `  Range  ` header to determine where to start the next chunk. Continue to `  PUT  ` each chunk of the file until the entire file has been uploaded.
 
-If any chunk's `  PUT  ` request is interrupted or if you receive an HTTP `  503 Service Unavailable  ` or any other `  5xx  ` response from the server, follow the procedure outlined in [resume an interrupted upload](#resume-upload) , but instead of uploading the rest of the file, simply continue uploading chunks from that point.
+If any chunk's `  PUT  ` request is interrupted or if you receive an HTTP `  503 Service Unavailable  ` or any other `  5xx  ` response from the server, follow the procedure outlined in [resume an interrupted upload](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#resume-upload) , but instead of uploading the rest of the file, simply continue uploading chunks from that point.
 
 **Important Notes:**
 
@@ -277,6 +259,8 @@ If any chunk's `  PUT  ` request is interrupted or if you receive an HTTP `  503
   - If you send a request with an expired upload session ID, the server returns a `  404 Not Found  ` status code. When an unrecoverable error occurs in the upload session, the server returns a `  410 Gone  ` status code. In these cases, you must start a new resumable upload, obtain a new upload URI, and start the upload from the beginning using the new endpoint.
 
 When the entire file upload is complete, the server responds with an `  HTTP 201 Created  ` along with any metadata associated with this resource. If this request had been updating an existing entity rather than creating a new one, the HTTP response code for a completed upload would have been `  200 OK  ` .
+
+-----
 
 #### Resume an interrupted upload
 
@@ -296,21 +280,17 @@ If an upload request is terminated before receiving a response or if you receive
 
 The following request uses the `  Content-Range  ` header to indicate that the current position in the 2,000,000 byte file is unknown.
 
-``` text
-PUT {session_uri} HTTP/1.1
-Content-Length: 0
-Content-Range: bytes */2000000
-```
+    PUT {session_uri} HTTP/1.1
+    Content-Length: 0
+    Content-Range: bytes */2000000
 
 2\) Extract the number of bytes uploaded so far from the response.
 
 The server's response uses the `  Range  ` header to indicate that it has received the first 43 bytes of the file so far. Use the upper value of the `  Range  ` header to determine where to start the resumed upload.
 
-``` text
-HTTP/1.1 308 Resume Incomplete
-Content-Length: 0
-Range: 0-42
-```
+    HTTP/1.1 308 Resume Incomplete
+    Content-Length: 0
+    Range: 0-42
 
 **Note:** It is possible that the status response could be `  201 Created  ` or `  200 OK  ` if the upload is complete. This could happen if the connection broke after all bytes were uploaded but before the client received a response from the server.
 
@@ -318,13 +298,11 @@ Range: 0-42
 
 The following request resumes the upload by sending the remaining bytes of the file, starting at byte 43.
 
-``` text
-PUT {session_uri} HTTP/1.1
-Content-Length: 1999957
-Content-Range: bytes 43-1999999/2000000
-
-bytes 43-1999999
-```
+    PUT {session_uri} HTTP/1.1
+    Content-Length: 1999957
+    Content-Range: bytes 43-1999999/2000000
+    
+    bytes 43-1999999
 
 ## Best practices
 
@@ -335,7 +313,7 @@ When uploading media, it is helpful to be aware of some best practices related t
       - `  502 Bad Gateway  `
       - `  503 Service Unavailable  `
       - `  504 Gateway Timeout  `
-  - Use an [exponential backoff](#exp-backoff) strategy if any `  5xx  ` server error is returned when resuming or retrying upload requests. These errors can occur if a server is getting overloaded. Exponential backoff can help alleviate these kinds of problems during periods of high volume of requests or heavy network traffic.
+  - Use an [exponential backoff](https://docs.cloud.google.com/bigquery/docs/reference/api-uploads#exp-backoff) strategy if any `  5xx  ` server error is returned when resuming or retrying upload requests. These errors can occur if a server is getting overloaded. Exponential backoff can help alleviate these kinds of problems during periods of high volume of requests or heavy network traffic.
   - Other kinds of requests should not be handled by exponential backoff but you can still retry a number of them. When retrying these requests, limit the number of times you retry them. For example your code could limit to ten retries or less before reporting an error.
   - Handle `  404 Not Found  ` and `  410 Gone  ` errors when doing resumable uploads by starting the entire upload over from the beginning.
 

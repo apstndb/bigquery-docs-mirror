@@ -1,20 +1,22 @@
 # Connect to AlloyDB for PostgreSQL
 
-As a BigQuery administrator, you can create a [connection](/bigquery/docs/connections-api-intro) to access AlloyDB data. This connection lets data analysts [query data in AlloyDB](/bigquery/docs/alloydb-federated-queries) .
+As a BigQuery administrator, you can create a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) to access AlloyDB data. This connection lets data analysts [query data in AlloyDB](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) .
 
 To connect to AlloyDB, you must perform the following steps:
 
-1.  [Create an AlloyDB connection](#create-alloydb-connection) .
+1.  [Create an AlloyDB connection](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#create-alloydb-connection) .
 
-2.  [Grant access to the service account](#access-alloydb) .
+2.  [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#access-alloydb) .
 
 ## Before you begin
 
 1.  Enable the BigQuery Connection API.  
-
-2.  To get the permissions that you need to create an AlloyDB connection, ask your administrator to grant you the [BigQuery Connection Admin](/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
     
-    You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+    [Enable the API](https://console.cloud.google.com/apis/library/bigqueryconnection.googleapis.com)
+
+2.  To get the permissions that you need to create an AlloyDB connection, ask your administrator to grant you the [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create an AlloyDB connection
 
@@ -25,6 +27,8 @@ Select one of the following options to create an AlloyDB connection:
 ### Console
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -44,13 +48,13 @@ Select one of the following options to create an AlloyDB connection:
     
       - For **Connection ID** , enter an identifier for the connection resource. Letters, numbers, and underscores are allowed. For example, `  bq_alloydb_connection  ` .
     
-      - For **Data location** , select a BigQuery location (or region) that is [compatible with your external data source region](/bigquery/docs/federated-queries-intro#supported_regions) .
+      - For **Data location** , select a BigQuery location (or region) that is [compatible with your external data source region](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#supported_regions) .
     
       - Optional: For **Friendly name** , enter a user-friendly name for the connection, such as `  My connection resource  ` . The friendly name can be any value that helps you identify the connection resource if you need to modify it later.
     
       - Optional: For **Description** , enter a description for this connection resource.
     
-      - Optional: **Encryption** If you want to use a [customer-managed encryption key (CMEK)](/bigquery/docs/customer-managed-encryption) to encrypt your credentials, select **Customer-managed encryption key (CMEK)** and then select a customer-managed key. Otherwise, your credentials are protected by the default Google-owned and Google-managed encryption key.
+      - Optional: **Encryption** If you want to use a [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) to encrypt your credentials, select **Customer-managed encryption key (CMEK)** and then select a customer-managed key. Otherwise, your credentials are protected by the default Google-owned and Google-managed encryption key.
     
       - For **Database name** , enter the name of the database.
     
@@ -70,13 +74,13 @@ Select one of the following options to create an AlloyDB connection:
 
 8.  Click **Go to connection** .
 
-9.  In the **Connection Info** pane, copy the service account ID for use in the [next step](/bigquery/docs/connect-to-alloydb#share_connections) to grant the correct IAM permissions.
+9.  In the **Connection Info** pane, copy the service account ID for use in the [next step](https://docs.cloud.google.com/bigquery/docs/connect-to-alloydb#share_connections) to grant the correct IAM permissions.
 
 ### bq
 
-Enter the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
+Enter the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command with the following flags:
 
-``` text
+``` 
   bq mk \
   --connection \
   --location=LOCATION \
@@ -116,11 +120,11 @@ Optional flag:
 
 ### API
 
-Within the BigQuery Connection API, you can invoke `  CreateConnection  ` within the `  ConnectionService  ` to instantiate a connection. See the [client library page](/bigquery/docs/reference/bigqueryconnection) for more details.
+Within the BigQuery Connection API, you can invoke `  CreateConnection  ` within the `  ConnectionService  ` to instantiate a connection. See the [client library page](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection) for more details.
 
 ## Grant access to the service account
 
-A [service account](/iam/docs/service-agents) is automatically created when you create the first connection within a project. The service account's name is **BigQuery Connection Service Agent** . The service account ID is of the following format:
+A [service account](https://docs.cloud.google.com/iam/docs/service-agents) is automatically created when you create the first connection within a project. The service account's name is **BigQuery Connection Service Agent** . The service account ID is of the following format:
 
 `  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` .
 
@@ -128,17 +132,19 @@ To connect to AlloyDB, you must give the new connection access to AlloyDB so tha
 
   - `  alloydb.instances.connect  `
 
-You can grant the service account associated with the connection the [AlloyDB Client IAM role](/alloydb/docs/reference/iam-roles-permissions#roles) , which already has this permission assigned. You can omit this step if the service account already has the required permission.
+You can grant the service account associated with the connection the [AlloyDB Client IAM role](https://docs.cloud.google.com/alloydb/docs/reference/iam-roles-permissions#roles) , which already has this permission assigned. You can omit this step if the service account already has the required permission.
 
 ### Console
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant Access** .
     
     The **Add principals** dialog opens.
 
-3.  In the **New principals** field, enter the service account name **BigQuery Connection Service Agent** or the service account ID taken from the [connection information](/bigquery/docs/working-with-connections#view-connections) .
+3.  In the **New principals** field, enter the service account name **BigQuery Connection Service Agent** or the service account ID taken from the [connection information](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
 
 4.  In the **Select a role** field, select **AlloyDB** , and then select **AlloyDB Client** .
 
@@ -146,18 +152,16 @@ You can grant the service account associated with the connection the [AlloyDB Cl
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  `](/iam/docs/granting-changing-revoking-access#grant-single-role) command:
+Use the [`  gcloud projects add-iam-policy-binding  `](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#grant-single-role) command:
 
-``` text
-gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVICE_ACCOUNT_ID --role=roles/alloydb.client
-```
+    gcloud projects add-iam-policy-binding PROJECT_ID --member=serviceAccount:SERVICE_ACCOUNT_ID --role=roles/alloydb.client
 
 Provide the following values:
 
   - `  PROJECT_ID  ` : Your Google Cloud project ID.
   - `  SERVICE_ACCOUNT_ID  ` : Replace project number in `  service- PROJECT_NUMBER @gcp-sa-bigqueryconnection.iam.gserviceaccount.com  ` and use it.
 
-**Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access#view-access) .
+**Note:** For more information on how to grant and revoke IAM roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#view-access) .
 
 ## Share connections with users
 
@@ -167,7 +171,7 @@ You can grant the following roles to let users query data and manage connections
 
   - `  roles/bigquery.connectionAdmin  ` : enables users to manage connections.
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 Select one of the following options:
 
@@ -175,9 +179,13 @@ Select one of the following options:
 
 1.  Go to the **BigQuery** page.
     
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+    
     Connections are listed in your project, in a group called **Connections** .
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -193,9 +201,9 @@ Select one of the following options:
 
 ### bq
 
-Use the following [`  set-iam-policy  ` command](/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) :
+Use the following [`  set-iam-policy  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) :
 
-``` text
+``` 
   bq set-iam-policy RESOURCE FILE_NAME
 ```
 
@@ -204,15 +212,15 @@ Replace the following:
   - `  RESOURCE  ` : Enter the resource name in the `  project_id.region.connection_id  ` or `  region.connection_id  ` format.
   - `  FILE_NAME  ` : Enter the filename that contains the IAM policy in a JSON format.
 
-For more information about the set-iam-policy command, see [Control access to resources with IAM](/bigquery/docs/control-access-to-resources-iam#bq) .
+For more information about the set-iam-policy command, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#bq) .
 
 ### API
 
-Use the [`  projects.locations.connections.setIAM  ` method](/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section and supply an instance of the `  policy  ` resource.
+Use the [`  projects.locations.connections.setIAM  ` method](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#methods) in the BigQuery Connections REST API reference section and supply an instance of the `  policy  ` resource.
 
 ## What's next
 
-  - Learn about different [connection types](/bigquery/docs/connections-api-intro) .
-  - Learn about [managing connections](/bigquery/docs/working-with-connections) .
-  - Learn about [federated queries](/bigquery/docs/federated-queries-intro) .
-  - Learn how to [query AlloyDB data](/bigquery/docs/alloydb-federated-queries) .
+  - Learn about different [connection types](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) .
+  - Learn about [managing connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
+  - Learn about [federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) .
+  - Learn how to [query AlloyDB data](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) .

@@ -1,6 +1,6 @@
 # Generate text with the AI.GENERATE function
 
-This tutorial shows you how to generate text from text or multimodal data by using the [`  AI.GENERATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) . With the `  AI.GENERATE  ` function, you use a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to connect to a hosted Gemini model so that you don't have to create and maintain a model of your own.
+This tutorial shows you how to generate text from text or multimodal data by using the [`  AI.GENERATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) . With the `  AI.GENERATE  ` function, you use a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to connect to a hosted Gemini model so that you don't have to create and maintain a model of your own.
 
 This tutorial shows you how to complete the following tasks:
 
@@ -16,13 +16,13 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
   - **Vertex AI** : You incur costs for calls to the Vertex AI model.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
-For more information about Vertex AI generative AI pricing, see the [Vertex AI pricing](/vertex-ai/generative-ai/pricing) page.
+For more information about Vertex AI generative AI pricing, see the [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) page.
 
 ## Before you begin
 
@@ -32,7 +32,9 @@ For more information about Vertex AI generative AI pricing, see the [Vertex AI p
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ### Required roles
 
@@ -52,7 +54,7 @@ These predefined roles contain the permissions required to perform the tasks in 
   - Set service account permissions: `  resourcemanager.projects.getIamPolicy  ` and `  resourcemanager.projects.setIamPolicy  `
   - Query table data: `  bigquery.tables.getData  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create a dataset
 
@@ -61,6 +63,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -76,11 +80,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -89,15 +93,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -107,13 +111,17 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 
 ## Create a connection
 
-Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. Create the connection in the same [location](/bigquery/docs/locations) as the dataset that you created in the previous step.
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. Create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the dataset that you created in the previous step.
 
 Follow these steps to create a connection:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add data** :
+    
+    ![The Add data UI element.](https://docs.cloud.google.com/static/bigquery/images/add-data.png)
     
     The **Add data** dialog opens.
 
@@ -142,6 +150,8 @@ Grant the connection's service account the Vertex AI User role.
 To grant the role, follow these steps:
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -162,10 +172,12 @@ To grant the role, follow these steps:
 Follow these steps to generate text using the `  AI.GENERATE  ` function, and output the results in the `  AI.GENERATE  ` function's default format:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     WITH
     bbc_news AS (
       SELECT body FROM `bigquery-public-data.bbc_news.fulltext` LIMIT 5
@@ -175,31 +187,31 @@ Follow these steps to generate text using the `  AI.GENERATE  ` function, and ou
     
     The output is similar to the following:
     
-    ``` text
-    +---------------------------------------------+------------------------------------+---------------+
-    | news.result                                 | news.full_response                 | news.status   |
-    +---------------------------------------------+------------------------------------+---------------+
-    | This article presents a debate about the    | {"candidates":[{"avg_logprobs":    |               |
-    | "digital divide" between rich and poor      | -0.31465074559841777, content":    |               |
-    | nations. Here's a breakdown of the key..    | {"parts":[{"text":"This article..  |               |
-    +---------------------------------------------+------------------------------------+---------------+
-    | This article discusses how advanced         | {"candidates":[{"avg_logprobs":    |               |
-    | mapping technology is aiding humanitarian   | -0.21313422900091983,"content":    |               |
-    | efforts in Darfur, Sudan. Here's a...       | {"parts":[{"text":"This article..  |               |
-    +---------------------------------------------+------------------------------------+---------------+
-    | ...                                         | ...                                | ...           |
-    +---------------------------------------------+------------------------------------+---------------+
-    ```
+        +---------------------------------------------+------------------------------------+---------------+
+        | news.result                                 | news.full_response                 | news.status   |
+        +---------------------------------------------+------------------------------------+---------------+
+        | This article presents a debate about the    | {"candidates":[{"avg_logprobs":    |               |
+        | "digital divide" between rich and poor      | -0.31465074559841777, content":    |               |
+        | nations. Here's a breakdown of the key..    | {"parts":[{"text":"This article..  |               |
+        +---------------------------------------------+------------------------------------+---------------+
+        | This article discusses how advanced         | {"candidates":[{"avg_logprobs":    |               |
+        | mapping technology is aiding humanitarian   | -0.21313422900091983,"content":    |               |
+        | efforts in Darfur, Sudan. Here's a...       | {"parts":[{"text":"This article..  |               |
+        +---------------------------------------------+------------------------------------+---------------+
+        | ...                                         | ...                                | ...           |
+        +---------------------------------------------+------------------------------------+---------------+
 
 ## Summarize text and output structured results
 
 Follow these steps to generate text using the `  AI.GENERATE  ` function, and use the `  AI.GENERATE  ` function's `  output_schema  ` argument to format the output:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     WITH
     bbc_news AS (
       SELECT
@@ -218,31 +230,31 @@ Follow these steps to generate text using the `  AI.GENERATE  ` function, and us
     
     The output is similar to the following:
     
-    ``` text
-    +----------------+--------------------------------------------+
-    | good_sentiment | summary                                    |
-    +----------------+--------------------------------------------+
-    | true           | A World Bank report suggests the digital   |
-    |                | divide is rapidly closing due to increased |
-    |                | access to technology in developing..       |
-    +----------------+--------------------------------------------+
-    | true           | A review of sports games, focusing on the  |
-    |                | rivalry between EA Sports and ESPN, and    |
-    |                | the recent deal where EA acquired the..    |
-    +----------------+--------------------------------------------+
-    | ...            | ...                                        |
-    +----------------+--------------------------------------------+
-    ```
+        +----------------+--------------------------------------------+
+        | good_sentiment | summary                                    |
+        +----------------+--------------------------------------------+
+        | true           | A World Bank report suggests the digital   |
+        |                | divide is rapidly closing due to increased |
+        |                | access to technology in developing..       |
+        +----------------+--------------------------------------------+
+        | true           | A review of sports games, focusing on the  |
+        |                | rivalry between EA Sports and ESPN, and    |
+        |                | the recent deal where EA acquired the..    |
+        +----------------+--------------------------------------------+
+        | ...            | ...                                        |
+        +----------------+--------------------------------------------+
 
 ## Transcribe and translate video content
 
 Follow these steps to create an object table over public video content, and then transcribe and translate a video:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to create the object table:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.video`
     WITH CONNECTION `us.test_connection`
     OPTIONS (
@@ -253,7 +265,7 @@ Follow these steps to create an object table over public video content, and then
 
 3.  In the query editor, run the following query to transcribe and translate the `  pixel8.mp4  ` file:
     
-    ``` text
+    ``` notranslate
     SELECT
     AI.GENERATE(
       (OBJ.GET_ACCESS_URL(ref, 'r'), 'Transcribe the video in Japanese and then translate to English.'),
@@ -269,25 +281,25 @@ Follow these steps to create an object table over public video content, and then
     
     The output is similar to the following:
     
-    ``` text
-    +--------------------------------------------+--------------------------------+
-    | english_translation                        | japanese_transcript            |
-    +--------------------------------------------+--------------------------------+
-    | My name is Saeka Shimada. I'm a            | 島田 さえか です 。 東京 で フ     |
-    | photographer in Tokyo. Tokyo has many      | ォトグラファー を し て い ま      |
-    | faces. The city at night is totally...     | す 。 東京 に は いろんな 顔 が    |
-    +--------------------------------------------+--------------------------------+
-    ```
+        +--------------------------------------------+--------------------------------+
+        | english_translation                        | japanese_transcript            |
+        +--------------------------------------------+--------------------------------+
+        | My name is Saeka Shimada. I'm a            | 島田 さえか です 。 東京 で フ     |
+        | photographer in Tokyo. Tokyo has many      | ォトグラファー を し て い ま      |
+        | faces. The city at night is totally...     | す 。 東京 に は いろんな 顔 が    |
+        +--------------------------------------------+--------------------------------+
 
 ## Analyze audio file content
 
 Follow these steps to create an object table over public audio content, and then analyze the content of the audio files.
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query to create the object table:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE EXTERNAL TABLE `bqml_tutorial.audio`
       WITH CONNECTION `us.test_connection`
       OPTIONS (
@@ -298,7 +310,7 @@ Follow these steps to create an object table over public audio content, and then
 
 3.  In the query editor, run the following query to analyze the audio files:
     
-    ``` text
+    ``` notranslate
     SELECT
     AI.GENERATE(
       (OBJ.GET_ACCESS_URL(ref, 'r'), 'Summarize the content of this audio file.'),
@@ -312,33 +324,31 @@ Follow these steps to create an object table over public audio content, and then
     
     The results look similar to the following:
     
-    ``` text
-    +--------------------------------------------+-----------------------------------------------------------+
-    | summary                                    | topic              | uri                                  |
-    +--------------------------------------------+-----------------------------------------------------------+
-    | The audio contains a distinctive 'beep'    | beep sound         | gs://cloud-samples-data/generativ... |
-    | sound, followed by the characteristic      |                    |                                      |
-    | sound of a large vehicle or bus backing..  |                    |                                      |
-    +--------------------------------------------+--------------------+--------------------------------------+
-    |                                            | vehicle backing up |                                      |
-    |                                            +--------------------+                                      |
-    |                                            | bus                |                                      |
-    |                                            +--------------------+                                      |
-    |                                            | alarm              |                                      |
-    +--------------------------------------------+--------------------+--------------------------------------+
-    | The speaker introduces themselves          | Introduction       | gs://cloud-samples-data/generativ... |
-    | as Gemini and expresses their excitement   |                    |                                      |
-    | and readiness to dive into something..     |                    |                                      |
-    +--------------------------------------------+--------------------+--------------------------------------+
-    |                                            | Readiness          |                                      |
-    |                                            +--------------------+                                      |
-    |                                            | Excitement         |                                      |
-    |                                            +--------------------+                                      |
-    |                                            | Collaboration      |                                      |
-    +--------------------------------------------+--------------------+--------------------------------------+
-    | ...                                        | ...                | ...                                  |
-    +--------------------------------------------+--------------------+--------------------------------------+
-    ```
+        +--------------------------------------------+-----------------------------------------------------------+
+        | summary                                    | topic              | uri                                  |
+        +--------------------------------------------+-----------------------------------------------------------+
+        | The audio contains a distinctive 'beep'    | beep sound         | gs://cloud-samples-data/generativ... |
+        | sound, followed by the characteristic      |                    |                                      |
+        | sound of a large vehicle or bus backing..  |                    |                                      |
+        +--------------------------------------------+--------------------+--------------------------------------+
+        |                                            | vehicle backing up |                                      |
+        |                                            +--------------------+                                      |
+        |                                            | bus                |                                      |
+        |                                            +--------------------+                                      |
+        |                                            | alarm              |                                      |
+        +--------------------------------------------+--------------------+--------------------------------------+
+        | The speaker introduces themselves          | Introduction       | gs://cloud-samples-data/generativ... |
+        | as Gemini and expresses their excitement   |                    |                                      |
+        | and readiness to dive into something..     |                    |                                      |
+        +--------------------------------------------+--------------------+--------------------------------------+
+        |                                            | Readiness          |                                      |
+        |                                            +--------------------+                                      |
+        |                                            | Excitement         |                                      |
+        |                                            +--------------------+                                      |
+        |                                            | Collaboration      |                                      |
+        +--------------------------------------------+--------------------+--------------------------------------+
+        | ...                                        | ...                | ...                                  |
+        +--------------------------------------------+--------------------+--------------------------------------+
 
 ## Clean up
 
@@ -350,6 +360,8 @@ Follow these steps to create an object table over public audio content, and then
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

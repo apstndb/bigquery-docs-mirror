@@ -59,6 +59,8 @@ These topics are out of scope for this guide. However, it will benefit your data
 
 The following diagram illustrates a typical DWH design for BigQuery. It shows how data from external sources is ingested into the DWH, and how consumers consume data from the DWH.
 
+![Three databases outside of Google Cloud are data sources. Their data moves into storage in a staging area. The data then moves into BigQuery tables, which are the source for BigQuery views. Consumers like Looker, App Engine, Vertex AI notebooks, and human users consume the data using the views.](https://docs.cloud.google.com/static/bigquery/images/continuous-integration-of-data-in-bigquery-typical-dwh-design.svg)
+
 The data starts at the data sources, where the data is in conventional transactional or low-latency databases such as OLTP SQL databases and NoSQL databases. A scheduled process copies the data into a staging area.
 
 The data is stored temporarily in the staging area. If necessary, the data is transformed to fit an analytical system before it's loaded into the DWH tables. (In this diagram, the staging area is inside Google Cloud, but it doesn't have to be.) Transformations might include denormalization, enriching certain datasets, or handling malformed entries (for example, entries with missing values).
@@ -88,7 +90,7 @@ As with any other development or IT team, the DWH team must maintain assets that
     
       - **Data definition language (DDL)** : These assets are used for defining the schema of tables and views.
       - **Data manipulation language (DML)** : These assets are used for manipulating data inside a table. DML commands are also used to create new tables based on existing tables.
-      - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`  bq  `](/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
+      - **Data control language (DCL)** : These assets are used for controlling permissions and access to tables. Within BigQuery, you can control access by using SQL and the [`  bq  `](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) command-line tool or by using the BigQuery REST API. However, we recommend that you use IAM.
 
 These assets, and others like Terraform scripts that are used to build components, are maintained inside code repositories. Tools like [Dataform](https://dataform.co/) can help you construct a CI/CD pipeline that validates your SQL scripts and checks predefined validation rules on tables that are created by DDL scripts. These tools let you apply compilation and testing processes for SQL, which in most contexts doesn't have a natural testing environment.
 
@@ -100,42 +102,21 @@ Because of the potential complexity of table relationships inside a DWH (for exa
 
 The following table summarizes the differences between the practices for integrating code and the practices for integrating data.
 
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Integrating code</th>
-<th>Integrating data</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Local development</td>
-<td>Source code is easily cloneable due to its relatively small size. Generally the code fits most end-user machines (excluding cases of monorepos, which have other solutions).</td>
-<td>Most tables in a DWH cannot fit on a development machine due to their size.</td>
-</tr>
-<tr class="even">
-<td>Central testing</td>
-<td>Different states of the source code are cloned into a central system (a CI server) to undergo automated testing. Having different states of the code lets you compare results between a stable version and a development version.</td>
-<td>Creating different states of the data in an isolated environment isn't straightforward. Moving data outside the DWH is a resource-intensive and time-consuming operation. It isn't practical to do as frequently as needed for testing.</td>
-</tr>
-<tr class="odd">
-<td>Past versions</td>
-<td>During the process of releasing new versions of software, you can track past versions. If you detect a problem in a new release, you can roll back to a safe version.</td>
-<td>Taking backups of tables inside the DWH is a standard practice in case you must roll back. However, you must make sure that all affected tables are rolled back to the same point in time. That way, related tables are consistent with one another.</td>
-</tr>
-</tbody>
-</table>
+|                   | Integrating code                                                                                                                                                                                                                  | Integrating data                                                                                                                                                                                                                                     |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Local development | Source code is easily cloneable due to its relatively small size. Generally the code fits most end-user machines (excluding cases of monorepos, which have other solutions).                                                      | Most tables in a DWH cannot fit on a development machine due to their size.                                                                                                                                                                          |
+| Central testing   | Different states of the source code are cloned into a central system (a CI server) to undergo automated testing. Having different states of the code lets you compare results between a stable version and a development version. | Creating different states of the data in an isolated environment isn't straightforward. Moving data outside the DWH is a resource-intensive and time-consuming operation. It isn't practical to do as frequently as needed for testing.              |
+| Past versions     | During the process of releasing new versions of software, you can track past versions. If you detect a problem in a new release, you can roll back to a safe version.                                                             | Taking backups of tables inside the DWH is a standard practice in case you must roll back. However, you must make sure that all affected tables are rolled back to the same point in time. That way, related tables are consistent with one another. |
 
 ## Integrate data into BigQuery tables
 
-BigQuery has two features that can help you design a workflow for data integration: [table snapshots](/bigquery/docs/table-snapshots-intro) and [table clones](/bigquery/docs/table-clones-intro) . You can combine these features to achieve a workflow that gives you a cost-effective development environment. Developers can manipulate data and its structure in isolation from the production environment, and they can roll back a change if necessary.
+BigQuery has two features that can help you design a workflow for data integration: [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) and [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) . You can combine these features to achieve a workflow that gives you a cost-effective development environment. Developers can manipulate data and its structure in isolation from the production environment, and they can roll back a change if necessary.
 
 A BigQuery table snapshot is a read-only representation of a table (called the *base table* ) at a given moment in time. Similarly, A BigQuery table clone is a read-write representation of a table at a given moment in time. In both cases, storage costs are minimized because only the differences from the base table are stored. Table clones start to incur costs when the base table changes or when the table clones change. Because table snapshots are read-only, they incur costs only when the base table changes.
 
-For more information about the pricing of table snapshots and table clones, see [Introduction to table snapshots](/bigquery/docs/table-snapshots-intro#storage_costs) and [Introduction to table clones](/bigquery/docs/table-clones-intro) .
+For more information about the pricing of table snapshots and table clones, see [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro#storage_costs) and [Introduction to table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) .
 
-You can take table snapshots and table clones using the BigQuery [time travel](/bigquery/docs/time-travel) feature (up to seven days in the past). This feature lets you capture snapshots and clones of multiple tables at the same point in time, which makes your working environment and snapshots consistent with one another. Using this feature can be helpful for tables that are updated frequently.
+You can take table snapshots and table clones using the BigQuery [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) feature (up to seven days in the past). This feature lets you capture snapshots and clones of multiple tables at the same point in time, which makes your working environment and snapshots consistent with one another. Using this feature can be helpful for tables that are updated frequently.
 
 ### How to use table clones and table snapshots to allow isolation
 
@@ -143,9 +124,9 @@ To illustrate the integration workflow for CI in a DWH, imagine the following sc
 
 1.  You identify the tables that might be affected by the changes and additional tables that you might want to check.
 
-2.  You [create a new BigQuery dataset](/bigquery/docs/datasets) to contain the assets for this change. This dataset helps isolate the changes and separates this task from other tasks that other team members work on. The dataset must be in the same region as the source dataset. However, the project can be separated from the production project to help with your organization's security and billing requirements.
+2.  You [create a new BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to contain the assets for this change. This dataset helps isolate the changes and separates this task from other tasks that other team members work on. The dataset must be in the same region as the source dataset. However, the project can be separated from the production project to help with your organization's security and billing requirements.
 
-3.  For each of the tables, you create both a [clone](/bigquery/docs/table-clones-create) and a [snapshot](/bigquery/docs/table-snapshots-create) in the new dataset, potentially for the same point in time. This approach offers the following benefits:
+3.  For each of the tables, you create both a [clone](https://docs.cloud.google.com/bigquery/docs/table-clones-create) and a [snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create) in the new dataset, potentially for the same point in time. This approach offers the following benefits:
     
       - The table clone can act as a working copy where you can make changes freely without affecting the production table. You can create multiple table clones of the same base table in order to test different integration paths at the same time, with minimal overhead.
       - The snapshot can act as a restore and reference point, a point where the data is known to have worked before any change took place. Having this snapshot lets you perform a rollback in case an issue is detected later in the process.
@@ -172,6 +153,8 @@ When you use the workflow described in the preceding section, your developers ca
 
 This section provides more detail about how table snapshots and table clones let developers achieve this workflow. The following diagram shows how table snapshots and table clones relate to the data in the production dataset.
 
+![A production dataset contains 9 tables. A second dataset named "Dev Dataset 1" contains snapshots of tables 2 and 3 and clones of tables 2 and 3. A third dataset named "Dev Dataset 2" contains snapshots of tables 3 and 4 and clones of tables 3 and 4.](https://docs.cloud.google.com/static/bigquery/images/continuous-integration-of-data-in-bigquery-table-clones-and-snapshots.svg)
+
 In the diagram, the production dataset contains all the tables that are being used in production. Every developer can create a dataset for their own development environment. The diagram shows two developer datasets, which are labeled **Dev Dataset 1** and **Dev Dataset 2** . By using these developer datasets, developers can work simultaneously on the same tables without interfering with one another.
 
 After developers have created a dataset, they can create clones and snapshots of the tables they are working on. The clones and snapshots represent the data at a particular point in time. At this point, developers are free to change the table clones, because changes aren't visible on the base table.
@@ -194,45 +177,20 @@ Another alternative method is to move the data through Cloud Storage. This metho
 
 ### Use BigQuery sharing
 
-[BigQuery sharing (formerly Analytics Hub)](/bigquery/docs/analytics-hub-introduction) lets you share datasets both outside and inside the organization in a way that's designed to be secure. It offers many features that let you publish datasets to provide subscribers with controlled, read-only access to those datasets. However, even though you can use BigQuery sharing to expose datasets in order to implement changes, a developer still must create table clones in order to work with the tables.
+[BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction) lets you share datasets both outside and inside the organization in a way that's designed to be secure. It offers many features that let you publish datasets to provide subscribers with controlled, read-only access to those datasets. However, even though you can use BigQuery sharing to expose datasets in order to implement changes, a developer still must create table clones in order to work with the tables.
 
 ## Summary of DWH continuous integration options
 
 The following table summarizes the differences, advantages, and potential disadvantages between the options for DWH continuous integration. (Sharing offers a different feature set, and is therefore not measurable using the parameters listed in the table.)
 
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Costs</th>
-<th>Rollbacks</th>
-<th>Risks</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Table snapshots and table clones</td>
-<td>Minimal. You pay only for the difference between the snapshot or clone and the base table.</td>
-<td>The snapshot acts as a backup to roll back to if necessary.</td>
-<td>You control the amount of risk. Snapshots can be taken at a point in time for all tables, which reduces inconsistencies even if there is a rollback.</td>
-</tr>
-<tr class="even">
-<td>Table copy</td>
-<td>Higher costs than using table snapshots and table clones. The entirety of the data is duplicated. To support rollbacks, you need multiple copies of the same table.</td>
-<td>Possible, but requires two copies of the table—one copy to serve as backup and one copy to work with and make changes to.</td>
-<td>Cloning is harder to do for a point in time. If a rollback is necessary, not all tables are taken from the same point in time.</td>
-</tr>
-<tr class="odd">
-<td>Export and import</td>
-<td>Higher costs than using table snapshots and table clones. The data is duplicated. To support rollback, you need multiple copies of the same table.</td>
-<td>The exported data serves as a backup.</td>
-<td>Exported data is not a point-in-time export for multiple tables.</td>
-</tr>
-</tbody>
-</table>
+|                                  | Costs                                                                                                                                                               | Rollbacks                                                                                                                 | Risks                                                                                                                                                |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Table snapshots and table clones | Minimal. You pay only for the difference between the snapshot or clone and the base table.                                                                          | The snapshot acts as a backup to roll back to if necessary.                                                               | You control the amount of risk. Snapshots can be taken at a point in time for all tables, which reduces inconsistencies even if there is a rollback. |
+| Table copy                       | Higher costs than using table snapshots and table clones. The entirety of the data is duplicated. To support rollbacks, you need multiple copies of the same table. | Possible, but requires two copies of the table—one copy to serve as backup and one copy to work with and make changes to. | Cloning is harder to do for a point in time. If a rollback is necessary, not all tables are taken from the same point in time.                       |
+| Export and import                | Higher costs than using table snapshots and table clones. The data is duplicated. To support rollback, you need multiple copies of the same table.                  | The exported data serves as a backup.                                                                                     | Exported data is not a point-in-time export for multiple tables.                                                                                     |
 
 ## What's next
 
-  - Read about BigQuery table snapshots in [Introduction to table snapshots](/bigquery/docs/table-snapshots-intro) .
-  - Learn more about continuous integration for software development in [DevOps tech: Continuous integration](/architecture/devops/devops-tech-continuous-integration) .
-  - For more reference architectures, diagrams, and best practices, explore the [Cloud Architecture Center](/architecture) .
+  - Read about BigQuery table snapshots in [Introduction to table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+  - Learn more about continuous integration for software development in [DevOps tech: Continuous integration](https://docs.cloud.google.com/architecture/devops/devops-tech-continuous-integration) .
+  - For more reference architectures, diagrams, and best practices, explore the [Cloud Architecture Center](https://docs.cloud.google.com/architecture) .

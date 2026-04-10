@@ -1,10 +1,10 @@
 # Restore table snapshots
 
-This document describes how to create a writeable table from a table snapshot by using the Google Cloud console, a `  CREATE TABLE CLONE  ` query, a `  bq cp  ` command, or the `  jobs.insert  ` API. It is intended for users who are familiar with [table snapshots](/bigquery/docs/table-snapshots-intro) .
+This document describes how to create a writeable table from a table snapshot by using the Google Cloud console, a `  CREATE TABLE CLONE  ` query, a `  bq cp  ` command, or the `  jobs.insert  ` API. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) that you need to create a writeable table from a table snapshot, and the [predefined IAM roles](/bigquery/docs/access-control#bigquery) that grant those permissions.
+This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to create a writeable table from a table snapshot, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
 
 ### Permissions
 
@@ -84,8 +84,12 @@ You can restore a table snapshot into a new table by using one of the following 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -94,6 +98,8 @@ You can restore a table snapshot into a new table by using one of the following 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
 5.  In the table snapshot pane that appears, click update **Restore** .
+    
+    ![Restore table from snapshot](https://docs.cloud.google.com/static/bigquery/images/snapshot-restore.png)
 
 6.  In the **Restore snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the new table.
 
@@ -101,13 +107,15 @@ You can restore a table snapshot into a new table by using one of the following 
 
 ### SQL
 
-Use the [`  CREATE TABLE CLONE  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
+Use the [`  CREATE TABLE CLONE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.NEW_TABLE_NAME
     CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
     ```
@@ -123,13 +131,15 @@ Use the [`  CREATE TABLE CLONE  ` DDL statement](/bigquery/docs/reference/standa
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 Enter the following command in the Cloud Shell:
 
-``` text
+[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
+
+``` notranslate
 bq cp \
 --restore \
 --no_clobber \
@@ -150,7 +160,7 @@ The `  --no_clobber  ` flag instructs the command to fail if the destination tab
 
 ### API
 
-Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -170,7 +180,7 @@ Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) metho
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -212,14 +222,20 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand the project, click **Datasets** , and then click the dataset that contains the table snapshot that you want to restore from.
 
 4.  Click **Overview \> Tables** , and then click the name of the table snapshot.
 
 5.  In the table snapshot pane that appears, click **Restore** .
+    
+    ![Restore table from snapshot](https://docs.cloud.google.com/static/bigquery/images/snapshot-restore.png)
 
 6.  In the **Restore snapshot** pane that appears, enter the **Project** , **Dataset** , and **Table** information for the existing table.
 
@@ -229,13 +245,15 @@ You can overwrite an existing table with a table snapshot by using one of the fo
 
 ### SQL
 
-Use the [`  CREATE TABLE CLONE  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
+Use the [`  CREATE TABLE CLONE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE TABLE_PROJECT_ID.TABLE_DATASET_NAME.TABLE_NAME
     CLONE SNAPSHOT_PROJECT_ID.SNAPSHOT_DATASET_NAME.SNAPSHOT_NAME;
     ```
@@ -251,13 +269,15 @@ Use the [`  CREATE TABLE CLONE  ` DDL statement](/bigquery/docs/reference/standa
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 Enter the following command in the Cloud Shell:
 
-``` text
+[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
+
+``` notranslate
 bq cp \
 --restore \
 --force \
@@ -276,7 +296,7 @@ Replace the following:
 
 ### API
 
-Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
+Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the following parameters:
 
 <table>
 <colgroup>
@@ -296,7 +316,7 @@ Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) metho
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -333,4 +353,4 @@ If an expiration is not specified, then the destination table expires after the 
 
 ## What's next
 
-  - [List the table snapshots of a specified base table](/bigquery/docs/table-snapshots-list#list_the_table_snapshots_of_a_specified_base_table) .
+  - [List the table snapshots of a specified base table](https://docs.cloud.google.com/bigquery/docs/table-snapshots-list#list_the_table_snapshots_of_a_specified_base_table) .

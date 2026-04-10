@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [AuditLogConfig](#AuditLogConfig)
-      - [JSON representation](#AuditLogConfig.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/AuditConfig#SCHEMA_REPRESENTATION)
+  - [AuditLogConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/AuditConfig#AuditLogConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/AuditConfig#AuditLogConfig.SCHEMA_REPRESENTATION)
 
 Specifies the audit configuration for a service. The configuration determines which permission types are logged, and what identities, if any, are exempted from logging. An AuditConfig must have one or more AuditLogConfigs.
 
@@ -8,43 +8,41 @@ If there are AuditConfigs for both `  allServices  ` and a specific service, the
 
 Example Policy with multiple AuditConfigs:
 
-``` text
-{
-  "auditConfigs": [
     {
-      "service": "allServices",
-      "auditLogConfigs": [
+      "auditConfigs": [
         {
-          "logType": "DATA_READ",
-          "exemptedMembers": [
-            "user:jose@example.com"
+          "service": "allServices",
+          "auditLogConfigs": [
+            {
+              "logType": "DATA_READ",
+              "exemptedMembers": [
+                "user:jose@example.com"
+              ]
+            },
+            {
+              "logType": "DATA_WRITE"
+            },
+            {
+              "logType": "ADMIN_READ"
+            }
           ]
         },
         {
-          "logType": "DATA_WRITE"
-        },
-        {
-          "logType": "ADMIN_READ"
-        }
-      ]
-    },
-    {
-      "service": "sampleservice.googleapis.com",
-      "auditLogConfigs": [
-        {
-          "logType": "DATA_READ"
-        },
-        {
-          "logType": "DATA_WRITE",
-          "exemptedMembers": [
-            "user:aliya@example.com"
+          "service": "sampleservice.googleapis.com",
+          "auditLogConfigs": [
+            {
+              "logType": "DATA_READ"
+            },
+            {
+              "logType": "DATA_WRITE",
+              "exemptedMembers": [
+                "user:aliya@example.com"
+              ]
+            }
           ]
         }
       ]
     }
-  ]
-}
-```
 
 For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ logging. It also exempts `  jose@example.com  ` from DATA\_READ logging, and `  aliya@example.com  ` from DATA\_WRITE logging.
 
@@ -59,7 +57,7 @@ For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ l
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;service&quot;: string,
   &quot;auditLogConfigs&quot;: [
     {
@@ -89,21 +87,19 @@ The configuration for logging of each type of permission.
 
 Provides the configuration for logging a type of permissions. Example:
 
-``` text
-{
-  "auditLogConfigs": [
     {
-      "logType": "DATA_READ",
-      "exemptedMembers": [
-        "user:jose@example.com"
+      "auditLogConfigs": [
+        {
+          "logType": "DATA_READ",
+          "exemptedMembers": [
+            "user:jose@example.com"
+          ]
+        },
+        {
+          "logType": "DATA_WRITE"
+        }
       ]
-    },
-    {
-      "logType": "DATA_WRITE"
     }
-  ]
-}
-```
 
 This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting <jose@example.com> from DATA\_READ logging.
 
@@ -118,7 +114,7 @@ This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting <jose@examp
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;logType&quot;: enum (LogType),
   &quot;exemptedMembers&quot;: [
     string

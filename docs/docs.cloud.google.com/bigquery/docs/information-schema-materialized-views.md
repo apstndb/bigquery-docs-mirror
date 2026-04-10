@@ -4,7 +4,7 @@ The `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view contains status about mater
 
 ## Required permissions
 
-To get the permissions that you need to query the `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view, ask your administrator to grant you the [BigQuery Metadata Viewer](/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) IAM role on your project or dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to query the `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view, ask your administrator to grant you the [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) IAM role on your project or dataset. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to query the `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -15,9 +15,9 @@ The following permissions are required to query the `  INFORMATION_SCHEMA.MATERI
   - `  bigquery.tables.get  `
   - `  bigquery.tables.list  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -25,92 +25,40 @@ When you query the `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view, the query r
 
 The `  INFORMATION_SCHEMA.MATERIALIZED_VIEWS  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the project that contains the dataset. Also referred to as the <code dir="ltr" translate="no">       projectId      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       table_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the dataset that contains the materialized view. Also referred to as the <code dir="ltr" translate="no">       datasetId      </code> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the materialized view. Also referred to as the <code dir="ltr" translate="no">       tableId      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       last_refresh_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>The time when this materialized view was last refreshed.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       refresh_watermark      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>The refresh watermark of the materialized view. The data contained in materialized view base tables up to this time are included in the materialized view cache.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       last_refresh_status      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Error result of the last automatic refresh job as an <a href="/bigquery/docs/reference/rest/v2/ErrorProto">ErrorProto</a> object. If present, indicates that the last automatic refresh was unsuccessful.</td>
-</tr>
-</tbody>
-</table>
+| Column name                          | Data type                  | Value                                                                                                                                                                                                                       |
+| ------------------------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        table_catalog       `       | `        STRING       `    | The name of the project that contains the dataset. Also referred to as the `        projectId       ` .                                                                                                                     |
+| `        table_schema       `        | `        STRING       `    | The name of the dataset that contains the materialized view. Also referred to as the `        datasetId       ` .                                                                                                           |
+| `        table_name       `          | `        STRING       `    | The name of the materialized view. Also referred to as the `        tableId       ` .                                                                                                                                       |
+| `        last_refresh_time       `   | `        TIMESTAMP       ` | The time when this materialized view was last refreshed.                                                                                                                                                                    |
+| `        refresh_watermark       `   | `        TIMESTAMP       ` | The refresh watermark of the materialized view. The data contained in materialized view base tables up to this time are included in the materialized view cache.                                                            |
+| `        last_refresh_status       ` | `        RECORD       `    | Error result of the last automatic refresh job as an [ErrorProto](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ErrorProto) object. If present, indicates that the last automatic refresh was unsuccessful. |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
-Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information, see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information, see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.MATERIALIZED_VIEWS      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.MATERIALIZED_VIEWS      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                       | Resource scope | Region scope               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.MATERIALIZED_VIEWS       `` | Project level  | `          REGION        ` |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.MATERIALIZED_VIEWS       `        | Dataset level  | Dataset location           |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 For example:
 
-``` text
--- Returns metadata for views in a single dataset.
-SELECT * FROM myDataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
-
--- Returns metadata for all views in a region.
-SELECT * FROM region-us.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
-```
+    -- Returns metadata for views in a single dataset.
+    SELECT * FROM myDataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
+    
+    -- Returns metadata for all views in a region.
+    SELECT * FROM region-us.INFORMATION_SCHEMA.MATERIALIZED_VIEWS;
 
 ## Examples
 
@@ -120,7 +68,7 @@ The following example retrieves all the unhealthy materialized views from the ` 
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: ``  ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS  `` ; for example, ``  `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS  `` .
 
-``` text
+``` notranslate
 SELECT
   table_name, last_refresh_status
 FROM
@@ -133,7 +81,7 @@ WHERE
 
 The result is similar to the following:
 
-``` text
+``` 
   +---------------+---------------------------------------------------------------------+
   |  table_name   |                        last_refresh_status                          |
   +---------------------------------------------------------------------+---------------+
@@ -148,7 +96,7 @@ The following example retrieves the `  last_refresh_time  ` and `  refresh_water
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: ``  ` project_id `. dataset .INFORMATION_SCHEMA.MATERIALIZED_VIEWS  `` ; for example, ``  `myproject`.mydataset.INFORMATION_SCHEMA.MATERIALIZED_VIEWS  `` .
 
-``` text
+``` notranslate
 SELECT
   table_name, last_refresh_time, refresh_watermark
 FROM
@@ -161,7 +109,7 @@ WHERE
 
 The result is similar to the following:
 
-``` text
+``` 
   +---------------+------------------------------------------------+
   |  table_name   |  last_refresh_time     | refresh_watermark     |
   +---------------+------------------------------------------------+

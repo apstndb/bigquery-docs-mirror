@@ -2,15 +2,17 @@
 
 This document describes the syntax, commands, flags, and arguments for `  bq  ` , the Python-based command-line tool for BigQuery.
 
-For a tutorial on using the bq command-line tool, see [Load and query data with the bq tool](/bigquery/docs/quickstarts/load-data-bq) .
+For a tutorial on using the bq command-line tool, see [Load and query data with the bq tool](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) .
 
 ## Ways to use the bq command-line tool
 
-You can enter bq command-line tool commands in [Cloud Shell](/shell/docs/how-cloud-shell-works) either from the Google Cloud console or from a local installation of the [Google Cloud CLI](/sdk/docs) .
+You can enter bq command-line tool commands in [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) either from the Google Cloud console or from a local installation of the [Google Cloud CLI](https://docs.cloud.google.com/sdk/docs) .
 
   - To use the bq command-line tool from the Google Cloud console, activate Cloud Shell:
+    
+    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
-  - To use the bq command-line tool locally, [install and configure the gcloud CLI](/sdk/docs/install) . To keep your installation current, see [Manage an installation](/sdk/docs/install#manage_an_installation) in the gcloud CLI documentation.
+  - To use the bq command-line tool locally, [install and configure the gcloud CLI](https://docs.cloud.google.com/sdk/docs/install) . To keep your installation current, see [Manage an installation](https://docs.cloud.google.com/sdk/docs/install#manage_an_installation) in the gcloud CLI documentation.
 
 ## Command format
 
@@ -18,7 +20,7 @@ The bq command-line tool uses the following format:
 
 `  bq COMMAND [ FLAGS ] [ ARGUMENTS ]  `
 
-Some flags can be used with multiple bq command-line tool commands; these flags are described in the [Global flags](#global_flags) section.
+Some flags can be used with multiple bq command-line tool commands; these flags are described in the [Global flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) section.
 
 Other flags are command-specific; they can only be used with a particular bq command-line tool command. The command-specific flags are described in the command sections.
 
@@ -26,46 +28,19 @@ Other flags are command-specific; they can only be used with a particular bq com
 
 When you specify a value for a flag, the equals sign ( `  =  ` ) is optional. For example, the following two commands are equivalent:
 
-``` text
-bq ls --format prettyjson myDataset
-bq ls --format=prettyjson myDataset
-```
+    bq ls --format prettyjson myDataset
+    bq ls --format=prettyjson myDataset
 
 This document uses the equals sign for clarity.
 
 Some bq command-line tool flags are *boolean* ; you can set the flag's value to either `  true  ` or `  false  ` . The bq command-line tool accepts the following formats for setting boolean flags.
 
-<table>
-<thead>
-<tr class="header">
-<th>Value</th>
-<th>Format</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       true      </code></td>
-<td><code dir="ltr" translate="no">       --               FLAGNAME              =true      </code></td>
-<td><code dir="ltr" translate="no">       --debug_mode=true      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       true      </code></td>
-<td><code dir="ltr" translate="no">       --               FLAGNAME       </code></td>
-<td><code dir="ltr" translate="no">       --debug_mode      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       false      </code></td>
-<td><code dir="ltr" translate="no">       --               FLAGNAME              =false      </code></td>
-<td><code dir="ltr" translate="no">       --debug_mode=false      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       false      </code></td>
-<td><code dir="ltr" translate="no">       --no               FLAGNAME       </code></td>
-<td><code dir="ltr" translate="no">       --nodebug_mode      </code></td>
-</tr>
-</tbody>
-</table>
+| Value                  | Format                                                         | Example                             |
+| ---------------------- | -------------------------------------------------------------- | ----------------------------------- |
+| `        true       `  | `        --               FLAGNAME              =true       `  | `        --debug_mode=true       `  |
+| `        true       `  | `        --               FLAGNAME        `                    | `        --debug_mode       `       |
+| `        false       ` | `        --               FLAGNAME              =false       ` | `        --debug_mode=false       ` |
+| `        false       ` | `        --no               FLAGNAME        `                  | `        --nodebug_mode       `     |
 
 This document uses the `  -- FLAGNAME = VALUE  ` format for boolean flags.
 
@@ -75,44 +50,21 @@ All boolean flags are optional; if a boolean flag is not present, then BigQuery 
 
 The format for specifying a resource depends on the context; in some cases the separator between the project and dataset is a colon ( `  :  ` ) and in some cases, it is a period ( `  .  ` ). The following table describes how to specify a BigQuery table in different contexts.
 
-<table>
-<thead>
-<tr class="header">
-<th>Context</th>
-<th>Format</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>bq command-line tool</td>
-<td><code dir="ltr" translate="no">         PROJECT              :               DATASET              .               TABLE       </code></td>
-<td><code dir="ltr" translate="no">       myProject:myDataset.myTable      </code></td>
-</tr>
-<tr class="even">
-<td>GoogleSQL query</td>
-<td><code dir="ltr" translate="no">         PROJECT              .               DATASET              .               TABLE       </code></td>
-<td><code dir="ltr" translate="no">       myProject.myDataset.myTable      </code></td>
-</tr>
-<tr class="odd">
-<td>Legacy SQL query</td>
-<td><code dir="ltr" translate="no">         PROJECT              :               DATASET              .               TABLE       </code></td>
-<td><code dir="ltr" translate="no">       myProject:myDataset.myTable      </code></td>
-</tr>
-</tbody>
-</table>
+| Context              | Format                                                                                              | Example                                      |
+| -------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| bq command-line tool | `          PROJECT              :               DATASET              .               TABLE        ` | `        myProject:myDataset.myTable       ` |
+| GoogleSQL query      | `          PROJECT              .               DATASET              .               TABLE        ` | `        myProject.myDataset.myTable       ` |
+| Legacy SQL query     | `          PROJECT              :               DATASET              .               TABLE        ` | `        myProject:myDataset.myTable       ` |
 
 If you don't specify a project, then BigQuery uses the current project. For example, if the current project is `  myProject  ` , then BigQuery interprets `  myDataset.myTable  ` as `  myProject:myDataset.myTable  ` (or `  myProject.myDataset.myTable  ` ).
 
-Some resource identifiers must be quoted using back ticks ( ``  `  `` ). If your resource identifier begins with a letter or underscore character, and contains only characters that are letters, numbers, and underscores, then you don't need to quote it. However, if your resource identifier contains other types of characters, or reserved keywords, you need to surround the identifier (or the part of the identifier with the special characters or reserved keywords) with back ticks. For more information, see [Identifiers](/bigquery/docs/reference/standard-sql/lexical#identifiers) .
+Some resource identifiers must be quoted using back ticks ( ``  `  `` ). If your resource identifier begins with a letter or underscore character, and contains only characters that are letters, numbers, and underscores, then you don't need to quote it. However, if your resource identifier contains other types of characters, or reserved keywords, you need to surround the identifier (or the part of the identifier with the special characters or reserved keywords) with back ticks. For more information, see [Identifiers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) .
 
 ## How to run commands
 
-Place any [global flags](#global_flags) before the `  bq  ` command, and then include command-specific flags. You can include multiple global or command-specific flags. For example:
+Place any [global flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) before the `  bq  ` command, and then include command-specific flags. You can include multiple global or command-specific flags. For example:
 
-``` text
-bq --location=us mk --reservation --project_id=project reservation_name
-```
+    bq --location=us mk --reservation --project_id=project reservation_name
 
 You can specify command arguments in the following ways:
 
@@ -128,13 +80,13 @@ Replace the following:
   - `  FLAG  ` : a global or command-specific flag
   - `  ARGUMENT  ` : the flag's argument
 
-Some commands require the use of quotes around arguments. If quotes are required, either single or double quotes are acceptable. Arguments that require quotes are typically values that contain spaces, commas, or other special characters. If your argument contains a BigQuery resource, be sure to follow the [rules for specifying resource names](/bigquery/docs/reference/bq-cli-reference#specify-resource) in commands.
+Some commands require the use of quotes around arguments. If quotes are required, either single or double quotes are acceptable. Arguments that require quotes are typically values that contain spaces, commas, or other special characters. If your argument contains a BigQuery resource, be sure to follow the [rules for specifying resource names](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#specify-resource) in commands.
 
-**Note:** The following examples use the `  --nouse_legacy_sql  ` flag. This flag is required to run a GoogleSQL query from the command line unless you [set a default value in `  .bigqueryrc  `](/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) or [set the configuration setting](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) `  default_sql_dialect_option  ` to 'default\_legacy\_sql' at the project or organization level.
+**Note:** The following examples use the `  --nouse_legacy_sql  ` flag. This flag is required to run a GoogleSQL query from the command line unless you [set a default value in `  .bigqueryrc  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#set_default_values_for_command-line_flags) or [set the configuration setting](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) `  default_sql_dialect_option  ` to 'default\_legacy\_sql' at the project or organization level.
 
 This example shows how to run a GoogleSQL query on the command line:
 
-``` text
+``` notranslate
 bq query --nouse_legacy_sql \
 'SELECT
    COUNT(*)
@@ -146,7 +98,7 @@ Flags with boolean values can be specified without an argument. If you specify `
 
 For example, this command specifies false for the boolean flag `  --use_legacy_sql  ` by placing `  no  ` at the front of the flag:
 
-``` text
+``` notranslate
 bq query --nouse_legacy_sql \
 'SELECT
    COUNT(*)
@@ -156,7 +108,7 @@ bq query --nouse_legacy_sql \
 
 Alternatively, to specify `  false  ` as the flag's argument, you can enter the following:
 
-``` text
+``` notranslate
 bq query --use_legacy_sql=false \
 'SELECT
    COUNT(*)
@@ -166,30 +118,28 @@ bq query --use_legacy_sql=false \
 
 ### Run commands in a script
 
-You can run the bq command-line tool in a script, as you would run a [Google Cloud CLI command](/sdk/docs/scripting-gcloud) . The following is an example of `  gcloud  ` and `  bq  ` commands in a bash script:
+You can run the bq command-line tool in a script, as you would run a [Google Cloud CLI command](https://docs.cloud.google.com/sdk/docs/scripting-gcloud) . The following is an example of `  gcloud  ` and `  bq  ` commands in a bash script:
 
-``` text
-#!/bin/bash
-gcloud config set project myProject
-bq query --use_legacy_sql=false --destination_table=myDataset.myTable \
-'SELECT
-   word,
-   SUM(word_count) AS count
- FROM
-   `bigquery-public-data`.samples.shakespeare
- WHERE
-   word LIKE "%raisin%"
- GROUP BY
-   word'
-```
+    #!/bin/bash
+    gcloud config set project myProject
+    bq query --use_legacy_sql=false --destination_table=myDataset.myTable \
+    'SELECT
+       word,
+       SUM(word_count) AS count
+     FROM
+       `bigquery-public-data`.samples.shakespeare
+     WHERE
+       word LIKE "%raisin%"
+     GROUP BY
+       word'
 
 ### Use a service account
 
-You can use a [service account](/bigquery/docs/use-service-accounts) to make authorized API calls or run query jobs on your behalf. To use a service account in the bq command-line tool, authorize access to Google Cloud from the service account. For more information, see [gcloud auth activate-service-account](/sdk/gcloud/reference/auth/activate-service-account) .
+You can use a [service account](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) to make authorized API calls or run query jobs on your behalf. To use a service account in the bq command-line tool, authorize access to Google Cloud from the service account. For more information, see [gcloud auth activate-service-account](https://docs.cloud.google.com/sdk/gcloud/reference/auth/activate-service-account) .
 
-To start running `  bq  ` commands using [service account impersonation](/iam/docs/impersonating-service-accounts) , run the following command:
+To start running `  bq  ` commands using [service account impersonation](https://docs.cloud.google.com/iam/docs/impersonating-service-accounts) , run the following command:
 
-``` text
+``` notranslate
 gcloud config set auth/impersonate_service_account SERVICE_ACCOUNT_NAME
 ```
 
@@ -199,7 +149,7 @@ Replace `  SERVICE_ACCOUNT_NAME  ` with your service account name.
 
 To stop running `  bq  ` commands from a service account, run the following command:
 
-``` text
+``` notranslate
 gcloud config unset auth/impersonate_service_account
 ```
 
@@ -215,12 +165,12 @@ If the `  --bigqueryrc  ` flag is not specified, then the `  BIGQUERYRC  ` envir
 
 To add default values for command-line flags to `  .bigqueryrc  ` :
 
-  - Place [global flags](/bigquery/docs/reference/bq-cli-reference#global_flags) at the top of the file without a header.
+  - Place [global flags](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#global_flags) at the top of the file without a header.
   - For command-specific flags, enter the command name (in brackets) and add the command-specific flags (one per line) after the command name.
 
 For example:
 
-``` text
+``` notranslate
 --apilog=stdout
 --format=prettyjson
 --location=US
@@ -250,43 +200,18 @@ The preceding example sets default values for the following flags:
 
   - The `  query  ` command-specific flag `  --maximum_bytes_billed  ` is set to 10,000,000 bytes (10 MB) to fail queries that read more than 10 MB of data.
 
-  - The `  load  ` command-specific flag [`  --destination_kms_key  `](/bigquery/docs/customer-managed-encryption) is set to `  projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey  ` .
+  - The `  load  ` command-specific flag [`  --destination_kms_key  `](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) is set to `  projects/myproject/locations/mylocation/keyRings/myRing/cryptoKeys/myKey  ` .
 
 ## CLI help
 
 You can get help with the bq command-line tool by running the following commands:
 
-<table>
-<thead>
-<tr class="header">
-<th>Description</th>
-<th>Help command format</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Installed version</td>
-<td><code dir="ltr" translate="no">       bq version      </code></td>
-<td><code dir="ltr" translate="no">       bq version      </code></td>
-</tr>
-<tr class="even">
-<td>List of all commands with examples</td>
-<td><code dir="ltr" translate="no">       bq help      </code></td>
-<td><code dir="ltr" translate="no">       bq help      </code></td>
-</tr>
-<tr class="odd">
-<td>Description of global flags</td>
-<td><code dir="ltr" translate="no">       bq --help      </code></td>
-<td><code dir="ltr" translate="no">       bq --help      </code></td>
-</tr>
-<tr class="even">
-<td>Description of a particular command</td>
-<td><code dir="ltr" translate="no">       bq help               COMMAND       </code></td>
-<td><code dir="ltr" translate="no">       bq help mk      </code></td>
-</tr>
-</tbody>
-</table>
+| Description                         | Help command format                             | Example                     |
+| ----------------------------------- | ----------------------------------------------- | --------------------------- |
+| Installed version                   | `        bq version       `                     | `        bq version       ` |
+| List of all commands with examples  | `        bq help       `                        | `        bq help       `    |
+| Description of global flags         | `        bq --help       `                      | `        bq --help       `  |
+| Description of a particular command | `        bq help               COMMAND        ` | `        bq help mk       ` |
 
 ## Troubleshooting CLI commands
 
@@ -296,7 +221,7 @@ You can get help with the bq command-line tool by running the following commands
     Using `  -  ` or `  stdout  ` instead of a path prints the log to the Google Cloud console. Setting `  --apilog  ` to `  stderr  ` outputs to the standard error file. To log more requests, use the `  --httplib2_debuglevel= LOG_LEVEL  ` flag. A higher `  LOG_LEVEL  ` logs more information about the HTTP requests.
 
   - To troubleshoot errors:  
-    Enter the `  --format=prettyjson  ` flag when you get a [job's status](/bigquery/docs/managing-jobs#view-job) or when you view detailed information about resources such as tables and datasets. Using this flag outputs the response in JSON format, including the `  reason  ` property. You can use the `  reason  ` property to find [error messages](/bigquery/troubleshooting-errors) .
+    Enter the `  --format=prettyjson  ` flag when you get a [job's status](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) or when you view detailed information about resources such as tables and datasets. Using this flag outputs the response in JSON format, including the `  reason  ` property. You can use the `  reason  ` property to find [error messages](https://docs.cloud.google.com/bigquery/troubleshooting-errors) .
     
     For more information about errors when you run a command, use the `  --debug_mode  ` flag.
 
@@ -322,13 +247,13 @@ You can use the following flags with any `  bq  ` command, where applicable:
     If set to `  true  ` , enables authentication using Google Auth libraries. The default value is `  true  ` .
 
   - **`  --bigqueryrc= PATH  `**  
-    Specifies the path to the bq command-line tool configuration file. If you don't specify the `  --bigqueryrc  ` flag, then the command uses the `  BIGQUERYRC  ` environment variable. If the environment variable is not set, then `  $HOME/.bigqueryrc  ` is used. If that file does not exist, then `  ~/.bigqueryrc  ` is used. For more information, see [Setting default values for command-line flags](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+    Specifies the path to the bq command-line tool configuration file. If you don't specify the `  --bigqueryrc  ` flag, then the command uses the `  BIGQUERYRC  ` environment variable. If the environment variable is not set, then `  $HOME/.bigqueryrc  ` is used. If that file does not exist, then `  ~/.bigqueryrc  ` is used. For more information, see [Setting default values for command-line flags](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
   - **`  --ca_certificates_file= PATH  `**  
-    Specifies the location of your [Certificate Authority Service](/certificate-authority-service) (CA) file.
+    Specifies the location of your [Certificate Authority Service](https://docs.cloud.google.com/certificate-authority-service) (CA) file.
 
   - **`  --dataset_id= DATASET_ID  `**  
-    Specifies the default dataset to use with the command. This flag is ignored when not applicable. You can specify the `  DATASET_ID  ` argument using the format `  PROJECT : DATASET  ` or `  DATASET  ` . If the `  PROJECT  ` part is missing, then the default project is used. You can override the default project setting by specifying the [`  --project_id  ` flag](#project_id_flag) .
+    Specifies the default dataset to use with the command. This flag is ignored when not applicable. You can specify the `  DATASET_ID  ` argument using the format `  PROJECT : DATASET  ` or `  DATASET  ` . If the `  PROJECT  ` part is missing, then the default project is used. You can override the default project setting by specifying the [`  --project_id  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#project_id_flag) .
 
   - **`  --debug_mode={true|false}  `**  
     If set to `  true  ` , shows tracebacks on Python exceptions. The default value is `  false  ` .
@@ -364,30 +289,28 @@ You can use the following flags with any `  bq  ` command, where applicable:
     
     For example:
     
-    ``` text
-    --httplib2_debuglevel=1
-    ```
+        --httplib2_debuglevel=1
     
     **Note:** Multi-level debugging is not supported for this flag, so you can set `  DEBUG_LEVEL  ` to any positive number.
 
   - **`  --job_id= JOB_ID  `**  
-    Specifies a job identifier for a new job. This flag applies only to commands that create jobs: `  cp  ` , `  extract  ` , `  load  ` , and `  query  ` . If you don't use the `  --job_id  ` flag, then the commands generate a unique job identifier. For more information, see [Running jobs programmatically](/bigquery/docs/running-jobs) .
+    Specifies a job identifier for a new job. This flag applies only to commands that create jobs: `  cp  ` , `  extract  ` , `  load  ` , and `  query  ` . If you don't use the `  --job_id  ` flag, then the commands generate a unique job identifier. For more information, see [Running jobs programmatically](https://docs.cloud.google.com/bigquery/docs/running-jobs) .
 
   - **`  --job_property= KEY : VALUE  `**  
     A key-value pair to include in the properties field of the job configuration. Repeat this flag to specify additional properties.
 
   - **`  --location= LOCATION  `**  
-    A string corresponding to a region or multi-region [location](/bigquery/docs/locations) . The location flag is required for the [`  bq cancel  `](/bigquery/docs/reference/bq-cli-reference#bq_cancel) command and for the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_show) command when you use the `  --jobs  ` flag to show information about jobs. The location flag is optional for the following commands:
+    A string corresponding to a region or multi-region [location](https://docs.cloud.google.com/bigquery/docs/locations) . The location flag is required for the [`  bq cancel  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cancel) command and for the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command when you use the `  --jobs  ` flag to show information about jobs. The location flag is optional for the following commands:
     
-      - [`  query  `](/bigquery/docs/reference/bq-cli-reference#bq_query)
-      - [`  cp  `](/bigquery/docs/reference/bq-cli-reference#bq_cp)
-      - [`  load  `](/bigquery/docs/reference/bq-cli-reference#bq_load)
-      - [`  extract  `](/bigquery/docs/reference/bq-cli-reference#bq_extract)
-      - [`  partition  `](/bigquery/docs/reference/bq-cli-reference#bq_partition)
-      - [`  update  `](/bigquery/docs/reference/bq-cli-reference#bq_update)
-      - [`  wait  `](/bigquery/docs/reference/bq-cli-reference#bq_wait)
-      - [`  mk  `](/bigquery/docs/reference/bq-cli-reference#bq_mk) when you use the `  --dataset  ` , `  --reservation  ` , `  --capacity_commitment  ` , or `  --reservation_assignment  ` flags
-      - [`  ls  `](#bq_ls) when you use the `  --reservation  ` , `  --capacity_commitment  ` , or `  --reservation_assignment  ` flags
+      - [`  query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query)
+      - [`  cp  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp)
+      - [`  load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load)
+      - [`  extract  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_extract)
+      - [`  partition  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_partition)
+      - [`  update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update)
+      - [`  wait  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_wait)
+      - [`  mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) when you use the `  --dataset  ` , `  --reservation  ` , `  --capacity_commitment  ` , or `  --reservation_assignment  ` flags
+      - [`  ls  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) when you use the `  --reservation  ` , `  --capacity_commitment  ` , or `  --reservation_assignment  ` flags
     
     All other commands ignore the `  --location  ` flag.
     
@@ -421,15 +344,15 @@ You can use the following flags with any `  bq  ` command, where applicable:
     Specifies a tracing token to include in API requests.
 
   - **`  --use_regional_endpoints={true|false}  `**  
-    In [preview](https://cloud.google.com/products/#product-launch-stages) . To connect to a regional endpoint, set the `  --use_regional_endpoints  ` flag to `  true  ` and the [`  --location  `](#location_flag) flag to the region you want to connect to. The default value is `  false  ` .
+    In [preview](https://cloud.google.com/products/#product-launch-stages) . To connect to a regional endpoint, set the `  --use_regional_endpoints  ` flag to `  true  ` and the [`  --location  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#location_flag) flag to the region you want to connect to. The default value is `  false  ` .
 
 ## Deprecated global flags
 
-The following global flag for specifying bq command-line tool flags from a file is deprecated. To specify flags from a file, use the [`  --bigqueryrc  `](#bigqueryrc_flag) flag.
+The following global flag for specifying bq command-line tool flags from a file is deprecated. To specify flags from a file, use the [`  --bigqueryrc  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bigqueryrc_flag) flag.
 
 **`  --flagfile= PATH  `**
 
-When specified, flag definitions from the supplied file are inserted into the bq command-line tool. The default value is `  ''  ` . For more information, see [Setting default values for command-line flags](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+When specified, flag definitions from the supplied file are inserted into the bq command-line tool. The default value is `  ''  ` . For more information, see [Setting default values for command-line flags](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
 
 ## Commands
 
@@ -437,29 +360,25 @@ The following sections describe the bq command-line tool commands, along with th
 
 ### `     bq add-iam-policy-binding    `
 
-Use the `  bq add-iam-policy-binding  ` command to retrieve the [Identity and Access Management (IAM) policy](/iam/docs/reference/rest/v1/Policy#binding) for a table or view and add a binding to the policy, in one step.
+Use the `  bq add-iam-policy-binding  ` command to retrieve the [Identity and Access Management (IAM) policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) for a table or view and add a binding to the policy, in one step.
 
 This command is an alternative to the following three-step process:
 
-1.  Using the [`  bq get-iam-policy  `](#bq_get-iam-policy) command to retrieve the policy file (in JSON format).
+1.  Using the [`  bq get-iam-policy  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) command to retrieve the policy file (in JSON format).
 2.  Editing the policy file.
-3.  Using the [`  bq set-iam-policy  `](#bq_set-iam-policy) command to update the policy with a new binding.
+3.  Using the [`  bq set-iam-policy  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command to update the policy with a new binding.
 
-**Note:** `  bq add-iam-policy-binding  ` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
+**Note:** `  bq add-iam-policy-binding  ` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
 
 #### Synopsis
 
-``` text
-bq add-iam-policy-binding [FLAGS] --member=MEMBER_TYPE:MEMBER --role=ROLE
-  [--table] RESOURCE
-```
+    bq add-iam-policy-binding [FLAGS] --member=MEMBER_TYPE:MEMBER --role=ROLE
+      [--table] RESOURCE
 
 #### Example
 
-``` text
-bq add-iam-policy-binding --member=user:myAccount@gmail.com \
-  --role=roles/bigquery.dataViewer myDataset.myTable
-```
+    bq add-iam-policy-binding --member=user:myAccount@gmail.com \
+      --role=roles/bigquery.dataViewer myDataset.myTable
 
 #### Flags and arguments
 
@@ -486,7 +405,7 @@ The `  bq add-iam-policy-binding  ` command uses the following flags and argumen
   - **`  RESOURCE  `**  
     The table or view whose policy you want to add to.
 
-For more information, see the [IAM policy reference](/iam/docs/reference/rest/v1/Policy#binding) .
+For more information, see the [IAM policy reference](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) .
 
 ### `     bq cancel    `
 
@@ -494,50 +413,40 @@ Use the `  bq cancel  ` command to cancel BigQuery jobs.
 
 #### Synopsis
 
-``` text
-bq [--synchronous_mode=false] cancel JOB_ID
-```
+    bq [--synchronous_mode=false] cancel JOB_ID
 
 #### Examples
 
-``` text
-bq cancel bqjob_12345
-```
+    bq cancel bqjob_12345
 
-``` text
-bq --synchronous_mode=false cancel bqjob_12345
-```
+    bq --synchronous_mode=false cancel bqjob_12345
 
 #### Flags and arguments
 
 The `  bq cancel  ` command uses the following flags and arguments:
 
   - **`  --synchronous_mode=false  `**  
-    If you don't want to wait for the `  bq cancel  ` command to complete ,set the global [`  --synchronous_mode  `](#sync_flag) flag to `  false  ` . The default is `  true  ` .
+    If you don't want to wait for the `  bq cancel  ` command to complete ,set the global [`  --synchronous_mode  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#sync_flag) flag to `  false  ` . The default is `  true  ` .
   - **`  JOB_ID  `**  
     The job you want to cancel.
 
-For more information about using the `  bq cancel  ` command, see [Managing jobs](/bigquery/docs/managing-jobs) .
+For more information about using the `  bq cancel  ` command, see [Managing jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs) .
 
 ### `     bq cp    `
 
 Use the `  bq cp  ` command for the following tasks:
 
-  - Create a copy of a [table](/bigquery/docs/tables-intro) , [table clone](/bigquery/docs/table-clones-intro) , or [table snapshot](/bigquery/docs/table-snapshots-intro) .
+  - Create a copy of a [table](https://docs.cloud.google.com/bigquery/docs/tables-intro) , [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , or [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
   - Create a table clone.
   - Create a table snapshot.
 
 #### Synopsis
 
-``` text
-bq cp [FLAGS] SOURCE_TABLE DESTINATION_TABLE
-```
+    bq cp [FLAGS] SOURCE_TABLE DESTINATION_TABLE
 
 #### Example
 
-``` text
-bq cp myDataset.myTable myDataset.myTableCopy
-```
+    bq cp myDataset.myTable myDataset.myTableCopy
 
 #### Flags and arguments
 
@@ -549,18 +458,16 @@ The `  bq cp  ` command uses the following flags and arguments:
     You can't use the flag settings `  --append_table=true  ` and `  --clone=true  ` at the same time.
 
   - **`  --clone={true|false}  `**  
-    To create a [table clone](/bigquery/docs/table-clones-intro) , set to `  true  ` . The base table can be a standard table, a table clone, or a table snapshot. The destination table is a table clone. The default is `  false  ` ; if neither `  --clone=true  ` nor `  --snapshot=true  ` is specified, then the destination table is the same type of table as the base table. Requires the `  --no_clobber  ` flag.
+    To create a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , set to `  true  ` . The base table can be a standard table, a table clone, or a table snapshot. The destination table is a table clone. The default is `  false  ` ; if neither `  --clone=true  ` nor `  --snapshot=true  ` is specified, then the destination table is the same type of table as the base table. Requires the `  --no_clobber  ` flag.
     
     You can't use the flag settings `  --append_table=true  ` and `  --clone=true  ` at the same time.
 
   - **`  --destination_kms_key= KEY  `**  
-    Specifies a Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
+    Specifies a Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
     
     For example:
     
-    ``` text
-    --destination_kms_key=projects/myProject/locations/global/keyRings/myKeyRing/cryptoKeys/myKey
-    ```
+        --destination_kms_key=projects/myProject/locations/global/keyRings/myKeyRing/cryptoKeys/myKey
 
   - **`  --expiration= SECONDS  `**  
     The number of seconds until a table snapshot expires. If not included, the table snapshot expiration is set to the default expiration of the dataset containing the new table snapshot. Use with the `  --snapshot  ` flag.
@@ -575,7 +482,7 @@ The `  bq cp  ` command uses the following flags and arguments:
     This flag is being deprecated. To create a writeable table from a table snapshot, use the `  bq cp  ` command or the `  bq cp --clone  ` command.
 
   - **`  --snapshot={true|false}  `**  
-    To create a [table snapshot](/bigquery/docs/table-snapshots-intro) of the table that's specified in the `  SOURCE_TABLE  ` argument, set to `  true  ` . The base table can be a standard table, a table clone, or another table snapshot. The default is `  false  ` ; if neither `  --clone=true  ` nor `  --snapshot=true  ` is specified, then the destination table is the same type of table as the base table. Requires the `  --no_clobber  ` flag.
+    To create a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) of the table that's specified in the `  SOURCE_TABLE  ` argument, set to `  true  ` . The base table can be a standard table, a table clone, or another table snapshot. The default is `  false  ` ; if neither `  --clone=true  ` nor `  --snapshot=true  ` is specified, then the destination table is the same type of table as the base table. Requires the `  --no_clobber  ` flag.
 
   - **`  SOURCE_TABLE  `**  
     The table that you want to copy.
@@ -585,10 +492,10 @@ The `  bq cp  ` command uses the following flags and arguments:
 
 For more information about using the `  cp  ` command, see the following:
 
-  - [Copy a table](/bigquery/docs/managing-tables#copy-table)
-  - [Create table clones](/bigquery/docs/table-clones-create)
-  - [Create table snapshots](/bigquery/docs/table-snapshots-create)
-  - [Restore table snapshots](/bigquery/docs/table-snapshots-restore)
+  - [Copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table)
+  - [Create table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-create)
+  - [Create table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create)
+  - [Restore table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore)
 
 ### `     bq extract    `
 
@@ -596,21 +503,15 @@ Use the `  bq extract  ` command to export table data to Cloud Storage.
 
 #### Synopsis
 
-``` text
-bq extract [FLAGS] RESOURCE DESTINATION
-```
+    bq extract [FLAGS] RESOURCE DESTINATION
 
 #### Examples
 
-``` text
-bq extract --compression=GZIP --destination_format=CSV --field_delimiter=tab \
-    --print_header=false myDataset.myTable gs://my-bucket/myFile.csv.gzip
-```
+    bq extract --compression=GZIP --destination_format=CSV --field_delimiter=tab \
+        --print_header=false myDataset.myTable gs://my-bucket/myFile.csv.gzip
 
-``` text
-bq extract --destination_format=CSV --field_delimiter='|' myDataset.myTable \
-  gs://myBucket/myFile.csv
-```
+    bq extract --destination_format=CSV --field_delimiter='|' myDataset.myTable \
+      gs://myBucket/myFile.csv
 
 #### Flags and arguments
 
@@ -626,7 +527,7 @@ The `  bq extract  ` command uses the following flags and arguments:
     
     The default value is `  NONE  ` .
     
-    For information about which formats are supported for each compression type, see [Export formats and compression types](/bigquery/docs/exporting-data#export_formats_and_compression_types) .
+    For information about which formats are supported for each compression type, see [Export formats and compression types](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types) .
 
   - **`  --destination_format= FORMAT  `**  
     Specifies the format for the exported data. Possible values are the following:
@@ -650,29 +551,23 @@ The `  bq extract  ` command uses the following flags and arguments:
   - **`  DESTINATION  `**  
     The storage location that receives the exported data.
 
-For more information about using the `  bq extract  ` command, see [Exporting table data](/bigquery/docs/exporting-data) .
+For more information about using the `  bq extract  ` command, see [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
 
 ### `     bq get-iam-policy    `
 
-Use the `  bq get-iam-policy  ` command to retrieve the [IAM policy](/iam/docs/reference/rest/v1/Policy#binding) for a resource and print it to `  stdout  ` . The resource can be a table, a view, or a [slot reservation](/bigquery/docs/reservations-workload-management#slot_reservations) . The policy is in JSON format.
+Use the `  bq get-iam-policy  ` command to retrieve the [IAM policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) for a resource and print it to `  stdout  ` . The resource can be a table, a view, or a [slot reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_reservations) . The policy is in JSON format.
 
-**Note:** `  bq get-iam-policy  ` does not support datasets. To get the IAM policy of a dataset, see [View the access policy of a dataset](/bigquery/docs/control-access-to-resources-iam#view_the_access_policy_of_a_dataset) .
+**Note:** `  bq get-iam-policy  ` does not support datasets. To get the IAM policy of a dataset, see [View the access policy of a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#view_the_access_policy_of_a_dataset) .
 
 #### Synopsis
 
-``` text
-bq get-iam-policy [FLAGS] RESOURCE
-```
+    bq get-iam-policy [FLAGS] RESOURCE
 
 #### Examples
 
-``` text
-bq get-iam-policy myDataset.myTable
-```
+    bq get-iam-policy myDataset.myTable
 
-``` text
-bq get-iam-policy --reservation myReservation
-```
+    bq get-iam-policy --reservation myReservation
 
 #### Flags and arguments
 
@@ -685,7 +580,7 @@ The `  bq get-iam-policy  ` command uses the following flags and arguments:
   - **`  RESOURCE  `**  
     The table or view whose policy you want to get.
 
-For more information about the `  bq get-iam-policy  ` command, see [Control access to resources with IAM](/bigquery/docs/control-access-to-resources-iam#bq) .
+For more information about the `  bq get-iam-policy  ` command, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#bq) .
 
 ### `     bq head    `
 
@@ -693,16 +588,12 @@ Use the `  bq head  ` command to display the specified rows and columns of a tab
 
 #### Synopsis
 
-``` text
-bq head [FLAGS] [TABLE]
-```
+    bq head [FLAGS] [TABLE]
 
 #### Example
 
-``` text
-bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
-  myDataset.myTable
-```
+    bq head --max_rows=10 --start_row=50 --selected_fields=field1,field3 \
+      myDataset.myTable
 
 #### Flags and arguments
 
@@ -721,7 +612,7 @@ The `  bq head  ` command uses the following flags and arguments:
   - **`  TABLE  `**  
     The table whose data you want to retrieve.
 
-For more information about using the `  bq head  ` command, see [Managing table data](/bigquery/docs/managing-table-data) .
+For more information about using the `  bq head  ` command, see [Managing table data](https://docs.cloud.google.com/bigquery/docs/managing-table-data) .
 
 ### `     bq help    `
 
@@ -740,23 +631,17 @@ The `  bq help  ` command uses the following flags and arguments:
 
 ### `     bq insert    `
 
-Use the `  bq insert  ` command to insert rows of newline-delimited, JSON-formatted data into a table from a file using the streaming insert. Data types are converted to match the column types of the destination table. This command is intended for testing purposes only. To stream data into BigQuery, use the [`  insertAll  `](/bigquery/docs/reference/rest/v2/tabledata/insertAll) API method.
+Use the `  bq insert  ` command to insert rows of newline-delimited, JSON-formatted data into a table from a file using the streaming insert. Data types are converted to match the column types of the destination table. This command is intended for testing purposes only. To stream data into BigQuery, use the [`  insertAll  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/insertAll) API method.
 
 #### Synopsis
 
-``` text
-bq insert [FLAGS] TABLE FILE
-```
+    bq insert [FLAGS] TABLE FILE
 
 #### Examples
 
-``` text
-bq insert --ignore_unknown_values --template_suffix=_insert myDataset.myTable /tmp/myData.json
-```
+    bq insert --ignore_unknown_values --template_suffix=_insert myDataset.myTable /tmp/myData.json
 
-``` text
-echo '{"a":1, "b":2}' | bq insert myDataset.myTable
-```
+    echo '{"a":1, "b":2}' | bq insert myDataset.myTable
 
 #### Flags and arguments
 
@@ -773,7 +658,7 @@ The `  bq insert  ` command uses the following flags and arguments:
   - **`  FILE  `**  
     The file containing the data that you want to insert.
 
-For more information about using the `  bq insert  ` command, see [Streaming data into BigQuery](/bigquery/docs/streaming-data-into-bigquery) .
+For more information about using the `  bq insert  ` command, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
 ### `     bq load    `
 
@@ -781,15 +666,11 @@ Use the `  bq load  ` command to load data into a table.
 
 #### Synopsis
 
-``` text
-bq load [FLAGS] DESTINATION_TABLE SOURCE_DATA [SCHEMA]
-```
+    bq load [FLAGS] DESTINATION_TABLE SOURCE_DATA [SCHEMA]
 
 #### Example
 
-``` text
-bq load myDataset.newTable gs://mybucket/info.csv ./info_schema.json
-```
+    bq load myDataset.newTable gs://mybucket/info.csv ./info_schema.json
 
 #### Flags and arguments
 
@@ -808,13 +689,13 @@ The `  bq load  ` command uses the following flags and arguments:
     To enable schema auto-detection for CSV and JSON data, set to `  true  ` . The default is `  false  ` . If `  --autodetect  ` is `  false  ` , and no schema is specified by using the `  --schema  ` flag, and the destination table exists, then the schema of the destination table is used.
 
   - **`  --clustering_fields= COLUMNS  `**  
-    A comma-separated list of up to four column names that specifies the fields to use for [table clustering](/bigquery/docs/clustered-tables) .
+    A comma-separated list of up to four column names that specifies the fields to use for [table clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) .
 
   - **`  --column_name_character_map= SCOPE  `**  
-    Defines the scope and handling of characters in column names, with the option of enabling [flexible column names](/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) . Requires the `  --autodetect  ` option for CSV files. For a list of possible values, see [`  load_option_list  `](/bigquery/docs/reference/standard-sql/load-statements#load_option_list) .
+    Defines the scope and handling of characters in column names, with the option of enabling [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) . Requires the `  --autodetect  ` option for CSV files. For a list of possible values, see [`  load_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) .
 
   - **`  --destination_kms_key= KEY  `**  
-    Specifies a Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
+    Specifies a Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
 
   - **`  --encoding= ENCODING_TYPE or -E= ENCODING_TYPE  `**  
     The character encoding used in the data. Use one of the following values:
@@ -835,7 +716,7 @@ The `  bq load  ` command uses the following flags and arguments:
     
     To use this flag, the `  --source_format  ` flag must be set to `  NEWLINE_DELIMITED_JSON  ` .
     
-    For more information, see [Loading newline-delimited GeoJSON files](/bigquery/docs/gis-data#geojson-files) .
+    For more information, see [Loading newline-delimited GeoJSON files](https://docs.cloud.google.com/bigquery/docs/gis-data#geojson-files) .
 
   - **`  --max_bad_records= MAX  `**  
     An integer that specifies the maximum number of bad records allowed before the entire job fails. The default value is `  0  ` . At most, five errors of any type are returned regardless of the `  --max_bad_records  ` value. This flag applies for loading CSV, JSON, and Google Sheets data only.
@@ -852,22 +733,18 @@ The `  bq load  ` command uses the following flags and arguments:
   - **`  --replace={true|false}  `**  
     To erase any existing data and schema when new data is loaded, set to `  true  ` . Any Cloud KMS key is also removed, unless you specify the `  --destination_kms_key  ` flag. The default value is `  false  ` .
     
-    Equivalent to the `  WRITE_TRUNCATE  ` value for [`  JobConfigurationLoad.writeDisposition  `](/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) .
+    Equivalent to the `  WRITE_TRUNCATE  ` value for [`  JobConfigurationLoad.writeDisposition  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) .
     
-    **Note:** You can use the [`  TRUNCATE TABLE  `](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement to remove all rows from a table without deleting the schema.
+    **Note:** You can use the [`  TRUNCATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement to remove all rows from a table without deleting the schema.
 
   - **`  --schema={ SCHEMA_FILE | SCHEMA  ` }**  
     Specifies either the path to a local JSON schema file or a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a schema file, don't add an extension to the filename.
     
     For example:
     
-    ``` text
-    --schema=/tmp/tabledef
-    ```
+        --schema=/tmp/tabledef
     
-    ``` text
-    --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
-    ```
+        --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
     
     If no schema is specified, and `  --autodetect  ` is `  false  ` , and the destination table exists, then the schema of the destination table is used.
 
@@ -920,39 +797,39 @@ The `  bq load  ` command uses the following flags and arguments:
     If the `  --source_format  ` flag is set to `  AVRO  ` , then set this flag to `  true  ` to convert logical types into their corresponding types (such as `  TIMESTAMP  ` ) instead of only using their raw types (such as `  INTEGER  ` ).
 
   - **`  --decimal_target_types= DECIMAL_TYPE  `**  
-    Determines how to convert a `  Decimal  ` logical type. Equivalent to [`  JobConfigurationLoad.decimalTargetTypes  `](/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) . Repeat this flag to specify multiple target types.
+    Determines how to convert a `  Decimal  ` logical type. Equivalent to [`  JobConfigurationLoad.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) . Repeat this flag to specify multiple target types.
 
   - **`  --parquet_enum_as_string={true|false}  `**  
     If the `  --source_format  ` flag is set to `  PARQUET  ` , and you want BigQuery to infer Parquet `  ENUM  ` logical types as `  STRING  ` values, then set this flag to `  true  ` . The default is `  false  ` .
 
   - **`  --parquet_enable_list_inference={true|false}  `**  
-    If the `  --source_format  ` flag is set to `  PARQUET  ` , then this flag indicates whether to use [schema inference](/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types.
+    If the `  --source_format  ` flag is set to `  PARQUET  ` , then this flag indicates whether to use [schema inference](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types.
 
   - **`  --reference_file_schema_uri= URI  `**  
-    Specifies the path to a reference file with the expected table schema for creating external tables. Equivalent to [`  ExternalDataConfiguration.referenceFileSchemaUri  `](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.reference_file_schema_uri) . This flag is enabled for Avro, ORC, and PARQUET formats.
+    Specifies the path to a reference file with the expected table schema for creating external tables. Equivalent to [`  ExternalDataConfiguration.referenceFileSchemaUri  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.reference_file_schema_uri) . This flag is enabled for Avro, ORC, and PARQUET formats.
 
   - **`  DESTINATION_TABLE  `**  
     The table that you want to load data into.
 
   - **`  SOURCE_DATA  `**  
-    The [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) of the file that contains the data that you want to load.
+    The [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) of the file that contains the data that you want to load.
 
   - **`  SCHEMA  `**  
     The schema for the destination table.
 
 For more information about loading data from Cloud Storage using the `  bq load  ` command, see the following:
 
-  - [Loading Avro data](/bigquery/docs/loading-data-cloud-storage-avro)
-  - [Loading CSV data](/bigquery/docs/loading-data-cloud-storage-csv)
-  - [Loading JSON data](/bigquery/docs/loading-data-cloud-storage-json)
-  - [Loading ORC data](/bigquery/docs/loading-data-cloud-storage-orc)
-  - [Loading Parquet data](/bigquery/docs/loading-data-cloud-storage-parquet)
-  - [Loading data from Datastore exports](/bigquery/docs/loading-data-cloud-datastore)
-  - [Loading data from Firestore exports](/bigquery/docs/loading-data-cloud-firestore)
+  - [Loading Avro data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro)
+  - [Loading CSV data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
+  - [Loading JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json)
+  - [Loading ORC data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-orc)
+  - [Loading Parquet data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet)
+  - [Loading data from Datastore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-datastore)
+  - [Loading data from Firestore exports](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-firestore)
 
 For more information about loading data from a local source using the `  bq load  ` command, see the following:
 
-  - [Loading data from local files](/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
+  - [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#loading_data_from_local_files) .
 
 ### `     bq ls    `
 
@@ -960,15 +837,11 @@ Use the `  bq ls  ` command to list objects in a collection.
 
 #### Synopsis
 
-``` text
-bq ls [FLAGS] [RESOURCE]
-```
+    bq ls [FLAGS] [RESOURCE]
 
 #### Example
 
-``` text
-bq ls myDataset
-```
+    bq ls myDataset
 
 #### Flags and arguments
 
@@ -978,7 +851,7 @@ The `  bq ls  ` command uses the following flags and arguments:
     To show all results, set to `  true  ` . Shows jobs from all users or all datasets, including hidden ones. This flag is not needed when listing transfer configurations or transfer runs. The default value is `  false  ` .
 
   - **`  --capacity_commitment={true|false}  `**  
-    To list capacity commitments, set to `  true  ` and use the `  --location  ` flag to specify the location. For more information, see [View purchased commitments](/bigquery/docs/reservations-commitments#view-commitments) .
+    To list capacity commitments, set to `  true  ` and use the `  --location  ` flag to specify the location. For more information, see [View purchased commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#view-commitments) .
     
     For example: `  bq ls --capacity_commitment=true --location='us'  `
 
@@ -994,7 +867,7 @@ The `  bq ls  ` command uses the following flags and arguments:
     
     For example:
     
-    ``` text
+    ``` 
      --filter "labels.department:marketing labels.team:sales"
      
     ```
@@ -1003,27 +876,27 @@ The `  bq ls  ` command uses the following flags and arguments:
 
 <!-- end list -->
 
-  - `  amazon_s3  ` - [Amazon S3 data transfer](/bigquery/docs/s3-transfer#bq)
-  - `  azure_blob_storage  ` - [Azure Blob Storage data transfer](/bigquery/docs/blob-storage-transfer#bq)
-  - `  dcm_dt  ` - [Campaign Manager data transfer](/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
-  - `  google_cloud_storage  ` - [Cloud Storage data transfer](/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
-  - `  cross_region_copy  ` - [Dataset Copy](/bigquery/docs/copying-datasets)
-  - `  dfp_dt  ` - [Google Ad Manager data transfer](/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
-  - `  displayvideo  ` - [Display & Video 360 data transfer](/bigquery/docs/display-video-transfer)
-  - `  google_ads  ` - [Google Ads data transfer](/bigquery/docs/google-ads-transfer)
-  - `  merchant_center  ` - [Google Merchant Center data transfer](/bigquery/docs/merchant-center-transfer-schedule-transfers)
-  - `  mysql  ` - [MySQL data transfer](/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
-  - `  play  ` - [Google Play data transfer](/bigquery/docs/play-transfer#setup-transfer)
-  - `  scheduled_query  ` - [Scheduled queries data transfer](/bigquery/docs/scheduling-queries)
-  - `  search_ads  ` - [Search Ads 360 data transfer](/bigquery/docs/search-ads-transfer)
-  - `  youtube_channel  ` - [YouTube Channel data transfer](/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
-  - `  youtube_content_owner  ` - [YouTube Content Owner data transfer](/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
-  - `  redshift  ` - [Amazon Redshift migration](/bigquery/docs/migration/redshift#set-up-transfer)
-  - `  on_premises  ` - [Teradata migration](/bigquery/docs/migration/teradata)
+  - `  amazon_s3  ` - [Amazon S3 data transfer](https://docs.cloud.google.com/bigquery/docs/s3-transfer#bq)
+  - `  azure_blob_storage  ` - [Azure Blob Storage data transfer](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer#bq)
+  - `  dcm_dt  ` - [Campaign Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
+  - `  google_cloud_storage  ` - [Cloud Storage data transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
+  - `  cross_region_copy  ` - [Dataset Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
+  - `  dfp_dt  ` - [Google Ad Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
+  - `  displayvideo  ` - [Display & Video 360 data transfer](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
+  - `  google_ads  ` - [Google Ads data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
+  - `  merchant_center  ` - [Google Merchant Center data transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers)
+  - `  mysql  ` - [MySQL data transfer](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
+  - `  play  ` - [Google Play data transfer](https://docs.cloud.google.com/bigquery/docs/play-transfer#setup-transfer)
+  - `  scheduled_query  ` - [Scheduled queries data transfer](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)
+  - `  search_ads  ` - [Search Ads 360 data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer)
+  - `  youtube_channel  ` - [YouTube Channel data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
+  - `  youtube_content_owner  ` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
+  - `  redshift  ` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
+  - `  on_premises  ` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 For example:
 
-``` text
+``` 
    --filter labels.dataSourceIds:dcm_dt
    
 ```
@@ -1038,9 +911,7 @@ For transfer runs, use `  states  ` as the key and one or more of the following 
 
 For example:
 
-``` text
---filter="states:FAILED"
-```
+    --filter="states:FAILED"
 
 For jobs, use `  states  ` as the key and one or more of the following job states as the value:
 
@@ -1050,11 +921,9 @@ For jobs, use `  states  ` as the key and one or more of the following job state
 
 For example:
 
-``` text
-bq ls --jobs --filter="states:RUNNING"
-
-bq ls --jobs --filter="states:RUNNING,PENDING"
-```
+    bq ls --jobs --filter="states:RUNNING"
+    
+    bq ls --jobs --filter="states:RUNNING,PENDING"
 
   - **`  --jobs={true|false}  ` or `  -j={true|false}  `**  
     To list jobs, set to `  true  ` . The default value is `  false  ` . By default, you are limited to 100,000 results.
@@ -1089,15 +958,13 @@ bq ls --jobs --filter="states:RUNNING,PENDING"
     
     For example:
     
-    ``` text
-    bq ls --reservation=true --project_id=myProject --location=us
-    ```
+        bq ls --reservation=true --project_id=myProject --location=us
 
   - **`  --reservation_assignment={true|false}  `**  
     To list all reservation assignments for a given project and location, set to `  true  ` . The default value is `  false  ` . Use with the `  --project_id  ` and `  --location  ` flags.
 
   - **`  --routines={true|false}  `**  
-    To list all routines in the specified dataset, set to `  true  ` . The default value is `  false  ` . Routines include [persistent user-defined functions](/bigquery/docs/user-defined-functions) , [table functions](/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), and [stored procedures](/bigquery/docs/procedures) .
+    To list all routines in the specified dataset, set to `  true  ` . The default value is `  false  ` . Routines include [persistent user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) , [table functions](https://docs.cloud.google.com/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), and [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
   - **`  --row_access_policies  `**  
     When specified, lists all the row-level access policies on a table. Row-level access policies are used for row-level security. You must supply the table name in the format `  dataset.table  ` .
@@ -1119,21 +986,19 @@ bq ls --jobs --filter="states:RUNNING,PENDING"
     
     For example:
     
-    ``` text
-    bq ls --transfer_run=true projects/myProject/locations/us/transferConfigs/12345
-    ```
+        bq ls --transfer_run=true projects/myProject/locations/us/transferConfigs/12345
 
   - **`  RESOURCE  `**  
     The collection whose objects that you want to list. The resource can be a dataset, project, reservation, or transfer configuration.
 
 For more information about using the `  bq ls  ` command, see the following:
 
-  - [Managing jobs](/bigquery/docs/managing-jobs)
-  - [Listing datasets in a project](/bigquery/docs/listing-datasets)
-  - [Creating and using tables](/bigquery/docs/tables)
-  - [Listing views in a dataset](/bigquery/docs/view-metadata#list_views)
-  - [Working with transfers](/bigquery/docs/working-with-transfers)
-  - [Listing table snapshots in a dataset](/bigquery/docs/table-snapshots-list)
+  - [Managing jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs)
+  - [Listing datasets in a project](https://docs.cloud.google.com/bigquery/docs/listing-datasets)
+  - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
+  - [Listing views in a dataset](https://docs.cloud.google.com/bigquery/docs/view-metadata#list_views)
+  - [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers)
+  - [Listing table snapshots in a dataset](https://docs.cloud.google.com/bigquery/docs/table-snapshots-list)
 
 ### `     bq mk    `
 
@@ -1141,9 +1006,7 @@ Use the `  bq mk  ` command to create a BigQuery resource.
 
 #### Synopsis
 
-``` text
-bq mk TYPE_FLAG [OTHER FLAGS] [ARGS]
-```
+    bq mk TYPE_FLAG [OTHER FLAGS] [ARGS]
 
 #### Flags and arguments
 
@@ -1151,27 +1014,27 @@ The `  bq mk  ` command takes a *type* flag that specifies the type of resource 
 
 **`  TYPE_FLAG  ` :** Set one of the following flags to `  true  ` . Your selection specifies the type of resource to create.
 
-  - [`  --capacity_commitment  `](#mk-capacity-commitment) : Purchase a capacity commitment.
+  - [`  --capacity_commitment  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-capacity-commitment) : Purchase a capacity commitment.
 
-  - [`  --connection  `](#mk-connection) : Create a connection.
+  - [`  --connection  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) : Create a connection.
 
-  - [`  --dataset  `](#mk-dataset) or `  -d  ` : Create a dataset.
+  - [`  --dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) or `  -d  ` : Create a dataset.
 
-  - [`  --materialized_view  `](#mk-materializedview) : Create a materialized view.
+  - [`  --materialized_view  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-materializedview) : Create a materialized view.
 
-  - [`  --reservation  `](#mk-reservation) : Create a reservation.
+  - [`  --reservation  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-reservation) : Create a reservation.
 
-  - [`  --reservation_assignment  `](#mk-reservation_assignment) . Assign a folder, project, or organization to a reservation.
+  - [`  --reservation_assignment  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-reservation_assignment) . Assign a folder, project, or organization to a reservation.
 
-  - [`  --reservation-group  `](#mk-reservation-group) : Create a reservation group.
+  - [`  --reservation-group  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-reservation-group) : Create a reservation group.
 
-  - [`  --table  `](#mk-table) or `  -t  ` : Create a table.
+  - [`  --table  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) or `  -t  ` : Create a table.
 
-  - [`  --transfer_config  `](#mk-transfer-config) : Create a transfer configuration.
+  - [`  --transfer_config  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-config) : Create a transfer configuration.
 
-  - [`  --transfer_run  `](#mk-transfer-run) : Create a transfer run for a time range.
+  - [`  --transfer_run  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-transfer-run) : Create a transfer run for a time range.
 
-  - [`  --view  `](#mk-view) : Create a view.
+  - [`  --view  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-view) : Create a view.
 
 The `  bq mk  ` command supports the following flag for all types of resources:
 
@@ -1188,7 +1051,7 @@ To purchase a capacity commitment, set `  --capacity_commitment  ` to `  true  `
     Specifies the location of the commitment.
 
   - **`  --plan= PLAN_TYPE  `**  
-    Specifies the [commitment plan type](/bigquery/docs/reservations-workload-management#slot_commitments) . Must be one of the following values:
+    Specifies the [commitment plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) . Must be one of the following values:
     
       - `  ANNUAL  `
       - `  THREE_YEAR  `
@@ -1200,7 +1063,7 @@ To purchase a capacity commitment, set `  --capacity_commitment  ` to `  true  `
       - `  ANNUAL  `
 
   - **`  --renewal_plan= RENEWAL_TYPE  `**  
-    Specifies the [renewal plan type](/bigquery/docs/reservations-workload-management#renew-commitments) . Required for `  ANNUAL  ` or `  THREE_YEAR  ` commitment plans. Must be one of the following:
+    Specifies the [renewal plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) . Required for `  ANNUAL  ` or `  THREE_YEAR  ` commitment plans. Must be one of the following:
     
       - `  ANNUAL  `
       - `  THREE_YEAR  `
@@ -1219,12 +1082,12 @@ To purchase a capacity commitment, set `  --capacity_commitment  ` to `  true  `
     Specifies the number of baseline slots to purchase.
 
   - **`  --edition= EDITION  `**  
-    The [edition](/bigquery/docs/editions-intro) associated with the capacity commitment. Must be one of the following:
+    The [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) associated with the capacity commitment. Must be one of the following:
     
       - `  ENTERPRISE  `
       - `  ENTERPRISE_PLUS  `
 
-For more information, see [Purchase commitments](/bigquery/docs/reservations-commitments#purchase-commitment) .
+For more information, see [Purchase commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#purchase-commitment) .
 
 #### `     bq mk --connection    `
 
@@ -1236,7 +1099,7 @@ Creates a connection. The following flags are supported:
   - **`  --properties= PROPERTIES  `**  
     Connection specific parameters in JSON format. `  instanceId  ` , `  database  ` and `  type  ` must be specified.
     
-    If you create a Spanner connection and want to use [Data Boost](/spanner/docs/databoost/databoost-overview) , include the `  "useParallelism":true  ` and `  "useDataBoost":true  ` pairs.
+    If you create a Spanner connection and want to use [Data Boost](https://docs.cloud.google.com/spanner/docs/databoost/databoost-overview) , include the `  "useParallelism":true  ` and `  "useDataBoost":true  ` pairs.
 
   - **`  --connection_credential= CONNECTION_CREDENTIAL  `**  
     The credentials of the connection in JSON format. `  username  ` and `  password  ` must be specified.
@@ -1269,17 +1132,17 @@ Creates a connection. The following flags are supported:
   - **`  CONNECTION_ID  `**  
     Specifies an optional connection ID for the connection. If a connection ID is not provided a unique ID is automatically generated. The connection ID can contain letters, numbers and underscores.
 
-For more information, see [Introduction to connections](/bigquery/docs/connections-api-intro) .
+For more information, see [Introduction to connections](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) .
 
 #### `     bq mk --dataset    `
 
 Creates a dataset. The following flags are supported:
 
   - **`  --add_tags= TAGS  `**  
-    Specifies the [tags](/bigquery/docs/tags) that you are attaching to the new dataset, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](/iam/docs/tags-access-control#definitions) .
+    Specifies the [tags](https://docs.cloud.google.com/bigquery/docs/tags) that you are attaching to the new dataset, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
   - **`  --default_kms_key= KEY  `**  
-    Specifies the default Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the table data in a dataset if no explicit key is provided during table creation or query.
+    Specifies the default Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the table data in a dataset if no explicit key is provided during table creation or query.
 
   - **`  --default_partition_expiration= SECONDS  `**  
     An integer that specifies the default expiration time, in seconds, for all partitions in newly-created partitioned tables in the dataset. A partition's expiration time is set to the partition's UTC date plus the integer value. If this property is set, then its value overrides the dataset-level default table expiration if it exists. If you supply the `  --time_partitioning_expiration  ` flag when you create or update a partitioned table, then the table-level partition expiration takes precedence over the dataset-level default partition expiration.
@@ -1291,7 +1154,7 @@ Creates a dataset. The following flags are supported:
     Specifies the description of the dataset.
 
   - **`  --external_source= EXTERNAL_SOURCE  `**  
-    Specifies the external data source when you create a [federated dataset](/bigquery/docs/glue-federated-datasets) .
+    Specifies the external data source when you create a [federated dataset](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .
 
   - **`  --label= KEY : VALUE  `**  
     Specifies a label for the dataset. Repeat this flag to specify multiple labels.
@@ -1300,16 +1163,16 @@ Creates a dataset. The following flags are supported:
     Specifies the location of the dataset. Prefer the `  --location  ` flag; the `  --data_location  ` flag is a legacy flag.
 
   - **`  --max_time_travel_hours= HOURS  `**  
-    Specifies the duration in hours of the [time travel window](/bigquery/docs/time-travel) for the dataset. The `  --max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this flag isn't specified.
+    Specifies the duration in hours of the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) for the dataset. The `  --max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this flag isn't specified.
 
   - **`  --storage_billing_model= BILLING_MODEL  `**  
-    Specifies the [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `  --storage_billing_model  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes. `  LOGICAL  ` is the default.
+    Specifies the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `  --storage_billing_model  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes. `  LOGICAL  ` is the default.
     
     When you change a dataset's billing model, it takes 24 hours for the change to take effect.
     
     Once you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again.
 
-For more information, see [Creating datasets](/bigquery/docs/datasets) .
+For more information, see [Creating datasets](https://docs.cloud.google.com/bigquery/docs/datasets) .
 
 #### `     bq mk --materialized_view    `
 
@@ -1320,17 +1183,17 @@ Creates a materialized view. The following flags are supported:
   - **`  --refresh_interval_ms= MILLISECONDS  `**  
     Specifies the number of milliseconds for the refresh interval of a materialized view. If this flag is not specified, then the default refresh interval for a materialized view that has refresh enabled is 1,800,000 milliseconds, which is 30 minutes.
 
-For more information, see [Creating and using materialized views](/bigquery/docs/materialized-views) .
+For more information, see [Creating and using materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views) .
 
 #### `     bq mk --reservation    `
 
 Creates a reservation with dedicated slots. The following flags are supported:
 
   - **`  --target_job_concurrency= CONCURRENCY  `**  
-    Specifies the target number of queries that execute simultaneously. The default value is 0, which means that the concurrency is automatically computed based on the reservation size. For more information, see [Use query queues](/bigquery/docs/query-queues) .
+    Specifies the target number of queries that execute simultaneously. The default value is 0, which means that the concurrency is automatically computed based on the reservation size. For more information, see [Use query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
 
   - **`  --ignore_idle_slots={true|false}  `**  
-    To restrict jobs running in this reservation to only use slots allocated to the reservation, set to `  true  ` . The default value is `  false  ` ; jobs in this reservation can use idle slots from other reservations, or slots that are not allocated to any reservation. For more information, see [Idle slots](/bigquery/docs/slots#idle_slots) .
+    To restrict jobs running in this reservation to only use slots allocated to the reservation, set to `  true  ` . The default value is `  false  ` ; jobs in this reservation can use idle slots from other reservations, or slots that are not allocated to any reservation. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .
 
   - **`  --location= LOCATION  `**  
     Specifies the location of the reservation.
@@ -1342,7 +1205,7 @@ Creates a reservation with dedicated slots. The following flags are supported:
     Specifies the number of baseline slots to allocate to this reservation.
 
   - **`  --edition= EDITION  `**  
-    The [edition](/bigquery/docs/editions-intro) associated with the capacity commitment. Must be one of the following:
+    The [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) associated with the capacity commitment. Must be one of the following:
     
       - `  STANDARD  `
       - `  ENTERPRISE  `
@@ -1364,7 +1227,7 @@ Creates a reservation with dedicated slots. The following flags are supported:
     
     Must be configured with the `  --max_slots  ` flag ( [Preview](https://cloud.google.com/products/#product-launch-stages) ).
 
-For more information, see [Create a reservation with dedicated slots](/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
+For more information, see [Create a reservation with dedicated slots](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_a_reservation_with_dedicated_slots) .
 
 #### `     bq mk --reservation_assignment    `
 
@@ -1390,7 +1253,7 @@ Assigns a project, folder, or organization to a reservation. The following flags
   - **`  --reservation_id= RESERVATION_ID  `**  
     Specifies the ID of the reservation.
 
-For more information, see [Work with reservation assignments](/bigquery/docs/reservations-assignments) .
+For more information, see [Work with reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-assignments) .
 
 #### `     bq mk --reservation-group    `
 
@@ -1401,40 +1264,40 @@ Create a reservation group. The following flags are supported:
   - **`  --project_id= PROJECT_ID  `**  
     Specifies the project that owns the reservation.
 
-For more information, see [Work with reservation groups](/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) .
+For more information, see [Work with reservation groups](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#prioritize_idle_slots_with_reservation_groups) .
 
 #### `     bq mk --table    `
 
 Creates a table. The following flags are supported:
 
   - **`  --add_tags= TAGS  `**  
-    Specifies the [tags](/bigquery/docs/tags) that you are attaching to the new table, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](/iam/docs/tags-access-control#definitions) .
+    Specifies the [tags](https://docs.cloud.google.com/bigquery/docs/tags) that you are attaching to the new table, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
   - **`  --clustering_fields= COLUMNS  `**  
-    A comma-separated list of up to four column names that specifies the fields to use for [table clustering](/bigquery/docs/clustered-tables) . If specified with partitioning, then the table is first partitioned, and then each partition is clustered using the supplied columns.
+    A comma-separated list of up to four column names that specifies the fields to use for [table clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) . If specified with partitioning, then the table is first partitioned, and then each partition is clustered using the supplied columns.
 
   - **`  --description= DESCRIPTION  `**  
     Specifies the description of the table.
 
   - **`  --destination_kms_key= KEY  `**  
-    Specifies a Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
+    Specifies a Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
 
   - **`  --expiration= SECONDS  `**  
     Specifies the lifetime for the table. If you don't specify the `  --expiration  ` flag, then BigQuery creates the table with the dataset's default table lifetime, or the table doesn't expire.
 
   - **`  --external_table_definition= STRING  `**  
-    Specifies a table definition for creating an [external table](/bigquery/docs/external-tables) .
+    Specifies a table definition for creating an [external table](https://docs.cloud.google.com/bigquery/docs/external-tables) .
     
-    **For [Cloud Storage](/bigquery/docs/external-data-cloud-storage) and [Google Drive](/bigquery/docs/external-data-drive) external tables:**
+    **For [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage) and [Google Drive](https://docs.cloud.google.com/bigquery/docs/external-data-drive) external tables:**
     
       - `  --external_table_definition={ PATH_TO_FILE | DEFINITION }  `  
-        The value can be either a path to a file containing a [table definition](/bigquery/external-table-definition) ( `  PATH_TO_FILE  ` ) or an inline table definition ( `  DEFINITION  ` ).
+        The value can be either a path to a file containing a [table definition](https://docs.cloud.google.com/bigquery/external-table-definition) ( `  PATH_TO_FILE  ` ) or an inline table definition ( `  DEFINITION  ` ).
     
     <!-- end list -->
     
       - The format for the `  DEFINITION  ` field is `  SCHEMA @ FORMAT = URI  ` .
     
-      - The format for the `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . You can omit the `  SCHEMA  ` value if the data format is self-describing (such as Avro) or if you are using [schema auto-detection](/bigquery/docs/schema-detect) .
+      - The format for the `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . You can omit the `  SCHEMA  ` value if the data format is self-describing (such as Avro) or if you are using [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) .
     
       - The `  FORMAT  ` value specifies the data format; one of the following:
         
@@ -1450,20 +1313,16 @@ Creates a table. The following flags are supported:
     
     For example:
     
-    ``` text
-    --external_table_definition=/tmp/tabledef
-    ```
+        --external_table_definition=/tmp/tabledef
     
-    ``` text
-    --external_table_definition=Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
-    ```
+        --external_table_definition=Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
     
-    **For [Bigtable external tables](/bigquery/docs/external-data-bigtable) , and BigLake tables based on [AWS](/bigquery/docs/omni-aws-create-external-table) and [Azure](/bigquery/docs/omni-azure-create-external-table) :**
+    **For [Bigtable external tables](https://docs.cloud.google.com/bigquery/docs/external-data-bigtable) , and BigLake tables based on [AWS](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) and [Azure](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) :**
     
       - `  --external_table_definition= PATH_TO_FILE  `  
-        The value must be a path to a file containing a [table definition](/bigquery/docs/external-table-definition#tabledef-bigtable) .
+        The value must be a path to a file containing a [table definition](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) .
     
-    **For [BigLake tables based on Cloud Storage](/bigquery/docs/biglake-quickstart) :**
+    **For [BigLake tables based on Cloud Storage](https://docs.cloud.google.com/bigquery/docs/biglake-quickstart) :**
     
     `  --external_table_definition= FORMAT = BUCKET_PATH @ REGION . CONNECTION_NAME  ` :
     
@@ -1486,21 +1345,21 @@ Creates a table. The following flags are supported:
             
             **Important:** If you specify more than one file, all of the files must have compatible schemas.
             
-            You can use wildcards to limit the files included in the BigLake table. For example, if the bucket contains several types of data, you could have the table only use PARQUET files by specifying `  gs://bucket_name/*.parquet  ` . For more information about using wildcards, see [URI wildcards](/storage/docs/wildcards) .
+            You can use wildcards to limit the files included in the BigLake table. For example, if the bucket contains several types of data, you could have the table only use PARQUET files by specifying `  gs://bucket_name/*.parquet  ` . For more information about using wildcards, see [URI wildcards](https://docs.cloud.google.com/storage/docs/wildcards) .
     
-      - The `  REGION  ` value specifies the [region or multi-region](/bigquery/docs/locations#supported_locations) that contains the connection.
+      - The `  REGION  ` value specifies the [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) that contains the connection.
     
       - The `  CONNECTION_NAME  ` value specifies the name of the cloud resource connection to use with this external table. The connection determines which service account is used to read data from Cloud Storage.
     
-    **For [object tables](/bigquery/docs/object-tables) :**
+    **For [object tables](https://docs.cloud.google.com/bigquery/docs/object-tables) :**
     
     `  --external_table_definition= BUCKET_PATH @ REGION . CONNECTION_NAME  ` :
     
       - `  BUCKET_PATH  ` is the path to the Cloud Storage bucket that contains the objects represented by the object table, in the format `  gs://bucket_name/[folder_name/]*  ` .You can specify multiple buckets by providing multiple paths, for example `  gs://mybucket1/*,gs://mybucket2/folder5/*  ` .
         
-        You can use wildcards to limit the objects included in the object table. For example, if the bucket contains several types of unstructured data, you could create the object table over only PDF objects by specifying `  gs://bucket_name/*.pdf  ` . For more information about using wildcards, see [URI wildcards](/storage/docs/wildcards) .
+        You can use wildcards to limit the objects included in the object table. For example, if the bucket contains several types of unstructured data, you could create the object table over only PDF objects by specifying `  gs://bucket_name/*.pdf  ` . For more information about using wildcards, see [URI wildcards](https://docs.cloud.google.com/storage/docs/wildcards) .
     
-      - The `  REGION  ` value specifies the [region or multi-region](/bigquery/docs/locations#supported_locations) that contains the connection.
+      - The `  REGION  ` value specifies the [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) that contains the connection.
     
       - The `  CONNECTION_NAME  ` value specifies the name of the cloud resource connection to use with this external table. The connection determines which service account is used to read data from Cloud Storage.
 
@@ -1513,7 +1372,7 @@ Creates a table. The following flags are supported:
     For example, if you have a source URI of `  "gs://bucket/path/file"  ` and the `  file_set_spec_type  ` is `  FILE_SYSTEM_MATCH  ` , then the file is used directly as a data file. If the `  file_set_spec_type  ` is `  NEW_LINE_DELIMITED_MANIFEST  ` , then each line in the file is interpreted as a URI that points to a data file.
 
   - **`  --reference_file_schema_uri= URI  `**  
-    Specifies the path to a reference file with the expected table schema for creating external tables. Equivalent to [`  ExternalDataConfiguration.referenceFileSchemaUri  `](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.reference_file_schema_uri) . This flag is enabled for Avro, ORC, and PARQUET formats.
+    Specifies the path to a reference file with the expected table schema for creating external tables. Equivalent to [`  ExternalDataConfiguration.referenceFileSchemaUri  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.reference_file_schema_uri) . This flag is enabled for Avro, ORC, and PARQUET formats.
 
   - **`  --label= KEY : VALUE  `**  
     Specifies a label for the table. Repeat this flag to specify multiple labels.
@@ -1521,16 +1380,16 @@ Creates a table. The following flags are supported:
   - **`  --max_staleness= INTERVAL  `**  
     Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
     
-    Applicable for [BigLake tables](/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](/bigquery/docs/object-table-introduction) .
+    Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
     
     To disable metadata caching, specify 0. This is the default.
     
-    To enable metadata caching, specify an interval value between 30 minutes and 7 days, using the `  Y-M D H:M:S  ` format described in the [`  INTERVAL  ` data type](/bigquery/docs/reference/standard-sql/data-types#interval_type) documentation. For example, specify `  0-0 0 4:0:0  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
+    To enable metadata caching, specify an interval value between 30 minutes and 7 days, using the `  Y-M D H:M:S  ` format described in the [`  INTERVAL  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type) documentation. For example, specify `  0-0 0 4:0:0  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
 
   - **`  --object_metadata= STRING  `**  
-    Set the value of this flag to `  SIMPLE  ` when creating an [object table](/bigquery/docs/object-table-introduction) .
+    Set the value of this flag to `  SIMPLE  ` when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
     
-    Only required when creating an [object table](/bigquery/docs/object-table-introduction) .
+    Only required when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
   - **`  --range_partitioning= COLUMN_NAME , START , END , INTERVAL  `**  
     Specifies options for an integer-range partition, as follows:
@@ -1542,9 +1401,7 @@ Creates a table. The following flags are supported:
     
     For example:
     
-    ``` text
-    --range_partitioning=customer_id,0,10000,100
-    ```
+        --range_partitioning=customer_id,0,10000,100
 
   - **`  --require_partition_filter={true|false}  `**  
     To require a partition filter for queries over the supplied table, set to `  true  ` . This flag only applies to partitioned tables. The default value is `  false  ` .
@@ -1554,13 +1411,9 @@ Creates a table. The following flags are supported:
     
     Examples:
     
-    ``` text
-    --schema=/tmp/tabledef
-    ```
+        --schema=/tmp/tabledef
     
-    ``` text
-    --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
-    ```
+        --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
 
   - **`  --time_partitioning_expiration= SECONDS  `**  
     An integer that specifies (in seconds) when a time-based partition should be deleted. The expiration time evaluates to the partition's UTC date plus the integer value. A negative number indicates no expiration.
@@ -1577,15 +1430,15 @@ Creates a table. The following flags are supported:
       - `  YEAR  `
 
   - **`  --use_avro_logical_types={true|false}  `**  
-    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](#external_table_definition_flag) is set to `  AVRO  ` , then this flag specifies whether to convert logical types into their corresponding types (such as `  TIMESTAMP  ` ) instead of only using their raw types (such as `  INTEGER  ` ).
+    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#external_table_definition_flag) is set to `  AVRO  ` , then this flag specifies whether to convert logical types into their corresponding types (such as `  TIMESTAMP  ` ) instead of only using their raw types (such as `  INTEGER  ` ).
 
   - **`  --parquet_enable_list_inference={true|false}  `**  
-    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](#external_table_definition_flag) is set to `  PARQUET  ` , then this flag specifies whether to use [schema inference](/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types.
+    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#external_table_definition_flag) is set to `  PARQUET  ` , then this flag specifies whether to use [schema inference](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types.
 
   - **`  --parquet_enum_as_string={true|false}  `**  
-    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](#external_table_definition_flag) is set to `  PARQUET  ` , then this flag specifies whether to infer Parquet `  ENUM  ` logical types as `  STRING  ` values.
+    If the `  FORMAT  ` part of the [`  --external_table_definition  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#external_table_definition_flag) is set to `  PARQUET  ` , then this flag specifies whether to infer Parquet `  ENUM  ` logical types as `  STRING  ` values.
 
-For more information, see [Creating and using tables](/bigquery/docs/tables) .
+For more information, see [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables) .
 
 #### `     bq mk --transfer_config    `
 
@@ -1596,23 +1449,23 @@ Creates a transfer configuration. The following flags are supported:
 
 <!-- end list -->
 
-  - `  amazon_s3  ` - [Amazon S3 data transfer](/bigquery/docs/s3-transfer#bq)
-  - `  azure_blob_storage  ` - [Azure Blob Storage data transfer](/bigquery/docs/blob-storage-transfer#bq)
-  - `  dcm_dt  ` - [Campaign Manager data transfer](/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
-  - `  google_cloud_storage  ` - [Cloud Storage data transfer](/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
-  - `  cross_region_copy  ` - [Dataset Copy](/bigquery/docs/copying-datasets)
-  - `  dfp_dt  ` - [Google Ad Manager data transfer](/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
-  - `  displayvideo  ` - [Display & Video 360 data transfer](/bigquery/docs/display-video-transfer)
-  - `  google_ads  ` - [Google Ads data transfer](/bigquery/docs/google-ads-transfer)
-  - `  merchant_center  ` - [Google Merchant Center data transfer](/bigquery/docs/merchant-center-transfer-schedule-transfers)
-  - `  mysql  ` - [MySQL data transfer](/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
-  - `  play  ` - [Google Play data transfer](/bigquery/docs/play-transfer#setup-transfer)
-  - `  scheduled_query  ` - [Scheduled queries data transfer](/bigquery/docs/scheduling-queries)
-  - `  search_ads  ` - [Search Ads 360 data transfer](/bigquery/docs/search-ads-transfer)
-  - `  youtube_channel  ` - [YouTube Channel data transfer](/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
-  - `  youtube_content_owner  ` - [YouTube Content Owner data transfer](/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
-  - `  redshift  ` - [Amazon Redshift migration](/bigquery/docs/migration/redshift#set-up-transfer)
-  - `  on_premises  ` - [Teradata migration](/bigquery/docs/migration/teradata)
+  - `  amazon_s3  ` - [Amazon S3 data transfer](https://docs.cloud.google.com/bigquery/docs/s3-transfer#bq)
+  - `  azure_blob_storage  ` - [Azure Blob Storage data transfer](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer#bq)
+  - `  dcm_dt  ` - [Campaign Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
+  - `  google_cloud_storage  ` - [Cloud Storage data transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
+  - `  cross_region_copy  ` - [Dataset Copy](https://docs.cloud.google.com/bigquery/docs/copying-datasets)
+  - `  dfp_dt  ` - [Google Ad Manager data transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
+  - `  displayvideo  ` - [Display & Video 360 data transfer](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
+  - `  google_ads  ` - [Google Ads data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
+  - `  merchant_center  ` - [Google Merchant Center data transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers)
+  - `  mysql  ` - [MySQL data transfer](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer)
+  - `  play  ` - [Google Play data transfer](https://docs.cloud.google.com/bigquery/docs/play-transfer#setup-transfer)
+  - `  scheduled_query  ` - [Scheduled queries data transfer](https://docs.cloud.google.com/bigquery/docs/scheduling-queries)
+  - `  search_ads  ` - [Search Ads 360 data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer)
+  - `  youtube_channel  ` - [YouTube Channel data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
+  - `  youtube_content_owner  ` - [YouTube Content Owner data transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
+  - `  redshift  ` - [Amazon Redshift migration](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set-up-transfer)
+  - `  on_premises  ` - [Teradata migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 **Note:** The `  redshift  ` and `  on_premises  ` values are for data migrations; before you use the `  bq mk --transfer_config  ` command with these values, consult the linked documentation from the preceding list.
 
@@ -1631,22 +1484,22 @@ Creates a transfer configuration. The following flags are supported:
   - **`  --table_filter= TABLES  `**  
     Only used with the `  google_ads  ` data source. The `  TABLES  ` parameter is a comma-separated list of tables to include in the transfer. To exclude a table, prefix it with a hyphen ( `  -  ` ). The default value includes all tables in the transfer.
   - **`  --destination_kms_key= KEY  `**  
-    Specifies a Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
+    Specifies a Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
 
 For information about using the `  bq mk  ` command with the BigQuery Data Transfer Service, see the following:
 
-  - [Set up an Amazon S3 transfer](/bigquery/docs/s3-transfer-intro)
-  - [Set up a Campaign Manager transfer](/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
-  - [Set up a Cloud Storage transfer](/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
-  - [Set up a Google Ad Manager transfer](/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
-  - [Set up a Google Ads transfer](/bigquery/docs/google-ads-transfer#setup-data-transfer)
-  - [Set up a Google Merchant Center transfer](/bigquery/docs/merchant-center-transfer-schedule-transfers#bq) (beta)
-  - [Set up a Google Play transfer](/bigquery/docs/play-transfer#setup-transfer)
-  - [Set up a Search Ads 360 transfer](/bigquery/docs/sa360-transfer#set_up_a_search_ads_360_data_transfer) (beta)
-  - [Set up a YouTube Channel transfer](/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
-  - [Set up a YouTube Content Owner transfer](/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
-  - [Migrate data from Amazon Redshift](/bigquery/docs/migration/redshift)
-  - [Migrate data from Teradata](/bigquery/docs/migration/teradata)
+  - [Set up an Amazon S3 transfer](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro)
+  - [Set up a Campaign Manager transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#set_up_a_campaign_manager_transfer)
+  - [Set up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#set_up_a_cloud_storage_transfer)
+  - [Set up a Google Ad Manager transfer](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer#set_up_a_google_ad_manager_transfer)
+  - [Set up a Google Ads transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer)
+  - [Set up a Google Merchant Center transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers#bq) (beta)
+  - [Set up a Google Play transfer](https://docs.cloud.google.com/bigquery/docs/play-transfer#setup-transfer)
+  - [Set up a Search Ads 360 transfer](https://docs.cloud.google.com/bigquery/docs/sa360-transfer#set_up_a_search_ads_360_data_transfer) (beta)
+  - [Set up a YouTube Channel transfer](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer#set_up_a_youtube_channel_transfer)
+  - [Set up a YouTube Content Owner transfer](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer#set_up_a_youtube_content_owner_transfer)
+  - [Migrate data from Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift)
+  - [Migrate data from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 #### `     bq mk --transfer_run    `
 
@@ -1654,9 +1507,7 @@ Creates a data transfer run at the specified time or time range using the specif
 
 ##### Synopsis
 
-``` text
-bq mk --transfer_run [--run_time=RUN_TIME | --start_time=START_TIME --end_time=END_TIME] CONFIG
-```
+    bq mk --transfer_run [--run_time=RUN_TIME | --start_time=START_TIME --end_time=END_TIME] CONFIG
 
 The following flags are supported:
 
@@ -1673,25 +1524,21 @@ The `  CONFIG  ` argument specifies a pre-existing data transfer configuration.
 
 ##### Examples
 
-``` text
-bq mk --transfer_run \
-      --run_time=2021-01-20T17:00:00.00Z \
-      projects/p/locations/l/transferConfigs/c
-```
+    bq mk --transfer_run \
+          --run_time=2021-01-20T17:00:00.00Z \
+          projects/p/locations/l/transferConfigs/c
 
-``` text
-bq mk --transfer_run \
-      --start_time=2020-12-19T16:39:57-08:00 \
-      --end_time=2020-12-19T20:39:57-08:00 \
-      projects/p/locations/l/transferConfigs/c
-```
+    bq mk --transfer_run \
+          --start_time=2020-12-19T16:39:57-08:00 \
+          --end_time=2020-12-19T20:39:57-08:00 \
+          projects/p/locations/l/transferConfigs/c
 
 #### `     bq mk --view    `
 
 Creates a view. The following flags are supported:
 
   - **`  --add_tags= TAGS  `**  
-    Specifies the [tags](/bigquery/docs/tags) that you are attaching to the new view, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](/iam/docs/tags-access-control#definitions) .
+    Specifies the [tags](https://docs.cloud.google.com/bigquery/docs/tags) that you are attaching to the new view, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
   - **`  --description= DESCRIPTION  `**  
     Specifies the description of the view.
   - **`  --expiration= SECONDS  `**  
@@ -1699,11 +1546,11 @@ Creates a view. The following flags are supported:
   - **`  --label= KEY : VALUE  `**  
     Specifies a label for the view. Repeat this flag to specify multiple labels.
   - **`  --use_legacy_sql={true|false}  `**  
-    Set to `  false  ` to use a GoogleSQL query to create a view. The default value is determined by your [configuration settings](/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; uses legacy SQL.
+    Set to `  false  ` to use a GoogleSQL query to create a view. The default value is determined by your [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; uses legacy SQL.
   - **`  --view_udf_resource= FILE  `**  
     Specifies the Cloud Storage URI or the path to a local code file that is loaded and evaluated immediately as a user-defined function resource used by a view's SQL query. Repeat this flag to specify multiple files.
 
-For more information, see [Creating views](/bigquery/docs/views) .
+For more information, see [Creating views](https://docs.cloud.google.com/bigquery/docs/views) .
 
 ### `     bq mkdef    `
 
@@ -1711,9 +1558,7 @@ Use the `  bq mkdef  ` command to create a table definition in JSON format for d
 
 #### Synopsis
 
-``` text
-bq mkdef [FLAGS] URI [ > FILE ]
-```
+    bq mkdef [FLAGS] URI [ > FILE ]
 
 #### Flags and arguments
 
@@ -1753,7 +1598,7 @@ The `  bq mkdef  ` command uses the following flags and arguments:
       - `  gs://bucket/path_to_table/{dt:STRING}/{country:STRING}/{id:INTEGER}  `
       - `  gs://bucket/path_to_table/{dt:DATE}/{country:STRING}/{id:STRING}  `
 
-For more information about using the `  bq mkdef  ` command, see [Creating a table definition file for an external data source](/bigquery/external-table-definition) .
+For more information about using the `  bq mkdef  ` command, see [Creating a table definition file for an external data source](https://docs.cloud.google.com/bigquery/external-table-definition) .
 
   - **`  --ignore_unknown_values={true|false}  ` or `  -i={true|false}  `**  
     Specifies whether to ignore any values in a row that are not present in the schema. The default is `  false  ` .
@@ -1763,12 +1608,12 @@ For more information about using the `  bq mkdef  ` command, see [Creating a tab
     
     Set to `  AUTOMATIC  ` for the metadata cache to be refreshed at a system-defined interval, usually somewhere between 30 and 60 minutes.
     
-    Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
+    Set to `  MANUAL  ` if you want to refresh the metadata cache on a schedule you determine. In this case, you can call the [`  BQ.REFRESH_EXTERNAL_METADATA_CACHE  ` system procedure](https://docs.cloud.google.com/bigquery/docs/reference/system-procedures#bqrefresh_external_metadata_cache) to refresh the cache.
     
-    You must set the `  --metadata_cache_mode  ` flag if you set the `  --max_staleness  ` flag with the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-table) .
+    You must set the `  --metadata_cache_mode  ` flag if you set the `  --max_staleness  ` flag with the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
 
   - **`  --parquet_enable_list_inference={true|false}  `**  
-    If `  source_format  ` is set to `  PARQUET  ` , then this flag specifies whether to use [schema inference](/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types. The default is `  false  ` .
+    If `  source_format  ` is set to `  PARQUET  ` , then this flag specifies whether to use [schema inference](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#list_logical_type) for Parquet `  LIST  ` logical types. The default is `  false  ` .
 
   - **`  --parquet_enum_as_string={true|false}  `**  
     If `  source_format  ` is set to `  PARQUET  ` , then this flag specifies whether to infer Parquet `  ENUM  ` logical types as `  STRING  ` values. The default is `  false  ` .
@@ -1803,9 +1648,7 @@ Use the `  bq partition  ` command to convert a group of tables with time-unit s
 
 #### Synopsis
 
-``` text
-bq partition [FLAGS] SOURCE_TABLE_BASE_NAME PARTITION_TABLE
-```
+    bq partition [FLAGS] SOURCE_TABLE_BASE_NAME PARTITION_TABLE
 
 #### Flags and arguments
 
@@ -1820,32 +1663,13 @@ The `  bq partition  ` command uses the following flags and arguments:
   - **`  --time_partitioning_type= INTERVAL  `**  
     Specifies the partition type. The following table provides the possible values for the `  INTERVAL  ` flag and the expected time-unit-suffix format for each:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th><code dir="ltr" translate="no">           INTERVAL         </code></th>
-    <th>Suffix</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td><code dir="ltr" translate="no">         HOUR        </code></td>
-    <td><code dir="ltr" translate="no">           YYYYMMDDHH         </code></td>
-    </tr>
-    <tr class="even">
-    <td><code dir="ltr" translate="no">         DAY        </code></td>
-    <td><code dir="ltr" translate="no">           YYYYMMDD         </code></td>
-    </tr>
-    <tr class="odd">
-    <td><code dir="ltr" translate="no">         MONTH        </code></td>
-    <td><code dir="ltr" translate="no">           YYYYMM         </code></td>
-    </tr>
-    <tr class="even">
-    <td><code dir="ltr" translate="no">         YEAR        </code></td>
-    <td><code dir="ltr" translate="no">           YYYY         </code></td>
-    </tr>
-    </tbody>
-    </table>
+    | `            INTERVAL          ` | Suffix                             |
+    | -------------------------------- | ---------------------------------- |
+    | `          HOUR         `        | `            YYYYMMDDHH          ` |
+    | `          DAY         `         | `            YYYYMMDD          `   |
+    | `          MONTH         `       | `            YYYYMM          `     |
+    | `          YEAR         `        | `            YYYY          `       |
+    
 
   - **`  SOURCE_TABLE_BASE_NAME  `**  
     The base name of the group of tables with time-unit suffixes.
@@ -1853,7 +1677,7 @@ The `  bq partition  ` command uses the following flags and arguments:
   - **`  PARTITION_TABLE  `**  
     The name of the destination partitioned table.
 
-For more information about using the `  bq partition  ` command, see [Converting date-sharded tables into ingestion-time partitioned tables](/bigquery/docs/creating-partitioned-tables#convert-date-sharded-tables) .
+For more information about using the `  bq partition  ` command, see [Converting date-sharded tables into ingestion-time partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables#convert-date-sharded-tables) .
 
 ### `     bq query    `
 
@@ -1861,9 +1685,7 @@ Use the `  bq query  ` command to create a query job that runs the specified SQL
 
 #### Synopsis
 
-``` text
-bq query [FLAGS] 'QUERY'
-```
+    bq query [FLAGS] 'QUERY'
 
 #### Flags and arguments
 
@@ -1879,58 +1701,50 @@ The `  bq query  ` command uses the following flags and arguments:
     To run the query in batch mode, set to `  true  ` . The default value is `  false  ` .
 
   - **`  --clustering_fields= COLUMNS  `**  
-    A comma-separated list of up to four column names that specifies fields to use to [cluster](/bigquery/docs/clustered-tables) the destination table in a query. If specified with partitioning, then the table is first partitioned, and then each partition is clustered using the supplied columns.
+    A comma-separated list of up to four column names that specifies fields to use to [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) the destination table in a query. If specified with partitioning, then the table is first partitioned, and then each partition is clustered using the supplied columns.
 
   - **`  --connection_property= KEY = VALUE  `**  
     A key-value pair that lets you specify connection-level properties to customize query behavior. Repeat this flag to specify additional properties.
     
     Supported connection properties are as follows:
     
-      - **`  dataset_project_id  `** : represents the default project for datasets that are used in the query, similar to the `  @@dataset_project_id  ` [system variable](/bigquery/docs/reference/system-variables) .
-      - **`  query_label  `** : associates the query with a given job label. If set, all subsequent queries in a script or session have this label. For details on query label formatting requirements, see the `  labels  ` field in the [`  JobConfiguration  ` resource](/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
+      - **`  dataset_project_id  `** : represents the default project for datasets that are used in the query, similar to the `  @@dataset_project_id  ` [system variable](https://docs.cloud.google.com/bigquery/docs/reference/system-variables) .
+      - **`  query_label  `** : associates the query with a given job label. If set, all subsequent queries in a script or session have this label. For details on query label formatting requirements, see the `  labels  ` field in the [`  JobConfiguration  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfiguration) .
       - **`  service_account  `** : specifies a service account to use to run the query. For example, `  --connection_property=service_account=myserviceaccount@project.iam.gserviceaccount.com  ` .
       - **`  session_id  `** : associates the query with a given session.
       - **`  time_zone  `** : represents the default timezone to use to run the query.
 
   - **`  --continuous={true|false}  `**  
-    To run a [continuous query](/bigquery/docs/continuous-queries-introduction) , set to `  true  ` . The default value is `  false  ` .
+    To run a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) , set to `  true  ` . The default value is `  false  ` .
 
   - **`  --destination_kms_key= KEY  `**  
-    Specifies a Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
+    Specifies a Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting the destination table data.
 
   - **`  --destination_schema={ PATH_TO_FILE | SCHEMA }  `**  
     The path to a local JSON schema file or a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` .
     
-    Schema changes happen in a separate operation from query execution. If you write query results to a table by specifying the `  --destination_table  ` flag, and the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](/bigquery/docs/managing-table-schemas) if necessary.
+    Schema changes happen in a separate operation from query execution. If you write query results to a table by specifying the `  --destination_table  ` flag, and the query subsequently raises an exception, it is possible that any schema changes will be skipped. If this occurs, check the destination table schema and [manually update it](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) if necessary.
 
   - **`  --destination_table= TABLE  `**  
     When specified, the query results are saved to `  TABLE  ` . Specify `  TABLE  ` in the following format: `  PROJECT  ` : `  DATASET  ` . `  TABLE  ` . If `  PROJECT  ` is not specified, then the current project is assumed. If the `  --destination_table  ` flag is not specified, then the query results are saved to a temporary table.
     
     Examples:
     
-    ``` text
-    --destination_table myProject:myDataset.myTable
-    ```
+        --destination_table myProject:myDataset.myTable
     
-    ``` text
-    --destination_table myDataset.myTable
-    ```
+        --destination_table myDataset.myTable
 
   - **`  --dry_run={true|false}  `**  
     When specified, the query is validated but not run.
 
   - **`  --external_table_definition={ TABLE :: PATH_TO_FILE | TABLE :: DEFINITION }  `**  
-    Specifies the table name and [table definition](/bigquery/external-table-definition) for an external table query. The table definition can be a path to a local JSON schema file or an inline table definition. The format for supplying the inline table definition is `  SCHEMA @ SOURCE_FORMAT = CLOUD_STORAGE_URI  ` . The format for the `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a table definition file, don't add an extension to the filename.
+    Specifies the table name and [table definition](https://docs.cloud.google.com/bigquery/external-table-definition) for an external table query. The table definition can be a path to a local JSON schema file or an inline table definition. The format for supplying the inline table definition is `  SCHEMA @ SOURCE_FORMAT = CLOUD_STORAGE_URI  ` . The format for the `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a table definition file, don't add an extension to the filename.
     
     For example:
     
-    ``` text
-    --external_table_definition=myTable::/tmp/tabledef
-    ```
+        --external_table_definition=myTable::/tmp/tabledef
     
-    ``` text
-    --external_table_definition=myTable::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
-    ```
+        --external_table_definition=myTable::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
     
     Repeat this flag to query multiple tables.
 
@@ -1957,17 +1771,11 @@ The `  bq query  ` command uses the following flags and arguments:
     
     For example:
     
-    ``` text
-    --parameter=/tmp/queryParams
-    ```
+        --parameter=/tmp/queryParams
     
-    ``` text
-    --parameter=Name::Oscar
-    ```
+        --parameter=Name::Oscar
     
-    ``` text
-    --parameter=Count:INTEGER:42
-    ```
+        --parameter=Count:INTEGER:42
 
   - **`  --range_partitioning= COLUMN_NAME , START , END , INTERVAL  `**  
     Use with the `  --destination_table  ` flag. Specifies options for integer-range partitioning in the destination table. The value is a comma-separated list of the form `  column_name,start,end,interval  ` , where
@@ -1979,14 +1787,12 @@ The `  bq query  ` command uses the following flags and arguments:
     
     For example:
     
-    ``` text
-    --range_partitioning=customer_id,0,10000,100
-    ```
+        --range_partitioning=customer_id,0,10000,100
 
   - **`  --replace={true|false}  `**  
     To overwrite the destination table with the query results, set to `  true  ` . Any existing data and schema are erased. Any Cloud KMS key is also removed, unless you specify the `  --destination_kms_key  ` flag. The default value is `  false  ` .
     
-    **Note:** To remove all rows from a table without deleting the schema, use the [`  TRUNCATE TABLE  `](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement.
+    **Note:** To remove all rows from a table without deleting the schema, use the [`  TRUNCATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement.
 
   - **`  --require_cache={true|false}  `**  
     If specified, then run the query only if results can be retrieved from the cache.
@@ -2005,15 +1811,11 @@ The `  bq query  ` command uses the following flags and arguments:
     
     Examples:
     
-    ``` text
-    --schedule="every 24 hours"
-    ```
+        --schedule="every 24 hours"
     
-    ``` text
-    --schedule="every 3 hours"
-    ```
+        --schedule="every 3 hours"
     
-    For a description of the schedule syntax, see [Formatting the schedule](/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
+    For a description of the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
 
   - **`  --schema_update_option= OPTION  `**  
     When appending data to a table in a load job or a query job, or when overwriting a table partition, specifies how to update the schema of the destination table. Use one of the following values:
@@ -2050,7 +1852,7 @@ The `  bq query  ` command uses the following flags and arguments:
     To disallow caching query results, set to `  false  ` . The default value is `  true  ` .
 
   - **`  --use_legacy_sql={true|false}  `**  
-    To run a GoogleSQL query, set to `  false  ` . The default value is determined by your [configuration settings](/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; the command uses legacy SQL.
+    To run a GoogleSQL query, set to `  false  ` . The default value is determined by your [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; the command uses legacy SQL.
 
   - **`  --job_timeout_ms={string (Int64Value)}  `**  
     Specifies the maximum time to run a query in milliseconds. If this time limit is exceeded, BigQuery attempts to stop the job.
@@ -2064,37 +1866,31 @@ The `  bq query  ` command uses the following flags and arguments:
         
         The following example shows a typical approach in Bash, which is to use double quotes to denote the string literals in the query, and then enclose the query itself in single quotes:
         
-        ``` text
-        'SELECT * FROM mydataset.mytable WHERE column1 = "value";'
-        ```
+            'SELECT * FROM mydataset.mytable WHERE column1 = "value";'
         
         If you are copying the query from another location, you must also remove any comments in the query.
     
       - Pass in a SQL script that contains the query. The following example shows how to pass in a SQL script in the Bash shell:
         
-        ``` text
-        bq query --use_legacy_sql=false < query.sql
-        ```
+            bq query --use_legacy_sql=false < query.sql
 
-For more information about using the `  bq query  ` command, see [Run a query](/bigquery/docs/running-queries) .
+For more information about using the `  bq query  ` command, see [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) .
 
 ### `     bq remove-iam-policy-binding    `
 
-Use the `  bq remove-iam-policy-binding  ` command to retrieve the [IAM policy](/iam/docs/reference/rest/v1/Policy#binding) for a resource and remove a binding from the policy, in one step. The resource can be a table or a view.
+Use the `  bq remove-iam-policy-binding  ` command to retrieve the [IAM policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) for a resource and remove a binding from the policy, in one step. The resource can be a table or a view.
 
 This command is an alternative to the following three-step process:
 
-1.  Using the [`  bq get-iam-policy  `](#bq_get-iam-policy) command to retrieve the policy file (in JSON format).
+1.  Using the [`  bq get-iam-policy  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) command to retrieve the policy file (in JSON format).
 2.  Editing the policy file.
-3.  Using the [`  bq set-iam-policy  `](#bq_set-iam-policy) command to update the policy without the binding.
+3.  Using the [`  bq set-iam-policy  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_set-iam-policy) command to update the policy without the binding.
 
-**Note:** `  bq remove-iam-policy-binding  ` does not support datasets. To remove access to a dataset, see [Revoke access to a dataset](/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
+**Note:** `  bq remove-iam-policy-binding  ` does not support datasets. To remove access to a dataset, see [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
 
 #### Synopsis
 
-``` text
-bq remove-iam-policy-binding FLAGS --member=MEMBER_TYPE:MEMBER --role=ROLE RESOURCE
-```
+    bq remove-iam-policy-binding FLAGS --member=MEMBER_TYPE:MEMBER --role=ROLE RESOURCE
 
 #### Flags and arguments
 
@@ -2120,7 +1916,7 @@ The `  bq remove-iam-policy-binding  ` command uses the following flags and argu
 
 **`  RESOURCE  `** is the table or view whose policy binding you want to remove.
 
-For more information, see the [IAM policy reference](/iam/docs/reference/rest/v1/Policy#binding) .
+For more information, see the [IAM policy reference](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) .
 
 ### `     bq rm    `
 
@@ -2128,9 +1924,7 @@ Use the `  bq rm  ` command to delete a BigQuery resource.
 
 #### Synopsis
 
-``` text
-bq rm [FLAGS] RESOURCE
-```
+    bq rm [FLAGS] RESOURCE
 
 #### Flags and arguments
 
@@ -2153,7 +1947,7 @@ The `  bq rm  ` command uses the following flags and arguments:
   - **`  --reservation_assignment={true|false}  `**  
     To delete a reservation assignment, set to `  true  ` . The default value is `  false  ` .
   - **`  --routine={true|false}  `**  
-    To delete a routine, set to `  true  ` . The default value is `  false  ` . A routine can be a [persistent user-defined function](/bigquery/docs/user-defined-functions) , a [table function](/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), or a [stored procedure](/bigquery/docs/procedures) .
+    To delete a routine, set to `  true  ` . The default value is `  false  ` . A routine can be a [persistent user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) , a [table function](https://docs.cloud.google.com/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), or a [stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) .
   - **`  --table={true|false}  ` or `  -t={true|false}  `**  
     To delete a table or view, set to `  true  ` . The default value is `  false  ` .
   - **`  --transfer_config={true|false}  `**  
@@ -2163,38 +1957,32 @@ The `  bq rm  ` command uses the following flags and arguments:
 
 For more information about using the `  bq rm  ` command, see the following:
 
-  - [Managing datasets](/bigquery/docs/managing-datasets)
-  - [Managing jobs](/bigquery/docs/managing-jobs)
-  - [Managing tables](/bigquery/docs/managing-tables)
-  - [Managing views](/bigquery/docs/managing-views)
-  - [Working with transfers](/bigquery/docs/working-with-transfers)
-  - [Deleting table snapshots](/bigquery/docs/table-snapshots-delete)
+  - [Managing datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets)
+  - [Managing jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs)
+  - [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables)
+  - [Managing views](https://docs.cloud.google.com/bigquery/docs/managing-views)
+  - [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers)
+  - [Deleting table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-delete)
 
 ### `     bq set-iam-policy    `
 
-Use the `  bq set-iam-policy  ` command to specify or update the [IAM policy](/iam/docs/reference/rest/v1/Policy#binding) for a resource. The resource can be a table, a view, or a [slot reservation](/bigquery/docs/reservations-workload-management#slot_reservations) . After setting the policy, the new policy is printed to `  stdout  ` . The policy is in JSON format.
+Use the `  bq set-iam-policy  ` command to specify or update the [IAM policy](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Policy#binding) for a resource. The resource can be a table, a view, or a [slot reservation](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_reservations) . After setting the policy, the new policy is printed to `  stdout  ` . The policy is in JSON format.
 
 The `  etag  ` field in the updated policy must match the `  etag  ` value of the current policy, otherwise the update fails. This feature prevents concurrent updates.
 
-You can obtain the current policy and `  etag  ` value for a resource by using the [`  bq get-iam-policy  `](#bq_get-iam-policy) command.
+You can obtain the current policy and `  etag  ` value for a resource by using the [`  bq get-iam-policy  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_get-iam-policy) command.
 
-**Note:** `  bq set-iam-policy  ` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) or [Revoke access to a dataset](/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
+**Note:** `  bq set-iam-policy  ` does not support datasets. To modify access to a dataset, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) or [Revoke access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#revoke_access_to_a_dataset) .
 
 #### Synopsis
 
-``` text
-bq set-iam-policy [FLAGS] RESOURCE FILE_NAME
-```
+    bq set-iam-policy [FLAGS] RESOURCE FILE_NAME
 
 #### Examples
 
-``` text
-bq set-iam-policy myDataset.myTable policy.json
-```
+    bq set-iam-policy myDataset.myTable policy.json
 
-``` text
-bq set-iam-policy --reservation myReservation policy.json
-```
+    bq set-iam-policy --reservation myReservation policy.json
 
 #### Flags and arguments
 
@@ -2209,7 +1997,7 @@ RESOURCE is the table or view whose policy you want to update.
 
 FILE\_NAME is the name of a file containing the policy in JSON format.
 
-For more information about the `  bq set-iam-policy  ` command, see [Control access to resources with IAM](/bigquery/docs/control-access-to-resources-iam#bq) .
+For more information about the `  bq set-iam-policy  ` command, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#bq) .
 
 ### `     bq show    `
 
@@ -2217,9 +2005,7 @@ Use the `  bq show  ` command to display information about a resource.
 
 #### Synopsis
 
-``` text
-bq show [FLAGS] [RESOURCE]
-```
+    bq show [FLAGS] [RESOURCE]
 
 #### Flags and arguments
 
@@ -2233,11 +2019,11 @@ The `  bq show  ` command uses the following flags and arguments:
       - `  ORGANIZATION  `
       - `  PROJECT  `
   - **`  --connection={true|false}  `**  
-    To show information about a connection, set to `  true  ` . The default value is `  false  ` . For more information, see [Viewing a connection resource](/bigquery/docs/working-with-connections#view-connections) .
+    To show information about a connection, set to `  true  ` . The default value is `  false  ` . For more information, see [Viewing a connection resource](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) .
   - **`  --dataset={true|false}  ` or `  -d={true|false}  `**  
     To show information about a dataset, set to `  true  ` . The default value is `  false  ` .
   - **`  --encryption_service_account={true|false}  `**  
-    To show the encryption service account for a project, if it exists, or create one if it doesn't exist, set to `  true  ` . The default value is `  false  ` . Use with the [`  --project_id  `](#project_id_flag) flag.
+    To show the encryption service account for a project, if it exists, or create one if it doesn't exist, set to `  true  ` . The default value is `  false  ` . Use with the [`  --project_id  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#project_id_flag) flag.
   - **`  --job={true|false}  ` or `  -j={true|false}  `**  
     To show information about a job, set to `  true  ` . The default value is `  false  ` .
   - **`  --job_type= JOB_TYPE  `**  
@@ -2252,7 +2038,7 @@ The `  bq show  ` command uses the following flags and arguments:
   - **`  --reservation_assignment={true|false}  `**  
     When set to `  true  ` , the command displays reservation assignments for a specified folder, organization, or project. The command displays the target resource's explicit assignments, if any; otherwise, displays assignments inherited from parent resources. For example, a project might inherit assignments from its parent folder. When using this flag, the `  --job_type  ` , `  --assignee_type  ` , and `  --assignee_id  ` flags apply. The default value is `  false  ` .
   - **`  --routine={true|false}  `**  
-    To show information about a routine, set to `  true  ` . The default value is `  false  ` . A routine can be a [persistent user-defined function](/bigquery/docs/user-defined-functions) , a [table function](/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), or a [stored procedure](/bigquery/docs/procedures) .
+    To show information about a routine, set to `  true  ` . The default value is `  false  ` . A routine can be a [persistent user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) , a [table function](https://docs.cloud.google.com/bigquery/docs/table-functions) ( [Preview](https://cloud.google.com/products/#product-launch-stages) ), or a [stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) .
   - **`  --schema={true|false}  `**  
     To display only the table's schema, set to `  true  ` . The default value is `  false  ` .
   - **`  --transfer_config={true|false}  `**  
@@ -2266,12 +2052,12 @@ The `  bq show  ` command uses the following flags and arguments:
 
 For more information about using the `  bq show  ` command, see the following:
 
-  - [Getting information about datasets](/bigquery/docs/dataset-metadata)
-  - [Creating and using tables](/bigquery/docs/tables)
-  - [Getting information about views](/bigquery/docs/view-metadata)
-  - [Working with transfers](/bigquery/docs/working-with-transfers)
-  - [Managing jobs](/bigquery/docs/managing-jobs)
-  - [Getting information about a table snapshot](/bigquery/docs/table-snapshots-metadata)
+  - [Getting information about datasets](https://docs.cloud.google.com/bigquery/docs/dataset-metadata)
+  - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
+  - [Getting information about views](https://docs.cloud.google.com/bigquery/docs/view-metadata)
+  - [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers)
+  - [Managing jobs](https://docs.cloud.google.com/bigquery/docs/managing-jobs)
+  - [Getting information about a table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-metadata)
 
 ### `     bq update    `
 
@@ -2279,40 +2065,38 @@ Use the `  bq update  ` command to change a resource.
 
 #### Synopsis
 
-``` text
-bq update [FLAGS] [RESOURCE]
-```
+    bq update [FLAGS] [RESOURCE]
 
 #### Flags and arguments
 
 The `  bq update  ` command uses the following flags and arguments:
 
   - **`  --add_tags= TAGS  `**  
-    Only available on datasets and tables. Specifies the [tags](/bigquery/docs/tags) that you are attaching to the resource, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](/iam/docs/tags-access-control#definitions) .
+    Only available on datasets and tables. Specifies the [tags](https://docs.cloud.google.com/bigquery/docs/tags) that you are attaching to the resource, separated by commas. For example, `  556741164180/env:prod,myProject/department:sales  ` . Each tag must have the [namespaced key name and value short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
   - **`  --autoscale_max_slots= NUMBER_OF_AUTOSCALING_SLOTS  `**  
-    the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots. Only available with the `  --reservation  ` flag and if the reservation was created with an [edition](/bigquery/docs/editions-intro) .
+    the number of autoscaling slots assigned to the reservation. This is equal to the value of the max reservation size minus the number of baseline slots. Only available with the `  --reservation  ` flag and if the reservation was created with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
   - **`  --capacity_commitment={true|false}  `**  
     To update a capacity commitment, set to `  true  ` . Use this flag with the `  --merge  ` , `  --plan  ` , `  --renewal_plan  ` , `  --split  ` , and `  --slots  ` flags.
 
   - **`  --clear_all_tags={true|false}  `**  
-    Only available on datasets and tables. To clear all [tags](/bigquery/docs/tags) from a resource, set to `  true  ` . The default value is `  false  ` .
+    Only available on datasets and tables. To clear all [tags](https://docs.cloud.google.com/bigquery/docs/tags) from a resource, set to `  true  ` . The default value is `  false  ` .
 
   - **`  --clear_label= KEY : VALUE  `**  
     Removes a label from the resource. Use the format `  KEY : VALUE  ` to specify the label to remove. Repeat this flag to remove multiple labels.
 
   - **`  --clustering_fields= COLUMNS  `**  
-    Updates a table's [clustering](/bigquery/docs/clustered-tables) specification. The COLUMNS value is a comma-separated list of column names to use for clustering. To remove the clustering, set COLUMNS to `  ""  ` (the empty string). For more information, see [Modify the clustering specification](/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+    Updates a table's [clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables) specification. The COLUMNS value is a comma-separated list of column names to use for clustering. To remove the clustering, set COLUMNS to `  ""  ` (the empty string). For more information, see [Modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
   - **`  --target_job_concurrency= CONCURRENCY  `**  
-    When used with the `  --reservation  ` flag, specifies the target number of queries that execute simultaneously. The default value is 0, which means that the concurrency is automatically set based on the reservation size. For more information, see [Use query queues](/bigquery/docs/query-queues) .
+    When used with the `  --reservation  ` flag, specifies the target number of queries that execute simultaneously. The default value is 0, which means that the concurrency is automatically set based on the reservation size. For more information, see [Use query queues](https://docs.cloud.google.com/bigquery/docs/query-queues) .
 
   - **`  --dataset={true|false}  ` or `  -d={true|false}  `**  
     To update a dataset, set to `  true  ` . The default value is `  false  ` .
 
   - **`  --default_kms_key= KEY  `**  
-    Specifies the default Cloud KMS [key resource ID](/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting table data in a dataset. The default key is used if no explicit key is provided for a table creation or a query.
+    Specifies the default Cloud KMS [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for encrypting table data in a dataset. The default key is used if no explicit key is provided for a table creation or a query.
 
   - **`  --default_partition_expiration= SECONDS  `**  
     An integer that specifies the default expiration time, in seconds, for all partitions in newly created partitioned tables in the dataset. This flag has no minimum value.
@@ -2326,35 +2110,31 @@ The `  bq update  ` command uses the following flags and arguments:
     Updates the description of a dataset, table, table snapshot, model, or view.
 
   - **`  --destination_reservation_id= RESERVATION_ID  `**  
-    When used with the `  --reservation_assignment  ` flag, moves an existing reservation assignment to the specified reservation. The value is the ID of the destination reservation. For more information, see [Move an assignment to a different reservation](/bigquery/docs/reservations-assignments#move_an_assignment_to_a_different_reservation) .
+    When used with the `  --reservation_assignment  ` flag, moves an existing reservation assignment to the specified reservation. The value is the ID of the destination reservation. For more information, see [Move an assignment to a different reservation](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#move_an_assignment_to_a_different_reservation) .
 
   - **`  --display_name= DISPLAY_NAME  `**  
     Updates the display name for a transfer configuration.
 
   - **`  --etag= ETAG  `**  
-    Acts as a filter; updates the resource only if the resource has an [ETag](/storage/docs/xml-api/reference-headers#etag) that matches the string specified in the `  ETAG  ` argument.
+    Acts as a filter; updates the resource only if the resource has an [ETag](https://docs.cloud.google.com/storage/docs/xml-api/reference-headers#etag) that matches the string specified in the `  ETAG  ` argument.
 
   - `  --expiration SECONDS  `  
     To update the expiration for the table, model, table snapshot, or view, include this flag. Replace `  SECONDS  ` with the number of seconds from the update time to the expiration time. To remove the expiration for a table, model, table snapshot, or view, set the `  SECONDS  ` argument to 0.
 
   - **`  --external_table_definition={ TABLE :: PATH_TO_FILE | TABLE :: DEFINITION }  `**  
-    Updates an external table with the specified [table definition](/bigquery/external-table-definition) . The table definition can be a path to a local JSON table definition file or an inline table definition in the format `  SCHEMA @ SOURCE_FORMAT = CLOUD_STORAGE_URI  ` . The `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a table definition file, don't add an extension to the filename.
+    Updates an external table with the specified [table definition](https://docs.cloud.google.com/bigquery/external-table-definition) . The table definition can be a path to a local JSON table definition file or an inline table definition in the format `  SCHEMA @ SOURCE_FORMAT = CLOUD_STORAGE_URI  ` . The `  SCHEMA  ` value is a comma-separated list of column definitions in the form `  FIELD : DATA_TYPE , FIELD : DATA_TYPE  ` . If you use a table definition file, don't add an extension to the filename.
     
     For example:
     
-    ``` text
-    --external_table_definition=myTable::/tmp/tabledef
-    ```
+        --external_table_definition=myTable::/tmp/tabledef
     
-    ``` text
-    --external_table_definition=myTable::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
-    ```
+        --external_table_definition=myTable::Region:STRING,Quarter:STRING,Total_sales:INTEGER@CSV=gs://mybucket/sales.csv
 
   - **`  --ignore_idle_slots={true|false}  `**  
-    Use with the `  --reservation  ` flag. To restrict jobs running in the specified reservation to only use slots allocated to that reservation, set to `  true  ` . The default value is `  false  ` ; jobs in the specified reservation can use idle slots from other reservations, or slots that are not allocated to any reservation. For more information, see [Idle slots](/bigquery/docs/slots#idle_slots) .
+    Use with the `  --reservation  ` flag. To restrict jobs running in the specified reservation to only use slots allocated to that reservation, set to `  true  ` . The default value is `  false  ` ; jobs in the specified reservation can use idle slots from other reservations, or slots that are not allocated to any reservation. For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .
 
   - **`  --max_staleness= INTERVAL  `**  
-    Specifies an [INTERVAL](/bigquery/docs/reference/standard-sql/data-types#interval_type) value that determines the maximum staleness allowed when querying a materialized view or an external table. The default value is `  0-0 0 0:0:0  ` .
+    Specifies an [INTERVAL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type) value that determines the maximum staleness allowed when querying a materialized view or an external table. The default value is `  0-0 0 0:0:0  ` .
     
     For example:
     
@@ -2364,10 +2144,10 @@ The `  bq update  ` command uses the following flags and arguments:
     To use this flag, you must specify a table definition with the `  --external_table_definition  ` flag.
 
   - **`  --max_time_travel_hours= HOURS  `**  
-    Specifies the duration in hours of the [time travel window](/bigquery/docs/time-travel#configure_the_time_travel_window) for the dataset. The `  --max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
+    Specifies the duration in hours of the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) for the dataset. The `  --max_time_travel_hours  ` value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days).
 
   - **`  --merge={true|false}  `**  
-    To merge two capacity commitments, set `  --merge  ` to `  true  ` . Set the `  --capacity_commitment  ` flag to `  true  ` , specify the location of the commitments you want to merge by using the `  --location  ` flag, and replace `  RESOURCE  ` with the IDs of the two commitments you want to merge, separated by a comma. For more information, see [Merge two commitments](/bigquery/docs/reservations-commitments#merging-commitments) .
+    To merge two capacity commitments, set `  --merge  ` to `  true  ` . Set the `  --capacity_commitment  ` flag to `  true  ` , specify the location of the commitments you want to merge by using the `  --location  ` flag, and replace `  RESOURCE  ` with the IDs of the two commitments you want to merge, separated by a comma. For more information, see [Merge two commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#merging-commitments) .
 
   - **`  --metadata_cache_mode= METADATA_CACHE_MODE  `**  
     Enables metadata cache for an external table with a connection. Use one of the following values:
@@ -2381,7 +2161,7 @@ The `  bq update  ` command uses the following flags and arguments:
     To update metadata for a BigQuery ML model, set to `  true  ` . The default value is `  false  ` .
 
   - **`  --params={" PARAMETER ":" VALUE "} or -p={" PARAMETER ":" VALUE "}  `**  
-    Updates parameters for a transfer configuration. The parameters vary depending on the data source. For more information, see [Introduction to BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
+    Updates parameters for a transfer configuration. The parameters vary depending on the data source. For more information, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
 
   - **`  --plan= PLAN  `**  
     When used with the `  --capacity_commitment  ` flag, converts a capacity commitment to the specified longer-duration commitment plan. Replace `  PLAN  ` with one of the following:
@@ -2393,7 +2173,7 @@ The `  bq update  ` command uses the following flags and arguments:
     An integer that specifies an updated refresh window (in days) for a transfer configuration.
 
   - **`  --remove_tags= TAG_KEYS  `**  
-    Only available on datasets and tables. Specifies the [tags](/bigquery/docs/tags) that you are removing from the resource, separated by commas—for example, `  556741164180/env,myProject/department  ` . Each tag key must have the [namespaced key name](/iam/docs/tags-access-control#definitions) .
+    Only available on datasets and tables. Specifies the [tags](https://docs.cloud.google.com/bigquery/docs/tags) that you are removing from the resource, separated by commas—for example, `  556741164180/env,myProject/department  ` . Each tag key must have the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
   - **`  --renewal_plan= PLAN  `**  
     When used with the `  --capacity_commitment  ` flag, updates the renewal plan for an annual capacity commitment. Replace `  PLAN  ` with one of the following:
@@ -2419,13 +2199,9 @@ The `  bq update  ` command uses the following flags and arguments:
     
     For example:
     
-    ``` text
-    --schema=/tmp/tabledef
-    ```
+        --schema=/tmp/tabledef
     
-    ``` text
-    --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
-    ```
+        --schema=Region:STRING,Quarter:STRING,Total_sales:INTEGER
 
   - **`  --service_account_name= SERVICE_ACCOUNT  `**  
     Specifies a service account to be used as the credential for a transfer configuration.
@@ -2439,13 +2215,13 @@ The `  bq update  ` command uses the following flags and arguments:
     When used with the `  --reservation  ` flag, updates the number of slots in a reservation.
 
   - **`  --source= FILE  `**  
-    The path to a local JSON file containing a payload used to update a resource. For example, you can use this flag to specify a JSON file that contains a [dataset](/bigquery/docs/reference/rest/v2/datasets) resource with an updated `  access  ` property. The file is used to overwrite the dataset's access controls. The JSON file must not include a byte order mark (BOM).
+    The path to a local JSON file containing a payload used to update a resource. For example, you can use this flag to specify a JSON file that contains a [dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) resource with an updated `  access  ` property. The file is used to overwrite the dataset's access controls. The JSON file must not include a byte order mark (BOM).
 
   - **`  --split={true|false}  `**  
-    When set to `  true  ` and used with the `  --capacity_commitment  ` flag, specifies that you want to split an existing capacity commitment. Use the `  --location  ` flag to specify the location of the commitment you want to split from, and use the `  --slots  ` flag to specify the number of slots you want to split off. Replace `  RESOURCE  ` with the ID of the commitment you want to split from. For more information, see [Split a commitment](/bigquery/docs/reservations-commitments#splitting-commitments) .
+    When set to `  true  ` and used with the `  --capacity_commitment  ` flag, specifies that you want to split an existing capacity commitment. Use the `  --location  ` flag to specify the location of the commitment you want to split from, and use the `  --slots  ` flag to specify the number of slots you want to split off. Replace `  RESOURCE  ` with the ID of the commitment you want to split from. For more information, see [Split a commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#splitting-commitments) .
 
   - **`  --storage_billing_model= BILLING_MODEL  `**  
-    Specifies the [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `  --storage_billing_model  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes.
+    Specifies the [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) for a dataset. Set the `  --storage_billing_model  ` value to `  PHYSICAL  ` to use physical bytes when calculating storage charges, or to `  LOGICAL  ` to use logical bytes.
     
     When you change a dataset's billing model, it takes 24 hours for the change to take effect.
     
@@ -2480,7 +2256,7 @@ The `  bq update  ` command uses the following flags and arguments:
     Specifies whether to update the transfer configuration credentials. The default value is `  false  ` .
 
   - **`  --use_legacy_sql={true|false}  `**  
-    Set to `  false  ` to update the SQL query for a view from legacy SQL to GoogleSQL. The default value is determined by your [configuration settings](/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; the query uses legacy SQL.
+    Set to `  false  ` to update the SQL query for a view from legacy SQL to GoogleSQL. The default value is determined by your [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration) . If the configuration setting is not specified, the default value is `  true  ` ; the query uses legacy SQL.
 
   - **`  --vertex_ai_model_id= VERTEX_AI_MODEL_ID  `**  
     When specified, updates the model ID for a BigQuery ML model that is registered in the Vertex AI Model Registry.
@@ -2496,12 +2272,12 @@ The `  bq update  ` command uses the following flags and arguments:
 
 For more information about using the `  bq update  ` command, see the following:
 
-  - [Updating dataset properties](/bigquery/docs/updating-datasets)
-  - [Managing tables](/bigquery/docs/managing-tables)
-  - [Updating views](/bigquery/docs/managing-views#update_a_view)
-  - [Updating labels](/bigquery/docs/updating-labels)
-  - [Working with transfers](/bigquery/docs/working-with-transfers)
-  - [Updating table snapshot metadata](/bigquery/docs/table-snapshots-update)
+  - [Updating dataset properties](https://docs.cloud.google.com/bigquery/docs/updating-datasets)
+  - [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables)
+  - [Updating views](https://docs.cloud.google.com/bigquery/docs/managing-views#update_a_view)
+  - [Updating labels](https://docs.cloud.google.com/bigquery/docs/updating-labels)
+  - [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers)
+  - [Updating table snapshot metadata](https://docs.cloud.google.com/bigquery/docs/table-snapshots-update)
 
 ### `     bq version    `
 
@@ -2509,11 +2285,9 @@ Use the `  bq version  ` command to display the version number of your bq comman
 
 #### Synopsis
 
-``` text
-bq version
-```
+    bq version
 
-**Note:** You can see the version number of all components in your Google Cloud CLI installation by using the [`  gcloud version  `](/sdk/gcloud/reference/version) command.
+**Note:** You can see the version number of all components in your Google Cloud CLI installation by using the [`  gcloud version  `](https://docs.cloud.google.com/sdk/gcloud/reference/version) command.
 
 ### `     bq wait    `
 
@@ -2521,19 +2295,13 @@ Use the `  bq wait  ` command to wait a specified number of seconds for a job to
 
 #### Synopsis
 
-``` text
-bq wait [FLAGS] [JOB] [SECONDS]
-```
+    bq wait [FLAGS] [JOB] [SECONDS]
 
 #### Examples
 
-``` text
-bq wait
-```
+    bq wait
 
-``` text
-bq wait --wait_for_status=RUNNING 12345 100
-```
+    bq wait --wait_for_status=RUNNING 12345 100
 
 #### Flags and arguments
 

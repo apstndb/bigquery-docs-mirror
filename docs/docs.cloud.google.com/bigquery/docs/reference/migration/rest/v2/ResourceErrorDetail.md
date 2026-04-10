@@ -1,8 +1,8 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [ErrorDetail](#ErrorDetail)
-      - [JSON representation](#ErrorDetail.SCHEMA_REPRESENTATION)
-  - [ErrorLocation](#ErrorLocation)
-      - [JSON representation](#ErrorLocation.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ResourceErrorDetail#SCHEMA_REPRESENTATION)
+  - [ErrorDetail](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ResourceErrorDetail#ErrorDetail)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ResourceErrorDetail#ErrorDetail.SCHEMA_REPRESENTATION)
+  - [ErrorLocation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ResourceErrorDetail#ErrorLocation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/ResourceErrorDetail#ErrorLocation.SCHEMA_REPRESENTATION)
 
 Provides details for errors and the corresponding resources.
 
@@ -17,7 +17,7 @@ Provides details for errors and the corresponding resources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resourceInfo&quot;: {
     object (ResourceInfo)
   },
@@ -67,7 +67,7 @@ Provides details for errors, e.g. issues that where encountered when processing 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;location&quot;: {
     object (ErrorLocation)
   },
@@ -108,7 +108,7 @@ Holds information about where the error is located.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;line&quot;: integer,
   &quot;column&quot;: integer
 }</code></pre></td>

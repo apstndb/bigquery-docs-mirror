@@ -2,11 +2,11 @@
 
 **Preview**
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for Google Merchant Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-You can load data from Google Merchant Center to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Google Merchant Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Merchant Center to BigQuery.
+You can load data from Google Merchant Center to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Google Merchant Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Google Merchant Center to BigQuery.
 
 ## Supported reports
 
@@ -14,54 +14,43 @@ The BigQuery Data Transfer Service for Google Merchant Center supports the follo
 
 ### Products and product issues
 
-The products and product issues report includes product data provided to the Google Merchant Center through feeds or using the Content API for Shopping. This report also includes item level issues detected by Google for your products. You can view product and product issues data in the [Google Merchant Center](https://merchants.google.com/) or by querying the [Content API for Shopping](https://developers.google.com/shopping-content/v2/reference/v2.1/) . For information on how this data is loaded into BigQuery, see the Google Merchant Center [product table schema](/bigquery/docs/merchant-center-products-schema) .
+The products and product issues report includes product data provided to the Google Merchant Center through feeds or using the Content API for Shopping. This report also includes item level issues detected by Google for your products. You can view product and product issues data in the [Google Merchant Center](https://merchants.google.com/) or by querying the [Content API for Shopping](https://developers.google.com/shopping-content/v2/reference/v2.1/) . For information on how this data is loaded into BigQuery, see the Google Merchant Center [product table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema) .
 
 ### Regional Inventories
 
-The regional inventories report includes additional product data about regional availability and pricing overrides of your products. For information on how this data is loaded into BigQuery, see the Google Merchant Center [regional inventories table schema](/bigquery/docs/merchant-center-regional-inventories-schema) .
+The regional inventories report includes additional product data about regional availability and pricing overrides of your products. For information on how this data is loaded into BigQuery, see the Google Merchant Center [regional inventories table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-regional-inventories-schema) .
 
 ### Local Inventories
 
-The local inventories report includes additional product data about local inventory of your products. This report contains data on local pricing, availability, quantity, pick-up and in-store product location. For information on how this data is loaded into BigQuery, see the Google Merchant Center [local inventories table schema](/bigquery/docs/merchant-center-local-inventories-schema) .
+The local inventories report includes additional product data about local inventory of your products. This report contains data on local pricing, availability, quantity, pick-up and in-store product location. For information on how this data is loaded into BigQuery, see the Google Merchant Center [local inventories table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-local-inventories-schema) .
 
 ### Performance
 
-The performance report provides granular segmentation of your performance data across both Ads and Free Listings. For information on how this data is loaded into BigQuery, see the Google Merchant Center [performance table schema](/bigquery/docs/merchant-center-performance-schema) .
+The performance report provides granular segmentation of your performance data across both Ads and Free Listings. For information on how this data is loaded into BigQuery, see the Google Merchant Center [performance table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-performance-schema) .
 
 ### Best Sellers
 
-The Best sellers report provides the same data found in the Google Merchant Center UI and lets you backfill the data across countries or categories for up to 2 years. This includes data about the most popular products and brands in Shopping ads and unpaid listings, as well as whether or not you have them in your inventory. This report is based on the [best sellers report](https://support.google.com/merchants/answer/9488679) available through Google Merchant Center. For information on how this data is loaded into BigQuery, see the Google Merchant Center [best sellers tables schemas](/bigquery/docs/merchant-center-best-sellers-schema) .
+The Best sellers report provides the same data found in the Google Merchant Center UI and lets you backfill the data across countries or categories for up to 2 years. This includes data about the most popular products and brands in Shopping ads and unpaid listings, as well as whether or not you have them in your inventory. This report is based on the [best sellers report](https://support.google.com/merchants/answer/9488679) available through Google Merchant Center. For information on how this data is loaded into BigQuery, see the Google Merchant Center [best sellers tables schemas](https://docs.cloud.google.com/bigquery/docs/merchant-center-best-sellers-schema) .
 
 ### Price Competitiveness
 
-Formerly known as the price benchmarks report, the price competitiveness report includes product level attributes and price benchmark data and is based on the same definitions as the [price competitiveness report](https://support.google.com/merchants/answer/9626903) available through Google Merchant Center. For information on how this data is loaded into BigQuery, see the Google Merchant Center [price competitiveness table schema](/bigquery/docs/merchant-center-price-competitiveness-schema) .
+Formerly known as the price benchmarks report, the price competitiveness report includes product level attributes and price benchmark data and is based on the same definitions as the [price competitiveness report](https://support.google.com/merchants/answer/9626903) available through Google Merchant Center. For information on how this data is loaded into BigQuery, see the Google Merchant Center [price competitiveness table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-competitiveness-schema) .
 
 ### Price Insights
 
-Use the price insights report to see suggested sale prices for your products, and predictions for the performance that you can expect if you update your products' prices. Using the price insights report can help you price your products more effectively. For more information on how to use the data in this report, see [Improve product pricing with the price insights report](https://support.google.com/merchants/answer/11916926) for more information on how to use the data in this report. For information on how this data is loaded into BigQuery, see the Google Merchant Center [Price Insights table schema](/bigquery/docs/merchant-center-price-insights-schema) .
+Use the price insights report to see suggested sale prices for your products, and predictions for the performance that you can expect if you update your products' prices. Using the price insights report can help you price your products more effectively. For more information on how to use the data in this report, see [Improve product pricing with the price insights report](https://support.google.com/merchants/answer/11916926) for more information on how to use the data in this report. For information on how this data is loaded into BigQuery, see the Google Merchant Center [Price Insights table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-price-insights-schema) .
 
 ### Product Targeting
 
-Enable the Product Targeting report when you set up a transfer to expose Ads targeting information when you load data from Google Shopping into BigQuery. For information on how the data is loaded into BigQuery, see the Google Merchant Center [Product Targeting table schema](/bigquery/docs/merchant-center-product-targeting-schema) .
+Enable the Product Targeting report when you set up a transfer to expose Ads targeting information when you load data from Google Shopping into BigQuery. For information on how the data is loaded into BigQuery, see the Google Merchant Center [Product Targeting table schema](https://docs.cloud.google.com/bigquery/docs/merchant-center-product-targeting-schema) .
 
 ## Reporting options
 
 The BigQuery Data Transfer Service for Google Merchant Center supports the following reporting options:
 
-<table>
-<thead>
-<tr class="header">
-<th>Reporting option</th>
-<th>Support</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Schedule</td>
-<td><p>Configurable to daily, weekly, monthly, or custom. By default, this is set to daily when the transfer is created. The minimum interval between transfers is 6 hours.</p></td>
-</tr>
-</tbody>
-</table>
+| Reporting option | Support                                                                                                                                                              |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Schedule         | Configurable to daily, weekly, monthly, or custom. By default, this is set to daily when the transfer is created. The minimum interval between transfers is 6 hours. |
 
 ## Data ingestion
 

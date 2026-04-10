@@ -2,11 +2,11 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To request feedback or support for this feature, send an email to <bigquery-drivers-feedback@google.com> .
 
-The Java Database Connectivity (JDBC) driver for BigQuery connects your Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect non-Java applications to BigQuery, use the [Simba Open Database Connectivity (ODBC) driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers) .
+The Java Database Connectivity (JDBC) driver for BigQuery connects your Java applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. To connect non-Java applications to BigQuery, use the [Simba Open Database Connectivity (ODBC) driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
 
 ## Limitations
 
@@ -14,7 +14,7 @@ The JDBC driver for BigQuery is subject to the following limitations:
 
   - The driver is specific to BigQuery and can't be used with other products or services.
   - The `  INTERVAL  ` data type isn't supported with the BigQuery Storage Read API.
-  - All [data manipulation language (DML) limitations](/bigquery/docs/data-manipulation-language#dml-limitations) apply.
+  - All [data manipulation language (DML) limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) apply.
 
 ## Before you begin
 
@@ -22,7 +22,7 @@ The JDBC driver for BigQuery is subject to the following limitations:
 
 2.  Verify that your system is configured with Java Runtime Environment (JRE) 8.0 or later. For information on checking your JRE version, see [Verifying the JRE Environment](https://docs.oracle.com/goldengate/dir1212/gg-director/GDRAD/verifying-jre-environment.htm) .
 
-3.  [Authenticate to BigQuery](/bigquery/docs/authentication) , and take note of the following information, which is used later when you establish a connection with the JDBC driver for BigQuery. You only need to note the information that corresponds to the authentication method that you use.
+3.  [Authenticate to BigQuery](https://docs.cloud.google.com/bigquery/docs/authentication) , and take note of the following information, which is used later when you establish a connection with the JDBC driver for BigQuery. You only need to note the information that corresponds to the authentication method that you use.
     
     **Authentication method**
 
@@ -36,7 +36,7 @@ To configure your development environment with the JDBC driver, add the driver a
 
 Add the following dependency to your `  pom.xml  ` file:
 
-``` text
+``` notranslate
 <dependency>
     <groupId>com.google.cloud</groupId>
     <artifactId>google-cloud-bigquery-jdbc</artifactId>
@@ -48,7 +48,7 @@ Add the following dependency to your `  pom.xml  ` file:
 
 Add the following to your `  build.gradle  ` file:
 
-``` text
+``` notranslate
 dependencies {
 // ... other dependencies
 implementation("com.google.cloud:google-cloud-bigquery-jdbc:0.3.0")
@@ -65,7 +65,7 @@ To establish a connection between your Java application and BigQuery with the JD
 
 1.  Identify your connection string for the JDBC driver for BigQuery. This string captures all the required information to establish a connection between your Java application and BigQuery. The connection string has the following format:
     
-    ``` text
+    ``` notranslate
     jdbc:bigquery://HOST:PORT;ProjectId=PROJECT_ID;OAuthType=AUTH_TYPE;AUTH_PROPS;OTHER_PROPS
     ```
     
@@ -80,14 +80,14 @@ To establish a connection between your Java application and BigQuery with the JD
           - `  2  ` : for pre-generated refresh or access token authentication
           - `  3  ` : for Application Default Credential authentication
           - `  4  ` : for other authentication methods
-      - `  AUTH_PROPS  ` : the authentication information that you noted when you [authenticated to BigQuery](#before_you_begin) , listed in the `  property_1=value_1; property_2=value_2;...  ` format—for example, `  OAuthPvtKeyPath=path/to/file/secret.json  ` , if you authenticated with a service account key file.
-      - `  OTHER_PROPS  ` (optional): additional connection properties for the JDBC driver, listed in the `  property_1=value_1; property_2=value_2;...  ` format. For a full list of connection properties, see [Connection properties](#connection_properties) .
+      - `  AUTH_PROPS  ` : the authentication information that you noted when you [authenticated to BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#before_you_begin) , listed in the `  property_1=value_1; property_2=value_2;...  ` format—for example, `  OAuthPvtKeyPath=path/to/file/secret.json  ` , if you authenticated with a service account key file.
+      - `  OTHER_PROPS  ` (optional): additional connection properties for the JDBC driver, listed in the `  property_1=value_1; property_2=value_2;...  ` format. For a full list of connection properties, see [Connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) .
 
 2.  Connect your Java application to the JDBC driver for BigQuery with either the [`  DriverManager  `](https://docs.oracle.com/javase/8/docs/api/java/sql/DriverManager.html) or [`  DataSource  `](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) class.
     
       - Connect with the `  DriverManager  ` class:
         
-        ``` text
+        ``` notranslate
         import java.sql.Connection;
         import java.sql.DriverManager;
         
@@ -101,7 +101,7 @@ To establish a connection between your Java application and BigQuery with the JD
     
       - Connect with the `  DataSource  ` class:
         
-        ``` text
+        ``` notranslate
         import com.google.cloud.bigquery.jdbc.DataSource;
         import java.sql.Connection;
         import java.sql.SQLException;
@@ -117,9 +117,9 @@ To establish a connection between your Java application and BigQuery with the JD
         
         Replace `  CONNECTION_STRING  ` with the connection string from the previous step.
         
-        The `  DataSource  ` class also has setter methods that you can use to set [connection properties](#connection_properties) , rather than including them in the connection string. The following is an example:
+        The `  DataSource  ` class also has setter methods that you can use to set [connection properties](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#connection_properties) , rather than including them in the connection string. The following is an example:
         
-        ``` text
+        ``` notranslate
         private static Connection getConnection() throws SQLException {
           DataSource ds = new DataSource();
           ds.setURL(jdbc:bigquery://https://www.googleapis.com/bigquery/v2:443;);
@@ -134,7 +134,7 @@ To establish a connection between your Java application and BigQuery with the JD
 
 ### Connection properties
 
-JDBC driver connection properties are configuration parameters that you include in the connection string or pass through setter methods when you [establish a connection](#establish_a_connection) to a database. The following connection properties are supported by the JDBC driver for BigQuery.
+JDBC driver connection properties are configuration parameters that you include in the connection string or pass through setter methods when you [establish a connection](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery#establish_a_connection) to a database. The following connection properties are supported by the JDBC driver for BigQuery.
 
 **Note:** All connection property names are case-insensitive. Boolean connection properties accept both `  TRUE  ` / `  FALSE  ` and `  1  ` / `  0  ` .
 
@@ -410,7 +410,7 @@ No
 
 `  Location  `
 
-The [location](/bigquery/docs/locations) where datasets are created or queried. BigQuery automatically determines the location if this property isn't set.
+The [location](https://docs.cloud.google.com/bigquery/docs/locations) where datasets are created or queried. BigQuery automatically determines the location if this property isn't set.
 
 N/A
 
@@ -646,7 +646,7 @@ No
 
 `  QueryProperties  `
 
-[REST connection properties](/bigquery/docs/reference/rest/v2/ConnectionProperty) that customize query behavior.
+[REST connection properties](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/ConnectionProperty) that customize query behavior.
 
 N/A
 
@@ -806,86 +806,30 @@ No
 
 ## Run queries with the driver
 
-With your Java application connected to BigQuery through the JDBC driver, you can now run queries in your development environment through the [standard JDBC process](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html) . All [BigQuery quotas and limits](/bigquery/quotas) apply.
+With your Java application connected to BigQuery through the JDBC driver, you can now run queries in your development environment through the [standard JDBC process](https://docs.oracle.com/javase/tutorial/jdbc/basics/processingsqlstatements.html) . All [BigQuery quotas and limits](https://docs.cloud.google.com/bigquery/quotas) apply.
 
 ### Data type mapping
 
 When you run queries through the JDBC driver for BigQuery, the following data type mapping occurs:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>GoogleSQL type</strong></th>
-<th><strong>Java type</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       Array      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       BigDecimal      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><code dir="ltr" translate="no">       Boolean      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td><code dir="ltr" translate="no">       byte[]      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       Date      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-<td><code dir="ltr" translate="no">       String      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-<td><code dir="ltr" translate="no">       Double      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
-<td><code dir="ltr" translate="no">       String      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       Long      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INTERVAL      </code></td>
-<td><code dir="ltr" translate="no">       String      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td><code dir="ltr" translate="no">       String      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       BigDecimal      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       String      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td><code dir="ltr" translate="no">       Struct      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-<td><code dir="ltr" translate="no">       Time      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       Timestamp      </code></td>
-</tr>
-</tbody>
-</table>
+| **GoogleSQL type**          | **Java type**               |
+| --------------------------- | --------------------------- |
+| `        ARRAY       `      | `        Array       `      |
+| `        BIGNUMERIC       ` | `        BigDecimal       ` |
+| `        BOOL       `       | `        Boolean       `    |
+| `        BYTES       `      | `        byte[]       `     |
+| `        DATE       `       | `        Date       `       |
+| `        DATETIME       `   | `        String       `     |
+| `        FLOAT64       `    | `        Double       `     |
+| `        GEOGRAPHY       `  | `        String       `     |
+| `        INT64       `      | `        Long       `       |
+| `        INTERVAL       `   | `        String       `     |
+| `        JSON       `       | `        String       `     |
+| `        NUMERIC       `    | `        BigDecimal       ` |
+| `        STRING       `     | `        String       `     |
+| `        STRUCT       `     | `        Struct       `     |
+| `        TIME       `       | `        Time       `       |
+| `        TIMESTAMP       `  | `        Timestamp       `  |
 
 ### Examples
 
@@ -893,9 +837,9 @@ The following sections provide examples that use BigQuery features through the J
 
 #### Positional parameters
 
-The following example runs a query with a [positional parameter](/bigquery/docs/parameterized-queries) :
+The following example runs a query with a [positional parameter](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) :
 
-``` text
+``` notranslate
 PreparedStatement preparedStatement = connection.prepareStatement(
     "SELECT * FROM MyTestTable where testColumn = ?");
 preparedStatement.setString(1, "string2");
@@ -906,7 +850,7 @@ ResultSet resultSet = statement.executeQuery(selectQuery);
 
 The following example queries the base record of `  Struct  ` data:
 
-``` text
+``` notranslate
 ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
     resultSet.next();
     Struct obj = (Struct) resultSet.getObject(1);
@@ -915,7 +859,7 @@ ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 
 
 The driver returns the base record as a struct object or a string representation of a JSON object. The result is similar to the following:
 
-``` text
+``` notranslate
 {
   "v": {
     "f": [
@@ -932,7 +876,7 @@ The driver returns the base record as a struct object or a string representation
 
 The following example queries the subcomponents of a `  Struct  ` object:
 
-``` text
+``` notranslate
 ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 as age)");
     resultSet.next();
     Struct structObject = (Struct) resultSet.getObject(1);
@@ -944,7 +888,7 @@ ResultSet resultSet = statement.executeQuery("SELECT STRUCT(\"Adam\" as name, 5 
 
 The following example queries a standard array of repeated data, then verifies the result:
 
-``` text
+``` notranslate
 // Execute Query
 ResultSet resultSet = statement.executeQuery("SELECT [1,2,3]");
 resultSet.next();
@@ -959,7 +903,7 @@ for (; count < arrayObject.length; count++) {
 
 The following example queries a `  Struct  ` array of repeated data, then verifies the result:
 
-``` text
+``` notranslate
 // Execute Query
 ResultSet resultSet = statement.executeQuery("SELECT "
     + "[STRUCT(\"Adam\" as name, 12 as age), "
@@ -977,7 +921,7 @@ for (int count =0; count < arrayObject.length; count++) {
 
 The following example performs a bulk-insert operation with the [`  executeBatch  ` method](https://docs.oracle.com/javase/8/docs/api/java/sql/Statement.html#executeBatch--) .
 
-``` text
+``` notranslate
 Connection conn = DriverManager.getConnection(connectionUrl);
 PreparedStatement statement = null;
 Statement st = conn.createStatement();
@@ -1004,5 +948,5 @@ You can download the JDBC driver for BigQuery at no cost, and you don't need any
 
 ## What's next
 
-  - Learn more about the [Simba ODBC driver for BigQuery](/bigquery/docs/reference/odbc-jdbc-drivers) .
-  - Explore other [BigQuery developer tools](/bigquery/docs/developer-overview) .
+  - Learn more about the [Simba ODBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers) .
+  - Explore other [BigQuery developer tools](https://docs.cloud.google.com/bigquery/docs/developer-overview) .

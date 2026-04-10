@@ -12,17 +12,15 @@ If you are deleting a model in another project, you must specify the project, da
 
 For more information about supported SQL statements and functions for different model types, see the following documents:
 
-  - [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai)
-  - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import)
+  - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+  - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
 
 ## Syntax
 
-``` text
-{DROP MODEL | DROP MODEL IF EXISTS}
-model_name
-```
+    {DROP MODEL | DROP MODEL IF EXISTS}
+    model_name
 
 Where:
 

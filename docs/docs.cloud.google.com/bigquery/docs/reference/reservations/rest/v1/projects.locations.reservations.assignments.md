@@ -1,8 +1,8 @@
-  - [Resource: Assignment](#Assignment)
-      - [JSON representation](#Assignment.SCHEMA_REPRESENTATION)
-  - [JobType](#JobType)
-  - [State](#State)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Assignment](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#Assignment)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#Assignment.SCHEMA_REPRESENTATION)
+  - [JobType](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#JobType)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#State)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments#METHODS_SUMMARY)
 
 ## Resource: Assignment
 
@@ -19,7 +19,7 @@ An assignment allows a project to submit jobs of a certain type using slots from
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;assignee&quot;: string,
   &quot;jobType&quot;: enum (JobType),

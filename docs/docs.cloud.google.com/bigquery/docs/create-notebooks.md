@@ -1,6 +1,6 @@
 # Create notebooks
 
-This document describes how to create [Colab Enterprise notebooks in BigQuery](/bigquery/docs/notebooks-introduction) . Notebooks are [BigQuery Studio](/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](/dataform/docs/overview) .
+This document describes how to create [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) . Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
 ## Before you begin
 
@@ -8,29 +8,29 @@ This document describes how to create [Colab Enterprise notebooks in BigQuery](/
 
 Set the appropriate permissions to create, edit, or view notebooks.
 
-All users with the [Dataform Admin role](/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) have owner access to all notebooks created in the project.
+All users with the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) have owner access to all notebooks created in the project.
 
-For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 #### Permissions to create notebooks
 
 To get the permissions that you need to create and run notebooks, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Read Session User](/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
 
-  - [BigQuery Studio User](/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
+  - [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
     
     The BigQuery Studio User role combines the following IAM roles:
     
-      - [BigQuery Job User](/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-      - [Notebook Runtime User](/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-      - [Code Creator](/dataform/docs/access-control#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+      - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+      - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
+      - [Code Creator](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
 
-**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `  dataform.repositories.list  ` permission—which is included in standard BigQuery roles such as [BigQuery Job User](/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](/iam/docs/creating-custom-roles) that exclude the `  dataform.repositories.list  ` permission.
+**Warning:** Visibility for code assets is governed by project-level Dataform permissions. Users with the `  dataform.repositories.list  ` permission—which is included in standard BigQuery roles such as [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) , [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) , and [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) —can see all code assets in the **Explorer** panel of the Google Cloud project, regardless of whether they created these assets or these assets were shared with them. To restrict visibility, you can create [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) that exclude the `  dataform.repositories.list  ` permission.
 
 **Note:** Users assigned the Code Creator role in a project can list the names of code assets in that project by using the Dataform API or the Dataform command-line interface (CLI).
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) . To see the exact permissions that are required to create and run notebooks, expand the **Required permissions** section:
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) . To see the exact permissions that are required to create and run notebooks, expand the **Required permissions** section:
 
 #### Required permissions
 
@@ -56,25 +56,25 @@ You might also be able to get the required permissions through [custom roles](/i
   - `  aiplatform.notebookRuntimes.list  `
   - `  aiplatform.operations.list  `
 
-**Note:** When you create a notebook, BigQuery grants you the [Dataform Admin role](/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` ) on that notebook. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the notebooks created in the project. To override this behavior, see [Grant a specific role upon resource creation](/dataform/docs/access-control#grant-specific-role) .
+**Note:** When you create a notebook, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` ) on that notebook. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the notebooks created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 #### Roles to edit notebooks
 
 To edit and run notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User](/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Notebook Runtime User](/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-  - [Code Editor](/dataform/docs/access-control#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
+  - [Code Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
 
 #### Roles to view notebooks
 
 To view and run notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User](/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - [BigQuery Read Session User](/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
-  - [Notebook Runtime User](/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
-  - [Code Viewer](/dataform/docs/access-control#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - [BigQuery Read Session User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` )
+  - [Notebook Runtime User](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) ( `  roles/aiplatform.notebookRuntimeUser  ` )
+  - [Code Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
 
 ## Create notebooks
 
@@ -89,6 +89,8 @@ If this is the first time you are creating a code asset, you should set the defa
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, find the project in which you have enabled code assets.
 
@@ -98,13 +100,13 @@ All code assets in BigQuery Studio use the same default region. To set the defau
 
 5.  Click **Select** .
 
-For a list of supported regions, see [BigQuery Studio locations](/bigquery/docs/locations#bqstudio-loc) .
+For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 
 ### Create a notebook using the notebook gallery
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or to request product enhancements, contact <bigquery-notebook-gallery@google.com> .
 
@@ -113,6 +115,8 @@ The notebook gallery in the Google Cloud console for BigQuery is your central hu
 To create a notebook from a template in the notebook gallery, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  To open the gallery, in the tab bar of the editor pane, click the arrow\_drop\_down arrow next to add\_box **SQL query** , and then click **Notebook \> All templates** .
 
@@ -124,7 +128,9 @@ To create a notebook from a template in the notebook gallery, follow these steps
 
 5.  To create a runnable notebook from the template, click **Use this template** .
 
-6.  Optional: To view notebook details or the [version history](#create_a_notebook_from_an_existing_notebook) , add new comments, or reply to or get a link to an existing comment, use the following toolbar:
+6.  Optional: To view notebook details or the [version history](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create_a_notebook_from_an_existing_notebook) , add new comments, or reply to or get a link to an existing comment, use the following toolbar:
+    
+    ![Toolbar adjacent to the notebook.](https://docs.cloud.google.com/static/bigquery/images/editor-toolbar.png)
     
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
@@ -135,8 +141,12 @@ To create a notebook from a template in the notebook gallery, follow these steps
 To create a notebook containing a default query for a specific table, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -153,6 +163,8 @@ To create a notebook containing a default query for a specific table, follow the
 To create a notebook to explore the result set of a query, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the editor pane, run a query that generates a query result.
 
@@ -165,8 +177,12 @@ To create a notebook to explore the result set of a query, follow these steps:
 To open any version of an existing notebook as a new notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -185,8 +201,12 @@ You can upload a local notebook to use it in BigQuery Studio. The uploaded noteb
 To upload a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, and then do one of the following:
     
@@ -205,11 +225,11 @@ Your notebook can be accessed through the **Explorer** pane.
 
 ## Connect to a runtime
 
-Use the following sections to learn how to connect a notebook to a [Vertex AI runtime](/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
+Use the following sections to learn how to connect a notebook to a [Vertex AI runtime](https://docs.cloud.google.com/colab/docs/create-runtime) . A runtime is a compute resource that runs the code in your notebook. The runtime must be in the same region as your notebook.
 
-For more information about runtimes, see [Runtimes and runtime templates](/colab/docs/runtimes) .
+For more information about runtimes, see [Runtimes and runtime templates](https://docs.cloud.google.com/colab/docs/runtimes) .
 
-**Note:** If you use [VPC Service Controls](/vpc-service-controls/docs/overview) , make sure you have configured [Private Google Access with VPC Service Controls](/vpc-service-controls/docs/private-connectivity) before connecting to a runtime. Otherwise, the service returns the error `  Failed to connect to Runtime Network projects/ projectid /global/networks/default' was not found.  `
+**Note:** If you use [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview) , make sure you have configured [Private Google Access with VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/private-connectivity) before connecting to a runtime. Otherwise, the service returns the error `  Failed to connect to Runtime Network projects/ projectid /global/networks/default' was not found.  `
 
 ### Connect to the default runtime
 
@@ -218,8 +238,12 @@ The default runtime is a preset runtime that requires minimal setup.
 To connect to the default runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -231,13 +255,17 @@ To connect to the default runtime, follow these steps:
 
 ### Connect to a non-default runtime
 
-If you want to use a runtime other than the default runtime, you must first [create that additional runtime in Vertex AI](/vertex-ai/docs/colab/create-runtime) .
+If you want to use a runtime other than the default runtime, you must first [create that additional runtime in Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/colab/create-runtime) .
 
 To connect to non-default runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -256,8 +284,12 @@ To connect to non-default runtime, follow these steps:
 To connect to a new runtime, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -267,7 +299,7 @@ To connect to a new runtime, follow these steps:
 
 6.  Click **Create new runtime** .
 
-7.  In **Runtime Template** , select the [Vertex AI runtime template](/colab/docs/create-runtime-template) to use.
+7.  In **Runtime Template** , select the [Vertex AI runtime template](https://docs.cloud.google.com/colab/docs/create-runtime-template) to use.
 
 8.  In **Runtime name** , type a name for the runtime.
 
@@ -281,29 +313,31 @@ A notebook is made up of cells that you can edit. The following types of cells a
 
   - **Code cell** : Use a code cell to add Python to your notebook. You can run each code cell individually. A code cell can reference any variables created in another cell that you've already run.
 
-  - **SQL cell** ( [Preview](/products#product-launch-stages) ): Use a [SQL cell](/colab/docs/sql-cells) to run GoogleSQL queries. The output of the query is automatically saved as a DataFrame with the same name as the title of the cell. You can run multiple SQL statements in a single SQL cell, but only the results of the last statement are saved to a DataFrame.
+  - **SQL cell** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Use a [SQL cell](https://docs.cloud.google.com/colab/docs/sql-cells) to run GoogleSQL queries. The output of the query is automatically saved as a DataFrame with the same name as the title of the cell. You can run multiple SQL statements in a single SQL cell, but only the results of the last statement are saved to a DataFrame.
     
     You can refer to Python variables in expressions or use BigQuery DataFrames as tables in your query by enclosing the variable name in braces ( `  { }  ` ):
     
-    ``` text
-    # Refer to the Python variable my_threshold in a SQL expression.
-    SELECT * FROM my_dataset.my_table WHERE x > {my_threshold};
-    
-    # Reference previous query results to iterate on your queries.
-    SELECT * FROM {df};
-    ```
+        # Refer to the Python variable my_threshold in a SQL expression.
+        SELECT * FROM my_dataset.my_table WHERE x > {my_threshold};
+        
+        # Reference previous query results to iterate on your queries.
+        SELECT * FROM {df};
 
-  - **Visualization cell** ( [Preview](/products#product-launch-stages) ): Use a [visualization cell](/colab/docs/visualization-cells) to automatically generate a visualization of any DataFrame in your notebook. You can modify which columns are displayed and select from various chart types and aggregations. You can also choose custom colors, data labels, and titles.
+  - **Visualization cell** ( [Preview](https://docs.cloud.google.com/products#product-launch-stages) ): Use a [visualization cell](https://docs.cloud.google.com/colab/docs/visualization-cells) to automatically generate a visualization of any DataFrame in your notebook. You can modify which columns are displayed and select from various chart types and aggregations. You can also choose custom colors, data labels, and titles.
 
 ## Grant access to notebooks
 
 To grant other users access to a notebook, add those users to an appropriate IAM role.
 
-**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](/bigquery/docs/create-notebooks#disable_output_saving) .
+**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](https://docs.cloud.google.com/bigquery/docs/create-notebooks#disable_output_saving) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -319,11 +353,11 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 
 8.  In the **Role** list, select one of the following roles:
     
-      - [**Code Owner**](/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
-      - [**Code Editor**](/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
-      - [**Code Viewer**](/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
+      - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
+      - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
+      - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
     
-    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
+    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -333,15 +367,19 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 
 ## Share notebooks
 
-To share a notebook with other users, you can generate and share a link to the notebook. For other users to see the notebook you share, you must first [grant access](/bigquery/docs/create-notebooks#grant_access_to_notebooks) to the notebook.
+To share a notebook with other users, you can generate and share a link to the notebook. For other users to see the notebook you share, you must first [grant access](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) to the notebook.
 
-To run a notebook, users must have access to the data that the notebook accesses. For more information, see [Grant access to a dataset](/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
+To run a notebook, users must have access to the data that the notebook accesses. For more information, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
 
-**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](/bigquery/docs/create-notebooks#disable_output_saving) .
+**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](https://docs.cloud.google.com/bigquery/docs/create-notebooks#disable_output_saving) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -359,7 +397,7 @@ You can prevent sharing saved notebook output with other users who have access t
 
 When you disable output saving for a selected notebook, BigQuery deletes all output saved in the notebook file and doesn't save the output of subsequent runs.
 
-However, users who have [access to the notebook](/bigquery/docs/create-notebooks#grant_access_to_notebooks) can still view its output in the following ways:
+However, users who have [access to the notebook](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) can still view its output in the following ways:
 
   - Run the notebook to view its current output. This output is not saved.
   - View an archival version of the notebook and its output in revision history.
@@ -367,8 +405,12 @@ However, users who have [access to the notebook](/bigquery/docs/create-notebooks
 To disable saving of output for a selected notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -401,8 +443,12 @@ If you and another user make conflicting changes in a notebook, the service rais
 To rename a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -416,9 +462,9 @@ To rename a notebook, follow these steps:
 
 ## Troubleshooting
 
-For more information, see [Troubleshoot Colab Enterprise](/colab/docs/troubleshooting) .
+For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.google.com/colab/docs/troubleshooting) .
 
 ## What's next
 
-  - Learn how to [manage notebooks](/bigquery/docs/manage-notebooks) .
-  - Learn how to [schedule notebooks](/bigquery/docs/orchestrate-notebooks) .
+  - Learn how to [manage notebooks](https://docs.cloud.google.com/bigquery/docs/manage-notebooks) .
+  - Learn how to [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) .

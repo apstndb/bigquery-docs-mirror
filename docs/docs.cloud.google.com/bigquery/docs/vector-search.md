@@ -1,6 +1,6 @@
 # Search embeddings with vector search
 
-This tutorial shows you how to perform a [similarity search](https://wikipedia.org/wiki/Similarity_search) on embeddings stored in BigQuery tables by using the [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) and optionally a [vector index](/bigquery/docs/vector-index) .
+This tutorial shows you how to perform a [similarity search](https://wikipedia.org/wiki/Similarity_search) on embeddings stored in BigQuery tables by using the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) and optionally a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) .
 
 When you use `  VECTOR_SEARCH  ` with a vector index, `  VECTOR_SEARCH  ` uses the [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) method to improve vector search performance, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) and so returning more approximate results. Without a vector index, `  VECTOR_SEARCH  ` uses [brute force search](https://en.wikipedia.org/wiki/Brute-force_search) to measure distance for every record.
 
@@ -33,7 +33,7 @@ The `  VECTOR_SEARCH  ` function uses [BigQuery compute pricing](https://cloud.g
 
   - Editions pricing: You are charged for the slots required to complete the job within your reservation edition. Larger, more complex similarity calculations incur more charges.
     
-    **Note:** Using an index isn't supported in [Standard editions](/bigquery/docs/editions-intro) .
+    **Note:** Using an index isn't supported in [Standard editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
 For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
@@ -44,27 +44,35 @@ For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/p
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
 ## Create a dataset
 
 Create a BigQuery dataset:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
 3.  Click more\_vert **View actions \> Create dataset** .
+    
+    ![Create a dataset to contain the objects used in the tutorial.](https://docs.cloud.google.com/static/bigquery/images/create-dataset.png)
 
 4.  On the **Create dataset** page, do the following:
     
@@ -72,7 +80,7 @@ Create a BigQuery dataset:
     
       - For **Location type** , select **Multi-region** , and then select **US (multiple regions in United States)** .
         
-        The public datasets are stored in the `  US  ` [multi-region](/bigquery/docs/locations#multi-regions) . For simplicity, store your dataset in the same location.
+        The public datasets are stored in the `  US  ` [multi-region](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . For simplicity, store your dataset in the same location.
     
       - Leave the remaining default settings as they are, and click **Create dataset** .
 
@@ -80,7 +88,7 @@ Create a BigQuery dataset:
 
 1.  Create the `  patents  ` table that contains patents embeddings, based on a subset of the [Google Patents](https://console.cloud.google.com/marketplace/product/google_patents_public_datasets/google-patents-public-data) public dataset:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE vector_search.patents AS
     SELECT * FROM `patents-public-data.google_patents_research.publications`
     WHERE ARRAY_LENGTH(embedding_v1) > 0
@@ -90,7 +98,7 @@ Create a BigQuery dataset:
 
 2.  Create the `  patents2  ` table that contains a patent embedding to find nearest neighbors for:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE vector_search.patents2 AS
     SELECT * FROM `patents-public-data.google_patents_research.publications`
     WHERE publication_number = 'KR-20180122872-A';
@@ -100,7 +108,7 @@ Create a BigQuery dataset:
 
 1.  Create the `  my_index  ` vector index on the `  embeddings_v1  ` column of the `  patents  ` table:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE VECTOR INDEX my_index ON vector_search.patents(embedding_v1)
     STORING(publication_number, title)
     OPTIONS(distance_type='COSINE', index_type='IVF');
@@ -108,7 +116,7 @@ Create a BigQuery dataset:
 
 2.  Wait several minutes for the vector index to be created, then run the following query and confirm that the `  coverage_percentage  ` value is `  100  ` :
     
-    ``` text
+    ``` notranslate
     SELECT * FROM vector_search.INFORMATION_SCHEMA.VECTOR_INDEXES;
     ```
 
@@ -116,11 +124,11 @@ Create a BigQuery dataset:
 
 After the vector index is created and populated, use the `  VECTOR_SEARCH  ` function to find the nearest neighbor for the embedding in the `  embedding_v1  ` column in the `  patents2  ` table. This query uses the vector index in the search, so `  VECTOR_SEARCH  ` uses an [Approximate Nearest Neighbor](https://en.wikipedia.org/wiki/Nearest_neighbor_search#Approximation_methods) method to find the embedding's nearest neighbor.
 
-**Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `  vector_search.patents  ` table](/bigquery/docs/vector-search#create_test_tables) without the `  LIMIT 1000000  ` clause, [recreate the vector index](/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
+**Note:** Vector indexes are more effective on large datasets. If you want to see this in action, [recreate the `  vector_search.patents  ` table](https://docs.cloud.google.com/bigquery/docs/vector-search#create_test_tables) without the `  LIMIT 1000000  ` clause, [recreate the vector index](https://docs.cloud.google.com/bigquery/docs/vector-search#create_a_vector_index) , and then run the following query.
 
 Use the `  VECTOR_SEARCH  ` function with an index:
 
-``` text
+``` notranslate
 SELECT query.publication_number AS query_publication_number,
   query.title AS query_title,
   base.publication_number AS base_publication_number,
@@ -154,7 +162,7 @@ The results look similar to the following:
 
 Use the `  VECTOR_SEARCH  ` function to find the nearest neighbor for the embedding in the `  embedding_v1  ` column in the `  patents2  ` table. This query doesn't use the vector index in the search, so `  VECTOR_SEARCH  ` finds the embedding's exact nearest neighbor.
 
-``` text
+``` notranslate
 SELECT query.publication_number AS query_publication_number,
   query.title AS query_title,
   base.publication_number AS base_publication_number,
@@ -188,7 +196,7 @@ The results look similar to the following:
 
 When you perform a vector search with an index, it returns approximate results, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recallsearch_term_rules) . You can compute recall by comparing the results returned by vector search with an index and by vector search with brute force. In this dataset, the `  publication_number  ` value uniquely identifies a patent, so it is used for comparison.
 
-``` text
+``` notranslate
 WITH approx_results AS (
   SELECT query.publication_number AS query_publication_number,
     base.publication_number AS base_publication_number
@@ -234,6 +242,8 @@ If the recall is lower than you would like, you can increase the `  fraction_lis
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

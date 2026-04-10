@@ -12,46 +12,23 @@ The following sections outline the changes. Changes are organized by release dat
 
 Campaign Manager 360 made an [announcement](https://support.google.com/campaignmanager/answer/16320235?hl=#111) to update its criterion IDs for browser, operating system, mobile make and model, and ISP data to align with the cross-platform data standards. After the migration, Campaign Manager 360 will stop populating values for deprecated columns and will start populating the new columns. The impacted columns are as follows:
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated columns</th>
-<th>New columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DBM_Browser_Platform_ID      </code></td>
-<td><code dir="ltr" translate="no">       DV360_Browser_Platform_Reportable_ID      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DBM_ISP_ID      </code></td>
-<td><code dir="ltr" translate="no">       DV360_ISP_Reportable_ID      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DBM_Operating_System_ID      </code></td>
-<td><code dir="ltr" translate="no">       DV360_Operating_System_Reportable_ID      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DBM_Mobile_Make_ID      </code></td>
-<td><code dir="ltr" translate="no">       DV360_Mobile_Make_Reportable_ID      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DBM_Mobile_Model_ID      </code></td>
-<td><code dir="ltr" translate="no">       DV360_Mobile_Model_Reportable_ID      </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated columns                       | New columns                                           |
+| ---------------------------------------- | ----------------------------------------------------- |
+| `        DBM_Browser_Platform_ID       ` | `        DV360_Browser_Platform_Reportable_ID       ` |
+| `        DBM_ISP_ID       `              | `        DV360_ISP_Reportable_ID       `              |
+| `        DBM_Operating_System_ID       ` | `        DV360_Operating_System_Reportable_ID       ` |
+| `        DBM_Mobile_Make_ID       `      | `        DV360_Mobile_Make_Reportable_ID       `      |
+| `        DBM_Mobile_Model_ID       `     | `        DV360_Mobile_Model_Reportable_ID       `     |
 
 ## Display & Video 360 API
 
-The BigQuery Data Transfer Service for Display & Video 360 connector periodically updates to support new columns and adapt to changes introduced by new [Display & Video 360 API](https://developers.google.com/display-video/api/release-notes) versions. The BigQuery Data Transfer Service for Display & Video 360 connector uses the supported API version to retrieve [configuration data](/bigquery/docs/display-video-transfer#supported_configuration_data) .
+The BigQuery Data Transfer Service for Display & Video 360 connector periodically updates to support new columns and adapt to changes introduced by new [Display & Video 360 API](https://developers.google.com/display-video/api/release-notes) versions. The BigQuery Data Transfer Service for Display & Video 360 connector uses the supported API version to retrieve [configuration data](https://docs.cloud.google.com/bigquery/docs/display-video-transfer#supported_configuration_data) .
 
 The following sections outline the changes when updating to a new Display & Video 360 API version. Changes are organized by release date, and each entry provides information on the changes you need to make for you to continue receiving data from Display & Video 360.
 
 ### August 26, 2025
 
-[The Display & Video 360 connector](/bigquery/docs/display-video-transfer) plans to update the [Display & Video 360 API version](https://developers.google.com/display-video/api/release-notes) used to retrieve configuration data from [v3](https://developers.google.com/display-video/api/reference/rest/v3) to [v4](https://developers.google.com/display-video/api/reference/rest/v4) . Changes from the API upgrade are listed in the following section. For more information, see [Display & Video 360 API v3 to v4 migration guide](https://developers.google.com/display-video/api/v4-migration-guide) .
+[The Display & Video 360 connector](https://docs.cloud.google.com/bigquery/docs/display-video-transfer) plans to update the [Display & Video 360 API version](https://developers.google.com/display-video/api/release-notes) used to retrieve configuration data from [v3](https://developers.google.com/display-video/api/reference/rest/v3) to [v4](https://developers.google.com/display-video/api/reference/rest/v4) . Changes from the API upgrade are listed in the following section. For more information, see [Display & Video 360 API v3 to v4 migration guide](https://developers.google.com/display-video/api/v4-migration-guide) .
 
 This update for the Display & Video 360 connector is planned to start on August 26, 2025.
 
@@ -107,24 +84,13 @@ New columns
 
 #### Tables with deprecated columns
 
-<table>
-<thead>
-<tr class="header">
-<th>Tables affected</th>
-<th>Deprecated columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Creative      </code></td>
-<td><code dir="ltr" translate="no">       reviewStatus.publisherReviewStatuses      </code></td>
-</tr>
-</tbody>
-</table>
+| Tables affected           | Deprecated columns                                    |
+| ------------------------- | ----------------------------------------------------- |
+| `        Creative       ` | `        reviewStatus.publisherReviewStatuses       ` |
 
 ## Google Ads API
 
-The BigQuery Data Transfer Service for Google Ads periodically updates to support new columns and adapt to changes introduced by new [Google Ads API](https://developers.google.com/google-ads/api/docs/release-notes) versions. The BigQuery Data Transfer Service for Google Ads connector uses the [supported API version](/bigquery/docs/google-ads-transfer#connector_overview) in the Google Ads connector.
+The BigQuery Data Transfer Service for Google Ads periodically updates to support new columns and adapt to changes introduced by new [Google Ads API](https://developers.google.com/google-ads/api/docs/release-notes) versions. The BigQuery Data Transfer Service for Google Ads connector uses the [supported API version](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) in the Google Ads connector.
 
 The following sections outline the changes when updating to a new Google Ads API version. Changes are organized by release date, and each entry provides information on the changes you need to make for you to continue receiving data from Google Ads.
 
@@ -132,7 +98,7 @@ For more information about the Google Ads API release schedule, see [Timetable](
 
 ### June 15, 2026
 
-The [Google Ads connector](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v22](https://developers.google.com/google-ads/api/fields/v22/overview) to [v23](https://developers.google.com/google-ads/api/fields/v23/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v22-v23) .
+The [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v22](https://developers.google.com/google-ads/api/fields/v22/overview) to [v23](https://developers.google.com/google-ads/api/fields/v23/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v22-v23) .
 
 Deprecated columns
 
@@ -150,11 +116,11 @@ Tables affected
 
 `  campaign_end_date_time  `
 
-By April 3, 2026, the Google Ads connector will add the columns `  campaign_start_date_time  ` and `  campaign_end_date_time  ` to the table schema and populate them with `  null  ` . After the update to Google Ads API v23 on June 15, 2026, these new columns will be populated with new values and new data type [datetime](/bigquery/docs/reference/standard-sql/data-types#datetime_type) . `  campaign_start_date  ` and `  campaign_end_date  ` will be deprecated and populated with `  null  ` , but will still remain in the table schema.
+By April 3, 2026, the Google Ads connector will add the columns `  campaign_start_date_time  ` and `  campaign_end_date_time  ` to the table schema and populate them with `  null  ` . After the update to Google Ads API v23 on June 15, 2026, these new columns will be populated with new values and new data type [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) . `  campaign_start_date  ` and `  campaign_end_date  ` will be deprecated and populated with `  null  ` , but will still remain in the table schema.
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other is populated with `  null  ` . To prepare for the Google Ads API v23 update, update your queries to specify one of the two columns. If your SQL query selects the deprecated columns, update the query so that it specifies the correct column, for example:
 
-``` text
+``` notranslate
 IFNULL(DATE(campaign_start_date_time), campaign_start_date)
 ```
 
@@ -162,24 +128,13 @@ IFNULL(DATE(campaign_start_date_time), campaign_start_date)
 
 The following column will be deprecated on June 8, 2026. The column will be populated with `  null  ` for new data transferred.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated columns</th>
-<th>Tables affected</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ad_group_ad_ad_call_ad_phone_number      </code></td>
-<td><code dir="ltr" translate="no">       Ad      </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated columns                                   | Tables affected     |
+| ---------------------------------------------------- | ------------------- |
+| `        ad_group_ad_ad_call_ad_phone_number       ` | `        Ad       ` |
 
 ### March 2, 2026
 
-The [Google Ads connector](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v21](https://developers.google.com/google-ads/api/fields/v21/overview) to [v22](https://developers.google.com/google-ads/api/fields/v22/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v21-v22) .
+The [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v21](https://developers.google.com/google-ads/api/fields/v21/overview) to [v22](https://developers.google.com/google-ads/api/fields/v22/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v21-v22) .
 
 Deprecated columns
 
@@ -259,95 +214,46 @@ By Jan 16, 2026, the Google Ads connector will add the columns `  metrics_truevi
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other is populated with `  null  ` . In response to the Google Ads API v22 update, update your queries to specify one of the two columns. For example, if your SQL query selects the column `  metrics_average_cpv  ` , update the query so that it specifies the correct column:
 
-``` text
+``` notranslate
 IFNULL(metrics_average_cpv, metrics_trueview_average_cpv)
 ```
 
-If you use [custom reports](/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API. If you use [custom reports](/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API.
+If you use [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API. If you use [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) , see the [Google Ads API v22 reference page](https://developers.google.com/google-ads/api/fields/v22/overview) and the [Google Ads API release notes](https://developers.google.com/google-ads/api/docs/release-notes) to update impacted GAQL queries after the [Google Ads connector](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) is upgraded to Google Ads v22 API.
 
 ### August 1, 2025
 
-[Google Ads transfers](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview) to [v20](https://developers.google.com/google-ads/api/reference/rpc/v20/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v18-v19) .
+[Google Ads transfers](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview) to [v20](https://developers.google.com/google-ads/api/reference/rpc/v20/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v18-v19) .
 
 #### Table: `     p_ads_Ad_customer_id    `
 
-<table>
-<thead>
-<tr class="header">
-<th>Columns impacted</th>
-<th>Deprecated data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>ad_group_type</td>
-<td>VIDEO_OUTSTREAM</td>
-</tr>
-<tr class="even">
-<td>ad_group_ad_ad_type</td>
-<td>VIDEO_OUTSTREAM</td>
-</tr>
-</tbody>
-</table>
+| Columns impacted        | Deprecated data type |
+| ----------------------- | -------------------- |
+| ad\_group\_type         | VIDEO\_OUTSTREAM     |
+| ad\_group\_ad\_ad\_type | VIDEO\_OUTSTREAM     |
 
 #### Table: `     p_ads_Campaign_customer_id    `
 
-<table>
-<thead>
-<tr class="header">
-<th>Columns impacted</th>
-<th>Deprecated data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_advertising_channel_sub_type</td>
-<td>VIDEO_OUTSTREAM</td>
-</tr>
-</tbody>
-</table>
+| Columns impacted                          | Deprecated data type |
+| ----------------------------------------- | -------------------- |
+| campaign\_advertising\_channel\_sub\_type | VIDEO\_OUTSTREAM     |
 
 #### Table: `     p_ads_DisplayVideoKeywordStats_customer_id    `
 
-<table>
-<thead>
-<tr class="header">
-<th>Columns impacted</th>
-<th>Deprecated data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_advertising_channel_sub_type</td>
-<td>VIDEO_OUTSTREAM</td>
-</tr>
-</tbody>
-</table>
+| Columns impacted                          | Deprecated data type |
+| ----------------------------------------- | -------------------- |
+| campaign\_advertising\_channel\_sub\_type | VIDEO\_OUTSTREAM     |
 
 ### January 20, 2025
 
-[Google Ads transfers](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview) to [v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v17-v18) .
+[Google Ads transfers](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview) to [v18](https://developers.google.com/google-ads/api/reference/rpc/v18/overview) . After the API upgrade, the column values for newly transferred data in the affected tables will change. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v17-v18) .
 
 This update for the Google Ads connector started on January 20, 2025, and was completed on February 4, 2025.
 
 #### Table: `     p_ads_Campaign_customer_id    `
 
-<table>
-<thead>
-<tr class="header">
-<th>Columns impacted</th>
-<th>Old value (v16)</th>
-<th>New value (v18)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>campaign_advertising_channel_type</td>
-<td>DISCOVERY</td>
-<td>DEMAND_GEN</td>
-</tr>
-</tbody>
-</table>
+| Columns impacted                     | Old value (v16) | New value (v18) |
+| ------------------------------------ | --------------- | --------------- |
+| campaign\_advertising\_channel\_type | DISCOVERY       | DEMAND\_GEN     |
 
 #### Table: `     p_ads_Ad_customer_id    `
 
@@ -379,32 +285,19 @@ This update for the Google Ads connector started on January 20, 2025, and was co
 
 #### Table: `     Asset    `
 
-<table>
-<thead>
-<tr class="header">
-<th>Columns impacted</th>
-<th>Old value (v16)</th>
-<th>New value (v18)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>asset_type</td>
-<td>DISCOVERY_CAROUSEL_CARD</td>
-<td>DEMAND_GEN_CAROUSEL_CARD</td>
-</tr>
-</tbody>
-</table>
+| Columns impacted | Old value (v16)           | New value (v18)             |
+| ---------------- | ------------------------- | --------------------------- |
+| asset\_type      | DISCOVERY\_CAROUSEL\_CARD | DEMAND\_GEN\_CAROUSEL\_CARD |
 
 To ensure your queries work after the update, change your queries to select both old and new values. For example, if you have the following `  WHERE  ` condition in your SQL query:
 
-``` text
+``` notranslate
 WHERE asset_type='DISCOVERY_CAROUSEL_CARD'
 ```
 
 Replace with the following statement:
 
-``` text
+``` notranslate
 WHERE
   asset_type='DISCOVERY_CAROUSEL_CARD'
   OR asset_type='DEMAND_GEN_CAROUSEL_CARD'
@@ -412,7 +305,7 @@ WHERE
 
 ### June 24, 2024
 
-[Google Ads transfers](/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from v14 to [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview) . In this API upgrade, the column names for newly transferred data in the affected tables are changed. Also, some columns are deprecated. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v17-v18) .
+[Google Ads transfers](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer) plans to update the [Google Ads API version](https://developers.google.com/google-ads/api/docs/release-notes) from v14 to [v16](https://developers.google.com/google-ads/api/reference/rpc/v16/overview) . In this API upgrade, the column names for newly transferred data in the affected tables are changed. Also, some columns are deprecated. For more information, see [Google Ads API upgrade](https://developers.google.com/google-ads/api/docs/upgrade#v17-v18) .
 
 This update for the Google Ads connector started on June 17, 2024, and was completed on June 23, 2024.
 
@@ -473,13 +366,13 @@ With Google Ads API v14, new columns, such as `  segments_product_category_level
 
 For each pair of columns, only one column is populated with values from the Google Ads API while the other will be populated with `  null  ` . To ensure your existing queries keep working after the update, update your queries to choose one of the two columns. For example, if you have the following statement in your SQL query:
 
-``` text
+``` notranslate
 segments_product_bidding_category_level1
 ```
 
 Replace with the following statement that specifies the correct column:
 
-``` text
+``` notranslate
 IFNULL(segments_product_category_level1, segments_product_bidding_category_level1)
 ```
 
@@ -495,76 +388,32 @@ The following sections outline the changes when updating to a new Google Analyti
 
 **Note:** These changes only affect users who used the Google Analytics connector before April 25, 2025.
 
-[The Google Analytics connector](/bigquery/docs/google-analytics-4-transfer) plans to deprecate tables and update schemas to reflect changes in [Google Analytics Data API v1](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog) . These changes are listed in the following sections.
+[The Google Analytics connector](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer) plans to deprecate tables and update schemas to reflect changes in [Google Analytics Data API v1](https://developers.google.com/analytics/devguides/reporting/data/v1/changelog) . These changes are listed in the following sections.
 
 This update for the Google Analytics connector is planned to start on September 22, 2025.
 
 #### Deprecated tables
 
-The following table shows the tables that will be deprecated and replaced with new tables with updated schemas. Note that the `  p_ga4_conversions  ` and `  p_ga4_inAppPurchases  ` tables will be discontinued after this update. Both deprecated and new tables will be populated until September 22, 2025 to allow time for migration. You can filter out deprecated tables using the [Table Filter](/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer) option in the transfer configuration.
+The following table shows the tables that will be deprecated and replaced with new tables with updated schemas. Note that the `  p_ga4_conversions  ` and `  p_ga4_inAppPurchases  ` tables will be discontinued after this update. Both deprecated and new tables will be populated until September 22, 2025 to allow time for migration. You can filter out deprecated tables using the [Table Filter](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer#set-up-ga4-transfer) option in the transfer configuration.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated Table</th>
-<th>New Table</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_audiences      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_Audiences      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_conversions      </code></td>
-<td><code dir="ltr" translate="no">       Deprecated      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_demographicDetails      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_DemographicDetails      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_ecommercePurchase      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_EcommercePurchase      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_events      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_Events      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_inAppPurchases      </code></td>
-<td><code dir="ltr" translate="no">       Deprecated      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_landingPage      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_LandingPage      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_pagesAndScreens      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_PagesAndScreens      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_promotions      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_Promotions      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_techDetails      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_TechDetails      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_ga4_trafficAcquisition      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_TrafficAcquisition      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_ga4_userAcquisition      </code></td>
-<td><code dir="ltr" translate="no">       p_ga4_UserAcquisition      </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated Table                          | New Table                                 |
+| ----------------------------------------- | ----------------------------------------- |
+| `        p_ga4_audiences       `          | `        p_ga4_Audiences       `          |
+| `        p_ga4_conversions       `        | `        Deprecated       `               |
+| `        p_ga4_demographicDetails       ` | `        p_ga4_DemographicDetails       ` |
+| `        p_ga4_ecommercePurchase       `  | `        p_ga4_EcommercePurchase       `  |
+| `        p_ga4_events       `             | `        p_ga4_Events       `             |
+| `        p_ga4_inAppPurchases       `     | `        Deprecated       `               |
+| `        p_ga4_landingPage       `        | `        p_ga4_LandingPage       `        |
+| `        p_ga4_pagesAndScreens       `    | `        p_ga4_PagesAndScreens       `    |
+| `        p_ga4_promotions       `         | `        p_ga4_Promotions       `         |
+| `        p_ga4_techDetails       `        | `        p_ga4_TechDetails       `        |
+| `        p_ga4_trafficAcquisition       ` | `        p_ga4_TrafficAcquisition       ` |
+| `        p_ga4_userAcquisition       `    | `        p_ga4_UserAcquisition       `    |
 
 #### Updated table schemas
 
-New table schemas can be found on the [Google Analytics report transformation](/bigquery/docs/google-analytics-4-transformation) page.
+New table schemas can be found on the [Google Analytics report transformation](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transformation) page.
 
 Summary of schema changes:
 
@@ -583,32 +432,11 @@ The following sections outline the changes organized by release date.
 
 The Microsoft SQL Server connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
 
-<table>
-<thead>
-<tr class="header">
-<th>Microsoft SQL Server data type</th>
-<th>Deprecated BigQuery data type mapping</th>
-<th>Updated BigQuery data type mapping</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       datetime      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       datetime2      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       smalldatetime      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-</tbody>
-</table>
+| Microsoft SQL Server data type | Deprecated BigQuery data type mapping | Updated BigQuery data type mapping |
+| ------------------------------ | ------------------------------------- | ---------------------------------- |
+| `        datetime       `      | `        TIMESTAMP       `            | `        DATETIME       `          |
+| `        datetime2       `     | `        TIMESTAMP       `            | `        DATETIME       `          |
+| `        smalldatetime       ` | `        TIMESTAMP       `            | `        DATETIME       `          |
 
 You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
 
@@ -624,32 +452,11 @@ The following sections outline the changes organized by release date.
 
 The MySQL connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
 
-<table>
-<thead>
-<tr class="header">
-<th>MySQL data type</th>
-<th>Deprecated BigQuery data type mapping</th>
-<th>Updated BigQuery data type mapping</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       GEOMETRY      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
-</tr>
-</tbody>
-</table>
+| MySQL data type           | Deprecated BigQuery data type mapping | Updated BigQuery data type mapping |
+| ------------------------- | ------------------------------------- | ---------------------------------- |
+| `        DATETIME       ` | `        TIMESTAMP       `            | `        DATETIME       `          |
+| `        JSON       `     | `        STRING       `               | `        JSON       `              |
+| `        GEOMETRY       ` | `        BYTES       `                | `        GEOGRAPHY       `         |
 
 You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
 
@@ -669,24 +476,10 @@ Google Play plans to make the following changes to the [Earnings report](https:/
 
 The following Google Play columns will be renamed.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated columns</th>
-<th>New columns</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Base_Plan_ID      </code></td>
-<td><code dir="ltr" translate="no">       Base_Plan_or_Purchase_Option_ID      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Product_id      </code></td>
-<td><code dir="ltr" translate="no">       Package_ID      </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated columns            | New columns                                      |
+| ----------------------------- | ------------------------------------------------ |
+| `        Base_Plan_ID       ` | `        Base_Plan_or_Purchase_Option_ID       ` |
+| `        Product_id       `   | `        Package_ID       `                      |
 
 #### Column value change
 
@@ -706,32 +499,11 @@ The following sections outline the changes organized by release date.
 
 The PostgreSQL connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
 
-<table>
-<thead>
-<tr class="header">
-<th>PostgreSQL data type</th>
-<th>Deprecated BigQuery data type mapping</th>
-<th>Updated BigQuery data type mapping</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       timestamp[(p)][without time zone]      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       json      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       jsonb      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-</tr>
-</tbody>
-</table>
+| PostgreSQL data type                               | Deprecated BigQuery data type mapping | Updated BigQuery data type mapping |
+| -------------------------------------------------- | ------------------------------------- | ---------------------------------- |
+| `        timestamp[(p)][without time zone]       ` | `        TIMESTAMP       `            | `        DATETIME       `          |
+| `        json       `                              | `        STRING       `               | `        JSON       `              |
+| `        jsonb       `                             | `        STRING       `               | `        JSON       `              |
 
 You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
 
@@ -751,80 +523,24 @@ As part of the Salesforce connector GA release, the Salesforce connector now use
 
 The following table shows the fields deprecated with the Salesforce connector GA release, along with the `  sObject  ` name associated with each field.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated Field</th>
-<th><code dir="ltr" translate="no">       sObject      </code> name</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       EffectiveDate      </code></td>
-<td><code dir="ltr" translate="no">       MobSecurityCertPinConfig      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetectionTraining      </code></td>
-<td><code dir="ltr" translate="no">       Profile      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetection      </code></td>
-<td><code dir="ltr" translate="no">       Profile      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetectionTraining      </code></td>
-<td><code dir="ltr" translate="no">       PermissionSet      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetection      </code></td>
-<td><code dir="ltr" translate="no">       PermissionSet      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       MaximumPermissionsAllowObjectDetectionTraining      </code></td>
-<td><code dir="ltr" translate="no">       PermissionSetLicense      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       MaximumPermissionsAllowObjectDetection      </code></td>
-<td><code dir="ltr" translate="no">       PermissionSetLicense      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetectionTraining      </code></td>
-<td><code dir="ltr" translate="no">       UserPermissionAccess      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetection      </code></td>
-<td><code dir="ltr" translate="no">       UserPermissionAccess      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetectionTraining      </code></td>
-<td><code dir="ltr" translate="no">       MutingPermissionSet      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       PermissionsAllowObjectDetection      </code></td>
-<td><code dir="ltr" translate="no">       MutingPermissionSet      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       OptionsHstsHeaders      </code></td>
-<td><code dir="ltr" translate="no">       Domain      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UserPreferencesHideInvoicesRedirectConfirmation      </code></td>
-<td><code dir="ltr" translate="no">       User      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       UserPreferencesHideStatementsRedirectConfirmation      </code></td>
-<td><code dir="ltr" translate="no">       User      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UserPreferencesHideInvoicesRedirectConfirmation      </code></td>
-<td><code dir="ltr" translate="no">       UserChangeEvent      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       UserPreferencesHideStatementsRedirectConfirmation      </code></td>
-<td><code dir="ltr" translate="no">       UserChangeEvent      </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated Field                                                   | `        sObject       ` name             |
+| ------------------------------------------------------------------ | ----------------------------------------- |
+| `        EffectiveDate       `                                     | `        MobSecurityCertPinConfig       ` |
+| `        PermissionsAllowObjectDetectionTraining       `           | `        Profile       `                  |
+| `        PermissionsAllowObjectDetection       `                   | `        Profile       `                  |
+| `        PermissionsAllowObjectDetectionTraining       `           | `        PermissionSet       `            |
+| `        PermissionsAllowObjectDetection       `                   | `        PermissionSet       `            |
+| `        MaximumPermissionsAllowObjectDetectionTraining       `    | `        PermissionSetLicense       `     |
+| `        MaximumPermissionsAllowObjectDetection       `            | `        PermissionSetLicense       `     |
+| `        PermissionsAllowObjectDetectionTraining       `           | `        UserPermissionAccess       `     |
+| `        PermissionsAllowObjectDetection       `                   | `        UserPermissionAccess       `     |
+| `        PermissionsAllowObjectDetectionTraining       `           | `        MutingPermissionSet       `      |
+| `        PermissionsAllowObjectDetection       `                   | `        MutingPermissionSet       `      |
+| `        OptionsHstsHeaders       `                                | `        Domain       `                   |
+| `        UserPreferencesHideInvoicesRedirectConfirmation       `   | `        User       `                     |
+| `        UserPreferencesHideStatementsRedirectConfirmation       ` | `        User       `                     |
+| `        UserPreferencesHideInvoicesRedirectConfirmation       `   | `        UserChangeEvent       `          |
+| `        UserPreferencesHideStatementsRedirectConfirmation       ` | `        UserChangeEvent       `          |
 
 ## ServiceNow
 
@@ -836,27 +552,10 @@ The following sections outline the changes organized by release date.
 
 The ServiceNow connector plans to update its data type mapping to more accurately reflect the source data and to ensure data integrity. The following table shows the source data type, and the corresponding deprecated data type mapping and the updated data type mapping:
 
-<table>
-<thead>
-<tr class="header">
-<th>ServiceNow data type</th>
-<th>Deprecated BigQuery data type mapping</th>
-<th>Updated BigQuery data type mapping</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       glide_list      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       list      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-</tr>
-</tbody>
-</table>
+| ServiceNow data type        | Deprecated BigQuery data type mapping | Updated BigQuery data type mapping |
+| --------------------------- | ------------------------------------- | ---------------------------------- |
+| `        glide_list       ` | `        STRING       `               | `        ARRAY       `             |
+| `        list       `       | `        STRING       `               | `        ARRAY       `             |
 
 You can continue to use the deprecated data type mapping in the transfer configuration by setting the `  connector.legacyMapping  ` parameter to `  true  ` . You can use the updated data type mapping by setting the `  connector.legacyMapping  ` parameter to `  false  ` .
 
@@ -870,7 +569,7 @@ The following sections outline the changes when new reports are introduced by Yo
 
 ### September 22, 2025
 
-[The YouTube Content Owner connector](/bigquery/docs/youtube-content-owner-transfer) and [The YouTube Channel connector](/bigquery/docs/youtube-channel-transfer) plan to introduce new reports and deprecate old reports to reflect the YouTube [shorts view count change](https://support.google.com/youtube/thread/333869549/a-change-to-how-we-count-views-on-shorts) . These changes are listed in the following sections.
+[The YouTube Content Owner connector](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer) and [The YouTube Channel connector](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer) plan to introduce new reports and deprecate old reports to reflect the YouTube [shorts view count change](https://support.google.com/youtube/thread/333869549/a-change-to-how-we-count-views-on-shorts) . These changes are listed in the following sections.
 
 New reports are planned to start on July 7, 2025. No action is required from you to get the new reports. The deprecation of old reports is planned to start on September 22, 2025.
 
@@ -878,175 +577,51 @@ New reports are planned to start on July 7, 2025. No action is required from you
 
 For the YouTube Content Owner connector, the following table shows the BigQuery tables that will be deprecated and replaced with new tables with updated schemas. Both deprecated and new tables will be populated until September 22, 2025 to allow time for migration. After September 22, 2025, only the new tables will be populated. The value for suffix is the table suffix you configured when you created the transfer.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated Table</th>
-<th>New Table</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_basic_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_basic_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_combined_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_combined_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_device_os_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_device_os_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_playback_location_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_playback_location_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_province_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_province_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_asset_traffic_source_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_asset_traffic_source_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_basic_a3_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_basic_a4_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_combined_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_combined_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_device_os_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_device_os_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_playback_location_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playback_location_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_basic_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_basic_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_combined_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_combined_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_device_os_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_device_os_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_playback_location_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_playback_location_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_province_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_province_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_traffic_source_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_playlist_traffic_source_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_province_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_province_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_subtitles_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_subtitles_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_traffic_source_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_traffic_source_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_ad_revenue_summary_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_ad_revenue_summary_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_country_ad_revenue_summary_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_country_ad_revenue_summary_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_day_ad_revenue_summary_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_day_ad_revenue_summary_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_global_ad_revenue_summary_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_content_owner_shorts_global_ad_revenue_summary_a2_               suffix       </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated Table                                                                             | New Table                                                                                    |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `        p_content_owner_asset_basic_a2_               suffix        `                       | `        p_content_owner_asset_basic_a3_               suffix        `                       |
+| `        p_content_owner_asset_combined_a2_               suffix        `                    | `        p_content_owner_asset_combined_a3_               suffix        `                    |
+| `        p_content_owner_asset_device_os_a2_               suffix        `                   | `        p_content_owner_asset_device_os_a3_               suffix        `                   |
+| `        p_content_owner_asset_playback_location_a2_               suffix        `           | `        p_content_owner_asset_playback_location_a3_               suffix        `           |
+| `        p_content_owner_asset_province_a2_               suffix        `                    | `        p_content_owner_asset_province_a3_               suffix        `                    |
+| `        p_content_owner_asset_traffic_source_a2_               suffix        `              | `        p_content_owner_asset_traffic_source_a3_               suffix        `              |
+| `        p_content_owner_basic_a3_               suffix        `                             | `        p_content_owner_basic_a4_               suffix        `                             |
+| `        p_content_owner_combined_a2_               suffix        `                          | `        p_content_owner_combined_a3_               suffix        `                          |
+| `        p_content_owner_device_os_a2_               suffix        `                         | `        p_content_owner_device_os_a3_               suffix        `                         |
+| `        p_content_owner_playback_location_a2_               suffix        `                 | `        p_content_owner_playback_location_a3_               suffix        `                 |
+| `        p_content_owner_playlist_basic_a1_               suffix        `                    | `        p_content_owner_playlist_basic_a2_               suffix        `                    |
+| `        p_content_owner_playlist_combined_a1_               suffix        `                 | `        p_content_owner_playlist_combined_a2_               suffix        `                 |
+| `        p_content_owner_playlist_device_os_a1_               suffix        `                | `        p_content_owner_playlist_device_os_a2_               suffix        `                |
+| `        p_content_owner_playlist_playback_location_a1_               suffix        `        | `        p_content_owner_playlist_playback_location_a2_               suffix        `        |
+| `        p_content_owner_playlist_province_a1_               suffix        `                 | `        p_content_owner_playlist_province_a2_               suffix        `                 |
+| `        p_content_owner_playlist_traffic_source_a1_               suffix        `           | `        p_content_owner_playlist_traffic_source_a2_               suffix        `           |
+| `        p_content_owner_province_a2_               suffix        `                          | `        p_content_owner_province_a3_               suffix        `                          |
+| `        p_content_owner_subtitles_a2_               suffix        `                         | `        p_content_owner_subtitles_a3_               suffix        `                         |
+| `        p_content_owner_traffic_source_a2_               suffix        `                    | `        p_content_owner_traffic_source_a3_               suffix        `                    |
+| `        p_content_owner_shorts_ad_revenue_summary_a1_               suffix        `         | `        p_content_owner_shorts_ad_revenue_summary_a2_               suffix        `         |
+| `        p_content_owner_shorts_country_ad_revenue_summary_a1_               suffix        ` | `        p_content_owner_shorts_country_ad_revenue_summary_a2_               suffix        ` |
+| `        p_content_owner_shorts_day_ad_revenue_summary_a1_               suffix        `     | `        p_content_owner_shorts_day_ad_revenue_summary_a2_               suffix        `     |
+| `        p_content_owner_shorts_global_ad_revenue_summary_a1_               suffix        `  | `        p_content_owner_shorts_global_ad_revenue_summary_a2_               suffix        `  |
 
 #### YouTube Channel connector - deprecated tables
 
 For the YouTube Channel connector, the following table shows the BigQuery tables that will be deprecated and replaced with new tables with updated schemas. Both deprecated and new tables will be populated until September 22, 2025 to allow time for migration. After September 22, 2025, only the new tables will be populated. The value for suffix is the table suffix you configured when you created the transfer.
 
-<table>
-<thead>
-<tr class="header">
-<th>Deprecated Table</th>
-<th>New Table</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_channel_basic_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_basic_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_channel_combined_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_combined_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_channel_device_os_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_device_os_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_channel_playback_location_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_playback_location_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_channel_province_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_province_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_channel_subtitles_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_subtitles_a3_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_channel_traffic_source_a2_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_channel_traffic_source_a3_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_playlist_basic_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_basic_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_playlist_combined_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_combined_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_playlist_device_os_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_device_os_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_playlist_playback_location_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_playback_location_a2_               suffix       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       p_playlist_province_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_province_a2_               suffix       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       p_playlist_traffic_source_a1_               suffix       </code></td>
-<td><code dir="ltr" translate="no">       p_playlist_traffic_source_a2_               suffix       </code></td>
-</tr>
-</tbody>
-</table>
+| Deprecated Table                                                        | New Table                                                               |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `        p_channel_basic_a2_               suffix        `              | `        p_channel_basic_a3_               suffix        `              |
+| `        p_channel_combined_a2_               suffix        `           | `        p_channel_combined_a3_               suffix        `           |
+| `        p_channel_device_os_a2_               suffix        `          | `        p_channel_device_os_a3_               suffix        `          |
+| `        p_channel_playback_location_a2_               suffix        `  | `        p_channel_playback_location_a3_               suffix        `  |
+| `        p_channel_province_a2_               suffix        `           | `        p_channel_province_a3_               suffix        `           |
+| `        p_channel_subtitles_a2_               suffix        `          | `        p_channel_subtitles_a3_               suffix        `          |
+| `        p_channel_traffic_source_a2_               suffix        `     | `        p_channel_traffic_source_a3_               suffix        `     |
+| `        p_playlist_basic_a1_               suffix        `             | `        p_playlist_basic_a2_               suffix        `             |
+| `        p_playlist_combined_a1_               suffix        `          | `        p_playlist_combined_a2_               suffix        `          |
+| `        p_playlist_device_os_a1_               suffix        `         | `        p_playlist_device_os_a2_               suffix        `         |
+| `        p_playlist_playback_location_a1_               suffix        ` | `        p_playlist_playback_location_a2_               suffix        ` |
+| `        p_playlist_province_a1_               suffix        `          | `        p_playlist_province_a2_               suffix        `          |
+| `        p_playlist_traffic_source_a1_               suffix        `    | `        p_playlist_traffic_source_a2_               suffix        `    |
 
 #### Updated table schemas
 

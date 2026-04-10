@@ -7,4 +7,4 @@ BigQuery DataFrames consists of the following parts:
   - `  bigframes.pandas  ` implements a [pandas-like API](https://dataframes.bigquery.dev/reference/api/bigframes.pandas.html) on top of BigQuery. For more information, see [Supported pandas APIs](https://dataframes.bigquery.dev/supported_pandas_apis.html) .
   - `  bigframes.ml  ` implements a [scikit-learn-like API](https://dataframes.bigquery.dev/reference/api/bigframes.ml.html) on top of BigQuery ML.
 
-Get started with BigQuery DataFrames by using the [BigQuery DataFrames quickstart](/bigquery/docs/dataframes-quickstart) .
+Get started with BigQuery DataFrames by using the [BigQuery DataFrames quickstart](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) .

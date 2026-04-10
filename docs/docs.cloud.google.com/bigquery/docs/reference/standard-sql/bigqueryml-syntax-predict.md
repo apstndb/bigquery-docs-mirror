@@ -2,28 +2,28 @@
 
 This document describes the `  ML.PREDICT  ` function, which you can use to predict outcomes by using a model. `  ML.PREDICT  ` works with the following models:
 
-  - [Linear and logistic regression models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-  - [Boosted tree models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Random forest models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [Deep neural network (DNN) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Wide-and-deep models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-  - [K-means models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
-  - [Principal component analysis (PCA) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-  - [Autoencoder models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+  - [Linear and logistic regression models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+  - [Boosted tree models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Random forest models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+  - [Deep neural network (DNN) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+  - [Wide-and-deep models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+  - [K-means models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+  - [Principal component analysis (PCA) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+  - [Autoencoder models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
   - Imported models:
-      - [ONNX models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
-      - [TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-      - [TensorFlow Lite models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
-      - [XGBoost models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
-  - [Vertex AI hosted models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - [ONNX models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx)
+      - [TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+      - [TensorFlow Lite models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite)
+      - [XGBoost models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost)
+  - [Vertex AI hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
 
-For PCA and autoencoder models, you can use the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) as an alternative to the `  ML.PREDICT  ` function. `  AI.GENERATE_EMBEDDING  ` generates the same embedding data as `  ML.PREDICT  ` as an array in a single column, rather than in a series of columns. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  AI.GENERATE_EMBEDDING  ` output.
+For PCA and autoencoder models, you can use the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) as an alternative to the `  ML.PREDICT  ` function. `  AI.GENERATE_EMBEDDING  ` generates the same embedding data as `  ML.PREDICT  ` as an array in a single column, rather than in a series of columns. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  AI.GENERATE_EMBEDDING  ` output.
 
 You can run prediction during model creation, after model creation, or after a failure (as long as at least one iteration is finished). `  ML.PREDICT  ` always uses the model weights from the last successful iteration.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.PREDICT(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }
@@ -46,27 +46,27 @@ ML.PREDICT(
 
   - `  TABLE  ` : The name of the input table that contains the evaluation data.
     
-    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
-    For TensorFlow Lite, Open Neural Network Exchange (ONNX), and XGBoost models, the input must be [convertible](/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
+    For TensorFlow Lite, Open Neural Network Exchange (ONNX), and XGBoost models, the input must be [convertible](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
     
     For remote models, the input columns must contain all Vertex AI endpoint input fields.
     
     If there are unused columns from the table, they are passed through as output columns.
 
-  - `  QUERY_STATEMENT  ` : The GoogleSQL query that is used to generate the evaluation data. See the [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  QUERY_STATEMENT  ` clause.
+  - `  QUERY_STATEMENT  ` : The GoogleSQL query that is used to generate the evaluation data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  QUERY_STATEMENT  ` clause.
     
-    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
-    For TensorFlow Lite, ONNX, and XGBoost models, the input must be [convertible](/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
+    For TensorFlow Lite, ONNX, and XGBoost models, the input must be [convertible](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules) to the type expected by the model.
     
     For remote models, the input columns must contain all Vertex AI endpoint input fields.
     
     If there are unused columns from the query, they are passed through as output columns.
     
-    If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause must appear in `  QUERY_STATEMENT  ` .
+    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause must appear in `  QUERY_STATEMENT  ` .
     
-    If you are running inference on image data from an [object table](/bigquery/docs/object-table-introduction) , you must use the [`  ML.DECODE_IMAGE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `  ARRAY  ` representation. You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` statement, or you can write the results from `  ML.DECODE_IMAGE  ` to a table column and reference that column when you call `  ML.PREDICT  ` . For more information, see [Predict an outcome from image data with an imported TensorFlow model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#tensorflow-unstructured) .
+    If you are running inference on image data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must use the [`  ML.DECODE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `  ARRAY  ` representation. You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` statement, or you can write the results from `  ML.DECODE_IMAGE  ` to a table column and reference that column when you call `  ML.PREDICT  ` . For more information, see [Predict an outcome from image data with an imported TensorFlow model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#tensorflow-unstructured) .
 
   - THRESHOLD : a `  FLOAT64  ` value that specifies a custom threshold for a binary classification model. It is used as the cutoff between the two labels. Predictions above the threshold are positive predictions. Predictions below the threshold are negative predictions. The default value is `  0.5  ` .
 
@@ -127,7 +127,7 @@ The following columns are returned:
 For k-means models, the following columns are returned:
 
   - `  centroid_id  ` : an `  INT64  ` value that identifies the centroid.
-  - `  nearest_centroids_distance  ` : an `  ARRAY<STRUCT>  ` value that contains the distances to the nearest `  k  ` clusters, where `  k  ` is equal to the lesser of `  num_clusters  ` or `  5  ` . If the model was created with the [`  standardize_features  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#model_option_list) set to `  TRUE  ` , then the model computes these distances using standardized features; otherwise, it computes these distances using non-standardized features.
+  - `  nearest_centroids_distance  ` : an `  ARRAY<STRUCT>  ` value that contains the distances to the nearest `  k  ` clusters, where `  k  ` is equal to the lesser of `  num_clusters  ` or `  5  ` . If the model was created with the [`  standardize_features  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#model_option_list) set to `  TRUE  ` , then the model computes these distances using standardized features; otherwise, it computes these distances using non-standardized features.
 
 ### PCA models
 
@@ -161,36 +161,16 @@ For remote models, the output columns contain all Vertex AI endpoint output fiel
 
 In statistics, imputation is used to replace missing data with substituted values. When you train a model in BigQuery ML, `  NULL  ` values are treated as missing data. When you predict outcomes in BigQuery ML, missing values can occur when BigQuery ML encounters a `  NULL  ` value or a previously unseen value. BigQuery ML handles missing data differently, based on the type of data in the column.
 
-<table>
-<thead>
-<tr class="header">
-<th>Column type</th>
-<th>Imputation method</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Numeric</td>
-<td>In both training and prediction, <code dir="ltr" translate="no">       NULL      </code> values in numeric columns are replaced with the mean value of the given column, as calculated by the feature column in the original input data.</td>
-</tr>
-<tr class="even">
-<td>One-hot/Multi-hot encoded</td>
-<td>In both training and prediction, <code dir="ltr" translate="no">       NULL      </code> values in the encoded columns are mapped to an additional category that is added to the data. Previously unseen data is assigned a weight of 0 during prediction.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code> columns use a mixture of imputation methods from both standardized and one-hot encoded columns. For the generated Unix time column, BigQuery ML replaces values with the mean Unix time across the original columns. For other generated values, BigQuery ML assigns them to the respective <code dir="ltr" translate="no">       NULL      </code> category for each extracted feature.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td>In both training and prediction, each field of the <code dir="ltr" translate="no">       STRUCT      </code> is imputed according to its type.</td>
-</tr>
-</tbody>
-</table>
+| Column type                | Imputation method                                                                                                                                                                                                                                                                                                                                                                 |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Numeric                    | In both training and prediction, `        NULL       ` values in numeric columns are replaced with the mean value of the given column, as calculated by the feature column in the original input data.                                                                                                                                                                            |
+| One-hot/Multi-hot encoded  | In both training and prediction, `        NULL       ` values in the encoded columns are mapped to an additional category that is added to the data. Previously unseen data is assigned a weight of 0 during prediction.                                                                                                                                                          |
+| `        TIMESTAMP       ` | `        TIMESTAMP       ` columns use a mixture of imputation methods from both standardized and one-hot encoded columns. For the generated Unix time column, BigQuery ML replaces values with the mean Unix time across the original columns. For other generated values, BigQuery ML assigns them to the respective `        NULL       ` category for each extracted feature. |
+| `        STRUCT       `    | In both training and prediction, each field of the `        STRUCT       ` is imputed according to its type.                                                                                                                                                                                                                                                                      |
 
 ## Permissions
 
-You must have the `  bigquery.models.getData  ` [Identity and Access Management (IAM) permission](/bigquery/docs/access-control#bq-permissions) in order to run `  ML.PREDICT  ` .
+You must have the `  bigquery.models.getData  ` [Identity and Access Management (IAM) permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) in order to run `  ML.PREDICT  ` .
 
 ## Examples
 
@@ -207,7 +187,7 @@ The following example predicts an outcome and returns the following columns:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -227,7 +207,7 @@ The following example creates two models and then compares their output:
 
 1.  Create the first model:
     
-    ``` text
+    ``` notranslate
     CREATE MODEL
       `mydataset.mymodel1`
     OPTIONS
@@ -243,7 +223,7 @@ The following example creates two models and then compares their output:
 
 2.  Create the second model:
     
-    ``` text
+    ``` notranslate
     CREATE MODEL
       `mydataset.mymodel2`
     OPTIONS
@@ -259,7 +239,7 @@ The following example creates two models and then compares their output:
 
 3.  Compare the output of the two models:
     
-    ``` text
+    ``` notranslate
     SELECT
       label,
       predicted_label1,
@@ -279,7 +259,7 @@ The following example creates two models and then compares their output:
 
 The following example runs prediction with input data and a custom threshold of `  0.55  ` :
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -296,9 +276,9 @@ FROM
 
 ### Predict an outcome from structured data with an imported TensorFlow model
 
-The following query predicts outcomes using an imported TensorFlow model. The `  input_data  ` table contains inputs in the schema expected by `  my_model  ` . See [the `  CREATE MODEL  ` statement for TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) for more information.
+The following query predicts outcomes using an imported TensorFlow model. The `  input_data  ` table contains inputs in the schema expected by `  my_model  ` . See [the `  CREATE MODEL  ` statement for TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) for more information.
 
-``` text
+``` notranslate
 SELECT *
 FROM ML.PREDICT(MODEL `my_project.my_dataset.my_model`,
   (SELECT * FROM input_data))
@@ -306,7 +286,7 @@ FROM ML.PREDICT(MODEL `my_project.my_dataset.my_model`,
 
 ### Predict an outcome from image data with an imported TensorFlow model
 
-If you are running inference on image data from an [object table](/bigquery/docs/object-table-introduction) , you must use the [`  ML.DECODE_IMAGE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `  ARRAY  ` representation. You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` function, or you can write the results from `  ML.DECODE_IMAGE  ` to a table column and reference that column when you call `  ML.PREDICT  ` . You can also pass `  ML.DECODE_IMAGE  ` output to another image processing function for additional preprocessing during either of these procedures.
+If you are running inference on image data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must use the [`  ML.DECODE_IMAGE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-decode-image) to convert image bytes to a multi-dimensional `  ARRAY  ` representation. You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` function, or you can write the results from `  ML.DECODE_IMAGE  ` to a table column and reference that column when you call `  ML.PREDICT  ` . You can also pass `  ML.DECODE_IMAGE  ` output to another image processing function for additional preprocessing during either of these procedures.
 
 You can join the object table to standard BigQuery tables to limit the data used in inference, or to provide additional input to the model.
 
@@ -316,7 +296,7 @@ The following examples show different ways you can use the `  ML.PREDICT  ` func
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. It returns the inference results for all images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
@@ -329,7 +309,7 @@ ML.PREDICT(
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function, and uses the `  ML.CONVERT_COLOR_SPACE  ` function in the `  ML.PREDICT  ` function to convert the image color space from `  RBG  ` to `  YIQ  ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
   ML.PREDICT(
     MODEL `my_dataset.vision_model`,
@@ -345,7 +325,7 @@ The following example uses results from `  ML.DECODE_IMAGE  ` that have been wri
 
 Create the decoded images table:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `my_dataset.decoded_images`
   AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
   FROM `my_dataset.object_table`);
@@ -353,7 +333,7 @@ CREATE OR REPLACE TABLE `my_dataset.decoded_images`
 
 Run inference on the decoded images table:
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL`my_dataset.vision_model`,
@@ -368,7 +348,7 @@ The following example uses results from `  ML.DECODE_IMAGE  ` that have been wri
 
 Create the table:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `my_dataset.decoded_images`
   AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
   FROM `my_dataset.object_table`);
@@ -376,7 +356,7 @@ CREATE OR REPLACE TABLE `my_dataset.decoded_images`
 
 Run inference on the decoded images table:
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
@@ -389,7 +369,7 @@ ML.PREDICT(
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. In this example, the model has an output field of `  embeddings  ` and two input fields: one that expects an image, `  f_img  ` , and one that expects a string, `  f_txt  ` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `  uri  ` column.
 
-``` text
+``` notranslate
 SELECT * FROM
   ML.PREDICT(
     MODEL `my_dataset.mixed_model`,
@@ -403,9 +383,9 @@ SELECT * FROM
 
 ### Predict an outcome with a model trained with the `     TRANSFORM    ` clause
 
-The following example trains a model using the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) :
+The following example trains a model using the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) :
 
-``` text
+``` notranslate
 CREATE MODEL `mydataset.mymodel`
   TRANSFORM(f1 + f2 as c, label)
   OPTIONS(...)
@@ -414,7 +394,7 @@ AS SELECT f1, f2, f3, label FROM t;
 
 Because the `  f3  ` column doesn't appear in the `  TRANSFORM  ` clause, the following prediction query omits that column in the `  QUERY_STATEMENT  ` :
 
-``` text
+``` notranslate
 SELECT * FROM ML.PREDICT(
   MODEL `mydataset.mymodel`, (SELECT f1, f2 FROM t1));
 ```
@@ -425,12 +405,12 @@ If `  f3  ` is provided in the `  SELECT  ` statement, it isn't used for calcula
 
 The following example runs prediction against a previously built autoencoder model, where the input was 4 dimensional (4 input columns) and the dimensionality reduction had 2 dimensions (2 output columns):
 
-``` text
+``` notranslate
 SELECT * FROM ML.PREDICT(
   MODEL `mydataset.mymodel`, (SELECT f1, f2, f3, f4 FROM t1));
 ```
 
 ## What's next
 
-  - For more information about model inference, see [Model inference overview](/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

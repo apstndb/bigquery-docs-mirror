@@ -2,17 +2,17 @@
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
 
 This document helps you understand the concept of repositories in BigQuery. You can use repositories to perform version control on files you use in BigQuery. BigQuery uses Git to record changes and manage file versions.
 
-Each BigQuery repository represents a Git repository. You can use BigQuery's built-in Git capabilities, or you can connect to a third-party Git repository. Within each repository, you can create one or more [workspaces](/bigquery/docs/workspaces-intro) to edit the code stored in the repository.
+Each BigQuery repository represents a Git repository. You can use BigQuery's built-in Git capabilities, or you can connect to a third-party Git repository. Within each repository, you can create one or more [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) to edit the code stored in the repository.
 
 To view repositories, on the BigQuery page, in the left pane, click explore **Explorer** , and then click **Repositories** . Your repositories are displayed in alphabetical order in a new tab in the details pane.
 
-**Important:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in BigQuery repository. For scheduling and executing Dataform workflows, you need to use Dataform repositories. For scheduling queries and notebooks, use BigQuery Studio. For more information, see [Scheduling queries](/bigquery/docs/scheduling-queries) , [Schedule notebooks](/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](/bigquery/docs/schedule-pipelines) .
+**Important:** If you create an asset in a BigQuery repository—for example, a query, notebook (including a notebook with an Apache Spark job), BigQuery pipeline, or Dataform workflow—you cannot schedule it for execution in BigQuery repository. For scheduling and executing Dataform workflows, you need to use Dataform repositories. For scheduling queries and notebooks, use BigQuery Studio. For more information, see [Scheduling queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [Schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) , and [Schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .
 
 ## Third-party repositories
 
@@ -20,50 +20,28 @@ You can connect a BigQuery repository to a third-party Git repository if you cho
 
 The following table lists supported Git providers and the connection methods that are available for their repositories:
 
-<table>
-<thead>
-<tr class="header">
-<th>Git provider</th>
-<th>Connection method</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Microsoft Azure DevOps Services</td>
-<td>SSH</td>
-</tr>
-<tr class="even">
-<td>Bitbucket</td>
-<td>SSH</td>
-</tr>
-<tr class="odd">
-<td>GitHub</td>
-<td>SSH or HTTPS</td>
-</tr>
-<tr class="even">
-<td>GitLab</td>
-<td>SSH or HTTPS</td>
-</tr>
-</tbody>
-</table>
+| Git provider                    | Connection method |
+| ------------------------------- | ----------------- |
+| Microsoft Azure DevOps Services | SSH               |
+| Bitbucket                       | SSH               |
+| GitHub                          | SSH or HTTPS      |
+| GitLab                          | SSH or HTTPS      |
 
-For more information, see [Connect to a third-party repository](/bigquery/docs/repositories#connect-third-party) .
+For more information, see [Connect to a third-party repository](https://docs.cloud.google.com/bigquery/docs/repositories#connect-third-party) .
 
 ## Service account
 
 All BigQuery repositories are connected to the default Dataform service agent. This service account is derived from your project number in the following format:
 
-``` text
-service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
-```
+    service-YOUR_PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
 ## Locations
 
-You can create repositories in all [BigQuery Studio locations](/bigquery/docs/locations#bqstudio-loc) .
+You can create repositories in all [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 
 ## Quotas
 
-[Dataform quotas](/dataform/docs/quotas#quotas) apply to use of BigQuery repositories.
+[Dataform quotas](https://docs.cloud.google.com/dataform/docs/quotas#quotas) apply to use of BigQuery repositories.
 
 ## Pricing
 
@@ -73,5 +51,5 @@ For more information on BigQuery pricing, see [Pricing](https://cloud.google.com
 
 ## What's next
 
-  - Learn how to [create repositories](/bigquery/docs/repositories) .
-  - Learn how to [create workspaces](/bigquery/docs/workspaces) .
+  - Learn how to [create repositories](https://docs.cloud.google.com/bigquery/docs/repositories) .
+  - Learn how to [create workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces) .

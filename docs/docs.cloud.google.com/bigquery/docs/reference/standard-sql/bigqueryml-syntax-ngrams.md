@@ -2,14 +2,14 @@
 
 This document describes the `  ML.NGRAMS  ` function, which lets you create [n-grams](https://wikipedia.org/wiki/N-gram) of the input values.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey) ).
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey) ).
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.NGRAMS(array_input, range [, separator])
 ```
 
@@ -29,7 +29,7 @@ ML.NGRAMS(array_input, range [, separator])
 
 The following example outputs all possible 2-token and 3-token combinations for a set of three input strings:
 
-``` text
+``` notranslate
 SELECT
   ML.NGRAMS(['a', 'b', 'c'], [2,3], '#') AS output;
 ```
@@ -46,4 +46,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

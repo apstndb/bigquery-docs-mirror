@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for remote models over custom models
 
-This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over custom models deployed to [Vertex AI](/vertex-ai/docs) by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over custom models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-After you create a remote model, you can use it with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to get predictions from the custom model deployed to Vertex AI.
+After you create a remote model, you can use it with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to get predictions from the custom model deployed to Vertex AI.
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 [INPUT (field_name field_type)]
@@ -50,13 +50,13 @@ You must specify the `  INPUT  ` and `  OUTPUT  ` clauses when you create a remo
 
 You can use the following BigQuery data types in the `  INPUT  ` and `  OUTPUT  ` clauses:
 
-  - [`  BOOL  `](/bigquery/docs/reference/standard-sql/data-types#boolean_type)
-  - [`  INT64  `](/bigquery/docs/reference/standard-sql/data-types#integer_types)
-  - [`  FLOAT64  `](/bigquery/docs/reference/standard-sql/data-types#floating_point_types)
-  - [`  NUMERIC  `](/bigquery/docs/reference/standard-sql/data-types#decimal_types)
-  - [`  BIGNUMERIC  `](/bigquery/docs/reference/standard-sql/data-types#decimal_types)
-  - [`  STRING  `](/bigquery/docs/reference/standard-sql/data-types#string_type)
-  - An [`  ARRAY  `](/bigquery/docs/reference/standard-sql/data-types#array_type) of any of the aforementioned types.
+  - [`  BOOL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type)
+  - [`  INT64  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)
+  - [`  FLOAT64  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types)
+  - [`  NUMERIC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types)
+  - [`  BIGNUMERIC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types)
+  - [`  STRING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)
+  - An [`  ARRAY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) of any of the aforementioned types.
 
 #### Field name format
 
@@ -66,113 +66,95 @@ The `  INPUT  ` and `  OUTPUT  ` field names must be identical as the field name
 
 If the Vertex AI request looks like the following example:
 
-``` text
-{
-  "instances": [
-    { "f1": 10, "f2": 12.3, "f3": "abc", "f4": [1, 2, 3, 4] },
-    { "f1": 40, "f2": 32.5, "f3": "def", "f4": [11, 12, 13, 14] },
-  ]
-}
-```
+    {
+      "instances": [
+        { "f1": 10, "f2": 12.3, "f3": "abc", "f4": [1, 2, 3, 4] },
+        { "f1": 40, "f2": 32.5, "f3": "def", "f4": [11, 12, 13, 14] },
+      ]
+    }
 
 The `  INPUT  ` statement must be:
 
-``` text
-INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY<INT64>)
-```
+    INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY<INT64>)
 
 If the Vertex AI response looks like the following example:
 
-``` text
-{
-  "predictions": [
     {
-      "out1": 300,
-      "out2": 40
-    },
-    {
-      "out1": 200,
-      "out2": 30
+      "predictions": [
+        {
+          "out1": 300,
+          "out2": 40
+        },
+        {
+          "out1": 200,
+          "out2": 30
+        }
+      ]
     }
-  ]
-}
-```
 
 The `  OUTPUT  ` statement must be:
 
-``` text
-OUTPUT(out1 INT64, out2 INT64)
-```
+    OUTPUT(out1 INT64, out2 INT64)
 
 ### `     REMOTE WITH CONNECTION    `
 
 **Syntax**
 
-``` text
-`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
-```
+    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
 
 The connection elements are as follows:
 
   - `  PROJECT_ID  ` : the project ID of the project that contains the connection.
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
   - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
     
-    To find your connection ID, [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
-If you are using the remote model to analyze unstructured data from an [object table](/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
+If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
 **Example**
 
-``` text
-`myproject.us.my_connection`
-```
+    `myproject.us.my_connection`
 
 ### `     ENDPOINT    `
 
 **Syntax**
 
-``` text
-ENDPOINT = vertex_ai_https_endpoint
-```
+    ENDPOINT = vertex_ai_https_endpoint
 
 **Description**
 
-For `  vertex_ai_https_endpoint  ` , specify the [shared public endpoint](/vertex-ai/docs/predictions/choose-endpoint-type) of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . Dedicated public endpoints, Private Service Connect endpoints, and private endpoints aren't supported.
+For `  vertex_ai_https_endpoint  ` , specify the [shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/choose-endpoint-type) of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` . Dedicated public endpoints, Private Service Connect endpoints, and private endpoints aren't supported.
 
-To learn more about deploying a model to a shared public endpoint, see [Create a shared public endpoint](/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) .
+To learn more about deploying a model to a shared public endpoint, see [Create a shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) .
 
 The following example shows how to create a remote model that uses a shared public endpoint:
 
-``` text
-ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234'
-```
+    ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234'
 
 ## Locations
 
-For information about supported locations, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+For information about supported locations, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Example
 
 The following example creates a BigQuery ML remote model over a model deployed to a Vertex AI endpoint:
 
-``` text
-CREATE MODEL `project_id.mydataset.mymodel`
- INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY)
- OUTPUT(out1 INT64, out2 INT64)
- REMOTE WITH CONNECTION `myproject.us.test_connection`
- OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234')
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     INPUT(f1 INT64, f2 FLOAT64, f3 STRING, f4 ARRAY)
+     OUTPUT(out1 INT64, out2 INT64)
+     REMOTE WITH CONNECTION `myproject.us.test_connection`
+     OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234')
 
 ## What's next
 
-  - Learn how to [make predictions with remote models on Vertex AI](/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model) .
-  - For more information about the supported SQL statements and functions for remote models that use HTTPS endpoints, see [End-to-end user journey for each model](/bigquery/docs/e2e-journey) .
+  - Learn how to [make predictions with remote models on Vertex AI](https://docs.cloud.google.com/bigquery/docs/bigquery-ml-remote-model-tutorial#create-remote-model) .
+  - For more information about the supported SQL statements and functions for remote models that use HTTPS endpoints, see [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

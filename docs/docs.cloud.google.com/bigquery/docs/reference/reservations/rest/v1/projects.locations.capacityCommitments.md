@@ -1,8 +1,8 @@
-  - [Resource: CapacityCommitment](#CapacityCommitment)
-      - [JSON representation](#CapacityCommitment.SCHEMA_REPRESENTATION)
-  - [CommitmentPlan](#CommitmentPlan)
-  - [State](#State)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: CapacityCommitment](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments#CapacityCommitment)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments#CapacityCommitment.SCHEMA_REPRESENTATION)
+  - [CommitmentPlan](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments#CommitmentPlan)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments#State)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments#METHODS_SUMMARY)
 
 ## Resource: CapacityCommitment
 
@@ -23,7 +23,7 @@ A capacity commitment resource exists as a child resource of the admin project.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;slotCount&quot;: string,
   &quot;plan&quot;: enum (CommitmentPlan),

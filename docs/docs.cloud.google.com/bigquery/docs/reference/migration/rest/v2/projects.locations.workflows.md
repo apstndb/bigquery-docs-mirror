@@ -1,66 +1,66 @@
-  - [Resource: MigrationWorkflow](#MigrationWorkflow)
-      - [JSON representation](#MigrationWorkflow.SCHEMA_REPRESENTATION)
-  - [MigrationTask](#MigrationTask)
-      - [JSON representation](#MigrationTask.SCHEMA_REPRESENTATION)
-  - [AssessmentTaskDetails](#AssessmentTaskDetails)
-      - [JSON representation](#AssessmentTaskDetails.SCHEMA_REPRESENTATION)
-  - [AssessmentFeatureHandle](#AssessmentFeatureHandle)
-      - [JSON representation](#AssessmentFeatureHandle.SCHEMA_REPRESENTATION)
-  - [TranslationConfigDetails](#TranslationConfigDetails)
-      - [JSON representation](#TranslationConfigDetails.SCHEMA_REPRESENTATION)
-  - [ObjectNameMappingList](#ObjectNameMappingList)
-      - [JSON representation](#ObjectNameMappingList.SCHEMA_REPRESENTATION)
-  - [ObjectNameMapping](#ObjectNameMapping)
-      - [JSON representation](#ObjectNameMapping.SCHEMA_REPRESENTATION)
-  - [NameMappingKey](#NameMappingKey)
-      - [JSON representation](#NameMappingKey.SCHEMA_REPRESENTATION)
-  - [Type](#Type)
-  - [NameMappingValue](#NameMappingValue)
-      - [JSON representation](#NameMappingValue.SCHEMA_REPRESENTATION)
-  - [Dialect](#Dialect)
-      - [JSON representation](#Dialect.SCHEMA_REPRESENTATION)
-  - [BigQueryDialect](#BigQueryDialect)
-  - [HiveQLDialect](#HiveQLDialect)
-  - [RedshiftDialect](#RedshiftDialect)
-  - [TeradataDialect](#TeradataDialect)
-      - [JSON representation](#TeradataDialect.SCHEMA_REPRESENTATION)
-  - [Mode](#Mode)
-  - [OracleDialect](#OracleDialect)
-  - [SparkSQLDialect](#SparkSQLDialect)
-  - [SnowflakeDialect](#SnowflakeDialect)
-  - [NetezzaDialect](#NetezzaDialect)
-  - [AzureSynapseDialect](#AzureSynapseDialect)
-  - [VerticaDialect](#VerticaDialect)
-  - [SQLServerDialect](#SQLServerDialect)
-  - [PostgresqlDialect](#PostgresqlDialect)
-  - [PrestoDialect](#PrestoDialect)
-  - [MySQLDialect](#MySQLDialect)
-  - [DB2Dialect](#DB2Dialect)
-  - [SQLiteDialect](#SQLiteDialect)
-  - [GreenplumDialect](#GreenplumDialect)
-  - [SourceEnv](#SourceEnv)
-      - [JSON representation](#SourceEnv.SCHEMA_REPRESENTATION)
-  - [TranslationDetails](#TranslationDetails)
-      - [JSON representation](#TranslationDetails.SCHEMA_REPRESENTATION)
-  - [SourceTargetMapping](#SourceTargetMapping)
-      - [JSON representation](#SourceTargetMapping.SCHEMA_REPRESENTATION)
-  - [SourceSpec](#SourceSpec)
-      - [JSON representation](#SourceSpec.SCHEMA_REPRESENTATION)
-  - [Literal](#Literal)
-      - [JSON representation](#Literal.SCHEMA_REPRESENTATION)
-  - [TargetSpec](#TargetSpec)
-      - [JSON representation](#TargetSpec.SCHEMA_REPRESENTATION)
-  - [SourceEnvironment](#SourceEnvironment)
-      - [JSON representation](#SourceEnvironment.SCHEMA_REPRESENTATION)
-  - [State](#State)
-  - [MigrationTaskResult](#MigrationTaskResult)
-      - [JSON representation](#MigrationTaskResult.SCHEMA_REPRESENTATION)
-  - [TranslationTaskResult](#TranslationTaskResult)
-      - [JSON representation](#TranslationTaskResult.SCHEMA_REPRESENTATION)
-  - [GcsReportLogMessage](#GcsReportLogMessage)
-      - [JSON representation](#GcsReportLogMessage.SCHEMA_REPRESENTATION)
-  - [State](#State_1)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: MigrationWorkflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationWorkflow)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationWorkflow.SCHEMA_REPRESENTATION)
+  - [MigrationTask](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationTask)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationTask.SCHEMA_REPRESENTATION)
+  - [AssessmentTaskDetails](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#AssessmentTaskDetails)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#AssessmentTaskDetails.SCHEMA_REPRESENTATION)
+  - [AssessmentFeatureHandle](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#AssessmentFeatureHandle)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#AssessmentFeatureHandle.SCHEMA_REPRESENTATION)
+  - [TranslationConfigDetails](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationConfigDetails)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationConfigDetails.SCHEMA_REPRESENTATION)
+  - [ObjectNameMappingList](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ObjectNameMappingList)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ObjectNameMappingList.SCHEMA_REPRESENTATION)
+  - [ObjectNameMapping](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ObjectNameMapping)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#ObjectNameMapping.SCHEMA_REPRESENTATION)
+  - [NameMappingKey](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#NameMappingKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#NameMappingKey.SCHEMA_REPRESENTATION)
+  - [Type](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Type)
+  - [NameMappingValue](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#NameMappingValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#NameMappingValue.SCHEMA_REPRESENTATION)
+  - [Dialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Dialect)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Dialect.SCHEMA_REPRESENTATION)
+  - [BigQueryDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#BigQueryDialect)
+  - [HiveQLDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#HiveQLDialect)
+  - [RedshiftDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#RedshiftDialect)
+  - [TeradataDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TeradataDialect)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TeradataDialect.SCHEMA_REPRESENTATION)
+  - [Mode](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Mode)
+  - [OracleDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#OracleDialect)
+  - [SparkSQLDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SparkSQLDialect)
+  - [SnowflakeDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SnowflakeDialect)
+  - [NetezzaDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#NetezzaDialect)
+  - [AzureSynapseDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#AzureSynapseDialect)
+  - [VerticaDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#VerticaDialect)
+  - [SQLServerDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SQLServerDialect)
+  - [PostgresqlDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#PostgresqlDialect)
+  - [PrestoDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#PrestoDialect)
+  - [MySQLDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MySQLDialect)
+  - [DB2Dialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#DB2Dialect)
+  - [SQLiteDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SQLiteDialect)
+  - [GreenplumDialect](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#GreenplumDialect)
+  - [SourceEnv](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceEnv)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceEnv.SCHEMA_REPRESENTATION)
+  - [TranslationDetails](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationDetails)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationDetails.SCHEMA_REPRESENTATION)
+  - [SourceTargetMapping](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceTargetMapping)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceTargetMapping.SCHEMA_REPRESENTATION)
+  - [SourceSpec](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceSpec)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceSpec.SCHEMA_REPRESENTATION)
+  - [Literal](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Literal)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#Literal.SCHEMA_REPRESENTATION)
+  - [TargetSpec](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TargetSpec)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TargetSpec.SCHEMA_REPRESENTATION)
+  - [SourceEnvironment](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceEnvironment)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#SourceEnvironment.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#State)
+  - [MigrationTaskResult](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationTaskResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#MigrationTaskResult.SCHEMA_REPRESENTATION)
+  - [TranslationTaskResult](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationTaskResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#TranslationTaskResult.SCHEMA_REPRESENTATION)
+  - [GcsReportLogMessage](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#GcsReportLogMessage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#GcsReportLogMessage.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#State_1)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#METHODS_SUMMARY)
 
 ## Resource: MigrationWorkflow
 
@@ -77,7 +77,7 @@ A migration workflow which specifies what needs to be done for an EDW migration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;tasks&quot;: {
@@ -149,7 +149,7 @@ A single task for a migration which has details about the configuration of the t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;id&quot;: string,
   &quot;type&quot;: string,
   &quot;state&quot;: enum (State),
@@ -300,7 +300,7 @@ Assessment task config.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;inputPath&quot;: string,
   &quot;outputDataset&quot;: string,
   &quot;querylogsPath&quot;: string,
@@ -360,7 +360,7 @@ User-definable feature flags for assessment tasks.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;addShareableDataset&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -390,7 +390,7 @@ The translation config to capture necessary settings for a translation task and 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceDialect&quot;: {
     object (Dialect)
   },
@@ -494,7 +494,7 @@ Represents a map of name mappings using a list of key:value proto messages of ex
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;nameMap&quot;: [
     {
       object (ObjectNameMapping)
@@ -528,7 +528,7 @@ Represents a key-value pair of NameMappingKey to NameMappingValue to represent t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;source&quot;: {
     object (NameMappingKey)
   },
@@ -569,7 +569,7 @@ The potential components of a full name mapping that will be mapped during trans
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: enum (Type),
   &quot;database&quot;: string,
   &quot;schema&quot;: string,
@@ -665,7 +665,7 @@ The potential components of a full name mapping that will be mapped during trans
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;database&quot;: string,
   &quot;schema&quot;: string,
   &quot;relation&quot;: string,
@@ -716,7 +716,7 @@ The possible dialect options for translation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field dialect_value can be only one of the following:
   &quot;bigqueryDialect&quot;: {
@@ -915,7 +915,7 @@ The dialect definition for Teradata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;mode&quot;: enum (Mode)
 }</code></pre></td>
 </tr>
@@ -1041,7 +1041,7 @@ Represents the default source environment values for the translation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;defaultDatabase&quot;: string,
   &quot;schemaSearchPath&quot;: [
     string
@@ -1087,7 +1087,7 @@ The translation details to capture the necessary settings for a translation job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceTargetMapping&quot;: [
     {
       object (SourceTargetMapping)
@@ -1155,7 +1155,7 @@ Represents one mapping from a source SQL to a target SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceSpec&quot;: {
     object (SourceSpec)
   },
@@ -1196,7 +1196,7 @@ Represents one path to the location that holds source data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;encoding&quot;: string,
 
   // Union field source can be only one of the following:
@@ -1247,7 +1247,7 @@ Literal data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;relativePath&quot;: string,
 
   // Union field literal_data can be only one of the following:
@@ -1296,7 +1296,7 @@ Represents one path to the location that holds target data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;relativePath&quot;: string
 }</code></pre></td>
 </tr>
@@ -1326,7 +1326,7 @@ Represents the default source environment values for the translation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;defaultDatabase&quot;: string,
   &quot;schemaSearchPath&quot;: [
     string
@@ -1406,7 +1406,7 @@ The migration task result.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field details can be only one of the following:
   &quot;translationTaskResult&quot;: {
@@ -1443,7 +1443,7 @@ Translation specific result details from the migration task.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;translatedLiterals&quot;: [
     {
       object (Literal)
@@ -1495,7 +1495,7 @@ A record in the aggregate CSV report for a migration workflow
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;severity&quot;: string,
   &quot;category&quot;: string,
   &quot;filePath&quot;: string,

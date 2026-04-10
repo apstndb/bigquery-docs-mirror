@@ -1,15 +1,15 @@
 # The ML.GENERATE\_EMBEDDING function
 
-This document describes the `  ML.GENERATE_EMBEDDING  ` function, which lets you create [embeddings](#embeddings) that describe an entity—for example, a piece of text or an image.
+This document describes the `  ML.GENERATE_EMBEDDING  ` function, which lets you create [embeddings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-embedding#embeddings) that describe an entity—for example, a piece of text or an image.
 
-The [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `  AI.GENERATE_EMBEDDING  ` instead.
+The [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) offers the same functionality with simplified column names in the output. For new queries, we recommend that you use `  AI.GENERATE_EMBEDDING  ` instead.
 
 You can create embeddings for the following types of data:
 
   - Text data from standard tables.
-  - Visual data that is returned as [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`  OBJ.GET_ACCESS_URL  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`  ObjectRef  `](/bigquery/docs/work-with-objectref) values from standard tables as input to the `  OBJ.GET_ACCESS_URL  ` function. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
-  - Visual data in [object tables](/bigquery/docs/object-table-introduction) .
-  - Output data from [PCA](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
+  - Visual data that is returned as [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values by the [`  OBJ.GET_ACCESS_URL  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . You can use [`  ObjectRef  `](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values from standard tables as input to the `  OBJ.GET_ACCESS_URL  ` function. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - Visual data in [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
+  - Output data from [PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca) , [autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder) , or [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models.
 
 ## Embeddings
 
@@ -30,18 +30,18 @@ Embeddings help you perform the following tasks:
 
 Depending on the task, the `  ML.GENERATE_EMBEDDING  ` function works in one of the following ways:
 
-  - To generate embeddings from text or visual content, `  ML.GENERATE_EMBEDDING  ` sends the request to a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
+  - To generate embeddings from text or visual content, `  ML.GENERATE_EMBEDDING  ` sends the request to a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a [Vertex AI embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#embeddings-models) or a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , and then returns the model's response.
     
     The `  ML.GENERATE_EMBEDDING  ` function works with the Vertex AI model to perform embedding tasks supported by that model. For more information on the types of tasks these models can perform, see the following documentation:
     
-      - [Text embedding model use cases](/vertex-ai/generative-ai/docs/embeddings#text-use-cases)
-      - [Multimodal embedding model use cases](/vertex-ai/generative-ai/docs/embeddings#multimodal-use-cases)
+      - [Text embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#text-use-cases)
+      - [Multimodal embedding model use cases](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings#multimodal-use-cases)
     
     Typically, you want to use text embedding models for text-only use cases, and use multimodal models for cross-modal search use cases, where embeddings for text and visual content are generated in the same semantic space.
 
-  - For PCA and autoencoding, `  ML.GENERATE_EMBEDDING  ` processes the request using a BigQuery ML PCA or autoencoder model [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . `  ML.GENERATE_EMBEDDING  ` gathers the `  ML.PREDICT  ` output for the model into an array and outputs it as the `  ml_generate_embedding_result  ` column. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  ML.GENERATE_EMBEDDING  ` output.
+  - For PCA and autoencoding, `  ML.GENERATE_EMBEDDING  ` processes the request using a BigQuery ML PCA or autoencoder model [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) . `  ML.GENERATE_EMBEDDING  ` gathers the `  ML.PREDICT  ` output for the model into an array and outputs it as the `  ml_generate_embedding_result  ` column. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  ML.GENERATE_EMBEDDING  ` output.
 
-  - For matrix factorization, `  ML.GENERATE_EMBEDDING  ` processes the request using a BigQuery ML matrix factorization model and the [`  ML.WEIGHTS  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights) . `  ML.GENERATE_EMBEDDING  ` gathers the `  factor_weights.weight  ` and `  intercept  ` values from the `  ML.WEIGHTS  ` output for the model into an array and outputs it as the `  ml_generate_embedding_result  ` column. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  ML.GENERATE_EMBEDDING  ` output.
+  - For matrix factorization, `  ML.GENERATE_EMBEDDING  ` processes the request using a BigQuery ML matrix factorization model and the [`  ML.WEIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-weights) . `  ML.GENERATE_EMBEDDING  ` gathers the `  factor_weights.weight  ` and `  intercept  ` values from the `  ML.WEIGHTS  ` output for the model into an array and outputs it as the `  ml_generate_embedding_result  ` column. Having all of the embeddings in a single column lets you directly use the [`  VECTOR_SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search) on the `  ML.GENERATE_EMBEDDING  ` output.
 
 ## Syntax
 
@@ -49,16 +49,14 @@ Depending on the task, the `  ML.GENERATE_EMBEDDING  ` function works in one of 
 
 ### `       gemini-embedding-001      `
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [FLATTEN_JSON_OUTPUT AS flatten_json_output]
-    [, TASK_TYPE AS task_type]
-    [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT(
+        [FLATTEN_JSON_OUTPUT AS flatten_json_output]
+        [, TASK_TYPE AS task_type]
+        [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
+    )
 
 ### Arguments
 
@@ -72,7 +70,7 @@ ML.GENERATE_EMBEDDING(
     
     You can confirm what LLM is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the `  JSON  ` content returned by the function is parsed into separate columns. The default is `  TRUE  ` .
 
@@ -84,7 +82,7 @@ ML.GENERATE_EMBEDDING(
         
         When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `  title  ` or aliased as `  title  ` , for example:
         
-        ``` text
+        ``` notranslate
         SELECT *
         FROM
         ML.GENERATE_EMBEDDING(
@@ -95,7 +93,7 @@ ML.GENERATE_EMBEDDING(
         );
         ```
         
-        Specifying the title column in the input query populates the [`  title  ` field](/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `  title  ` value when using any other task type, that input is ignored and has no effect on the embedding results.
+        Specifying the title column in the input query populates the [`  title  ` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `  title  ` value when using any other task type, that input is ignored and has no effect on the embedding results.
     
       - `  SEMANTIC_SIMILARITY  ` : specifies that the given text will be used for Semantic Textual Similarity (STS).
     
@@ -117,16 +115,14 @@ The model and input table must be in the same region.
 
 ### `       text-embedding      `
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [FLATTEN_JSON_OUTPUT AS flatten_json_output]
-    [, TASK_TYPE AS task_type]
-    [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT(
+        [FLATTEN_JSON_OUTPUT AS flatten_json_output]
+        [, TASK_TYPE AS task_type]
+        [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
+    )
 
 ### Arguments
 
@@ -142,7 +138,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains a `  STRING  ` column to embed. The text in the column that's named `  content  ` is sent to the model. If your table doesn't have a `  content  ` column, use a `  SELECT  ` statement for this argument to provide an alias for an existing table column. An error occurs if no `  content  ` column exists.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the `  JSON  ` content returned by the function is parsed into separate columns. The default is `  TRUE  ` .
 
@@ -154,7 +150,7 @@ ML.GENERATE_EMBEDDING(
         
         When using this task type, it is helpful to include the document title in the query statement in order to improve embedding quality. The document title must be in a column either named `  title  ` or aliased as `  title  ` , for example:
         
-        ``` text
+        ``` notranslate
         SELECT *
         FROM
         ML.GENERATE_EMBEDDING(
@@ -165,7 +161,7 @@ ML.GENERATE_EMBEDDING(
         );
         ```
         
-        Specifying the title column in the input query populates the [`  title  ` field](/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `  title  ` value when using any other task type, that input is ignored and has no effect on the embedding results.
+        Specifying the title column in the input query populates the [`  title  ` field](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-reference/text-embeddings-api#request_body) of the request body sent to the model. If you specify a `  title  ` value when using any other task type, that input is ignored and has no effect on the embedding results.
     
       - `  SEMANTIC_SIMILARITY  ` : specifies that the given text will be used for Semantic Textual Similarity (STS).
     
@@ -187,13 +183,11 @@ The model and input table must be in the same region.
 
 ### Open models
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT([FLATTEN_JSON_OUTPUT AS flatten_json_output])
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT([FLATTEN_JSON_OUTPUT AS flatten_json_output])
+    )
 
 ### Arguments
 
@@ -209,7 +203,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  TABLE_NAME  ` : the name of the BigQuery table that contains a `  STRING  ` column to embed. The text in the column that's named `  content  ` is sent to the model. If your table doesn't have a `  content  ` column, use a `  SELECT  ` statement for this argument to provide an alias for an existing table column. An error occurs if no `  content  ` column exists.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query whose result contains a `  STRING  ` column that's named `  content  ` . For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the `  JSON  ` content returned by the function is parsed into separate columns. The default is `  TRUE  ` .
 
@@ -219,30 +213,26 @@ The model and input table must be in the same region.
 
 ### `       multimodalembedding      `
 
-``` text
-# Syntax for standard tables
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [FLATTEN_JSON_OUTPUT AS flatten_json_output]
-    [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
-)
-```
+    # Syntax for standard tables
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT(
+        [FLATTEN_JSON_OUTPUT AS flatten_json_output]
+        [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
+    )
 
-``` text
-# Syntax for object tables
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [FLATTEN_JSON_OUTPUT AS flatten_json_output]
-    [, START_SECOND AS start_second]
-    [, END_SECOND AS end_second]
-    [, INTERVAL_SECONDS AS interval_seconds]
-    [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
-)
-```
+    # Syntax for object tables
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT(
+        [FLATTEN_JSON_OUTPUT AS flatten_json_output]
+        [, START_SECOND AS start_second]
+        [, END_SECOND AS end_second]
+        [, INTERVAL_SECONDS AS interval_seconds]
+        [, OUTPUT_DIMENSIONALITY AS output_dimensionality])
+    )
 
 ### Arguments
 
@@ -260,7 +250,7 @@ ML.GENERATE_EMBEDDING(
     
       - If you are creating embeddings for text in a standard table, the name of the BigQuery table that contains the content. The content must be in a `  STRING  ` column named `  content  ` . If your table does not have a `  content  ` column, use the `  QUERY_STATEMENT  ` argument instead and provide a `  SELECT  ` statement that includes an alias for an existing table column. An error occurs if no `  content  ` column is available.
     
-      - If you are creating embeddings for visual content using data from an an object table, the name of a BigQuery [object table](/bigquery/docs/object-table-introduction) that contains the visual content.
+      - If you are creating embeddings for visual content using data from an an object table, the name of a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the visual content.
 
   - `  QUERY_STATEMENT  ` : the GoogleSQL query that generates the input data for the function.
     
@@ -268,7 +258,7 @@ ML.GENERATE_EMBEDDING(
         
           - For text embeddings, you can pull the value from a `  STRING  ` column, or you can specify a string literal in the query.
         
-          - For visual content embeddings, you can provide an [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) value for the `  content  ` column. You can generate `  ObjectRefRuntime  ` values by using the [`  OBJ.GET_ACCESS_URL  ` function](/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . The `  OBJ.GET_ACCESS_URL  ` function takes an [`  ObjectRef  `](/bigquery/docs/analyze-multimodal-data#objectref_values) value as input, which you can provide by either specifying the name of a column that contains `  ObjectRef  ` values, or by constructing an `  ObjectRef  ` value.
+          - For visual content embeddings, you can provide an [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) value for the `  content  ` column. You can generate `  ObjectRefRuntime  ` values by using the [`  OBJ.GET_ACCESS_URL  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objget_access_url) . The `  OBJ.GET_ACCESS_URL  ` function takes an [`  ObjectRef  `](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectref_values) value as input, which you can provide by either specifying the name of a column that contains `  ObjectRef  ` values, or by constructing an `  ObjectRef  ` value.
             
             `  ObjectRefRuntime  ` values must have the `  access_url.read_url  ` and `  details.gcs_metadata.content_type  ` elements of the JSON value populated.
     
@@ -292,12 +282,10 @@ The model and input table must be in the same region.
 
 ### PCA
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) }
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) }
+    )
 
 ### Arguments
 
@@ -321,13 +309,11 @@ The model and input table must be in the same region.
 
 ### Autoencoder
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT([TRIAL_ID AS trial_id])
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT([TRIAL_ID AS trial_id])
+    )
 
 ### Arguments
 
@@ -353,12 +339,10 @@ The model and input table must be in the same region.
 
 ### Matrix factorization
 
-``` text
-ML.GENERATE_EMBEDDING(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  STRUCT([TRIAL_ID AS trial_id])
-)
-```
+    ML.GENERATE_EMBEDDING(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      STRUCT([TRIAL_ID AS trial_id])
+    )
 
 ### Arguments
 
@@ -382,7 +366,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  ml_generate_embedding_result  ` :
     
-      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  values  ` element.
+      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  values  ` element.
       - If `  flatten_json_output  ` is `  TRUE  ` , this is an `  ARRAY<FLOAT64>  ` value that contains the generated embeddings.
 
   - `  ml_generate_embedding_statistics  ` : a `  JSON  ` value that contains a `  token_count  ` field with the number of tokens in the content, and a `  truncated  ` field that indicates whether the content was truncated. This column is returned when `  flatten_json_output  ` is `  TRUE  ` .
@@ -395,7 +379,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  ml_generate_embedding_result  ` :
     
-      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  values  ` element.
+      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  values  ` element.
       - If `  flatten_json_output  ` is `  TRUE  ` , this is an `  ARRAY<FLOAT64>  ` value that contains the generated embeddings.
 
   - `  ml_generate_embedding_statistics  ` : a `  JSON  ` value that contains a `  token_count  ` field with the number of tokens in the content, and a `  truncated  ` field that indicates whether the content was truncated. This column is returned when `  flatten_json_output  ` is `  TRUE  ` .
@@ -408,7 +392,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  ml_generate_embedding_result  ` :
     
-      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the first element of the `  predictions  ` array.
+      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the first element of the `  predictions  ` array.
       - If `  flatten_json_output  ` is `  TRUE  ` , this is an `  ARRAY<FLOAT64>  ` value that contains the generated embeddings.
 
   - `  ml_generate_embedding_status  ` : a `  STRING  ` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
@@ -419,7 +403,7 @@ ML.GENERATE_EMBEDDING(
 
   - `  ml_generate_embedding_result  ` :
     
-      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  textEmbedding  ` , `  imageEmbedding  ` , or `  videoEmbeddings  ` element, depending on the type of input data you used.
+      - If `  flatten_json_output  ` is `  FALSE  ` , this is the [JSON response](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict#response-body) from the [`  projects.locations.endpoints.predict  `](https://docs.cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict) call to the model. The generated embeddings are in the `  textEmbedding  ` , `  imageEmbedding  ` , or `  videoEmbeddings  ` element, depending on the type of input data you used.
       - If `  flatten_json_output  ` is `  TRUE  ` , this is an `  ARRAY<FLOAT64>  ` value that contains the generated embeddings.
 
   - `  ml_generate_embedding_status  ` : a `  STRING  ` value that contains the API response status for the corresponding row. This value is empty if the operation was successful.
@@ -432,27 +416,27 @@ ML.GENERATE_EMBEDDING(
 
 `  ML.GENERATE_EMBEDDING  ` returns the input table and the following column:
 
-  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the principal components for the input data. The number of array dimensions is equal to the PCA model's [`  NUM_PRINCIPAL_COMPONENTS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) value if that option is used when the model is created. If the [`  PCA_EXPLAINED_VARIANCE_RATIO  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) is used instead, the array dimensions vary depending on the input table and the option ratio determined by BigQuery ML.
+  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the principal components for the input data. The number of array dimensions is equal to the PCA model's [`  NUM_PRINCIPAL_COMPONENTS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#num_principal_components) value if that option is used when the model is created. If the [`  PCA_EXPLAINED_VARIANCE_RATIO  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca#pca_explained_variance_ratio) is used instead, the array dimensions vary depending on the input table and the option ratio determined by BigQuery ML.
 
 ### Autoencoder
 
 `  ML.GENERATE_EMBEDDING  ` returns the input table and the following column:
 
   - `  trial_id  ` : an `  INT64  ` value that identifies the hyperparameter tuning trial used by the function. This column is only returned if you ran hyperparameter tuning when creating the model.
-  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the latent space dimensions for the input data. The number of array dimensions is equal to the number in the middle of the autoencoder model's [`  HIDDEN_UNITS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hidden_units) array value.
+  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the latent space dimensions for the input data. The number of array dimensions is equal to the number in the middle of the autoencoder model's [`  HIDDEN_UNITS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hidden_units) array value.
 
 ### Matrix factorization
 
 `  ML.GENERATE_EMBEDDING  ` returns the following columns:
 
   - `  trial_id  ` : an `  INT64  ` value that identifies the hyperparameter tuning trial used by the function. This column is only returned if you ran hyperparameter tuning when creating the model.
-  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the weights of the feature, and also the intercept or bias term for the feature. The intercept value is the last value in the array. The number of array dimensions is equal to the matrix factorization model's [`  NUM_FACTORS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_factors) value.
-  - `  processed_input  ` : a `  STRING  ` value that contains the name of the user or item column. The value of this column matches the name of the user or item column provided in the [`  query_statement  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) that was used when the matrix factorization model was trained.
+  - `  ml_generate_embedding_result  ` : this is an `  ARRAY<FLOAT>  ` value that contains the weights of the feature, and also the intercept or bias term for the feature. The intercept value is the last value in the array. The number of array dimensions is equal to the matrix factorization model's [`  NUM_FACTORS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_factors) value.
+  - `  processed_input  ` : a `  STRING  ` value that contains the name of the user or item column. The value of this column matches the name of the user or item column provided in the [`  query_statement  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) that was used when the matrix factorization model was trained.
   - `  feature  ` : a `  STRING  ` value that contains the names of the specific users or items used during training.
 
 ## Supported visual content
 
-You can use the `  ML.GENERATE_EMBEDDING  ` function to generate embeddings for videos and images that meet the requirements described in [API limits](/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
+You can use the `  ML.GENERATE_EMBEDDING  ` function to generate embeddings for videos and images that meet the requirements described in [API limits](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#api-limits) .
 
 There is no limitation on the length of the video files you can use with this function. However, the function only processes the first two minutes of a video. If a video is longer than two minutes, the `  ML.GENERATE_EMBEDDING  ` function only returns embeddings for the first two minutes.
 
@@ -460,9 +444,7 @@ There is no limitation on the length of the video files you can use with this fu
 
 Sometimes after a query job that uses this function finishes successfully, some returned rows contain the following error message:
 
-``` text
-A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
-```
+    A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
 
 This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `  resource exhausted  ` error message is returned.
 
@@ -476,7 +458,7 @@ This example shows how to generate an embedding of a single piece of sample text
 
 Create the remote model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `mydataset.text_embedding`
 REMOTE WITH CONNECTION DEFAULT
 OPTIONS(ENDPOINT = 'text-embedding-005')
@@ -484,7 +466,7 @@ OPTIONS(ENDPOINT = 'text-embedding-005')
 
 Generate the embedding:
 
-``` text
+``` notranslate
 SELECT *
 FROM
   ML.GENERATE_EMBEDDING(
@@ -500,7 +482,7 @@ This example shows how to generate embeddings from visual content by using a rem
 
 Create the remote model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `mydataset.multimodalembedding`
 REMOTE WITH CONNECTION DEFAULT
 OPTIONS(ENDPOINT = 'multimodalembedding@001')
@@ -510,7 +492,7 @@ OPTIONS(ENDPOINT = 'multimodalembedding@001')
 
 Generate embeddings from visual content in an `  ObjectRef  ` column in a standard table:
 
-``` text
+``` notranslate
 SELECT *
 FROM ML.GENERATE_EMBEDDING(
   MODEL `mydataset.multimodalembedding`,
@@ -524,7 +506,7 @@ FROM ML.GENERATE_EMBEDDING(
 
 Generate embeddings from visual content in an object table:
 
-``` text
+``` notranslate
 SELECT *
 FROM ML.GENERATE_EMBEDDING(
   MODEL `mydataset.multimodalembedding`,
@@ -537,7 +519,7 @@ This example shows how to generate embeddings that represent the principal compo
 
 Create the PCA model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `mydataset.pca_nyc_trees`
   OPTIONS (
     MODEL_TYPE = 'PCA',
@@ -559,7 +541,7 @@ AS (
 
 Generate embeddings that represent principal components:
 
-``` text
+``` notranslate
 SELECT *
 FROM
   ML.GENERATE_EMBEDDING(
@@ -585,7 +567,7 @@ This example shows how to generate embeddings that represent the latent space di
 
 Create the autoencoder model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `mydataset.my_autoencoder_model`
   OPTIONS (
     model_type = 'autoencoder',
@@ -613,7 +595,7 @@ FROM
 
 Generate embeddings that represent latent space dimensions:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -628,7 +610,7 @@ This example shows how to generate embeddings that represent the underlying weig
 
 Create the matrix factorization model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL
   `mydataset.my_mf_model`
 OPTIONS (
@@ -648,7 +630,7 @@ GROUP BY user_id, item_id;
 
 Generate embeddings that represent model weights and intercepts:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -657,33 +639,33 @@ FROM
 
 ## Locations
 
-The `  ML.GENERATE_EMBEDDING  ` function must run in the same [region or multi-region](/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Embedding models are also available in the `  US  ` multi-region.
+The `  ML.GENERATE_EMBEDDING  ` function must run in the same [region or multi-region](https://docs.cloud.google.com/bigquery/docs/locations) as the model that the function references. For more information on supported regions for embedding models, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations) . Embedding models are also available in the `  US  ` multi-region.
 
 ## Quotas
 
-Quotas apply when you use the `  ML.GENERATE_EMBEDDING  ` function with remote models. For more information, see [Vertex AI and Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions) .
+Quotas apply when you use the `  ML.GENERATE_EMBEDDING  ` function with remote models. For more information, see [Vertex AI and Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
-To request more quota for the Vertex AI models, use the process described in [Manage your quota using the console](/docs/quotas/view-manage#managing_your_quota_console) .
+To request more quota for the Vertex AI models, use the process described in [Manage your quota using the console](https://docs.cloud.google.com/docs/quotas/view-manage#managing_your_quota_console) .
 
 ## What's next
 
   - Try creating embeddings:
     
-      - [Creating text embeddings](/bigquery/docs/generate-text-embedding)
-      - [Creating image embeddings](/bigquery/docs/generate-visual-content-embedding)
-      - [Creating video embeddings](/bigquery/docs/generate-video-embedding)
+      - [Creating text embeddings](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding)
+      - [Creating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding)
+      - [Creating video embeddings](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding)
 
-  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](/bigquery/docs/generative-ai-overview) .
+  - For more information about using Vertex AI models to generate text and embeddings, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
-  - Try the [Perform semantic search and retrieval-augmented generation](/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
+  - Try the [Perform semantic search and retrieval-augmented generation](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) tutorial to learn how to do the following tasks:
     
       - Generate text embeddings.
       - Create a vector index on the embeddings.
       - Perform a vector search with the embeddings to search for similar text.
       - Perform retrieval-augmented generation (RAG) by using vector search results to augment the prompt input and improve results.
 
-  - Try the [Parse PDFs in a retrieval-augmented generation pipeline](/bigquery/docs/rag-pipeline-pdf) tutorial to learn how to create a RAG pipeline based on parsed PDF content.
+  - Try the [Parse PDFs in a retrieval-augmented generation pipeline](https://docs.cloud.google.com/bigquery/docs/rag-pipeline-pdf) tutorial to learn how to create a RAG pipeline based on parsed PDF content.
 
-  - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](/bigquery/docs/ai-application-overview) .
+  - For more information about using Cloud AI APIs to perform AI tasks, see [AI application overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
 
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai) .
+  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

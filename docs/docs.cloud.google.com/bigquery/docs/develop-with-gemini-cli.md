@@ -2,9 +2,9 @@
 
 **Note:** The BigQuery CLI extensions are based on MCP Toolbox for Databases. MCP Toolbox for Databases is in beta (pre-v1.0) and may see breaking changes until the first stable release (v1.0).
 
-This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.
+This page explains how to interact with BigQuery data in your terminal by using natural-language prompts with the [Gemini CLI](https://docs.cloud.google.com/gemini/docs/codeassist/gemini-cli) . Using the dedicated BigQuery [extensions](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#about-bigquery-extensions) with the Gemini CLI enables AI-driven data analysis and insights directly within your command line. You can analyze data from your BigQuery tables, or from tables in the BigQuery public datasets.
 
-These first-party extensions provide some common tools for data analysis and insights. To build your own tools, see [Use BigQuery with MCP, Gemini CLI, and other agents](/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
+These first-party extensions provide some common tools for data analysis and insights. To build your own tools, see [Use BigQuery with MCP, Gemini CLI, and other agents](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
 
 ## About Gemini CLI and extensions
 
@@ -81,27 +81,10 @@ Analyze the contribution of country to revenue in the bigquery-public-data.googl
 
 The [Conversational Analytics extension](https://github.com/gemini-cli-extensions/bigquery-conversational-analytics) provides the following tools:
 
-<table>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Tool</th>
-<th>Example natural language prompt</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Search</td>
-<td><code dir="ltr" translate="no">       search_catalog      </code></td>
-<td>Find tables related to PyPi downloads</td>
-</tr>
-<tr class="even">
-<td>Conversational analytics</td>
-<td><code dir="ltr" translate="no">       ask_data_insights      </code></td>
-<td>Using the tool ask_data_insights and the tables under bigquery-public-data.google_analytics_sample, tell me the channels I should focus on and why</td>
-</tr>
-</tbody>
-</table>
+| Category                 | Tool                               | Example natural language prompt                                                                                                                        |
+| ------------------------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Search                   | `        search_catalog       `    | Find tables related to PyPi downloads                                                                                                                  |
+| Conversational analytics | `        ask_data_insights       ` | Using the tool ask\_data\_insights and the tables under bigquery-public-data.google\_analytics\_sample, tell me the channels I should focus on and why |
 
 ## Before you begin
 
@@ -124,13 +107,13 @@ Before you begin, you need the following:
 
 To get the permissions that you need to use the BigQuery extensions with Gemini CLI, ask your administrator to grant you the following IAM roles on Resource Manager resources (projects, folders, and organizations) or lower-level resources like datasets:
 
-  - Run BigQuery queries in a Google Cloud project: [BigQuery User](/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
-  - Use the foundational metadata tools to get BigQuery dataset and table metadata: [BigQuery Metadata Viewer](/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
-  - Use the Conversational Analytics extension: [Gemini for Google Cloud User](/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` )
+  - Run BigQuery queries in a Google Cloud project: [BigQuery User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.user) ( `  roles/bigquery.user  ` )
+  - Use the foundational metadata tools to get BigQuery dataset and table metadata: [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
+  - Use the Conversational Analytics extension: [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Install the BigQuery extensions
 
@@ -140,9 +123,7 @@ Install the BigQuery extensions and then use them to explore and analyze your da
 
 2.  Set the environment variables to connect to your BigQuery project:
     
-    ``` text
-    export BIGQUERY_PROJECT="PROJECT_ID"
-    ```
+        export BIGQUERY_PROJECT="PROJECT_ID"
     
     Replace `  PROJECT_ID  ` with your Google Cloud project ID.
     
@@ -155,25 +136,19 @@ Install the BigQuery extensions and then use them to explore and analyze your da
     
       - Optional: install the BigQuery Data Analytics extension:
         
-        ``` text
-        gemini extensions install https://github.com/gemini-cli-extensions/bigquery-data-analytics
-        ```
+            gemini extensions install https://github.com/gemini-cli-extensions/bigquery-data-analytics
     
       - Optional: install the BigQuery Conversational Analytics extension:
         
-        ``` text
-        gemini extensions install https://github.com/gemini-cli-extensions/bigquery-conversational-analytics
-        ```
+            gemini extensions install https://github.com/gemini-cli-extensions/bigquery-conversational-analytics
 
 4.  Start the Gemini CLI in interactive mode to explore and analyze your data:
     
-    ``` text
-    gemini
-    ```
+        gemini
     
     The CLI automatically loads the BigQuery extension and its tools, which you can use to interact with your data.
 
-**Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using Conversational Analytics tools. For more information, see [Pricing](#pricing) .
+**Note:** if you install both of the BigQuery extensions, the Gemini CLI might use tools from either extension to answer your questions. This could have a billing impact, as there is additional billing impact when using Conversational Analytics tools. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli#pricing) .
 
 ## Example prompts to explore and analyze your data
 
@@ -185,46 +160,38 @@ The following example prompts let you explore and analyze your tables.
 
   - **Example prompt** to find tables related to PyPi downloads:
     
-    ``` text
-    Find tables related to PyPi downloads
-    ```
+        Find tables related to PyPi downloads
     
     **Example response**
     
     The Gemini CLI returns a list of related tables:
     
-    ``` text
-    ✦ I found the following tables related to PyPi downloads:
-    
-        *   file_downloads: projects/bigquery-public-data/datasets/pypi/tables/file_downloads
-        *   distribution_metadata: projects/bigquery-public-data/datasets/pypi/tables/distribution_metadata
-    ```
+        ✦ I found the following tables related to PyPi downloads:
+        
+            *   file_downloads: projects/bigquery-public-data/datasets/pypi/tables/file_downloads
+            *   distribution_metadata: projects/bigquery-public-data/datasets/pypi/tables/distribution_metadata
 
   - **Example prompt** to show the top ten downloaded PyPI packages this month:
     
-    ``` text
-    Using bigquery-public-data.pypi.file_downloads, show me the top 10
-    downloaded pypi packages this month
-    ```
+        Using bigquery-public-data.pypi.file_downloads, show me the top 10
+        downloaded pypi packages this month
     
     **Example response**
     
     The Gemini CLI returns the top 10 packages:
     
-    ``` text
-    ✦ Here are the top 10 most downloaded PyPI packages this month:
-    
-        1.  boto3: 685,007,866 downloads
-        2.  botocore: 531,034,851 downloads
-        3.  urllib3: 512,611,825 downloads
-        4.  requests: 464,595,806 downloads
-        5.  typing-extensions: 459,505,780 downloads
-        6.  certifi: 451,929,759 downloads
-        7.  charset-normalizer: 428,716,731 downloads
-        8.  idna: 409,262,986 downloads
-        9.  grpcio-status: 402,535,938 downloads
-        10. aiobotocore: 399,650,559 downloads
-    ```
+        ✦ Here are the top 10 most downloaded PyPI packages this month:
+        
+            1.  boto3: 685,007,866 downloads
+            2.  botocore: 531,034,851 downloads
+            3.  urllib3: 512,611,825 downloads
+            4.  requests: 464,595,806 downloads
+            5.  typing-extensions: 459,505,780 downloads
+            6.  certifi: 451,929,759 downloads
+            7.  charset-normalizer: 428,716,731 downloads
+            8.  idna: 409,262,986 downloads
+            9.  grpcio-status: 402,535,938 downloads
+            10. aiobotocore: 399,650,559 downloads
 
 ### Run deeper insights using the `     ask_data_insights    ` tool
 
@@ -232,48 +199,44 @@ The `  ask_data_insights  ` tool triggers an agent on the BigQuery Conversationa
 
   - **Example prompt** to get insights on channels to focus on:
     
-    ``` text
-    Using ask_data_insights and using the tables under
-    bigquery-public-data.google_analytics_sample, tell me the channels I should
-    focus on and why
-    ```
+        Using ask_data_insights and using the tables under
+        bigquery-public-data.google_analytics_sample, tell me the channels I should
+        focus on and why
     
     **Example response**
     
     The Gemini CLI returns recommendations based on the analysis:
     
-    ``` text
-    Based on the analysis of the Google Analytics sample data, here are the
-    channels you should focus on and why:
-    
-    |     Channel      | Total Visits | Total Pageviews | Total Transactions | Total Revenue |
-    | ---------------- | ------------ | --------------- | ------------------ | ------------- |
-    | Referral         |      104,838 |         707,597 |              5,543 |   $651,429.91 |
-    | Direct           |      143,026 |         584,840 |              2,219 |   $434,840.55 |
-    | Organic Search   |      381,561 |       1,569,218 |              3,581 |   $326,380.51 |
-    | Display          |        6,262 |          34,202 |                152 |    $78,337.46 |
-    | Paid Search      |       25,326 |         136,060 |                479 |    $43,558.90 |
-    | Social           |      226,117 |         398,690 |                131 |     $4,916.54 |
-    | Affiliates       |       16,403 |          47,417 |                  9 |       $597.38 |
-    | (Other)          |          120 |             442 |                  1 |         $9.99 |
-    
-      Recommendations:
-    
-        1.  Prioritize referral traffic:
-            *   Why: This is a highly valuable channel. It brings in the most
-                revenue and has a high number of transactions, despite not
-                having the highest number of visits. This indicates that
-                traffic from referrals is highly qualified and converts
-                well.
-            *   Action: Identify your top referring websites and build
-                stronger relationships with them. Look for similar websites
-                to partner with.
-    
-        2.  Nurture your direct traffic:
-            *   Why: Direct traffic is your second-highest revenue source.
-                These are likely returning customers or people who know your
-                brand well.
-    ```
+        Based on the analysis of the Google Analytics sample data, here are the
+        channels you should focus on and why:
+        
+        |     Channel      | Total Visits | Total Pageviews | Total Transactions | Total Revenue |
+        | ---------------- | ------------ | --------------- | ------------------ | ------------- |
+        | Referral         |      104,838 |         707,597 |              5,543 |   $651,429.91 |
+        | Direct           |      143,026 |         584,840 |              2,219 |   $434,840.55 |
+        | Organic Search   |      381,561 |       1,569,218 |              3,581 |   $326,380.51 |
+        | Display          |        6,262 |          34,202 |                152 |    $78,337.46 |
+        | Paid Search      |       25,326 |         136,060 |                479 |    $43,558.90 |
+        | Social           |      226,117 |         398,690 |                131 |     $4,916.54 |
+        | Affiliates       |       16,403 |          47,417 |                  9 |       $597.38 |
+        | (Other)          |          120 |             442 |                  1 |         $9.99 |
+        
+          Recommendations:
+        
+            1.  Prioritize referral traffic:
+                *   Why: This is a highly valuable channel. It brings in the most
+                    revenue and has a high number of transactions, despite not
+                    having the highest number of visits. This indicates that
+                    traffic from referrals is highly qualified and converts
+                    well.
+                *   Action: Identify your top referring websites and build
+                    stronger relationships with them. Look for similar websites
+                    to partner with.
+        
+            2.  Nurture your direct traffic:
+                *   Why: Direct traffic is your second-highest revenue source.
+                    These are likely returning customers or people who know your
+                    brand well.
 
 ### Pricing
 
@@ -285,7 +248,7 @@ During beta (pre-v1.0), the `  ask_data_insights  ` tool is offered at no additi
 
 ## What's next
 
-  - Learn more about [using BigQuery with MCP, Gemini CLI, and other agents](/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
-  - Learn more about [Gemini in BigQuery](/bigquery/docs/gemini-overview) .
+  - Learn more about [using BigQuery with MCP, Gemini CLI, and other agents](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox) .
+  - Learn more about [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) .
   - See the [Data Analytics extension](https://github.com/gemini-cli-extensions/bigquery-data-analytics) on GitHub.
   - See the [Conversational Analytics extension](https://github.com/gemini-cli-extensions/bigquery-conversational-analytics) on GitHub.

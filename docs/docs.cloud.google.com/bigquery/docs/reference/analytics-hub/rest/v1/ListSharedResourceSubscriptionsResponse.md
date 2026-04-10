@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/ListSharedResourceSubscriptionsResponse#SCHEMA_REPRESENTATION)
 
 Message for response to the listing of shared resource subscriptions.
 
@@ -13,7 +13,7 @@ Message for response to the listing of shared resource subscriptions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sharedResourceSubscriptions&quot;: [
     {
       object (Subscription)

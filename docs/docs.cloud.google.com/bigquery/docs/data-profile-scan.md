@@ -1,10 +1,10 @@
 # Profile your data
 
-This document explains how to use data profile scans to better understand your data. BigQuery uses Dataplex Universal Catalog to analyze the statistical characteristics of your data, such as average values, unique values, and maximum values. Dataplex Universal Catalog also uses this information to [recommend rules for data quality checks](/dataplex/docs/auto-data-quality-overview) .
+This document explains how to use data profile scans to better understand your data. BigQuery uses Dataplex Universal Catalog to analyze the statistical characteristics of your data, such as average values, unique values, and maximum values. Dataplex Universal Catalog also uses this information to [recommend rules for data quality checks](https://docs.cloud.google.com/dataplex/docs/auto-data-quality-overview) .
 
-For more information about data profiling, see [About data profiling](/dataplex/docs/data-profiling-overview) .
+For more information about data profiling, see [About data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
 
-**Tip:** The steps in this document show how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see the [Manage data profile scans for a specific table](#start-from-table) section of this document.
+**Tip:** The steps in this document show how to manage data profile scans across your project. You can also create and manage data profile scans when working with a specific table. For more information, see the [Manage data profile scans for a specific table](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#start-from-table) section of this document.
 
 ## Before you begin
 
@@ -12,7 +12,9 @@ Enable the Dataplex API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
 
 ## Required roles
 
@@ -22,12 +24,12 @@ This section describes the IAM roles and permissions needed to use Dataplex Univ
 
 To get the permissions that you need to create and manage data profile scans, ask your administrator to grant you the following IAM roles:
 
-  - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project containing the data scan
-  - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project containing the data scan
-  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group
-  - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the table
+  - Create, run, update, and delete data profile scans: [Dataplex DataScan Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanEditor) ( `  roles/dataplex.dataScanEditor  ` ) on the project containing the data scan
+  - View data profile scan results, jobs, and history: [Dataplex DataScan Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.dataScanViewer) ( `  roles/dataplex.dataScanViewer  ` ) on the project containing the data scan
+  - Publish data profile scan results to Dataplex Universal Catalog: [Dataplex Catalog Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.catalogEditor) ( `  roles/dataplex.catalogEditor  ` ) on the `  @bigquery  ` entry group
+  - View published data profile scan results in BigQuery on the **Data profile** tab: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on the table
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to create and manage data profile scans. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -57,7 +59,7 @@ The following permissions are required to create and manage data profile scans:
       - `  bigquery.tables.get  ` on table
       - `  bigquery.tables.getData  ` on table
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Dataplex Universal Catalog service account roles and permissions
 
@@ -66,14 +68,14 @@ To ensure that the Dataplex Universal Catalog service account has the necessary 
 **Important:** You must grant these roles to the Dataplex Universal Catalog service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
   - Run data profile scans against BigQuery data:
-      - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on project running the scan
-      - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on tables being scanned
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on project running the scan
+      - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on tables being scanned
   - Run data profile scans for BigQuery external tables that use Cloud Storage data:
-      - [Storage Object Viewer](/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on Cloud Storage bucket
-      - [Storage Legacy Bucket Reader](/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `  roles/storage.legacyBucketReader  ` ) on Cloud Storage bucket
-  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on table
+      - [Storage Object Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectViewer) ( `  roles/storage.objectViewer  ` ) on Cloud Storage bucket
+      - [Storage Legacy Bucket Reader](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.legacyBucketReader) ( `  roles/storage.legacyBucketReader  ` ) on Cloud Storage bucket
+  - Export data profile scan results to a BigQuery table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on table
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to run data profile scans and export results. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -92,11 +94,11 @@ The following permissions are required to run data profile scans and export resu
       - `  bigquery.tables.create  ` on dataset
       - `  bigquery.tables.updateData  ` on table
 
-Your administrator might also be able to give the Dataplex Universal Catalog service account these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the Dataplex Universal Catalog service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-If a table uses BigQuery [row-level security](/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `  TRUE  ` .
+If a table uses BigQuery [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then Dataplex Universal Catalog can only scan rows visible to the Dataplex Universal Catalog service account. To allow Dataplex Universal Catalog to scan all rows, add its service account to a row filter where the predicate is `  TRUE  ` .
 
-If a table uses BigQuery [column-level security](/bigquery/docs/column-level-security) , then Dataplex Universal Catalog requires access to scan protected columns. To grant access, give the Dataplex Universal Catalog service account the **Data Catalog Fine-Grained Reader** ( `  roles/datacatalog.fineGrainedReader  ` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
+If a table uses BigQuery [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security) , then Dataplex Universal Catalog requires access to scan protected columns. To grant access, give the Dataplex Universal Catalog service account the **Data Catalog Fine-Grained Reader** ( `  roles/datacatalog.fineGrainedReader  ` ) role on all policy tags used in the table. The user creating or updating a data scan also needs permissions on protected columns.
 
 ### Grant roles to the Dataplex Universal Catalog service account
 
@@ -104,9 +106,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 1.  Get the Dataplex Universal Catalog service account email address. If you haven't created a data profile or data quality scan in this project before, run the following `  gcloud  ` command to generate the service identity:
     
-    ``` text
-    gcloud beta services identity create --service=dataplex.googleapis.com
-    ```
+        gcloud beta services identity create --service=dataplex.googleapis.com
     
     The command returns the service account email, which has the following format: service- PROJECT\_ID @gcp-sa-dataplex.iam.gserviceaccount.com.
     
@@ -114,11 +114,9 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 2.  Grant the service account the **BigQuery Job User** ( `  roles/bigquery.jobUser  ` ) role on your project. This role lets the service account run BigQuery jobs for the scan.
     
-    ``` text
-    gcloud projects add-iam-policy-binding PROJECT_ID \
-        --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
-        --role="roles/bigquery.jobUser"
-    ```
+        gcloud projects add-iam-policy-binding PROJECT_ID \
+            --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
+            --role="roles/bigquery.jobUser"
     
     Replace the following:
     
@@ -127,11 +125,9 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 3.  Grant the service account the **BigQuery Data Viewer** ( `  roles/bigquery.dataViewer  ` ) role for each table that you want to profile. This role grants read-only access to the tables.
     
-    ``` text
-    gcloud bigquery tables add-iam-policy-binding DATASET_ID.TABLE_ID \
-        --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
-        --role="roles/bigquery.dataViewer"
-    ```
+        gcloud bigquery tables add-iam-policy-binding DATASET_ID.TABLE_ID \
+            --member="serviceAccount:service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com" \
+            --role="roles/bigquery.dataViewer"
     
     Replace the following:
     
@@ -144,12 +140,14 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click **Create data profile scan** .
 
 3.  Optional: Enter a **Display name** .
 
-4.  Enter an **ID** . See the [Resource naming conventions](/compute/docs/naming-resources#resource-name-format) .
+4.  Enter an **ID** . See the [Resource naming conventions](https://docs.cloud.google.com/compute/docs/naming-resources#resource-name-format) .
 
 5.  Optional: Enter a **Description** .
 
@@ -165,7 +163,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 8.  Optional: To filter your data, do any of the following:
     
-      - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`  WHERE  ` clause in GoogleSQL syntax](/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `  col1 >= 0  ` .
+      - To filter by rows, select the **Filter rows** checkbox. Enter a valid SQL expression that can be used in a [`  WHERE  ` clause in GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#where_clause) . For example: `  col1 >= 0  ` .
         
         The filter can be a combination of SQL conditions over multiple columns. For example: `  col1 >= 0 AND col2 < 10  ` .
     
@@ -187,7 +185,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 10. Optional: Publish the data profile scan results in the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Dataplex Catalog** checkbox.
     
-    You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](#share-results) section of this document.
+    You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
     
     The publishing option might not be available in the following cases:
     
@@ -210,7 +208,7 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
         
         **Note:** You can use the same results table for multiple data profile scans.
 
@@ -222,23 +220,19 @@ To run data profile scans, Dataplex Universal Catalog uses a service account tha
 
 ### gcloud
 
-To create a data profile scan, use the [`  gcloud dataplex datascans create data-profile  ` command](/sdk/gcloud/reference/dataplex/datascans/create/data-profile) .
+To create a data profile scan, use the [`  gcloud dataplex datascans create data-profile  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-profile) .
 
 If the source data is organized in a Dataplex Universal Catalog lake, include the `  --data-source-entity  ` flag:
 
-``` text
-gcloud dataplex datascans create data-profile DATASCAN \
---location=LOCATION \
---data-source-entity=DATA_SOURCE_ENTITY
-```
+    gcloud dataplex datascans create data-profile DATASCAN \
+    --location=LOCATION \
+    --data-source-entity=DATA_SOURCE_ENTITY
 
 If the source data isn't organized in a Dataplex Universal Catalog lake, include the `  --data-source-resource  ` flag:
 
-``` text
-gcloud dataplex datascans create data-profile DATASCAN \
---location=LOCATION \
---data-source-resource=DATA_SOURCE_RESOURCE
-```
+    gcloud dataplex datascans create data-profile DATASCAN \
+    --location=LOCATION \
+    --data-source-resource=DATA_SOURCE_RESOURCE
 
 Replace the following variables:
 
@@ -251,240 +245,230 @@ Replace the following variables:
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` csharp
-using Google.Api.Gax.ResourceNames;
-using Google.Cloud.Dataplex.V1;
-using Google.LongRunning;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for CreateDataScan</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public void CreateDataScanRequestObject()
+    using Google.Api.Gax.ResourceNames;
+    using Google.Cloud.Dataplex.V1;
+    using Google.LongRunning;
+    
+    public sealed partial class GeneratedDataScanServiceClientSnippets
     {
-        // Create client
-        DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
-        // Initialize request argument(s)
-        CreateDataScanRequest request = new CreateDataScanRequest
+        /// <summary>Snippet for CreateDataScan</summary>
+        /// <remarks>
+        /// This snippet has been automatically generated and should be regarded as a code template only.
+        /// It will require modifications to work:
+        /// - It may require correct/in-range values for request initialization.
+        /// - It may require specifying regional endpoints when creating the service client as shown in
+        ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
+        /// </remarks>
+        public void CreateDataScanRequestObject()
         {
-            ParentAsLocationName = LocationName.FromProjectLocation("[PROJECT]", "[LOCATION]"),
-            DataScan = new DataScan(),
-            DataScanId = "",
-            ValidateOnly = false,
-        };
-        // Make the request
-        Operation<DataScan, OperationMetadata> response = dataScanServiceClient.CreateDataScan(request);
-
-        // Poll until the returned long-running operation is complete
-        Operation<DataScan, OperationMetadata> completedResponse = response.PollUntilCompleted();
-        // Retrieve the operation result
-        DataScan result = completedResponse.Result;
-
-        // Or get the name of the operation
-        string operationName = response.Name;
-        // This name can be stored, then the long-running operation retrieved later by name
-        Operation<DataScan, OperationMetadata> retrievedResponse = dataScanServiceClient.PollOnceCreateDataScan(operationName);
-        // Check if the retrieved long-running operation has completed
-        if (retrievedResponse.IsCompleted)
-        {
-            // If it has completed, then access the result
-            DataScan retrievedResult = retrievedResponse.Result;
+            // Create client
+            DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
+            // Initialize request argument(s)
+            CreateDataScanRequest request = new CreateDataScanRequest
+            {
+                ParentAsLocationName = LocationName.FromProjectLocation("[PROJECT]", "[LOCATION]"),
+                DataScan = new DataScan(),
+                DataScanId = "",
+                ValidateOnly = false,
+            };
+            // Make the request
+            Operation<DataScan, OperationMetadata> response = dataScanServiceClient.CreateDataScan(request);
+    
+            // Poll until the returned long-running operation is complete
+            Operation<DataScan, OperationMetadata> completedResponse = response.PollUntilCompleted();
+            // Retrieve the operation result
+            DataScan result = completedResponse.Result;
+    
+            // Or get the name of the operation
+            string operationName = response.Name;
+            // This name can be stored, then the long-running operation retrieved later by name
+            Operation<DataScan, OperationMetadata> retrievedResponse = dataScanServiceClient.PollOnceCreateDataScan(operationName);
+            // Check if the retrieved long-running operation has completed
+            if (retrievedResponse.IsCompleted)
+            {
+                // If it has completed, then access the result
+                DataScan retrievedResult = retrievedResponse.Result;
+            }
         }
     }
-}
-```
 
 ### Go
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` go
-package main
-
-import (
- "context"
-
- dataplex "cloud.google.com/go/dataplex/apiv1"
- dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
-)
-
-func main() {
- ctx := context.Background()
- // This snippet has been automatically generated and should be regarded as a code template only.
- // It will require modifications to work:
- // - It may require correct/in-range values for request initialization.
- // - It may require specifying regional endpoints when creating the service client as shown in:
- //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
- c, err := dataplex.NewDataScanClient(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- defer c.Close()
-
- req := &dataplexpb.CreateDataScanRequest{
-     // TODO: Fill request struct fields.
-     // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#CreateDataScanRequest.
- }
- op, err := c.CreateDataScan(ctx, req)
- if err != nil {
-     // TODO: Handle error.
- }
-
- resp, err := op.Wait(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- // TODO: Use resp.
- _ = resp
-}
-```
-
-### Java
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-dataplex/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` java
-import com.google.cloud.dataplex.v1.CreateDataScanRequest;
-import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.DataScanServiceClient;
-import com.google.cloud.dataplex.v1.LocationName;
-
-public class SyncCreateDataScan {
-
-  public static void main(String[] args) throws Exception {
-    syncCreateDataScan();
-  }
-
-  public static void syncCreateDataScan() throws Exception {
-    // This snippet has been automatically generated and should be regarded as a code template only.
-    // It will require modifications to work:
-    // - It may require correct/in-range values for request initialization.
-    // - It may require specifying regional endpoints when creating the service client as shown in
-    // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
-      CreateDataScanRequest request =
-          CreateDataScanRequest.newBuilder()
-              .setParent(LocationName.of("[PROJECT]", "[LOCATION]").toString())
-              .setDataScan(DataScan.newBuilder().build())
-              .setDataScanId("dataScanId1260787906")
-              .setValidateOnly(true)
-              .build();
-      DataScan response = dataScanServiceClient.createDataScanAsync(request).get();
-    }
-  }
-}
-```
-
-### Python
-
-### Python
-
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/dataplex/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-# This snippet has been automatically generated and should be regarded as a
-# code template only.
-# It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-#   client as shown in:
-#   https://googleapis.dev/python/google-api-core/latest/client_options.html
-from google.cloud import dataplex_v1
-
-
-def sample_create_data_scan():
-    # Create a client
-    client = dataplex_v1.DataScanServiceClient()
-
-    # Initialize request argument(s)
-    data_scan = dataplex_v1.DataScan()
-    data_scan.data.entity = "entity_value"
-
-    request = dataplex_v1.CreateDataScanRequest(
-        parent="parent_value",
-        data_scan=data_scan,
-        data_scan_id="data_scan_id_value",
+    package main
+    
+    import (
+     "context"
+    
+     dataplex "cloud.google.com/go/dataplex/apiv1"
+     dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
     )
+    
+    func main() {
+     ctx := context.Background()
+     // This snippet has been automatically generated and should be regarded as a code template only.
+     // It will require modifications to work:
+     // - It may require correct/in-range values for request initialization.
+     // - It may require specifying regional endpoints when creating the service client as shown in:
+     //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
+     c, err := dataplex.NewDataScanClient(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     defer c.Close()
+    
+     req := &dataplexpb.CreateDataScanRequest{
+         // TODO: Fill request struct fields.
+         // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#CreateDataScanRequest.
+     }
+     op, err := c.CreateDataScan(ctx, req)
+     if err != nil {
+         // TODO: Handle error.
+     }
+    
+     resp, err := op.Wait(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     // TODO: Use resp.
+     _ = resp
+    }
 
-    # Make the request
-    operation = client.create_data_scan(request=request)
+### Java
 
-    print("Waiting for operation to complete...")
+### Java
 
-    response = operation.result()
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview) .
 
-    # Handle the response
-    print(response)
-```
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    import com.google.cloud.dataplex.v1.CreateDataScanRequest;
+    import com.google.cloud.dataplex.v1.DataScan;
+    import com.google.cloud.dataplex.v1.DataScanServiceClient;
+    import com.google.cloud.dataplex.v1.LocationName;
+    
+    public class SyncCreateDataScan {
+    
+      public static void main(String[] args) throws Exception {
+        syncCreateDataScan();
+      }
+    
+      public static void syncCreateDataScan() throws Exception {
+        // This snippet has been automatically generated and should be regarded as a code template only.
+        // It will require modifications to work:
+        // - It may require correct/in-range values for request initialization.
+        // - It may require specifying regional endpoints when creating the service client as shown in
+        // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
+        try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
+          CreateDataScanRequest request =
+              CreateDataScanRequest.newBuilder()
+                  .setParent(LocationName.of("[PROJECT]", "[LOCATION]").toString())
+                  .setDataScan(DataScan.newBuilder().build())
+                  .setDataScanId("dataScanId1260787906")
+                  .setValidateOnly(true)
+                  .build();
+          DataScan response = dataScanServiceClient.createDataScanAsync(request).get();
+        }
+      }
+    }
+
+### Python
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/dataplex/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    # This snippet has been automatically generated and should be regarded as a
+    # code template only.
+    # It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    #   client as shown in:
+    #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+    from google.cloud import dataplex_v1
+    
+    
+    def sample_create_data_scan():
+        # Create a client
+        client = dataplex_v1.DataScanServiceClient()
+    
+        # Initialize request argument(s)
+        data_scan = dataplex_v1.DataScan()
+        data_scan.data.entity = "entity_value"
+    
+        request = dataplex_v1.CreateDataScanRequest(
+            parent="parent_value",
+            data_scan=data_scan,
+            data_scan_id="data_scan_id_value",
+        )
+    
+        # Make the request
+        operation = client.create_data_scan(request=request)
+    
+        print("Waiting for operation to complete...")
+    
+        response = operation.result()
+    
+        # Handle the response
+        print(response)
 
 ### Ruby
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](/ruby/docs/reference/google-cloud-dataplex/latest) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` ruby
-require "google/cloud/dataplex/v1"
-
-##
-# Snippet for the create_data_scan call in the DataScanService service
-#
-# This snippet has been automatically generated and should be regarded as a code
-# template only. It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-# client as shown in https://cloud.google.com/ruby/docs/reference.
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#create_data_scan.
-#
-def create_data_scan
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
-
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Dataplex::V1::CreateDataScanRequest.new
-
-  # Call the create_data_scan method.
-  result = client.create_data_scan request
-
-  # The returned object is of type Gapic::Operation. You can use it to
-  # check the status of an operation, cancel it, or wait for results.
-  # Here is how to wait for a response.
-  result.wait_until_done! timeout: 60
-  if result.response?
-    p result.response
-  else
-    puts "No response received."
-  end
-end
-```
+    require "google/cloud/dataplex/v1"
+    
+    ##
+    # Snippet for the create_data_scan call in the DataScanService service
+    #
+    # This snippet has been automatically generated and should be regarded as a code
+    # template only. It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    # client as shown in https://cloud.google.com/ruby/docs/reference.
+    #
+    # This is an auto-generated example demonstrating basic usage of
+    # Google::Cloud::Dataplex::V1::DataScanService::Client#create_data_scan.
+    #
+    def create_data_scan
+      # Create a client object. The client can be reused for multiple calls.
+      client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+    
+      # Create a request. To set request fields, pass in keyword arguments.
+      request = Google::Cloud::Dataplex::V1::CreateDataScanRequest.new
+    
+      # Call the create_data_scan method.
+      result = client.create_data_scan request
+    
+      # The returned object is of type Gapic::Operation. You can use it to
+      # check the status of an operation, cancel it, or wait for results.
+      # Here is how to wait for a response.
+      result.wait_until_done! timeout: 60
+      if result.response?
+        p result.response
+      else
+        puts "No response received."
+      end
+    end
 
 ### REST
 
-To create a data profile scan, use the [`  dataScans.create  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a data profile scan, use the [`  dataScans.create  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 **Note:** If your BigQuery table is configured with the `  Require partition filter  ` setting set to `  true  ` , use the table's partition column as the data profile scan's row filter or timestamp column.
 
@@ -493,6 +477,8 @@ To create a data profile scan, use the [`  dataScans.create  ` method](/dataplex
 You can configure data profile scans for multiple tables in a BigQuery dataset at the same time by using the Google Cloud console.
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click **Create data profile scan** .
 
@@ -518,7 +504,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
     
     3.  Optional: Publish the data profile scan results in the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console for the source table. Select the **Publish results to Dataplex Catalog** checkbox.
         
-        You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](#share-results) section of this document.
+        You can view the latest scan results in the **Data profile** tab in the BigQuery and Dataplex Universal Catalog pages for the source table. To enable users to access the published scan results, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
         
         **Note:** You must choose tables that don't have any existing scans publishing their results.
     
@@ -542,7 +528,7 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
     
     1.  In the **Select BigQuery dataset** field, click **Browse** . Select a BigQuery dataset to store the data profile scan results.
     
-    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
+    2.  In the **BigQuery table** field, specify the table to store the data profile scan results. If you're using an existing table, make sure that it is compatible with the [export table schema](https://docs.cloud.google.com/dataplex/docs/use-data-profiling#table-schema) . If the specified table doesn't exist, Dataplex Universal Catalog creates it for you.
         
         Dataplex Universal Catalog uses the same results table for all of the data profile scans.
 
@@ -557,17 +543,19 @@ You can configure data profile scans for multiple tables in a BigQuery dataset a
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
+
 2.  Click the data profile scan to run.
+
 3.  Click **Run now** .
 
 ### gcloud
 
-To run a data profile scan, use the [`  gcloud dataplex datascans run  ` command](/sdk/gcloud/reference/dataplex/datascans/run) :
+To run a data profile scan, use the [`  gcloud dataplex datascans run  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
 
-``` text
-gcloud dataplex datascans run DATASCAN \
---location=LOCATION
-```
+    gcloud dataplex datascans run DATASCAN \
+    --location=LOCATION
 
 Replace the following variables:
 
@@ -578,195 +566,185 @@ Replace the following variables:
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` csharp
-using Google.Cloud.Dataplex.V1;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for RunDataScan</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public void RunDataScanRequestObject()
+    using Google.Cloud.Dataplex.V1;
+    
+    public sealed partial class GeneratedDataScanServiceClientSnippets
     {
-        // Create client
-        DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
-        // Initialize request argument(s)
-        RunDataScanRequest request = new RunDataScanRequest
+        /// <summary>Snippet for RunDataScan</summary>
+        /// <remarks>
+        /// This snippet has been automatically generated and should be regarded as a code template only.
+        /// It will require modifications to work:
+        /// - It may require correct/in-range values for request initialization.
+        /// - It may require specifying regional endpoints when creating the service client as shown in
+        ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
+        /// </remarks>
+        public void RunDataScanRequestObject()
         {
-            DataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
-        };
-        // Make the request
-        RunDataScanResponse response = dataScanServiceClient.RunDataScan(request);
+            // Create client
+            DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
+            // Initialize request argument(s)
+            RunDataScanRequest request = new RunDataScanRequest
+            {
+                DataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
+            };
+            // Make the request
+            RunDataScanResponse response = dataScanServiceClient.RunDataScan(request);
+        }
     }
-}
-```
 
 ### Go
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` go
-package main
-
-import (
- "context"
-
- dataplex "cloud.google.com/go/dataplex/apiv1"
- dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
-)
-
-func main() {
- ctx := context.Background()
- // This snippet has been automatically generated and should be regarded as a code template only.
- // It will require modifications to work:
- // - It may require correct/in-range values for request initialization.
- // - It may require specifying regional endpoints when creating the service client as shown in:
- //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
- c, err := dataplex.NewDataScanClient(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- defer c.Close()
-
- req := &dataplexpb.RunDataScanRequest{
-     // TODO: Fill request struct fields.
-     // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#RunDataScanRequest.
- }
- resp, err := c.RunDataScan(ctx, req)
- if err != nil {
-     // TODO: Handle error.
- }
- // TODO: Use resp.
- _ = resp
-}
-```
-
-### Java
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-dataplex/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` java
-import com.google.cloud.dataplex.v1.DataScanName;
-import com.google.cloud.dataplex.v1.DataScanServiceClient;
-import com.google.cloud.dataplex.v1.RunDataScanRequest;
-import com.google.cloud.dataplex.v1.RunDataScanResponse;
-
-public class SyncRunDataScan {
-
-  public static void main(String[] args) throws Exception {
-    syncRunDataScan();
-  }
-
-  public static void syncRunDataScan() throws Exception {
-    // This snippet has been automatically generated and should be regarded as a code template only.
-    // It will require modifications to work:
-    // - It may require correct/in-range values for request initialization.
-    // - It may require specifying regional endpoints when creating the service client as shown in
-    // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
-      RunDataScanRequest request =
-          RunDataScanRequest.newBuilder()
-              .setName(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
-              .build();
-      RunDataScanResponse response = dataScanServiceClient.runDataScan(request);
-    }
-  }
-}
-```
-
-### Python
-
-### Python
-
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/dataplex/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-# This snippet has been automatically generated and should be regarded as a
-# code template only.
-# It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-#   client as shown in:
-#   https://googleapis.dev/python/google-api-core/latest/client_options.html
-from google.cloud import dataplex_v1
-
-
-def sample_run_data_scan():
-    # Create a client
-    client = dataplex_v1.DataScanServiceClient()
-
-    # Initialize request argument(s)
-    request = dataplex_v1.RunDataScanRequest(
-        name="name_value",
+    package main
+    
+    import (
+     "context"
+    
+     dataplex "cloud.google.com/go/dataplex/apiv1"
+     dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
     )
+    
+    func main() {
+     ctx := context.Background()
+     // This snippet has been automatically generated and should be regarded as a code template only.
+     // It will require modifications to work:
+     // - It may require correct/in-range values for request initialization.
+     // - It may require specifying regional endpoints when creating the service client as shown in:
+     //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
+     c, err := dataplex.NewDataScanClient(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     defer c.Close()
+    
+     req := &dataplexpb.RunDataScanRequest{
+         // TODO: Fill request struct fields.
+         // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#RunDataScanRequest.
+     }
+     resp, err := c.RunDataScan(ctx, req)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     // TODO: Use resp.
+     _ = resp
+    }
 
-    # Make the request
-    response = client.run_data_scan(request=request)
+### Java
 
-    # Handle the response
-    print(response)
-```
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    import com.google.cloud.dataplex.v1.DataScanName;
+    import com.google.cloud.dataplex.v1.DataScanServiceClient;
+    import com.google.cloud.dataplex.v1.RunDataScanRequest;
+    import com.google.cloud.dataplex.v1.RunDataScanResponse;
+    
+    public class SyncRunDataScan {
+    
+      public static void main(String[] args) throws Exception {
+        syncRunDataScan();
+      }
+    
+      public static void syncRunDataScan() throws Exception {
+        // This snippet has been automatically generated and should be regarded as a code template only.
+        // It will require modifications to work:
+        // - It may require correct/in-range values for request initialization.
+        // - It may require specifying regional endpoints when creating the service client as shown in
+        // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
+        try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
+          RunDataScanRequest request =
+              RunDataScanRequest.newBuilder()
+                  .setName(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
+                  .build();
+          RunDataScanResponse response = dataScanServiceClient.runDataScan(request);
+        }
+      }
+    }
+
+### Python
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/dataplex/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    # This snippet has been automatically generated and should be regarded as a
+    # code template only.
+    # It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    #   client as shown in:
+    #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+    from google.cloud import dataplex_v1
+    
+    
+    def sample_run_data_scan():
+        # Create a client
+        client = dataplex_v1.DataScanServiceClient()
+    
+        # Initialize request argument(s)
+        request = dataplex_v1.RunDataScanRequest(
+            name="name_value",
+        )
+    
+        # Make the request
+        response = client.run_data_scan(request=request)
+    
+        # Handle the response
+        print(response)
 
 ### Ruby
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](/ruby/docs/reference/google-cloud-dataplex/latest) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` ruby
-require "google/cloud/dataplex/v1"
-
-##
-# Snippet for the run_data_scan call in the DataScanService service
-#
-# This snippet has been automatically generated and should be regarded as a code
-# template only. It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-# client as shown in https://cloud.google.com/ruby/docs/reference.
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan.
-#
-def run_data_scan
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
-
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Dataplex::V1::RunDataScanRequest.new
-
-  # Call the run_data_scan method.
-  result = client.run_data_scan request
-
-  # The returned object is of type Google::Cloud::Dataplex::V1::RunDataScanResponse.
-  p result
-end
-```
+    require "google/cloud/dataplex/v1"
+    
+    ##
+    # Snippet for the run_data_scan call in the DataScanService service
+    #
+    # This snippet has been automatically generated and should be regarded as a code
+    # template only. It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    # client as shown in https://cloud.google.com/ruby/docs/reference.
+    #
+    # This is an auto-generated example demonstrating basic usage of
+    # Google::Cloud::Dataplex::V1::DataScanService::Client#run_data_scan.
+    #
+    def run_data_scan
+      # Create a client object. The client can be reused for multiple calls.
+      client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+    
+      # Create a request. To set request fields, pass in keyword arguments.
+      request = Google::Cloud::Dataplex::V1::RunDataScanRequest.new
+    
+      # Call the run_data_scan method.
+      result = client.run_data_scan request
+    
+      # The returned object is of type Google::Cloud::Dataplex::V1::RunDataScanResponse.
+      p result
+    end
 
 ### REST
 
-To run a data profile scan, use the [`  dataScans.run  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
+To run a data profile scan, use the [`  dataScans.run  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) .
 
 **Note:** Run isn't supported for data profile scans that are on a one-time schedule.
 
@@ -775,6 +753,8 @@ To run a data profile scan, use the [`  dataScans.run  ` method](/dataplex/docs/
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
     
@@ -788,14 +768,12 @@ To run a data profile scan, use the [`  dataScans.run  ` method](/dataplex/docs/
 
 ### gcloud
 
-To view the results of a data profile scan job, use the [`  gcloud dataplex datascans jobs describe  ` command](/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
+To view the results of a data profile scan job, use the [`  gcloud dataplex datascans jobs describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/describe) :
 
-``` text
-gcloud dataplex datascans jobs describe JOB \
---location=LOCATION \
---datascan=DATASCAN \
---view=FULL
-```
+    gcloud dataplex datascans jobs describe JOB \
+    --location=LOCATION \
+    --datascan=DATASCAN \
+    --view=FULL
 
 Replace the following variables:
 
@@ -808,204 +786,198 @@ Replace the following variables:
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` csharp
-using Google.Cloud.Dataplex.V1;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for GetDataScan</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public void GetDataScanRequestObject()
+    using Google.Cloud.Dataplex.V1;
+    
+    public sealed partial class GeneratedDataScanServiceClientSnippets
     {
-        // Create client
-        DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
-        // Initialize request argument(s)
-        GetDataScanRequest request = new GetDataScanRequest
+        /// <summary>Snippet for GetDataScan</summary>
+        /// <remarks>
+        /// This snippet has been automatically generated and should be regarded as a code template only.
+        /// It will require modifications to work:
+        /// - It may require correct/in-range values for request initialization.
+        /// - It may require specifying regional endpoints when creating the service client as shown in
+        ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
+        /// </remarks>
+        public void GetDataScanRequestObject()
         {
-            DataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
-            View = GetDataScanRequest.Types.DataScanView.Unspecified,
-        };
-        // Make the request
-        DataScan response = dataScanServiceClient.GetDataScan(request);
+            // Create client
+            DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
+            // Initialize request argument(s)
+            GetDataScanRequest request = new GetDataScanRequest
+            {
+                DataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
+                View = GetDataScanRequest.Types.DataScanView.Unspecified,
+            };
+            // Make the request
+            DataScan response = dataScanServiceClient.GetDataScan(request);
+        }
     }
-}
-```
 
 ### Go
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` go
-package main
-
-import (
- "context"
-
- dataplex "cloud.google.com/go/dataplex/apiv1"
- dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
-)
-
-func main() {
- ctx := context.Background()
- // This snippet has been automatically generated and should be regarded as a code template only.
- // It will require modifications to work:
- // - It may require correct/in-range values for request initialization.
- // - It may require specifying regional endpoints when creating the service client as shown in:
- //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
- c, err := dataplex.NewDataScanClient(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- defer c.Close()
-
- req := &dataplexpb.GetDataScanRequest{
-     // TODO: Fill request struct fields.
-     // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#GetDataScanRequest.
- }
- resp, err := c.GetDataScan(ctx, req)
- if err != nil {
-     // TODO: Handle error.
- }
- // TODO: Use resp.
- _ = resp
-}
-```
-
-### Java
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-dataplex/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` java
-import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.DataScanName;
-import com.google.cloud.dataplex.v1.DataScanServiceClient;
-import com.google.cloud.dataplex.v1.GetDataScanRequest;
-
-public class SyncGetDataScan {
-
-  public static void main(String[] args) throws Exception {
-    syncGetDataScan();
-  }
-
-  public static void syncGetDataScan() throws Exception {
-    // This snippet has been automatically generated and should be regarded as a code template only.
-    // It will require modifications to work:
-    // - It may require correct/in-range values for request initialization.
-    // - It may require specifying regional endpoints when creating the service client as shown in
-    // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
-      GetDataScanRequest request =
-          GetDataScanRequest.newBuilder()
-              .setName(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
-              .build();
-      DataScan response = dataScanServiceClient.getDataScan(request);
-    }
-  }
-}
-```
-
-### Python
-
-### Python
-
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/dataplex/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-# This snippet has been automatically generated and should be regarded as a
-# code template only.
-# It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-#   client as shown in:
-#   https://googleapis.dev/python/google-api-core/latest/client_options.html
-from google.cloud import dataplex_v1
-
-
-def sample_get_data_scan():
-    # Create a client
-    client = dataplex_v1.DataScanServiceClient()
-
-    # Initialize request argument(s)
-    request = dataplex_v1.GetDataScanRequest(
-        name="name_value",
+    package main
+    
+    import (
+     "context"
+    
+     dataplex "cloud.google.com/go/dataplex/apiv1"
+     dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
     )
+    
+    func main() {
+     ctx := context.Background()
+     // This snippet has been automatically generated and should be regarded as a code template only.
+     // It will require modifications to work:
+     // - It may require correct/in-range values for request initialization.
+     // - It may require specifying regional endpoints when creating the service client as shown in:
+     //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
+     c, err := dataplex.NewDataScanClient(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     defer c.Close()
+    
+     req := &dataplexpb.GetDataScanRequest{
+         // TODO: Fill request struct fields.
+         // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#GetDataScanRequest.
+     }
+     resp, err := c.GetDataScan(ctx, req)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     // TODO: Use resp.
+     _ = resp
+    }
 
-    # Make the request
-    response = client.get_data_scan(request=request)
+### Java
 
-    # Handle the response
-    print(response)
-```
+### Java
+
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    import com.google.cloud.dataplex.v1.DataScan;
+    import com.google.cloud.dataplex.v1.DataScanName;
+    import com.google.cloud.dataplex.v1.DataScanServiceClient;
+    import com.google.cloud.dataplex.v1.GetDataScanRequest;
+    
+    public class SyncGetDataScan {
+    
+      public static void main(String[] args) throws Exception {
+        syncGetDataScan();
+      }
+    
+      public static void syncGetDataScan() throws Exception {
+        // This snippet has been automatically generated and should be regarded as a code template only.
+        // It will require modifications to work:
+        // - It may require correct/in-range values for request initialization.
+        // - It may require specifying regional endpoints when creating the service client as shown in
+        // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
+        try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
+          GetDataScanRequest request =
+              GetDataScanRequest.newBuilder()
+                  .setName(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
+                  .build();
+          DataScan response = dataScanServiceClient.getDataScan(request);
+        }
+      }
+    }
+
+### Python
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/dataplex/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    # This snippet has been automatically generated and should be regarded as a
+    # code template only.
+    # It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    #   client as shown in:
+    #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+    from google.cloud import dataplex_v1
+    
+    
+    def sample_get_data_scan():
+        # Create a client
+        client = dataplex_v1.DataScanServiceClient()
+    
+        # Initialize request argument(s)
+        request = dataplex_v1.GetDataScanRequest(
+            name="name_value",
+        )
+    
+        # Make the request
+        response = client.get_data_scan(request=request)
+    
+        # Handle the response
+        print(response)
 
 ### Ruby
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](/ruby/docs/reference/google-cloud-dataplex/latest) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` ruby
-require "google/cloud/dataplex/v1"
-
-##
-# Snippet for the get_data_scan call in the DataScanService service
-#
-# This snippet has been automatically generated and should be regarded as a code
-# template only. It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-# client as shown in https://cloud.google.com/ruby/docs/reference.
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan.
-#
-def get_data_scan
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
-
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Dataplex::V1::GetDataScanRequest.new
-
-  # Call the get_data_scan method.
-  result = client.get_data_scan request
-
-  # The returned object is of type Google::Cloud::Dataplex::V1::DataScan.
-  p result
-end
-```
+    require "google/cloud/dataplex/v1"
+    
+    ##
+    # Snippet for the get_data_scan call in the DataScanService service
+    #
+    # This snippet has been automatically generated and should be regarded as a code
+    # template only. It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    # client as shown in https://cloud.google.com/ruby/docs/reference.
+    #
+    # This is an auto-generated example demonstrating basic usage of
+    # Google::Cloud::Dataplex::V1::DataScanService::Client#get_data_scan.
+    #
+    def get_data_scan
+      # Create a client object. The client can be reused for multiple calls.
+      client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+    
+      # Create a request. To set request fields, pass in keyword arguments.
+      request = Google::Cloud::Dataplex::V1::GetDataScanRequest.new
+    
+      # Call the get_data_scan method.
+      result = client.get_data_scan request
+    
+      # The returned object is of type Google::Cloud::Dataplex::V1::DataScan.
+      p result
+    end
 
 ### REST
 
-To view the results of a data profile scan, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the results of a data profile scan, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View published results
 
 If the data profile scan results are published to the BigQuery and Dataplex Universal Catalog pages in the Google Cloud console, then you can see the latest scan results on the source table's **Data profile** tab.
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -1024,6 +996,8 @@ If the data profile scan results are published to the BigQuery and Dataplex Univ
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1033,13 +1007,11 @@ If the data profile scan results are published to the BigQuery and Dataplex Univ
 
 ### gcloud
 
-To view the most recent successful data profile scan, use the [`  gcloud dataplex datascans describe  ` command](/sdk/gcloud/reference/dataplex/datascans/describe) :
+To view the most recent successful data profile scan, use the [`  gcloud dataplex datascans describe  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/describe) :
 
-``` text
-gcloud dataplex datascans describe DATASCAN \
---location=LOCATION \
---view=FULL
-```
+    gcloud dataplex datascans describe DATASCAN \
+    --location=LOCATION \
+    --view=FULL
 
 Replace the following variables:
 
@@ -1049,7 +1021,7 @@ Replace the following variables:
 
 ### REST
 
-To view the most recent scan job, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
+To view the most recent scan job, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) .
 
 ### View historical scan results
 
@@ -1058,6 +1030,8 @@ Dataplex Universal Catalog saves the data profile scan history of the last 300 j
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1069,13 +1043,11 @@ Dataplex Universal Catalog saves the data profile scan history of the last 300 j
 
 ### gcloud
 
-To view historical data profile scan jobs, use the [`  gcloud dataplex datascans jobs list  ` command](/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
+To view historical data profile scan jobs, use the [`  gcloud dataplex datascans jobs list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/jobs/list) :
 
-``` text
-gcloud dataplex datascans jobs list \
---location=LOCATION \
---datascan=DATASCAN
-```
+    gcloud dataplex datascans jobs list \
+    --location=LOCATION \
+    --datascan=DATASCAN
 
 Replace the following variables:
 
@@ -1086,259 +1058,251 @@ Replace the following variables:
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` csharp
-using Google.Api.Gax;
-using Google.Cloud.Dataplex.V1;
-using System;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for ListDataScanJobs</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public void ListDataScanJobsRequestObject()
+    using Google.Api.Gax;
+    using Google.Cloud.Dataplex.V1;
+    using System;
+    
+    public sealed partial class GeneratedDataScanServiceClientSnippets
     {
-        // Create client
-        DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
-        // Initialize request argument(s)
-        ListDataScanJobsRequest request = new ListDataScanJobsRequest
+        /// <summary>Snippet for ListDataScanJobs</summary>
+        /// <remarks>
+        /// This snippet has been automatically generated and should be regarded as a code template only.
+        /// It will require modifications to work:
+        /// - It may require correct/in-range values for request initialization.
+        /// - It may require specifying regional endpoints when creating the service client as shown in
+        ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
+        /// </remarks>
+        public void ListDataScanJobsRequestObject()
         {
-            ParentAsDataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
-            Filter = "",
-        };
-        // Make the request
-        PagedEnumerable<ListDataScanJobsResponse, DataScanJob> response = dataScanServiceClient.ListDataScanJobs(request);
-
-        // Iterate over all response items, lazily performing RPCs as required
-        foreach (DataScanJob item in response)
-        {
-            // Do something with each item
-            Console.WriteLine(item);
-        }
-
-        // Or iterate over pages (of server-defined size), performing one RPC per page
-        foreach (ListDataScanJobsResponse page in response.AsRawResponses())
-        {
-            // Do something with each page of items
-            Console.WriteLine("A page of results:");
-            foreach (DataScanJob item in page)
+            // Create client
+            DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
+            // Initialize request argument(s)
+            ListDataScanJobsRequest request = new ListDataScanJobsRequest
+            {
+                ParentAsDataScanName = DataScanName.FromProjectLocationDataScan("[PROJECT]", "[LOCATION]", "[DATASCAN]"),
+                Filter = "",
+            };
+            // Make the request
+            PagedEnumerable<ListDataScanJobsResponse, DataScanJob> response = dataScanServiceClient.ListDataScanJobs(request);
+    
+            // Iterate over all response items, lazily performing RPCs as required
+            foreach (DataScanJob item in response)
             {
                 // Do something with each item
                 Console.WriteLine(item);
             }
+    
+            // Or iterate over pages (of server-defined size), performing one RPC per page
+            foreach (ListDataScanJobsResponse page in response.AsRawResponses())
+            {
+                // Do something with each page of items
+                Console.WriteLine("A page of results:");
+                foreach (DataScanJob item in page)
+                {
+                    // Do something with each item
+                    Console.WriteLine(item);
+                }
+            }
+    
+            // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
+            int pageSize = 10;
+            Page<DataScanJob> singlePage = response.ReadPage(pageSize);
+            // Do something with the page of items
+            Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
+            foreach (DataScanJob item in singlePage)
+            {
+                // Do something with each item
+                Console.WriteLine(item);
+            }
+            // Store the pageToken, for when the next page is required.
+            string nextPageToken = singlePage.NextPageToken;
         }
-
-        // Or retrieve a single page of known size (unless it's the final page), performing as many RPCs as required
-        int pageSize = 10;
-        Page<DataScanJob> singlePage = response.ReadPage(pageSize);
-        // Do something with the page of items
-        Console.WriteLine($"A page of {pageSize} results (unless it's the final page):");
-        foreach (DataScanJob item in singlePage)
-        {
-            // Do something with each item
-            Console.WriteLine(item);
-        }
-        // Store the pageToken, for when the next page is required.
-        string nextPageToken = singlePage.NextPageToken;
     }
-}
-```
 
 ### Go
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` go
-package main
-
-import (
- "context"
-
- dataplex "cloud.google.com/go/dataplex/apiv1"
- dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
- "google.golang.org/api/iterator"
-)
-
-func main() {
- ctx := context.Background()
- // This snippet has been automatically generated and should be regarded as a code template only.
- // It will require modifications to work:
- // - It may require correct/in-range values for request initialization.
- // - It may require specifying regional endpoints when creating the service client as shown in:
- //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
- c, err := dataplex.NewDataScanClient(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- defer c.Close()
-
- req := &dataplexpb.ListDataScanJobsRequest{
-     // TODO: Fill request struct fields.
-     // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#ListDataScanJobsRequest.
- }
- it := c.ListDataScanJobs(ctx, req)
- for {
-     resp, err := it.Next()
-     if err == iterator.Done {
-         break
-     }
+    package main
+    
+    import (
+     "context"
+    
+     dataplex "cloud.google.com/go/dataplex/apiv1"
+     dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
+     "google.golang.org/api/iterator"
+    )
+    
+    func main() {
+     ctx := context.Background()
+     // This snippet has been automatically generated and should be regarded as a code template only.
+     // It will require modifications to work:
+     // - It may require correct/in-range values for request initialization.
+     // - It may require specifying regional endpoints when creating the service client as shown in:
+     //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
+     c, err := dataplex.NewDataScanClient(ctx)
      if err != nil {
          // TODO: Handle error.
      }
-     // TODO: Use resp.
-     _ = resp
-
-     // If you need to access the underlying RPC response,
-     // you can do so by casting the `Response` as below.
-     // Otherwise, remove this line. Only populated after
-     // first call to Next(). Not safe for concurrent access.
-     _ = it.Response.(*dataplexpb.ListDataScanJobsResponse)
- }
-}
-```
+     defer c.Close()
+    
+     req := &dataplexpb.ListDataScanJobsRequest{
+         // TODO: Fill request struct fields.
+         // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#ListDataScanJobsRequest.
+     }
+     it := c.ListDataScanJobs(ctx, req)
+     for {
+         resp, err := it.Next()
+         if err == iterator.Done {
+             break
+         }
+         if err != nil {
+             // TODO: Handle error.
+         }
+         // TODO: Use resp.
+         _ = resp
+    
+         // If you need to access the underlying RPC response,
+         // you can do so by casting the `Response` as below.
+         // Otherwise, remove this line. Only populated after
+         // first call to Next(). Not safe for concurrent access.
+         _ = it.Response.(*dataplexpb.ListDataScanJobsResponse)
+     }
+    }
 
 ### Java
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-dataplex/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` java
-import com.google.cloud.dataplex.v1.DataScanJob;
-import com.google.cloud.dataplex.v1.DataScanName;
-import com.google.cloud.dataplex.v1.DataScanServiceClient;
-import com.google.cloud.dataplex.v1.ListDataScanJobsRequest;
-
-public class SyncListDataScanJobs {
-
-  public static void main(String[] args) throws Exception {
-    syncListDataScanJobs();
-  }
-
-  public static void syncListDataScanJobs() throws Exception {
-    // This snippet has been automatically generated and should be regarded as a code template only.
-    // It will require modifications to work:
-    // - It may require correct/in-range values for request initialization.
-    // - It may require specifying regional endpoints when creating the service client as shown in
-    // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
-      ListDataScanJobsRequest request =
-          ListDataScanJobsRequest.newBuilder()
-              .setParent(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
-              .setPageSize(883849137)
-              .setPageToken("pageToken873572522")
-              .setFilter("filter-1274492040")
-              .build();
-      for (DataScanJob element : dataScanServiceClient.listDataScanJobs(request).iterateAll()) {
-        // doThingsWith(element);
+    import com.google.cloud.dataplex.v1.DataScanJob;
+    import com.google.cloud.dataplex.v1.DataScanName;
+    import com.google.cloud.dataplex.v1.DataScanServiceClient;
+    import com.google.cloud.dataplex.v1.ListDataScanJobsRequest;
+    
+    public class SyncListDataScanJobs {
+    
+      public static void main(String[] args) throws Exception {
+        syncListDataScanJobs();
+      }
+    
+      public static void syncListDataScanJobs() throws Exception {
+        // This snippet has been automatically generated and should be regarded as a code template only.
+        // It will require modifications to work:
+        // - It may require correct/in-range values for request initialization.
+        // - It may require specifying regional endpoints when creating the service client as shown in
+        // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
+        try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
+          ListDataScanJobsRequest request =
+              ListDataScanJobsRequest.newBuilder()
+                  .setParent(DataScanName.of("[PROJECT]", "[LOCATION]", "[DATASCAN]").toString())
+                  .setPageSize(883849137)
+                  .setPageToken("pageToken873572522")
+                  .setFilter("filter-1274492040")
+                  .build();
+          for (DataScanJob element : dataScanServiceClient.listDataScanJobs(request).iterateAll()) {
+            // doThingsWith(element);
+          }
+        }
       }
     }
-  }
-}
-```
 
 ### Python
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/dataplex/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-# This snippet has been automatically generated and should be regarded as a
-# code template only.
-# It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-#   client as shown in:
-#   https://googleapis.dev/python/google-api-core/latest/client_options.html
-from google.cloud import dataplex_v1
-
-
-def sample_list_data_scan_jobs():
-    # Create a client
-    client = dataplex_v1.DataScanServiceClient()
-
-    # Initialize request argument(s)
-    request = dataplex_v1.ListDataScanJobsRequest(
-        parent="parent_value",
-    )
-
-    # Make the request
-    page_result = client.list_data_scan_jobs(request=request)
-
-    # Handle the response
-    for response in page_result:
-        print(response)
-```
+    # This snippet has been automatically generated and should be regarded as a
+    # code template only.
+    # It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    #   client as shown in:
+    #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+    from google.cloud import dataplex_v1
+    
+    
+    def sample_list_data_scan_jobs():
+        # Create a client
+        client = dataplex_v1.DataScanServiceClient()
+    
+        # Initialize request argument(s)
+        request = dataplex_v1.ListDataScanJobsRequest(
+            parent="parent_value",
+        )
+    
+        # Make the request
+        page_result = client.list_data_scan_jobs(request=request)
+    
+        # Handle the response
+        for response in page_result:
+            print(response)
 
 ### Ruby
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](/ruby/docs/reference/google-cloud-dataplex/latest) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` ruby
-require "google/cloud/dataplex/v1"
-
-##
-# Snippet for the list_data_scan_jobs call in the DataScanService service
-#
-# This snippet has been automatically generated and should be regarded as a code
-# template only. It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-# client as shown in https://cloud.google.com/ruby/docs/reference.
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scan_jobs.
-#
-def list_data_scan_jobs
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
-
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new
-
-  # Call the list_data_scan_jobs method.
-  result = client.list_data_scan_jobs request
-
-  # The returned object is of type Gapic::PagedEnumerable. You can iterate
-  # over elements, and API calls will be issued to fetch pages as needed.
-  result.each do |item|
-    # Each element is of type ::Google::Cloud::Dataplex::V1::DataScanJob.
-    p item
-  end
-end
-```
+    require "google/cloud/dataplex/v1"
+    
+    ##
+    # Snippet for the list_data_scan_jobs call in the DataScanService service
+    #
+    # This snippet has been automatically generated and should be regarded as a code
+    # template only. It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    # client as shown in https://cloud.google.com/ruby/docs/reference.
+    #
+    # This is an auto-generated example demonstrating basic usage of
+    # Google::Cloud::Dataplex::V1::DataScanService::Client#list_data_scan_jobs.
+    #
+    def list_data_scan_jobs
+      # Create a client object. The client can be reused for multiple calls.
+      client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+    
+      # Create a request. To set request fields, pass in keyword arguments.
+      request = Google::Cloud::Dataplex::V1::ListDataScanJobsRequest.new
+    
+      # Call the list_data_scan_jobs method.
+      result = client.list_data_scan_jobs request
+    
+      # The returned object is of type Gapic::PagedEnumerable. You can iterate
+      # over elements, and API calls will be issued to fetch pages as needed.
+      result.each do |item|
+        # Each element is of type ::Google::Cloud::Dataplex::V1::DataScanJob.
+        p item
+      end
+    end
 
 ### REST
 
-To view historical data profile scan jobs, use the [`  dataScans.jobs.list  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
+To view historical data profile scan jobs, use the [`  dataScans.jobs.list  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) .
 
 ### View the data profile scans for a table
 
 To view the data profile scans that apply to a specific table, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Filter the list by table name and scan type.
 
@@ -1347,6 +1311,8 @@ To view the data profile scans that apply to a specific table, do the following:
 To enable the users in your organization to view the scan results, do the following:
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the data profile scan you want to share the results of.
 
@@ -1365,6 +1331,8 @@ You can also create and manage data profile scans when working with a specific t
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
     
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+    
     In the **Explorer** pane (in the left pane), click **Datasets** , and then click your dataset. Now click **Overview \> Tables** , and select the table whose data profile scan results you want to see.
 
 2.  Click the **Data profile** tab.
@@ -1375,21 +1343,21 @@ You can also create and manage data profile scans when working with a specific t
         
         To manage the data profile scans for this table, click **Data profile scan** , and then select from the following options:
         
-          - **Create new scan** : create a new data profile scan. For more information, see the [Create a data profile scan](#create-scan) section of this document. When you create a scan from a table's details page, the table is preselected.
+          - **Create new scan** : create a new data profile scan. For more information, see the [Create a data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create-scan) section of this document. When you create a scan from a table's details page, the table is preselected.
         
           - **Run now** : run the scan.
         
           - **Edit scan configuration** : edit settings including the display name, filters, sampling size, and schedule.
         
-          - **Manage scan permissions** : control who can access the scan results. For more information, see the [Grant access to data profile scan results](#share-results) section of this document.
+          - **Manage scan permissions** : control who can access the scan results. For more information, see the [Grant access to data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#share-results) section of this document.
         
-          - **View historical results** : view detailed information about previous data profile scan jobs. For more information, see the [View data profile scan results](#results) and [View historical scan results](#older-scans) sections of this document.
+          - **View historical results** : view detailed information about previous data profile scan jobs. For more information, see the [View data profile scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#results) and [View historical scan results](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#older-scans) sections of this document.
         
           - **View all scans** : view a list of data profile scans that apply to this table.
     
       - **Data profile scan results aren't published** : click the menu next to **Quick data profile** , and then select from the following options:
         
-          - **Customize data profiling** : create a new data profile scan. For more information, see the [Create a data profile scan](#create-scan) section of this document. When you create a scan from a table's details page, the table is preselected.
+          - **Customize data profiling** : create a new data profile scan. For more information, see the [Create a data profile scan](https://docs.cloud.google.com/bigquery/docs/data-profile-scan#create-scan) section of this document. When you create a scan from a table's details page, the table is preselected.
         
           - **View previous profiles** : view a list of data profile scans that apply to this table.
 
@@ -1398,6 +1366,8 @@ You can also create and manage data profile scans when working with a specific t
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the name of a data profile scan.
 
@@ -1407,13 +1377,11 @@ You can also create and manage data profile scans when working with a specific t
 
 ### gcloud
 
-To update a data profile scan, use the [`  gcloud dataplex datascans update data-profile  ` command](/sdk/gcloud/reference/dataplex/datascans/update/data-profile) :
+To update a data profile scan, use the [`  gcloud dataplex datascans update data-profile  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-profile) :
 
-``` text
-gcloud dataplex datascans update data-profile DATASCAN \
---location=LOCATION \
---description=DESCRIPTION
-```
+    gcloud dataplex datascans update data-profile DATASCAN \
+    --location=LOCATION \
+    --description=DESCRIPTION
 
 Replace the following variables:
 
@@ -1421,242 +1389,232 @@ Replace the following variables:
   - `  LOCATION  ` : The Google Cloud region in which the data profile scan was created.
   - `  DESCRIPTION  ` : The new description for the data profile scan.
 
-**Note:** You can update specification fields, such as `  rowFilter  ` , `  samplingPercent  ` , or `  includeFields  ` , in the data profile specification file. See the [JSON format](/dataplex/docs/reference/rest/v1/DataProfileSpec) .
+**Note:** You can update specification fields, such as `  rowFilter  ` , `  samplingPercent  ` , or `  includeFields  ` , in the data profile specification file. See the [JSON format](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/DataProfileSpec) .
 
 ### C\#
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.Dataplex.V1/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` csharp
-using Google.Cloud.Dataplex.V1;
-using Google.LongRunning;
-using Google.Protobuf.WellKnownTypes;
-
-public sealed partial class GeneratedDataScanServiceClientSnippets
-{
-    /// <summary>Snippet for UpdateDataScan</summary>
-    /// <remarks>
-    /// This snippet has been automatically generated and should be regarded as a code template only.
-    /// It will require modifications to work:
-    /// - It may require correct/in-range values for request initialization.
-    /// - It may require specifying regional endpoints when creating the service client as shown in
-    ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
-    /// </remarks>
-    public void UpdateDataScanRequestObject()
+    using Google.Cloud.Dataplex.V1;
+    using Google.LongRunning;
+    using Google.Protobuf.WellKnownTypes;
+    
+    public sealed partial class GeneratedDataScanServiceClientSnippets
     {
-        // Create client
-        DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
-        // Initialize request argument(s)
-        UpdateDataScanRequest request = new UpdateDataScanRequest
+        /// <summary>Snippet for UpdateDataScan</summary>
+        /// <remarks>
+        /// This snippet has been automatically generated and should be regarded as a code template only.
+        /// It will require modifications to work:
+        /// - It may require correct/in-range values for request initialization.
+        /// - It may require specifying regional endpoints when creating the service client as shown in
+        ///   https://cloud.google.com/dotnet/docs/reference/help/client-configuration#endpoint.
+        /// </remarks>
+        public void UpdateDataScanRequestObject()
         {
-            DataScan = new DataScan(),
-            UpdateMask = new FieldMask(),
-            ValidateOnly = false,
-        };
-        // Make the request
-        Operation<DataScan, OperationMetadata> response = dataScanServiceClient.UpdateDataScan(request);
-
-        // Poll until the returned long-running operation is complete
-        Operation<DataScan, OperationMetadata> completedResponse = response.PollUntilCompleted();
-        // Retrieve the operation result
-        DataScan result = completedResponse.Result;
-
-        // Or get the name of the operation
-        string operationName = response.Name;
-        // This name can be stored, then the long-running operation retrieved later by name
-        Operation<DataScan, OperationMetadata> retrievedResponse = dataScanServiceClient.PollOnceUpdateDataScan(operationName);
-        // Check if the retrieved long-running operation has completed
-        if (retrievedResponse.IsCompleted)
-        {
-            // If it has completed, then access the result
-            DataScan retrievedResult = retrievedResponse.Result;
+            // Create client
+            DataScanServiceClient dataScanServiceClient = DataScanServiceClient.Create();
+            // Initialize request argument(s)
+            UpdateDataScanRequest request = new UpdateDataScanRequest
+            {
+                DataScan = new DataScan(),
+                UpdateMask = new FieldMask(),
+                ValidateOnly = false,
+            };
+            // Make the request
+            Operation<DataScan, OperationMetadata> response = dataScanServiceClient.UpdateDataScan(request);
+    
+            // Poll until the returned long-running operation is complete
+            Operation<DataScan, OperationMetadata> completedResponse = response.PollUntilCompleted();
+            // Retrieve the operation result
+            DataScan result = completedResponse.Result;
+    
+            // Or get the name of the operation
+            string operationName = response.Name;
+            // This name can be stored, then the long-running operation retrieved later by name
+            Operation<DataScan, OperationMetadata> retrievedResponse = dataScanServiceClient.PollOnceUpdateDataScan(operationName);
+            // Check if the retrieved long-running operation has completed
+            if (retrievedResponse.IsCompleted)
+            {
+                // If it has completed, then access the result
+                DataScan retrievedResult = retrievedResponse.Result;
+            }
         }
     }
-}
-```
 
 ### Go
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Go API reference documentation](https://pkg.go.dev/cloud.google.com/go/dataplex) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` go
-package main
-
-import (
- "context"
-
- dataplex "cloud.google.com/go/dataplex/apiv1"
- dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
-)
-
-func main() {
- ctx := context.Background()
- // This snippet has been automatically generated and should be regarded as a code template only.
- // It will require modifications to work:
- // - It may require correct/in-range values for request initialization.
- // - It may require specifying regional endpoints when creating the service client as shown in:
- //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
- c, err := dataplex.NewDataScanClient(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- defer c.Close()
-
- req := &dataplexpb.UpdateDataScanRequest{
-     // TODO: Fill request struct fields.
-     // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#UpdateDataScanRequest.
- }
- op, err := c.UpdateDataScan(ctx, req)
- if err != nil {
-     // TODO: Handle error.
- }
-
- resp, err := op.Wait(ctx)
- if err != nil {
-     // TODO: Handle error.
- }
- // TODO: Use resp.
- _ = resp
-}
-```
-
-### Java
-
-### Java
-
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-dataplex/latest/overview) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` java
-import com.google.cloud.dataplex.v1.DataScan;
-import com.google.cloud.dataplex.v1.DataScanServiceClient;
-import com.google.cloud.dataplex.v1.UpdateDataScanRequest;
-import com.google.protobuf.FieldMask;
-
-public class SyncUpdateDataScan {
-
-  public static void main(String[] args) throws Exception {
-    syncUpdateDataScan();
-  }
-
-  public static void syncUpdateDataScan() throws Exception {
-    // This snippet has been automatically generated and should be regarded as a code template only.
-    // It will require modifications to work:
-    // - It may require correct/in-range values for request initialization.
-    // - It may require specifying regional endpoints when creating the service client as shown in
-    // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
-    try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
-      UpdateDataScanRequest request =
-          UpdateDataScanRequest.newBuilder()
-              .setDataScan(DataScan.newBuilder().build())
-              .setUpdateMask(FieldMask.newBuilder().build())
-              .setValidateOnly(true)
-              .build();
-      DataScan response = dataScanServiceClient.updateDataScanAsync(request).get();
-    }
-  }
-}
-```
-
-### Python
-
-### Python
-
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/dataplex/latest) .
-
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
-
-``` python
-# This snippet has been automatically generated and should be regarded as a
-# code template only.
-# It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-#   client as shown in:
-#   https://googleapis.dev/python/google-api-core/latest/client_options.html
-from google.cloud import dataplex_v1
-
-
-def sample_update_data_scan():
-    # Create a client
-    client = dataplex_v1.DataScanServiceClient()
-
-    # Initialize request argument(s)
-    data_scan = dataplex_v1.DataScan()
-    data_scan.data.entity = "entity_value"
-
-    request = dataplex_v1.UpdateDataScanRequest(
-        data_scan=data_scan,
+    package main
+    
+    import (
+     "context"
+    
+     dataplex "cloud.google.com/go/dataplex/apiv1"
+     dataplexpb "cloud.google.com/go/dataplex/apiv1/dataplexpb"
     )
+    
+    func main() {
+     ctx := context.Background()
+     // This snippet has been automatically generated and should be regarded as a code template only.
+     // It will require modifications to work:
+     // - It may require correct/in-range values for request initialization.
+     // - It may require specifying regional endpoints when creating the service client as shown in:
+     //   https://pkg.go.dev/cloud.google.com/go#hdr-Client_Options
+     c, err := dataplex.NewDataScanClient(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     defer c.Close()
+    
+     req := &dataplexpb.UpdateDataScanRequest{
+         // TODO: Fill request struct fields.
+         // See https://pkg.go.dev/cloud.google.com/go/dataplex/apiv1/dataplexpb#UpdateDataScanRequest.
+     }
+     op, err := c.UpdateDataScan(ctx, req)
+     if err != nil {
+         // TODO: Handle error.
+     }
+    
+     resp, err := op.Wait(ctx)
+     if err != nil {
+         // TODO: Handle error.
+     }
+     // TODO: Use resp.
+     _ = resp
+    }
 
-    # Make the request
-    operation = client.update_data_scan(request=request)
+### Java
 
-    print("Waiting for operation to complete...")
+### Java
 
-    response = operation.result()
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-dataplex/latest/overview) .
 
-    # Handle the response
-    print(response)
-```
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    import com.google.cloud.dataplex.v1.DataScan;
+    import com.google.cloud.dataplex.v1.DataScanServiceClient;
+    import com.google.cloud.dataplex.v1.UpdateDataScanRequest;
+    import com.google.protobuf.FieldMask;
+    
+    public class SyncUpdateDataScan {
+    
+      public static void main(String[] args) throws Exception {
+        syncUpdateDataScan();
+      }
+    
+      public static void syncUpdateDataScan() throws Exception {
+        // This snippet has been automatically generated and should be regarded as a code template only.
+        // It will require modifications to work:
+        // - It may require correct/in-range values for request initialization.
+        // - It may require specifying regional endpoints when creating the service client as shown in
+        // https://cloud.google.com/java/docs/setup#configure_endpoints_for_the_client_library
+        try (DataScanServiceClient dataScanServiceClient = DataScanServiceClient.create()) {
+          UpdateDataScanRequest request =
+              UpdateDataScanRequest.newBuilder()
+                  .setDataScan(DataScan.newBuilder().build())
+                  .setUpdateMask(FieldMask.newBuilder().build())
+                  .setValidateOnly(true)
+                  .build();
+          DataScan response = dataScanServiceClient.updateDataScanAsync(request).get();
+        }
+      }
+    }
+
+### Python
+
+### Python
+
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/dataplex/latest) .
+
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
+
+    # This snippet has been automatically generated and should be regarded as a
+    # code template only.
+    # It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    #   client as shown in:
+    #   https://googleapis.dev/python/google-api-core/latest/client_options.html
+    from google.cloud import dataplex_v1
+    
+    
+    def sample_update_data_scan():
+        # Create a client
+        client = dataplex_v1.DataScanServiceClient()
+    
+        # Initialize request argument(s)
+        data_scan = dataplex_v1.DataScan()
+        data_scan.data.entity = "entity_value"
+    
+        request = dataplex_v1.UpdateDataScanRequest(
+            data_scan=data_scan,
+        )
+    
+        # Make the request
+        operation = client.update_data_scan(request=request)
+    
+        print("Waiting for operation to complete...")
+    
+        response = operation.result()
+    
+        # Handle the response
+        print(response)
 
 ### Ruby
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](/ruby/docs/reference/google-cloud-dataplex/latest) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/dataplex/docs/reference/libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://docs.cloud.google.com/ruby/docs/reference/google-cloud-dataplex/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` ruby
-require "google/cloud/dataplex/v1"
-
-##
-# Snippet for the update_data_scan call in the DataScanService service
-#
-# This snippet has been automatically generated and should be regarded as a code
-# template only. It will require modifications to work:
-# - It may require correct/in-range values for request initialization.
-# - It may require specifying regional endpoints when creating the service
-# client as shown in https://cloud.google.com/ruby/docs/reference.
-#
-# This is an auto-generated example demonstrating basic usage of
-# Google::Cloud::Dataplex::V1::DataScanService::Client#update_data_scan.
-#
-def update_data_scan
-  # Create a client object. The client can be reused for multiple calls.
-  client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
-
-  # Create a request. To set request fields, pass in keyword arguments.
-  request = Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new
-
-  # Call the update_data_scan method.
-  result = client.update_data_scan request
-
-  # The returned object is of type Gapic::Operation. You can use it to
-  # check the status of an operation, cancel it, or wait for results.
-  # Here is how to wait for a response.
-  result.wait_until_done! timeout: 60
-  if result.response?
-    p result.response
-  else
-    puts "No response received."
-  end
-end
-```
+    require "google/cloud/dataplex/v1"
+    
+    ##
+    # Snippet for the update_data_scan call in the DataScanService service
+    #
+    # This snippet has been automatically generated and should be regarded as a code
+    # template only. It will require modifications to work:
+    # - It may require correct/in-range values for request initialization.
+    # - It may require specifying regional endpoints when creating the service
+    # client as shown in https://cloud.google.com/ruby/docs/reference.
+    #
+    # This is an auto-generated example demonstrating basic usage of
+    # Google::Cloud::Dataplex::V1::DataScanService::Client#update_data_scan.
+    #
+    def update_data_scan
+      # Create a client object. The client can be reused for multiple calls.
+      client = Google::Cloud::Dataplex::V1::DataScanService::Client.new
+    
+      # Create a request. To set request fields, pass in keyword arguments.
+      request = Google::Cloud::Dataplex::V1::UpdateDataScanRequest.new
+    
+      # Call the update_data_scan method.
+      result = client.update_data_scan request
+    
+      # The returned object is of type Gapic::Operation. You can use it to
+      # check the status of an operation, cancel it, or wait for results.
+      # Here is how to wait for a response.
+      result.wait_until_done! timeout: 60
+      if result.response?
+        p result.response
+      else
+        puts "No response received."
+      end
+    end
 
 ### REST
 
-To edit a data profile scan, use the [`  dataScans.patch  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
+To edit a data profile scan, use the [`  dataScans.patch  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) .
 
 **Note:** Update isn't supported for data profile scans that are on a one-time schedule.
 
@@ -1665,6 +1623,8 @@ To edit a data profile scan, use the [`  dataScans.patch  ` method](/dataplex/do
 ### Console
 
 1.  In the Google Cloud console, on the BigQuery **Metadata curation** page, go to the **Data profiling & quality** tab.
+    
+    [Go to Data profiling & quality](https://console.cloud.google.com/bigquery/governance/metadata-curation/data-profiling-and-quality)
 
 2.  Click the scan you want to delete.
 
@@ -1672,12 +1632,10 @@ To edit a data profile scan, use the [`  dataScans.patch  ` method](/dataplex/do
 
 ### gcloud
 
-To delete a data profile scan, use the [`  gcloud dataplex datascans delete  ` command](/sdk/gcloud/reference/dataplex/datascans/delete) :
+To delete a data profile scan, use the [`  gcloud dataplex datascans delete  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/delete) :
 
-``` text
-gcloud dataplex datascans delete DATASCAN \
---location=LOCATION --async
-```
+    gcloud dataplex datascans delete DATASCAN \
+    --location=LOCATION --async
 
 Replace the following variables:
 
@@ -1686,13 +1644,13 @@ Replace the following variables:
 
 ### REST
 
-To delete a data profile scan, use the [`  dataScans.delete  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
+To delete a data profile scan, use the [`  dataScans.delete  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) .
 
 **Note:** Delete isn't supported for data profile scans that are on a one-time schedule.
 
 ## What's next
 
-  - Learn how to [explore your data by generating data insights](/bigquery/docs/data-insights) .
-  - Learn more about [data governance in BigQuery](/bigquery/docs/data-governance) .
-  - Learn how to [scan your data for data quality issues](/bigquery/docs/data-quality-scan) .
-  - Learn how to examine table data and create queries with [table explorer](/bigquery/docs/table-explorer) .
+  - Learn how to [explore your data by generating data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - Learn more about [data governance in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-governance) .
+  - Learn how to [scan your data for data quality issues](https://docs.cloud.google.com/bigquery/docs/data-quality-scan) .
+  - Learn how to examine table data and create queries with [table explorer](https://docs.cloud.google.com/bigquery/docs/table-explorer) .

@@ -2,7 +2,7 @@
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The `  INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE  ` view provides daily totals of storage usage for the past 90 days for the following types of tables:
 
@@ -25,9 +25,7 @@ The data in this table is not kept in real time. It takes approximately 72 hours
 
 Storage usage is returned in MiB-second. For example, if a project uses 1,000,000 physical bytes for 86,400 seconds (24 hours), the total physical usage is 86,400,000,000 byte-seconds, which is converted to 82,397 MiB-seconds, as shown in the following example:
 
-``` text
-86,400,000,000 / 1,024 / 1,024 = 82,397
-```
+    86,400,000,000 / 1,024 / 1,024 = 82,397
 
 This is the value that would be returned by the `  BILLABLE_TOTAL_PHYSICAL_USAGE  ` column.
 
@@ -51,7 +49,7 @@ Each of the following predefined IAM roles includes the preceding permissions:
 
 For queries with a region qualifier, you must have permissions for the project.
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -105,37 +103,37 @@ The `  INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE  ` view has the following
 <td><code dir="ltr" translate="no">       billable_total_logical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
 <td><p>The total logical usage, in MiB second.</p>
-<p>Returns 0 if the dataset uses the physical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<p>Returns 0 if the dataset uses the physical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       billable_active_logical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
 <td><p>The logical usage that is less than 90 days old, in MiB second.</p>
-<p>Returns 0 if the dataset uses the physical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<p>Returns 0 if the dataset uses the physical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       billable_long_term_logical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
 <td><p>The logical usage that is more than 90 days old, in MiB second.</p>
-<p>Returns 0 if the dataset uses the physical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<p>Returns 0 if the dataset uses the physical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       billable_total_physical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><p>The total usage in MiB second. This includes physical bytes used for fail-safe and <a href="/bigquery/docs/time-travel">time travel</a> storage.</p>
-<p>Returns 0 if the dataset uses the logical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<td><p>The total usage in MiB second. This includes physical bytes used for fail-safe and <a href="https://docs.cloud.google.com/bigquery/docs/time-travel">time travel</a> storage.</p>
+<p>Returns 0 if the dataset uses the logical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       billable_active_physical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><p>The physical usage that is less than 90 days old, in MiB second. This includes physical bytes used for fail-safe and <a href="/bigquery/docs/time-travel">time travel</a> storage.</p>
-<p>Returns 0 if the dataset uses the logical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<td><p>The physical usage that is less than 90 days old, in MiB second. This includes physical bytes used for fail-safe and <a href="https://docs.cloud.google.com/bigquery/docs/time-travel">time travel</a> storage.</p>
+<p>Returns 0 if the dataset uses the logical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       billable_long_term_physical_usage      </code></td>
 <td><code dir="ltr" translate="no">       INT64      </code></td>
 <td><p>The physical usage that is more than 90 days old, in MiB second.</p>
-<p>Returns 0 if the dataset uses the logical storage <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
+<p>Returns 0 if the dataset uses the logical storage <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">billing model</a> .</p></td>
 </tr>
 </tbody>
 </table>
@@ -144,42 +142,25 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE[_BY_PROJECT]      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                                              | Resource scope | Region scope               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE[_BY_PROJECT]       `` | Project level  | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 The following example shows how to return storage information for tables in a specified project:
 
-``` text
-SELECT * FROM myProject.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE;
-```
+    SELECT * FROM myProject.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE;
 
 The following example shows how to return storage information for tables in a specified region:
 
-``` text
-SELECT * FROM `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE;
-```
+    SELECT * FROM `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE;
 
 ## Examples
 
@@ -189,7 +170,7 @@ SELECT * FROM `region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE;
 
 The following example sums the storage usage by day for projects in a specified region.
 
-``` text
+``` notranslate
 SELECT
   usage_date,
   project_id,
@@ -210,25 +191,23 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-| usage_date | project_id | billable_total_logical_usage | billable_active_logical_usage | billable_long_term_logical_usage  | billable_total_physical_usage | billable_active_physical_usage | billable_long_term_physical_usage   |
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-| 2023-04-03 | project_A  | 305085738096                 | 7667321458                    | 297418416638                      | 74823954823                   | 124235724                      | 74699719099                         |
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-| 2023-04-04 | project_A  | 287033241105                 | 7592334614                    | 279440906491                      | 75071991788                   | 200134561                      | 74871857227                         |
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-| 2023-04-03 | project_B  | 478173930912                 | 8137372626                    | 470036558286                      | 0                             | 0                              | 0                                   |
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-| 2023-04-04 | project_B  | 496648915405                 | 7710451723                    | 488938463682                      | 0                             | 0                              | 0                                   |
-+-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
-```
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
+    | usage_date | project_id | billable_total_logical_usage | billable_active_logical_usage | billable_long_term_logical_usage  | billable_total_physical_usage | billable_active_physical_usage | billable_long_term_physical_usage   |
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
+    | 2023-04-03 | project_A  | 305085738096                 | 7667321458                    | 297418416638                      | 74823954823                   | 124235724                      | 74699719099                         |
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
+    | 2023-04-04 | project_A  | 287033241105                 | 7592334614                    | 279440906491                      | 75071991788                   | 200134561                      | 74871857227                         |
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
+    | 2023-04-03 | project_B  | 478173930912                 | 8137372626                    | 470036558286                      | 0                             | 0                              | 0                                   |
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
+    | 2023-04-04 | project_B  | 496648915405                 | 7710451723                    | 488938463682                      | 0                             | 0                              | 0                                   |
+    +-------------------------+------------------------------+-------------------------------+-----------------------------------+-------------------------------+--------------------------------+-------------------------------------+
 
 **Example 2**
 
 The following example shows the storage usage for a specified day for tables in a dataset that uses logical storage.
 
-``` text
+``` notranslate
 SELECT
   usage_date,
   table_schema,
@@ -246,25 +225,23 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+--------------+--------------+------------+------------------------------+
-| usage_date   | table_schema | table_name | billable_total_logical_usage |
-+--------------+--------------+------------+------------------------------+
-|  2023-04-03  | dataset_A    | table_4    | 734893409201                 |
-+--------------+--------------+------------+------------------------------+
-|  2023-04-03  | dataset_A    | table_1    | 690070445455                 |
-+--------------+--------------+------------+------------------------------+
-|  2023-04-03  | dataset_A    | table_3    |  52513713981                 |
-+--------------+--------------+------------+------------------------------+
-|  2023-04-03  | dataset_A    | table_2    |   8894535355                 |
-+--------------+--------------+------------+------------------------------+
-```
+    +--------------+--------------+------------+------------------------------+
+    | usage_date   | table_schema | table_name | billable_total_logical_usage |
+    +--------------+--------------+------------+------------------------------+
+    |  2023-04-03  | dataset_A    | table_4    | 734893409201                 |
+    +--------------+--------------+------------+------------------------------+
+    |  2023-04-03  | dataset_A    | table_1    | 690070445455                 |
+    +--------------+--------------+------------+------------------------------+
+    |  2023-04-03  | dataset_A    | table_3    |  52513713981                 |
+    +--------------+--------------+------------+------------------------------+
+    |  2023-04-03  | dataset_A    | table_2    |   8894535355                 |
+    +--------------+--------------+------------+------------------------------+
 
 **Example 3**
 
 The following example shows the storage usage for the most recent usage date for tables in a dataset that uses physical storage.
 
-``` text
+``` notranslate
 SELECT
   usage_date,
   table_schema,
@@ -289,25 +266,23 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+--------------+--------------+------------+-------------------------------+
-| usage_date   | table_schema | table_name | billable_total_physical_usage |
-+--------------+--------------+------------+-------------------------------+
-|  2023-04-12  | dataset_A    | table_4    |  345788341123                 |
-+--------------+--------------+------------+-------------------------------+
-|  2023-04-12  | dataset_A    | table_1    |             0                 |
-+--------------+--------------+------------+-------------------------------+
-|  2023-04-12  | dataset_A    | table_3    | 9123481400212                 |
-+--------------+--------------+------------+-------------------------------+
-|  2023-04-12  | dataset_A    | table_2    |    1451334553                 |
-+--------------+--------------+------------+-------------------------------+
-```
+    +--------------+--------------+------------+-------------------------------+
+    | usage_date   | table_schema | table_name | billable_total_physical_usage |
+    +--------------+--------------+------------+-------------------------------+
+    |  2023-04-12  | dataset_A    | table_4    |  345788341123                 |
+    +--------------+--------------+------------+-------------------------------+
+    |  2023-04-12  | dataset_A    | table_1    |             0                 |
+    +--------------+--------------+------------+-------------------------------+
+    |  2023-04-12  | dataset_A    | table_3    | 9123481400212                 |
+    +--------------+--------------+------------+-------------------------------+
+    |  2023-04-12  | dataset_A    | table_2    |    1451334553                 |
+    +--------------+--------------+------------+-------------------------------+
 
 **Example 4**
 
 The following example joins the `  TABLE_OPTIONS  ` and `  TABLE_STORAGE_USAGE_TIMELINE  ` views to get storage usage details based on tags.
 
-``` text
+``` notranslate
 SELECT * FROM region-REGION.INFORMATION_SCHEMA.TABLE_OPTIONS
     INNER JOIN region-REGION.INFORMATION_SCHEMA.TABLE_STORAGE_USAGE_TIMELINE
     USING (TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME)

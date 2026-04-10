@@ -1,17 +1,17 @@
 Schedule queries or transfer external data from SaaS applications to Google BigQuery on a regular basis.
 
-  - [REST Resource: v1.projects](#v1.projects)
-  - [REST Resource: v1.projects.dataSources](#v1.projects.dataSources)
-  - [REST Resource: v1.projects.locations](#v1.projects.locations)
-  - [REST Resource: v1.projects.locations.dataSources](#v1.projects.locations.dataSources)
-  - [REST Resource: v1.projects.locations.transferConfigs](#v1.projects.locations.transferConfigs)
-  - [REST Resource: v1.projects.locations.transferConfigs.runs](#v1.projects.locations.transferConfigs.runs)
-  - [REST Resource: v1.projects.locations.transferConfigs.runs.transferLogs](#v1.projects.locations.transferConfigs.runs.transferLogs)
-  - [REST Resource: v1.projects.locations.transferConfigs.transferResources](#v1.projects.locations.transferConfigs.transferResources)
-  - [REST Resource: v1.projects.transferConfigs](#v1.projects.transferConfigs)
-  - [REST Resource: v1.projects.transferConfigs.runs](#v1.projects.transferConfigs.runs)
-  - [REST Resource: v1.projects.transferConfigs.runs.transferLogs](#v1.projects.transferConfigs.runs.transferLogs)
-  - [REST Resource: v1.projects.transferConfigs.transferResources](#v1.projects.transferConfigs.transferResources)
+  - [REST Resource: v1.projects](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects)
+  - [REST Resource: v1.projects.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.dataSources)
+  - [REST Resource: v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations)
+  - [REST Resource: v1.projects.locations.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations.dataSources)
+  - [REST Resource: v1.projects.locations.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations.transferConfigs)
+  - [REST Resource: v1.projects.locations.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations.transferConfigs.runs)
+  - [REST Resource: v1.projects.locations.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations.transferConfigs.runs.transferLogs)
+  - [REST Resource: v1.projects.locations.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.locations.transferConfigs.transferResources)
+  - [REST Resource: v1.projects.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.transferConfigs)
+  - [REST Resource: v1.projects.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.transferConfigs.runs)
+  - [REST Resource: v1.projects.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.transferConfigs.runs.transferLogs)
+  - [REST Resource: v1.projects.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest#v1.projects.transferConfigs.transferResources)
 
 ## Service: bigquerydatatransfer.googleapis.com
 
@@ -29,7 +29,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigquerydatatransfer.googleapis.com  `
 
-## REST Resource: [v1.projects](/bigquery/docs/reference/datatransfer/rest/v1/projects)
+## REST Resource: [v1.projects](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects)
 
 Methods
 
@@ -38,7 +38,7 @@ Methods
 `  POST /v1/{name=projects/*}:enrollDataSources  `  
 Enroll data sources in a user project.
 
-## REST Resource: [v1.projects.dataSources](/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources)
+## REST Resource: [v1.projects.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources)
 
 Methods
 
@@ -57,7 +57,7 @@ Retrieves a supported data source and returns its settings.
 `  GET /v1/{parent=projects/*}/dataSources  `  
 Lists supported data sources and returns their settings.
 
-## REST Resource: [v1.projects.locations](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations)
+## REST Resource: [v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations)
 
 Methods
 
@@ -81,7 +81,7 @@ Lists information about the supported locations for this service.
 `  POST /v1/{name=projects/*/locations/*}:unenrollDataSources  `  
 Unenroll data sources in a user project.
 
-## REST Resource: [v1.projects.locations.dataSources](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources)
+## REST Resource: [v1.projects.locations.dataSources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources)
 
 Methods
 
@@ -100,7 +100,7 @@ Retrieves a supported data source and returns its settings.
 `  GET /v1/{parent=projects/*/locations/*}/dataSources  `  
 Lists supported data sources and returns their settings.
 
-## REST Resource: [v1.projects.locations.transferConfigs](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs)
+## REST Resource: [v1.projects.locations.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs)
 
 Methods
 
@@ -139,7 +139,7 @@ Creates transfer runs for a time range \[start\_time, end\_time\].
 `  POST /v1/{parent=projects/*/locations/*/transferConfigs/*}:startManualRuns  `  
 Manually initiates transfer runs.
 
-## REST Resource: [v1.projects.locations.transferConfigs.runs](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs)
+## REST Resource: [v1.projects.locations.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs)
 
 Methods
 
@@ -158,7 +158,7 @@ Returns information about the particular transfer run.
 `  GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/runs  `  
 Returns information about running and completed transfer runs.
 
-## REST Resource: [v1.projects.locations.transferConfigs.runs.transferLogs](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs)
+## REST Resource: [v1.projects.locations.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs)
 
 Methods
 
@@ -167,7 +167,7 @@ Methods
 `  GET /v1/{parent=projects/*/locations/*/transferConfigs/*/runs/*}/transferLogs  `  
 Returns log messages for the transfer run.
 
-## REST Resource: [v1.projects.locations.transferConfigs.transferResources](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources)
+## REST Resource: [v1.projects.locations.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources)
 
 Methods
 
@@ -181,7 +181,7 @@ Returns a transfer resource.
 `  GET /v1/{parent=projects/*/locations/*/transferConfigs/*}/transferResources  `  
 Returns information about transfer resources.
 
-## REST Resource: [v1.projects.transferConfigs](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs)
+## REST Resource: [v1.projects.transferConfigs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs)
 
 Methods
 
@@ -220,7 +220,7 @@ Creates transfer runs for a time range \[start\_time, end\_time\].
 `  POST /v1/{parent=projects/*/transferConfigs/*}:startManualRuns  `  
 Manually initiates transfer runs.
 
-## REST Resource: [v1.projects.transferConfigs.runs](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs)
+## REST Resource: [v1.projects.transferConfigs.runs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs)
 
 Methods
 
@@ -239,7 +239,7 @@ Returns information about the particular transfer run.
 `  GET /v1/{parent=projects/*/transferConfigs/*}/runs  `  
 Returns information about running and completed transfer runs.
 
-## REST Resource: [v1.projects.transferConfigs.runs.transferLogs](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs.transferLogs)
+## REST Resource: [v1.projects.transferConfigs.runs.transferLogs](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.runs.transferLogs)
 
 Methods
 
@@ -248,7 +248,7 @@ Methods
 `  GET /v1/{parent=projects/*/transferConfigs/*/runs/*}/transferLogs  `  
 Returns log messages for the transfer run.
 
-## REST Resource: [v1.projects.transferConfigs.transferResources](/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources)
+## REST Resource: [v1.projects.transferConfigs.transferResources](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources)
 
 Methods
 

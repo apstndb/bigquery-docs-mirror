@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/OperationMetadata#SCHEMA_REPRESENTATION)
 
 Represents the metadata of a long-running operation in Analytics Hub.
 
@@ -13,7 +13,7 @@ Represents the metadata of a long-running operation in Analytics Hub.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;createTime&quot;: string,
   &quot;endTime&quot;: string,
   &quot;target&quot;: string,

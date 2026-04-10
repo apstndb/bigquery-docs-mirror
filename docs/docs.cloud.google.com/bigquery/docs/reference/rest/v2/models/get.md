@@ -1,9 +1,9 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Request body](#body.request_body)
-  - [Response body](#body.response_body)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#body.PATH_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#body.request_body)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#body.response_body)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models/get#try-it)
 
 Gets the specified model resource by model ID.
 
@@ -52,4 +52,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery.readonly  `
   - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

@@ -2,34 +2,34 @@
 
 This page describes how to export or extract data from BigQuery tables to Cloud Storage.
 
-After you've [loaded your data into BigQuery](/bigquery/docs/loading-data) , you can export the data in several formats. BigQuery can export up to 1 GB of logical data size to a single file. If you are exporting more than 1 GB of data, you must export your data to [multiple files](#exporting_data_into_one_or_more_files) . When you export your data to multiple files, the size of the files will vary.
+After you've [loaded your data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) , you can export the data in several formats. BigQuery can export up to 1 GB of logical data size to a single file. If you are exporting more than 1 GB of data, you must export your data to [multiple files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) . When you export your data to multiple files, the size of the files will vary.
 
-You can also export the results of a query by using the [`  EXPORT DATA  `](/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement. You can use [`  EXPORT DATA OPTIONS  `](/bigquery/docs/reference/standard-sql/export-statements#gcs_s3_export_option) to specify the format of the exported data.
+You can also export the results of a query by using the [`  EXPORT DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement. You can use [`  EXPORT DATA OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#gcs_s3_export_option) to specify the format of the exported data.
 
-Finally, you can use a service such as [Dataflow](/dataflow/what-is-google-cloud-dataflow) to read data from BigQuery instead of exporting it from BigLake. For more information about using Dataflow to read from and write to BigQuery, see [BigQuery I/O documentation](https://beam.apache.org/documentation/io/built-in/google-bigquery) .
+Finally, you can use a service such as [Dataflow](https://docs.cloud.google.com/dataflow/what-is-google-cloud-dataflow) to read data from BigQuery instead of exporting it from BigLake. For more information about using Dataflow to read from and write to BigQuery, see [BigQuery I/O documentation](https://beam.apache.org/documentation/io/built-in/google-bigquery) .
 
 ## Export limitations
 
 When you export data from BigQuery, note the following:
 
-**Caution:** If you are exporting data to a Cloud Storage bucket, we strongly recommend that you disable the [Bucket Lock](/storage/docs/using-bucket-lock#set-policy) and [Soft Delete](/storage/docs/use-soft-delete) retention policies on your bucket. When you export to a bucket with these retention policies, BigQuery attempts to rewrite files to the bucket, which can fail if the bucket's retention policy prevents a file from being overwritten, resulting in additional incurred charges. You can re-enable these policies after the export completes.
+**Caution:** If you are exporting data to a Cloud Storage bucket, we strongly recommend that you disable the [Bucket Lock](https://docs.cloud.google.com/storage/docs/using-bucket-lock#set-policy) and [Soft Delete](https://docs.cloud.google.com/storage/docs/use-soft-delete) retention policies on your bucket. When you export to a bucket with these retention policies, BigQuery attempts to rewrite files to the bucket, which can fail if the bucket's retention policy prevents a file from being overwritten, resulting in additional incurred charges. You can re-enable these policies after the export completes.
 
-  - You cannot export table data to a local file, to Google Sheets, or to Google Drive. The only supported export location is Cloud Storage. For information on saving query results, see [Downloading and saving query results](/bigquery/docs/writing-results#downloading-saving-results-console) .
-  - You can export up to 1 GB of logical table data size to a single file. If you are exporting more than 1 GB of data, use a [wildcard](/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) to export the data into multiple files. When you export data to multiple files, the size of the files will vary. To [limit the exported file size](#limit_the_exported_file_size) , you can partition your data and export each partition.
+  - You cannot export table data to a local file, to Google Sheets, or to Google Drive. The only supported export location is Cloud Storage. For information on saving query results, see [Downloading and saving query results](https://docs.cloud.google.com/bigquery/docs/writing-results#downloading-saving-results-console) .
+  - You can export up to 1 GB of logical table data size to a single file. If you are exporting more than 1 GB of data, use a [wildcard](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) to export the data into multiple files. When you export data to multiple files, the size of the files will vary. To [limit the exported file size](https://docs.cloud.google.com/bigquery/docs/exporting-data#limit_the_exported_file_size) , you can partition your data and export each partition.
   - The generated file size when using the `  EXPORT DATA  ` statement is not guaranteed.
   - The number of files generated by an extract job can vary.
   - You cannot export nested and repeated data in CSV format. Nested and repeated data are supported for Avro, JSON, and Parquet exports.
-  - When you export data in [JSON](/bigquery/docs/reference/standard-sql/data-types#json_type) format, [INT64](/bigquery/docs/reference/standard-sql/data-types#integer_types) (integer) data types are encoded as JSON strings to preserve 64-bit precision when the data is read by other systems.
+  - When you export data in [JSON](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) format, [INT64](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) (integer) data types are encoded as JSON strings to preserve 64-bit precision when the data is read by other systems.
   - You cannot export data from multiple tables in a single extract job.
   - You cannot choose a compression type other than `  GZIP  ` when you export data using the Google Cloud console.
   - When you export a table in JSON format, the symbols `  <  ` , `  >  ` , and `  &  ` are converted by using the unicode notation `  \uNNNN  ` , where `  N  ` is a hexadecimal digit. For example, `  profit&loss  ` becomes `  profit\u0026loss  ` . This unicode conversion is done to avoid security vulnerabilities.
-  - The order of exported table data is not guaranteed unless you use the [`  EXPORT DATA  `](/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement and specify an `  ORDER BY  ` clause in the `  query_statement  ` .
+  - The order of exported table data is not guaranteed unless you use the [`  EXPORT DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) statement and specify an `  ORDER BY  ` clause in the `  query_statement  ` .
   - BigQuery doesn't support Cloud Storage resource paths that include multiple consecutive slashes after the initial double slash. Cloud Storage object names can contain multiple consecutive slash ("/") characters. However, BigQuery converts multiple consecutive slashes into a single slash. For example, the following resource path, though valid in Cloud Storage, doesn't work in BigQuery: `  gs:// bucket /my//object//name  ` .
   - Any new data loaded into BigQuery while an extract job is running won't be included in that extract job. You must create a new extract job to export the new data.
 
 ## Before you begin
 
-Grant [Identity and Access Management (IAM)](/iam/docs) roles that give users the necessary permissions to perform each task in this document.
+Grant [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs) roles that give users the necessary permissions to perform each task in this document.
 
 ### Required permissions
 
@@ -48,7 +48,7 @@ Each of the following predefined IAM roles includes the `  bigquery.tables.expor
 
 #### Permissions to run an extract job
 
-To run an extract [job](/bigquery/docs/managing-jobs) , you need the `  bigquery.jobs.create  ` IAM permission.
+To run an extract [job](https://docs.cloud.google.com/bigquery/docs/managing-jobs) , you need the `  bigquery.jobs.create  ` IAM permission.
 
 Each of the following predefined IAM roles includes the permissions that you need in order to run an extract job:
 
@@ -68,7 +68,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/storage.objectAdmin  `
   - `  roles/storage.admin  `
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Export formats and compression types
 
@@ -91,7 +91,7 @@ BigQuery supports the following data formats and compression types for exported 
 <tr class="odd">
 <td>CSV</td>
 <td>GZIP</td>
-<td><p>You can control the CSV delimiter in your exported data by using the <a href="/bigquery/docs/reference/bq-cli-reference#bq_extract"><code dir="ltr" translate="no">         --field_delimiter        </code></a> bq command-line tool flag or the <a href="/bigquery/docs/reference/rest/v2/Job#jobconfigurationextract"><code dir="ltr" translate="no">         configuration.extract.fieldDelimiter        </code></a> extract job property.</p>
+<td><p>You can control the CSV delimiter in your exported data by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_extract"><code dir="ltr" translate="no">         --field_delimiter        </code></a> bq command-line tool flag or the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobconfigurationextract"><code dir="ltr" translate="no">         configuration.extract.fieldDelimiter        </code></a> extract job property.</p>
 <p>Nested and repeated data is not supported.</p></td>
 </tr>
 <tr class="even">
@@ -103,12 +103,12 @@ BigQuery supports the following data formats and compression types for exported 
 <td>Avro</td>
 <td>DEFLATE, SNAPPY</td>
 <td><p>GZIP is not supported for Avro exports.</p>
-<p>Nested and repeated data are supported. See <a href="#avro_export_details">Avro export details</a> .</p></td>
+<p>Nested and repeated data are supported. See <a href="https://docs.cloud.google.com/bigquery/docs/exporting-data#avro_export_details">Avro export details</a> .</p></td>
 </tr>
 <tr class="even">
 <td>Parquet</td>
 <td>SNAPPY, GZIP, ZSTD</td>
-<td><p>Nested and repeated data are supported. See <a href="#parquet_export_details">Parquet export details</a> .</p></td>
+<td><p>Nested and repeated data are supported. See <a href="https://docs.cloud.google.com/bigquery/docs/exporting-data#parquet_export_details">Parquet export details</a> .</p></td>
 </tr>
 </tbody>
 </table>
@@ -122,7 +122,7 @@ The following sections show you how to export your table data, table metadata, a
 You can export table data by:
 
   - Using the Google Cloud console
-  - Using the [`  bq extract  `](/bigquery/docs/reference/bq-cli-reference#bq_extract) command in the bq command-line tool
+  - Using the [`  bq extract  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_extract) command in the bq command-line tool
   - Submitting an `  extract  ` job using the API or client libraries
 
 Select one of the following:
@@ -130,8 +130,12 @@ Select one of the following:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -151,17 +155,19 @@ Select one of the following:
 
 To check on the progress of the job, in the **Explorer** pane, click **Job history** , and look for an **EXTRACT** type job.
 
-To export views to Cloud Storage, use [`  EXPORT DATA OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/export-statements) .
+To export views to Cloud Storage, use [`  EXPORT DATA OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements) .
 
 ### SQL
 
-Use the [`  EXPORT DATA  ` statement](/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) . The following example exports selected fields from a table named `  mydataset.table1  ` :
+Use the [`  EXPORT DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) . The following example exports selected fields from a table named `  mydataset.table1  ` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     EXPORT DATA
       OPTIONS (
         uri = 'gs://bucket/folder/*.csv',
@@ -178,15 +184,15 @@ Use the [`  EXPORT DATA  ` statement](/bigquery/docs/reference/standard-sql/expo
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 **Note:** `  LIMIT  ` clauses in `  EXPORT DATA  ` statements can often lead to slow export job execution. For this reason, we don't recommend using `  LIMIT  ` clauses in `  EXPORT DATA  ` statements.
 
 ### bq
 
-Use the [`  bq extract  `](/bigquery/docs/reference/bq-cli-reference#bq_extract) command with the `  --destination_format  ` flag.
+Use the [`  bq extract  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_extract) command with the `  --destination_format  ` flag.
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](/bigquery/docs/locations) .
+(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 Other optional flags include:
 
@@ -196,34 +202,32 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` text
-bq extract --location=location \
---destination_format format \
---compression compression_type \
---field_delimiter delimiter \
---print_header=boolean \
-project_id:dataset.table \
-gs://bucket/filename.ext
-```
+    bq extract --location=location \
+    --destination_format format \
+    --compression compression_type \
+    --field_delimiter delimiter \
+    --print_header=boolean \
+    project_id:dataset.table \
+    gs://bucket/filename.ext
 
 Where:
 
-  - location is the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - location is the name of your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - format is the format for the exported data: `  CSV  ` , `  NEWLINE_DELIMITED_JSON  ` , `  AVRO  ` , or `  PARQUET  ` .
-  - compression\_type is a supported compression type for your data format. See [Export formats and compression types](#export_formats_and_compression_types) .
+  - compression\_type is a supported compression type for your data format. See [Export formats and compression types](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types) .
   - delimiter is the character that indicates the boundary between columns in CSV exports. `  \t  ` and `  tab  ` are accepted names for tab.
   - boolean is `  true  ` or `  false  ` . When set to `  true  ` , header rows are printed to the exported data if the data format supports headers. The default value is `  true  ` .
   - project\_id is your project ID.
   - dataset is the name of the source dataset.
-  - table is the table you're exporting. If you use a [partition decorator](/bigquery/docs/partitioned-tables#partition_decorators) , then you must surround the table path with single quotation marks or escape the `  $  ` character.
-  - bucket is the name of the Cloud Storage bucket to which you're exporting the data. The BigQuery dataset and the Cloud Storage bucket must be in the same [location](/bigquery/docs/locations) .
-  - filename.ext is the name and extension of the exported data file. You can export to multiple files using a [wildcard](#exporting_data_into_one_or_more_files) .
+  - table is the table you're exporting. If you use a [partition decorator](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#partition_decorators) , then you must surround the table path with single quotation marks or escape the `  $  ` character.
+  - bucket is the name of the Cloud Storage bucket to which you're exporting the data. The BigQuery dataset and the Cloud Storage bucket must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) .
+  - filename.ext is the name and extension of the exported data file. You can export to multiple files using a [wildcard](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
 
 Examples:
 
 For example, the following command exports `  mydataset.mytable  ` into a gzip compressed file named `  myfile.csv  ` . `  myfile.csv  ` is stored in a Cloud Storage bucket named `  example-bucket  ` .
 
-``` text
+``` notranslate
 bq extract \
 --compression GZIP \
 'mydataset.mytable' \
@@ -232,7 +236,7 @@ gs://example-bucket/myfile.csv
 
 The default destination format is CSV. To export into JSON or Avro, use the `  destination_format  ` flag and set it to either `  NEWLINE_DELIMITED_JSON  ` or `  AVRO  ` . For example:
 
-``` text
+``` notranslate
 bq extract \
 --destination_format NEWLINE_DELIMITED_JSON \
 'mydataset.mytable' \
@@ -241,7 +245,7 @@ gs://example-bucket/myfile.json
 
 The following command exports `  mydataset.mytable  ` into an Avro file that is compressed using Snappy. The file is named `  myfile.avro  ` . `  myfile.avro  ` is exported to a Cloud Storage bucket named `  example-bucket  ` .
 
-``` text
+``` notranslate
 bq extract \
 --destination_format AVRO \
 --compression SNAPPY \
@@ -251,7 +255,7 @@ gs://example-bucket/myfile.avro
 
 The following command exports a single partition of `  mydataset.my_partitioned_table  ` into a CSV file in Cloud Storage:
 
-``` text
+``` notranslate
 bq extract \
 --destination_format CSV \
 'mydataset.my_partitioned_table$0' \
@@ -262,9 +266,9 @@ gs://example-bucket/single_partition.csv
 
 To export data, create an `  extract  ` job and populate the job configuration.
 
-**Note:** If you are exporting data to the Parquet format, it might be faster to use the [BigQuery export to Parquet (via BigQuery Storage API) template](/dataflow/docs/guides/templates/provided/bigquery-to-parquet) rather than writing a custom solution.
+**Note:** If you are exporting data to the Parquet format, it might be faster to use the [BigQuery export to Parquet (via BigQuery Storage API) template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/bigquery-to-parquet) rather than writing a custom solution.
 
-(Optional) Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/jobs) .
+(Optional) Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
 1.  Create an extract job that points to the BigQuery source data and the Cloud Storage destination.
 
@@ -274,7 +278,7 @@ To export data, create an `  extract  ` job and populate the job configuration.
 
 4.  Specify the data format by setting the `  configuration.extract.destinationFormat  ` property. For example, to export a JSON file, set this property to the value `  NEWLINE_DELIMITED_JSON  ` .
 
-5.  To check the job status, call [jobs.get( job\_id )](/bigquery/docs/reference/v2/jobs/get) with the ID of the job returned by the initial request.
+5.  To check the job status, call [jobs.get( job\_id )](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) with the ID of the job returned by the initial request.
     
       - If `  status.state = DONE  ` , the job completed successfully.
       - If the `  status.errorResult  ` property is present, the request failed, and that object will include information describing what went wrong.
@@ -288,314 +292,300 @@ To export data, create an `  extract  ` job and populate the job configuration.
 
 ### C\#
 
-Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
+Before trying this sample, follow the C\# setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery C\# API reference documentation](https://docs.cloud.google.com/dotnet/docs/reference/Google.Cloud.BigQuery.V2/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` csharp
-using Google.Cloud.BigQuery.V2;
-using System;
-
-public class BigQueryExtractTable
-{
-    public void ExtractTable(
-        string projectId = "your-project-id",
-        string bucketName = "your-bucket-name")
+    using Google.Cloud.BigQuery.V2;
+    using System;
+    
+    public class BigQueryExtractTable
     {
-        BigQueryClient client = BigQueryClient.Create(projectId);
-        // Define a destination URI. Use a single wildcard URI if you think
-        // your exported data will be larger than the 1 GB maximum value.
-        string destinationUri = $"gs://{bucketName}/shakespeare-*.csv";
-        BigQueryJob job = client.CreateExtractJob(
-            projectId: "bigquery-public-data",
-            datasetId: "samples",
-            tableId: "shakespeare",
-            destinationUri: destinationUri
-        );
-        job = job.PollUntilCompleted().ThrowOnAnyError();  // Waits for the job to complete.
-        Console.Write($"Exported table to {destinationUri}.");
+        public void ExtractTable(
+            string projectId = "your-project-id",
+            string bucketName = "your-bucket-name")
+        {
+            BigQueryClient client = BigQueryClient.Create(projectId);
+            // Define a destination URI. Use a single wildcard URI if you think
+            // your exported data will be larger than the 1 GB maximum value.
+            string destinationUri = $"gs://{bucketName}/shakespeare-*.csv";
+            BigQueryJob job = client.CreateExtractJob(
+                projectId: "bigquery-public-data",
+                datasetId: "samples",
+                tableId: "shakespeare",
+                destinationUri: destinationUri
+            );
+            job = job.PollUntilCompleted().ThrowOnAnyError();  // Waits for the job to complete.
+            Console.Write($"Exported table to {destinationUri}.");
+        }
     }
-}
-```
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// exportTableAsCompressedCSV demonstrates using an export job to
-// write the contents of a table into Cloud Storage as CSV.
-func exportTableAsCSV(projectID, gcsURI string) error {
- // projectID := "my-project-id"
- // gcsUri := "gs://mybucket/shakespeare.csv"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- srcProject := "bigquery-public-data"
- srcDataset := "samples"
- srcTable := "shakespeare"
-
- gcsRef := bigquery.NewGCSReference(gcsURI)
- gcsRef.FieldDelimiter = ","
-
- extractor := client.DatasetInProject(srcProject, srcDataset).Table(srcTable).ExtractorTo(gcsRef)
- extractor.DisableHeader = true
- // You can choose to run the job in a specific location for more complex data locality scenarios.
- // Ex: In this example, source dataset and GCS bucket are in the US.
- extractor.Location = "US"
-
- job, err := extractor.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
- if err := status.Err(); err != nil {
-     return err
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // exportTableAsCompressedCSV demonstrates using an export job to
+    // write the contents of a table into Cloud Storage as CSV.
+    func exportTableAsCSV(projectID, gcsURI string) error {
+     // projectID := "my-project-id"
+     // gcsUri := "gs://mybucket/shakespeare.csv"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     srcProject := "bigquery-public-data"
+     srcDataset := "samples"
+     srcTable := "shakespeare"
+    
+     gcsRef := bigquery.NewGCSReference(gcsURI)
+     gcsRef.FieldDelimiter = ","
+    
+     extractor := client.DatasetInProject(srcProject, srcDataset).Table(srcTable).ExtractorTo(gcsRef)
+     extractor.DisableHeader = true
+     // You can choose to run the job in a specific location for more complex data locality scenarios.
+     // Ex: In this example, source dataset and GCS bucket are in the US.
+     extractor.Location = "US"
+    
+     job, err := extractor.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+     if err := status.Err(); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.RetryOption;
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.Table;
-import com.google.cloud.bigquery.TableId;
-import org.threeten.bp.Duration;
-
-public class ExtractTableToCsv {
-
-  public static void runExtractTableToCsv() {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "bigquery-public-data";
-    String datasetName = "samples";
-    String tableName = "shakespeare";
-    String bucketName = "my-bucket";
-    String destinationUri = "gs://" + bucketName + "/path/to/file";
-    // For more information on export formats available see:
-    // https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
-    // For more information on Job see:
-    // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-
-    String dataFormat = "CSV";
-    extractTableToCsv(projectId, datasetName, tableName, destinationUri, dataFormat);
-  }
-
-  // Exports datasetName:tableName to destinationUri as raw CSV
-  public static void extractTableToCsv(
-      String projectId,
-      String datasetName,
-      String tableName,
-      String destinationUri,
-      String dataFormat) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId tableId = TableId.of(projectId, datasetName, tableName);
-      Table table = bigquery.getTable(tableId);
-
-      Job job = table.extract(dataFormat, destinationUri);
-
-      // Blocks until this job completes its execution, either failing or succeeding.
-      Job completedJob =
-          job.waitFor(
-              RetryOption.initialRetryDelay(Duration.ofSeconds(1)),
-              RetryOption.totalTimeout(Duration.ofMinutes(3)));
-      if (completedJob == null) {
-        System.out.println("Job not executed since it no longer exists.");
-        return;
-      } else if (completedJob.getStatus().getError() != null) {
-        System.out.println(
-            "BigQuery was unable to extract due to an error: \n" + job.getStatus().getError());
-        return;
+    import com.google.cloud.RetryOption;
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.Table;
+    import com.google.cloud.bigquery.TableId;
+    import org.threeten.bp.Duration;
+    
+    public class ExtractTableToCsv {
+    
+      public static void runExtractTableToCsv() {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "bigquery-public-data";
+        String datasetName = "samples";
+        String tableName = "shakespeare";
+        String bucketName = "my-bucket";
+        String destinationUri = "gs://" + bucketName + "/path/to/file";
+        // For more information on export formats available see:
+        // https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
+        // For more information on Job see:
+        // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+    
+        String dataFormat = "CSV";
+        extractTableToCsv(projectId, datasetName, tableName, destinationUri, dataFormat);
       }
-      System.out.println(
-          "Table export successful. Check in GCS bucket for the " + dataFormat + " file.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Table extraction job was interrupted. \n" + e.toString());
+    
+      // Exports datasetName:tableName to destinationUri as raw CSV
+      public static void extractTableToCsv(
+          String projectId,
+          String datasetName,
+          String tableName,
+          String destinationUri,
+          String dataFormat) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId tableId = TableId.of(projectId, datasetName, tableName);
+          Table table = bigquery.getTable(tableId);
+    
+          Job job = table.extract(dataFormat, destinationUri);
+    
+          // Blocks until this job completes its execution, either failing or succeeding.
+          Job completedJob =
+              job.waitFor(
+                  RetryOption.initialRetryDelay(Duration.ofSeconds(1)),
+                  RetryOption.totalTimeout(Duration.ofMinutes(3)));
+          if (completedJob == null) {
+            System.out.println("Job not executed since it no longer exists.");
+            return;
+          } else if (completedJob.getStatus().getError() != null) {
+            System.out.println(
+                "BigQuery was unable to extract due to an error: \n" + job.getStatus().getError());
+            return;
+          }
+          System.out.println(
+              "Table export successful. Check in GCS bucket for the " + dataFormat + " file.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Table extraction job was interrupted. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-const bigquery = new BigQuery();
-const storage = new Storage();
-
-async function extractTableToGCS() {
-  // Exports my_dataset:my_table to gcs://my-bucket/my-file as raw CSV.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_table";
-  // const bucketName = "my-bucket";
-  // const filename = "file.csv";
-
-  // Location must match that of the source table.
-  const options = {
-    location: 'US',
-  };
-
-  // Export data from the table into a Google Cloud Storage file
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .extract(storage.bucket(bucketName).file(filename), options);
-
-  console.log(`Job ${job.id} created.`);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
+    // Import the Google Cloud client libraries
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const {Storage} = require('@google-cloud/storage');
+    
+    const bigquery = new BigQuery();
+    const storage = new Storage();
+    
+    async function extractTableToGCS() {
+      // Exports my_dataset:my_table to gcs://my-bucket/my-file as raw CSV.
+    
+      /**
+       * TODO(developer): Uncomment the following lines before running the sample.
+       */
+      // const datasetId = "my_dataset";
+      // const tableId = "my_table";
+      // const bucketName = "my-bucket";
+      // const filename = "file.csv";
+    
+      // Location must match that of the source table.
+      const options = {
+        location: 'US',
+      };
+    
+      // Export data from the table into a Google Cloud Storage file
+      const [job] = await bigquery
+        .dataset(datasetId)
+        .table(tableId)
+        .extract(storage.bucket(bucketName).file(filename), options);
+    
+      console.log(`Job ${job.id} created.`);
+    
+      // Check the job's status for errors
+      const errors = job.status.errors;
+      if (errors && errors.length > 0) {
+        throw errors;
+      }
+    }
 
 ### PHP
 
-Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
+Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` php
-use Google\Cloud\BigQuery\BigQueryClient;
-
-/**
- * Extracts the given table as json to given GCS bucket.
- *
- * @param string $projectId The project Id of your Google Cloud Project.
- * @param string $datasetId The BigQuery dataset ID.
- * @param string $tableId The BigQuery table ID.
- * @param string $bucketName Bucket name in Google Cloud Storage
- */
-function extract_table(
-    string $projectId,
-    string $datasetId,
-    string $tableId,
-    string $bucketName
-): void {
-    $bigQuery = new BigQueryClient([
-      'projectId' => $projectId,
-    ]);
-    $dataset = $bigQuery->dataset($datasetId);
-    $table = $dataset->table($tableId);
-    $destinationUri = "gs://{$bucketName}/{$tableId}.json";
-    // Define the format to use. If the format is not specified, 'CSV' will be used.
-    $format = 'NEWLINE_DELIMITED_JSON';
-    // Create the extract job
-    $extractConfig = $table->extract($destinationUri)->destinationFormat($format);
-    // Run the job
-    $job = $table->runJob($extractConfig);  // Waits for the job to complete
-    printf('Exported %s to %s' . PHP_EOL, $table->id(), $destinationUri);
-}
-```
+    use Google\Cloud\BigQuery\BigQueryClient;
+    
+    /**
+     * Extracts the given table as json to given GCS bucket.
+     *
+     * @param string $projectId The project Id of your Google Cloud Project.
+     * @param string $datasetId The BigQuery dataset ID.
+     * @param string $tableId The BigQuery table ID.
+     * @param string $bucketName Bucket name in Google Cloud Storage
+     */
+    function extract_table(
+        string $projectId,
+        string $datasetId,
+        string $tableId,
+        string $bucketName
+    ): void {
+        $bigQuery = new BigQueryClient([
+          'projectId' => $projectId,
+        ]);
+        $dataset = $bigQuery->dataset($datasetId);
+        $table = $dataset->table($tableId);
+        $destinationUri = "gs://{$bucketName}/{$tableId}.json";
+        // Define the format to use. If the format is not specified, 'CSV' will be used.
+        $format = 'NEWLINE_DELIMITED_JSON';
+        // Create the extract job
+        $extractConfig = $table->extract($destinationUri)->destinationFormat($format);
+        // Run the job
+        $job = $table->runJob($extractConfig);  // Waits for the job to complete
+        printf('Exported %s to %s' . PHP_EOL, $table->id(), $destinationUri);
+    }
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-# from google.cloud import bigquery
-# client = bigquery.Client()
-# bucket_name = 'my-bucket'
-project = "bigquery-public-data"
-dataset_id = "samples"
-table_id = "shakespeare"
-
-destination_uri = "gs://{}/{}".format(bucket_name, "shakespeare.csv")
-dataset_ref = bigquery.DatasetReference(project, dataset_id)
-table_ref = dataset_ref.table(table_id)
-
-extract_job = client.extract_table(
-    table_ref,
-    destination_uri,
-    # Location must match that of the source table.
-    location="US",
-)  # API request
-extract_job.result()  # Waits for job to complete.
-
-print(
-    "Exported {}:{}.{} to {}".format(project, dataset_id, table_id, destination_uri)
-)
-```
+    # from google.cloud import bigquery
+    # client = bigquery.Client()
+    # bucket_name = 'my-bucket'
+    project = "bigquery-public-data"
+    dataset_id = "samples"
+    table_id = "shakespeare"
+    
+    destination_uri = "gs://{}/{}".format(bucket_name, "shakespeare.csv")
+    dataset_ref = bigquery.DatasetReference(project, dataset_id)
+    table_ref = dataset_ref.table(table_id)
+    
+    extract_job = client.extract_table(
+        table_ref,
+        destination_uri,
+        # Location must match that of the source table.
+        location="US",
+    )  # API request
+    extract_job.result()  # Waits for job to complete.
+    
+    print(
+        "Exported {}:{}.{} to {}".format(project, dataset_id, table_id, destination_uri)
+    )
 
 ### Ruby
 
-Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html) .
+Before trying this sample, follow the Ruby setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Ruby API reference documentation](https://googleapis.dev/ruby/google-cloud-bigquery/latest/Google/Cloud/Bigquery.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` ruby
-require "google/cloud/bigquery"
-
-def extract_table bucket_name = "my-bucket",
-                  dataset_id  = "my_dataset_id",
-                  table_id    = "my_table_id"
-  bigquery = Google::Cloud::Bigquery.new
-  dataset  = bigquery.dataset dataset_id
-  table    = dataset.table    table_id
-
-  # Define a destination URI. Use a single wildcard URI if you think
-  # your exported data will be larger than the 1 GB maximum value.
-  destination_uri = "gs://#{bucket_name}/output-*.csv"
-
-  extract_job = table.extract_job destination_uri do |config|
-    # Location must match that of the source table.
-    config.location = "US"
-  end
-  extract_job.wait_until_done! # Waits for the job to complete
-
-  puts "Exported #{table.id} to #{destination_uri}"
-end
-```
+    require "google/cloud/bigquery"
+    
+    def extract_table bucket_name = "my-bucket",
+                      dataset_id  = "my_dataset_id",
+                      table_id    = "my_table_id"
+      bigquery = Google::Cloud::Bigquery.new
+      dataset  = bigquery.dataset dataset_id
+      table    = dataset.table    table_id
+    
+      # Define a destination URI. Use a single wildcard URI if you think
+      # your exported data will be larger than the 1 GB maximum value.
+      destination_uri = "gs://#{bucket_name}/output-*.csv"
+    
+      extract_job = table.extract_job destination_uri do |config|
+        # Location must match that of the source table.
+        config.location = "US"
+      end
+      extract_job.wait_until_done! # Waits for the job to complete
+    
+      puts "Exported #{table.id} to #{destination_uri}"
+    end
 
 ### Export table metadata
 
-To export table metadata from [Iceberg tables](/bigquery/docs/iceberg-tables) , use the following SQL statement:
+To export table metadata from [Iceberg tables](https://docs.cloud.google.com/bigquery/docs/iceberg-tables) , use the following SQL statement:
 
-``` text
+``` notranslate
 EXPORT TABLE METADATA FROM `[[PROJECT_NAME.]DATASET_NAME.]TABLE_NAME`;
 ```
 
@@ -612,6 +602,8 @@ The exported metadata is located in the STORAGE\_URI `  /metadata  ` folder, whe
 You can export your query results to Cloud Storage in the Google Cloud console with the following steps:
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click add\_box **SQL query** .
 
@@ -644,7 +636,7 @@ BigQuery expresses Avro formatted data in the following ways:
   - `  DATE  ` data types are represented as `  date  ` logical type (it annotates an Avro `  INT  ` types) by default in Export Data SQL, but are represented as `  string  ` type by default in Extract jobs. (Note: you can add `  use_avro_logical_types=False  ` to `  Export Data Options  ` to disable the logical type, or use the flag `  --use_avro_logical_types=True  ` to enable the logical type in Extract jobs.)
   - `  TIME  ` data types are represented as `  timestamp-micro  ` logical type (it annotates an Avro `  LONG  ` types) by default in Export Data SQL, but are represented as `  string  ` type by default in Extract jobs. (Note: you can add `  use_avro_logical_types=False  ` to `  Export Data Options  ` to disable the logical type, or use the flag `  --use_avro_logical_types=True  ` to enable the logical type in Extract jobs.)
   - `  DATETIME  ` data types are represented as Avro `  STRING  ` types (a string type with custom named logical type `  datetime  ` ) by default in Export Data SQL, but are represented as `  string  ` type by default in Extract jobs. (Note: you can add `  use_avro_logical_types=False  ` to `  Export Data Options  ` to disable the logical type, or use the flag `  --use_avro_logical_types=True  ` to enable logical type in Extract jobs.)
-  - [RANGE types](/bigquery/docs/reference/standard-sql/data-types#range_type) aren't supported in Avro export.
+  - [RANGE types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type) aren't supported in Avro export.
 
 **Note:** The encoding of string type follows the Internet Engineering Task Force [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) spec.
 
@@ -652,7 +644,7 @@ Parameterized `  NUMERIC(P[, S])  ` and `  BIGNUMERIC(P[, S])  ` data types tran
 
 **Caution:**
 
-  - If you export a `  DATETIME  ` type to Avro, you cannot load the Avro file directly back into the same table schema, because the converted `  STRING  ` won't match the schema. As a workaround, load the file into a staging table. Then use a SQL query to cast the field to a `  DATETIME  ` type and save the result to a new table. For more information, see [Changing a column's data type](/bigquery/docs/manually-changing-schemas#changing_a_columns_data_type) .
+  - If you export a `  DATETIME  ` type to Avro, you cannot load the Avro file directly back into the same table schema, because the converted `  STRING  ` won't match the schema. As a workaround, load the file into a staging table. Then use a SQL query to cast the field to a `  DATETIME  ` type and save the result to a new table. For more information, see [Changing a column's data type](https://docs.cloud.google.com/bigquery/docs/manually-changing-schemas#changing_a_columns_data_type) .
   - Export Data Option `  use_avro_logical_types  ` and Extract Job flag `  --use_avro_logical_types  ` are applied to all the logical types at the same time once specified.
 
 The Avro format can't be used in combination with GZIP compression. To compress Avro data, use the bq command-line tool or the API and specify one of the supported compression types for Avro data: `  DEFLATE  ` or `  SNAPPY  ` .
@@ -661,95 +653,30 @@ The Avro format can't be used in combination with GZIP compression. To compress 
 
 BigQuery converts GoogleSQL data types to the following Parquet data types:
 
-<table>
-<thead>
-<tr class="header">
-<th>BigQuery data type</th>
-<th>Parquet primitive type</th>
-<th>Parquet logical type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Integer</td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       NONE      </code></td>
-</tr>
-<tr class="even">
-<td>Numeric</td>
-<td><code dir="ltr" translate="no">       FIXED_LEN_BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       DECIMAL (precision = 38, scale = 9)      </code></td>
-</tr>
-<tr class="odd">
-<td>Numeric(P[, S])</td>
-<td><code dir="ltr" translate="no">       FIXED_LEN_BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       DECIMAL (precision = P, scale = S)      </code></td>
-</tr>
-<tr class="even">
-<td>BigNumeric</td>
-<td><code dir="ltr" translate="no">       FIXED_LEN_BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       DECIMAL (precision = 76, scale = 38)      </code></td>
-</tr>
-<tr class="odd">
-<td>BigNumeric(P[, S])</td>
-<td><code dir="ltr" translate="no">       FIXED_LEN_BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       DECIMAL (precision = P, scale = S)      </code></td>
-</tr>
-<tr class="even">
-<td>Floating point</td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td><code dir="ltr" translate="no">       NONE      </code></td>
-</tr>
-<tr class="odd">
-<td>Boolean</td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td><code dir="ltr" translate="no">       NONE      </code></td>
-</tr>
-<tr class="even">
-<td>String</td>
-<td><code dir="ltr" translate="no">       BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code> <code dir="ltr" translate="no">       (UTF8)      </code></td>
-</tr>
-<tr class="odd">
-<td>Bytes</td>
-<td><code dir="ltr" translate="no">       BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       NONE      </code></td>
-</tr>
-<tr class="even">
-<td>Date</td>
-<td><code dir="ltr" translate="no">       INT32      </code></td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-</tr>
-<tr class="odd">
-<td>Datetime</td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)      </code></td>
-</tr>
-<tr class="even">
-<td>Time</td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       TIME (isAdjustedToUTC = true, unit = MICROS)      </code></td>
-</tr>
-<tr class="odd">
-<td>Timestamp</td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)      </code></td>
-</tr>
-<tr class="even">
-<td>Geography</td>
-<td><code dir="ltr" translate="no">       BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       GEOGRAPHY (edges = spherical)      </code></td>
-</tr>
-</tbody>
-</table>
+| BigQuery data type   | Parquet primitive type                | Parquet logical type                                                |
+| -------------------- | ------------------------------------- | ------------------------------------------------------------------- |
+| Integer              | `        INT64       `                | `        NONE       `                                               |
+| Numeric              | `        FIXED_LEN_BYTE_ARRAY       ` | `        DECIMAL (precision = 38, scale = 9)       `                |
+| Numeric(P\[, S\])    | `        FIXED_LEN_BYTE_ARRAY       ` | `        DECIMAL (precision = P, scale = S)       `                 |
+| BigNumeric           | `        FIXED_LEN_BYTE_ARRAY       ` | `        DECIMAL (precision = 76, scale = 38)       `               |
+| BigNumeric(P\[, S\]) | `        FIXED_LEN_BYTE_ARRAY       ` | `        DECIMAL (precision = P, scale = S)       `                 |
+| Floating point       | `        FLOAT       `                | `        NONE       `                                               |
+| Boolean              | `        BOOLEAN       `              | `        NONE       `                                               |
+| String               | `        BYTE_ARRAY       `           | `        STRING       ` `        (UTF8)       `                     |
+| Bytes                | `        BYTE_ARRAY       `           | `        NONE       `                                               |
+| Date                 | `        INT32       `                | `        DATE       `                                               |
+| Datetime             | `        INT64       `                | `        TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)       ` |
+| Time                 | `        INT64       `                | `        TIME (isAdjustedToUTC = true, unit = MICROS)       `       |
+| Timestamp            | `        INT64       `                | `        TIMESTAMP (isAdjustedToUTC = false, unit = MICROS)       ` |
+| Geography            | `        BYTE_ARRAY       `           | `        GEOGRAPHY (edges = spherical)       `                      |
 
-The Parquet schema represents nested data as a group and repeated records as repeated groups. For more information about using nested and repeated data in BigQuery, see [Specifying nested and repeated columns](/bigquery/docs/nested-repeated) .
+The Parquet schema represents nested data as a group and repeated records as repeated groups. For more information about using nested and repeated data in BigQuery, see [Specifying nested and repeated columns](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 **Caution:** If you export a `  DATETIME  ` type to Parquet, you cannot load the Parquet file directly back into the same table schema, because the converted value won't match the schema.
 
 You can use the following workarounds for `  DATETIME  ` types:
 
-  - Load the file into a staging table. Then use a SQL query to cast the field to a `  DATETIME  ` and save the result to a new table. For more information, see [Changing a column's data type](/bigquery/docs/managing-table-schemas#change_a_columns_data_type) .
+  - Load the file into a staging table. Then use a SQL query to cast the field to a `  DATETIME  ` and save the result to a new table. For more information, see [Changing a column's data type](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas#change_a_columns_data_type) .
   - Provide a schema for the table by using the `  --schema  ` flag in the load job. Define the datetime column as `  col:DATETIME  ` .
 
 The `  GEOGRAPHY  ` logical type is represented with [GeoParquet](https://geoparquet.org) metadata added to the exported file(s).
@@ -766,7 +693,7 @@ The following table describes several possible options for the `  destinationUri
 
 Single URI
 
-Use a single URI if you are exporting table data that is 1 GB or less. This option is the most common use case, as exported data is generally less than the 1 GB maximum value. This option is not supported for the [`  EXPORT DATA  ` statement](/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) ; you must use a single wildcard URI.
+Use a single URI if you are exporting table data that is 1 GB or less. This option is the most common use case, as exported data is generally less than the 1 GB maximum value. This option is not supported for the [`  EXPORT DATA  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#export_data_statement) ; you must use a single wildcard URI.
 
 **Property definition:**
 
@@ -774,9 +701,7 @@ Use a single URI if you are exporting table data that is 1 GB or less. This opti
 
 **Creates:**
 
-``` text
-gs://my-bucket/file-name.json
-```
+    gs://my-bucket/file-name.json
 
 Single wildcard URI
 
@@ -790,23 +715,19 @@ Use a single wildcard URI if you think your exported data will be larger than th
 
 **Creates:**
 
-``` text
-gs://my-bucket/file-name-000000000000.json
-gs://my-bucket/file-name-000000000001.json
-gs://my-bucket/file-name-000000000002.json
-...
-```
+    gs://my-bucket/file-name-000000000000.json
+    gs://my-bucket/file-name-000000000001.json
+    gs://my-bucket/file-name-000000000002.json
+    ...
 
 `  ['gs://my-bucket/*']  `
 
 **Creates:**
 
-``` text
-gs://my-bucket/000000000000
-gs://my-bucket/000000000001
-gs://my-bucket/000000000002
-...
-```
+    gs://my-bucket/000000000000
+    gs://my-bucket/000000000001
+    gs://my-bucket/000000000002
+    ...
 
 ### Limit the exported file size
 
@@ -816,7 +737,7 @@ When you export more than 1 GB of data in a single export, you must use a wildca
 
 2.  Create a new table that is partitioned and clustered by a new randomly generated column called `  export_id  ` . The following example shows how to create a new `  processed_table  ` from an existing table called `  source_table  ` which requires `  n  ` partitions to achieve the chosen file size:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE my_dataset.processed_table
     PARTITION BY RANGE_BUCKET(export_id, GENERATE_ARRAY(0, n, 1))
     CLUSTER BY export_id
@@ -828,7 +749,7 @@ When you export more than 1 GB of data in a single export, you must use a wildca
 
 3.  For each integer `  i  ` between 0 and `  n-1  ` , run an `  EXPORT DATA  ` statement on the following query:
     
-    ``` text
+    ``` notranslate
     SELECT * EXCEPT(export_id)
     FROM my_dataset.processed_table
     WHERE export_id = i;
@@ -838,233 +759,225 @@ When you export more than 1 GB of data in a single export, you must use a wildca
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// exportTableAsCompressedCSV demonstrates using an export job to
-// write the contents of a table into Cloud Storage as compressed CSV.
-func exportTableAsCompressedCSV(projectID, gcsURI string) error {
- // projectID := "my-project-id"
- // gcsURI := "gs://mybucket/shakespeare.csv"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %w", err)
- }
- defer client.Close()
-
- srcProject := "bigquery-public-data"
- srcDataset := "samples"
- srcTable := "shakespeare"
-
- gcsRef := bigquery.NewGCSReference(gcsURI)
- gcsRef.Compression = bigquery.Gzip
-
- extractor := client.DatasetInProject(srcProject, srcDataset).Table(srcTable).ExtractorTo(gcsRef)
- extractor.DisableHeader = true
- // You can choose to run the job in a specific location for more complex data locality scenarios.
- // Ex: In this example, source dataset and GCS bucket are in the US.
- extractor.Location = "US"
-
- job, err := extractor.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
- if err := status.Err(); err != nil {
-     return err
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // exportTableAsCompressedCSV demonstrates using an export job to
+    // write the contents of a table into Cloud Storage as compressed CSV.
+    func exportTableAsCompressedCSV(projectID, gcsURI string) error {
+     // projectID := "my-project-id"
+     // gcsURI := "gs://mybucket/shakespeare.csv"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %w", err)
+     }
+     defer client.Close()
+    
+     srcProject := "bigquery-public-data"
+     srcDataset := "samples"
+     srcTable := "shakespeare"
+    
+     gcsRef := bigquery.NewGCSReference(gcsURI)
+     gcsRef.Compression = bigquery.Gzip
+    
+     extractor := client.DatasetInProject(srcProject, srcDataset).Table(srcTable).ExtractorTo(gcsRef)
+     extractor.DisableHeader = true
+     // You can choose to run the job in a specific location for more complex data locality scenarios.
+     // Ex: In this example, source dataset and GCS bucket are in the US.
+     extractor.Location = "US"
+    
+     job, err := extractor.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+     if err := status.Err(); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.ExtractJobConfiguration;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.TableId;
-
-// Sample to extract a compressed table
-public class ExtractTableCompressed {
-
-  public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectName = "MY_PROJECT_NAME";
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String bucketName = "MY-BUCKET-NAME";
-    String destinationUri = "gs://" + bucketName + "/path/to/file";
-    // For more information on export formats available see:
-    // https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
-    String compressed = "gzip";
-    // For more information on Job see:
-    // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-    String dataFormat = "CSV";
-
-    extractTableCompressed(
-        projectName, datasetName, tableName, destinationUri, dataFormat, compressed);
-  }
-
-  public static void extractTableCompressed(
-      String projectName,
-      String datasetName,
-      String tableName,
-      String destinationUri,
-      String dataFormat,
-      String compressed) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId tableId = TableId.of(projectName, datasetName, tableName);
-
-      ExtractJobConfiguration extractConfig =
-          ExtractJobConfiguration.newBuilder(tableId, destinationUri)
-              .setCompression(compressed)
-              .setFormat(dataFormat)
-              .build();
-
-      Job job = bigquery.create(JobInfo.of(extractConfig));
-
-      // Blocks until this job completes its execution, either failing or succeeding.
-      Job completedJob = job.waitFor();
-      if (completedJob == null) {
-        System.out.println("Job not executed since it no longer exists.");
-        return;
-      } else if (completedJob.getStatus().getError() != null) {
-        System.out.println(
-            "BigQuery was unable to extract due to an error: \n" + job.getStatus().getError());
-        return;
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.ExtractJobConfiguration;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.TableId;
+    
+    // Sample to extract a compressed table
+    public class ExtractTableCompressed {
+    
+      public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectName = "MY_PROJECT_NAME";
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String bucketName = "MY-BUCKET-NAME";
+        String destinationUri = "gs://" + bucketName + "/path/to/file";
+        // For more information on export formats available see:
+        // https://cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types
+        String compressed = "gzip";
+        // For more information on Job see:
+        // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+        String dataFormat = "CSV";
+    
+        extractTableCompressed(
+            projectName, datasetName, tableName, destinationUri, dataFormat, compressed);
       }
-      System.out.println("Table extract compressed successful");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Table extraction job was interrupted. \n" + e.toString());
+    
+      public static void extractTableCompressed(
+          String projectName,
+          String datasetName,
+          String tableName,
+          String destinationUri,
+          String dataFormat,
+          String compressed) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId tableId = TableId.of(projectName, datasetName, tableName);
+    
+          ExtractJobConfiguration extractConfig =
+              ExtractJobConfiguration.newBuilder(tableId, destinationUri)
+                  .setCompression(compressed)
+                  .setFormat(dataFormat)
+                  .build();
+    
+          Job job = bigquery.create(JobInfo.of(extractConfig));
+    
+          // Blocks until this job completes its execution, either failing or succeeding.
+          Job completedJob = job.waitFor();
+          if (completedJob == null) {
+            System.out.println("Job not executed since it no longer exists.");
+            return;
+          } else if (completedJob.getStatus().getError() != null) {
+            System.out.println(
+                "BigQuery was unable to extract due to an error: \n" + job.getStatus().getError());
+            return;
+          }
+          System.out.println("Table extract compressed successful");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Table extraction job was interrupted. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-const bigquery = new BigQuery();
-const storage = new Storage();
-
-async function extractTableCompressed() {
-  // Exports my_dataset:my_table to gcs://my-bucket/my-file as a compressed file.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_table";
-  // const bucketName = "my-bucket";
-  // const filename = "file.csv";
-
-  // Location must match that of the source table.
-  const options = {
-    location: 'US',
-    gzip: true,
-  };
-
-  // Export data from the table into a Google Cloud Storage file
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .extract(storage.bucket(bucketName).file(filename), options);
-
-  console.log(`Job ${job.id} created.`);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
+    // Import the Google Cloud client libraries
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const {Storage} = require('@google-cloud/storage');
+    
+    const bigquery = new BigQuery();
+    const storage = new Storage();
+    
+    async function extractTableCompressed() {
+      // Exports my_dataset:my_table to gcs://my-bucket/my-file as a compressed file.
+    
+      /**
+       * TODO(developer): Uncomment the following lines before running the sample.
+       */
+      // const datasetId = "my_dataset";
+      // const tableId = "my_table";
+      // const bucketName = "my-bucket";
+      // const filename = "file.csv";
+    
+      // Location must match that of the source table.
+      const options = {
+        location: 'US',
+        gzip: true,
+      };
+    
+      // Export data from the table into a Google Cloud Storage file
+      const [job] = await bigquery
+        .dataset(datasetId)
+        .table(tableId)
+        .extract(storage.bucket(bucketName).file(filename), options);
+    
+      console.log(`Job ${job.id} created.`);
+    
+      // Check the job's status for errors
+      const errors = job.status.errors;
+      if (errors && errors.length > 0) {
+        throw errors;
+      }
+    }
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-# from google.cloud import bigquery
-# client = bigquery.Client()
-# bucket_name = 'my-bucket'
-
-destination_uri = "gs://{}/{}".format(bucket_name, "shakespeare.csv.gz")
-dataset_ref = bigquery.DatasetReference(project, dataset_id)
-table_ref = dataset_ref.table("shakespeare")
-job_config = bigquery.job.ExtractJobConfig()
-job_config.compression = bigquery.Compression.GZIP
-
-extract_job = client.extract_table(
-    table_ref,
-    destination_uri,
-    # Location must match that of the source table.
-    location="US",
-    job_config=job_config,
-)  # API request
-extract_job.result()  # Waits for job to complete.
-```
+    # from google.cloud import bigquery
+    # client = bigquery.Client()
+    # bucket_name = 'my-bucket'
+    
+    destination_uri = "gs://{}/{}".format(bucket_name, "shakespeare.csv.gz")
+    dataset_ref = bigquery.DatasetReference(project, dataset_id)
+    table_ref = dataset_ref.table("shakespeare")
+    job_config = bigquery.job.ExtractJobConfig()
+    job_config.compression = bigquery.Compression.GZIP
+    
+    extract_job = client.extract_table(
+        table_ref,
+        destination_uri,
+        # Location must match that of the source table.
+        location="US",
+        job_config=job_config,
+    )  # API request
+    extract_job.result()  # Waits for job to complete.
 
 ## Example use case
 
 This example shows how you can export data to Cloud Storage.
 
-Suppose you are streaming data to Cloud Storage from endpoint logs continuously. A daily snapshot is to be exported to Cloud Storage for backup and archival purposes. The best choice is an [extract job](#export-data-in-bigquery) subject to certain [quotas](/bigquery/quotas#export_jobs) and [limitations](#export_limitations) .
+Suppose you are streaming data to Cloud Storage from endpoint logs continuously. A daily snapshot is to be exported to Cloud Storage for backup and archival purposes. The best choice is an [extract job](https://docs.cloud.google.com/bigquery/docs/exporting-data#export-data-in-bigquery) subject to certain [quotas](https://docs.cloud.google.com/bigquery/quotas#export_jobs) and [limitations](https://docs.cloud.google.com/bigquery/docs/exporting-data#export_limitations) .
 
-Submit an extract job with the [API](/bigquery/docs/reference/rest/v2/jobs/insert) or [client libraries](/bigquery/docs/reference/libraries) , passing in a unique ID as **`  jobReference.jobId  `** . Extract Jobs are asynchronous. [Check the job status](/bigquery/docs/reference/v2/jobs/get) using the unique job ID used to create the job. The job completed successfully if **`  status.status  `** is **`  DONE  `** . If **`  status.errorResult  `** is present, the job failed and needs to be retried.
+Submit an extract job with the [API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) or [client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) , passing in a unique ID as **`  jobReference.jobId  `** . Extract Jobs are asynchronous. [Check the job status](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) using the unique job ID used to create the job. The job completed successfully if **`  status.status  `** is **`  DONE  `** . If **`  status.errorResult  `** is present, the job failed and needs to be retried.
 
 **Batch data processing**
 
 Suppose a nightly batch job is used to load data by a fixed deadline. After this load job completes, a table with statistics is materialized from a query as described in the preceding section. Data from this table is retrieved and compiled into a PDF report and sent to a regulator.
 
-Since the amount of data that needs to be read is small, use the [`  tabledata.list  `](/bigquery/docs/reference/rest/v2/tabledata/list) API to retrieve all rows of the table in JSON dictionary format. If there is more than one page of data, the results have the **`  pageToken  `** property set. To retrieve the next page of results, make another `  tabledata.list  ` call and include the token value as the **`  pageToken  `** parameter. If the API call fails with a [5xx error](/bigquery/docs/error-messages) , retry with exponential backoff. Most 4xx errors cannot be retried. For better decoupling of BigQuery export and report generation, results should be persisted to disk.
+Since the amount of data that needs to be read is small, use the [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) API to retrieve all rows of the table in JSON dictionary format. If there is more than one page of data, the results have the **`  pageToken  `** property set. To retrieve the next page of results, make another `  tabledata.list  ` call and include the token value as the **`  pageToken  `** parameter. If the API call fails with a [5xx error](https://docs.cloud.google.com/bigquery/docs/error-messages) , retry with exponential backoff. Most 4xx errors cannot be retried. For better decoupling of BigQuery export and report generation, results should be persisted to disk.
 
 ## Quota policy
 
-For information on extract job quotas, see [Extract jobs](/bigquery/quotas#export_jobs) on the Quotas and limits page.
+For information on extract job quotas, see [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) on the Quotas and limits page.
 
-Usage for extract jobs are available in the `  INFORMATION_SCHEMA  ` . The job entry in the `  JOBS_BY_*  ` system tables for the extract job contains a `  total_bytes_processed  ` value that can be used to monitor the aggregate usage to ensure that it stays under 50 TiB per-day. To learn how to query the `  INFORMATION_SCHEMA.JOBS  ` view to get the `  total_bytes_processed  ` value, see [`  INFORMATION_SCHEMA.JOBS  ` schema](/bigquery/docs/information-schema-jobs#schema)
+Usage for extract jobs are available in the `  INFORMATION_SCHEMA  ` . The job entry in the `  JOBS_BY_*  ` system tables for the extract job contains a `  total_bytes_processed  ` value that can be used to monitor the aggregate usage to ensure that it stays under 50 TiB per-day. To learn how to query the `  INFORMATION_SCHEMA.JOBS  ` view to get the `  total_bytes_processed  ` value, see [`  INFORMATION_SCHEMA.JOBS  ` schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema)
 
 ### View current quota usage
 
-You can view your current usage of query, load, extract, or copy jobs by running an `  INFORMATION_SCHEMA  ` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `  INFORMATION_SCHEMA.JOBS  ` view to list the number of query, load, extract, and copy jobs by project:
+You can view your current usage of query, load, extract, or copy jobs by running an `  INFORMATION_SCHEMA  ` query to view metadata about the jobs ran over a specified time period. You can compare your current usage against the [quota limit](https://docs.cloud.google.com/bigquery/quotas#copy_jobs) to determine your quota usage for a particular type of job. The following example query uses the `  INFORMATION_SCHEMA.JOBS  ` view to list the number of query, load, extract, and copy jobs by project:
 
-``` text
+``` notranslate
 SELECT
   sum(case  when job_type="QUERY" then 1 else 0 end) as QRY_CNT,
   sum(case  when job_type="LOAD" then 1 else 0 end) as LOAD_CNT,
@@ -1074,9 +987,11 @@ FROM `region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
 WHERE date(creation_time)= CURRENT_DATE()
 ```
 
-You can set up a [Cloud Monitoring](/bigquery/docs/monitoring) alerting policy that monitors the number of bytes exported.
+You can set up a [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring) alerting policy that monitors the number of bytes exported.
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
+    
+    [Go to **Alerting**](https://console.cloud.google.com/monitoring/alerting)
     
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 
@@ -1086,19 +1001,17 @@ You can set up a [Cloud Monitoring](/bigquery/docs/monitoring) alerting policy t
 
 4.  In the **PromQL** query editor, enter the following query:
     
-    ``` text
-    (
-      sum by (project_id, quota_metric, location) (increase({"serviceruntime.googleapis.com/quota/rate/net_usage", monitored_resource="consumer_quota", service="bigquery.googleapis.com"}[1m]))
-      /
-      max by (project_id, quota_metric, location) ({"serviceruntime.googleapis.com/quota/limit", monitored_resource="consumer_quota", service="bigquery.googleapis.com", limit_name="ExtractBytesPerDay"})
-    ) > 0.01
-    ```
+        (
+          sum by (project_id, quota_metric, location) (increase({"serviceruntime.googleapis.com/quota/rate/net_usage", monitored_resource="consumer_quota", service="bigquery.googleapis.com"}[1m]))
+          /
+          max by (project_id, quota_metric, location) ({"serviceruntime.googleapis.com/quota/limit", monitored_resource="consumer_quota", service="bigquery.googleapis.com", limit_name="ExtractBytesPerDay"})
+        ) > 0.01
     
     If **Auto-run** isn't enabled, then click **Run Query** .
 
 5.  Configure the rest of your alert and click **Create policy** .
 
-For detailed steps about creating PromQL-based alerting policies, see [Create PromQL-based alerting policies (Console)](/monitoring/promql/create-promql-alerts-console) .
+For detailed steps about creating PromQL-based alerting policies, see [Create PromQL-based alerting policies (Console)](https://docs.cloud.google.com/monitoring/promql/create-promql-alerts-console) .
 
 ## Troubleshooting
 
@@ -1106,37 +1019,33 @@ Diagnose and troubleshoot issues with extract jobs.
 
 ### Diagnose issues using Logs Explorer
 
-To diagnose issues with extract jobs, you can use the [Logs Explorer](/logging/docs/view/logs-explorer-interface) to review the logs for a specific extract job and identify possible errors. The following Logs Explorer filter returns information about your extract jobs:
+To diagnose issues with extract jobs, you can use the [Logs Explorer](https://docs.cloud.google.com/logging/docs/view/logs-explorer-interface) to review the logs for a specific extract job and identify possible errors. The following Logs Explorer filter returns information about your extract jobs:
 
-``` text
-resource.type="bigquery_resource"
-protoPayload.methodName="jobservice.insert"
-(protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~"EXPORT" OR
-protoPayload.serviceData.jobCompletedEvent.eventName="extract_job_completed" OR
-protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.query=~"EXPORT")
-```
+    resource.type="bigquery_resource"
+    protoPayload.methodName="jobservice.insert"
+    (protoPayload.serviceData.jobInsertRequest.resource.jobConfiguration.query.query=~"EXPORT" OR
+    protoPayload.serviceData.jobCompletedEvent.eventName="extract_job_completed" OR
+    protoPayload.serviceData.jobCompletedEvent.job.jobConfiguration.query.query=~"EXPORT")
 
 ### Exceeded extract bytes per day quota error
 
-BigQuery returns this error when the extraction exceeds the default 50 TiB daily limit in a project. For more information about extract job limits, see [Extract jobs](/bigquery/quotas#export_jobs) .
+BigQuery returns this error when the extraction exceeds the default 50 TiB daily limit in a project. For more information about extract job limits, see [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
 **Error message**
 
-``` text
-Your usage exceeded quota for ExtractBytesPerDay
-```
+    Your usage exceeded quota for ExtractBytesPerDay
 
 #### Diagnosis
 
-If you are exporting a table that is larger than 50 TiB, the export fails because it [exceeds the extraction limit](/bigquery/quotas#export_jobs) . If you want to [export table data](/bigquery/docs/partitioned-tables#export_table_data) for specific table partitions, you can use a [partition decorator](/bigquery/docs/partitioned-tables#partition_decorators) to identify the partitions to export.
+If you are exporting a table that is larger than 50 TiB, the export fails because it [exceeds the extraction limit](https://docs.cloud.google.com/bigquery/quotas#export_jobs) . If you want to [export table data](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#export_table_data) for specific table partitions, you can use a [partition decorator](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#partition_decorators) to identify the partitions to export.
 
 If you would like to gather usages of exports data over recent days, you can try the following:
 
-  - [View the quotas for your project](/docs/quotas/view-manage#view_project_quotas) with filter criteria such as `  Name: Extract bytes per day  ` or `  Metric: bigquery.googleapis.com/quota/extract/bytes  ` along with the Show usage chart to see your usage trend over a few days.
+  - [View the quotas for your project](https://docs.cloud.google.com/docs/quotas/view-manage#view_project_quotas) with filter criteria such as `  Name: Extract bytes per day  ` or `  Metric: bigquery.googleapis.com/quota/extract/bytes  ` along with the Show usage chart to see your usage trend over a few days.
 
-  - Alternatively you can query [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `  EXTRACT  ` jobs in the past seven days.
+  - Alternatively you can query [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to see your total extract bytes over a few days. For example, the following query returns the daily total bytes processed by `  EXTRACT  ` jobs in the past seven days.
     
-    ``` text
+    ``` notranslate
     SELECT
     TIMESTAMP_TRUNC(creation_time, DAY) AS day,
     SUM ( total_bytes_processed ) / POW(1024, 3) AS total_gibibytes_processed
@@ -1151,7 +1060,7 @@ If you would like to gather usages of exports data over recent days, you can try
 
   - You can then further refine the results by identifying the specific jobs that are consuming more bytes than expected. The following example returns the top 100 `  EXTRACT  ` jobs which are consuming more than 100 GB processed over the past seven days.
     
-    ``` text
+    ``` notranslate
     SELECT
     creation_time,
     job_id,
@@ -1167,13 +1076,13 @@ If you would like to gather usages of exports data over recent days, you can try
     LIMIT 100
     ```
 
-You can alternatively use the [jobs explorer](/bigquery/docs/admin-jobs-explorer) with filters like `  Bytes processed more than  ` to filter for high processing jobs for a specified period of time.
+You can alternatively use the [jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer) with filters like `  Bytes processed more than  ` to filter for high processing jobs for a specified period of time.
 
 #### Resolution
 
-One method of resolving this quota error is to create a slot [reservation](/bigquery/docs/reservations-intro#reservations) and [assign](/bigquery/docs/reservations-workload-management#assignments) your project into the reservation with the `  PIPELINE  ` job type. This method can bypass the limit check since it uses your dedicated reservations rather than a free shared slot pool. If needed, the reservation can be deleted if you want to use a shared slot pool later on.
+One method of resolving this quota error is to create a slot [reservation](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) and [assign](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) your project into the reservation with the `  PIPELINE  ` job type. This method can bypass the limit check since it uses your dedicated reservations rather than a free shared slot pool. If needed, the reservation can be deleted if you want to use a shared slot pool later on.
 
-For alternative approaches that allow exporting more *than* 50 TiB, see the notes section in [Extract jobs](/bigquery/quotas#export_jobs) .
+For alternative approaches that allow exporting more *than* 50 TiB, see the notes section in [Extract jobs](https://docs.cloud.google.com/bigquery/quotas#export_jobs) .
 
 ## Pricing
 
@@ -1183,10 +1092,10 @@ Once the data is exported, you are charged for storing the data in Cloud Storage
 
 ## Table security
 
-To control access to tables in BigQuery, see [Control access to resources with IAM](/bigquery/docs/control-access-to-resources-iam) .
+To control access to tables in BigQuery, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
 ## What's next
 
-  - To learn more about the Google Cloud console, see [Using the Google Cloud console](/bigquery/docs/bigquery-web-ui) .
-  - To learn more about the bq command-line tool, see [Using the bq command-line tool](/bigquery/bq-command-line-tool) .
-  - To learn how to create an application using the BigQuery API client libraries, see [Client library quickstart](/bigquery/docs/quickstarts/quickstart-client-libraries) .
+  - To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
+  - To learn more about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
+  - To learn how to create an application using the BigQuery API client libraries, see [Client library quickstart](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) .

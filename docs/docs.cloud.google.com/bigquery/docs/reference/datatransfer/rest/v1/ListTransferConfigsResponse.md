@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferConfigsResponse#SCHEMA_REPRESENTATION)
 
 The returned list of pipelines in the project.
 
@@ -13,7 +13,7 @@ The returned list of pipelines in the project.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;transferConfigs&quot;: [
     {
       object (TransferConfig)

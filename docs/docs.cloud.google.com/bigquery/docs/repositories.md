@@ -2,7 +2,7 @@
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or ask questions that are related to this Preview feature, contact [bigquery-repositories-feedback@google.com](mailto:%20bigquery-repositories-feedback@google.com) .
 
@@ -19,15 +19,15 @@ This document shows you how to work with repositories in BigQuery, including the
 
 To get the permissions that you need to work with a repositories and workspaces, ask your administrator to grant you the following IAM roles on repositories and workspaces:
 
-  - Create and manage shared repositories: [Code Owner](/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `  roles/dataform.codeOwner  ` )
-  - Create and delete workspaces in shared repositories: [Code Editor](/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
-  - Create, modify, and version control files in workspaces in shared repositories: [Code Editor](/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
-  - View workspaces and their files in shared repositories: [Code Viewer](/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
-  - Create and manage private repositories, including all actions with workspaces and files in the private repository: [Code Creator](/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
+  - Create and manage shared repositories: [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `  roles/dataform.codeOwner  ` )
+  - Create and delete workspaces in shared repositories: [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - Create, modify, and version control files in workspaces in shared repositories: [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - View workspaces and their files in shared repositories: [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `  roles/dataform.codeViewer  ` )
+  - Create and manage private repositories, including all actions with workspaces and files in the private repository: [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `  roles/dataform.codeCreator  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 Principals that have the Code Editor role on a repository are able to edit all workspaces in the repository.
 
@@ -38,8 +38,12 @@ Private repositories that you create are still visible to principals who are gra
 To create a BigQuery repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -53,7 +57,7 @@ To create a BigQuery repository, follow these steps:
 
 6.  In the **Region** drop-down list, select a BigQuery region for storing the repository and its contents. Select the BigQuery region nearest to your location.
     
-    For a list of available BigQuery regions, see [BigQuery Studio locations](/bigquery/docs/locations#bqstudio-loc) . The repository region does not have to match the location of your BigQuery datasets.
+    For a list of available BigQuery regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) . The repository region does not have to match the location of your BigQuery datasets.
 
 7.  Click **Create** .
 
@@ -65,34 +69,14 @@ We recommend creating a dedicated BigQuery repository for each remote repository
 
 You can connect a remote repository through HTTPS or SSH. Connecting a BigQuery repository to a remote repository can fail if the remote repository is not open to the public internet, for example, if it is behind a firewall. The following table lists supported Git providers and the connection methods that are available for their repositories:
 
-<table>
-<thead>
-<tr class="header">
-<th>Git provider</th>
-<th>Connection method</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Azure DevOps Services</td>
-<td>SSH</td>
-</tr>
-<tr class="even">
-<td>Bitbucket</td>
-<td>SSH</td>
-</tr>
-<tr class="odd">
-<td>GitHub</td>
-<td>SSH or HTTPS</td>
-</tr>
-<tr class="even">
-<td>GitLab</td>
-<td>SSH or HTTPS</td>
-</tr>
-</tbody>
-</table>
+| Git provider          | Connection method |
+| --------------------- | ----------------- |
+| Azure DevOps Services | SSH               |
+| Bitbucket             | SSH               |
+| GitHub                | SSH or HTTPS      |
+| GitLab                | SSH or HTTPS      |
 
-**Important:** To create a BigQuery repository connected to a remote Git repository that is not allow-listed in the `  dataform.restrictGitRemotes  ` policy, first add the remote Git repository to the `  allowedValues  ` list in the policy, and then create a new BigQuery repository and connect it to the remote repository. For more information, see [Restrict remote repositories](/dataform/docs/restrict-git-remotes) .
+**Important:** To create a BigQuery repository connected to a remote Git repository that is not allow-listed in the `  dataform.restrictGitRemotes  ` policy, first add the remote Git repository to the `  allowedValues  ` list in the policy, and then create a new BigQuery repository and connect it to the remote repository. For more information, see [Restrict remote repositories](https://docs.cloud.google.com/dataform/docs/restrict-git-remotes) .
 
 ### Connect a remote repository through SSH
 
@@ -100,7 +84,7 @@ To connect a remote repository through SSH, you must generate an SSH key and a S
 
 BigQuery uses the secret with the private SSH key to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
-**Warning:** The private SSH key that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](/bigquery/docs/access-control) role can use the key to connect repositories. BigQuery users are not able to see the key itself.
+**Warning:** The private SSH key that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](https://docs.cloud.google.com/bigquery/docs/access-control) role can use the key to connect repositories. BigQuery users are not able to see the key itself.
 
 To connect a remote repository to a BigQuery repository through SSH, follow these steps:
 
@@ -127,21 +111,23 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
     1.  In GitLab, [create a private SSH key](https://docs.gitlab.com/ee/user/ssh.html#generate-an-ssh-key-pair) .
     2.  [Upload the GitLab public SSH key](https://docs.gitlab.com/ee/user/ssh.html#add-an-ssh-key-to-your-gitlab-account) to your GitLab repository.
 
-2.  In Secret Manager, [create a secret](/secret-manager/docs/creating-and-accessing-secrets#create) and paste in your private SSH key as the secret value. Your private SSH key should be stored in a file similar to `  ~/.ssh/id_ed25519  ` . Give a name to the secret so you can find it in the future.
+2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) and paste in your private SSH key as the secret value. Your private SSH key should be stored in a file similar to `  ~/.ssh/id_ed25519  ` . Give a name to the secret so you can find it in the future.
 
-3.  [Grant access to the secret to your default Dataform service agent](/secret-manager/docs/manage-access-to-secrets) .
+3.  [Grant access to the secret to your default Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
     
     Your default Dataform service account is in the following format:
     
-    ``` text
-    service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
-    ```
+        service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
-4.  Grant the [`  roles/secretmanager.secretAccessor  ` role](/secret-manager/docs/access-control#secretmanager.secretAccessor) to the service account.
+4.  Grant the [`  roles/secretmanager.secretAccessor  ` role](https://docs.cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor) to the service account.
 
 5.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 6.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 7.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -170,21 +156,15 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
     
     1.  To retrieve the Azure DevOps Services public host key, run the following command in the terminal:
         
-        ``` text
-        ssh-keyscan -t rsa ssh.dev.azure.com
-        ```
+            ssh-keyscan -t rsa ssh.dev.azure.com
     
     2.  Copy one of the outputted keys, omitting `  ssh.dev.azure.com  ` from the beginning of the line. The value that you copy must be in the following format:
         
-        ``` text
-        ALGORITHM BASE64_KEY_VALUE
-        ```
+            ALGORITHM BASE64_KEY_VALUE
         
         For example:
         
-        ``` text
-        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
-        ```
+            ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
         
         Verify this key is still up-to-date with Azure DevOps Services.
     
@@ -192,21 +172,15 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
     
     1.  To retrieve the Bitbucket public host key, run the following command in the terminal:
         
-        ``` text
-        curl https://bitbucket.org/site/ssh
-        ```
+            curl https://bitbucket.org/site/ssh
     
     2.  The command returns a list of public host keys. Choose one of the keys from the list, and copy it, omitting `  bitbucket.org  ` from the beginning of the line. The value that you copy must be in the following format:
         
-        ``` text
-        ALGORITHM BASE64_KEY_VALUE
-        ```
+            ALGORITHM BASE64_KEY_VALUE
         
         For example:
         
-        ``` text
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIazEu89wgQZ4bqs3d63QSMzYVa0MuJ2e2gKTKqu+UUO
-        ```
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIazEu89wgQZ4bqs3d63QSMzYVa0MuJ2e2gKTKqu+UUO
         
         Verify this key is still up-to-date with Bitbucket.
     
@@ -216,15 +190,11 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
     
     2.  The page contains a list of public host keys. Choose one of them, and copy it, omitting `  github.com  ` from the beginning of the line. The value that you copy must be in the following format:
         
-        ``` text
-        ALGORITHM BASE64_KEY_VALUE
-        ```
+            ALGORITHM BASE64_KEY_VALUE
         
         For example:
         
-        ``` text
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
-        ```
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
         
         Verify this key is still up-to-date with GitHub.
     
@@ -234,15 +204,11 @@ To connect a remote repository to a BigQuery repository through SSH, follow thes
     
     2.  The page contains a list of public host keys. Choose one of them, and copy it, omitting `  gitlab.com  ` from the beginning of the line. The value that you copy must be in the following format:
         
-        ``` text
-        ALGORITHM BASE64_KEY_VALUE
-        ```
+            ALGORITHM BASE64_KEY_VALUE
         
         For example:
         
-        ``` text
-        ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
-        ```
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAfuCHKVTjquxvt6CM6tdG4SLp1Btn/nOeHHE5UOzRdf
         
         Verify this key is still up-to-date with GitLab.
 
@@ -254,7 +220,7 @@ To connect a remote repository through HTTPS, you must create a Secret Manager s
 
 BigQuery then uses the access token to sign in to your Git provider to commit changes on behalf of users. BigQuery makes these commits using the user's Google Cloud email address so you can tell who made each commit.
 
-**Warning:** The private HTTPS token that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](/bigquery/docs/access-control) role can use the token to connect repositories. BigQuery users are not able to see the token itself.
+**Warning:** The private HTTPS token that you create is shared among all BigQuery users who use the repository. We recommend that you create a machine user with your Git provider and limit its access to the remote Git repositories you plan to use with BigQuery. Only Google Cloud project owners and BigQuery users with the [Code Owner](https://docs.cloud.google.com/bigquery/docs/access-control) role can use the token to connect repositories. BigQuery users are not able to see the token itself.
 
 To connect a remote repository to a BigQuery repository through HTTPS, follow these steps:
 
@@ -296,21 +262,23 @@ To connect a remote repository to a BigQuery repository through HTTPS, follow th
     
     4.  Set a token expiration time appropriate to your needs.
 
-2.  In Secret Manager, [create a secret](/secret-manager/docs/creating-and-accessing-secrets#create) containing the personal access token of your remote repository.
+2.  In Secret Manager, [create a secret](https://docs.cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) containing the personal access token of your remote repository.
 
-3.  [Grant access to the secret to your default Dataform service agent](/secret-manager/docs/manage-access-to-secrets) .
+3.  [Grant access to the secret to your default Dataform service agent](https://docs.cloud.google.com/secret-manager/docs/manage-access-to-secrets) .
     
     Your default Dataform service agent is in the following format:
     
-    ``` text
-    service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
-    ```
+        service-PROJECT_NUMBER@gcp-sa-dataform.iam.gserviceaccount.com
 
-4.  Grant the [`  roles/secretmanager.secretAccessor  ` role](/secret-manager/docs/access-control#secretmanager.secretAccessor) to the service account.
+4.  Grant the [`  roles/secretmanager.secretAccessor  ` role](https://docs.cloud.google.com/secret-manager/docs/access-control#secretmanager.secretAccessor) to the service account.
 
 5.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 6.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 7.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -337,8 +305,12 @@ To connect a remote repository to a BigQuery repository through HTTPS, follow th
 To edit a connection between a BigQuery repository and a remote Git repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -357,8 +329,12 @@ To edit a connection between a BigQuery repository and a remote Git repository, 
 To share a repository, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -374,15 +350,19 @@ To share a repository, follow these steps:
 
 9.  Click **Save** .
 
-**Note:** If you enhance security by setting the `  enable_private_workspace  ` field [(Preview)](https://cloud.google.com/products#product-launch-stages) to `  true  ` in the [`  projects.locations.updateConfig  ` Dataform API method](/dataform/reference/rest/v1beta1/projects.locations/updateConfig) for your Google Cloud project, then for any Dataform repository used by your BigQuery repository, only the creator of a Dataform workspace in that Dataform repository can read and write code in that Dataform workspace.
+**Note:** If you enhance security by setting the `  enable_private_workspace  ` field [(Preview)](https://cloud.google.com/products#product-launch-stages) to `  true  ` in the [`  projects.locations.updateConfig  ` Dataform API method](https://docs.cloud.google.com/dataform/reference/rest/v1beta1/projects.locations/updateConfig) for your Google Cloud project, then for any Dataform repository used by your BigQuery repository, only the creator of a Dataform workspace in that Dataform repository can read and write code in that Dataform workspace.
 
 ## Delete a repository
 
 To delete a repository and all its contents, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Repositories** to open the **Repositories** tab in the details pane.
 
@@ -394,4 +374,4 @@ To delete a repository and all its contents, follow these steps:
 
 ## What's next
 
-  - Learn how to [create workspaces](/bigquery/docs/workspaces) .
+  - Learn how to [create workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces) .

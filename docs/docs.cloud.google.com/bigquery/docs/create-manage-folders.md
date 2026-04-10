@@ -2,15 +2,15 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To give feedback or request support for this feature, send an email to <bigquery-explorer-feedback@google.com> .
 
-The following document describes how create and manage folders in BigQuery. You can use folders to organize and control access to single file code assets, such as [notebooks](/bigquery/docs/create-notebooks) , [saved queries](/bigquery/docs/work-with-saved-queries) , [data canvases](/bigquery/docs/data-canvas) , and [data preparation](/bigquery/docs/data-prep-get-suggestions) files. BigQuery offers user folders for individuals to manage their own code assets, and team folders to manage a team's code assets.
+The following document describes how create and manage folders in BigQuery. You can use folders to organize and control access to single file code assets, such as [notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) , [saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries) , [data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas) , and [data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) files. BigQuery offers user folders for individuals to manage their own code assets, and team folders to manage a team's code assets.
 
-BigQuery folders are powered by [Dataform](/dataform/docs/overview) .
+BigQuery folders are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
-Before creating folders, learn how BigQuery folders work by reading [Organize code assets with folders](/bigquery/docs/code-asset-folders) .
+Before creating folders, learn how BigQuery folders work by reading [Organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders) .
 
 ## Before you begin
 
@@ -18,89 +18,31 @@ Before creating folders, learn how BigQuery folders work by reading [Organize co
 
 To get the permissions that you need to complete the tasks in this document, ask your administrator to grant you the appropriate IAM roles on the project, folder, or resource.
 
-To get the permissions that you need to use the BigQuery file browser, ask your administrator to grant you the [BigQuery User](/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` ) or [BigQuery Studio User](/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` ) role on the project.
+To get the permissions that you need to use the BigQuery file browser, ask your administrator to grant you the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) ( `  roles/bigquery.user  ` ) or [BigQuery Studio User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` ) role on the project.
 
 Permissions granted on a folder propagate to all the files and folders contained within it.
 
 The following apply to files and the folders that contain them:
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Role</th>
-<th style="text-align: left;">Granted on</th>
-<th style="text-align: left;">Permissions and use cases</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.codeOwner">Code Owner</a> ( <code dir="ltr" translate="no">       roles/dataform.codeOwner      </code> )</td>
-<td style="text-align: left;">File or folder</td>
-<td style="text-align: left;">Grants full control over a resource in the files and folders system. A user with this role can perform all actions, including deleting the resource, setting its IAM policy, and moving it.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.codeEditor">Code Editor</a> ( <code dir="ltr" translate="no">       roles/dataform.codeEditor      </code> )</td>
-<td style="text-align: left;">File or folder</td>
-<td style="text-align: left;">Allows for editing and managing content. A user with this role can add content to folders, edit files, and get the IAM policy for a file or folder. This role is also required on the destination folder when moving a resource.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.codeCommenter">Code Commenter</a> ( <code dir="ltr" translate="no">       roles/dataform.codeCommenter      </code> )</td>
-<td style="text-align: left;">File or folder</td>
-<td style="text-align: left;">Allows for commenting on code assets or folders.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.codeViewer">Code Viewer</a> ( <code dir="ltr" translate="no">       roles/dataform.codeViewer      </code> )</td>
-<td style="text-align: left;">File or folder</td>
-<td style="text-align: left;">Provides read-only access. A user with this role can query the contents of files and folders.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.codeCreator">Code Creator</a> ( <code dir="ltr" translate="no">       roles/dataform.codeCreator      </code> )</td>
-<td style="text-align: left;">Project</td>
-<td style="text-align: left;">Grants permission to create new files and folders within a project.</td>
-</tr>
-</tbody>
-</table>
+| Role                                                                                                                                                         | Granted on     | Permissions and use cases                                                                                                                                                                                                        |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Code Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeOwner) ( `        roles/dataform.codeOwner       ` )             | File or folder | Grants full control over a resource in the files and folders system. A user with this role can perform all actions, including deleting the resource, setting its IAM policy, and moving it.                                      |
+| [Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `        roles/dataform.codeEditor       ` )          | File or folder | Allows for editing and managing content. A user with this role can add content to folders, edit files, and get the IAM policy for a file or folder. This role is also required on the destination folder when moving a resource. |
+| [Code Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCommenter) ( `        roles/dataform.codeCommenter       ` ) | File or folder | Allows for commenting on code assets or folders.                                                                                                                                                                                 |
+| [Code Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeViewer) ( `        roles/dataform.codeViewer       ` )          | File or folder | Provides read-only access. A user with this role can query the contents of files and folders.                                                                                                                                    |
+| [Code Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeCreator) ( `        roles/dataform.codeCreator       ` )       | Project        | Grants permission to create new files and folders within a project.                                                                                                                                                              |
 
 The following roles are specific to managing team folders:
 
-<table>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Role</th>
-<th style="text-align: left;">Granted on</th>
-<th style="text-align: left;">Permissions and use cases</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner">Team Folder Owner</a> ( <code dir="ltr" translate="no">       roles/dataform.teamFolderOwner      </code> )</td>
-<td style="text-align: left;">Team folder</td>
-<td style="text-align: left;">Grants full control over a team folder in the files and folders system. A user with this role can delete the team folder and set its IAM policy.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor">Team Folder Contributor</a> ( <code dir="ltr" translate="no">       roles/dataform.teamFolderContributor      </code> )</td>
-<td style="text-align: left;">Team folder</td>
-<td style="text-align: left;">Allows for content management within a team folder. A user with this role can update a team folder.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.teamFolderCommenter">Team Folder Commenter</a> ( <code dir="ltr" translate="no">       roles/dataform.teamFolderCommenter      </code> )</td>
-<td style="text-align: left;">Team folder</td>
-<td style="text-align: left;">Allows for commenting on a team folder and the code assets that it contains.</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer">Team Folder Viewer</a> ( <code dir="ltr" translate="no">       roles/dataform.teamFolderViewer      </code> )</td>
-<td style="text-align: left;">Team folder</td>
-<td style="text-align: left;">Provides read-only access to a team folder and its contents. A user with this role can view a team folder and get its IAM policy.</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><a href="/iam/docs/roles-permissions/dataform#dataform.teamFolderCreator">Team Folder Creator</a> ( <code dir="ltr" translate="no">       roles/dataform.teamFolderCreator      </code> )</td>
-<td style="text-align: left;">Project</td>
-<td style="text-align: left;">Grants permission to create new team folders within a project.</td>
-</tr>
-</tbody>
-</table>
+| Role                                                                                                                                                                                  | Granted on  | Permissions and use cases                                                                                                                        |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------- | :----------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Team Folder Owner](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderOwner) ( `        roles/dataform.teamFolderOwner       ` )                   | Team folder | Grants full control over a team folder in the files and folders system. A user with this role can delete the team folder and set its IAM policy. |
+| [Team Folder Contributor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderContributor) ( `        roles/dataform.teamFolderContributor       ` ) | Team folder | Allows for content management within a team folder. A user with this role can update a team folder.                                              |
+| [Team Folder Commenter](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCommenter) ( `        roles/dataform.teamFolderCommenter       ` )       | Team folder | Allows for commenting on a team folder and the code assets that it contains.                                                                     |
+| [Team Folder Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderViewer) ( `        roles/dataform.teamFolderViewer       ` )                | Team folder | Provides read-only access to a team folder and its contents. A user with this role can view a team folder and get its IAM policy.                |
+| [Team Folder Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.teamFolderCreator) ( `        roles/dataform.teamFolderCreator       ` )             | Project     | Grants permission to create new team folders within a project.                                                                                   |
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to complete the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -125,21 +67,25 @@ These predefined roles contain the permissions required to complete the tasks in
   - Retrieve the properties of a team folder: `  teamFolders.get  ` on the team folder
   - Update a team folder: `  teamFolders.update  ` on the team folder
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 To gain full access to all the folders and files in your project, ask your administrator to grant you the following IAM roles on the project:
 
-  - [Dataform Admin](/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` )
-  - [Dataform Editor](/dataform/docs/access-control#dataform.editor) ( `  roles/dataform.editor  ` )
-  - [Dataform Viewer](/dataform/docs/access-control#dataform.viewer) ( `  roles/dataform.viewer  ` )
+  - [Dataform Admin](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` )
+  - [Dataform Editor](https://docs.cloud.google.com/dataform/docs/access-control#dataform.editor) ( `  roles/dataform.editor  ` )
+  - [Dataform Viewer](https://docs.cloud.google.com/dataform/docs/access-control#dataform.viewer) ( `  roles/dataform.viewer  ` )
 
 ## View resources
 
 Follow these steps to view folders and code assets in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -151,11 +97,15 @@ Follow these steps to view folders and code assets in BigQuery:
 
 ### Change the code region
 
-You can have folders and code assets in [different code regions](/bigquery/docs/code-asset-folders#folder_code_regions) . Follow these steps to change the code region that you are viewing:
+You can have folders and code assets in [different code regions](https://docs.cloud.google.com/bigquery/docs/code-asset-folders#folder_code_regions) . Follow these steps to change the code region that you are viewing:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Next to the project name, click more\_vert **View files panel actions** \> **Switch code region** .
 
@@ -171,13 +121,17 @@ Use this procedure to create any of the following resources:
   - A subfolder in a team folder.
   - A code asset in the subfolder of a team folder.
 
-For information about creating a team folder, see [Create a team folder](#create_a_team_folder) .
+For information about creating a team folder, see [Create a team folder](https://docs.cloud.google.com/bigquery/docs/create-manage-folders#create_a_team_folder) .
 
 Follow these steps to create a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the user root node or the folder in which you want to create the resource.
 
@@ -192,8 +146,12 @@ Follow these steps to create a folder or code asset in BigQuery:
 Follow these steps to create a team folder in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the team folder root node.
 
@@ -208,8 +166,12 @@ Follow these steps to create a team folder in BigQuery:
 Follow these steps to upload a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder to which you want to upload the code asset.
 
@@ -231,8 +193,12 @@ Follow these steps to upload a code asset in BigQuery:
 Follow these steps to download a code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the code asset that you want to download.
 
@@ -243,8 +209,12 @@ Follow these steps to download a code asset in BigQuery:
 Follow these steps to rename a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to rename.
 
@@ -259,8 +229,12 @@ Follow these steps to rename a folder or code asset in BigQuery:
 Follow these steps to share a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to share.
 
@@ -272,17 +246,17 @@ Follow these steps to share a folder or code asset in BigQuery:
     
       - In the **Role** list, select one of the following roles to share a code asset, including a user folder:
         
-          - [`  roles/dataform.codeOwner  `](/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the code asset, including deleting or sharing it.
-          - [`  roles/dataform.codeEditor  `](/dataform/docs/access-control#dataform.codeEditor) : Can perform any action on the code asset except for deleting or sharing it.
-          - [`  roles/dataform.codeCommenter  `](/dataform/docs/access-control#dataform.codeCommenter) : Can view and comment on the code asset.
-          - [`  roles/dataform.codeViewer  `](/dataform/docs/access-control#dataform.codeViewer) : Can view the code asset.
+          - [`  roles/dataform.codeOwner  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the code asset, including deleting or sharing it.
+          - [`  roles/dataform.codeEditor  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can perform any action on the code asset except for deleting or sharing it.
+          - [`  roles/dataform.codeCommenter  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeCommenter) : Can view and comment on the code asset.
+          - [`  roles/dataform.codeViewer  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the code asset.
     
       - In the **Role** list, select one of the following roles to share a team folder:
         
-          - [`  roles/dataform.teamFolderOwner  `](/dataform/docs/access-control#dataform.teamFolderOwner) : Can perform any action on the team folder, including deleting or sharing it.
-          - [`  roles/dataform.teamFolderContributor  `](/dataform/docs/access-control#dataform.teamFolderContributor) : Can perform any action on the team folder except for deleting or sharing it.
-          - [`  roles/dataform.teamFolderCommenter  `](/dataform/docs/access-control#dataform.teamFolderCommenter) : Can view and comment on the team folder and the code assets that it contains.
-          - [`  roles/dataform.teamFolderViewer  `](/dataform/docs/access-control#dataform.teamFolderViewer) : Can view the team folder and the code assets that it contains.
+          - [`  roles/dataform.teamFolderOwner  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderOwner) : Can perform any action on the team folder, including deleting or sharing it.
+          - [`  roles/dataform.teamFolderContributor  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderContributor) : Can perform any action on the team folder except for deleting or sharing it.
+          - [`  roles/dataform.teamFolderCommenter  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderCommenter) : Can view and comment on the team folder and the code assets that it contains.
+          - [`  roles/dataform.teamFolderViewer  `](https://docs.cloud.google.com/dataform/docs/access-control#dataform.teamFolderViewer) : Can view the team folder and the code assets that it contains.
 
 7.  Click **Save** .
 
@@ -293,8 +267,12 @@ Follow these steps to share a folder or code asset in BigQuery:
 Follow these steps to move a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to move.
 
@@ -309,8 +287,12 @@ Follow these steps to move a folder or code asset in BigQuery:
 Follow these steps to copy a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to copy.
 
@@ -325,8 +307,12 @@ Follow these steps to copy a folder or code asset in BigQuery:
 Follow these steps to delete a folder or code asset in BigQuery:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click folder **Files** to open the file browser:
+    
+    ![Click \*\*Files\*\* to open the file browser.](https://docs.cloud.google.com/static/bigquery/images/select-file-browser.png)
 
 3.  Select the folder or code asset that you want to delete.
 
@@ -336,8 +322,8 @@ Follow these steps to delete a folder or code asset in BigQuery:
 
 ## What's next
 
-  - [Organize code assets with folders](/bigquery/docs/code-asset-folders)
-  - [Create notebooks](/bigquery/docs/create-notebooks)
-  - [Create saved queries](/bigquery/docs/work-with-saved-queries)
-  - [Create data canvases](/bigquery/docs/data-canvas)
-  - [Create data preparations](/bigquery/docs/data-prep-get-suggestions)
+  - [Organize code assets with folders](https://docs.cloud.google.com/bigquery/docs/code-asset-folders)
+  - [Create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks)
+  - [Create saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries)
+  - [Create data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
+  - [Create data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions)

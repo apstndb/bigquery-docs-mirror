@@ -2,14 +2,14 @@
 
 This document describes the `  ML.FEATURE_CROSS  ` function, which lets you create [feature crosses](https://developers.google.com/machine-learning/crash-course/feature-crosses/video-lecture) .
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.FEATURE_CROSS(struct_categorical_features [, degree])
 ```
 
@@ -28,7 +28,7 @@ ML.FEATURE_CROSS(struct_categorical_features [, degree])
 
 The following example crosses three features:
 
-``` text
+``` notranslate
 SELECT
   ML.FEATURE_CROSS(STRUCT('a' AS f1, 'b' AS f2, 'c' AS f3)) AS output;
 ```
@@ -45,4 +45,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

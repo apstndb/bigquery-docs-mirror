@@ -1,5 +1,5 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [Code](#Code)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobCreationReason#SCHEMA_REPRESENTATION)
+  - [Code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobCreationReason#Code)
 
 Reason about why a Job was created from a [`  jobs.query  `](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method when used with `  JOB_CREATION_OPTIONAL  ` Job creation mode.
 
@@ -16,7 +16,7 @@ For [`  jobs.insert  `](https://cloud.google.com/bigquery/docs/reference/rest/v2
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;code&quot;: enum (Code)
 }</code></pre></td>
 </tr>

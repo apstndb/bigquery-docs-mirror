@@ -1,10 +1,10 @@
 A service to modify your BigQuery reservations.
 
-  - [REST Resource: v1.projects.locations](#v1.projects.locations)
-  - [REST Resource: v1.projects.locations.capacityCommitments](#v1.projects.locations.capacityCommitments)
-  - [REST Resource: v1.projects.locations.reservationGroups](#v1.projects.locations.reservationGroups)
-  - [REST Resource: v1.projects.locations.reservations](#v1.projects.locations.reservations)
-  - [REST Resource: v1.projects.locations.reservations.assignments](#v1.projects.locations.reservations.assignments)
+  - [REST Resource: v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations)
+  - [REST Resource: v1.projects.locations.capacityCommitments](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations.capacityCommitments)
+  - [REST Resource: v1.projects.locations.reservationGroups](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations.reservationGroups)
+  - [REST Resource: v1.projects.locations.reservations](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations.reservations)
+  - [REST Resource: v1.projects.locations.reservations.assignments](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest#v1.projects.locations.reservations.assignments)
 
 ## Service: bigqueryreservation.googleapis.com
 
@@ -22,7 +22,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigqueryreservation.googleapis.com  `
 
-## REST Resource: [v1.projects.locations](/bigquery/docs/reference/reservations/rest/v1/projects.locations)
+## REST Resource: [v1.projects.locations](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations)
 
 Methods
 
@@ -46,7 +46,7 @@ Deprecated: Looks up assignments for a specified resource for a particular regio
 `  PATCH /v1/{biReservation.name=projects/*/locations/*/biReservation}  `  
 Updates a BI reservation.
 
-## REST Resource: [v1.projects.locations.capacityCommitments](/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments)
+## REST Resource: [v1.projects.locations.capacityCommitments](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.capacityCommitments)
 
 Methods
 
@@ -85,7 +85,7 @@ Updates an existing capacity commitment.
 `  POST /v1/{name=projects/*/locations/*/capacityCommitments/*}:split  `  
 Splits capacity commitment to two commitments of the same plan and `  commitment_end_time  ` .
 
-## REST Resource: [v1.projects.locations.reservationGroups](/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservationGroups)
+## REST Resource: [v1.projects.locations.reservationGroups](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservationGroups)
 
 Methods
 
@@ -109,7 +109,7 @@ Returns information about the reservation group.
 `  GET /v1/{parent=projects/*/locations/*}/reservationGroups  `  
 Lists all the reservation groups for the project in the specified location.
 
-## REST Resource: [v1.projects.locations.reservations](/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations)
+## REST Resource: [v1.projects.locations.reservations](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations)
 
 Methods
 
@@ -158,7 +158,7 @@ Sets an access control policy for a resource.
 `  POST /v1/{resource=projects/*/locations/*/reservations/*}:testIamPermissions  `  
 Gets your permissions on a resource.
 
-## REST Resource: [v1.projects.locations.reservations.assignments](/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments)
+## REST Resource: [v1.projects.locations.reservations.assignments](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations.assignments)
 
 Methods
 

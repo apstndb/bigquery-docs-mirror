@@ -7,7 +7,7 @@ This document provides detailed steps for setting up a VPN connection between Am
 Ensure that you have the following:
 
   - Access to AWS and Google Cloud accounts with appropriate permissions.
-  - Existing [Virtual Private Clouds](/vpc/docs/overview) in both AWS and Google Cloud.
+  - Existing [Virtual Private Clouds](https://docs.cloud.google.com/vpc/docs/overview) in both AWS and Google Cloud.
 
 ## Set up networking on AWS
 
@@ -22,9 +22,11 @@ The setup on Google Cloud requires creating the VPN gateway and VPN tunnels, con
 
 ### Create the VPN gateway
 
-**Note:** The following steps describe how to create a [Classic VPN](/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
+**Note:** The following steps describe how to create a [Classic VPN](https://docs.cloud.google.com/network-connectivity/docs/vpn/concepts/overview#classic-vpn) . You can create a high-availability (HA) VPN instead if it fits your use case. For more information, see [Create an HA VPN gateway to a peer VPN gateway](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-ha-vpn) .
 
 1.  In the Google Cloud console, go to the **Cloud VPN gateways** page.
+    
+    [Go to Cloud VPN gateways](https://console.cloud.google.com/hybrid/vpn?tab=gateways)
 
 2.  Click **Create VPN gateway** .
 
@@ -36,7 +38,7 @@ The setup on Google Cloud requires creating the VPN gateway and VPN tunnels, con
 
 6.  Select the region.
 
-7.  For **IP address** , create or choose an existing regional [external IP address](/compute/docs/ip-addresses#reservedaddress) .
+7.  For **IP address** , create or choose an existing regional [external IP address](https://docs.cloud.google.com/compute/docs/ip-addresses#reservedaddress) .
 
 8.  Provide a tunnel name.
 
@@ -48,11 +50,13 @@ The setup on Google Cloud requires creating the VPN gateway and VPN tunnels, con
 
 12. Click **Create** .
 
-For more information, see [Create a gateway and tunnel](/network-connectivity/docs/vpn/how-to/creating-static-vpns#create_a_gateway_and_tunnel) .
+For more information, see [Create a gateway and tunnel](https://docs.cloud.google.com/network-connectivity/docs/vpn/how-to/creating-static-vpns#create_a_gateway_and_tunnel) .
 
 ### Create the network attachment
 
 1.  In the Google Cloud console, go to the **Network attachments** page.
+    
+    [Go to Network attachments](https://console.cloud.google.com/net-services/psc/list/networkAttachments)
 
 2.  Click add **Create network attachment** .
 
@@ -66,7 +70,7 @@ For more information, see [Create a gateway and tunnel](/network-connectivity/do
 
 7.  Click **Create network attachment** .
 
-For more information, see [Create network attachments](/vpc/docs/create-manage-network-attachments#create-network-attachments) .
+For more information, see [Create network attachments](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments#create-network-attachments) .
 
 ## Test the VPN connection
 

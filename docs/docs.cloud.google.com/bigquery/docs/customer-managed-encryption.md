@@ -1,18 +1,18 @@
 # Customer-managed Cloud KMS keys
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](/bigquery/docs/editions-intro) .
+**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-By default, BigQuery [encrypts your content stored at rest](/docs/security/encryption/default-encryption) . BigQuery handles and manages this default encryption for you without any additional actions on your part. First, data in a BigQuery table is encrypted using a *data encryption key* . Then, those data encryption keys are encrypted with *key encryption keys* , which is known as [envelope encryption](/kms/docs/envelope-encryption) . Key encryption keys don't directly encrypt your data but are used to encrypt the data encryption keys that Google uses to encrypt your data.
+By default, BigQuery [encrypts your content stored at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) . BigQuery handles and manages this default encryption for you without any additional actions on your part. First, data in a BigQuery table is encrypted using a *data encryption key* . Then, those data encryption keys are encrypted with *key encryption keys* , which is known as [envelope encryption](https://docs.cloud.google.com/kms/docs/envelope-encryption) . Key encryption keys don't directly encrypt your data but are used to encrypt the data encryption keys that Google uses to encrypt your data.
 
-If you want to control encryption yourself, you can use customer-managed encryption keys (CMEK) for BigQuery. Instead of Google owning and managing the key encryption keys that protect your data, you control and manage key encryption keys in [Cloud KMS](/kms/docs) . This document provides details about manually creating Cloud KMS keys for BigQuery.
+If you want to control encryption yourself, you can use customer-managed encryption keys (CMEK) for BigQuery. Instead of Google owning and managing the key encryption keys that protect your data, you control and manage key encryption keys in [Cloud KMS](https://docs.cloud.google.com/kms/docs) . This document provides details about manually creating Cloud KMS keys for BigQuery.
 
-Learn more about [encryption options on Google Cloud](/docs/security/encryption/default-encryption) . For specific information about CMEK, including its advantages and limitations, see [Customer-managed encryption keys](/kms/docs/cmek) .
+Learn more about [encryption options on Google Cloud](https://docs.cloud.google.com/docs/security/encryption/default-encryption) . For specific information about CMEK, including its advantages and limitations, see [Customer-managed encryption keys](https://docs.cloud.google.com/kms/docs/cmek) .
 
 ## Before you begin
 
-  - All data assets residing in BigQuery managed storage support CMEK. However, if you are also querying data stored in an [external data source](/bigquery/docs/external-data-sources) such as Cloud Storage that has CMEK-encrypted data, then the data encryption is managed by [Cloud Storage](/storage/docs/encryption/customer-managed-keys) . For example, BigLake tables support data encrypted with CMEK in Cloud Storage.
+  - All data assets residing in BigQuery managed storage support CMEK. However, if you are also querying data stored in an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) such as Cloud Storage that has CMEK-encrypted data, then the data encryption is managed by [Cloud Storage](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys) . For example, BigLake tables support data encrypted with CMEK in Cloud Storage.
     
-    BigQuery and [BigLake tables](/bigquery/docs/biglake-intro) don't support Customer-Supplied Encryption Keys (CSEK).
+    BigQuery and [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) don't support Customer-Supplied Encryption Keys (CSEK).
 
   - Decide whether you are going to run BigQuery and Cloud KMS in the same Google Cloud project, or in different projects. For documentation example purposes, the following convention is used:
     
@@ -20,7 +20,7 @@ Learn more about [encryption options on Google Cloud](/docs/security/encryption/
       - `  PROJECT_NUMBER  ` : the project number of the project running BigQuery
       - `  KMS_PROJECT_ID  ` : the project ID of the project running Cloud KMS (even if this is the same project running BigQuery)
     
-    For information about Google Cloud project IDs and project numbers, see [Identifying projects](/resource-manager/docs/creating-managing-projects#identifying_projects) .
+    For information about Google Cloud project IDs and project numbers, see [Identifying projects](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#identifying_projects) .
 
   - BigQuery is automatically enabled in new projects. If you are using a pre-existing project to run BigQuery, [enable the BigQuery API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery) .
 
@@ -34,11 +34,11 @@ Cloud KMS keys used to protect your data in BigQuery are AES-256 keys. These key
 
 ## Manual or automated key creation
 
-You can either create your CMEK keys manually or use Cloud KMS Autokey. Autokey simplifies creating and managing your CMEK keys by automating provisioning and assignment. With Autokey, you don't need to provision key rings, keys, and service accounts ahead of time. Instead, they are generated on demand as part of BigQuery resource creation. For more information, see the [Autokey overview](/kms/docs/autokey-overview) .
+You can either create your CMEK keys manually or use Cloud KMS Autokey. Autokey simplifies creating and managing your CMEK keys by automating provisioning and assignment. With Autokey, you don't need to provision key rings, keys, and service accounts ahead of time. Instead, they are generated on demand as part of BigQuery resource creation. For more information, see the [Autokey overview](https://docs.cloud.google.com/kms/docs/autokey-overview) .
 
 ### Manually create key ring and key
 
-For the Google Cloud project that runs Cloud KMS, create a key ring and a key as described in [Creating key rings and keys](/kms/docs/creating-keys) . Create the key ring in a location that matches the location of your BigQuery dataset:
+For the Google Cloud project that runs Cloud KMS, create a key ring and a key as described in [Creating key rings and keys](https://docs.cloud.google.com/kms/docs/creating-keys) . Create the key ring in a location that matches the location of your BigQuery dataset:
 
   - Any multi-regional dataset should use a multi-regional key ring from a matching location. For example, a dataset in region `  US  ` should be protected with a key ring from region `  us  ` , and a dataset in region `  EU  ` should be protected with a key ring from region `  europe  ` .
 
@@ -50,15 +50,15 @@ For more information about the supported locations for BigQuery and Cloud KMS, s
 
 ## Grant encryption and decryption permission
 
-To protect your BigQuery data with a CMEK key, grant the BigQuery service account permission to encrypt and decrypt using that key. The [Cloud KMS CryptoKey Encrypter/Decrypter](/kms/docs/reference/permissions-and-roles#predefined_roles) role grants this permission.
+To protect your BigQuery data with a CMEK key, grant the BigQuery service account permission to encrypt and decrypt using that key. The [Cloud KMS CryptoKey Encrypter/Decrypter](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles#predefined_roles) role grants this permission.
 
 Make sure your service account has been created, and then use the Google Cloud console to determine the BigQuery service account ID. Next, provide the service account with the appropriate role to encrypt and decrypt using Cloud KMS.
 
 ### Trigger creation of your service account
 
-Your BigQuery service account is not initially created when you create a project. To trigger the creation of your service account, enter a command that uses it, such as the [`  bq show --encryption_service_account  `](/bigquery/docs/reference/bq-cli-reference#encryption_service_account_flag) command, or call the [projects.getServiceAccount](/bigquery/docs/reference/rest/v2/projects/getServiceAccount) API method. For example:
+Your BigQuery service account is not initially created when you create a project. To trigger the creation of your service account, enter a command that uses it, such as the [`  bq show --encryption_service_account  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#encryption_service_account_flag) command, or call the [projects.getServiceAccount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects/getServiceAccount) API method. For example:
 
-``` text
+``` notranslate
 bq show --encryption_service_account --project_id=PROJECT_ID
 ```
 
@@ -66,7 +66,7 @@ bq show --encryption_service_account --project_id=PROJECT_ID
 
 The BigQuery service account ID is of the form:
 
-``` text
+``` notranslate
 bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 ```
 
@@ -75,14 +75,18 @@ The following techniques show how you can determine the BigQuery service account
 ### Console
 
 1.  Go to the [**Dashboard** page](https://console.cloud.google.com/home) in the Google Cloud console.
+    
+    [Go to the Dashboard page](https://console.cloud.google.com/home)
 
 2.  Click the **Select from** drop-down list at the top of the page. In the **Select From** window that appears, select your project.
 
 3.  Both the project ID and project number are displayed on the project Dashboard **Project info** card:
+    
+    ![project info card](https://docs.cloud.google.com/static/resource-manager/img/project_id.png)
 
 4.  In the following string, replace PROJECT\_NUMBER with your project number. The new string identifies your BigQuery service account ID.
     
-    ``` text
+    ``` notranslate
     bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
     ```
 
@@ -90,13 +94,13 @@ The following techniques show how you can determine the BigQuery service account
 
 Use the `  bq show  ` command with the `  --encryption_service_account  ` flag to determine the service account ID:
 
-``` text
+``` notranslate
 bq show --encryption_service_account
 ```
 
 The command displays the service account ID:
 
-``` text
+``` notranslate
                   ServiceAccountID
 -------------------------------------------------------------
 bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
@@ -104,15 +108,17 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 ### Assign the Encrypter/Decrypter role
 
-Assign the Cloud KMS CryptoKey Encrypter/Decrypter [role](/kms/docs/reference/permissions-and-roles#predefined_roles) to the BigQuery system service account that you copied to your clipboard. This account is of the form:
+Assign the Cloud KMS CryptoKey Encrypter/Decrypter [role](https://docs.cloud.google.com/kms/docs/reference/permissions-and-roles#predefined_roles) to the BigQuery system service account that you copied to your clipboard. This account is of the form:
 
-``` text
+``` notranslate
 bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 ```
 
 ### Console
 
 1.  Open the **Cryptographic Keys** page in the Google Cloud console.
+    
+    [Open the Cryptographic Keys page](https://console.cloud.google.com/security/kms)
 
 2.  Click the name of the key ring that contains the key.
 
@@ -132,7 +138,7 @@ bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com
 
 You can use the Google Cloud CLI to assign the role:
 
-``` text
+``` notranslate
 gcloud kms keys add-iam-policy-binding \
 --project=KMS_PROJECT_ID \
 --member serviceAccount:bq-PROJECT_NUMBER@bigquery-encryption.iam.gserviceaccount.com \
@@ -154,7 +160,7 @@ Replace the following:
 
 The resource ID for the Cloud KMS key is required for CMEK use, as shown in the examples. This key is case-sensitive and in the form:
 
-``` text
+``` notranslate
 projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ```
 
@@ -163,6 +169,8 @@ projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY
 ### Retrieve the key resource ID
 
 1.  Open the **Cryptographic Keys** page in the Google Cloud console.
+    
+    [Open the Cryptographic Keys page](https://console.cloud.google.com/security/kms)
 
 2.  Click the name of the key ring that contains the key.
 
@@ -177,8 +185,12 @@ To create a table that is protected by Cloud KMS:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -186,23 +198,25 @@ To create a table that is protected by Cloud KMS:
 
 4.  In the details pane, click add\_box **Create table** .
 
-5.  On the **Create table** page, fill in the information needed to [create an empty table with a schema definition](/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . Before you click **Create Table** , set the encryption type and specify the Cloud KMS key to use with the table:
+5.  On the **Create table** page, fill in the information needed to [create an empty table with a schema definition](https://docs.cloud.google.com/bigquery/docs/tables#create_an_empty_table_with_a_schema_definition) . Before you click **Create Table** , set the encryption type and specify the Cloud KMS key to use with the table:
     
     1.  Click **Advanced options** .
     2.  Click **Customer-managed key** .
-    3.  Select the key. If the key you want to use is not listed, enter the [resource ID](#key_resource_id) for the key.
+    3.  Select the key. If the key you want to use is not listed, enter the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the key.
 
 6.  Click **Create table** .
 
 ### SQL
 
-Use the [`  CREATE TABLE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `  kms_key_name  ` option:
+Use the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) with the `  kms_key_name  ` option:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE DATASET_ID.TABLE_ID (
       name STRING, value INT64
     ) OPTIONS (
@@ -212,15 +226,15 @@ Use the [`  CREATE TABLE  ` statement](/bigquery/docs/reference/standard-sql/dat
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-You can use the bq command-line tool with the `  --destination_kms_key  ` flag to create the table. The `  --destination_kms_key  ` flag specifies the [resource ID](#key_resource_id) of the key to use with the table.
+You can use the bq command-line tool with the `  --destination_kms_key  ` flag to create the table. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
 
 To create an empty table with a schema:
 
-``` text
+``` notranslate
 bq mk --schema name:string,value:integer -t \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 DATASET_ID.TABLE_ID
@@ -228,25 +242,25 @@ DATASET_ID.TABLE_ID
 
 To create a table from a query:
 
-``` text
+``` notranslate
 bq query --destination_table=DATASET_ID.TABLE_ID \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
 ### Terraform
 
 Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-The following example creates a table named `  mytable  ` , and also uses the [`  google_kms_crypto_key  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`  google_kms_key_ring  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](/bigquery/docs/customer-managed-encryption) for the table.
+The following example creates a table named `  mytable  ` , and also uses the [`  google_kms_crypto_key  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_crypto_key) and [`  google_kms_key_ring  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/kms_key_ring) resources to specify a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for the table.
 
 To run this example, you must enable the [Cloud Resource Manager API](https://console.cloud.google.com/flows/enableapi?apiid=cloudresourcemanager.googleapis.com) and the [Cloud Key Management Service API](https://console.cloud.google.com/flows/enableapi?apiid=cloudkms.googleapis.com) .
 
-``` terraform
+``` lang-terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -323,9 +337,7 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
     
     You only need to run this command once per project, and you can run it in any directory.
     
-    ``` text
-    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    ```
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
     
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
@@ -335,9 +347,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
     
-    ``` text
-    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-    ```
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
@@ -351,31 +361,23 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 5.  Initialize Terraform. You only need to do this once per directory.
     
-    ``` text
-    terraform init
-    ```
+        terraform init
     
     Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
     
-    ``` text
-    terraform init -upgrade
-    ```
+        terraform init -upgrade
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
     
-    ``` text
-    terraform plan
-    ```
+        terraform plan
     
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
     
-    ``` text
-    terraform apply
-    ```
+        terraform apply
     
     Wait until Terraform displays the "Apply complete\!" message.
 
@@ -385,134 +387,128 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// createTableWithCMEK demonstrates creating a table protected with a customer managed encryption key.
-func createTableWithCMEK(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydatasetid"
- // tableID := "mytableid"
- ctx := context.Background()
-
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- tableRef := client.Dataset(datasetID).Table(tableID)
- meta := &bigquery.TableMetadata{
-     EncryptionConfig: &bigquery.EncryptionConfig{
-         // TODO: Replace this key with a key you have created in Cloud KMS.
-         KMSKeyName: "projects/cloud-samples-tests/locations/us/keyRings/test/cryptoKeys/test",
-     },
- }
- if err := tableRef.Create(ctx, meta); err != nil {
-     return err
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // createTableWithCMEK demonstrates creating a table protected with a customer managed encryption key.
+    func createTableWithCMEK(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydatasetid"
+     // tableID := "mytableid"
+     ctx := context.Background()
+    
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     tableRef := client.Dataset(datasetID).Table(tableID)
+     meta := &bigquery.TableMetadata{
+         EncryptionConfig: &bigquery.EncryptionConfig{
+             // TODO: Replace this key with a key you have created in Cloud KMS.
+             KMSKeyName: "projects/cloud-samples-tests/locations/us/keyRings/test/cryptoKeys/test",
+         },
+     }
+     if err := tableRef.Create(ctx, meta); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.EncryptionConfiguration;
-import com.google.cloud.bigquery.Field;
-import com.google.cloud.bigquery.Schema;
-import com.google.cloud.bigquery.StandardSQLTypeName;
-import com.google.cloud.bigquery.StandardTableDefinition;
-import com.google.cloud.bigquery.TableDefinition;
-import com.google.cloud.bigquery.TableId;
-import com.google.cloud.bigquery.TableInfo;
-
-// Sample to create a cmek table
-public class CreateTableCMEK {
-
-  public static void runCreateTableCMEK() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String kmsKeyName = "MY_KEY_NAME";
-    Schema schema =
-        Schema.of(
-            Field.of("stringField", StandardSQLTypeName.STRING),
-            Field.of("booleanField", StandardSQLTypeName.BOOL));
-    // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
-    EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    createTableCMEK(datasetName, tableName, schema, encryption);
-  }
-
-  public static void createTableCMEK(
-      String datasetName, String tableName, Schema schema, EncryptionConfiguration configuration) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId tableId = TableId.of(datasetName, tableName);
-      TableDefinition tableDefinition = StandardTableDefinition.of(schema);
-      TableInfo tableInfo =
-          TableInfo.newBuilder(tableId, tableDefinition)
-              .setEncryptionConfiguration(configuration)
-              .build();
-
-      bigquery.create(tableInfo);
-      System.out.println("Table cmek created successfully");
-    } catch (BigQueryException e) {
-      System.out.println("Table cmek was not created. \n" + e.toString());
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.EncryptionConfiguration;
+    import com.google.cloud.bigquery.Field;
+    import com.google.cloud.bigquery.Schema;
+    import com.google.cloud.bigquery.StandardSQLTypeName;
+    import com.google.cloud.bigquery.StandardTableDefinition;
+    import com.google.cloud.bigquery.TableDefinition;
+    import com.google.cloud.bigquery.TableId;
+    import com.google.cloud.bigquery.TableInfo;
+    
+    // Sample to create a cmek table
+    public class CreateTableCMEK {
+    
+      public static void runCreateTableCMEK() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String kmsKeyName = "MY_KEY_NAME";
+        Schema schema =
+            Schema.of(
+                Field.of("stringField", StandardSQLTypeName.STRING),
+                Field.of("booleanField", StandardSQLTypeName.BOOL));
+        // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
+        EncryptionConfiguration encryption =
+            EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
+        createTableCMEK(datasetName, tableName, schema, encryption);
+      }
+    
+      public static void createTableCMEK(
+          String datasetName, String tableName, Schema schema, EncryptionConfiguration configuration) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId tableId = TableId.of(datasetName, tableName);
+          TableDefinition tableDefinition = StandardTableDefinition.of(schema);
+          TableInfo tableInfo =
+              TableInfo.newBuilder(tableId, tableDefinition)
+                  .setEncryptionConfiguration(configuration)
+                  .build();
+    
+          bigquery.create(tableInfo);
+          System.out.println("Table cmek created successfully");
+        } catch (BigQueryException e) {
+          System.out.println("Table cmek was not created. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
+Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
 
-``` python
-from google.cloud import bigquery
-
-client = bigquery.Client()
-
-# TODO(dev): Change table_id to the full name of the table you want to create.
-table_id = "your-project.your_dataset.your_table_name"
-
-# Set the encryption key to use for the table.
-# TODO: Replace this key with a key you have created in Cloud KMS.
-kms_key_name = "projects/your-project/locations/us/keyRings/test/cryptoKeys/test"
-
-table = bigquery.Table(table_id)
-table.encryption_configuration = bigquery.EncryptionConfiguration(
-    kms_key_name=kms_key_name
-)
-table = client.create_table(table)  # API request
-
-print(f"Created {table_id}.")
-print(f"Key: {table.encryption_configuration.kms_key_name}.")
-```
+    from google.cloud import bigquery
+    
+    client = bigquery.Client()
+    
+    # TODO(dev): Change table_id to the full name of the table you want to create.
+    table_id = "your-project.your_dataset.your_table_name"
+    
+    # Set the encryption key to use for the table.
+    # TODO: Replace this key with a key you have created in Cloud KMS.
+    kms_key_name = "projects/your-project/locations/us/keyRings/test/cryptoKeys/test"
+    
+    table = bigquery.Table(table_id)
+    table.encryption_configuration = bigquery.EncryptionConfiguration(
+        kms_key_name=kms_key_name
+    )
+    table = client.create_table(table)  # API request
+    
+    print(f"Created {table_id}.")
+    print(f"Key: {table.encryption_configuration.kms_key_name}.")
 
 ### Query a table protected by a Cloud KMS key
 
@@ -522,11 +518,13 @@ All existing tools, the BigQuery console, and the bq command-line tool run the s
 
 ### Protect query results with a Cloud KMS key
 
-By default, query results are stored in a temporary table encrypted with a Google-owned and Google-managed encryption key. If the project already has a [default key](/bigquery/docs/customer-managed-encryption#project_default_key) , the key is applied to the temporary (default) query results table. To use a Cloud KMS key to encrypt your query results instead, select one of the following options:
+By default, query results are stored in a temporary table encrypted with a Google-owned and Google-managed encryption key. If the project already has a [default key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#project_default_key) , the key is applied to the temporary (default) query results table. To use a Cloud KMS key to encrypt your query results instead, select one of the following options:
 
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
@@ -536,7 +534,7 @@ By default, query results are stored in a temporary table encrypted with a Googl
 
 5.  Select **Customer-managed encryption** .
 
-6.  Select the key. If the key you want to use is not listed, enter the [resource ID](#key_resource_id) for the key.
+6.  Select the key. If the key you want to use is not listed, enter the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) for the key.
 
 7.  Click **Save** .
 
@@ -544,183 +542,177 @@ By default, query results are stored in a temporary table encrypted with a Googl
 
 ### bq
 
-Specify the flag `  --destination_kms_key  ` to protect the destination table or query results (if using a temporary table) with your Cloud KMS key. The `  --destination_kms_key  ` flag specifies the [resource ID](#key_resource_id) of the key to use with the destination or resulting table.
+Specify the flag `  --destination_kms_key  ` to protect the destination table or query results (if using a temporary table) with your Cloud KMS key. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination or resulting table.
 
 Optionally use the `  --destination_table  ` flag to specify the destination for query results. If `  --destination_table  ` is not used, the query results are written to a temporary table.
 
 To query a table:
 
-``` text
+``` notranslate
 bq query \
 --destination_table=DATASET_ID.TABLE_ID \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 "SELECT name,count FROM DATASET_ID.TABLE_ID WHERE gender = 'M' ORDER BY count DESC LIMIT 6"
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
+Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
 
-``` go
-import (
- "context"
- "fmt"
- "io"
-
- "cloud.google.com/go/bigquery"
- "google.golang.org/api/iterator"
-)
-
-// queryWithDestinationCMEK demonstrates saving query results to a destination table and protecting those results
-// by specifying a customer managed encryption key.
-func queryWithDestinationCMEK(w io.Writer, projectID, dstDatasetID, dstTableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydataset"
- // tableID := "mytable"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- q := client.Query("SELECT 17 as my_col")
- q.Location = "US" // Location must match the dataset(s) referenced in query.
- q.QueryConfig.Dst = client.Dataset(dstDatasetID).Table(dstTableID)
- q.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
-     // TODO: Replace this key with a key you have created in Cloud KMS.
-     KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
- }
- // Run the query and print results when the query job is completed.
- job, err := q.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
- if err := status.Err(); err != nil {
-     return err
- }
- it, err := job.Read(ctx)
- for {
-     var row []bigquery.Value
-     err := it.Next(&row)
-     if err == iterator.Done {
-         break
+    import (
+     "context"
+     "fmt"
+     "io"
+    
+     "cloud.google.com/go/bigquery"
+     "google.golang.org/api/iterator"
+    )
+    
+    // queryWithDestinationCMEK demonstrates saving query results to a destination table and protecting those results
+    // by specifying a customer managed encryption key.
+    func queryWithDestinationCMEK(w io.Writer, projectID, dstDatasetID, dstTableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydataset"
+     // tableID := "mytable"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
      }
+     defer client.Close()
+    
+     q := client.Query("SELECT 17 as my_col")
+     q.Location = "US" // Location must match the dataset(s) referenced in query.
+     q.QueryConfig.Dst = client.Dataset(dstDatasetID).Table(dstTableID)
+     q.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
+         // TODO: Replace this key with a key you have created in Cloud KMS.
+         KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
+     }
+     // Run the query and print results when the query job is completed.
+     job, err := q.Run(ctx)
      if err != nil {
          return err
      }
-     fmt.Fprintln(w, row)
- }
- return nil
-}
-```
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+     if err := status.Err(); err != nil {
+         return err
+     }
+     it, err := job.Read(ctx)
+     for {
+         var row []bigquery.Value
+         err := it.Next(&row)
+         if err == iterator.Done {
+             break
+         }
+         if err != nil {
+             return err
+         }
+         fmt.Fprintln(w, row)
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
+Protect a new table with a customer-managed encryption key by setting the [Table.encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object before creating the table.
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.EncryptionConfiguration;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-import com.google.cloud.bigquery.TableResult;
-
-// Sample to query on destination table with encryption key
-public class QueryDestinationTableCMEK {
-
-  public static void runQueryDestinationTableCMEK() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String kmsKeyName = "MY_KMS_KEY_NAME";
-    String query =
-        String.format("SELECT stringField, booleanField FROM %s.%s", datasetName, tableName);
-    EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    queryDestinationTableCMEK(query, encryption);
-  }
-
-  public static void queryDestinationTableCMEK(String query, EncryptionConfiguration encryption) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      QueryJobConfiguration config =
-          QueryJobConfiguration.newBuilder(query)
-              // Set the encryption key to use for the destination.
-              .setDestinationEncryptionConfiguration(encryption)
-              .build();
-
-      TableResult results = bigquery.query(config);
-
-      results
-          .iterateAll()
-          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-      System.out.println("Query performed successfully with encryption key.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Query not performed \n" + e.toString());
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.EncryptionConfiguration;
+    import com.google.cloud.bigquery.QueryJobConfiguration;
+    import com.google.cloud.bigquery.TableResult;
+    
+    // Sample to query on destination table with encryption key
+    public class QueryDestinationTableCMEK {
+    
+      public static void runQueryDestinationTableCMEK() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String kmsKeyName = "MY_KMS_KEY_NAME";
+        String query =
+            String.format("SELECT stringField, booleanField FROM %s.%s", datasetName, tableName);
+        EncryptionConfiguration encryption =
+            EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
+        queryDestinationTableCMEK(query, encryption);
+      }
+    
+      public static void queryDestinationTableCMEK(String query, EncryptionConfiguration encryption) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          QueryJobConfiguration config =
+              QueryJobConfiguration.newBuilder(query)
+                  // Set the encryption key to use for the destination.
+                  .setDestinationEncryptionConfiguration(encryption)
+                  .build();
+    
+          TableResult results = bigquery.query(config);
+    
+          results
+              .iterateAll()
+              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+          System.out.println("Query performed successfully with encryption key.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Query not performed \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect a query destination table with a customer-managed encryption key by setting the [QueryJobConfig.destination\_encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig#google_cloud_bigquery_job_QueryJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and run the query.
+Protect a query destination table with a customer-managed encryption key by setting the [QueryJobConfig.destination\_encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJobConfig#google_cloud_bigquery_job_QueryJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and run the query.
 
-``` python
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the destination table.
-# table_id = "your-project.your_dataset.your_table_name"
-
-# Set the encryption key to use for the destination.
-# TODO(developer): Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     your-project, location, your-ring, your-key
-# )
-
-job_config = bigquery.QueryJobConfig(
-    destination=table_id,
-    destination_encryption_configuration=bigquery.EncryptionConfiguration(
-        kms_key_name=kms_key_name
-    ),
-)
-
-# Start the query, passing in the extra configuration.
-query_job = client.query(
-    "SELECT 17 AS my_col;", job_config=job_config
-)  # Make an API request.
-query_job.result()  # Wait for the job to complete.
-
-table = client.get_table(table_id)  # Make an API request.
-if table.encryption_configuration.kms_key_name == kms_key_name:
-    print("The destination table is written using the encryption configuration")
-```
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    # TODO(developer): Set table_id to the ID of the destination table.
+    # table_id = "your-project.your_dataset.your_table_name"
+    
+    # Set the encryption key to use for the destination.
+    # TODO(developer): Replace this key with a key you have created in KMS.
+    # kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
+    #     your-project, location, your-ring, your-key
+    # )
+    
+    job_config = bigquery.QueryJobConfig(
+        destination=table_id,
+        destination_encryption_configuration=bigquery.EncryptionConfiguration(
+            kms_key_name=kms_key_name
+        ),
+    )
+    
+    # Start the query, passing in the extra configuration.
+    query_job = client.query(
+        "SELECT 17 AS my_col;", job_config=job_config
+    )  # Make an API request.
+    query_job.result()  # Wait for the job to complete.
+    
+    table = client.get_table(table_id)  # Make an API request.
+    if table.encryption_configuration.kms_key_name == kms_key_name:
+        print("The destination table is written using the encryption configuration")
 
 ### Load a table protected by Cloud KMS
 
@@ -731,8 +723,12 @@ To load a data file into a table that is protected by Cloud KMS:
 Protect a load job destination table with a customer-managed encryption key by specifying the key when you load the table.
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click a dataset. The dataset opens in a tab.
 
@@ -742,7 +738,9 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 6.  Under **Encryption** , select **Customer-managed key** .
 
-7.  Click the **Select a customer-managed key** drop-down list and select the key to use. If you don't see any keys available, enter a [key resource ID](#key_resource_id) .
+7.  Click the **Select a customer-managed key** drop-down list and select the key to use. If you don't see any keys available, enter a [key resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) .
+    
+    ![Advanced options.](https://docs.cloud.google.com/static/bigquery/images/bq_cmek_advanced_options.png)
 
 8.  Click **Create table** .
 
@@ -750,7 +748,7 @@ Protect a load job destination table with a customer-managed encryption key by s
 
 Protect a load job destination table with a customer-managed encryption key by setting the `  --destination_kms_key  ` flag.
 
-``` text
+``` notranslate
 bq --location=LOCATION load \
 --autodetect \
 --source_format=FORMAT \
@@ -761,7 +759,7 @@ path_to_source
 
 For example:
 
-``` text
+``` notranslate
 bq load \
 --autodetect \
 --source_format=NEWLINE_DELIMITED_JSON \
@@ -772,190 +770,184 @@ gs://cloud-samples-data/bigquery/us-states/us-states.json
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// importJSONWithCMEK demonstrates loading newline-delimited JSON from Cloud Storage,
-// and protecting the data with a customer-managed encryption key.
-func importJSONWithCMEK(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydataset"
- // tableID := "mytable"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.json")
- gcsRef.SourceFormat = bigquery.JSON
- gcsRef.AutoDetect = true
- loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
- loader.WriteDisposition = bigquery.WriteEmpty
- loader.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
-     // TODO: Replace this key with a key you have created in KMS.
-     KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
- }
-
- job, err := loader.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
-
- if status.Err() != nil {
-     return fmt.Errorf("job completed with error: %v", status.Err())
- }
-
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // importJSONWithCMEK demonstrates loading newline-delimited JSON from Cloud Storage,
+    // and protecting the data with a customer-managed encryption key.
+    func importJSONWithCMEK(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydataset"
+     // tableID := "mytable"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.json")
+     gcsRef.SourceFormat = bigquery.JSON
+     gcsRef.AutoDetect = true
+     loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
+     loader.WriteDisposition = bigquery.WriteEmpty
+     loader.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
+         // TODO: Replace this key with a key you have created in KMS.
+         KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
+     }
+    
+     job, err := loader.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+    
+     if status.Err() != nil {
+         return fmt.Errorf("job completed with error: %v", status.Err())
+     }
+    
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.EncryptionConfiguration;
-import com.google.cloud.bigquery.FormatOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.LoadJobConfiguration;
-import com.google.cloud.bigquery.TableId;
-
-// Sample to load JSON data with configuration key from Cloud Storage into a new BigQuery table
-public class LoadJsonFromGCSCMEK {
-
-  public static void runLoadJsonFromGCSCMEK() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String kmsKeyName = "MY_KMS_KEY_NAME";
-    String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.json";
-    // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
-    EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    loadJsonFromGCSCMEK(datasetName, tableName, sourceUri, encryption);
-  }
-
-  public static void loadJsonFromGCSCMEK(
-      String datasetName, String tableName, String sourceUri, EncryptionConfiguration encryption) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId tableId = TableId.of(datasetName, tableName);
-      LoadJobConfiguration loadConfig =
-          LoadJobConfiguration.newBuilder(tableId, sourceUri)
-              // Set the encryption key to use for the destination.
-              .setDestinationEncryptionConfiguration(encryption)
-              .setFormatOptions(FormatOptions.json())
-              .setAutodetect(true)
-              .build();
-
-      // Load data from a GCS JSON file into the table
-      Job job = bigquery.create(JobInfo.of(loadConfig));
-      // Blocks until this load table job completes its execution, either failing or succeeding.
-      job = job.waitFor();
-      if (job.isDone()) {
-        System.out.println("Table loaded succesfully from GCS with configuration key");
-      } else {
-        System.out.println(
-            "BigQuery was unable to load into the table due to an error:"
-                + job.getStatus().getError());
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.EncryptionConfiguration;
+    import com.google.cloud.bigquery.FormatOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.LoadJobConfiguration;
+    import com.google.cloud.bigquery.TableId;
+    
+    // Sample to load JSON data with configuration key from Cloud Storage into a new BigQuery table
+    public class LoadJsonFromGCSCMEK {
+    
+      public static void runLoadJsonFromGCSCMEK() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String kmsKeyName = "MY_KMS_KEY_NAME";
+        String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.json";
+        // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
+        EncryptionConfiguration encryption =
+            EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
+        loadJsonFromGCSCMEK(datasetName, tableName, sourceUri, encryption);
       }
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Column not added during load append \n" + e.toString());
+    
+      public static void loadJsonFromGCSCMEK(
+          String datasetName, String tableName, String sourceUri, EncryptionConfiguration encryption) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId tableId = TableId.of(datasetName, tableName);
+          LoadJobConfiguration loadConfig =
+              LoadJobConfiguration.newBuilder(tableId, sourceUri)
+                  // Set the encryption key to use for the destination.
+                  .setDestinationEncryptionConfiguration(encryption)
+                  .setFormatOptions(FormatOptions.json())
+                  .setAutodetect(true)
+                  .build();
+    
+          // Load data from a GCS JSON file into the table
+          Job job = bigquery.create(JobInfo.of(loadConfig));
+          // Blocks until this load table job completes its execution, either failing or succeeding.
+          job = job.waitFor();
+          if (job.isDone()) {
+            System.out.println("Table loaded succesfully from GCS with configuration key");
+          } else {
+            System.out.println(
+                "BigQuery was unable to load into the table due to an error:"
+                    + job.getStatus().getError());
+          }
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Column not added during load append \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect a load job destination table with a customer-managed encryption key by setting the [LoadJobConfig.destination\_encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and load the table.
+Protect a load job destination table with a customer-managed encryption key by setting the [LoadJobConfig.destination\_encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and load the table.
 
-``` python
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name
-
-# Set the encryption key to use for the destination.
-# TODO: Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     "cloud-samples-tests", "us", "test", "test"
-# )
-
-job_config = bigquery.LoadJobConfig(
-    autodetect=True,
-    source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
-    destination_encryption_configuration=bigquery.EncryptionConfiguration(
-        kms_key_name=kms_key_name
-    ),
-)
-
-uri = "gs://cloud-samples-data/bigquery/us-states/us-states.json"
-
-load_job = client.load_table_from_uri(
-    uri,
-    table_id,
-    location="US",  # Must match the destination dataset location.
-    job_config=job_config,
-)  # Make an API request.
-
-assert load_job.job_type == "load"
-
-load_job.result()  # Waits for the job to complete.
-
-assert load_job.state == "DONE"
-table = client.get_table(table_id)
-
-if table.encryption_configuration.kms_key_name == kms_key_name:
-    print("A table loaded with encryption configuration key")
-```
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    # TODO(developer): Set table_id to the ID of the table to create.
+    # table_id = "your-project.your_dataset.your_table_name
+    
+    # Set the encryption key to use for the destination.
+    # TODO: Replace this key with a key you have created in KMS.
+    # kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
+    #     "cloud-samples-tests", "us", "test", "test"
+    # )
+    
+    job_config = bigquery.LoadJobConfig(
+        autodetect=True,
+        source_format=bigquery.SourceFormat.NEWLINE_DELIMITED_JSON,
+        destination_encryption_configuration=bigquery.EncryptionConfiguration(
+            kms_key_name=kms_key_name
+        ),
+    )
+    
+    uri = "gs://cloud-samples-data/bigquery/us-states/us-states.json"
+    
+    load_job = client.load_table_from_uri(
+        uri,
+        table_id,
+        location="US",  # Must match the destination dataset location.
+        job_config=job_config,
+    )  # Make an API request.
+    
+    assert load_job.job_type == "load"
+    
+    load_job.result()  # Waits for the job to complete.
+    
+    assert load_job.state == "DONE"
+    table = client.get_table(table_id)
+    
+    if table.encryption_configuration.kms_key_name == kms_key_name:
+        print("A table loaded with encryption configuration key")
 
 ## Stream into a table protected by Cloud KMS
 
-You can stream data into your CMEK-protected BigQuery table without specifying any additional parameters. Note that this data is encrypted using your Cloud KMS key in the buffer as well as in the final location. Before using streaming with a CMEK table, review the requirements on [key availability and accessibility](#key_access) .
+You can stream data into your CMEK-protected BigQuery table without specifying any additional parameters. Note that this data is encrypted using your Cloud KMS key in the buffer as well as in the final location. Before using streaming with a CMEK table, review the requirements on [key availability and accessibility](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_access) .
 
-Learn more about streaming at [Streaming data using the BigQuery Storage Write API](/bigquery/docs/write-api) .
+Learn more about streaming at [Streaming data using the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) .
 
 ## Change a table from default encryption to Cloud KMS protection
 
 ### bq
 
-You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to copy a table protected by default encryption into a new table, or into the original table, protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](#key_resource_id) of the key to use with the destination table.
+You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to copy a table protected by default encryption into a new table, or into the original table, protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination table.
 
 To copy a table that has default encryption to a new table that has Cloud KMS protection:
 
-``` text
+``` notranslate
 bq cp \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
@@ -963,7 +955,7 @@ SOURCE_DATASET_ID.SOURCE_TABLE_ID DESTINATION_DATASET_ID.DESTINATION_TABLE_ID
 
 If you want to copy a table that has default encryption to the same table with Cloud KMS protection:
 
-``` text
+``` notranslate
 bq cp -f \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
@@ -971,169 +963,163 @@ DATASET_ID.TABLE_ID DATASET_ID.TABLE_ID
 
 If you want to change a table from Cloud KMS protection to default encryption, copy the file to itself by running `  bq cp  ` without using the `  --destination_kms_key  ` flag.
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// copyTableWithCMEK demonstrates creating a copy of a table and ensuring the copied data is
-// protected with a customer managed encryption key.
-func copyTableWithCMEK(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydataset"
- // tableID := "mytable"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- srcTable := client.DatasetInProject("bigquery-public-data", "samples").Table("shakespeare")
- copier := client.Dataset(datasetID).Table(tableID).CopierFrom(srcTable)
- copier.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
-     // TODO: Replace this key with a key you have created in Cloud KMS.
-     KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
- }
- job, err := copier.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
- if err := status.Err(); err != nil {
-     return err
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // copyTableWithCMEK demonstrates creating a copy of a table and ensuring the copied data is
+    // protected with a customer managed encryption key.
+    func copyTableWithCMEK(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydataset"
+     // tableID := "mytable"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     srcTable := client.DatasetInProject("bigquery-public-data", "samples").Table("shakespeare")
+     copier := client.Dataset(datasetID).Table(tableID).CopierFrom(srcTable)
+     copier.DestinationEncryptionConfig = &bigquery.EncryptionConfig{
+         // TODO: Replace this key with a key you have created in Cloud KMS.
+         KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/test",
+     }
+     job, err := copier.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+     if err := status.Err(); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.CopyJobConfiguration;
-import com.google.cloud.bigquery.EncryptionConfiguration;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.TableId;
-
-// Sample to copy a cmek table
-public class CopyTableCMEK {
-
-  public static void runCopyTableCMEK() {
-    // TODO(developer): Replace these variables before running the sample.
-    String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
-    String destinationTableId = "MY_DESTINATION_TABLE_NAME";
-    String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
-    String sourceTableId = "MY_SOURCE_TABLE_NAME";
-    String kmsKeyName = "MY_KMS_KEY_NAME";
-    EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    copyTableCMEK(
-        sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId, encryption);
-  }
-
-  public static void copyTableCMEK(
-      String sourceDatasetName,
-      String sourceTableId,
-      String destinationDatasetName,
-      String destinationTableId,
-      EncryptionConfiguration encryption) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
-      TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
-
-      // For more information on CopyJobConfiguration see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
-      CopyJobConfiguration configuration =
-          CopyJobConfiguration.newBuilder(destinationTable, sourceTable)
-              .setDestinationEncryptionConfiguration(encryption)
-              .build();
-
-      // For more information on Job see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-      Job job = bigquery.create(JobInfo.of(configuration));
-
-      // Blocks until this job completes its execution, either failing or succeeding.
-      Job completedJob = job.waitFor();
-      if (completedJob == null) {
-        System.out.println("Job not executed since it no longer exists.");
-        return;
-      } else if (completedJob.getStatus().getError() != null) {
-        System.out.println(
-            "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
-        return;
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.CopyJobConfiguration;
+    import com.google.cloud.bigquery.EncryptionConfiguration;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.TableId;
+    
+    // Sample to copy a cmek table
+    public class CopyTableCMEK {
+    
+      public static void runCopyTableCMEK() {
+        // TODO(developer): Replace these variables before running the sample.
+        String destinationDatasetName = "MY_DESTINATION_DATASET_NAME";
+        String destinationTableId = "MY_DESTINATION_TABLE_NAME";
+        String sourceDatasetName = "MY_SOURCE_DATASET_NAME";
+        String sourceTableId = "MY_SOURCE_TABLE_NAME";
+        String kmsKeyName = "MY_KMS_KEY_NAME";
+        EncryptionConfiguration encryption =
+            EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
+        copyTableCMEK(
+            sourceDatasetName, sourceTableId, destinationDatasetName, destinationTableId, encryption);
       }
-      System.out.println("Table cmek copied successfully.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Table cmek copying job was interrupted. \n" + e.toString());
+    
+      public static void copyTableCMEK(
+          String sourceDatasetName,
+          String sourceTableId,
+          String destinationDatasetName,
+          String destinationTableId,
+          EncryptionConfiguration encryption) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId sourceTable = TableId.of(sourceDatasetName, sourceTableId);
+          TableId destinationTable = TableId.of(destinationDatasetName, destinationTableId);
+    
+          // For more information on CopyJobConfiguration see:
+          // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/JobConfiguration.html
+          CopyJobConfiguration configuration =
+              CopyJobConfiguration.newBuilder(destinationTable, sourceTable)
+                  .setDestinationEncryptionConfiguration(encryption)
+                  .build();
+    
+          // For more information on Job see:
+          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+          Job job = bigquery.create(JobInfo.of(configuration));
+    
+          // Blocks until this job completes its execution, either failing or succeeding.
+          Job completedJob = job.waitFor();
+          if (completedJob == null) {
+            System.out.println("Job not executed since it no longer exists.");
+            return;
+          } else if (completedJob.getStatus().getError() != null) {
+            System.out.println(
+                "BigQuery was unable to copy table due to an error: \n" + job.getStatus().getError());
+            return;
+          }
+          System.out.println("Table cmek copied successfully.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Table cmek copying job was interrupted. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Protect the destination of a table copy with a customer-managed encryption key by setting the [QueryJobConfig.destination\_encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.CopyJobConfig#google_cloud_bigquery_job_CopyJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and copy the table.
+Protect the destination of a table copy with a customer-managed encryption key by setting the [QueryJobConfig.destination\_encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.CopyJobConfig#google_cloud_bigquery_job_CopyJobConfig_destination_encryption_configuration) property to an [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) and copy the table.
 
-``` python
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set dest_table_id to the ID of the destination table.
-# dest_table_id = "your-project.your_dataset.your_table_name"
-
-# TODO(developer): Set orig_table_id to the ID of the original table.
-# orig_table_id = "your-project.your_dataset.your_table_name"
-
-# Set the encryption key to use for the destination.
-# TODO(developer): Replace this key with a key you have created in KMS.
-# kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
-#     your-project, location, your-ring, your-key
-# )
-
-job_config = bigquery.CopyJobConfig(
-    destination_encryption_configuration=bigquery.EncryptionConfiguration(
-        kms_key_name=kms_key_name
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    # TODO(developer): Set dest_table_id to the ID of the destination table.
+    # dest_table_id = "your-project.your_dataset.your_table_name"
+    
+    # TODO(developer): Set orig_table_id to the ID of the original table.
+    # orig_table_id = "your-project.your_dataset.your_table_name"
+    
+    # Set the encryption key to use for the destination.
+    # TODO(developer): Replace this key with a key you have created in KMS.
+    # kms_key_name = "projects/{}/locations/{}/keyRings/{}/cryptoKeys/{}".format(
+    #     your-project, location, your-ring, your-key
+    # )
+    
+    job_config = bigquery.CopyJobConfig(
+        destination_encryption_configuration=bigquery.EncryptionConfiguration(
+            kms_key_name=kms_key_name
+        )
     )
-)
-job = client.copy_table(orig_table_id, dest_table_id, job_config=job_config)
-job.result()  # Wait for the job to complete.
-
-dest_table = client.get_table(dest_table_id)  # Make an API request.
-if dest_table.encryption_configuration.kms_key_name == kms_key_name:
-    print("A copy of the table created")
-```
+    job = client.copy_table(orig_table_id, dest_table_id, job_config=job_config)
+    job.result()  # Wait for the job to complete.
+    
+    dest_table = client.get_table(dest_table_id)  # Make an API request.
+    if dest_table.encryption_configuration.kms_key_name == kms_key_name:
+        print("A copy of the table created")
 
 ## Determine if a table is protected by Cloud KMS
 
@@ -1144,8 +1130,10 @@ if dest_table.encryption_configuration.kms_key_name == kms_key_name:
 3.  Click **Details** . The **Table Details** page displays the table's description and table information.
 
 4.  If the table is protected by Cloud KMS, the **Customer-Managed Encryption Key** field displays the key resource ID.
+    
+    ![Protected table.](https://docs.cloud.google.com/static/bigquery/images/bq_cmek_table.png)
 
-For each of the keys you've created or that protect your tables, you can see what resources that key protects with key usage tracking. For more information, see [View key usage](/kms/docs/view-key-usage) .
+For each of the keys you've created or that protect your tables, you can see what resources that key protects with key usage tracking. For more information, see [View key usage](https://docs.cloud.google.com/kms/docs/view-key-usage) .
 
 ## Change the Cloud KMS key for a BigQuery table
 
@@ -1155,17 +1143,19 @@ If you use `  update  ` , you can change the Cloud KMS key used for a CMEK-prote
 
 If you use `  cp  ` , you can change the Cloud KMS key used for a CMEK-protected table, change a table from default encryption to CMEK-protection, or change a table from CMEK-protection to default encryption.
 
-An advantage of `  update  ` is it is faster than `  cp  ` and it lets you use [table decorators](/bigquery/docs/table-decorators) .
+An advantage of `  update  ` is it is faster than `  cp  ` and it lets you use [table decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators) .
 
 ### SQL
 
-Use the [`  ALTER TABLE SET OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the `  kms_key_name  ` field for a table:
+Use the [`  ALTER TABLE SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_set_options_statement) to update the `  kms_key_name  ` field for a table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE DATASET_ID.mytable
     SET OPTIONS (
       kms_key_name
@@ -1174,13 +1164,13 @@ Use the [`  ALTER TABLE SET OPTIONS  ` statement](/bigquery/docs/reference/stand
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to change the key for a table protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](#key_resource_id) of the key to use with the table.
+You can use the `  bq cp  ` command with the `  --destination_kms_key  ` flag to change the key for a table protected by Cloud KMS. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the table.
 
-``` text
+``` notranslate
 bq update \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 -t DATASET_ID.TABLE_ID
@@ -1188,123 +1178,117 @@ bq update \
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// updateTableChangeCMEK demonstrates how to change the customer managed encryption key that protects a table.
-func updateTableChangeCMEK(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydatasetid"
- // tableID := "mytableid"
- ctx := context.Background()
-
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- tableRef := client.Dataset(datasetID).Table(tableID)
- meta, err := tableRef.Metadata(ctx)
- if err != nil {
-     return err
- }
- update := bigquery.TableMetadataToUpdate{
-     EncryptionConfig: &bigquery.EncryptionConfig{
-         // TODO: Replace this key with a key you have created in Cloud KMS.
-         KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/otherkey",
-     },
- }
- if _, err := tableRef.Update(ctx, update, meta.ETag); err != nil {
-     return err
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // updateTableChangeCMEK demonstrates how to change the customer managed encryption key that protects a table.
+    func updateTableChangeCMEK(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydatasetid"
+     // tableID := "mytableid"
+     ctx := context.Background()
+    
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     tableRef := client.Dataset(datasetID).Table(tableID)
+     meta, err := tableRef.Metadata(ctx)
+     if err != nil {
+         return err
+     }
+     update := bigquery.TableMetadataToUpdate{
+         EncryptionConfig: &bigquery.EncryptionConfig{
+             // TODO: Replace this key with a key you have created in Cloud KMS.
+             KMSKeyName: "projects/cloud-samples-tests/locations/us-central1/keyRings/test/cryptoKeys/otherkey",
+         },
+     }
+     if _, err := tableRef.Update(ctx, update, meta.ETag); err != nil {
+         return err
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.EncryptionConfiguration;
-import com.google.cloud.bigquery.Table;
-import com.google.cloud.bigquery.TableId;
-
-// Sample to update a cmek table
-public class UpdateTableCMEK {
-
-  public static void runUpdateTableCMEK() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String kmsKeyName = "MY_KEY_NAME";
-    // Set a new encryption key to use for the destination.
-    // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
-    EncryptionConfiguration encryption =
-        EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
-    updateTableCMEK(datasetName, tableName, encryption);
-  }
-
-  public static void updateTableCMEK(
-      String datasetName, String tableName, EncryptionConfiguration encryption) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      Table table = bigquery.getTable(TableId.of(datasetName, tableName));
-      bigquery.update(table.toBuilder().setEncryptionConfiguration(encryption).build());
-      System.out.println("Table cmek updated successfully");
-    } catch (BigQueryException e) {
-      System.out.println("Table cmek was not updated. \n" + e.toString());
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.EncryptionConfiguration;
+    import com.google.cloud.bigquery.Table;
+    import com.google.cloud.bigquery.TableId;
+    
+    // Sample to update a cmek table
+    public class UpdateTableCMEK {
+    
+      public static void runUpdateTableCMEK() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String kmsKeyName = "MY_KEY_NAME";
+        // Set a new encryption key to use for the destination.
+        // i.e. projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{cryptoKey}
+        EncryptionConfiguration encryption =
+            EncryptionConfiguration.newBuilder().setKmsKeyName(kmsKeyName).build();
+        updateTableCMEK(datasetName, tableName, encryption);
+      }
+    
+      public static void updateTableCMEK(
+          String datasetName, String tableName, EncryptionConfiguration encryption) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          Table table = bigquery.getTable(TableId.of(datasetName, tableName));
+          bigquery.update(table.toBuilder().setEncryptionConfiguration(encryption).build());
+          System.out.println("Table cmek updated successfully");
+        } catch (BigQueryException e) {
+          System.out.println("Table cmek was not updated. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Python
 
-Change the customer-managed encryption key for a table by changing the [Table.encryption\_configuration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to a new [EncryptionConfiguration](/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object and update the table.
+Change the customer-managed encryption key for a table by changing the [Table.encryption\_configuration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.table.Table#google_cloud_bigquery_table_Table_encryption_configuration) property to a new [EncryptionConfiguration](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.encryption_configuration.EncryptionConfiguration) object and update the table.
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-# from google.cloud import bigquery
-# client = bigquery.Client()
-
-assert table.encryption_configuration.kms_key_name == original_kms_key_name
-
-# Set a new encryption key to use for the destination.
-# TODO: Replace this key with a key you have created in KMS.
-updated_kms_key_name = (
-    "projects/cloud-samples-tests/locations/us/keyRings/test/cryptoKeys/otherkey"
-)
-table.encryption_configuration = bigquery.EncryptionConfiguration(
-    kms_key_name=updated_kms_key_name
-)
-
-table = client.update_table(table, ["encryption_configuration"])  # API request
-
-assert table.encryption_configuration.kms_key_name == updated_kms_key_name
-assert original_kms_key_name != updated_kms_key_name
-```
+    # from google.cloud import bigquery
+    # client = bigquery.Client()
+    
+    assert table.encryption_configuration.kms_key_name == original_kms_key_name
+    
+    # Set a new encryption key to use for the destination.
+    # TODO: Replace this key with a key you have created in KMS.
+    updated_kms_key_name = (
+        "projects/cloud-samples-tests/locations/us/keyRings/test/cryptoKeys/otherkey"
+    )
+    table.encryption_configuration = bigquery.EncryptionConfiguration(
+        kms_key_name=updated_kms_key_name
+    )
+    
+    table = client.update_table(table, ["encryption_configuration"])  # API request
+    
+    assert table.encryption_configuration.kms_key_name == updated_kms_key_name
+    assert original_kms_key_name != updated_kms_key_name
 
 ## Set a dataset default key
 
@@ -1312,17 +1296,17 @@ You can set a dataset-wide default Cloud KMS key that applies to all newly creat
 
 You can apply, change, or remove a dataset default key by
 
-  - specifying the default key in the [`  EncryptionConfiguration.kmsKeyName  `](/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) or [`  datasets.patch  `](/bigquery/docs/reference/rest/v2/datasets/patch) methods
+  - specifying the default key in the [`  EncryptionConfiguration.kmsKeyName  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name) field when you call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) or [`  datasets.patch  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) methods
 
-  - specifying the default key in the `  --default_kms_key  ` flag when you run the [`  bq mk --dataset  `](/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
+  - specifying the default key in the `  --default_kms_key  ` flag when you run the [`  bq mk --dataset  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) command.
     
-    ``` text
+    ``` notranslate
     bq mk \
     --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
     --dataset DATASET_ID
     ```
     
-    ``` text
+    ``` notranslate
     bq update \
     --default_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
     --dataset DATASET_ID
@@ -1332,19 +1316,21 @@ You can apply, change, or remove a dataset default key by
 
 ## Set a project default key
 
-You can set project-default Cloud KMS keys that apply to all query results and newly created tables in the project for that location, unless you specify a different Cloud KMS key. The default key also applies to newly created cached results tables that are stored in [anonymous datasets](/bigquery/docs/cached-results) .
+You can set project-default Cloud KMS keys that apply to all query results and newly created tables in the project for that location, unless you specify a different Cloud KMS key. The default key also applies to newly created cached results tables that are stored in [anonymous datasets](https://docs.cloud.google.com/bigquery/docs/cached-results) .
 
 The default key does not apply to existing tables. Changing the default key does not modify any existing tables and applies only to new tables created after the change.
 
 ### SQL
 
-Use the [`  ALTER PROJECT SET OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project. You can find the resource name for the key on the Cloud KMS page.
+Use the [`  ALTER PROJECT SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project. You can find the resource name for the key on the Cloud KMS page.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     ALTER PROJECT PROJECT_ID
     SET OPTIONS (
       `region-LOCATION.default_kms_key_name`
@@ -1353,13 +1339,13 @@ Use the [`  ALTER PROJECT SET OPTIONS  ` statement](/bigquery/docs/reference/sta
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-You can use the `  bq  ` command to run an [`  ALTER PROJECT SET OPTIONS  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project:
+You can use the `  bq  ` command to run an [`  ALTER PROJECT SET OPTIONS  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) to update the `  default_kms_key_name  ` field for a project:
 
-``` text
+``` notranslate
 bq query --nouse_legacy_sql \
   'ALTER PROJECT PROJECT_ID
   SET OPTIONS (
@@ -1373,9 +1359,9 @@ BigQuery ML supports CMEK. Along with the default encryption provided by BigQuer
 
 ### Create an encrypted model with a Cloud KMS key
 
-To create an encrypted model, use the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) and specify `  KMS_KEY_NAME  ` in the training options:
+To create an encrypted model, use the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) and specify `  KMS_KEY_NAME  ` in the training options:
 
-``` text
+``` 
     CREATE MODEL my_dataset.my_model
     OPTIONS(
       model_type='linear_reg',
@@ -1386,7 +1372,7 @@ To create an encrypted model, use the [`  CREATE MODEL  ` statement](/bigquery/d
 
 The same syntax also applies to imported TensorFlow models:
 
-``` text
+``` 
     CREATE MODEL my_dataset.my_model
     OPTIONS(
       model_type='tensorflow',
@@ -1401,28 +1387,28 @@ Customer-managed encryption keys have the following restrictions when encrypting
 
   - `  Global  ` region CMEK keys are not supported for the following types of models:
     
-      - [DNN](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-      - [Wide-and-Deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-      - [Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
-      - [Boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+      - [DNN](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+      - [Wide-and-Deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+      - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+      - [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
 
   - `  Global  ` region CMEK keys and multi-region CMEK keys, for example `  EU  ` or `  US  ` , are not supported when creating the following types of models:
     
-      - [AutoML Tables models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+      - [AutoML Tables models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
   - CMEK keys aren't supported for remote models:
     
-      - [Remote models over Vertex AI built-in models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
-      - [Remote models over Vertex AI hosted models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
-      - [Remote models over Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
+      - [Remote models over Vertex AI built-in models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+      - [Remote models over Vertex AI hosted models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
 
 ### Change a model from default encryption to Cloud KMS protection
 
-You can use the [`  bq cp  ` command](/bigquery/docs/reference/bq-cli-reference#bq_cp) with the `  --destination_kms_key  ` flag to copy a model protected by default encryption into a new model that is protected by Cloud KMS. Alternatively, you can use the `  bq cp  ` command with the `  -f  ` flag to overwrite a model protected by default encryption and update it to use Cloud KMS protection instead. The `  --destination_kms_key  ` flag specifies the [resource ID](#key_resource_id) of the key to use with the destination model.
+You can use the [`  bq cp  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) with the `  --destination_kms_key  ` flag to copy a model protected by default encryption into a new model that is protected by Cloud KMS. Alternatively, you can use the `  bq cp  ` command with the `  -f  ` flag to overwrite a model protected by default encryption and update it to use Cloud KMS protection instead. The `  --destination_kms_key  ` flag specifies the [resource ID](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#key_resource_id) of the key to use with the destination model.
 
 To copy a model that has default encryption to a new model that has Cloud KMS protection:
 
-``` text
+``` notranslate
 bq cp \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 SOURCE_DATASET_ID.SOURCE_MODEL_ID DESTINATION_DATASET_ID.DESTINATION_MODEL_ID
@@ -1430,7 +1416,7 @@ SOURCE_DATASET_ID.SOURCE_MODEL_ID DESTINATION_DATASET_ID.DESTINATION_MODEL_ID
 
 To overwrite a model that has default encryption to the same model with Cloud KMS protection:
 
-``` text
+``` notranslate
 bq cp -f \
 --destination_kms_key projects/KMS_PROJECT_ID/locations/LOCATION/keyRings/KEY_RING/cryptoKeys/KEY \
 DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
@@ -1438,18 +1424,18 @@ DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
 
 To change a model from Cloud KMS protection to default encryption:
 
-``` text
+``` notranslate
 bq cp -f \
 DATASET_ID.MODEL_ID DATASET_ID.MODEL_ID
 ```
 
-For more information about the bq command-line tool, see [Using the bq command-line tool](/bigquery/bq-command-line-tool) .
+For more information about the bq command-line tool, see [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/bq-command-line-tool) .
 
 ### Determine if a model is protected by Cloud KMS
 
-Use the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) to see if a model is protected by Cloud KMS key. The encryption key is in the `  kmsKeyName  ` field.
+Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to see if a model is protected by Cloud KMS key. The encryption key is in the `  kmsKeyName  ` field.
 
-``` text
+``` notranslate
 bq show -m my_dataset.my_model
 ```
 
@@ -1457,9 +1443,9 @@ You can also use the Google Cloud console to find the Cloud KMS key for an encry
 
 ### Change the Cloud KMS key for an encrypted model
 
-Use the [`  bq update  ` command](/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --destination_kms_key  ` flag to change the key for a model protected by Cloud KMS:
+Use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the `  --destination_kms_key  ` flag to change the key for a model protected by Cloud KMS:
 
-``` text
+``` notranslate
 bq update --destination_kms_key \
 projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key \
 -t my_dataset.my_model
@@ -1477,22 +1463,22 @@ You can use all BigQuery ML functions with an encrypted model without specifying
 
 For Cloud SQL connections, you can protect your BigQuery Connection API credentials using CMEK.
 
-For more information about how to create a CMEK-protected connection, see [Create Cloud SQL connections](/bigquery/docs/connect-to-sql#create-sql-connection) .
+For more information about how to create a CMEK-protected connection, see [Create Cloud SQL connections](https://docs.cloud.google.com/bigquery/docs/connect-to-sql#create-sql-connection) .
 
 ## Use CMEK to protect BigQuery Studio code assets
 
 To use CMEK to protect your BigQuery Studio code assets, you must set a default Dataform CMEK key for the Google Cloud project that contains your code assets. Code assets include the following:
 
-  - [Saved queries](/bigquery/docs/work-with-saved-queries)
-  - [Notebooks](/bigquery/docs/create-notebooks)
-  - [Data canvases](/bigquery/docs/data-canvas)
-  - [Data preparations](/bigquery/docs/data-prep-get-suggestions)
+  - [Saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries)
+  - [Notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks)
+  - [Data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
+  - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions)
 
 After you set a default Dataform CMEK key, Dataform applies the key to all new resources created in the Google Cloud project by default, including any hidden resources created for storing your code assets.
 
 The default Dataform CMEK key isn't applied to existing resources. If you already have code assets in that project, they won't be encrypted by the default Dataform CMEK key. To use CMEK with a code asset that was created before you set your project's default Dataform CMEK key, you can save the asset as a new BigQuery Studio code asset.
 
-Setting Dataform default CMEK configuration for BigQuery code assets through Terraform isn't supported. Instead, use the Dataform API. This configuration must be applied on a per-project basis, not at the organization level. For instructions, see [Set a default Dataform CMEK key](/dataform/docs/cmek#set-default-key) .
+Setting Dataform default CMEK configuration for BigQuery code assets through Terraform isn't supported. Instead, use the Dataform API. This configuration must be applied on a per-project basis, not at the organization level. For instructions, see [Set a default Dataform CMEK key](https://docs.cloud.google.com/dataform/docs/cmek#set-default-key) .
 
 ## Remove BigQuery's access to the Cloud KMS key
 
@@ -1510,7 +1496,7 @@ If BigQuery loses access to the Cloud KMS key, the user experience can suffer si
 
 ## Control CMEK use with organization policy
 
-BigQuery integrates with CMEK [organization policy constraints](/resource-manager/docs/organization-policy/org-policy-constraints) to let you specify encryption compliance requirements for BigQuery resources in your organization.
+BigQuery integrates with CMEK [organization policy constraints](https://docs.cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints) to let you specify encryption compliance requirements for BigQuery resources in your organization.
 
 This integration lets you do the following:
 
@@ -1531,6 +1517,8 @@ After you set this policy, it applies only to new resources in the project. Any 
 ### Console
 
 1.  Open the **Organization policies** page.
+    
+    [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
 2.  In the **Filter** field, enter `  constraints/gcp.restrictNonCmekServices  ` , and then click **Restrict which services may create resources without CMEK** .
 
@@ -1546,14 +1534,14 @@ After you set this policy, it applies only to new resources in the project. Any 
 
 ### gcloud
 
-``` bash
+``` notranslate lang-sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     deny gcp.restrictNonCmekServices is:bigquery.googleapis.com
 ```
 
 To verify that the policy is successfully applied, you can try to create a table in the project. The process fails unless you specify a Cloud KMS key.
 
-This policy also applies to query results tables in the project. You can specify a [project default key](#project_default_key) so users don't have to manually specify a key each time they execute a query in the project.
+This policy also applies to query results tables in the project. You can specify a [project default key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#project_default_key) so users don't have to manually specify a key each time they execute a query in the project.
 
 ### Restrict Cloud KMS keys for a BigQuery project
 
@@ -1564,6 +1552,8 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 ### Console
 
 1.  Open the **Organization policies** page.
+    
+    [Go to Organization policies](https://console.cloud.google.com/iam-admin/orgpolicies/list)
 
 2.  In the **Filter** field, enter `  constraints/gcp.restrictCmekCryptoKeyProjects  ` , and then click **Restrict which projects may supply KMS CryptoKeys for CMEK** .
 
@@ -1579,7 +1569,7 @@ You might specify a rule - for example, "For all BigQuery resources in projects/
 
 ### gcloud
 
-``` bash
+``` notranslate lang-sh
   gcloud resource-manager org-policies --project=PROJECT_ID \
     allow gcp.restrictCmekCryptoKeyProjects under:projects/KMS_PROJECT_ID
 ```
@@ -1596,7 +1586,7 @@ After you set or update an organization policy, it can take up to 15 minutes for
 
 #### Required permissions to set an organization policy
 
-The permission to set or update the organization policy might be difficult to acquire for testing purposes. You must be granted the [Organization Policy Administrator role](/resource-manager/docs/organization-policy/using-constraints#required-roles) , which can only be granted at the organization level (rather than the project or folder level).
+The permission to set or update the organization policy might be difficult to acquire for testing purposes. You must be granted the [Organization Policy Administrator role](https://docs.cloud.google.com/resource-manager/docs/organization-policy/using-constraints#required-roles) , which can only be granted at the organization level (rather than the project or folder level).
 
 Although the role must be granted at the organization level, it is still possible to specify a policy that only applies to a specific project or folder.
 
@@ -1612,7 +1602,7 @@ If there is a default key on the dataset, and you rotate the key, any new tables
 
 When you create or truncate a CMEK-protected table, BigQuery generates an intermediate key-encryption key which is then encrypted with the specified Cloud KMS key.
 
-For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, you can expect one call to Cloud KMS [`  cryptoKeys.encrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`  cryptoKeys.decrypt  `](/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
+For billing purposes, this means that neither your calls to Cloud KMS nor their associated costs scale with the table size. For CMEK-protected tables, you can expect one call to Cloud KMS [`  cryptoKeys.encrypt  `](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/encrypt) for each table creation or truncation and one call to Cloud KMS [`  cryptoKeys.decrypt  `](https://docs.cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys/decrypt) for each table involved in a query. These methods both belong to the category of **Key operations: Cryptographic** listed in [Cloud KMS Pricing](https://cloud.google.com/kms/pricing) .
 
 Either reading from or writing to an existing CMEK-protected table invokes Cloud KMS `  cryptoKeys.decrypt  ` because the intermediate key must be decrypted.
 
@@ -1622,14 +1612,14 @@ Either reading from or writing to an existing CMEK-protected table invokes Cloud
 
 A Cloud KMS key is considered available and accessible by BigQuery under the following conditions:
 
-  - The key is [enabled](/kms/docs/key-states#enabled)
+  - The key is [enabled](https://docs.cloud.google.com/kms/docs/key-states#enabled)
   - The BigQuery service account has encrypt and decrypt permissions on the key
 
 The following sections describe impact to streaming inserts and long-term inaccessible data when a key is inaccessible.
 
 #### Impact to streaming inserts
 
-The Cloud KMS key must be available and accessible for at least 24 consecutive hours in the 48-hour period following a streaming insertion request. If the key is not available and accessible, the streamed data might not be fully persisted and can be lost. For more information about streaming inserts, see [Streaming data into BigQuery](/bigquery/docs/streaming-data-into-bigquery) .
+The Cloud KMS key must be available and accessible for at least 24 consecutive hours in the 48-hour period following a streaming insertion request. If the key is not available and accessible, the streamed data might not be fully persisted and can be lost. For more information about streaming inserts, see [Streaming data into BigQuery](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) .
 
 #### Impact to long-term inaccessible data
 
@@ -1637,42 +1627,42 @@ As BigQuery provides managed storage, long-term inaccessible data is not compati
 
 ### Using external data sources
 
-If you are querying data stored in an [external data source](/bigquery/docs/external-data-sources) such as Cloud Storage that has CMEK-encrypted data, then the data encryption is managed by [Cloud Storage](/storage/docs/encryption/customer-managed-keys) . For example, BigLake tables support data encrypted with CMEK in Cloud Storage.
+If you are querying data stored in an [external data source](https://docs.cloud.google.com/bigquery/docs/external-data-sources) such as Cloud Storage that has CMEK-encrypted data, then the data encryption is managed by [Cloud Storage](https://docs.cloud.google.com/storage/docs/encryption/customer-managed-keys) . For example, BigLake tables support data encrypted with CMEK in Cloud Storage.
 
-BigQuery and [BigLake tables](/bigquery/docs/biglake-intro) don't support Customer-Supplied Encryption Keys (CSEK).
+BigQuery and [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) don't support Customer-Supplied Encryption Keys (CSEK).
 
 ### Switching between CMEK-protected and default encryption
 
-You cannot switch a table in place between default encryptions and CMEK encryption. To switch encryption, [copy the table](/bigquery/docs/managing-tables#copy-table) with destination encryption information set or use a `  SELECT *  ` query to select the table into itself with `  WRITE_TRUNCATE  ` disposition.
+You cannot switch a table in place between default encryptions and CMEK encryption. To switch encryption, [copy the table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) with destination encryption information set or use a `  SELECT *  ` query to select the table into itself with `  WRITE_TRUNCATE  ` disposition.
 
 ### Using table decorators
 
-If you protect a table with Cloud KMS and then replace the data in the table by using the value `  WRITE_TRUNCATE  ` for a `  load  ` , `  cp  ` , or `  query  ` operation, then [range decorators](/bigquery/docs/table-decorators#range_decorators) don't work across the encryption change boundary. You can still use table decorators, including range decorators, to query the data before or after the boundary, or query the snapshot at a point in time.
+If you protect a table with Cloud KMS and then replace the data in the table by using the value `  WRITE_TRUNCATE  ` for a `  load  ` , `  cp  ` , or `  query  ` operation, then [range decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators#range_decorators) don't work across the encryption change boundary. You can still use table decorators, including range decorators, to query the data before or after the boundary, or query the snapshot at a point in time.
 
 ### Wildcard table queries
 
-CMEK-protected tables cannot be queried with a [wildcard suffix](/bigquery/docs/querying-wildcard-tables) .
+CMEK-protected tables cannot be queried with a [wildcard suffix](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) .
 
 ### Script support
 
-[Scripts](/bigquery/docs/reference/standard-sql/procedural-language) cannot define destination tables for CMEK operations.
+[Scripts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language) cannot define destination tables for CMEK operations.
 
 ### Editions support
 
 CMEK support for BigQuery is only available for BigQuery Enterprise, BigQuery Enterprise Plus and BigQuery On-Demand.
 
-**Note:** Using CMEK to query data in a BigQuery project from a project that does not support CMEK is allowed, however the project storing the data must use a compatible [BigQuery edition](/bigquery/docs/customer-managed-encryption#editions-support) and its service account must have the appropriate [Cloud KMS key permissions](/bigquery/docs/customer-managed-encryption#grant_permission) .
+**Note:** Using CMEK to query data in a BigQuery project from a project that does not support CMEK is allowed, however the project storing the data must use a compatible [BigQuery edition](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#editions-support) and its service account must have the appropriate [Cloud KMS key permissions](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) .
 
 ### BigQuery Studio support
 
 BigQuery Studio code assets support CMEK. Code assets include the following:
 
-  - [Saved queries](/bigquery/docs/work-with-saved-queries)
-  - [Notebooks](/bigquery/docs/create-notebooks)
-  - [Data canvases](/bigquery/docs/data-canvas)
-  - [Data preparations](/bigquery/docs/data-prep-get-suggestions)
+  - [Saved queries](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries)
+  - [Notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks)
+  - [Data canvases](https://docs.cloud.google.com/bigquery/docs/data-canvas)
+  - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions)
 
-For more information, see [Use CMEK to protect BigQuery Studio code assets](#cmek-studio) .
+For more information, see [Use CMEK to protect BigQuery Studio code assets](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#cmek-studio) .
 
 ## Frequently asked questions
 
@@ -1692,7 +1682,7 @@ As an example, consider three CMEK-protected tables: `  table1  ` , `  table2  `
 
 ### In what ways can BigQuery use my Cloud KMS key?
 
-BigQuery uses the Cloud KMS key to decrypt data in response to a user query, for example, [`  tabledata.list  `](/bigquery/docs/reference/rest/v2/tabledata/list) or [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) .
+BigQuery uses the Cloud KMS key to decrypt data in response to a user query, for example, [`  tabledata.list  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata/list) or [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) .
 
 BigQuery can also use the key for data maintenance and storage optimization tasks, like data conversion into a read-optimized format.
 
@@ -1702,39 +1692,16 @@ BigQuery relies on Cloud KMS for CMEK functionality. Cloud KMS uses [Tink](https
 
 ### How to get more help?
 
-If you have questions that are not answered here, see [BigQuery support](/bigquery/docs/getting-support) .
+If you have questions that are not answered here, see [BigQuery support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 ## Troubleshooting errors
 
 The following describes common errors and recommended mitigations.
 
-<table>
-<thead>
-<tr class="header">
-<th>Error</th>
-<th>Recommendation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Please grant Cloud KMS CryptoKey Encrypter/Decrypter role</td>
-<td>The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. Follow the instructions in the error or <a href="#grant_permission">in this documentation</a> to grant the proper IAM permission.</td>
-</tr>
-<tr class="even">
-<td>Existing table encryption settings don't match encryption settings specified in the request</td>
-<td>This can occur in scenarios where the destination table has encryption settings that don't match the encryption settings in your request. As mitigation, use write disposition <code dir="ltr" translate="no">       TRUNCATE      </code> to replace the table, or specify a different destination table.</td>
-</tr>
-<tr class="odd">
-<td>This region is not supported</td>
-<td>The region of the Cloud KMS key does not match the region of the BigQuery dataset of the destination table. As a mitigation, select a key in a region that matches your dataset, or load into a dataset that matches the key region.</td>
-</tr>
-<tr class="even">
-<td>Your administrator requires that you specify an encryption key for queries in project PROJECT_ID.</td>
-<td>An organization policy prevented creating a resource or running a query. To learn more about this policy, see <a href="#services_constraint">Requiring CMEKs for all resources in a BigQuery project</a> .</td>
-</tr>
-<tr class="odd">
-<td>Your administrator prevents using KMS keys from project KMS_PROJECT_ID to protect resources in project PROJECT_ID .</td>
-<td>An organization policy prevented creating a resource or running a query. To learn more about this policy, see <a href="#projects_constraint">Restrict Cloud KMS keys for a BigQuery project</a> .</td>
-</tr>
-</tbody>
-</table>
+| Error                                                                                                                  | Recommendation                                                                                                                                                                                                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Please grant Cloud KMS CryptoKey Encrypter/Decrypter role                                                              | The BigQuery service account associated with your project doesn't have sufficient IAM permission to operate on the specified Cloud KMS key. Follow the instructions in the error or [in this documentation](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) to grant the proper IAM permission. |
+| Existing table encryption settings don't match encryption settings specified in the request                            | This can occur in scenarios where the destination table has encryption settings that don't match the encryption settings in your request. As mitigation, use write disposition `        TRUNCATE       ` to replace the table, or specify a different destination table.                                                                  |
+| This region is not supported                                                                                           | The region of the Cloud KMS key does not match the region of the BigQuery dataset of the destination table. As a mitigation, select a key in a region that matches your dataset, or load into a dataset that matches the key region.                                                                                                      |
+| Your administrator requires that you specify an encryption key for queries in project PROJECT\_ID.                     | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Requiring CMEKs for all resources in a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#services_constraint) .                                                                    |
+| Your administrator prevents using KMS keys from project KMS\_PROJECT\_ID to protect resources in project PROJECT\_ID . | An organization policy prevented creating a resource or running a query. To learn more about this policy, see [Restrict Cloud KMS keys for a BigQuery project](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#projects_constraint) .                                                                             |

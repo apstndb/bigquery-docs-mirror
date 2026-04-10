@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request support or provide feedback for this feature, email <bq-studio-product-team@google.com> .
 
@@ -23,7 +23,7 @@ You can copy this query into a new query in query editor, or apply the query in 
   - Table explorer is available for BigQuery tables, BigLake tables, external tables, and views.
   - Table explorer lets you explore a single table at a time. The feature does not support simultaneous exploration of multiple tables or generating cross-table operations, for example, `  JOIN  ` operations.
   - Table explorer creates SQL queries that directly reflect your selection of table fields and distinct values. You can execute queries created by table explorer or manually edit them in the query editor. Table explorer does not provide AI-powered assistance to generate, complete, or explain SQL queries.
-  - To explore table data and generate queries for tables with column-level access control (ACLs) or restricted user permissions, you must have read access for all selected fields. To run the generated queries, you must have sufficient [permissions](#roles) .
+  - To explore table data and generate queries for tables with column-level access control (ACLs) or restricted user permissions, you must have read access for all selected fields. To run the generated queries, you must have sufficient [permissions](https://docs.cloud.google.com/bigquery/docs/table-explorer#roles) .
 
 ## Pricing
 
@@ -39,10 +39,10 @@ For more information about BigQuery compute pricing, see [Pricing](https://cloud
 
 To get the permissions that you need to view table data and generate queries with table explorer, ask your administrator to grant you the following IAM roles:
 
-  - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
-  - [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that you want to explore.
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on the project.
+  - [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` ) on all tables and views that you want to explore.
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to view table data and generate queries with table explorer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -53,17 +53,21 @@ The following permissions are required to view table data and generate queries w
   - `  bigquery.jobs.create  ` on the project from which the query is being run, regardless of where the data is stored.
   - `  bigquery.tables.getData  ` on all tables and views that you want to explore.
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Explore data in a table to create a query
 
 To explore table data and create a query based on your selection of table fields and values, follow these steps:
 
 1.  In the Google Cloud console, go to BigQuery Studio.
+    
+    [Go to BigQuery Studio](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and then click **Datasets** .
 
@@ -101,19 +105,17 @@ To explore table data and create a query based on your selection of table fields
 
 ## Troubleshooting
 
-``` text
-Access Denied: Project [project_id]: User does not have bigquery.jobs.create
-permission in project [project_id].
-```
+    Access Denied: Project [project_id]: User does not have bigquery.jobs.create
+    permission in project [project_id].
 
 This error occurs when a principal lacks permission to create a query jobs in the project.
 
 **Resolution** : An administrator must grant you the `  bigquery.jobs.create  ` permission on the project you are querying. This permission is required in addition to any permission required to access the queried data.
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## What's next
 
-  - Learn how to [explore your data by generating data insights](/bigquery/docs/data-insights) .
-  - Learn how to [write queries with Gemini assistance in BigQuery](/bigquery/docs/write-sql-gemini) .
-  - Learn how to iterate on query results with natural language questions by using [data canvas](/bigquery/docs/data-canvas) .
+  - Learn how to [explore your data by generating data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - Learn how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
+  - Learn how to iterate on query results with natural language questions by using [data canvas](https://docs.cloud.google.com/bigquery/docs/data-canvas) .

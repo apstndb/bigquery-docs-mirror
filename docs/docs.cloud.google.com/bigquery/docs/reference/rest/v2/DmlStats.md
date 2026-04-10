@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [DmlMode](#DmlMode)
-  - [FineGrainedDmlUnusedReason](#FineGrainedDmlUnusedReason)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats#SCHEMA_REPRESENTATION)
+  - [DmlMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats#DmlMode)
+  - [FineGrainedDmlUnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DmlStats#FineGrainedDmlUnusedReason)
 
 Detailed statistics for DML statements
 
@@ -15,7 +15,7 @@ Detailed statistics for DML statements
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;insertedRowCount&quot;: string,
   &quot;deletedRowCount&quot;: string,
   &quot;updatedRowCount&quot;: string,

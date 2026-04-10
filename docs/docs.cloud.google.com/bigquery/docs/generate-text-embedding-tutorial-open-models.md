@@ -1,6 +1,6 @@
 # Generate text embeddings by using an open model and the AI.GENERATE\_EMBEDDING function
 
-This tutorial shows you how to create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) that's based on the open-source text embedding model [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) , and then how to use that model with the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to embed movie reviews from the `  bigquery-public-data.imdb.reviews  ` public table.
+This tutorial shows you how to create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) that's based on the open-source text embedding model [Qwen3-Embedding-0.6B](https://huggingface.co/Qwen/Qwen3-Embedding-0.6B) , and then how to use that model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to embed movie reviews from the `  bigquery-public-data.imdb.reviews  ` public table.
 
 ## Required permissions
 
@@ -28,7 +28,7 @@ These predefined roles contain the permissions required to perform the tasks in 
       - `  bigquery.models.updateData  `
       - `  bigquery.models.updateMetadata  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Costs
 
@@ -37,9 +37,9 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
   - **Vertex AI** : You incur costs for calls to the Vertex AI model that's represented by the remote model.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
@@ -52,17 +52,21 @@ Open models that you deploy to Vertex AI are charged per machine-hour. This mean
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -71,6 +75,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -86,11 +92,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -99,15 +105,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -120,12 +126,14 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 Create a remote model that represents a hosted Vertex AI model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `bqml_tutorial.qwen3_embedding_model`
   REMOTE WITH CONNECTION DEFAULT
   OPTIONS (
@@ -140,10 +148,12 @@ The query takes up to 20 minutes to complete, after which the `  qwen3_embedding
 Perform text embedding on [IMDB](https://www.imdb.com/) movie reviews by using the remote model and the `  AI.GENERATE_EMBEDDING  ` function:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement to perform text embedding on five movie reviews:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -169,14 +179,14 @@ Perform text embedding on [IMDB](https://www.imdb.com/) movie reviews by using t
 
 ## Undeploy model
 
-If you choose not to [delete your project as recommended](#clean_up) , you must undeploy the Qwen3 embedding model in Vertex AI to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
+If you choose not to [delete your project as recommended](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding-tutorial-open-models#clean_up) , you must undeploy the Qwen3 embedding model in Vertex AI to avoid continued billing for it. BigQuery automatically undeploys the model after a specified period of idleness (6.5 hours by default). Alternatively, you can immediately undeploy the model by using the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) , as shown in the following example:
 
-``` text
+``` notranslate
 ALTER MODEL `bqml_tutorial.qwen3_embedding_model`
 SET OPTIONS (deploy_model = false);
 ```
 
-For more information, see [Automatic or immediate open model undeployment](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) .
+For more information, see [Automatic or immediate open model undeployment](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) .
 
 ## Clean up
 
@@ -189,10 +199,12 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [use text embeddings for semantic search and retrieval-augmented generation (RAG)](/bigquery/docs/vector-index-text-search-tutorial) .
+  - Learn how to [use text embeddings for semantic search and retrieval-augmented generation (RAG)](https://docs.cloud.google.com/bigquery/docs/vector-index-text-search-tutorial) .

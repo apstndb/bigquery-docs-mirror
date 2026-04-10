@@ -2,59 +2,59 @@
 
 You can use a number of Google Cloud services to load data into BigQuery where you can then perform further analysis. These services typically require that you initiate extract jobs from the respective console or API of the service. Once enabled, data is loaded into BigQuery according to the cadence defined in the service's extract job. Some extract jobs run in real time and others provide batch data loads.
 
-For Google Cloud databases and services, including Google Drive and Google Sheets, data queries originate from BigQuery. For more information, see [external data sources](/bigquery/external-data-sources) .
+For Google Cloud databases and services, including Google Drive and Google Sheets, data queries originate from BigQuery. For more information, see [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
-If a service is not listed, you might still be able to export data from the service, but this might require using additional functionality. For more information about how to set up custom exports or how to create load jobs and queries from BigQuery, see [Introduction to loading data](/bigquery/docs/loading-data) .
+If a service is not listed, you might still be able to export data from the service, but this might require using additional functionality. For more information about how to set up custom exports or how to create load jobs and queries from BigQuery, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
 
 ## Cloud services that support data exports
 
 ### Carbon Footprint
 
-The [Carbon Footprint](/carbon-footprint) export captures gross estimated greenhouse gas emissions associated with the usage of covered Google Cloud services for the selected billing account.
+The [Carbon Footprint](https://docs.cloud.google.com/carbon-footprint) export captures gross estimated greenhouse gas emissions associated with the usage of covered Google Cloud services for the selected billing account.
 
 You can export your Carbon Footprint data to BigQuery in order to perform data analysis, or to create custom dashboards and reports.
 
-To set up exports of your Carbon Footprint data, see [Export your carbon footprint](/carbon-footprint/docs/export) .
+To set up exports of your Carbon Footprint data, see [Export your carbon footprint](https://docs.cloud.google.com/carbon-footprint/docs/export) .
 
 ### Google Security Operations
 
 You can export [Google Security Operations](https://chronicle.security) security logs to BigQuery for additional data joins and analytics.
 
-To set up exports of your Google Security Operations security logs, reach out to your [Google Security Operations support](/chronicle/docs/getting-support) to set this up.
+To set up exports of your Google Security Operations security logs, reach out to your [Google Security Operations support](https://docs.cloud.google.com/chronicle/docs/getting-support) to set this up.
 
 ### Cloud Asset Inventory
 
-[Cloud Asset Inventory](/asset-inventory) lets you export the asset metadata for your organization, folder, or project to a BigQuery table, and then run data analysis on your inventory.
+[Cloud Asset Inventory](https://docs.cloud.google.com/asset-inventory) lets you export the asset metadata for your organization, folder, or project to a BigQuery table, and then run data analysis on your inventory.
 
-To set up exports of your Cloud Asset Inventory data, see [Exporting to BigQuery](/asset-inventory/docs/exporting-to-bigquery) .
+To set up exports of your Cloud Asset Inventory data, see [Exporting to BigQuery](https://docs.cloud.google.com/asset-inventory/docs/exporting-to-bigquery) .
 
 ### Cloud Billing
 
-[Cloud Billing](/billing) export to BigQuery lets you export detailed Google Cloud billing data (such as usage, cost estimates, and pricing data) automatically throughout the day.
+[Cloud Billing](https://docs.cloud.google.com/billing) export to BigQuery lets you export detailed Google Cloud billing data (such as usage, cost estimates, and pricing data) automatically throughout the day.
 
 **Timing is important.** To have access to a more comprehensive set of billing data for your analysis needs, we recommend that you enable Cloud Billing data export to BigQuery at the same time that you create a Cloud Billing account.
 
-To set up exports of your Cloud Billing data, see [Export Cloud Billing data to BigQuery](/billing/docs/how-to/export-data-bigquery) .
+To set up exports of your Cloud Billing data, see [Export Cloud Billing data to BigQuery](https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery) .
 
 ### Cloud Logging
 
-You can route logs from [Cloud Logging](/logging) to BigQuery tables for additional analytics and joins. For Google Cloud services, log data becomes available for querying approximately 1 minute after it is generated.
+You can route logs from [Cloud Logging](https://docs.cloud.google.com/logging) to BigQuery tables for additional analytics and joins. For Google Cloud services, log data becomes available for querying approximately 1 minute after it is generated.
 
-To use BigQuery as a part of Observability Analytics, see [Observability Analytics](/logging/docs/analyze/query-and-view) .
+To use BigQuery as a part of Observability Analytics, see [Observability Analytics](https://docs.cloud.google.com/logging/docs/analyze/query-and-view) .
 
-To set up exports of your Cloud Logging data, see [Route logs to supported sinks](/logging/docs/export/configure_export_v2) .
+To set up exports of your Cloud Logging data, see [Route logs to supported sinks](https://docs.cloud.google.com/logging/docs/export/configure_export_v2) .
 
 ### Customer Experience Insights
 
-[CX Insights](/solutions/ccai-insights) lets you export your CX Insights conversation and analysis data to BigQuery so that you can perform your own raw queries.
+[CX Insights](https://docs.cloud.google.com/solutions/ccai-insights) lets you export your CX Insights conversation and analysis data to BigQuery so that you can perform your own raw queries.
 
-To configure exports of your CX Insights data, see [Export conversations to BigQuery](/contact-center/insights/docs/export) .
+To configure exports of your CX Insights data, see [Export conversations to BigQuery](https://docs.cloud.google.com/contact-center/insights/docs/export) .
 
 ### Dialogflow CX
 
-[Dialogflow CX](/dialogflow) generates logs of the conversations between agents and your customers.
+[Dialogflow CX](https://docs.cloud.google.com/dialogflow) generates logs of the conversations between agents and your customers.
 
-To configure exports of conversations from Dialogflow CX, see [Interaction logging export to BigQuery](/dialogflow/cx/docs/concept/export-bq) .
+To configure exports of conversations from Dialogflow CX, see [Interaction logging export to BigQuery](https://docs.cloud.google.com/dialogflow/cx/docs/concept/export-bq) .
 
 ### Firebase
 
@@ -97,23 +97,23 @@ To set up exports of your data, see [About bulk data export of Search Console da
 
 ### Recommender
 
-You can schedule daily snapshots of the [recommendations](/recommender/docs/whatis-activeassist) using the BigQuery Data Transfer Service. Recommendations provide advice on optimizing your usage of Google Cloud products and resources, and also provide insights into your resource usage patterns.
+You can schedule daily snapshots of the [recommendations](https://docs.cloud.google.com/recommender/docs/whatis-activeassist) using the BigQuery Data Transfer Service. Recommendations provide advice on optimizing your usage of Google Cloud products and resources, and also provide insights into your resource usage patterns.
 
-To set up snapshots of your data using the BigQuery Data Transfer Service, see [Export recommendations to BigQuery](/recommender/docs/bq-export/export-recommendations-to-bq) .
+To set up snapshots of your data using the BigQuery Data Transfer Service, see [Export recommendations to BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq) .
 
 ### Vertex AI Batch Prediction
 
-[Vertex AI](/vertex-ai) Batch Prediction creates a set of predictions based on an input to a model. You can store these results in BigQuery for additional analytics and joins.
+[Vertex AI](https://docs.cloud.google.com/vertex-ai) Batch Prediction creates a set of predictions based on an input to a model. You can store these results in BigQuery for additional analytics and joins.
 
-To configure exports of batch prediction results, see [Get batch predictions and explanations](/vertex-ai/docs/tabular-data/classification-regression/get-batch-predictions#make-batch-request) .
+To configure exports of batch prediction results, see [Get batch predictions and explanations](https://docs.cloud.google.com/vertex-ai/docs/tabular-data/classification-regression/get-batch-predictions#make-batch-request) .
 
 ### Vertex AI Predictions
 
 You can use Vertex AI Predictions to store prediction results from online endpoints in BigQuery for additional analysis.
 
-To configure model prediction integration with BigQuery, see [Online prediction logging](/vertex-ai/docs/predictions/online-prediction-logging#enabling-and-disabling) .
+To configure model prediction integration with BigQuery, see [Online prediction logging](https://docs.cloud.google.com/vertex-ai/docs/predictions/online-prediction-logging#enabling-and-disabling) .
 
 ## What's next
 
-  - Learn about other integrations you can initiate in BigQuery using [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - Learn about connections to other [external data sources](/bigquery/external-data-sources) .
+  - Learn about other integrations you can initiate in BigQuery using [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - Learn about connections to other [external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .

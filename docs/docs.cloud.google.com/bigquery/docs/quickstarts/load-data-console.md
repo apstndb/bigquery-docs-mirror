@@ -2,7 +2,13 @@
 
 Get started with BigQuery by creating a dataset, loading data into a table, and querying the table.
 
+-----
+
 To follow step-by-step guidance for this task directly in the Google Cloud console, click **Guide me** :
+
+[Guide me](https://console.cloud.google.com/freetrial?redirectPath=/?walkthrough_id=bigquery--bigquery-quickstart-load-data-console)
+
+-----
 
 ## Before you begin
 
@@ -10,30 +16,34 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
     For new projects, the BigQuery API is automatically enabled.
 
-2.  Optional: [Enable billing](/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](/bigquery/docs/sandbox#setup) .
+2.  Optional: [Enable billing](https://docs.cloud.google.com/billing/docs/how-to/modify-project) for the project. If you don't want to enable billing or provide a credit card, the steps in this document still work. BigQuery provides you a sandbox to perform the steps. For more information, see [Enable the BigQuery sandbox](https://docs.cloud.google.com/bigquery/docs/sandbox#setup) .
     
-    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
+    **Note:** If your project has a billing account and you want to use the BigQuery sandbox, then [disable billing for your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project#disable_billing_for_a_project) .
 
 ### Required roles
 
 To get the permissions that you need to create a dataset, create a table, load data, and query data, ask your administrator to grant you the following IAM roles on the project:
 
-  - Run load jobs and query jobs: [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
-  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Run load jobs and query jobs: [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` )
+  - Create a dataset, create a table, load data into a table, and query a table: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create a BigQuery dataset
 
-Use the Google Cloud console to create a dataset to store the data. You create your dataset in the US multi-region location. For information on BigQuery regions and multi-regions, see [Locations](/bigquery/docs/dataset-locations) .
+Use the Google Cloud console to create a dataset to store the data. You create your dataset in the US multi-region location. For information on BigQuery regions and multi-regions, see [Locations](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 In the Google Cloud console, open the BigQuery page.
+
+[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -57,9 +67,7 @@ For more information about the data, see the Social Security Administration's [B
 
 1.  Download the US Social Security Administration's data by opening the following URL in a new browser tab:
     
-    ``` text
-    https://www.ssa.gov/OACT/babynames/names.zip
-    ```
+        https://www.ssa.gov/OACT/babynames/names.zip
 
 2.  Extract the file.
     
@@ -120,7 +128,7 @@ Next, query the table.
 
 2.  In the query editor, paste the following query. This query retrieves the top five names for babies born in the US that were assigned male at birth in 2024.  
     
-    ``` text
+    ``` 
       SELECT
         name,
         count
@@ -136,6 +144,7 @@ Next, query the table.
     ```
 
 3.  Click **Run** . The results are displayed in the **Query results** section.  
+    ![The query results panel](https://docs.cloud.google.com/static/bigquery/images/names-query-results.png)
 
 You have successfully queried a table in a public dataset and then loaded your sample data into BigQuery using the Google Cloud console.
 
@@ -151,7 +160,7 @@ To avoid incurring charges to your Google Cloud account for the resources used o
 
 ## What's next
 
-  - To learn more about loading data into BigQuery, see [Introduction to loading data](/bigquery/docs/loading-data) .
-  - To learn more about querying data, see [Overview of BigQuery analytics](/bigquery/docs/query-overview) .
-  - To learn how to load a JSON file with nested and repeated data, see [Loading nested and repeated JSON data](/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) .
-  - To learn more about accessing BigQuery programmatically, see the [REST API](/bigquery/docs/reference/rest/v2) reference or the [BigQuery client libraries](/bigquery/docs/reference/libraries) page.
+  - To learn more about loading data into BigQuery, see [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data) .
+  - To learn more about querying data, see [Overview of BigQuery analytics](https://docs.cloud.google.com/bigquery/docs/query-overview) .
+  - To learn how to load a JSON file with nested and repeated data, see [Loading nested and repeated JSON data](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-json#loading_nested_and_repeated_json_data) .
+  - To learn more about accessing BigQuery programmatically, see the [REST API](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2) reference or the [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) page.

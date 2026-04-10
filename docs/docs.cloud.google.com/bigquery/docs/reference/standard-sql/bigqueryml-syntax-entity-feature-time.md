@@ -2,11 +2,11 @@
 
 This document describes the `  ML.ENTITY_FEATURES_AT_TIME  ` function, which lets you use multiple point-in-time cutoffs for multiple entities when retrieving features, because features can have time dependencies if they include time-sensitive data. To avoid [data leakage](https://en.wikipedia.org/wiki/Leakage_\(machine_learning\)) , use point-in-time features when training models and running inference.
 
-Use this function to retrieve features from multiple entities for multiple points in time. For example, you could retrieve features created at or before three different points in time for entity 1, and features created at or before yet another different point in time for entity 2. Use the [`  ML.FEATURES_AT_TIME  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
+Use this function to retrieve features from multiple entities for multiple points in time. For example, you could retrieve features created at or before three different points in time for entity 1, and features created at or before yet another different point in time for entity 2. Use the [`  ML.FEATURES_AT_TIME  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature-time) to use the same point-in-time cutoff for all entities when retrieving features.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.ENTITY_FEATURES_AT_TIME(
    { TABLE `PROJECT_ID.DATASET.FEATURE_TABLE_NAME` | (FEATURE_QUERY_STATEMENT) },
    { TABLE `PROJECT_ID.DATASET.ENTITY_TIME_TABLE_NAME` | (ENTITY_TIME_QUERY_STATEMENT) },
@@ -31,7 +31,7 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     The feature table must be in [wide](https://en.wikipedia.org/wiki/Wide_and_narrow_data#Wide) format, with one column for each feature.
 
-  - `  FEATURE_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as `  feature_table  ` . See [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  FEATURE_QUERY_STATEMENT  ` clause.
+  - `  FEATURE_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the feature data. This query must return the same columns as `  feature_table  ` . See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  FEATURE_QUERY_STATEMENT  ` clause.
 
   - `  ENTITY_TIME_TABLE_NAME  ` : a `  STRING  ` value that specifies the name of the BigQuery table that maps entity IDs to feature lookup times. The entity time table must contain the following columns:
     
@@ -42,7 +42,7 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     The table identified by the `  ENTITY_TIME_TABLE_NAME  ` value must be no larger than 100 MB.
 
-  - `  ENTITY_TIME_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the entity time data. This query must return the same columns as the `  ENTITY_TIME_TABLE_NAME  ` argument. See [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  ENTITY_TIME_QUERY_STATEMENT  ` clause.
+  - `  ENTITY_TIME_QUERY_STATEMENT  ` : a `  STRING  ` value that specifies a GoogleSQL query that returns the entity time data. This query must return the same columns as the `  ENTITY_TIME_TABLE_NAME  ` argument. See [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) for the supported SQL syntax of the `  ENTITY_TIME_QUERY_STATEMENT  ` clause.
 
   - `  NUM_ROWS  ` : an `  INT64  ` value that specifies the number of rows to return for each row in `  ENTITY_TIME_TABLE_NAME  ` . Defaults to `  1  ` .
 
@@ -74,15 +74,13 @@ ML.ENTITY_FEATURES_AT_TIME(
     
     Running this query:
     
-    ``` text
-    SELECT *
-    FROM
-      ML.ENTITY_FEATURES_AT_TIME(
-        TABLE mydataset.feature_table,
-        TABLE mydataset.entity_time_table,
-        num_rows => 1,
-        ignore_feature_nulls => TRUE);
-    ```
+        SELECT *
+        FROM
+          ML.ENTITY_FEATURES_AT_TIME(
+            TABLE mydataset.feature_table,
+            TABLE mydataset.entity_time_table,
+            num_rows => 1,
+            ignore_feature_nulls => TRUE);
     
     Results in the following output, where the `  f2  ` value from the row for entity ID 2 that is timestamped `  '2022-06-10 12:00:00+00'  ` is substituted for the `  NULL  ` value in the row timestamped `  '2022-06-11 10:00:00+00'  ` :
     
@@ -117,66 +115,60 @@ Then the function doesn't return any output for that entity time table row.
 
 This example shows a how to retrain a model using only features that were created or updated before the timestamps identified in `  mydataset.entity_time_table  ` :
 
-``` text
-CREATE OR REPLACE
-  `mydataset.mymodel` OPTIONS (WARM_START = TRUE)
-AS
-SELECT * EXCEPT (feature_timestamp, entity_id)
-FROM
-  ML.ENTITY_FEATURES_AT_TIME(
-    TABLE `mydataset.feature_table`,
-    TABLE `mydataset.entity_time_table`,
-    num_rows => 1,
-    ignore_feature_nulls => TRUE);
-```
+    CREATE OR REPLACE
+      `mydataset.mymodel` OPTIONS (WARM_START = TRUE)
+    AS
+    SELECT * EXCEPT (feature_timestamp, entity_id)
+    FROM
+      ML.ENTITY_FEATURES_AT_TIME(
+        TABLE `mydataset.feature_table`,
+        TABLE `mydataset.entity_time_table`,
+        num_rows => 1,
+        ignore_feature_nulls => TRUE);
 
 **Example 2**
 
 This example shows a how to get predictions from a model based on features that were created or updated before the timestamps identified in `  mydataset.entity_time_table  ` :
 
-``` text
-SELECT
-  *
-FROM
-  ML.PREDICT(
-    MODEL `mydataset.mymodel`,
-    (
-      SELECT * EXCEPT (feature_timestamp, entity_id)
-      FROM
-        ML.ENTITY_FEATURES_AT_TIME(
-          TABLE `mydataset.feature_table`,
-          TABLE `mydataset.entity_time_table`,
-          num_rows => 1,
-          ignore_feature_nulls => TRUE)
-    )
-  );
-```
+    SELECT
+      *
+    FROM
+      ML.PREDICT(
+        MODEL `mydataset.mymodel`,
+        (
+          SELECT * EXCEPT (feature_timestamp, entity_id)
+          FROM
+            ML.ENTITY_FEATURES_AT_TIME(
+              TABLE `mydataset.feature_table`,
+              TABLE `mydataset.entity_time_table`,
+              num_rows => 1,
+              ignore_feature_nulls => TRUE)
+        )
+      );
 
 **Example 3**
 
 This is a contrived example that you can use to see the output of the function:
 
-``` text
-WITH
-  feature_table AS (
-    SELECT * FROM UNNEST(
-      ARRAY<STRUCT<entity_id STRING, f_1 FLOAT64, f_2 FLOAT64, feature_timestamp TIMESTAMP>>[
-        ('id1', 1.0, 1.0, TIMESTAMP '2022-06-10 12:00:00+00'),
-        ('id2', 12.0, 24.0, TIMESTAMP '2022-06-11 12:00:00+00'),
-        ('id1', 11.0, NULL, TIMESTAMP '2022-06-11 12:00:00+00'),
-        ('id1', 6.0, 12.0, TIMESTAMP '2022-06-11 10:00:00+00'),
-        ('id2', 2.0, 4.0, TIMESTAMP '2022-06-10 12:00:00+00'),
-        ('id2', 7.0, NULL, TIMESTAMP '2022-06-11 10:00:00+00')])
-  ),
-  entity_time_table AS (
-    SELECT * FROM UNNEST(
-      ARRAY<STRUCT<entity_id STRING, time TIMESTAMP>>[
-        ('id1', TIMESTAMP '2022-06-12 12:00:00+00'),
-        ('id2', TIMESTAMP '2022-06-11 10:00:00+00'),
-        ('id1', TIMESTAMP '2022-06-10 13:00:00+00')])
-  )
-SELECT *
-FROM
-  ML.ENTITY_FEATURES_AT_TIME(
-    TABLE feature_table, TABLE entity_time_table, num_rows => 1, ignore_feature_nulls => TRUE);
-```
+    WITH
+      feature_table AS (
+        SELECT * FROM UNNEST(
+          ARRAY<STRUCT<entity_id STRING, f_1 FLOAT64, f_2 FLOAT64, feature_timestamp TIMESTAMP>>[
+            ('id1', 1.0, 1.0, TIMESTAMP '2022-06-10 12:00:00+00'),
+            ('id2', 12.0, 24.0, TIMESTAMP '2022-06-11 12:00:00+00'),
+            ('id1', 11.0, NULL, TIMESTAMP '2022-06-11 12:00:00+00'),
+            ('id1', 6.0, 12.0, TIMESTAMP '2022-06-11 10:00:00+00'),
+            ('id2', 2.0, 4.0, TIMESTAMP '2022-06-10 12:00:00+00'),
+            ('id2', 7.0, NULL, TIMESTAMP '2022-06-11 10:00:00+00')])
+      ),
+      entity_time_table AS (
+        SELECT * FROM UNNEST(
+          ARRAY<STRUCT<entity_id STRING, time TIMESTAMP>>[
+            ('id1', TIMESTAMP '2022-06-12 12:00:00+00'),
+            ('id2', TIMESTAMP '2022-06-11 10:00:00+00'),
+            ('id1', TIMESTAMP '2022-06-10 13:00:00+00')])
+      )
+    SELECT *
+    FROM
+      ML.ENTITY_FEATURES_AT_TIME(
+        TABLE feature_table, TABLE entity_time_table, num_rows => 1, ignore_feature_nulls => TRUE);

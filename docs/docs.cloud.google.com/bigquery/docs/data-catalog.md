@@ -1,6 +1,6 @@
 # Work with Data Catalog
 
-**Caution:** Data Catalog is [deprecated](/data-catalog/docs/deprecations) in favor of [Dataplex Universal Catalog](/dataplex/docs/catalog-overview) , which offers intelligent governance for data and AI assets across Google Cloud. Key Dataplex Universal Catalog capabilities are integrated with BigQuery and are also available in the BigQuery experience. See [Manage aspects and enrich metadata](/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
+**Caution:** Data Catalog is [deprecated](https://docs.cloud.google.com/data-catalog/docs/deprecations) in favor of [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , which offers intelligent governance for data and AI assets across Google Cloud. Key Dataplex Universal Catalog capabilities are integrated with BigQuery and are also available in the BigQuery experience. See [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) for details on enriching your data with aspects, which are the equivalent of Data Catalog tags.
 
 Data Catalog integrates with BigQuery by automatically cataloging metadata about BigQuery resources like tables, datasets, views, and models. This document describes how to search these resources, view data lineage, and add tags by using Data Catalog.
 
@@ -9,39 +9,48 @@ Data Catalog integrates with BigQuery by automatically cataloging metadata about
 To use Data Catalog to search for BigQuery datasets, tables, and starred projects, follow these steps:
 
 1.  In the Google Cloud console, go to the Data Catalog **Search** page.
+    
+    [Go to Search](https://console.cloud.google.com/dataplex)
 
 2.  In the **Search** field, enter a query, and then click **Search** .
     
+    ![Data Catalog search lets you find data across your projects and organizations.](https://docs.cloud.google.com/static/bigquery/images/data-catalog-search.png)
+    
     To refine your search parameters, use the **Filters** panel. For example, in the **Systems** section, select the **BigQuery** checkbox. The results are filtered to BigQuery systems.
 
-You can perform basic searches in Data Catalog through the Google Cloud console. For more information about searching in the Google Cloud console, see [Open a public dataset](/bigquery/docs/quickstarts/query-public-dataset-console#open_a_public_dataset) .
+You can perform basic searches in Data Catalog through the Google Cloud console. For more information about searching in the Google Cloud console, see [Open a public dataset](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console#open_a_public_dataset) .
 
 ## Data lineage
 
-[Data lineage](/dataplex/docs/about-data-lineage) is a Dataplex Universal Catalog feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. You can access the data lineage feature directly from BigQuery.
+[Data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) is a Dataplex Universal Catalog feature that lets you track how data moves through your systems: where it comes from, where it is passed to, and what transformations are applied to it. You can access the data lineage feature directly from BigQuery.
 
 Enabling data lineage in your BigQuery project causes Dataplex Universal Catalog to automatically record lineage information for tables created by the following operations:
 
-  - [Copy jobs](/bigquery/docs/managing-tables#copy-table) .
+  - [Copy jobs](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) .
 
-  - [Query jobs](/bigquery/docs/running-queries) that use the following data definition language (DDL) or data manipulation language (DML) statements in GoogleSQL:
+  - [Query jobs](https://docs.cloud.google.com/bigquery/docs/running-queries) that use the following data definition language (DDL) or data manipulation language (DML) statements in GoogleSQL:
     
-      - [`  CREATE TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) (including the `  CREATE TABLE AS SELECT  ` statement)
-      - [`  INSERT  `](/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
-      - [`  UPDATE  `](/bigquery/docs/reference/standard-sql/dml-syntax#update_statement)
-      - [`  DELETE  `](/bigquery/docs/reference/standard-sql/dml-syntax#delete_statement)
-      - [`  MERGE  `](/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement)
+      - [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) (including the `  CREATE TABLE AS SELECT  ` statement)
+      - [`  INSERT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement)
+      - [`  UPDATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_statement)
+      - [`  DELETE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_statement)
+      - [`  MERGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#merge_statement)
 
 ### Before you begin
 
-In this section, you enable the Data Lineage API and grant [Identity and Access Management (IAM)](/iam/docs) roles that give users the necessary permissions to perform each task in this document.
+In this section, you enable the Data Lineage API and grant [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs) roles that give users the necessary permissions to perform each task in this document.
 
 #### Enable data lineage
 
 1.  In the Google Cloud console, on the project selector page, select the project that contains the resources for which you want to track lineage.
-2.  Enable the Data Lineage API and Dataplex API.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-**Note:** Enabling the Data Lineage API may incur additional costs. For more information, see [Data lineage considerations](/dataplex/docs/lineage-considerations) .
+2.  Enable the Data Lineage API and Dataplex API.
+    
+    [Enable the APIs](https://console.cloud.google.com/apis/enableflow?apiid=datalineage.googleapis.com,dataplex.googleapis.com)
+
+**Note:** Enabling the Data Lineage API may incur additional costs. For more information, see [Data lineage considerations](https://docs.cloud.google.com/dataplex/docs/lineage-considerations) .
 
 #### Required IAM roles
 
@@ -49,23 +58,27 @@ Lineage information is tracked automatically when you enable the Data Lineage AP
 
 To get the permissions that you need to view lineage graphs, ask your administrator to grant you the following IAM roles:
 
-  - [Data Catalog Viewer](/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `  roles/datacatalog.viewer  ` ) on a Data Catalog resource project.
-  - [Data lineage viewer](/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `  roles/datalineage.viewer  ` ) on the project where you use systems supported by data lineage.
-  - [BigQuery Metadata](/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
+  - [Data Catalog Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datacatalog#datacatalog.viewer) ( `  roles/datacatalog.viewer  ` ) on a Data Catalog resource project.
+  - [Data lineage viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/datalineage#datalineage.viewer) ( `  roles/datalineage.viewer  ` ) on the project where you use systems supported by data lineage.
+  - [BigQuery Metadata](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Data lineage roles](/dataplex/docs/iam-roles#lineage-roles) .
+For more information, see [Data lineage roles](https://docs.cloud.google.com/dataplex/docs/iam-roles#lineage-roles) .
 
 ### View lineage graphs in BigQuery
 
 To view the data lineage graph from BigQuery follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -75,11 +88,15 @@ To view the data lineage graph from BigQuery follow these steps:
 
 5.  Click the **Lineage** tab.
     
+    ![Data lineage tab.](https://docs.cloud.google.com/static/bigquery/images/data-lineage-tab.png)
+    
     Your data lineage graph is displayed.
+    
+    ![Data lineage graph.](https://docs.cloud.google.com/static/bigquery/images/sample-lineage-graph.png)
 
 6.  Optional: Select a node to view additional details about the entities or processes involved in constructing lineage information.
 
-For more information about data lineage, see [About data lineage](/dataplex/docs/about-data-lineage) .
+For more information about data lineage, see [About data lineage](https://docs.cloud.google.com/dataplex/docs/about-data-lineage) .
 
 ## Tags and tag templates
 
@@ -97,7 +114,7 @@ Data Catalog provides two types of tags: private tags and public tags.
 
 #### Private tags
 
-Private tags provide strict access controls. You can search or view the tags and the data entries associated with the tags only if you are granted the [required view permissions](/data-catalog/docs/concepts/iam#roles_to_view_public_and_private_tags) on both the private tag template and the data entries.
+Private tags provide strict access controls. You can search or view the tags and the data entries associated with the tags only if you are granted the [required view permissions](https://docs.cloud.google.com/data-catalog/docs/concepts/iam#roles_to_view_public_and_private_tags) on both the private tag template and the data entries.
 
 Searching for private tags in the Data Catalog page requires that you use the `  tag:  ` search syntax or the search filters.
 
@@ -134,6 +151,8 @@ To help you get started, Data Catalog includes a gallery of sample tag templates
 To use a tag template gallery, perform the following steps:
 
 1.  In the Google Cloud console, go to the Dataplex Universal Catalog **Tag templates** page.
+    
+    [Go to Tag templates](https://console.cloud.google.com/dataplex/templates)
 
 2.  Click **Create tag template** .
     
@@ -141,8 +160,8 @@ To use a tag template gallery, perform the following steps:
 
 After you select a template from the gallery, you can use it just like any other tag template. You can add or delete attributes and change anything in the template to suit your business needs. You can then search for the template fields and values using Data Catalog.
 
-For more information about tags and tag templates, see [Tags and tag templates](/data-catalog/docs/tags-and-tag-templates) .
+For more information about tags and tag templates, see [Tags and tag templates](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) .
 
 ### Regional resources
 
-Every tag template and tag is stored in a particular [Google Cloud region](/bigquery/docs/locations) . You can use a tag template to create a tag in any region, so you don't need to create copies of your template if you have metadata entries spread across multiple regions.
+Every tag template and tag is stored in a particular [Google Cloud region](https://docs.cloud.google.com/bigquery/docs/locations) . You can use a tag template to create a tag in any region, so you don't need to create copies of your template if you have metadata entries spread across multiple regions.

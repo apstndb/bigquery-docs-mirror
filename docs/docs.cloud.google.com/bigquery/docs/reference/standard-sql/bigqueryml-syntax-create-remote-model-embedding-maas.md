@@ -1,16 +1,16 @@
 # The CREATE MODEL statement for Vertex AI embedding models as MaaS
 
-This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over [embedding models](/vertex-ai/generative-ai/docs/embeddings) in Vertex AI as a model as a service (MaaS) by using SQL. When you use MaaS on Vertex AI, you don't have to provision or manage serving infrastructure for your models. Choose MaaS for rapid development and prototyping, when you want to minimize operational overhead. For more information, see [When to use MaaS](/vertex-ai/generative-ai/docs/open-models/choose-serving-option#when_to_use_maas) .
+This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over [embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings) in Vertex AI as a model as a service (MaaS) by using SQL. When you use MaaS on Vertex AI, you don't have to provision or manage serving infrastructure for your models. Choose MaaS for rapid development and prototyping, when you want to minimize operational overhead. For more information, see [When to use MaaS](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#when_to_use_maas) .
 
-Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
-  - [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
+  - [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding)
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}
@@ -48,41 +48,35 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
-```
+    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
 
 The connection elements are as follows:
 
   - `  PROJECT_ID  ` : the project ID of the project that contains the connection.
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
   - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
     
-    To find your connection ID, [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
-If you are using the remote model to analyze unstructured data from an [object table](/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
+If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
 **Example**
 
-``` text
-`myproject.us.my_connection`
-```
+    `myproject.us.my_connection`
 
 ### `     ENDPOINT    `
 
 **Syntax**
 
-``` text
-ENDPOINT = 'vertex_ai_embedding_endpoint'
-```
+    ENDPOINT = 'vertex_ai_embedding_endpoint'
 
 **Description**
 
@@ -94,26 +88,26 @@ A `  STRING  ` value that contains the model name of the target Vertex AI embedd
 
 ### text embedding models
 
-The following [text embedding models](/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models) are supported:
+The following [text embedding models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models) are supported:
 
   - `  gemini-embedding-001  ` , which supports both English and multilingual input.
   - `  text-embedding-004  `
   - `  text-embedding-005  `
   - `  text-multilingual-embedding-002  `
 
-After you create a remote model based on an embedding model, you can use the model with the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table.
+After you create a remote model based on an embedding model, you can use the model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table.
 
 ### multimodal embedding models
 
-The `  multimodalembedding@001  ` [embedding model](/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#supported-models) is supported.
+The `  multimodalembedding@001  ` [embedding model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-multimodal-embeddings#supported-models) is supported.
 
-After you create a remote model based on a `  multimodalembedding  ` embedding model, you can use the model with the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table or from visual content in a BigQuery [object table](/bigquery/docs/object-table-introduction) .
+After you create a remote model based on a `  multimodalembedding  ` embedding model, you can use the model with the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) to generate embeddings from text data in a BigQuery table or from visual content in a BigQuery [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
-For information that can help you choose between the supported models, see [Model information](/vertex-ai/docs/generative-ai/learn/models) .
+For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models) .
 
 ## Locations
 
-For information about supported locations, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+For information about supported locations, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Examples
 
@@ -123,14 +117,12 @@ The following examples create BigQuery ML remote models.
 
 The following example creates a BigQuery ML remote model over the `  text-embedding-005  ` model and uses the default connection:
 
-``` text
-CREATE OR REPLACE MODEL mydataset.embedding_005
-REMOTE WITH CONNECTION DEFAULT
-OPTIONS(ENDPOINT = 'text-embedding-005');
-```
+    CREATE OR REPLACE MODEL mydataset.embedding_005
+    REMOTE WITH CONNECTION DEFAULT
+    OPTIONS(ENDPOINT = 'text-embedding-005');
 
 ## What's next
 
-  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](/bigquery/docs/generative-ai-overview) .
-  - Try [generating embeddings from BigQuery data](/bigquery/docs/generate-text-embedding) .
-  - Try [generating image embeddings](/bigquery/docs/generate-visual-content-embedding) .
+  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - Try [generating embeddings from BigQuery data](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
+  - Try [generating image embeddings](https://docs.cloud.google.com/bigquery/docs/generate-visual-content-embedding) .

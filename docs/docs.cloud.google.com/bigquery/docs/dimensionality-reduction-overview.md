@@ -6,10 +6,10 @@ Reducing dimensionality is important when you are working with large datasets th
 
 BigQuery ML offers the following models for dimensionality reduction:
 
-  - [Principal component analysis (PCA)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-  - [Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+  - [Principal component analysis (PCA)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+  - [Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
-You can use PCA and autoencoder models with the [`  ML.PREDICT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview) .
+You can use PCA and autoencoder models with the [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
 You can use the output from dimensionality reduction models for tasks such as the following:
 

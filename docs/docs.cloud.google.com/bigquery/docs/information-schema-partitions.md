@@ -2,15 +2,13 @@
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 The `  INFORMATION_SCHEMA.PARTITIONS  ` view contains one row for each partition.
 
 Querying the `  INFORMATION_SCHEMA.PARTITIONS  ` view is limited to 1000 tables. To get the data about partitions at the project level, you can split the query into multiple queries and then join the results. If you exceed the limit, you might encounter an error similar to the following. To narrow down your results, you can use filters with the `  WHERE  ` statement, for example, `  table_name = 'mytable'  ` and `  total_logical_bytes IS NOT NULL  ` .
 
-``` text
-INFORMATION_SCHEMA.PARTITIONS query attempted to read too many tables. Please add more restrictive filters.
-```
+    INFORMATION_SCHEMA.PARTITIONS query attempted to read too many tables. Please add more restrictive filters.
 
 ## Required permissions
 
@@ -25,11 +23,11 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.dataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, the query results typically contain one row for each partition. The exception is when there is a combination of long-term and active storage tier data in the [`  __UNPARTITIONED__  ` partition](/bigquery/docs/querying-partitioned-tables#query_data_in_the_streaming_buffer) . In that case, the view returns two rows for the `  __UNPARTITIONED__  ` partition, one for each storage tier.
+When you query the `  INFORMATION_SCHEMA.PARTITIONS  ` view, the query results typically contain one row for each partition. The exception is when there is a combination of long-term and active storage tier data in the [`  __UNPARTITIONED__  ` partition](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables#query_data_in_the_streaming_buffer) . In that case, the view returns two rows for the `  __UNPARTITIONED__  ` partition, one for each storage tier.
 
 The `  INFORMATION_SCHEMA.PARTITIONS  ` view has the following schema:
 
@@ -104,29 +102,16 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.PARTITIONS      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                        | Resource scope | Region scope     |
+| -------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.PARTITIONS       ` | Dataset level  | Dataset location |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
 
 ## Examples
 
@@ -134,7 +119,7 @@ Replace the following:
 
 The following example calculates the number of logical bytes used by each storage tier in all of the tables in a dataset named `  mydataset  ` :
 
-``` text
+``` notranslate
 SELECT
   storage_tier,
   SUM(total_logical_bytes) AS logical_bytes
@@ -148,20 +133,18 @@ GROUP BY
 
 The results look similar to the following:
 
-``` text
-+--------------+----------------+
-| storage_tier | logical_bytes  |
-+--------------+----------------+
-| LONG_TERM    |  1311495144879 |
-| ACTIVE       |    66757629240 |
-+--------------+----------------+
-```
+    +--------------+----------------+
+    | storage_tier | logical_bytes  |
+    +--------------+----------------+
+    | LONG_TERM    |  1311495144879 |
+    | ACTIVE       |    66757629240 |
+    +--------------+----------------+
 
 **Example 2**
 
 The following example creates a column that extracts the partition type from the `  partition_id  ` field and aggregates partition information at the table level for the public `  bigquery-public-data.covid19_usafacts  ` dataset:
 
-``` text
+``` notranslate
 SELECT
   table_name,
   CASE
@@ -181,12 +164,10 @@ GROUP BY 1, 2;
 
 The results look similar to the following:
 
-``` text
-+-----------------+----------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+
-| table_name      | partition_type | earliest_partition | latest_partition_id | partition_count | sum_total_logical_bytes | max_last_updated_time          |
-+--------------+-------------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+
-| confirmed_cases | DAY            | 20221204           | 20221213            | 10              | 26847302                | 2022-12-13 00:09:25.604000 UTC |
-| deaths          | DAY            | 20221204           | 20221213            | 10              | 26847302                | 2022-12-13 00:09:24.709000 UTC |
-| summary         | DAY            | 20221204           | 20221213            | 10              | 241285338               | 2022-12-13 00:09:27.496000 UTC |
-+-----------------+----------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+
-```
+    +-----------------+----------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+
+    | table_name      | partition_type | earliest_partition | latest_partition_id | partition_count | sum_total_logical_bytes | max_last_updated_time          |
+    +--------------+-------------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+
+    | confirmed_cases | DAY            | 20221204           | 20221213            | 10              | 26847302                | 2022-12-13 00:09:25.604000 UTC |
+    | deaths          | DAY            | 20221204           | 20221213            | 10              | 26847302                | 2022-12-13 00:09:24.709000 UTC |
+    | summary         | DAY            | 20221204           | 20221213            | 10              | 241285338               | 2022-12-13 00:09:27.496000 UTC |
+    +-----------------+----------------+--------------------+---------------------+-----------------+-------------------------+--------------------------------+

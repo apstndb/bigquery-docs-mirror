@@ -4,9 +4,9 @@ This document describes *time travel* and *fail-safe* data retention windows for
 
 ## Time travel and data retention
 
-You can access changed or deleted data from any point within the time travel window, which covers the past seven days by default. Time travel lets you [query data that was updated or deleted](/bigquery/docs/access-historical-data) , restore a [table](/bigquery/docs/restore-deleted-tables) or [dataset](/bigquery/docs/restore-deleted-datasets) that was deleted, restore a [table that expired](/bigquery/docs/managing-tables#updating_a_tables_expiration_time) , or [restore a table to a point in time](/bigquery/docs/access-historical-data#restore-a-table) .
+You can access changed or deleted data from any point within the time travel window, which covers the past seven days by default. Time travel lets you [query data that was updated or deleted](https://docs.cloud.google.com/bigquery/docs/access-historical-data) , restore a [table](https://docs.cloud.google.com/bigquery/docs/restore-deleted-tables) or [dataset](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) that was deleted, restore a [table that expired](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_a_tables_expiration_time) , or [restore a table to a point in time](https://docs.cloud.google.com/bigquery/docs/access-historical-data#restore-a-table) .
 
-You can set the duration of the time travel window, from a minimum of two days to a maximum of seven days. A longer time travel window is useful in cases where it is important to be able to recover updated or deleted data. A shorter time travel window lets you save on storage costs when using the [physical storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) . These savings don't apply when using the logical storage billing model. For more information on how the storage billing model affects cost, see [Billing](#billing) . You can't set the time travel duration for less than 2 days.
+You can set the duration of the time travel window, from a minimum of two days to a maximum of seven days. A longer time travel window is useful in cases where it is important to be able to recover updated or deleted data. A shorter time travel window lets you save on storage costs when using the [physical storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) . These savings don't apply when using the logical storage billing model. For more information on how the storage billing model affects cost, see [Billing](https://docs.cloud.google.com/bigquery/docs/time-travel#billing) . You can't set the time travel duration for less than 2 days.
 
 ## Configure the time travel window
 
@@ -14,22 +14,20 @@ You set the time travel window at the dataset or project level. These settings t
 
 ### Set the project-level time travel window
 
-To specify the project-level default time travel window, you can use data definition language (DDL) statements. To learn how to set the project-level time travel window, see [Manage configuration settings](/bigquery/docs/default-configuration) .
+To specify the project-level default time travel window, you can use data definition language (DDL) statements. To learn how to set the project-level time travel window, see [Manage configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
 
 ### Set the dataset-level time travel window
 
 To specify or modify the time travel window for a dataset, you can use the Google Cloud console, the bq command-line tool, or the BigQuery API.
 
-  - To specify the default time travel window for new datasets, see [Create datasets](/bigquery/docs/datasets#create-dataset) .
-  - To modify or update the time travel window for an existing dataset, see [Update time travel windows](/bigquery/docs/updating-datasets#update_time_travel_windows) .
+  - To specify the default time travel window for new datasets, see [Create datasets](https://docs.cloud.google.com/bigquery/docs/datasets#create-dataset) .
+  - To modify or update the time travel window for an existing dataset, see [Update time travel windows](https://docs.cloud.google.com/bigquery/docs/updating-datasets#update_time_travel_windows) .
 
 When modifying a time travel window, if the timestamp specifies a time outside the time travel window, or from before the table was created, then the query fails and returns an error like the following:
 
-``` text
-Table ID was created at time which is
-before its allowed time travel interval timestamp. Creation
-time: timestamp
-```
+    Table ID was created at time which is
+    before its allowed time travel interval timestamp. Creation
+    time: timestamp
 
 ## How time travel works
 
@@ -51,67 +49,35 @@ For example, if you have a time travel window duration of two days and then incr
 
 Because time travel windows are set at the dataset level, you can't change the time travel window of a deleted dataset until it is undeleted.
 
-If you reduce the time travel window duration, delete a table, and then realize that you need a longer period of recoverability for that data, you can create a snapshot of the table from a point in time prior to the table deletion. You must do this while the deleted table is still recoverable. For more information, see [Create a table snapshot using time travel](/bigquery/docs/table-snapshots-create#create_a_table_snapshot_using_time_travel) .
+If you reduce the time travel window duration, delete a table, and then realize that you need a longer period of recoverability for that data, you can create a snapshot of the table from a point in time prior to the table deletion. You must do this while the deleted table is still recoverable. For more information, see [Create a table snapshot using time travel](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create#create_a_table_snapshot_using_time_travel) .
 
 ### Time travel and row-level access
 
-If a table has, or has had, [row-level access policies](/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table. The following [Identity and Access Management (IAM)](/bigquery/docs/access-control) permission is required to restore tables with row access policies:
+If a table has, or has had, [row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , then only a table administrator can access historical data for the table. The following [Identity and Access Management (IAM)](https://docs.cloud.google.com/bigquery/docs/access-control) permission is required to restore tables with row access policies:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Permission</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions"><code dir="ltr" translate="no">        bigquery.rowAccessPolicies.overrideTimeTravelRestrictions       </code></a></td>
-<td>The table whose historical data is being accessed</td>
-</tr>
-</tbody>
-</table>
+| **Permission**                                                                                                                                                                                       | **Resource**                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`         bigquery.rowAccessPolicies.overrideTimeTravelRestrictions        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.rowAccessPolicies.overrideTimeTravelRestrictions) | The table whose historical data is being accessed |
 
-The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission can't be added to a [custom role](/iam/docs/creating-custom-roles) . The following roles provide the required permission:
+The `  bigquery.rowAccessPolicies.overrideTimeTravelRestrictions  ` permission can't be added to a [custom role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) . The following roles provide the required permission:
 
-<table>
-<colgroup>
-<col style="width: 62%" />
-<col style="width: 38%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Role</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/access-control#bigquery.admin"><code dir="ltr" translate="no">        roles/bigquery.admin       </code></a></td>
-<td>The table whose historical data is being accessed</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/access-control#bigquery.studioAdmin"><code dir="ltr" translate="no">        roles/bigquery.studioAdmin       </code></a></td>
-<td>The table whose historical data is being accessed</td>
-</tr>
-<tr class="odd">
-<td><a href="/iam/docs/roles-permissions/iam#iam.databasesAdmin"><code dir="ltr" translate="no">        roles/iam.databasesAdmin       </code></a></td>
-<td>The table whose historical data is being accessed</td>
-</tr>
-</tbody>
-</table>
+| **Role**                                                                                                                         | **Resource**                                      |
+| -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| [`         roles/bigquery.admin        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.admin)             | The table whose historical data is being accessed |
+| [`         roles/bigquery.studioAdmin        `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) | The table whose historical data is being accessed |
+| [`         roles/iam.databasesAdmin        `](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.databasesAdmin)   | The table whose historical data is being accessed |
 
 **Note:** The **`  roles/owner  `** role does not contain all the permissions present in the table administrator roles, so you must grant one of these table administrator roles to any user who restores tables that have or had row-level access policies applied to them.
 
   - Run the following command to get the equivalent Unix epoch time by passing the UTC timestamp:
     
-    ``` text
+    ``` notranslate
     date -d '2023-08-04 16:00:34.456789Z' +%s000
     ```
 
   - Replace the UNIX epoch time `  1691164834000  ` received from the previous command in the bq command-line tool. Run the following command to restore a copy of the deleted table `  deletedTableID  ` in another table `  restoredTable  ` , within the same dataset `  myDatasetID  ` :
     
-    ``` text
+    ``` notranslate
     bq cp myProjectID:myDatasetID.deletedTableID@1691164834000 myProjectID:myDatasetID.restoredTable
     ```
 
@@ -121,8 +87,8 @@ BigQuery provides a fail-safe period. During the fail-safe period, deleted data 
 
 When you perform the following operations, the data that is replaced or removed can be recovered through the time travel window. After the time travel window ends, this data then enters the fail-safe period for extended recovery time:
 
-  - **Table deletion or replacement:** When a table is deleted, or when its data is fully replaced (for example, by using the [`  WRITE_TRUNCATE  `](/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) write disposition in a load job or by using the [`  CREATE OR REPLACE TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement), the previous contents of the table are retained.
-  - **Partition deletion:** If a specific partition is deleted from a [partitioned table](/bigquery/docs/partitioned-tables) , the data belonging to that specific partition is retained. Other partitions in the table aren't affected.
+  - **Table deletion or replacement:** When a table is deleted, or when its data is fully replaced (for example, by using the [`  WRITE_TRUNCATE  `](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) write disposition in a load job or by using the [`  CREATE OR REPLACE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement), the previous contents of the table are retained.
+  - **Partition deletion:** If a specific partition is deleted from a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , the data belonging to that specific partition is retained. Other partitions in the table aren't affected.
 
 You can't query or directly recover data in fail-safe storage. To recover data from fail-safe storage, contact [Cloud Customer Care](https://cloud.google.com/support-hub) .
 
@@ -130,7 +96,7 @@ You can't query or directly recover data in fail-safe storage. To recover data f
 
 ## Billing
 
-If you set your [storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) to use physical bytes, you are billed separately for the bytes used for time travel and fail-safe storage. Time travel and fail-safe storage are charged at the active physical storage rate. You can [configure the time travel window](#configure_the_time_travel_window) to balance storage costs with your data retention needs.
+If you set your [storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) to use physical bytes, you are billed separately for the bytes used for time travel and fail-safe storage. Time travel and fail-safe storage are charged at the active physical storage rate. You can [configure the time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#configure_the_time_travel_window) to balance storage costs with your data retention needs.
 
 If you set your storage billing model to use logical bytes, the total storage costs for time travel and fail-safe storage are included in the base rate that you are charged.
 
@@ -169,7 +135,7 @@ The following table show a comparison of physical and logical storage costs:
 </tbody>
 </table>
 
-If you use physical storage, you can see the bytes used by time travel and fail-safe by looking at the `  TIME_TRAVEL_PHYSICAL_BYTES  ` and `  FAIL_SAFE_PHYSICAL_BYTES  ` columns in the [`  TABLE_STORAGE  `](/bigquery/docs/information-schema-table-storage) and [`  TABLE_STORAGE_BY_ORGANIZATION  `](/bigquery/docs/information-schema-table-storage-by-organization) views. For an example of how to use one of these views to estimate your costs, see [Forecast storage billing](/bigquery/docs/information-schema-table-storage#forecast_storage_billing) .
+If you use physical storage, you can see the bytes used by time travel and fail-safe by looking at the `  TIME_TRAVEL_PHYSICAL_BYTES  ` and `  FAIL_SAFE_PHYSICAL_BYTES  ` columns in the [`  TABLE_STORAGE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage) and [`  TABLE_STORAGE_BY_ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-by-organization) views. For an example of how to use one of these views to estimate your costs, see [Forecast storage billing](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage#forecast_storage_billing) .
 
 [Storage costs](https://cloud.google.com/bigquery/pricing#storage) apply for time travel and fail-safe data, but you are only billed if data storage fees don't apply elsewhere in BigQuery. The following details apply:
 
@@ -181,88 +147,11 @@ If you use physical storage, you can see the bytes used by time travel and fail-
 
 The following table shows how deleted or changed data moves between storage retention windows. This example shows a situation where the total active storage is 200 GiB and 50 GiB is deleted with a time travel window of seven days:
 
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th>Day 0</th>
-<th>Day 1</th>
-<th>Day 2</th>
-<th>Day 3</th>
-<th>Day 4</th>
-<th>Day 5</th>
-<th>Day 6</th>
-<th>Day 7</th>
-<th>Day 8</th>
-<th>Day 9</th>
-<th>Day 10</th>
-<th>Day 11</th>
-<th>Day 12</th>
-<th>Day 13</th>
-<th>Day 14</th>
-<th>Day 15</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Active storage</td>
-<td>200</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-<td>150</td>
-</tr>
-<tr class="even">
-<td>Time travel storage</td>
-<td></td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Fail-safe storage</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td>50</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+|                     | Day 0 | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7 | Day 8 | Day 9 | Day 10 | Day 11 | Day 12 | Day 13 | Day 14 | Day 15 |
+| ------------------- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ----- | ------ | ------ | ------ | ------ | ------ | ------ |
+| Active storage      | 200   | 150   | 150   | 150   | 150   | 150   | 150   | 150   | 150   | 150   | 150    | 150    | 150    | 150    | 150    | 150    |
+| Time travel storage |       | 50    | 50    | 50    | 50    | 50    | 50    | 50    |       |       |        |        |        |        |        |        |
+| Fail-safe storage   |       |       |       |       |       |       |       |       | 50    | 50    | 50     | 50     | 50     | 50     | 50     |        |
 
 Deleting data from long-term physical storage works in the same way.
 
@@ -270,17 +159,17 @@ Deleting data from long-term physical storage works in the same way.
 
 Data retrieval with time travel is subject to the following limitations:
 
-  - Time travel only provides access to historical data for the duration of the time travel window. To preserve table data for non-emergency purposes for longer than the time travel window, use [table snapshots](/bigquery/docs/table-snapshots-intro) .
-  - If a table has, or has previously had, row-level access policies, then time travel can only be used by table administrators. For more information, see [Time travel and row-level access](#time_travel_and_row-level_access) .
+  - Time travel only provides access to historical data for the duration of the time travel window. To preserve table data for non-emergency purposes for longer than the time travel window, use [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
+  - If a table has, or has previously had, row-level access policies, then time travel can only be used by table administrators. For more information, see [Time travel and row-level access](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel_and_row-level_access) .
   - Time travel does not restore table metadata.
   - Time travel is not supported in the following table types:
-      - [External tables](/bigquery/docs/external-tables) . However, for Apache Iceberg external tables, you can use the [`  FOR SYSTEM_TIME AS OF  ` clause](/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
-      - [Temporary cached query result tables](/bigquery/docs/cached-results) .
-      - [Temporary session tables](/bigquery/docs/sessions-intro) .
-      - [Temporary multi-statement tables](/bigquery/docs/multi-statement-queries) .
+      - [External tables](https://docs.cloud.google.com/bigquery/docs/external-tables) . However, for Apache Iceberg external tables, you can use the [`  FOR SYSTEM_TIME AS OF  ` clause](https://docs.cloud.google.com/bigquery/docs/access-historical-data#query_data_at_a_point_in_time) to access snapshots that are retained in your Iceberg metadata.
+      - [Temporary cached query result tables](https://docs.cloud.google.com/bigquery/docs/cached-results) .
+      - [Temporary session tables](https://docs.cloud.google.com/bigquery/docs/sessions-intro) .
+      - [Temporary multi-statement tables](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) .
       - Tables listed under external datasets.
 
 ## What's next
 
-  - Learn how to [query and recover time travel data](/bigquery/docs/access-historical-data) .
-  - Learn more about [table snapshots](/bigquery/docs/table-snapshots-intro) .
+  - Learn how to [query and recover time travel data](https://docs.cloud.google.com/bigquery/docs/access-historical-data) .
+  - Learn more about [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .

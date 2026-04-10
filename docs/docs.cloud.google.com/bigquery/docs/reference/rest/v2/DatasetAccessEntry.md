@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/DatasetAccessEntry#SCHEMA_REPRESENTATION)
 
 Grants all resources of particular types in a particular dataset read access to the current dataset.
 
@@ -15,7 +15,7 @@ Similar to how individually authorized views work, updates to any resource grant
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: {
     object (DatasetReference)
   },

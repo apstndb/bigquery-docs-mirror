@@ -13,7 +13,7 @@ A discovery scan does the following:
   - Scans the data in the Cloud Storage bucket or path.
   - Groups structured and semi-structured data into tables.
   - Collects metadata, such as the table name, schema, and partition definition.
-  - Creates and updates [BigLake external](/bigquery/docs/biglake-intro) , [non-BigLake external](/bigquery/docs/external-tables) , or [BigLake object](/bigquery/docs/object-table-introduction) tables in BigQuery using the schema and partition definition.
+  - Creates and updates [BigLake external](https://docs.cloud.google.com/bigquery/docs/biglake-intro) , [non-BigLake external](https://docs.cloud.google.com/bigquery/docs/external-tables) , or [BigLake object](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) tables in BigQuery using the schema and partition definition.
 
 For unstructured data, such as images and videos, the discovery scan detects and registers groups of files that share the same data file format. Files must be located in folders that contain the same file format. For example, `  gs://images/group1  ` must only contain GIF images, and `  gs://images/group2  ` must only contain JPEG images for the discovery scan to detect and register two BigLake object tables.
 
@@ -29,7 +29,7 @@ The discovery scan supports the following formats:
   - JSON (only the [newline-delimited format](https://github.com/ndjson/ndjson-spec) )
   - CSV (but not CSV files that have comment rows)
 
-[**Unstructured**](/bigquery/docs/object-table-introduction#supported_object_files)
+[**Unstructured**](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#supported_object_files)
 
   - Image (such as JPEG, PNG, and BMP)
   - Documents (such as PDF, slide presentations, and text reports)
@@ -43,37 +43,13 @@ The discovery scan supports the following compression formats:
 
   - Internal compression for the following formats:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>Compression</th>
-    <th>File extension sample</th>
-    <th>Supported format</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>gzip</td>
-    <td><code dir="ltr" translate="no">         .gz.parquet        </code></td>
-    <td>Parquet</td>
-    </tr>
-    <tr class="even">
-    <td>lz4</td>
-    <td><code dir="ltr" translate="no">         .lz4.parquet        </code></td>
-    <td>Parquet</td>
-    </tr>
-    <tr class="odd">
-    <td>Snappy</td>
-    <td><code dir="ltr" translate="no">         .snappy.parquet        </code></td>
-    <td>Parquet, ORC, Avro</td>
-    </tr>
-    <tr class="even">
-    <td>lzo</td>
-    <td><code dir="ltr" translate="no">         .lzo.parquet        </code></td>
-    <td>Parquet, ORC</td>
-    </tr>
-    </tbody>
-    </table>
+    | Compression | File extension sample                | Supported format   |
+    | ----------- | ------------------------------------ | ------------------ |
+    | gzip        | `          .gz.parquet         `     | Parquet            |
+    | lz4         | `          .lz4.parquet         `    | Parquet            |
+    | Snappy      | `          .snappy.parquet         ` | Parquet, ORC, Avro |
+    | lzo         | `          .lzo.parquet         `    | Parquet, ORC       |
+    
 
   - External compression for JSON and CSV files:
     
@@ -82,13 +58,13 @@ The discovery scan supports the following compression formats:
 
 **Unstructured data**
 
-For object tables, compression is managed primarily through [Cloud Storage object metadata](/storage/docs/metadata) , rather than BigQuery internal settings.
+For object tables, compression is managed primarily through [Cloud Storage object metadata](https://docs.cloud.google.com/storage/docs/metadata) , rather than BigQuery internal settings.
 
   - Standard metadata compression: BigQuery automatically recognizes files compressed with gzip and bzip2 if they use the standard .gz or .bz2 extensions.
-  - Content-Encoding: you can use the [Content-Encoding gzip](/storage/docs/metadata#content-encoding) metadata in Cloud Storage to serve compressed files while maintaining their original content-type.
+  - Content-Encoding: you can use the [Content-Encoding gzip](https://docs.cloud.google.com/storage/docs/metadata#content-encoding) metadata in Cloud Storage to serve compressed files while maintaining their original content-type.
   - Media-internal compression: formats that are inherently compressed (such as JPEG for images, MP3 for audio, MP4 for video) are natively supported.
 
-To see the limit of how many tables a discovery scan supports, see [Quotas and limits](/bigquery/quotas#dataplex-discovery) .
+To see the limit of how many tables a discovery scan supports, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#dataplex-discovery) .
 
 The discovered tables are registered in BigQuery as BigLake external tables, BigLake object tables, or external tables. This makes their data available for analysis in BigQuery. Metadata caching for BigLake tables and object tables is also enabled. All the BigLake tables are automatically ingested into Dataplex Universal Catalog for search and discovery.
 
@@ -98,13 +74,15 @@ Enable the Dataplex API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dataplex.googleapis.com)
 
 ### Required roles for the Dataplex Universal Catalog service account
 
 Before you begin, assign the IAM permissions to the Dataplex Universal Catalog service account in your project.
 
-``` text
+``` 
   service-PROJECT_NUMBER@gcp-sa-dataplex.iam.gserviceaccount.com
   
 ```
@@ -115,11 +93,11 @@ To ensure that the Dataplex service account has the necessary permissions to cre
 
 **Important:** You must grant these roles to the Dataplex service account, *not* to your user account. Failure to grant the roles to the correct principal might result in permission errors.
 
-  - [Dataplex Discovery Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) on the storage bucket
-  - [Dataplex Discovery Publishing Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryPublishingServiceAgent) ( `  roles/dataplex.discoveryPublishingServiceAgent  ` ) on the user project
-  - Create BigLake tables: [Dataplex Discovery BigLake Publishing Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryBigLakePublishingServiceAgent) ( `  roles/dataplex.discoveryBigLakePublishingServiceAgent  ` ) on the BigQuery connection
+  - [Dataplex Discovery Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) on the storage bucket
+  - [Dataplex Discovery Publishing Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryPublishingServiceAgent) ( `  roles/dataplex.discoveryPublishingServiceAgent  ` ) on the user project
+  - Create BigLake tables: [Dataplex Discovery BigLake Publishing Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryBigLakePublishingServiceAgent) ( `  roles/dataplex.discoveryBigLakePublishingServiceAgent  ` ) on the BigQuery connection
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to create and run a discovery scan. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -136,15 +114,15 @@ The following permissions are required to create and run a discovery scan:
       - `  bigquery.connections.delegate  ` on the BigQuery connection
       - `  bigquery.connections.use  ` on the BigQuery connection
 
-Your administrator might also be able to give the Dataplex service account these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the Dataplex service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Required roles for the BigQuery connection service account
 
-To ensure that the BigQuery Connection Service account has the necessary permissions to create a discovery scan, ask your administrator to grant the [Dataplex Discovery Service Agent](/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) IAM role to the BigQuery Connection Service account on the Cloud Storage bucket.
+To ensure that the BigQuery Connection Service account has the necessary permissions to create a discovery scan, ask your administrator to grant the [Dataplex Discovery Service Agent](https://docs.cloud.google.com/iam/docs/roles-permissions/dataplex#dataplex.discoveryServiceAgent) ( `  roles/dataplex.discoveryServiceAgent  ` ) IAM role to the BigQuery Connection Service account on the Cloud Storage bucket.
 
 **Important:** You must grant this role to the BigQuery Connection Service account, *not* to your user account. Failure to grant the role to the correct principal might result in permission errors.
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a discovery scan. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -161,7 +139,7 @@ The following permissions are required to create a discovery scan:
       - `  bigquery.connections.delegate  ` on the BigQuery connection
       - `  bigquery.connections.use  ` on the BigQuery connection
 
-Your administrator might also be able to give the BigQuery Connection Service account these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+Your administrator might also be able to give the BigQuery Connection Service account these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Required roles for end users
 
@@ -172,7 +150,7 @@ To get the permissions that you need to create and manage data discovery scans, 
   - Read access to DataScan resources, excluding the results: Dataplex DataScan Viewer ( `  roles/dataplex.dataScanViewer  ` ) - your project
   - Read access to DataScan resources, including the results: Dataplex DataScan DataViewer ( `  roles/dataplex.dataScanDataViewer  ` ) - your project
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to create and manage data discovery scans. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -190,7 +168,7 @@ The following permissions are required to create and manage data discovery scans
   - View the IAM permissions of the DataScan: `  dataplex.datascans.getIamPolicy  ` on your project or a DataScan resource
   - Set the IAM permissions on the DataScan: `  dataplex.datascans.setIamPolicy  ` on your project or a DataScan resource
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create a discovery scan
 
@@ -201,6 +179,8 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 ### Console
 
 1.  In the Google Cloud console, go to the **Metadata curation** page.
+    
+    [Go to Metadata curation](https://console.cloud.google.com/bigquery/governance/metadata-curation/cloud-storage-discovery)
 
 2.  In the **Cloud Storage discovery** tab, click **Create** .
 
@@ -208,7 +188,7 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 4.  Enter a name for the scan.
 
-5.  In the **Scan ID** field, enter a unique ID that follows the [resource naming conventions in Google Cloud](/compute/docs/naming-resources#resource-name-format) . If you don't provide an ID, the discovery scan generates the scan ID.
+5.  In the **Scan ID** field, enter a unique ID that follows the [resource naming conventions in Google Cloud](https://docs.cloud.google.com/compute/docs/naming-resources#resource-name-format) . If you don't provide an ID, the discovery scan generates the scan ID.
 
 6.  Optional: Provide a description of the scan.
 
@@ -227,11 +207,11 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 10. In **Location type** , select either **Region** or **Multi-region** (whichever is available) where the BigQuery publishing dataset is created.
 
-11. To create BigLake tables from the scanned data, in the **Connection ID** field, provide your Google Cloud resource connection ID. For more information, see [Google Cloud resource connections in BigQuery](/bigquery/docs/connections-api-intro#cloud-resource-connections) .
+11. To create BigLake tables from the scanned data, in the **Connection ID** field, provide your Google Cloud resource connection ID. For more information, see [Google Cloud resource connections in BigQuery](https://docs.cloud.google.com/bigquery/docs/connections-api-intro#cloud-resource-connections) .
     
-    You can create a new connection ID in the same location as the BigQuery dataset location, which is [compatible with the Cloud Storage bucket location](/bigquery/docs/external-tables#storage-location-considerations) .
+    You can create a new connection ID in the same location as the BigQuery dataset location, which is [compatible with the Cloud Storage bucket location](https://docs.cloud.google.com/bigquery/docs/external-tables#storage-location-considerations) .
     
-    If you don't provide a resource connection ID, the discovery scan creates [non-BigLake external tables](/bigquery/docs/external-data-sources#non-biglake-tables) . To understand the differences between these external table types and why the discovery service might choose one over the other, see the [behavioral differences comparison](/bigquery/docs/external-data-sources#external_data_source_feature_comparison) .
+    If you don't provide a resource connection ID, the discovery scan creates [non-BigLake external tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources#non-biglake-tables) . To understand the differences between these external table types and why the discovery service might choose one over the other, see the [behavioral differences comparison](https://docs.cloud.google.com/bigquery/docs/external-data-sources#external_data_source_feature_comparison) .
 
 12. In the **Discovery frequency** section, configure when you want the discovery scan to run:
     
@@ -260,9 +240,9 @@ When the discovery scan runs, it creates a new dataset in BigQuery that correspo
 
 ### gcloud
 
-To create a discovery scan, use the [`  gcloud dataplex datascans create data-discovery  `](/sdk/gcloud/reference/dataplex/datascans/create/data-discovery) command.
+To create a discovery scan, use the [`  gcloud dataplex datascans create data-discovery  `](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/create/data-discovery) command.
 
-``` text
+``` suppresswarning
 gcloud dataplex datascans create data-discovery --location=LOCATION
 --data-source-resource=BUCKET_PATH
 ```
@@ -274,7 +254,7 @@ Replace the following:
 
 ### REST
 
-To create a discovery scan, use the [`  dataScans.create  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
+To create a discovery scan, use the [`  dataScans.create  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/create) .
 
 ## Query published BigLake tables
 
@@ -282,7 +262,7 @@ After you run the discovery scan, BigLake tables are published in a new dataset 
 
 ### SQL
 
-You can view or query tables in BigQuery. For more information about how to run queries in BigQuery, see [Run a query](/bigquery/docs/running-queries) .
+You can view or query tables in BigQuery. For more information about how to run queries in BigQuery, see [Run a query](https://docs.cloud.google.com/bigquery/docs/running-queries) .
 
 ### Apache Spark
 
@@ -290,7 +270,7 @@ To query BigLake tables using Spark SQL on a Dataproc serverless job, follow the
 
 1.  Create a PySpark script similar to the following sample script:
     
-    ``` text
+    ``` suppresswarning
     from pyspark.sql import SparkSession
     session = (
       SparkSession.builder.appName("testing")
@@ -318,7 +298,7 @@ To query BigLake tables using Spark SQL on a Dataproc serverless job, follow the
       - `  TABLE_NAME  ` : Name of BigLake table
       - `  TABLE_ID  ` : ID of BigLake table
 
-2.  [Submit the batch job](/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) .
+2.  [Submit the batch job](https://docs.cloud.google.com/dataproc-serverless/docs/quickstarts/spark-batch#submit_a_spark_batch_workload) .
 
 ## Manage published BigLake tables
 
@@ -326,9 +306,9 @@ Published BigLake tables are created and managed in BigQuery by the discovery sc
 
 If you want to manage the schema and other metadata like CSV or JSON options yourself, set the `  metadata-managed-mode  ` label to `  user_managed  ` . This way, the schema remains unchanged when the next discovery scan runs. This approach can be useful in scenarios where the schema that's inferred by the discovery scan is incorrect or different from what is expected for a given table. When the `  metadata-managed-mode  ` label is set to `  user_managed  ` , it can reduce the cost.
 
-To update the label, you can [edit the value of the label key](/bigquery/docs/updating-labels#updating_a_table_or_view_label) `  metadata-managed-mode  ` to `  user_managed  ` instead of `  discovery-managed  ` . In this case, the discovery scan doesn't update the schema of the table as long as the `  user_managed  ` label is attached to the table.
+To update the label, you can [edit the value of the label key](https://docs.cloud.google.com/bigquery/docs/updating-labels#updating_a_table_or_view_label) `  metadata-managed-mode  ` to `  user_managed  ` instead of `  discovery-managed  ` . In this case, the discovery scan doesn't update the schema of the table as long as the `  user_managed  ` label is attached to the table.
 
-**Note:** You can apply access policies, such as [column-level security](/bigquery/docs/column-level-security-intro) and [row-level security](/bigquery/docs/row-level-security-intro) , even if your tables are managed by the discovery scan.
+**Note:** You can apply access policies, such as [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , even if your tables are managed by the discovery scan.
 
 ### Update published BigLake tables
 
@@ -337,10 +317,14 @@ For BigLake tables published using the discovery scan jobs with the default conf
 To update a published BigLake table, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  [Update one or more table properties](/bigquery/docs/managing-tables#updating_table_properties) .
+2.  [Update one or more table properties](https://docs.cloud.google.com/bigquery/docs/managing-tables#updating_table_properties) .
 
 3.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -360,11 +344,15 @@ To update a published BigLake table, follow these steps:
 
 To delete a published BigLake table, follow these steps:
 
-1.  [Delete the data files for the table in the Cloud Storage bucket](/storage/docs/deleting-objects) .
+1.  [Delete the data files for the table in the Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/deleting-objects) .
 
 2.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 3.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 4.  In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
 
@@ -389,6 +377,8 @@ To run a discovery scan on demand, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -398,12 +388,10 @@ To run a discovery scan on demand, select one of the following options.
 
 ### gcloud
 
-To run a discovery scan, use the [`  gcloud dataplex datascans run  ` command](/sdk/gcloud/reference/dataplex/datascans/run) :
+To run a discovery scan, use the [`  gcloud dataplex datascans run  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/run) :
 
-``` text
-gcloud dataplex datascans run DATASCAN \
-  --location=LOCATION
-```
+    gcloud dataplex datascans run DATASCAN \
+      --location=LOCATION
 
 Replace the following variables:
 
@@ -412,7 +400,7 @@ Replace the following variables:
 
 ### REST
 
-To run a discovery scan on demand, use the [`  dataScans.run  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) in the Dataplex API.
+To run a discovery scan on demand, use the [`  dataScans.run  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/run) in the Dataplex API.
 
 ## List discovery scans
 
@@ -421,6 +409,8 @@ To list your discovery scans, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -428,9 +418,7 @@ To list your discovery scans, select one of the following options.
 
 ### gcloud
 
-``` text
-gcloud dataplex datascans list --location=LOCATION --project=PROJECT_ID
-```
+    gcloud dataplex datascans list --location=LOCATION --project=PROJECT_ID
 
 Replace the following:
 
@@ -439,7 +427,7 @@ Replace the following:
 
 ### REST
 
-To retrieve the list of discovery scans in your project, use the [`  dataScans.list  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/list) in the Dataplex API.
+To retrieve the list of discovery scans in your project, use the [`  dataScans.list  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/list) in the Dataplex API.
 
 ## View a discovery scan
 
@@ -448,6 +436,8 @@ To view a discovery scan, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -458,7 +448,7 @@ To view a discovery scan, select one of the following options.
 
 ### gcloud
 
-``` text
+``` suppresswarning
 gcloud dataplex datascans jobs describe JOB \
     --location=LOCATION \
     --datascan=DATASCAN \
@@ -474,7 +464,7 @@ Replace the following:
 
 ### REST
 
-To view the results of a data discovery scan, use the [`  dataScans.get  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) in the Dataplex API.
+To view the results of a data discovery scan, use the [`  dataScans.get  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/get) in the Dataplex API.
 
 ### View historical discovery scan results
 
@@ -483,6 +473,8 @@ To view historical discovery scan results, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -494,7 +486,7 @@ To view historical discovery scan results, select one of the following options.
 
 ### gcloud
 
-``` text
+``` suppresswarning
 gcloud dataplex datascans jobs list \
     --location=LOCATION \
     --datascan=DATASCAN
@@ -507,7 +499,7 @@ Replace the following:
 
 ### REST
 
-To view all the jobs of a discovery scan, use the [`  dataScans.job/list  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
+To view all the jobs of a discovery scan, use the [`  dataScans.job/list  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans.jobs/list) in the Dataplex API.
 
 ## Update a discovery scan
 
@@ -518,6 +510,8 @@ To change the schedule of a discovery scan, for example, to change the schedule 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -529,9 +523,9 @@ To change the schedule of a discovery scan, for example, to change the schedule 
 
 ### gcloud
 
-To update a discovery scan, use the [`  gcloud dataplex datascans update data-discovery  `](/sdk/gcloud/reference/dataplex/datascans/update/data-discovery) command.
+To update a discovery scan, use the [`  gcloud dataplex datascans update data-discovery  `](https://docs.cloud.google.com/sdk/gcloud/reference/dataplex/datascans/update/data-discovery) command.
 
-``` text
+``` suppresswarning
 gcloud dataplex datascans update data-discovery SCAN_ID --location=LOCATION --description=DESCRIPTION
 ```
 
@@ -543,7 +537,7 @@ Replace the following:
 
 ### REST
 
-To update a discovery scan, use the [`  dataScans.patch  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) in the Dataplex API.
+To update a discovery scan, use the [`  dataScans.patch  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/patch) in the Dataplex API.
 
 ## Delete a discovery scan
 
@@ -552,6 +546,8 @@ To delete a discovery scan, select one of the following options.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Governance \> Metadata curation** .
 
@@ -561,7 +557,7 @@ To delete a discovery scan, select one of the following options.
 
 ### gcloud
 
-``` text
+``` suppresswarning
 gcloud dataplex datascans delete SCAN_ID --location=LOCATION --async
 ```
 
@@ -572,4 +568,4 @@ Replace the following:
 
 ### REST
 
-To delete a discovery scan, use the [`  dataScans.delete  ` method](/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) in the Dataplex API.
+To delete a discovery scan, use the [`  dataScans.delete  ` method](https://docs.cloud.google.com/dataplex/docs/reference/rest/v1/projects.locations.dataScans/delete) in the Dataplex API.

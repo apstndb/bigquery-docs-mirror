@@ -2,11 +2,11 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Stripe to BigQuery using the Stripe connector with the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) . By using the Stripe connector, you can schedule recurring transfer jobs that add your latest data from Stripe to BigQuery.
+You can load data from Stripe to BigQuery using the Stripe connector with the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) . By using the Stripe connector, you can schedule recurring transfer jobs that add your latest data from Stripe to BigQuery.
 
 ## Limitations
 
@@ -23,7 +23,7 @@ Stripe data transfers are subject to the following limitations:
       - You might encounter long data transfer runtimes when transferring data from Stripe preview regions.
   - The Stripe connector supports some objects with the `  StartDate  ` filter.
       - The required format for the `  StartDate  ` filter is `  YYYY-MM-DD  ` . If no start date is provided, the connector defaults to three years before the current date. If a date before January 1, 2011 is provided, then the connector automatically uses January 1, 2011.
-      - For a list of supported objects, see [Objects with `  StartDate  ` filter support](#objects_with_startdate_filter_support) .
+      - For a list of supported objects, see [Objects with `  StartDate  ` filter support](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#objects_with_startdate_filter_support) .
   - A single transfer configuration can only support one data transfer run at a given time. If a second data transfer is scheduled to run before the first transfer is completed, then only the first data transfer completes while any other data transfers that overlap with the first transfer is skipped.
       - To avoid skipped transfers within a single transfer configuration, we recommend that you increase the duration of time between large data transfers by configuring the **Repeat frequency** .
 
@@ -45,7 +45,7 @@ The following sections describe the steps that you need to take before you creat
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -57,13 +57,13 @@ The following permissions are required to create a transfer:
   - `  bigquery.datasets.get  ` on the target dataset
   - `  bigquery.datasets.update  ` on the target dataset
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Stripe account types
 
@@ -71,13 +71,13 @@ The Stripe connector supports both Stripe platform accounts and Stripe connected
 
 ### Connect to platform accounts
 
-To run a Stripe data transfer from only one platform account, do the following when you [set up the transfer configuration](#transfer-setup) :
+To run a Stripe data transfer from only one platform account, do the following when you [set up the transfer configuration](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#transfer-setup) :
 
   - Enter the platform account ID for the platform account in the **Account Id** field.
   - Enter the secret or restricted key for the platform account in the **Secret/API Key** field.
   - For **SyncAllConnectedAccounts** , select **False** .
 
-To run a Stripe data transfer for multiple accounts, for example, for a platform account linked with connected accounts, do the following when you [set up the transfer configuration](#transfer-setup) :
+To run a Stripe data transfer for multiple accounts, for example, for a platform account linked with connected accounts, do the following when you [set up the transfer configuration](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#transfer-setup) :
 
   - Enter the platform account ID for the platform account in the **Account Id** field.
   - Enter the secret or restricted key for the platform account in the **Secret/API Key** field.
@@ -87,7 +87,7 @@ To run a Stripe data transfer for multiple accounts, for example, for a platform
 
 Connected accounts are Stripe accounts linked to Stripe using Stripe Connect.
 
-To run a Stripe data transfer from a connected account, do the following when you [set up the transfer configuration](#transfer-setup) :
+To run a Stripe data transfer from a connected account, do the following when you [set up the transfer configuration](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#transfer-setup) :
 
   - Enter the platform account ID for the connected account in the **Account Id** field.
   - Enter the secret or restricted key for the platform account to which the connected account is connected to in the **Secret/API Key** field.
@@ -100,6 +100,8 @@ Add Stripe data into BigQuery by setting up a transfer configuration using one o
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -107,8 +109,8 @@ Add Stripe data into BigQuery by setting up a transfer configuration using one o
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Platform/Connected Account ID** , enter the Stripe account ID. For more information, see [Stripe prerequisites](/bigquery/docs/stripe-transfer#stripe-prerequisites) .
-      - For **Stripe Secret Key** , enter the API key for the Stripe account. For more information, see [Stripe prerequisites](/bigquery/docs/stripe-transfer#stripe-prerequisites) .
+      - For **Platform/Connected Account ID** , enter the Stripe account ID. For more information, see [Stripe prerequisites](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#stripe-prerequisites) .
+      - For **Stripe Secret Key** , enter the API key for the Stripe account. For more information, see [Stripe prerequisites](https://docs.cloud.google.com/bigquery/docs/stripe-transfer#stripe-prerequisites) .
       - For **Start Date** , enter a date in the format `  YYYY-MM-DD  ` . The data transfer loads Stripe data starting from this date.
       - Select **Sync all connected accounts** , to sync all connected accounts.
       - For **Stripe objects to transfer** , enter the names of the Stripe objects to transfer, or click **Browse** and select the objects that you want to transfer.
@@ -119,21 +121,21 @@ Add Stripe data into BigQuery by setting up a transfer configuration using one o
 
 7.  In the **Schedule options** section, do the following:
     
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notification** toggle. After you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
+      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
 ### bq
 
-Enter the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --project_id=PROJECT_ID
@@ -163,7 +165,7 @@ Where:
 
 For example, the following command creates a Stripe data transfer in the default project with all the required parameters:
 
-``` text
+``` notranslate
   bq mk \
       --transfer_config \
       --target_dataset=mydataset \
@@ -180,77 +182,28 @@ For example, the following command creates a Stripe data transfer in the default
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+Use the [`  projects.locations.transferConfigs.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 When you save the transfer configuration, the Stripe connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Stripe connector transfers all available data from Stripe into BigQuery.
 
-To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Data type mapping
 
 The following table maps Stripe data types to the corresponding BigQuery data types.
 
-<table>
-<thead>
-<tr class="header">
-<th>Stripe data type</th>
-<th>BigQuery data type</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       String      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Dictionary      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>When a nested object is loaded into BigQuery, it is converted into a flattened object. This flattened object is then saved as a single literal string within the table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Integer      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Double      </code></td>
-<td><code dir="ltr" translate="no">       DOUBLE      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Float      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Decimal      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BigInt (long)      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Boolean      </code></td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Datetime      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Unix timestamp      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Stripe data type                | BigQuery data type          | Notes                                                                                                                                                                   |
+| ------------------------------- | --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        String       `         | `        STRING       `     |                                                                                                                                                                         |
+| `        Dictionary       `     | `        STRING       `     | When a nested object is loaded into BigQuery, it is converted into a flattened object. This flattened object is then saved as a single literal string within the table. |
+| `        Integer       `        | `        INT64       `      |                                                                                                                                                                         |
+| `        Double       `         | `        DOUBLE       `     |                                                                                                                                                                         |
+| `        Float       `          | `        FLOAT       `      |                                                                                                                                                                         |
+| `        Decimal       `        | `        BIGNUMERIC       ` |                                                                                                                                                                         |
+| `        BigInt (long)       `  | `        BIGNUMERIC       ` |                                                                                                                                                                         |
+| `        Boolean       `        | `        BOOL       `       |                                                                                                                                                                         |
+| `        Datetime       `       | `        TIMESTAMP       `  |                                                                                                                                                                         |
+| `        Unix timestamp       ` | `        TIMESTAMP       `  |                                                                                                                                                                         |
 
 ## Objects with `     StartDate    ` filter support
 
@@ -290,7 +243,7 @@ The following Stripe objects support the `  StartDate  ` filter, which lets you 
 
 ## Troubleshoot transfer setup
 
-If you are having issues setting up your data transfer, see [Stripe transfer issues](/bigquery/docs/transfer-troubleshooting#stripe-issues) .
+If you are having issues setting up your data transfer, see [Stripe transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#stripe-issues) .
 
 ## Pricing
 
@@ -298,6 +251,6 @@ There is no cost to transfer Stripe data into BigQuery while this feature is in 
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Working with transfers](/bigquery/docs/working-with-transfers) .
-  - Learn how to [load data with cross-cloud operations](/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - For an overview of the BigQuery Data Transfer Service, see [Introduction to BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Working with transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .
+  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

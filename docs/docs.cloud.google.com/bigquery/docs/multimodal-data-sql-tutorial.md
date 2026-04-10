@@ -1,17 +1,17 @@
 # Analyze multimodal data with SQL and BigQuery DataFrames
 
-This tutorial shows you how to [analyze multimodal data](/bigquery/docs/analyze-multimodal-data) by using SQL queries and [BigQuery DataFrames](/bigquery/docs/bigquery-dataframes-introduction) .
+This tutorial shows you how to [analyze multimodal data](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data) by using SQL queries and [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
 
 This tutorial uses the product catalog from the public Cymbal pet store dataset.
 
 ## Objectives
 
-  - Use [`  ObjectRef  `](/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](/bigquery/docs/tables-intro#standard-tables) .
-  - Generate text based on image data from a standard table by using the [`  AI.GENERATE_TABLE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
+  - Use [`  ObjectRef  `](https://docs.cloud.google.com/bigquery/docs/work-with-objectref) values to store image data alongside structured data in a BigQuery [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
+  - Generate text based on image data from a standard table by using the [`  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) .
   - Transform existing images to create new images by using a Python UDF.
   - Chunk PDFs for further analysis by using a Python UDF.
   - Use a Gemini model and the `  AI.GENERATE_TEXT  ` function to analyze the chunked PDF data.
-  - Generate embeddings based on image data from a standard table by using the [`  AI.GENERATE_EMBEDDING  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) .
+  - Generate embeddings based on image data from a standard table by using the [`  AI.GENERATE_EMBEDDING  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) .
   - Process ordered multimodal data using arrays of `  ObjectRef  ` values.
 
 ## Costs
@@ -23,16 +23,16 @@ In this document, you use the following billable components of Google Cloud:
   - **Cloud Storage** : you incur costs for the objects stored in Cloud Storage.
   - **Vertex AI** : you incur costs for calls to Vertex AI models.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information about, see the following pricing pages:
 
   - [BigQuery pricing](https://cloud.google.com/bigquery/pricing)
-  - [BigQuery Python UDFs pricing](/bigquery/docs/user-defined-functions-python#pricing)
+  - [BigQuery Python UDFs pricing](https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#pricing)
   - [Cloud Storage pricing](https://cloud.google.com/storage/pricing)
-  - [Vertex AI pricing](/vertex-ai/generative-ai/pricing)
+  - [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing)
 
 ## Before you begin
 
@@ -41,31 +41,35 @@ For more information about, see the following pricing pages:
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery, BigQuery Connection, Cloud Storage, and Vertex AI APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,storage.googleapis.com,aiplatform.googleapis.com)
 
 ### Required roles
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles:
 
-  - Create a connection: [BigQuery Connection Admin](/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
-  - Grant permissions to the connection's service account: [Project IAM Admin](/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` )
-  - Create a Cloud Storage bucket: [Storage Admin](/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` )
-  - Create datasets, models, UDFs, and tables, and run BigQuery jobs: [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
-  - Create URLs that let you read and modify Cloud Storage objects: [BigQuery ObjectRef Admin](/iam/docs/roles-permissions/bigquery#bigquery.objectRefAdmin) ( `  roles/bigquery.objectRefAdmin  ` )
+  - Create a connection: [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` )
+  - Grant permissions to the connection's service account: [Project IAM Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/resourcemanager#resourcemanager.projectIamAdmin) ( `  roles/resourcemanager.projectIamAdmin  ` )
+  - Create a Cloud Storage bucket: [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` )
+  - Create datasets, models, UDFs, and tables, and run BigQuery jobs: [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
+  - Create URLs that let you read and modify Cloud Storage objects: [BigQuery ObjectRef Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.objectRefAdmin) ( `  roles/bigquery.objectRefAdmin  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Set up
 
@@ -76,8 +80,12 @@ In this section, you create the dataset, connection, tables, and models used in 
 Create a BigQuery dataset to contain the objects you create in this tutorial:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -94,20 +102,26 @@ Create a BigQuery dataset to contain the objects you create in this tutorial:
 Create a Cloud Storage bucket for storing transformed objects:
 
 1.  Go to the **Buckets** page.
+    
+    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Click add\_box **Create** .
 
-3.  On the **Create a bucket** page, in the **Get started** section, enter a globally unique name that meets the [bucket name requirements](/storage/docs/buckets#naming) .
+3.  On the **Create a bucket** page, in the **Get started** section, enter a globally unique name that meets the [bucket name requirements](https://docs.cloud.google.com/storage/docs/buckets#naming) .
 
 4.  Click **Create** .
 
 ### Create a connection
 
-Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage:
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) and get the connection's service account. BigQuery uses the connection to access objects in Cloud Storage:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, click add **Add data** .
     
@@ -133,13 +147,15 @@ Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connec
 
 ### Grant permissions to the connection's service account
 
-Grant the connection's service account the appropriate roles to access other services. You must grant these roles in the same project you created or selected in the [Before you begin](#before_you_begin) section. Granting the roles in a different project results in the error `  bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
+Grant the connection's service account the appropriate roles to access other services. You must grant these roles in the same project you created or selected in the [Before you begin](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#before_you_begin) section. Granting the roles in a different project results in the error `  bqcx-1234567890-xxxx@gcp-sa-bigquery-condel.iam.gserviceaccount.com does not have the permission to access resource  ` .
 
 #### Grant permissions on the Cloud Storage bucket
 
 Give the service account access to use objects in the bucket you created:
 
 1.  Go to the **Buckets** page.
+    
+    [Go to Buckets](https://console.cloud.google.com/storage/browser)
 
 2.  Click the name of the bucket you created.
 
@@ -158,6 +174,8 @@ Give the service account access to use objects in the bucket you created:
 Give the service account access to use Vertex AI models:
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Grant access** . The **Grant access** dialog opens.
 
@@ -176,12 +194,14 @@ Create tables to store the Cymbal pets product information.
 Create a standard table that contains the Cymbal pets product information:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Run the following to create the `  products  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     LOAD DATA OVERWRITE cymbal_pets.products
     FROM
       FILES(
@@ -192,25 +212,23 @@ Create a standard table that contains the Cymbal pets product information:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    import bigframes.bigquery as bbq
-    import bigframes.pandas as bpd
-    
-    bbq.load_data(
-        "cymbal_pets.products",
-        write_disposition="OVERWRITE",
-        from_files_options={
-            "format": "avro",
-            "uris": [
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro"
-            ],
-        },
-    )
-    ```
+        import bigframes.bigquery as bbq
+        import bigframes.pandas as bpd
+        
+        bbq.load_data(
+            "cymbal_pets.products",
+            write_disposition="OVERWRITE",
+            from_files_options={
+                "format": "avro",
+                "uris": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/tables/products/products_*.avro"
+                ],
+            },
+        )
 
 #### Create the `     product_images    ` table
 
@@ -220,7 +238,7 @@ Create an object table that contains the Cymbal pets product images:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_images
       WITH CONNECTION `us.cymbal_conn`
       OPTIONS (
@@ -232,23 +250,21 @@ Create an object table that contains the Cymbal pets product images:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    bbq.create_external_table(
-        "cymbal_pets.product_images",
-        replace=True,
-        connection_name="us.cymbal_conn",
-        options={
-            "object_metadata": "SIMPLE",
-            "uris": [
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
-            ],
-        },
-    )
-    ```
+        bbq.create_external_table(
+            "cymbal_pets.product_images",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={
+                "object_metadata": "SIMPLE",
+                "uris": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/*.png"
+                ],
+            },
+        )
 
 #### Create the `     product_manuals    ` table
 
@@ -258,7 +274,7 @@ Create an object table that contains the Cymbal pets product manuals:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE EXTERNAL TABLE cymbal_pets.product_manuals
       WITH CONNECTION `us.cymbal_conn`
       OPTIONS (
@@ -268,33 +284,31 @@ Create an object table that contains the Cymbal pets product manuals:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    bbq.create_external_table(
-        "cymbal_pets.product_manuals",
-        replace=True,
-        connection_name="us.cymbal_conn",
-        options={
-            "object_metadata": "SIMPLE",
-            "uris": [
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf"
-            ],
-        },
-    )
-    ```
+        bbq.create_external_table(
+            "cymbal_pets.product_manuals",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={
+                "object_metadata": "SIMPLE",
+                "uris": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf"
+                ],
+            },
+        )
 
 ### Create a text generation model
 
-Create a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a Vertex AI Gemini model:
+Create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a Vertex AI Gemini model:
 
   - Run the following to create the remote model:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `cymbal_pets.gemini`
       REMOTE WITH CONNECTION `us.cymbal_conn`
       OPTIONS (ENDPOINT = 'gemini-2.0-flash');
@@ -302,18 +316,16 @@ Create a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigque
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    gemini_model = bbq.ml.create_model(
-        "cymbal_pets.gemini",
-        replace=True,
-        connection_name="us.cymbal_conn",
-        options={"endpoint": "gemini-2.5-flash"},
-    )
-    ```
+        gemini_model = bbq.ml.create_model(
+            "cymbal_pets.gemini",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={"endpoint": "gemini-2.5-flash"},
+        )
 
 ### Create an embedding generation model
 
@@ -323,7 +335,7 @@ Create a BigQuery ML remote model that represents a Vertex AI multimodal embeddi
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `cymbal_pets.embedding_model`
       REMOTE WITH CONNECTION `us.cymbal_conn`
       OPTIONS (ENDPOINT = 'multimodalembedding@001');
@@ -331,18 +343,16 @@ Create a BigQuery ML remote model that represents a Vertex AI multimodal embeddi
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    embedding_model = bbq.ml.create_model(
-        "cymbal_pets.embedding_model",
-        replace=True,
-        connection_name="us.cymbal_conn",
-        options={"endpoint": "multimodalembedding@001"},
-    )
-    ```
+        embedding_model = bbq.ml.create_model(
+            "cymbal_pets.embedding_model",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={"endpoint": "multimodalembedding@001"},
+        )
 
 ## Create a `     products_mm    ` table with multimodal data
 
@@ -352,7 +362,7 @@ Create a `  products_mm  ` table that contains an `  image  ` column populated w
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE cymbal_pets.products_mm
     AS
     SELECT products.* EXCEPT (uri), ot.ref AS image FROM cymbal_pets.products
@@ -362,36 +372,32 @@ Create a `  products_mm  ` table that contains an `  image  ` column populated w
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_images = bpd.read_gbq("SELECT * FROM cymbal_pets.product_images")
-    df_products = bpd.read_gbq("cymbal_pets.products")
-    
-    df_products_mm = df_images.merge(df_products, on="uri").drop(columns="uri")
-    df_products_mm = df_products_mm.rename(columns={"ref": "image"})
-    ```
+        df_images = bpd.read_gbq("SELECT * FROM cymbal_pets.product_images")
+        df_products = bpd.read_gbq("cymbal_pets.products")
+        
+        df_products_mm = df_images.merge(df_products, on="uri").drop(columns="uri")
+        df_products_mm = df_products_mm.rename(columns={"ref": "image"})
 
 2.  Run the following to view the `  image  ` column data:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT product_name, image
     FROM cymbal_pets.products_mm
     ```
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_products_mm[["product_name", "image"]]
-    ```
+        df_products_mm[["product_name", "image"]]
     
     The results look similar to the following:
     
@@ -425,7 +431,7 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE cymbal_pets.products_mm
     AS
     SELECT
@@ -458,46 +464,44 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_products_mm["url"] = bbq.obj.get_access_url(
-        df_products_mm["image"], "R"
-    ).to_frame()
-    df_products_mm["prompt0"] = "Can you describe the following image?"
-    
-    df_products_mm["prompt"] = bbq.struct(df_products_mm[["prompt0", "url"]])
-    df_products_mm = bbq.ai.generate_table(
-        gemini_model, df_products_mm, output_schema={"image_description": "STRING"}
-    )
-    
-    df_products_mm = df_products_mm[
-        [
-            "product_id",
-            "product_name",
-            "brand",
-            "category",
-            "subcategory",
-            "animal_type",
-            "search_keywords",
-            "price",
-            "description",
-            "inventory_level",
-            "supplier_id",
-            "average_rating",
-            "image",
-            "image_description",
+        df_products_mm["url"] = bbq.obj.get_access_url(
+            df_products_mm["image"], "R"
+        ).to_frame()
+        df_products_mm["prompt0"] = "Can you describe the following image?"
+        
+        df_products_mm["prompt"] = bbq.struct(df_products_mm[["prompt0", "url"]])
+        df_products_mm = bbq.ai.generate_table(
+            gemini_model, df_products_mm, output_schema={"image_description": "STRING"}
+        )
+        
+        df_products_mm = df_products_mm[
+            [
+                "product_id",
+                "product_name",
+                "brand",
+                "category",
+                "subcategory",
+                "animal_type",
+                "search_keywords",
+                "price",
+                "description",
+                "inventory_level",
+                "supplier_id",
+                "average_rating",
+                "image",
+                "image_description",
+            ]
         ]
-    ]
-    ```
 
 2.  Run the following to update the `  animal_type  ` , `  search_keywords  ` , and `  subcategory  ` columns with generated data:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     UPDATE cymbal_pets.products_mm p
     SET
       p.animal_type = s.animal_type,
@@ -532,33 +536,31 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_prompt = bbq.obj.get_access_url(df_products_mm["image"], "R").to_frame()
-    df_prompt[
-        "prompt0"
-    ] = "For the image of a pet product, concisely generate the following metadata: 1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory."
-    
-    df_products_mm["prompt"] = bbq.struct(df_prompt[["prompt0", "image"]])
-    
-    df_products_mm = df_products_mm.drop(
-        columns=["animal_type", "search_keywords", "subcategory"]
-    )
-    df_products_mm = bbq.ai.generate_table(
-        gemini_model,
-        df_products_mm,
-        output_schema="animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING",
-    )
-    ```
+        df_prompt = bbq.obj.get_access_url(df_products_mm["image"], "R").to_frame()
+        df_prompt[
+            "prompt0"
+        ] = "For the image of a pet product, concisely generate the following metadata: 1) animal_type and 2) 5 SEO search keywords, and 3) product subcategory."
+        
+        df_products_mm["prompt"] = bbq.struct(df_prompt[["prompt0", "image"]])
+        
+        df_products_mm = df_products_mm.drop(
+            columns=["animal_type", "search_keywords", "subcategory"]
+        )
+        df_products_mm = bbq.ai.generate_table(
+            gemini_model,
+            df_products_mm,
+            output_schema="animal_type STRING, search_keywords ARRAY<STRING>, subcategory STRING",
+        )
 
 3.  Run the following to view the generated data:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT
       product_name,
       image_description,
@@ -570,21 +572,19 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_products_mm[
-        [
-            "product_name",
-            "image_description",
-            "animal_type",
-            "search_keywords",
-            "subcategory",
+        df_products_mm[
+            [
+                "product_name",
+                "image_description",
+                "animal_type",
+                "search_keywords",
+                "subcategory",
+            ]
         ]
-    ]
-    ```
     
     The results look similar to the following:
     
@@ -612,7 +612,7 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT
       brand,
       brand_description,
@@ -640,35 +640,33 @@ Use a Gemini model to generate the following data for the pet store products:
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_agg = df_products_mm[
-        ["image", "description", "category", "subcategory", "brand"]
-    ]
-    df_agg["image"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
-    df_agg = bbq.array_agg(df_agg.groupby(by=["brand"]))
-    
-    df_agg["cnt"] = bbq.array_length(df_agg["image"])
-    
-    df_prompt = df_agg[["image", "description", "category", "subcategory"]]
-    df_prompt[
-        "prompt0"
-    ] = "Use the images and text to give one concise brand description for a website brand page. Return the description only. "
-    
-    df_agg["prompt"] = bbq.struct(
-        df_prompt[["prompt0", "image", "description", "category", "subcategory"]]
-    )
-    
-    df_agg = df_agg.reset_index()
-    
-    df_agg = bbq.ai.generate_table(
-        gemini_model, df_agg, output_schema={"brand_description": "STRING"}
-    )
-    df_agg[["brand", "brand_description", "cnt"]]
-    ```
+        df_agg = df_products_mm[
+            ["image", "description", "category", "subcategory", "brand"]
+        ]
+        df_agg["image"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
+        df_agg = bbq.array_agg(df_agg.groupby(by=["brand"]))
+        
+        df_agg["cnt"] = bbq.array_length(df_agg["image"])
+        
+        df_prompt = df_agg[["image", "description", "category", "subcategory"]]
+        df_prompt[
+            "prompt0"
+        ] = "Use the images and text to give one concise brand description for a website brand page. Return the description only. "
+        
+        df_agg["prompt"] = bbq.struct(
+            df_prompt[["prompt0", "image", "description", "category", "subcategory"]]
+        )
+        
+        df_agg = df_agg.reset_index()
+        
+        df_agg = bbq.ai.generate_table(
+            gemini_model, df_agg, output_schema={"brand_description": "STRING"}
+        )
+        df_agg[["brand", "brand_description", "cnt"]]
     
     The results look similar to the following:
     
@@ -698,7 +696,7 @@ The Python UDF uses open source libraries, and also uses parallel execution to t
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE FUNCTION cymbal_pets.to_grayscale(src_json STRING, dst_json STRING)
     RETURNS STRING
     LANGUAGE python
@@ -740,65 +738,63 @@ The Python UDF uses open source libraries, and also uses parallel execution to t
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    @bpd.udf(
-        dataset="cymbal_pets",
-        name="to_grayscale",
-        packages=["numpy", "opencv-python"],
-        bigquery_connection="us.cymbal_conn",
-        max_batching_rows=1,
-    )
-    def to_grayscale(src_ref: str, dst_ref: str) -> str:
-        import json
-        from urllib.request import Request, urlopen
-    
-        import cv2 as cv
-        import numpy as np
-    
-        src_json = json.loads(src_ref)
-        srcUrl = src_json["access_urls"]["read_url"]
-    
-        dst_json = json.loads(dst_ref)
-        dstUrl = dst_json["access_urls"]["write_url"]
-    
-        req = urlopen(srcUrl)
-        arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-        img = cv.imdecode(arr, -1)  # 'Load it as it is'
-    
-        # Convert the image to grayscale
-        gray_image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-    
-        # Send POST request to the URL
-        _, img_encoded = cv.imencode(".png", gray_image)
-    
-        req = Request(
-            url=dstUrl,
-            data=img_encoded.tobytes(),
-            method="PUT",
-            headers={
-                "Content-Type": "image/png",
-            },
+        @bpd.udf(
+            dataset="cymbal_pets",
+            name="to_grayscale",
+            packages=["numpy", "opencv-python"],
+            bigquery_connection="us.cymbal_conn",
+            max_batching_rows=1,
         )
-        with urlopen(req):
-            pass
-        return dst_ref
-    ```
+        def to_grayscale(src_ref: str, dst_ref: str) -> str:
+            import json
+            from urllib.request import Request, urlopen
+        
+            import cv2 as cv
+            import numpy as np
+        
+            src_json = json.loads(src_ref)
+            srcUrl = src_json["access_urls"]["read_url"]
+        
+            dst_json = json.loads(dst_ref)
+            dstUrl = dst_json["access_urls"]["write_url"]
+        
+            req = urlopen(srcUrl)
+            arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+            img = cv.imdecode(arr, -1)  # 'Load it as it is'
+        
+            # Convert the image to grayscale
+            gray_image = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+        
+            # Send POST request to the URL
+            _, img_encoded = cv.imencode(".png", gray_image)
+        
+            req = Request(
+                url=dstUrl,
+                data=img_encoded.tobytes(),
+                method="PUT",
+                headers={
+                    "Content-Type": "image/png",
+                },
+            )
+            with urlopen(req):
+                pass
+            return dst_ref
 
 ## Transform product images
 
 Create the `  products_grayscale  ` table with an `  ObjectRef  ` column that contains the destination paths and authorizers for grayscale images. The destination path is derived from the original image path.
 
-After you create the table, run the `  to_grayscale  ` function to create the grayscale images, write them to a Cloud Storage bucket, and then return [`  ObjectRefRuntime  `](/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values containing access URLs and metadata for the grayscale images.
+After you create the table, run the `  to_grayscale  ` function to create the grayscale images, write them to a Cloud Storage bucket, and then return [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/objectref_functions#objectrefruntime) values containing access URLs and metadata for the grayscale images.
 
 1.  Run the following to create the `  products_grayscale  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE cymbal_pets.products_grayscale
     AS
     SELECT
@@ -813,43 +809,41 @@ After you create the table, run the `  to_grayscale  ` function to create the gr
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_grayscale = df_products_mm[["product_id", "product_name", "image"]]
-    df_grayscale[
-        "gray_image_uri"
-    ] = f"gs://{BUCKET}/cymbal-pets-images/grayscale/" + df_grayscale[
-        "image"
-    ].struct.field(
-        "uri"
-    ).str.extract(
-        r"([^/]+)$"
-    )
+        df_grayscale = df_products_mm[["product_id", "product_name", "image"]]
+        df_grayscale[
+            "gray_image_uri"
+        ] = f"gs://{BUCKET}/cymbal-pets-images/grayscale/" + df_grayscale[
+            "image"
+        ].struct.field(
+            "uri"
+        ).str.extract(
+            r"([^/]+)$"
+        )
+        
+        df_grayscale["gray_image"] = bbq.obj.make_ref(
+            df_grayscale["gray_image_uri"], "us.cymbal_conn"
+        )
+        
+        df_grayscale["image_url"] = bbq.to_json_string(
+            bbq.obj.get_access_url(df_grayscale["image"], "r")
+        )
+        df_grayscale["gray_image_url"] = bbq.to_json_string(
+            bbq.obj.get_access_url(df_grayscale["gray_image"], "rw")
+        )
+        
+        df_grayscale[["image_url", "gray_image_url"]].apply(to_grayscale, axis=1)
     
-    df_grayscale["gray_image"] = bbq.obj.make_ref(
-        df_grayscale["gray_image_uri"], "us.cymbal_conn"
-    )
-    
-    df_grayscale["image_url"] = bbq.to_json_string(
-        bbq.obj.get_access_url(df_grayscale["image"], "r")
-    )
-    df_grayscale["gray_image_url"] = bbq.to_json_string(
-        bbq.obj.get_access_url(df_grayscale["gray_image"], "rw")
-    )
-    
-    df_grayscale[["image_url", "gray_image_url"]].apply(to_grayscale, axis=1)
-    ```
-    
-    Replace `  BUCKET  ` with the name of the [bucket that you created](#create_a_bucket) .
+    Replace `  BUCKET  ` with the name of the [bucket that you created](https://docs.cloud.google.com/bigquery/docs/multimodal-data-sql-tutorial#create_a_bucket) .
 
 2.  Run the following to create the grayscale images, write them to a Cloud Storage bucket, and then return `  ObjectRefRuntime  ` values containing access URLs and metadata for the grayscale images:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT cymbal_pets.to_grayscale(
       TO_JSON_STRING(OBJ.GET_ACCESS_URL(image, 'r')),
       TO_JSON_STRING(OBJ.GET_ACCESS_URL(gray_image, 'rw')))
@@ -858,35 +852,33 @@ After you create the table, run the `  to_grayscale  ` function to create the gr
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_grayscale = df_products_mm[["product_id", "product_name", "image"]]
-    df_grayscale[
-        "gray_image_uri"
-    ] = f"gs://{BUCKET}/cymbal-pets-images/grayscale/" + df_grayscale[
-        "image"
-    ].struct.field(
-        "uri"
-    ).str.extract(
-        r"([^/]+)$"
-    )
-    
-    df_grayscale["gray_image"] = bbq.obj.make_ref(
-        df_grayscale["gray_image_uri"], "us.cymbal_conn"
-    )
-    
-    df_grayscale["image_url"] = bbq.to_json_string(
-        bbq.obj.get_access_url(df_grayscale["image"], "r")
-    )
-    df_grayscale["gray_image_url"] = bbq.to_json_string(
-        bbq.obj.get_access_url(df_grayscale["gray_image"], "rw")
-    )
-    
-    df_grayscale[["image_url", "gray_image_url"]].apply(to_grayscale, axis=1)
-    ```
+        df_grayscale = df_products_mm[["product_id", "product_name", "image"]]
+        df_grayscale[
+            "gray_image_uri"
+        ] = f"gs://{BUCKET}/cymbal-pets-images/grayscale/" + df_grayscale[
+            "image"
+        ].struct.field(
+            "uri"
+        ).str.extract(
+            r"([^/]+)$"
+        )
+        
+        df_grayscale["gray_image"] = bbq.obj.make_ref(
+            df_grayscale["gray_image_uri"], "us.cymbal_conn"
+        )
+        
+        df_grayscale["image_url"] = bbq.to_json_string(
+            bbq.obj.get_access_url(df_grayscale["image"], "r")
+        )
+        df_grayscale["gray_image_url"] = bbq.to_json_string(
+            bbq.obj.get_access_url(df_grayscale["gray_image"], "rw")
+        )
+        
+        df_grayscale[["image_url", "gray_image_url"]].apply(to_grayscale, axis=1)
     
     The results look similar to the following:
     
@@ -918,7 +910,7 @@ PDFs are often very large and might not fit into a single call to a generative A
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     -- This function chunks the product manual PDF into multiple parts.
     -- The function accepts an ObjectRefRuntime value for the PDF file and the chunk size.
     -- It then parses the PDF, chunks the contents, and returns an array of chunked text.
@@ -968,54 +960,52 @@ PDFs are often very large and might not fit into a single call to a generative A
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    @bpd.udf(
-        dataset="cymbal_pets",
-        name="chunk_pdf",
-        packages=["pypdf"],
-        bigquery_connection="us.cymbal_conn",
-        max_batching_rows=1,
-    )
-    def chunk_pdf(src_ref: str, chunk_size: int, overlap_size: int) -> list[str]:
-        import io
-        import json
-        from urllib.request import urlopen
-    
-        from pypdf import PdfReader  # type: ignore
-    
-        src_json = json.loads(src_ref)
-        srcUrl = src_json["access_urls"]["read_url"]
-    
-        req = urlopen(srcUrl)
-        pdf_file = io.BytesIO(bytearray(req.read()))
-        reader = PdfReader(pdf_file, strict=False)
-    
-        # extract and chunk text simultaneously
-        all_text_chunks = []
-        curr_chunk = ""
-        for page in reader.pages:
-            page_text = page.extract_text()
-            if page_text:
-                curr_chunk += page_text
-                # split the accumulated text into chunks of a specific size with overlaop
-                # this loop implements a sliding window approach to create chunks
-                while len(curr_chunk) >= chunk_size:
-                    split_idx = curr_chunk.rfind(" ", 0, chunk_size)
-                    if split_idx == -1:
-                        split_idx = chunk_size
-                    actual_chunk = curr_chunk[:split_idx]
-                    all_text_chunks.append(actual_chunk)
-                    overlap = curr_chunk[split_idx + 1 : split_idx + 1 + overlap_size]
-                    curr_chunk = overlap + curr_chunk[split_idx + 1 + overlap_size :]
-        if curr_chunk:
-            all_text_chunks.append(curr_chunk)
-    
-        return all_text_chunks
-    ```
+        @bpd.udf(
+            dataset="cymbal_pets",
+            name="chunk_pdf",
+            packages=["pypdf"],
+            bigquery_connection="us.cymbal_conn",
+            max_batching_rows=1,
+        )
+        def chunk_pdf(src_ref: str, chunk_size: int, overlap_size: int) -> list[str]:
+            import io
+            import json
+            from urllib.request import urlopen
+        
+            from pypdf import PdfReader  # type: ignore
+        
+            src_json = json.loads(src_ref)
+            srcUrl = src_json["access_urls"]["read_url"]
+        
+            req = urlopen(srcUrl)
+            pdf_file = io.BytesIO(bytearray(req.read()))
+            reader = PdfReader(pdf_file, strict=False)
+        
+            # extract and chunk text simultaneously
+            all_text_chunks = []
+            curr_chunk = ""
+            for page in reader.pages:
+                page_text = page.extract_text()
+                if page_text:
+                    curr_chunk += page_text
+                    # split the accumulated text into chunks of a specific size with overlaop
+                    # this loop implements a sliding window approach to create chunks
+                    while len(curr_chunk) >= chunk_size:
+                        split_idx = curr_chunk.rfind(" ", 0, chunk_size)
+                        if split_idx == -1:
+                            split_idx = chunk_size
+                        actual_chunk = curr_chunk[:split_idx]
+                        all_text_chunks.append(actual_chunk)
+                        overlap = curr_chunk[split_idx + 1 : split_idx + 1 + overlap_size]
+                        curr_chunk = overlap + curr_chunk[split_idx + 1 + overlap_size :]
+            if curr_chunk:
+                all_text_chunks.append(curr_chunk)
+        
+            return all_text_chunks
 
 ## Analyze PDF data
 
@@ -1025,7 +1015,7 @@ Run the `  chunk_pdf  ` function to chunk the PDF data in the `  product_manuals
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE cymbal_pets.product_manual_chunk_strings
     AS
     SELECT chunked
@@ -1040,29 +1030,27 @@ Run the `  chunk_pdf  ` function to chunk the PDF data in the `  product_manuals
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_manuals = bpd.read_gbq("SELECT * FROM cymbal_pets.product_manuals")
-    df_manuals["url"] = bbq.to_json_string(
-        bbq.obj.get_access_url(df_manuals["ref"], "R")
-    )
-    
-    df_manuals["chunk_size"] = 1000
-    df_manuals["overlap_size"] = 100
-    
-    df_manuals["chunked"] = df_manuals[["url", "chunk_size", "overlap_size"]].apply(
-        chunk_pdf, axis=1
-    )
-    ```
+        df_manuals = bpd.read_gbq("SELECT * FROM cymbal_pets.product_manuals")
+        df_manuals["url"] = bbq.to_json_string(
+            bbq.obj.get_access_url(df_manuals["ref"], "R")
+        )
+        
+        df_manuals["chunk_size"] = 1000
+        df_manuals["overlap_size"] = 100
+        
+        df_manuals["chunked"] = df_manuals[["url", "chunk_size", "overlap_size"]].apply(
+            chunk_pdf, axis=1
+        )
 
 2.  Run the following to analyze the PDF data by using a Gemini model:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT
       result
     FROM
@@ -1079,21 +1067,19 @@ Run the `  chunk_pdf  ` function to chunk the PDF data in the `  product_manuals
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_chunked = df_manuals["chunked"].explode().to_frame()
-    df_chunked[
-        "prompt0"
-    ] = "Can you summarize the product manual as bullet points? Highlight the legal clauses"
-    
-    df_chunked["prompt"] = bbq.struct(df_chunked[["prompt0", "chunked"]])
-    
-    result = bbq.ai.generate_text(gemini_model, df_chunked["prompt"])
-    result
-    ```
+        df_chunked = df_manuals["chunked"].explode().to_frame()
+        df_chunked[
+            "prompt0"
+        ] = "Can you summarize the product manual as bullet points? Highlight the legal clauses"
+        
+        df_chunked["prompt"] = bbq.struct(df_chunked[["prompt0", "chunked"]])
+        
+        result = bbq.ai.generate_text(gemini_model, df_chunked["prompt"])
+        result
     
     The results look similar to the following:
     
@@ -1133,15 +1119,15 @@ Run the `  chunk_pdf  ` function to chunk the PDF data in the `  product_manuals
 
 ## Generate embeddings and perform a vector search
 
-Generate embeddings from image data, and then use the embeddings to return similar images by using [vector search](/bigquery/docs/vector-search-intro) .
+Generate embeddings from image data, and then use the embeddings to return similar images by using [vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
-In a production scenario, we recommend creating a [vector index](/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) before running a vector search. A vector index lets you perform the vector search more quickly, with the trade-off of reducing recall and so returning more approximate results.
+In a production scenario, we recommend creating a [vector index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_vector_index_statement) before running a vector search. A vector index lets you perform the vector search more quickly, with the trade-off of reducing recall and so returning more approximate results.
 
 1.  Run the following to create the `  products_embeddings  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE cymbal_pets.products_embedding
     AS
     SELECT product_id, embedding, content as image
@@ -1156,24 +1142,22 @@ In a production scenario, we recommend creating a [vector index](/bigquery/docs/
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_products_mm["content"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
-    df_embed = bbq.ai.generate_embedding(
-        embedding_model, df_products_mm[["content", "product_id"]]
-    )
-    
-    df_embed.to_gbq("cymbal_pets.products_embedding", if_exists="replace")
-    ```
+        df_products_mm["content"] = bbq.obj.get_access_url(df_products_mm["image"], "R")
+        df_embed = bbq.ai.generate_embedding(
+            embedding_model, df_products_mm[["content", "product_id"]]
+        )
+        
+        df_embed.to_gbq("cymbal_pets.products_embedding", if_exists="replace")
 
 2.  Run the following to run a vector search to return product images that are similar to the given input image:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
     VECTOR_SEARCH(
@@ -1188,29 +1172,27 @@ In a production scenario, we recommend creating a [vector index](/bigquery/docs/
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_image = bpd.DataFrame(
-        {
-            "uri": [
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png"
-            ]
-        }
-    ).cache()
-    df_image["image"] = bbq.obj.make_ref(df_image["uri"], "us.cymbal_conn")
-    df_search = bbq.ai.generate_embedding(
-        embedding_model,
-        bbq.obj.get_access_url(bbq.obj.fetch_metadata(df_image["image"]), "R"),
-    )
-    
-    search_result = bbq.vector_search(
-        "cymbal_pets.products_embedding", "embedding", df_search["embedding"]
-    )
-    search_result
-    ```
+        df_image = bpd.DataFrame(
+            {
+                "uri": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/images/cozy-naps-cat-scratching-post-with-condo.png"
+                ]
+            }
+        ).cache()
+        df_image["image"] = bbq.obj.make_ref(df_image["uri"], "us.cymbal_conn")
+        df_search = bbq.ai.generate_embedding(
+            embedding_model,
+            bbq.obj.get_access_url(bbq.obj.fetch_metadata(df_image["image"]), "R"),
+        )
+        
+        search_result = bbq.vector_search(
+            "cymbal_pets.products_embedding", "embedding", df_search["embedding"]
+        )
+        search_result
     
     The results look similar to the following:
     
@@ -1247,17 +1229,19 @@ This section shows you how to complete the following tasks:
 3.  Analyze an array of `  ObjectRef  ` values together to return a single generated value.
 4.  Analyze an array of `  ObjectRef  ` values separately and returning a generated value for each array value.
 
-As part of the analysis tasks, you convert the array of `  ObjectRef  ` values to an ordered list of [`  ObjectRefRuntime  `](/bigquery/docs/analyze-multimodal-data#objectrefruntime_values) values, and then pass that list to a Gemini model, specifying the `  ObjectRefRuntime  ` values as part of the prompt. The `  ObjectRefRuntime  ` values provide signed URLs that the model uses to access the object information in Cloud Storage.
+As part of the analysis tasks, you convert the array of `  ObjectRef  ` values to an ordered list of [`  ObjectRefRuntime  `](https://docs.cloud.google.com/bigquery/docs/analyze-multimodal-data#objectrefruntime_values) values, and then pass that list to a Gemini model, specifying the `  ObjectRefRuntime  ` values as part of the prompt. The `  ObjectRefRuntime  ` values provide signed URLs that the model uses to access the object information in Cloud Storage.
 
 Follow these steps to process ordered multimodal data using arrays of `  ObjectRef  ` values:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Run the following to recreate the `  product_manuals  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE EXTERNAL TABLE `cymbal_pets.product_manuals`
       WITH CONNECTION `us.cymbal_conn`
       OPTIONS (
@@ -1269,30 +1253,28 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    bbq.create_external_table(
-        "cymbal_pets.product_manuals_all",
-        replace=True,
-        connection_name="us.cymbal_conn",
-        options={
-            "object_metadata": "SIMPLE",
-            "uris": [
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf",
-                "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf",
-            ],
-        },
-    )
-    ```
+        bbq.create_external_table(
+            "cymbal_pets.product_manuals_all",
+            replace=True,
+            connection_name="us.cymbal_conn",
+            options={
+                "object_metadata": "SIMPLE",
+                "uris": [
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/documents/*.pdf",
+                    "gs://cloud-samples-data/bigquery/tutorials/cymbal-pets/document_chunks/*.pdf",
+                ],
+            },
+        )
 
 3.  Run the following to write PDF data to the `  map_manual_to_chunks  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     -- Extract the file and chunks into a single table.
     -- Store the chunks in the chunks column as array of ObjectRefs (ordered by page number)
     CREATE OR REPLACE TABLE cymbal_pets.map_manual_to_chunks
@@ -1308,46 +1290,42 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df1 = bpd.read_gbq("SELECT * FROM cymbal_pets.product_manuals_all").sort_values(
-        "uri"
-    )
-    df2 = df1.copy()
-    df1["name"] = df1["uri"].str.extract(r".*/([^.]*).[^/]+")
-    df2["name"] = df2["uri"].str.extract(r".*/([^.]*)_page[0-9]+.[^/]+")
-    df_manuals_all = df1.merge(df2, on="name")
-    df_manuals_agg = (
-        bbq.array_agg(df_manuals_all[["ref_x", "uri_x"]].groupby("uri_x"))["ref_x"]
-        .str[0]
-        .to_frame()
-    )
-    df_manuals_agg["chunks"] = bbq.array_agg(
-        df_manuals_all[["ref_y", "uri_x"]].groupby("uri_x")
-    )["ref_y"]
-    ```
+        df1 = bpd.read_gbq("SELECT * FROM cymbal_pets.product_manuals_all").sort_values(
+            "uri"
+        )
+        df2 = df1.copy()
+        df1["name"] = df1["uri"].str.extract(r".*/([^.]*).[^/]+")
+        df2["name"] = df2["uri"].str.extract(r".*/([^.]*)_page[0-9]+.[^/]+")
+        df_manuals_all = df1.merge(df2, on="name")
+        df_manuals_agg = (
+            bbq.array_agg(df_manuals_all[["ref_x", "uri_x"]].groupby("uri_x"))["ref_x"]
+            .str[0]
+            .to_frame()
+        )
+        df_manuals_agg["chunks"] = bbq.array_agg(
+            df_manuals_all[["ref_y", "uri_x"]].groupby("uri_x")
+        )["ref_y"]
 
 4.  Run the following to view the PDF data in the `  map_manual_to_chunks  ` table:
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM cymbal_pets.map_manual_to_chunks;
     ```
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_manuals_agg
-    ```
+        df_manuals_agg
     
     The results look similar to the following:
     
@@ -1371,7 +1349,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     WITH
       manuals AS (
         SELECT
@@ -1398,24 +1376,22 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    df_manuals_agg["chunks_url"] = bbq.array_agg(
-        bbq.obj.get_access_url(df_manuals_agg.explode("chunks")["chunks"], "R").groupby(
-            "uri_x"
+        df_manuals_agg["chunks_url"] = bbq.array_agg(
+            bbq.obj.get_access_url(df_manuals_agg.explode("chunks")["chunks"], "R").groupby(
+                "uri_x"
+            )
         )
-    )
-    df_manuals_agg[
-        "prompt0"
-    ] = "Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order"
-    df_manuals_agg["prompt"] = bbq.struct(df_manuals_agg[["prompt0", "chunks_url"]])
-    
-    result = bbq.ai.generate_text(gemini_model, df_manuals_agg["prompt"])["result"]
-    result
-    ```
+        df_manuals_agg[
+            "prompt0"
+        ] = "Can you provide a page by page summary for the first 3 pages of the attached manual? Only write one line for each page. The pages are provided in serial order"
+        df_manuals_agg["prompt"] = bbq.struct(df_manuals_agg[["prompt0", "chunks_url"]])
+        
+        result = bbq.ai.generate_text(gemini_model, df_manuals_agg["prompt"])["result"]
+        result
     
     The results look similar to the following:
     
@@ -1438,7 +1414,7 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### SQL
     
-    ``` text
+    ``` notranslate
     WITH
       input_chunked_objrefs AS (
         SELECT row_id, offset, chunk_ref
@@ -1484,22 +1460,20 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
     
     ### BigQuery DataFrames
     
-    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+    Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
     
-    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+    To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
     
-    ``` python
-    result = bbq.ai.generate_table(
-        gemini_model,
-        df_manuals_agg["prompt"],
-        output_schema={
-            "page1_summary": "STRING",
-            "page2_summary": "STRING",
-            "page3_summary": "STRING",
-        },
-    )[["page1_summary", "page2_summary", "page3_summary"]]
-    result
-    ```
+        result = bbq.ai.generate_table(
+            gemini_model,
+            df_manuals_agg["prompt"],
+            output_schema={
+                "page1_summary": "STRING",
+                "page2_summary": "STRING",
+                "page3_summary": "STRING",
+            },
+        )[["page1_summary", "page2_summary", "page3_summary"]]
+        result
     
     The results look similar to the following:
     
@@ -1527,6 +1501,8 @@ Follow these steps to process ordered multimodal data using arrays of `  ObjectR
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

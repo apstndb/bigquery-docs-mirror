@@ -1,55 +1,59 @@
 # Manage notebooks
 
-This document describes how to manage [Colab Enterprise notebooks in BigQuery](/bigquery/docs/notebooks-introduction) , including how to view, compare, restore, and delete notebooks.
+This document describes how to manage [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) , including how to view, compare, restore, and delete notebooks.
 
-This document also describes how to view and manage notebook metadata in [Dataplex Universal Catalog](/dataplex/docs/introduction) .
+This document also describes how to view and manage notebook metadata in [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
 
-Notebooks are [BigQuery Studio](/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](/dataform/docs/overview) .
+Notebooks are [BigQuery Studio](https://docs.cloud.google.com/bigquery/docs/query-overview#bigquery-studio) code assets powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
 ## Before you begin
 
-1.  [Create a notebook](/bigquery/docs/create-notebooks) .
-2.  To manage notebook metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+1.  [Create a notebook](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+2.  To manage notebook metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required permissions
 
 To share notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `  roles/dataform.codeOwner  ` )](/dataform/docs/access-control#dataform.codeOwner) at the resource level.
+  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) at the resource level.
 
 To save and delete notebooks, you need the following IAM roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](/bigquery/docs/access-control#bigquery.readSessionUser)
-  - [Code Owner ( `  roles/dataform.codeOwner  ` )](/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `  roles/dataform.codeEditor  ` )](/dataform/docs/access-control#dataform.codeEditor)
+  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) or [Code Editor ( `  roles/dataform.codeEditor  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
 
 To work with notebook revisions, you need the following IAM roles:
 
-  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](/bigquery/docs/access-control#bigquery.jobUser)
+  - [BigQuery Job User ( `  roles/bigquery.jobUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.jobUser)
 
-  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](/bigquery/docs/access-control#bigquery.readSessionUser)
+  - [BigQuery Read Session User ( `  roles/bigquery.readSessionUser  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.readSessionUser)
 
   - Any one of the following roles:
     
-      - [Code Owner ( `  roles/dataform.codeOwner  ` )](/dataform/docs/access-control#dataform.codeOwner)
-      - [Code Editor ( `  roles/dataform.codeEditor  ` )](/dataform/docs/access-control#dataform.codeEditor)
-      - [Code Viewer ( `  roles/dataform.codeViewer  ` )](/dataform/docs/access-control#dataform.codeViewer)
+      - [Code Owner ( `  roles/dataform.codeOwner  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner)
+      - [Code Editor ( `  roles/dataform.codeEditor  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor)
+      - [Code Viewer ( `  roles/dataform.codeViewer  ` )](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer)
 
-For more information about BigQuery IAM, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage notebook metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](/dataplex/docs/iam-roles) .
+To manage notebook metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) .
 
 ## Grant access to notebooks
 
 To grant other users access to a notebook, add those users to an appropriate IAM role.
 
-**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](/bigquery/docs/create-notebooks#disable_output_saving) .
+**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](https://docs.cloud.google.com/bigquery/docs/create-notebooks#disable_output_saving) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -65,11 +69,11 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 
 8.  In the **Role** list, select one of the following roles:
     
-      - [**Code Owner**](/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
-      - [**Code Editor**](/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
-      - [**Code Viewer**](/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
+      - [**Code Owner**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeOwner) : Can perform any action on the notebook, including deleting or sharing it.
+      - [**Code Editor**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeEditor) : Can edit the notebook.
+      - [**Code Viewer**](https://docs.cloud.google.com/dataform/docs/access-control#dataform.codeViewer) : Can view the notebook.
     
-    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
+    **Note:** The principal must also have the [Notebook Runtime User ( `  roles/aiplatform.notebookRuntimeUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.notebookRuntimeUser) and [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user) roles to run the notebook.
 
 9.  Optional: To view a complete list of roles and advanced sharing settings, click **Advanced sharing** .
 
@@ -79,15 +83,19 @@ To grant other users access to a notebook, add those users to an appropriate IAM
 
 ## Share notebooks
 
-To share a notebook with other users, you can generate and share a link to the notebook. For other users to see the notebook you share, you must first [grant access](/bigquery/docs/create-notebooks#grant_access_to_notebooks) to the notebook.
+To share a notebook with other users, you can generate and share a link to the notebook. For other users to see the notebook you share, you must first [grant access](https://docs.cloud.google.com/bigquery/docs/create-notebooks#grant_access_to_notebooks) to the notebook.
 
-To run a notebook, users must have access to the data that the notebook accesses. For more information, see [Grant access to a dataset](/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
+To run a notebook, users must have access to the data that the notebook accesses. For more information, see [Grant access to a dataset](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#grant_access_to_a_dataset) .
 
-**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](/bigquery/docs/create-notebooks#disable_output_saving) .
+**Important:** Users who have access to the notebook can see all output generated by code in the notebook, even if this output contains data from tables they don't have access to. To prevent saved output from being shared, [disable notebook output saving](https://docs.cloud.google.com/bigquery/docs/create-notebooks#disable_output_saving) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -104,8 +112,12 @@ To run a notebook, users must have access to the data that the notebook accesses
 To view a list of all notebooks in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -122,22 +134,26 @@ To view a list of all notebooks in your project, do the following:
 To view notebook metadata, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Click the name of the notebook that you want to view metadata for.
 
-5.  Look at the summary details to see information about the notebook such as the [region](/bigquery/docs/notebooks-introduction#supported_regions) it uses for data and the date it was last modified.
+5.  Look at the summary details to see information about the notebook such as the [region](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction#supported_regions) it uses for data and the date it was last modified.
 
 ## Work with notebook versions
 
-You can choose to create a notebook either inside of or outside of a [repository](/bigquery/docs/repository-intro) . Notebook versioning is handled differently based on where the notebook is located.
+You can choose to create a notebook either inside of or outside of a [repository](https://docs.cloud.google.com/bigquery/docs/repository-intro) . Notebook versioning is handled differently based on where the notebook is located.
 
 ### Notebook versioning in repositories
 
-Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](/bigquery/docs/workspaces-intro) in repositories to perform version control on notebooks. For more information, see [Use version control with a file](/bigquery/docs/workspaces#use_version_control_with_a_file) .
+Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) in repositories to perform version control on notebooks. For more information, see [Use version control with a file](https://docs.cloud.google.com/bigquery/docs/workspaces#use_version_control_with_a_file) .
 
 ### Notebook versioning outside of repositories
 
@@ -148,8 +164,12 @@ Use the following sections to learn how to view, compare, and restore versions o
 To view notebook versions, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** . Click the name of the notebook you want to view version history for.
 
@@ -160,8 +180,12 @@ To view notebook versions, follow these steps:
 To compare notebook versions, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -182,8 +206,12 @@ To compare notebook versions, follow these steps:
 Restoring a notebook version from the comparison pane lets you compare the current and previous versions of the notebook before choosing to restore the previous version. Restoring a notebook creates a new version of a notebook instead of overwriting the current version. No version history is lost.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -202,14 +230,20 @@ Restoring a notebook version from the comparison pane lets you compare the curre
 To download a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
 4.  Click the name of the notebook that you want to download. You can use the search feature or filters to find your notebook.
 
 5.  Expand the menu bar and go to the **File** menu:
+    
+    ![The notebook menu bar](https://docs.cloud.google.com/static/bigquery/images/notebook-menu-bar.png)
 
 6.  Select **Download** , and then select the file type in which you want to download the file.
 
@@ -218,8 +252,12 @@ To download a notebook, follow these steps:
 To delete a notebook, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Notebooks** .
 
@@ -233,9 +271,9 @@ To delete a notebook, follow these steps:
 
 ## Manage metadata in Dataplex Universal Catalog
 
-[Dataplex Universal Catalog](/dataplex/docs/introduction) lets you store and manage metadata for notebooks. Notebooks are available in Dataplex Universal Catalog by default, without additional configuration.
+[Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) lets you store and manage metadata for notebooks. Notebooks are available in Dataplex Universal Catalog by default, without additional configuration.
 
-You can use Dataplex Universal Catalog to manage notebooks in all [BigQuery locations](/bigquery/docs/locations) . Managing notebooks in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Dataplex Universal Catalog to manage notebooks in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing notebooks in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
 Dataplex Universal Catalog automatically retrieves the following metadata from notebooks:
 
@@ -245,25 +283,25 @@ Dataplex Universal Catalog automatically retrieves the following metadata from n
   - Data asset type
   - Corresponding Google Cloud project
 
-Dataplex Universal Catalog logs notebooks as [entries](/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Dataplex Universal Catalog logs notebooks as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](/dataplex/docs/ingest-custom-sources#entry-groups) for notebooks is `  @dataform  ` . To view details of notebook entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for notebooks is `  @dataform  ` . To view details of notebook entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
   - System entry type  
-    The [system entry type](/dataplex/docs/ingest-custom-sources#entry-types) for notebooks is `  dataform-code-asset  ` . To view details of notebooks, you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for notebooks is `  dataform-code-asset  ` . To view details of notebooks, you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected notebook. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
   - System aspect type  
-    The [system aspect type](/dataplex/docs/enrich-entries-metadata#aspect-types) for notebooks is `  dataform-code-asset  ` . To provide additional context to notebooks in Dataplex Universal Catalog by annotating notebook entries with [aspects](/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for notebooks is `  dataform-code-asset  ` . To provide additional context to notebooks in Dataplex Universal Catalog by annotating notebook entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  NOTEBOOK  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
   - Type  
-    The type for data canvases is `  NOTEBOOK  ` . This type lets you filter notebooks in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK  ` query in an [aspect-based filter](/dataplex/docs/search-syntax#aspect-search) .
+    The type for data canvases is `  NOTEBOOK  ` . This type lets you filter notebooks in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=NOTEBOOK  ` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
+For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
 
 ## Troubleshooting
 
-For more information, see [Troubleshoot Colab Enterprise](/colab/docs/troubleshooting) .
+For more information, see [Troubleshoot Colab Enterprise](https://docs.cloud.google.com/colab/docs/troubleshooting) .
 
 ## What's next
 
-  - Learn more about [Colab Enterprise notebooks in BigQuery](/bigquery/docs/notebooks-introduction) .
-  - Learn how to [create notebooks](/bigquery/docs/create-notebooks) .
-  - Learn how to [schedule notebooks](/bigquery/docs/orchestrate-notebooks) .
+  - Learn more about [Colab Enterprise notebooks in BigQuery](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) .
+  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
+  - Learn how to [schedule notebooks](https://docs.cloud.google.com/bigquery/docs/orchestrate-notebooks) .

@@ -1,14 +1,14 @@
 # The CREATE MODEL statement for contribution analysis models
 
-This document describes the `  CREATE MODEL  ` statement for creating [contribution analysis](/bigquery/docs/contribution-analysis) models in BigQuery. You can use contribution analysis models to generate insights about changes to key metrics in your multi-dimensional data.
+This document describes the `  CREATE MODEL  ` statement for creating [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) models in BigQuery. You can use contribution analysis models to generate insights about changes to key metrics in your multi-dimensional data.
 
-After you have created a contribution analysis model, you can use the [`  ML.GET_INSIGHTS  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model.
+After you have created a contribution analysis model, you can use the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to retrieve the metric information calculated by the model.
 
-For more information about supported SQL statements and functions for this model, see [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey) .
+For more information about supported SQL statements and functions for this model, see [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` googlesql
+``` lang-googlesql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} 
 `project_id.dataset.model_name`
 OPTIONS(
@@ -54,9 +54,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'CONTRIBUTION_ANALYSIS'
-```
+    MODEL_TYPE = 'CONTRIBUTION_ANALYSIS'
 
 **Description**
 
@@ -72,15 +70,15 @@ Specify the model type. This option is required.
 
 Provides the expression to use to calculate the metric you are analyzing.
 
-To calculate a [summable metric](#use_a_summable_metric) , the expression must be in the form `  SUM(metric_column_name)  ` , where `  metric_column_name  ` is a numeric data type.
+To calculate a [summable metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) , the expression must be in the form `  SUM(metric_column_name)  ` , where `  metric_column_name  ` is a numeric data type.
 
-To calculate a [summable ratio metric](#use_a_summable_ratio_metric) , the expression must be in the form `  SUM(numerator_metric_column_name)/SUM(denominator_metric_column_name)  ` , where `  numerator_metric_column_name  ` and `  denominator_metric_column_name  ` are numeric data types.
+To calculate a [summable ratio metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) , the expression must be in the form `  SUM(numerator_metric_column_name)/SUM(denominator_metric_column_name)  ` , where `  numerator_metric_column_name  ` and `  denominator_metric_column_name  ` are numeric data types.
 
-To calculate a [summable by category metric](#use_a_summable_by_category_metric) , the expression must be in the form `  SUM(metric_sum_column_name)/COUNT(DISTINCT categorical_column_name)  ` . The summed column must be a numeric data type. The categorical column must have type `  BOOL  ` , `  DATE  ` , `  DATETIME  ` , `  TIME  ` , `  TIMESTAMP  ` , `  STRING  ` , or `  INT64  ` .
+To calculate a [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) , the expression must be in the form `  SUM(metric_sum_column_name)/COUNT(DISTINCT categorical_column_name)  ` . The summed column must be a numeric data type. The categorical column must have type `  BOOL  ` , `  DATE  ` , `  DATETIME  ` , `  TIME  ` , `  TIMESTAMP  ` , `  STRING  ` , or `  INT64  ` .
 
 The expression is case insensitive.
 
-You can't use any additional numerical computations in the contribution metric expression. For example, neither `  SUM(AVG(metric_col))  ` nor `  AVG(SUM(round(metric_col_numerator))/(SUM(metric_col_denominator))  ` is valid. You can perform additional computations in the [`  query_statement  `](#query_statement) if necessary.
+You can't use any additional numerical computations in the contribution metric expression. For example, neither `  SUM(AVG(metric_col))  ` nor `  AVG(SUM(round(metric_col_numerator))/(SUM(metric_col_denominator))  ` is valid. You can perform additional computations in the [`  query_statement  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#query_statement) if necessary.
 
 The values in the metrics columns that you use in the `  CONTRIBUTION_METRIC  ` option must be non-negative, unless you specify `  0  ` for the `  MIN_APRIORI_SUPPORT  ` value.
 
@@ -110,11 +108,11 @@ A `  STRING  ` value. There is no default value.
 
 **Description**
 
-Provides the names of the columns to use as dimensions when summarizing the metric specified in the [`  CONTRIBUTION_METRIC  ` option](#contribution_metric) . The dimension columns that you specify must have an `  INT64  ` , `  BOOL  ` , or `  STRING  ` data type.
+Provides the names of the columns to use as dimensions when summarizing the metric specified in the [`  CONTRIBUTION_METRIC  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) . The dimension columns that you specify must have an `  INT64  ` , `  BOOL  ` , or `  STRING  ` data type.
 
-Any rows in the dimension columns that contain `  NULL  ` values are removed. If you have `  NULL  ` values in your data, you can preprocess the data to fill in the `  NULL  ` values by using the [`  ML.IMPUTER  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer) , or by using the [`  IFNULL  ` expression](/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) to replace `  NULL  ` values with a custom value.
+Any rows in the dimension columns that contain `  NULL  ` values are removed. If you have `  NULL  ` values in your data, you can preprocess the data to fill in the `  NULL  ` values by using the [`  ML.IMPUTER  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-imputer) , or by using the [`  IFNULL  ` expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull) to replace `  NULL  ` values with a custom value.
 
-If you want to use a [numerical](/bigquery/docs/reference/standard-sql/data-types#numeric_types) column that has a data type other than `  INT64  ` as a dimension, you can use any function that outputs an `  INT64  ` , `  BOOL  ` , or `  STRING  ` value in the `  query_statement  ` to transform continuous values. For example, you could use one of the [numerical preprocessing functions](/bigquery/docs/manual-preprocessing#numerical_functions) , such as [`  ML.BUCKETIZE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) .
+If you want to use a [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) column that has a data type other than `  INT64  ` as a dimension, you can use any function that outputs an `  INT64  ` , `  BOOL  ` , or `  STRING  ` value in the `  query_statement  ` to transform continuous values. For example, you could use one of the [numerical preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing#numerical_functions) , such as [`  ML.BUCKETIZE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-bucketize) .
 
 Using fewer dimensions helps reduce the model creation runtime.
 
@@ -132,7 +130,7 @@ If you omit the `  dimension_id_cols  ` option, then all columns in the query st
 
 **Description**
 
-Provide the minimum [apriori support threshold](#use_an_apriori_support_threshold) for including segments in the model output. All segments whose [`  apriori_support  ` value](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output) is less than the `  MIN_APRIORI_SUPPORT  ` value that you specify are excluded. The `  MIN_APRIORI_SUPPORT  ` option can't be used together with `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` .
+Provide the minimum [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) for including segments in the model output. All segments whose [`  apriori_support  ` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output) is less than the `  MIN_APRIORI_SUPPORT  ` value that you specify are excluded. The `  MIN_APRIORI_SUPPORT  ` option can't be used together with `  TOP_K_INSIGHTS_BY_APRIORI_SUPPORT  ` .
 
 **Arguments**
 
@@ -177,7 +175,7 @@ The default value is `  NO_PRUNING  ` .
 
 ### `     query_statement    `
 
-The [GoogleSQL query](/bigquery/docs/reference/standard-sql/query-syntax) that contains the test and control data to analyze. The table of input data that you specify in the query must contain exactly the columns that you reference in the `  CONTRIBUTION_METRIC  ` , `  DIMENSION_ID_COLS  ` , and `  IS_TEST_COL  ` options.
+The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that contains the test and control data to analyze. The table of input data that you specify in the query must contain exactly the columns that you reference in the `  CONTRIBUTION_METRIC  ` , `  DIMENSION_ID_COLS  ` , and `  IS_TEST_COL  ` options.
 
 ## Choose test and control data
 
@@ -188,7 +186,7 @@ Contribution analysis models require test and control data in a single table as 
   - **Product types:** Compare sales per user across different product types.
   - **Campaign or promotion:** Compare website engagement across different ad campaigns.
 
-To set up the input data, you can create tables of test and control data separately and take the union of the two tables. The final input table must contain your dimension columns, numeric metric columns, and a categorical column if you're using a summable by category metric. For best results, we recommend having roughly equal numbers of test and control rows when using the summable and summable ratio metrics to avoid biased results. If the number of test and control rows are unbalanced, then the [summable by category metric](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) might reduce bias by normalizing the numeric metric against categorical values, allowing for easier comparisons between contributors.
+To set up the input data, you can create tables of test and control data separately and take the union of the two tables. The final input table must contain your dimension columns, numeric metric columns, and a categorical column if you're using a summable by category metric. For best results, we recommend having roughly equal numbers of test and control rows when using the summable and summable ratio metrics to avoid biased results. If the number of test and control rows are unbalanced, then the [summable by category metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_by_category_metric) might reduce bias by normalizing the numeric metric against categorical values, allowing for easier comparisons between contributors.
 
 ## Use a summable metric
 
@@ -196,69 +194,20 @@ A summable metric contribution analysis model summarizes the values of a metric 
 
 An example input dataset for a summable metric contribution analysis model might look similar to the following table:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>product</strong></th>
-<th><strong>store</strong></th>
-<th><strong>city</strong></th>
-<th><strong>revenue</strong></th>
-<th><strong>is_test</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>shoe_1</td>
-<td>store_2</td>
-<td>Mountain View</td>
-<td>100</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>shoe_1</td>
-<td>store_3</td>
-<td>Sunnyvale</td>
-<td>200</td>
-<td>true</td>
-</tr>
-<tr class="odd">
-<td>shoe_2</td>
-<td>store_1</td>
-<td>San Francisco</td>
-<td>85</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>shoe_1</td>
-<td>store_2</td>
-<td>Mountain View</td>
-<td>100</td>
-<td>false</td>
-</tr>
-<tr class="odd">
-<td>shoe_1</td>
-<td>store_3</td>
-<td>Sunnyvale</td>
-<td>150</td>
-<td>false</td>
-</tr>
-<tr class="even">
-<td>shoe_2</td>
-<td>store_1</td>
-<td>San Francisco</td>
-<td>175</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
+| **product** | **store** | **city**      | **revenue** | **is\_test** |
+| ----------- | --------- | ------------- | ----------- | ------------ |
+| shoe\_1     | store\_2  | Mountain View | 100         | true         |
+| shoe\_1     | store\_3  | Sunnyvale     | 200         | true         |
+| shoe\_2     | store\_1  | San Francisco | 85          | true         |
+| shoe\_1     | store\_2  | Mountain View | 100         | false        |
+| shoe\_1     | store\_3  | Sunnyvale     | 150         | false        |
+| shoe\_2     | store\_1  | San Francisco | 175         | false        |
 
 In this example, the numerical `  revenue  ` column provides the metric to analyze. The `  product  ` , `  store  ` , and `  city  ` columns are the dimensions to analyze as contributors to total revenue. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
 
-``` text
-CONTRIBUTION_METRIC = 'SUM(revenue)',
-DIMENSION_ID_COLS = ['product', 'store', 'city'],
-IS_TEST_COL = 'is_test',
-```
+    CONTRIBUTION_METRIC = 'SUM(revenue)',
+    DIMENSION_ID_COLS = ['product', 'store', 'city'],
+    IS_TEST_COL = 'is_test',
 
 ## Use a summable ratio metric
 
@@ -266,62 +215,19 @@ A summable ratio metric contribution analysis model summarizes the values of two
 
 An example input dataset for a summable ratio metric contribution analysis model might look similar to the following table:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>browser</strong></th>
-<th><strong>device</strong></th>
-<th><strong>cost</strong></th>
-<th><strong>clicks</strong></th>
-<th><strong>is_test</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Chrome</td>
-<td>iPad</td>
-<td>100.00</td>
-<td>30</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>Firefox</td>
-<td>Pixel</td>
-<td>100.00</td>
-<td>10</td>
-<td>true</td>
-</tr>
-<tr class="odd">
-<td>Edge</td>
-<td>Pixel</td>
-<td>250.00</td>
-<td>40</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>Chrome</td>
-<td>iPad</td>
-<td>100.00</td>
-<td>40</td>
-<td>false</td>
-</tr>
-<tr class="odd">
-<td>Firefox</td>
-<td>Pixel</td>
-<td>50.00</td>
-<td>5</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
+| **browser** | **device** | **cost** | **clicks** | **is\_test** |
+| ----------- | ---------- | -------- | ---------- | ------------ |
+| Chrome      | iPad       | 100.00   | 30         | true         |
+| Firefox     | Pixel      | 100.00   | 10         | true         |
+| Edge        | Pixel      | 250.00   | 40         | true         |
+| Chrome      | iPad       | 100.00   | 40         | false        |
+| Firefox     | Pixel      | 50.00    | 5          | false        |
 
 In this case, the numerical `  cost  ` and `  clicks  ` columns provide the metrics to analyze. The `  browser  ` and `  device  ` columns are the dimensions to analyze as contributors to the cost and click values. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
 
-``` text
-CONTRIBUTION_METRIC = 'SUM(cost)/SUM(clicks)',
-DIMENSION_ID_COLS = ['browser', 'device'],
-IS_TEST_COL = 'is_test',
-```
+    CONTRIBUTION_METRIC = 'SUM(cost)/SUM(clicks)',
+    DIMENSION_ID_COLS = ['browser', 'device'],
+    IS_TEST_COL = 'is_test',
 
 ## Use a summable by category metric
 
@@ -339,69 +245,20 @@ For example, if `  sales  ` is your numeric column and `  month  ` is your categ
 
 An example input dataset for the summable by category metric contribution analysis model might look similar to the following table:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>item_id</strong></th>
-<th><strong>category</strong></th>
-<th><strong>sales</strong></th>
-<th><strong>month</strong></th>
-<th><strong>is_test</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>shirts</td>
-<td>150</td>
-<td>December</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>jackets</td>
-<td>100</td>
-<td>January</td>
-<td>true</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>hats</td>
-<td>50</td>
-<td>April</td>
-<td>true</td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td>shirts</td>
-<td>125</td>
-<td>February</td>
-<td>false</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>hats</td>
-<td>10</td>
-<td>February</td>
-<td>false</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>jackets</td>
-<td>75</td>
-<td>November</td>
-<td>false</td>
-</tr>
-</tbody>
-</table>
+| **item\_id** | **category** | **sales** | **month** | **is\_test** |
+| ------------ | ------------ | --------- | --------- | ------------ |
+| 1            | shirts       | 150       | December  | true         |
+| 2            | jackets      | 100       | January   | true         |
+| 3            | hats         | 50        | April     | true         |
+| 1            | shirts       | 125       | February  | false        |
+| 4            | hats         | 10        | February  | false        |
+| 2            | jackets      | 75        | November  | false        |
 
 In this case, the numerical sales and categorical month columns provide the metrics to analyze. The `  item_id  ` and `  category  ` columns are the dimensions to analyze as contributors to the sales per month values. The `  is_test  ` column value indicates whether the row belongs to the test set or the control set. Your `  CREATE MODEL  ` statement would include the following:
 
-``` text
-CONTRIBUTION_METRIC = 'SUM(sales)/COUNT(DISTINCT month)',
-DIMENSION_ID_COLS = ['item_id', 'category'],
-IS_TEST_COL = 'is_test',
-```
+    CONTRIBUTION_METRIC = 'SUM(sales)/COUNT(DISTINCT month)',
+    DIMENSION_ID_COLS = ['item_id', 'category'],
+    IS_TEST_COL = 'is_test',
 
 ## Use an apriori support threshold
 
@@ -418,7 +275,7 @@ The following examples show how to create contribution analysis models.
 
 The following example creates a contribution analysis model that uses a summable metric:
 
-``` text
+``` notranslate
 CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
     MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
@@ -433,7 +290,7 @@ SELECT * FROM mydataset.house_sales WHERE state = 'WA';
 
 The following example creates a contribution analysis model that uses a summable ratio metric:
 
-``` text
+``` notranslate
 CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
     MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
@@ -451,7 +308,7 @@ FROM mydataset.regional_sales;
 
 The following example creates a contribution analysis model that uses a summable by category metric:
 
-``` text
+``` notranslate
 CREATE (OR REPLACE) MODEL `myproject.mydataset.ca_model`
   OPTIONS(
     MODEL_TYPE = 'CONTRIBUTION_ANALYSIS',
@@ -468,5 +325,5 @@ FROM mydataset.regional_sales;
 
 ## What's next
 
-  - Learn how to call the [`  ML.GET_INSIGHTS  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to get insights from your contribution analysis model.
-  - Try a tutorial on how to [Get data insights from a contribution analysis model using a summable metric](/bigquery/docs/get-contribution-analysis-insights) .
+  - Learn how to call the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) to get insights from your contribution analysis model.
+  - Try a tutorial on how to [Get data insights from a contribution analysis model using a summable metric](https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights) .

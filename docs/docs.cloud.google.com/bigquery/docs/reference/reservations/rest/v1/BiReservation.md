@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [TableReference](#TableReference)
-      - [JSON representation](#TableReference.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation#SCHEMA_REPRESENTATION)
+  - [TableReference](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation#TableReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/BiReservation#TableReference.SCHEMA_REPRESENTATION)
 
 Represents a BI Reservation.
 
@@ -15,7 +15,7 @@ Represents a BI Reservation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;updateTime&quot;: string,
   &quot;size&quot;: string,
@@ -72,7 +72,7 @@ Fully qualified reference to BigQuery table. Internally stored as google.cloud.b
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string

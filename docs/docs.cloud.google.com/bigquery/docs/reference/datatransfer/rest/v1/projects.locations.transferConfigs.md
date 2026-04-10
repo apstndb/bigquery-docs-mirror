@@ -1,20 +1,20 @@
-  - [Resource: TransferConfig](#TransferConfig)
-      - [JSON representation](#TransferConfig.SCHEMA_REPRESENTATION)
-      - [ScheduleOptions](#TransferConfig.ScheduleOptions)
-          - [JSON representation](#TransferConfig.ScheduleOptions.SCHEMA_REPRESENTATION)
-      - [ScheduleOptionsV2](#TransferConfig.ScheduleOptionsV2)
-          - [JSON representation](#TransferConfig.ScheduleOptionsV2.SCHEMA_REPRESENTATION)
-      - [TimeBasedSchedule](#TransferConfig.TimeBasedSchedule)
-          - [JSON representation](#TransferConfig.TimeBasedSchedule.SCHEMA_REPRESENTATION)
-      - [ManualSchedule](#TransferConfig.ManualSchedule)
-      - [EventDrivenSchedule](#TransferConfig.EventDrivenSchedule)
-          - [JSON representation](#TransferConfig.EventDrivenSchedule.SCHEMA_REPRESENTATION)
-      - [UserInfo](#TransferConfig.UserInfo)
-          - [JSON representation](#TransferConfig.UserInfo.SCHEMA_REPRESENTATION)
-      - [EncryptionConfiguration](#TransferConfig.EncryptionConfiguration)
-          - [JSON representation](#TransferConfig.EncryptionConfiguration.SCHEMA_REPRESENTATION)
-      - [ManagedTableType](#TransferConfig.ManagedTableType)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: TransferConfig](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.SCHEMA_REPRESENTATION)
+      - [ScheduleOptions](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ScheduleOptions)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ScheduleOptions.SCHEMA_REPRESENTATION)
+      - [ScheduleOptionsV2](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ScheduleOptionsV2)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ScheduleOptionsV2.SCHEMA_REPRESENTATION)
+      - [TimeBasedSchedule](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.TimeBasedSchedule)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.TimeBasedSchedule.SCHEMA_REPRESENTATION)
+      - [ManualSchedule](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ManualSchedule)
+      - [EventDrivenSchedule](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EventDrivenSchedule)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EventDrivenSchedule.SCHEMA_REPRESENTATION)
+      - [UserInfo](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.UserInfo)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.UserInfo.SCHEMA_REPRESENTATION)
+      - [EncryptionConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EncryptionConfiguration)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.EncryptionConfiguration.SCHEMA_REPRESENTATION)
+      - [ManagedTableType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig.ManagedTableType)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#METHODS_SUMMARY)
 
 ## Resource: TransferConfig
 
@@ -31,7 +31,7 @@ Represents a data transfer configuration. A transfer configuration contains all 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;dataSourceId&quot;: string,
@@ -224,7 +224,7 @@ Options customizing the data transfer schedule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;disableAutoScheduling&quot;: boolean,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
@@ -268,7 +268,7 @@ V2 options customizing different types of data transfer schedule. This field sup
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field schedule can be only one of the following:
   &quot;timeBasedSchedule&quot;: {
@@ -323,7 +323,7 @@ Options customizing the time based transfer schedule. Options are migrated from 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;schedule&quot;: string,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
@@ -375,7 +375,7 @@ Options customizing EventDriven transfers schedule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field eventStream can be only one of the following:
   &quot;pubsubSubscription&quot;: string
@@ -410,7 +410,7 @@ Information about a user.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;email&quot;: string
 }</code></pre></td>
 </tr>
@@ -440,7 +440,7 @@ Represents the encryption configuration for a transfer.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>

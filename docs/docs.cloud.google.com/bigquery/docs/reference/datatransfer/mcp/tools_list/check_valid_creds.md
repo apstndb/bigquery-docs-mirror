@@ -4,7 +4,7 @@ Check for valid credentials for a data source.
 
 The following example shows a MCP call to check for valid credentials for a data source with the ID `  data_source_id  ` in the project `  myproject  ` in the location `  myregion  ` .
 
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `  US  ` multi-region.
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `  US  ` multi-region.
 
 If `  has_valid_creds  ` is true, then the credentials are valid. Otherwise, the credentials are not valid.
 
@@ -23,7 +23,7 @@ The following sample demonstrate how to use `  curl  ` to invoke the `  check_va
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
 curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -60,7 +60,7 @@ A request to determine whether the user has valid credentials. This method is us
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string
 }</code></pre></td>
 </tr>
@@ -98,7 +98,7 @@ A response indicating whether the credentials exist and are valid.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;hasValidCreds&quot;: boolean
 }</code></pre></td>
 </tr>

@@ -1,33 +1,18 @@
 # Delete table snapshots
 
-This document describes how to delete a table snapshot by using the Google Cloud console, a [`  DROP SNAPSHOT TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) GoogleSQL statement, a [`  bq rm  `](/bigquery/docs/reference/bq-cli-reference#bq_rm) command, or a BigQuery API [`  tables.delete  `](/bigquery/docs/reference/rest/v2/tables/delete) call. It also provides information about how to recover a table snapshot that was deleted or that expired in the past seven days. It is intended for users who are familiar with [table snapshots](/bigquery/docs/table-snapshots-intro) .
+This document describes how to delete a table snapshot by using the Google Cloud console, a [`  DROP SNAPSHOT TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) GoogleSQL statement, a [`  bq rm  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_rm) command, or a BigQuery API [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) call. It also provides information about how to recover a table snapshot that was deleted or that expired in the past seven days. It is intended for users who are familiar with [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ## Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permission](/bigquery/docs/access-control#bq-permissions) that you need to delete a table snapshot, and the [predefined IAM roles](/bigquery/docs/access-control#bigquery) that grant those permissions.
+This section describes the [Identity and Access Management (IAM) permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to delete a table snapshot, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
 
 ### Permissions
 
 To delete a table snapshot, you need the following permission:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Permission</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.deleteSnapshot      </code></td>
-<td>The table snapshot that you want to delete</td>
-</tr>
-</tbody>
-</table>
+| **Permission**                                  | **Resource**                               |
+| ----------------------------------------------- | ------------------------------------------ |
+| `        bigquery.tables.deleteSnapshot       ` | The table snapshot that you want to delete |
 
 ### Roles
 
@@ -65,9 +50,11 @@ You can delete a table snapshot by using one of the following options:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
 
-<!-- end list -->
+[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 1.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -81,13 +68,15 @@ You can delete a table snapshot by using one of the following options:
 
 ### SQL
 
-Use the [`  DROP SNAPSHOT TABLE  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) :
+Use the [`  DROP SNAPSHOT TABLE  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     DROP SNAPSHOT TABLE PROJECT_ID.DATASET_NAME.SNAPSHOT_NAME;
     ```
     
@@ -99,13 +88,15 @@ Use the [`  DROP SNAPSHOT TABLE  ` DDL statement](/bigquery/docs/reference/stand
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 Enter the following command in the Cloud Shell:
 
-``` text
+[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
+
+``` notranslate
 bq rm \
 PROJECT_ID:DATASET_NAME.SNAPSHOT_NAME
 ```
@@ -118,35 +109,18 @@ Replace the following:
 
 ### API
 
-Call the [`  tables.delete  `](/bigquery/docs/reference/rest/v2/tables/delete) method with the following parameters:
+Call the [`  tables.delete  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/delete) method with the following parameters:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Parameter</strong></th>
-<th><strong>Value</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         projectId        </code></td>
-<td>The project ID of the project that contains the snapshot.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         datasetId        </code></td>
-<td>The name of the dataset that contains the snapshot.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         tableId        </code></td>
-<td>The name of the snapshot.</td>
-</tr>
-</tbody>
-</table>
+| **Parameter**                  | **Value**                                                 |
+| ------------------------------ | --------------------------------------------------------- |
+| `          projectId         ` | The project ID of the project that contains the snapshot. |
+| `          datasetId         ` | The name of the dataset that contains the snapshot.       |
+| `          tableId         `   | The name of the snapshot.                                 |
 
 ## Restore a deleted or expired table snapshot
 
-You can recover a table snapshot that was deleted or that expired in the past seven days in the same way that you recover a standard table. For more information, see [Restore table snapshots](/bigquery/docs/table-snapshots-restore) .
+You can recover a table snapshot that was deleted or that expired in the past seven days in the same way that you recover a standard table. For more information, see [Restore table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore) .
 
 ## What's next
 
-  - [Create monthly snapshots of a table by using a service account that runs a scheduled query](/bigquery/docs/table-snapshots-scheduled) .
+  - [Create monthly snapshots of a table by using a service account that runs a scheduled query](https://docs.cloud.google.com/bigquery/docs/table-snapshots-scheduled) .

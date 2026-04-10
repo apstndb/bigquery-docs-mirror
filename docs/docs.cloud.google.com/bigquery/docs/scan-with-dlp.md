@@ -4,25 +4,27 @@ Knowing where your sensitive data exists is often the first step in ensuring tha
 
 There are two ways to scan your BigQuery data:
 
-  - **Sensitive data profiling.** Sensitive Data Protection can generate profiles about BigQuery data across an organization, folder, or project. *Data profiles* contain metrics and metadata about your tables and help you determine where [sensitive and high-risk data](/sensitive-data-protection/docs/sensitivity-risk-calculation) reside. Sensitive Data Protection reports these metrics at the project, table, and column levels. For more information, see [Data profiles for BigQuery data](/sensitive-data-protection/docs/data-profiles) .
+  - **Sensitive data profiling.** Sensitive Data Protection can generate profiles about BigQuery data across an organization, folder, or project. *Data profiles* contain metrics and metadata about your tables and help you determine where [sensitive and high-risk data](https://docs.cloud.google.com/sensitive-data-protection/docs/sensitivity-risk-calculation) reside. Sensitive Data Protection reports these metrics at the project, table, and column levels. For more information, see [Data profiles for BigQuery data](https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles) .
 
-  - **On-demand inspection.** Sensitive Data Protection can perform a deep inspection on a single table or a subset of columns and report its findings down to the cell level. This kind of inspection can help you identify individual instances of specific data [types](/sensitive-data-protection/docs/infotypes-reference) , such as the precise location of a credit card number inside a table cell. You can do an on-demand inspection through the Sensitive Data Protection page in the Google Cloud console, the **BigQuery** page in the Google Cloud console, or programmatically through the DLP API.
+  - **On-demand inspection.** Sensitive Data Protection can perform a deep inspection on a single table or a subset of columns and report its findings down to the cell level. This kind of inspection can help you identify individual instances of specific data [types](https://docs.cloud.google.com/sensitive-data-protection/docs/infotypes-reference) , such as the precise location of a credit card number inside a table cell. You can do an on-demand inspection through the Sensitive Data Protection page in the Google Cloud console, the **BigQuery** page in the Google Cloud console, or programmatically through the DLP API.
 
 This page describes how to do an on-demand inspection through the **BigQuery** page in the Google Cloud console.
 
 Sensitive Data Protection is a fully managed service that lets Google Cloud customers identify and protect sensitive data at scale. Sensitive Data Protection uses more than 150 predefined detectors to identify patterns, formats, and checksums. Sensitive Data Protection also provides a set of tools to de-identify your data including masking, tokenization, pseudonymization, date shifting, and more, all without replicating customer data.
 
-To learn more about Sensitive Data Protection, see the [Sensitive Data Protection](/sensitive-data-protection/docs) documentation.
+To learn more about Sensitive Data Protection, see the [Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection/docs) documentation.
 
 ## Before you begin
 
-1.  Get familiar with [Sensitive Data Protection pricing](https://cloud.google.com/sensitive-data-protection/pricing) and [how to keep Sensitive Data Protection costs under control](/sensitive-data-protection/docs/best-practices-costs) .
+1.  Get familiar with [Sensitive Data Protection pricing](https://cloud.google.com/sensitive-data-protection/pricing) and [how to keep Sensitive Data Protection costs under control](https://docs.cloud.google.com/sensitive-data-protection/docs/best-practices-costs) .
 
-2.  [Enable the DLP API](/apis/docs/enable-disable-apis) .
+2.  [Enable the DLP API](https://docs.cloud.google.com/apis/docs/enable-disable-apis) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=dlp.googleapis.com)
 
-3.  Ensure that the user creating your Sensitive Data Protection jobs is granted an appropriate predefined Sensitive Data Protection [IAM role](/sensitive-data-protection/docs/iam-roles) or sufficient [permissions](/sensitive-data-protection/docs/iam-permissions) to run Sensitive Data Protection jobs.
+3.  Ensure that the user creating your Sensitive Data Protection jobs is granted an appropriate predefined Sensitive Data Protection [IAM role](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-roles) or sufficient [permissions](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions) to run Sensitive Data Protection jobs.
 
-**Note:** When you enable the DLP API, a service account is created with a name similar to `  service- project_number @dlp-api.iam.gserviceaccount.com  ` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
+**Note:** When you enable the DLP API, a service account is created with a name similar to `  service- project_number @dlp-api.iam.gserviceaccount.com  ` . This service account is granted the DLP API Service Agent role, which lets the service account authenticate with the BigQuery API. For more information, see [Service account](https://docs.cloud.google.com/sensitive-data-protection/docs/iam-permissions#service_account) on the Sensitive Data Protection IAM permissions page.
 
 ## Scanning BigQuery data using the Google Cloud console
 
@@ -31,8 +33,12 @@ To scan BigQuery data, you create a Sensitive Data Protection job that analyzes 
 To scan a BigQuery table using Sensitive Data Protection:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -51,9 +57,9 @@ To scan a BigQuery table using Sensitive Data Protection:
     Do one of the following:
     
       - To select from the list of predefined `  infoTypes  ` , click **Manage infoTypes** . Then, select the infoTypes you want to search for.
-      - To use an existing [inspection template](/sensitive-data-protection/docs/creating-templates-inspect) , in the **Template name** field, enter the template's full resource name.
+      - To use an existing [inspection template](https://docs.cloud.google.com/sensitive-data-protection/docs/creating-templates-inspect) , in the **Template name** field, enter the template's full resource name.
     
-    For more information on `  infoTypes  ` , see [InfoTypes and infoType detectors](/sensitive-data-protection/docs/concepts-infotypes) in the Sensitive Data Protection documentation.
+    For more information on `  infoTypes  ` , see [InfoTypes and infoType detectors](https://docs.cloud.google.com/sensitive-data-protection/docs/concepts-infotypes) in the Sensitive Data Protection documentation.
 
 9.  Click **Continue** .
 
@@ -79,19 +85,19 @@ To scan a BigQuery table using Sensitive Data Protection:
 
 17. After the Sensitive Data Protection job completes, you are redirected to the job details page, and you're notified by email. You can view the results of the scan on the job details page, or you can click the link to the Sensitive Data Protection job details page in the job completion email.
 
-18. If you chose to publish Sensitive Data Protection findings to BigQuery, on the **Job details** page, click **View Findings in BigQuery** to open the table in the Google Cloud console. You can then query the table and analyze your findings. For more information on querying your results in BigQuery, see [Querying Sensitive Data Protection findings in BigQuery](/sensitive-data-protection/docs/querying-findings) in the Sensitive Data Protection documentation.
+18. If you chose to publish Sensitive Data Protection findings to BigQuery, on the **Job details** page, click **View Findings in BigQuery** to open the table in the Google Cloud console. You can then query the table and analyze your findings. For more information on querying your results in BigQuery, see [Querying Sensitive Data Protection findings in BigQuery](https://docs.cloud.google.com/sensitive-data-protection/docs/querying-findings) in the Sensitive Data Protection documentation.
 
 ## What's next
 
-  - Learn more about [inspecting BigQuery and other storage repositories for sensitive data using Sensitive Data Protection](/sensitive-data-protection/docs/inspecting-storage) .
+  - Learn more about [inspecting BigQuery and other storage repositories for sensitive data using Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection/docs/inspecting-storage) .
 
-  - Learn more about [profiling data in an organization, folder, or project](/sensitive-data-protection/docs/data-profiles) .
+  - Learn more about [profiling data in an organization, folder, or project](https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles) .
 
   - Read the Identity & Security blog post [Take charge of your data: using Sensitive Data Protection to de-identify and obfuscate sensitive information](https://cloud.google.com/blog/products/identity-security/taking-charge-of-your-data-using-cloud-dlp-to-de-identify-and-obfuscate-sensitive-information) .
 
 If you want to redact or otherwise de-identify the sensitive data that the Sensitive Data Protection scan found, see the following:
 
-  - [Inspect text to de-identify sensitive information](/sensitive-data-protection/docs/inspect-sensitive-text-de-identify)
-  - [De-identifying sensitive data](/sensitive-data-protection/docs/deidentify-sensitive-data) in the Sensitive Data Protection documentation
-  - [AEAD encryption concepts in GoogleSQL](/bigquery/docs/aead-encryption-concepts) for information on encrypting individual values within a table
-  - [Protecting data with Cloud KMS keys](/bigquery/docs/customer-managed-encryption) for information on creating and managing your own encryption keys in [Cloud KMS](/kms/docs) to encrypt BigQuery tables
+  - [Inspect text to de-identify sensitive information](https://docs.cloud.google.com/sensitive-data-protection/docs/inspect-sensitive-text-de-identify)
+  - [De-identifying sensitive data](https://docs.cloud.google.com/sensitive-data-protection/docs/deidentify-sensitive-data) in the Sensitive Data Protection documentation
+  - [AEAD encryption concepts in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/aead-encryption-concepts) for information on encrypting individual values within a table
+  - [Protecting data with Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) for information on creating and managing your own encryption keys in [Cloud KMS](https://docs.cloud.google.com/kms/docs) to encrypt BigQuery tables

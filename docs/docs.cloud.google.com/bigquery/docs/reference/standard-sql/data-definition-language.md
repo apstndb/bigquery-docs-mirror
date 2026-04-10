@@ -1,19 +1,19 @@
 # Data definition language (DDL) statements in GoogleSQL
 
-Data definition language (DDL) statements let you create and modify BigQuery resources using [GoogleSQL](/bigquery/docs/reference/standard-sql) query syntax. You can use DDL commands to create, alter, and delete resources, such as the following:
+Data definition language (DDL) statements let you create and modify BigQuery resources using [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql) query syntax. You can use DDL commands to create, alter, and delete resources, such as the following:
 
-  - [Datasets](/bigquery/docs/datasets-intro)
-  - [Tables](/bigquery/docs/tables-intro)
-  - [Table schemas](/bigquery/docs/managing-table-schemas)
-  - [Table clones](/bigquery/docs/table-clones-intro)
-  - [Table snapshots](/bigquery/docs/table-snapshots-intro)
-  - [Views](/bigquery/docs/views)
-  - [Connections](/bigquery/docs/connections-api-intro)
-  - [User-defined functions](#create_function_statement) (UDFs)
-  - [Indexes](/bigquery/docs/search-intro)
-  - [Capacity commitments and reservations](/bigquery/docs/reservations-intro)
-  - [Row-level access policies](/bigquery/docs/managing-row-level-security)
-  - [Default configuration settings](/bigquery/docs/default-configuration)
+  - [Datasets](https://docs.cloud.google.com/bigquery/docs/datasets-intro)
+  - [Tables](https://docs.cloud.google.com/bigquery/docs/tables-intro)
+  - [Table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas)
+  - [Table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro)
+  - [Table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro)
+  - [Views](https://docs.cloud.google.com/bigquery/docs/views)
+  - [Connections](https://docs.cloud.google.com/bigquery/docs/connections-api-intro)
+  - [User-defined functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) (UDFs)
+  - [Indexes](https://docs.cloud.google.com/bigquery/docs/search-intro)
+  - [Capacity commitments and reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro)
+  - [Row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security)
+  - [Default configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration)
 
 ## Required permissions
 
@@ -23,21 +23,23 @@ To create a job that runs a DDL statement, you must have the `  bigquery.jobs.cr
 
 The predefined IAM roles `  bigquery.user  ` , `  bigquery.jobUser  ` , and `  bigquery.admin  ` include the required `  bigquery.jobs.create  ` permission.
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) or the [IAM permissions reference](/iam/docs/permissions-reference) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) or the [IAM permissions reference](https://docs.cloud.google.com/iam/docs/permissions-reference) .
 
 ## Run DDL statements
 
-You can run DDL statements by using the Google Cloud console, by using the bq command-line tool, by calling the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) REST API, or programmatically using the [BigQuery API client libraries](/bigquery/docs/reference/libraries) .
+You can run DDL statements by using the Google Cloud console, by using the bq command-line tool, by calling the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) REST API, or programmatically using the [BigQuery API client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
 
 ### Console
 
 1.  Go to the BigQuery page in the Google Cloud console.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Compose new query** .
 
 3.  Enter the DDL statement into the **Query editor** text area. For example:
     
-    ``` text
+    ``` notranslate
      CREATE TABLE mydataset.newtable ( x INT64 )
      
     ```
@@ -46,18 +48,18 @@ You can run DDL statements by using the Google Cloud console, by using the bq co
 
 ### bq
 
-Enter the [`  bq query  `](/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
+Enter the [`  bq query  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query) command and supply the DDL statement as the query parameter. Set the `  use_legacy_sql  ` flag to `  false  ` .
 
-``` text
+``` notranslate
 bq query --use_legacy_sql=false \
   'CREATE TABLE mydataset.newtable ( x INT64 )'
 ```
 
 ### API
 
-Call the [`  jobs.query  `](/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
+Call the [`  jobs.query  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) method and supply the DDL statement in the request body's `  query  ` property.
 
-DDL functionality extends the information returned by a [Jobs resource](/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
+DDL functionality extends the information returned by a [Jobs resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs#resource) . `  statistics.query.statementType  ` includes the following additional values:
 
   - `  CREATE_TABLE  `
   - `  CREATE_TABLE_AS_SELECT  `
@@ -82,210 +84,181 @@ DDL functionality extends the information returned by a [Jobs resource](/bigquer
 
 ### Java
 
-Call the [`  BigQuery.create()  `](/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery#com_google_cloud_bigquery_BigQuery_create_com_google_cloud_bigquery_JobInfo_com_google_cloud_bigquery_BigQuery_JobOption____) method to start a query job. Call the [`  Job.waitFor()  `](/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.Job#com_google_cloud_bigquery_Job_waitFor_com_google_cloud_RetryOption____) method to wait for the DDL query to finish.
+Call the [`  BigQuery.create()  `](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.BigQuery#com_google_cloud_bigquery_BigQuery_create_com_google_cloud_bigquery_JobInfo_com_google_cloud_bigquery_BigQuery_JobOption____) method to start a query job. Call the [`  Job.waitFor()  `](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/com.google.cloud.bigquery.Job#com_google_cloud_bigquery_Job_waitFor_com_google_cloud_RetryOption____) method to wait for the DDL query to finish.
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-
-// Sample to create a view using DDL
-public class DDLCreateView {
-
-  public static void runDDLCreateView() {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String tableId = "MY_VIEW_ID";
-    String ddl =
-        "CREATE VIEW "
-            + "`"
-            + projectId
-            + "."
-            + datasetId
-            + "."
-            + tableId
-            + "`"
-            + " OPTIONS("
-            + " expiration_timestamp=TIMESTAMP_ADD("
-            + " CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),"
-            + " friendly_name=\"new_view\","
-            + " description=\"a view that expires in 2 days\","
-            + " labels=[(\"org_unit\", \"development\")]"
-            + " )"
-            + " AS SELECT name, state, year, number"
-            + " FROM `bigquery-public-data.usa_names.usa_1910_current`"
-            + " WHERE state LIKE 'W%'`";
-    ddlCreateView(ddl);
-  }
-
-  public static void ddlCreateView(String ddl) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      QueryJobConfiguration config = QueryJobConfiguration.newBuilder(ddl).build();
-
-      // create a view using query and it will wait to complete job.
-      Job job = bigquery.create(JobInfo.of(config));
-      job = job.waitFor();
-      if (job.isDone()) {
-        System.out.println("View created successfully");
-      } else {
-        System.out.println("View was not created");
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.QueryJobConfiguration;
+    
+    // Sample to create a view using DDL
+    public class DDLCreateView {
+    
+      public static void runDDLCreateView() {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "MY_PROJECT_ID";
+        String datasetId = "MY_DATASET_ID";
+        String tableId = "MY_VIEW_ID";
+        String ddl =
+            "CREATE VIEW "
+                + "`"
+                + projectId
+                + "."
+                + datasetId
+                + "."
+                + tableId
+                + "`"
+                + " OPTIONS("
+                + " expiration_timestamp=TIMESTAMP_ADD("
+                + " CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),"
+                + " friendly_name=\"new_view\","
+                + " description=\"a view that expires in 2 days\","
+                + " labels=[(\"org_unit\", \"development\")]"
+                + " )"
+                + " AS SELECT name, state, year, number"
+                + " FROM `bigquery-public-data.usa_names.usa_1910_current`"
+                + " WHERE state LIKE 'W%'`";
+        ddlCreateView(ddl);
       }
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("View was not created. \n" + e.toString());
+    
+      public static void ddlCreateView(String ddl) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          QueryJobConfiguration config = QueryJobConfiguration.newBuilder(ddl).build();
+    
+          // create a view using query and it will wait to complete job.
+          Job job = bigquery.create(JobInfo.of(config));
+          job = job.waitFor();
+          if (job.isDone()) {
+            System.out.println("View created successfully");
+          } else {
+            System.out.println("View was not created");
+          }
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("View was not created. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-// Import the Google Cloud client library and create a client
-const {BigQuery} = require('@google-cloud/bigquery');
-const bigquery = new BigQuery();
-
-async function ddlCreateView() {
-  // Creates a view via a DDL query
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const projectId = "my_project"
-  // const datasetId = "my_dataset"
-  // const tableId = "my_new_view"
-
-  const query = `
-  CREATE VIEW \`${projectId}.${datasetId}.${tableId}\`
-  OPTIONS(
-      expiration_timestamp=TIMESTAMP_ADD(
-          CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-      friendly_name="new_view",
-      description="a view that expires in 2 days",
-      labels=[("org_unit", "development")]
-  )
-  AS SELECT name, state, year, number
-      FROM \`bigquery-public-data.usa_names.usa_1910_current\`
-      WHERE state LIKE 'W%'`;
-
-  // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
-  const options = {
-    query: query,
-  };
-
-  // Run the query as a job
-  const [job] = await bigquery.createQueryJob(options);
-
-  job.on('complete', metadata => {
-    console.log(`Created new view ${tableId} via job ${metadata.id}`);
-  });
-}
-```
+    // Import the Google Cloud client library and create a client
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const bigquery = new BigQuery();
+    
+    async function ddlCreateView() {
+      // Creates a view via a DDL query
+    
+      /**
+       * TODO(developer): Uncomment the following lines before running the sample.
+       */
+      // const projectId = "my_project"
+      // const datasetId = "my_dataset"
+      // const tableId = "my_new_view"
+    
+      const query = `
+      CREATE VIEW \`${projectId}.${datasetId}.${tableId}\`
+      OPTIONS(
+          expiration_timestamp=TIMESTAMP_ADD(
+              CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+          friendly_name="new_view",
+          description="a view that expires in 2 days",
+          labels=[("org_unit", "development")]
+      )
+      AS SELECT name, state, year, number
+          FROM \`bigquery-public-data.usa_names.usa_1910_current\`
+          WHERE state LIKE 'W%'`;
+    
+      // For all options, see https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query
+      const options = {
+        query: query,
+      };
+    
+      // Run the query as a job
+      const [job] = await bigquery.createQueryJob(options);
+    
+      job.on('complete', metadata => {
+        console.log(`Created new view ${tableId} via job ${metadata.id}`);
+      });
+    }
 
 ### Python
 
-Call the [`  Client.query()  `](/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) method to start a query job. Call the [`  QueryJob.result()  `](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_result) method to wait for the DDL query to finish.
+Call the [`  Client.query()  `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_query) method to start a query job. Call the [`  QueryJob.result()  `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.QueryJob#google_cloud_bigquery_job_QueryJob_result) method to wait for the DDL query to finish.
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-# from google.cloud import bigquery
-# project = 'my-project'
-# dataset_id = 'my_dataset'
-# table_id = 'new_view'
-# client = bigquery.Client(project=project)
-
-sql = """
-CREATE VIEW `{}.{}.{}`
-OPTIONS(
-    expiration_timestamp=TIMESTAMP_ADD(
-        CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-    friendly_name="new_view",
-    description="a view that expires in 2 days",
-    labels=[("org_unit", "development")]
-)
-AS SELECT name, state, year, number
-    FROM `bigquery-public-data.usa_names.usa_1910_current`
-    WHERE state LIKE 'W%'
-""".format(
-    project, dataset_id, table_id
-)
-
-job = client.query(sql)  # API request.
-job.result()  # Waits for the query to finish.
-
-print(
-    'Created new view "{}.{}.{}".'.format(
-        job.destination.project,
-        job.destination.dataset_id,
-        job.destination.table_id,
+    # from google.cloud import bigquery
+    # project = 'my-project'
+    # dataset_id = 'my_dataset'
+    # table_id = 'new_view'
+    # client = bigquery.Client(project=project)
+    
+    sql = """
+    CREATE VIEW `{}.{}.{}`
+    OPTIONS(
+        expiration_timestamp=TIMESTAMP_ADD(
+            CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+        friendly_name="new_view",
+        description="a view that expires in 2 days",
+        labels=[("org_unit", "development")]
     )
-)
-```
+    AS SELECT name, state, year, number
+        FROM `bigquery-public-data.usa_names.usa_1910_current`
+        WHERE state LIKE 'W%'
+    """.format(
+        project, dataset_id, table_id
+    )
+    
+    job = client.query(sql)  # API request.
+    job.result()  # Waits for the query to finish.
+    
+    print(
+        'Created new view "{}.{}.{}".'.format(
+            job.destination.project,
+            job.destination.dataset_id,
+            job.destination.table_id,
+        )
+    )
 
 ## On-demand query size calculation
 
 If you use on-demand billing, BigQuery charges for data definition language (DDL) queries based on the number of bytes processed by the query.
 
-<table>
-<thead>
-<tr class="header">
-<th>DDL statement</th>
-<th>Bytes processed</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CREATE TABLE      </code></td>
-<td>None.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CREATE TABLE ... AS SELECT ...      </code></td>
-<td>The sum of bytes processed for all the columns referenced from the tables scanned by the query.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CREATE VIEW      </code></td>
-<td>None.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DROP TABLE      </code></td>
-<td>None.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DROP VIEW      </code></td>
-<td>None.</td>
-</tr>
-</tbody>
-</table>
+| DDL statement                                   | Bytes processed                                                                                 |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `        CREATE TABLE       `                   | None.                                                                                           |
+| `        CREATE TABLE ... AS SELECT ...       ` | The sum of bytes processed for all the columns referenced from the tables scanned by the query. |
+| `        CREATE VIEW       `                    | None.                                                                                           |
+| `        DROP TABLE       `                     | None.                                                                                           |
+| `        DROP VIEW       `                      | None.                                                                                           |
 
-For more information about cost estimation, see [Estimate and control costs](/bigquery/docs/best-practices-costs) .
+For more information about cost estimation, see [Estimate and control costs](https://docs.cloud.google.com/bigquery/docs/best-practices-costs) .
 
 ## `     CREATE SCHEMA    ` statement
 
 Creates a new dataset.
 
-**Key Point:** This SQL statement uses the term `  SCHEMA  ` to refer to a logical collection of tables, views, and other resources. The equivalent concept in BigQuery is a *dataset* . In this context, `  SCHEMA  ` does not refer to BigQuery [table schemas](/bigquery/docs/schemas) .
+**Key Point:** This SQL statement uses the term `  SCHEMA  ` to refer to a logical collection of tables, views, and other resources. The equivalent concept in BigQuery is a *dataset* . In this context, `  SCHEMA  ` does not refer to BigQuery [table schemas](https://docs.cloud.google.com/bigquery/docs/schemas) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE SCHEMA [ IF NOT EXISTS ]
 [project_name.]dataset_name
 [DEFAULT COLLATE collate_specification]
@@ -296,7 +269,7 @@ CREATE SCHEMA [ IF NOT EXISTS ]
 
   - `  IF NOT EXISTS  ` : If any dataset exists with the same name, the `  CREATE  ` statement has no effect.
 
-  - `  DEFAULT COLLATE collate_specification  ` : When a new table is created in the dataset, the table inherits a default [collation specification](/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) unless a collation specification is explicitly specified for a table or a [column](#column_name_and_column_schema) .
+  - `  DEFAULT COLLATE collate_specification  ` : When a new table is created in the dataset, the table inherits a default [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) unless a collation specification is explicitly specified for a table or a [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) .
     
     If you remove or change this collation specification later with the `  ALTER SCHEMA  ` statement, this will not change existing collation specifications in this dataset. If you want to update an existing collation specification in a dataset, you must alter the column that contains the specification.
 
@@ -304,13 +277,13 @@ CREATE SCHEMA [ IF NOT EXISTS ]
 
   - `  dataset_name  ` : The name of the dataset to create.
 
-  - [`  schema_option_list  `](#schema_option_list) : A list of options for creating the dataset.
+  - [`  schema_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) : A list of options for creating the dataset.
 
 ### Details
 
-The dataset is created in the location that you specify in the query settings. For more information, see [Specifying your location](/bigquery/docs/locations#specify_locations) .
+The dataset is created in the location that you specify in the query settings. For more information, see [Specifying your location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
-For more information about creating a dataset, see [Creating datasets](/bigquery/docs/datasets) . For information about quotas, see [Dataset limits](/bigquery/quotas#dataset_limits) .
+For more information about creating a dataset, see [Creating datasets](https://docs.cloud.google.com/bigquery/docs/datasets) . For information about quotas, see [Dataset limits](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) .
 
 ### `     schema_option_list    `
 
@@ -346,7 +319,7 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       default_rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the <a href="/bigquery/docs/reference/rest/v2/datasets#Dataset.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> that is used for new tables created in this dataset. It does not impact existing tables. The following values are supported:</p>
+<p>This specifies the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> that is used for new tables created in this dataset. It does not impact existing tables. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.25 is rounded to 2.3, and -2.25 is rounded to -2.3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.25 is rounded to 2.2 and -2.25 is rounded to -2.2.</li>
@@ -399,17 +372,17 @@ The following options are supported:
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_time_travel_hours      </code></td>
 <td><code dir="ltr" translate="no">       SMALLINT      </code></td>
-<td>Specifies the duration in hours of the <a href="/bigquery/docs/time-travel#time_travel">time travel window</a> for the dataset. The <code dir="ltr" translate="no">       max_time_travel_hours      </code> value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.</td>
+<td>Specifies the duration in hours of the <a href="https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel">time travel window</a> for the dataset. The <code dir="ltr" translate="no">       max_time_travel_hours      </code> value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       primary_replica      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The replica name to set as the <a href="/bigquery/docs/data-replication">primary replica</a> .</td>
+<td>The replica name to set as the <a href="https://docs.cloud.google.com/bigquery/docs/data-replication">primary replica</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       storage_billing_model      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>Alters the <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">storage billing model</a> for the dataset. Set the <code dir="ltr" translate="no">        storage_billing_model       </code> value to <code dir="ltr" translate="no">        PHYSICAL       </code> to use physical bytes when calculating storage charges, or to <code dir="ltr" translate="no">        LOGICAL       </code> to use logical bytes. <code dir="ltr" translate="no">        LOGICAL       </code> is the default.</p>
+<td><p>Alters the <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">storage billing model</a> for the dataset. Set the <code dir="ltr" translate="no">        storage_billing_model       </code> value to <code dir="ltr" translate="no">        PHYSICAL       </code> to use physical bytes when calculating storage charges, or to <code dir="ltr" translate="no">        LOGICAL       </code> to use logical bytes. <code dir="ltr" translate="no">        LOGICAL       </code> is the default.</p>
 <p>The <code dir="ltr" translate="no">        storage_billing_model       </code> option is only available for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is <code dir="ltr" translate="no">        LOGICAL       </code> .</p>
 <p>When you change a dataset's billing model, it takes 24 hours for the change to take effect.</p>
 <p>Once you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again.</p></td>
@@ -417,29 +390,18 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the dataset, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the dataset, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.create      </code></td>
-<td>The project where you create the dataset.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                  |
+| ----------------------------------------- | ----------------------------------------- |
+| `        bigquery.datasets.create       ` | The project where you create the dataset. |
 
 ### Examples
 
@@ -447,7 +409,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example creates a dataset with a default table expiration and a set of labels.
 
-``` text
+``` notranslate
 CREATE SCHEMA mydataset
 OPTIONS(
   location="us",
@@ -460,7 +422,7 @@ OPTIONS(
 
 The following example creates a case-insensitive dataset. Both the dataset name and table names inside the dataset are case-insensitive.
 
-``` text
+``` notranslate
 CREATE SCHEMA mydataset
 OPTIONS(
   is_case_insensitive=TRUE
@@ -471,7 +433,7 @@ OPTIONS(
 
 The following example creates a dataset with a collation specification.
 
-``` text
+``` notranslate
 CREATE SCHEMA mydataset
 DEFAULT COLLATE 'und:ci'
 ```
@@ -482,7 +444,7 @@ Creates a new table.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] [ TEMP | TEMPORARY ] TABLE [ IF NOT EXISTS ]
 table_name
 [(
@@ -516,35 +478,35 @@ REFERENCES primary_key_table(column_name[, ...]) NOT ENFORCED
 
   - `  OR REPLACE  ` : Replaces any table with the same name if it exists. Cannot appear with `  IF NOT EXISTS  ` .
 
-  - `  TEMP | TEMPORARY  ` : Creates a [temporary table](/bigquery/docs/multi-statement-queries#temporary_tables) .
+  - `  TEMP | TEMPORARY  ` : Creates a [temporary table](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) .
 
   - `  IF NOT EXISTS  ` : If any table exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
 
-  - `  table_name  ` : The name of the table to create. See [Table path syntax](#table_path) . For temporary tables, do not include the project name or dataset name.
+  - `  table_name  ` : The name of the table to create. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) . For temporary tables, do not include the project name or dataset name.
 
-  - [`  column  `](#column_name_and_column_schema) : The table's schema information.
+  - [`  column  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) : The table's schema information.
 
-  - [`  constraint_definition  `](/bigquery/docs/information-schema-table-constraints) : An expression that defines a table constraint.
+  - [`  constraint_definition  `](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) : An expression that defines a table constraint.
 
-  - [`  collation_specification  `](/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) : When a new column is added to the table without an explicit collation specification, the [column](#column_name_and_column_schema) inherits this collation specification for `  STRING  ` types.
+  - [`  collation_specification  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) : When a new column is added to the table without an explicit collation specification, the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) inherits this collation specification for `  STRING  ` types.
     
     If you remove or change this collation specification later with the `  ALTER TABLE  ` statement, this will not change existing collation specifications in this table. If you want to update an existing collation specification in a table, you must alter the column that contains the specification.
     
     If the table is part of a dataset, the default collation specification for this table overrides the default collation specification for the dataset.
 
-  - [`  partition_expression  `](#partition_expression) : An expression that determines how to partition the table.
+  - [`  partition_expression  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) : An expression that determines how to partition the table.
 
-  - [`  clustering_column_list  `](#clustering_column_list) : A comma-separated list of column references that determine how to cluster the table. You cannot have collation on columns in this list.
+  - [`  clustering_column_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#clustering_column_list) : A comma-separated list of column references that determine how to cluster the table. You cannot have collation on columns in this list.
 
-  - `  connection_name  ` : Specifies a [connection resource](/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+  - `  connection_name  ` : Specifies a [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-  - [`  table_option_list  `](#table_option_list) : A list of options for creating the table.
+  - [`  table_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) : A list of options for creating the table.
 
-  - `  query_statement  ` : The query from which the table should be created. For the query syntax, see [SQL syntax reference](/bigquery/docs/reference/standard-sql/query-syntax) . If a collation specification is used on this table, collation passes through this query statement.
+  - `  query_statement  ` : The query from which the table should be created. For the query syntax, see [SQL syntax reference](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . If a collation specification is used on this table, collation passes through this query statement.
 
-  - `  primary_key  ` : An expression that defines a primary key [table constraint](/bigquery/docs/primary-foreign-keys) . BigQuery only supports unenforced primary keys.
+  - `  primary_key  ` : An expression that defines a primary key [table constraint](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . BigQuery only supports unenforced primary keys.
 
-  - `  foreign_key  ` : An expression that defines a foreign key [table constraint](/bigquery/docs/primary-foreign-keys) . BigQuery only supports unenforced foreign keys.
+  - `  foreign_key  ` : An expression that defines a foreign key [table constraint](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . BigQuery only supports unenforced foreign keys.
 
 ### Details
 
@@ -557,17 +519,17 @@ REFERENCES primary_key_table(column_name[, ...]) NOT ENFORCED
   - Column names must be specified either through the column list, the `  AS query_statement  ` clause or schema of the table in the `  LIKE  ` clause.
   - Duplicate column names are not allowed.
   - When both the `  LIKE  ` and the `  AS query_statement  ` clause are present, the column list in the query statement must match the columns of the table referenced by the `  LIKE  ` clause.
-  - Table names are case-sensitive unless the dataset they belong to is not. To create a case-insensitive dataset, see [Creating a case-insensitive dataset](/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) . To alter a dataset to make it case-insensitive dataset, see [Turning on case insensitivity for a dataset](/bigquery/docs/reference/standard-sql/data-definition-language#turning_on_case_insensitivity_for_a_dataset) .
+  - Table names are case-sensitive unless the dataset they belong to is not. To create a case-insensitive dataset, see [Creating a case-insensitive dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) . To alter a dataset to make it case-insensitive dataset, see [Turning on case insensitivity for a dataset](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#turning_on_case_insensitivity_for_a_dataset) .
 
 Limitations:
 
-  - It is not possible to create an [ingestion-time partitioned table](/bigquery/docs/creating-partitioned-tables) from the result of a query. Instead, use a `  CREATE TABLE  ` DDL statement to create the table, and then use an [`  INSERT  ` DML statement](/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to insert data into it.
+  - It is not possible to create an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) from the result of a query. Instead, use a `  CREATE TABLE  ` DDL statement to create the table, and then use an [`  INSERT  ` DML statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#insert_statement) to insert data into it.
   - It is not possible to use the `  OR REPLACE  ` modifier to replace a table with a different kind of partitioning. Instead, `  DROP  ` the table, and then use a `  CREATE TABLE ... AS SELECT ...  ` statement to recreate it.
 
 This statement supports the following variants, which have the same limitations:
 
-  - [`  CREATE TABLE LIKE  `](#create_table_like) : Create a table with the same schema as an existing table.
-  - [`  CREATE TABLE COPY  `](#create_table_copy) : Create a table by copying schema and data from an existing table.
+  - [`  CREATE TABLE LIKE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_like) : Create a table with the same schema as an existing table.
+  - [`  CREATE TABLE COPY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_copy) : Create a table by copying schema and data from an existing table.
 
 ### `     column    `
 
@@ -575,59 +537,55 @@ This statement supports the following variants, which have the same limitations:
 
 **Note:** Constraints cannot be specified on `  ARRAY  ` or `  STRUCT  ` elements.
 
-``` text
-column :=
-  column_name column_schema
+    column :=
+      column_name column_schema
+    
+    column_schema :=
+       {
+         simple_type
+         | STRUCT<field_list>
+         | ARRAY<array_element_schema>
+       }
+       [PRIMARY KEY NOT ENFORCED | REFERENCES table_name(column_name) NOT ENFORCED]
+       [ DEFAULT default_expression |
+         GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list) ]
+       [NOT NULL]
+       [OPTIONS(column_option_list)]
+    
+    simple_type :=
+      { data_type | STRING COLLATE collate_specification }
+    
+    field_list :=
+      field_name column_schema [, ...]
+    
+    array_element_schema :=
+      { simple_type | STRUCT<field_list> }
+      [NOT NULL]
 
-column_schema :=
-   {
-     simple_type
-     | STRUCT<field_list>
-     | ARRAY<array_element_schema>
-   }
-   [PRIMARY KEY NOT ENFORCED | REFERENCES table_name(column_name) NOT ENFORCED]
-   [ DEFAULT default_expression |
-     GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list) ]
-   [NOT NULL]
-   [OPTIONS(column_option_list)]
-
-simple_type :=
-  { data_type | STRING COLLATE collate_specification }
-
-field_list :=
-  field_name column_schema [, ...]
-
-array_element_schema :=
-  { simple_type | STRUCT<field_list> }
-  [NOT NULL]
-```
-
-  - [`  column_name  `](/bigquery/docs/schemas#column_names) is the name of the column. A column name:
+  - [`  column_name  `](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) is the name of the column. A column name:
     
       - Must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_)
       - Must start with a letter or underscore
       - Can be up to 300 characters
 
-  - `  column_schema  ` : Similar to a [data type](/bigquery/docs/schemas#standard_sql_data_types) , but supports an optional `  NOT NULL  ` constraint for types other than `  ARRAY  ` . `  column_schema  ` also supports options on top-level columns and `  STRUCT  ` fields.
+  - `  column_schema  ` : Similar to a [data type](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , but supports an optional `  NOT NULL  ` constraint for types other than `  ARRAY  ` . `  column_schema  ` also supports options on top-level columns and `  STRUCT  ` fields.
     
     `  column_schema  ` can be used only in the column definition list of `  CREATE TABLE  ` statements. It cannot be used as a type in expressions.
 
-  - `  simple_type  ` : Any [supported data type](/bigquery/docs/reference/standard-sql/data-types) aside from `  STRUCT  ` and `  ARRAY  ` .
+  - `  simple_type  ` : Any [supported data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) aside from `  STRUCT  ` and `  ARRAY  ` .
     
-    If `  simple_type  ` is a `  STRING  ` , it supports an additional clause for [collation](/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) , which defines how a resulting `  STRING  ` can be compared and sorted. The syntax looks like this:
+    If `  simple_type  ` is a `  STRING  ` , it supports an additional clause for [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) , which defines how a resulting `  STRING  ` can be compared and sorted. The syntax looks like this:
     
-    ``` text
-    STRING COLLATE collate_specification
-    ```
+        STRING COLLATE collate_specification
     
     If you have `  DEFAULT COLLATE collate_specification  ` assigned to the table, the collation specification for a column overrides the specification for the table.
 
-  - `  default_expression  ` : The [default value](/bigquery/docs/default-values) assigned to the column. You cannot specify `  DEFAULT  ` if `  GENERATED ALWAYS AS  ` is specified.
+  - `  default_expression  ` : The [default value](https://docs.cloud.google.com/bigquery/docs/default-values) assigned to the column. You cannot specify `  DEFAULT  ` if `  GENERATED ALWAYS AS  ` is specified.
 
-  - `  generation_expression  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `  generation_expression  ` syntax is a call to the [`  AI.EMBED  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
+  - `  generation_expression  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `  generation_expression  ` syntax is a call to the [`  AI.EMBED  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
     
       - You can't specify `  GENERATED ALWAYS AS  ` if `  DEFAULT  ` is specified.
-      - The `  connection_id  ` argument to `  AI.EMBED  ` is required when used in a generation expression.
+      - If you specify an `  endpoint  ` argument to `  AI.EMBED  ` , then the `  connection_id  ` argument is also required when used in a generation expression.
       - The type of the column must be `  STRUCT<result ARRAY<FLOAT64>, status STRING>  ` .
 
   - `  generation_option_list  ` : The options for a generated column. The only supported option is `  asynchronous = TRUE  ` .
@@ -644,7 +602,7 @@ array_element_schema :=
 
 ### `     partition_expression    `
 
-`  PARTITION BY  ` is an optional clause that controls [table](/bigquery/docs/partitioned-tables) and [vector index](/bigquery/docs/vector-index#partitions) partitioning. `  partition_expression  ` is an expression that determines how to partition the table or vector index. The partition expression can contain the following values:
+`  PARTITION BY  ` is an optional clause that controls [table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) partitioning. `  partition_expression  ` is an expression that determines how to partition the table or vector index. The partition expression can contain the following values:
 
   - `  _PARTITIONDATE  ` . Partition by ingestion time with daily partitions. This syntax cannot be used with the `  AS query_statement  ` clause.
 
@@ -670,13 +628,13 @@ array_element_schema :=
 
 ### `     clustering_column_list    `
 
-`  CLUSTER BY  ` is an optional clause that controls [table clustering](/bigquery/docs/creating-clustered-tables) . `  clustering_column_list  ` is a comma-separated list that determines how to cluster the table. The clustering column list can contain a list of up to four clustering columns.
+`  CLUSTER BY  ` is an optional clause that controls [table clustering](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) . `  clustering_column_list  ` is a comma-separated list that determines how to cluster the table. The clustering column list can contain a list of up to four clustering columns.
 
 **Note:** You cannot have collation on a column in `  clustering_column_list  ` .
 
 ### `     table_option_list    `
 
-The option list lets you set table options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list lets you set table options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a table option list in the following format:
 
@@ -702,72 +660,72 @@ Specify a table option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       partition_expiration_days      </code></td>
 <td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        partition_expiration_days=7       </code></p>
-<p>Sets the partition expiration in days. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
+<p>Sets the partition expiration in days. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       require_partition_filter      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        require_partition_filter=true       </code></p>
-<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
+<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       kms_key_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/       </code> <code dir="ltr" translate="no">          location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
-<p>See more details about <a href="/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
+<p>See more details about <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_table"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a table that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the default <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
+<p>This specifies the default <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.5 is rounded to 3.0, and -2.5 is rounded to -3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.5 is rounded to 2.0 and -2.5 is rounded to -2.0.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       enable_change_history      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_change_history=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_staleness      </code></td>
 <td><p><code dir="ltr" translate="no">        INTERVAL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        max_staleness=INTERVAL "4:0:0" HOUR TO SECOND       </code></p>
-<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
+<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
 <p><code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
 </tr>
 <tr class="odd">
@@ -775,7 +733,7 @@ Specify a table option list in the following format:
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_fine_grained_mutations=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       storage_uri      </code></td>
@@ -783,7 +741,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        storage_uri=                 gs:                //                 BUCKET_DIRECTORY                /                 TABLE_DIRECTORY                /       </code></p>
 <p>A fully qualified location prefix for the external folder where data is stored. Supports <code dir="ltr" translate="no">        gs:       </code> buckets.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p></td>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       file_format      </code></td>
@@ -791,7 +749,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        file_format=PARQUET       </code></p>
 <p>The open-source file format in which the table data is stored. Only <code dir="ltr" translate="no">        PARQUET       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        PARQUET       </code> .</p></td>
 </tr>
 <tr class="even">
@@ -800,13 +758,13 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        table_format=ICEBERG       </code></p>
 <p>The open table format in which metadata-only snapshots are stored. Only <code dir="ltr" translate="no">        ICEBERG       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        ICEBERG       </code> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -859,25 +817,25 @@ Specify a column option list in the following format:
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a unique id"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
+<p>This specifies the <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.25 is rounded to 2.3, and -2.25 is rounded to -2.3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.25 is rounded to 2.2 and -2.25 is rounded to -2.2.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       data_policies      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code></td>
-<td><p>Applies a <a href="/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
+<td><p>Applies a <a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies = ["{'name':'myproject.region-us.data_policy_name1'}",                                           "{'name':'myproject.region-us.data_policy_name2'}"]       </code></p>
-<p>The <a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies +=["data_policy1", "data_policy2"]       </code></p></td>
 </tr>
 </tbody>
@@ -907,22 +865,11 @@ Setting the `  VALUE  ` replaces the existing value of that option for the colum
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                                |
+| --------------------------------------- | --------------------------------------- |
+| `        bigquery.tables.create       ` | The dataset where you create the table. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` and `  bigquery.tables.updateData  ` permissions.
 
@@ -934,7 +881,7 @@ If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquer
 
 The following example creates a partitioned table named `  newtable  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable
 (
   x INT64 OPTIONS(description="An optional INTEGER field"),
@@ -969,7 +916,7 @@ The table schema contains two columns:
       - **a:** An array of strings, with description "A repeated STRING field"
       - **b:** A boolean
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](/bigquery/docs/nested-repeated) .
+    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -982,7 +929,7 @@ The table option list specifies the:
 
 The following example creates a table named `  top_words  ` in `  mydataset  ` from a query:
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.top_words
 OPTIONS(
   description="Top ten words per Shakespeare corpus"
@@ -1006,7 +953,7 @@ The table schema contains 2 columns:
 
   - **top\_words:** An `  ARRAY  ` of `  STRUCT  ` s containing 2 fields: `  word  ` (a `  STRING  ` ) and `  word_count  ` (an `  INT64  ` with the word count)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](/bigquery/docs/nested-repeated) .
+    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD column, and an ARRAY is displayed as a REPEATED column. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -1016,7 +963,7 @@ The table option list specifies the:
 
 The following example creates a table named `  newtable  ` in `  mydataset  ` only if no table named `  newtable  ` exists in `  mydataset  ` . If the table name exists in the dataset, no error is returned, and no action is taken.
 
-``` text
+``` notranslate
 CREATE TABLE IF NOT EXISTS mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
 OPTIONS(
   expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
@@ -1033,7 +980,7 @@ The table schema contains 2 columns:
 
   - **y:** A STRUCT containing a (an array of strings) and b (a boolean)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](/bigquery/docs/nested-repeated) .
+    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -1045,7 +992,7 @@ The table option list specifies the:
 
 The following example creates a table named `  newtable  ` in `  mydataset  ` , and if `  newtable  ` exists in `  mydataset  ` , it is overwritten with an empty table.
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE mydataset.newtable (x INT64, y STRUCT <a ARRAY <STRING>, b BOOL>)
 OPTIONS(
   expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC",
@@ -1062,7 +1009,7 @@ The table schema contains 2 columns:
 
   - **y:** A STRUCT containing a (an array of strings) and b (a boolean)
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](/bigquery/docs/nested-repeated) .
+    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 The table option list specifies the:
 
@@ -1074,7 +1021,7 @@ The table option list specifies the:
 
 The following example creates a table named `  newtable  ` in `  mydataset  ` . The `  NOT NULL  ` modifier in the column definition list of a `  CREATE TABLE  ` statement specifies that a column or field is created in `  REQUIRED  ` mode.
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable (
   x INT64 NOT NULL,
   y STRUCT <
@@ -1100,7 +1047,7 @@ The table schema contains 3 columns:
 
   - **z:** A `  NULLABLE  ` string
     
-    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](/bigquery/docs/nested-repeated) .
+    **Note:** When you examine the table schema in the Google Cloud console, a STRUCT is displayed as a RECORD, and an ARRAY is displayed as REPEATED. The STRUCT and ARRAY data types are used to create nested and repeated data in BigQuery. For more information, see [Specifying nested and repeated fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) .
 
 #### Creating a table with collation support
 
@@ -1108,7 +1055,7 @@ The following examples create a table named `  newtable  ` in `  mydataset  ` wi
 
 All `  STRING  ` column schemas in this table are collated with `  'und:ci'  ` :
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable (
   a STRING,
   b STRING,
@@ -1122,7 +1069,7 @@ DEFAULT COLLATE 'und:ci';
 
 Only `  b  ` and `  y  ` are collated with `  'und:ci'  ` :
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable (
   a STRING,
   b STRING COLLATE 'und:ci',
@@ -1135,9 +1082,9 @@ CREATE TABLE mydataset.newtable (
 
 #### Creating a table with parameterized data types
 
-The following example creates a table named `  newtable  ` in `  mydataset  ` . The parameters in parentheses specify that the column contains a parameterized data type. See [Parameterized Data Types](/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information about parameterized types.
+The following example creates a table named `  newtable  ` in `  mydataset  ` . The parameters in parentheses specify that the column contains a parameterized data type. See [Parameterized Data Types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) for more information about parameterized types.
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable (
   x STRING(10),
   y STRUCT <
@@ -1163,9 +1110,9 @@ The table schema contains 3 columns:
 
 #### Creating a partitioned table
 
-The following example creates a [partitioned table](/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) named `  newtable  ` in `  mydataset  ` using a `  DATE  ` column:
+The following example creates a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) named `  newtable  ` in `  mydataset  ` using a `  DATE  ` column:
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable (transaction_id INT64, transaction_date DATE)
 PARTITION BY transaction_date
 OPTIONS(
@@ -1188,24 +1135,22 @@ The table option list specifies the:
 
 #### Creating a partitioned table from the result of a query
 
-The following example creates a [partitioned table](/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) named `  days_with_rain  ` in `  mydataset  ` using a `  DATE  ` column:
+The following example creates a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables) named `  days_with_rain  ` in `  mydataset  ` using a `  DATE  ` column:
 
-``` text
-CREATE TABLE mydataset.days_with_rain
-PARTITION BY date
-OPTIONS (
-  partition_expiration_days=365,
-  description="weather stations with precipitation, partitioned by day"
-) AS
-SELECT
-  DATE(CAST(year AS INT64), CAST(mo AS INT64), CAST(da AS INT64)) AS date,
-  (SELECT ANY_VALUE(name) FROM `bigquery-public-data.noaa_gsod.stations` AS stations
-   WHERE stations.usaf = stn) AS station_name,  -- Stations can have multiple names
-  prcp
-FROM `bigquery-public-data.noaa_gsod.gsod2017` AS weather
-WHERE prcp != 99.9  -- Filter unknown values
-  AND prcp > 0      -- Filter stations/days with no precipitation
-```
+    CREATE TABLE mydataset.days_with_rain
+    PARTITION BY date
+    OPTIONS (
+      partition_expiration_days=365,
+      description="weather stations with precipitation, partitioned by day"
+    ) AS
+    SELECT
+      DATE(CAST(year AS INT64), CAST(mo AS INT64), CAST(da AS INT64)) AS date,
+      (SELECT ANY_VALUE(name) FROM `bigquery-public-data.noaa_gsod.stations` AS stations
+       WHERE stations.usaf = stn) AS station_name,  -- Stations can have multiple names
+      prcp
+    FROM `bigquery-public-data.noaa_gsod.gsod2017` AS weather
+    WHERE prcp != 99.9  -- Filter unknown values
+      AND prcp > 0      -- Filter stations/days with no precipitation
 
 If you haven't configured a default project, prepend a project ID to the dataset name in the example SQL, and enclose the name in backticks if `  project_id  ` contains special characters: ``  ` project_id.dataset.table `  `` . So, instead of `  mydataset.days_with_rain  ` , your table qualifier might be ``  `myproject.mydataset.days_with_rain`  `` .
 
@@ -1224,9 +1169,9 @@ The table option list specifies the:
 
 ##### Example 1
 
-The following example creates a [clustered table](/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is a [partitioned table](/bigquery/docs/partitioned-tables) , partitioned by a truncated `  TIMESTAMP  ` column and clustered by a `  STRING  ` column named `  customer_id  ` .
+The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) , partitioned by a truncated `  TIMESTAMP  ` column and clustered by a `  STRING  ` column named `  customer_id  ` .
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.myclusteredtable
 (
   input_timestamp TIMESTAMP,
@@ -1256,9 +1201,9 @@ The table option list specifies the:
 
 ##### Example 2
 
-The following example creates a [clustered table](/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is an [ingestion-time partitioned table](/bigquery/docs/creating-partitioned-tables) .
+The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is an [ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.myclusteredtable
 (
   customer_id STRING,
@@ -1287,9 +1232,9 @@ The table option list specifies the:
 
 ##### Example 3
 
-The following example creates a [clustered table](/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is not partitioned.
+The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` . The table is not partitioned.
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.myclusteredtable
 (
   customer_id STRING,
@@ -1317,11 +1262,11 @@ The table option list specifies the:
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following example creates a table named `  embedded_table  ` in `  mydataset  ` with an [automatically generated embedding](/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from the `  content  ` column:
+The following example creates a table named `  embedded_table  ` in `  mydataset  ` with an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from the `  content  ` column:
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.embedded_table (
   id INT64,
   content STRING,
@@ -1340,9 +1285,9 @@ CREATE TABLE mydataset.embedded_table (
 
 ##### Example 1
 
-The following example creates a partitioned and [clustered table](/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` using the result of a query.
+The following example creates a partitioned and [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` using the result of a query.
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.myclusteredtable
 (
   input_timestamp TIMESTAMP,
@@ -1374,9 +1319,9 @@ The table option list specifies the:
 
 ##### Example 2
 
-The following example creates a [clustered table](/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` using the result of a query. The table is not partitioned.
+The following example creates a [clustered table](https://docs.cloud.google.com/bigquery/docs/clustered-tables) named `  myclusteredtable  ` in `  mydataset  ` using the result of a query. The table is not partitioned.
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.myclusteredtable
 (
   customer_id STRING,
@@ -1405,7 +1350,7 @@ The table option list specifies the:
 
 The following example creates a temporary table named `  Example  ` and inserts values into it.
 
-``` text
+``` notranslate
 CREATE TEMP TABLE Example
 (
   x INT64,
@@ -1424,30 +1369,28 @@ FROM Example;
 
 This script returns the following output:
 
-``` text
-+-----+---+-----+
-| Row | x | y   |
-+-----+---|-----+
-| 1   | 5 | foo |
-| 2   | 6 | bar |
-+-----+---|-----+
-```
+    +-----+---+-----+
+    | Row | x | y   |
+    +-----+---|-----+
+    | 1   | 5 | foo |
+    | 2   | 6 | bar |
+    +-----+---|-----+
 
 #### Load data across clouds
 
 #### Example 1
 
-Suppose you have a BigLake table named `  myawsdataset.orders  ` that references data from [Amazon S3](/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `  myotherdataset.shipments  ` in the US multi-region.
+Suppose you have a BigLake table named `  myawsdataset.orders  ` that references data from [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table) . You want to transfer data from that table to a BigQuery table `  myotherdataset.shipments  ` in the US multi-region.
 
 First, display information about the `  myawsdataset.orders  ` table:
 
-``` text
+``` 
     bq show myawsdataset.orders;
 ```
 
 The output is similar to the following:
 
-``` text
+``` 
   Last modified             Schema              Type     Total URIs   Expiration
 ----------------- -------------------------- ---------- ------------ -----------
   31 Oct 17:40:28   |- l_orderkey: integer     EXTERNAL   1
@@ -1461,13 +1404,13 @@ The output is similar to the following:
 
 Next, display information about the `  myotherdataset.shipments  ` table:
 
-``` text
+``` 
   bq show myotherdataset.shipments
 ```
 
 The output is similar to the following. Some columns are omitted to simplify the output.
 
-``` text
+``` 
   Last modified             Schema             Total Rows   Total Bytes   Expiration   Time Partitioning   Clustered Fields   Total Logical
  ----------------- --------------------------- ------------ ------------- ------------ ------------------- ------------------ ---------------
   31 Oct 17:34:31   |- l_orderkey: integer      3086653      210767042                                                         210767042
@@ -1482,82 +1425,72 @@ The output is similar to the following. Some columns are omitted to simplify the
 
 Now, using the `  CREATE TABLE AS SELECT  ` statement you can selectively load data to the `  myotherdataset.orders  ` table in the US multi-region:
 
-``` text
-CREATE OR REPLACE TABLE
-  myotherdataset.orders
-  PARTITION BY DATE_TRUNC(l_commitdate, YEAR) AS
-SELECT
-  *
-FROM
-  myawsdataset.orders
-WHERE
-  EXTRACT(YEAR FROM l_commitdate) = 1992;
-```
+    CREATE OR REPLACE TABLE
+      myotherdataset.orders
+      PARTITION BY DATE_TRUNC(l_commitdate, YEAR) AS
+    SELECT
+      *
+    FROM
+      myawsdataset.orders
+    WHERE
+      EXTRACT(YEAR FROM l_commitdate) = 1992;
 
-**Note:** If you get a `  ResourceExhausted  ` error, retry after some time. If the issue persists, you can [contact support](/bigquery/docs/getting-support) .
+**Note:** If you get a `  ResourceExhausted  ` error, retry after some time. If the issue persists, you can [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 You can then perform a join operation with the newly created table:
 
-``` text
-SELECT
-  orders.l_orderkey,
-  orders.l_orderkey,
-  orders.l_suppkey,
-  orders.l_commitdate,
-  orders.l_returnflag,
-  shipments.l_shipmode,
-  shipments.l_shipinstruct
-FROM
-  myotherdataset.shipments
-JOIN
-  `myotherdataset.orders` as orders
-ON
-  orders.l_orderkey = shipments.l_orderkey
-AND orders.l_partkey = shipments.l_partkey
-AND orders.l_suppkey = shipments.l_suppkey
-WHERE orders.l_returnflag = 'R'; -- 'R' means refunded.
-```
+    SELECT
+      orders.l_orderkey,
+      orders.l_orderkey,
+      orders.l_suppkey,
+      orders.l_commitdate,
+      orders.l_returnflag,
+      shipments.l_shipmode,
+      shipments.l_shipinstruct
+    FROM
+      myotherdataset.shipments
+    JOIN
+      `myotherdataset.orders` as orders
+    ON
+      orders.l_orderkey = shipments.l_orderkey
+    AND orders.l_partkey = shipments.l_partkey
+    AND orders.l_suppkey = shipments.l_suppkey
+    WHERE orders.l_returnflag = 'R'; -- 'R' means refunded.
 
 When new data is available, append the data of the 1993 year to the destination table using the `  INSERT INTO SELECT  ` statement:
 
-``` text
-INSERT INTO
-   myotherdataset.orders
- SELECT
-   *
- FROM
-   myawsdataset.orders
- WHERE
-   EXTRACT(YEAR FROM l_commitdate) = 1993;
-```
+    INSERT INTO
+       myotherdataset.orders
+     SELECT
+       *
+     FROM
+       myawsdataset.orders
+     WHERE
+       EXTRACT(YEAR FROM l_commitdate) = 1993;
 
 #### Example 2
 
 The following example inserts data into an ingestion-time partitioned table:
 
-``` text
-CREATE TABLE
- mydataset.orders(id String, numeric_id INT64)
-PARTITION BY _PARTITIONDATE;
-```
+    CREATE TABLE
+     mydataset.orders(id String, numeric_id INT64)
+    PARTITION BY _PARTITIONDATE;
 
 After creating a partitioned table, you can insert data into the ingestion-time partitioned table:
 
-``` text
-INSERT INTO
- mydataset.orders(
-   _PARTITIONTIME,
-   id,
-   numeric_id)
-SELECT
- TIMESTAMP("2023-01-01"),
- id,
- numeric_id,
-FROM
- mydataset.ordersof23
-WHERE
- numeric_id > 4000000;
-```
+    INSERT INTO
+     mydataset.orders(
+       _PARTITIONTIME,
+       id,
+       numeric_id)
+    SELECT
+     TIMESTAMP("2023-01-01"),
+     id,
+     numeric_id,
+    FROM
+     mydataset.ordersof23
+    WHERE
+     numeric_id > 4000000;
 
 ## `     CREATE TABLE LIKE    ` statement
 
@@ -1565,7 +1498,7 @@ Creates a new table with all of the same metadata of another table.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ]
 table_name
 LIKE [[project_name.]dataset_name.]source_table_name
@@ -1575,7 +1508,7 @@ LIKE [[project_name.]dataset_name.]source_table_name
 
 ### Details
 
-This statement is a variant of the `  CREATE TABLE  ` statement and has the same [limitations](#create_table_details) . Other than the use of the `  LIKE  ` clause in place of a column list, the syntax is identical to the `  CREATE TABLE  ` syntax.
+This statement is a variant of the `  CREATE TABLE  ` statement and has the same [limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_details) . Other than the use of the `  LIKE  ` clause in place of a column list, the syntax is identical to the `  CREATE TABLE  ` syntax.
 
 The `  CREATE TABLE LIKE  ` statement copies only the metadata of the source table. You can use the `  AS query_statement  ` clause to include data into the new table.
 
@@ -1585,26 +1518,12 @@ By default, the new table inherits partitioning, clustering, and options metadat
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The source table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                                |
+| --------------------------------------- | --------------------------------------- |
+| `        bigquery.tables.create       ` | The dataset where you create the table. |
+| `        bigquery.tables.get       `    | The source table.                       |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` and `  bigquery.tables.updateData  ` permissions.
 
@@ -1616,7 +1535,7 @@ If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquer
 
 The following example creates a new table named `  newtable  ` in `  mydataset  ` with the same metadata as `  sourcetable  ` :
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable
 LIKE mydataset.sourcetable
 ```
@@ -1625,7 +1544,7 @@ LIKE mydataset.sourcetable
 
 The following example creates a new table named `  newtable  ` in `  mydataset  ` with the same metadata as `  sourcetable  ` and the data from the `  SELECT  ` statement:
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.newtable
 LIKE mydataset.sourcetable
 AS SELECT * FROM mydataset.myothertable
@@ -1633,11 +1552,11 @@ AS SELECT * FROM mydataset.myothertable
 
 ## `     CREATE TABLE COPY    ` statement
 
-Creates a table that has the same metadata and data as another table. The source table can be a table, a [table clone](/bigquery/docs/table-clones-intro) , or a [table snapshot](/bigquery/docs/table-snapshots-intro) .
+Creates a table that has the same metadata and data as another table. The source table can be a table, a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , or a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] TABLE [ IF NOT EXISTS ] table_name
 COPY source_table_name
 ...
@@ -1646,7 +1565,7 @@ COPY source_table_name
 
 ### Details
 
-This statement is a variant of the `  CREATE TABLE  ` statement and has the same [limitations](#create_table_details) . Other than the use of the `  COPY  ` clause in place of a column list, the syntax is identical to the `  CREATE TABLE  ` syntax.
+This statement is a variant of the `  CREATE TABLE  ` statement and has the same [limitations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_details) . Other than the use of the `  COPY  ` clause in place of a column list, the syntax is identical to the `  CREATE TABLE  ` syntax.
 
 The `  CREATE TABLE COPY  ` statement copies both the metadata and data from the source table.
 
@@ -1656,30 +1575,13 @@ The new table has no relationship to the source table after creation; modificati
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the table copy.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.getData      </code></td>
-<td>The source table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                               | Resource                                     |
+| ---------------------------------------- | -------------------------------------------- |
+| `        bigquery.tables.create       `  | The dataset where you create the table copy. |
+| `        bigquery.tables.get       `     | The source table.                            |
+| `        bigquery.tables.getData       ` | The source table.                            |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` and `  bigquery.tables.updateData  ` permissions.
 
@@ -1687,11 +1589,11 @@ If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquer
 
 ## `     CREATE SNAPSHOT TABLE    ` statement
 
-Creates a [table snapshot](/bigquery/docs/table-snapshots-intro) based on a source table. The source table can be a table, a [table clone](/bigquery/docs/table-clones-intro) , or a table snapshot.
+Creates a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) based on a source table. The source table can be a table, a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , or a table snapshot.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE SNAPSHOT TABLE [ IF NOT EXISTS ] table_snapshot_name
 CLONE source_table_name
 [FOR SYSTEM_TIME AS OF time_expression]
@@ -1700,17 +1602,17 @@ CLONE source_table_name
 
 ### Arguments
 
-  - `  IF NOT EXISTS  ` : If a table snapshot or other [table resource](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect.
+  - `  IF NOT EXISTS  ` : If a table snapshot or other [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect.
 
-  - `  table_snapshot_name  ` : The name of the table snapshot that you want to create. The table snapshot name must be unique per dataset. See [Table path syntax](#table_path) .
+  - `  table_snapshot_name  ` : The name of the table snapshot that you want to create. The table snapshot name must be unique per dataset. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - `  source_table_name  ` : The name of the table that you want to snapshot or the table snapshot that you want to copy. See [Table path syntax](#table_path) .
+  - `  source_table_name  ` : The name of the table that you want to snapshot or the table snapshot that you want to copy. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
     
     If the source table is a standard table, then BigQuery creates a table snapshot of the source table. If the source table is a table snapshot, then BigQuery creates a copy of the table snapshot.
 
-  - [`  FOR SYSTEM_TIME AS OF  `](/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) : Lets you select the version of the table that was current at the time specified by `  timestamp_expression  ` . It can only be used when creating a snapshot of a table; it can't be used when making a copy of a table snapshot.
+  - [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) : Lets you select the version of the table that was current at the time specified by `  timestamp_expression  ` . It can only be used when creating a snapshot of a table; it can't be used when making a copy of a table snapshot.
 
-  - [`  snapshot_option_list  `](#snapshot_option_list) : Additional table snapshot creation options such as a [label](/bigquery/docs/labels) and an expiration time.
+  - [`  snapshot_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#snapshot_option_list) : Additional table snapshot creation options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time.
 
 ### Details
 
@@ -1725,7 +1627,7 @@ CLONE source_table_name
 
 ### `     snapshot_option_list    `
 
-The option list lets you set table snapshot options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list lets you set table snapshot options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a table snapshot option list in the following format:
 
@@ -1751,30 +1653,30 @@ Specify a table snapshot option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time"><code dir="ltr" translate="no">         expirationTime        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time"><code dir="ltr" translate="no">         expirationTime        </code></a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_table_snapshot"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name"><code dir="ltr" translate="no">         friendlyName        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name"><code dir="ltr" translate="no">         friendlyName        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="A table snapshot that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description"><code dir="ltr" translate="no">         description        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description"><code dir="ltr" translate="no">         description        </code></a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels"><code dir="ltr" translate="no">         labels        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels"><code dir="ltr" translate="no">         labels        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -1803,34 +1705,14 @@ If `  VALUE  ` evaluates to `  NULL  ` , the corresponding option `  NAME  ` in 
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the table snapshot.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.createSnapshot      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.getData      </code></td>
-<td>The source table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                      | Resource                                         |
+| ----------------------------------------------- | ------------------------------------------------ |
+| `        bigquery.tables.create       `         | The dataset where you create the table snapshot. |
+| `        bigquery.tables.createSnapshot       ` | The source table.                                |
+| `        bigquery.tables.get       `            | The source table.                                |
+| `        bigquery.tables.getData       `        | The source table.                                |
 
 ### Examples
 
@@ -1838,7 +1720,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example creates a table snapshot of the table `  myproject.mydataset.mytable  ` . The table snapshot is created in the dataset `  mydataset  ` and is named `  mytablesnapshot  ` :
 
-``` text
+``` notranslate
 CREATE SNAPSHOT TABLE `myproject.mydataset.mytablesnapshot`
 CLONE `myproject.mydataset.mytable`
 OPTIONS(
@@ -1864,7 +1746,7 @@ The table snapshot option list specifies the following:
 
 The following example creates a table snapshot of the table `  myproject.mydataset.mytable  ` . The table snapshot is created in the dataset `  mydataset  ` and is named `  mytablesnapshot  ` :
 
-``` text
+``` notranslate
 CREATE SNAPSHOT TABLE IF NOT EXISTS `myproject.mydataset.mytablesnapshot`
 CLONE `myproject.mydataset.mytable`
 OPTIONS(
@@ -1884,17 +1766,17 @@ The table snapshot option list specifies the following:
 
 If the table snapshot name already exists in the dataset, then no action is taken, and no error is returned.
 
-For information about restoring table snapshots, see [`  CREATE TABLE CLONE  `](#create_table_clone_statement) .
+For information about restoring table snapshots, see [`  CREATE TABLE CLONE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) .
 
-For information about removing table snapshots, see [`  DROP SNAPSHOT TABLE  `](#drop_snapshot_table_statement) .
+For information about removing table snapshots, see [`  DROP SNAPSHOT TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_snapshot_table_statement) .
 
 ## `     CREATE TABLE CLONE    ` statement
 
-Creates a [table clone](/bigquery/docs/table-clones-intro) based on a source table. The source table can be a table, a table clone, or a [table snapshot](/bigquery/docs/table-snapshots-intro) .
+Creates a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) based on a source table. The source table can be a table, a table clone, or a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE TABLE [ IF NOT EXISTS ]
 destination_table_name
 CLONE source_table_name [FOR SYSTEM_TIME AS OF time_expression]
@@ -1915,7 +1797,7 @@ Other than the use of the `  CLONE  ` clause in place of a column list, the synt
       - Up to 1,024 characters
       - Letters (upper or lower case), numbers, and underscores
 
-  - `  OPTIONS(table_option_list)  ` : Lets you specify additional table creation options such as a [label](/bigquery/docs/labels) and an expiration time.
+  - `  OPTIONS(table_option_list)  ` : Lets you specify additional table creation options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time.
 
   - `  source_table_name  ` : The name of the source table.
 
@@ -1926,38 +1808,18 @@ Other than the use of the `  CLONE  ` clause in place of a column list, the synt
 
 ### `     OPTIONS    `
 
-`  CREATE TABLE CLONE  ` options are the same as [`  CREATE TABLE  ` options](#table_option_list) .
+`  CREATE TABLE CLONE  ` options are the same as [`  CREATE TABLE  ` options](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the table clone.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.getData      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.restoreSnapshot      </code></td>
-<td>The source table (required only if the source table is a table snapshot).</td>
-</tr>
-</tbody>
-</table>
+| Permission                                       | Resource                                                                  |
+| ------------------------------------------------ | ------------------------------------------------------------------------- |
+| `        bigquery.tables.create       `          | The dataset where you create the table clone.                             |
+| `        bigquery.tables.get       `             | The source table.                                                         |
+| `        bigquery.tables.getData       `         | The source table.                                                         |
+| `        bigquery.tables.restoreSnapshot       ` | The source table (required only if the source table is a table snapshot). |
 
 If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquery.tables.delete  ` permission is also required.
 
@@ -1967,7 +1829,7 @@ If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquer
 
 The following example creates the table `  myproject.mydataset.mytable  ` from the table snapshot `  myproject.mydataset.mytablesnapshot  ` :
 
-``` text
+``` notranslate
 CREATE TABLE `myproject.mydataset.mytable`
 CLONE `myproject.mydataset.mytablesnapshot`
 OPTIONS(
@@ -1993,7 +1855,7 @@ The table option list specifies the following:
 
 The following example creates the table clone `  myproject.mydataset.mytableclone  ` based on the table `  myproject.mydataset.mytable  ` :
 
-``` text
+``` notranslate
 CREATE TABLE IF NOT EXISTS `myproject.mydataset.mytableclone`
 CLONE `myproject.mydataset.mytable`
 OPTIONS(
@@ -2013,9 +1875,9 @@ The table option list specifies the following:
 
 If the table name exists in the dataset, then no action is taken, and no error is returned.
 
-For information about creating a copy of a table, see [`  CREATE TABLE COPY  `](#create_snapshot_table_statement) .
+For information about creating a copy of a table, see [`  CREATE TABLE COPY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) .
 
-For information about creating a snapshot of a table, see [`  CREATE SNAPSHOT TABLE  `](#create_snapshot_table_statement) .
+For information about creating a snapshot of a table, see [`  CREATE SNAPSHOT TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) .
 
 ## `     CREATE VIEW    ` statement
 
@@ -2023,7 +1885,7 @@ Creates a new view.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] VIEW [ IF NOT EXISTS ] view_name
 [(view_column_name_list)]
 [OPTIONS(view_option_list)]
@@ -2040,13 +1902,13 @@ view_column :=
 
   - `  OR REPLACE  ` : Replaces any view with the same name if it exists. Cannot appear with `  IF NOT EXISTS  ` .
 
-  - `  IF NOT EXISTS  ` : If a view or other [table resource](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
+  - `  IF NOT EXISTS  ` : If a view or other [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
 
-  - `  view_name  ` : The name of the view you're creating. See [Table path syntax](#table_path) .
+  - `  view_name  ` : The name of the view you're creating. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - [`  view_column_name_list  `](#view_column_name_list) : Lets you explicitly specify the column names of the view, which may be aliases to the column names in the underlying SQL query.
+  - [`  view_column_name_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_column_name_list) : Lets you explicitly specify the column names of the view, which may be aliases to the column names in the underlying SQL query.
 
-  - [`  view_option_list  `](#view_option_list) : Additional view creation options such as a [label](/bigquery/docs/labels) and an expiration time.
+  - [`  view_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_option_list) : Additional view creation options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time.
 
   - `  query_expression  ` : The GoogleSQL query expression used to define the view.
 
@@ -2060,17 +1922,13 @@ view_column :=
 
 The view's column name list is optional. The names must be unique but do not have to be the same as the column names of the underlying SQL query. For example, if your view is created with the following statement:
 
-``` text
-CREATE VIEW mydataset.age_groups(age, count) AS SELECT age, COUNT(*)
-FROM mydataset.people
-group by age;
-```
+    CREATE VIEW mydataset.age_groups(age, count) AS SELECT age, COUNT(*)
+    FROM mydataset.people
+    group by age;
 
 Then you can query it with:
 
-``` text
-SELECT age, count from mydataset.age_groups;
-```
+    SELECT age, count from mydataset.age_groups;
 
 The number of columns in the column name list must match the number of columns in the underlying SQL query. If the columns in the table of the underlying SQL query is added or dropped, the view becomes invalid and must be recreated. For example, if the `  age  ` column is dropped from the `  mydataset.people  ` table, then the view created in the previous example becomes invalid.
 
@@ -2078,26 +1936,13 @@ The number of columns in the column name list must match the number of columns i
 
 The `  view_column_option_list  ` lets you specify optional top-level column options. Column options for a view have the same syntax and requirements as for a table, but with a different list of `  NAME  ` and `  VALUE  ` fields:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td><p>Example: <code dir="ltr" translate="no">        description="a unique id"       </code></p></td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `        | `        VALUE       `    | Details                                               |
+| ---------------------------- | ------------------------- | ----------------------------------------------------- |
+| `        description       ` | `         STRING        ` | Example: `         description="a unique id"        ` |
 
 ### `     view_option_list    `
 
-The option list allows you to set view options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list allows you to set view options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a view option list in the following format:
 
@@ -2123,36 +1968,36 @@ Specify a view option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_view"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a view that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       privacy_policy      </code></td>
 <td><p><code dir="ltr" translate="no">        JSON-formatted STRING       </code></p></td>
-<td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">         privacy_policy        </code></a> view option.</p>
+<td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">         privacy_policy        </code></a> view option.</p>
 <strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the view, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the view, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -2181,7 +2026,7 @@ If `  VALUE  ` evaluates to `  NULL  ` , the corresponding option `  NAME  ` in 
 
 ### `     privacy_policy    `
 
-The following policies are available in the [`  privacy_policy  ` view option](/bigquery/docs/reference/standard-sql/data-definition-language#view_option_list) to create [analysis rules](/bigquery/docs/analysis-rules) . A policy represents a condition that needs to be met before a query can be run.
+The following policies are available in the [`  privacy_policy  ` view option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_option_list) to create [analysis rules](https://docs.cloud.google.com/bigquery/docs/analysis-rules) . A policy represents a condition that needs to be met before a query can be run.
 
 <table>
 <colgroup>
@@ -2199,7 +2044,7 @@ The following policies are available in the [`  privacy_policy  ` view option](/
 <td><p><code dir="ltr" translate="no">        aggregation_threshold_policy       </code></p></td>
 <td><p>The aggregation threshold policy to enforce when a view is queried.</p>
 <p>Syntax:</p>
-<pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
   &quot;aggregation_threshold_policy&quot;: {
     &quot;threshold&quot;: value,
     &quot;privacy_unit_columns&quot;: value
@@ -2218,7 +2063,7 @@ The following policies are available in the [`  privacy_policy  ` view option](/
 <td><p><code dir="ltr" translate="no">        differential_privacy_policy       </code></p></td>
 <td><p>A differential privacy policy for the view. When this parameter is included, only differentially private queries can be run on the view.</p>
 <p>Syntax:</p>
-<pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
   &quot;differential_privacy_policy&quot;: {
     &quot;privacy_unit_column&quot;: value,
     &quot;max_epsilon_per_query&quot;: value,
@@ -2246,7 +2091,7 @@ The following policies are available in the [`  privacy_policy  ` view option](/
 <td><p>A join restriction policy for the view. When this parameter is included, only the specified joins can be run on the specified columns in the view.</p>
 <p>This policy can be used alone or with other policies, such as the aggregation threshold or differential privacy policy.</p>
 <p>Syntax:</p>
-<pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>&#39;{
   &quot;join_restriction_policy&quot;: {
     &quot;join_condition&quot;: value,
     &quot;join_allowed_columns&quot;: value
@@ -2259,8 +2104,8 @@ The following policies are available in the [`  privacy_policy  ` view option](/
 <ul>
 <li><code dir="ltr" translate="no">           JOIN_ALL          </code> : All columns in <code dir="ltr" translate="no">           join_allowed_columns          </code> must be inner joined upon for this view to be queried.</li>
 <li><code dir="ltr" translate="no">           JOIN_ANY          </code> : At least one column in <code dir="ltr" translate="no">           join_allowed_columns          </code> must be joined upon for this view to be queried.</li>
-<li><code dir="ltr" translate="no">           JOIN_BLOCKED          </code> : This view can't be joined along any column. Don't set <code dir="ltr" translate="no">           join_allowed_columns          </code> in this case. This can be used with all analysis rules except for the <a href="/bigquery/docs/analysis-rules#list_overlap_rules">list overlap analysis rule</a> .</li>
-<li><code dir="ltr" translate="no">           JOIN_NOT_REQUIRED          </code> : A join is not required to query this view. If a join is used, only the columns in <code dir="ltr" translate="no">           join_allowed_columns          </code> can be used. This can be used with all analysis rules except for the <a href="/bigquery/docs/analysis-rules#list_overlap_rules">list overlap analysis rule</a> .</li>
+<li><code dir="ltr" translate="no">           JOIN_BLOCKED          </code> : This view can't be joined along any column. Don't set <code dir="ltr" translate="no">           join_allowed_columns          </code> in this case. This can be used with all analysis rules except for the <a href="https://docs.cloud.google.com/bigquery/docs/analysis-rules#list_overlap_rules">list overlap analysis rule</a> .</li>
+<li><code dir="ltr" translate="no">           JOIN_NOT_REQUIRED          </code> : A join is not required to query this view. If a join is used, only the columns in <code dir="ltr" translate="no">           join_allowed_columns          </code> can be used. This can be used with all analysis rules except for the <a href="https://docs.cloud.google.com/bigquery/docs/analysis-rules#list_overlap_rules">list overlap analysis rule</a> .</li>
 </ul></li>
 <li><code dir="ltr" translate="no">         join_allowed_columns        </code> : A list of columns that can be part of a join operation. <code dir="ltr" translate="no">         value        </code> is a JSON array.</li>
 </ul>
@@ -2276,9 +2121,7 @@ The following policies are available in the [`  privacy_policy  ` view option](/
 
 If the view is created in the same project used to run the `  CREATE VIEW  ` statement, the view body `  query_expression  ` can reference entities without specifying the project; the default project is the project which owns the view. Consider the sample query below.
 
-``` text
-CREATE VIEW myProject.myDataset.myView AS SELECT * FROM anotherDataset.myTable;
-```
+    CREATE VIEW myProject.myDataset.myView AS SELECT * FROM anotherDataset.myTable;
 
 After running the above `  CREATE VIEW  ` query in the project `  myProject  ` , you can run the query `  SELECT * FROM myProject.myDataset.myView  ` . Regardless of the project you choose to run this `  SELECT  ` query, the referenced table `  anotherDataset.myTable  ` is always resolved against project `  myProject  ` .
 
@@ -2286,22 +2129,11 @@ If the view is not created in the same project used to run the `  CREATE VIEW  `
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the view.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                               |
+| --------------------------------------- | -------------------------------------- |
+| `        bigquery.tables.create       ` | The dataset where you create the view. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` permission.
 
@@ -2313,16 +2145,14 @@ If the `  OPTIONS  ` clause includes an expiration time, then the `  bigquery.ta
 
 The following example creates a view named `  newview  ` in `  mydataset  ` :
 
-``` text
-CREATE VIEW `myproject.mydataset.newview`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="newview",
-  description="a view that expires in 2 days",
-  labels=[("org_unit", "development")]
-)
-AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
-```
+    CREATE VIEW `myproject.mydataset.newview`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="newview",
+      description="a view that expires in 2 days",
+      labels=[("org_unit", "development")]
+    )
+    AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
 
 If the view name exists in the dataset, the following error is returned:
 
@@ -2343,16 +2173,14 @@ The view option list specifies the:
 
 The following example creates a view named `  newview  ` in `  mydataset  ` only if no view named `  newview  ` exists in `  mydataset  ` . If the view name exists in the dataset, no error is returned, and no action is taken.
 
-``` text
-CREATE VIEW IF NOT EXISTS `myproject.mydataset.newview`
-OPTIONS(
-  expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
-  friendly_name="newview",
-  description="a view that expires in 2 days",
-  labels=[("org_unit", "development")]
-)
-AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
-```
+    CREATE VIEW IF NOT EXISTS `myproject.mydataset.newview`
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
+      friendly_name="newview",
+      description="a view that expires in 2 days",
+      labels=[("org_unit", "development")]
+    )
+    AS SELECT column_1, column_2, column_3 FROM `myproject.mydataset.mytable`
 
 The view is defined using the following GoogleSQL query:
 
@@ -2369,7 +2197,7 @@ The view option list specifies the:
 
 The following example creates a view named `  newview  ` in `  mydataset  ` , and if `  newview  ` exists in `  mydataset  ` , it is overwritten using the specified query expression.
 
-``` text
+``` notranslate
 CREATE OR REPLACE VIEW `myproject.mydataset.newview`
 OPTIONS(
   expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
@@ -2395,7 +2223,7 @@ The view option list specifies the:
 
 The following example creates a view named `  newview  ` in `  mydataset  ` . This view definition provides the column description for each column in `  mytable  ` . You can rename columns from the original query.
 
-``` text
+``` notranslate
 CREATE VIEW `myproject.mydataset.newview` (
   column_1_new_name OPTIONS (DESCRIPTION='Description of the column 1 contents'),
   column_2_new_name OPTIONS (DESCRIPTION='Description of the column 2 contents'),
@@ -2410,7 +2238,7 @@ Creates a new materialized view.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] MATERIALIZED VIEW [ IF NOT EXISTS ] materialized_view_name
 [PARTITION BY partition_expression]
 [CLUSTER BY clustering_column_list]
@@ -2422,19 +2250,19 @@ AS query_expression
 
   - `  OR REPLACE  ` : Replaces a materialized view with the same name if it exists. Cannot appear with `  IF NOT EXISTS  ` .
 
-  - `  IF NOT EXISTS  ` : If a materialized view or other [table resource](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
+  - `  IF NOT EXISTS  ` : If a materialized view or other [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
 
-  - `  materialized_view_name  ` : The name of the materialized view you're creating. See [Table path syntax](#table_path) .
+  - `  materialized_view_name  ` : The name of the materialized view you're creating. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
     
     If the `  project_name  ` is omitted from the materialized view name, or it is the same as the project that runs this DDL query, then the latter is also used as the default project for references to tables, functions, and other resources in `  query_expression  ` . The default project of the references is fixed and does not depend on the future queries that invoke the new materialized view. Otherwise, all references in `  query_expression  ` must be qualified with project names.
     
     The materialized view name must be unique per dataset.
 
-  - [`  partition_expression  `](#partition_expression) : An expression that determines how to partition the table. A materialized view can only be partitioned in the same way as the table in `  query expression  ` (the *base table* ) is partitioned.
+  - [`  partition_expression  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) : An expression that determines how to partition the table. A materialized view can only be partitioned in the same way as the table in `  query expression  ` (the *base table* ) is partitioned.
 
-  - [`  clustering_column_list  `](#clustering_column_list) : A comma-separated list of column references that determine how to cluster the materialized view.
+  - [`  clustering_column_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#clustering_column_list) : A comma-separated list of column references that determine how to cluster the materialized view.
 
-  - [`  materialized_view_option_list  `](#materialized_view_option_list) : Allows you to specify additional materialized view options such as a whether refresh is enabled, the refresh interval, a [label](/bigquery/docs/labels) , and an expiration time.
+  - [`  materialized_view_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_option_list) : Allows you to specify additional materialized view options such as a whether refresh is enabled, the refresh interval, a [label](https://docs.cloud.google.com/bigquery/docs/labels) , and an expiration time.
 
   - `  query_expression  ` : The GoogleSQL query expression used to define the materialized view.
 
@@ -2448,9 +2276,7 @@ AS query_expression
 
 If the materialized view is created in the same project used to run the `  CREATE MATERIALIZED VIEW  ` statement, the materialized view body `  query_expression  ` can reference entities without specifying the project; the default project is the project which owns the materialized view. Consider the sample query below.
 
-``` text
-CREATE MATERIALIZED VIEW myProject.myDataset.myView AS SELECT * FROM anotherDataset.myTable;
-```
+    CREATE MATERIALIZED VIEW myProject.myDataset.myView AS SELECT * FROM anotherDataset.myTable;
 
 After running the above `  CREATE MATERIALIZED VIEW  ` query in the project `  myProject  ` , you can run the query `  SELECT * FROM myProject.myDataset.myView  ` . Regardless of the project you choose to run this `  SELECT  ` query, the referenced table `  anotherDataset.myTable  ` is always resolved against project `  myProject  ` .
 
@@ -2458,7 +2284,7 @@ If the materialized view is not created in the same project used to run the `  C
 
 ### `     materialized_view_option_list    `
 
-The option list allows you to set materialized view options such as a whether refresh is enabled. the refresh interval, a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list allows you to set materialized view options such as a whether refresh is enabled. the refresh interval, a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a materialized view option list in the following format:
 
@@ -2496,71 +2322,60 @@ Default: <code dir="ltr" translate="no">        refresh_interval_minutes=30     
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property. <code dir="ltr" translate="no">        expiration_timestamp       </code> is optional and not used by default.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property. <code dir="ltr" translate="no">        expiration_timestamp       </code> is optional and not used by default.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_staleness      </code></td>
 <td><code dir="ltr" translate="no">       INTERVAL      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        max_staleness=INTERVAL "4:0:0" HOUR TO SECOND       </code></p>
-<p>The <a href="/bigquery/docs/materialized-views-create#max_staleness"><code dir="ltr" translate="no">         max_staleness        </code> property</a> provides consistently high performance with controlled costs when processing large, frequently changing datasets. <code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness"><code dir="ltr" translate="no">         max_staleness        </code> property</a> provides consistently high performance with controlled costs when processing large, frequently changing datasets. <code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       allow_non_incremental_definition      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code></p>
-<p>The <a href="/bigquery/docs/materialized-views-create#non-incremental"><code dir="ltr" translate="no">         allow_non_incremental_definition        </code> property</a> supports an expanded range of SQL queries to create materialized views. <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code> is disabled by default. <code dir="ltr" translate="no">        CREATE MATERIALIZED VIEW       </code> statement support only. The <code dir="ltr" translate="no">        allow_non_incremental_definition       </code> property can't be changed after the materialized view is created.</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental"><code dir="ltr" translate="no">         allow_non_incremental_definition        </code> property</a> supports an expanded range of SQL queries to create materialized views. <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code> is disabled by default. <code dir="ltr" translate="no">        CREATE MATERIALIZED VIEW       </code> statement support only. The <code dir="ltr" translate="no">        allow_non_incremental_definition       </code> property can't be changed after the materialized view is created.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       kms_key_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/       </code> <code dir="ltr" translate="no">          location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
-<p>See more details about <a href="/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
+<p>See more details about <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_mv"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a materialized view that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;      </code></td>
-<td>An array of IAM tags for the materialized view, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the materialized view, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the materialized view.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                                            |
+| --------------------------------------- | --------------------------------------------------- |
+| `        bigquery.tables.create       ` | The dataset where you create the materialized view. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` permission.
 
@@ -2572,7 +2387,7 @@ If the `  OPTIONS  ` clause includes any expiration options, then the `  bigquer
 
 The following example creates a materialized view named `  new_mv  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
 OPTIONS(
   expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
@@ -2610,7 +2425,7 @@ The materialized view option list specifies the:
 
 The following example creates a materialized view named `  new_mv  ` in `  mydataset  ` only if no materialized view named `  new_mv  ` exists in `  mydataset  ` . If the materialized view name exists in the dataset, no error is returned, and no action is taken.
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW IF NOT EXISTS `myproject.mydataset.new_mv`
 OPTIONS(
   expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 48 HOUR),
@@ -2638,7 +2453,7 @@ The materialized view option list specifies the:
 
 The following example creates a materialized view named `  new_mv  ` in `  mydataset  ` , partitioned by the `  col_datetime  ` column and clustered by the `  col_int  ` column:
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW `myproject.mydataset.new_mv`
 PARTITION BY DATE(col_datetime)
 CLUSTER BY col_int
@@ -2647,17 +2462,17 @@ AS SELECT col_int, col_datetime, COUNT(1) as cnt
    GROUP BY col_int, col_datetime
 ```
 
-The base table, `  mv_base_table  ` , must also be partitioned by the `  col_datetime  ` column. For more information, see [Working with partitioned and clustered tables](/bigquery/docs/materialized-views#partition_cluster) .
+The base table, `  mv_base_table  ` , must also be partitioned by the `  col_datetime  ` column. For more information, see [Working with partitioned and clustered tables](https://docs.cloud.google.com/bigquery/docs/materialized-views#partition_cluster) .
 
 ## `     CREATE MATERIALIZED VIEW AS REPLICA OF    ` statement
 
-Creates a [replica of a materialized view](/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) . The source materialized view must be over an Amazon Simple Storage Service (Amazon S3) BigLake table. You can use the materialized view replica to make Amazon S3 data available locally for joins.
+Creates a [replica of a materialized view](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas) . The source materialized view must be over an Amazon Simple Storage Service (Amazon S3) BigLake table. You can use the materialized view replica to make Amazon S3 data available locally for joins.
 
-For more information, see [Create materialized view replicas](/bigquery/docs/load-data-using-cross-cloud-transfer#create) .
+For more information, see [Create materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#create) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW replica_name
 [OPTIONS(materialized_view_replica_option_list)]
 AS REPLICA OF source_materialized_view_name
@@ -2665,11 +2480,11 @@ AS REPLICA OF source_materialized_view_name
 
 ### Arguments
 
-  - `  replica_name  ` : The name of the materialized view replica you're creating, in [table path syntax](#table_path) . If the project name is omitted from the materialized view replica name, the current project is used as the default.
+  - `  replica_name  ` : The name of the materialized view replica you're creating, in [table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) . If the project name is omitted from the materialized view replica name, the current project is used as the default.
     
     The materialized view replica name must be unique for each dataset.
 
-  - [`  materialized_view_replica_option_list  `](#materialized_view_replica_option_list) : Allows you to specify options such as the replication interval.
+  - [`  materialized_view_replica_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_replica_option_list) : Allows you to specify options such as the replication interval.
 
   - `  source_materialized_view_name  ` : The name of the materialized view you are replicating, in table path syntax. The source materialized view must be over an Amazon S3 BigLake table, and must be authorized on the dataset that contains that table.
 
@@ -2706,7 +2521,7 @@ Specify a materialized view replica option list in the following format:
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
   - `  bigquery.tables.create  `
   - `  bigquery.tables.get  `
@@ -2718,7 +2533,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example creates a materialized view replica named `  mv_replica  ` in `  bq_dataset  ` :
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW `myproject.bq_dataset.mv_replica`
 OPTIONS(
   replication_interval_seconds=600
@@ -2732,12 +2547,12 @@ Creates a new federated dataset.
 
 A federated dataset is a connection between BigQuery and an external data source at the dataset level. For more information about creating federated datasets, see the following:
 
-  - [Create AWS Glue federated datasets](/bigquery/docs/glue-federated-datasets) .
-  - [Create Spanner federated datasets](/bigquery/docs/spanner-external-datasets) .
+  - [Create AWS Glue federated datasets](https://docs.cloud.google.com/bigquery/docs/glue-federated-datasets) .
+  - [Create Spanner federated datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE EXTERNAL SCHEMA [ IF NOT EXISTS ] dataset_name
 [WITH CONNECTION connection_name]
 [OPTIONS(external_schema_option_list)]
@@ -2749,15 +2564,15 @@ CREATE EXTERNAL SCHEMA [ IF NOT EXISTS ] dataset_name
 
   - `  dataset_name  ` : The name of the dataset to create.
 
-  - `  connection_name  ` : Specifies a [connection resource](/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ).
+  - `  connection_name  ` : Specifies a [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ).
 
-  - [`  external_schema_option_list  `](#external_schema_option_list) : A list of options for creating the federated dataset.
+  - [`  external_schema_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_schema_option_list) : A list of options for creating the federated dataset.
 
 ### Details
 
-The dataset is created in the location that you specify in the query settings. For more information, see [Specify locations](/bigquery/docs/locations#specify_locations) . The location must support the kind of federated dataset that you are creating, for example, you can only create AWS Glue federated datasets in AWS locations.
+The dataset is created in the location that you specify in the query settings. For more information, see [Specify locations](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) . The location must support the kind of federated dataset that you are creating, for example, you can only create AWS Glue federated datasets in AWS locations.
 
-For more information about creating a dataset, see [Create datasets](/bigquery/docs/datasets) . For information about quotas, see [dataset limits](/bigquery/quotas#dataset_limits) .
+For more information about creating a dataset, see [Create datasets](https://docs.cloud.google.com/bigquery/docs/datasets) . For information about quotas, see [dataset limits](https://docs.cloud.google.com/bigquery/quotas#dataset_limits) .
 
 ### `     external_schema_option_list    `
 
@@ -2765,96 +2580,44 @@ The option list specifies options for the federated dataset. Specify the options
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The description of the dataset.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       friendly_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>A descriptive name for the dataset.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       labels      </code></td>
-<td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of labels for the dataset, expressed as key-value pairs.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       location      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The location in which to create the dataset. If you don't specify this option, the dataset is created in the location where the query runs. If you specify this option and also explicitly set the location for the query job, the two values must match; otherwise the query fails. The location must support the kind of federated dataset that you are creating, for example, you can only create AWS Glue federated datasets in AWS locations.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       external_source      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The source of the external dataset. For AWS Glue federated datasets this must be an <a href="https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html">Amazon Resource Name (ARN)</a> , with a prefix identifying the source, such as <code dir="ltr" translate="no">       aws-glue://      </code> . For Spanner federated datasets, this must be a specific Spanner database with a <code dir="ltr" translate="no">       google-cloudspanner:/      </code> prefix. For example: <code dir="ltr" translate="no">       google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       tags      </code></td>
-<td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `            | `        VALUE       `                           | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| -------------------------------- | ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        description       `     | `        STRING       `                          | The description of the dataset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `        friendly_name       `   | `        STRING       `                          | A descriptive name for the dataset.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `        labels       `          | `        <ARRAY<STRUCT<STRING, STRING>>>       ` | An array of labels for the dataset, expressed as key-value pairs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `        location       `        | `        STRING       `                          | The location in which to create the dataset. If you don't specify this option, the dataset is created in the location where the query runs. If you specify this option and also explicitly set the location for the query job, the two values must match; otherwise the query fails. The location must support the kind of federated dataset that you are creating, for example, you can only create AWS Glue federated datasets in AWS locations.                                                                                 |
+| `        external_source       ` | `        STRING       `                          | The source of the external dataset. For AWS Glue federated datasets this must be an [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html) , with a prefix identifying the source, such as `        aws-glue://       ` . For Spanner federated datasets, this must be a specific Spanner database with a `        google-cloudspanner:/       ` prefix. For example: `        google-cloudspanner:/projects/my_project/instances/my_instance/databases/my_database       ` . |
+| `        tags       `            | `        <ARRAY<STRUCT<STRING, STRING>>>       ` | An array of IAM tags expressed as key-value pairs. The key should be the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) , and the value should be the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .                                                                                                                                                                                                                                        |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.create      </code></td>
-<td>The project where you create the federated dataset.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.connections.use      </code></td>
-<td>The project where you create the federated dataset.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.delegate      </code></td>
-<td>The project where you create the federated dataset.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                     | Resource                                            |
+| ---------------------------------------------- | --------------------------------------------------- |
+| `        bigquery.datasets.create       `      | The project where you create the federated dataset. |
+| `        bigquery.connections.use       `      | The project where you create the federated dataset. |
+| `        bigquery.connections.delegate       ` | The project where you create the federated dataset. |
 
 ### Examples
 
 The following example creates an AWS Glue federated dataset:
 
-``` text
-CREATE EXTERNAL SCHEMA mydataset
-WITH CONNECTION myproject.`aws-us-east-1`.myconnection
-  OPTIONS (
-    external_source = 'aws-glue://arn:aws:glue:us-east-1:123456789:database/test_database',
-    location = 'aws-us-east-1');
-```
+    CREATE EXTERNAL SCHEMA mydataset
+    WITH CONNECTION myproject.`aws-us-east-1`.myconnection
+      OPTIONS (
+        external_source = 'aws-glue://arn:aws:glue:us-east-1:123456789:database/test_database',
+        location = 'aws-us-east-1');
 
 ## `     CREATE EXTERNAL TABLE    ` statement
 
 Creates a new external table.
 
-External tables let BigQuery query data that is stored outside of BigQuery storage. For more information about external tables, see [Introduction to external data sources](/bigquery/external-data-sources) .
+External tables let BigQuery query data that is stored outside of BigQuery storage. For more information about external tables, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] EXTERNAL TABLE [ IF NOT EXISTS ] table_name
 [(
   column_name column_schema,
@@ -2877,27 +2640,27 @@ OPTIONS (
 
   - `  OR REPLACE  ` : Replaces any external table with the same name if it exists. Cannot appear with `  IF NOT EXISTS  ` .
 
-  - `  IF NOT EXISTS  ` : If an external table or other [table resource](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
+  - `  IF NOT EXISTS  ` : If an external table or other [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) exists with the same name, the `  CREATE  ` statement has no effect. Cannot appear with `  OR REPLACE  ` .
 
-  - `  table_name  ` : The name of the external table. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the external table. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  column_name  ` : The name of a column in the table.
 
-  - `  column_schema  ` : Specifies the schema of the column. It uses the same syntax as the [`  column_schema  `](#column_name_and_column_schema) definition in the [`  CREATE TABLE  `](#create_table_statement) statement. If you don't include this clause, BigQuery detects the schema automatically.
+  - `  column_schema  ` : Specifies the schema of the column. It uses the same syntax as the [`  column_schema  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) definition in the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement. If you don't include this clause, BigQuery detects the schema automatically.
 
-  - `  connection_name  ` : Specifies a [connection resource](/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+  - `  connection_name  ` : Specifies a [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the external data. Specify the connection name in the form PROJECT\_ID . LOCATION . CONNECTION\_ID . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-  - `  partition_column_name  ` : The name of a partition column. Include this field if your external data uses a hive-partitioned layout. For more information, see: [Supported data layouts](/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) .
+  - `  partition_column_name  ` : The name of a partition column. Include this field if your external data uses a hive-partitioned layout. For more information, see: [Supported data layouts](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) .
 
   - `  partition_column_type  ` : The partition column type.
 
-  - [`  external_table_option_list  `](#external_table_option_list) : A list of options for creating the external table.
+  - [`  external_table_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) : A list of options for creating the external table.
 
 ### Details
 
 The `  CREATE EXTERNAL TABLE  ` statement does not support creating temporary external tables.
 
-To create an externally partitioned table, use the `  WITH PARTITION COLUMNS  ` clause to specify the partition schema details. BigQuery validates the column definitions against the external data location. The schema declaration must strictly follow the ordering of the fields in the external path. For more information about external partitioning, see [Querying externally partitioned data](/bigquery/docs/hive-partitioned-queries-gcs) .
+To create an externally partitioned table, use the `  WITH PARTITION COLUMNS  ` clause to specify the partition schema details. BigQuery validates the column definitions against the external data location. The schema declaration must strictly follow the ordering of the fields in the external path. For more information about external partitioning, see [Querying externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs) .
 
 ### `     external_table_option_list    `
 
@@ -2943,7 +2706,7 @@ Applies to CSV and JSON data.
 
 `  ARRAY<STRING>  `
 
-Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
+Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
 
 Example: `  ["NUMERIC", "BIGNUMERIC"]  ` .
 
@@ -2965,7 +2728,7 @@ Applies to Parquet data.
 
 `  BOOL  `
 
-If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
+If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
 
 Applies to Avro data.
 
@@ -3005,9 +2768,9 @@ Applies to CSV data.
 
 `  STRING  `
 
-The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
-Supported values for [`  LOAD DATA  `](/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+Supported values for [`  LOAD DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
 The value `  JSON  ` is equivalent to `  NEWLINE_DELIMITED_JSON  ` .
 
@@ -3049,7 +2812,7 @@ Applies to CSV and JSON data.
 For JSON data, indicates a particular JSON interchange format. If not specified, BigQuery reads the data as generic JSON records.
 
 Supported values include:  
-`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](/bigquery/docs/geospatial-data#external-geojson) .
+`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](https://docs.cloud.google.com/bigquery/docs/geospatial-data#external-geojson) .
 
 `  max_bad_records  `
 
@@ -3063,13 +2826,13 @@ Applies to: CSV, JSON, and Google Sheets data.
 
 `  INTERVAL  `
 
-Applicable for [BigLake tables](/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
+Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
 
 Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
 
 To disable metadata caching, specify 0. This is the default.
 
-To enable metadata caching, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
+To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
 
 `  null_marker  `
 
@@ -3093,7 +2856,7 @@ Applies to CSV data.
 
 `  STRING  `
 
-Only required when creating an [object table](/bigquery/docs/object-table-introduction) .
+Only required when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 Set the value of this option to `  SIMPLE  ` when creating an object table.
 
@@ -3174,7 +2937,7 @@ Supported values include:
 
 `  <ARRAY<STRUCT<STRING, STRING>>>  `
 
-An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](/iam/docs/tags-access-control#definitions) , and the value should be the [short name](/iam/docs/tags-access-control#definitions) .
+An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) , and the value should be the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
 `  time_zone  `
 
@@ -3182,7 +2945,7 @@ An array of IAM tags for the table, expressed as key-value pairs. The key should
 
 Default time zone that will apply when parsing timestamp values that have no specific time zone.
 
-Check [valid time zone names](/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
+Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
 
 If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
 
@@ -3192,11 +2955,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
 
-If this value is present, this format is the only compatible DATE format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
 
-If this value is not present, the DATE field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -3204,11 +2967,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
 
-If this value is not present, the DATETIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -3216,11 +2979,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
 
-If this value is not present, the TIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -3228,11 +2991,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
 
-If this value is not present, the TIMESTAMP field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -3242,7 +3005,7 @@ For external tables, including object tables, that aren't Bigtable tables:
 
 `  ARRAY<STRING>  `
 
-An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
+An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
 
 The following examples show valid `  uris  ` values:
 
@@ -3260,26 +3023,15 @@ The URI identifying the Bigtable table to use as a data source. You can only spe
 
 Example: `  https://googleapis.com/bigtable/projects/ project_id /instances/ instance_id [/appProfiles/ app_profile ]/tables/ table_name  `
 
-For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
+For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.create      </code></td>
-<td>The dataset where you create the external table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                                         |
+| --------------------------------------- | ------------------------------------------------ |
+| `        bigquery.tables.create       ` | The dataset where you create the external table. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.tables.update  ` permission.
 
@@ -3289,43 +3041,37 @@ If the `  OPTIONS  ` clause includes an expiration time, then the `  bigquery.ta
 
 The following example creates a BigLake table and explicitly specifies the schema. It also specifies refreshing metadata cache automatically at a system-defined interval.
 
-``` text
-CREATE OR REPLACE EXTERNAL TABLE mydataset.newtable (x INT64, y STRING, z BOOL)
-  WITH CONNECTION myconnection
-  OPTIONS(
-    format ="PARQUET",
-    max_staleness = STALENESS_INTERVAL,
-    metadata_cache_mode = 'AUTOMATIC');
-```
+    CREATE OR REPLACE EXTERNAL TABLE mydataset.newtable (x INT64, y STRING, z BOOL)
+      WITH CONNECTION myconnection
+      OPTIONS(
+        format ="PARQUET",
+        max_staleness = STALENESS_INTERVAL,
+        metadata_cache_mode = 'AUTOMATIC');
 
 The following example creates an external table from multiple URIs. The data format is CSV. This example uses schema auto-detection.
 
-``` text
-CREATE EXTERNAL TABLE dataset.CsvTable OPTIONS (
-  format = 'CSV',
-  uris = ['gs://bucket/path1.csv', 'gs://bucket/path2.csv']
-);
-```
+    CREATE EXTERNAL TABLE dataset.CsvTable OPTIONS (
+      format = 'CSV',
+      uris = ['gs://bucket/path1.csv', 'gs://bucket/path2.csv']
+    );
 
 The following example creates an external table from a CSV file and explicitly specifies the schema. It also specifies the field delimiter ( `  '|'  ` ) and sets the maximum number of bad records allowed.
 
-``` text
-CREATE OR REPLACE EXTERNAL TABLE dataset.CsvTable
-(
-  x INT64,
-  y STRING
-)
-OPTIONS (
-  format = 'CSV',
-  uris = ['gs://bucket/path1.csv'],
-  field_delimiter = '|',
-  max_bad_records = 5
-);
-```
+    CREATE OR REPLACE EXTERNAL TABLE dataset.CsvTable
+    (
+      x INT64,
+      y STRING
+    )
+    OPTIONS (
+      format = 'CSV',
+      uris = ['gs://bucket/path1.csv'],
+      field_delimiter = '|',
+      max_bad_records = 5
+    );
 
 The following example creates an externally partitioned table. It uses schema auto-detection to detect both the file schema and the hive partitioning layout. If the external path is `  gs://bucket/path/field_1=first/field_2=1/data.parquet  ` , the partition columns are detected as `  field_1  ` ( `  STRING  ` ) and `  field_2  ` ( `  INT64  ` ).
 
-``` text
+``` notranslate
 CREATE EXTERNAL TABLE dataset.AutoHivePartitionedTable
 WITH PARTITION COLUMNS
 OPTIONS (
@@ -3337,7 +3083,7 @@ OPTIONS (
 
 The following example creates an externally partitioned table by explicitly specifying the partition columns. This example assumes that the external file path has the pattern `  gs://bucket/path/field_1=first/field_2=1/data.parquet  ` .
 
-``` text
+``` notranslate
 CREATE EXTERNAL TABLE dataset.CustomHivePartitionedTable
 WITH PARTITION COLUMNS (
   field_1 STRING, -- column order must match the external path
@@ -3351,13 +3097,13 @@ OPTIONS (
 
 ## `     CREATE FUNCTION    ` statement
 
-Creates a new [user-defined function](/bigquery/docs/user-defined-functions) (UDF). BigQuery supports UDFs written in SQL, JavaScript, or Python.
+Creates a new [user-defined function](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) (UDF). BigQuery supports UDFs written in SQL, JavaScript, or Python.
 
 ### Syntax
 
 To create a SQL UDF, use the following syntax:
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] [ TEMPORARY | TEMP ] FUNCTION [ IF NOT EXISTS ]
     [[project_name.]dataset_name.]function_name
     ([named_parameter[, ...]])
@@ -3372,7 +3118,7 @@ named_parameter:
 
 To create a JavaScript UDF, use the following syntax:
 
-``` text
+``` notranslate
 CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
     [[project_name.]dataset_name.]function_name
     ([named_parameter[, ...]])
@@ -3393,11 +3139,11 @@ To create a Python UDF, use the following syntax:
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** For support during the preview, email <bq-python-udf-feedback@google.com> .
 
-``` text
+``` notranslate
 CREATE [OR REPLACE] FUNCTION [IF NOT EXISTS]
     [project_name.]dataset_name.function_name
     ([named_parameter[, ...]])
@@ -3413,7 +3159,7 @@ named_parameter:
 
 To create a remote function, use the following syntax:
 
-``` text
+``` notranslate
 CREATE [OR REPLACE] [TEMPORARY | TEMP] FUNCTION [IF NOT EXISTS]
     [[project_name.]dataset_name.]function_name
     ([named_parameter[, ...]])
@@ -3441,7 +3187,7 @@ Routine names must contain only letters, numbers, and underscores, and be at mos
 
   - `  function_name  ` : The name of the function.
 
-  - `  named_parameter  ` : A comma-separated `  param_name  ` and `  param_type  ` pair. The value of `  param_type  ` is a BigQuery [data type](/bigquery/docs/reference/standard-sql/data-types) . For a SQL UDF, the value of `  param_type  ` can also be `  ANY TYPE  ` .
+  - `  named_parameter  ` : A comma-separated `  param_name  ` and `  param_type  ` pair. The value of `  param_type  ` is a BigQuery [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) . For a SQL UDF, the value of `  param_type  ` can also be `  ANY TYPE  ` .
 
   - `  determinism_specifier  ` : Applies only to JavaScript UDFs. Provides a hint to BigQuery as to whether the query result can be cached. Can be one of the following values:
     
@@ -3449,31 +3195,31 @@ Routine names must contain only letters, numbers, and underscores, and be at mos
     
       - `  NOT DETERMINISTIC  ` : The function does not always return the same result when passed the same arguments, and therefore is not cacheable. For example, if the functionj `  add_random(i)  ` returns `  i + rand()  ` , the function is not deterministic and BigQuery does not use cached results.
         
-        If all of the invoked functions are `  DETERMINISTIC  ` , BigQuery tries to cache the result, unless the results can't be cached for other reasons. For more information, see [Using cached query results](/bigquery/docs/cached-results) .
+        If all of the invoked functions are `  DETERMINISTIC  ` , BigQuery tries to cache the result, unless the results can't be cached for other reasons. For more information, see [Using cached query results](https://docs.cloud.google.com/bigquery/docs/cached-results) .
 
   - `  data_type  ` : The data type that the function returns.
     
       - If the function is defined in SQL, then the `  RETURNS  ` clause is optional. If the `  RETURNS  ` clause is omitted, then BigQuery infers the result type of the function from the SQL function body when a query calls the function.
     
-      - If the function is defined in JavaScript, then the `  RETURNS  ` clause is required. For more information about allowed values for `  data_type  ` , see [Supported JavaScript UDF data types](/bigquery/docs/reference/standard-sql/user-defined-functions#supported-javascript-udf-data-types) .
+      - If the function is defined in JavaScript, then the `  RETURNS  ` clause is required. For more information about allowed values for `  data_type  ` , see [Supported JavaScript UDF data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions#supported-javascript-udf-data-types) .
 
   - `  sql_expression  ` : The SQL expression that defines the function.
 
-  - [`  function_option_list  `](#function_option_list) : A list of options for creating the function.
+  - [`  function_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#function_option_list) : A list of options for creating the function.
 
-  - `  javascript_code  ` : The definition of a JavaScript function. The value is a [string literal](/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) . If the code includes quotes and backslashes, it must be either escaped or represented as a raw string. For example, the code `  return "\n";  ` can be represented as one of the following:
+  - `  javascript_code  ` : The definition of a JavaScript function. The value is a [string literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) . If the code includes quotes and backslashes, it must be either escaped or represented as a raw string. For example, the code `  return "\n";  ` can be represented as one of the following:
     
       - Quoted string `  "return \"\\n\";"  ` . Both quotes and backslashes need to be escaped.
       - Triple quoted string: `  """return "\\n";"""  ` . Backslashes need to be escaped, quotes don't.
       - Raw string: `  r"""return "\n";"""  ` . No escaping is needed.
 
-  - `  python_code  ` : The definition of a Python function. The value is a [string literal](/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) . If the code includes quotes and backslashes, it must be escaped or represented as a raw string. For example, the code `  return "\n";  ` can be represented as one of the following:
+  - `  python_code  ` : The definition of a Python function. The value is a [string literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) . If the code includes quotes and backslashes, it must be escaped or represented as a raw string. For example, the code `  return "\n";  ` can be represented as one of the following:
     
       - Quoted string: `  "return \"\\n\";"  ` . Both quotes and backslashes need to be escaped.
       - Triple quoted string: `  """return "\\n";"""  ` . Backslashes need to be escaped, quotes don't.
       - Raw string: `  r"""return "\n";"""  ` . No escaping is needed.
 
-  - `  connection_name  ` : Specifies a [connection resource](/bigquery/docs/connections-api-intro) that has credentials for accessing the remote endpoint or for running Python code. Specify the connection name in the form `  project_name.location.connection_id  ` : If the project name or location contains a dash, enclose the connection name in backticks ( ``  `  `` ).
+  - `  connection_name  ` : Specifies a [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the remote endpoint or for running Python code. Specify the connection name in the form `  project_name.location.connection_id  ` : If the project name or location contains a dash, enclose the connection name in backticks ( ``  `  `` ).
 
 ### `     function_option_list    `
 
@@ -3501,7 +3247,7 @@ The option list specifies options for creating a UDF. The following options are 
 <tr class="even">
 <td><code dir="ltr" translate="no">       library      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY &lt;STRING&gt;       </code></p></td>
-<td><p>An array of JavaScript libraries to include in the function definition. Applies only to JavaScript and Python UDFs. For more information, see <a href="/bigquery/docs/user-defined-functions-python#use-imported-lib">Including JavaScript libraries</a> .</p>
+<td><p>An array of JavaScript libraries to include in the function definition. Applies only to JavaScript and Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#use-imported-lib">Including JavaScript libraries</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        ["gs://my-bucket/lib1.js", "gs://my-bucket/lib2.js"]       </code></p></td>
 </tr>
 <tr class="odd">
@@ -3509,7 +3255,7 @@ The option list specifies options for creating a UDF. The following options are 
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td>An HTTP endpoint of Cloud Functions. Applies only to remote functions.
 <p>Example: <code dir="ltr" translate="no">        "https://us-east1-your-project.cloudfunctions.net/foo"       </code></p>
-<p>For more information, see <a href="/bigquery/docs/remote-functions#create_a_remote_function">Create a remote function</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/remote-functions#create_a_remote_function">Create a remote function</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       user_defined_context      </code></td>
@@ -3535,59 +3281,37 @@ The option list specifies options for creating a UDF. The following options are 
 <tr class="even">
 <td><code dir="ltr" translate="no">       packages      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRING&gt;       </code></p></td>
-<td><p>An array of Python packages to install in the function definition. Applies only to Python UDFs. For more information, see <a href="/bigquery/docs/user-defined-functions-python#third-party-packages">Use third party packages</a> .</p>
+<td><p>An array of Python packages to install in the function definition. Applies only to Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#third-party-packages">Use third party packages</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        ["pandas&gt;=2.1", "google-cloud-translate==3.11"]       </code></p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       container_cpu      </code></td>
 <td><p><code dir="ltr" translate="no">        DOUBLE       </code></p></td>
-<td><p>Amount of CPU provisioned for a Python UDF container instance. Applied only to Python UDFs. For more information, see <a href="/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
+<td><p>Amount of CPU provisioned for a Python UDF container instance. Applied only to Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       container_memory      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td><p>Amount of memory provisioned for a Python UDF container instance. Applies only to Python UDFs. For more information, see <a href="/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
+<td><p>Amount of memory provisioned for a Python UDF container instance. Applies only to Python UDFs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-python#configure-container-limits">Configure container limits for Python UDF</a> .</p></td>
 </tr>
 </tbody>
 </table>
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.create      </code></td>
-<td>The dataset where you create the function.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                   |
+| ----------------------------------------- | ------------------------------------------ |
+| `        bigquery.routines.create       ` | The dataset where you create the function. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.routines.update  ` permission.
 
-To create a remote function, additional [IAM permissions](/bigquery/docs/access-control#bq-permissions) are needed:
+To create a remote function, additional [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) are needed:
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.delegate      </code></td>
-<td>The connection which you use to create the remote function.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                     | Resource                                                    |
+| ---------------------------------------------- | ----------------------------------------------------------- |
+| `        bigquery.connections.delegate       ` | The connection which you use to create the remote function. |
 
 ### Examples
 
@@ -3595,75 +3319,65 @@ To create a remote function, additional [IAM permissions](/bigquery/docs/access-
 
 The following example creates a persistent SQL UDF named `  multiplyInputs  ` in a dataset named `  mydataset  ` .
 
-``` text
-CREATE FUNCTION mydataset.multiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-AS (x * y);
-```
+    CREATE FUNCTION mydataset.multiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    AS (x * y);
 
 #### Create a JavaScript UDF
 
 The following example creates a temporary JavaScript UDF named `  multiplyInputs  ` and calls it from inside a `  SELECT  ` statement.
 
-``` text
-CREATE TEMP FUNCTION multiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-LANGUAGE js
-AS r"""
-  return x*y;
-""";
-
-
-SELECT multiplyInputs(a, b) FROM (SELECT 3 as a, 2 as b);
-```
+    CREATE TEMP FUNCTION multiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE js
+    AS r"""
+      return x*y;
+    """;
+    
+    
+    SELECT multiplyInputs(a, b) FROM (SELECT 3 as a, 2 as b);
 
 #### Create a remote function
 
 The following example creates a temporary remote function named `  tempRemoteMultiplyInputs  ` in `  US  ` location, using a connection called `  myconnection  ` in the 'US' region.
 
-``` text
-CREATE TEMP FUNCTION tempRemoteMultiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-REMOTE WITH CONNECTION us.myconnection
-OPTIONS(endpoint="https://us-central1-myproject.cloudfunctions.net/multiply");
-```
+    CREATE TEMP FUNCTION tempRemoteMultiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    REMOTE WITH CONNECTION us.myconnection
+    OPTIONS(endpoint="https://us-central1-myproject.cloudfunctions.net/multiply");
 
 The following example creates a persistent remote function named `  remoteMultiplyInputs  ` in a dataset named `  mydataset  ` using a connection called `  myconnection  ` . The location and project of the dataset and the connection must match.
 
-``` text
-CREATE FUNCTION mydataset.remoteMultiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-REMOTE WITH CONNECTION us.myconnection
-OPTIONS(endpoint="https://us-central1-myproject.cloudfunctions.net/multiply");
-```
+    CREATE FUNCTION mydataset.remoteMultiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    REMOTE WITH CONNECTION us.myconnection
+    OPTIONS(endpoint="https://us-central1-myproject.cloudfunctions.net/multiply");
 
 #### Create a Python UDF
 
 The following example creates a Python UDF named `  multiplyInputs  ` .
 
-``` text
-CREATE FUNCTION mydataset.multiplyInputs(x FLOAT64, y FLOAT64)
-RETURNS FLOAT64
-LANGUAGE python
-OPTIONS(entry_point='multiply', runtime_version='python-3.11' packages=['pandas==2.2'])
-AS r"""
-import pandas as pd
-
-def multiply(df: pd.DataFrame):
-  return df['x'] * df['y']
-
-""";
-```
+    CREATE FUNCTION mydataset.multiplyInputs(x FLOAT64, y FLOAT64)
+    RETURNS FLOAT64
+    LANGUAGE python
+    OPTIONS(entry_point='multiply', runtime_version='python-3.11' packages=['pandas==2.2'])
+    AS r"""
+    import pandas as pd
+    
+    def multiply(df: pd.DataFrame):
+      return df['x'] * df['y']
+    
+    """;
 
 ## `     CREATE AGGREGATE FUNCTION    ` statement (SQL)
 
-Creates a new SQL [user-defined aggregate function](/bigquery/docs/user-defined-aggregates) (UDAF).
+Creates a new SQL [user-defined aggregate function](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) (UDAF).
 
 ### Syntax
 
 To create a SQL UDAF, use the following syntax:
 
-``` text
+``` notranslate
 CREATE
   [ OR REPLACE ]
   [ { TEMPORARY | TEMP } ]
@@ -3694,51 +3408,27 @@ function_parameter:
       - `  function_name  ` : The name of the function. Function names must contain only letters, numbers, and underscores, and be at most 256 characters long.
   - `  function_parameter  ` : A parameter for the function.
       - `  parameter_name  ` : The name of the function parameter.
-      - `  parameter_data_type  ` : The GoogleSQL [data type](/bigquery/docs/reference/standard-sql/data-types) for the function parameter.
+      - `  parameter_data_type  ` : The GoogleSQL [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for the function parameter.
       - `  NOT AGGREGATE  ` : The function parameter is not an aggregate. A non-aggregate function parameter can appear anywhere in the function definition.
   - `  return_data_type  ` : The GoogleSQL data type that the function should return. GoogleSQL infers the result data type of the function from the function body when the `  RETURN  ` clause is omitted.
   - `  function_body  ` : The SQL expression that defines the function body.
-  - `  function_option_list  ` : A list of options for creating the function. For more information, see [`  function_option_list  `](#sql-udaf-function-option-list) .
+  - `  function_option_list  ` : A list of options for creating the function. For more information, see [`  function_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#sql-udaf-function-option-list) .
 
 ### `     function_option_list    `
 
 The option list specifies options for creating a SQL UDAF. The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td>A description of the UDAF.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `        | `        VALUE       `    | Details                    |
+| ---------------------------- | ------------------------- | -------------------------- |
+| `        description       ` | `         STRING        ` | A description of the UDAF. |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.create      </code></td>
-<td>The dataset where you create the function.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                   |
+| ----------------------------------------- | ------------------------------------------ |
+| `        bigquery.routines.create       ` | The dataset where you create the function. |
 
 In addition, the `  OR REPLACE  ` clause requires the `  bigquery.routines.update  ` permission.
 
@@ -3748,7 +3438,7 @@ In addition, the `  OR REPLACE  ` clause requires the `  bigquery.routines.updat
 
 The following example shows a persistent SQL UDAF that includes a non-aggregate function parameter. Inside the function definition, the aggregate `  SUM  ` method takes the aggregate function parameter dividend, while the non-aggregate division operator ( `  /  ` ) takes the non-aggregate function parameter divisor.
 
-``` text
+``` notranslate
 CREATE AGGREGATE FUNCTION myProject.myDataset.ScaledSum(
   dividend FLOAT64,
   divisor FLOAT64 NOT AGGREGATE)
@@ -3774,13 +3464,13 @@ FROM (
 
 ## `     CREATE AGGREGATE FUNCTION    ` statement (JavaScript)
 
-Creates a new [JavaScript user-defined aggregate function](/bigquery/docs/user-defined-aggregates) (UDAF).
+Creates a new [JavaScript user-defined aggregate function](https://docs.cloud.google.com/bigquery/docs/user-defined-aggregates) (UDAF).
 
 ### Syntax
 
 To create a JavaScript UDAF, use the following syntax:
 
-``` text
+``` notranslate
 CREATE
   [ OR REPLACE ]
   [ { TEMPORARY | TEMP } ]
@@ -3810,21 +3500,21 @@ function_parameter:
       - `  function_name  ` : The name of the function. Function names must contain only letters, numbers, and underscores, and be at most 256 characters long.
   - `  function_parameter  ` : A parameter for the function.
       - `  parameter_name  ` : The name of the function parameter.
-      - `  parameter_data_type  ` : The GoogleSQL [data type](/bigquery/docs/reference/standard-sql/data-types) for the function parameter.
+      - `  parameter_data_type  ` : The GoogleSQL [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) for the function parameter.
       - `  NOT AGGREGATE  ` : The function parameter is not an aggregate. Only one non-aggregate function parameter is allowed per JavaScript UDAF, and it must be the last parameter in the list.
   - `  return_data_type  ` : The GoogleSQL data type that the function should return.
-  - `  function_body  ` : The JavaScript expression that defines the function body. For more information, see [`  function_body  `](#javascript-udaf-function-body) .
-  - `  function_option_list  ` : A list of options for creating the function. For more information, see [`  function_option_list  `](#javascript-udaf-function-option-list) .
+  - `  function_body  ` : The JavaScript expression that defines the function body. For more information, see [`  function_body  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#javascript-udaf-function-body) .
+  - `  function_option_list  ` : A list of options for creating the function. For more information, see [`  function_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#javascript-udaf-function-option-list) .
 
 ### `     function_body    `
 
-The body of the JavaScript function must be a quoted string literal that represents the JavaScript code. To learn more about the different types of quoted string literals you can use, see [Formats for quoted literals](/bigquery/docs/reference/standard-sql/lexical#quoted_literals) .
+The body of the JavaScript function must be a quoted string literal that represents the JavaScript code. To learn more about the different types of quoted string literals you can use, see [Formats for quoted literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#quoted_literals) .
 
-Only certain type encodings are allowed. To learn more, see [SQL type encodings in a JavaScript UDAF](#javascript-type-encodings-udaf) .
+Only certain type encodings are allowed. To learn more, see [SQL type encodings in a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#javascript-type-encodings-udaf) .
 
-The JavaScript function body must include four JavaScript functions that initialize, aggregate, merge, and finalize the results for the JavaScript UDAF. To learn more about the `  initialState  ` , `  aggregate  ` , `  merge  ` , and `  finalize  ` JavaScript functions, see [Required aggregate functions in a JavaScript UDAF](#javascript-interface-functions-udaf) .
+The JavaScript function body must include four JavaScript functions that initialize, aggregate, merge, and finalize the results for the JavaScript UDAF. To learn more about the `  initialState  ` , `  aggregate  ` , `  merge  ` , and `  finalize  ` JavaScript functions, see [Required aggregate functions in a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#javascript-interface-functions-udaf) .
 
-Only serialized data can be passed into the JavaScript aggregate functions. If you need to serialize data such as functions or symbols to pass them into the aggregate functions, use the JavaScript serialization functions. For more information, see [Serialization functions for a JavaScript UDAF](#javascript-serialization-functions-udaf) .
+Only serialized data can be passed into the JavaScript aggregate functions. If you need to serialize data such as functions or symbols to pass them into the aggregate functions, use the JavaScript serialization functions. For more information, see [Serialization functions for a JavaScript UDAF](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#javascript-serialization-functions-udaf) .
 
 ### `     function_option_list    `
 
@@ -3860,7 +3550,7 @@ The option list specifies options for creating a JavaScript UDAF. The following 
 
 ### SQL type encodings in a JavaScript UDAF
 
-In JavaScript UDAFs, [GoogleSQL data types](/bigquery/docs/reference/standard-sql/data-types) represent [JavaScript data types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) in the following manner:
+In JavaScript UDAFs, [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) represent [JavaScript data types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects) in the following manner:
 
 <table>
 <colgroup>
@@ -3951,9 +3641,7 @@ The JavaScript function body must include the following exportable JavaScript fu
     
     **Syntax:**
     
-    ``` text
-    export function initialState([nonAggregateParam]){...}
-    ```
+        export function initialState([nonAggregateParam]){...}
     
     **Parameters:**
     
@@ -3961,21 +3649,15 @@ The JavaScript function body must include the following exportable JavaScript fu
     
     **Examples:**
     
-    ``` text
-    export function initialState(){...}
-    ```
+        export function initialState(){...}
     
-    ``` text
-    export function initialState(initialSum){...}
-    ```
+        export function initialState(initialSum){...}
 
   - `  aggregate  ` function: Aggregates one row of data, updating state to store the result of the aggregation. Doesn't return a value.
     
     **Syntax:**
     
-    ``` text
-    export function aggregate(state, aggregateParam[, ...][, nonAggregateParam]){...}
-    ```
+        export function aggregate(state, aggregateParam[, ...][, nonAggregateParam]){...}
     
     **Parameters:**
     
@@ -3987,17 +3669,13 @@ The JavaScript function body must include the following exportable JavaScript fu
     
     **Example:**
     
-    ``` text
-    export function aggregate(currentState, aggX, aggWeight, initialSum)
-    ```
+        export function aggregate(currentState, aggX, aggWeight, initialSum)
 
   - `  merge  ` function: Combines two aggregation states from a prior call to the `  aggregate  ` , `  merge  ` , or `  initialState  ` function. This function does not return a value.
     
     **Syntax:**
     
-    ``` text
-    export function merge(state, partialState[, nonAggregateParam]){...}
-    ```
+        export function merge(state, partialState[, nonAggregateParam]){...}
     
     **Parameters:**
     
@@ -4013,17 +3691,13 @@ The JavaScript function body must include the following exportable JavaScript fu
     
     **Example:**
     
-    ``` text
-    export function merge(currentState, partialState, initialSum)
-    ```
+        export function merge(currentState, partialState, initialSum)
 
   - `  finalize  ` function: Computes the final aggregation result and then returns this result for the UDAF.
     
     **Syntax:**
     
-    ``` text
-    export function finalize(state[, nonAggregateParam]){...}
-    ```
+        export function finalize(state[, nonAggregateParam]){...}
     
     **Parameters:**
     
@@ -4035,9 +3709,7 @@ The JavaScript function body must include the following exportable JavaScript fu
     
     **Example:**
     
-    ``` text
-    export function finalize(finalState, initialSum)
-    ```
+        export function finalize(finalState, initialSum)
 
 ### Serialization functions for a JavaScript UDAF
 
@@ -4047,9 +3719,7 @@ If you want to work with non-serializable aggregation states, the JavaScript UDA
     
     Syntax:
     
-    ``` text
-    export function serialize(state[, nonAggregateParam]){...}
-    ```
+        export function serialize(state[, nonAggregateParam]){...}
     
     Arguments:
     
@@ -4059,17 +3729,13 @@ If you want to work with non-serializable aggregation states, the JavaScript UDA
     
     Example:
     
-    ``` text
-    export function serialize(stateToSerialize, initialSum)
-    ```
+        export function serialize(stateToSerialize, initialSum)
 
   - `  deserialize  ` function: Converts a serialized state into an aggregation state. An aggregated state can be passed into the `  serialize  ` , `  aggregate  ` , `  merge  ` , and `  finalize  ` functions.
     
     Syntax:
     
-    ``` text
-    export function deserialize(serializedState[, nonAggregateParam]){...}
-    ```
+        export function deserialize(serializedState[, nonAggregateParam]){...}
     
     Arguments:
     
@@ -4079,28 +3745,15 @@ If you want to work with non-serializable aggregation states, the JavaScript UDA
     
     Example:
     
-    ``` text
-    export function deserialize(stateToDeserialize, initialSum)
-    ```
+        export function deserialize(stateToDeserialize, initialSum)
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.create      </code></td>
-<td>The dataset where you create the function.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                   |
+| ----------------------------------------- | ------------------------------------------ |
+| `        bigquery.routines.create       ` | The dataset where you create the function. |
 
 In addition, the `  OR REPLACE  ` clause requires the `  bigquery.routines.update  ` permission.
 
@@ -4110,7 +3763,7 @@ In addition, the `  OR REPLACE  ` clause requires the `  bigquery.routines.updat
 
 A JavaScript UDAF is similar to a JavaScript UDF, but defines an aggregate function instead of a scalar function. In the following example, a temporary JavaScript UDAF calculates the sum of all rows that have a positive value. The JavaScript UDAF body is quoted within a raw string:
 
-``` text
+``` notranslate
 CREATE TEMP AGGREGATE FUNCTION SumPositive(x FLOAT64)
 RETURNS FLOAT64
 LANGUAGE js
@@ -4148,7 +3801,7 @@ FROM numbers;
 
 A JavaScript UDAF can have aggregate and non-aggregate parameters. In the following example, the JavaScript UDAF calculates the weighted average for `  x  ` after starting with an initial sum ( `  initialSum  ` ). `  x  ` and `  weight  ` are aggregate parameters, and `  initialSum  ` is a non-aggregate parameter:
 
-``` text
+``` notranslate
 CREATE OR REPLACE AGGREGATE FUNCTION my_project.my_dataset.WeightedAverage(
     x INT64,
     weight FLOAT64,
@@ -4188,11 +3841,11 @@ FROM (
 
 ## `     CREATE TABLE FUNCTION    ` statement
 
-Creates a new [table function](/bigquery/docs/table-functions) , also called a *table-valued function* (TVF).
+Creates a new [table function](https://docs.cloud.google.com/bigquery/docs/table-functions) , also called a *table-valued function* (TVF).
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] TABLE FUNCTION [ IF NOT EXISTS ]
   [[project_name.]dataset_name.]function_name
   ( [ function_parameter [, ...] ] )
@@ -4214,7 +3867,7 @@ column_declaration:
   - `  project_name  ` : The name of the project where you are creating the function. Defaults to the project that runs this DDL statement.
   - `  dataset_name  ` : The name of the dataset where you are creating the function.
   - `  function_name  ` : The name of the function to create.
-  - `  function_parameter  ` : A parameter for the function, specified as a parameter name and a data type. The value of `  data_type  ` is a scalar BigQuery [data type](/bigquery/docs/reference/standard-sql/data-types) or `  ANY TYPE  ` , or a table schema. Using [table parameters](/bigquery/docs/table-functions#table_parameters) in a table function is in [Preview](https://cloud.google.com/products#product-launch-stages) .
+  - `  function_parameter  ` : A parameter for the function, specified as a parameter name and a data type. The value of `  data_type  ` is a scalar BigQuery [data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) or `  ANY TYPE  ` , or a table schema. Using [table parameters](https://docs.cloud.google.com/bigquery/docs/table-functions#table_parameters) in a table function is in [Preview](https://cloud.google.com/products#product-launch-stages) .
   - `  RETURNS TABLE  ` : The schema of the table that the function returns, specified as a comma-separated list of column name and data type pairs. If `  RETURNS TABLE  ` is absent, BigQuery infers the output schema from the query statement in the function body. If `  RETURNS TABLE  ` is included, the names in the returned table type must match column names from the SQL query.
   - `  sql_query  ` : Specifies the SQL query to run. The SQL query must include names for all columns.
 
@@ -4222,22 +3875,9 @@ column_declaration:
 
 The `  table_function_options_list  ` lets you specify table function options. Table function options have the same syntax and requirements as table options but with a different list of `  NAME  ` s and `  VALUE  ` s:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td>The description of the table function.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `        | `        VALUE       `    | Details                                |
+| ---------------------------- | ------------------------- | -------------------------------------- |
+| `        description       ` | `         STRING        ` | The description of the table function. |
 
 ### Details
 
@@ -4247,22 +3887,11 @@ If a parameter type is `  ANY TYPE  ` , the function accepts an input of any typ
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.create      </code></td>
-<td>The dataset where you create the table function.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                         |
+| ----------------------------------------- | ------------------------------------------------ |
+| `        bigquery.routines.create       ` | The dataset where you create the table function. |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.routines.update  ` permission.
 
@@ -4270,7 +3899,7 @@ In addition, the `  OR REPLACE  ` clause requires `  bigquery.routines.update  `
 
 The following table function takes an `  INT64  ` parameter that is used to filter the results of a query:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
 AS
   SELECT year, name, SUM(number) AS total
@@ -4281,7 +3910,7 @@ AS
 
 The following example specifies the return `  TABLE  ` type in the `  RETURNS  ` clause:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
 RETURNS TABLE<name STRING, year INT64, total INT64>
 AS
@@ -4293,7 +3922,7 @@ AS
 
 The following example computes total sales for items with the name `  item_name  ` from the `  orders  ` table:
 
-``` text
+``` notranslate
 CREATE TABLE FUNCTION mydataset.compute_sales (
   orders TABLE<item STRING, sales INT64>, item_name STRING)
 AS (
@@ -4306,13 +3935,13 @@ AS (
 
 ## `     CREATE PROCEDURE    ` statement
 
-Creates a new [procedure](/bigquery/docs/procedures) , which is a block of statements that can be called from other queries. Procedures can call themselves recursively.
+Creates a new [procedure](https://docs.cloud.google.com/bigquery/docs/procedures) , which is a block of statements that can be called from other queries. Procedures can call themselves recursively.
 
 ### Syntax
 
-To create a [GoogleSQL stored procedure](/bigquery/docs/procedures) , use the following syntax:
+To create a [GoogleSQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) , use the following syntax:
 
-``` text
+``` notranslate
 CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
 [[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
 [OPTIONS(procedure_option_list)]
@@ -4325,9 +3954,9 @@ procedure_argument: [procedure_argument_mode] argument_name argument_type
 procedure_argument_mode: IN | OUT | INOUT
 ```
 
-To create a [stored procedure for Apache Spark](/bigquery/docs/spark-procedures) , use the following syntax:
+To create a [stored procedure for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) , use the following syntax:
 
-``` text
+``` notranslate
 CREATE [OR REPLACE] PROCEDURE [IF NOT EXISTS]
 [[project_name.]dataset_name.]procedure_name (procedure_argument[, ...] )
 [EXTERNAL SECURITY external_security]
@@ -4356,23 +3985,23 @@ external_security: INVOKER
 
   - `  external_security  ` : The procedure to be executed with the privileges of the user that calls it.
 
-  - `  connection_project_id  ` : the project that contains the [connection](/bigquery/docs/connect-to-spark) to run Spark procedures—for example, `  myproject  ` .
+  - `  connection_project_id  ` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to run Spark procedures—for example, `  myproject  ` .
 
   - `  connection_region  ` : the region that contains the connection to run Spark procedures—for example, `  us  ` .
 
   - `  connection_id  ` : the connection ID—for example, `  myconnection  ` .
     
-    When you [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    For more information, see [Create a stored procedure for Apache Spark](/bigquery/docs/spark-procedures#create-spark-procedure) .
+    For more information, see [Create a stored procedure for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#create-spark-procedure) .
 
-  - `  multi_statement_query  ` : The [multi-statement query](/bigquery/docs/multi-statement-queries) to run.
+  - `  multi_statement_query  ` : The [multi-statement query](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) to run.
 
   - `  language  ` : The language in which the stored procedure for Apache Spark is written. BigQuery supports stored procedures for Apache Spark that are written in Python, Java, or Scala.
 
-  - `  pyspark_code  ` : The PySpark code for the stored procedure for Apache Spark if you want to pass the body of the procedure inline. Cannot appear with `  main_file_uri  ` in [`  procedure_option_list  `](#procedure_option_list) .
+  - `  pyspark_code  ` : The PySpark code for the stored procedure for Apache Spark if you want to pass the body of the procedure inline. Cannot appear with `  main_file_uri  ` in [`  procedure_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) .
 
-  - `  argument_type  ` : Any valid BigQuery [type](/bigquery/docs/reference/standard-sql/data-types) .
+  - `  argument_type  ` : Any valid BigQuery [type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
 
   - `  procedure_argument_mode  ` : Specifies whether an argument is an input, an output, or both.
 
@@ -4419,7 +4048,7 @@ Valid value: <code dir="ltr" translate="no">       engine="SPARK"      </code></
 <td><code dir="ltr" translate="no">       runtime_version      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>The runtime version of stored procedures for Spark.</p>
-<p>If not specified, the system default runtime version is used. Stored procedures for Spark support the same list of runtime versions as Serverless for Apache Spark. However, we recommend to specify a runtime version. For more information, see <a href="/dataproc-serverless/docs/concepts/versions/spark-runtime-versions">Serverless for Apache Spark runtime releases</a> .</p>
+<p>If not specified, the system default runtime version is used. Stored procedures for Spark support the same list of runtime versions as Serverless for Apache Spark. However, we recommend to specify a runtime version. For more information, see <a href="https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/spark-runtime-versions">Serverless for Apache Spark runtime releases</a> .</p>
 Example: <code dir="ltr" translate="no">       runtime_version="1.1"      </code></td>
 </tr>
 <tr class="odd">
@@ -4428,16 +4057,16 @@ Example: <code dir="ltr" translate="no">       runtime_version="1.1"      </code
 <td><p>Custom container image for the runtime environment of the stored procedure for Spark.</p>
 <p>If not specified, the system default container image that includes the default Spark, Java, and Python packages associated with a runtime version is used.</p>
 <p>You can provide a custom container Docker image that includes your own built Java or Python dependencies. As Spark is mounted into your custom container at runtime, you must omit Spark in your custom container image.</p>
-<p>For optimized performance, we recommend you to host your image in Artifact Registry. For more information, see <a href="/dataproc-serverless/docs/guides/custom-containers">Use custom containers with Serverless for Apache Spark</a> .</p>
+<p>For optimized performance, we recommend you to host your image in Artifact Registry. For more information, see <a href="https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers">Use custom containers with Serverless for Apache Spark</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        container_image="us-docker.pkg.dev/my-project-id/my-images/my-image”       </code></p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       properties      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;      </code></td>
 <td><p>A key-value pair to include properties for stored procedures for Spark.</p>
-<p>Stored procedures for Spark support most of the <a href="https://spark.apache.org/docs/latest/configuration.html#spark-properties" class="external">Spark properties</a> and a list of <a href="/dataproc-serverless/docs/concepts/properties#custom_spark_properties">Serverless for Apache Spark properties</a> . If you specify unsupported Spark properties such as YARN-related Spark properties, BigQuery fails to create the stored procedure. You can add Spark properties using the following format: <code dir="ltr" translate="no">        [("key1","value1"),("key2", "value2")]       </code></p>
+<p>Stored procedures for Spark support most of the <a href="https://spark.apache.org/docs/latest/configuration.html#spark-properties" class="external">Spark properties</a> and a list of <a href="https://docs.cloud.google.com/dataproc-serverless/docs/concepts/properties#custom_spark_properties">Serverless for Apache Spark properties</a> . If you specify unsupported Spark properties such as YARN-related Spark properties, BigQuery fails to create the stored procedure. You can add Spark properties using the following format: <code dir="ltr" translate="no">        [("key1","value1"),("key2", "value2")]       </code></p>
 For example:
-<pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>bq query --nouse_legacy_sql --dry_run
+<pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>bq query --nouse_legacy_sql --dry_run
 &#39;CREATE PROCEDURE my_bq_project.my_dataset.spark_proc()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(
@@ -4453,13 +4082,13 @@ LANGUAGE PYTHON&#39;
 Invalid properties: \
 Attempted to set unsupported properties: \
 [spark:spark.yarn.am.memory] at [1:1]</code></pre>
-<strong>Note:</strong> You can use the <a href="/bigquery/docs/running-queries#dry-run">BigQuery dry run feature</a> to validate your stored procedure without creating it.</td>
+<strong>Note:</strong> You can use the <a href="https://docs.cloud.google.com/bigquery/docs/running-queries#dry-run">BigQuery dry run feature</a> to validate your stored procedure without creating it.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       main_file_uri      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>The Cloud Storage URI of the main Python, Scala, or Java JAR file of the Spark application. Applies only to stored procedures for Spark.</p>
-<p>Alternatively, if you want to add the body of the stored procedure that's written in Python in the <code dir="ltr" translate="no">        CREATE PROCEDURE       </code> statement, add the code after <code dir="ltr" translate="no">        LANGUAGE PYTHON AS       </code> as shown in the example in <a href="/bigquery/docs/spark-procedures#use-inline-code">Use inline code</a> .</p>
+<p>Alternatively, if you want to add the body of the stored procedure that's written in Python in the <code dir="ltr" translate="no">        CREATE PROCEDURE       </code> statement, add the code after <code dir="ltr" translate="no">        LANGUAGE PYTHON AS       </code> as shown in the example in <a href="https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code">Use inline code</a> .</p>
 Example: <code dir="ltr" translate="no">       main_file_uri="gs://my-bucket/my-pyspark-main.py"      </code>
 <p>For Scala and Java languages, this field contains a path to only one JAR file. You can set only one value for <code dir="ltr" translate="no">        main_file_uri       </code> and <code dir="ltr" translate="no">        main_class       </code> .</p>
 Example: <code dir="ltr" translate="no">       main_file_uri="gs://my-bucket/my-scala-main.jar"      </code></td>
@@ -4521,134 +4150,98 @@ Variables declared in a procedure are not visible outside of the procedure, and 
 
 An `  OUT  ` or `  INOUT  ` argument can be assigned a value using `  SET  ` , in which case the modified value is visible outside of the procedure. If the procedure exits successfully, then the value of the `  OUT  ` or `  INOUT  ` argument is the final value assigned to that `  INOUT  ` variable.
 
-[Temporary tables](#create-table-statement) exist for the duration of the script, so if a procedure creates a temporary table, the caller of the procedure will be able to reference the temporary table as well.
+[Temporary tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create-table-statement) exist for the duration of the script, so if a procedure creates a temporary table, the caller of the procedure will be able to reference the temporary table as well.
 
 ### Default project in procedure body
 
 Procedure bodies can reference entities without specifying the project; the default project is the project which owns the procedure, not necessarily the project used to run the `  CREATE PROCEDURE  ` statement. Consider the sample query below.
 
-``` text
-CREATE PROCEDURE myProject.myDataset.QueryTable()
-BEGIN
-  SELECT * FROM anotherDataset.myTable;
-END;
-```
+    CREATE PROCEDURE myProject.myDataset.QueryTable()
+    BEGIN
+      SELECT * FROM anotherDataset.myTable;
+    END;
 
 After creating the above procedure, you can run the query `  CALL myProject.myDataset.QueryTable()  ` . Regardless of the project you choose to run this `  CALL  ` query, the referenced table `  anotherDataset.myTable  ` is always resolved against project `  myProject  ` .
 
 ### Required permissions
 
-This statement requires the following [IAM permission](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.create      </code></td>
-<td>The dataset where you create the procedure.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                    |
+| ----------------------------------------- | ------------------------------------------- |
+| `        bigquery.routines.create       ` | The dataset where you create the procedure. |
 
-To create a stored procedure for Apache Spark, additional [IAM permission](/bigquery/docs/access-control#bq-permissions) are needed:
+To create a stored procedure for Apache Spark, additional [IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) are needed:
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.delegate      </code></td>
-<td>The connection which you use to <a href="/bigquery/docs/spark-procedures#create-spark-procedure">create the stored procedure for Apache Spark</a> .</td>
-</tr>
-</tbody>
-</table>
+| Permission                                     | Resource                                                                                                                                                              |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        bigquery.connections.delegate       ` | The connection which you use to [create the stored procedure for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#create-spark-procedure) . |
 
 In addition, the `  OR REPLACE  ` clause requires `  bigquery.routines.update  ` permission.
 
 ### SQL examples
 
-You can also see [examples of stored procedures for Apache Spark](/bigquery/docs/spark-procedures#example-spark-procedure) .
+You can also see [examples of stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#example-spark-procedure) .
 
 The following example creates a SQL procedure that both takes `  x  ` as an input argument and returns `  x  ` as output; because no argument mode is present for the argument `  delta  ` , it is an input argument. The procedure consists of a block containing a single statement, which assigns the sum of the two input arguments to `  x  ` .
 
-``` text
-CREATE PROCEDURE mydataset.AddDelta(INOUT x INT64, delta INT64)
-BEGIN
-  SET x = x + delta;
-END;
-```
+    CREATE PROCEDURE mydataset.AddDelta(INOUT x INT64, delta INT64)
+    BEGIN
+      SET x = x + delta;
+    END;
 
 The following example calls the `  AddDelta  ` procedure from the example above, passing it the variable `  accumulator  ` both times; because the changes to `  x  ` within `  AddDelta  ` are visible outside of `  AddDelta  ` , these procedure calls increment `  accumulator  ` by a total of 8.
 
-``` text
-DECLARE accumulator INT64 DEFAULT 0;
-CALL mydataset.AddDelta(accumulator, 5);
-CALL mydataset.AddDelta(accumulator, 3);
-SELECT accumulator;
-```
+    DECLARE accumulator INT64 DEFAULT 0;
+    CALL mydataset.AddDelta(accumulator, 5);
+    CALL mydataset.AddDelta(accumulator, 3);
+    SELECT accumulator;
 
 This returns the following:
 
-``` text
-+-------------+
-| accumulator |
-+-------------+
-|           8 |
-+-------------+
-```
+    +-------------+
+    | accumulator |
+    +-------------+
+    |           8 |
+    +-------------+
 
 The following example creates the procedure `  SelectFromTablesAndAppend  ` , which takes `  target_date  ` as an input argument and returns `  rows_added  ` as an output. The procedure creates a temporary table `  DataForTargetDate  ` from a query; then, it calculates the number of rows in `  DataForTargetDate  ` and assigns the result to `  rows_added  ` . Next, it inserts a new row into `  TargetTable  ` , passing the value of `  target_date  ` as one of the column names. Finally, it drops the table `  DataForTargetDate  ` and returns `  rows_added  ` .
 
-``` text
-CREATE PROCEDURE mydataset.SelectFromTablesAndAppend(
-  target_date DATE, OUT rows_added INT64)
-BEGIN
-  CREATE TEMP TABLE DataForTargetDate AS
-  SELECT t1.id, t1.x, t2.y
-  FROM dataset.partitioned_table1 AS t1
-  JOIN dataset.partitioned_table2 AS t2
-  ON t1.id = t2.id
-  WHERE t1.date = target_date
-    AND t2.date = target_date;
-
-  SET rows_added = (SELECT COUNT(*) FROM DataForTargetDate);
-
-  SELECT id, x, y, target_date  -- note that target_date is a parameter
-  FROM DataForTargetDate;
-
-  DROP TABLE DataForTargetDate;
-END;
-```
+    CREATE PROCEDURE mydataset.SelectFromTablesAndAppend(
+      target_date DATE, OUT rows_added INT64)
+    BEGIN
+      CREATE TEMP TABLE DataForTargetDate AS
+      SELECT t1.id, t1.x, t2.y
+      FROM dataset.partitioned_table1 AS t1
+      JOIN dataset.partitioned_table2 AS t2
+      ON t1.id = t2.id
+      WHERE t1.date = target_date
+        AND t2.date = target_date;
+    
+      SET rows_added = (SELECT COUNT(*) FROM DataForTargetDate);
+    
+      SELECT id, x, y, target_date  -- note that target_date is a parameter
+      FROM DataForTargetDate;
+    
+      DROP TABLE DataForTargetDate;
+    END;
 
 The following example declares a variable `  rows_added  ` , then passes it as an argument to the `  SelectFromTablesAndAppend  ` procedure from the previous example, along with the value of `  CURRENT_DATE  ` ; then it returns a message stating how many rows were added.
 
-``` text
-DECLARE rows_added INT64;
-CALL mydataset.SelectFromTablesAndAppend(CURRENT_DATE(), rows_added);
-SELECT FORMAT('Added %d rows', rows_added);
-```
+    DECLARE rows_added INT64;
+    CALL mydataset.SelectFromTablesAndAppend(CURRENT_DATE(), rows_added);
+    SELECT FORMAT('Added %d rows', rows_added);
 
 ## `     CREATE ROW ACCESS POLICY    ` statement
 
-Creates or replaces a [row-level access policy](/bigquery/docs/row-level-security-intro) . Row-level access policies on a table must have unique names.
+Creates or replaces a [row-level access policy](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) . Row-level access policies on a table must have unique names.
 
 ### Syntax
 
-``` text
-CREATE [ OR REPLACE ] ROW ACCESS POLICY [ IF NOT EXISTS ]
-row_access_policy_name ON table_name
-[GRANT TO (grantee_list)]
-FILTER USING (filter_expression);
-```
+    CREATE [ OR REPLACE ] ROW ACCESS POLICY [ IF NOT EXISTS ]
+    row_access_policy_name ON table_name
+    [GRANT TO (grantee_list)]
+    FILTER USING (filter_expression);
 
 ### Arguments
 
@@ -4665,7 +4258,7 @@ FILTER USING (filter_expression);
     
     **Caution:** If no `  grantee_list  ` is provided, then the row-level access policy for the specified filter is initialized with no principals. This configuration prevents all data reads by everyone.
     
-    `  grantee_list  ` is a list of `  iam_member  ` users or groups. Strings must be valid [IAM principals](/iam/docs/overview#concepts_related_identity) , or members, following the format of an [IAM Policy Binding member](/iam/docs/reference/rest/v1/Binding) , and must be quoted. The following types are supported:
+    `  grantee_list  ` is a list of `  iam_member  ` users or groups. Strings must be valid [IAM principals](https://docs.cloud.google.com/iam/docs/overview#concepts_related_identity) , or members, following the format of an [IAM Policy Binding member](https://docs.cloud.google.com/iam/docs/reference/rest/v1/Binding) , and must be quoted. The following types are supported:
     
     Example: `  user:alice@example.com  `
     
@@ -4686,40 +4279,23 @@ FILTER USING (filter_expression);
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.create      </code></td>
-<td>The target table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.setIamPolicy      </code></td>
-<td>The target table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.getData      </code></td>
-<td>The target table.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                               | Resource          |
+| -------------------------------------------------------- | ----------------- |
+| `        bigquery.rowAccessPolicies.create       `       | The target table. |
+| `        bigquery.rowAccessPolicies.setIamPolicy       ` | The target table. |
+| `        bigquery.tables.getData       `                 | The target table. |
 
 ## `     CREATE CAPACITY    ` statement
 
-Purchases [slots](/bigquery/docs/slots) by creating a new capacity commitment.
+Purchases [slots](https://docs.cloud.google.com/bigquery/docs/slots) by creating a new capacity commitment.
 
-**Caution:** Before you purchase slots, understand the details of the [commitment plans](/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
+**Caution:** Before you purchase slots, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE CAPACITY
 `project_id.location_id.commitment_id`
 OPTIONS (capacity_commitment_option_list);
@@ -4728,9 +4304,9 @@ OPTIONS (capacity_commitment_option_list);
 ### Arguments
 
   - `  project_id  ` : The project ID of the administration project that will maintain ownership of this commitment.
-  - `  location_id  ` : The [location](/bigquery/docs/locations#supported_locations) of the commitment.
+  - `  location_id  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the commitment.
   - `  commitment_id  ` : The ID of the commitment. The value must be unique to the project and location. It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers and dashes.
-  - [`  capacity_commitment_option_list  `](#capacity_commitment_option_list) : The options you can set to describe the capacity commitment.
+  - [`  capacity_commitment_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#capacity_commitment_option_list) : The options you can set to describe the capacity commitment.
 
 ### `     capacity_commitment_option_list    `
 
@@ -4738,62 +4314,26 @@ The option list specifies options for the capacity commitment. Specify the optio
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       plan      </code></td>
-<td>String</td>
-<td>The commitment plan to purchase. Supported values include: <code dir="ltr" translate="no">       ANNUAL      </code> , <code dir="ltr" translate="no">       THREE_YEAR      </code> , and <code dir="ltr" translate="no">       TRIAL      </code> . For more information, see <a href="/bigquery/docs/reservations-workload-management#slot_commitments">Commitment plans</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       renewal_plan      </code></td>
-<td>String</td>
-<td>The commitment renewal plan. Applies only when <code dir="ltr" translate="no">       plan      </code> is <code dir="ltr" translate="no">       ANNUAL      </code> , <code dir="ltr" translate="no">       THREE_YEAR      </code> , or <code dir="ltr" translate="no">       TRIAL      </code> . For more information, see <a href="/bigquery/docs/reservations-workload-management#renew-commitments">Renewing commitments</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       slot_count      </code></td>
-<td>Integer</td>
-<td>The number of slots in the commitment.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       edition      </code></td>
-<td>String</td>
-<td>The edition associated with this reservation. For more information about editions, see <a href="/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `         | `        TYPE       ` | Details                                                                                                                                                                                                                                                                                                        |
+| ----------------------------- | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        plan       `         | String                | The commitment plan to purchase. Supported values include: `        ANNUAL       ` , `        THREE_YEAR       ` , and `        TRIAL       ` . For more information, see [Commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .                  |
+| `        renewal_plan       ` | String                | The commitment renewal plan. Applies only when `        plan       ` is `        ANNUAL       ` , `        THREE_YEAR       ` , or `        TRIAL       ` . For more information, see [Renewing commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) . |
+| `        slot_count       `   | Integer               | The number of slots in the commitment.                                                                                                                                                                                                                                                                         |
+| `        edition       `      | String                | The edition associated with this reservation. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                                                       |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.capacityCommitments.create      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                           | Resource                                                                |
+| ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.capacityCommitments.create       ` | The administration project that maintains ownership of the commitments. |
 
 ### Example
 
 The following example creates a capacity commitment of 100 annual slots that are located in the `  region-us  ` region and managed by a project `  admin_project  ` :
 
-``` text
+``` notranslate
 CREATE CAPACITY `admin_project.region-us.my-commitment`
 OPTIONS (
   slot_count = 100,
@@ -4802,11 +4342,11 @@ OPTIONS (
 
 ## `     CREATE RESERVATION    ` statement
 
-Creates a reservation. For more information, see [Introduction to Reservations](/bigquery/docs/reservations-intro) .
+Creates a reservation. For more information, see [Introduction to Reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE RESERVATION
 `project_id.location_id.reservation_id`
 OPTIONS (reservation_option_list);
@@ -4815,9 +4355,9 @@ OPTIONS (reservation_option_list);
 ### Arguments
 
   - `  project_id  ` : The project ID of the administration project where the capacity commitment was created.
-  - `  location  ` : The [location](/bigquery/docs/locations#supported_locations) of the reservation.
+  - `  location  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the reservation.
   - `  reservation_id  ` : The reservation ID.
-  - [`  reservation_option_list  `](#reservation_option_list) : The options you can set to describe the reservation.
+  - [`  reservation_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#reservation_option_list) : The options you can set to describe the reservation.
 
 #### `     reservation_option_list    `
 
@@ -4825,87 +4365,31 @@ The option list specifies options for the dataset. Specify the options in the fo
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ignore_idle_slots      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>If the value is <code dir="ltr" translate="no">       true      </code> , then the reservation uses only the slots that are provisioned to it. The default value is <code dir="ltr" translate="no">       false      </code> . For more information, see <a href="/bigquery/docs/slots#idle_slots">Idle slots</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       slot_capacity      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The number of slots to allocate to the reservation. If this reservation was created with an <a href="/bigquery/docs/editions-intro">edition</a> , this is equivalent to the amount of <a href="/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots">baseline slots</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       target_job_concurrency      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>A soft upper bound on the number of jobs that can run concurrently in this reservation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       edition      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The edition associated with this reservation. For more information about editions, see <a href="/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       autoscale_max_slots      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The maximum number of slots that could be added to the reservation by autoscaling.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       secondary_location      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The secondary location to use in the case of disaster recovery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       max_slots      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The maximum number of slots the reservation can consume. For more details about predictable reservations, see <a href="/bigquery/docs/reservations-workload-management#predictable">Reservation predictability</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       scaling_mode      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The scaling mode of the reservation. This value must be configured together with <code dir="ltr" translate="no">       max_slots      </code> . Also, this value must be aligned with <code dir="ltr" translate="no">       ignore_idle_slots      </code> . For details, see <a href="/bigquery/docs/reservations-workload-management#predictable">Reservation predictability</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       labels      </code></td>
-<td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of labels for the reservation, expressed as key-value pairs.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `                   | `        TYPE       `                            | Details                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `        ignore_idle_slots       `      | `        BOOLEAN       `                         | If the value is `        true       ` , then the reservation uses only the slots that are provisioned to it. The default value is `        false       ` . For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .                                                                                      |
+| `        slot_capacity       `          | `        INTEGER       `                         | The number of slots to allocate to the reservation. If this reservation was created with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , this is equivalent to the amount of [baseline slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots) . |
+| `        target_job_concurrency       ` | `        INTEGER       `                         | A soft upper bound on the number of jobs that can run concurrently in this reservation.                                                                                                                                                                                                                                                                |
+| `        edition       `                | `        STRING       `                          | The edition associated with this reservation. For more information about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .                                                                                                                                                               |
+| `        autoscale_max_slots       `    | `        INTEGER       `                         | The maximum number of slots that could be added to the reservation by autoscaling.                                                                                                                                                                                                                                                                     |
+| `        secondary_location       `     | `        STRING       `                          | The secondary location to use in the case of disaster recovery.                                                                                                                                                                                                                                                                                        |
+| `        max_slots       `              | `        INTEGER       `                         | The maximum number of slots the reservation can consume. For more details about predictable reservations, see [Reservation predictability](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .                                                                                                                 |
+| `        scaling_mode       `           | `        STRING       `                          | The scaling mode of the reservation. This value must be configured together with `        max_slots       ` . Also, this value must be aligned with `        ignore_idle_slots       ` . For details, see [Reservation predictability](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#predictable) .                     |
+| `        labels       `                 | `        <ARRAY<STRUCT<STRING, STRING>>>       ` | An array of labels for the reservation, expressed as key-value pairs.                                                                                                                                                                                                                                                                                  |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.reservations.create      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                    | Resource                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.reservations.create       ` | The administration project that maintains ownership of the commitments. |
 
 ### Example
 
 The following example creates a reservation of 100 slots in the project `  admin_project  ` :
 
-``` text
+``` notranslate
 CREATE RESERVATION `admin_project.region-us.prod`
 OPTIONS (
   slot_capacity = 100);
@@ -4917,7 +4401,7 @@ Assigns a project, folder, or organization to a reservation.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE ASSIGNMENT
 `project_id.location_id.reservation_id.assignment_id`
 OPTIONS (assignment_option_list)
@@ -4926,10 +4410,10 @@ OPTIONS (assignment_option_list)
 ### Arguments
 
   - `  project_id  ` : The project ID of the administration project where the reservation was created.
-  - `  location  ` : The [location](/bigquery/docs/locations#supported_locations) of the reservation.
+  - `  location  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the reservation.
   - `  reservation_id  ` : The reservation ID.
   - `  assignment_id  ` : The ID of the assignment. The value must be unique to the project and location. It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers and dashes.
-  - [`  assignment_option_list  `](#assignment_option_list) : The options you can set to describe assignment.
+  - [`  assignment_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#assignment_option_list) : The options you can set to describe assignment.
 
 To remove a project from any reservations and use on-demand billing instead, set `  reservation_id  ` to `  none  ` .
 
@@ -4939,52 +4423,24 @@ The option list specifies options for the dataset. Specify the options in the fo
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       assignee      </code></td>
-<td>String</td>
-<td>The ID of the project, folder, or organization to assign to the reservation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       job_type      </code></td>
-<td>String</td>
-<td>The type of job to assign to this reservation. Supported values include <code dir="ltr" translate="no">       QUERY      </code> , <code dir="ltr" translate="no">       PIPELINE      </code> , <code dir="ltr" translate="no">       ML_EXTERNAL      </code> , <code dir="ltr" translate="no">       CONTINUOUS      </code> , and <code dir="ltr" translate="no">       BACKGROUND      </code> . For more information, see <a href="/bigquery/docs/reservations-workload-management#assignments">Reservation assignments</a> .</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `     | `        TYPE       ` | Details                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        assignee       ` | String                | The ID of the project, folder, or organization to assign to the reservation.                                                                                                                                                                                                                                                                                                |
+| `        job_type       ` | String                | The type of job to assign to this reservation. Supported values include `        QUERY       ` , `        PIPELINE       ` , `        ML_EXTERNAL       ` , `        CONTINUOUS       ` , and `        BACKGROUND       ` . For more information, see [Reservation assignments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) . |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.reservationAssignments.create      </code></td>
-<td>The administration project and the assignee.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                              | Resource                                     |
+| ------------------------------------------------------- | -------------------------------------------- |
+| `        bigquery.reservationAssignments.create       ` | The administration project and the assignee. |
 
 ### Example
 
 The following example assigns the project `  my_project  ` to the `  prod  ` reservation for query jobs:
 
-``` text
+``` notranslate
 CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
 OPTIONS (
   assignee = 'projects/my_project',
@@ -4993,7 +4449,7 @@ OPTIONS (
 
 The following example assigns an organization to the `  prod  ` reservation for pipeline jobs, such as load and extract jobs:
 
-``` text
+``` notranslate
 CREATE ASSIGNMENT `admin_project.region-us.prod.my_assignment`
 OPTIONS (
   assignee = 'organizations/1234',
@@ -5002,13 +4458,13 @@ OPTIONS (
 
 ## `     CREATE SEARCH INDEX    ` statement
 
-Creates a new [search index](/bigquery/docs/search-index) on one or more columns of a table.
+Creates a new [search index](https://docs.cloud.google.com/bigquery/docs/search-index) on one or more columns of a table.
 
-A search index enables efficient queries using the [`  SEARCH  `](/bigquery/docs/reference/standard-sql/search_functions#search) function.
+A search index enables efficient queries using the [`  SEARCH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search) function.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE SEARCH INDEX [ IF NOT EXISTS ] index_name
 ON table_name({ALL COLUMNS [WITH COLUMN OPTIONS(column [, ...])] | column [, ...]})
 [OPTIONS(index_option_list)]
@@ -5023,7 +4479,7 @@ column_name [OPTIONS(index_column_option_list)]
 
   - `  index_name  ` : The name of the search index you're creating. Since the search index is always created in the same project and dataset as the base table, there is no need to specify these in the name.
 
-  - `  table_name  ` : The name of the table. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  ALL COLUMNS  ` : If data types are not specified, creates a search index on every column in the table which contains a `  STRING  ` field. If data types are specified, create a search index on every column in the table which matches any of the data types specified.
 
@@ -5031,48 +4487,23 @@ column_name [OPTIONS(index_column_option_list)]
 
   - `  column_name  ` : The name of a top-level column in the table which is one of the following supported data types or contains a field with one of the supported data types:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>Supported data types</th>
-    <th>Notes</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td><code dir="ltr" translate="no">         STRING        </code></td>
-    <td>Primitive data type.</td>
-    </tr>
-    <tr class="even">
-    <td><code dir="ltr" translate="no">         INT64        </code></td>
-    <td>Primitive data type.</td>
-    </tr>
-    <tr class="odd">
-    <td><code dir="ltr" translate="no">         TIMESTAMP        </code></td>
-    <td>Primitive data type.</td>
-    </tr>
-    <tr class="even">
-    <td><code dir="ltr" translate="no">         ARRAY&lt;PRIMITIVE_DATA_TYPE&gt;        </code></td>
-    <td>Must contain a primitive data type in this list.</td>
-    </tr>
-    <tr class="odd">
-    <td><code dir="ltr" translate="no">         STRUCT        </code> or <code dir="ltr" translate="no">         ARRAY&lt;STRUCT&gt;        </code></td>
-    <td>Must contain at least one nested field that is a primitive data type in this list or <code dir="ltr" translate="no">         ARRAY&lt;PRIMITIVE_DATA_TYPE&gt;        </code> .</td>
-    </tr>
-    <tr class="even">
-    <td><code dir="ltr" translate="no">         JSON        </code></td>
-    <td>Must contain at least one nested field of a type that matches any data types in this list.</td>
-    </tr>
-    </tbody>
-    </table>
+    | Supported data types                                              | Notes                                                                                                                                  |
+    | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+    | `          STRING         `                                       | Primitive data type.                                                                                                                   |
+    | `          INT64         `                                        | Primitive data type.                                                                                                                   |
+    | `          TIMESTAMP         `                                    | Primitive data type.                                                                                                                   |
+    | `          ARRAY<PRIMITIVE_DATA_TYPE>         `                   | Must contain a primitive data type in this list.                                                                                       |
+    | `          STRUCT         ` or `          ARRAY<STRUCT>         ` | Must contain at least one nested field that is a primitive data type in this list or `          ARRAY<PRIMITIVE_DATA_TYPE>         ` . |
+    | `          JSON         `                                         | Must contain at least one nested field of a type that matches any data types in this list.                                             |
+    
 
-  - [`  index_column_option_list  `](#index_column_option_list) : The list of options to set on indexed columns.
+  - [`  index_column_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_column_option_list) : The list of options to set on indexed columns.
 
-  - [`  index_option_list  `](#index_option_list) : The list of options to set on the search index.
+  - [`  index_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#index_option_list) : The list of options to set on the search index.
 
 ### Details
 
-You can create only one search index per base table. You cannot create a search index on a view or materialized view. To modify which columns are indexed, [`  DROP  `](#drop_search_index) the current index and create a new one.
+You can create only one search index per base table. You cannot create a search index on a view or materialized view. To modify which columns are indexed, [`  DROP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_search_index) the current index and create a new one.
 
 BigQuery returns an error if any `  column_name  ` is not a `  STRING  ` or does not contain a `  STRING  ` field, or if you call `  CREATE SEARCH INDEX  ` on `  ALL COLUMNS  ` of a table which contains no `  STRING  ` fields.
 
@@ -5102,12 +4533,12 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       analyzer      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        analyzer='LOG_ANALYZER'       </code></p>
-<p>The <a href="/bigquery/docs/reference/standard-sql/text-analysis">text analyzer</a> to use to generate tokens for the search index. The supported values are <code dir="ltr" translate="no">        'LOG_ANALYZER'       </code> , <code dir="ltr" translate="no">        'NO_OP_ANALYZER'       </code> , and <code dir="ltr" translate="no">        'PATTERN_ANALYZER'       </code> .</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis">text analyzer</a> to use to generate tokens for the search index. The supported values are <code dir="ltr" translate="no">        'LOG_ANALYZER'       </code> , <code dir="ltr" translate="no">        'NO_OP_ANALYZER'       </code> , and <code dir="ltr" translate="no">        'PATTERN_ANALYZER'       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       analyzer_options      </code></td>
 <td><code dir="ltr" translate="no">       JSON-formatted STRING      </code></td>
-<td>The text analyzer configurations to set when creating a search index. Supported when <code dir="ltr" translate="no">       analyzer      </code> is equal to <code dir="ltr" translate="no">       'LOG_ANALYZER'      </code> or <code dir="ltr" translate="no">       'PATTERN_ANALYZER'      </code> . For examples of JSON-formatted strings with different text analyzers, see <a href="/bigquery/docs/text-analysis-search">Work with text analyzers</a> .</td>
+<td>The text analyzer configurations to set when creating a search index. Supported when <code dir="ltr" translate="no">       analyzer      </code> is equal to <code dir="ltr" translate="no">       'LOG_ANALYZER'      </code> or <code dir="ltr" translate="no">       'PATTERN_ANALYZER'      </code> . For examples of JSON-formatted strings with different text analyzers, see <a href="https://docs.cloud.google.com/bigquery/docs/text-analysis-search">Work with text analyzers</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       data_types      </code></td>
@@ -5119,7 +4550,7 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       default_index_column_granularity      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_index_column_granularity='GLOBAL'       </code></p>
-<p>The default granularity of information to store for each indexed column. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
+<p>The default granularity of information to store for each indexed column. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
 </tr>
 </tbody>
 </table>
@@ -5144,35 +4575,24 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       index_granularity      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        index_granularity='GLOBAL'       </code></p>
-<p>The granularity of information to store for the indexed column. This setting overrides the default granularity specified in the <code dir="ltr" translate="no">        default_index_column_granularity       </code> field of the index options. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
+<p>The granularity of information to store for the indexed column. This setting overrides the default granularity specified in the <code dir="ltr" translate="no">        default_index_column_granularity       </code> field of the index options. The supported values are <code dir="ltr" translate="no">        'GLOBAL'       </code> (default) and <code dir="ltr" translate="no">        'COLUMN'       </code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/search-index#column-granularity">Index with column granularity</a> .</p></td>
 </tr>
 </tbody>
 </table>
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.createIndex      </code></td>
-<td>The base table where you create the index.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                                   |
+| -------------------------------------------- | ------------------------------------------ |
+| `        bigquery.tables.createIndex       ` | The base table where you create the index. |
 
 ### Examples
 
 The following example creates a search index called `  my_index  ` on all string columns of `  my_table  ` . In this case, the index is only created on column `  a  ` .
 
-``` text
+``` notranslate
 CREATE TABLE dataset.my_table(a STRING, b INT64);
 
 CREATE SEARCH INDEX my_index
@@ -5181,7 +4601,7 @@ ON dataset.my_table(ALL COLUMNS);
 
 The following example creates a search index on columns `  a  ` , `  my_struct.string_field  ` , and `  b  ` that uses the `  NO_OP_ANALYZER  ` text analyzer. It sets the default index column granularity to `  COLUMN  ` and overrides the setting for column `  a  ` to `  GLOBAL  ` .
 
-``` text
+``` notranslate
 CREATE TABLE dataset.complex_table(
   a STRING,
   my_struct STRUCT <string_field STRING, int_field INT64>,
@@ -5200,13 +4620,13 @@ OPTIONS (
 
 ## `     CREATE VECTOR INDEX    ` statement
 
-Creates a new [vector index](/bigquery/docs/vector-index) on a column of a table.
+Creates a new [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) on a column of a table.
 
-A vector index lets you perform a [vector search](/bigquery/docs/vector-search-intro) more quickly, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recall) and so returning more approximate results.
+A vector index lets you perform a [vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) more quickly, with the trade-off of reducing [recall](https://developers.google.com/machine-learning/crash-course/classification/precision-and-recall#recall) and so returning more approximate results.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] VECTOR INDEX [ IF NOT EXISTS ] index_name
 ON table_name(column_name)
 [STORING(stored_column_name [, ...])]
@@ -5222,23 +4642,23 @@ OPTIONS(index_option_list);
 
   - `  index_name  ` : The name of the vector index you're creating. Since the index is always created in the same project and dataset as the base table, there is no need to specify these in the name.
 
-  - `  table_name  ` : The name of the table. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - `  column_name  ` : The name of a column with a type of `  ARRAY<FLOAT64>  ` , or if you're using [autonomous embedding generation (Preview)](/bigquery/docs/autonomous-embedding-generation) , a `  STRUCT<result ARRAY<FLOAT64>, status STRING>  ` column. If column type is `  ARRAY<FLOAT64>  ` , then all elements in the array must be non- `  NULL  ` , and all values in the column must have the same array dimensions. If your index type is `  TREE_AH  ` , then the array dimension must be at least 2.
+  - `  column_name  ` : The name of a column with a type of `  ARRAY<FLOAT64>  ` , or if you're using [autonomous embedding generation (Preview)](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) , a `  STRUCT<result ARRAY<FLOAT64>, status STRING>  ` column. If column type is `  ARRAY<FLOAT64>  ` , then all elements in the array must be non- `  NULL  ` , and all values in the column must have the same array dimensions. If your index type is `  TREE_AH  ` , then the array dimension must be at least 2.
 
-  - `  stored_column_name  ` : The name of a top-level column in the table to store in the vector index. The column type can't be `  RANGE  ` . Stored columns are not used if the table has a row-level access policy or the column has a policy tag. To learn more, see [Store columns and pre-filter](/bigquery/docs/vector-index#stored-columns) .
+  - `  stored_column_name  ` : The name of a top-level column in the table to store in the vector index. The column type can't be `  RANGE  ` . Stored columns are not used if the table has a row-level access policy or the column has a policy tag. To learn more, see [Store columns and pre-filter](https://docs.cloud.google.com/bigquery/docs/vector-index#stored-columns) .
 
-  - [`  partition_expression  `](#partition_expression) : An expression that determines how to partition the vector index. You can only partition TreeAH indexes. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
+  - [`  partition_expression  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression) : An expression that determines how to partition the vector index. You can only partition TreeAH indexes. ( [Preview](https://cloud.google.com/products#product-launch-stages) )
 
-  - [`  index_option_list  `](#vector_index_option_list) : The list of options to set on the vector index.
+  - [`  index_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#vector_index_option_list) : The list of options to set on the vector index.
 
 ### Details
 
-You can only create vector indexes on [standard tables](/bigquery/docs/tables-intro#standard-tables) .
+You can only create vector indexes on [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
-You can create only one vector index per table. You can't create a vector index on a table that already has a [search index](#create_search_index_statement) with the same index name.
+You can create only one vector index per table. You can't create a vector index on a table that already has a [search index](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) with the same index name.
 
-To modify which column is indexed, [`  DROP  `](#drop_vector_index) the current index and create a new one.
+To modify which column is indexed, [`  DROP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_vector_index) the current index and create a new one.
 
 ### `     index_option_list    `
 
@@ -5264,15 +4684,15 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       index_type      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Required. The algorithm to use to build the vector index. The supported values are <code dir="ltr" translate="no">       IVF      </code> and <code dir="ltr" translate="no">       TREE_AH      </code> .
-<p><code dir="ltr" translate="no">        IVF       </code> : Specifying <code dir="ltr" translate="no">        IVF       </code> builds the vector index as an inverted file index (IVF). An IVF uses a k-means algorithm to cluster the vector data, and then partitions the vector data based on those clusters. When you use the <a href="/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code> function</a> to search the vector data, it can use these partitions to reduce the amount of data it needs to read in order to determine a result.</p>
-<p><code dir="ltr" translate="no">        TREE_AH       </code> : Uses Google's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/algorithms.md">ScaNN algorithm</a> . <code dir="ltr" translate="no">        TREE_AH       </code> is a tree-quantization based index, leveraging k-means clustering for partitioning and asymmetric hashing (product quantization) for fast approximate distance computation. For more information, see <a href="/bigquery/docs/vector-index#tree-ah-index">TreeAH index</a> .</p></td>
+<p><code dir="ltr" translate="no">        IVF       </code> : Specifying <code dir="ltr" translate="no">        IVF       </code> builds the vector index as an inverted file index (IVF). An IVF uses a k-means algorithm to cluster the vector data, and then partitions the vector data based on those clusters. When you use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code> function</a> to search the vector data, it can use these partitions to reduce the amount of data it needs to read in order to determine a result.</p>
+<p><code dir="ltr" translate="no">        TREE_AH       </code> : Uses Google's <a href="https://github.com/google-research/google-research/blob/master/scann/docs/algorithms.md">ScaNN algorithm</a> . <code dir="ltr" translate="no">        TREE_AH       </code> is a tree-quantization based index, leveraging k-means clustering for partitioning and asymmetric hashing (product quantization) for fast approximate distance computation. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/vector-index#tree-ah-index">TreeAH index</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       distance_type      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Specifies the default distance type to use when performing a vector search using this index. The supported values are <a href="https://en.wikipedia.org/wiki/Euclidean_distance"><code dir="ltr" translate="no">        EUCLIDEAN       </code></a> , <a href="https://en.wikipedia.org/wiki/Cosine_similarity#Cosine_Distance"><code dir="ltr" translate="no">        COSINE       </code></a> , and <a href="https://en.wikipedia.org/wiki/Dot_product"><code dir="ltr" translate="no">        DOT_PRODUCT       </code></a> . <code dir="ltr" translate="no">       EUCLIDEAN      </code> is the default.
 <p>The index creation itself always uses <code dir="ltr" translate="no">        EUCLIDEAN       </code> distance for training but the distance used in the <code dir="ltr" translate="no">        VECTOR_SEARCH       </code> function can be different.</p>
-<p>If you specify a value for the <code dir="ltr" translate="no">        distance_type       </code> argument of the <a href="/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code> function</a> , that value is used instead of the vector index's <code dir="ltr" translate="no">        distance_type       </code> value.</p></td>
+<p>If you specify a value for the <code dir="ltr" translate="no">        distance_type       </code> argument of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code> function</a> , that value is used instead of the vector index's <code dir="ltr" translate="no">        distance_type       </code> value.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       ivf_options      </code></td>
@@ -5289,7 +4709,7 @@ The following options are supported:
 <td>The options to use with the <code dir="ltr" translate="no">       TREE_AH      </code> algorithm. Defaults to <code dir="ltr" translate="no">       '{}'      </code> to denote that all underlying options use their corresponding default values.
 <p>Two options are supported: <code dir="ltr" translate="no">        leaf_node_embedding_node       </code> and <code dir="ltr" translate="no">        normalization_type       </code> .</p>
 <p><code dir="ltr" translate="no">        leaf_node_embedding_count       </code> is an <code dir="ltr" translate="no">        INT64       </code> value greater than or equal to 500 that specifies the approximate number of vectors in each leaf node of the tree that the TreeAH algorithm creates. The TreeAH algorithm divides the whole data space into a number of lists, with each list containing approximately <code dir="ltr" translate="no">        leaf_node_embedding_count       </code> data points. A lower value creates more lists with fewer data points, while a larger value creates fewer lists with more data points. The default is 1,000, which is appropriate for most datasets.</p>
-<p><code dir="ltr" translate="no">        normalization_type       </code> : the type of normalization performed on each base table and query vector prior to any processing. The supported values are <code dir="ltr" translate="no">        NONE       </code> and <code dir="ltr" translate="no">        L2       </code> . <code dir="ltr" translate="no">        L2       </code> is also referred to as the <a href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidean norm</a> . Defaults to <code dir="ltr" translate="no">        NONE       </code> . Normalization happens before any processing, for both the base table data and the query data, but doesn't modify the embedding column in the table. Depending on the dataset, the embedding model, and the distance type used during <a href="/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code></a> , normalizing the embeddings might improve recall.</p>
+<p><code dir="ltr" translate="no">        normalization_type       </code> : the type of normalization performed on each base table and query vector prior to any processing. The supported values are <code dir="ltr" translate="no">        NONE       </code> and <code dir="ltr" translate="no">        L2       </code> . <code dir="ltr" translate="no">        L2       </code> is also referred to as the <a href="https://en.wikipedia.org/wiki/Norm_(mathematics)#Euclidean_norm">Euclidean norm</a> . Defaults to <code dir="ltr" translate="no">        NONE       </code> . Normalization happens before any processing, for both the base table data and the query data, but doesn't modify the embedding column in the table. Depending on the dataset, the embedding model, and the distance type used during <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#vector_search"><code dir="ltr" translate="no">         VECTOR_SEARCH        </code></a> , normalizing the embeddings might improve recall.</p>
 <p>For example <code dir="ltr" translate="no">        tree_ah_options = '{"leaf_node_embedding_count": 1000,     "normalization_type": "L2"}'       </code></p>
 <p>The statement fails if <code dir="ltr" translate="no">        tree_ah_options       </code> is specified and <code dir="ltr" translate="no">        index_type       </code> is not <code dir="ltr" translate="no">        TREE_AH       </code> .</p></td>
 </tr>
@@ -5298,39 +4718,28 @@ The following options are supported:
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.createIndex      </code></td>
-<td>The table where you create the vector index.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                                     |
+| -------------------------------------------- | -------------------------------------------- |
+| `        bigquery.tables.createIndex       ` | The table where you create the vector index. |
 
 If you choose to use the `  OR REPLACE  ` clause, you must also have the `  bigquery.tables.updateIndex  ` permission.
 
 ### Examples
 
-The following examples show how to create vector indexes with different options. They assume that you have a base table named `  my_table  ` , which contains a column called `  embedding  ` of type `  ARRAY<FLOAT64>  ` and a [sufficient number of rows](/bigquery/quotas#vector_index_limits) .
+The following examples show how to create vector indexes with different options. They assume that you have a base table named `  my_table  ` , which contains a column called `  embedding  ` of type `  ARRAY<FLOAT64>  ` and a [sufficient number of rows](https://docs.cloud.google.com/bigquery/quotas#vector_index_limits) .
 
 This example creates a vector index of type `  IVF  ` on the `  embedding  ` column of `  my_table  ` :
 
-``` text
+``` notranslate
 CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
 OPTIONS (index_type = 'IVF');
 ```
 
 The following example creates a vector index on the `  embedding  ` column of `  my_table  ` , and specifies the distance type to use and the IVF options:
 
-``` text
+``` notranslate
 CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
 OPTIONS (
   index_type = 'IVF',
@@ -5340,7 +4749,7 @@ OPTIONS (
 
 The following example creates a vector index on the `  embedding  ` column of `  my_table  ` , and specifies the distance type to use and the `  TREE_AH  ` options:
 
-``` text
+``` notranslate
 CREATE VECTOR INDEX my_index ON my_dataset.my_table(embedding)
 OPTIONS (
   index_type = 'TREE_AH',
@@ -5352,15 +4761,15 @@ OPTIONS (
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
-Creates or replaces a [data policy](/bigquery/docs/column-data-masking#data-policies-on-column) . The name of the data policy must be unique within the project.
+Creates or replaces a [data policy](https://docs.cloud.google.com/bigquery/docs/column-data-masking#data-policies-on-column) . The name of the data policy must be unique within the project.
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE [ OR REPLACE ] DATA_POLICY [ IF NOT EXISTS ] `project_id.region-location_id.data_policy_id`
 OPTIONS(index_option_list);
 ```
@@ -5377,7 +4786,7 @@ OPTIONS(index_option_list);
 
   - `  data_policy_id  ` : The name of the data policy that is unique within the project that the data policy resides in.
 
-  - [`  index_option_list  `](#datapolicy_option_list) : The list of options to set on the data policy.
+  - [`  index_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#datapolicy_option_list) : The list of options to set on the data policy.
 
 ### `     index_option_list    `
 
@@ -5410,7 +4819,7 @@ The following options are supported:
 <tr class="even">
 <td><code dir="ltr" translate="no">       masking_expression      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Specifies the <a href="/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#PredefinedExpression">predefined masking rule</a> or a <a href="/bigquery/docs/column-data-masking-intro#custom_mask">custom masking routine</a> .</td>
+<td>Specifies the <a href="https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#PredefinedExpression">predefined masking rule</a> or a <a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask">custom masking routine</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -5421,15 +4830,15 @@ The user or service account that creates a data policy must have the `  bigquery
 
 The `  bigquery.dataPolicies.create  ` permission is included in the BigQuery Data Policy Admin, BigQuery Admin and BigQuery Data Owner roles.
 
-If you are creating a data policy that references a custom masking routine, you also need [routine permissions](/bigquery/docs/routines#permissions) .
+If you are creating a data policy that references a custom masking routine, you also need [routine permissions](https://docs.cloud.google.com/bigquery/docs/routines#permissions) .
 
 ## `     CREATE CONNECTION    ` statement
 
-Creates a connection. For more information, see [Introduction to connections](/bigquery/docs/connections-api-intro) .
+Creates a connection. For more information, see [Introduction to connections](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) .
 
 ### Syntax
 
-``` text
+``` notranslate
 CREATE CONNECTION [IF NOT EXISTS] `[[project_id.]location.]connection_id`
 OPTIONS (connection_option_list);
 ```
@@ -5437,9 +4846,9 @@ OPTIONS (connection_option_list);
 ### Arguments
 
   - `  project_id  ` (Optional): The ID of the project to create the connection in. If omitted, the project where you run this DDL statement is used.
-  - `  location  ` (Optional): The [location](/bigquery/docs/locations) to create the connection in. If omitted, the location where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](https://docs.cloud.google.com/bigquery/docs/locations) to create the connection in. If omitted, the location where you run this DDL statement is used.
   - `  connection_id  ` : A name for the connection.
-  - [`  connection_option_list  `](#connection_option_list) : The options to set for the connection.
+  - [`  connection_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#connection_option_list) : The options to set for the connection.
 
 ### `     connection_option_list    `
 
@@ -5463,7 +4872,7 @@ Specify options in the `  NAME=VALUE, ...  ` format. The following options are s
 <td><code dir="ltr" translate="no">       connection_type      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td><p>Required. Not modifiable.</p>
-<p>The connection type. Only <code dir="ltr" translate="no">        "CLOUD_RESOURCE"       </code> is supported for <a href="/bigquery/docs/create-cloud-resource-connection">Cloud resource connections</a> .</p></td>
+<p>The connection type. Only <code dir="ltr" translate="no">        "CLOUD_RESOURCE"       </code> is supported for <a href="https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection">Cloud resource connections</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
@@ -5482,28 +4891,17 @@ Specify options in the `  NAME=VALUE, ...  ` format. The following options are s
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.create      </code></td>
-<td>The project that you're creating the connection in.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                                            |
+| -------------------------------------------- | --------------------------------------------------- |
+| `        bigquery.connections.create       ` | The project that you're creating the connection in. |
 
 ### Example
 
 The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` :
 
-``` text
+``` notranslate
 CREATE CONNECTION IF NOT EXISTS `us.my_cloud_resource_connection`
 OPTIONS (
   connection_type = "CLOUD_RESOURCE",
@@ -5514,11 +4912,11 @@ OPTIONS (
 
 ## `     ALTER SCHEMA SET DEFAULT COLLATE    ` statement
 
-Sets [collation specifications](/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) on a dataset.
+Sets [collation specifications](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) on a dataset.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER SCHEMA [IF EXISTS]
 [project_name.]dataset_name
 SET DEFAULT COLLATE collate_specification
@@ -5528,7 +4926,7 @@ SET DEFAULT COLLATE collate_specification
 
   - `  IF EXISTS  ` : If no dataset exists with that name, the statement has no effect.
 
-  - `  DEFAULT COLLATE collate_specification  ` : When a new table is created in the dataset, the table inherits a default [collation specification](/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) unless a collation specification is explicitly specified for a [column](#column_name_and_column_schema) .
+  - `  DEFAULT COLLATE collate_specification  ` : When a new table is created in the dataset, the table inherits a default [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) unless a collation specification is explicitly specified for a [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) .
     
     The updated collation specification only applies to tables created afterwards.
 
@@ -5536,40 +4934,26 @@ SET DEFAULT COLLATE collate_specification
 
   - `  dataset_name  ` : The name of the dataset.
 
-  - [`  collate_specification  `](/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) : Specifies the collation specifications to set.
+  - [`  collate_specification  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) : Specifies the collation specifications to set.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.get      </code></td>
-<td>The dataset to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.datasets.update      </code></td>
-<td>The dataset to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource              |
+| ----------------------------------------- | --------------------- |
+| `        bigquery.datasets.get       `    | The dataset to alter. |
+| `        bigquery.datasets.update       ` | The dataset to alter. |
 
 ### Example
 
 Assume you have an existing table, `  mytable_a  ` , in a dataset called `  mydataset  ` . For example:
 
-``` text
+``` notranslate
 CREATE SCHEMA mydataset
 ```
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.mytable_a
 (
   number INT64,
@@ -5577,24 +4961,22 @@ CREATE TABLE mydataset.mytable_a
 )
 ```
 
-``` text
-+----------------------+
-| mydataset.mytable_a  |
-|   number INT64       |
-|   word STRING        |
-+----------------------+
-```
+    +----------------------+
+    | mydataset.mytable_a  |
+    |   number INT64       |
+    |   word STRING        |
+    +----------------------+
 
 At a later time, you decide to add a collation specification to your dataset. For example:
 
-``` text
+``` notranslate
 ALTER SCHEMA mydataset
 SET DEFAULT COLLATE 'und:ci'
 ```
 
 If you create a new table for your dataset, it inherits `  COLLATE 'und:ci'  ` for all `  STRING  ` columns. For example, collation is added to `  characters  ` when you create the `  mytable_b  ` table in the `  mydataset  ` dataset:
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.mytable_b
 (
   amount INT64,
@@ -5602,33 +4984,29 @@ CREATE TABLE mydataset.mytable_b
 )
 ```
 
-``` text
-+--------------------------------------+
-| mydataset.mytable_b                  |
-|   amount INT64                       |
-|   characters STRING COLLATE 'und:ci' |
-+--------------------------------------+
-```
+    +--------------------------------------+
+    | mydataset.mytable_b                  |
+    |   amount INT64                       |
+    |   characters STRING COLLATE 'und:ci' |
+    +--------------------------------------+
 
 However, although you have updated the collation specification for the dataset, your existing table, `  mytable_a  ` , continues to use the previous collation specification. For example:
 
-``` text
-+---------------------+
-| mydataset.mytable_a |
-|   number INT64      |
-|   word STRING       |
-+---------------------+
-```
+    +---------------------+
+    | mydataset.mytable_a |
+    |   number INT64      |
+    |   word STRING       |
+    +---------------------+
 
 ## `     ALTER SCHEMA SET OPTIONS    ` statement
 
 Sets options on a dataset.
 
-The statement runs in the location of the dataset if the dataset exists, unless you specify the location in the query settings. For more information, see [Specifying your location](/bigquery/docs/locations#specify_locations) .
+The statement runs in the location of the dataset if the dataset exists, unless you specify the location in the query settings. For more information, see [Specifying your location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER SCHEMA [IF EXISTS]
 [project_name.]dataset_name
 SET OPTIONS(schema_set_options_list)
@@ -5642,7 +5020,7 @@ SET OPTIONS(schema_set_options_list)
 
   - `  dataset_name  ` : The name of the dataset.
 
-  - [`  schema_set_options_list  `](#schema_set_options_list) : The list of options to set.
+  - [`  schema_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_set_options_list) : The list of options to set.
 
 ### `     schema_set_options_list    `
 
@@ -5678,7 +5056,7 @@ The following options are supported:
 <td><code dir="ltr" translate="no">       default_rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the <a href="/bigquery/docs/reference/rest/v2/datasets#Dataset.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> that is used for new tables created in this dataset. It does not impact existing tables. The following values are supported:</p>
+<p>This specifies the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> that is used for new tables created in this dataset. It does not impact existing tables. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.25 is rounded to 2.3, and -2.25 is rounded to -2.3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.25 is rounded to 2.2 and -2.25 is rounded to -2.2.</li>
@@ -5726,17 +5104,17 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       max_time_travel_hours      </code></td>
 <td><code dir="ltr" translate="no">       SMALLINT      </code></td>
-<td>Specifies the duration in hours of the <a href="/bigquery/docs/time-travel#time_travel">time travel window</a> for the dataset. The <code dir="ltr" translate="no">       max_time_travel_hours      </code> value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.</td>
+<td>Specifies the duration in hours of the <a href="https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel">time travel window</a> for the dataset. The <code dir="ltr" translate="no">       max_time_travel_hours      </code> value must be an integer expressed in multiples of 24 (48, 72, 96, 120, 144, 168) between 48 (2 days) and 168 (7 days). 168 hours is the default if this option isn't specified.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       primary_replica      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The replica name to set as the <a href="/bigquery/docs/data-replication">primary replica</a> .</td>
+<td>The replica name to set as the <a href="https://docs.cloud.google.com/bigquery/docs/data-replication">primary replica</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       storage_billing_model      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>Alters the <a href="/bigquery/docs/datasets-intro#dataset_storage_billing_models">storage billing model</a> for the dataset. Set the <code dir="ltr" translate="no">        storage_billing_model       </code> value to <code dir="ltr" translate="no">        PHYSICAL       </code> to use physical bytes when calculating storage charges, or to <code dir="ltr" translate="no">        LOGICAL       </code> to use logical bytes. <code dir="ltr" translate="no">        LOGICAL       </code> is the default.</p>
+<td><p>Alters the <a href="https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models">storage billing model</a> for the dataset. Set the <code dir="ltr" translate="no">        storage_billing_model       </code> value to <code dir="ltr" translate="no">        PHYSICAL       </code> to use physical bytes when calculating storage charges, or to <code dir="ltr" translate="no">        LOGICAL       </code> to use logical bytes. <code dir="ltr" translate="no">        LOGICAL       </code> is the default.</p>
 <p>The <code dir="ltr" translate="no">        storage_billing_model       </code> option is only available for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is <code dir="ltr" translate="no">        LOGICAL       </code> .</p>
 <p>When you change a dataset's billing model, it takes 24 hours for the change to take effect.</p>
 <p>Once you change a dataset's storage billing model, you must wait 14 days before you can change the storage billing model again.</p></td>
@@ -5744,33 +5122,19 @@ The following options are supported:
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the dataset, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the dataset, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.get      </code></td>
-<td>The dataset to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.datasets.update      </code></td>
-<td>The dataset to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource              |
+| ----------------------------------------- | --------------------- |
+| `        bigquery.datasets.get       `    | The dataset to alter. |
+| `        bigquery.datasets.update       ` | The dataset to alter. |
 
 ### Examples
 
@@ -5778,7 +5142,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example sets the default table expiration.
 
-``` text
+``` notranslate
 ALTER SCHEMA mydataset
 SET OPTIONS(
   default_table_expiration_days=3.75
@@ -5789,7 +5153,7 @@ SET OPTIONS(
 
 The following example turns on case insensitivity for the name of a dataset and the table names within that dataset.
 
-``` text
+``` notranslate
 ALTER SCHEMA mydataset
 SET OPTIONS(
   is_case_insensitive=TRUE
@@ -5802,7 +5166,7 @@ Adds a replica to a schema ( [preview](https://cloud.google.com/products/#produc
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER SCHEMA [IF EXISTS]
 [project_name.]dataset_name
 ADD REPLICA replica_name [OPTIONS(add_replica_options_list)]
@@ -5811,9 +5175,9 @@ ADD REPLICA replica_name [OPTIONS(add_replica_options_list)]
 ### Arguments
 
   - `  IF EXISTS  ` : If no dataset exists with that name, the statement has no effect.
-  - `  dataset_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  dataset_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
   - `  replica_name  ` : The name of the new replica. Conventionally, this is the same as the location you are creating the replica in.
-  - [`  add_replica_option_list  `](#add_replica_options_list) : The list of options to set.
+  - [`  add_replica_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#add_replica_options_list) : The list of options to set.
 
 ### `     add_replica_options_list    `
 
@@ -5821,39 +5185,22 @@ The option list specifies options for the dataset. Specify the options in the fo
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       location      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The location in which to create the replica.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       replica_kms_key      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The Cloud Key Management Service key set in the destination region. <code dir="ltr" translate="no">       replica_kms_key      </code> is used as a substitute encryption key in the destination region for any keys used in the source region. Any table in the source region that's encrypted with a Cloud KMS key is encrypted with the <code dir="ltr" translate="no">       replica_kms_key      </code> . This value must be a Cloud KMS key created in the replica dataset's region, not the source dataset's region. For more information about setting up a Cloud KMS key, see <a href="/bigquery/docs/customer-managed-encryption#grant_permission">Grant encryption and decryption permission</a> .</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `            | `        VALUE       `  | Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| -------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `        location       `        | `        STRING       ` | The location in which to create the replica.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| `        replica_kms_key       ` | `        STRING       ` | The Cloud Key Management Service key set in the destination region. `        replica_kms_key       ` is used as a substitute encryption key in the destination region for any keys used in the source region. Any table in the source region that's encrypted with a Cloud KMS key is encrypted with the `        replica_kms_key       ` . This value must be a Cloud KMS key created in the replica dataset's region, not the source dataset's region. For more information about setting up a Cloud KMS key, see [Grant encryption and decryption permission](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) . |
 
 ### Required permissions
 
-To get the permissions that you need to manage replicas, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on your schema. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to manage replicas, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on your schema. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Examples
 
 The following example adds a secondary replica that is named `  EU  ` in the `  EU  ` multi-region to a schema that is named `  cross_region_dataset  ` :
 
-``` text
+``` notranslate
 ALTER SCHEMA cross_region_dataset
 ADD REPLICA `EU` OPTIONS(location=`eu`);
 ```
@@ -5864,26 +5211,26 @@ Drops a replica from a schema ( [preview](https://cloud.google.com/products/#pro
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER SCHEMA [IF EXISTS] dataset_name
 DROP REPLICA replica_name
 ```
 
   - `  IF EXISTS  ` : If no dataset exists with that name, the statement has no effect.
-  - `  dataset_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  dataset_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
   - `  replica_name  ` : The name of the replica to drop.
 
 ### Required permissions
 
-To get the permissions that you need to manage replicas, ask your administrator to grant you the [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on your schema. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to manage replicas, ask your administrator to grant you the [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) IAM role on your schema. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Examples
 
 The following example removes a replica that is located in the `  us-east4  ` region from the `  cross_region_dataset  ` dataset:
 
-``` text
+``` notranslate
 ALTER SCHEMA [IF EXISTS] cross_region_dataset
 DROP REPLICA `us-east4`
 ```
@@ -5894,7 +5241,7 @@ Sets the options on a table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name
 SET OPTIONS(table_set_options_list)
 ```
@@ -5903,17 +5250,17 @@ SET OPTIONS(table_set_options_list)
 
   - `  IF EXISTS  ` : If no table exists with that name, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - [`  table_set_options_list  `](#table_set_options_list) : The list of options to set.
+  - [`  table_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_set_options_list) : The list of options to set.
 
 ### Details
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### `     table_set_options_list    `
 
-The option list lets you set table options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list lets you set table options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a table option list in the following format:
 
@@ -5939,72 +5286,72 @@ Specify a table option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       partition_expiration_days      </code></td>
 <td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        partition_expiration_days=7       </code></p>
-<p>Sets the partition expiration in days. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
+<p>Sets the partition expiration in days. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       require_partition_filter      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        require_partition_filter=true       </code></p>
-<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
+<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       kms_key_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/       </code> <code dir="ltr" translate="no">          location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
-<p>See more details about <a href="/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
+<p>See more details about <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_table"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a table that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the default <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
+<p>This specifies the default <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.5 is rounded to 3.0, and -2.5 is rounded to -3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.5 is rounded to 2.0 and -2.5 is rounded to -2.0.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       enable_change_history      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_change_history=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_staleness      </code></td>
 <td><p><code dir="ltr" translate="no">        INTERVAL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        max_staleness=INTERVAL "4:0:0" HOUR TO SECOND       </code></p>
-<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
+<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
 <p><code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
 </tr>
 <tr class="odd">
@@ -6012,7 +5359,7 @@ Specify a table option list in the following format:
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_fine_grained_mutations=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       storage_uri      </code></td>
@@ -6020,7 +5367,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        storage_uri=                 gs:                //                 BUCKET_DIRECTORY                /                 TABLE_DIRECTORY                /       </code></p>
 <p>A fully qualified location prefix for the external folder where data is stored. Supports <code dir="ltr" translate="no">        gs:       </code> buckets.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p></td>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       file_format      </code></td>
@@ -6028,7 +5375,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        file_format=PARQUET       </code></p>
 <p>The open-source file format in which the table data is stored. Only <code dir="ltr" translate="no">        PARQUET       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        PARQUET       </code> .</p></td>
 </tr>
 <tr class="even">
@@ -6037,13 +5384,13 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        table_format=ICEBERG       </code></p>
 <p>The open table format in which metadata-only snapshots are stored. Only <code dir="ltr" translate="no">        ICEBERG       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        ICEBERG       </code> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -6072,26 +5419,12 @@ Setting the value replaces the existing value of that option for the table, if t
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6099,7 +5432,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example sets the expiration timestamp on a table to seven days from the execution time of the `  ALTER TABLE  ` statement, and sets the description as well:
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 SET OPTIONS (
   expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
@@ -6109,9 +5442,9 @@ SET OPTIONS (
 
 #### Setting the require partition filter attribute on a partitioned table
 
-The following example sets the [`  timePartitioning.requirePartitionFilter  `](/bigquery/docs/reference/rest/v2/tables#TimePartitioning) attribute on a [partitioned table](/bigquery/docs/partitioned-tables) :
+The following example sets the [`  timePartitioning.requirePartitionFilter  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning) attribute on a [partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mypartitionedtable
 SET OPTIONS (require_partition_filter=true)
 ```
@@ -6122,7 +5455,7 @@ Queries that reference this table must use a filter on the partitioning column, 
 
 The following example clears the expiration timestamp on a table so that it will not expire:
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 SET OPTIONS (expiration_timestamp=NULL)
 ```
@@ -6133,18 +5466,16 @@ Adds one or more new columns to an existing table schema.
 
 ### Syntax
 
-``` text
-ALTER TABLE table_name
-ADD COLUMN [IF NOT EXISTS] column [, ...]
-```
+    ALTER TABLE table_name
+    ADD COLUMN [IF NOT EXISTS] column [, ...]
 
 ### Arguments
 
-  - `  table_name  ` : The name of the table. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  IF NOT EXISTS  ` : If the column name already exists, the statement has no effect.
 
-  - `  column  ` : The column to add. This includes the name of the column and schema to add. The column name and schema use the same syntax used in the [`  CREATE TABLE  `](#create_table_statement) statement.
+  - `  column  ` : The column to add. This includes the name of the column and schema to add. The column name and schema use the same syntax used in the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement.
 
 ### Details
 
@@ -6156,7 +5487,7 @@ You cannot use this statement to create:
 
 You cannot add a `  REQUIRED  ` column to an existing table schema. However, you can create a nested `  REQUIRED  ` column as part of a new `  RECORD  ` field.
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 Without the `  IF NOT EXISTS  ` clause, if the table already contains a column with that name, the statement returns an error. If the `  IF NOT EXISTS  ` clause is included and the column name already exists, no error is returned, and no action is taken.
 
@@ -6165,30 +5496,16 @@ The value of the new column for existing rows is set to one of the following:
   - `  NULL  ` if the new column was added with `  NULLABLE  ` mode. This is the default mode.
   - An empty `  ARRAY  ` if the new column was added with `  REPEATED  ` mode.
 
-For more information about schema modifications in BigQuery, see [Modifying table schemas](/bigquery/docs/managing-table-schemas) .
+For more information about schema modifications in BigQuery, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6203,13 +5520,11 @@ The following example adds the following columns to an existing table named `  m
 
 <!-- end list -->
 
-``` text
-ALTER TABLE mydataset.mytable
-  ADD COLUMN A STRING,
-  ADD COLUMN IF NOT EXISTS B GEOGRAPHY,
-  ADD COLUMN C ARRAY <NUMERIC>,
-  ADD COLUMN D DATE OPTIONS(description="my description")
-```
+    ALTER TABLE mydataset.mytable
+      ADD COLUMN A STRING,
+      ADD COLUMN IF NOT EXISTS B GEOGRAPHY,
+      ADD COLUMN C ARRAY <NUMERIC>,
+      ADD COLUMN D DATE OPTIONS(description="my description")
 
 If any of the columns named `  A  ` , `  C  ` , or `  D  ` already exist, the statement fails. If column `  B  ` already exists, the statement succeeds because of the `  IF NOT EXISTS  ` clause.
 
@@ -6224,15 +5539,13 @@ The following example adds a column named `  A  ` of type `  STRUCT  ` that cont
 
 <!-- end list -->
 
-``` text
-ALTER TABLE mydataset.mytable
-   ADD COLUMN A STRUCT<
-       B GEOGRAPHY,
-       C ARRAY <INT64>,
-       D INT64 NOT NULL,
-       E TIMESTAMP OPTIONS(description="creation time")
-       >
-```
+    ALTER TABLE mydataset.mytable
+       ADD COLUMN A STRUCT<
+           B GEOGRAPHY,
+           C ARRAY <INT64>,
+           D INT64 NOT NULL,
+           E TIMESTAMP OPTIONS(description="creation time")
+           >
 
 The query fails if the table already has a column named `  A  ` , even if that column does not contain any of the nested columns that are specified.
 
@@ -6242,7 +5555,7 @@ The new `  STRUCT  ` named `  A  ` is nullable, but the nested column `  D  ` wi
 
 When you create a new column for your table, you can specifically assign a new collation specification to that column.
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ADD COLUMN word STRING COLLATE 'und:ci'
 ```
@@ -6251,11 +5564,11 @@ ADD COLUMN word STRING COLLATE 'und:ci'
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-The following example adds an [automatically generated embedding](/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from `  content  ` column to the existing table `  embedded_table  ` in `  mydataset  ` :
+The following example adds an [automatically generated embedding](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) column `  embedding  ` that generates embeddings from `  content  ` column to the existing table `  embedded_table  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.embedded_table
   ADD COLUMN embedding
     STRUCT, status STRING>
@@ -6271,11 +5584,11 @@ ALTER TABLE mydataset.embedded_table
 
 ## `     ALTER TABLE ADD FOREIGN KEY    ` statement
 
-Adds a [foreign key constraint](/bigquery/docs/primary-foreign-keys) to an existing table. You can add multiple foreign key constraints by using additional `  ADD FOREIGN KEY  ` statements.
+Adds a [foreign key constraint](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) to an existing table. You can add multiple foreign key constraints by using additional `  ADD FOREIGN KEY  ` statements.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [[project_name.]dataset_name.]fk_table_name
 ADD [CONSTRAINT [IF NOT EXISTS] constraint_name] FOREIGN KEY (fk_column_name[, ...])
 REFERENCES pk_table_name(pk_column_name[,...]) NOT ENFORCED
@@ -6284,7 +5597,7 @@ REFERENCES pk_table_name(pk_column_name[,...]) NOT ENFORCED
 
 ### Arguments
 
-  - `  project_name  ` : The name of the project containing the table with a [primary key](/bigquery/docs/primary-foreign-keys) . Defaults to the project that runs this DDL statement if undefined.
+  - `  project_name  ` : The name of the project containing the table with a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) . Defaults to the project that runs this DDL statement if undefined.
   - `  dataset_name  ` : The name of the dataset that contains the table with a primary key. Defaults to the project that runs this DDL statement if undefined.
   - `  fk_table_name  ` : The name of the existing table to add a foreign key to.
   - `  IF NOT EXISTS  ` : If a constraint of the same name already exists in the defined table, the statement has no effect.
@@ -6295,26 +5608,12 @@ REFERENCES pk_table_name(pk_column_name[,...]) NOT ENFORCED
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6322,20 +5621,20 @@ The following example adds the `  my_fk_name  ` foreign key constraint to the ` 
 
 1.  Add a primary key to the `  pk_table  ` table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE pk_table
     ADD PRIMARY KEY (x,y) NOT ENFORCED;
     ```
 
 2.  Create a table named `  fk_table  ` for the foreign key.
     
-    ``` text
+    ``` notranslate
     CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
     ```
 
 3.  Add the `  my_fk_name  ` foreign key constraint to the `  fk_table  ` .
     
-    ``` text
+    ``` notranslate
     ALTER TABLE fk_table
     ADD CONSTRAINT my_fk_name FOREIGN KEY (u, v)
     REFERENCES pk_table(x, y) NOT ENFORCED
@@ -6345,20 +5644,20 @@ The following example adds the `  fk  ` and `  fk2  ` foreign key constraints to
 
 1.  Add a primary key to the `  pk_table  ` table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE pk_table
     ADD PRIMARY KEY (x,y) NOT ENFORCED;
     ```
 
 2.  Create a table named `  fk_table  ` for multiple foreign key constraints.
     
-    ``` text
+    ``` notranslate
     CREATE TABLE fk_table(x int64, y int64, i int64, j int64, u int64, v int64);
     ```
 
 3.  Add the `  fk  ` and `  fk2  ` constraints to `  fk_table  ` in one statement.
     
-    ``` text
+    ``` notranslate
     ALTER TABLE fk_table
     ADD PRIMARY KEY (x,y) NOT ENFORCED,
     ADD CONSTRAINT fk FOREIGN KEY (u, v) REFERENCES pk_table(x, y) NOT ENFORCED,
@@ -6367,11 +5666,11 @@ The following example adds the `  fk  ` and `  fk2  ` foreign key constraints to
 
 ## `     ALTER TABLE ADD PRIMARY KEY    ` statement
 
-Adds a [primary key](/bigquery/docs/primary-foreign-keys) to an existing table.
+Adds a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) to an existing table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [[project_name.]dataset_name.]table_name
 ADD PRIMARY KEY(column_list) NOT ENFORCED;
 ```
@@ -6385,32 +5684,18 @@ ADD PRIMARY KEY(column_list) NOT ENFORCED;
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example adds the primary key constraint of `  x  ` and `  y  ` to the `  pk_table  ` table.
 
-``` text
+``` notranslate
 ALTER TABLE pk_table ADD PRIMARY KEY (x,y) NOT ENFORCED;
 ```
 
@@ -6418,13 +5703,13 @@ ALTER TABLE pk_table ADD PRIMARY KEY (x,y) NOT ENFORCED;
 
 Renames a clone, snapshot, or table.
 
-The `  ALTER TABLE RENAME TO  ` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
+The `  ALTER TABLE RENAME TO  ` statement recreates the table in the destination dataset with the creation timestamp of the original table. If you have configured [dataset-level table expiration](https://docs.cloud.google.com/bigquery/docs/updating-datasets#table-expiration) , the renamed table might be immediately deleted if its original creation timestamp falls outside of the expiration window.
 
-**Caution:** Renaming a table deletes all [tags](/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](/dataplex/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](/data-catalog) or [Dataplex Universal Catalog](/dataplex/docs/catalog-overview) , respectively.
+**Caution:** Renaming a table deletes all [tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) or [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that may be attached to it or its columns in [Data Catalog](https://docs.cloud.google.com/data-catalog) or [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/catalog-overview) , respectively.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name
 RENAME TO new_table_name
 ```
@@ -6433,9 +5718,9 @@ RENAME TO new_table_name
 
   - `  IF EXISTS  ` : If no table exists with that name, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to rename. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to rename. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - `  new_table_name  ` : The new name of the table. The value of `  new_table_name  ` must only include the name of the table, not the full [table path syntax](#table_path) . The new name cannot be an existing table name.
+  - `  new_table_name  ` : The new name of the table. The value of `  new_table_name  ` must only include the name of the table, not the full [table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) . The new name cannot be an existing table name.
 
 ### Details
 
@@ -6443,32 +5728,18 @@ RENAME TO new_table_name
   - While a table can usually be renamed 5 hours after the last streaming operation, it might take longer.
   - Existing table ACLs and row access policies are preserved, but table ACL and row access policy updates made during the table rename are not preserved.
   - You can't concurrently rename a table and run a DML statement on that table.
-  - Renaming a table removes all [Data Catalog tags](/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Dataplex Universal Catalog aspects](/dataplex/docs/enrich-entries-metadata#aspects) on the table.
+  - Renaming a table removes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates) (deprecated) and [Dataplex Universal Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) on the table.
   - Any search index or vector index created on the table is dropped when the table is renamed.
   - You can't rename external tables.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6476,19 +5747,19 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example renames the table `  mydataset.mytable  ` to `  mydataset.mynewtable  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable RENAME TO mynewtable
 ```
 
 ## `     ALTER TABLE RENAME COLUMN    ` statement
 
-**Caution:** Renaming a column deletes all [Data Catalog tags](/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Dataplex Universal Catalog aspects](/dataplex/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
+**Caution:** Renaming a column deletes all [Data Catalog tags](https://docs.cloud.google.com/data-catalog/docs/tags-and-tag-templates#tags) (deprecated) and [Dataplex Universal Catalog aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) that are attached to it. Primary key columns can't be renamed.
 
 Renames one or more columns in an existing table schema.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name
 RENAME COLUMN [IF EXISTS] column_to_column[, ...]
 
@@ -6500,7 +5771,7 @@ column_to_column :=
 
   - `  (ALTER TABLE) IF EXISTS  ` : If the specified table does not exist, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
@@ -6510,7 +5781,7 @@ column_to_column :=
 
 ### Details
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 If the table to be modified has active row-level access policies, the statement returns an error.
 
@@ -6537,26 +5808,12 @@ Multiple `  RENAME COLUMN  ` statements in one `  ALTER TABLE  ` statement are s
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6569,7 +5826,7 @@ The following example renames columns from an existing table named `  mytable  `
 
 <!-- end list -->
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
   RENAME COLUMN A TO columnA,
   RENAME COLUMN IF EXISTS B TO columnB
@@ -6579,7 +5836,7 @@ If column `  A  ` does not exist, then the statement fails. If column `  B  ` do
 
 The following example swaps the names of `  columnA  ` and `  columnB  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
   RENAME COLUMN columnA TO temp_col,
   RENAME COLUMN columnB TO columnA,
@@ -6592,14 +5849,12 @@ Drops one or more columns from an existing table schema.
 
 ### Syntax
 
-``` text
-ALTER TABLE table_name
-DROP COLUMN [IF EXISTS] column_name [, ...]
-```
+    ALTER TABLE table_name
+    DROP COLUMN [IF EXISTS] column_name [, ...]
 
 ### Arguments
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) . The table must already exist and have a schema.
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) . The table must already exist and have a schema.
 
   - `  IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
@@ -6614,11 +5869,11 @@ There are two options for immediately reclaiming storage:
   - Overwrite a table with a `  SELECT * EXCEPT  ` query.
   - Export the data to Cloud Storage, delete the unwanted columns, and then load the data into a new table with the correct schema.
 
-You can restore a dropped column in a table using [time travel](/bigquery/docs/access-historical-data#restore-a-table) . You cannot use this statement to drop the following:
+You can restore a dropped column in a table using [time travel](https://docs.cloud.google.com/bigquery/docs/access-historical-data#restore-a-table) . You cannot use this statement to drop the following:
 
   - Partitioned columns
   - Clustered columns
-  - Fields that are part of [primary key constraints or foreign key constraints](/bigquery/docs/primary-foreign-keys)
+  - Fields that are part of [primary key constraints or foreign key constraints](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys)
   - Nested columns inside existing `  RECORD  ` fields
   - Columns in a table that has row access policies
 
@@ -6627,36 +5882,22 @@ After one or more columns in a table are dropped you cannot do the following:
   - Query the table with legacy SQL.
   - Query the table as a wildcard table.
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 Without the `  IF EXISTS  ` clause, if the table does not contain a column with that name, then the statement returns an error. If the `  IF EXISTS  ` clause is included and the column name does not exist, then no error is returned, and no action is taken.
 
 This statement only removes the column from the table. Any objects that refer to the column, such as views or materialized views, must be updated or recreated separately.
 
-For more information about schema modifications in BigQuery, see [Modifying table schemas](/bigquery/docs/managing-table-schemas) .
+For more information about schema modifications in BigQuery, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -6669,11 +5910,9 @@ The following example drops the following columns from an existing table named `
 
 <!-- end list -->
 
-``` text
-ALTER TABLE mydataset.mytable
-  DROP COLUMN A,
-  DROP COLUMN IF EXISTS B
-```
+    ALTER TABLE mydataset.mytable
+      DROP COLUMN A,
+      DROP COLUMN IF EXISTS B
 
 If the column named `  A  ` does not exist, then the statement fails. If column `  B  ` does not exist, then the statement still succeeds because of the `  IF EXISTS  ` clause.
 
@@ -6683,17 +5922,17 @@ After one or more columns in a table are dropped, you cannot do the following:
   - Accelerate queries on the table with BigQuery BI Engine.
   - Query the table as a Wildcard Table.
   - Copy the table in the Google Cloud console.
-  - Copy the table using the [`  bq cp  `](/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
+  - Copy the table using the [`  bq cp  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command.
 
 Recreating the table using `  CREATE TABLE ... AS SELECT ...  ` removes these restrictions.
 
 ## `     ALTER TABLE DROP CONSTRAINT    ` statement
 
-Drops a constraint from an existing table. You can use this statement to drop [foreign key constraints](/bigquery/docs/primary-foreign-keys) from a table.
+Drops a constraint from an existing table. You can use this statement to drop [foreign key constraints](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) from a table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [[project_name.]dataset_name.]table_name
 DROP CONSTRAINT [IF EXISTS] constraint_name;
 ```
@@ -6708,42 +5947,28 @@ DROP CONSTRAINT [IF EXISTS] constraint_name;
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example drops the constraint `  myConstraint  ` from the existing table `  myTable  ` .
 
-``` text
+``` notranslate
 ALTER TABLE mytable DROP CONSTRAINT myConstraint;
 ```
 
 ## `     ALTER TABLE DROP PRIMARY KEY    ` statement
 
-Drops a [primary key](/bigquery/docs/primary-foreign-keys) from an existing table.
+Drops a [primary key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) from an existing table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [[project_name.]dataset_name.]table_name
 DROP PRIMARY KEY [IF EXISTS];
 ```
@@ -6757,43 +5982,29 @@ DROP PRIMARY KEY [IF EXISTS];
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example drops all primary keys from the existing table `  myTable  ` .
 
-``` text
+``` notranslate
 ALTER TABLE myTable
 DROP PRIMARY KEY;
 ```
 
 ## `     ALTER TABLE SET DEFAULT COLLATE    ` statement
 
-Sets [collation specifications](/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) on a table.
+Sets [collation specifications](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) on a table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE
   table_name
   SET DEFAULT COLLATE collate_specification
@@ -6801,40 +6012,26 @@ ALTER TABLE
 
 ### Arguments
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) . The table must already exist and have a schema.
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) . The table must already exist and have a schema.
 
-  - `  SET DEFAULT COLLATE collate_specification  ` : When a new column is created in the schema, and if the column does not have an explicit [collation specification](/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) , the [column](#column_name_and_column_schema) inherits this collation specification for `  STRING  ` types. The updated collation specification only applies to columns added afterwards.
+  - `  SET DEFAULT COLLATE collate_specification  ` : When a new column is created in the schema, and if the column does not have an explicit [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#default_collation) , the [column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_name_and_column_schema) inherits this collation specification for `  STRING  ` types. The updated collation specification only applies to columns added afterwards.
     
-    If you want to add a collation specification on a new column in an existing table, you can do this when you [add the column](#alter_table_add_column_statement) . If you add a collation specification directly on a column, the collation specification for the column has precedence over a table's default collation specification. You cannot update an existing collation specification on a column.
+    If you want to add a collation specification on a new column in an existing table, you can do this when you [add the column](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement) . If you add a collation specification directly on a column, the collation specification for the column has precedence over a table's default collation specification. You cannot update an existing collation specification on a column.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Example
 
 Assume you have an existing table, `  mytable  ` , in a schema called `  mydataset  ` .
 
-``` text
+``` notranslate
 CREATE TABLE mydataset.mytable
 (
   number INT64,
@@ -6844,46 +6041,40 @@ CREATE TABLE mydataset.mytable
 
 When you create `  mytable  ` , all `  STRING  ` columns inherit `  COLLATE 'und:ci'  ` . The resulting table has this structure:
 
-``` text
-+--------------------------------+
-| mydataset.mytable              |
-|   number INT64                 |
-|   word STRING COLLATE 'und:ci' |
-+--------------------------------+
-```
+    +--------------------------------+
+    | mydataset.mytable              |
+    |   number INT64                 |
+    |   word STRING COLLATE 'und:ci' |
+    +--------------------------------+
 
 At a later time, you decide to change the collation specification for your table.
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 SET DEFAULT COLLATE ''
 ```
 
 Although you have updated the collation specification, your existing column, `  word  ` , continues to use the previous collation specification.
 
-``` text
-+--------------------------------+
-| mydataset.mytable              |
-|   number INT64                 |
-|   word STRING COLLATE 'und:ci' |
-+--------------------------------+
-```
+    +--------------------------------+
+    | mydataset.mytable              |
+    |   number INT64                 |
+    |   word STRING COLLATE 'und:ci' |
+    +--------------------------------+
 
 However, if you create a new column for your table, the new column includes the new collation specification. In the following example a column called `  name  ` is added. Because the new collation specification is empty, the default collation specification is used.
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ADD COLUMN name STRING
 ```
 
-``` text
-+--------------------------------+
-| mydataset.mytable              |
-|   number INT64                 |
-|   word STRING COLLATE 'und:ci' |
-|   name STRING COLLATE          |
-+--------------------------------+
-```
+    +--------------------------------+
+    | mydataset.mytable              |
+    |   number INT64                 |
+    |   word STRING COLLATE 'und:ci' |
+    |   name STRING COLLATE          |
+    +--------------------------------+
 
 ## `     ALTER COLUMN SET OPTIONS    ` statement
 
@@ -6891,7 +6082,7 @@ Sets options, such as the column description, on a column in a table or view in 
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER { TABLE | VIEW } [IF EXISTS] name
 ALTER COLUMN [IF EXISTS] column_name
 SET OPTIONS({ column_set_options_list | view_column_set_options_list })
@@ -6901,19 +6092,19 @@ SET OPTIONS({ column_set_options_list | view_column_set_options_list })
 
   - `  (ALTER { TABLE | VIEW }) IF EXISTS  ` : If no table or view exists with that name, then the statement has no effect.
 
-  - `  name  ` : The name of the table or view to alter. See [Table path syntax](#table_path) .
+  - `  name  ` : The name of the table or view to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
   - `  column_name  ` : The name of the top-level column you're altering. Modifying subfields, such as nested columns in a `  STRUCT  ` , is not supported.
 
-  - [`  column_set_options_list  `](#column_set_options_list) : The list of options to set on the column of the table. This option must be used with `  TABLE  ` .
+  - [`  column_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#column_set_options_list) : The list of options to set on the column of the table. This option must be used with `  TABLE  ` .
 
-  - [`  view_column_set_options_list  `](#view_column_set_options_list) : The list of options to set on the column of the view. This option must be used with `  VIEW  ` .
+  - [`  view_column_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_column_set_options_list) : The list of options to set on the column of the view. This option must be used with `  VIEW  ` .
 
 ### Details
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### `     column_set_options_list    `
 
@@ -6941,25 +6132,25 @@ Specify a column option list in the following format:
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a unique id"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
+<p>This specifies the <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.25 is rounded to 2.3, and -2.25 is rounded to -2.3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.25 is rounded to 2.2 and -2.25 is rounded to -2.2.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       data_policies      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code></td>
-<td><p>Applies a <a href="/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
+<td><p>Applies a <a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies = ["{'name':'myproject.region-us.data_policy_name1'}",                                           "{'name':'myproject.region-us.data_policy_name2'}"]       </code></p>
-<p>The <a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies +=["data_policy1", "data_policy2"]       </code></p></td>
 </tr>
 </tbody>
@@ -6991,51 +6182,24 @@ Setting the `  VALUE  ` replaces the existing value of that option for the colum
 
 The `  view_column_option_list  ` lets you specify optional top-level column options. Column options for a view have the same syntax and requirements as for a table, but with a different list of `  NAME  ` and `  VALUE  ` fields:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td><p>Example: <code dir="ltr" translate="no">        description="a unique id"       </code></p></td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `        | `        VALUE       `    | Details                                               |
+| ---------------------------- | ------------------------- | ----------------------------------------------------- |
+| `        description       ` | `         STRING        ` | Example: `         description="a unique id"        ` |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example sets a new description on a table column called `  price  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ALTER COLUMN price
 SET OPTIONS (description = 'Price per unit');
@@ -7043,7 +6207,7 @@ SET OPTIONS (description = 'Price per unit');
 
 The following example sets a new description on a view column called `  total  ` :
 
-``` text
+``` notranslate
 ALTER VIEW mydataset.myview
 ALTER COLUMN total
 SET OPTIONS (description = 'Total sales of the product');
@@ -7055,7 +6219,7 @@ Removes a `  NOT NULL  ` constraint from a column in a table in BigQuery.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name
 ALTER COLUMN [IF EXISTS] column DROP NOT NULL
 ```
@@ -7064,7 +6228,7 @@ ALTER COLUMN [IF EXISTS] column DROP NOT NULL
 
   - `  (ALTER TABLE) IF EXISTS  ` : If no table exists with that name, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
@@ -7074,36 +6238,22 @@ ALTER COLUMN [IF EXISTS] column DROP NOT NULL
 
 If a column does not have a `  NOT NULL  ` constraint the query returns an error.
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example removes the `  NOT NULL  ` constraint from a column called `  mycolumn  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ALTER COLUMN mycolumn
 DROP NOT NULL
@@ -7115,7 +6265,7 @@ Changes the data type of a column in a table in BigQuery to a less restrictive d
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name
 ALTER COLUMN [IF EXISTS] column_name SET DATA TYPE column_schema
 ```
@@ -7124,13 +6274,13 @@ ALTER COLUMN [IF EXISTS] column_name SET DATA TYPE column_schema
 
   - `  (ALTER TABLE) IF EXISTS  ` : If no table exists with that name, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
   - `  column_name  ` : The name of the top level column you're altering. Modifying subfields is not supported.
 
-  - `  column_schema  ` : The schema that you're converting the column to. This schema uses the same syntax used in the [`  CREATE TABLE  `](#create_table_statement) statement.
+  - `  column_schema  ` : The schema that you're converting the column to. This schema uses the same syntax used in the [`  CREATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) statement.
 
 ### Details
 
@@ -7139,7 +6289,7 @@ The following data type conversions are supported: :
   - `  INT64  ` to `  NUMERIC  ` , `  BIGNUMERIC  ` , `  FLOAT64  `
   - `  NUMERIC  ` to `  BIGNUMERIC  ` , `  FLOAT64  `
 
-You can also convert data types from more restrictive to less restrictive [parameterized data types](/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) . For example, you can increase the maximum length of a string type or increase the precision or scale of a numeric type.
+You can also convert data types from more restrictive to less restrictive [parameterized data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#parameterized_data_types) . For example, you can increase the maximum length of a string type or increase the precision or scale of a numeric type.
 
 The following are examples of valid parameterized data type conversions:
 
@@ -7147,32 +6297,18 @@ The following are examples of valid parameterized data type conversions:
   - `  NUMERIC  ` to `  BIGNUMERIC(40, 20)  `
   - `  STRING(5)  ` to `  STRING(7)  `
 
-This statement is not supported for [external tables](/bigquery/docs/external-tables) .
+This statement is not supported for [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
 Without the `  IF EXISTS  ` clause, if the table does not contain a column with that name, the statement returns an error. If the `  IF EXISTS  ` clause is included and the column name does not exist, no error is returned, and no action is taken.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
@@ -7180,7 +6316,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example changes the data type of column `  c1  ` from an `  INT64  ` to `  NUMERIC  ` :
 
-``` text
+``` notranslate
 CREATE TABLE dataset.my_table(c1 INT64);
 
 ALTER TABLE dataset.my_table ALTER COLUMN c1 SET DATA TYPE NUMERIC;
@@ -7190,7 +6326,7 @@ ALTER TABLE dataset.my_table ALTER COLUMN c1 SET DATA TYPE NUMERIC;
 
 The following example changes the data type of one of the fields in the `  s1  ` column:
 
-``` text
+``` notranslate
 CREATE TABLE dataset.my_table(s1 STRUCT <a INT64, b STRING>);
 
 ALTER TABLE dataset.my_table ALTER COLUMN s1
@@ -7201,7 +6337,7 @@ SET DATA TYPE STRUCT <a NUMERIC, b STRING>;
 
 The following example changes the precision of a parameterized data type column:
 
-``` text
+``` notranslate
 CREATE TABLE dataset.my_table (pt NUMERIC(7,2));
 
 ALTER TABLE dataset.my_table
@@ -7211,11 +6347,11 @@ SET DATA TYPE NUMERIC(8,2);
 
 ## `     ALTER COLUMN SET DEFAULT    ` statement
 
-Sets the [default value](/bigquery/docs/default-values) of a column.
+Sets the [default value](https://docs.cloud.google.com/bigquery/docs/default-values) of a column.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
 SET DEFAULT default_expression;
 ```
@@ -7224,22 +6360,22 @@ SET DEFAULT default_expression;
 
   - `  (ALTER TABLE) IF EXISTS  ` : If the specified table does not exist, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
   - `  column_name  ` : The name of the top-level column to add a default value to.
 
-  - `  default_expression  ` : The default value assigned to the column. The expression must be a [literal](/bigquery/docs/reference/standard-sql/lexical#literals) or one of the following functions:
+  - `  default_expression  ` : The default value assigned to the column. The expression must be a [literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#literals) or one of the following functions:
     
-      - [`  CURRENT_DATE  `](/bigquery/docs/reference/standard-sql/date_functions#current_date)
-      - [`  CURRENT_DATETIME  `](/bigquery/docs/reference/standard-sql/datetime_functions#current_datetime)
-      - [`  CURRENT_TIME  `](/bigquery/docs/reference/standard-sql/time_functions#current_time)
-      - [`  CURRENT_TIMESTAMP  `](/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)
-      - [`  GENERATE_UUID  `](/bigquery/docs/reference/standard-sql/utility-functions#generate_uuid)
-      - [`  RAND  `](/bigquery/docs/reference/standard-sql/mathematical_functions#rand)
-      - [`  SESSION_USER  `](/bigquery/docs/reference/standard-sql/security_functions#session_user)
-      - [`  ST_GEOGPOINT  `](/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint)
+      - [`  CURRENT_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date)
+      - [`  CURRENT_DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#current_datetime)
+      - [`  CURRENT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time)
+      - [`  CURRENT_TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp)
+      - [`  GENERATE_UUID  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions#generate_uuid)
+      - [`  RAND  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#rand)
+      - [`  SESSION_USER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/security_functions#session_user)
+      - [`  ST_GEOGPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_geogpoint)
 
 ### Details
 
@@ -7249,36 +6385,22 @@ The type of the default value must match the type of the column. A `  STRUCT  ` 
 
 If the default value is a function, it is evaluated at the time that the value is written to the table, not the time the table is created.
 
-You can't set default values on columns that are [primary keys](/bigquery/docs/primary-foreign-keys) .
+You can't set default values on columns that are [primary keys](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example sets the default value of the column `  mycolumn  ` to the current time:
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ALTER COLUMN mycolumn
 SET DEFAULT CURRENT_TIME();
@@ -7286,11 +6408,11 @@ SET DEFAULT CURRENT_TIME();
 
 ## `     ALTER COLUMN DROP DEFAULT    ` statement
 
-Removes the [default value](/bigquery/docs/default-values) assigned to a column. This is the same as setting the default value to `  NULL  ` .
+Removes the [default value](https://docs.cloud.google.com/bigquery/docs/default-values) assigned to a column. This is the same as setting the default value to `  NULL  ` .
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER TABLE [IF EXISTS] table_name ALTER COLUMN [IF EXISTS] column_name
 DROP DEFAULT;
 ```
@@ -7299,7 +6421,7 @@ DROP DEFAULT;
 
   - `  (ALTER TABLE) IF EXISTS  ` : If the specified table does not exist, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to alter. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
   - `  (ALTER COLUMN) IF EXISTS  ` : If the specified column does not exist, the statement has no effect.
 
@@ -7307,32 +6429,18 @@ DROP DEFAULT;
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The table to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.get       `    | The table to alter. |
+| `        bigquery.tables.update       ` | The table to alter. |
 
 ### Examples
 
 The following example removes the default value from the column `  mycolumn  ` :
 
-``` text
+``` notranslate
 ALTER TABLE mydataset.mytable
 ALTER COLUMN mycolumn
 DROP DEFAULT;
@@ -7340,11 +6448,11 @@ DROP DEFAULT;
 
 ## `     ALTER VIEW SET OPTIONS    ` statement
 
-Sets the options on a [view](/bigquery/docs/views) .
+Sets the options on a [view](https://docs.cloud.google.com/bigquery/docs/views) .
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER VIEW [IF EXISTS] view_name
 SET OPTIONS(view_set_options_list)
 ```
@@ -7353,13 +6461,13 @@ SET OPTIONS(view_set_options_list)
 
   - `  IF EXISTS  ` : If no view exists with that name, the statement has no effect.
 
-  - `  view_name  ` : The name of the view to alter. See [Table path syntax](#table_path) .
+  - `  view_name  ` : The name of the view to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - [`  view_set_options_list  `](#view_set_options_list) : The list of options to set.
+  - [`  view_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_set_options_list) : The list of options to set.
 
 ### `     view_set_options_list    `
 
-The option list allows you to set view options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list allows you to set view options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a view option list in the following format:
 
@@ -7385,36 +6493,36 @@ Specify a view option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_view"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a view that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       privacy_policy      </code></td>
 <td><p><code dir="ltr" translate="no">        JSON-formatted STRING       </code></p></td>
-<td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">         privacy_policy        </code></a> view option.</p>
+<td><p>The policies to enforce when anyone queries the view. To learn more about the policies available for a view, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#privacy_policy"><code dir="ltr" translate="no">         privacy_policy        </code></a> view option.</p>
 <strong>Note:</strong> Time travel is disabled on any view that has an analysis rule.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the view, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the view, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -7443,26 +6551,12 @@ Setting the value replaces the existing value of that option for the view, if th
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The view to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The view to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource           |
+| --------------------------------------- | ------------------ |
+| `        bigquery.tables.get       `    | The view to alter. |
+| `        bigquery.tables.update       ` | The view to alter. |
 
 ### Examples
 
@@ -7470,7 +6564,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example sets the expiration timestamp on a view to seven days from the execution time of the `  ALTER VIEW  ` statement, and sets the description as well:
 
-``` text
+``` notranslate
 ALTER VIEW mydataset.myview
 SET OPTIONS (
   expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 7 DAY),
@@ -7484,7 +6578,7 @@ Sets the options on a materialized view.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER MATERIALIZED VIEW [IF EXISTS] materialized_view_name
 SET OPTIONS(materialized_view_set_options_list)
 ```
@@ -7493,13 +6587,13 @@ SET OPTIONS(materialized_view_set_options_list)
 
   - `  IF EXISTS  ` : If no materialized view exists with that name, the statement has no effect.
 
-  - `  materialized_view_name  ` : The name of the materialized view to alter. See [Table path syntax](#table_path) .
+  - `  materialized_view_name  ` : The name of the materialized view to alter. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
-  - [`  materialized_view_set_options_list  `](#materialized_view_set_options_list) : The list of options to set.
+  - [`  materialized_view_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_set_options_list) : The list of options to set.
 
 ### `     materialized_view_set_options_list    `
 
-The option list allows you to set materialized view options such as a whether refresh is enabled. the refresh interval, a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list allows you to set materialized view options such as a whether refresh is enabled. the refresh interval, a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a materialized view option list in the following format:
 
@@ -7537,49 +6631,49 @@ Default: <code dir="ltr" translate="no">        refresh_interval_minutes=30     
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property. <code dir="ltr" translate="no">        expiration_timestamp       </code> is optional and not used by default.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property. <code dir="ltr" translate="no">        expiration_timestamp       </code> is optional and not used by default.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       max_staleness      </code></td>
 <td><code dir="ltr" translate="no">       INTERVAL      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        max_staleness=INTERVAL "4:0:0" HOUR TO SECOND       </code></p>
-<p>The <a href="/bigquery/docs/materialized-views-create#max_staleness"><code dir="ltr" translate="no">         max_staleness        </code> property</a> provides consistently high performance with controlled costs when processing large, frequently changing datasets. <code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness"><code dir="ltr" translate="no">         max_staleness        </code> property</a> provides consistently high performance with controlled costs when processing large, frequently changing datasets. <code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       allow_non_incremental_definition      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code></p>
-<p>The <a href="/bigquery/docs/materialized-views-create#non-incremental"><code dir="ltr" translate="no">         allow_non_incremental_definition        </code> property</a> supports an expanded range of SQL queries to create materialized views. <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code> is disabled by default. <code dir="ltr" translate="no">        CREATE MATERIALIZED VIEW       </code> statement support only. The <code dir="ltr" translate="no">        allow_non_incremental_definition       </code> property can't be changed after the materialized view is created.</p></td>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/materialized-views-create#non-incremental"><code dir="ltr" translate="no">         allow_non_incremental_definition        </code> property</a> supports an expanded range of SQL queries to create materialized views. <code dir="ltr" translate="no">        allow_non_incremental_definition=true       </code> is disabled by default. <code dir="ltr" translate="no">        CREATE MATERIALIZED VIEW       </code> statement support only. The <code dir="ltr" translate="no">        allow_non_incremental_definition       </code> property can't be changed after the materialized view is created.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       kms_key_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/       </code> <code dir="ltr" translate="no">          location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
-<p>See more details about <a href="/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name">encryptionConfiguration.kmsKeyName</a> table resource property.</p>
+<p>See more details about <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Protecting data with Cloud KMS keys</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_mv"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a materialized view that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;      </code></td>
-<td>An array of IAM tags for the materialized view, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the materialized view, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -7588,26 +6682,12 @@ Setting the value replaces the existing value of that option for the materialize
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The materialized view to alter.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.update      </code></td>
-<td>The materialized view to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                        |
+| --------------------------------------- | ------------------------------- |
+| `        bigquery.tables.get       `    | The materialized view to alter. |
+| `        bigquery.tables.update       ` | The materialized view to alter. |
 
 ### Examples
 
@@ -7615,7 +6695,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example enables refresh and sets the refresh interval to 20 minutes on a materialized view:
 
-``` text
+``` notranslate
 ALTER MATERIALIZED VIEW mydataset.my_mv
 SET OPTIONS (
   enable_refresh=true,
@@ -7629,7 +6709,7 @@ Sets the options on an organization.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER ORGANIZATION
 SET OPTIONS (
   organization_set_options_list);
@@ -7637,7 +6717,7 @@ SET OPTIONS (
 
 ### Arguments
 
-  - [`  organization_set_options_list  `](#organziation_set_options_list) : The list of options to set.
+  - [`  organization_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#organziation_set_options_list) : The list of options to set.
 
 ### `     organization_set_options_list    `
 
@@ -7662,14 +6742,14 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       default_kms_key_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The default Cloud Key Management Service key for encrypting table data, including temporary or anonymous tables. For more information, see <a href="/bigquery/docs/customer-managed-encryption">Customer-managed Cloud KMS keys</a> .</p>
+<td><p>The default Cloud Key Management Service key for encrypting table data, including temporary or anonymous tables. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Customer-managed Cloud KMS keys</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/       </code> <code dir="ltr" translate="no">          location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name"><code dir="ltr" translate="no">         encryptionConfiguration.kmsKeyName        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name"><code dir="ltr" translate="no">         encryptionConfiguration.kmsKeyName        </code></a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_time_zone      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument. For more information, see <a href="/bigquery/docs/reference/standard-sql/data-types#time_zones">time zones</a> .</p>
+<td><p>The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones">time zones</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.default_time_zone` = "America/Los_Angeles"       </code> . Sets the default time zone to <code dir="ltr" translate="no">        America/Los_Angeles       </code> in the <code dir="ltr" translate="no">        us       </code> region.</p></td>
 </tr>
 <tr class="odd">
@@ -7704,25 +6784,25 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       query_runtime      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>Specifies whether the BigQuery query processor uses the <a href="/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">        query_runtime       </code> value to <code dir="ltr" translate="no">        advanced       </code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
+<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">        query_runtime       </code> value to <code dir="ltr" translate="no">        advanced       </code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.query_runtime` = 'advanced'       </code> . Enables the advanced runtime.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       enable_global_queries_execution      </code></td>
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
+<td><p>Determines if <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_execution` = true       </code> . Enables global queries.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       enable_global_queries_data_access      </code></td>
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
+<td><p>Determines if <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_location      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The <a href="/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
+<td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the query doesn't contain references to any datasets or connections. This setting can only be applied globally.</p>
 <p>Example: <code dir="ltr" translate="no">        `default_location` = 'europe-west6'       </code> . Sets the default location to the <code dir="ltr" translate="no">        europe-west6       </code> region.</p></td>
 </tr>
 </tbody>
@@ -7732,28 +6812,17 @@ Setting the value replaces the existing value of that option for the organizatio
 
 ### Required permissions
 
-The `  ALTER ORGANIZATION SET OPTIONS  ` statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+The `  ALTER ORGANIZATION SET OPTIONS  ` statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.config.update      </code></td>
-<td>The organization to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                   |
+| --------------------------------------- | -------------------------- |
+| `        bigquery.config.update       ` | The organization to alter. |
 
 ### Examples
 
 The following example sets the default time zone to America/Chicago and the default query job timeout to one hour for an organization in the US region:
 
-``` text
+``` notranslate
 ALTER ORGANIZATION
 SET OPTIONS (
   `region-us.default_time_zone` = "America/Chicago",
@@ -7763,7 +6832,7 @@ SET OPTIONS (
 
 The following example sets the default time zone, the default query job timeout, the default interactive and batch queue timeouts, and the default Cloud KMS key, clearing the organization level default settings:
 
-``` text
+``` notranslate
 ALTER ORGANIZATION
 SET OPTIONS (
   `region-us.default_time_zone` = NULL,
@@ -7779,7 +6848,7 @@ Sets the options on a project.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER PROJECT project_id
 SET OPTIONS (project_set_options_list);
 ```
@@ -7787,7 +6856,7 @@ SET OPTIONS (project_set_options_list);
 ### Arguments
 
   - `  project_id  ` : The name of the project you're altering. This argument is optional, and defaults to the project that runs this DDL query.
-  - [`  project_set_options_list  `](#project_set_options_list) : The list of options to set.
+  - [`  project_set_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#project_set_options_list) : The list of options to set.
 
 ### `     project_set_options_list    `
 
@@ -7812,14 +6881,14 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       default_kms_key_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The default Cloud Key Management Service key for encrypting table data, including temporary or anonymous tables. For more information, see <a href="/bigquery/docs/customer-managed-encryption">Customer-managed Cloud KMS keys</a> .</p>
+<td><p>The default Cloud Key Management Service key for encrypting table data, including temporary or anonymous tables. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption">Customer-managed Cloud KMS keys</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        kms_key_name="projects/                 project_id                /locations/                 location                /keyRings/                 keyring                /cryptoKeys/                 key                "       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name"><code dir="ltr" translate="no">         encryptionConfiguration.kmsKeyName        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/EncryptionConfiguration#FIELDS.kms_key_name"><code dir="ltr" translate="no">         encryptionConfiguration.kmsKeyName        </code></a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       default_time_zone      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument. For more information, see <a href="/bigquery/docs/reference/standard-sql/data-types#time_zones">time zones</a> .</p>
+<td><p>The default time zone to use in time zone-dependent SQL functions, when a time zone is not specified as an argument. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones">time zones</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.default_time_zone` = "America/Los_Angeles"       </code> . Sets the default time zone to <code dir="ltr" translate="no">        America/Los_Angeles       </code> in the <code dir="ltr" translate="no">        us       </code> region.</p></td>
 </tr>
 <tr class="odd">
@@ -7854,7 +6923,7 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       default_cloud_resource_connection_id      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The default connection to use when creating tables and models ([Preview](/products#product-launch-stages)). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="/bigquery/docs/default-connections">Default connection overview</a> .</p>
+<td><p>The default connection to use when creating tables and models ([Preview](/products#product-launch-stages)). Only specify the connection's ID, and exclude the attached project ID and region prefixes. Using default connections can cause the permissions granted to the connection's service account to be updated, depending on the type of table or model you create. For more information, see the <a href="https://docs.cloud.google.com/bigquery/docs/default-connections">Default connection overview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.default_cloud_resource_connection_id` = "connection_1"       </code> . Sets the default connection to <code dir="ltr" translate="no">        connection_1       </code> in the <code dir="ltr" translate="no">        us       </code> region.</p></td>
 </tr>
 <tr class="even">
@@ -7872,31 +6941,31 @@ The following options are supported:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       query_runtime      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>Specifies whether the BigQuery query processor uses the <a href="/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">        query_runtime       </code> value to <code dir="ltr" translate="no">        advanced       </code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
+<td><p>Specifies whether the BigQuery query processor uses the <a href="https://docs.cloud.google.com/bigquery/docs/advanced-runtime">advanced runtime</a> . Set the <code dir="ltr" translate="no">        query_runtime       </code> value to <code dir="ltr" translate="no">        advanced       </code> to enable the advanced runtime before it's rolled out as the default runtime.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.query_runtime` = 'advanced'       </code> . Enables the advanced runtime.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       enable_reservation_based_fairness      </code></td>
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><p>Determines how idle slots are shared. If <code dir="ltr" translate="no">        false       </code> (default), idle slots are equally distributed across all query projects. If <code dir="ltr" translate="no">        true       </code> , idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see <a href="/bigquery/docs/slots#fairness">reservation-based fairness</a> .</p>
+<td><p>Determines how idle slots are shared. If <code dir="ltr" translate="no">        false       </code> (default), idle slots are equally distributed across all query projects. If <code dir="ltr" translate="no">        true       </code> , idle slots are shared equally across all reservations first, and then across projects within the reservation. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/slots#fairness">reservation-based fairness</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_reservation_based_fairness` = true       </code> . Enables reservation-based fairness.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       enable_global_queries_execution      </code></td>
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
+<td><p>Determines if <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> can be run. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries are not enabled.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_execution` = true       </code> . Enables global queries.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       enable_global_queries_data_access      </code></td>
 <td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><p>Determines if <a href="/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
+<td><p>Determines if <a href="https://docs.cloud.google.com/bigquery/docs/global-queries">global queries</a> can access data stored in the region. The default value is <code dir="ltr" translate="no">        FALSE       </code> , which means that global queries can't copy data from this region regardless of the project in which they run.</p>
 <p>Example: <code dir="ltr" translate="no">        `region-us.enable_global_queries_data_access` = true       </code> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       default_location      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><p>The <a href="/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>
+<td><p>The <a href="https://docs.cloud.google.com/bigquery/docs/locations">location</a> that's used to run jobs when it can't be inferred from the request. For example, the default location is used if the location of the datasets in a query can't be determined. This setting can only be applied globally.</p>
 <p>Example: <code dir="ltr" translate="no">        `default_location` = 'europe-west6'       </code> . Sets the default location to the <code dir="ltr" translate="no">        europe-west6       </code> region.</p></td>
 </tr>
 </tbody>
@@ -7906,28 +6975,17 @@ Setting the value replaces the existing value of that option for the project, if
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.config.update      </code></td>
-<td>The project to alter.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource              |
+| --------------------------------------- | --------------------- |
+| `        bigquery.config.update       ` | The project to alter. |
 
 ### Examples
 
 The following example sets the default time zone to `  America/New_York  ` and the default query job timeout to 30 minutes for a project in the `  us  ` region.
 
-``` text
+``` notranslate
 ALTER PROJECT project_id
 SET OPTIONS (
   `region-us.default_time_zone` = "America/New_York",
@@ -7937,7 +6995,7 @@ SET OPTIONS (
 
 The following example sets the default time zone, the default query job timeout, the default Cloud KMS key to `  NULL  ` , and the default interactive and batch queue timeouts and default sql dialect, clearing the project level default settings:
 
-``` text
+``` notranslate
 ALTER PROJECT project_id
 SET OPTIONS (
   `region-us.default_time_zone` = NULL,
@@ -7954,7 +7012,7 @@ Sets the options on BigQuery BI Engine capacity.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `project_id.location_id.default`
 SET OPTIONS(bi_capacity_options_list)
 ```
@@ -7963,9 +7021,9 @@ SET OPTIONS(bi_capacity_options_list)
 
   - `  project_id  ` : Optional project ID of the project that will benefit from BI Engine acceleration. If omitted, the query project ID is used.
 
-  - `  location_id  ` : The [location](/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
+  - `  location_id  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) where data needs to be cached, prefixed with `  region-  ` . Examples: `  region-us  ` , `  region-us-central1  ` .
 
-  - [`  bi_capacity_options_list  `](#bi_capacity_options_list) : The list of options to set.
+  - [`  bi_capacity_options_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#bi_capacity_options_list) : The list of options to set.
 
 ### `     bi_capacity_options_list    `
 
@@ -7977,54 +7035,26 @@ Specify a column option list in the following format:
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       size_gb      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td>Specifies the size of the reservation in gigabytes.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       preferred_tables      </code></td>
-<td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRING&gt;&gt;      </code></td>
-<td>List of tables that acceleration should be applied to. Format: <code dir="ltr" translate="no">         project              .               dataset              .               table              or               dataset              .               table       </code> . If project is omitted, query project is used.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `             | `        VALUE       `           | Details                                                                                                                                                                                                                                                                                     |
+| --------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        size_gb       `          | `        INT64       `           | Specifies the size of the reservation in gigabytes.                                                                                                                                                                                                                                         |
+| `        preferred_tables       ` | `        <ARRAY<STRING>>       ` | List of tables that acceleration should be applied to. Format: `          project              .               dataset              .               table              or               dataset              .               table        ` . If project is omitted, query project is used. |
 
 Setting `  VALUE  ` replaces the existing value of that option for the BI Engine capacity, if there is one. Setting `  VALUE  ` to `  NULL  ` clears the value for that option.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.bireservations.update      </code></td>
-<td>BI Engine reservation</td>
-</tr>
-</tbody>
-</table>
+| Permission                                      | Resource              |
+| ----------------------------------------------- | --------------------- |
+| `        bigquery.bireservations.update       ` | BI Engine reservation |
 
 ### Examples
 
 #### Allocating BI Engine capacity without preferred tables
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `my-project.region-us.default`
 SET OPTIONS(
   size_gb = 250
@@ -8033,7 +7063,7 @@ SET OPTIONS(
 
 #### Deallocating BI capacity
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `my-project.region-us.default`
 SET OPTIONS(
   size_gb = 0
@@ -8042,7 +7072,7 @@ SET OPTIONS(
 
 #### Removing a set of preferred tables from reservation
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `my-project.region-us.default`
 SET OPTIONS(
   preferred_tables = NULL
@@ -8051,7 +7081,7 @@ SET OPTIONS(
 
 #### Allocating BI Capacity with preferred tables list
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `my-project.region-us.default`
 SET OPTIONS(
   size_gb = 250,
@@ -8062,7 +7092,7 @@ SET OPTIONS(
 
 #### Overwriting list of preferred tables without changing the size
 
-``` text
+``` notranslate
 ALTER BI_CAPACITY `region-us.default`
 SET OPTIONS(
   preferred_tables = ["dataset1.table1",
@@ -8076,7 +7106,7 @@ Alters an existing capacity commitment.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER CAPACITY `project_id.location_id.commitment_id`
 SET OPTIONS (alter_capacity_commitment_option_list);
 ```
@@ -8084,9 +7114,9 @@ SET OPTIONS (alter_capacity_commitment_option_list);
 ### Arguments
 
   - `  project_id  ` : The project ID of the administration project that maintains ownership of this commitment.
-  - `  location_id  ` : The [location](/bigquery/docs/locations#supported_locations) of the commitment.
+  - `  location_id  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the commitment.
   - `  commitment_id  ` : The ID of the commitment. The value must be unique to the project and location. It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers and dashes.
-  - [`  alter_capacity_commitment_option_list  `](#alter_capacity_commitment_option_list) : The options you can set to alter the capacity commitment.
+  - [`  alter_capacity_commitment_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_capacity_commitment_option_list) : The options you can set to alter the capacity commitment.
 
 ### `     alter_capacity_commitment_option_list    `
 
@@ -8094,52 +7124,24 @@ The option list specifies options for the dataset. Specify the options in the fo
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       plan      </code></td>
-<td>String</td>
-<td>The commitment plan to purchase. Supported values include: <code dir="ltr" translate="no">       ANNUAL      </code> , <code dir="ltr" translate="no">       THREE_YEAR      </code> , and <code dir="ltr" translate="no">       TRIAL      </code> . For more information, see <a href="/bigquery/docs/reservations-workload-management#slot_commitments">slot commitments</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       renewal_plan      </code></td>
-<td>String</td>
-<td>The plan this capacity commitment is converted to after <code dir="ltr" translate="no">       commitment_end_time      </code> passes. Once the plan is changed, the committed period is extended according to the commitment plan. Applicable for ANNUAL, THREE_YEAR, and TRIAL commitments.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `         | `        TYPE       ` | Details                                                                                                                                                                                                                                                                                       |
+| ----------------------------- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        plan       `         | String                | The commitment plan to purchase. Supported values include: `        ANNUAL       ` , `        THREE_YEAR       ` , and `        TRIAL       ` . For more information, see [slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) . |
+| `        renewal_plan       ` | String                | The plan this capacity commitment is converted to after `        commitment_end_time       ` passes. Once the plan is changed, the committed period is extended according to the commitment plan. Applicable for ANNUAL, THREE\_YEAR, and TRIAL commitments.                                  |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.capacityCommitments.update      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                           | Resource                                                                |
+| ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.capacityCommitments.update       ` | The administration project that maintains ownership of the commitments. |
 
 ### Example
 
 The following example changes a capacity commitment to a three-year plan that is located in the `  region-us  ` region and managed by a project `  admin_project  ` :
 
-``` text
+``` notranslate
 ALTER CAPACITY `admin_project.region-us.my-commitment`
 SET OPTIONS (
   plan = 'THREE_YEAR');
@@ -8151,7 +7153,7 @@ Alters an existing reservation.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER RESERVATION `project_id.location_id.reservation_id`
 SET OPTIONS (alter_reservation_option_list);
 ```
@@ -8159,9 +7161,9 @@ SET OPTIONS (alter_reservation_option_list);
 ### Arguments
 
   - `  project_id  ` : The project ID of the administration project that maintains ownership of this reservation.
-  - `  location_id  ` : The [location](/bigquery/docs/locations#supported_locations) of the reservation.
+  - `  location_id  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the reservation.
   - `  reservation_id  ` : The ID of the reservation. The value must be unique to the project and location. It must start and end with a lowercase letter or a number and contain only lowercase letters, numbers and dashes.
-  - [`  alter_reservation_option_list  `](#alter_reservation_option_list) : The options you can set to alter the reservation.
+  - [`  alter_reservation_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_reservation_option_list) : The options you can set to alter the reservation.
 
 ### `     alter_reservation_option_list    `
 
@@ -8169,71 +7171,23 @@ The option list specifies options for the dataset. Specify the options in the fo
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ignore_idle_slots      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>If the value is <code dir="ltr" translate="no">       true      </code> , then the reservation uses only the slots that are provisioned to it. The default value is <code dir="ltr" translate="no">       false      </code> . For more information, see <a href="/bigquery/docs/slots#idle_slots">Idle slots</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       slot_capacity      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The number of slots to allocate to the reservation. If this reservation was created with an <a href="/bigquery/docs/editions-intro">edition</a> , this is equivalent to the amount of <a href="/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots">baseline slots</a> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       target_job_concurrency      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>A soft upper bound on the number of jobs that can run concurrently in this reservation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       autoscale_max_slots      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The maximum number of slots that can be added to the reservation by autoscaling.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       secondary_location      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The secondary location to use in the case of disaster recovery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       is_primary      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>If the value is <code dir="ltr" translate="no">       true      </code> , the reservation is set to be the primary reservation.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       labels      </code></td>
-<td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of labels for the reservation, expressed as key-value pairs.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `                   | `        TYPE       `                            | Details                                                                                                                                                                                                                                                                                                                                                |
+| --------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `        ignore_idle_slots       `      | `        BOOLEAN       `                         | If the value is `        true       ` , then the reservation uses only the slots that are provisioned to it. The default value is `        false       ` . For more information, see [Idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .                                                                                      |
+| `        slot_capacity       `          | `        INTEGER       `                         | The number of slots to allocate to the reservation. If this reservation was created with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , this is equivalent to the amount of [baseline slots](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro#using_reservations_with_baseline_and_autoscaling_slots) . |
+| `        target_job_concurrency       ` | `        INTEGER       `                         | A soft upper bound on the number of jobs that can run concurrently in this reservation.                                                                                                                                                                                                                                                                |
+| `        autoscale_max_slots       `    | `        INTEGER       `                         | The maximum number of slots that can be added to the reservation by autoscaling.                                                                                                                                                                                                                                                                       |
+| `        secondary_location       `     | `        STRING       `                          | The secondary location to use in the case of disaster recovery.                                                                                                                                                                                                                                                                                        |
+| `        is_primary       `             | `        BOOLEAN       `                         | If the value is `        true       ` , the reservation is set to be the primary reservation.                                                                                                                                                                                                                                                          |
+| `        labels       `                 | `        <ARRAY<STRUCT<STRING, STRING>>>       ` | An array of labels for the reservation, expressed as key-value pairs.                                                                                                                                                                                                                                                                                  |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.reservations.update      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                    | Resource                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.reservations.update       ` | The administration project that maintains ownership of the commitments. |
 
 ### Examples
 
@@ -8241,7 +7195,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example changes an autoscaling reservation to 300 baseline slots and 400 autoscaling slots for a max reservation size of 700. These slots are located in the `  region-us  ` region and managed by a project `  admin_project  ` :
 
-``` text
+``` notranslate
 ALTER RESERVATION `admin_project.region-us.my-reservation`
 SET OPTIONS (
   slot_capacity = 300,
@@ -8252,15 +7206,15 @@ SET OPTIONS (
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send email to <bq-vector-search@google.com> .
 
-Rebuild a [vector index](/bigquery/docs/vector-index) on a table.
+Rebuild a [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index) on a table.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER VECTOR INDEX [ IF EXISTS ] index_name
 ON table_name
 REBUILD;
@@ -8272,7 +7226,7 @@ REBUILD;
 
   - `  index_name  ` : The name of the vector index to rebuild.
 
-  - `  table_name  ` : The name of the table that the vector index is on. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table that the vector index is on. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
     
     If the table doesn't contain a vector index, or if the table contains a different vector index than the one specified in the `  index_name  ` argument, the query fails.
 
@@ -8282,21 +7236,21 @@ REBUILD;
 
 Use the `  ALTER VECTOR INDEX REBUILD  ` statement to rebuild an active vector index on a table without having to drop the vector index, and without any index downtime. When you run the statement, BigQuery creates a shadow index on the table and trains it in the background. BigQuery promotes the shadow index to be the active index when the shadow index has enough coverage.
 
-To run the `  ALTER VECTOR INDEX REBUILD  ` statement, you must [create a reservation assignment](/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) with a job type of `  BACKGROUND  ` for the project that contains the table. If you run the statement without an appropriate reservation, the query fails.
+To run the `  ALTER VECTOR INDEX REBUILD  ` statement, you must [create a reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#assign_my_prod_project_to_prod_reservation) with a job type of `  BACKGROUND  ` for the project that contains the table. If you run the statement without an appropriate reservation, the query fails.
 
 You can have only one vector index rebuild in progress at a time. The `  ALTER VECTOR INDEX REBUILD  ` statement completes before the shadow index replaces the active index, because the shadow index training and cutover happen asynchronously. If you start another vector index rebuild before the shadow index replaces the initial index, the second rebuild request fails.
 
 ### Required permissions
 
-To get the permissions that you need to alter vector indexes, ask your administrator to grant you the BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) or BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) IAM role on your table. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to alter vector indexes, ask your administrator to grant you the BigQuery Data Editor ( `  roles/bigquery.dataEditor  ` ) or BigQuery Data Owner ( `  roles/bigquery.dataOwner  ` ) IAM role on your table. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Examples
 
 The following example rebuilds the `  index1  ` vector index on the `  sales  ` table:
 
-``` text
+``` notranslate
 ALTER VECTOR INDEX IF EXISTS index1
 ON mydataset.sales
 REBUILD;
@@ -8306,13 +7260,13 @@ REBUILD;
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER DATA_POLICY [ IF EXISTS ] `project_id.region-location_id.data_policy_id`
 SET OPTIONS (alter_option_list);
 ```
@@ -8327,7 +7281,7 @@ SET OPTIONS (alter_option_list);
 
   - `  data_policy_id  ` : The name of the data policy to be updated.
 
-  - [`  alter_option_list  `](#alter_datapolicy_option_list) : The list of options to update on the data policy.
+  - [`  alter_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_datapolicy_option_list) : The list of options to update on the data policy.
 
 ### `     alter_option_list    `
 
@@ -8335,27 +7289,10 @@ The option list specifies options for the data policy. Specify the options in th
 
 The following options are supported:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       VALUE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       data_policy_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Set it to <code dir="ltr" translate="no">       DATA_MASKING_POLICY      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       masking_expression      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Specifies the <a href="/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#PredefinedExpression">predefined masking rule</a> or a <a href="/bigquery/docs/column-data-masking-intro#custom_mask">custom masking routine</a> .</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `               | `        VALUE       `  | Details                                                                                                                                                                                                                                                                                           |
+| ----------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        data_policy_type       `   | `        STRING       ` | Set it to `        DATA_MASKING_POLICY       ` .                                                                                                                                                                                                                                                  |
+| `        masking_expression       ` | `        STRING       ` | Specifies the [predefined masking rule](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies#PredefinedExpression) or a [custom masking routine](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#custom_mask) . |
 
 ### Required permissions
 
@@ -8369,7 +7306,7 @@ Modifies an existing connection.
 
 ### Syntax
 
-``` text
+``` notranslate
 ALTER CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`
 SET OPTIONS (alter_connection_option_list);
 ```
@@ -8377,60 +7314,32 @@ SET OPTIONS (alter_connection_option_list);
 ### Arguments
 
   - `  project_id  ` (Optional): The ID of the project that the connection is in. If omitted, the project where you run this DDL statement is used.
-  - `  location  ` (Optional): The [location](/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](https://docs.cloud.google.com/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
   - `  connection_id  ` : The name of the connection.
-  - [`  alter_connection_option_list  `](#alter_connection_option_list) : The options to alter for the connection.
+  - [`  alter_connection_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_connection_option_list) : The options to alter for the connection.
 
 ### `     alter_connection_option_list    `
 
 Specify options in the `  NAME=VALUE, ...  ` format. You can modify the following options:
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       NAME      </code></th>
-<th><code dir="ltr" translate="no">       TYPE      </code></th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       friendly_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>A descriptive name for the connection.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>A description of the connection.</td>
-</tr>
-</tbody>
-</table>
+| `        NAME       `          | `        TYPE       `   | Details                                |
+| ------------------------------ | ----------------------- | -------------------------------------- |
+| `        friendly_name       ` | `        STRING       ` | A descriptive name for the connection. |
+| `        description       `   | `        STRING       ` | A description of the connection.       |
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.update      </code></td>
-<td>The project that the connection is in.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                               |
+| -------------------------------------------- | -------------------------------------- |
+| `        bigquery.connections.update       ` | The project that the connection is in. |
 
 ### Examples
 
 The following example modifies the description of the `  my_cloud_resource_connection  ` connection:
 
-``` text
+``` notranslate
 ALTER CONNECTION `us.my_cloud_resource_connection`
 SET OPTIONS (
   description = "Updated description for my Cloud resource connection"
@@ -8443,11 +7352,9 @@ Deletes a dataset.
 
 ### Syntax
 
-``` text
-DROP [EXTERNAL] SCHEMA [IF EXISTS]
-[project_name.]dataset_name
-[ CASCADE | RESTRICT ]
-```
+    DROP [EXTERNAL] SCHEMA [IF EXISTS]
+    [project_name.]dataset_name
+    [ CASCADE | RESTRICT ]
 
 ### Arguments
 
@@ -8459,66 +7366,46 @@ DROP [EXTERNAL] SCHEMA [IF EXISTS]
 
   - `  dataset_name  ` : The name of the dataset to delete.
 
-  - `  CASCADE  ` : Deletes the dataset and all resources within the dataset, such as tables, views, and functions. You must have permission to delete the resources, or else the statement returns an error. For a list of BigQuery permissions, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+  - `  CASCADE  ` : Deletes the dataset and all resources within the dataset, such as tables, views, and functions. You must have permission to delete the resources, or else the statement returns an error. For a list of BigQuery permissions, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
   - `  RESTRICT  ` : Deletes the dataset only if it's empty. Otherwise, returns an error. If you don't specify either `  CASCADE  ` or `  RESTRICT  ` , then the default behavior is `  RESTRICT  ` .
 
 ### Details
 
-The statement runs in the location of the dataset if it exists, unless you specify the location in the query settings. For more information, see [Specifying your location](/bigquery/docs/locations#specify_locations) .
+The statement runs in the location of the dataset if it exists, unless you specify the location in the query settings. For more information, see [Specifying your location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.delete      </code></td>
-<td>The dataset to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.delete      </code></td>
-<td>The dataset to delete. If the dataset is empty, then this permission is not required.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                                                              |
+| ----------------------------------------- | ------------------------------------------------------------------------------------- |
+| `        bigquery.datasets.delete       ` | The dataset to delete.                                                                |
+| `        bigquery.tables.delete       `   | The dataset to delete. If the dataset is empty, then this permission is not required. |
 
 ### Examples
 
 The following example deletes the dataset named `  mydataset  ` . If the dataset does not exist or is not empty, then the statement returns an error.
 
-``` text
-DROP SCHEMA mydataset
-```
+    DROP SCHEMA mydataset
 
 The following example drops the dataset named `  mydataset  ` and any resources in that dataset. If the dataset does not exist, then no error is returned.
 
-``` text
-DROP SCHEMA IF EXISTS mydataset CASCADE
-```
+    DROP SCHEMA IF EXISTS mydataset CASCADE
 
 ## `     UNDROP SCHEMA    ` statement
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-[Undeletes a dataset](/bigquery/docs/restore-deleted-datasets) within your time travel window.
+[Undeletes a dataset](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) within your time travel window.
 
 ### Syntax
 
-``` text
-UNDROP SCHEMA [IF NOT EXISTS]
-[project_name.]dataset_name
-[OPTIONS (location="us")]
-```
+    UNDROP SCHEMA [IF NOT EXISTS]
+    [project_name.]dataset_name
+    [OPTIONS (location="us")]
 
 ### Arguments
 
@@ -8532,77 +7419,45 @@ UNDROP SCHEMA [IF NOT EXISTS]
 
 ### Details
 
-When you run this statement, you must [specify the location](/bigquery/docs/locations#specify_locations) where the dataset was deleted. If you don't, the `  US  ` multi-region is used.
+When you run this statement, you must [specify the location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) where the dataset was deleted. If you don't, the `  US  ` multi-region is used.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.datasets.create      </code></td>
-<td>The project where you are undeleting the dataset.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.datasets.get      </code></td>
-<td>The dataset that you are undeleting.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                                          |
+| ----------------------------------------- | ------------------------------------------------- |
+| `        bigquery.datasets.create       ` | The project where you are undeleting the dataset. |
+| `        bigquery.datasets.get       `    | The dataset that you are undeleting.              |
 
 ### Examples
 
 The following example undeletes the dataset named `  mydataset  ` . If the dataset already exists or has passed the time travel window, then the statement returns an error.
 
-``` text
-UNDROP SCHEMA mydataset;
-```
+    UNDROP SCHEMA mydataset;
 
 ## `     DROP TABLE    ` statement
 
-Deletes a table or [table clone](/bigquery/docs/table-clones-intro) .
+Deletes a table or [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) .
 
 ### Syntax
 
-``` text
-DROP TABLE [IF EXISTS] table_name
-```
+    DROP TABLE [IF EXISTS] table_name
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no table exists with that name, the statement has no effect.
 
-  - `  table_name  ` : The name of the table to delete. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the table to delete. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.delete      </code></td>
-<td>The table to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The table to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource             |
+| --------------------------------------- | -------------------- |
+| `        bigquery.tables.delete       ` | The table to delete. |
+| `        bigquery.tables.get       `    | The table to delete. |
 
 ### Examples
 
@@ -8610,7 +7465,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example deletes a table named `  mytable  ` in the `  mydataset  ` :
 
-``` text
+``` notranslate
 DROP TABLE mydataset.mytable
 ```
 
@@ -8622,44 +7477,31 @@ If the table name does not exist in the dataset, the following error is returned
 
 The following example deletes a table named `  mytable  ` in `  mydataset  ` only if the table exists. If the table name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` text
+``` notranslate
 DROP TABLE IF EXISTS mydataset.mytable
 ```
 
 ## `     DROP SNAPSHOT TABLE    ` statement
 
-Deletes a [table snapshot](/bigquery/docs/table-snapshots-intro) .
+Deletes a [table snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) .
 
 ### Syntax
 
-``` text
-DROP SNAPSHOT TABLE [IF EXISTS] table_snapshot_name
-```
+    DROP SNAPSHOT TABLE [IF EXISTS] table_snapshot_name
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no table snapshot exists with that name, then the statement has no effect.
 
-  - `  table_snapshot_name  ` : The name of the table snapshot to delete. See [Table path syntax](#table_path) .
+  - `  table_snapshot_name  ` : The name of the table snapshot to delete. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.deleteSnapshot      </code></td>
-<td>The table snapshot to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                      | Resource                      |
+| ----------------------------------------------- | ----------------------------- |
+| `        bigquery.tables.deleteSnapshot       ` | The table snapshot to delete. |
 
 ### Examples
 
@@ -8667,7 +7509,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example deletes the table snapshot named `  mytablesnapshot  ` in the `  mydataset  ` dataset:
 
-``` text
+``` notranslate
 DROP SNAPSHOT TABLE mydataset.mytablesnapshot
 ```
 
@@ -8679,15 +7521,15 @@ If the table snapshot does not exist in the dataset, then the following error is
 
 The following example deletes the table snapshot named `  mytablesnapshot  ` in the `  mydataset  ` dataset.
 
-``` text
+``` notranslate
 DROP SNAPSHOT TABLE IF EXISTS mydataset.mytablesnapshot
 ```
 
 If the table snapshot doesn't exist in the dataset, then no action is taken, and no error is returned.
 
-For information about creating table snapshots, see [CREATE SNAPSHOT TABLE](#create_snapshot_table_statement) .
+For information about creating table snapshots, see [CREATE SNAPSHOT TABLE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_snapshot_table_statement) .
 
-For information about restoring table snapshots, see [CREATE TABLE CLONE](#create_table_clone_statement) .
+For information about restoring table snapshots, see [CREATE TABLE CLONE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) .
 
 ## `     DROP EXTERNAL TABLE    ` statement
 
@@ -8695,15 +7537,13 @@ Deletes an external table.
 
 ### Syntax
 
-``` text
-DROP EXTERNAL TABLE [IF EXISTS] table_name
-```
+    DROP EXTERNAL TABLE [IF EXISTS] table_name
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no external table exists with that name, then the statement has no effect.
 
-  - `  table_name  ` : The name of the external table to delete. See [Table path syntax](#table_path) .
+  - `  table_name  ` : The name of the external table to delete. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
 ### Details
 
@@ -8715,40 +7555,22 @@ The `  DROP EXTERNAL  ` statement only removes the external table definition fro
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.delete      </code></td>
-<td>The external table to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The external table to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                      |
+| --------------------------------------- | ----------------------------- |
+| `        bigquery.tables.delete       ` | The external table to delete. |
+| `        bigquery.tables.get       `    | The external table to delete. |
 
 ### Examples
 
 The following example drops the external table named `  external_table  ` from the dataset `  mydataset  ` . It returns an error if the external table does not exist.
 
-``` text
-DROP EXTERNAL TABLE mydataset.external_table
-```
+    DROP EXTERNAL TABLE mydataset.external_table
 
 The following example drops the external table named `  external_table  ` from the dataset `  mydataset  ` . If the external table does not exist, no error is returned.
 
-``` text
-DROP EXTERNAL TABLE IF EXISTS mydataset.external_table
-```
+    DROP EXTERNAL TABLE IF EXISTS mydataset.external_table
 
 ## `     DROP VIEW    ` statement
 
@@ -8756,38 +7578,22 @@ Deletes a view.
 
 ### Syntax
 
-``` text
-DROP VIEW [IF EXISTS] view_name
-```
+    DROP VIEW [IF EXISTS] view_name
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no view exists with that name, the statement has no effect.
 
-  - `  view_name  ` : The name of the view to delete. See [Table path syntax](#table_path) .
+  - `  view_name  ` : The name of the view to delete. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.delete      </code></td>
-<td>The view to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The view to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource            |
+| --------------------------------------- | ------------------- |
+| `        bigquery.tables.delete       ` | The view to delete. |
+| `        bigquery.tables.get       `    | The view to delete. |
 
 ### Examples
 
@@ -8795,7 +7601,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example deletes a view named `  myview  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 DROP VIEW mydataset.myview
 ```
 
@@ -8807,7 +7613,7 @@ If the view name does not exist in the dataset, the following error is returned:
 
 The following example deletes a view named `  myview  ` in `  mydataset  ` only if the view exists. If the view name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` text
+``` notranslate
 DROP VIEW IF EXISTS mydataset.myview
 ```
 
@@ -8817,38 +7623,22 @@ Deletes a materialized view.
 
 ### Syntax
 
-``` text
-DROP MATERIALIZED VIEW [IF EXISTS] mv_name
-```
+    DROP MATERIALIZED VIEW [IF EXISTS] mv_name
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no materialized view exists with that name, the statement has no effect.
 
-  - `  mv_name  ` : The name of the materialized view to delete. See [Table path syntax](#table_path) .
+  - `  mv_name  ` : The name of the materialized view to delete. See [Table path syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.delete      </code></td>
-<td>The materialized view to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.tables.get      </code></td>
-<td>The materialized view to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                              | Resource                         |
+| --------------------------------------- | -------------------------------- |
+| `        bigquery.tables.delete       ` | The materialized view to delete. |
+| `        bigquery.tables.get       `    | The materialized view to delete. |
 
 ### Examples
 
@@ -8856,7 +7646,7 @@ This statement requires the following [IAM permissions](/bigquery/docs/access-co
 
 The following example deletes a materialized view named `  my_mv  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 DROP MATERIALIZED VIEW mydataset.my_mv
 ```
 
@@ -8870,7 +7660,7 @@ If you are deleting a materialized view in another project, you must specify the
 
 The following example deletes a materialized view named `  my_mv  ` in `  mydataset  ` only if the materialized view exists. If the materialized view name does not exist in the dataset, no error is returned, and no action is taken.
 
-``` text
+``` notranslate
 DROP MATERIALIZED VIEW IF EXISTS mydataset.my_mv
 ```
 
@@ -8882,9 +7672,7 @@ Deletes a persistent user-defined function (UDF) or user-defined aggregate funct
 
 ### Syntax
 
-``` text
-DROP FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
-```
+    DROP FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
 
 ### Arguments
 
@@ -8898,48 +7686,33 @@ DROP FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.delete      </code></td>
-<td>The function to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                |
+| ----------------------------------------- | ----------------------- |
+| `        bigquery.routines.delete       ` | The function to delete. |
 
 ### Examples
 
 The following example statement deletes the function `  parseJsonAsStruct  ` contained in the dataset `  mydataset  ` .
 
-``` text
-DROP FUNCTION mydataset.parseJsonAsStruct;
-```
+    DROP FUNCTION mydataset.parseJsonAsStruct;
 
 The following example statement deletes the function `  parseJsonAsStruct  ` from the dataset `  sample_dataset  ` in the project `  other_project  ` .
 
-``` text
-DROP FUNCTION `other_project`.sample_dataset.parseJsonAsStruct;
-```
+    DROP FUNCTION `other_project`.sample_dataset.parseJsonAsStruct;
 
 ## `     DROP TABLE FUNCTION    `
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Deletes a [table function](/bigquery/docs/table-functions) .
+Deletes a [table function](https://docs.cloud.google.com/bigquery/docs/table-functions) .
 
 ### Syntax
 
-``` text
+``` notranslate
 DROP TABLE FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
 ```
 
@@ -8955,30 +7728,17 @@ DROP TABLE FUNCTION [IF EXISTS] [[project_name.]dataset_name.]function_name
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.delete      </code></td>
-<td>The table function to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                      |
+| ----------------------------------------- | ----------------------------- |
+| `        bigquery.routines.delete       ` | The table function to delete. |
 
 ### Example
 
 The following example deletes a table function named `  my_table_function  ` :
 
-``` text
-DROP TABLE FUNCTION mydataset.my_table_function;
-```
+    DROP TABLE FUNCTION mydataset.my_table_function;
 
 ## `     DROP PROCEDURE    ` statement
 
@@ -8986,9 +7746,7 @@ Deletes a stored procedure.
 
 ### Syntax
 
-``` text
-DROP PROCEDURE [IF EXISTS] [[project_name.]dataset_name.]procedure_name
-```
+    DROP PROCEDURE [IF EXISTS] [[project_name.]dataset_name.]procedure_name
 
 ### Arguments
 
@@ -9002,36 +7760,21 @@ DROP PROCEDURE [IF EXISTS] [[project_name.]dataset_name.]procedure_name
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.routines.delete      </code></td>
-<td>The procedure to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                | Resource                 |
+| ----------------------------------------- | ------------------------ |
+| `        bigquery.routines.delete       ` | The procedure to delete. |
 
 ### Examples
 
 The following example statement deletes the procedure `  myprocedure  ` contained in the dataset `  mydataset  ` .
 
-``` text
-DROP PROCEDURE mydataset.myProcedure;
-```
+    DROP PROCEDURE mydataset.myProcedure;
 
 The following example statement deletes the procedure `  myProcedure  ` from the dataset `  sample_dataset  ` in the project `  other_project  ` .
 
-``` text
-DROP PROCEDURE `other-project`.sample_dataset.myprocedure;
-```
+    DROP PROCEDURE `other-project`.sample_dataset.myprocedure;
 
 ## `     DROP ROW ACCESS POLICY    ` statement
 
@@ -9041,14 +7784,10 @@ Deletes a row-level access policy.
 
 ### Syntax
 
-``` text
-DROP ROW ACCESS POLICY [ IF EXISTS ]
-row_access_policy_name ON table_name;
-```
+    DROP ROW ACCESS POLICY [ IF EXISTS ]
+    row_access_policy_name ON table_name;
 
-``` text
-DROP ALL ROW ACCESS POLICIES ON table_name;
-```
+    DROP ALL ROW ACCESS POLICIES ON table_name;
 
 ### Arguments
 
@@ -9060,42 +7799,25 @@ DROP ALL ROW ACCESS POLICIES ON table_name;
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.delete      </code></td>
-<td>The row-level access policy to delete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.setIamPolicy      </code></td>
-<td>The row-level access policy to delete.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.list      </code></td>
-<td>The table to delete all row-level access policies on. Only required for <code dir="ltr" translate="no">       DROP ALL      </code> statements.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                               | Resource                                                                                                      |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `        bigquery.rowAccessPolicies.delete       `       | The row-level access policy to delete.                                                                        |
+| `        bigquery.rowAccessPolicies.setIamPolicy       ` | The row-level access policy to delete.                                                                        |
+| `        bigquery.rowAccessPolicies.list       `         | The table to delete all row-level access policies on. Only required for `        DROP ALL       ` statements. |
 
 ### Examples
 
 Delete a row-level access policy from a table:
 
-``` text
+``` notranslate
 DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
 ```
 
 Delete all the row-level access policies from a table:
 
-``` text
+``` notranslate
 DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
 ```
 
@@ -9105,46 +7827,31 @@ Deletes a capacity commitment.
 
 ### Syntax
 
-``` text
-DROP CAPACITY [IF EXISTS]
-project_id.location.capacity-commitment-id
-```
+    DROP CAPACITY [IF EXISTS]
+    project_id.location.capacity-commitment-id
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no capacity commitment exists with that ID, the statement has no effect.
   - `  project_id  ` : The project ID of the administration project where the reservation was created.
-  - `  location  ` : The [location](/bigquery/docs/locations#supported_locations) of the commitment.
+  - `  location  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the commitment.
   - `  capacity-commitment-id  ` : The capacity commitment ID.
 
-To find the capacity commitment ID, query the [`  INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT  `](/bigquery/docs/information-schema-capacity-commitments) table.
+To find the capacity commitment ID, query the [`  INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-capacity-commitments) table.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.capacityCommitments.delete      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                           | Resource                                                                |
+| ---------------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.capacityCommitments.delete       ` | The administration project that maintains ownership of the commitments. |
 
 ### Example
 
 The following example deletes the capacity commitment:
 
-``` text
-DROP CAPACITY `admin_project.region-us.1234`
-```
+    DROP CAPACITY `admin_project.region-us.1234`
 
 ## `     DROP RESERVATION    ` statement
 
@@ -9152,44 +7859,29 @@ Deletes a reservation.
 
 ### Syntax
 
-``` text
-DROP RESERVATION [IF EXISTS]
-project_id.location.reservation_id
-```
+    DROP RESERVATION [IF EXISTS]
+    project_id.location.reservation_id
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no reservation exists with that ID, the statement has no effect.
   - `  project_id  ` : The project ID of the administration project where the reservation was created.
-  - `  location  ` : The [location](/bigquery/docs/locations#supported_locations) of the reservation.
+  - `  location  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the reservation.
   - `  reservation_id  ` : The reservation ID.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.reservations.delete      </code></td>
-<td>The administration project that maintains ownership of the commitments.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                    | Resource                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------- |
+| `        bigquery.reservations.delete       ` | The administration project that maintains ownership of the commitments. |
 
 ### Example
 
 The following example deletes the reservation `  prod  ` :
 
-``` text
-DROP RESERVATION `admin_project.region-us.prod`
-```
+    DROP RESERVATION `admin_project.region-us.prod`
 
 ## `     DROP ASSIGNMENT    ` statement
 
@@ -9197,47 +7889,32 @@ Deletes a reservation assignment.
 
 ### Syntax
 
-``` text
-DROP ASSIGNMENT [IF EXISTS]
-project_id.location.reservation_id.assignment_id
-```
+    DROP ASSIGNMENT [IF EXISTS]
+    project_id.location.reservation_id.assignment_id
 
 ### Arguments
 
   - `  IF EXISTS  ` : If no assignment exists with that ID, the statement has no effect.
   - `  project_id  ` : The project ID of the administration project where the reservation was created.
-  - `  location  ` : The [location](/bigquery/docs/locations#supported_locations) of the reservation.
+  - `  location  ` : The [location](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) of the reservation.
   - `  reservation_id  ` : The reservation ID.
   - `  assignment_id  ` : The assignment ID.
 
-To find the assignment ID, query the [`  INFORMATION_SCHEMA.ASSIGNMENTS  ` view](/bigquery/docs/information-schema-assignments) .
+To find the assignment ID, query the [`  INFORMATION_SCHEMA.ASSIGNMENTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) .
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.reservationAssignments.delete      </code></td>
-<td>The administration project and the assignee.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                              | Resource                                     |
+| ------------------------------------------------------- | -------------------------------------------- |
+| `        bigquery.reservationAssignments.delete       ` | The administration project and the assignee. |
 
 ### Example
 
 The following example deletes an assignment from the reservation named `  prod  ` :
 
-``` text
-DROP ASSIGNMENT `admin_project.region-us.prod.1234`
-```
+    DROP ASSIGNMENT `admin_project.region-us.prod.1234`
 
 ## `     DROP SEARCH INDEX    ` statement
 
@@ -9245,9 +7922,7 @@ Deletes a search index on a table.
 
 ### Syntax
 
-``` text
-DROP SEARCH INDEX [ IF EXISTS ] index_name ON table_name
-```
+    DROP SEARCH INDEX [ IF EXISTS ] index_name ON table_name
 
 ### Arguments
 
@@ -9257,30 +7932,17 @@ DROP SEARCH INDEX [ IF EXISTS ] index_name ON table_name
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.deleteIndex      </code></td>
-<td>The table with the search index to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                                   |
+| -------------------------------------------- | ------------------------------------------ |
+| `        bigquery.tables.deleteIndex       ` | The table with the search index to delete. |
 
 ### Example
 
 The following example deletes a search index `  my_index  ` from `  my_table  ` :
 
-``` text
-DROP SEARCH INDEX my_index ON dataset.my_table;
-```
+    DROP SEARCH INDEX my_index ON dataset.my_table;
 
 ## `     DROP VECTOR INDEX    ` statement
 
@@ -9288,9 +7950,7 @@ Deletes a vector index on a table.
 
 ### Syntax
 
-``` text
-DROP VECTOR INDEX [ IF EXISTS ] index_name ON table_name
-```
+    DROP VECTOR INDEX [ IF EXISTS ] index_name ON table_name
 
 ### Arguments
 
@@ -9300,36 +7960,23 @@ DROP VECTOR INDEX [ IF EXISTS ] index_name ON table_name
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.tables.deleteIndex      </code></td>
-<td>The table with the vector index to delete.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                                   |
+| -------------------------------------------- | ------------------------------------------ |
+| `        bigquery.tables.deleteIndex       ` | The table with the vector index to delete. |
 
 ### Example
 
 The following example deletes a vector index `  my_index  ` from `  my_table  ` :
 
-``` text
-DROP VECTOR INDEX my_index ON dataset.my_table;
-```
+    DROP VECTOR INDEX my_index ON dataset.my_table;
 
 ## `     DROP DATA_POLICY    ` statement
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <bigquery-security@google.com> .
 
@@ -9337,9 +7984,7 @@ Deletes a data policy in a project.
 
 ### Syntax
 
-``` text
-DROP DATA_POLICY [ IF EXISTS ] `myproject.region-us.data_policy_name`;
-```
+    DROP DATA_POLICY [ IF EXISTS ] `myproject.region-us.data_policy_name`;
 
 ### Arguments
 
@@ -9361,51 +8006,38 @@ Deletes an existing connection.
 
 ### Syntax
 
-``` text
+``` notranslate
 DROP CONNECTION [IF EXISTS] `[[project_id.]location.]connection_id`;
 ```
 
 ### Arguments
 
   - `  project_id  ` (Optional): The ID of the project that the connection is in. If omitted, the project where you run this DDL statement is used.
-  - `  location  ` (Optional): The [location](/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
+  - `  location  ` (Optional): The [location](https://docs.cloud.google.com/bigquery/docs/locations) of the connection. If omitted, the location where you run this DDL statement is used.
   - `  connection_id  ` : The name of the connection to delete.
 
 ### Required permissions
 
-This statement requires the following [IAM permissions](/bigquery/docs/access-control#bq-permissions) :
+This statement requires the following [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) :
 
-<table>
-<thead>
-<tr class="header">
-<th>Permission</th>
-<th>Resource</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.connections.delete      </code></td>
-<td>The project that the connection is in.</td>
-</tr>
-</tbody>
-</table>
+| Permission                                   | Resource                               |
+| -------------------------------------------- | -------------------------------------- |
+| `        bigquery.connections.delete       ` | The project that the connection is in. |
 
 ### Example
 
 The following example deletes the `  my_cloud_resource_connection  ` connection:
 
-``` text
+``` notranslate
 DROP CONNECTION IF EXISTS `us.my_cloud_resource_connection`;
 ```
 
 ## Table path syntax
 
-Use the following syntax when specifying the path of a [table resource](/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) , including standard tables, views, materialized views, external tables, and table snapshots.
+Use the following syntax when specifying the path of a [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.type) , including standard tables, views, materialized views, external tables, and table snapshots.
 
-``` text
-table_path :=
-  [[project_name.]dataset_name.]table_name
-```
+    table_path :=
+      [[project_name.]dataset_name.]table_name
 
   - `  project_name  ` : The name of the project that contains the table resource. Defaults to the project that runs the DDL query. If the project name contains special characters such as colons, quote the name in backticks ``  `  `` (example: ``  `google.com:my_project`  `` ).
 
@@ -9422,7 +8054,7 @@ The following are all examples of valid table names: `  table 01  ` , `  ग्�
 
 Caveats:
 
-  - Table names are case-sensitive by default. `  mytable  ` and `  MyTable  ` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
+  - Table names are case-sensitive by default. `  mytable  ` and `  MyTable  ` can coexist in the same dataset, unless they are part of a [dataset with case-sensitivity turned off](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#creating_a_case-insensitive_dataset) .
 
   - Some table names and table name prefixes are reserved. If you receive an error saying that your table name or prefix is reserved, then select a different name and try again.
 

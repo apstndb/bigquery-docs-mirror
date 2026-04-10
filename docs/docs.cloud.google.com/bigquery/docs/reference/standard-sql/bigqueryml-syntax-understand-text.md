@@ -4,7 +4,7 @@ This document describes the `  ML.UNDERSTAND_TEXT  ` function, which lets you an
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.UNDERSTAND_TEXT(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -22,11 +22,11 @@ ML.UNDERSTAND_TEXT(
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_NATURAL_LANGUAGE_V1  ` .
+  - `  MODEL  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_NATURAL_LANGUAGE_V1  ` .
 
   - `  TABLE  ` : the name of the BigQuery table that contains text data. The text analysis is applied on the column with name `  text_content  ` in this table. If your table does not have `  text_content  ` column, use a `  SELECT  ` statement for this argument to provide an alias for an existing table column, as shown in the following example:
     
-    ``` sql
+    ``` lang-sql
     SELECT * from ML.UNDERSTAND_TEXT(
       mydataset.mymodel,
       (SELECT comment AS text_content from mydataset.mytable),
@@ -36,23 +36,23 @@ ML.UNDERSTAND_TEXT(
     
     An error occurs if no `  text_content  ` column is available.
 
-  - `  QUERY_STATEMENT  ` : a query whose result contains the text data. The text analysis is applied on the column in the query named `  text_content  ` . You can alias an existing table column as `  text_content  ` if necessary. For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query whose result contains the text data. The text analysis is applied on the column in the query named `  text_content  ` . You can alias an existing table column as `  text_content  ` if necessary. For information about the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  OPTION_NAME  ` : a `  STRING  ` value that specifies the feature name of a supported Natural Language API feature. The supported features are as follows:
     
-      - [`  ANALYZE_ENTITIES  `](/natural-language/docs/analyzing-entities)
+      - [`  ANALYZE_ENTITIES  `](https://docs.cloud.google.com/natural-language/docs/analyzing-entities)
     
-      - [`  ANALYZE_ENTITY_SENTIMENT  `](/natural-language/docs/analyzing-entity-sentiment)
+      - [`  ANALYZE_ENTITY_SENTIMENT  `](https://docs.cloud.google.com/natural-language/docs/analyzing-entity-sentiment)
     
-      - [`  ANALYZE_SENTIMENT  `](/natural-language/docs/analyzing-sentiment)
+      - [`  ANALYZE_SENTIMENT  `](https://docs.cloud.google.com/natural-language/docs/analyzing-sentiment)
     
-      - [`  ANALYZE_SYNTAX  `](/natural-language/docs/analyzing-syntax)
+      - [`  ANALYZE_SYNTAX  `](https://docs.cloud.google.com/natural-language/docs/analyzing-syntax)
     
-      - [`  CLASSIFY_TEXT  `](/natural-language/docs/classifying-text)
+      - [`  CLASSIFY_TEXT  `](https://docs.cloud.google.com/natural-language/docs/classifying-text)
 
   - `  FLATTEN_JSON_OUTPUT  ` : a `  BOOL  ` value that determines whether the JSON content returned by the function is parsed into separate columns. The default is `  FALSE  ` .
 
-  - `  ENCODING_TYPE  ` : a `  STRING  ` value that specifies the encoding that the Cloud Natural Language API uses to determine encoding-dependent information such as the [`  beginOffset  `](/natural-language/docs/reference/rest/v2/TextSpan) value. For more information, see [`  EncodingType  `](/natural-language/docs/reference/rest/v1/EncodingType) . You can specify this option for any NLU option except for `  CLASSIFY_TEXT  ` . The default value is `  NONE  ` . The supported types are as follows:
+  - `  ENCODING_TYPE  ` : a `  STRING  ` value that specifies the encoding that the Cloud Natural Language API uses to determine encoding-dependent information such as the [`  beginOffset  `](https://docs.cloud.google.com/natural-language/docs/reference/rest/v2/TextSpan) value. For more information, see [`  EncodingType  `](https://docs.cloud.google.com/natural-language/docs/reference/rest/v1/EncodingType) . You can specify this option for any NLU option except for `  CLASSIFY_TEXT  ` . The default value is `  NONE  ` . The supported types are as follows:
     
       - `  NONE  `
     
@@ -77,15 +77,13 @@ ML.UNDERSTAND_TEXT(
 
 ## Quotas
 
-See [Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions) .
+See [Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Known issues
 
 Sometimes after a query job that uses this function finishes successfully, some returned rows contain the following error message:
 
-``` text
-A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
-```
+    A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
 
 This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `  resource exhausted  ` error message is returned.
 
@@ -93,7 +91,7 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 ## Locations
 
-`  ML.UNDERSTAND_TEXT  ` must run in the same region as the remote model that the function references. For more information about supported locations for models based on the Natural Language API, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+`  ML.UNDERSTAND_TEXT  ` must run in the same region as the remote model that the function references. For more information about supported locations for models based on the Natural Language API, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Examples
 
@@ -101,7 +99,7 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 The following example applies classify\_text on the bq table `  mybqtable  ` in `  mydataset  ` .
 
-``` text
+``` notranslate
 # Create Model
 CREATE OR REPLACE MODEL
 `myproject.mydataset.mynlpmodel`
@@ -109,7 +107,7 @@ REMOTE WITH CONNECTION `myproject.myregion.myconnection`
 OPTIONS (remote_service_type ='cloud_ai_natural_language_v1');
 ```
 
-``` text
+``` notranslate
 # Understand Text
 SELECT * FROM ML.UNDERSTAND_TEXT(
   MODEL `mydataset.mynlpmodel`,
@@ -120,17 +118,15 @@ SELECT * FROM ML.UNDERSTAND_TEXT(
 
 The output is similar to the following:
 
-``` text
-ml_understand_text_result  | ml_understand_text_status | text_content |
-------- | -------- | --------
-{"categories":[{"confidence":0.51999998,"name":"/Arts & Entertainment/TV & Video/TV Shows & Programs"}]} | | That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows.
-```
+    ml_understand_text_result  | ml_understand_text_status | text_content |
+    ------- | -------- | --------
+    {"categories":[{"confidence":0.51999998,"name":"/Arts & Entertainment/TV & Video/TV Shows & Programs"}]} | | That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows.
 
 **Example 2**
 
 The following example classify the text in the column `  text_content  ` in the table `  mybqtable  ` , selects the rows where confidence is higher than `  0.5  ` , and then returns the results in separate columns.
 
-``` text
+``` notranslate
 CREATE TABLE
   `mydataset.classfied_result` AS (
   SELECT
@@ -154,15 +150,13 @@ WHERE
 
 The output is similar to the following:
 
-``` text
-Original Input  | Classified Name | Confidence | Status |
-------- | -------- | -------- | --------
-That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows. | /Arts & Entertainment/TV & Video/TV Shows & Programs| 0.51999998 | |
-```
+    Original Input  | Classified Name | Confidence | Status |
+    ------- | -------- | -------- | --------
+    That actor on TV makes movies in Hollywood and also stars in a variety of popular new TV shows. | /Arts & Entertainment/TV & Video/TV Shows & Programs| 0.51999998 | |
 
-If you get an error like `  query limit exceeded  ` , you might have exceeded the [quota](/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
+If you get an error like `  query limit exceeded  ` , you might have exceeded the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
 
-``` text
+``` notranslate
 CREATE TABLE
   `mydataset.classfied_result_next` AS (
   SELECT
@@ -182,7 +176,7 @@ SELECT * FROM `mydataset.classfied_result_next`;
 
 ## What's next
 
-  - Get step-by-step instructions on how to [analyze text in a BigQuery table](/bigquery/docs/understand-text) using the `  ML.UNDERSTAND_TEXT  ` function.
-  - Learn more about [other functions you can use](/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models) to analyze BigQuery data.
-  - For information about model inference, see [Model inference overview](/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai) .
+  - Get step-by-step instructions on how to [analyze text in a BigQuery table](https://docs.cloud.google.com/bigquery/docs/understand-text) using the `  ML.UNDERSTAND_TEXT  ` function.
+  - Learn more about [other functions you can use](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models) to analyze BigQuery data.
+  - For information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

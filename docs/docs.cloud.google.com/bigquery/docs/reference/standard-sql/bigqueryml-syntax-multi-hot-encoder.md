@@ -1,19 +1,19 @@
 # The ML.MULTI\_HOT\_ENCODER function
 
-This document describes the `  ML.MULTI_HOT_ENCODER  ` function, which lets you encode a string array expression by using a [multi-hot](/bigquery/docs/auto-preprocessing#feature-transform) encoding scheme.
+This document describes the `  ML.MULTI_HOT_ENCODER  ` function, which lets you encode a string array expression by using a [multi-hot](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing#feature-transform) encoding scheme.
 
 The encoding vocabulary is sorted alphabetically. `  NULL  ` values and categories that aren't in the vocabulary are encoded with an `  index  ` value of `  0  ` .
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.MULTI_HOT_ENCODER(array_expression [, top_k] [, frequency_threshold]) OVER()
 ```
 
@@ -33,7 +33,7 @@ ML.MULTI_HOT_ENCODER(array_expression [, top_k] [, frequency_threshold]) OVER()
 
 The following example performs multi-hot encoding on a set of string array expressions. It limits the encoding vocabulary to the three categories that occur the most frequently in the data and that also occur one or more times.
 
-``` text
+``` notranslate
 SELECT f[OFFSET(0)] AS f0, ML.MULTI_HOT_ENCODER(f, 3, 1) OVER () AS output
 FROM
   (
@@ -61,4 +61,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

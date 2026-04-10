@@ -2,26 +2,26 @@
 
 The Simba Open Database Connectivity (ODBC) and Java Database Connectivity (JDBC) drivers for BigQuery connect your applications to BigQuery, letting you use BigQuery features with your preferred tooling and infrastructure. Generally, the JDBC driver is used with Java applications, and the ODBC driver is used otherwise.
 
-The Simba ODBC and JDBC drivers are developed by [insightsoftware](https://insightsoftware.com/simba/) , a [Google Cloud Ready - BigQuery partner](/bigquery/docs/bigquery-ready-overview) . As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+The Simba ODBC and JDBC drivers are developed by [insightsoftware](https://insightsoftware.com/simba/) , a [Google Cloud Ready - BigQuery partner](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) . As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 ## Limitations
 
 The Simba ODBC and JDBC drivers for BigQuery are subject to the following limitations:
 
-  - [BigQuery load features](/bigquery/docs/loading-data) aren't supported.
-  - [BigQuery export features](/bigquery/docs/export-intro) aren't supported.
-  - [Query prefixes](/bigquery/docs/introduction-sql#sql) aren't supported.
-  - All [data manipulation language (DML) limitations](/bigquery/docs/data-manipulation-language#dml-limitations) apply.
-  - [Parameterized queries](/bigquery/docs/parameterized-queries) only provide query validation. Query performance isn't affected.
+  - [BigQuery load features](https://docs.cloud.google.com/bigquery/docs/loading-data) aren't supported.
+  - [BigQuery export features](https://docs.cloud.google.com/bigquery/docs/export-intro) aren't supported.
+  - [Query prefixes](https://docs.cloud.google.com/bigquery/docs/introduction-sql#sql) aren't supported.
+  - All [data manipulation language (DML) limitations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) apply.
+  - [Parameterized queries](https://docs.cloud.google.com/bigquery/docs/parameterized-queries) only provide query validation. Query performance isn't affected.
   - The drivers are specific to BigQuery and can't be used with other products or services.
 
 ## Before you begin
 
-When you use the Simba ODBC and JDBC drivers for BigQuery, you have the option to read data with the BigQuery Storage Read API, instead of with the standard BigQuery API. In the insightsoftware documentation, this feature is called the *High-Throughput API* . If you plan to use this optional feature, ensure that you have the [required roles](#high-throughput-roles) .
+When you use the Simba ODBC and JDBC drivers for BigQuery, you have the option to read data with the BigQuery Storage Read API, instead of with the standard BigQuery API. In the insightsoftware documentation, this feature is called the *High-Throughput API* . If you plan to use this optional feature, ensure that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/reference/odbc-jdbc-drivers#high-throughput-roles) .
 
 ### Required roles for the High-Throughput API
 
-To get the permissions that you need to use the High-Throughput API, ask your administrator to grant you the [BigQuery Read Session User](/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` ) IAM role on your BigQuery project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use the High-Throughput API, ask your administrator to grant you the [BigQuery Read Session User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.readSessionUser) ( `  roles/bigquery.readSessionUser  ` ) IAM role on your BigQuery project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use the High-Throughput API. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -35,7 +35,7 @@ The following permissions are required to use the High-Throughput API:
   - `  bigquery.readsessions.getData  `
   - `  bigquery.readsessions.update  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Install and configure the Simba ODBC driver for BigQuery
 
@@ -203,7 +203,7 @@ To see a list of previous driver versions, expand the following section:
 
 ## Install and configure the Simba JDBC driver for BigQuery
 
-**Note:** As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
+**Note:** As an alternative to the Simba JDBC driver, a [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) is available in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 1.  Download the [1.6.5.1002 version of the driver](https://storage.googleapis.com/simba-bq-release/jdbc/SimbaJDBCDriverforGoogleBigQuery42_1.6.5.1002.zip) .
 
@@ -237,7 +237,7 @@ To see a list of previous driver versions, expand the following section:
 
 ## Support
 
-Support for the Simba ODBC and JDBC drivers for BigQuery is available through standard [Cloud Customer Care](/bigquery/support) channels.
+Support for the Simba ODBC and JDBC drivers for BigQuery is available through standard [Cloud Customer Care](https://docs.cloud.google.com/bigquery/support) channels.
 
 ## Pricing
 
@@ -249,5 +249,5 @@ You can download the Simba ODBC and JDBC drivers for BigQuery at no cost, and yo
 
 ## What's next
 
-  - Learn more about the [Google-developed JDBC driver for BigQuery](/bigquery/docs/jdbc-for-bigquery) .
-  - Explore other [BigQuery developer tools](/bigquery/docs/developer-overview) .
+  - Learn more about the [Google-developed JDBC driver for BigQuery](https://docs.cloud.google.com/bigquery/docs/jdbc-for-bigquery) .
+  - Explore other [BigQuery developer tools](https://docs.cloud.google.com/bigquery/docs/developer-overview) .

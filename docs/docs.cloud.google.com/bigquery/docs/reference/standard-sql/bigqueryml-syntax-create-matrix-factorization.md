@@ -1,16 +1,16 @@
 # The CREATE MODEL statement for matrix factorization models
 
-**Note:** Matrix factorization models are only available to customers with reservations. For more information, see [Pricing](#pricing) .
+**Note:** Matrix factorization models are only available to customers with reservations. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .
 
-This document describes the `  CREATE MODEL  ` statement for creating [matrix factorization](https://en.wikipedia.org/wiki/Matrix_factorization_\(recommender_systems\)) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for creating [matrix factorization](https://en.wikipedia.org/wiki/Matrix_factorization_\(recommender_systems\)) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-Matrix factorization models use [collaborative filtering](https://developers.google.com/machine-learning/recommendation/collaborative/basics) to identify similar items. Use matrix factorization models with the [`  ML.RECOMMEND  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) to generate [recommendations](/bigquery/docs/recommendation-overview) .
+Matrix factorization models use [collaborative filtering](https://developers.google.com/machine-learning/recommendation/collaborative/basics) to identify similar items. Use matrix factorization models with the [`  ML.RECOMMEND  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) to generate [recommendations](https://docs.cloud.google.com/bigquery/docs/recommendation-overview) .
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -72,9 +72,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'MATRIX_FACTORIZATION'
-```
+    MODEL_TYPE = 'MATRIX_FACTORIZATION'
 
 **Description**
 
@@ -84,9 +82,7 @@ Specifies the model type. To create a matrix factorization model, specify `  MAT
 
 **Syntax**
 
-``` text
-FEEDBACK_TYPE = { 'EXPLICIT' | 'IMPLICIT' }
-```
+    FEEDBACK_TYPE = { 'EXPLICIT' | 'IMPLICIT' }
 
 **Description**
 
@@ -100,7 +96,7 @@ There are two types of ratings (user feedback): `  EXPLICIT  ` and `  IMPLICIT  
 
   - If you don't have explicit user feedback, the rating value must be artificially constructed based on the user's interaction with the item, for example, by looking at their clicks, pageviews, and purchases. In this situation, specify `  IMPLICIT  ` . This trains the model using the [Weighted-Alternating Least Squares](http://yifanhu.net/PUB/cf.pdf) algorithm.
 
-For more information about the differences between the two feedback types and when to use which type, see [Feedback types](#feedback-info) .
+For more information about the differences between the two feedback types and when to use which type, see [Feedback types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#feedback-info) .
 
 ### `     NUM_FACTORS    `
 
@@ -177,7 +173,7 @@ Adjusts the user feedback's impact on recommendation confidence, balancing posit
 
 You can only use this hyperparameter with `  IMPLICIT  ` matrix factorization models.
 
-For more information, see [Feedback types](#feedback-info) .
+For more information, see [Feedback types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#feedback-info) .
 
 **Arguments**
 
@@ -229,13 +225,11 @@ An `  INT64  ` value. The default value is `  20  ` .
 
 **Syntax**
 
-``` text
-EARLY_STOP = { TRUE | FALSE }
-```
+    EARLY_STOP = { TRUE | FALSE }
 
 **Description**
 
-Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](#min_rel_progress) .
+Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#min_rel_progress) .
 
 **Arguments**
 
@@ -249,7 +243,7 @@ A `  BOOL  ` value. The default value is `  TRUE  ` .
 
 **Description**
 
-The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
+The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
 
 **Arguments**
 
@@ -259,9 +253,7 @@ A `  FLOAT64  ` value. The default value is `  0.01  ` .
 
 **Syntax**
 
-``` text
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
-```
+    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
 
 **Description**
 
@@ -272,7 +264,7 @@ The percentage sizes of the data sets produced by the various arguments for this
 You can see the model's data split information in the following ways:
 
   - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
@@ -295,20 +287,20 @@ This option accepts the following values:
     
       - 80% is used as training data
         
-        For more information, see [Data split](/bigquery/docs/hp-tuning-overview#data_split) .
+        For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
 
-  - `  RANDOM  ` : Data is randomized before being split into sets. You can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) and [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `  AUTO_SPLIT  ` option.
+  - `  RANDOM  ` : Data is randomized before being split into sets. You can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_eval_fraction) and [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `  AUTO_SPLIT  ` option.
     
     A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
     
-    **Note:** A random split is based on the [FARM\_FINGERPRINT](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+    **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
 
   - `  CUSTOM  ` : Split data using the value in a specified column:
     
       - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, rows with a value of `  FALSE  ` are used as training data.
       - If you are running hyperparameter tuning, then you must provide the name of a column of type `  STRING  ` . Rows with a value of `  TRAIN  ` are used as training data, rows with a value of `  EVAL  ` are used as evaluation data, and rows with a value of `  TEST  ` are used as test data.
     
-    Use the [`  DATA_SPLIT_COL  ` option](#data_split_col) to identify the column that contains the data split information.
+    Use the [`  DATA_SPLIT_COL  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_col) to identify the column that contains the data split information.
 
   - `  SEQ  ` : Split data sequentially by using the value in a specified column of one of the following types:
     
@@ -341,9 +333,9 @@ This option accepts the following values:
 
 **Description**
 
-The fraction of the data to use as evaluation data. Use when you are specifying `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) .
+The fraction of the data to use as evaluation data. Use when you are specifying `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_method) .
 
-If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
+If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_test_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -357,9 +349,9 @@ A `  FLOAT64  ` value. The default is `  0.2  ` . The service maintains the accu
 
 **Description**
 
-The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `  RANDOM  ` or `  SEQ  ` as value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) .
+The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `  RANDOM  ` or `  SEQ  ` as value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_method) .
 
-If you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
+If you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_eval_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -373,11 +365,11 @@ A `  FLOAT64  ` value. The default is `  0  ` . The service maintains the accura
 
 **Description**
 
-The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `  CUSTOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) :
+The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `  CUSTOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_method) :
 
-  - If you aren't running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The remaining rows are used as training data.
+  - If you aren't running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_eval_fraction) . The remaining rows are used as training data.
   - If you aren't running hyperparameter tuning and you are specifying `  CUSTOM  ` as the value for `  DATA_SPLIT_METHOD  ` , then you must provide the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, rows with a value of `  FALSE  ` are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The next m rows are used as test data, where m is the value specified for [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) . The remaining rows are used as training data.
+  - If you are running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_eval_fraction) . The next m rows are used as test data, where m is the value specified for [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#data_split_test_fraction) . The remaining rows are used as training data.
   - If you are running hyperparameter tuning and you are specifying `  CUSTOM  ` as the value for `  DATA_SPLIT_METHOD  ` , then you must provide the name of a column of type `  STRING  ` . Rows with a value of `  TRAIN  ` are used as training data, rows with a value of `  EVAL  ` are used as evaluation data, and rows with a value of `  TEST  ` are used as test data.
 
 The column you specify for `  DATA_SPLIT_COL  ` can't be used as a feature or label, and is excluded from features automatically.
@@ -410,31 +402,29 @@ An `  INT64  ` value between `  1  ` and `  100  ` , inclusive.
 
 **Description**
 
-The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) .
 
 **Arguments**
 
 An `  INT64  ` value between `  1  ` and `  5  ` , inclusive. The default value is `  1  ` .
 
-**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `     HPARAM_TUNING_ALGORITHM    `
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
-```
+    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
 
 **Description**
 
-The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) .
 
 **Arguments**
 
 Specify one of the following values:
 
-  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
   - `  RANDOM_SEARCH  ` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
@@ -446,27 +436,23 @@ Specify one of the following values:
 
 For explicit `  MATRIX_FACTORIZATION  ` models:
 
-``` text
-HPARAM_TUNING_OBJECTIVES = 'MEAN_SQUARED_ERROR'
-```
+    HPARAM_TUNING_OBJECTIVES = 'MEAN_SQUARED_ERROR'
 
 For implicit `  MATRIX_FACTORIZATION  ` models:
 
-``` text
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_AVERAGE_PRECISION' | 'MEAN_SQUARED_ERROR' | 'NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN' | 'AVERAGE_RANK' }
-```
+    HPARAM_TUNING_OBJECTIVES = { 'MEAN_AVERAGE_PRECISION' | 'MEAN_SQUARED_ERROR' | 'NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN&#39; | 'AVERAGE_RANK' }
 
 **Description**
 
-The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) .
 
 **Arguments**
 
-The possible objectives are a subset of the [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the default objective is used. For explicit `  MATRIX_FACTORIZATION  ` models, the default is `  MEAN_SQUARED_ERROR'  ` . For implicit `  MATRIX_FACTORIZATION  ` models , the default is `  MEAN_AVERAGE_PRECISION  ` .
+The possible objectives are a subset of the [model evaluation metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the default objective is used. For explicit `  MATRIX_FACTORIZATION  ` models, the default is `  MEAN_SQUARED_ERROR'  ` . For implicit `  MATRIX_FACTORIZATION  ` models , the default is `  MEAN_AVERAGE_PRECISION  ` .
 
 ### `     MODEL_REGISTRY    `
 
-The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model) .
+The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/create_vertex#register-model) .
 
 ### `     VERTEX_AI_MODEL_ID    `
 
@@ -478,7 +464,7 @@ You can only set the `  VERTEX_AI_MODEL_ID  ` option when the `  MODEL_REGISTRY 
 
 ### `     VERTEX_AI_MODEL_VERSION_ALIASES    `
 
-The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](/vertex-ai/docs/model-registry/model-alias) .
+The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](https://docs.cloud.google.com/vertex-ai/docs/model-registry/model-alias) .
 
 You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MODEL_REGISTRY  ` option is set to `  VERTEX_AI  ` .
 
@@ -490,19 +476,17 @@ You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MO
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ### `     query_statement    `
 
-The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
+The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
 
 The query\_statement is expected to contain exactly 3 columns (user, item, and rating) unless you specify a `  DATA_SPLIT_METHOD  ` value that requires use of a `  DATA_SPLIT_COL  ` value.
 
@@ -524,18 +508,18 @@ BigQuery supports different GoogleSQL data types for the input columns for matri
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       user      </code></td>
-<td>Any <a href="/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
+<td>Any <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       item      </code></td>
-<td>Any <a href="/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
+<td>Any <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_properties">groupable</a> data type</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       rating      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
-<a href="/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
-<a href="/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
-<a href="/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_type"><code dir="ltr" translate="no">        NUMERIC       </code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bignumeric_type"><code dir="ltr" translate="no">        BIGNUMERIC       </code></a><br />
+<a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
 </tr>
 </tbody>
 </table>
@@ -551,9 +535,9 @@ Ratings provided by the user are considered to be explicit feedback. A low expli
 Where
 
 \\(r\_{ui} = \\) rating that user \\(u\\) gave to item \\(i\\)  
-\\(x\_u = \\) latent factor weights vector for user \\(u\\). Is length [`  NUM_FACTORS  `](#num_factors) .  
-\\(y\_i = \\) latent factor weights vector for item \\(i\\). Is length [`  NUM_FACTORS  `](#num_factors) .  
-\\(\\lambda = \\) [`  L2_REG  `](#l2_reg)
+\\(x\_u = \\) latent factor weights vector for user \\(u\\). Is length [`  NUM_FACTORS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_factors) .  
+\\(y\_i = \\) latent factor weights vector for item \\(i\\). Is length [`  NUM_FACTORS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_factors) .  
+\\(\\lambda = \\) [`  L2_REG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#l2_reg)
 
 However, most of the time data isn't labeled by users. Often, the only metrics that you have as to whether a user liked an item or movie is by the click rate or engagement time. You can use this as a proxy rating, but it is not necessarily a definitive indication as to whether a user likes or dislikes something. The data in these datasets is considered to be implicit feedback. For implicit feedback problems, BigQuery ML uses a variant of the ALS algorithm called weighted-alternating least squares (WALS), which is described in <http://yifanhu.net/PUB/cf.pdf> . This approach uses these proxy ratings and treats them as an indicator of the interest that a user has in an item. WALS seeks to minimize the following loss function:
 
@@ -563,35 +547,33 @@ Where, in addition to the variables defined previously, the function also introd
 
 \\(p\_{ui} = 1\\) when \\(r\_{ui} \> 0\\) and \\(p\_{ui} = 0\\) when \\(r\_{ui} \< 0\\)  
 \\(c\_{ui} = 1 + \\alpha r\_{ui}\\)  
-\\(\\alpha = \\) [`  WALS_ALPHA  `](#wals_alpha)
+\\(\\alpha = \\) [`  WALS_ALPHA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#wals_alpha)
 
 For explicit matrix factorization, the input is typically integers within a known fixed range. For implicit matrix factorization, the input ratings can be doubles or integers that span a wider range. We recommend that you make sure there aren't any outliers in the input ratings, and that you scale the input ratings if the model is performing poorly.
 
 ## Hyperparameter tuning
 
-Matrix factorization models support [hyperparameter tuning](/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
+Matrix factorization models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
 
-Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](#hparam_tuning_objectives) to tune for a different metric if you need to.
+Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#hparam_tuning_objectives) to tune for a different metric if you need to.
 
-For more information about the training objectives and hyperparameters supported for explicit matrix factorization models, see [`  MATRIX_FACTORIZATION  ` (explicit)](/bigquery/docs/hp-tuning-overview#matrix_factorization_explicit) . For more information about the training objectives and hyperparameters supported for implicit matrix factorization models, see [`  MATRIX_FACTORIZATION  ` (implicit)](/bigquery/docs/hp-tuning-overview#matrix_factorization_implicit) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial) .
+For more information about the training objectives and hyperparameters supported for explicit matrix factorization models, see [`  MATRIX_FACTORIZATION  ` (explicit)](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#matrix_factorization_explicit) . For more information about the training objectives and hyperparameters supported for implicit matrix factorization models, see [`  MATRIX_FACTORIZATION  ` (implicit)](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#matrix_factorization_implicit) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
 If you get the "Model is too large (\>100 MB)" error, check the input data. This error is caused by having too many ratings for a single user or a single item. Hashing the user or item columns into an `  INT64  ` value or reducing the data size can help. You can use the following formula to determine whether this error might occur:
 
-``` text
-max(num_rated_user, num_rated_item) < 100 million
-```
+    max(num_rated_user, num_rated_item) < 100 million
 
 Where `  num_rated_user  ` is the maximum item ratings that a single user has entered and `  num_rated_items  ` is the maximum user ratings for a given item.
 
 ## Pricing
 
-To create a matrix factorization model you must [create a reservation](/bigquery/docs/reservations-tasks#create_reservations) that uses the BigQuery [Enterprise or Enterprise Plus edition](/bigquery/docs/editions-intro) , and then [create a reservation assignment](/bigquery/docs/reservations-assignments#create_reservation_assignments) that uses the `  QUERY  ` job type.
+To create a matrix factorization model you must [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) that uses the BigQuery [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , and then [create a reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#create_reservation_assignments) that uses the `  QUERY  ` job type.
 
 ## Examples
 
@@ -601,7 +583,7 @@ The following example creates models named `  mymodel  ` in dataset `  mydataset
 
 This example creates an explicit feedback matrix factorization model.
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION') AS
 SELECT
@@ -616,7 +598,7 @@ FROM
 
 This example creates an implicit feedback matrix factorization model.
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='MATRIX_FACTORIZATION',
          FEEDBACK_TYPE='IMPLICIT') AS
@@ -630,5 +612,5 @@ FROM
 
 ## What's next
 
-  - [Use BigQuery ML to make recommendations from Google Analytics data](/bigquery/docs/bigqueryml-mf-implicit-tutorial) (implicit feedback)
-  - [Use BigQuery ML to make recommendations from movie ratings](/bigquery/docs/bigqueryml-mf-explicit-tutorial) (explicit feedback)
+  - [Use BigQuery ML to make recommendations from Google Analytics data](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-implicit-tutorial) (implicit feedback)
+  - [Use BigQuery ML to make recommendations from movie ratings](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial) (explicit feedback)

@@ -1,6 +1,6 @@
-  - [Resource: DataSource](#DataSource)
-      - [JSON representation](#DataSource.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: DataSource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources#DataSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources#DataSource.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.dataSources#METHODS_SUMMARY)
 
 ## Resource: DataSource
 
@@ -17,7 +17,7 @@ Defines the properties and custom parameters for a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;dataSourceId&quot;: string,
   &quot;displayName&quot;: string,

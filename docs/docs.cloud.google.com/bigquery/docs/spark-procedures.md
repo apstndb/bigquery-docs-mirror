@@ -2,26 +2,26 @@
 
 This document is intended for data engineers, data scientists, and data analysts to create and call stored procedures for Spark in BigQuery.
 
-Using BigQuery, you can create and run [Spark](https://spark.apache.org/) stored procedures that are written in Python, Java, and Scala. You can then run these stored procedures in BigQuery using a GoogleSQL query, similar to running [SQL stored procedures](/bigquery/docs/procedures) .
+Using BigQuery, you can create and run [Spark](https://spark.apache.org/) stored procedures that are written in Python, Java, and Scala. You can then run these stored procedures in BigQuery using a GoogleSQL query, similar to running [SQL stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
 
 ## Before you begin
 
-To create a stored procedure for Spark, ask your administrator to create a [Spark connection](/bigquery/docs/connect-to-spark) and share it with you. Your administrator must also grant the service account associated with the connection the [required Identity and Access Management (IAM) permissions](/bigquery/docs/connect-to-spark#grant-access) .
+To create a stored procedure for Spark, ask your administrator to create a [Spark connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) and share it with you. Your administrator must also grant the service account associated with the connection the [required Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#grant-access) .
 
 ### Required roles
 
 To get the permissions that you need to perform the tasks in this document, ask your administrator to grant you the following IAM roles:
 
-  - [Create a stored procedure for Spark](#create-spark-procedure) :
-      - [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you create the stored procedure
-      - [BigQuery Connection Admin](/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on the connection that the stored procedure uses
-      - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on your project
-  - [Call a stored procedure for Spark](#call-spark-procedure) :
-      - [BigQuery Metadata Viewer](/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) on the dataset where the stored procedure is stored
-      - [BigQuery Connection User](/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on the connection
-      - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on your project
+  - [Create a stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#create-spark-procedure) :
+      - [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` ) on the dataset where you create the stored procedure
+      - [BigQuery Connection Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionAdmin) ( `  roles/bigquery.connectionAdmin  ` ) on the connection that the stored procedure uses
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on your project
+  - [Call a stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#call-spark-procedure) :
+      - [BigQuery Metadata Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.metadataViewer) ( `  roles/bigquery.metadataViewer  ` ) on the dataset where the stored procedure is stored
+      - [BigQuery Connection User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.connectionUser) ( `  roles/bigquery.connectionUser  ` ) on the connection
+      - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobUser) ( `  roles/bigquery.jobUser  ` ) on your project
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to perform the tasks in this document. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -41,11 +41,11 @@ The following permissions are required to perform the tasks in this document:
       - `  bigquery.connections.use  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Location consideration
 
-You must [create a stored procedure for Spark](#create-spark-procedure) in the same location as your [connection](/bigquery/docs/connect-to-spark) because the stored procedure runs in the same location as the connection. For example, to create a stored procedure in the US multi-region, you use a connection located in the US multi-region.
+You must [create a stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#create-spark-procedure) in the same location as your [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) because the stored procedure runs in the same location as the connection. For example, to create a stored procedure in the US multi-region, you use a connection located in the US multi-region.
 
 ### Pricing
 
@@ -65,16 +65,18 @@ You must create the stored procedure in the same location as the connection that
 
 If the body of your stored procedure is more than 1 MB, then we recommend that you put your stored procedure in a file in a Cloud Storage bucket instead of using inline code. BigQuery provides two methods to create a stored procedure for Spark using Python:
 
-  - If you want to use the `  CREATE PROCEDURE  ` statement, [use the SQL query editor](#use-sql-query-editor) .
-  - If you want to type in Python code directly, [use the PySpark editor](#use-python-pyspark-editor) . You can [save the code as a stored procedure](#save-stored-procedure) .
+  - If you want to use the `  CREATE PROCEDURE  ` statement, [use the SQL query editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-sql-query-editor) .
+  - If you want to type in Python code directly, [use the PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) . You can [save the code as a stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures#save-stored-procedure) .
 
 ### Use SQL query editor
 
 To create a stored procedure for Spark in the SQL query editor, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the query editor, add the sample code for the [`  CREATE PROCEDURE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) that appears.
+2.  In the query editor, add the sample code for the [`  CREATE PROCEDURE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) that appears.
     
     Alternatively, in the **Explorer** pane, click the connection in the project that you used to create the connection resource. Then, to create a stored procedure for Spark, click search **Create stored procedure** .
     
@@ -82,39 +84,33 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
     
     To create a stored procedures for Spark in Python, use the following sample code:
     
-    ``` text
-    CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
-     WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
-     OPTIONS (
-         engine="SPARK", runtime_version="RUNTIME_VERSION",
-         main_file_uri=["MAIN_PYTHON_FILE_URI"]);
-     LANGUAGE PYTHON [AS PYSPARK_CODE]
-    ```
+        CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
+         WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
+         OPTIONS (
+             engine="SPARK", runtime_version="RUNTIME_VERSION",
+             main_file_uri=["MAIN_PYTHON_FILE_URI"]);
+         LANGUAGE PYTHON [AS PYSPARK_CODE]
     
     **Java or Scala**
     
     To create a stored procedure for Spark in Java or Scala with the `  main_file_uri  ` option, use the following sample code:
     
-    ``` text
-    CREATE [OR REPLACE] PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
-     WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
-     OPTIONS (
-         engine="SPARK", runtime_version="RUNTIME_VERSION",
-         main_file_uri=["MAIN_JAR_URI"]);
-     LANGUAGE JAVA|SCALA
-    ```
+        CREATE [OR REPLACE] PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
+         WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
+         OPTIONS (
+             engine="SPARK", runtime_version="RUNTIME_VERSION",
+             main_file_uri=["MAIN_JAR_URI"]);
+         LANGUAGE JAVA|SCALA
     
     To create a stored procedure for Spark in Java or Scala with `  main_class  ` and `  jar_uris  ` options, use the following sample code:
     
-    ``` text
-    CREATE [OR REPLACE] PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
-     WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
-     OPTIONS (
-         engine="SPARK", runtime_version="RUNTIME_VERSION",
-         main_class=["CLASS_NAME"],
-         jar_uris=["URI"]);
-     LANGUAGE JAVA|SCALA
-    ```
+        CREATE [OR REPLACE] PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
+         WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
+         OPTIONS (
+             engine="SPARK", runtime_version="RUNTIME_VERSION",
+             main_class=["CLASS_NAME"],
+             jar_uris=["URI"]);
+         LANGUAGE JAVA|SCALA
     
     Replace the following:
     
@@ -138,21 +134,21 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
         
         For example: `  myproject.mydataset.mysparkproc(num INT64)  ` .
         
-        For more information, see pass a value as an [`  IN  ` parameter](#pass-input-parameter) or the [`  OUT  ` and `  INOUT  ` parameters](#pass-input-output-parameter) in this document.
+        For more information, see pass a value as an [`  IN  ` parameter](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pass-input-parameter) or the [`  OUT  ` and `  INOUT  ` parameters](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pass-input-output-parameter) in this document.
     
-      - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](/bigquery/docs/connect-to-spark) to run the Spark procedure.
+      - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to run the Spark procedure.
     
       - `  CONNECTION_REGION  ` : the region that contains the connection to run the Spark procedure—for example, `  us  ` .
     
       - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
         
-        When you [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
       - `  RUNTIME_VERSION  ` : the runtime version of Spark—for example, `  2.2  ` .
     
       - `  MAIN_PYTHON_FILE_URI  ` : the path to a PySpark file—for example, `  gs://mybucket/mypysparkmain.py  ` .
         
-        Alternatively, if you want to add the body of the stored procedure in the `  CREATE PROCEDURE  ` statement, then add `  PYSPARK_CODE  ` after `  LANGUAGE PYTHON AS  ` as shown in the example in [Use inline code](#use-inline-code) in this document.
+        Alternatively, if you want to add the body of the stored procedure in the `  CREATE PROCEDURE  ` statement, then add `  PYSPARK_CODE  ` after `  LANGUAGE PYTHON AS  ` as shown in the example in [Use inline code](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code) in this document.
     
       - `  PYSPARK_CODE  ` : the definition of a PySpark application in the `  CREATE PROCEDURE  ` statement if you want to pass the body of the procedure inline.
         
@@ -162,7 +158,7 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
           - Triple-quoted string: `  """return "\\n";"""  ` . Backslashes are escaped while quotation marks are not.
           - Raw string: `  r"""return "\n";"""  ` . No escaping is needed.
         
-        To learn how to add inline PySpark code, see [Use inline code](#use-inline-code) .
+        To learn how to add inline PySpark code, see [Use inline code](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code) .
     
       - `  MAIN_JAR_URI  ` : the path of the JAR file that contains the `  main  ` class, for example, `  gs://mybucket/my_main.jar  ` .
     
@@ -170,7 +166,7 @@ To create a stored procedure for Spark in the SQL query editor, follow these ste
     
       - `  URI  ` : the path of the JAR file that contains the class specified in the `  main  ` class, for example, `  gs://mybucket/mypysparkmain.jar  ` .
     
-    For additional options that you can specify in `  OPTIONS  ` , see the [procedure option list](/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) .
+    For additional options that you can specify in `  OPTIONS  ` , see the [procedure option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) .
 
 ### Use PySpark editor
 
@@ -179,6 +175,8 @@ When creating a procedure using the PySpark editor, you don't need to use the ` 
 To create a stored procedure for Spark in the PySpark editor, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  If you want to type in the PySpark code directly, open the PySpark editor. To open the PySpark editor, click the arrow\_drop\_down menu next to add\_box **Create SQL query** , and then select **Create PySpark Procedure** .
 
@@ -194,9 +192,9 @@ To create a stored procedure for Spark in the PySpark editor, follow these steps
     
     4.  In the **Parameters** section, define parameters for the stored procedure. The value of the parameter is only used during in-session runs of the PySpark code, but the declaration itself is stored in the procedure.
     
-    5.  In the **Advanced options** section, specify the procedure options. For a detailed list of the procedure options, see the [procedure option list](/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) .
+    5.  In the **Advanced options** section, specify the procedure options. For a detailed list of the procedure options, see the [procedure option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) .
     
-    1\. In the **Properties** section, add the key-value pairs to configure the job. You can use any of the key-value pairs from the [Serverless for Apache Spark supported Spark properties](/dataproc-serverless/docs/concepts/properties#supported_spark_properties) .
+    1\. In the **Properties** section, add the key-value pairs to configure the job. You can use any of the key-value pairs from the [Serverless for Apache Spark supported Spark properties](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/properties#supported_spark_properties) .
     
     1.  In **Service account settings** , specify the custom service account, CMEK, staging dataset, and staging Cloud Storage folder to be used during in-session runs of the PySpark code.
     
@@ -204,13 +202,15 @@ To create a stored procedure for Spark in the PySpark editor, follow these steps
 
 #### Save a stored procedure for Spark
 
-After you [create the stored procedure](#use-python-pyspark-editor) by using the PySpark editor, you can save the stored procedure. To do so, follow these steps:
+After you [create the stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) by using the PySpark editor, you can save the stored procedure. To do so, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-2.  In the query editor, create a stored procedure for Spark [using Python with PySpark editor](#use-python-pyspark-editor) .
+2.  In the query editor, create a stored procedure for Spark [using Python with PySpark editor](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-python-pyspark-editor) .
 
-3.  Click **Save \> Save procedure** .
+3.  Click ![](https://docs.cloud.google.com/static/bigquery/images/save-bigquery-console.png) **Save \> Save procedure** .
 
 4.  In the **Save stored procedure** dialog, specify the dataset name where you want to store the stored procedure and the name of the stored procedure.
 
@@ -220,16 +220,14 @@ After you [create the stored procedure](#use-python-pyspark-editor) by using the
 
 ### Use custom containers
 
-The [custom container](/dataproc-serverless/docs/guides/custom-containers) provides the runtime environment for the workload's driver and executor processes. To use custom containers, use the following sample code:
+The [custom container](https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers) provides the runtime environment for the workload's driver and executor processes. To use custom containers, use the following sample code:
 
-``` text
-CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
-  WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
-  OPTIONS (
-      engine="SPARK", runtime_version="RUNTIME_VERSION",
-      container_image="CONTAINER_IMAGE", main_file_uri=["MAIN_PYTHON_FILE_URI"]);
-  LANGUAGE PYTHON [AS PYSPARK_CODE]
-```
+    CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
+      WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
+      OPTIONS (
+          engine="SPARK", runtime_version="RUNTIME_VERSION",
+          container_image="CONTAINER_IMAGE", main_file_uri=["MAIN_PYTHON_FILE_URI"]);
+      LANGUAGE PYTHON [AS PYSPARK_CODE]
 
 Replace the following:
 
@@ -253,21 +251,21 @@ Replace the following:
     
     For example: `  myproject.mydataset.mysparkproc(num INT64)  ` .
     
-    For more information, see pass a value as an [`  IN  ` parameter](#pass-input-parameter) or the [`  OUT  ` and `  INOUT  ` parameters](#pass-input-output-parameter) in this document.
+    For more information, see pass a value as an [`  IN  ` parameter](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pass-input-parameter) or the [`  OUT  ` and `  INOUT  ` parameters](https://docs.cloud.google.com/bigquery/docs/spark-procedures#pass-input-output-parameter) in this document.
 
-  - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](/bigquery/docs/connect-to-spark) to run the Spark procedure.
+  - `  CONNECTION_PROJECT_ID  ` : the project that contains the [connection](https://docs.cloud.google.com/bigquery/docs/connect-to-spark) to run the Spark procedure.
 
   - `  CONNECTION_REGION  ` : the region that contains the connection to run the Spark procedure—for example, `  us  ` .
 
   - `  CONNECTION_ID  ` : the connection ID, for example, `  myconnection  ` .
     
-    When you [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    When you [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console, the connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
 
   - `  RUNTIME_VERSION  ` : the runtime version of Spark—for example, `  2.2  ` .
 
   - `  MAIN_PYTHON_FILE_URI  ` : the path to a PySpark file—for example, `  gs://mybucket/mypysparkmain.py  ` .
     
-    Alternatively, if you want to add the body of the stored procedure in the `  CREATE PROCEDURE  ` statement, then add `  PYSPARK_CODE  ` after `  LANGUAGE PYTHON AS  ` as shown in the example in [Use inline code](#use-inline-code) in this document.
+    Alternatively, if you want to add the body of the stored procedure in the `  CREATE PROCEDURE  ` statement, then add `  PYSPARK_CODE  ` after `  LANGUAGE PYTHON AS  ` as shown in the example in [Use inline code](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code) in this document.
 
   - `  PYSPARK_CODE  ` : the definition of a PySpark application in the `  CREATE PROCEDURE  ` statement if you want to pass the body of the procedure inline.
     
@@ -277,21 +275,25 @@ Replace the following:
       - Triple-quoted string: `  """return "\\n";"""  ` . Backslashes are escaped while quotation marks are not.
       - Raw string: `  r"""return "\n";"""  ` . No escaping is needed.
     
-    To learn how to add inline PySpark code, see [Use inline code](#use-inline-code) .
+    To learn how to add inline PySpark code, see [Use inline code](https://docs.cloud.google.com/bigquery/docs/spark-procedures#use-inline-code) .
 
-  - [`  CONTAINER_IMAGE  `](/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) : path of image in [artifacts registry](/artifact-registry) . It must only contain libraries to use in your procedure. If not specified, the system default container image associated with the runtime version is used.
+  - [`  CONTAINER_IMAGE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#procedure_option_list) : path of image in [artifacts registry](https://docs.cloud.google.com/artifact-registry) . It must only contain libraries to use in your procedure. If not specified, the system default container image associated with the runtime version is used.
 
-For more information about how to build a custom container image with Spark, see [Build a custom container image](/dataproc-serverless/docs/guides/custom-containers#build_a_custom_container_image) .
+For more information about how to build a custom container image with Spark, see [Build a custom container image](https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers#build_a_custom_container_image) .
 
 ## Call a stored procedure for Spark
 
-After you [create a stored procedure](#create-spark-procedure) , you can call it by using one the following options:
+After you [create a stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures#create-spark-procedure) , you can call it by using one the following options:
 
 ### Console
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click category **Classic Explorer** :
+    
+    ![Highlighted button for the Classic Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/classic-explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -307,27 +309,29 @@ After you [create a stored procedure](#create-spark-procedure) , you can call it
     
       - If you want to view Spark driver logs, then click **Execution details** .
     
-      - If you want to view logs in [Cloud Logging](/logging/docs) , click **Job information** , and then in the **Log** field, click **log** .
+      - If you want to view logs in [Cloud Logging](https://docs.cloud.google.com/logging/docs) , click **Job information** , and then in the **Log** field, click **log** .
     
       - If you want to get the Spark History Server endpoint, click **Job information** , and then click **Spark history server** .
 
 ### SQL
 
-To call a stored procedure, use the [`  CALL PROCEDURE  ` statement](/bigquery/docs/reference/standard-sql/procedural-language#call) :
+To call a stored procedure, use the [`  CALL PROCEDURE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CALL `PROJECT_ID`.DATASET.PROCEDURE_NAME()
     ```
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
-**Note:** You can also obtain the Cloud Logging filter information and the Spark History Cluster endpoint by using the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) . To learn how to get log filters, see [View log filters](#view-log-filters) in this document.
+**Note:** You can also obtain the Cloud Logging filter information and the Spark History Cluster endpoint by using the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) . To learn how to get log filters, see [View log filters](https://docs.cloud.google.com/bigquery/docs/spark-procedures#view-log-filters) in this document.
 
 ## Use a custom service account
 
@@ -335,31 +339,27 @@ Instead of using Spark connection's service identity for data access, you can us
 
 To use a custom service account, specify the `  INVOKER  ` security mode (using the `  EXTERNAL SECURITY INVOKER  ` statement) when you create a Spark stored procedure, and specify the service account when you invoke the stored procedure.
 
-When you run the Spark stored procedure with the custom service account for the first time, BigQuery creates a Spark service agent and grants the service agent required permissions. Make sure that you don't modify this grant before you invoke the Spark stored procedure. To learn more details, see [BigQuery Spark Service Agent](/iam/docs/service-agents#bigquery-spark-service-agent) .
+When you run the Spark stored procedure with the custom service account for the first time, BigQuery creates a Spark service agent and grants the service agent required permissions. Make sure that you don't modify this grant before you invoke the Spark stored procedure. To learn more details, see [BigQuery Spark Service Agent](https://docs.cloud.google.com/iam/docs/service-agents#bigquery-spark-service-agent) .
 
 If you want to access and use Spark code from Cloud Storage, you need to grant necessary permissions to the Spark connection's service identify. You need to grant the connection's service account the `  storage.objects.get  ` IAM permission or the `  storage.objectViewer  ` IAM role.
 
-Optionally, you can grant the connection's service account access to Dataproc Metastore and Dataproc Persistent History Server if you have specified them in the connection. For more information, see [Grant access to the service account](/bigquery/docs/connect-to-spark#grant-access) .
+Optionally, you can grant the connection's service account access to Dataproc Metastore and Dataproc Persistent History Server if you have specified them in the connection. For more information, see [Grant access to the service account](https://docs.cloud.google.com/bigquery/docs/connect-to-spark#grant-access) .
 
-``` text
-CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
-  EXTERNAL SECURITY INVOKER
-  WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
-  OPTIONS (
-      engine="SPARK", runtime_version="RUNTIME_VERSION",
-      main_file_uri=["MAIN_PYTHON_FILE_URI"]);
-  LANGUAGE PYTHON [AS PYSPARK_CODE]
-
-SET @@spark_proc_properties.service_account='CUSTOM_SERVICE_ACCOUNT';
-CALL PROJECT_ID.DATASET_ID.PROCEDURE_NAME();
-```
+    CREATE OR REPLACE PROCEDURE `PROJECT_ID`.DATASET.PROCEDURE_NAME(PROCEDURE_ARGUMENT)
+      EXTERNAL SECURITY INVOKER
+      WITH CONNECTION `CONNECTION_PROJECT_ID.CONNECTION_REGION.CONNECTION_ID`
+      OPTIONS (
+          engine="SPARK", runtime_version="RUNTIME_VERSION",
+          main_file_uri=["MAIN_PYTHON_FILE_URI"]);
+      LANGUAGE PYTHON [AS PYSPARK_CODE]
+    
+    SET @@spark_proc_properties.service_account='CUSTOM_SERVICE_ACCOUNT';
+    CALL PROJECT_ID.DATASET_ID.PROCEDURE_NAME();
 
 Optionally, you can add the following arguments to the preceding code:
 
-``` text
-SET @@spark_proc_properties.staging_bucket='BUCKET_NAME';
-SET @@spark_proc_properties.staging_dataset_id='DATASET';
-```
+    SET @@spark_proc_properties.staging_bucket='BUCKET_NAME';
+    SET @@spark_proc_properties.staging_dataset_id='DATASET';
 
 Replace the following:
 
@@ -380,7 +380,7 @@ Your custom service account must have the following permissions:
       - `  bigquery.readsessions.*  ` on your project.
       - The `  roles/bigquery.admin  ` IAM role includes the previous permissions.
     
-    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](/bigquery/docs/batch-loading-data) , then your custom service account must have the `  bigquery.jobs.create  ` permission on your project. For more information about IAM roles and permissions in BigQuery, see [IAM roles and permissions](/bigquery/docs/access-control) .
+    **Note:** If your stored procedure writes data to a temporary Cloud Storage bucket and then [loads the Cloud Storage data to BigQuery](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) , then your custom service account must have the `  bigquery.jobs.create  ` permission on your project. For more information about IAM roles and permissions in BigQuery, see [IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
   - (Optional) To read and write data from and to Cloud Storage:
     
@@ -401,7 +401,7 @@ The following example shows how to create a stored procedure for Spark by using 
 
 ### Python
 
-``` text
+``` notranslate
 CREATE PROCEDURE my_bq_project.my_dataset.spark_proc()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-pyspark-main.py")
@@ -412,7 +412,7 @@ LANGUAGE PYTHON
 
 Use `  main_file_uri  ` to create a stored procedure:
 
-``` text
+``` notranslate
 CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_wtih_main_jar()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2", main_file_uri="gs://my-bucket/my-scala-main.jar")
@@ -421,7 +421,7 @@ LANGUAGE SCALA
 
 Use `  main_class  ` to create a stored procedure:
 
-``` text
+``` notranslate
 CREATE PROCEDURE my_bq_project.my_dataset.scala_proc_with_main_class()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2",
@@ -433,7 +433,7 @@ LANGUAGE SCALA
 
 The following example shows how to create a stored procedure for Spark by using the connection `  my-project-id.us.my-connection  ` and inline PySpark code:
 
-``` text
+``` notranslate
 CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2")
@@ -466,11 +466,11 @@ The following examples display the two methods to pass a value as an input param
 
 #### Method 1: Use environment variables
 
-In the PySpark code, you can obtain the input parameters of the stored procedure for Spark through environment variables in the Spark driver and executors. The name of the environment variable has the format of `  BIGQUERY_PROC_PARAM. PARAMETER_NAME  ` , where `  PARAMETER_NAME  ` is the name of the input parameter. For example, if the name of the input parameter is `  var  ` , the name of the corresponding environment variable is `  BIGQUERY_PROC_PARAM.var  ` . The input parameters are [JSON encoded](/bigquery/docs/reference/standard-sql/json_functions#json_encodings) . In your PySpark code, you can get the input parameter value in a JSON string from the environment variable and decode it to a Python variable.
+In the PySpark code, you can obtain the input parameters of the stored procedure for Spark through environment variables in the Spark driver and executors. The name of the environment variable has the format of `  BIGQUERY_PROC_PARAM. PARAMETER_NAME  ` , where `  PARAMETER_NAME  ` is the name of the input parameter. For example, if the name of the input parameter is `  var  ` , the name of the corresponding environment variable is `  BIGQUERY_PROC_PARAM.var  ` . The input parameters are [JSON encoded](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions#json_encodings) . In your PySpark code, you can get the input parameter value in a JSON string from the environment variable and decode it to a Python variable.
 
 The following example shows how to get the value of an input parameter of type `  INT64  ` into your PySpark code:
 
-``` text
+``` notranslate
 CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64)
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2")
@@ -492,84 +492,28 @@ num = int(json.loads(os.environ["BIGQUERY_PROC_PARAM.num"]))
 
 In the PySpark code, you can simply import a built-in library and use it to populate all types of parameters. To pass the parameters to executors, populate the parameters in a Spark driver as Python variables and pass the values to executors. The built-in library supports most of the BigQuery data types except `  INTERVAL  ` , `  GEOGRAPHY  ` , `  NUMERIC  ` , and `  BIGNUMERIC  ` .
 
-<table>
-<thead>
-<tr class="header">
-<th>BigQuery data type</th>
-<th>Python data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><code dir="ltr" translate="no">       bool      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       str      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-<td><code dir="ltr" translate="no">       float      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       int      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td><code dir="ltr" translate="no">       bytes      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       datetime.date      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       datetime.datetime      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-<td><code dir="ltr" translate="no">       datetime.time      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-<td><code dir="ltr" translate="no">       datetime.datetime      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Array      </code></td>
-<td><code dir="ltr" translate="no">       Array      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Struct      </code></td>
-<td><code dir="ltr" translate="no">       Struct      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td><code dir="ltr" translate="no">       Object      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td>Unsupported</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td>Unsupported</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INTERVAL      </code></td>
-<td>Unsupported</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
-<td>Unsupported</td>
-</tr>
-</tbody>
-</table>
+| BigQuery data type          | Python data type                   |
+| --------------------------- | ---------------------------------- |
+| `        BOOL       `       | `        bool       `              |
+| `        STRING       `     | `        str       `               |
+| `        FLOAT64       `    | `        float       `             |
+| `        INT64       `      | `        int       `               |
+| `        BYTES       `      | `        bytes       `             |
+| `        DATE       `       | `        datetime.date       `     |
+| `        TIMESTAMP       `  | `        datetime.datetime       ` |
+| `        TIME       `       | `        datetime.time       `     |
+| `        DATETIME       `   | `        datetime.datetime       ` |
+| `        Array       `      | `        Array       `             |
+| `        Struct       `     | `        Struct       `            |
+| `        JSON       `       | `        Object       `            |
+| `        NUMERIC       `    | Unsupported                        |
+| `        BIGNUMERIC       ` | Unsupported                        |
+| `        INTERVAL       `   | Unsupported                        |
+| `        GEOGRAPHY       `  | Unsupported                        |
 
 The following example shows how to import the built-in library and use it to populate an input parameter of type INT64 and an input parameter of type ARRAY\<STRUCT\<a INT64, b STRING\>\> into your PySpark code:
 
-``` text
+``` notranslate
 CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc(num INT64, info ARRAY<STRUCT<a INT64, b STRING>>)
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2")
@@ -603,21 +547,17 @@ In the Java or Scala code, you can obtain the input parameters of the stored pro
 
 The following example shows how to get the value of an input parameter from environment variables into your Scala code:
 
-``` text
-val input_param = sys.env.get("BIGQUERY_PROC_PARAM.input_param").get
-```
+    val input_param = sys.env.get("BIGQUERY_PROC_PARAM.input_param").get
 
 The following example shows getting input parameters from environment variables into your Java code:
 
-``` text
-String input_param = System.getenv("BIGQUERY_PROC_PARAM.input_param");
-```
+    String input_param = System.getenv("BIGQUERY_PROC_PARAM.input_param");
 
 ### Pass values as `     OUT    ` and `     INOUT    ` parameters
 
 Output parameters return the value from the Spark procedure, whereas the `  INOUT  ` parameter accepts a value for the procedure and returns a value from the procedure. To use the `  OUT  ` and `  INOUT  ` parameters, add the `  OUT  ` or `  INOUT  ` keyword before the parameter name when creating the Spark procedure. In the PySpark code, you use the built-in library to return a value as an `  OUT  ` or an `  INOUT  ` parameter. Same as input parameters, the built-in library supports most of the BigQuery data types except `  INTERVAL  ` , `  GEOGRAPHY  ` , `  NUMERIC  ` , and `  BIGNUMERIC  ` . The `  TIME  ` and `  DATETIME  ` type values are converted to the UTC timezone when returning as the `  OUT  ` or `  INOUT  ` parameters.
 
-``` text
+``` notranslate
 CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.pyspark_proc(IN int INT64, INOUT datetime DATETIME,OUT b BOOL, OUT info ARRAY<STRUCT<a INT64, b STRING>>, OUT time TIME, OUT f FLOAT64, OUT bs BYTES, OUT date DATE, OUT ts TIMESTAMP, OUT js JSON)
 WITH CONNECTION `my_bq_project.my_dataset.my_connection`
 OPTIONS(engine="SPARK", runtime_version="2.2") LANGUAGE PYTHON AS
@@ -651,7 +591,7 @@ spark_proc_param_context.js = {"name": "Alice", "age": 30}
 
 The following example shows how to transform a Hive Metastore table and write the results to BigQuery:
 
-``` text
+``` notranslate
 CREATE OR REPLACE PROCEDURE my_bq_project.my_dataset.spark_proc()
 WITH CONNECTION `my-project-id.us.my-connection`
 OPTIONS(engine="SPARK", runtime_version="2.2")
@@ -680,21 +620,21 @@ df.write.format("bigquery") \
 
 ## View log filters
 
-After you [call a stored procedure for Spark](#call-spark-procedure) , you can view the log information. To obtain the Cloud Logging filter information and the Spark History Cluster endpoint, use the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) . The filter information is available under the `  SparkStatistics  ` field of the child job. To get log filters, follow these steps:
+After you [call a stored procedure for Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures#call-spark-procedure) , you can view the log information. To obtain the Cloud Logging filter information and the Spark History Cluster endpoint, use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) . The filter information is available under the `  SparkStatistics  ` field of the child job. To get log filters, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, list child jobs of the stored procedure's script job:
     
-    ``` text
-    bq ls -j --parent_job_id=$parent_job_id
-    ```
+        bq ls -j --parent_job_id=$parent_job_id
     
-    To learn how to get the job ID, see [View job details](/bigquery/docs/managing-jobs#view-job) .
+    To learn how to get the job ID, see [View job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
     
     The output is similar to the following:
     
-    ``` text
+    ``` 
                     jobId                         Job Type     State       Start Time         Duration
     ---------------------------------------------- ---------   ---------  ---------------  ----------------
     script_job_90fb26c32329679c139befcc638a7e71_0   query      SUCCESS   07 Sep 18:00:27   0:05:15.052000
@@ -702,73 +642,63 @@ After you [call a stored procedure for Spark](#call-spark-procedure) , you can v
 
 3.  Identify the `  jobId  ` for your stored procedure and use the `  bq show  ` command to view details of the job:
     
-    ``` text
-    bq show --format=prettyjson --job $child_job_id
-    ```
+        bq show --format=prettyjson --job $child_job_id
     
     Copy the `  sparkStatistics  ` field because you need it in another step.
     
     The output is similar to the following:
     
-    ``` text
-    {
-    "configuration": {...}
-    …
-    "statistics": {
-     …
-      "query": {
-        "sparkStatistics": {
-          "loggingInfo": {
-            "projectId": "myproject",
-            "resourceType": "myresource"
-          },
-          "sparkJobId": "script-job-90f0",
-          "sparkJobLocation": "us-central1"
-        },
+        {
+        "configuration": {...}
         …
-      }
-    }
-    }
-    ```
+        "statistics": {
+         …
+          "query": {
+            "sparkStatistics": {
+              "loggingInfo": {
+                "projectId": "myproject",
+                "resourceType": "myresource"
+              },
+              "sparkJobId": "script-job-90f0",
+              "sparkJobLocation": "us-central1"
+            },
+            …
+          }
+        }
+        }
 
-4.  For Logging, [generate log filters](/logging/docs/view/building-queries) with the `  SparkStatistics  ` fields:
+4.  For Logging, [generate log filters](https://docs.cloud.google.com/logging/docs/view/building-queries) with the `  SparkStatistics  ` fields:
     
-    ``` text
-    resource.type = sparkStatistics.loggingInfo.resourceType
-    resource.labels.resource_container=sparkStatistics.loggingInfo.projectId
-    resource.labels.spark_job_id=sparkStatistics.sparkJobId
-    resource.labels.location=sparkStatistics.sparkJobLocation
-    ```
+        resource.type = sparkStatistics.loggingInfo.resourceType
+        resource.labels.resource_container=sparkStatistics.loggingInfo.projectId
+        resource.labels.spark_job_id=sparkStatistics.sparkJobId
+        resource.labels.location=sparkStatistics.sparkJobLocation
     
     The logs are written in the `  bigquery.googleapis.com/SparkJob  ` monitored resource. The logs are labeled by the `  INFO  ` , `  DRIVER  ` , and `  EXECUTOR  ` components. To filter logs from the Spark driver, add the `  labels.component = "DRIVER"  ` component to the log filters. To filter logs from the Spark executor, add the `  labels.component = "EXECUTOR"  ` component to the log filters.
 
 ## Use the customer-managed encryption key
 
-BigQuery Spark procedure uses the customer-managed encryption key (CMEK) to protect your content, along with the default encryption provided by BigQuery. To use the CMEK in the Spark procedure, first trigger creation of the BigQuery [encryption service account and grant the required permissions](/bigquery/docs/customer-managed-encryption#grant_permission) . Spark procedure also supports the [CMEK organization policies](/kms/docs/cmek-org-policy) if they are applied to your project.
+BigQuery Spark procedure uses the customer-managed encryption key (CMEK) to protect your content, along with the default encryption provided by BigQuery. To use the CMEK in the Spark procedure, first trigger creation of the BigQuery [encryption service account and grant the required permissions](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption#grant_permission) . Spark procedure also supports the [CMEK organization policies](https://docs.cloud.google.com/kms/docs/cmek-org-policy) if they are applied to your project.
 
 If your stored procedure is using the `  INVOKER  ` security mode, your CMEK should be specified through the SQL system variable when calling the procedure. Otherwise, your CMEK can be specified through the connection associated with the stored procedure.
 
 To specify the CMEK through the connection when you create a Spark stored procedure, use the following sample code:
 
-``` text
-bq mk --connection --connection_type='SPARK' \
- --properties='{"kms_key_name"="projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING_NAME/cryptoKeys/KMS_KEY_NAME"}' \
- --project_id=PROJECT_ID \
- --location=LOCATION \
- CONNECTION_NAME
-```
+    bq mk --connection --connection_type='SPARK' \
+     --properties='{"kms_key_name"="projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING_NAME/cryptoKeys/KMS_KEY_NAME"}' \
+     --project_id=PROJECT_ID \
+     --location=LOCATION \
+     CONNECTION_NAME
 
 To specify CMEK through the SQL system variable when calling the procedure, use the following sample code:
 
-``` text
-SET @@spark_proc_properties.service_account='CUSTOM_SERVICE_ACCOUNT';
-SET @@spark_proc_properties.kms_key_name='projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING_NAME/cryptoKeys/KMS_KEY_NAME;
-CALL PROJECT_ID.DATASET_ID.PROCEDURE_NAME();
-```
+    SET @@spark_proc_properties.service_account='CUSTOM_SERVICE_ACCOUNT';
+    SET @@spark_proc_properties.kms_key_name='projects/PROJECT_ID/locations/LOCATION/keyRings/KEY_RING_NAME/cryptoKeys/KMS_KEY_NAME;
+    CALL PROJECT_ID.DATASET_ID.PROCEDURE_NAME();
 
 ## Use VPC Service Controls
 
-VPC Service Controls lets you set up a secure perimeter to guard against data exfiltration. To use VPC Service Controls with a Spark procedure for additional security, first [create a service perimeter](/vpc-service-controls/docs/create-service-perimeters) .
+VPC Service Controls lets you set up a secure perimeter to guard against data exfiltration. To use VPC Service Controls with a Spark procedure for additional security, first [create a service perimeter](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters) .
 
 To fully protect your Spark procedure jobs, add the following APIs to the service perimeter:
 
@@ -784,26 +714,26 @@ Add the spark procedure's query project into the perimeter. Add other projects t
 
   - When you use a connection in your project for the first time, it takes about an extra minute to provision. To save time, you can reuse an existing Spark connection when you create a stored procedure for Spark.
 
-  - When you create a Spark procedure for production use, Google recommends specifying a runtime version. For a list of supported runtime versions, see [Serverless for Apache Spark runtime versions](/dataproc-serverless/docs/concepts/versions/dataproc-serverless-versions) . We recommended to use the Long-Time-Support (LTS) version.
+  - When you create a Spark procedure for production use, Google recommends specifying a runtime version. For a list of supported runtime versions, see [Serverless for Apache Spark runtime versions](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/versions/dataproc-serverless-versions) . We recommended to use the Long-Time-Support (LTS) version.
 
-  - When you specify a custom container in a Spark procedure, we recommend using Artifact Registry and [image streaming](/dataproc-serverless/docs/guides/custom-containers#image_streaming) .
+  - When you specify a custom container in a Spark procedure, we recommend using Artifact Registry and [image streaming](https://docs.cloud.google.com/dataproc-serverless/docs/guides/custom-containers#image_streaming) .
 
-  - For better performance, you can specify [resource allocation properties](/dataproc-serverless/docs/concepts/properties#resource_allocation_properties) in the Spark procedure. Spark stored procedures support a list of resource allocation properties same as Serverless for Apache Spark.
+  - For better performance, you can specify [resource allocation properties](https://docs.cloud.google.com/dataproc-serverless/docs/concepts/properties#resource_allocation_properties) in the Spark procedure. Spark stored procedures support a list of resource allocation properties same as Serverless for Apache Spark.
 
 ## Limitations
 
-  - You can only use [gRPC endpoint protocol](/dataproc-metastore/docs/about-endpoint-protocols#grpc) to connect to [Dataproc Metastore](/dataproc-metastore/docs/overview) . Other types of Hive Metastore are not supported.
-  - [Customer-managed encryption keys (CMEK)](/kms/docs/cmek) are only available when customers create single-region Spark procedures. Global region CMEK keys and multi-region CMEK keys, for example, `  EU  ` or `  US  ` , are not supported.
+  - You can only use [gRPC endpoint protocol](https://docs.cloud.google.com/dataproc-metastore/docs/about-endpoint-protocols#grpc) to connect to [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) . Other types of Hive Metastore are not supported.
+  - [Customer-managed encryption keys (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) are only available when customers create single-region Spark procedures. Global region CMEK keys and multi-region CMEK keys, for example, `  EU  ` or `  US  ` , are not supported.
   - Passing output parameters is only supported for PySpark.
-  - If the dataset associated with the stored procedure for Spark is replicated to a destination region through [cross-region dataset replication](/bigquery/docs/data-replication) , the stored procedure can only be queried in the region that it was created in.
+  - If the dataset associated with the stored procedure for Spark is replicated to a destination region through [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) , the stored procedure can only be queried in the region that it was created in.
   - Spark doesn't support accessing HTTP endpoints in your private VPC Service Controls network.
 
 ## Quotas and limits
 
-For information about quotas and limits, see [stored procedures for Spark quotas and limits](/bigquery/quotas#spark-procedure) .
+For information about quotas and limits, see [stored procedures for Spark quotas and limits](https://docs.cloud.google.com/bigquery/quotas#spark-procedure) .
 
 ## What's next
 
-  - Learn how to [view a stored procedure](/bigquery/docs/routines#view_the_body_of_a_routine) .
-  - Learn how to [delete a stored procedure](/bigquery/docs/routines#delete_a_routine) .
-  - Learn how to [work with a SQL stored procedure](/bigquery/docs/procedures) .
+  - Learn how to [view a stored procedure](https://docs.cloud.google.com/bigquery/docs/routines#view_the_body_of_a_routine) .
+  - Learn how to [delete a stored procedure](https://docs.cloud.google.com/bigquery/docs/routines#delete_a_routine) .
+  - Learn how to [work with a SQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) .

@@ -2,7 +2,7 @@
 
 Anomaly detection is a data mining technique that you can use to identify data deviations in a given dataset. For example, if the return rate for a given product increases substantially from the baseline for that product, that might indicate a product defect or potential fraud. You can use anomaly detection to detect critical incidents, such as technical issues, or opportunities, such as changes in consumer behavior.
 
-It can be challenging to determine what counts as anomalous data. If you aren't certain what counts as anomalous data, or you don't have labeled data to train a model on, you can use unsupervised machine learning to perform anomaly detection. Use the [`  AI.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) or [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with one of the following models to detect anomalies in training data or new serving data:
+It can be challenging to determine what counts as anomalous data. If you aren't certain what counts as anomalous data, or you don't have labeled data to train a model on, you can use unsupervised machine learning to perform anomaly detection. Use the [`  AI.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) or [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) with one of the following models to detect anomalies in training data or new serving data:
 
 Data type
 
@@ -14,19 +14,19 @@ What the function does
 
 Time series
 
-[`  TimesFM  `](/bigquery/docs/timesfm-model)
+[`  TimesFM  `](https://docs.cloud.google.com/bigquery/docs/timesfm-model)
 
 `  AI.DETECT_ANOMALIES  `
 
 Detect the anomalies in the time series.
 
-[`  ARIMA_PLUS  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+[`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
 
 `  ML.DETECT_ANOMALIES  `
 
 Detect the anomalies in the time series.
 
-[`  ARIMA_PLUS_XREG  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+[`  ARIMA_PLUS_XREG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
 
 `  ML.DETECT_ANOMALIES  `
 
@@ -34,28 +34,28 @@ Detect the anomalies in the time series with external regressors.
 
 [Independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables)
 
-[K-means](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+[K-means](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
 
 `  ML.DETECT_ANOMALIES  `
 
-Detect anomalies based on the shortest distance among the normalized distances from the input data to each cluster centroid. For a definition of normalized distances, see [the k-means model output for the `  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies#k-means_model_output) .
+Detect anomalies based on the shortest distance among the normalized distances from the input data to each cluster centroid. For a definition of normalized distances, see [the k-means model output for the `  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies#k-means_model_output) .
 
-[Autoencoder](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+[Autoencoder](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
 Detect anomalies based on the reconstruction loss in terms of mean squared error. For more information, see `  ML.RECONSTRUCTION_LOSS  ` . The `  ML.RECONSTRUCTION_LOSS  ` function can retrieve all types of reconstruction loss.
 
-[PCA](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+[PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
 
 Detect anomalies based upon the reconstruction loss in terms of mean squared error.
 
-If you already have labeled data that identifies anomalies, you can perform anomaly detection by using the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) with one of the following supervised machine learning models:
+If you already have labeled data that identifies anomalies, you can perform anomaly detection by using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) with one of the following supervised machine learning models:
 
-  - [Linear and logistic regression models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-  - [Boosted trees models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Random forest models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [Deep neural network (DNN) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Wide & Deep models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-  - [AutoML models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+  - [Linear and logistic regression models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+  - [Boosted trees models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Random forest models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+  - [Deep neural network (DNN) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+  - [Wide & Deep models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+  - [AutoML models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
 ## Recommended knowledge
 

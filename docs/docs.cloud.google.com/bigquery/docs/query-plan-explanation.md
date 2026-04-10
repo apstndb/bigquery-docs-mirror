@@ -1,4 +1,4 @@
-Embedded within query jobs, BigQuery includes diagnostic query plan and timing information. This is similar to the information provided by statements such as `  EXPLAIN  ` in other database and analytical systems. This information can be retrieved from the API responses of methods such as [`  jobs.get  `](/bigquery/docs/reference/rest/v2/jobs/get) .
+Embedded within query jobs, BigQuery includes diagnostic query plan and timing information. This is similar to the information provided by statements such as `  EXPLAIN  ` in other database and analytical systems. This information can be retrieved from the API responses of methods such as [`  jobs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .
 
 For long running queries, BigQuery will periodically update these statistics. These updates happen independently of the rate at which the job status is polled, but typically won't happen more frequently than every 30 seconds. Additionally, query jobs that don't use execution resources, such as dry run requests or results that can be served from cached results, won't include the additional diagnostic information, though other statistics may be present.
 
@@ -16,6 +16,8 @@ In addition to the query plan, query jobs also expose a **timeline** of executio
 
 In the [Google Cloud console](https://console.cloud.google.com/bigquery) , you can see details of the query plan for a completed query by clicking the **Execution Details** button.
 
+![The query plan.](https://docs.cloud.google.com/static/bigquery/images/explanation-button.png)
+
 ## Query plan information
 
 Within the API response, query plans are represented as a list of query stages. Each item in the list shows per-stage overview statistics, detailed step information, and stage timing classifications. Not all details are rendered within the Google Cloud console, but they can all be present within the API responses.
@@ -24,7 +26,11 @@ Within the API response, query plans are represented as a list of query stages. 
 
 In the Google Cloud console, you can see the query plan details by clicking the **Execution graph** tab.
 
+![The execution graph tab.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-tab.png)
+
 The **Execution graph** panel is organized as follows:
+
+![The execution graph layout.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-layout.png)
 
   - In the center is the **execution graph** . It shows stages as nodes and shuffle memory exchanged between stages as edges.
   - The left panel has the **query text heatmap** . It shows the main query text that the query executed along with any referenced views.
@@ -42,7 +48,7 @@ To navigate around the execution graph, you can:
 
 Clicking on a stage in the graph shows the selected stage's details. The stage details have:
 
-  - Statistics. See [Stage overview](#stage-overview) for details about the statistics.
+  - Statistics. See [Stage overview](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#stage-overview) for details about the statistics.
   - Step details. Steps describe the individual operations that execute the query's logic.
 
 #### Step details
@@ -51,9 +57,11 @@ Stages are made up of steps, the individual operations that execute the query's 
 
 The following image shows a stages steps:
 
+![The execution graph step details.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-step-details.png)
+
 Here is an example of a stage's steps:
 
-``` text
+``` 
   READ
   $30:l_orderkey, $31:l_quantity
   FROM lineitem
@@ -74,7 +82,7 @@ The example's steps describe the following:
   - The stage aggregated the variables $30 and $31, storing aggregations into the variables $100 and $70, respectively.
   - The stage wrote the results of the variables $100 and $70 to shuffle. The stage ordered the results in shuffle memory based on $100.
 
-See [Interpret and optimize steps](#interpret-and-optimize-steps) for full details about the type of steps and how to optimize them.
+See [Interpret and optimize steps](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#interpret-and-optimize-steps) for full details about the type of steps and how to optimize them.
 
 BigQuery might truncate substeps when the query's execution graph was complex enough that providing complete substeps would cause payload size issues when retrieving query information.
 
@@ -84,84 +92,43 @@ BigQuery can map some stage steps to portions of query text. The query text heat
 
 The following image shows the highlighted query text:
 
+![The execution graph highlighted query text.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-query-text.png)
+
 Holding the pointer over a mapped portion of the query text shows a tooltip that lists all stage steps that map to the query text along with stage slot-time. Clicking on a mapped query text selects the stage in the execution graph and opens the stage details in the right panel.
+
+![The execution graph associates the query text with the stage.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-stage-selection.png)
 
 A single portion of query text can map to multiple stages. The tooltip lists each mapped stage and its slot-time. Clicking on the query text highlights the corresponding stages and grays out the rest of the graph. Subsequently clicking on a specific stage shows its details.
 
 The following image shows how the query text relates to the step details:
 
+![The execution graph associates the query text with the step.](https://docs.cloud.google.com/static/bigquery/images/execution-graph-query-text-step-details.png)
+
 In a stage's **Step details** section, if a step maps to query text, the step has a code icon. Clicking on the code icon highlights the mapped portion of query text on the left.
 
 It is important to keep in mind that the heatmap color is based on the entire stage's slot-time. Because BigQuery does not measure the slot-time of steps, the heatmap does not represent the actual slot-time for that specific portion of mapped query text. In most cases, a stage performs just a single complex step, like a join or aggregate. Thus the heatmap color is appropriate. However, when a stage is made up of steps that perform multiple complex operations, the heatmap color may overrepresent the actual slot-time in the heatmap. In such cases, it is important to understand the other steps that make up the stage to get a more complete understanding of the query's performance.
 
-If a query uses views, and the stage's steps have mappings to a view's query text, then the query text heatmap shows the view's name and view's query text with their mappings. However, if the view is deleted, or if you lose the `  bigquery.tables.get  ` [IAM permission](/bigquery/docs/access-control) on the view, then the query text heatmap doesn't show the stage steps' mappings for the view.
+If a query uses views, and the stage's steps have mappings to a view's query text, then the query text heatmap shows the view's name and view's query text with their mappings. However, if the view is deleted, or if you lose the `  bigquery.tables.get  ` [IAM permission](https://docs.cloud.google.com/bigquery/docs/access-control) on the view, then the query text heatmap doesn't show the stage steps' mappings for the view.
 
 ### Stage overview
 
 The overview fields for each stage can include the following:
 
-<table>
-<thead>
-<tr class="header">
-<th>API field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       id      </code></td>
-<td>Unique numeric ID for the stage.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       name      </code></td>
-<td>Simple summary name for the stage. The <code dir="ltr" translate="no">       steps      </code> within the stage provide additional details about execution steps.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       status      </code></td>
-<td>Execution status of the stage. Possible states include PENDING, RUNNING, COMPLETE, FAILED, and CANCELLED.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       inputStages      </code></td>
-<td>A list of the IDs that form the dependency graph of the stage. For example, a JOIN stage often needs two dependent stages that prepare the data on the left and right side of the JOIN relationship.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       startMs      </code></td>
-<td>Timestamp, in epoch milliseconds, that represents when the first worker within the stage began execution.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       endMs      </code></td>
-<td>Timestamp, in epoch milliseconds, that represents when the last worker completed execution.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       steps      </code></td>
-<td>More detailed list of execution steps within the stage. See next section for more information.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       recordsRead      </code></td>
-<td>Input size of the stage as number of records, across all stage workers.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       recordsWritten      </code></td>
-<td>Output size of the stage as number of records, across all stage workers.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       parallelInputs      </code></td>
-<td>Number of parallelizable units of work for the stage. Depending on the stage and query, this may represent the number of columnar segments within a table, or the number of partitions within an intermediate shuffle.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       completedParallelInputs      </code></td>
-<td>Number of units work within the stage that were completed. For some queries, not all inputs within a stage need to be completed for the stage to complete.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       shuffleOutputBytes      </code></td>
-<td>Represents the total bytes written across all workers within a query stage.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       shuffleOutputBytesSpilled      </code></td>
-<td>Queries that transmit significant data between stages may need to fallback to disk-based transmission. The spilled bytes statistic communicates how much data was spilled to disk. Depends on an optimization algorithm so it is not deterministic for any given query.</td>
-</tr>
-</tbody>
-</table>
+| API field                                  | Description                                                                                                                                                                                                                                                             |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        id       `                        | Unique numeric ID for the stage.                                                                                                                                                                                                                                        |
+| `        name       `                      | Simple summary name for the stage. The `        steps       ` within the stage provide additional details about execution steps.                                                                                                                                        |
+| `        status       `                    | Execution status of the stage. Possible states include PENDING, RUNNING, COMPLETE, FAILED, and CANCELLED.                                                                                                                                                               |
+| `        inputStages       `               | A list of the IDs that form the dependency graph of the stage. For example, a JOIN stage often needs two dependent stages that prepare the data on the left and right side of the JOIN relationship.                                                                    |
+| `        startMs       `                   | Timestamp, in epoch milliseconds, that represents when the first worker within the stage began execution.                                                                                                                                                               |
+| `        endMs       `                     | Timestamp, in epoch milliseconds, that represents when the last worker completed execution.                                                                                                                                                                             |
+| `        steps       `                     | More detailed list of execution steps within the stage. See next section for more information.                                                                                                                                                                          |
+| `        recordsRead       `               | Input size of the stage as number of records, across all stage workers.                                                                                                                                                                                                 |
+| `        recordsWritten       `            | Output size of the stage as number of records, across all stage workers.                                                                                                                                                                                                |
+| `        parallelInputs       `            | Number of parallelizable units of work for the stage. Depending on the stage and query, this may represent the number of columnar segments within a table, or the number of partitions within an intermediate shuffle.                                                  |
+| `        completedParallelInputs       `   | Number of units work within the stage that were completed. For some queries, not all inputs within a stage need to be completed for the stage to complete.                                                                                                              |
+| `        shuffleOutputBytes       `        | Represents the total bytes written across all workers within a query stage.                                                                                                                                                                                             |
+| `        shuffleOutputBytesSpilled       ` | Queries that transmit significant data between stages may need to fallback to disk-based transmission. The spilled bytes statistic communicates how much data was spilled to disk. Depends on an optimization algorithm so it is not deterministic for any given query. |
 
 ### Per-stage timing classification
 
@@ -171,112 +138,33 @@ The Google Cloud console presents stage timing using the relative timing represe
 
 The stage timing information is reported as follows:
 
-<table>
-<thead>
-<tr class="header">
-<th>Relative timing</th>
-<th>Absolute timing</th>
-<th>Ratio numerator</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       waitRatioAvg      </code></td>
-<td><code dir="ltr" translate="no">       waitMsAvg      </code></td>
-<td>Time the average worker spent waiting to be scheduled.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       waitRatioMax      </code></td>
-<td><code dir="ltr" translate="no">       waitMsMax      </code></td>
-<td>Time the slowest worker spent waiting to be scheduled.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       readRatioAvg      </code></td>
-<td><code dir="ltr" translate="no">       readMsAvg      </code></td>
-<td>Time the average worker spent reading input data.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       readRatioMax      </code></td>
-<td><code dir="ltr" translate="no">       readMsMax      </code></td>
-<td>Time the slowest worker spent reading input data.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       computeRatioAvg      </code></td>
-<td><code dir="ltr" translate="no">       computeMsAvg      </code></td>
-<td>Time the average worker spent CPU bound.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       computeRatioMax      </code></td>
-<td><code dir="ltr" translate="no">       computeMsMax      </code></td>
-<td>Time the slowest worker spent CPU bound.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       writeRatioAvg      </code></td>
-<td><code dir="ltr" translate="no">       writeMsAvg      </code></td>
-<td>Time the average worker spent writing output data.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       writeRatioMax      </code></td>
-<td><code dir="ltr" translate="no">       writeMsMax      </code></td>
-<td>Time the slowest worker spent writing output data.</td>
-</tr>
-</tbody>
-</table>
+| Relative timing                  | Absolute timing               | Ratio numerator                                        |
+| -------------------------------- | ----------------------------- | ------------------------------------------------------ |
+| `        waitRatioAvg       `    | `        waitMsAvg       `    | Time the average worker spent waiting to be scheduled. |
+| `        waitRatioMax       `    | `        waitMsMax       `    | Time the slowest worker spent waiting to be scheduled. |
+| `        readRatioAvg       `    | `        readMsAvg       `    | Time the average worker spent reading input data.      |
+| `        readRatioMax       `    | `        readMsMax       `    | Time the slowest worker spent reading input data.      |
+| `        computeRatioAvg       ` | `        computeMsAvg       ` | Time the average worker spent CPU bound.               |
+| `        computeRatioMax       ` | `        computeMsMax       ` | Time the slowest worker spent CPU bound.               |
+| `        writeRatioAvg       `   | `        writeMsAvg       `   | Time the average worker spent writing output data.     |
+| `        writeRatioMax       `   | `        writeMsMax       `   | Time the slowest worker spent writing output data.     |
 
 ### Step overview
 
 Steps contain the operations that each worker within a stage executes, presented as an ordered list of operations. Each step operation has a category, with some operations providing more detailed information. The operation categories present in the query plan include the following:
 
-<table>
-<thead>
-<tr class="header">
-<th>Step category</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       READ      </code></td>
-<td>A read of one or more columns from an input table or from intermediate shuffle. Only the first sixteen columns that are read are returned in the step details.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       WRITE      </code></td>
-<td>A write of one or more columns to an output table or to intermediate shuffle. For <code dir="ltr" translate="no">       HASH      </code> partitioned outputs from a stage, this also includes the columns used as the partition key.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COMPUTE      </code></td>
-<td>Expression evaluation and SQL functions.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FILTER      </code></td>
-<td>Used by <code dir="ltr" translate="no">       WHERE      </code> , <code dir="ltr" translate="no">       OMIT IF      </code> , and <code dir="ltr" translate="no">       HAVING      </code> clauses.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       SORT      </code></td>
-<td><code dir="ltr" translate="no">       ORDER BY      </code> operation that includes the column keys and the sort order.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       AGGREGATE      </code></td>
-<td>Implements aggregations for clauses like <code dir="ltr" translate="no">       GROUP BY      </code> or <code dir="ltr" translate="no">       COUNT      </code> , among others.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LIMIT      </code></td>
-<td>Implements the <code dir="ltr" translate="no">       LIMIT      </code> clause.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       JOIN      </code></td>
-<td>Implements joins for clauses like <code dir="ltr" translate="no">       JOIN      </code> , among others; includes the join type and possibly the join conditions.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ANALYTIC_FUNCTION      </code></td>
-<td>An invocation of a window function (also known as an "analytic function").</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       USER_DEFINED_FUNCTION      </code></td>
-<td>An invocation to a user-defined function.</td>
-</tr>
-</tbody>
-</table>
+| Step category                          | Description                                                                                                                                                                                         |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        READ       `                  | A read of one or more columns from an input table or from intermediate shuffle. Only the first sixteen columns that are read are returned in the step details.                                      |
+| `        WRITE       `                 | A write of one or more columns to an output table or to intermediate shuffle. For `        HASH       ` partitioned outputs from a stage, this also includes the columns used as the partition key. |
+| `        COMPUTE       `               | Expression evaluation and SQL functions.                                                                                                                                                            |
+| `        FILTER       `                | Used by `        WHERE       ` , `        OMIT IF       ` , and `        HAVING       ` clauses.                                                                                                    |
+| `        SORT       `                  | `        ORDER BY       ` operation that includes the column keys and the sort order.                                                                                                               |
+| `        AGGREGATE       `             | Implements aggregations for clauses like `        GROUP BY       ` or `        COUNT       ` , among others.                                                                                        |
+| `        LIMIT       `                 | Implements the `        LIMIT       ` clause.                                                                                                                                                       |
+| `        JOIN       `                  | Implements joins for clauses like `        JOIN       ` , among others; includes the join type and possibly the join conditions.                                                                    |
+| `        ANALYTIC_FUNCTION       `     | An invocation of a window function (also known as an "analytic function").                                                                                                                          |
+| `        USER_DEFINED_FUNCTION       ` | An invocation to a user-defined function.                                                                                                                                                           |
 
 ## Interpret and optimize steps
 
@@ -288,7 +176,7 @@ The `  READ  ` step means that a stage is accessing data for processing. Data ca
 
 #### Potential performance issues
 
-  - **Large scan of unpartitioned table:** if the query only needs a small portion of the data, then this might indicate that a table scan is inefficient. [Partitioning](/bigquery/docs/partitioned-tables) could be a good optimization strategy.
+  - **Large scan of unpartitioned table:** if the query only needs a small portion of the data, then this might indicate that a table scan is inefficient. [Partitioning](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) could be a good optimization strategy.
   - **Scan of a large table with a small filter ratio:** this suggests that the filter isn't effectively reducing the data scanned. Consider revising the filter conditions.
   - **Shuffle bytes spilled over to disk:** this suggests that the data isn't stored effectively using optimization techniques such as clustering, which could maintain similar data in clusters.
 
@@ -353,7 +241,7 @@ The query plan for the `  JOIN  ` step typically reveals the following details:
   - **Hash join:** when tables are large or a broadcast join isn't suitable, a hash join might be used. BigQuery uses hash and shuffle operations to shuffle the left and right tables so that the matching keys end up in the same slot to perform a local join. Hash joins are an expensive operation since the data needs to be moved, but they enable efficient matching of rows across hashes. Look for `  JOIN EACH WITH EACH  ` in the step details.
   - **Self join:** a SQL antipattern in which a table is joined to itself.
   - **Cross join:** a SQL antipattern that can cause significant performance issues because it generates larger output data than the inputs.
-  - **Skewed join:** the data distribution across the join key in one table is very skewed and can lead to performance issues. Look for cases where the max compute time is much greater than the average compute time in the query plan. For more information, see [High cardinality join](/bigquery/docs/query-insights#high_cardinality_join) and [Partition skew](/bigquery/docs/query-insights#partition_skew) .
+  - **Skewed join:** the data distribution across the join key in one table is very skewed and can lead to performance issues. Look for cases where the max compute time is much greater than the average compute time in the query plan. For more information, see [High cardinality join](https://docs.cloud.google.com/bigquery/docs/query-insights#high_cardinality_join) and [Partition skew](https://docs.cloud.google.com/bigquery/docs/query-insights#partition_skew) .
 
 #### Debugging
 
@@ -422,30 +310,26 @@ Don't over-optimize. Premature optimization might make your queries more complex
 
 ## Explanation for federated queries
 
-[Federated queries](/bigquery/docs/federated-queries-intro) let you send a query statement to an external data source by using the [`  EXTERNAL_QUERY  ` function](/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) . Federated queries are subject to the optimization technique known as [SQL pushdowns](/bigquery/docs/federated-queries-intro#sql_pushdowns) and the query plan shows operations pushed down to the external data source, if any. For example, if you run the following query:
+[Federated queries](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro) let you send a query statement to an external data source by using the [`  EXTERNAL_QUERY  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) . Federated queries are subject to the optimization technique known as [SQL pushdowns](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#sql_pushdowns) and the query plan shows operations pushed down to the external data source, if any. For example, if you run the following query:
 
-``` text
-SELECT id, name
-FROM EXTERNAL_QUERY("<connection>", "SELECT * FROM company")
-WHERE country_code IN ('ee', 'hu') AND name like '%TV%'
-```
+    SELECT id, name
+    FROM EXTERNAL_QUERY("<connection>", "SELECT * FROM company")
+    WHERE country_code IN ('ee', 'hu') AND name like '%TV%'
 
 The query plan will show the following stage steps:
 
-``` text
-$1:id, $2:name, $3:country_code
-FROM table_for_external_query_$_0(
-  SELECT id, name, country_code
-  FROM (
-    /*native_query*/
-    SELECT * FROM company
-  )
-  WHERE in(country_code, 'ee', 'hu')
-)
-WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
-$1, $2
-TO __stage00_output
-```
+    $1:id, $2:name, $3:country_code
+    FROM table_for_external_query_$_0(
+      SELECT id, name, country_code
+      FROM (
+        /*native_query*/
+        SELECT * FROM company
+      )
+      WHERE in(country_code, 'ee', 'hu')
+    )
+    WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
+    $1, $2
+    TO __stage00_output
 
 In this plan, `  table_for_external_query_$_0(...)  ` represents the `  EXTERNAL_QUERY  ` function. In the parentheses you can see the query that the external data source executes. Based on that, you can notice that:
 
@@ -455,19 +339,17 @@ In this plan, `  table_for_external_query_$_0(...)  ` represents the `  EXTERNAL
 
 For comparison, if there are no pushdowns, the query plan will show the following stage steps:
 
-``` text
-$1:id, $2:name, $3:country_code
-FROM table_for_external_query_$_0(
-  SELECT id, name, description, country_code, primary_address, secondary address
-  FROM (
-    /*native_query*/
-    SELECT * FROM company
-  )
-)
-WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
-$1, $2
-TO __stage00_output
-```
+    $1:id, $2:name, $3:country_code
+    FROM table_for_external_query_$_0(
+      SELECT id, name, description, country_code, primary_address, secondary address
+      FROM (
+        /*native_query*/
+        SELECT * FROM company
+      )
+    )
+    WHERE and(in($3, 'ee', 'hu'), like($2, '%TV%'))
+    $1, $2
+    TO __stage00_output
 
 This time an external data source returns all the columns and all the rows from the `  company  ` table and BigQuery performs filtering.
 
@@ -475,53 +357,32 @@ This time an external data source returns all the columns and all the rows from 
 
 The query timeline reports progress at specific points in time, providing snapshot views of overall query progress. The timeline is represented as a series of samples that report the following details:
 
-<table>
-<thead>
-<tr class="header">
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       elapsedMs      </code></td>
-<td>Milliseconds elapsed since the start of query execution.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       totalSlotMs      </code></td>
-<td>A cumulative representation of the slot milliseconds used by the query.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       pendingUnits      </code></td>
-<td>Total units of work scheduled and waiting for execution.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       activeUnits      </code></td>
-<td>Total active units of work being processed by workers.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       completedUnits      </code></td>
-<td>Total units of work that have been completed while executing this query.</td>
-</tr>
-</tbody>
-</table>
+| Field                           | Description                                                              |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `        elapsedMs       `      | Milliseconds elapsed since the start of query execution.                 |
+| `        totalSlotMs       `    | A cumulative representation of the slot milliseconds used by the query.  |
+| `        pendingUnits       `   | Total units of work scheduled and waiting for execution.                 |
+| `        activeUnits       `    | Total active units of work being processed by workers.                   |
+| `        completedUnits       ` | Total units of work that have been completed while executing this query. |
 
 ## An example query
 
 The following query counts the number of rows in the Shakespeare public dataset and has a second conditional count that restricts results to rows that reference 'hamlet':
 
-``` text
-SELECT
-  COUNT(1) as rowcount,
-  COUNTIF(corpus = 'hamlet') as rowcount_hamlet
-FROM `publicdata.samples.shakespeare`
-```
+    SELECT
+      COUNT(1) as rowcount,
+      COUNTIF(corpus = 'hamlet') as rowcount_hamlet
+    FROM `publicdata.samples.shakespeare`
 
 Click **Execution details** to see the query plan:
+
+![The hamlet query plan.](https://docs.cloud.google.com/static/bigquery/images/queryplan_hamlet_stages.png)
 
 The color indicators show the relative timings for all steps across all stages.
 
 To learn more about the steps of the execution stages, click arrow\_drop\_down to expand the details for the stage:
+
+![The hamlet query plan step details.](https://docs.cloud.google.com/static/bigquery/images/queryplan_hamlet_steps.png)
 
 In this example, the longest time in any segment was the time the single worker in Stage 01 spent waiting for Stage 00 to complete. This is because Stage 01 was dependent on Stage 00's input, and couldn't start until the first stage wrote its output into intermediate shuffle.
 
@@ -529,11 +390,11 @@ In this example, the longest time in any segment was the time the single worker 
 
 It is possible for query jobs to fail mid-execution. Because plan information is updated periodically, you can observe where within the execution graph the failure occurred. Within the Google Cloud console, successful or failed stages are labeled with a checkmark or exclamation point next to the stage name.
 
-For more information about interpreting and addressing errors, see the [troubleshooting guide](/bigquery/troubleshooting-errors) .
+For more information about interpreting and addressing errors, see the [troubleshooting guide](https://docs.cloud.google.com/bigquery/troubleshooting-errors) .
 
 ## API sample representation
 
-Query plan information is embedded in the job response information, and you can retrieve it by calling [`  jobs.get  `](/bigquery/docs/reference/rest/v2/jobs/get) . For example, the following excerpt of a JSON response for a job returning the sample hamlet query shows both the query plan and timeline information.
+Query plan information is embedded in the job response information, and you can retrieve it by calling [`  jobs.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) . For example, the following excerpt of a JSON response for a job returning the sample hamlet query shows both the query plan and timeline information.
 
 ``` console
 "statistics": {
@@ -690,8 +551,8 @@ Query plan information is embedded in the job response information, and you can 
 
 BigQuery query plans provide information about how the service executes queries, but the managed nature of the service limits whether some details are directly actionable. Many optimizations happen automatically by using the service, which can differ from other environments where tuning, provisioning, and monitoring can require dedicated, knowledgeable staff.
 
-For specific techniques that can improve query execution and performance, see the [best practices documentation](/bigquery/docs/best-practices-performance-overview) . The query plan and timeline statistics can help you understand whether certain stages dominate resource utilization. For example, a JOIN stage that generates far more output rows than input rows can indicate an opportunity to filter earlier in the query.
+For specific techniques that can improve query execution and performance, see the [best practices documentation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) . The query plan and timeline statistics can help you understand whether certain stages dominate resource utilization. For example, a JOIN stage that generates far more output rows than input rows can indicate an opportunity to filter earlier in the query.
 
 Additionally, timeline information can help identify whether a given query is slow in isolation or due to effects from other queries contending for the same resources. If you observe that the number of active units remains limited throughout the lifetime of the query but the amount of queued units of work remains high, this can represent cases where reducing the number of concurrent queries can significantly improve overall execution time for certain queries.
 
-**Note:** Some query processing takes place outside of the context of any stage. In some cases, significant latency or slot usage can be accrued before the first stage is dispatched, or after the last stage completes. Examples include some forms of partition pruning, various metadata operations, and [compensation for excess slot usage](/bigquery/docs/slots#excess_slot_usage) .
+**Note:** Some query processing takes place outside of the context of any stage. In some cases, significant latency or slot usage can be accrued before the first stage is dispatched, or after the last stage completes. Examples include some forms of partition pruning, various metadata operations, and [compensation for excess slot usage](https://docs.cloud.google.com/bigquery/docs/slots#excess_slot_usage) .

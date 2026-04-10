@@ -1,6 +1,6 @@
 # Apache Hive SQL translation guide
 
-This document details the similarities and differences in SQL syntax between Apache Hive and BigQuery to help you plan your migration. To migrate your SQL scripts in bulk, use [batch SQL translation](/bigquery/docs/batch-sql-translator) . To translate ad hoc queries, use [interactive SQL translation](/bigquery/docs/interactive-sql-translator) .
+This document details the similarities and differences in SQL syntax between Apache Hive and BigQuery to help you plan your migration. To migrate your SQL scripts in bulk, use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) . To translate ad hoc queries, use [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) .
 
 In some cases, there's no direct mapping between a SQL element in Hive and BigQuery. However, in most cases, BigQuery offers an alternative element to Hive to help you achieve the same functionality, as shown in the examples in this document.
 
@@ -8,110 +8,33 @@ The intended audience for this document is enterprise architects, database admin
 
 ## Data types
 
-Hive and BigQuery have different data type systems. In most cases, you can map data types in Hive to [BigQuery data types](/bigquery/docs/reference/standard-sql/data-types) with a few exceptions, such as `  MAP  ` and `  UNION  ` . Hive supports more implicit type casting than BigQuery. As a result, the batch SQL translator inserts many explicit casts.
+Hive and BigQuery have different data type systems. In most cases, you can map data types in Hive to [BigQuery data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) with a few exceptions, such as `  MAP  ` and `  UNION  ` . Hive supports more implicit type casting than BigQuery. As a result, the batch SQL translator inserts many explicit casts.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TINYINT      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SMALLINT      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BIGINT      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DECIMAL      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DOUBLE      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       VARCHAR      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CHAR      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BINARY      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       DATETIME/TIMESTAMP      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INTERVAL      </code></td>
-<td>-</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       MAPS      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT      </code> with key values ( <code dir="ltr" translate="no">       REPEAT      </code> field)</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UNION      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT      </code> with different types</td>
-</tr>
-<tr class="even">
-<td>-</td>
-<td><code dir="ltr" translate="no">       GEOGRAPHY      </code></td>
-</tr>
-<tr class="odd">
-<td>-</td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-</tr>
-</tbody>
-</table>
+| **Hive**                   | **BigQuery**                                                             |
+| -------------------------- | ------------------------------------------------------------------------ |
+| `        TINYINT       `   | `        INT64       `                                                   |
+| `        SMALLINT       `  | `        INT64       `                                                   |
+| `        INT       `       | `        INT64       `                                                   |
+| `        BIGINT       `    | `        INT64       `                                                   |
+| `        DECIMAL       `   | `        NUMERIC       `                                                 |
+| `        FLOAT       `     | `        FLOAT64       `                                                 |
+| `        DOUBLE       `    | `        FLOAT64       `                                                 |
+| `        BOOLEAN       `   | `        BOOL       `                                                    |
+| `        STRING       `    | `        STRING       `                                                  |
+| `        VARCHAR       `   | `        STRING       `                                                  |
+| `        CHAR       `      | `        STRING       `                                                  |
+| `        BINARY       `    | `        BYTES       `                                                   |
+| `        DATE       `      | `        DATE       `                                                    |
+| \-                         | `        DATETIME       `                                                |
+| \-                         | `        TIME       `                                                    |
+| `        TIMESTAMP       ` | `        DATETIME/TIMESTAMP       `                                      |
+| `        INTERVAL       `  | \-                                                                       |
+| `        ARRAY       `     | `        ARRAY       `                                                   |
+| `        STRUCT       `    | `        STRUCT       `                                                  |
+| `        MAPS       `      | `        STRUCT       ` with key values ( `        REPEAT       ` field) |
+| `        UNION       `     | `        STRUCT       ` with different types                             |
+| \-                         | `        GEOGRAPHY       `                                               |
+| \-                         | `        JSON       `                                                    |
 
 ## Query syntax
 
@@ -121,32 +44,11 @@ This section addresses differences in query syntax between Hive and BigQuery.
 
 Most Hive [`  SELECT  `](https://cwiki.apache.org/confluence/display/hive/languagemanual+select#LanguageManualSelect-SelectSyntax) statements are compatible with BigQuery. The following table contains a list of minor differences:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Case</strong></th>
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Subquery</td>
-<td><p><code dir="ltr" translate="no">        SELECT * FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                ) tmp_table;       </code></p></td>
-<td><p><code dir="ltr" translate="no">        SELECT * FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                );       </code></p></td>
-</tr>
-<tr class="even">
-<td>Column filtering</td>
-<td><p><code dir="ltr" translate="no">        SET hive.support.quoted.identifiers=none;                SELECT `(col2|col3)?+.+` FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                ) tmp_table;       </code></p></td>
-<td><p><code dir="ltr" translate="no">        SELECT * EXCEPT(col2,col3) FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                );       </code></p></td>
-</tr>
-<tr class="odd">
-<td>Exploding an array</td>
-<td><p><code dir="ltr" translate="no">        SELECT tmp_table.pageid, adid FROM (                SELECT 'test_value' pageid,  Array(1,2,3) ad_id) tmp_table                LATERAL VIEW                explode(tmp_table.ad_id) adTable AS adid;       </code></p></td>
-<td><p><code dir="ltr" translate="no">        SELECT tmp_table.pageid, ad_id FROM (                SELECT 'test_value' pageid, [1,2,3] ad_id) tmp_table,                UNNEST(tmp_table.ad_id) ad_id;       </code></p></td>
-</tr>
-</tbody>
-</table>
+| **Case**           | **Hive**                                                                                                                                                                                                               | **BigQuery**                                                                                                                                                                |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Subquery           | `         SELECT * FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                ) tmp_table;        `                                                                                        | `         SELECT * FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                );        `                                                       |
+| Column filtering   | ``         SET hive.support.quoted.identifiers=none;                SELECT `(col2\|col3)?+.+` FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                ) tmp_table;        ``            | `         SELECT * EXCEPT(col2,col3) FROM (                SELECT 10 as col1, "test" as col2, "test" as col3                );        `                                     |
+| Exploding an array | `         SELECT tmp_table.pageid, adid FROM (                SELECT 'test_value' pageid,  Array(1,2,3) ad_id) tmp_table                LATERAL VIEW                explode(tmp_table.ad_id) adTable AS adid;        ` | `         SELECT tmp_table.pageid, ad_id FROM (                SELECT 'test_value' pageid, [1,2,3] ad_id) tmp_table,                UNNEST(tmp_table.ad_id) ad_id;        ` |
 
 ### `     FROM    ` clause
 
@@ -158,11 +60,11 @@ You can reference BigQuery tables in the `  FROM  ` clause by using the followin
   - `  [dataset_id].[table_name]  `
   - `  [table_name]  `
 
-BigQuery also supports [additional table references](/bigquery/docs/reference/standard-sql/query-syntax#from_clause) :
+BigQuery also supports [additional table references](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#from_clause) :
 
-  - Historical versions of the table definition and rows using [`  FOR SYSTEM_TIME AS OF  `](/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of)
-  - [Field paths](/bigquery/docs/reference/standard-sql/query-syntax#field_path) , or any path that resolves to a field within a data type (such as a `  STRUCT  ` )
-  - [Flattened arrays](/bigquery/docs/arrays#querying_nested_arrays)
+  - Historical versions of the table definition and rows using [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of)
+  - [Field paths](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#field_path) , or any path that resolves to a field within a data type (such as a `  STRUCT  ` )
+  - [Flattened arrays](https://docs.cloud.google.com/bigquery/docs/arrays#querying_nested_arrays)
 
 ### Comparison operators
 
@@ -189,7 +91,7 @@ The following table provides details about converting operators from Hive to Big
 <code dir="ltr" translate="no">       +      </code> Addition<br />
 <code dir="ltr" translate="no">       -      </code> Subtraction</td>
 <td>All <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types#LanguageManualTypes-NumericTypes" class="external">number types</a></td>
-<td>All <a href="/bigquery/docs/reference/standard-sql/data-types#numeric_types">number types</a> .<br />
+<td>All <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types">number types</a> .<br />
 
 <p>To prevent errors during the divide operation, consider using <code dir="ltr" translate="no">          SAFE_DIVIDE        </code> or <code dir="ltr" translate="no">          IEEE_DIVIDE        </code> .</p></td>
 </tr>
@@ -223,7 +125,7 @@ The following table provides details about converting operators from Hive to Big
 <tr class="even">
 <td>Integer division</td>
 <td><code dir="ltr" translate="no">       A DIV B      </code> and <code dir="ltr" translate="no">       A/B      </code> for detailed precision</td>
-<td>All <a href="/bigquery/docs/reference/standard-sql/data-types#numeric_types">number types</a> .<br />
+<td>All <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types">number types</a> .<br />
 
 <p>Note: To prevent errors during the divide operation, consider using <code dir="ltr" translate="no">          SAFE_DIVIDE        </code> or <code dir="ltr" translate="no">          IEEE_DIVIDE        </code> .</p></td>
 </tr>
@@ -235,7 +137,7 @@ The following table provides details about converting operators from Hive to Big
 <tr class="even">
 <td>Types supporting equality comparisons</td>
 <td>All <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types#LanguageManualTypes-Overview" class="external">primitive types</a></td>
-<td>All <a href="/bigquery/docs/reference/standard-sql/data-types">comparable types and <code dir="ltr" translate="no">        STRUCT       </code></a> .</td>
+<td>All <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">comparable types and <code dir="ltr" translate="no">        STRUCT       </code></a> .</td>
 </tr>
 <tr class="odd">
 <td></td>
@@ -254,7 +156,7 @@ The following table provides details about converting operators from Hive to Big
 <tr class="odd">
 <td>Relational operators ( <code dir="ltr" translate="no">       =, ==, !=, &lt;, &gt;, &gt;=      </code> )</td>
 <td>All <a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-RelationalOperators" class="external">primitive types</a></td>
-<td>All <a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">comparable types</a> .</td>
+<td>All <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators">comparable types</a> .</td>
 </tr>
 <tr class="even">
 <td>String comparison</td>
@@ -264,7 +166,7 @@ The following table provides details about converting operators from Hive to Big
 <tr class="odd">
 <td><code dir="ltr" translate="no">       [NOT] LIKE, [NOT] BETWEEN, IS [NOT] NULL      </code></td>
 <td><code dir="ltr" translate="no">       A [NOT] BETWEEN B AND C, A IS [NOT] (TRUE|FALSE), A [NOT] LIKE B      </code></td>
-<td>Same as Hive. In addition, BigQuery also supports the <a href="/bigquery/docs/reference/standard-sql/operators#in_operators"><code dir="ltr" translate="no">        IN       </code> operator</a> .</td>
+<td>Same as Hive. In addition, BigQuery also supports the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators"><code dir="ltr" translate="no">        IN       </code> operator</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -281,9 +183,9 @@ Both Hive and BigQuery support the following types of joins:
 
   - `  FULL [OUTER] JOIN  `
 
-  - `  CROSS JOIN  ` and the equivalent implicit [comma cross join](/bigquery/docs/reference/standard-sql/query-syntax#cross_join)
+  - `  CROSS JOIN  ` and the equivalent implicit [comma cross join](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join)
 
-For more information, see [Join operation](/bigquery/docs/reference/standard-sql/query-syntax#join_types) and [Hive joins](https://cwiki.apache.org/confluence/display/hive/languagemanual+joins) .
+For more information, see [Join operation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types) and [Hive joins](https://cwiki.apache.org/confluence/display/hive/languagemanual+joins) .
 
 ### Type conversion and casting
 
@@ -306,13 +208,13 @@ The following table provides details about converting functions from Hive to Big
 <tr class="odd">
 <td>Type casting</td>
 <td>When a cast fails, `NULL` is returned.</td>
-<td><p>Same syntax as Hive. For more information about BigQuery type conversion rules, see <a href="/bigquery/docs/reference/standard-sql/conversion_rules">Conversion rules</a> .</p>
+<td><p>Same syntax as Hive. For more information about BigQuery type conversion rules, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules">Conversion rules</a> .</p>
 <p>If cast fails, you see an error. To have the same behavior as Hive, use <code dir="ltr" translate="no">        SAFE_CAST       </code> instead.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       SAFE      </code> function calls</td>
 <td></td>
-<td>If you prefix function calls with <a href="/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix"><code dir="ltr" translate="no">        SAFE       </code></a> , the function returns <code dir="ltr" translate="no">       NULL      </code> instead of reporting failure. For example, <code dir="ltr" translate="no">       SAFE.SUBSTR('foo', 0, -2) AS safe_output;      </code> returns <code dir="ltr" translate="no">       NULL      </code> .<br />
+<td>If you prefix function calls with <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#safe_prefix"><code dir="ltr" translate="no">        SAFE       </code></a> , the function returns <code dir="ltr" translate="no">       NULL      </code> instead of reporting failure. For example, <code dir="ltr" translate="no">       SAFE.SUBSTR('foo', 0, -2) AS safe_output;      </code> returns <code dir="ltr" translate="no">       NULL      </code> .<br />
 
 <p>Note: When casting safely without errors, use <code dir="ltr" translate="no">        SAFE_CAST       </code> .</p></td>
 </tr>
@@ -323,61 +225,24 @@ The following table provides details about converting functions from Hive to Big
 
 When migrating to BigQuery, you need to convert most of your [Hive implicit conversions](https://cwiki.apache.org/confluence/display/hive/languagemanual+types#LanguageManualTypes-AllowedImplicitConversions) to BigQuery explicit conversions except for the following data types, which BigQuery implicitly converts.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>From BigQuery type</strong></th>
-<th><strong>To BigQuery type</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code> , <code dir="ltr" translate="no">       NUMERIC      </code> , <code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       BIGNUMERIC      </code> , <code dir="ltr" translate="no">       FLOAT64      </code></td>
-</tr>
-</tbody>
-</table>
+| **From BigQuery type**      | **To BigQuery type**                                                              |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `        INT64       `      | `        FLOAT64       ` , `        NUMERIC       ` , `        BIGNUMERIC       ` |
+| `        BIGNUMERIC       ` | `        FLOAT64       `                                                          |
+| `        NUMERIC       `    | `        BIGNUMERIC       ` , `        FLOAT64       `                            |
 
 BigQuery also performs implicit conversions for the following literals:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>From BigQuery type</strong></th>
-<th><strong>To BigQuery type</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code> literal (for example, <code dir="ltr" translate="no">       "2008-12-25"      </code> )</td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRING      </code> literal (for example, <code dir="ltr" translate="no">       "2008-12-25 15:30:00"      </code> )</td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code> literal (for example, <code dir="ltr" translate="no">       "2008-12-25T07:30:00"      </code> )</td>
-<td><code dir="ltr" translate="no">       DATETIME      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRING      </code> literal (for example, <code dir="ltr" translate="no">       "15:30:00"      </code> )</td>
-<td><code dir="ltr" translate="no">       TIME      </code></td>
-</tr>
-</tbody>
-</table>
+| **From BigQuery type**                                                                 | **To BigQuery type**       |
+| -------------------------------------------------------------------------------------- | -------------------------- |
+| `        STRING       ` literal (for example, `        "2008-12-25"       ` )          | `        DATE       `      |
+| `        STRING       ` literal (for example, `        "2008-12-25 15:30:00"       ` ) | `        TIMESTAMP       ` |
+| `        STRING       ` literal (for example, `        "2008-12-25T07:30:00"       ` ) | `        DATETIME       `  |
+| `        STRING       ` literal (for example, `        "15:30:00"       ` )            | `        TIME       `      |
 
 #### Explicit conversion types
 
-If you want to convert Hive data types that BigQuery doesn't implicitly convert, use the BigQuery [`  CAST(expression AS type)  ` function](/bigquery/docs/reference/standard-sql/conversion_functions#cast) .
+If you want to convert Hive data types that BigQuery doesn't implicitly convert, use the BigQuery [`  CAST(expression AS type)  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) .
 
 ## Functions
 
@@ -543,112 +408,32 @@ The following table shows mappings between common Hive aggregate, statistical ag
 
 The following table shows mappings between common Hive analytical functions with their BigQuery equivalents:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       AVG      </code></td>
-<td><code dir="ltr" translate="no">         AVG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       COUNT      </code></td>
-<td><code dir="ltr" translate="no">         COUNT       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COVAR_POP      </code></td>
-<td><code dir="ltr" translate="no">         COVAR_POP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       COVAR_SAMP      </code></td>
-<td><code dir="ltr" translate="no">         COVAR_SAMP       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CUME_DIST      </code></td>
-<td><code dir="ltr" translate="no">         CUME_DIST       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DENSE_RANK      </code></td>
-<td><code dir="ltr" translate="no">         DENSE_RANK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         FIRST_VALUE       </code></td>
-<td><code dir="ltr" translate="no">         FIRST_VALUE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LAST_VALUE      </code></td>
-<td><code dir="ltr" translate="no">         LAST_VALUE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LAG      </code></td>
-<td><code dir="ltr" translate="no">         LAG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LEAD      </code></td>
-<td><code dir="ltr" translate="no">         LEAD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COLLECT_LIST, \ COLLECT_SET      </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG       </code> <code dir="ltr" translate="no">         ARRAY_CONCAT_AGG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       MAX      </code></td>
-<td><code dir="ltr" translate="no">         MAX       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       MIN      </code></td>
-<td><code dir="ltr" translate="no">         MIN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NTILE      </code></td>
-<td><code dir="ltr" translate="no">         NTILE              (constant_integer_expression)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PERCENT_RANK       </code></td>
-<td><code dir="ltr" translate="no">         PERCENT_RANK       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RANK ()      </code></td>
-<td><code dir="ltr" translate="no">         RANK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ROW_NUMBER      </code></td>
-<td><code dir="ltr" translate="no">         ROW_NUMBER       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STDDEV_POP      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_POP       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STDDEV_SAMP      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_SAMP              ,               STDDEV       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SUM      </code></td>
-<td><code dir="ltr" translate="no">         SUM       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       VAR_POP      </code></td>
-<td><code dir="ltr" translate="no">         VAR_POP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       VAR_SAMP      </code></td>
-<td><code dir="ltr" translate="no">         VAR_SAMP              ,               VARIANCE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       VARIANCE      </code></td>
-<td><code dir="ltr" translate="no">         VARIANCE ()       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         WIDTH_BUCKET       </code></td>
-<td>A user-defined function (UDF) can be used.</td>
-</tr>
-</tbody>
-</table>
+| **Hive**                                     | **BigQuery**                                                        |
+| -------------------------------------------- | ------------------------------------------------------------------- |
+| `        AVG       `                         | `          AVG        `                                             |
+| `        COUNT       `                       | `          COUNT        `                                           |
+| `        COVAR_POP       `                   | `          COVAR_POP        `                                       |
+| `        COVAR_SAMP       `                  | `          COVAR_SAMP        `                                      |
+| `        CUME_DIST       `                   | `          CUME_DIST        `                                       |
+| `        DENSE_RANK       `                  | `          DENSE_RANK        `                                      |
+| `          FIRST_VALUE        `              | `          FIRST_VALUE        `                                     |
+| `        LAST_VALUE       `                  | `          LAST_VALUE        `                                      |
+| `        LAG       `                         | `          LAG        `                                             |
+| `        LEAD       `                        | `          LEAD        `                                            |
+| `        COLLECT_LIST, \ COLLECT_SET       ` | `          ARRAY_AGG        ` `          ARRAY_CONCAT_AGG        `  |
+| `        MAX       `                         | `          MAX        `                                             |
+| `        MIN       `                         | `          MIN        `                                             |
+| `        NTILE       `                       | `          NTILE              (constant_integer_expression)       ` |
+| `          PERCENT_RANK        `             | `          PERCENT_RANK        `                                    |
+| `        RANK ()       `                     | `          RANK        `                                            |
+| `        ROW_NUMBER       `                  | `          ROW_NUMBER        `                                      |
+| `        STDDEV_POP       `                  | `          STDDEV_POP        `                                      |
+| `        STDDEV_SAMP       `                 | `          STDDEV_SAMP              ,               STDDEV        ` |
+| `        SUM       `                         | `          SUM        `                                             |
+| `        VAR_POP       `                     | `          VAR_POP        `                                         |
+| `        VAR_SAMP       `                    | `          VAR_SAMP              ,               VARIANCE        `  |
+| `        VARIANCE       `                    | `          VARIANCE ()        `                                     |
+| `          WIDTH_BUCKET        `             | A user-defined function (UDF) can be used.                          |
 
 ### Date and time functions
 
@@ -780,108 +565,31 @@ BigQuery offers the following additional date and time functions:
 
 The following table shows mappings between Hive string functions and their BigQuery equivalents:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ASCII      </code></td>
-<td><code dir="ltr" translate="no">         TO_CODE_POINTS(string_expr)[OFFSET(0)]       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HEX      </code></td>
-<td><code dir="ltr" translate="no">         TO_HEX       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LENGTH      </code></td>
-<td><code dir="ltr" translate="no">         CHAR_LENGTH       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LENGTH      </code></td>
-<td><code dir="ltr" translate="no">         CHARACTER_LENGTH       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CHR      </code></td>
-<td><code dir="ltr" translate="no">         CODE_POINTS_TO_STRING       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CONCAT      </code></td>
-<td><code dir="ltr" translate="no">         CONCAT       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LOWER      </code></td>
-<td><code dir="ltr" translate="no">         LOWER       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LPAD      </code></td>
-<td><code dir="ltr" translate="no">         LPAD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LTRIM      </code></td>
-<td><code dir="ltr" translate="no">         LTRIM       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       REGEXP_EXTRACT      </code></td>
-<td><code dir="ltr" translate="no">         REGEXP_EXTRACT       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       REGEXP_REPLACE      </code></td>
-<td><code dir="ltr" translate="no">         REGEXP_REPLACE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       REPLACE      </code></td>
-<td><code dir="ltr" translate="no">         REPLACE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       REVERSE      </code></td>
-<td><code dir="ltr" translate="no">         REVERSE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RPAD      </code></td>
-<td><code dir="ltr" translate="no">         RPAD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       RTRIM      </code></td>
-<td><code dir="ltr" translate="no">         RTRIM       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SOUNDEX      </code></td>
-<td><code dir="ltr" translate="no">         SOUNDEX       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       SPLIT      </code></td>
-<td><code dir="ltr" translate="no">         SPLIT              (instring, delimiter)[ORDINAL(tokennum)]      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SUBSTR, \ SUBSTRING      </code></td>
-<td><code dir="ltr" translate="no">         SUBSTR       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TRANSLATE      </code></td>
-<td><code dir="ltr" translate="no">         TRANSLATE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LTRIM      </code></td>
-<td><code dir="ltr" translate="no">         LTRIM       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       RTRIM      </code></td>
-<td><code dir="ltr" translate="no">         RTRIM       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TRIM      </code></td>
-<td><code dir="ltr" translate="no">         TRIM       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UPPER      </code></td>
-<td><code dir="ltr" translate="no">         UPPER       </code></td>
-</tr>
-</tbody>
-</table>
+| **Hive**                             | **BigQuery**                                                                   |
+| ------------------------------------ | ------------------------------------------------------------------------------ |
+| `        ASCII       `               | `          TO_CODE_POINTS(string_expr)[OFFSET(0)]        `                     |
+| `        HEX       `                 | `          TO_HEX        `                                                     |
+| `        LENGTH       `              | `          CHAR_LENGTH        `                                                |
+| `        LENGTH       `              | `          CHARACTER_LENGTH        `                                           |
+| `        CHR       `                 | `          CODE_POINTS_TO_STRING        `                                      |
+| `        CONCAT       `              | `          CONCAT        `                                                     |
+| `        LOWER       `               | `          LOWER        `                                                      |
+| `        LPAD       `                | `          LPAD        `                                                       |
+| `        LTRIM       `               | `          LTRIM        `                                                      |
+| `        REGEXP_EXTRACT       `      | `          REGEXP_EXTRACT        `                                             |
+| `        REGEXP_REPLACE       `      | `          REGEXP_REPLACE        `                                             |
+| `        REPLACE       `             | `          REPLACE        `                                                    |
+| `        REVERSE       `             | `          REVERSE        `                                                    |
+| `        RPAD       `                | `          RPAD        `                                                       |
+| `        RTRIM       `               | `          RTRIM        `                                                      |
+| `        SOUNDEX       `             | `          SOUNDEX        `                                                    |
+| `        SPLIT       `               | `          SPLIT              (instring, delimiter)[ORDINAL(tokennum)]       ` |
+| `        SUBSTR, \ SUBSTRING       ` | `          SUBSTR        `                                                     |
+| `        TRANSLATE       `           | `          TRANSLATE        `                                                  |
+| `        LTRIM       `               | `          LTRIM        `                                                      |
+| `        RTRIM       `               | `          RTRIM        `                                                      |
+| `        TRIM       `                | `          TRIM        `                                                       |
+| `        UPPER       `               | `          UPPER        `                                                      |
 
 BigQuery offers the following additional string functions:
 
@@ -920,120 +628,34 @@ BigQuery offers the following additional string functions:
 
 The following table shows mappings between Hive [math functions](https://cwiki.apache.org/confluence/display/Hive/LanguageManual+UDF#LanguageManualUDF-MathematicalFunctions) and their BigQuery equivalents:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ABS      </code></td>
-<td><code dir="ltr" translate="no">         ABS       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       ACOS      </code></td>
-<td><code dir="ltr" translate="no">         ACOS       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ASIN      </code></td>
-<td><code dir="ltr" translate="no">         ASIN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       ATAN      </code></td>
-<td><code dir="ltr" translate="no">         ATAN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CEIL      </code></td>
-<td><code dir="ltr" translate="no">         CEIL       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CEILING      </code></td>
-<td><code dir="ltr" translate="no">         CEILING       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COS      </code></td>
-<td><code dir="ltr" translate="no">         COS       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FLOOR      </code></td>
-<td><code dir="ltr" translate="no">         FLOOR       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       GREATEST      </code></td>
-<td><code dir="ltr" translate="no">         GREATEST       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LEAST      </code></td>
-<td><code dir="ltr" translate="no">         LEAST       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LN      </code></td>
-<td><code dir="ltr" translate="no">         LN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LNNVL      </code></td>
-<td>Use with <code dir="ltr" translate="no">       ISNULL      </code> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LOG      </code></td>
-<td><code dir="ltr" translate="no">         LOG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       MOD (% operator)      </code></td>
-<td><code dir="ltr" translate="no">         MOD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       POWER      </code></td>
-<td><code dir="ltr" translate="no">         POWER              ,               POW       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RAND      </code></td>
-<td><code dir="ltr" translate="no">         RAND       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ROUND      </code></td>
-<td><code dir="ltr" translate="no">         ROUND       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SIGN      </code></td>
-<td><code dir="ltr" translate="no">         SIGN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       SIN      </code></td>
-<td><code dir="ltr" translate="no">         SIN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SQRT      </code></td>
-<td><code dir="ltr" translate="no">         SQRT       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HASH      </code></td>
-<td><code dir="ltr" translate="no">         FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STDDEV_POP      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_POP       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STDDEV_SAMP      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_SAMP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       TAN      </code></td>
-<td><code dir="ltr" translate="no">         TAN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TRUNC      </code></td>
-<td><code dir="ltr" translate="no">         TRUNC       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NVL      </code></td>
-<td><code dir="ltr" translate="no">         IFNULL                (expr, 0),                 COALESCE                (exp, 0)       </code></td>
-</tr>
-</tbody>
-</table>
+| **Hive**                          | **BigQuery**                                                                                          |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `        ABS       `              | `          ABS        `                                                                               |
+| `        ACOS       `             | `          ACOS        `                                                                              |
+| `        ASIN       `             | `          ASIN        `                                                                              |
+| `        ATAN       `             | `          ATAN        `                                                                              |
+| `        CEIL       `             | `          CEIL        `                                                                              |
+| `        CEILING       `          | `          CEILING        `                                                                           |
+| `        COS       `              | `          COS        `                                                                               |
+| `        FLOOR       `            | `          FLOOR        `                                                                             |
+| `        GREATEST       `         | `          GREATEST        `                                                                          |
+| `        LEAST       `            | `          LEAST        `                                                                             |
+| `        LN       `               | `          LN        `                                                                                |
+| `        LNNVL       `            | Use with `        ISNULL       ` .                                                                    |
+| `        LOG       `              | `          LOG        `                                                                               |
+| `        MOD (% operator)       ` | `          MOD        `                                                                               |
+| `        POWER       `            | `          POWER              ,               POW        `                                            |
+| `        RAND       `             | `          RAND        `                                                                              |
+| `        ROUND       `            | `          ROUND        `                                                                             |
+| `        SIGN       `             | `          SIGN        `                                                                              |
+| `        SIN       `              | `          SIN        `                                                                               |
+| `        SQRT       `             | `          SQRT        `                                                                              |
+| `        HASH       `             | `          FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512        `                                       |
+| `        STDDEV_POP       `       | `          STDDEV_POP        `                                                                        |
+| `        STDDEV_SAMP       `      | `          STDDEV_SAMP        `                                                                       |
+| `        TAN       `              | `          TAN        `                                                                               |
+| `        TRUNC       `            | `          TRUNC        `                                                                             |
+| `        NVL       `              | `          IFNULL                (expr, 0),                 COALESCE                (exp, 0)        ` |
 
 BigQuery offers the following additional math functions:
 
@@ -1048,52 +670,20 @@ BigQuery offers the following additional math functions:
 
 The following table shows mappings between Hive logical and conditional functions and their BigQuery equivalents:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CASE       </code></td>
-<td><code dir="ltr" translate="no">         CASE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COALESCE       </code></td>
-<td><code dir="ltr" translate="no">         COALESCE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         NVL       </code></td>
-<td><code dir="ltr" translate="no">         IFNULL              (expr, 0),               COALESCE              (exp, 0)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NULLIF       </code></td>
-<td><code dir="ltr" translate="no">         NULLIF       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         IF       </code></td>
-<td><code dir="ltr" translate="no">         IF(expr, true_result, else_result)       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ISNULL       </code></td>
-<td><code dir="ltr" translate="no">       IS NULL      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ISNOTNULL       </code></td>
-<td><code dir="ltr" translate="no">       IS NOT NULL      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NULLIF       </code></td>
-<td><code dir="ltr" translate="no">         NULLIF       </code></td>
-</tr>
-</tbody>
-</table>
+| **Hive**                      | **BigQuery**                                                                                   |
+| ----------------------------- | ---------------------------------------------------------------------------------------------- |
+| `          CASE        `      | `          CASE        `                                                                       |
+| `          COALESCE        `  | `          COALESCE        `                                                                   |
+| `          NVL        `       | `          IFNULL              (expr, 0),               COALESCE              (exp, 0)       ` |
+| `          NULLIF        `    | `          NULLIF        `                                                                     |
+| `          IF        `        | `          IF(expr, true_result, else_result)        `                                         |
+| `          ISNULL        `    | `        IS NULL       `                                                                       |
+| `          ISNOTNULL        ` | `        IS NOT NULL       `                                                                   |
+| `          NULLIF        `    | `          NULLIF        `                                                                     |
 
 ### UDFs and UDAFs
 
-Apache Hive supports writing user defined functions (UDFs) in Java. You can load UDFs into Hive to be used in regular queries. [BigQuery UDFs](/bigquery/docs/user-defined-functions) must be written in GoogleSQL or JavaScript. Converting the Hive UDFs to SQL UDFs is recommended because SQL UDFs perform better. If you need to use JavaScript, read [Best Practices for JavaScript UDFs](/bigquery/docs/user-defined-functions#best-practices-for-javascript-udfs) . For other languages, BigQuery supports [remote functions](/bigquery/docs/remote-functions) that let you invoke your functions in [Cloud Run functions](/functions/docs/concepts/overview) or [Cloud Run](/run/docs/overview/what-is-cloud-run) from GoogleSQL queries.
+Apache Hive supports writing user defined functions (UDFs) in Java. You can load UDFs into Hive to be used in regular queries. [BigQuery UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) must be written in GoogleSQL or JavaScript. Converting the Hive UDFs to SQL UDFs is recommended because SQL UDFs perform better. If you need to use JavaScript, read [Best Practices for JavaScript UDFs](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#best-practices-for-javascript-udfs) . For other languages, BigQuery supports [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) that let you invoke your functions in [Cloud Run functions](https://docs.cloud.google.com/functions/docs/concepts/overview) or [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) from GoogleSQL queries.
 
 BigQuery does not support user-defined aggregation functions (UDAFs).
 
@@ -1131,7 +721,7 @@ Most Hive `  INSERT  ` statements are compatible with BigQuery. The following ta
 </tbody>
 </table>
 
-BigQuery imposes [DML quotas](/bigquery/quotas#data-manipulation-language-statements) that restrict the number of DML statements that you can execute daily. To make the best use of your quota, consider the following approaches:
+BigQuery imposes [DML quotas](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) that restrict the number of DML statements that you can execute daily. To make the best use of your quota, consider the following approaches:
 
   - Combine multiple rows in a single `  INSERT  ` statement, instead of one row for each `  INSERT  ` operation.
 
@@ -1170,7 +760,7 @@ Most Hive `  UPDATE  ` statements are compatible with BigQuery. The following ta
 
 You can use `  DELETE  ` or `  TRUNCATE  ` statements to remove rows from a table without affecting the table schema or indexes.
 
-In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see [`  DELETE  ` examples](/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) .
+In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see [`  DELETE  ` examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) .
 
 <table>
 <colgroup>
@@ -1273,8 +863,8 @@ The following table provides details about converting `  CREATE VIEW  ` statemen
 <p><code dir="ltr" translate="no">        serde_properties:       </code></p>
 <p><code dir="ltr" translate="no">        : (property_name = property_value, property_name = property_value, ... )       </code></p></td>
 <td>Serialization and deserialization is managed by the BigQuery service and isn't user configurable.
-<p>To learn how to let BigQuery read data from CSV, JSON, AVRO, PARQUET, or ORC files, see <a href="/bigquery/docs/external-data-cloud-storage">Create Cloud Storage external tables</a> .</p>
-<p>Supports CSV, JSON, AVRO, and PARQUET export formats. For more information, see <a href="/bigquery/docs/exporting-data#export_formats_and_compression_types">Export formats and compression types</a> .</p></td>
+<p>To learn how to let BigQuery read data from CSV, JSON, AVRO, PARQUET, or ORC files, see <a href="https://docs.cloud.google.com/bigquery/docs/external-data-cloud-storage">Create Cloud Storage external tables</a> .</p>
+<p>Supports CSV, JSON, AVRO, and PARQUET export formats. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/exporting-data#export_formats_and_compression_types">Export formats and compression types</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       Table storage properties      </code></td>
@@ -1299,7 +889,7 @@ The following table provides details about converting `  CREATE VIEW  ` statemen
 <code dir="ltr" translate="no">       ALTER TABLE [[project_name.]dataset_name.]table_name      </code><br />
 <code dir="ltr" translate="no">       ADD PRIMARY KEY(column_list) NOT ENFORCED;      </code><br />
 
-<p>For more information, see <a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement"><code dir="ltr" translate="no">         ALTER TABLE ADD PRIMARY KEY        </code> statement</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement"><code dir="ltr" translate="no">         ALTER TABLE ADD PRIMARY KEY        </code> statement</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       Add partition      </code></td>
@@ -1308,7 +898,7 @@ The following table provides details about converting `  CREATE VIEW  ` statemen
 <p><code dir="ltr" translate="no">        : (partition_column = partition_col_value, partition_column = partition_col_value, ...)       </code></p></td>
 <td>Not supported. Additional partitions are added as needed when data with new values in the partition columns are loaded.<br />
 
-<p>For more information, see <a href="/bigquery/docs/managing-partitioned-tables">Managing partitioned tables</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables">Managing partitioned tables</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       Rename partition      </code></td>
@@ -1501,7 +1091,7 @@ The following table provides details about converting `  CREATE TABLE  ` stateme
 <p>description="This is the page view table",</p>
 <p>require_partition_filter=TRUE</p>
 <p><code dir="ltr" translate="no">        )'       </code></p>
-<p>For more information, see <a href="/bigquery/docs/creating-clustered-tables">Create and use clustered tables</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables">Create and use clustered tables</a> .</p></td>
 </tr>
 <tr class="even">
 <td>Skewed tables (tables where one or more columns have skewed values)</td>
@@ -1553,14 +1143,14 @@ The following table provides details about converting `  CREATE TABLE  ` stateme
 <li>Use the <code dir="ltr" translate="no">         CREATE OR REPLACE TABLE        </code> statement.</li>
 <li>Use the <code dir="ltr" translate="no">         DELETE from table_name WHERE 1=1        </code> statement.</li>
 </ul>
-<p>Note: Specific partitions can also be truncated. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#delete_a_partition">Delete a partition</a> .</p></td>
+<p>Note: Specific partitions can also be truncated. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#delete_a_partition">Delete a partition</a> .</p></td>
 </tr>
 </tbody>
 </table>
 
 ### `     CREATE EXTERNAL TABLE    ` and `     DROP EXTERNAL TABLE    ` statements
 
-For external table support in BigQuery, see [Introduction to external data sources](/bigquery/external-data-sources) .
+For external table support in BigQuery, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
 ### `     CREATE VIEW    ` and `     DROP VIEW    ` statements
 
@@ -1585,7 +1175,7 @@ The following table provides details about converting `  CREATE VIEW  ` statemen
 <p><code dir="ltr" translate="no">        AS SELECT ...;       </code></p></td>
 <td><code dir="ltr" translate="no">       {CREATE VIEW | CREATE VIEW IF NOT EXISTS | CREATE OR REPLACE VIEW}       </code>
 <p>view_name</p>
-<p>[OPTIONS( <a href="/bigquery/docs/reference/standard-sql/data-definition-language#view_option_list">view_option_list</a> )]</p>
+<p>[OPTIONS( <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#view_option_list">view_option_list</a> )]</p>
 <p><code dir="ltr" translate="no">        AS query_expression       </code></p></td>
 </tr>
 <tr class="even">
@@ -1605,7 +1195,7 @@ The following table provides details about converting `  CREATE VIEW  ` statemen
 <td><code dir="ltr" translate="no">       CREATE MATERIALIZED VIEW [IF NOT EXISTS] \ [project_id].[dataset_id].materialized_view_name       </code>
 <p>-- cannot disable rewrites in BigQuery</p>
 <p>[OPTIONS(</p>
-<p>[description="materialized_view_comment",] \ [other <a href="/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_option_list">materialized_view_option_list</a> ]</p>
+<p>[description="materialized_view_comment",] \ [other <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#materialized_view_option_list">materialized_view_option_list</a> ]</p>
 <p>)]</p>
 <p><code dir="ltr" translate="no">        [PARTITION BY (col_name)] --same as source table       </code></p></td>
 </tr>
@@ -1667,30 +1257,16 @@ The following table provides details about converting stored procedures from Hiv
 
 The following table provides details about converting procedural SQL statements used in creating macro from Hive to BigQuery with variable declaration and assignment:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Hive</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       CREATE TEMPORARY MACRO macro_name([col_name col_type, ...]) expression;      </code></td>
-<td>Not supported. In some cases, this can be substituted with a UDF.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DROP TEMPORARY MACRO [IF EXISTS] macro_name;      </code></td>
-<td>Not supported.</td>
-</tr>
-</tbody>
-</table>
+| **Hive**                                                                                 | **BigQuery**                                                      |
+| ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `        CREATE TEMPORARY MACRO macro_name([col_name col_type, ...]) expression;       ` | Not supported. In some cases, this can be substituted with a UDF. |
+| `        DROP TEMPORARY MACRO [IF EXISTS] macro_name;       `                            | Not supported.                                                    |
 
 ## Error codes and messages
 
-[Hive error codes](https://cwiki.apache.org/confluence/display/GEODE/Error+Codes) and [BigQuery error codes](/bigquery/troubleshooting-errors) are different. If your application logic is catching errors, eliminate the source of the error because BigQuery doesn't return the same error codes.
+[Hive error codes](https://cwiki.apache.org/confluence/display/GEODE/Error+Codes) and [BigQuery error codes](https://docs.cloud.google.com/bigquery/troubleshooting-errors) are different. If your application logic is catching errors, eliminate the source of the error because BigQuery doesn't return the same error codes.
 
-In BigQuery, it's common to use the [INFORMATION\_SCHEMA](/bigquery/docs/information-schema-jobs) views or [audit logging](/bigquery/docs/reference/auditlogs) to examine errors.
+In BigQuery, it's common to use the [INFORMATION\_SCHEMA](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) views or [audit logging](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) to examine errors.
 
 ## Consistency guarantees and transaction isolation
 
@@ -1700,10 +1276,10 @@ Both Hive and BigQuery support transactions with ACID semantics. [Transactions](
 
 Hive supports [snapshot isolation](https://cwiki.apache.org/confluence/display/hive/hive+transactions) . When you execute a query, the query is provided with a consistent snapshot of the database, which it uses until the end of its execution. Hive provides full ACID semantics at the row level, letting one application add rows when another application reads from the same partition without interfering with each other.
 
-BigQuery provides [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit wins) with [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency for each row and mutation, and across rows within the same DML statement, while avoiding deadlocks. For multiple DML updates to the same table, BigQuery switches to [pessimistic concurrency control](/bigquery/docs/data-manipulation-language#dml-limitations) . Load jobs can run independently and append tables; however, BigQuery doesn't provide an explicit transaction boundary or session.
+BigQuery provides [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit wins) with [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency for each row and mutation, and across rows within the same DML statement, while avoiding deadlocks. For multiple DML updates to the same table, BigQuery switches to [pessimistic concurrency control](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) . Load jobs can run independently and append tables; however, BigQuery doesn't provide an explicit transaction boundary or session.
 
 ### Transactions
 
 Hive doesn't support multi-statement transactions. It doesn't support `  BEGIN  ` , `  COMMIT  ` , and `  ROLLBACK  ` statements. In Hive, all language operations are auto-committed.
 
-BigQuery supports multi-statement transactions inside a single query or across multiple queries when you use sessions. A multi-statement transaction lets you perform mutating operations, such as inserting or deleting rows from one or more tables and either committing or rolling back the changes. For more information, see [Multi-statement transactions](/bigquery/docs/reference/standard-sql/transactions) .
+BigQuery supports multi-statement transactions inside a single query or across multiple queries when you use sessions. A multi-statement transaction lets you perform mutating operations, such as inserting or deleting rows from one or more tables and either committing or rolling back the changes. For more information, see [Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/transactions) .

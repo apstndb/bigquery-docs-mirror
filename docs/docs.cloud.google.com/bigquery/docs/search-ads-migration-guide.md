@@ -12,7 +12,7 @@ The new Search Ads 360 reporting API organizes accounts into a hierarchy of mana
 
 ### ID space
 
-Entities in the new Search Ads 360 have a different [ID space](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) mapping than previous versions of Search Ads 360. For information about mapping between previous IDs and new IDs, see [ID mapping](#id_mapping) .
+Entities in the new Search Ads 360 have a different [ID space](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) mapping than previous versions of Search Ads 360. For information about mapping between previous IDs and new IDs, see [ID mapping](https://docs.cloud.google.com/bigquery/docs/search-ads-migration-guide#id_mapping) .
 
 ### Resource-based reporting
 
@@ -20,7 +20,7 @@ The new Search Ads 360 API data model uses a resource-based data model, as oppos
 
 ## Migrate transfer configurations
 
-There is no automated method to convert existing Search Ads 360 transfer configurations to the new Search Ads 360 reporting API. You must [create a new Search Ads 360 data transfer](/bigquery/docs/search-ads-transfer#setup-data-transfer) with the new Search Ads 360 reporting API as the data source.
+There is no automated method to convert existing Search Ads 360 transfer configurations to the new Search Ads 360 reporting API. You must [create a new Search Ads 360 data transfer](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#setup-data-transfer) with the new Search Ads 360 reporting API as the data source.
 
 ## Review mapping information
 
@@ -217,11 +217,11 @@ p_sa_WebpageConversionActionAndDeviceStats_customer_id</td>
 
 ### Field mapping
 
-The BigQuery Data Transfer Service supports a subset of Search Ads 360 report fields as listed in [Search Ads 360 report transformation](/bigquery/docs/search-ads-transformation) . BigQuery does not support `  .  ` in column names, so all transferred reports replace `  .  ` with `  _  ` . For example, the field `  ad_group_ad.ad.text_ad.description1  ` in a Search Ads 360 resource is transferred to BigQuery as `  ad_group_ad_ad_text_ad_description1  ` .
+The BigQuery Data Transfer Service supports a subset of Search Ads 360 report fields as listed in [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) . BigQuery does not support `  .  ` in column names, so all transferred reports replace `  .  ` with `  _  ` . For example, the field `  ad_group_ad.ad.text_ad.description1  ` in a Search Ads 360 resource is transferred to BigQuery as `  ad_group_ad_ad_text_ad_description1  ` .
 
 ### ID mapping
 
-Entities in the new Search Ads 360, such as customers, campaigns, and ad groups, have a different [ID space](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) than the old Search Ads 360. For more information about ID mapping tables for the new Search Ads 360, see [ID mapping tables](/bigquery/docs/search-ads-transfer#id-mapping) .
+Entities in the new Search Ads 360, such as customers, campaigns, and ad groups, have a different [ID space](https://developers.google.com/search-ads/v2/how-tos/reporting/id-mapping) than the old Search Ads 360. For more information about ID mapping tables for the new Search Ads 360, see [ID mapping tables](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#id-mapping) .
 
 ## Examples of migrated queries
 
@@ -229,7 +229,7 @@ The following examples demonstrate how a BigQuery query might look before and af
 
 Consider the following example query that analyzes Search Ads campaign performance from the past 30 days using the old Search Ads 360 reporting API.
 
-``` text
+``` notranslate
 SELECT
   c.accountId,
   c.campaign,
@@ -255,7 +255,7 @@ ORDER BY
 
 When mapped to be compatible with the new Search Ads 360 reporting API, the same query is converted to the following:
 
-``` text
+``` notranslate
 SELECT
   c.customer_id,
   c.campaign_name,
@@ -279,9 +279,9 @@ ORDER BY
   Impressions DESC
 ```
 
-For more examples of queries that are compatible with the new Search Ads 360, see [Example queries](/bigquery/docs/search-ads-transfer#example_queries) .
+For more examples of queries that are compatible with the new Search Ads 360, see [Example queries](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer#example_queries) .
 
 ## What's next
 
-  - To learn how to schedule and manage recurring load jobs from Search Ads 360, see [Search Ads 360 transfers](/bigquery/docs/search-ads-transfer) .
-  - To see how you can transform your Search Ads 360 reports, see [Search Ads 360 report transformation](/bigquery/docs/search-ads-transformation) .
+  - To learn how to schedule and manage recurring load jobs from Search Ads 360, see [Search Ads 360 transfers](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer) .
+  - To see how you can transform your Search Ads 360 reports, see [Search Ads 360 report transformation](https://docs.cloud.google.com/bigquery/docs/search-ads-transformation) .

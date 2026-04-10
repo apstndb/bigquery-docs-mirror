@@ -30,7 +30,7 @@ When you set up the Cloud Storage, Blob Storage, or Amazon S3 transfer, you can 
 <td>Formatted timestamp</td>
 <td>In UTC time, per the schedule. For regularly scheduled transfers, <code dir="ltr" translate="no">       run_time      </code> represents the intended time of execution. For example, if the transfer is set to "every 24 hours", the <code dir="ltr" translate="no">       run_time      </code> difference between two consecutive queries will be exactly 24 hours—even though the actual execution time might vary slightly.<br />
 <br />
-See <a href="/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs">TransferRun.runTime</a></td>
+See <a href="https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs">TransferRun.runTime</a></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       run_date      </code></td>
@@ -79,7 +79,7 @@ Decimals are allowed, for example: <code dir="ltr" translate="no">        1.5h  
 A formatting string. The most common formatting parameters are years (%Y), months (%m), and days (%d).<br />
 For partitioned tables, YYYYMMDD is the required suffix - this is equivalent to "%Y%m%d".<br />
 <br />
-Read more about <a href="/bigquery/docs/reference/standard-sql/functions-and-operators#supported-format-elements-for-datetime">formatting datetime elements</a> .</p></td>
+Read more about <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-and-operators#supported-format-elements-for-datetime">formatting datetime elements</a> .</p></td>
 </tr>
 </tbody>
 </table>
@@ -143,16 +143,16 @@ or<br />
 </tbody>
 </table>
 
-**Note:** When you use date or time parameters to create tables with names ending in a date format such as `  YYYYMMDD  ` , BigQuery [groups these tables together](/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `  mytable_(1)  ` , which represents the collection of sharded tables.
+**Note:** When you use date or time parameters to create tables with names ending in a date format such as `  YYYYMMDD  ` , BigQuery [groups these tables together](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) . In the Google Cloud console, these grouped tables might be displayed with a name like `  mytable_(1)  ` , which represents the collection of sharded tables.
 
 ## Partitioning options
 
 There are two types of partitioned tables in BigQuery:
 
   - **Tables that are partitioned by ingestion time.** For Cloud Storage, Blob Storage, and Amazon S3 transfers, the ingestion time is the transfer's run time.
-  - **Tables that are partitioned based on a column.** The column type must be a [`  TIMESTAMP  `](/bigquery/docs/reference/standard-sql/data-types#timestamp_type) or [`  DATE  `](/bigquery/docs/reference/standard-sql/data-types#date_type) column.
+  - **Tables that are partitioned based on a column.** The column type must be a [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) or [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) column.
 
-If the destination table is partitioned on a column, you identify the partitioning column when you create the destination table and specify its schema. Learn more about creating column-based partitioned tables in [Creating and using partitioned tables](/bigquery/docs/creating-column-partitions) .
+If the destination table is partitioned on a column, you identify the partitioning column when you create the destination table and specify its schema. Learn more about creating column-based partitioned tables in [Creating and using partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-column-partitions) .
 
 **Note:** Minutes cannot be specified when partitioning a table.
 
@@ -160,16 +160,16 @@ If the destination table is partitioned on a column, you identify the partitioni
 
   - Table with no partitioning
       - Destination table: `  mytable  `
-  - [Ingestion-time partitioned table](/bigquery/docs/partitioned-tables#ingestion_time)
+  - [Ingestion-time partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time)
       - Destination table: `  mytable $YYYYMMDD  `
       - Note that minutes cannot be specified.
-  - [Column-partitioned table](/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables)
+  - [Column-partitioned table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables)
       - Destination table: `  mytable  `
       - Specify the partitioning column as a `  TIMESTAMP  ` or `  DATE  ` column when you create the table's schema.
 
 ## Notes on parameter usage
 
-  - If you partition your data based on your local timezone, you need to manually calculate the hour offset from UTC by using the offsetting mechanism in the [templating syntax](#templating_system) .
+  - If you partition your data based on your local timezone, you need to manually calculate the hour offset from UTC by using the offsetting mechanism in the [templating syntax](https://docs.cloud.google.com/bigquery/docs/gcs-transfer-parameters#templating_system) .
   - Minutes cannot be specified in parameters.
   - Using wildcards for the URI or data path in combination with parameters on the destination table name is allowed.
 
@@ -181,106 +181,31 @@ The following examples show ways to combine the wildcard character and parameter
 
 This use case applies to loading new files from a Cloud Storage, Blob Storage, or Amazon S3 bucket into a non-partitioned table. This example uses a wildcard in the URI or data path and uses an ad hoc refresh transfer to pick up new files.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Data source</strong></th>
-<th><strong>Source URI or data path</strong></th>
-<th><strong>Destination table name</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Cloud Storage</td>
-<td><code dir="ltr" translate="no">       gs://bucket/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-</tr>
-<tr class="even">
-<td>Amazon S3</td>
-<td><code dir="ltr" translate="no">       s3://bucket/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-</tr>
-<tr class="odd">
-<td>Blob Storage</td>
-<td><code dir="ltr" translate="no">       *.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable      </code></td>
-</tr>
-</tbody>
-</table>
+| **Data source** | **Source URI or data path**        | **Destination table name** |
+| --------------- | ---------------------------------- | -------------------------- |
+| Cloud Storage   | `        gs://bucket/*.csv       ` | `        mytable       `   |
+| Amazon S3       | `        s3://bucket/*.csv       ` | `        mytable       `   |
+| Blob Storage    | `        *.csv       `             | `        mytable       `   |
 
 ### Load a snapshot of all data into an ingestion-time partitioned table
 
 In this case, all data in the specified URI or data path is transferred to a table partitioned by today's date. In a refresh transfer, this configuration picks up files added since the last load and adds them to a particular partition.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Data source</strong></th>
-<th><strong>Source URI or data path</strong></th>
-<th><strong>Parameterized destination table name</strong></th>
-<th><strong>Evaluated destination table name</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Cloud Storage</td>
-<td><code dir="ltr" translate="no">       gs://bucket/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-<tr class="even">
-<td>Amazon S3</td>
-<td><code dir="ltr" translate="no">       s3://bucket/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-<tr class="odd">
-<td>Blob Storage</td>
-<td><code dir="ltr" translate="no">       *.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-</tbody>
-</table>
+| **Data source** | **Source URI or data path**        | **Parameterized destination table name**                                   | **Evaluated destination table name** |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------- | ------------------------------------ |
+| Cloud Storage   | `        gs://bucket/*.csv       ` | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        mytable$20180215       `    |
+| Amazon S3       | `        s3://bucket/*.csv       ` | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        mytable$20180215       `    |
+| Blob Storage    | `        *.csv       `             | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        mytable$20180215       `    |
 
 This use case transfers today's data into a table partitioned on today's date. This example also applies to a refresh transfer that retrieves newly added files that match a certain date and loads the data into the corresponding partition.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Data source</strong></th>
-<th><strong>Parameterized URI or data path</strong></th>
-<th><strong>Parameterized destination table name</strong></th>
-<th><strong>Evaluated URI or data path</strong></th>
-<th><strong>Evaluated destination table name</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Cloud Storage</td>
-<td><code dir="ltr" translate="no">       gs://bucket/events-{               run_time|"%Y%m%d"              }/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       gs://bucket/events-20180215/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-<tr class="even">
-<td>Amazon S3</td>
-<td><code dir="ltr" translate="no">       s3://bucket/events-{               run_time|"%Y%m%d"              }/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       s3://bucket/events-20180215/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-<tr class="odd">
-<td>Blob Storage</td>
-<td><code dir="ltr" translate="no">       events-{               run_time|"%Y%m%d"              }/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable${               run_time|"%Y%m%d"              }      </code></td>
-<td><code dir="ltr" translate="no">       events-20180215/*.csv      </code></td>
-<td><code dir="ltr" translate="no">       mytable$20180215      </code></td>
-</tr>
-</tbody>
-</table>
+| **Data source** | **Parameterized URI or data path**                                                          | **Parameterized destination table name**                                   | **Evaluated URI or data path**                     | **Evaluated destination table name** |
+| --------------- | ------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------------ |
+| Cloud Storage   | `        gs://bucket/events-{               run_time\|"%Y%m%d"              }/*.csv       ` | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        gs://bucket/events-20180215/*.csv       ` | `        mytable$20180215       `    |
+| Amazon S3       | `        s3://bucket/events-{               run_time\|"%Y%m%d"              }/*.csv       ` | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        s3://bucket/events-20180215/*.csv       ` | `        mytable$20180215       `    |
+| Blob Storage    | `        events-{               run_time\|"%Y%m%d"              }/*.csv       `             | `        mytable${               run_time\|"%Y%m%d"              }       ` | `        events-20180215/*.csv       `             | `        mytable$20180215       `    |
 
 ## What's next
 
-  - Learn about [setting up a Cloud Storage transfer](/bigquery/docs/cloud-storage-transfer) .
-  - Learn more about the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
+  - Learn about [setting up a Cloud Storage transfer](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer) .
+  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .

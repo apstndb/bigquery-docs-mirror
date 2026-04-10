@@ -1,16 +1,16 @@
 # The CREATE MODEL statement for self-deployed open models
 
-This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over open text embedding and text generation models deployed to [Vertex AI](/vertex-ai/docs) . When you self-deploy a model, the model runs within your project and VPC network, giving you full control over the deployment environment. We recommend using self-deployed models when your application requires custom control over model weights, hardware configurations, compliance, or location. For more information, see the [Overview of self-deployed models](/vertex-ai/generative-ai/docs/model-garden/self-deployed-models) and read about [when to use self-deployed models](/vertex-ai/generative-ai/docs/open-models/choose-serving-option#self-deploy-model-garden) .
+This document describes the `  CREATE MODEL  ` statement for creating remote models in BigQuery over open text embedding and text generation models deployed to [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs) . When you self-deploy a model, the model runs within your project and VPC network, giving you full control over the deployment environment. We recommend using self-deployed models when your application requires custom control over model weights, hardware configurations, compliance, or location. For more information, see the [Overview of self-deployed models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/self-deployed-models) and read about [when to use self-deployed models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/open-models/choose-serving-option#self-deploy-model-garden) .
 
-After you create a remote model, you can use it with the [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function, depending on the model type.
+After you create a remote model, you can use it with the [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function, depending on the model type.
 
 ## `     CREATE MODEL    ` syntax
 
-You can automatically deploy the open model at the same time that you create the remote model, or you can manually deploy the open model first, and then use the deployed open model with the remote model. BigQuery manages the Vertex AI resources for automatically deployed open models. You must manage the Vertex AI resources for manually deployed open models. For more information, see [Deploy open models](#deploy_open_models) .
+You can automatically deploy the open model at the same time that you create the remote model, or you can manually deploy the open model first, and then use the deployed open model with the remote model. BigQuery manages the Vertex AI resources for automatically deployed open models. You must manage the Vertex AI resources for manually deployed open models. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
 ### Automatically deployed
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}
@@ -62,43 +62,37 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
-```
+    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
 
 The connection elements are as follows:
 
   - `  PROJECT_ID  ` : the project ID of the project that contains the connection.
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
   - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
     
-    To find your connection ID, [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-You must grant the [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model. For more information, see [Grant or revoke a single IAM role](/iam/docs/granting-changing-revoking-access#single-role) .
+You must grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model. For more information, see [Grant or revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#single-role) .
 
 **Example**
 
-``` text
-`myproject.us.my_connection`
-```
+    `myproject.us.my_connection`
 
 ### `       HUGGING_FACE_MODEL_ID      `
 
 **Syntax**
 
-``` text
-HUGGING_FACE_MODEL_ID = 'hugging_face_model_id'
-```
+    HUGGING_FACE_MODEL_ID = 'hugging_face_model_id'
 
 **Description**
 
-The model ID for a [supported Hugging Face model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `  deepseek-ai/DeepSeek-R1  ` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
+The model ID for a [supported Hugging Face model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `  deepseek-ai/DeepSeek-R1  ` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
 
 **Arguments**
 
@@ -106,13 +100,11 @@ A `  STRING  ` value that specifies the model ID.
 
 ### `       MODEL_GARDEN_MODEL_NAME      `
 
-``` text
-MODEL_GARDEN_MODEL_NAME = 'model_garden_model_name'
-```
+    MODEL_GARDEN_MODEL_NAME = 'model_garden_model_name'
 
 **Description**
 
-The model ID and model version of a [supported Vertex AI Model Garden model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format `  publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `  publishers/openai/models/gpt-oss@gpt-oss-120b  ` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
+The model ID and model version of a [supported Vertex AI Model Garden model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format `  publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `  publishers/openai/models/gpt-oss@gpt-oss-120b  ` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
 
 **Arguments**
 
@@ -120,9 +112,7 @@ A `  STRING  ` value that specifies the model ID and model version.
 
 ### `       HUGGING_FACE_TOKEN      `
 
-``` text
-HUGGING_FACE_TOKEN = 'hugging_face_token'
-```
+    HUGGING_FACE_TOKEN = 'hugging_face_token'
 
 **Description**
 
@@ -142,13 +132,11 @@ A `  STRING  ` value that specifies the Hugging Face User Access Token.
 
 ### `       MACHINE_TYPE      `
 
-``` text
-MACHINE_TYPE = 'machine_type'
-```
+    MACHINE_TYPE = 'machine_type'
 
 **Description**
 
-The machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](/vertex-ai/docs/predictions/configure-compute#machine-types) .
+The machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute#machine-types) .
 
 **Arguments**
 
@@ -156,9 +144,7 @@ A `  STRING  ` value that specifies the machine type. If you don't specify a val
 
 ### `       MIN_REPLICA_COUNT      `
 
-``` text
-MIN_REPLICA_COUNT = min_replica_count
-```
+    MIN_REPLICA_COUNT = min_replica_count
 
 **Description**
 
@@ -170,9 +156,7 @@ An `  INT64  ` value that specifies the minimum replica count. The `  MIN_REPLIC
 
 ### `       MAX_REPLICA_COUNT      `
 
-``` text
-MAX_REPLICA_COUNT = max_replica_count
-```
+    MAX_REPLICA_COUNT = max_replica_count
 
 **Description**
 
@@ -184,15 +168,13 @@ An `  INT64  ` value that specifies the maximum replica count. The `  MAX_REPLIC
 
 ### `       RESERVATION_AFFINITY_TYPE      `
 
-``` text
-RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'}
-```
+    RESERVATION_AFFINITY_TYPE = {'NO_RESERVATION' | 'ANY_RESERVATION' | 'SPECIFIC_RESERVATION'}
 
 **Description**
 
-Determines whether the deployed model uses [Compute Engine reservations](/compute/docs/instances/reservations-overview) to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation. For more information, see [Compute Engine reservation affinity](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity) .
+Determines whether the deployed model uses [Compute Engine reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-overview) to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation. For more information, see [Compute Engine reservation affinity](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity) .
 
-You can only use Compute Engine reservations that are shared with Vertex AI. For more information, see [Allow a reservation to be consumed](/vertex-ai/docs/predictions/use-reservations#allow-consumption) .
+You can only use Compute Engine reservations that are shared with Vertex AI. For more information, see [Allow a reservation to be consumed](https://docs.cloud.google.com/vertex-ai/docs/predictions/use-reservations#allow-consumption) .
 
 **Arguments**
 
@@ -200,20 +182,18 @@ This option accepts the following values:
 
   - `  NO_RESERVATION  ` : no reservation is consumed when your model is deployed to a Vertex AI endpoint. Specifying `  NO_RESERVATION  ` has the same effect as not specifying a reservation affinity.
 
-  - `  ANY_RESERVATION  ` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
+  - `  ANY_RESERVATION  ` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](https://docs.cloud.google.com/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
     
       - They use the machine type specified by the `  MACHINE_TYPE  ` value.
       - If the BigQuery dataset in which you are creating the remote model is a single region, the reservation must be in the same region. If the dataset is in the `  US  ` multiregion, the reservation must be in the `  us-central1  ` region. If the dataset is in the `  EU  ` multiregion, the reservation must be in the `  europe-west4  ` region.
     
     If there isn't enough capacity in the available reservations, or if no suitable reservations are found, the system provisions on-demand Compute Engine VMs to meet the resource requirements.
 
-  - `  SPECIFIC_RESERVATION  ` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `  RESERVATION_AFFINITY_VALUES  ` value. This reservation must be [configured for specifically targeted consumption](/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
+  - `  SPECIFIC_RESERVATION  ` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `  RESERVATION_AFFINITY_VALUES  ` value. This reservation must be [configured for specifically targeted consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
 
 ### `       RESERVATION_AFFINITY_KEY      `
 
-``` text
-RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name'
-```
+    RESERVATION_AFFINITY_KEY = 'compute.googleapis.com/reservation-name'
 
 **Description**
 
@@ -225,9 +205,7 @@ The string `  compute.googleapis.com/reservation-name  ` .
 
 ### `       RESERVATION_AFFINITY_VALUES      `
 
-``` text
-RESERVATION_AFFINITY_VALUES = reservation_affinity_values
-```
+    RESERVATION_AFFINITY_VALUES = reservation_affinity_values
 
 **Description**
 
@@ -235,7 +213,7 @@ The full resource name of the Compute Engine reservation, in the following forma
 
 `  projects/ myproject /zones/ reservation_zone /reservations/ reservation_name  `
 
-You can get the reservation name and zone from the **Reservations** page of the Google Cloud console. For more information, see [View reservations](/compute/docs/instances/reservations-view#view-reservations) .
+You can get the reservation name and zone from the **Reservations** page of the Google Cloud console. For more information, see [View reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-view#view-reservations) .
 
 You must specify this option when the `  RESERVATION_AFFINITY_TYPE  ` value is `  SPECIFIC_RESERVATION  ` .
 
@@ -245,9 +223,7 @@ An `  ARRAY<STRING>  ` value that specifies the resource name. For example, `  R
 
 ### `       ENDPOINT_IDLE_TTL      `
 
-``` text
-ENDPOINT_IDLE_TTL = endpoint_idle_ttl
-```
+    ENDPOINT_IDLE_TTL = endpoint_idle_ttl
 
 **Description**
 
@@ -255,9 +231,9 @@ The duration of inactivity after which the open model is automatically undeploye
 
 Model inactivity is defined as the amount of time that has passed since the any of the following operations were performed on the model:
 
-  - Running the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
-  - Running the [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model#deploy_model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .
-  - Sending an inference request to the model endpoint. For example, by running the [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
+  - Running the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
+  - Running the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model#deploy_model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .
+  - Sending an inference request to the model endpoint. For example, by running the [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
 
 Each of these operations resets the inactivity timer to zero. The reset is triggered at the start of the BigQuery job that performs the operation.
 
@@ -265,13 +241,13 @@ After the model is undeployed, inference requests sent to the model return an er
 
 **Arguments**
 
-An `  INTERVAL  ` value. Specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
+An `  INTERVAL  ` value. Specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
 
-To modify this option after the model has been created, use the [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model#endpoint_idle_ttl) .
+To modify this option after the model has been created, use the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model#endpoint_idle_ttl) .
 
 ### Manually deployed
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}
@@ -311,57 +287,49 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
-```
+    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
 
 The connection elements are as follows:
 
   - `  PROJECT_ID  ` : the project ID of the project that contains the connection.
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
   - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
     
-    To find your connection ID, [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-You must grant the [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model. For more information, see [Grant or revoke a single IAM role](/iam/docs/granting-changing-revoking-access#single-role) .
+You must grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model. For more information, see [Grant or revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#single-role) .
 
 **Example**
 
-``` text
-`myproject.us.my_connection`
-```
+    `myproject.us.my_connection`
 
 ### `       ENDPOINT      `
 
 **Syntax**
 
-``` text
-ENDPOINT = 'vertex_ai_endpoint'
-```
+    ENDPOINT = 'vertex_ai_endpoint'
 
 **Description**
 
-The Vertex AI endpoint of the deployed open model. The endpoint must be a [shared public endpoint](/vertex-ai/docs/predictions/choose-endpoint-type) . Dedicated public endpoints, Private Service Connect endpoints, and private endpoints aren't supported.
+The Vertex AI endpoint of the deployed open model. The endpoint must be a [shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/choose-endpoint-type) . Dedicated public endpoints, Private Service Connect endpoints, and private endpoints aren't supported.
 
 **Arguments**
 
-A `  STRING  ` value that specifies the [shared public endpoint](/vertex-ai/docs/predictions/choose-endpoint-type) of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` .
+A `  STRING  ` value that specifies the [shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/choose-endpoint-type) of a model deployed to Vertex AI, in the format `  https:// location -aiplatform.googleapis.com/v1/projects/ project /locations/ location /endpoints/ endpoint_id  ` .
 
 The following code shows an example endpoint:
 
-``` text
-ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234'
-```
+    ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234'
 
 ## Supported open models
 
-You can create a remote model over a deployed open model from either the [Vertex AI Model Garden](/vertex-ai/generative-ai/docs/model-garden/explore-models) or [Hugging Face](https://huggingface.co/) .
+You can create a remote model over a deployed open model from either the [Vertex AI Model Garden](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models) or [Hugging Face](https://huggingface.co/) .
 
 ### Supported Vertex AI Model Garden models
 
@@ -408,7 +376,7 @@ The following open embedding generation models in the Vertex AI Model Garden are
 
 BigQuery ML supports Hugging Face models that use the [Text Embeddings Inference API](https://huggingface.github.io/text-embeddings-inference/) or the [Text Generation Inference API](https://huggingface.github.io/text-generation-inference/) and can be deployed to Vertex AI.
 
-If you use the Vertex AI API to [deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model) as a Vertex AI endpoint, you don't have to check whether the model has been verified by Vertex AI. Otherwise, you must verify that the model is supported before deploying it.
+If you use the Vertex AI API to [deploy the open model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model) as a Vertex AI endpoint, you don't have to check whether the model has been verified by Vertex AI. Otherwise, you must verify that the model is supported before deploying it.
 
 To find supported Hugging Face models, do the following:
 
@@ -425,14 +393,16 @@ To find supported Hugging Face models, do the following:
 6.  Press `  Enter  ` .
     
     A green check circle is shown if the model can be deployed in Vertex AI Model Garden:
+    
+    ![A green check circle appears if the Hugging Face model is deployable.](https://docs.cloud.google.com/static/bigquery/images/deployable-hugging-face-model.png)
 
 ## Deploy open models
 
-If you are creating a remote model over a [supported open model](#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement.
+If you are creating a remote model over a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement.
 
 ### Automatically deployed models
 
-If you choose to automatically deploy the open model, the service uses the credentials of the connection that you specify in the `  CREATE MODEL  ` statement to deploy the open model to a Vertex AI [shared public endpoint](/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) . The Vertex AI endpoint is created in the same project in which you create the remote model. The Vertex AI resource IDs for the BigQuery-managed model and endpoint begin with `  bq-managed-  ` . The location of the endpoint is determined as follows:
+If you choose to automatically deploy the open model, the service uses the credentials of the connection that you specify in the `  CREATE MODEL  ` statement to deploy the open model to a Vertex AI [shared public endpoint](https://docs.cloud.google.com/vertex-ai/docs/predictions/create-public-endpoint#create_a_shared_public_endpoint) . The Vertex AI endpoint is created in the same project in which you create the remote model. The Vertex AI resource IDs for the BigQuery-managed model and endpoint begin with `  bq-managed-  ` . The location of the endpoint is determined as follows:
 
   - If the BigQuery dataset in which you are creating the remote model is in a single region, the endpoint is created in the same region.
   - If the dataset is in the `  US  ` multiregion, the endpoint is created in the `  us-central1  ` region.
@@ -440,9 +410,9 @@ If you choose to automatically deploy the open model, the service uses the crede
 
 Automatically deployed models offer the following benefits:
 
-  - [Automatic Vertex AI resource management](#managed-resources)
-  - Reserve open model resources by [using Compute Engine reservations](#reservation-affinity)
-  - [Automatic or immediate open model undeployment](#managed-model-undeployment) to save costs
+  - [Automatic Vertex AI resource management](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-resources)
+  - Reserve open model resources by [using Compute Engine reservations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity)
+  - [Automatic or immediate open model undeployment](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#managed-model-undeployment) to save costs
 
 #### Automatic Vertex AI resource management
 
@@ -450,13 +420,13 @@ When you automatically deploy an open model, BigQuery manages the open model's V
 
 #### Compute Engine reservation affinity
 
-You can use [Compute Engine reservations](/compute/docs/instances/reservations-overview) with open models that you automatically deploy to Vertex AI. Compute Engine reservations provide assured virtual machine (VM) availability for the open model when serving predictions. For more information, see [Use reservations with inference](/vertex-ai/docs/predictions/use-reservations) .
+You can use [Compute Engine reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-overview) with open models that you automatically deploy to Vertex AI. Compute Engine reservations provide assured virtual machine (VM) availability for the open model when serving predictions. For more information, see [Use reservations with inference](https://docs.cloud.google.com/vertex-ai/docs/predictions/use-reservations) .
 
-Use the [`  RESERVATION_AFFINITY_TYPE  `](#reservation-affinity-type) , [`  RESERVATION_AFFINITY_KEY  `](#reservation-affinity-key) , and [`  RESERVATION_AFFINITY_VALUES  `](#reservation-affinity-values) options to specify Compute Engine reservation affinity configurations for the open model.
+Use the [`  RESERVATION_AFFINITY_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity-type) , [`  RESERVATION_AFFINITY_KEY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity-key) , and [`  RESERVATION_AFFINITY_VALUES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity-values) options to specify Compute Engine reservation affinity configurations for the open model.
 
 #### Automatic or immediate open model undeployment
 
-By default, BigQuery automatically undeploys the model after a specified period of idleness. You can specify how long the model can remain idle before undeployment by setting the [`  ENDPOINT_IDLE_TTL  ` option](#endpoint-idle-ttl) in the `  CREATE MODEL  ` or [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) . This helps you save costs by undeploying the model it isn't being used.
+By default, BigQuery automatically undeploys the model after a specified period of idleness. You can specify how long the model can remain idle before undeployment by setting the [`  ENDPOINT_IDLE_TTL  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#endpoint-idle-ttl) in the `  CREATE MODEL  ` or [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) . This helps you save costs by undeploying the model it isn't being used.
 
 Alternatively, you can use the `  ALTER MODEL  ` statement to manually undeploy an open model from a Vertex AI endpoint in order to immediately stop billing. To manually undeploy an open model, set the `  DEPLOY_MODEL  ` argument of the `  ALTER MODEL  ` statement to `  FALSE  ` .
 
@@ -467,12 +437,14 @@ After the model is undeployed, inference requests sent to the model return an er
 To deploy an open model from the Model Garden, do the following:
 
 1.  Go to Model Garden.
+    
+    [Go to Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
 
 2.  Locate the model's model card in the Model Garden and click it.
 
 3.  Use one of the deployment options on the model card. All models have a **Deploy** option for deploying directly, and an **Open Notebook** option for deploying the model by using a Colab Enterprise notebook. Some models also offer a **Fine-Tune** option for deploying a fine-tuned version of the model.
 
-4.  Follow the workflow of the deployment option that you have chosen. You must select **Public (shared endpoint)** as the value for the **Endpoint access** field in the deployment workflow. For more information, see [Use models in Model Garden](/vertex-ai/generative-ai/docs/model-garden/use-models) .
+4.  Follow the workflow of the deployment option that you have chosen. You must select **Public (shared endpoint)** as the value for the **Endpoint access** field in the deployment workflow. For more information, see [Use models in Model Garden](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/use-models) .
 
 ### Manually deploy Hugging Face models
 
@@ -500,24 +472,24 @@ To deploy a Hugging Face text embedding ( [Preview](https://cloud.google.com/pro
 6.  Press `  Enter  ` .
 7.  Select **Open Notebook** :
 
-<!-- end list -->
+![Open a notebook to deploy a Hugging Face model.](https://docs.cloud.google.com/static/bigquery/images/hugging-face-notebook-deployment.png)
 
 1.  Click the name of the notebook that you want to use.
 
-To stop billing for a model, [undeploy the model](/vertex-ai/docs/predictions/undeploy-model) .
+To stop billing for a model, [undeploy the model](https://docs.cloud.google.com/vertex-ai/docs/predictions/undeploy-model) .
 
-As an alternative to using the UI or a notebook, you can also use the Vertex AI API to [deploy the open model](/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model) as a Vertex AI endpoint.
+As an alternative to using the UI or a notebook, you can also use the Vertex AI API to [deploy the open model](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/model-garden/use-models#deploy_an_open_model) as a Vertex AI endpoint.
 
 ## Locations
 
-For information about supported locations, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+For information about supported locations, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Limitations
 
   - You can only use open models to process text data. Multimodal data isn't supported.
   - Canceling a model creation or update job that includes open model deployment doesn't cause the allocated Vertex AI resources to be cleaned up, because Vertex AI doesn't support canceling in-progress model deployments. Instead of canceling the job, wait for it to complete, and then replace, alter, or delete the BigQuery ML model to release Vertex AI resources.
   - Don't directly modify the Vertex AI resources for an open model that BigQuery manages in Vertex AI. Doing so can lead to unexpected behavior. For example, manually undeploying a model while it is processing an inference job can lead to the whole inference query failing.
-  - [Time travel](/bigquery/docs/time-travel) isn't supported for automatically deployed open models. The Vertex AI resources associated with the model aren't recovered.
+  - [Time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) isn't supported for automatically deployed open models. The Vertex AI resources associated with the model aren't recovered.
   - If you want to delete a BigQuery dataset that contains a BigQuery ML model with BigQuery-managed resources in Vertex AI, you must delete the BigQuery ML model from the dataset first. Otherwise, the Vertex AI resources remain active, and you must go to Vertex AI to manually delete them.
 
 ## Examples
@@ -528,87 +500,71 @@ The following examples show how to create a remote model over an open model.
 
 The following example creates a BigQuery ML remote model over a model deployed to a Vertex AI endpoint:
 
-``` text
-CREATE MODEL `project_id.mydataset.mymodel`
- REMOTE WITH CONNECTION `myproject.us.test_connection`
- OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234')
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     REMOTE WITH CONNECTION `myproject.us.test_connection`
+     OPTIONS(ENDPOINT = 'https://us-central1-aiplatform.googleapis.com/v1/projects/myproject/locations/us-central1/endpoints/1234')
 
 ### Create a Vertex AI Model Garden model and run text generation
 
 The following example creates a BigQuery-managed Vertex AI model over the `  gpt-oss@gpt-oss-20b  ` model from Vertex AI Model Garden:
 
-``` text
-CREATE MODEL `project_id.mydataset.my_model_garden_model`
-REMOTE WITH CONNECTION DEFAULT
-OPTIONS (model_garden_model_name = 'publishers/openai/models/gpt-oss@gpt-oss-20b');
-```
+    CREATE MODEL `project_id.mydataset.my_model_garden_model`
+    REMOTE WITH CONNECTION DEFAULT
+    OPTIONS (model_garden_model_name = 'publishers/openai/models/gpt-oss@gpt-oss-20b');
 
-``` text
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `project_id.mydataset.my_model_garden_model`,
-    (SELECT 'What is the purpose of dreams?' AS prompt));
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `project_id.mydataset.my_model_garden_model`,
+        (SELECT 'What is the purpose of dreams?' AS prompt));
 
 ### Create a Hugging Face model and run embedding generation
 
 The following example creates a BigQuery-managed Vertex AI model over the `  intfloat/multilingual-e5-small  ` model from Hugging Face with ten machine replicas, and uses it for large-scale embedding generation:
 
-``` text
-CREATE MODEL `project_id.mydataset.my_hugging_face_model`
-REMOTE WITH CONNECTION DEFAULT
-OPTIONS (hugging_face_model_id = 'intfloat/multilingual-e5-small', max_replica_count = 10);
-```
+    CREATE MODEL `project_id.mydataset.my_hugging_face_model`
+    REMOTE WITH CONNECTION DEFAULT
+    OPTIONS (hugging_face_model_id = 'intfloat/multilingual-e5-small', max_replica_count = 10);
 
-``` text
-SELECT *
-FROM
-  AI.GENERATE_EMBEDDING(
-    MODEL `project_id.mydataset.my_hugging_face_model`,
-    TABLE `project_id.mydataset.customer_feedback`
-);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_EMBEDDING(
+        MODEL `project_id.mydataset.my_hugging_face_model`,
+        TABLE `project_id.mydataset.customer_feedback`
+    );
 
 ### Vertex AI resource management
 
 The following example creates a BigQuery-managed Vertex AI model over the `  gemma3@gemma-3-1b-it  ` model from Vertex AI Model Garden, and configures it to automatically undeploy after being idle for 8 hours:
 
-``` text
-CREATE MODEL `project_id.mydataset.my_model_garden_model`
-  REMOTE WITH CONNECTION DEFAULT
-  OPTIONS (
-    model_garden_model_name = 'publishers/google/models/gemma3@gemma-3-1b-it',
-    endpoint_idle_ttl = INTERVAL 8 HOUR
-  );
-```
+    CREATE MODEL `project_id.mydataset.my_model_garden_model`
+      REMOTE WITH CONNECTION DEFAULT
+      OPTIONS (
+        model_garden_model_name = 'publishers/google/models/gemma3@gemma-3-1b-it',
+        endpoint_idle_ttl = INTERVAL 8 HOUR
+      );
 
 The following example updates the `  endpoint_idle_ttl  ` option to automatically undeploy the model after 1 day of inactivity:
 
-``` text
-ALTER MODEL `project_id.mydataset.my_model_garden_model`
-SET OPTIONS (endpoint_idle_ttl = INTERVAL 1 DAY);
-```
+    ALTER MODEL `project_id.mydataset.my_model_garden_model`
+    SET OPTIONS (endpoint_idle_ttl = INTERVAL 1 DAY);
 
 The following example manually undeploys the model to immediately stop costs after the inference job is complete:
 
-``` text
-SELECT *
-FROM
-  AI.GENERATE_TEXT(
-    MODEL `project_id.mydataset.my_model_garden_model`,
-    (SELECT 'What is the purpose of dreams?' AS prompt));
-
-ALTER MODEL `project_id.mydataset.my_model_garden_model`
-SET OPTIONS (deploy_model = FALSE);
-```
+    SELECT *
+    FROM
+      AI.GENERATE_TEXT(
+        MODEL `project_id.mydataset.my_model_garden_model`,
+        (SELECT 'What is the purpose of dreams?' AS prompt));
+    
+    ALTER MODEL `project_id.mydataset.my_model_garden_model`
+    SET OPTIONS (deploy_model = FALSE);
 
 ## What's next
 
-  - Try [generating text using your data](/bigquery/docs/generate-text) .
-  - Try [generating text embeddings using your data](/bigquery/docs/generate-text-embedding) .
-  - Try [generating text with Gemma](/bigquery/docs/generate-text-tutorial-gemma) .
-  - Try [generating text embeddings with an open model](/bigquery/docs/generate-text-embedding-tutorial-open-models) .
-  - Try [generating video embeddings using your data](/bigquery/docs/generate-video-embedding) .
-  - For more information about the supported SQL statements and functions for remote models that use HTTPS endpoints, see [End-to-end user journey for each model](/bigquery/docs/e2e-journey) .
+  - Try [generating text using your data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
+  - Try [generating text embeddings using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding) .
+  - Try [generating text with Gemma](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma) .
+  - Try [generating text embeddings with an open model](https://docs.cloud.google.com/bigquery/docs/generate-text-embedding-tutorial-open-models) .
+  - Try [generating video embeddings using your data](https://docs.cloud.google.com/bigquery/docs/generate-video-embedding) .
+  - For more information about the supported SQL statements and functions for remote models that use HTTPS endpoints, see [End-to-end user journey for each model](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

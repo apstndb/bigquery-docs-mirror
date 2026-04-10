@@ -1,21 +1,19 @@
 # The AI.DETECT\_ANOMALIES function
 
-This document describes the `  AI.DETECT_ANOMALIES  ` function, which lets you detect anomalies in time series data by using BigQuery ML's built-in [TimesFM model](/bigquery/docs/timesfm-model) .
+This document describes the `  AI.DETECT_ANOMALIES  ` function, which lets you detect anomalies in time series data by using BigQuery ML's built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) .
 
 For example, imagine you have historical and current data about sales of a product. You could run a query similar to the following to detect anomalous spikes or drops in sales:
 
-``` text
-SELECT *
-FROM AI.DETECT_ANOMALIES(
-  TABLE `mydataset.history_table`,
-  TABLE `mydataset.target_table`,
-  data_col => 'units_sold',
-  timestamp_col => 'sales_date');
-```
+    SELECT *
+    FROM AI.DETECT_ANOMALIES(
+      TABLE `mydataset.history_table`,
+      TABLE `mydataset.target_table`,
+      data_col => 'units_sold',
+      timestamp_col => 'sales_date');
 
 ## Syntax
 
-``` sql
+``` lang-sql
 SELECT
   *
 FROM
@@ -87,89 +85,28 @@ The TimesFM model forecasts data for the `  DATA_COL  ` value, based on the hist
 
   - `  CONTEXT_WINDOW  ` : an `  INT64  ` value that specifies the context window length used by BigQuery ML's built-in TimesFM model. The context window length determines how many of the most recent data points from the input time series are used by the model. For example, if your time series date range is March 1 to April 15, data points are selected starting at April 15 and working backwards. Valid values for models are as follows:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th><strong>Model Name</strong></th>
-    <th><strong>Supported Context Window Length</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>TimesFM 2.0</td>
-    <td>64, 128, 256, 512, 1024, 2048</td>
-    </tr>
-    <tr class="even">
-    <td>TimesFM 2.5</td>
-    <td>64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360</td>
-    </tr>
-    </tbody>
-    </table>
+    | **Model Name** | **Supported Context Window Length**              |
+    | -------------- | ------------------------------------------------ |
+    | TimesFM 2.0    | 64, 128, 256, 512, 1024, 2048                    |
+    | TimesFM 2.5    | 64, 128, 256, 512, 1024, 2048, 4096, 8192, 15360 |
     
+
     If you don't specify a `  CONTEXT_WINDOW  ` value, the `  AI.DETECT_ANOMALIES  ` function automatically chooses the smallest possible context window length to use that is still large enough to cover the number of time series data points in your input data. The following table shows the relationships between the number of time series data points in the input data, the selected context window length, and the corresponding supported TimesFM model name:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th><strong>Number of time series data points</strong></th>
-    <th><strong>Context window length</strong></th>
-    <th><strong>Supported Model Names</strong></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>(1, 64]</td>
-    <td>64</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="even">
-    <td>(65, 128]</td>
-    <td>128</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="odd">
-    <td>(129, 256]</td>
-    <td>256</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="even">
-    <td>(257, 512]</td>
-    <td>512</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="odd">
-    <td>(513, 1024]</td>
-    <td>1,024</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="even">
-    <td>(1025, 2048]</td>
-    <td>2,048</td>
-    <td>TimesFM 2.0, TimesFM 2.5</td>
-    </tr>
-    <tr class="odd">
-    <td>(2049, 4096]</td>
-    <td>4,096</td>
-    <td>TimesFM 2.5</td>
-    </tr>
-    <tr class="even">
-    <td>(4097, 8192]</td>
-    <td>8,192</td>
-    <td>TimesFM 2.5</td>
-    </tr>
-    <tr class="odd">
-    <td>(8193, 15360]</td>
-    <td>15,360</td>
-    <td>TimesFM 2.5</td>
-    </tr>
-    <tr class="even">
-    <td>15360</td>
-    <td>15,360</td>
-    <td>TimesFM 2.5</td>
-    </tr>
-    </tbody>
-    </table>
+    | **Number of time series data points** | **Context window length** | **Supported Model Names** |
+    | ------------------------------------- | ------------------------- | ------------------------- |
+    | (1, 64\]                              | 64                        | TimesFM 2.0, TimesFM 2.5  |
+    | (65, 128\]                            | 128                       | TimesFM 2.0, TimesFM 2.5  |
+    | (129, 256\]                           | 256                       | TimesFM 2.0, TimesFM 2.5  |
+    | (257, 512\]                           | 512                       | TimesFM 2.0, TimesFM 2.5  |
+    | (513, 1024\]                          | 1,024                     | TimesFM 2.0, TimesFM 2.5  |
+    | (1025, 2048\]                         | 2,048                     | TimesFM 2.0, TimesFM 2.5  |
+    | (2049, 4096\]                         | 4,096                     | TimesFM 2.5               |
+    | (4097, 8192\]                         | 8,192                     | TimesFM 2.5               |
+    | (8193, 15360\]                        | 15,360                    | TimesFM 2.5               |
+    | 15360                                 | 15,360                    | TimesFM 2.5               |
     
+
     For the `  TimesFM 2.0  ` model, 2,048 is the maximum number of time series data points that are passed to the model. For the `  TimesFM 2.5  ` model, 15,360 is the maximum number of time series data points that are passed to the model. Any additional time series data points in the input data are ignored.
 
 ## Output
@@ -193,81 +130,75 @@ The following examples detect anomalies in the number of bike trips recorded in 
 
 This query shows how to detect anomalies in the number of trips that happened each day:
 
-``` text
-WITH bike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date
-  )
-SELECT *
-FROM
-  AI.DETECT_ANOMALIES(
-    # Historical data from a query
-    (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
-    # Target data from a query
-    (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date');
-```
+    WITH bike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        # Historical data from a query
+        (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
+        # Target data from a query
+        (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
+        data_col => 'num_trips',
+        timestamp_col => 'date');
 
 The first few rows of output look similar to the following:
 
-``` text
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-| time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound        | anomaly_probability | ai_detect_anomalies_status |
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-| 2016-07-02 00:00:00 UTC | 35837.0          | false      | 31180.300309540704 | 53286.037518730387 | 0.77394848118403459 | null                       |
-| 2016-07-03 00:00:00 UTC | 35348.0          | false      | 29203.3735854947   | 52593.933445778675 | 0.69142246991005529 | null                       |
-| 2016-07-04 00:00:00 UTC | 34860.0          | true       | 37186.313388224225 | 58915.902423241641 | 0.97986699682799683 | null                       |
-+-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
-```
+    +-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
+    | time_series_timestamp   | time_series_data | is_anomaly | lower_bound        | upper_bound        | anomaly_probability | ai_detect_anomalies_status |
+    +-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
+    | 2016-07-02 00:00:00 UTC | 35837.0          | false      | 31180.300309540704 | 53286.037518730387 | 0.77394848118403459 | null                       |
+    | 2016-07-03 00:00:00 UTC | 35348.0          | false      | 29203.3735854947   | 52593.933445778675 | 0.69142246991005529 | null                       |
+    | 2016-07-04 00:00:00 UTC | 34860.0          | true       | 37186.313388224225 | 58915.902423241641 | 0.97986699682799683 | null                       |
+    +-------------------------+------------------+------------+--------------------+--------------------+---------------------+----------------------------+
 
 Anomalies occur when the `  time_series_data  ` is below the `  lower_bound  ` or above the `  upper_bound  ` . To visualize the results, in the **Query results** pane click **Visualization** .
 
 **Note:** The time displayed in the visualization is shown in the `  America/Los_Angeles  ` time zone.
 
+![Visualization of time series data with lower and upper bounds](https://docs.cloud.google.com/static/bigquery/images/anomaly-detection-graph.png)
+
 You can specify `  usertype  ` in the `  id_cols  ` argument to detect anomalies broken down by the type of user, which can be `  Subscriber  ` or `  Customer  ` :
 
-``` text
-WITH
-  bike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype
-  )
-SELECT *
-FROM
-  AI.DETECT_ANOMALIES(
-    # Historical data from a query
-    (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
-    # Target data from a query
-    (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date',
-    id_cols => ['usertype'])
-```
+    WITH
+      bike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, usertype, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date, usertype
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        # Historical data from a query
+        (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
+        # Target data from a query
+        (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
+        data_col => 'num_trips',
+        timestamp_col => 'date',
+        id_cols => ['usertype'])
 
 This query breaks down the anomalies by the dimensions `  usertype  ` and `  gender  ` , specifies that BigQuery should use the `  TimesFM 2.5  ` model, and sets `  anomaly_prob_threshold  ` to 0.8:
 
-``` text
-WITH bike_trips AS (
-    SELECT EXTRACT(DATE FROM starttime) AS date, usertype, gender, COUNT(*) AS num_trips
-    FROM `bigquery-public-data.new_york.citibike_trips`
-    GROUP BY date, usertype, gender
-  )
-SELECT *
-FROM
-  AI.DETECT_ANOMALIES(
-    # Historical data from a query
-    (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
-    # Target data from a query
-    (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
-    data_col => 'num_trips',
-    timestamp_col => 'date',
-    id_cols => ['usertype', 'gender'],
-    model => "TimesFM 2.5",
-    anomaly_prob_threshold => 0.8);
-```
+    WITH bike_trips AS (
+        SELECT EXTRACT(DATE FROM starttime) AS date, usertype, gender, COUNT(*) AS num_trips
+        FROM `bigquery-public-data.new_york.citibike_trips`
+        GROUP BY date, usertype, gender
+      )
+    SELECT *
+    FROM
+      AI.DETECT_ANOMALIES(
+        # Historical data from a query
+        (SELECT * FROM bike_trips WHERE date <= DATE('2016-06-30')),
+        # Target data from a query
+        (SELECT * FROM bike_trips WHERE date BETWEEN '2016-07-01' AND '2016-09-01'),
+        data_col => 'num_trips',
+        timestamp_col => 'date',
+        id_cols => ['usertype', 'gender'],
+        model => "TimesFM 2.5",
+        anomaly_prob_threshold => 0.8);
 
 ## Limitations
 
@@ -275,13 +206,13 @@ Only the most recent 1,024 time points are evaluated for anomalies. If you need 
 
 ## Locations
 
-`  AI.DETECT_ANOMALIES  ` and the TimesFM model are available in all [supported BigQuery ML locations](/bigquery/docs/locations#bqml-loc) .
+`  AI.DETECT_ANOMALIES  ` and the TimesFM model are available in all [supported BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#bqml-loc) .
 
 ## Pricing
 
-`  AI.DETECT_ANOMALIES  ` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](/bigquery/pricing#bqml) page.
+`  AI.DETECT_ANOMALIES  ` usage is billed at the evaluation, inspection, and prediction rate documented in the **BigQuery ML on-demand pricing** section of the [BigQuery ML pricing](https://docs.cloud.google.com/bigquery/pricing#bqml) page.
 
 ## What's next
 
-  - Try [Detect anomalies with a TimesFM univariate model](/bigquery/docs/timesfm-anomaly-detection-tutorial) .
-  - For information about anomaly detection in BigQuery ML, see [Anomaly detection overview](/bigquery/docs/anomaly-detection-overview) .
+  - Try [Detect anomalies with a TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-anomaly-detection-tutorial) .
+  - For information about anomaly detection in BigQuery ML, see [Anomaly detection overview](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .

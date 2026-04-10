@@ -1,10 +1,10 @@
 # The ML.CONVERT\_IMAGE\_TYPE function
 
-This document describes the `  ML.CONVERT_IMAGE_TYPE  ` scalar function, which lets you convert the data type of pixel values in an image to `  INT64  ` with a range of `  [0, 255)  ` . You can use `  ML.CONVERT_IMAGE_TYPE  ` with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
+This document describes the `  ML.CONVERT_IMAGE_TYPE  ` scalar function, which lets you convert the data type of pixel values in an image to `  INT64  ` with a range of `  [0, 255)  ` . You can use `  ML.CONVERT_IMAGE_TYPE  ` with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.CONVERT_IMAGE_TYPE(image)
 ```
 
@@ -32,7 +32,7 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The [SSD Mobilenet V2 Object detection model](https://tfhub.dev/tensorflow/ssd_mobilenet_v2/2) model requires input to be in `  tf.uint8  ` . The following example changes the pixel values for the input images from floating point numbers to integers so that they work with this model:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE mydataset.detections
 AS (
   SELECT uri, detection_scores
@@ -49,12 +49,12 @@ AS (
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
   - For more information about supported SQL statements and functions for each model type, see the following documents:
     
-      - [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

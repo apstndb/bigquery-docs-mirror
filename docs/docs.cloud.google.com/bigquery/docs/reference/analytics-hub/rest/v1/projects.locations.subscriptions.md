@@ -1,6 +1,6 @@
-  - [Resource: Subscription](#Subscription)
-      - [JSON representation](#Subscription.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Subscription](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#Subscription)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#Subscription.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions#METHODS_SUMMARY)
 
 ## Resource: Subscription
 
@@ -17,7 +17,7 @@ A subscription represents a subscribers' access to a particular set of published
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;creationTime&quot;: string,
   &quot;lastModifyTime&quot;: string,

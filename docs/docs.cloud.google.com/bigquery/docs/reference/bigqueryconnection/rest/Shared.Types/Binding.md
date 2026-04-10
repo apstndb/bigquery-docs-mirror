@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [Expr](#Expr)
-      - [JSON representation](#Expr.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/Binding#SCHEMA_REPRESENTATION)
+  - [Expr](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/Binding#Expr)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/Shared.Types/Binding#Expr.SCHEMA_REPRESENTATION)
 
 Associates `  members  ` , or principals, with a `  role  ` .
 
@@ -15,7 +15,7 @@ Associates `  members  ` , or principals, with a `  role  ` .
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;role&quot;: string,
   &quot;members&quot;: [
     string
@@ -106,35 +106,27 @@ Represents a textual expression in the Common Expression Language (CEL) syntax. 
 
 Example (Comparison):
 
-``` text
-title: "Summary size limit"
-description: "Determines if a summary is less than 100 chars"
-expression: "document.summary.size() < 100"
-```
+    title: "Summary size limit"
+    description: "Determines if a summary is less than 100 chars"
+    expression: "document.summary.size() < 100"
 
 Example (Equality):
 
-``` text
-title: "Requestor is owner"
-description: "Determines if requestor is the document owner"
-expression: "document.owner == request.auth.claims.email"
-```
+    title: "Requestor is owner"
+    description: "Determines if requestor is the document owner"
+    expression: "document.owner == request.auth.claims.email"
 
 Example (Logic):
 
-``` text
-title: "Public documents"
-description: "Determine whether the document should be publicly visible"
-expression: "document.type != 'private' && document.type != 'internal'"
-```
+    title: "Public documents"
+    description: "Determine whether the document should be publicly visible"
+    expression: "document.type != 'private' && document.type != 'internal'"
 
 Example (Data Manipulation):
 
-``` text
-title: "Notification string"
-description: "Create a notification string with a timestamp."
-expression: "'New message received at ' + string(document.create_time)"
-```
+    title: "Notification string"
+    description: "Create a notification string with a timestamp."
+    expression: "'New message received at ' + string(document.create_time)"
 
 The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information.
 
@@ -149,7 +141,7 @@ The exact variables and functions that may be referenced within an expression ar
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;expression&quot;: string,
   &quot;title&quot;: string,
   &quot;description&quot;: string,

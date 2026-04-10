@@ -1,6 +1,6 @@
 # Load Display & Video 360 data into BigQuery
 
-You can load data from Display & Video 360 to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Display & Video 360 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Display & Video 360 to BigQuery.
+You can load data from Display & Video 360 to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Display & Video 360 connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Display & Video 360 to BigQuery.
 
 ## Connector overview
 
@@ -21,23 +21,23 @@ The BigQuery Data Transfer Service for the Display & Video 360 connector support
 <tr class="odd">
 <td>Supported reports</td>
 <td>The Display &amp; Video 360 connector supports the transfer of data from the reports in <a href="https://developers.google.com/bid-manager/dtv2/reference/file-format">Data Transfer v2 (Display &amp; Video DTv2) files</a> .
-<p>For information about how Display &amp; Video 360 reports are transformed into BigQuery tables and views, see <a href="/bigquery/docs/display-video-transformation">Display &amp; Video 360 report transformation</a> .</p></td>
+<p>For information about how Display &amp; Video 360 reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transformation">Display &amp; Video 360 report transformation</a> .</p></td>
 </tr>
 <tr class="even">
 <td>Repeat frequency</td>
 <td>The Display &amp; Video 360 connector supports daily data transfers.<br />
 <br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="#set_up_dv_360_transfer">set up your data transfer</a> .</td>
+By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transfer#set_up_dv_360_transfer">set up your data transfer</a> .</td>
 </tr>
 <tr class="odd">
 <td>Refresh window</td>
 <td>The Display &amp; Video 360 connector retrieves Display &amp; Video 360 data from up to 2 days at the time the data transfer is run. You cannot configure the refresh window for this connector.<br />
 <br />
-For more information, see <a href="#refresh">Refresh windows</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/display-video-transfer#refresh">Refresh windows</a> .</td>
 </tr>
 <tr class="even">
 <td>Backfill data availability</td>
-<td><a href="/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
 <br />
 For information about the data retention policy for Display &amp; Video 360, see <a href="https://support.google.com/displayvideo/answer/6110224">Report data freshness and availability</a> .</td>
 </tr>
@@ -81,7 +81,7 @@ A *refresh window* is the number of days that a data transfer retrieves data whe
 
 When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window. For example, if the refresh window is three days and you run the data transfer for the first time, the BigQuery Data Transfer Service retrieves all source data within three days.
 
-To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Before you begin
 
@@ -89,9 +89,9 @@ Review the following prerequisites and information before you create a Display &
 
 ### Prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store Display & Video 360 data.
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store Display & Video 360 data.
 
   - Ensure that you have either your Display & Video 360 [Partner ID](https://support.google.com/displayvideo/answer/7622449) or [Advertiser ID](https://support.google.com/displayvideo/answer/11415707) . The partner ID is the parent in the hierarchy.
 
@@ -107,7 +107,7 @@ Review the following prerequisites and information before you create a Display &
     
     **Note:** The Google Cloud team does not have the ability to generate or grant access to Display & Video 360 DTv2 files on your behalf. Contact Display & Video 360 [support](https://support.google.com/displayvideo/answer/9026876) or your agency for access to Display & Video 360 DTv2 files.
 
-  - To set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - To set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Find your Display & Video 360 ID
 
@@ -131,6 +131,8 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -152,7 +154,7 @@ Select one of the following options:
       - In the **DV360 Partner/Advertiser ID** field, enter the [Partner ID](https://support.google.com/displayvideo/answer/7622449) or [Advertiser ID](https://support.google.com/displayvideo/answer/11415707) .
       - Optional: In the **Notification options** section:
           - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-          - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer.
+          - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 7.  Click **Save** .
 
@@ -167,7 +169,7 @@ Enter the `  bq mk  ` command and supply the transfer creation flag — `  --tra
 
 <!-- end list -->
 
-``` text
+``` notranslate
   bq mk --transfer_config \
   --project_id=PROJECT_ID \
   --target_dataset=DATASET \
@@ -188,7 +190,7 @@ For example, the following command creates a Display & Video 360 data transfer n
 
 The data transfer is created in the default project:
 
-``` text
+``` notranslate
   bq mk --transfer_config \
   --target_dataset=mydataset \
   --display_name='My Transfer' \
@@ -204,10 +206,10 @@ Follow the instructions in the message and paste the authentication code on the 
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ## Query your data
 
-When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-We recommend that you query the auto-generated views instead of querying the tables directly. However, if you want to query your tables directly, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+We recommend that you query the auto-generated views instead of querying the tables directly. However, if you want to query your tables directly, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .

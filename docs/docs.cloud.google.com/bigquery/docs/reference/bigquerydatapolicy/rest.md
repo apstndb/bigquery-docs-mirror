@@ -1,9 +1,9 @@
 Allows users to manage BigQuery data policies.
 
-  - [REST Resource: v2beta1.projects.locations.dataPolicies](#v2beta1.projects.locations.dataPolicies)
-  - [REST Resource: v2.projects.locations.dataPolicies](#v2.projects.locations.dataPolicies)
-  - [REST Resource: v1beta1.projects.locations.dataPolicies](#v1beta1.projects.locations.dataPolicies)
-  - [REST Resource: v1.projects.locations.dataPolicies](#v1.projects.locations.dataPolicies)
+  - [REST Resource: v2beta1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#v2beta1.projects.locations.dataPolicies)
+  - [REST Resource: v2.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#v2.projects.locations.dataPolicies)
+  - [REST Resource: v1beta1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#v1beta1.projects.locations.dataPolicies)
+  - [REST Resource: v1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest#v1.projects.locations.dataPolicies)
 
 ## Service: bigquerydatapolicy.googleapis.com
 
@@ -24,7 +24,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigquerydatapolicy.googleapis.com  `
 
-## REST Resource: [v2beta1.projects.locations.dataPolicies](/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies)
+## REST Resource: [v2beta1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2beta1/projects.locations.dataPolicies)
 
 Methods
 
@@ -78,7 +78,7 @@ Sets the IAM policy for the specified data policy.
 `  POST /v2beta1/{resource=projects/*/locations/*/dataPolicies/*}:testIamPermissions  `  
 Returns the caller's permission on the specified data policy resource.
 
-## REST Resource: [v2.projects.locations.dataPolicies](/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies)
+## REST Resource: [v2.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v2/projects.locations.dataPolicies)
 
 Methods
 
@@ -132,7 +132,7 @@ Sets the IAM policy for the specified data policy.
 `  POST /v2/{resource=projects/*/locations/*/dataPolicies/*}:testIamPermissions  `  
 Returns the caller's permission on the specified data policy resource.
 
-## REST Resource: [v1beta1.projects.locations.dataPolicies](/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies)
+## REST Resource: [v1beta1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies)
 
 Methods
 
@@ -176,7 +176,7 @@ Sets the IAM policy for the specified data policy.
 `  POST /v1beta1/{resource=projects/*/locations/*/dataPolicies/*}:testIamPermissions  `  
 Returns the caller's permission on the specified data policy resource.
 
-## REST Resource: [v1.projects.locations.dataPolicies](/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies)
+## REST Resource: [v1.projects.locations.dataPolicies](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1/projects.locations.dataPolicies)
 
 Methods
 

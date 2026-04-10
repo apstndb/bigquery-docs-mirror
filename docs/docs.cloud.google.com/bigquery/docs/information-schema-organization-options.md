@@ -1,6 +1,6 @@
 # ORGANIZATION\_OPTIONS view
 
-You can query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view to retrieve real-time metadata about BigQuery organization options. This view contains configuration options that are set at the organization level. To view the default values for a configuration option, see [configuration settings](/bigquery/docs/default-configuration#configuration-settings) .
+You can query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view to retrieve real-time metadata about BigQuery organization options. This view contains configuration options that are set at the organization level. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .
 
 ## Required permissions
 
@@ -12,7 +12,7 @@ The following predefined IAM role includes the permissions that you need in orde
 
   - `  roles/bigquery.jobUser  `
 
-For more information about granular BigQuery permissions, see [roles and permissions](/bigquery/docs/access-control) .
+For more information about granular BigQuery permissions, see [roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -20,76 +20,22 @@ When you query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view, the query
 
 The `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         option_name       </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>One of the name values in the <a href="#options_table">options table</a> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       option_description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The option description.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       option_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The data type of the <code dir="ltr" translate="no">       option_value      </code> .</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       option_value      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The current value of the option.</td>
-</tr>
-</tbody>
-</table>
+| Column name                         | Data type               | Value                                                                                                                                              |
+| ----------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          option_name        `     | `        STRING       ` | One of the name values in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-organization-options#options_table) . |
+| `        option_description       ` | `        STRING       ` | The option description.                                                                                                                            |
+| `        option_type       `        | `        STRING       ` | The data type of the `        option_value       ` .                                                                                               |
+| `        option_value       `       | `        STRING       ` | The current value of the option.                                                                                                                   |
 
 ##### Options table
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       option_name      </code></th>
-<th><code dir="ltr" translate="no">       option_type      </code></th>
-<th><code dir="ltr" translate="no">       option_value      </code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_time_zone      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The default time zone for this organization.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       default_kms_key_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The default key name for this organization.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_query_job_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The default query timeout in milliseconds for this organization.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       default_interactive_query_queue_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The default timeout in milliseconds for queued interactive queries for this organization.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_batch_query_queue_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The default timeout in milliseconds for queued batch queries for this organization.</td>
-</tr>
-</tbody>
-</table>
+| `        option_name       `                                | `        option_type       ` | `        option_value       `                                                             |
+| ----------------------------------------------------------- | ---------------------------- | ----------------------------------------------------------------------------------------- |
+| `        default_time_zone       `                          | `        STRING       `      | The default time zone for this organization.                                              |
+| `        default_kms_key_name       `                       | `        STRING       `      | The default key name for this organization.                                               |
+| `        default_query_job_timeout_ms       `               | `        STRING       `      | The default query timeout in milliseconds for this organization.                          |
+| `        default_interactive_query_queue_timeout_ms       ` | `        STRING       `      | The default timeout in milliseconds for queued interactive queries for this organization. |
+| `        default_batch_query_queue_timeout_ms       `       | `        STRING       `      | The default timeout in milliseconds for queued batch queries for this organization.       |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -99,34 +45,21 @@ This view contains currently running sessions and the history of sessions comple
 
 ## Scope and syntax
 
-Queries against this view must have a [region qualifier](/bigquery/docs/information-schema-intro#syntax) .
+Queries against this view must have a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) .
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       `region-               REGION              `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS      </code></td>
-<td>Configuration options within the specified organization.</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                               | Resource scope                                           | Region scope               |
+| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | -------------------------- |
+| ``        `region-               REGION              `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS       `` | Configuration options within the specified organization. | `          REGION        ` |
 
 Replace the following:
 
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, `  region-us  ` .
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  region-us  ` .
 
 ## Examples
 
 The following example retrieves the `  OPTION_NAME  ` , `  OPTION_TYPE  ` , and `  OPTION_VALUE  ` columns from the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS  ` .
 
-``` text
+``` notranslate
 SELECT
   option_name, option_type, option_value
 FROM
@@ -137,7 +70,7 @@ FROM
 
 The result is similar to the following:
 
-``` text
+``` 
   +--------------------------------------------+-------------+---------------------+
   | option_name                                | option_type | option_value        |
   +--------------------------------------------+-------------+---------------------+

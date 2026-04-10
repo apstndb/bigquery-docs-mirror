@@ -1,10 +1,10 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Query parameters](#body.QUERY_PARAMETERS)
-  - [Request body](#body.request_body)
-  - [Response body](#body.response_body)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.PATH_PARAMETERS)
+  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.QUERY_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.request_body)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.response_body)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get#try-it)
 
 Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.
 
@@ -62,4 +62,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery.readonly  `
   - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

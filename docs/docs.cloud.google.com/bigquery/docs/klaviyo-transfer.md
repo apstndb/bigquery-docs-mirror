@@ -2,11 +2,11 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
-You can load data from Klaviyo to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Klaviyo connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Klaviyo to BigQuery.
+You can load data from Klaviyo to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Klaviyo connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from Klaviyo to BigQuery.
 
 ## Before you begin
 
@@ -18,12 +18,12 @@ You must have a read-only private API key to allow the Klaviyo connector to tran
 
 ### BigQuery prerequisites
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data.
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -41,11 +41,11 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` IAM permission. Pub/Sub permissions aren't required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Set up a Klaviyo data transfer
 
@@ -54,6 +54,8 @@ Add Klaviyo data into BigQuery by setting up a transfer configuration using one 
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -61,7 +63,7 @@ Add Klaviyo data into BigQuery by setting up a transfer configuration using one 
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Private API Key** , enter your private API key. For more information, see [Klaviyo prerequisites](/bigquery/docs/klaviyo-transfer#klaviyo-prerequisites) .
+      - For **Private API Key** , enter your private API key. For more information, see [Klaviyo prerequisites](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer#klaviyo-prerequisites) .
       - Optional: For **Start Date** , specify a start date for new records to be included in the data transfer. Only records created on or after this date are included in the data transfer. The default value is 3 months before the transfer run date.
       - For **Klaviyo objects to transfer** , click **Browse** to select any objects to be transferred to the BigQuery destination dataset. You can also manually enter any objects to include in the data transfer in this field.
 
@@ -71,21 +73,21 @@ Add Klaviyo data into BigQuery by setting up a transfer configuration using one 
 
 7.  In the **Schedule options** section:
     
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notification** toggle. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To enable [Pub/Sub transfer run notifications](/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](/pubsub/docs/publish-message-overview) name, or you can click **Create a topic** to create one.
+      - To enable [Pub/Sub transfer run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for this transfer, click the **Pub/Sub notifications** toggle. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/publish-message-overview) name, or you can click **Create a topic** to create one.
 
 9.  Click **Save** .
 
 ### bq
 
-Enter the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --project_id=PROJECT_ID
@@ -113,7 +115,7 @@ Replace the following:
 
 The following command creates a Klaviyo data transfer in the default project.
 
-``` text
+``` notranslate
     bq mk
         --transfer_config
         --target_dataset=mydataset
@@ -128,48 +130,22 @@ The following command creates a Klaviyo data transfer in the default project.
 
 When you save the transfer configuration, the Klaviyo connector automatically triggers a transfer run according to your schedule option. With every transfer run, the Klaviyo connector transfers all available data from Klaviyo into BigQuery.
 
-To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
-For a list of data that's included in a Klaviyo data transfer, see [Klaviyo data model reference](/bigquery/docs/klaviyo-data-model) .
+For a list of data that's included in a Klaviyo data transfer, see [Klaviyo data model reference](https://docs.cloud.google.com/bigquery/docs/klaviyo-data-model) .
 
 ## Data type mapping
 
 The following table maps Klaviyo data types to the corresponding BigQuery data types:
 
-<table>
-<thead>
-<tr class="header">
-<th>Klaviyo data type</th>
-<th>BigQuery data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       String      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Text      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Integer      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       Boolean      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Date (YYYY-MM-DD HH:MM:SS)      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       List      </code></td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-</tr>
-</tbody>
-</table>
+| Klaviyo data type                           | BigQuery data type         |
+| ------------------------------------------- | -------------------------- |
+| `        String       `                     | `        STRING       `    |
+| `        Text       `                       | `        STRING       `    |
+| `        Integer       `                    | `        INTEGER       `   |
+| `        Boolean       `                    | `        BOOLEAN       `   |
+| `        Date (YYYY-MM-DD HH:MM:SS)       ` | `        TIMESTAMP       ` |
+| `        List       `                       | `        ARRAY       `     |
 
 ## Pricing
 
@@ -177,9 +153,9 @@ There is no cost to transfer Klaviyo data into BigQuery while this feature is in
 
 ## Troubleshoot transfer setup
 
-If you are having issues setting up your data transfer, see [Klaviyo transfer issues](/bigquery/docs/transfer-troubleshooting#klaviyo-issues) .
+If you are having issues setting up your data transfer, see [Klaviyo transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#klaviyo-issues) .
 
 ## What's next
 
-  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](/bigquery/docs/working-with-transfers) .
+  - For an overview of the BigQuery Data Transfer Service, see [What is BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - For information on using transfers including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history, see [Manage transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) .

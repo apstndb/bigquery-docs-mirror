@@ -1,4 +1,4 @@
-GoogleSQL for BigQuery supports collation. Collation defines rules to sort and compare strings in certain [operations](#collate_operations) , such as conditional expressions, joins, and groupings.
+GoogleSQL for BigQuery supports collation. Collation defines rules to sort and compare strings in certain [operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_operations) , such as conditional expressions, joins, and groupings.
 
 By default, GoogleSQL sorts strings case-sensitively. This means that `  a  ` and `  A  ` are treated as different letters, and `  Z  ` would come before `  a  ` .
 
@@ -8,7 +8,7 @@ By contrast, collation lets you sort and compare strings case-insensitively or a
 
 **Example case-insensitive collation:** Apple, apple, Zebra
 
-To customize collation for a collation-supported operation, you typically [assign a collation specification](#collate_define) to at least one string in the operation inputs. Some operations can't use collation, but can [propagate collation through them](#collate_propagate) .
+To customize collation for a collation-supported operation, you typically [assign a collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_define) to at least one string in the operation inputs. Some operations can't use collation, but can [propagate collation through them](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_propagate) .
 
 Collation is useful when you need fine-tuned control over how values are sorted, joined, or grouped in tables.
 
@@ -16,42 +16,17 @@ Collation is useful when you need fine-tuned control over how values are sorted,
 
 The following example query operations are affected by collation when sorting and comparing strings:
 
-<table>
-<thead>
-<tr class="header">
-<th>Operations</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Collation-supported <a href="#collate_funcs">comparison operations</a></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#join_types">Join operations</a></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause"><code dir="ltr" translate="no">        ORDER BY       </code></a></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause"><code dir="ltr" translate="no">        GROUP BY       </code></a></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#window_clause"><code dir="ltr" translate="no">        WINDOW       </code></a> for window functions</td>
-</tr>
-<tr class="even">
-<td>Collation-supported <a href="#collate_funcs">scalar functions</a></td>
-</tr>
-<tr class="odd">
-<td>Collation-supported <a href="#collate_funcs">aggregate functions</a></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#set_operators">Set operations</a></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#nullif"><code dir="ltr" translate="no">        NULLIF       </code> conditional expression</a></td>
-</tr>
-</tbody>
-</table>
+| Operations                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Collation-supported [comparison operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs)      |
+| [Join operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#join_types)                                         |
+| [`         ORDER BY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause)                        |
+| [`         GROUP BY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#group_by_clause)                        |
+| [`         WINDOW        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) for window functions       |
+| Collation-supported [scalar functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs)           |
+| Collation-supported [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_funcs)        |
+| [Set operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators)                                       |
+| [`         NULLIF        ` conditional expression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif) |
 
 ## Operations that propagate collation
 
@@ -60,335 +35,131 @@ Collation can pass through some query operations to other parts of a query. When
   - If an input contains no collation specification or an empty collation specification and another input contains an explicitly defined collation, the explicitly defined collation is used for all of the inputs.
   - All inputs with a non-empty explicitly defined collation specification must have the same type of collation specification, otherwise an error is thrown.
 
-GoogleSQL has several [functions](#functions_propagation) , [operators](#operators_propagation) , and [expressions](#expressions_propagation) that can propagate collation.
+GoogleSQL has several [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#functions_propagation) , [operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#operators_propagation) , and [expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#expressions_propagation) that can propagate collation.
 
 In the following example, the `  'und:ci'  ` collation specification is propagated from the `  character  ` column to the `  ORDER BY  ` operation.
 
-``` text
--- With collation
-SELECT *
-FROM UNNEST([
-  COLLATE('B', 'und:ci'),
-  'b',
-  'a'
-]) AS character
-ORDER BY character
+    -- With collation
+    SELECT *
+    FROM UNNEST([
+      COLLATE('B', 'und:ci'),
+      'b',
+      'a'
+    ]) AS character
+    ORDER BY character
+    
+    /*-----------+
+     | character |
+     +-----------+
+     | a         |
+     | B         |
+     | b         |
+     +-----------*/
 
-/*-----------+
- | character |
- +-----------+
- | a         |
- | B         |
- | b         |
- +-----------*/
-```
-
-``` text
--- Without collation
-SELECT *
-FROM UNNEST([
-  'B',
-  'b',
-  'a'
-]) AS character
-ORDER BY character
-
-/*-----------+
- | character |
- +-----------+
- | B         |
- | a         |
- | b         |
- +-----------*/
-```
+    -- Without collation
+    SELECT *
+    FROM UNNEST([
+      'B',
+      'b',
+      'a'
+    ]) AS character
+    ORDER BY character
+    
+    /*-----------+
+     | character |
+     +-----------+
+     | B         |
+     | a         |
+     | b         |
+     +-----------*/
 
 ### Functions
 
 The following example functions propagate collation.
 
-<table>
-<thead>
-<tr class="header">
-<th>Function</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string"><code dir="ltr" translate="no">        AEAD.DECRYPT_STRING       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#any_value"><code dir="ltr" translate="no">        ANY_VALUE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg"><code dir="ltr" translate="no">        ARRAY_AGG       </code></a></td>
-<td>Collation on input arguments are propagated as collation on the array element.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#array_first"><code dir="ltr" translate="no">        ARRAY_FIRST       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#array_last"><code dir="ltr" translate="no">        ARRAY_LAST       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#array_slice"><code dir="ltr" translate="no">        ARRAY_SLICE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#array_to_string"><code dir="ltr" translate="no">        ARRAY_TO_STRING       </code></a></td>
-<td>Collation on array elements are propagated to output.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#collate"><code dir="ltr" translate="no">        COLLATE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#concat"><code dir="ltr" translate="no">        CONCAT       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#format_string"><code dir="ltr" translate="no">        FORMAT       </code></a></td>
-<td>Collation from <code dir="ltr" translate="no">       format_string      </code> to the returned string is propagated.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#format_date"><code dir="ltr" translate="no">        FORMAT_DATE       </code></a></td>
-<td>Collation from <code dir="ltr" translate="no">       format_string      </code> to the returned string is propagated.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime"><code dir="ltr" translate="no">        FORMAT_DATETIME       </code></a></td>
-<td>Collation from <code dir="ltr" translate="no">       format_string      </code> to the returned string is propagated.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/time_functions#format_time"><code dir="ltr" translate="no">        FORMAT_TIME       </code></a></td>
-<td>Collation from <code dir="ltr" translate="no">       format_string      </code> to the returned string is propagated.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp"><code dir="ltr" translate="no">        FORMAT_TIMESTAMP       </code></a></td>
-<td>Collation from <code dir="ltr" translate="no">       format_string      </code> to the returned string is propagated.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#greatest"><code dir="ltr" translate="no">        GREATEST       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#lag"><code dir="ltr" translate="no">        LAG       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#lead"><code dir="ltr" translate="no">        LEAD       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#least"><code dir="ltr" translate="no">        LEAST       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#left"><code dir="ltr" translate="no">        LEFT       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#lower"><code dir="ltr" translate="no">        LOWER       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#lpad"><code dir="ltr" translate="no">        LPAD       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#max"><code dir="ltr" translate="no">        MAX       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#min"><code dir="ltr" translate="no">        MIN       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/net_functions#nethost"><code dir="ltr" translate="no">        NET.HOST       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix"><code dir="ltr" translate="no">        NET.PUBLIC_SUFFIX       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/net_functions#netreg_domain"><code dir="ltr" translate="no">        NET.REG_DOMAIN       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/navigation_functions#nth_value"><code dir="ltr" translate="no">        NTH_VALUE       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#normalize"><code dir="ltr" translate="no">        NORMALIZE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#normalize_and_casefold"><code dir="ltr" translate="no">        NORMALIZE_AND_CASEFOLD       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#repeat"><code dir="ltr" translate="no">        REPEAT       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#replace"><code dir="ltr" translate="no">        REPLACE       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#reverse"><code dir="ltr" translate="no">        REVERSE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#right"><code dir="ltr" translate="no">        RIGHT       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#rpad"><code dir="ltr" translate="no">        RPAD       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#soundex"><code dir="ltr" translate="no">        SOUNDEX       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#split"><code dir="ltr" translate="no">        SPLIT       </code></a></td>
-<td>Collation on input arguments are propagated as collation on the array element.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg"><code dir="ltr" translate="no">        STRING_AGG       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#substr"><code dir="ltr" translate="no">        SUBSTR       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#upper"><code dir="ltr" translate="no">        UPPER       </code></a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Function                                                                                                                                                  | Notes                                                                               |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`         AEAD.DECRYPT_STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions#aeaddecrypt_string) |                                                                                     |
+| [`         ANY_VALUE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)                          |                                                                                     |
+| [`         ARRAY_AGG        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)                          | Collation on input arguments are propagated as collation on the array element.      |
+| [`         ARRAY_FIRST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_first)                          |                                                                                     |
+| [`         ARRAY_LAST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_last)                            |                                                                                     |
+| [`         ARRAY_SLICE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_slice)                          |                                                                                     |
+| [`         ARRAY_TO_STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#array_to_string)                  | Collation on array elements are propagated to output.                               |
+| [`         COLLATE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate)                                 |                                                                                     |
+| [`         CONCAT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#concat)                                   |                                                                                     |
+| [`         FORMAT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#format_string)                            | Collation from `        format_string       ` to the returned string is propagated. |
+| [`         FORMAT_DATE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date)                           | Collation from `        format_string       ` to the returned string is propagated. |
+| [`         FORMAT_DATETIME        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)               | Collation from `        format_string       ` to the returned string is propagated. |
+| [`         FORMAT_TIME        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time)                           | Collation from `        format_string       ` to the returned string is propagated. |
+| [`         FORMAT_TIMESTAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp)            | Collation from `        format_string       ` to the returned string is propagated. |
+| [`         GREATEST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#greatest)                         |                                                                                     |
+| [`         LAG        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lag)                                     |                                                                                     |
+| [`         LEAD        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#lead)                                   |                                                                                     |
+| [`         LEAST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#least)                               |                                                                                     |
+| [`         LEFT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#left)                                       |                                                                                     |
+| [`         LOWER        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#lower)                                     |                                                                                     |
+| [`         LPAD        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#lpad)                                       |                                                                                     |
+| [`         MAX        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)                                      |                                                                                     |
+| [`         MIN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)                                      |                                                                                     |
+| [`         NET.HOST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#nethost)                                   |                                                                                     |
+| [`         NET.PUBLIC_SUFFIX        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netpublic_suffix)                 |                                                                                     |
+| [`         NET.REG_DOMAIN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/net_functions#netreg_domain)                       |                                                                                     |
+| [`         NTH_VALUE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions#nth_value)                         |                                                                                     |
+| [`         NORMALIZE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#normalize)                             |                                                                                     |
+| [`         NORMALIZE_AND_CASEFOLD        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#normalize_and_casefold)   |                                                                                     |
+| [`         REPEAT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#repeat)                                   |                                                                                     |
+| [`         REPLACE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#replace)                                 |                                                                                     |
+| [`         REVERSE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#reverse)                                 |                                                                                     |
+| [`         RIGHT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#right)                                     |                                                                                     |
+| [`         RPAD        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#rpad)                                       |                                                                                     |
+| [`         SOUNDEX        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#soundex)                                 |                                                                                     |
+| [`         SPLIT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#split)                                     | Collation on input arguments are propagated as collation on the array element.      |
+| [`         STRING_AGG        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#string_agg)                        |                                                                                     |
+| [`         SUBSTR        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#substr)                                   |                                                                                     |
+| [`         UPPER        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#upper)                                     |                                                                                     |
 
 ### Operators
 
 The following example operators propagate collation.
 
-<table>
-<thead>
-<tr class="header">
-<th>Operator</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#concatenation_operator"><code dir="ltr" translate="no">        ||       </code> concatenation operator</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#array_subscript_operator">Array subscript operator</a></td>
-<td>Propagated to output.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#set_operators">Set operators</a></td>
-<td>Collation of an output column is decided by the collations of input columns at the same position.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#field_access_operator"><code dir="ltr" translate="no">        STRUCT       </code> field access operator</a></td>
-<td>When getting a <code dir="ltr" translate="no">       STRUCT      </code> , collation on the <code dir="ltr" translate="no">       STRUCT      </code> field is propagated as the output collation.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator"><code dir="ltr" translate="no">        UNNEST       </code></a></td>
-<td>Collation on the input array element is propagated to output.</td>
-</tr>
-</tbody>
-</table>
+| Operator                                                                                                                                              | Notes                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| [`         \|\|        ` concatenation operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#concatenation_operator) |                                                                                                                                |
+| [Array subscript operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#array_subscript_operator)                     | Propagated to output.                                                                                                          |
+| [Set operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators)                                        | Collation of an output column is decided by the collations of input columns at the same position.                              |
+| [`         STRUCT        ` field access operator](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#field_access_operator) | When getting a `        STRUCT       ` , collation on the `        STRUCT       ` field is propagated as the output collation. |
+| [`         UNNEST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#unnest_operator)                          | Collation on the input array element is propagated to output.                                                                  |
 
 ### Expressions
 
 The following example expressions propagate collation.
 
-<table>
-<thead>
-<tr class="header">
-<th>Expression</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#array_type"><code dir="ltr" translate="no">        ARRAY       </code></a></td>
-<td>When you construct an <code dir="ltr" translate="no">       ARRAY      </code> , collation on input arguments is propagated on the elements in the <code dir="ltr" translate="no">       ARRAY      </code> .</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#case"><code dir="ltr" translate="no">        CASE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr"><code dir="ltr" translate="no">        CASE       </code> expr</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#coalesce"><code dir="ltr" translate="no">        COALESCE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#if"><code dir="ltr" translate="no">        IF       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull"><code dir="ltr" translate="no">        IFNULL       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#nullif"><code dir="ltr" translate="no">        NULLIF       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#struct_type"><code dir="ltr" translate="no">        STRUCT       </code></a></td>
-<td>When you construct a <code dir="ltr" translate="no">       STRUCT      </code> , collation on input arguments is propagated on the fields in the <code dir="ltr" translate="no">       STRUCT      </code> .</td>
-</tr>
-</tbody>
-</table>
+| Expression                                                                                                                           | Notes                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [`         ARRAY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)                 | When you construct an `        ARRAY       ` , collation on input arguments is propagated on the elements in the `        ARRAY       ` . |
+| [`         CASE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case)           |                                                                                                                                           |
+| [`         CASE        ` expr](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr) |                                                                                                                                           |
+| [`         COALESCE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#coalesce)   |                                                                                                                                           |
+| [`         IF        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#if)               |                                                                                                                                           |
+| [`         IFNULL        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull)       |                                                                                                                                           |
+| [`         NULLIF        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif)       |                                                                                                                                           |
+| [`         STRUCT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)               | When you construct a `        STRUCT       ` , collation on input arguments is propagated on the fields in the `        STRUCT       ` .  |
 
 ## Additional features that support collation
 
 These features in BigQuery generally support collation:
 
-<table>
-<thead>
-<tr class="header">
-<th>Feature</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/views-intro">Views</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/materialized-views-intro">Materialized views</a></td>
-<td>This feature supports collation, but <a href="#limitations">limitations apply</a></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/table-functions">Table functions</a></td>
-<td>This feature supports collation, but <a href="#limitations">limitations apply</a></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/bi-engine-intro">BI engine</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Feature                                                                                    | Notes                                                                                                                                                       |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Views](https://docs.cloud.google.com/bigquery/docs/views-intro)                           |                                                                                                                                                             |
+| [Materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) | This feature supports collation, but [limitations apply](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#limitations) |
+| [Table functions](https://docs.cloud.google.com/bigquery/docs/table-functions)             | This feature supports collation, but [limitations apply](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#limitations) |
+| [BI engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro)                   |                                                                                                                                                             |
 
 ## Where you can assign a collation specification
 
-You can assign a [collation specification](#collate_spec_details) to these collation-supported types:
+You can assign a [collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) to these collation-supported types:
 
   - A `  STRING  `
   - A `  STRING  ` field in a `  STRUCT  `
@@ -406,31 +177,23 @@ In summary:
 
 You can define a default collation specification for a dataset. For example:
 
-``` text
-CREATE SCHEMA (...)
-DEFAULT COLLATE 'und:ci'
-```
+    CREATE SCHEMA (...)
+    DEFAULT COLLATE 'und:ci'
 
 You can define a default collation specification for a table. For example:
 
-``` text
-CREATE TABLE (...)
-DEFAULT COLLATE 'und:ci'
-```
+    CREATE TABLE (...)
+    DEFAULT COLLATE 'und:ci'
 
 You can define a collation specification for a collation-supported column. For example:
 
-``` text
-CREATE TABLE (
-  case_insensitive_column STRING COLLATE 'und:ci'
-)
-```
+    CREATE TABLE (
+      case_insensitive_column STRING COLLATE 'und:ci'
+    )
 
 You can specify a collation specification for a collation-supported expression with the `  COLLATE  ` function. For example:
 
-``` text
-SELECT COLLATE('a', 'und:ci') AS character
-```
+    SELECT COLLATE('a', 'und:ci') AS character
 
 ### DDL statements
 
@@ -452,29 +215,29 @@ You can assign a collation specification to the following DDL statements.
 <tbody>
 <tr class="odd">
 <td>Dataset</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement"><code dir="ltr" translate="no">        CREATE SCHEMA       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_schema_statement"><code dir="ltr" translate="no">        CREATE SCHEMA       </code></a></td>
 <td>Create a dataset and optionally add a default collation specification to the dataset.</td>
 </tr>
 <tr class="even">
 <td>Dataset</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_collate_statement"><code dir="ltr" translate="no">        ALTER SCHEMA       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_schema_collate_statement"><code dir="ltr" translate="no">        ALTER SCHEMA       </code></a></td>
 <td>Updates the default collation specification for a dataset.</td>
 </tr>
 <tr class="odd">
 <td>Table</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement"><code dir="ltr" translate="no">        CREATE TABLE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement"><code dir="ltr" translate="no">        CREATE TABLE       </code></a></td>
 <td>Create a table and optionally add a default collation specification to a table or a collation specification to a collation-supported type in a column.<br />
 <br />
 You can't have collation on a column used with <code dir="ltr" translate="no">       CLUSTERING      </code> .</td>
 </tr>
 <tr class="even">
 <td>Table</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_collate_statement"><code dir="ltr" translate="no">        ALTER TABLE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_collate_statement"><code dir="ltr" translate="no">        ALTER TABLE       </code></a></td>
 <td>Update the default collation specification for collation-supported type in a table.</td>
 </tr>
 <tr class="odd">
 <td>Column</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement"><code dir="ltr" translate="no">        ADD COLUMN       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_column_statement"><code dir="ltr" translate="no">        ADD COLUMN       </code></a></td>
 <td>Add a collation specification to a collation-supported type in a new column in an existing table.</td>
 </tr>
 </tbody>
@@ -484,30 +247,13 @@ You can't have collation on a column used with <code dir="ltr" translate="no">  
 
 You can assign a collation specification to the following data types.
 
-<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a></td>
-<td>You can apply a collation specification directly to this data type.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#struct_type"><code dir="ltr" translate="no">        STRUCT       </code></a></td>
-<td>You can apply a collation specification to a <code dir="ltr" translate="no">       STRING      </code> field in a <code dir="ltr" translate="no">       STRUCT      </code> . A <code dir="ltr" translate="no">       STRUCT      </code> can have <code dir="ltr" translate="no">       STRING      </code> fields with different collation specifications. A <code dir="ltr" translate="no">       STRUCT      </code> can only be used in comparisons with the following operators and conditional expressions: <code dir="ltr" translate="no">       =      </code> , <code dir="ltr" translate="no">       !=      </code> , <code dir="ltr" translate="no">       IN      </code> , <code dir="ltr" translate="no">       NULLIF      </code> , and <code dir="ltr" translate="no">       CASE      </code> .</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#array_type"><code dir="ltr" translate="no">        ARRAY       </code></a></td>
-<td>You can apply a collation specification to a <code dir="ltr" translate="no">       STRING      </code> element in an <code dir="ltr" translate="no">       ARRAY      </code> . An <code dir="ltr" translate="no">       ARRAY      </code> can have <code dir="ltr" translate="no">       STRING      </code> elements with different collation specifications.</td>
-</tr>
-</tbody>
-</table>
+| Type                                                                                                                   | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`         STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type) | You can apply a collation specification directly to this data type.                                                                                                                                                                                                                                                                                                                                                                                             |
+| [`         STRUCT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) | You can apply a collation specification to a `        STRING       ` field in a `        STRUCT       ` . A `        STRUCT       ` can have `        STRING       ` fields with different collation specifications. A `        STRUCT       ` can only be used in comparisons with the following operators and conditional expressions: `        =       ` , `        !=       ` , `        IN       ` , `        NULLIF       ` , and `        CASE       ` . |
+| [`         ARRAY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)   | You can apply a collation specification to a `        STRING       ` element in an `        ARRAY       ` . An `        ARRAY       ` can have `        STRING       ` elements with different collation specifications.                                                                                                                                                                                                                                        |
 
-**Note:** Use the [`  COLLATE  `](/bigquery/docs/reference/standard-sql/string_functions#collate) function to apply a collation specification to collation-supported expressions.
+**Note:** Use the [`  COLLATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate) function to apply a collation specification to collation-supported expressions.
 
 ### Functions, operators, and conditional expressions
 
@@ -515,155 +261,43 @@ You can assign a collation specification to the following functions, operators, 
 
 #### Functions
 
-<table>
-<thead>
-<tr class="header">
-<th>Type</th>
-<th>Support</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#collate"><code dir="ltr" translate="no">        COLLATE       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#ends_with"><code dir="ltr" translate="no">        ENDS_WITH       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#greatest"><code dir="ltr" translate="no">        GREATEST       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#instr"><code dir="ltr" translate="no">        INSTR       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#least"><code dir="ltr" translate="no">        LEAST       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#replace"><code dir="ltr" translate="no">        REPLACE       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#split"><code dir="ltr" translate="no">        SPLIT       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#starts_with"><code dir="ltr" translate="no">        STARTS_WITH       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Scalar</td>
-<td><a href="/bigquery/docs/reference/standard-sql/string_functions#strpos"><code dir="ltr" translate="no">        STRPOS       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Aggregate</td>
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#count"><code dir="ltr" translate="no">        COUNT       </code></a></td>
-<td>This operator is only affected by collation when the input includes the <code dir="ltr" translate="no">       DISTINCT      </code> argument.</td>
-</tr>
-<tr class="odd">
-<td>Aggregate</td>
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#max"><code dir="ltr" translate="no">        MAX       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Aggregate</td>
-<td><a href="/bigquery/docs/reference/standard-sql/aggregate_functions#min"><code dir="ltr" translate="no">        MIN       </code></a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Type      | Support                                                                                                                           | Notes                                                                                                       |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Scalar    | [`         COLLATE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#collate)         |                                                                                                             |
+| Scalar    | [`         ENDS_WITH        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#ends_with)     |                                                                                                             |
+| Scalar    | [`         GREATEST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#greatest) |                                                                                                             |
+| Scalar    | [`         INSTR        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#instr)             |                                                                                                             |
+| Scalar    | [`         LEAST        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#least)       |                                                                                                             |
+| Scalar    | [`         REPLACE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#replace)         |                                                                                                             |
+| Scalar    | [`         SPLIT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#split)             |                                                                                                             |
+| Scalar    | [`         STARTS_WITH        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#starts_with) |                                                                                                             |
+| Scalar    | [`         STRPOS        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#strpos)           |                                                                                                             |
+| Aggregate | [`         COUNT        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#count)          | This operator is only affected by collation when the input includes the `        DISTINCT       ` argument. |
+| Aggregate | [`         MAX        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max)              |                                                                                                             |
+| Aggregate | [`         MIN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min)              |                                                                                                             |
 
 #### Operators
 
-<table>
-<thead>
-<tr class="header">
-<th>Support</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        &lt;       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        &lt;=       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        &gt;       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        &gt;=       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        =       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        !=       </code></a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        [NOT] BETWEEN       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#in_operators"><code dir="ltr" translate="no">        [NOT] IN       </code></a></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#in_operators">Limitations apply</a> .</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#like_operator"><code dir="ltr" translate="no">        [NOT] LIKE       </code></a></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#like_operator">Limitations apply</a> .</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/operators#like_operator_quantified">Quantified <code dir="ltr" translate="no">        [NOT] LIKE       </code></a></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#like_operator_quantified">Limitations apply</a> .</td>
-</tr>
-</tbody>
-</table>
+| Support                                                                                                                                           | Notes                                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| [`         <        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                         |                                                                                                                              |
+| [`         <=        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                        |                                                                                                                              |
+| [`         >        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                         |                                                                                                                              |
+| [`         >=        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                        |                                                                                                                              |
+| [`         =        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                         |                                                                                                                              |
+| [`         !=        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                        |                                                                                                                              |
+| [`         [NOT] BETWEEN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)             |                                                                                                                              |
+| [`         [NOT] IN        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators)                          | [Limitations apply](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#in_operators) .             |
+| [`         [NOT] LIKE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator)                       | [Limitations apply](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator) .            |
+| [Quantified `         [NOT] LIKE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) | [Limitations apply](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#like_operator_quantified) . |
 
 #### Conditional expressions
 
-<table>
-<thead>
-<tr class="header">
-<th>Support</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#case"><code dir="ltr" translate="no">        CASE       </code></a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr"><code dir="ltr" translate="no">        CASE       </code> expr</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#nullif"><code dir="ltr" translate="no">        NULLIF       </code></a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Support                                                                                                                              |  |
+| ------------------------------------------------------------------------------------------------------------------------------------ |  |
+| [`         CASE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case)           |  |
+| [`         CASE        ` expr](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#case_expr) |  |
+| [`         NULLIF        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif)       |  |
 
 The preceding collation-supported operations (functions, operators, and conditional expressions) can include input with explicitly defined collation specifications for collation-supported types. In a collation-supported operation:
 
@@ -672,46 +306,44 @@ The preceding collation-supported operations (functions, operators, and conditio
 
 For example:
 
-``` text
--- Assume there's a table with this column declaration:
-CREATE TABLE table_a
-(
-    col_a STRING COLLATE 'und:ci',
-    col_b STRING COLLATE '',
-    col_c STRING,
-    col_d STRING COLLATE 'und:ci'
-);
-
--- This runs. Column 'b' has a collation specification and the
--- column 'c' doesn't.
-SELECT STARTS_WITH(col_b_expression, col_c_expression)
-FROM table_a;
-
--- This runs. Column 'a' and 'd' have the same collation specification.
-SELECT STARTS_WITH(col_a_expression, col_d_expression)
-FROM table_a;
-
--- This runs. Even though column 'a' and 'b' have different
--- collation specifications, column 'b' is considered the default collation
--- because it's assigned to an empty collation specification.
-SELECT STARTS_WITH(col_a_expression, col_b_expression)
-FROM table_a;
-
--- This works. Even though column 'a' and 'b' have different
--- collation specifications, column 'b' is updated to use the same
--- collation specification as column 'a'.
-SELECT STARTS_WITH(col_a_expression, COLLATE(col_b_expression, 'und:ci'))
-FROM table_a;
-
--- This runs. Column 'c' doesn't have a collation specification, so it uses the
--- collation specification of column 'd'.
-SELECT STARTS_WITH(col_c_expression, col_d_expression)
-FROM table_a;
-```
+    -- Assume there's a table with this column declaration:
+    CREATE TABLE table_a
+    (
+        col_a STRING COLLATE 'und:ci',
+        col_b STRING COLLATE '',
+        col_c STRING,
+        col_d STRING COLLATE 'und:ci'
+    );
+    
+    -- This runs. Column 'b' has a collation specification and the
+    -- column 'c' doesn't.
+    SELECT STARTS_WITH(col_b_expression, col_c_expression)
+    FROM table_a;
+    
+    -- This runs. Column 'a' and 'd' have the same collation specification.
+    SELECT STARTS_WITH(col_a_expression, col_d_expression)
+    FROM table_a;
+    
+    -- This runs. Even though column 'a' and 'b' have different
+    -- collation specifications, column 'b' is considered the default collation
+    -- because it's assigned to an empty collation specification.
+    SELECT STARTS_WITH(col_a_expression, col_b_expression)
+    FROM table_a;
+    
+    -- This works. Even though column 'a' and 'b' have different
+    -- collation specifications, column 'b' is updated to use the same
+    -- collation specification as column 'a'.
+    SELECT STARTS_WITH(col_a_expression, COLLATE(col_b_expression, 'und:ci'))
+    FROM table_a;
+    
+    -- This runs. Column 'c' doesn't have a collation specification, so it uses the
+    -- collation specification of column 'd'.
+    SELECT STARTS_WITH(col_c_expression, col_d_expression)
+    FROM table_a;
 
 ## Collation specification details
 
-A collation specification determines how strings are sorted and compared in [collation-supported operations](#collate_operations) . You can define the [Unicode collation specification](#unicode_collation) , `  und:ci  ` , for [collation-supported types](#collate_define) .
+A collation specification determines how strings are sorted and compared in [collation-supported operations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_operations) . You can define the [Unicode collation specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#unicode_collation) , `  und:ci  ` , for [collation-supported types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_define) .
 
 If a collation specification isn't defined, the default collation specification is used. To learn more, see the next section.
 
@@ -729,10 +361,8 @@ In general, the following behavior occurs when an empty string is included in co
 
 ### Unicode collation specification
 
-``` text
-collation_specification:
-  'language_tag:collation_attribute'
-```
+    collation_specification:
+      'language_tag:collation_attribute'
 
 A unicode collation specification indicates that the operation should use the [Unicode Collation Algorithm](http://www.unicode.org/reports/tr10/) to sort and compare strings. The collation specification can be a `  STRING  ` literal or a query parameter.
 
@@ -752,9 +382,7 @@ In addition to the language tag, the unicode collation specification must have a
 
 This is what the `  ci  ` collation attribute looks like when used with the `  und  ` language tag in the `  COLLATE  ` function:
 
-``` text
-COLLATE('orange1', 'und:ci')
-```
+    COLLATE('orange1', 'und:ci')
 
 #### Caveats
 
@@ -769,23 +397,21 @@ COLLATE('orange1', 'und:ci')
 
   - There are a wide range of unicode code points (punctuation, symbols, etc), that are treated as if they aren't there. So strings with and without them are sorted identically. For example, the format control code point `  U+2060  ` is ignored when the following strings are sorted:
     
-    ``` text
-    SELECT *
-    FROM UNNEST([
-      COLLATE('oran\u2060ge1', 'und:ci'),
-      COLLATE('\u2060orange2', 'und:ci'),
-      COLLATE('orange3', 'und:ci')
-    ]) AS fruit
-    ORDER BY fruit
-    
-    /*---------+
-    | fruit   |
-    +---------+
-    | orange1 |
-    | orange2 |
-    | orange3 |
-    +---------*/
-    ```
+        SELECT *
+        FROM UNNEST([
+          COLLATE('oran\u2060ge1', 'und:ci'),
+          COLLATE('\u2060orange2', 'und:ci'),
+          COLLATE('orange3', 'und:ci')
+        ]) AS fruit
+        ORDER BY fruit
+        
+        /*---------+
+        | fruit   |
+        +---------+
+        | orange1 |
+        | orange2 |
+        | orange3 |
+        +---------*/
 
   - Ordering *may* change. The Unicode specification of the `  und  ` collation can change occasionally, which can affect sorting order.
 
@@ -799,98 +425,84 @@ Limitations for supported features are captured in the previous sections, but he
 
   - You can't set non-empty collation on a clustering field.
     
-    ``` text
-    CREATE TABLE my_dataset.my_table
-    (
-      word STRING COLLATE 'und:ci',
-      number INT64
-    )
-    CLUSTER BY word;
-    
-    -- User error:
-    -- "CLUSTER BY STRING column word with
-    -- collation und:ci isn't supported"
-    ```
+        CREATE TABLE my_dataset.my_table
+        (
+          word STRING COLLATE 'und:ci',
+          number INT64
+        )
+        CLUSTER BY word;
+        
+        -- User error:
+        -- "CLUSTER BY STRING column word with
+        -- collation und:ci isn't supported"
 
   - You can't create a materialized view with collated sort keys in an aggregate function.
     
-    ``` text
-    CREATE MATERIALIZED VIEW my_dataset.my_view
-    AS SELECT
-      -- Assume collated_table.col_ci is a string column with 'und:ci' collation.
-      ARRAY_AGG(col_int64 ORDER BY col_ci) AS col_int64_arr
-    FROM my_dataset.collated_table;
-    
-    -- User error:
-    -- "Sort key with collation in aggregate function array_agg isn't
-    -- supported in materialized view"
-    ```
+        CREATE MATERIALIZED VIEW my_dataset.my_view
+        AS SELECT
+          -- Assume collated_table.col_ci is a string column with 'und:ci' collation.
+          ARRAY_AGG(col_int64 ORDER BY col_ci) AS col_int64_arr
+        FROM my_dataset.collated_table;
+        
+        -- User error:
+        -- "Sort key with collation in aggregate function array_agg isn't
+        -- supported in materialized view"
 
   - If a materialized view has joined on collated columns and not all of the collated columns were produced by the materialized view, it's possible that a query with the materialized view will use data from base tables rather than the materialized view.
     
-    ``` text
-    CREATE MATERIALIZED VIEW my_dataset.my_mv
-    AS SELECT
-      t1.col_ci AS t1_col_ci,
-      t2.col_int64 AS t2_col_int64
-    FROM my_dataset.collated_table1 AS t1
-    JOIN my_dataset.collated_table2 AS t2
-    ON t1.col_ci = t2.col_ci
-    
-    SELECT * FROM my_dataset.my_mv
-    WHERE t1_col_ci = 'abc'
-    
-    -- Assuming collated_table1.col_ci and collated_table2.col_ci are columns
-    -- with 'und:ci' collation, the query to my_mv may use data from
-    -- collated_table1 and collated_table2, rather than data from my_mv.
-    ```
+        CREATE MATERIALIZED VIEW my_dataset.my_mv
+        AS SELECT
+          t1.col_ci AS t1_col_ci,
+          t2.col_int64 AS t2_col_int64
+        FROM my_dataset.collated_table1 AS t1
+        JOIN my_dataset.collated_table2 AS t2
+        ON t1.col_ci = t2.col_ci
+        
+        SELECT * FROM my_dataset.my_mv
+        WHERE t1_col_ci = 'abc'
+        
+        -- Assuming collated_table1.col_ci and collated_table2.col_ci are columns
+        -- with 'und:ci' collation, the query to my_mv may use data from
+        -- collated_table1 and collated_table2, rather than data from my_mv.
 
   - Table functions can't take collated arguments.
     
-    ``` text
-    CREATE TABLE FUNCTION my_dataset.my_tvf(x STRING) AS (
-      SELECT x
-    );
-    
-    SELECT * FROM my_dataset.my_tvf(COLLATE('abc', 'und:ci'));
-    
-    -- User error:
-    -- "Collation 'und:ci' on argument of TVF call isn't allowed"
-    ```
+        CREATE TABLE FUNCTION my_dataset.my_tvf(x STRING) AS (
+          SELECT x
+        );
+        
+        SELECT * FROM my_dataset.my_tvf(COLLATE('abc', 'und:ci'));
+        
+        -- User error:
+        -- "Collation 'und:ci' on argument of TVF call isn't allowed"
 
   - A table function with collated output columns isn't supported if an explicit result schema is present.
     
-    ``` text
-    CREATE TABLE FUNCTION my_dataset.my_tvf(x STRING)
-    RETURNS TABLE<output_str STRING>
-    AS (SELECT COLLATE(x, 'und:ci') AS output_str);
-    
-    -- User error:
-    -- "Collation 'und:ci' on output column output_str isn't allowed when an
-    -- explicit result schema is present"
-    ```
+        CREATE TABLE FUNCTION my_dataset.my_tvf(x STRING)
+        RETURNS TABLE<output_str STRING>
+        AS (SELECT COLLATE(x, 'und:ci') AS output_str);
+        
+        -- User error:
+        -- "Collation 'und:ci' on output column output_str isn't allowed when an
+        -- explicit result schema is present"
 
   - User-defined functions (UDFs) can't take collated arguments.
     
-    ``` text
-    CREATE FUNCTION tmp_dataset.my_udf(x STRING) AS (x);
-    
-    SELECT tmp_dataset.my_udf(col_ci)
-    FROM shared_dataset.table_collation_simple;
-    
-    -- User error:
-    -- "Collation isn't allowed on argument x ('und:ci').
-    -- Use COLLATE(arg, '') to remove collation at [1:8]"
-    ```
+        CREATE FUNCTION tmp_dataset.my_udf(x STRING) AS (x);
+        
+        SELECT tmp_dataset.my_udf(col_ci)
+        FROM shared_dataset.table_collation_simple;
+        
+        -- User error:
+        -- "Collation isn't allowed on argument x ('und:ci').
+        -- Use COLLATE(arg, '') to remove collation at [1:8]"
 
   - Collation in the return type of a user-defined function body isn't allowed.
     
-    ``` text
-    CREATE FUNCTION my_dataset.my_udf(x STRING) AS (COLLATE(x, 'und:ci'));
-    
-    -- User error:
-    -- "Collation ['und:ci'] in return type of user-defined function body is
-    -- not allowed"
-    ```
+        CREATE FUNCTION my_dataset.my_udf(x STRING) AS (COLLATE(x, 'und:ci'));
+        
+        -- User error:
+        -- "Collation ['und:ci'] in return type of user-defined function body is
+        -- not allowed"
 
-  - [External tables](/bigquery/docs/external-data-sources) don't support collation.
+  - [External tables](https://docs.cloud.google.com/bigquery/docs/external-data-sources) don't support collation.

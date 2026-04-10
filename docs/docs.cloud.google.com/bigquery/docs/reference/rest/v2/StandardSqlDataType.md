@@ -1,7 +1,7 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [TypeKind](#TypeKind)
-  - [StandardSqlStructType](#StandardSqlStructType)
-      - [JSON representation](#StandardSqlStructType.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#SCHEMA_REPRESENTATION)
+  - [TypeKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#TypeKind)
+  - [StandardSqlStructType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/StandardSqlDataType#StandardSqlStructType.SCHEMA_REPRESENTATION)
 
 The data type of a variable such as a function argument. Examples include:
 
@@ -11,51 +11,45 @@ The data type of a variable such as a function argument. Examples include:
 
 <!-- end list -->
 
-``` text
-{
-  "typeKind": "ARRAY",
-  "arrayElementType": {"typeKind": "STRING"}
-}
-```
+    {
+      "typeKind": "ARRAY",
+      "arrayElementType": {"typeKind": "STRING"}
+    }
 
   - STRUCT\<x STRING, y ARRAY \>:
 
 <!-- end list -->
 
-``` text
-{
-  "typeKind": "STRUCT",
-  "structType":
-  {
-    "fields":
-    [
+    {
+      "typeKind": "STRUCT",
+      "structType":
       {
-        "name": "x",
-        "type": {"typeKind": "STRING"}
-      },
-      {
-        "name": "y",
-        "type":
-        {
-          "typeKind": "ARRAY",
-          "arrayElementType": {"typeKind": "DATE"}
-        }
+        "fields":
+        [
+          {
+            "name": "x",
+            "type": {"typeKind": "STRING"}
+          },
+          {
+            "name": "y",
+            "type":
+            {
+              "typeKind": "ARRAY",
+              "arrayElementType": {"typeKind": "DATE"}
+            }
+          }
+        ]
       }
-    ]
-  }
-}
-```
+    }
 
   - RANGE :
 
 <!-- end list -->
 
-``` text
-{
-  "typeKind": "RANGE",
-  "rangeElementType": {"typeKind": "DATE"}
-}
-```
+    {
+      "typeKind": "RANGE",
+      "rangeElementType": {"typeKind": "DATE"}
+    }
 
 <table>
 <colgroup>
@@ -68,7 +62,7 @@ The data type of a variable such as a function argument. Examples include:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;typeKind&quot;: enum (TypeKind),
 
   // Union field sub_type can be only one of the following:
@@ -204,7 +198,7 @@ The representation of a SQL STRUCT type.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     {
       object (StandardSqlField)

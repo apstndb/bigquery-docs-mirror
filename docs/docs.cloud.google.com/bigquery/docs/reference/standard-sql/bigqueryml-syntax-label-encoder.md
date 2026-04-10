@@ -4,16 +4,16 @@ This document describes the `  ML.LABEL_ENCODER  ` function, which you can use t
 
 The encoding vocabulary is sorted alphabetically. `  NULL  ` values and categories that aren't in the vocabulary are encoded to `  0  ` .
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary values calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the vocabulary values calculated during training, along with the top *k* and frequency threshold values that you specified, are automatically used in prediction.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.LABEL_ENCODER(string_expression [, top_k] [, frequency_threshold]) OVER()
 ```
 
@@ -31,7 +31,7 @@ ML.LABEL_ENCODER(string_expression [, top_k] [, frequency_threshold]) OVER()
 
 The following example performs label encoding on a set of string expressions. It limits the encoding vocabulary to the two categories that occur the most frequently in the data and that also occur two or more times.
 
-``` text
+``` notranslate
 SELECT f, ML.LABEL_ENCODER(f, 2, 2) OVER () AS output
 FROM UNNEST([NULL, 'a', 'b', 'b', 'c', 'c', 'c', 'd', 'd']) AS f
 ORDER BY f;
@@ -57,5 +57,5 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
   - For information about the supported SQL statements and functions for each

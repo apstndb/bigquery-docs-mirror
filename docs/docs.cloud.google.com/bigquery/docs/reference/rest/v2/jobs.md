@@ -1,5 +1,5 @@
-  - [Resource](#RESOURCE_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs#RESOURCE_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs#METHODS_SUMMARY)
 
 ## Resource
 

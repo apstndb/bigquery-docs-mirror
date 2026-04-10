@@ -1,11 +1,11 @@
-  - [Resource: Reservation](#Reservation)
-      - [JSON representation](#Reservation.SCHEMA_REPRESENTATION)
-  - [Autoscale](#Autoscale)
-      - [JSON representation](#Autoscale.SCHEMA_REPRESENTATION)
-  - [ScalingMode](#ScalingMode)
-  - [ReplicationStatus](#ReplicationStatus)
-      - [JSON representation](#ReplicationStatus.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Reservation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#Reservation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#Reservation.SCHEMA_REPRESENTATION)
+  - [Autoscale](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#Autoscale)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#Autoscale.SCHEMA_REPRESENTATION)
+  - [ScalingMode](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#ScalingMode)
+  - [ReplicationStatus](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#ReplicationStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#ReplicationStatus.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations#METHODS_SUMMARY)
 
 ## Resource: Reservation
 
@@ -22,7 +22,7 @@ A reservation is a mechanism used to guarantee slots to users.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;slotCapacity&quot;: string,
   &quot;ignoreIdleSlots&quot;: boolean,
@@ -176,7 +176,7 @@ Auto scaling settings.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;currentSlots&quot;: string,
   &quot;maxSlots&quot;: string
 }</code></pre></td>
@@ -241,7 +241,7 @@ Disaster Recovery(DR) replication status of the reservation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;error&quot;: {
     object (Status)
   },

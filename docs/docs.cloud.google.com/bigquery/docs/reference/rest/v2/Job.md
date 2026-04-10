@@ -1,117 +1,117 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [JobConfiguration](#JobConfiguration)
-      - [JSON representation](#JobConfiguration.SCHEMA_REPRESENTATION)
-  - [JobConfigurationQuery](#JobConfigurationQuery)
-      - [JSON representation](#JobConfigurationQuery.SCHEMA_REPRESENTATION)
-  - [SystemVariables](#SystemVariables)
-      - [JSON representation](#SystemVariables.SCHEMA_REPRESENTATION)
-  - [ScriptOptions](#ScriptOptions)
-      - [JSON representation](#ScriptOptions.SCHEMA_REPRESENTATION)
-  - [KeyResultStatementKind](#KeyResultStatementKind)
-  - [JobConfigurationLoad](#JobConfigurationLoad)
-      - [JSON representation](#JobConfigurationLoad.SCHEMA_REPRESENTATION)
-  - [DestinationTableProperties](#DestinationTableProperties)
-      - [JSON representation](#DestinationTableProperties.SCHEMA_REPRESENTATION)
-  - [ColumnNameCharacterMap](#ColumnNameCharacterMap)
-  - [SourceColumnMatch](#SourceColumnMatch)
-  - [JobConfigurationTableCopy](#JobConfigurationTableCopy)
-      - [JSON representation](#JobConfigurationTableCopy.SCHEMA_REPRESENTATION)
-  - [OperationType](#OperationType)
-  - [JobConfigurationExtract](#JobConfigurationExtract)
-      - [JSON representation](#JobConfigurationExtract.SCHEMA_REPRESENTATION)
-  - [ModelExtractOptions](#ModelExtractOptions)
-      - [JSON representation](#ModelExtractOptions.SCHEMA_REPRESENTATION)
-  - [JobStatistics](#JobStatistics)
-      - [JSON representation](#JobStatistics.SCHEMA_REPRESENTATION)
-  - [JobStatistics2](#JobStatistics2)
-      - [JSON representation](#JobStatistics2.SCHEMA_REPRESENTATION)
-  - [ExplainQueryStage](#ExplainQueryStage)
-      - [JSON representation](#ExplainQueryStage.SCHEMA_REPRESENTATION)
-  - [ExplainQueryStep](#ExplainQueryStep)
-      - [JSON representation](#ExplainQueryStep.SCHEMA_REPRESENTATION)
-  - [ComputeMode](#ComputeMode)
-  - [QueryTimelineSample](#QueryTimelineSample)
-      - [JSON representation](#QueryTimelineSample.SCHEMA_REPRESENTATION)
-  - [MlStatistics](#MlStatistics)
-      - [JSON representation](#MlStatistics.SCHEMA_REPRESENTATION)
-  - [TrainingType](#TrainingType)
-  - [ExportDataStatistics](#ExportDataStatistics)
-      - [JSON representation](#ExportDataStatistics.SCHEMA_REPRESENTATION)
-  - [ExternalServiceCost](#ExternalServiceCost)
-      - [JSON representation](#ExternalServiceCost.SCHEMA_REPRESENTATION)
-  - [BiEngineStatistics](#BiEngineStatistics)
-      - [JSON representation](#BiEngineStatistics.SCHEMA_REPRESENTATION)
-  - [BiEngineMode](#BiEngineMode)
-  - [BiEngineAccelerationMode](#BiEngineAccelerationMode)
-  - [BiEngineReason](#BiEngineReason)
-      - [JSON representation](#BiEngineReason.SCHEMA_REPRESENTATION)
-  - [Code](#Code)
-  - [LoadQueryStatistics](#LoadQueryStatistics)
-      - [JSON representation](#LoadQueryStatistics.SCHEMA_REPRESENTATION)
-  - [SearchStatistics](#SearchStatistics)
-      - [JSON representation](#SearchStatistics.SCHEMA_REPRESENTATION)
-  - [IndexUsageMode](#IndexUsageMode)
-  - [IndexUnusedReason](#IndexUnusedReason)
-      - [JSON representation](#IndexUnusedReason.SCHEMA_REPRESENTATION)
-  - [Code](#Code_1)
-  - [VectorSearchStatistics](#VectorSearchStatistics)
-      - [JSON representation](#VectorSearchStatistics.SCHEMA_REPRESENTATION)
-  - [IndexUsageMode](#IndexUsageMode_1)
-  - [StoredColumnsUsage](#StoredColumnsUsage)
-      - [JSON representation](#StoredColumnsUsage.SCHEMA_REPRESENTATION)
-  - [StoredColumnsUnusedReason](#StoredColumnsUnusedReason)
-      - [JSON representation](#StoredColumnsUnusedReason.SCHEMA_REPRESENTATION)
-  - [Code](#Code_2)
-  - [PerformanceInsights](#PerformanceInsights)
-      - [JSON representation](#PerformanceInsights.SCHEMA_REPRESENTATION)
-  - [StagePerformanceStandaloneInsight](#StagePerformanceStandaloneInsight)
-      - [JSON representation](#StagePerformanceStandaloneInsight.SCHEMA_REPRESENTATION)
-  - [HighCardinalityJoin](#HighCardinalityJoin)
-      - [JSON representation](#HighCardinalityJoin.SCHEMA_REPRESENTATION)
-  - [PartitionSkew](#PartitionSkew)
-      - [JSON representation](#PartitionSkew.SCHEMA_REPRESENTATION)
-  - [SkewSource](#SkewSource)
-      - [JSON representation](#SkewSource.SCHEMA_REPRESENTATION)
-  - [StagePerformanceChangeInsight](#StagePerformanceChangeInsight)
-      - [JSON representation](#StagePerformanceChangeInsight.SCHEMA_REPRESENTATION)
-  - [InputDataChange](#InputDataChange)
-      - [JSON representation](#InputDataChange.SCHEMA_REPRESENTATION)
-  - [QueryInfo](#QueryInfo)
-      - [JSON representation](#QueryInfo.SCHEMA_REPRESENTATION)
-  - [SparkStatistics](#SparkStatistics)
-      - [JSON representation](#SparkStatistics.SCHEMA_REPRESENTATION)
-  - [LoggingInfo](#LoggingInfo)
-      - [JSON representation](#LoggingInfo.SCHEMA_REPRESENTATION)
-  - [MaterializedViewStatistics](#MaterializedViewStatistics)
-      - [JSON representation](#MaterializedViewStatistics.SCHEMA_REPRESENTATION)
-  - [MaterializedView](#MaterializedView)
-      - [JSON representation](#MaterializedView.SCHEMA_REPRESENTATION)
-  - [RejectedReason](#RejectedReason)
-  - [MetadataCacheStatistics](#MetadataCacheStatistics)
-      - [JSON representation](#MetadataCacheStatistics.SCHEMA_REPRESENTATION)
-  - [TableMetadataCacheUsage](#TableMetadataCacheUsage)
-      - [JSON representation](#TableMetadataCacheUsage.SCHEMA_REPRESENTATION)
-  - [UnusedReason](#UnusedReason)
-  - [JobStatistics3](#JobStatistics3)
-      - [JSON representation](#JobStatistics3.SCHEMA_REPRESENTATION)
-  - [JobStatistics4](#JobStatistics4)
-      - [JSON representation](#JobStatistics4.SCHEMA_REPRESENTATION)
-  - [CopyJobStatistics](#CopyJobStatistics)
-      - [JSON representation](#CopyJobStatistics.SCHEMA_REPRESENTATION)
-  - [ScriptStatistics](#ScriptStatistics)
-      - [JSON representation](#ScriptStatistics.SCHEMA_REPRESENTATION)
-  - [EvaluationKind](#EvaluationKind)
-  - [ScriptStackFrame](#ScriptStackFrame)
-      - [JSON representation](#ScriptStackFrame.SCHEMA_REPRESENTATION)
-  - [RowLevelSecurityStatistics](#RowLevelSecurityStatistics)
-      - [JSON representation](#RowLevelSecurityStatistics.SCHEMA_REPRESENTATION)
-  - [DataMaskingStatistics](#DataMaskingStatistics)
-      - [JSON representation](#DataMaskingStatistics.SCHEMA_REPRESENTATION)
-  - [TransactionInfo](#TransactionInfo)
-      - [JSON representation](#TransactionInfo.SCHEMA_REPRESENTATION)
-  - [ReservationEdition](#ReservationEdition)
-  - [JobStatus](#JobStatus)
-      - [JSON representation](#JobStatus.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SCHEMA_REPRESENTATION)
+  - [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfiguration.SCHEMA_REPRESENTATION)
+  - [JobConfigurationQuery](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationQuery.SCHEMA_REPRESENTATION)
+  - [SystemVariables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SystemVariables)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SystemVariables.SCHEMA_REPRESENTATION)
+  - [ScriptOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptOptions.SCHEMA_REPRESENTATION)
+  - [KeyResultStatementKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#KeyResultStatementKind)
+  - [JobConfigurationLoad](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.SCHEMA_REPRESENTATION)
+  - [DestinationTableProperties](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#DestinationTableProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#DestinationTableProperties.SCHEMA_REPRESENTATION)
+  - [ColumnNameCharacterMap](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ColumnNameCharacterMap)
+  - [SourceColumnMatch](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SourceColumnMatch)
+  - [JobConfigurationTableCopy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationTableCopy.SCHEMA_REPRESENTATION)
+  - [OperationType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#OperationType)
+  - [JobConfigurationExtract](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationExtract.SCHEMA_REPRESENTATION)
+  - [ModelExtractOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ModelExtractOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ModelExtractOptions.SCHEMA_REPRESENTATION)
+  - [JobStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics.SCHEMA_REPRESENTATION)
+  - [JobStatistics2](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics2)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics2.SCHEMA_REPRESENTATION)
+  - [ExplainQueryStage](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage.SCHEMA_REPRESENTATION)
+  - [ExplainQueryStep](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStep)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStep.SCHEMA_REPRESENTATION)
+  - [ComputeMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ComputeMode)
+  - [QueryTimelineSample](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryTimelineSample.SCHEMA_REPRESENTATION)
+  - [MlStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MlStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MlStatistics.SCHEMA_REPRESENTATION)
+  - [TrainingType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TrainingType)
+  - [ExportDataStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExportDataStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExportDataStatistics.SCHEMA_REPRESENTATION)
+  - [ExternalServiceCost](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExternalServiceCost)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExternalServiceCost.SCHEMA_REPRESENTATION)
+  - [BiEngineStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineStatistics.SCHEMA_REPRESENTATION)
+  - [BiEngineMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineMode)
+  - [BiEngineAccelerationMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineAccelerationMode)
+  - [BiEngineReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineReason)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#BiEngineReason.SCHEMA_REPRESENTATION)
+  - [Code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#Code)
+  - [LoadQueryStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#LoadQueryStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#LoadQueryStatistics.SCHEMA_REPRESENTATION)
+  - [SearchStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SearchStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SearchStatistics.SCHEMA_REPRESENTATION)
+  - [IndexUsageMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUsageMode)
+  - [IndexUnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason.SCHEMA_REPRESENTATION)
+  - [Code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#Code_1)
+  - [VectorSearchStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics.SCHEMA_REPRESENTATION)
+  - [IndexUsageMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUsageMode_1)
+  - [StoredColumnsUsage](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StoredColumnsUsage.SCHEMA_REPRESENTATION)
+  - [StoredColumnsUnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StoredColumnsUnusedReason)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StoredColumnsUnusedReason.SCHEMA_REPRESENTATION)
+  - [Code](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#Code_2)
+  - [PerformanceInsights](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PerformanceInsights.SCHEMA_REPRESENTATION)
+  - [StagePerformanceStandaloneInsight](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StagePerformanceStandaloneInsight)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StagePerformanceStandaloneInsight.SCHEMA_REPRESENTATION)
+  - [HighCardinalityJoin](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#HighCardinalityJoin)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#HighCardinalityJoin.SCHEMA_REPRESENTATION)
+  - [PartitionSkew](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PartitionSkew)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#PartitionSkew.SCHEMA_REPRESENTATION)
+  - [SkewSource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SkewSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SkewSource.SCHEMA_REPRESENTATION)
+  - [StagePerformanceChangeInsight](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StagePerformanceChangeInsight)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#StagePerformanceChangeInsight.SCHEMA_REPRESENTATION)
+  - [InputDataChange](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#InputDataChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#InputDataChange.SCHEMA_REPRESENTATION)
+  - [QueryInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#QueryInfo.SCHEMA_REPRESENTATION)
+  - [SparkStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SparkStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SparkStatistics.SCHEMA_REPRESENTATION)
+  - [LoggingInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#LoggingInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#LoggingInfo.SCHEMA_REPRESENTATION)
+  - [MaterializedViewStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics.SCHEMA_REPRESENTATION)
+  - [MaterializedView](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedView)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedView.SCHEMA_REPRESENTATION)
+  - [RejectedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#RejectedReason)
+  - [MetadataCacheStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MetadataCacheStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MetadataCacheStatistics.SCHEMA_REPRESENTATION)
+  - [TableMetadataCacheUsage](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TableMetadataCacheUsage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TableMetadataCacheUsage.SCHEMA_REPRESENTATION)
+  - [UnusedReason](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#UnusedReason)
+  - [JobStatistics3](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics3)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics3.SCHEMA_REPRESENTATION)
+  - [JobStatistics4](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics4)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatistics4.SCHEMA_REPRESENTATION)
+  - [CopyJobStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#CopyJobStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#CopyJobStatistics.SCHEMA_REPRESENTATION)
+  - [ScriptStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptStatistics.SCHEMA_REPRESENTATION)
+  - [EvaluationKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#EvaluationKind)
+  - [ScriptStackFrame](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptStackFrame)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ScriptStackFrame.SCHEMA_REPRESENTATION)
+  - [RowLevelSecurityStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#RowLevelSecurityStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#RowLevelSecurityStatistics.SCHEMA_REPRESENTATION)
+  - [DataMaskingStatistics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#DataMaskingStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#DataMaskingStatistics.SCHEMA_REPRESENTATION)
+  - [TransactionInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TransactionInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#TransactionInfo.SCHEMA_REPRESENTATION)
+  - [ReservationEdition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#ReservationEdition)
+  - [JobStatus](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobStatus.SCHEMA_REPRESENTATION)
 
 <table>
 <colgroup>
@@ -124,7 +124,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;id&quot;: string,
@@ -232,7 +232,7 @@ Output only. The reason why a Job was created.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobType&quot;: string,
   &quot;query&quot;: {
     object (JobConfigurationQuery)
@@ -329,7 +329,7 @@ JobConfigurationQuery configures a BigQuery query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;destinationTable&quot;: {
     object (TableReference)
@@ -588,7 +588,7 @@ System variables given to a query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;types&quot;: {
     string: {
       object (StandardSqlDataType)
@@ -632,7 +632,7 @@ Options related to script execution.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;statementTimeoutMs&quot;: string,
   &quot;statementByteBudget&quot;: string,
   &quot;keyResultStatement&quot;: enum (KeyResultStatementKind)
@@ -694,7 +694,7 @@ JobConfigurationLoad contains the configuration properties for loading data into
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceUris&quot;: [
     string
   ],
@@ -1081,7 +1081,7 @@ Properties for the destination table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
   &quot;labels&quot;: {
@@ -1168,7 +1168,7 @@ JobConfigurationTableCopy configures a job that copies data from one table to an
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceTable&quot;: {
     object (TableReference)
   },
@@ -1294,7 +1294,7 @@ JobConfigurationExtract configures a job that exports data from a BigQuery table
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;destinationUri&quot;: string,
   &quot;destinationUris&quot;: [
     string
@@ -1400,7 +1400,7 @@ Options related to model extraction.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;trialId&quot;: string
 }</code></pre></td>
 </tr>
@@ -1430,7 +1430,7 @@ Statistics for a single job execution.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;creationTime&quot;: string,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string,
@@ -1648,7 +1648,7 @@ Statistics for a query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;queryPlan&quot;: [
     {
       object (ExplainQueryStage)
@@ -2092,7 +2092,7 @@ A single stage of query execution.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;id&quot;: string,
   &quot;startMs&quot;: string,
@@ -2338,7 +2338,7 @@ An operation within a stage.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;substeps&quot;: [
     string
@@ -2395,7 +2395,7 @@ Summary of the state of query execution at a given time.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;elapsedMs&quot;: string,
   &quot;totalSlotMs&quot;: string,
   &quot;pendingUnits&quot;: string,
@@ -2460,7 +2460,7 @@ Job statistics specific to a BigQuery ML training job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;maxIterations&quot;: string,
   &quot;iterationResults&quot;: [
     {
@@ -2544,7 +2544,7 @@ Statistics for the EXPORT DATA statement as part of jobs.query Job. EXTRACT JOB 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fileCount&quot;: string,
   &quot;rowCount&quot;: string
 }</code></pre></td>
@@ -2581,7 +2581,7 @@ The external service cost is a portion of the total cost, these costs are not ad
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;externalService&quot;: string,
   &quot;bytesProcessed&quot;: string,
   &quot;bytesBilled&quot;: string,
@@ -2646,7 +2646,7 @@ Statistics for a BI Engine specific query. Populated as part of JobStatistics2
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;biEngineMode&quot;: enum (BiEngineMode),
   &quot;accelerationMode&quot;: enum (BiEngineAccelerationMode),
   &quot;biEngineReasons&quot;: [
@@ -2742,7 +2742,7 @@ Reason why BI Engine didn't accelerate the query (or sub-query).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;code&quot;: enum (Code),
   &quot;message&quot;: string
 }</code></pre></td>
@@ -2813,7 +2813,7 @@ Statistics for a LOAD query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;inputFiles&quot;: string,
   &quot;inputFileBytes&quot;: string,
   &quot;outputRows&quot;: string,
@@ -2880,7 +2880,7 @@ Statistics for a search query. Populated as part of JobStatistics2.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;indexUsageMode&quot;: enum (IndexUsageMode),
   &quot;indexUnusedReasons&quot;: [
     {
@@ -2918,11 +2918,11 @@ Index usage mode not specified.
 
 `  UNUSED  `
 
-No search indexes were used in the search query. See [`  indexUnusedReasons  `](/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for detailed reasons.
+No search indexes were used in the search query. See [`  indexUnusedReasons  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for detailed reasons.
 
 `  PARTIALLY_USED  `
 
-Part of the search query used search indexes. See [`  indexUnusedReasons  `](/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for why other parts of the query did not use search indexes.
+Part of the search query used search indexes. See [`  indexUnusedReasons  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for why other parts of the query did not use search indexes.
 
 `  FULLY_USED  `
 
@@ -2943,7 +2943,7 @@ Reason about why no search index was used in the search query (or sub-query).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;code&quot;: enum (Code),
   &quot;message&quot;: string,
   &quot;baseTable&quot;: {
@@ -3086,7 +3086,7 @@ Statistics for a vector search query. Populated as part of JobStatistics2.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;indexUsageMode&quot;: enum (IndexUsageMode),
   &quot;indexUnusedReasons&quot;: [
     {
@@ -3135,11 +3135,11 @@ Index usage mode not specified.
 
 `  UNUSED  `
 
-No vector indexes were used in the vector search query. See [`  indexUnusedReasons  `](/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for detailed reasons.
+No vector indexes were used in the vector search query. See [`  indexUnusedReasons  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for detailed reasons.
 
 `  PARTIALLY_USED  `
 
-Part of the vector search query used vector indexes. See [`  indexUnusedReasons  `](/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for why other parts of the query did not use vector indexes.
+Part of the vector search query used vector indexes. See [`  indexUnusedReasons  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#IndexUnusedReason) for why other parts of the query did not use vector indexes.
 
 `  FULLY_USED  `
 
@@ -3160,7 +3160,7 @@ Indicates the stored columns usage in the query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;storedColumnsUnusedReasons&quot;: [
     {
       object (StoredColumnsUnusedReason)
@@ -3210,7 +3210,7 @@ If the stored column was not used, explain why.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;uncoveredColumns&quot;: [
     string
   ],
@@ -3290,7 +3290,7 @@ Performance insights for the job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;avgPreviousExecutionMs&quot;: string,
   &quot;stagePerformanceStandaloneInsights&quot;: [
     {
@@ -3342,7 +3342,7 @@ Standalone performance insights for a specific stage.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;stageId&quot;: string,
   &quot;biEngineReasons&quot;: [
     {
@@ -3417,7 +3417,7 @@ High cardinality join detailed information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;leftRows&quot;: string,
   &quot;rightRows&quot;: string,
   &quot;outputRows&quot;: string,
@@ -3468,7 +3468,7 @@ Partition skew detailed information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;skewSources&quot;: [
     {
       object (SkewSource)
@@ -3502,7 +3502,7 @@ Details about source stages which produce skewed data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;stageId&quot;: string
 }</code></pre></td>
 </tr>
@@ -3532,7 +3532,7 @@ Performance insights compared to the previous executions for a specific stage.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;stageId&quot;: string,
   &quot;inputDataChange&quot;: {
     object (InputDataChange)
@@ -3571,7 +3571,7 @@ Details about the input data change insight.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;recordsReadDiffPercentage&quot;: number
 }</code></pre></td>
 </tr>
@@ -3601,7 +3601,7 @@ jobs.query optimization information for a QUERY job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;optimizationDetails&quot;: {
     object
   }
@@ -3633,7 +3633,7 @@ Statistics for a BigSpark query. Populated as part of JobStatistics2
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;endpoints&quot;: {
     string: string,
     ...
@@ -3711,7 +3711,7 @@ Spark job logs can be filtered by these fields in Cloud Logging.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resourceType&quot;: string,
   &quot;projectId&quot;: string
 }</code></pre></td>
@@ -3748,7 +3748,7 @@ Statistics of materialized views considered in a query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;materializedView&quot;: [
     {
       object (MaterializedView)
@@ -3784,7 +3784,7 @@ A materialized view considered for a query job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tableReference&quot;: {
     object (TableReference)
   },
@@ -3895,7 +3895,7 @@ Statistics for metadata caching in queried tables.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tableMetadataCacheUsage&quot;: [
     {
       object (TableMetadataCacheUsage)
@@ -3929,7 +3929,7 @@ Table level detail on the usage of metadata caching. Only set for Metadata cachi
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;staleness&quot;: string,
   &quot;tableType&quot;: string,
   &quot;tableReference&quot;: {
@@ -3992,7 +3992,7 @@ Metadata cache was outside the table's maxStaleness.
 
 `  METADATA_CACHING_NOT_ENABLED  `
 
-Metadata caching feature is not enabled. [Update BigLake tables](/bigquery/docs/create-cloud-storage-table-biglake#update-biglake-tables) to enable the metadata caching.
+Metadata caching feature is not enabled. [Update BigLake tables](https://docs.cloud.google.com/bigquery/docs/create-cloud-storage-table-biglake#update-biglake-tables) to enable the metadata caching.
 
 `  OTHER_REASON  `
 
@@ -4013,7 +4013,7 @@ Statistics for a load job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;inputFiles&quot;: string,
   &quot;inputFileBytes&quot;: string,
   &quot;outputRows&quot;: string,
@@ -4082,7 +4082,7 @@ Statistics for an extract job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;destinationUriFileCounts&quot;: [
     string
   ],
@@ -4132,7 +4132,7 @@ Statistics for a copy job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;copiedRows&quot;: string,
   &quot;copiedLogicalBytes&quot;: string
 }</code></pre></td>
@@ -4169,7 +4169,7 @@ Job statistics specific to the child job of a script.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;evaluationKind&quot;: enum (EvaluationKind),
   &quot;stackFrames&quot;: [
     {
@@ -4234,7 +4234,7 @@ Represents the location of the statement/expression being evaluated. Line and co
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;startLine&quot;: integer,
   &quot;startColumn&quot;: integer,
   &quot;endLine&quot;: integer,
@@ -4299,7 +4299,7 @@ Statistics for row-level security.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;rowLevelSecurityApplied&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -4329,7 +4329,7 @@ Statistics for data-masking.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataMaskingApplied&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -4359,7 +4359,7 @@ Whether any accessed data was protected by the data masking.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;transactionId&quot;: string
 }</code></pre></td>
 </tr>
@@ -4409,7 +4409,7 @@ Enterprise Plus edition.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;errorResult&quot;: {
     object (ErrorProto)
   },

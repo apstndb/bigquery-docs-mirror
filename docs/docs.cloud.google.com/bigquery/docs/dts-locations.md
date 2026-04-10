@@ -2,7 +2,7 @@
 
 This page explains the concepts of transfer configuration location and source data location, and also describes how locations and transfers interact.
 
-For more information about BigQuery locations more generally, see [Dataset locations](/bigquery/docs/locations) .
+For more information about BigQuery locations more generally, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## Transfer location
 
@@ -14,13 +14,13 @@ The source data you want to transfer to BigQuery might have a location. However,
 
 ## Location considerations for data warehouse migrations
 
-Data warehouse migrations from [Teradata](/bigquery/docs/migration/teradata-overview) require a Cloud Storage bucket as part of the transfer process. The Cloud Storage bucket must be colocated with the BigQuery destination dataset.
+Data warehouse migrations from [Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata-overview) require a Cloud Storage bucket as part of the transfer process. The Cloud Storage bucket must be colocated with the BigQuery destination dataset.
 
 Redshift data warehouse migrations do not require a colocated Cloud Storage bucket.
 
-**Key Point:** You can copy a dataset or manually move it to another location. See [Managing datasets](/bigquery/docs/managing-datasets) for details. For more information about using Cloud Storage to store and move large datasets, see [Using Cloud Storage with big data](/storage/docs/working-with-big-data) .
+**Key Point:** You can copy a dataset or manually move it to another location. See [Managing datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets) for details. For more information about using Cloud Storage to store and move large datasets, see [Using Cloud Storage with big data](https://docs.cloud.google.com/storage/docs/working-with-big-data) .
 
 ## What's next
 
   - View [all the Google Cloud services available in locations worldwide](https://cloud.google.com/about/locations/#region) .
-  - [Explore additional location-based concepts](/docs/geography-and-regions) , such as zones, that apply to other Google Cloud services.
+  - [Explore additional location-based concepts](https://docs.cloud.google.com/docs/geography-and-regions) , such as zones, that apply to other Google Cloud services.

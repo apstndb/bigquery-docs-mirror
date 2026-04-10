@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for importing TensorFlow models
 
-This document describes the `  CREATE MODEL  ` statement for importing [TensorFlow](https://www.tensorflow.org/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for importing [TensorFlow](https://www.tensorflow.org/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'TENSORFLOW', MODEL_PATH = string_value
@@ -45,9 +45,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'TENSORFLOW'
-```
+    MODEL_TYPE = 'TENSORFLOW'
 
 **Description**
 
@@ -57,13 +55,11 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-``` text
-MODEL_PATH = string_value
-```
+    MODEL_PATH = string_value
 
 **Description**
 
-Specifies the [Cloud Storage URI](/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the TensorFlow model to import. This option is required.
+Specifies the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the TensorFlow model to import. This option is required.
 
 **Arguments**
 
@@ -73,9 +69,7 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Example**
 
-``` text
-MODEL_PATH = 'gs://bucket/path/to/saved_model/*'
-```
+    MODEL_PATH = 'gs://bucket/path/to/saved_model/*'
 
 ### `     KMS_KEY_NAME    `
 
@@ -85,81 +79,30 @@ MODEL_PATH = 'gs://bucket/path/to/saved_model/*'
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ## Supported data types for input and output columns
 
 BigQuery ML converts some TensorFlow model input and output columns to BigQuery ML types, and some [TensorFlow types](https://www.tensorflow.org/api_docs/python/tf/dtypes/DType) aren't supported. Supported data types for input and output columns include the following:
 
-<table>
-<thead>
-<tr class="header">
-<th>TensorFlow types</th>
-<th>Supported</th>
-<th>BigQuery ML type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       tf.int8, tf.int16, tf.int32, tf.int64, tf.uint8, tf.uint16, tf.uint32, tf.uint64      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       tf.float16, tf.float32, tf.float64, tf.bfloat16      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       tf.complex64, tf.complex128      </code></td>
-<td>Unsupported</td>
-<td>N/a</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       tf.qint8, tf.quint8, tf.qint16, tf.quint16, tf.qint32      </code></td>
-<td>Unsupported</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       tf.bool      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       tf.string      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       tf.resource      </code></td>
-<td>Unsupported</td>
-<td>N/A</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       tf.variant      </code></td>
-<td>Unsupported</td>
-<td>N/A</td>
-</tr>
-<tr class="odd">
-<td><a href="https://www.tensorflow.org/api_docs/python/tf/sparse/SparseTensor"><code dir="ltr" translate="no">        SparseTensor       </code></a> of a supported TensorFlow type</td>
-<td>Supported</td>
-<td>A <code dir="ltr" translate="no">       NULL      </code> , the associated BigQuery ML type, or an <a href="/bigquery/docs/reference/standard-sql/data-types#array_type"><code dir="ltr" translate="no">        ARRAY       </code></a> of the associated BigQuery ML type.</td>
-</tr>
-<tr class="even">
-<td><a href="https://www.tensorflow.org/tutorials/load_data/tfrecord#tftrainexample"><code dir="ltr" translate="no">        tf.train.Example       </code></a> containing supported TensorFlow types</td>
-<td>Supported</td>
-<td>BigQuery ML automatically takes features and converts into a <code dir="ltr" translate="no">       tf.train.Example      </code> .</td>
-</tr>
-</tbody>
-</table>
+| TensorFlow types                                                                                                                                    | Supported   | BigQuery ML type                                                                                                                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        tf.int8, tf.int16, tf.int32, tf.int64, tf.uint8, tf.uint16, tf.uint32, tf.uint64       `                                                   | Supported   | [`         INT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)                                                                                                   |
+| `        tf.float16, tf.float32, tf.float64, tf.bfloat16       `                                                                                    | Supported   | [`         FLOAT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types)                                                                                          |
+| `        tf.complex64, tf.complex128       `                                                                                                        | Unsupported | N/a                                                                                                                                                                                                                       |
+| `        tf.qint8, tf.quint8, tf.qint16, tf.quint16, tf.qint32       `                                                                              | Unsupported | N/A                                                                                                                                                                                                                       |
+| `        tf.bool       `                                                                                                                            | Supported   | [`         BOOL        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type)                                                                                                     |
+| `        tf.string       `                                                                                                                          | Supported   | [`         STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)                                                                                                    |
+| `        tf.resource       `                                                                                                                        | Unsupported | N/A                                                                                                                                                                                                                       |
+| `        tf.variant       `                                                                                                                         | Unsupported | N/A                                                                                                                                                                                                                       |
+| [`         SparseTensor        `](https://www.tensorflow.org/api_docs/python/tf/sparse/SparseTensor) of a supported TensorFlow type                 | Supported   | A `        NULL       ` , the associated BigQuery ML type, or an [`         ARRAY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) of the associated BigQuery ML type. |
+| [`         tf.train.Example        `](https://www.tensorflow.org/tutorials/load_data/tfrecord#tftrainexample) containing supported TensorFlow types | Supported   | BigQuery ML automatically takes features and converts into a `        tf.train.Example       ` .                                                                                                                          |
 
 The model input columns can be either dense Tensors or SparseTensors; RaggedTensors aren't supported. You can pass SparseTensors as dense arrays and BigQuery ML automatically converts them into Sparse format to pass into TensorFlow.
 
@@ -167,7 +110,7 @@ If the model expects input columns in [`  tf.train.Example  ` format](https://ww
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
@@ -195,7 +138,7 @@ Imported TensorFlow models have the following limitations:
 
 The following example imports a TensorFlow model into BigQuery ML as a BigQuery ML model. The example assumes that there is an existing TensorFlow model located at `  gs://bucket/path/to/saved_model/*  ` .
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='TENSORFLOW',
          MODEL_PATH="gs://bucket/path/to/saved_model/*")

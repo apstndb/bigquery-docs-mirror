@@ -1,21 +1,21 @@
 # The CREATE MODEL statement for transform-only models
 
-This document describes the `  CREATE MODEL  ` statement for creating transform-only models in BigQuery. Transform-only models use the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to apply [preprocessing functions](/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
+This document describes the `  CREATE MODEL  ` statement for creating transform-only models in BigQuery. Transform-only models use the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to apply [preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) to input data and return the preprocessed data. Transform-only models decouple data preprocessing from model training, making it easier for you to capture and reuse a set of data preprocessing rules.
 
-You can use a transform-only model in conjunction with the [`  ML.TRANSFORM  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) to provide preprocessed data to other models:
+You can use a transform-only model in conjunction with the [`  ML.TRANSFORM  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) to provide preprocessed data to other models:
 
-  - You can use it in the [query statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) when creating another model, in order to use the transformed data as the training data for that model.
-  - You can use it in the [`  query statement  ` argument](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `  ML.PREDICT  ` function, in order to provide data for prediction that is processed in the way the target model expects.
+  - You can use it in the [query statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) when creating another model, in order to use the transformed data as the training data for that model.
+  - You can use it in the [`  query statement  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `  ML.PREDICT  ` function, in order to provide data for prediction that is processed in the way the target model expects.
 
-For batch feature transformations, it is better to use transform-only models because it lets you process large amounts of data in a short time. For online feature transformations, it is better to use [Vertex AI Feature Store](/vertex-ai/docs/featurestore/latest/overview) because it provides responses with low latency.
+For batch feature transformations, it is better to use transform-only models because it lets you process large amounts of data in a short time. For online feature transformations, it is better to use [Vertex AI Feature Store](https://docs.cloud.google.com/vertex-ai/docs/featurestore/latest/overview) because it provides responses with low latency.
 
-You can also use a transform-only model with the [`  ML.FEATURE_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) in order to return information about feature transformations in the model.
+You can also use a transform-only model with the [`  ML.FEATURE_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) in order to return information about feature transformations in the model.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 TRANSFORM (select_list)
 OPTIONS(MODEL_TYPE = 'TRANSFORM_ONLY')
@@ -66,7 +66,7 @@ You can transform inputs from `  query_statement  ` by using expressions in `  s
 The following cannot appear inside `  select_list  ` :
 
   - Aggregation functions.
-  - Non-BigQuery ML analytic functions. For more information about supported functions, see [Manual feature preprocessing](/bigquery/docs/manual-preprocessing) .
+  - Non-BigQuery ML analytic functions. For more information about supported functions, see [Manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) .
   - UDFs.
   - Subqueries.
   - Anonymous columns. For example, `  a + b as c  ` is allowed, while `  a + b  ` isn't.
@@ -86,9 +86,7 @@ If these columns are returned by `  query_statement  ` , you must reference them
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'TRANSFORM_ONLY'
-```
+    MODEL_TYPE = 'TRANSFORM_ONLY'
 
 **Description**
 
@@ -96,7 +94,7 @@ Specify the model type. This option is required.
 
 ### `     query_statement    `
 
-The [GoogleSQL query](/bigquery/docs/reference/standard-sql/query-syntax) that contains the data to preprocess. The statistics that are calculated when transforming this data are applied to the input data of any functions that you use the model with.
+The [GoogleSQL query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) that contains the data to preprocess. The statistics that are calculated when transforming this data are applied to the input data of any functions that you use the model with.
 
 ## Examples
 
@@ -106,7 +104,7 @@ The following examples show how to create and use transform-only models.
 
 The following example creates a model named `  transform_model  ` in `  mydataset  ` in your default project. The model transforms several columns from the BigQuery public table `  bigquery-public-data.ml_datasets.penguins  ` :
 
-``` text
+``` notranslate
 CREATE MODEL `mydataset.transform_model`
   TRANSFORM(
     species,
@@ -128,7 +126,7 @@ AS (
 
 The following example creates a model named `  mymodel  ` in `  mydataset  ` in your default project. The model is trained on data that is preprocessed by using a transform-only model:
 
-``` text
+``` notranslate
 CREATE MODEL `mydataset.mymodel`
 OPTIONS
   ( MODEL_TYPE = 'LINEAR_REG',

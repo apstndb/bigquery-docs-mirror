@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/TimeRange#SCHEMA_REPRESENTATION)
 
 A specification for a time range, this will request transfer runs with runTime between startTime (inclusive) and endTime (exclusive).
 
@@ -13,7 +13,7 @@ A specification for a time range, this will request transfer runs with runTime b
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
 }</code></pre></td>

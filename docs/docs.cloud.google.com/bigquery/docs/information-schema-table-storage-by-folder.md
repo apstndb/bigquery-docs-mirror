@@ -2,7 +2,7 @@
 
 The `  INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER  ` view contains one row for each table or materialized view in the parent folder of the current project, including its subfolders.
 
-This table doesn't maintain real-time data and might be delayed by a few seconds to a few minutes. Storage changes that result from partition or table expiration alone, or from modifications to the dataset time travel window, might take up to a day to appear in the `  INFORMATION_SCHEMA.TABLE_STORAGE  ` view. If a dataset containing more than 1,000 tables is deleted, this view won't reflect the change until the [time travel window](/bigquery/docs/time-travel#time_travel) for the deleted dataset has passed.
+This table doesn't maintain real-time data and might be delayed by a few seconds to a few minutes. Storage changes that result from partition or table expiration alone, or from modifications to the dataset time travel window, might take up to a day to appear in the `  INFORMATION_SCHEMA.TABLE_STORAGE  ` view. If a dataset containing more than 1,000 tables is deleted, this view won't reflect the change until the [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel) for the deleted dataset has passed.
 
 The table storage views give you a convenient way to observe your current storage consumption, and in addition provide details on whether your storage uses logical uncompressed bytes, physical compressed bytes, or time travel bytes. This information can help you with tasks like planning for future growth and understanding the update patterns for tables.
 
@@ -10,17 +10,17 @@ The table storage views give you a convenient way to observe your current storag
 
 The `  *_BYTES  ` columns in the table storage views include information about your use of storage bytes. This information is determined by looking at your storage usage for materialized views and the following types of tables:
 
-  - Permanent tables created through any of the methods described in [Create and use tables](/bigquery/docs/tables) .
-  - Temporary tables created in [sessions](/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . These tables are placed into datasets with generated names like "\_c018003e063d09570001ef33ae401fad6ab92a6a".
-  - Temporary tables created in [multi-statement queries](/bigquery/docs/multi-statement-queries#temporary_tables) ("scripts"). These tables are placed into datasets with generated names like "\_script72280c173c88442c3a7200183a50eeeaa4073719".
+  - Permanent tables created through any of the methods described in [Create and use tables](https://docs.cloud.google.com/bigquery/docs/tables) .
+  - Temporary tables created in [sessions](https://docs.cloud.google.com/bigquery/docs/sessions-write-queries#use_temporary_tables_in_sessions) . These tables are placed into datasets with generated names like "\_c018003e063d09570001ef33ae401fad6ab92a6a".
+  - Temporary tables created in [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) ("scripts"). These tables are placed into datasets with generated names like "\_script72280c173c88442c3a7200183a50eeeaa4073719".
 
-Data stored in the [query results cache](/bigquery/docs/writing-results#temporary_and_permanent_tables) is not billed to you and so is not included in the `  *_BYTES  ` column values.
+Data stored in the [query results cache](https://docs.cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) is not billed to you and so is not included in the `  *_BYTES  ` column values.
 
-Clones and snapshots show `  *_BYTES  ` column values as if they were complete tables, rather than showing the delta from the storage used by the base table, so they are an over-estimation. Your bill does account correctly for this delta in storage usage. For more information on the delta bytes stored and billed by clones and snapshots, see the [`  TABLE_STORAGE_USAGE_TIMELINE  ` view](/bigquery/docs/information-schema-table-storage-usage) .
+Clones and snapshots show `  *_BYTES  ` column values as if they were complete tables, rather than showing the delta from the storage used by the base table, so they are an over-estimation. Your bill does account correctly for this delta in storage usage. For more information on the delta bytes stored and billed by clones and snapshots, see the [`  TABLE_STORAGE_USAGE_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-storage-usage) .
 
 ## Forecast storage billing
 
-In order to forecast the monthly storage billing for a dataset, you can use either the `  logical  ` or `  physical *_BYTES  ` columns in this view, depending on the [dataset storage billing model](/bigquery/docs/datasets-intro#dataset_storage_billing_models) used by the dataset. Please note that this is only a rough forecast, and the precise billing amounts are calculated based on the usage by BigQuery storage billing infrastructure and visible in Cloud Billing.
+In order to forecast the monthly storage billing for a dataset, you can use either the `  logical  ` or `  physical *_BYTES  ` columns in this view, depending on the [dataset storage billing model](https://docs.cloud.google.com/bigquery/docs/datasets-intro#dataset_storage_billing_models) used by the dataset. Please note that this is only a rough forecast, and the precise billing amounts are calculated based on the usage by BigQuery storage billing infrastructure and visible in Cloud Billing.
 
 For datasets that use a logical billing model, you can forecast your monthly storage costs as follows:
 
@@ -52,7 +52,7 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.metadataViewer  `
 
-For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -209,42 +209,27 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [`               PROJECT_ID              `.]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER      </code></td>
-<td>Folder that contains the specified project</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                              | Resource scope                             | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | -------------------------- |
+| ``        [`               PROJECT_ID              `.]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER       `` | Folder that contains the specified project | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 To retrieve storage information for tables in the specified project's parent folder, run the following query:
 
-``` text
-SELECT * FROM `myProject`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER;
-```
+    SELECT * FROM `myProject`.`region-REGION`.INFORMATION_SCHEMA.TABLE_STORAGE_BY_FOLDER;
 
 ## Example
 
 The following query shows which projects in a folder use the most storage:
 
-``` text
+``` notranslate
 SELECT
   project_id,
   SUM(total_logical_bytes) AS total_logical_bytes
@@ -258,14 +243,12 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+---------------------+---------------------+
-|     project_id      | total_logical_bytes |
-+---------------------+---------------------+
-| projecta            |     971329178274633 |
-+---------------------+---------------------+
-| projectb            |     834638211024843 |
-+---------------------+---------------------+
-| projectc            |     562910385625126 |
-+---------------------+---------------------+
-```
+    +---------------------+---------------------+
+    |     project_id      | total_logical_bytes |
+    +---------------------+---------------------+
+    | projecta            |     971329178274633 |
+    +---------------------+---------------------+
+    | projectb            |     834638211024843 |
+    +---------------------+---------------------+
+    | projectc            |     562910385625126 |
+    +---------------------+---------------------+

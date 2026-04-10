@@ -2,29 +2,31 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
-This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](/bigquery/docs/create-data-agents) or data sources, such as tables or views, that you select.
+This document describes how to create, edit, and delete conversations in BigQuery. Conversations are persisted chats with a [data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) or data sources, such as tables or views, that you select.
 
 You can ask data agents multi-part questions that use common terms—for example, "sales" or "most popular"—without specifying table field names, or defining conditions to filter the data. The chat response provides the answer to your question as text and code, and it generates images and charts when appropriate. The response includes the reasoning behind the results.
 
-You can create a conversation with a data agent, or a direct conversation with one or more tables. When you create a direct conversation, the [Conversational Analytics API](/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
+You can create a conversation with a data agent, or a direct conversation with one or more tables. When you create a direct conversation, the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) interprets your question without the context and processing instructions offered by a data agent.
 
 ## Before you begin
 
-1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery, Gemini Data Analytics, and Gemini for Google Cloud APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,geminidataanalytics.googleapis.com,cloudaicompanion.googleapis.com)
 
 ### Required roles
 
-To create conversations, you must have one of the following [Conversational Analytics API IAM roles](/gemini/docs/conversational-analytics-api/access-control) :
+To create conversations, you must have one of the following [Conversational Analytics API IAM roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) :
 
   - To view and create conversations with any data agent that has been shared with you, you must have the Gemini Data Analytics Data Agent User ( `  roles/geminidataanalytics.dataAgentUser  ` ) role and the Gemini for Google Cloud User ( `  roles/cloudaicompanion.user  ` ) role at the project level.
   - To create a direct conversation, you must have the Gemini Data Analytics Stateless Chat User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ) role.
@@ -32,15 +34,13 @@ To create conversations, you must have one of the following [Conversational Anal
 Additionally, in the following situations, you must have the following roles:
 
   - If a data agent uses a data table as a knowledge source, you must have the BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) role on that table.
-  - If a data table uses [column-level access control](/bigquery/docs/column-level-security-intro) , you need the Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) role on the appropriate policy tag. For more information, see [Roles used with column-level access control](/bigquery/docs/column-level-security-intro#roles) .
-  - If a data table uses [row-level access control](/bigquery/docs/row-level-security-intro) , you must have the role-level access policy on that table. For more information, see [Create or update row-level access policies](/bigquery/docs/managing-row-level-security#create-policy) .
-  - If a data table uses [data masking](/bigquery/docs/column-data-masking-intro) , you need the Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) role on the appropriate data policy. For more information, see [Roles for querying masked data](/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
+  - If a data table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , you need the Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) role on the appropriate policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
+  - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must have the role-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
+  - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , you need the Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) role on the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
 
 If you don't have appropriate roles on the source data tables used by the data agent, the system returns the following error when you chat with the data agent:
 
-``` text
-Schema_Resolution: Access Denied
-```
+    Schema_Resolution: Access Denied
 
 ## Best practices
 
@@ -62,13 +62,15 @@ You can create persistent conversations with an agent or with a data source in t
 
 ### Create a conversation with a data agent
 
-To create a conversation with a data agent, you first [create a data agent](/bigquery/docs/create-data-agents) and publish it. You can also initiate a conversation with agents that others share with you.
+To create a conversation with a data agent, you first [create a data agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents) and publish it. You can also initiate a conversation with agents that others share with you.
 
 To create a conversation with a data agent in the Google Cloud console, select one of the following options:
 
 ### Agents page
 
 1.  Go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -82,9 +84,13 @@ To create a conversation with a data agent in the Google Cloud console, select o
     
     To see each step the data agent took to provide the answer to your question, click **Show reasoning** to view each message in the agent's reasoning process.
     
+    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
+    
     To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
     
     The **Summary** section now includes a generated query followed by the query result. You can optionally open the code in the query editor.
+    
+    ![The agent's calculation details, including a generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
     
     When appropriate for the data, the data agent provides images, charts, tables, and other visualizations.
     
@@ -94,7 +100,7 @@ To create a conversation with a data agent in the Google Cloud console, select o
 
 ### BigQuery Editor
 
-1.  When you [work with a table](/bigquery/docs/tables) , or [run a query](/bigquery/docs/running-queries#query-settings) , click the **Create conversation** button in the menu bar to create a new conversation.
+1.  When you [work with a table](https://docs.cloud.google.com/bigquery/docs/tables) , or [run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click the **Create conversation** button in the menu bar to create a new conversation.
 
 2.  In the **Ask a question** field, enter a question for the data agent. For example, "What were our total sales last quarter?" or "Show me the top 5 users by session time." You can also click one of the Gemini-suggested questions to get started.
     
@@ -102,9 +108,13 @@ To create a conversation with a data agent in the Google Cloud console, select o
     
     To see each step the data agent took to provide the answer to your question, click **Show reasoning** to view each message in the agent's reasoning process.
     
+    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
+    
     To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
     
     The **Summary** section now includes a generated query followed by the query result. You can optionally open the code in the query editor.
+    
+    ![The agent's calculation details, including a generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
     
     When appropriate for the data, the data agent provides images, charts, tables, and other visualizations.
     
@@ -121,6 +131,8 @@ To create a conversation with a data source in the Google Cloud console, select 
 To create a direct conversation with a data source from the **Agents** page, follow these steps:
 
 1.  Go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, on the **Chat with your data** pane, click **Data sources** .
 
@@ -132,15 +144,19 @@ To create a direct conversation with a data source from the **Agents** page, fol
     
     To see the steps the Conversational Analytics API took, click **Show reasoning** to view each message in the API's reasoning process.
     
+    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
+    
     To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
     
     The **Summary** section now includes a generated query followed by the query result. You can optionally open the query in the query editor.
+    
+    ![The API's calculation details, including the generated query and a query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
     
     When appropriate for the data, the response provides images, charts, tables, and other visualizations.
 
 ### BigQuery Editor
 
-1.  When you [work with a table](/bigquery/docs/tables) , or [run a query](/bigquery/docs/running-queries#query-settings) , click the **Create conversation** button in the menu bar to create a new conversation.
+1.  When you [work with a table](https://docs.cloud.google.com/bigquery/docs/tables) , or [run a query](https://docs.cloud.google.com/bigquery/docs/running-queries#query-settings) , click the **Create conversation** button in the menu bar to create a new conversation.
 
 2.  In the **Ask a question** field, enter a question for the data agent. You can also click one of the Gemini-suggested questions to get started.
     
@@ -150,16 +166,20 @@ To create a direct conversation with a data source from the **Agents** page, fol
     
     To see each step the data agent took to provide the answer to your question, click **Show reasoning** . From the list, and view each message in the agent's reasoning process.
     
+    ![How to open the \*\*Show reasoning\*\* results](https://docs.cloud.google.com/static/bigquery/images/ca-show-reasoning.png)
+    
     To see information about how the results were calculated, click keyboard\_arrow\_down **How was this calculated?**
     
     The **Summary** section now includes the generated query followed by the query result. You can optionally open the query in the query editor.
+    
+    ![The API's calculation details, including the generated query and the query result.](https://docs.cloud.google.com/static/bigquery/images/ca-how-calculated.png)
     
     When appropriate for the data, the response provides images, charts, tables, and other visualizations.
 
 ### Create a data agent from a conversation
 
 1.  From within a conversation's **Data** pane, in the **Quick Actions** section, click **Create Agent** .
-2.  Follow the steps to [create an agent](/bigquery/docs/create-data-agents#create-a-data-agent) .
+2.  Follow the steps to [create an agent](https://docs.cloud.google.com/bigquery/docs/create-data-agents#create-a-data-agent) .
 
 ## Manage conversations
 
@@ -168,12 +188,16 @@ You can open, rename, or delete a conversation on the **Agents** page, and manag
 ### Open an existing conversation
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to open.
 
 ### Rename a conversation
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to rename.
 
@@ -186,6 +210,8 @@ You can open, rename, or delete a conversation on the **Agents** page, and manag
 ### Delete a conversation
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  On the **Conversations** tab, in the conversations list, click the conversation you want to delete.
 
@@ -200,6 +226,8 @@ Manage conversations using BigQuery Studio Explorer. This conversation list prov
 To manage your conversations, follow these steps:
 
 1.  Go to the BigQuery Studio Explorer page.
+    
+    [Go to Explorer](https://console.cloud.google.com/bigquery/explorer)
 
 2.  In the **Explorer** pane, expand a project name.
 
@@ -217,6 +245,6 @@ Conversational analytics operates globally; you can't choose which region to use
 
 ## What's next
 
-  - Learn about [Conversational analytics in BigQuery](/bigquery/docs/conversational-analytics) .
-  - Learn about the [Conversational Analytics API](/gemini/docs/conversational-analytics-api/overview) .
-  - [Create data agents](/bigquery/docs/create-data-agents) .
+  - Learn about [Conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/conversational-analytics) .
+  - Learn about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+  - [Create data agents](https://docs.cloud.google.com/bigquery/docs/create-data-agents) .

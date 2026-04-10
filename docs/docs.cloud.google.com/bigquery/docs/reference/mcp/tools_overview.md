@@ -13,7 +13,7 @@ To get the MCP tool specifications for all tools in an MCP server, use the `  to
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                    
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                    
 curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -29,23 +29,23 @@ curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 
 MCP Tools
 
-[list\_dataset\_ids](/bigquery/docs/reference/mcp/list_dataset_ids)
+[list\_dataset\_ids](https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_dataset_ids)
 
 List BigQuery dataset IDs in a Google Cloud project.
 
-[get\_dataset\_info](/bigquery/docs/reference/mcp/get_dataset_info)
+[get\_dataset\_info](https://docs.cloud.google.com/bigquery/docs/reference/mcp/get_dataset_info)
 
 Get metadata information about a BigQuery dataset.
 
-[list\_table\_ids](/bigquery/docs/reference/mcp/list_table_ids)
+[list\_table\_ids](https://docs.cloud.google.com/bigquery/docs/reference/mcp/list_table_ids)
 
 List table ids in a BigQuery dataset.
 
-[get\_table\_info](/bigquery/docs/reference/mcp/get_table_info)
+[get\_table\_info](https://docs.cloud.google.com/bigquery/docs/reference/mcp/get_table_info)
 
 Get metadata information about a BigQuery table.
 
-[execute\_sql](/bigquery/docs/reference/mcp/execute_sql)
+[execute\_sql](https://docs.cloud.google.com/bigquery/docs/reference/mcp/execute_sql)
 
 Run a SQL query in the project and return the result.
 

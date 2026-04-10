@@ -4,8 +4,8 @@ This document describes upcoming restrictions to BigQuery legacy SQL availabilit
 
 Migrating to GoogleSQL offers these benefits over legacy SQL:
 
-  - It can be more cost-effective, using the [BigQuery advanced runtime](/bigquery/docs/advanced-runtime) for better performance.
-  - It lets you use features not supported by legacy SQL, such as [DML](/bigquery/docs/reference/standard-sql/dml-syntax) and [DDL](/bigquery/docs/reference/standard-sql/data-definition-language) statements, Common Table Expressions (CTEs), complex subqueries and join predicates, [materialized views](/bigquery/docs/materialized-views-intro) , [search indexes](/bigquery/docs/search) , and [Generative AI functions](/bigquery/docs/generative-ai-overview) .
+  - It can be more cost-effective, using the [BigQuery advanced runtime](https://docs.cloud.google.com/bigquery/docs/advanced-runtime) for better performance.
+  - It lets you use features not supported by legacy SQL, such as [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) and [DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) statements, Common Table Expressions (CTEs), complex subqueries and join predicates, [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) , [search indexes](https://docs.cloud.google.com/bigquery/docs/search) , and [Generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
 ## How feature availability works
 
@@ -163,22 +163,22 @@ This category includes specific legacy SQL features that go beyond the basic set
 <tr class="odd">
 <td>Extended features</td>
 <td><ul>
-<li><a href="/bigquery/docs/reference/legacy-sql#comma-as-union-all">Comma as <code dir="ltr" translate="no">          UNION ALL         </code></a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#flatten-operator">Explicit <code dir="ltr" translate="no">          FLATTEN         </code> operator</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#each"><code dir="ltr" translate="no">          GROUP BY         </code> with <code dir="ltr" translate="no">          EACH         </code> modifier</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#stringfunctions"><code dir="ltr" translate="no">          IGNORE CASE         </code> modifier</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#each-modifier"><code dir="ltr" translate="no">          JOIN         </code> with <code dir="ltr" translate="no">          EACH         </code> modifier</a></li>
-<li><a href="/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#logical_views">Logical views</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#omit"><code dir="ltr" translate="no">          OMIT … IF         </code> clause</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#semi-joins">Semi-join or Anti-join</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#from-tables">Table decorator - Partition</a></li>
-<li><a href="/bigquery/docs/table-decorators#range_decorators">Table decorator - Range</a></li>
-<li><a href="/bigquery/docs/table-decorators#time_decorators">Table decorator - Time</a></li>
-<li><a href="/bigquery/docs/user-defined-functions-legacy">User-defined functions</a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#table-date-range">Wildcard - <code dir="ltr" translate="no">          TABLE_DATE_RANGE         </code></a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#table-date-range-strict">Wildcard - <code dir="ltr" translate="no">          TABLE_DATE_RANGE_STRICT         </code></a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#table-query">Wildcard - <code dir="ltr" translate="no">          TABLE_QUERY         </code></a></li>
-<li><a href="/bigquery/docs/reference/legacy-sql#within"><code dir="ltr" translate="no">          WITHIN         </code> modifier for aggregate functions</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#comma-as-union-all">Comma as <code dir="ltr" translate="no">          UNION ALL         </code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#flatten-operator">Explicit <code dir="ltr" translate="no">          FLATTEN         </code> operator</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#each"><code dir="ltr" translate="no">          GROUP BY         </code> with <code dir="ltr" translate="no">          EACH         </code> modifier</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stringfunctions"><code dir="ltr" translate="no">          IGNORE CASE         </code> modifier</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#each-modifier"><code dir="ltr" translate="no">          JOIN         </code> with <code dir="ltr" translate="no">          EACH         </code> modifier</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#logical_views">Logical views</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#omit"><code dir="ltr" translate="no">          OMIT … IF         </code> clause</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#semi-joins">Semi-join or Anti-join</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#from-tables">Table decorator - Partition</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/table-decorators#range_decorators">Table decorator - Range</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/table-decorators#time_decorators">Table decorator - Time</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions-legacy">User-defined functions</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range">Wildcard - <code dir="ltr" translate="no">          TABLE_DATE_RANGE         </code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range-strict">Wildcard - <code dir="ltr" translate="no">          TABLE_DATE_RANGE_STRICT         </code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-query">Wildcard - <code dir="ltr" translate="no">          TABLE_QUERY         </code></a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#within"><code dir="ltr" translate="no">          WITHIN         </code> modifier for aggregate functions</a></li>
 </ul></td>
 </tr>
 </tbody>
@@ -486,80 +486,62 @@ The following examples demonstrate how feature availability works.
 
 A project runs a legacy SQL query during the evaluation period. Assume table `  T  ` contains a column `  X  ` of type `  INTEGER  ` .
 
-``` text
-#legacySQL
-SELECT X FROM T
-```
+    #legacySQL
+    SELECT X FROM T
 
 This usage ensures that all projects within the organization retain the ability to run queries that use any feature from the basic language capabilities set. For example, the following query continues to work:
 
-``` text
-#legacySQL
-SELECT X FROM T WHERE X > 10
-```
+    #legacySQL
+    SELECT X FROM T WHERE X > 10
 
 ### Example: Using function groupings
 
 A project uses one function from a specific function grouping. Assume table `  T  ` contains a column `  X  ` of type `  FLOAT  ` .
 
-``` text
-#legacySQL
-SELECT SIN(X) FROM T
-```
+    #legacySQL
+    SELECT SIN(X) FROM T
 
 The use of the `  SIN()  ` function makes the entire mathematical functions grouping available. Consequently, all projects within the organization can use any other function from that grouping, such as `  COS()  ` .
 
-``` text
-#legacySQL
-SELECT COS(X) FROM T
-```
+    #legacySQL
+    SELECT COS(X) FROM T
 
 Conversely, the following query fails after the evaluation period if no project in the organization uses any function from the aggregate functions for statistics grouping.
 
-``` text
-#legacySQL
-SELECT STDDEV(X) FROM T
-```
+    #legacySQL
+    SELECT STDDEV(X) FROM T
 
 ### Example: Feature retention across different tables
 
 Assume table `  X  ` has a column `  A  ` ( `  INTEGER  ` ) and table `  Y  ` has column `  B  ` ( `  FLOAT  ` ). A project runs the following query during the evaluation period:
 
-``` text
-#legacySQL
-SELECT SIN(A) FROM X
-```
+    #legacySQL
+    SELECT SIN(A) FROM X
 
 The organization can run the following query after the evaluation period ends. The query works because the mathematical functions feature was retained by the first query. The retention is independent of the specific table, column name, or data type used, as both `  INTEGER  ` and `  FLOAT  ` are part of the basic language capability.
 
-``` text
-#legacySQL
-SELECT COS(B) FROM Y
-```
+    #legacySQL
+    SELECT COS(B) FROM Y
 
 ### Example: Complex query
 
 Assume table `  T  ` contains a column `  X  ` of type `  STRING  ` . A project runs the following query during the evaluation period:
 
-``` text
-#legacySQL
-SELECT value, AVG(FLOAT(value)) OVER (ORDER BY value) AS avg
- FROM (
-  SELECT LENGTH(SPLIT(X, ',')) AS value
-    FROM T
-)
-```
+    #legacySQL
+    SELECT value, AVG(FLOAT(value)) OVER (ORDER BY value) AS avg
+     FROM (
+      SELECT LENGTH(SPLIT(X, ',')) AS value
+        FROM T
+    )
 
 This query uses features from the basic language capabilities and three function groupings: basic window functions, string functions, and functions returning repeated values. All projects within the organization retain these features. Therefore, a new query that uses a different combination of functions from those same retained feature sets succeeds.
 
-``` text
-#legacySQL
-SELECT value, COUNT(STRING(value)) OVER (ORDER BY value) as count
- FROM (
-  SELECT CONCAT(SPLIT(X, ','), '123') AS value
-    FROM T
-)
-```
+    #legacySQL
+    SELECT value, COUNT(STRING(value)) OVER (ORDER BY value) as count
+     FROM (
+      SELECT CONCAT(SPLIT(X, ','), '123') AS value
+        FROM T
+    )
 
 ## Frequently asked questions
 
@@ -577,7 +559,7 @@ Yes. All features that any project in your organization accessed during the eval
 
 **Is there a tool to check which legacy SQL features my organization uses?**
 
-There isn't a tool to audit specific feature usage. You can track legacy SQL usage by querying `  INFORMATION_SCHEMA.JOBS  ` views as described in [Legacy SQL query jobs count per project](/bigquery/docs/information-schema-jobs#legacy_sql_query_jobs_count_per_project) . You can also review your query logs in Cloud Logging to check for specific syntax usage.
+There isn't a tool to audit specific feature usage. You can track legacy SQL usage by querying `  INFORMATION_SCHEMA.JOBS  ` views as described in [Legacy SQL query jobs count per project](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#legacy_sql_query_jobs_count_per_project) . You can also review your query logs in Cloud Logging to check for specific syntax usage.
 
 **Do I have to migrate to GoogleSQL?**
 
@@ -589,4 +571,4 @@ To ensure that a query continues to work, run it once during the evaluation peri
 
 ## What's next
 
-  - To migrate your queries from legacy SQL to GoogleSQL, see the [migration guide](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) .
+  - To migrate your queries from legacy SQL to GoogleSQL, see the [migration guide](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) .

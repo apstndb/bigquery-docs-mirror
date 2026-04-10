@@ -2,9 +2,9 @@
 
 This document describes the architecture of the BigQuery entity resolution framework. Entity resolution matches records across shared data where no common identifier exists or augments shared data using an identity service from a Google Cloud partner.
 
-This document is for entity resolution end users and identity providers. For implementation details, see [Configure and use entity resolution in BigQuery](/bigquery/docs/entity-resolution-setup) .
+This document is for entity resolution end users and identity providers. For implementation details, see [Configure and use entity resolution in BigQuery](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
 
-You can use BigQuery entity resolution for data prepared before you contribute it to a [data clean room](/bigquery/docs/data-clean-rooms) . Entity resolution is available in on-demand and capacity pricing models and in all BigQuery editions.
+You can use BigQuery entity resolution for data prepared before you contribute it to a [data clean room](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) . Entity resolution is available in on-demand and capacity pricing models and in all BigQuery editions.
 
 ## Benefits
 
@@ -15,12 +15,14 @@ End users gain the following benefits from entity resolution:
 
 Identity providers gain the following benefits from entity resolution:
 
-  - Offer entity resolution as a managed software as a service (SaaS) offering on [Google Cloud Marketplace](/marketplace/docs/partners/integrated-saas) .
+  - Offer entity resolution as a managed software as a service (SaaS) offering on [Google Cloud Marketplace](https://docs.cloud.google.com/marketplace/docs/partners/integrated-saas) .
   - Use proprietary identity graphs and match logic without revealing them to users.
 
 ## Architecture
 
 BigQuery implements entity resolution using remote function calls that activate entity resolution processes in an identity provider's environment. Your data isn't copied or moved during this process. The following diagram and explanation describe the entity resolution workflow:
+
+![A diagram showing two main sections: an end-user project and an identity provider project.](https://docs.cloud.google.com/static/bigquery/images/entity-resolution-arch-diagram.svg)
 
 1.  The end user grants the identity provider's service account read access to their input dataset and write access to their output dataset.
 2.  The user calls the remote function that matches their input data with the provider's identity graph data. The remote function passes matching parameters to the provider.
@@ -41,14 +43,14 @@ End-user components include the following:
 
 Identity provider components include the following:
 
-  - **Control plane** : contains a [BigQuery remote function](/bigquery/docs/remote-functions) that orchestrates the matching process. This function can be implemented as a [Cloud Run](/run/docs/overview/what-is-cloud-run) job, or a [Cloud Run function](/functions/docs/concepts/overview) . The control plane can also contain other services, such as authentication and authorization.
-  - **Data plane** : contains the identity graph dataset and the stored procedure that implements the provider matching logic. The stored procedure can be implemented as a [SQL stored procedure](/bigquery/docs/procedures) or an [Apache Spark stored procedure](/bigquery/docs/spark-procedures) . The identity graph dataset contains the tables that the end-user data is matched against.
+  - **Control plane** : contains a [BigQuery remote function](https://docs.cloud.google.com/bigquery/docs/remote-functions) that orchestrates the matching process. This function can be implemented as a [Cloud Run](https://docs.cloud.google.com/run/docs/overview/what-is-cloud-run) job, or a [Cloud Run function](https://docs.cloud.google.com/functions/docs/concepts/overview) . The control plane can also contain other services, such as authentication and authorization.
+  - **Data plane** : contains the identity graph dataset and the stored procedure that implements the provider matching logic. The stored procedure can be implemented as a [SQL stored procedure](https://docs.cloud.google.com/bigquery/docs/procedures) or an [Apache Spark stored procedure](https://docs.cloud.google.com/bigquery/docs/spark-procedures) . The identity graph dataset contains the tables that the end-user data is matched against.
 
 **Note:** Identity graphs can also be stored in some external databases.
 
 ## What's next
 
-  - Learn how to [configure and use entity resolution](/bigquery/docs/entity-resolution-setup) .
-  - Learn about [remote functions](/bigquery/docs/remote-functions) .
-  - Learn about [stored procedures](/bigquery/docs/procedures) .
-  - Learn about [data clean rooms](/bigquery/docs/data-clean-rooms) .
+  - Learn how to [configure and use entity resolution](https://docs.cloud.google.com/bigquery/docs/entity-resolution-setup) .
+  - Learn about [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) .
+  - Learn about [stored procedures](https://docs.cloud.google.com/bigquery/docs/procedures) .
+  - Learn about [data clean rooms](https://docs.cloud.google.com/bigquery/docs/data-clean-rooms) .

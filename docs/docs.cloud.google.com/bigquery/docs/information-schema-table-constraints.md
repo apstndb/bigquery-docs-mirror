@@ -1,15 +1,15 @@
 # TABLE\_CONSTRAINTS view
 
-The `  TABLE_CONSTRAINTS  ` view contains [the primary and foreign key](/bigquery/docs/primary-foreign-keys) relations in a BigQuery dataset.
+The `  TABLE_CONSTRAINTS  ` view contains [the primary and foreign key](https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys) relations in a BigQuery dataset.
 
 ## Required permissions
 
-You need the following [Identity and Access Management (IAM) permissions](/iam/docs/overview) :
+You need the following [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/iam/docs/overview) :
 
   - `  bigquery.tables.get  ` for viewing primary and foreign key definitions.
   - `  bigquery.tables.list  ` for viewing table information schemas.
 
-Each of the following [predefined roles](/iam/docs/roles-overview#predefined) has the needed permissions to perform the workflows detailed in this document:
+Each of the following [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) has the needed permissions to perform the workflows detailed in this document:
 
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.dataOwner  `
@@ -17,7 +17,7 @@ Each of the following [predefined roles](/iam/docs/roles-overview#predefined) ha
 
 **Note:** Roles are presented in ascending order of permissions granted. We recommend that you use predefined roles from earlier in the list to not allocate excess permissions.
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -95,24 +95,11 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table shows the region and resource scopes for this view:
+Queries against this view must include a dataset qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table shows the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET              .INFORMATION_SCHEMA.TABLE_CONSTRAINTS;      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                             | Resource scope | Region scope     |
+| ------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ---------------- |
+| `        [               PROJECT_ID              .]               DATASET              .INFORMATION_SCHEMA.TABLE_CONSTRAINTS;       ` | Dataset level  | Dataset location |
 
 Replace the following:
 
@@ -122,11 +109,9 @@ Replace the following:
 
 The following query shows the constraints for a single table in a dataset:
 
-``` text
-SELECT *
-FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-WHERE table_name = TABLE;
-```
+    SELECT *
+    FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+    WHERE table_name = TABLE;
 
 Replace the following:
 
@@ -136,26 +121,20 @@ Replace the following:
 
 Conversely, the following query shows the constraints for all tables in a single dataset.
 
-``` text
-SELECT *
-FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.TABLE_CONSTRAINTS;
-```
+    SELECT *
+    FROM PROJECT_ID.DATASET.INFORMATION_SCHEMA.TABLE_CONSTRAINTS;
 
 With existing constraints, the query results are similar to the following:
 
-``` text
-+-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
-| Row | constraint_catalog  | constraint_schema |    constraint_name    |    table_catalog    | table_schema | table_name | constraint_type | is_deferrable | initially_deferred | enforced |
-+-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
-|   1 | myConstraintCatalog | myDataset         | orders.pk$            | myConstraintCatalog | myDataset    | orders     | PRIMARY KEY     | NO            | NO                 | NO       |
-|   2 | myConstraintCatalog | myDataset         | orders.order_customer | myConstraintCatalog | myDataset    | orders     | FOREIGN KEY     | NO            | NO                 | NO       |
-+-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
-```
+    +-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
+    | Row | constraint_catalog  | constraint_schema |    constraint_name    |    table_catalog    | table_schema | table_name | constraint_type | is_deferrable | initially_deferred | enforced |
+    +-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
+    |   1 | myConstraintCatalog | myDataset         | orders.pk$            | myConstraintCatalog | myDataset    | orders     | PRIMARY KEY     | NO            | NO                 | NO       |
+    |   2 | myConstraintCatalog | myDataset         | orders.order_customer | myConstraintCatalog | myDataset    | orders     | FOREIGN KEY     | NO            | NO                 | NO       |
+    +-----+---------------------+-------------------+-----------------------+---------------------+--------------+------------+-----------------+---------------+--------------------+----------+
 
 If the table or dataset has no constraints, the query results look like this:
 
-``` text
-+-----------------------------+
-| There is no data to display |
-+-----------------------------+
-```
+    +-----------------------------+
+    | There is no data to display |
+    +-----------------------------+

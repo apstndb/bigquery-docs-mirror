@@ -1,6 +1,6 @@
 # Supported protocol buffer and Arrow data types
 
-This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API](/bigquery/docs/write-api#overview) .
+This document describes the supported protocol buffer and Arrow data types for each respective BigQuery data type. Before reading this document, read [Overview of the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api#overview) .
 
 ## Supported protocol buffer data types
 
@@ -28,7 +28,7 @@ The value is the number of days since the Unix epoch (1970-01-01). The valid ran
 
 `  string  `
 
-The value must be a [`  DATETIME  `](/bigquery/docs/reference/standard-sql/lexical#datetime_literals) or [`  TIME  `](/bigquery/docs/reference/standard-sql/lexical#time_literals) literal.
+The value must be a [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#datetime_literals) or [`  TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) literal.
 
 `  int64  `
 
@@ -68,7 +68,7 @@ Use the [`  BigDecimalByteStringEncoder  ` class](https://github.com/googleapis/
 
 `  string  `
 
-The value must be a [`  TIME  ` literal](/bigquery/docs/reference/standard-sql/lexical#time_literals) .
+The value must be a [`  TIME  ` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#time_literals) .
 
 `  TIMESTAMP  `
 
@@ -80,7 +80,7 @@ The value is given in microseconds since the Unix epoch (1970-01-01).
 
 `  string  ` , `  google.protobuf.Duration  `
 
-The string value must be an [`  INTERVAL  ` literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) .
+The string value must be an [`  INTERVAL  ` literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) .
 
 `  RANGE<T>  `
 
@@ -88,13 +88,11 @@ The string value must be an [`  INTERVAL  ` literal](/bigquery/docs/reference/st
 
 A nested message type in the proto with two fields, `  start  ` and `  end  ` , where both fields must be of the same supported protocol buffer type that corresponds to a BigQuery data type `  T  ` . `  T  ` must be one of `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` . If a field ( `  start  ` or `  end  ` ) is not set in the proto message, it represents an unbounded boundary. In the following example, `  f_range_date  ` represents a `  RANGE  ` column in a table. Since the `  end  ` field is not set in the proto message, the end boundary of this range is unbounded.
 
-``` text
-{
-  f_range_date: {
-    start: 1
-  }
-}
-```
+    {
+      f_range_date: {
+        start: 1
+      }
+    }
 
 `  REPEATED FIELD  `
 
@@ -170,13 +168,13 @@ is\_signed = false
 
 `  Decimal128  `
 
-You can provide a NUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+You can provide a NUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
 `  BIGNUMERIC  `
 
 `  Decimal256  `
 
-You can provide a BIGNUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+You can provide a BIGNUMERIC that has any precision or scale that's smaller than the [BigQuery supported range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
 `  STRING  `
 

@@ -1,11 +1,11 @@
-  - [Resource: DataExchange](#DataExchange)
-      - [JSON representation](#DataExchange.SCHEMA_REPRESENTATION)
-  - [SharingEnvironmentConfig](#SharingEnvironmentConfig)
-      - [JSON representation](#SharingEnvironmentConfig.SCHEMA_REPRESENTATION)
-  - [DefaultExchangeConfig](#DefaultExchangeConfig)
-  - [DcrExchangeConfig](#DcrExchangeConfig)
-      - [JSON representation](#DcrExchangeConfig.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: DataExchange](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#DataExchange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#DataExchange.SCHEMA_REPRESENTATION)
+  - [SharingEnvironmentConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#SharingEnvironmentConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#SharingEnvironmentConfig.SCHEMA_REPRESENTATION)
+  - [DefaultExchangeConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#DefaultExchangeConfig)
+  - [DcrExchangeConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#DcrExchangeConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#DcrExchangeConfig.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges#METHODS_SUMMARY)
 
 ## Resource: DataExchange
 
@@ -22,7 +22,7 @@ A data exchange is a container that lets you share data. Along with the descript
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,
@@ -119,7 +119,7 @@ Sharing environment is a behavior model for sharing data within a data exchange.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field environment can be only one of the following:
   &quot;defaultExchangeConfig&quot;: {
@@ -173,7 +173,7 @@ Data Clean Room (DCR), used for privacy-safe and secured data sharing.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;singleSelectedResourceSharingRestriction&quot;: boolean,
   &quot;singleLinkedDatasetPerCleanroom&quot;: boolean
 }</code></pre></td>

@@ -4,7 +4,7 @@
 
 This guide shows you how to use the [MCP Toolbox for Databases](https://github.com/googleapis/genai-toolbox) to connect your BigQuery project to a variety of Integrated Development Environments (IDEs) and developer tools. It uses the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) , an open protocol for connecting large language models (LLMs) to data sources like BigQuery, allowing you to run SQL queries and interact with your project directly from your existing tools.
 
-If you use the Gemini CLI, you can use BigQuery extensions. To learn how, see [Develop with Gemini CLI](/bigquery/docs/develop-with-gemini-cli) . If you plan to build custom tools for the Gemini CLI, continue reading.
+If you use the Gemini CLI, you can use BigQuery extensions. To learn how, see [Develop with Gemini CLI](https://docs.cloud.google.com/bigquery/docs/develop-with-gemini-cli) . If you plan to build custom tools for the Gemini CLI, continue reading.
 
 This guide demonstrates the connection process for the following IDEs:
 
@@ -20,13 +20,13 @@ This guide demonstrates the connection process for the following IDEs:
 
 1.  In the Google Cloud console, on the [project selector page](https://console.cloud.google.com/projectselector2/home/dashboard) , select or create a Google Cloud project.
 
-2.  [Make sure that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Make sure that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  [Enable the BigQuery API in the Google Cloud project](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com&redirect=https://console.cloud.google.com/) .
 
-4.  Configure the required roles and permissions to complete this task. You will need the [BigQuery User](/bigquery/docs/access-control) role ( `  roles/bigquery.user  ` ), the BigQuery Data Viewer role ( `  roles/bigquery.dataViewer  ` ), or equivalent IAM permissions to connect to the project.
+4.  Configure the required roles and permissions to complete this task. You will need the [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control) role ( `  roles/bigquery.user  ` ), the BigQuery Data Viewer role ( `  roles/bigquery.dataViewer  ` ), or equivalent IAM permissions to connect to the project.
 
-5.  Configure [Application Default Credentials (ADC)](/docs/authentication/set-up-adc-local-dev-environment) for your environment.
+5.  Configure [Application Default Credentials (ADC)](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) for your environment.
 
 ## Connect with Antigravity
 
@@ -58,19 +58,17 @@ To connect to a custom MCP server, follow these steps:
 
 <!-- end list -->
 
-``` text
-{
-  "mcpServers": {
-    "bigquery": {
-      "command": "npx",
-      "args": ["-y","@toolbox-sdk/server","--prebuilt","bigquery","--stdio"],
-      "env": {
-          "BIGQUERY_PROJECT": "PROJECT_ID"
+    {
+      "mcpServers": {
+        "bigquery": {
+          "command": "npx",
+          "args": ["-y","@toolbox-sdk/server","--prebuilt","bigquery","--stdio"],
+          "env": {
+              "BIGQUERY_PROJECT": "PROJECT_ID"
+          }
+        }
       }
     }
-  }
-}
-```
 
 ## Install the MCP Toolbox
 
@@ -82,47 +80,35 @@ The toolbox acts as an open-source [Model Context Protocol (MCP)](https://modelc
     
     ### linux/amd64
     
-    ``` text
-    curl -O https://storage.googleapis.com/genai-toolbox/VERSION/linux/amd64/toolbox
-    ```
+        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/linux/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
     
     ### macOS darwin/arm64
     
-    ``` text
-    curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/arm64/toolbox
-    ```
+        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/arm64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
     
     ### macOS darwin/amd64
     
-    ``` text
-    curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/amd64/toolbox
-    ```
+        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/darwin/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
     
     ### windows/amd64
     
-    ``` text
-    curl -O https://storage.googleapis.com/genai-toolbox/VERSION/windows/amd64/toolbox
-    ```
+        curl -O https://storage.googleapis.com/genai-toolbox/VERSION/windows/amd64/toolbox
     
     Replace `  VERSION  ` with the MCP Toolbox version—for example `  v0.7.0  ` .
 
 2.  Make the binary executable:
     
-    ``` text
-    chmod +x toolbox
-    ```
+        chmod +x toolbox
 
 3.  Verify the installation:
     
-    ``` text
-    ./toolbox --version
-    ```
+        ./toolbox --version
 
 ## Set up clients and connections
 
@@ -130,7 +116,7 @@ This section explains how to connect BigQuery to your tools.
 
 If you are using the standalone Gemini CLI, you don't need to install or configure MCP Toolbox, as the extensions bundle the required server capabilities.
 
-For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](#install) .
+For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](https://docs.cloud.google.com/bigquery/docs/pre-built-tools-with-mcp-toolbox#install) .
 
 ### Claude code
 
@@ -140,7 +126,7 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](#i
 
 3.  Add the configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "mcpServers": {
                 "bigquery": {
@@ -165,7 +151,7 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](#i
 
 3.  Add the configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "mcpServers": {
                 "bigquery": {
@@ -192,7 +178,7 @@ For other MCP-compatible tools and IDEs, you must first [install MCP Toolbox](#i
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "mcpServers": {
                 "bigquery": {
@@ -217,7 +203,7 @@ A green active status appears after the server connects successfully.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "mcpServers": {
                 "bigquery": {
@@ -242,7 +228,7 @@ A green active status appears after the server connects successfully.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "servers": {
                 "bigquery": {
@@ -267,7 +253,7 @@ A green active status appears after the server connects successfully.
 
 3.  Add the following configuration, replace the environment variables with your values, and save:
     
-    ``` text
+    ``` 
             {
               "mcpServers": {
                 "bigquery": {

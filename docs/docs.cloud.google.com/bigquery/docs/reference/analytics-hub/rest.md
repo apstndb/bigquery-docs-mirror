@@ -1,13 +1,13 @@
 Exchange data and analytics assets securely and efficiently.
 
-  - [REST Resource: v1beta1.organizations.locations.dataExchanges](#v1beta1.organizations.locations.dataExchanges)
-  - [REST Resource: v1beta1.projects.locations.dataExchanges](#v1beta1.projects.locations.dataExchanges)
-  - [REST Resource: v1beta1.projects.locations.dataExchanges.listings](#v1beta1.projects.locations.dataExchanges.listings)
-  - [REST Resource: v1.organizations.locations.dataExchanges](#v1.organizations.locations.dataExchanges)
-  - [REST Resource: v1.projects.locations.dataExchanges](#v1.projects.locations.dataExchanges)
-  - [REST Resource: v1.projects.locations.dataExchanges.listings](#v1.projects.locations.dataExchanges.listings)
-  - [REST Resource: v1.projects.locations.dataExchanges.queryTemplates](#v1.projects.locations.dataExchanges.queryTemplates)
-  - [REST Resource: v1.projects.locations.subscriptions](#v1.projects.locations.subscriptions)
+  - [REST Resource: v1beta1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1beta1.organizations.locations.dataExchanges)
+  - [REST Resource: v1beta1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1beta1.projects.locations.dataExchanges)
+  - [REST Resource: v1beta1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1beta1.projects.locations.dataExchanges.listings)
+  - [REST Resource: v1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1.organizations.locations.dataExchanges)
+  - [REST Resource: v1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1.projects.locations.dataExchanges)
+  - [REST Resource: v1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1.projects.locations.dataExchanges.listings)
+  - [REST Resource: v1.projects.locations.dataExchanges.queryTemplates](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1.projects.locations.dataExchanges.queryTemplates)
+  - [REST Resource: v1.projects.locations.subscriptions](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest#v1.projects.locations.subscriptions)
 
 ## Service: analyticshub.googleapis.com
 
@@ -26,7 +26,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://analyticshub.googleapis.com  `
 
-## REST Resource: [v1beta1.organizations.locations.dataExchanges](/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges)
+## REST Resource: [v1beta1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/organizations.locations.dataExchanges)
 
 Methods
 
@@ -35,7 +35,7 @@ Methods
 `  GET /v1beta1/{organization=organizations/*/locations/*}/dataExchanges  `  
 Lists all data exchanges from projects in a given organization and location.
 
-## REST Resource: [v1beta1.projects.locations.dataExchanges](/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges)
+## REST Resource: [v1beta1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges)
 
 Methods
 
@@ -79,7 +79,7 @@ Sets the IAM policy.
 `  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions  `  
 Returns the permissions that a caller has.
 
-## REST Resource: [v1beta1.projects.locations.dataExchanges.listings](/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings)
+## REST Resource: [v1beta1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings)
 
 Methods
 
@@ -128,7 +128,7 @@ Subscribes to a listing.
 `  POST /v1beta1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions  `  
 Returns the permissions that a caller has.
 
-## REST Resource: [v1.organizations.locations.dataExchanges](/bigquery/docs/reference/analytics-hub/rest/v1/organizations.locations.dataExchanges)
+## REST Resource: [v1.organizations.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/organizations.locations.dataExchanges)
 
 Methods
 
@@ -137,7 +137,7 @@ Methods
 `  GET /v1/{organization=organizations/*/locations/*}/dataExchanges  `  
 Lists all data exchanges from projects in a given organization and location.
 
-## REST Resource: [v1.projects.locations.dataExchanges](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges)
+## REST Resource: [v1.projects.locations.dataExchanges](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges)
 
 Methods
 
@@ -191,7 +191,7 @@ Creates a Subscription to a Data Clean Room.
 `  POST /v1/{resource=projects/*/locations/*/dataExchanges/*}:testIamPermissions  `  
 Returns the permissions that a caller has.
 
-## REST Resource: [v1.projects.locations.dataExchanges.listings](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings)
+## REST Resource: [v1.projects.locations.dataExchanges.listings](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings)
 
 Methods
 
@@ -245,7 +245,7 @@ Subscribes to a listing.
 `  POST /v1/{resource=projects/*/locations/*/dataExchanges/*/listings/*}:testIamPermissions  `  
 Returns the permissions that a caller has.
 
-## REST Resource: [v1.projects.locations.dataExchanges.queryTemplates](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates)
+## REST Resource: [v1.projects.locations.dataExchanges.queryTemplates](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates)
 
 Methods
 
@@ -284,7 +284,7 @@ Updates an existing QueryTemplate
 `  POST /v1/{name=projects/*/locations/*/dataExchanges/*/queryTemplates/*}:submit  `  
 Submits a query template for approval.
 
-## REST Resource: [v1.projects.locations.subscriptions](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions)
+## REST Resource: [v1.projects.locations.subscriptions](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions)
 
 Methods
 

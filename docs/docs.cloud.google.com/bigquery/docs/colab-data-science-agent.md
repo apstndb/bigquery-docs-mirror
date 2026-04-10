@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback, to ask questions, or to request to opt out of this Preview feature, contact <vertex-notebooks-previews-external@google.com> or fill out the [Data Science Agent Public Preview Opt-out form](https://forms.gle/KuTAunuLT2YmFAcs8) .
 
@@ -14,11 +14,13 @@ The Data Science Agent (DSA) for Colab Enterprise and BigQuery lets you automate
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,aiplatform.googleapis.com,dataform.googleapis.com,compute.googleapis.com)
     
     For new projects, the BigQuery API is automatically enabled.
 
-If you're new to Colab Enterprise in BigQuery, see the setup steps on the [Create notebooks](/bigquery/docs/create-notebooks#required_permissions) page.
+If you're new to Colab Enterprise in BigQuery, see the setup steps on the [Create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks#required_permissions) page.
 
 ## Limitations
 
@@ -40,15 +42,15 @@ The Data Science Agent helps you with tasks ranging from exploratory data analys
   - **Generating a plan** : Generate and modify a plan to complete a particular task using common tools such as Python, SQL, Serverless for Apache Spark, and BigQuery DataFrames.
   - **Data exploration** : Explore a dataset to understand its structure, identify potential issues like missing values and outliers, and examine the distribution of key variables using Python or SQL.
   - **Data cleaning** : Clean your data. For example, remove data points that are outliers.
-  - **Data wrangling** : Convert categorical features into numerical representations using techniques like one-hot encoding or label encoding or by using BigQuery ML [feature transformation tools](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) . Create new features for analysis.
+  - **Data wrangling** : Convert categorical features into numerical representations using techniques like one-hot encoding or label encoding or by using BigQuery ML [feature transformation tools](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-transform) . Create new features for analysis.
   - **Data analysis** : Analyze the relationships between different variables. Calculate correlations between numerical features and explore distributions of categorical features. Look for patterns and trends in the data.
   - **Data visualization** : Create visualizations such as histograms, box plots, scatter plots, and bar charts that represent the distributions of individual variables and the relationships between them. You can also create visualizations in Python for tables stored in BigQuery.
   - **Feature engineering** : Engineer new features from a cleaned dataset.
   - **Data splitting** : Split an engineered dataset into training, validation, and testing datasets.
-  - **Model training** : Train a model by using the training data in a pandas DataFrame ( `  X_train  ` , `  y_train  ` ), [BigQuery DataFrames](/bigquery/docs/dataframes-ml-ai#train-models) , a [PySpark DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.html) , or by using the BigQuery ML [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) with BigQuery tables.
+  - **Model training** : Train a model by using the training data in a pandas DataFrame ( `  X_train  ` , `  y_train  ` ), [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-ml-ai#train-models) , a [PySpark DataFrame](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.DataFrame.html) , or by using the BigQuery ML [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create) with BigQuery tables.
   - **Model optimization** : Optimize a model by using the validation set. Explore alternative models like `  DecisionTreeRegressor  ` and `  RandomForestRegressor  ` and compare their performance.
-  - **Model evaluation** : Evaluate model performance on a test dataset using a pandas DataFrame, BigQuery DataFrames, or a PySpark DataFrame. You can also assess model quality and compare models by using BigQuery ML [model evaluation functions](/bigquery/docs/evaluate-overview) for models trained using BigQuery ML.
-  - **Model inference** : Perform inference with BigQuery ML trained models, imported models, and remote models using BigQuery ML [inference functions](/bigquery/docs/inference-overview) . You can also use the BigFrames `  model.predict()  ` method or PySpark [transformers](https://spark.apache.org/docs/latest/ml-pipeline.html#transformers) to make predictions.
+  - **Model evaluation** : Evaluate model performance on a test dataset using a pandas DataFrame, BigQuery DataFrames, or a PySpark DataFrame. You can also assess model quality and compare models by using BigQuery ML [model evaluation functions](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) for models trained using BigQuery ML.
+  - **Model inference** : Perform inference with BigQuery ML trained models, imported models, and remote models using BigQuery ML [inference functions](https://docs.cloud.google.com/bigquery/docs/inference-overview) . You can also use the BigFrames `  model.predict()  ` method or PySpark [transformers](https://spark.apache.org/docs/latest/ml-pipeline.html#transformers) to make predictions.
 
 ## Use the Data Science Agent in BigQuery
 
@@ -69,7 +71,7 @@ The following steps show you how to use the Data Science Agent in BigQuery.
       - If you want to use "BigQuery DataFrames", specify the "BigFrames" or "BigQuery DataFrames" keywords.
       - If you want to use PySpark, include the "Apache Spark" or "PySpark" keywords.
     
-    For help, see the [sample prompts](#sample-prompts) .
+    For help, see the [sample prompts](https://docs.cloud.google.com/bigquery/docs/colab-data-science-agent#sample-prompts) .
 
 4.  Examine the results.
 
@@ -78,12 +80,14 @@ The following steps show you how to use the Data Science Agent in BigQuery.
 To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
     
     Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the **+** icon, and then click **Notebook \> Empty notebook** .
 
-3.  Click the **Toggle Gemini in Colab** button to open the chat dialog.
+3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
     
     **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
 
@@ -108,12 +112,14 @@ To analyze a CSV using the Data Science Agent in BigQuery, follow these steps.
 To analyze a BigQuery table, choose one or more tables in the table selector, provide a reference to the table in your prompt, or search for a table by using the `  @  ` symbol.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the BigQuery Studio welcome page, under **Create new** , click **Notebook** .
     
     Alternatively, in the tab bar, click the arrow\_drop\_down drop-down arrow next to the **+** icon, and then click **Notebook \> Empty notebook** .
 
-3.  Click the **Toggle Gemini in Colab** button to open the chat dialog.
+3.  Click the ![](https://docs.cloud.google.com/static/colab/images/icon-gemini.png) **Toggle Gemini in Colab** button to open the chat dialog.
     
     **Note:** You can move the chat dialog into a separate panel outside the notebook by clicking the **Move to panel** icon.
 
@@ -165,7 +171,7 @@ Python code is generated by default unless you use a specific keyword in the pro
   - Group similar customers together to create targeting market campaigns using a KMeans model and BigQuery ML SQL functions. Use three features for clustering. Then visualize the results by creating a series of 2D scatter plots. Use the table `  bigquery-public-data.ml_datasets.census_adult_income  ` .
   - Generate text embeddings in BigQuery ML using the review content in `  bigquery-public-data.imdb.reviews  ` .
 
-For a list of supported models and machine learning tasks, see the [BigQuery ML documentation](/bigquery/docs/bqml-introduction) .
+For a list of supported models and machine learning tasks, see the [BigQuery ML documentation](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
 
 ### DataFrame prompts
 
@@ -183,16 +189,16 @@ For a list of supported models and machine learning tasks, see the [BigQuery ML 
 
 ## Turn off Gemini in BigQuery
 
-To turn off Gemini in BigQuery for a Google Cloud project, an administrator must turn off the Gemini for Google Cloud API. See [Disabling services](/service-usage/docs/enable-disable#disabling) .
+To turn off Gemini in BigQuery for a Google Cloud project, an administrator must turn off the Gemini for Google Cloud API. See [Disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable#disabling) .
 
-To turn off Gemini in BigQuery for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` ) role for that user. See [Revoke a single IAM role](/iam/docs/granting-changing-revoking-access#revoke-single-role) .
+To turn off Gemini in BigQuery for a specific user, an administrator needs to revoke the [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` ) role for that user. See [Revoke a single IAM role](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access#revoke-single-role) .
 
 **Note:** To opt out of using the Data Science Agent Preview without turning off other Gemini features, contact <vertex-notebooks-previews-external@google.com> .
 
 ## Pricing
 
-During Preview, you are charged for running code in the notebook's runtime and for any BigQuery [slots](/bigquery/docs/slots) you used. For more information, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
+During Preview, you are charged for running code in the notebook's runtime and for any BigQuery [slots](https://docs.cloud.google.com/bigquery/docs/slots) you used. For more information, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
 
 ## Supported regions
 
-To view the supported regions for Colab Enterprise's Data Science Agent, see [Locations](/colab/docs/locations) .
+To view the supported regions for Colab Enterprise's Data Science Agent, see [Locations](https://docs.cloud.google.com/colab/docs/locations) .

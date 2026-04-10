@@ -6,17 +6,19 @@ As a BigQuery administrator, you can monitor reservations in your project by vie
 
 You can view the project and reservation slot usage in the following ways:
 
-  - **`  INFORMATION_SCHEMA  ` views.** To retrieve project and reservation usage information, query the [`  INFORMATION_SCHEMA.JOBS*  ` views](/bigquery/docs/information-schema-jobs#examples) .
+  - **`  INFORMATION_SCHEMA  ` views.** To retrieve project and reservation usage information, query the [`  INFORMATION_SCHEMA.JOBS*  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#examples) .
     
-    The [`  reservation_id  `](/bigquery/docs/information-schema-jobs#schema) field in the `  INFORMATION_SCHEMA.JOBS*  ` views contains the reservation name.
+    The [`  reservation_id  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) field in the `  INFORMATION_SCHEMA.JOBS*  ` views contains the reservation name.
 
-  - **Google Cloud console.** The Google Cloud console includes charts that display slot usage. For more information, see [Use administrative resource charts](/bigquery/docs/admin-resource-charts) .
+  - **Google Cloud console.** The Google Cloud console includes charts that display slot usage. For more information, see [Use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
 
-  - **Audit logs.** Use [audit logs](/bigquery/docs/reference/auditlogs) to view metrics about slot usage.
+  - **Audit logs.** Use [audit logs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) to view metrics about slot usage.
 
-  - **The `  Jobs  ` method.** Use the [`  Jobs  ` API method](/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.
+  - **The `  Jobs  ` method.** Use the [`  Jobs  ` API method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) to view metrics about slot usage for a job.
 
-  - **Cloud Monitoring.** You can use [Cloud Monitoring](/bigquery/docs/monitoring-dashboard) to create dashboards to monitor your allocated slots. With a Cloud Monitoring dashboard, you can view your slot usage for each reservation and for each job type, across all projects within the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are monitoring the metrics. For more information about the metrics available for the Cloud Monitoring dashboard, see [Metrics available for visualization](/bigquery/docs/monitoring-dashboard#metrics) .
+  - **Cloud Monitoring.** You can use [Cloud Monitoring](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) to create dashboards to monitor your allocated slots. With a Cloud Monitoring dashboard, you can view your slot usage for each reservation and for each job type, across all projects within the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are monitoring the metrics. For more information about the metrics available for the Cloud Monitoring dashboard, see [Metrics available for visualization](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) .
+    
+    ![Reservations monitoring.](https://docs.cloud.google.com/static/bigquery/images/reservations-monitoring.png)
 
 **Note:** The number of slots in use might appear higher than your reservation slot count because of how BigQuery provisions resources to reservations. You are not charged for slots beyond your reservation slot count.
 
@@ -26,7 +28,7 @@ To view your capacity-based bill in real time, follow these steps:
 
 1.  In the Google Cloud console, go to the **Billing** page.
     
-    .
+    [Go to **Billing**](https://console.cloud.google.com/billing) .
 
 2.  Select the billing account project for which you want to view the bill.
 
@@ -41,13 +43,13 @@ To view your capacity-based bill in real time, follow these steps:
 
 This feature lets you attribute reservation fees back to the specific query usage across any projects that used the reservation. This results in more accurate net costs for each project basis.
 
-All [BigQuery Reservations API](/bigquery/docs/reservations-commitments#enabling-reservations-api) customers have an **"Analysis Slots Attribution"** line item in their Cloud Billing data. This line item is included on the **Billing** page and in the Cloud Billing export.
+All [BigQuery Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) customers have an **"Analysis Slots Attribution"** line item in their Cloud Billing data. This line item is included on the **Billing** page and in the Cloud Billing export.
 
 This line item shows slot hours used per project. It incurs no cost and doesn't affect your invoice totals.
 
 ## Audit logs
 
-Creating, deleting, and updating resources related to [BigQuery reservations](/bigquery/docs/reservations-concepts) are recorded in the project owner's audit logs. For more information, see [Audit log](/bigquery/docs/reference/auditlogs#auditlog_format) .
+Creating, deleting, and updating resources related to [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-concepts) are recorded in the project owner's audit logs. For more information, see [Audit log](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs#auditlog_format) .
 
 ## Monitor autoscaling with information schema
 
@@ -69,7 +71,7 @@ The following script aggregates autoscaling slots per edition.
 
 #### Expand to see the script to calculate autoscale slot seconds per edition.
 
-``` text
+``` notranslate
 SELECT
   edition,
   SUM(s.autoscale_current_slots) AS autoscale_slot_seconds
@@ -90,7 +92,7 @@ The following script aggregates autoscaling slots per reservation.
 
 #### Expand to see the script to calculate autoscale slot seconds per reservation.
 
-``` text
+``` notranslate
 select reservation_id, sum(s.autoscale_current_slots) as autoscale_slot_seconds
 from `region-us.INFORMATION_SCHEMA.RESERVATIONS_TIMELINE` m
 LEFT JOIN m.per_second_details s
@@ -103,7 +105,7 @@ The following script checks the slot usage covered by commitments for a particul
 
 #### Expand to see the script to calculate slot seconds from commitments.
 
-``` text
+``` notranslate
 DECLARE start_time,end_time TIMESTAMP;
 
 DECLARE
@@ -372,7 +374,7 @@ The following script checks the slot usage not covered by commitments for a part
 
 #### Expand to see the script to calculate slot seconds not covered by commitments
 
-``` text
+``` notranslate
 /*
 This script has several parts:
 1. Calculate the baseline and scaled slots for reservations
@@ -816,10 +818,10 @@ Slot usage can occasionally exceed the sum of your baseline plus scaled slots. Y
 
 Monitoring dashboards use sampled data, which might not accurately reflect the precise timing of slot usage within a sampling interval.
 
-For a more accurate analysis of slot usage, query columns related to idle slots, such as `  borrowed_slots  ` and `  lent_slots  ` columns in the [`  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view](/bigquery/docs/information-schema-reservation-timeline#schema) .
+For a more accurate analysis of slot usage, query columns related to idle slots, such as `  borrowed_slots  ` and `  lent_slots  ` columns in the [`  INFORMATION_SCHEMA.RESERVATIONS_TIMELINE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservation-timeline#schema) .
 
 ## What's next
 
-  - Learn about [capacity commitment plans](/bigquery/docs/reservations-workload-management#slot_commitments) .
-  - Learn how to [use administrative resource charts](/bigquery/docs/admin-resource-charts) .
+  - Learn about [capacity commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
+  - Learn how to [use administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts) .
   - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .

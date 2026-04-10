@@ -9,9 +9,7 @@ The following rules apply to all built-in GoogleSQL functions unless explicitly 
 
 ## Named arguments
 
-``` text
-named_argument => value
-```
+    named_argument => value
 
 You can provide parameter arguments by name when calling some functions and procedures. These arguments are called *named arguments* . An argument that isn't named is called a *positional argument* .
 
@@ -25,79 +23,65 @@ You can provide parameter arguments by name when calling some functions and proc
 
 These examples reference a function called `  CountTokensInText  ` , which counts the number of tokens in a paragraph. The function signature looks like this:
 
-``` text
-CountTokensInText(paragraph STRING, tokens ARRAY<STRING>, delimiters STRING)
-```
+    CountTokensInText(paragraph STRING, tokens ARRAY<STRING>, delimiters STRING)
 
 `  CountTokensInText  ` contains three arguments: `  paragraph  ` , `  tokens  ` , and `  delimiters  ` . `  paragraph  ` represents a body of text to analyze, `  tokens  ` represents the tokens to search for in the paragraph, and `  delimiters  ` represents the characters that specify a boundary between tokens in the paragraph.
 
 This is a query that includes `  CountTokensInText  ` without named arguments:
 
-``` text
-SELECT token, count
-FROM CountTokensInText(
-  'Would you prefer softball, baseball, or tennis? There is also swimming.',
-  ['baseball', 'football', 'tennis'],
-  ' .,!?()')
-```
+    SELECT token, count
+    FROM CountTokensInText(
+      'Would you prefer softball, baseball, or tennis? There is also swimming.',
+      ['baseball', 'football', 'tennis'],
+      ' .,!?()')
 
 This is the query with named arguments:
 
-``` text
-SELECT token, count
-FROM CountTokensInText(
-  paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.',
-  tokens => ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()')
-```
+    SELECT token, count
+    FROM CountTokensInText(
+      paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.',
+      tokens => ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()')
 
 If named arguments are used, the order of the arguments doesn't matter. This works:
 
-``` text
-SELECT token, count
-FROM CountTokensInText(
-  tokens => ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()',
-  paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.')
-```
+    SELECT token, count
+    FROM CountTokensInText(
+      tokens => ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()',
+      paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.')
 
 You can mix positional arguments and named arguments, as long as the positional arguments in the function signature come first:
 
-``` text
-SELECT token, count
-FROM CountTokensInText(
-  'Would you prefer softball, baseball, or tennis? There is also swimming.',
-  tokens => ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()')
-```
+    SELECT token, count
+    FROM CountTokensInText(
+      'Would you prefer softball, baseball, or tennis? There is also swimming.',
+      tokens => ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()')
 
 This doesn't work because a positional argument appears after a named argument:
 
-``` text
-SELECT token, count
-FROM CountTokensInText(
-  paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.',
-  ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()')
-```
+    SELECT token, count
+    FROM CountTokensInText(
+      paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.',
+      ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()')
 
 If you want to use `  tokens  ` as a positional argument, any arguments that appear before it in the function signature must also be positional arguments. If you try to use a named argument for `  paragraph  ` and a positional argument for `  tokens  ` , this will not work.
 
-``` text
--- This doesn't work.
-SELECT token, count
-FROM CountTokensInText(
-  ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()',
-  paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.')
-
--- This works.
-SELECT token, count
-FROM CountTokensInText(
-  'Would you prefer softball, baseball, or tennis? There is also swimming.',
-  ['baseball', 'football', 'tennis'],
-  delimiters => ' .,!?()')
-```
+    -- This doesn't work.
+    SELECT token, count
+    FROM CountTokensInText(
+      ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()',
+      paragraph => 'Would you prefer softball, baseball, or tennis? There is also swimming.')
+    
+    -- This works.
+    SELECT token, count
+    FROM CountTokensInText(
+      'Would you prefer softball, baseball, or tennis? There is also swimming.',
+      ['baseball', 'football', 'tennis'],
+      delimiters => ' .,!?()')
 
 ## Chained function calls
 
@@ -105,35 +89,31 @@ Writing nested expressions in GoogleSQL is common, particularly when you're clea
 
 Here's an example of an expression with deep nesting. The nesting makes it difficult to read:
 
-``` text
-SELECT
-  REPLACE(
-    REPLACE(
+    SELECT
       REPLACE(
         REPLACE(
-          REPLACE('one two three four five', 'one', '1'),
-          'two', '2'),
-        'three', '3'),
-      'four', '4'),
-    'five', '5');
-```
+          REPLACE(
+            REPLACE(
+              REPLACE('one two three four five', 'one', '1'),
+              'two', '2'),
+            'three', '3'),
+          'four', '4'),
+        'five', '5');
 
 Here is the same example rewritten using chained function syntax:
 
-``` text
-SELECT
-  ('one two three four five')
-  .REPLACE('one', '1')
-  .REPLACE('two', '2')
-  .REPLACE('three', '3')
-  .REPLACE('four', '4')
-  .REPLACE('five', '5');
-```
+    SELECT
+      ('one two three four five')
+      .REPLACE('one', '1')
+      .REPLACE('two', '2')
+      .REPLACE('three', '3')
+      .REPLACE('four', '4')
+      .REPLACE('five', '5');
 
 *Chained function calls* provide a syntax for simplifying nested function calls. Chained function calls have the following properties:
 
   - Chained function calls consist of functions connected together with a `  .  ` character.
-  - Each function in the chain must meet certain [requirements](#chained-function-reqs) .
+  - Each function in the chain must meet certain [requirements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#chained-function-reqs) .
   - Each function in the chain uses the output from the previous function as its first argument.
   - If the chain starts from a column name (or other identifier), that initial argument must be surrounded by `  ()  ` characters, for example: `  (x).UPPER()  ` . Parentheses aren't required on the input for other cases.
   - For functions with multi-part names, like `  SAFE.SQRT  ` , the function name must be parenthesized. For example, `  (x).(SAFE.SQRT)()  ` .
@@ -147,7 +127,7 @@ You can write function calls in chained call syntax if the functions meet these 
   - The function must use standard function call syntax, using comma-separated arguments. Function-like syntaxes that include special-case keywords, such as `  CAST(value AS type)  ` , aren't included.
   - The function must have at least one argument. The first argument becomes the chained input, and must meet the following requirements:
       - It must be an expression. It can't be a table, connection, model, descriptor, or other non-expression argument type.
-      - It must be a positional argument. It can't be a [named argument](#named-arguments) ( `  name => value  ` ).
+      - It must be a positional argument. It can't be a [named argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-reference#named-arguments) ( `  name => value  ` ).
       - It can't have an `  AS  ` alias (as in `  value AS alias  ` ).
 
 There are a few additional special cases. Chained function calls are allowed for these functions:
@@ -163,60 +143,52 @@ Chained function calls aren't allowed for these functions:
 
 The following examples show the chained function call equivalent of some standard syntax calls:
 
-``` text
-UPPER(x)
-(x).UPPER()  # Chained function call equivalent; the x must be within ()
-
-SUBSTR(x, 1, 4)
-(x).SUBSTR(1, 4)  # Chained function call equivalent
-
-STRPOS(x, 'pattern string')
-(x).STRPOS('pattern string')  # Chained function call equivalent
-
-FUNC(x, y, named_argument=>z)  # Some function that meets the chained function call requirements
-(x).FUNC(y, named_argument=>z)  # Chained function call equivalent
-
-ARRAY_CONCAT(array1, array2)
-(array1).ARRAY_CONCAT(array2)  # Chained function call equivalent
-
-SELECT SAFE.LEFT(x, count) AS result;      # Multi-part function name
-SELECT (x).(SAFE.LEFT)(count) AS result;   # Chained function call equivalent
-```
+    UPPER(x)
+    (x).UPPER()  # Chained function call equivalent; the x must be within ()
+    
+    SUBSTR(x, 1, 4)
+    (x).SUBSTR(1, 4)  # Chained function call equivalent
+    
+    STRPOS(x, 'pattern string')
+    (x).STRPOS('pattern string')  # Chained function call equivalent
+    
+    FUNC(x, y, named_argument=>z)  # Some function that meets the chained function call requirements
+    (x).FUNC(y, named_argument=>z)  # Chained function call equivalent
+    
+    ARRAY_CONCAT(array1, array2)
+    (array1).ARRAY_CONCAT(array2)  # Chained function call equivalent
+    
+    SELECT SAFE.LEFT(x, count) AS result;      # Multi-part function name
+    SELECT (x).(SAFE.LEFT)(count) AS result;   # Chained function call equivalent
 
 Here are chained function call examples with multiple function calls:
 
-``` text
-SELECT "Two birds and one mouse"
-  .REPLACE("bird", "dog")
-  .REPLACE("mouse", "cat") AS result;
-
-/*----------------------+
- |      result          |
- +----------------------+
- | Two dogs and one cat |
- +----------------------*/
-```
+    SELECT "Two birds and one mouse"
+      .REPLACE("bird", "dog")
+      .REPLACE("mouse", "cat") AS result;
+    
+    /*----------------------+
+     |      result          |
+     +----------------------+
+     | Two dogs and one cat |
+     +----------------------*/
 
 The following examples result in errors because the function being called doesn't meet the necessary requirements.
 
-``` text
-FUNC(named_argument=>x).  # Some function
-(x).FUNC()  # Error: The first argument can't be a named argument.
-
-CAST(x AS INT64)
-(x).CAST(AS INT64)  # Error: CAST syntax isn't supported in chained function calls.
-
-GROUPING(x)
-(x).GROUPING()  # Error: The argument isn't an expression.
-```
+    FUNC(named_argument=>x).  # Some function
+    (x).FUNC()  # Error: The first argument can't be a named argument.
+    
+    CAST(x AS INT64)
+    (x).CAST(AS INT64)  # Error: CAST syntax isn't supported in chained function calls.
+    
+    GROUPING(x)
+    (x).GROUPING()  # Error: The argument isn't an expression.
 
 ## SAFE. prefix
 
 **Syntax:**
 
-``` text
-SAFE.function_name()
-```
+    SAFE.function_name()
 
 **Description**
 
@@ -224,39 +196,35 @@ If you begin a function with the `  SAFE.  ` prefix, it will return `  NULL  ` i
 
 **Exclusions**
 
-  - [Operators](/bigquery/docs/reference/standard-sql/operators) , such as `  +  ` and `  =  ` , don't support the `  SAFE.  ` prefix. To prevent errors from a division operation, use [SAFE\_DIVIDE](/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide) .
+  - [Operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators) , such as `  +  ` and `  =  ` , don't support the `  SAFE.  ` prefix. To prevent errors from a division operation, use [SAFE\_DIVIDE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#safe_divide) .
   - Some operators, such as `  IN  ` , `  ARRAY  ` , and `  UNNEST  ` , resemble functions but don't support the `  SAFE.  ` prefix.
-  - The `  CAST  ` and `  EXTRACT  ` functions don't support the `  SAFE.  ` prefix. To prevent errors from casting, use [SAFE\_CAST](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
+  - The `  CAST  ` and `  EXTRACT  ` functions don't support the `  SAFE.  ` prefix. To prevent errors from casting, use [SAFE\_CAST](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) .
 
 **Example**
 
 In the following example, the first use of the `  SUBSTR  ` function would normally return an error, because the function doesn't support length arguments with negative values. However, the `  SAFE.  ` prefix causes the function to return `  NULL  ` instead. The second use of the `  SUBSTR  ` function provides the expected output: the `  SAFE.  ` prefix has no effect.
 
-``` text
-SELECT SAFE.SUBSTR('foo', 0, -2) AS safe_output UNION ALL
-SELECT SAFE.SUBSTR('bar', 0, 2) AS safe_output;
-
-/*-------------+
- | safe_output |
- +-------------+
- | NULL        |
- | ba          |
- +-------------*/
-```
+    SELECT SAFE.SUBSTR('foo', 0, -2) AS safe_output UNION ALL
+    SELECT SAFE.SUBSTR('bar', 0, 2) AS safe_output;
+    
+    /*-------------+
+     | safe_output |
+     +-------------+
+     | NULL        |
+     | ba          |
+     +-------------*/
 
 **Supported functions**
 
-BigQuery supports the use of the `  SAFE.  ` prefix with most scalar functions that can raise errors, including [STRING functions](/bigquery/docs/reference/standard-sql/string_functions) , [math functions](/bigquery/docs/reference/standard-sql/mathematical_functions) , [DATE functions](/bigquery/docs/reference/standard-sql/date_functions) , [DATETIME functions](/bigquery/docs/reference/standard-sql/datetime_functions) , [TIMESTAMP functions](/bigquery/docs/reference/standard-sql/timestamp_functions) , and [JSON functions](/bigquery/docs/reference/standard-sql/json_functions) . BigQuery does not support the use of the `  SAFE.  ` prefix with [aggregate](/bigquery/docs/reference/standard-sql/aggregate_functions) , [window](/bigquery/docs/reference/standard-sql/window-function-calls) , or [user-defined functions](/bigquery/docs/user-defined-functions) .
+BigQuery supports the use of the `  SAFE.  ` prefix with most scalar functions that can raise errors, including [STRING functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions) , [math functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions) , [DATE functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) , [DATETIME functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions) , [TIMESTAMP functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) , and [JSON functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/json_functions) . BigQuery does not support the use of the `  SAFE.  ` prefix with [aggregate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) , [window](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) , or [user-defined functions](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
 
 ## Calling persistent user-defined functions (UDFs)
 
-After [creating a persistent UDF](/bigquery/docs/data-definition-language#create_function_statement) , you can call it as you would any other function, prepended with the name of the dataset in which it is defined as a prefix.
+After [creating a persistent UDF](https://docs.cloud.google.com/bigquery/docs/data-definition-language#create_function_statement) , you can call it as you would any other function, prepended with the name of the dataset in which it is defined as a prefix.
 
 **Syntax**
 
-``` text
-[`project_name`].dataset_name.function_name([parameter_value[, ...]])
-```
+    [`project_name`].dataset_name.function_name([parameter_value[, ...]])
 
 To call a UDF in a project other than the project that you are using to run the query, `  project_name  ` is required.
 
@@ -264,17 +232,13 @@ To call a UDF in a project other than the project that you are using to run the 
 
 The following example creates a UDF named `  multiply_by_three  ` and calls it from the same project.
 
-``` text
-CREATE FUNCTION my_dataset.multiply_by_three(x INT64) AS (x * 3);
-
-SELECT my_dataset.multiply_by_three(5) AS result; -- returns 15
-```
+    CREATE FUNCTION my_dataset.multiply_by_three(x INT64) AS (x * 3);
+    
+    SELECT my_dataset.multiply_by_three(5) AS result; -- returns 15
 
 The following example calls a persistent UDF from a different project.
 
-``` text
-CREATE `other_project`.other_dataset.other_function(x INT64, y INT64)
-  AS (x * y * 2);
-
-SELECT `other_project`.other_dataset.other_function(3, 4); --returns 24
-```
+    CREATE `other_project`.other_dataset.other_function(x INT64, y INT64)
+      AS (x * y * 2);
+    
+    SELECT `other_project`.other_dataset.other_function(3, 4); --returns 24

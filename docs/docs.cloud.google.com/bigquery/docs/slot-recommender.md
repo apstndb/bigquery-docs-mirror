@@ -1,19 +1,23 @@
 # View edition slot recommendations
 
-The BigQuery slot recommender creates recommendations for [edition](/bigquery/docs/editions-intro) or on-demand workloads. The recommender analyzes historical slot usage for query jobs and calculates the cost-optimal settings for edition commitment slots and [autoscaling](/bigquery/docs/slots-autoscaling-intro) slots while maintaining similar performance. The slot recommender can also recommend a maximum reservation size that can improve performance.
+The BigQuery slot recommender creates recommendations for [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) or on-demand workloads. The recommender analyzes historical slot usage for query jobs and calculates the cost-optimal settings for edition commitment slots and [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) slots while maintaining similar performance. The slot recommender can also recommend a maximum reservation size that can improve performance.
 
 You can use the slot recommender for both reservations billing and on-demand billing:
 
   - For reservations billing, you can get a cost-optimized recommendation for Enterprise or Enterprise Plus edition workloads and performance-based recommendations for your reservations.
   - For on-demand billing, you can get cost-optimized recommendations for on-demand workloads across the organization, for a specific project, or a group of projects if you were to convert one or more projects to the Enterprise edition.
 
-For more information about the recommender service, see the [Recommender overview](/recommender/docs/overview) .
+For more information about the recommender service, see the [Recommender overview](https://docs.cloud.google.com/recommender/docs/overview) .
 
 ## Cost-optimized recommendations
 
-The slot recommender estimates your autoscaling usage based on slot usage over the past 30 days. For more information about slots autoscaling, see [Introduction to slots autoscaling](/bigquery/docs/slots-autoscaling-intro) . The recommender can generate multiple commitment options and calculate the total cost for each option. The recommender can also recommend options with the lowest total cost by using custom pricing. The recommended commitment and autoscale slots are meant to cover P99 slot usage of the entire 30-day observation window.
+The slot recommender estimates your autoscaling usage based on slot usage over the past 30 days. For more information about slots autoscaling, see [Introduction to slots autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) . The recommender can generate multiple commitment options and calculate the total cost for each option. The recommender can also recommend options with the lowest total cost by using custom pricing. The recommended commitment and autoscale slots are meant to cover P99 slot usage of the entire 30-day observation window.
 
 The slot recommender offers recommendations for different pricing types, including pay as you go (no commitments), 1-year and 3-year commitments. It displays the monthly cost for each option based on custom pricing.
+
+![Slot usage chart in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender-usage-chart.png)
+
+![Slot recommendations in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender.png)
 
 The recommendation includes the following details:
 
@@ -66,19 +70,23 @@ Each of the following predefined IAM roles includes these permissions:
 
 For edition workloads, you need the previously listed permissions at the billing account associated with the administrator project. For project-level on-demand workloads, you need the permissions at the billing account associated with the project or at the organization level for organization-level recommendations.
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Performance-improving recommendation
 
-When you select a specific reservation workload, the slot recommender suggests the maximum reservation size that can enhance job performance. The slot estimator then analyzes the [slot modeling](/bigquery/docs/slot-estimator#model_slot_performance) data and finds the minimum incremental value for the maximum reservation size that is capable of elevating job performance by at least 5%. If your current maximum reservation size meets your historical needs, then no recommendation is made.
+When you select a specific reservation workload, the slot recommender suggests the maximum reservation size that can enhance job performance. The slot estimator then analyzes the [slot modeling](https://docs.cloud.google.com/bigquery/docs/slot-estimator#model_slot_performance) data and finds the minimum incremental value for the maximum reservation size that is capable of elevating job performance by at least 5%. If your current maximum reservation size meets your historical needs, then no recommendation is made.
+
+![Slot recommender reservation recommendation in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender-reservation-recommendation.png)
 
 **Note:** Recommendations are based on historical data. Job performance can vary based on actual use.
 
 To implement a recommendation, click **Apply** to be redirected to the page where you can update the reservation.
 
+![Slot recommender reservation recommendation edit reservation in the Google Cloud console.](https://docs.cloud.google.com/static/bigquery/images/slot-recommender-edit-reservation.png)
+
 ## Before you begin
 
-Before you can view the recommendations, you must [enable the Recommender API](/recommender/docs/enabling) . To view the recommendations within the Google Cloud console, you must also [enable the Reservations API](/bigquery/docs/reservations-commitments#enabling-reservations-api) .
+Before you can view the recommendations, you must [enable the Recommender API](https://docs.cloud.google.com/recommender/docs/enabling) . To view the recommendations within the Google Cloud console, you must also [enable the Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) .
 
 ### Required permissions
 
@@ -92,17 +100,19 @@ To apply the recommended updates to the reservation, you must also have the foll
 
   - `  bigquery.reservations.update  `
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Pricing
 
-This recommender is displayed within the context of [slot estimator](/bigquery/docs/slot-estimator) . You can use the recommendations at no charge.
+This recommender is displayed within the context of [slot estimator](https://docs.cloud.google.com/bigquery/docs/slot-estimator) . You can use the recommendations at no charge.
 
 ## View slot recommendations
 
 To view slot recommendations using the Google Cloud console, perform the following steps.
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  For edition workloads recommendations, select the administrator project. For on-demand workloads recommendations, select any project within your organization that meets the predefined requirements.
 

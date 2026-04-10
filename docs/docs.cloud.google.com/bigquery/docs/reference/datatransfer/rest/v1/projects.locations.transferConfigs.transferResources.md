@@ -1,24 +1,24 @@
-  - [Resource: TransferResource](#TransferResource)
-      - [JSON representation](#TransferResource.SCHEMA_REPRESENTATION)
-      - [ResourceType](#TransferResource.ResourceType)
-      - [ResourceDestination](#TransferResource.ResourceDestination)
-      - [TransferRunBrief](#TransferResource.TransferRunBrief)
-          - [JSON representation](#TransferResource.TransferRunBrief.SCHEMA_REPRESENTATION)
-      - [TransferResourceStatusDetail](#TransferResource.TransferResourceStatusDetail)
-          - [JSON representation](#TransferResource.TransferResourceStatusDetail.SCHEMA_REPRESENTATION)
-      - [ResourceTransferState](#TransferResource.ResourceTransferState)
-      - [TransferStatusSummary](#TransferResource.TransferStatusSummary)
-          - [JSON representation](#TransferResource.TransferStatusSummary.SCHEMA_REPRESENTATION)
-      - [TransferStatusMetric](#TransferResource.TransferStatusMetric)
-          - [JSON representation](#TransferResource.TransferStatusMetric.SCHEMA_REPRESENTATION)
-      - [TransferStatusUnit](#TransferResource.TransferStatusUnit)
-      - [HierarchyDetail](#TransferResource.HierarchyDetail)
-          - [JSON representation](#TransferResource.HierarchyDetail.SCHEMA_REPRESENTATION)
-      - [TableDetail](#TransferResource.TableDetail)
-          - [JSON representation](#TransferResource.TableDetail.SCHEMA_REPRESENTATION)
-      - [PartitionDetail](#TransferResource.PartitionDetail)
-          - [JSON representation](#TransferResource.PartitionDetail.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: TransferResource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.SCHEMA_REPRESENTATION)
+      - [ResourceType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.ResourceType)
+      - [ResourceDestination](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.ResourceDestination)
+      - [TransferRunBrief](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferRunBrief)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferRunBrief.SCHEMA_REPRESENTATION)
+      - [TransferResourceStatusDetail](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferResourceStatusDetail)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferResourceStatusDetail.SCHEMA_REPRESENTATION)
+      - [ResourceTransferState](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.ResourceTransferState)
+      - [TransferStatusSummary](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferStatusSummary)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferStatusSummary.SCHEMA_REPRESENTATION)
+      - [TransferStatusMetric](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferStatusMetric)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferStatusMetric.SCHEMA_REPRESENTATION)
+      - [TransferStatusUnit](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TransferStatusUnit)
+      - [HierarchyDetail](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.HierarchyDetail)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.HierarchyDetail.SCHEMA_REPRESENTATION)
+      - [TableDetail](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TableDetail)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.TableDetail.SCHEMA_REPRESENTATION)
+      - [PartitionDetail](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.PartitionDetail)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#TransferResource.PartitionDetail.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources#METHODS_SUMMARY)
 
 ## Resource: TransferResource
 
@@ -35,7 +35,7 @@ Resource (table/partition) that is being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;type&quot;: enum (ResourceType),
   &quot;destination&quot;: enum (ResourceDestination),
@@ -170,7 +170,7 @@ Basic information about a transfer run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;run&quot;: string,
   &quot;startTime&quot;: string
 }</code></pre></td>
@@ -207,7 +207,7 @@ Status details of the resource being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;state&quot;: enum (ResourceTransferState),
   &quot;summary&quot;: {
     object (TransferStatusSummary)
@@ -292,7 +292,7 @@ Status summary of the resource being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;metrics&quot;: [
     {
       object (TransferStatusMetric)
@@ -333,7 +333,7 @@ Metrics for tracking the transfer status.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;completed&quot;: string,
   &quot;pending&quot;: string,
   &quot;failed&quot;: string,
@@ -409,7 +409,7 @@ Details about the hierarchy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field detail can be only one of the following:
   &quot;tableDetail&quot;: {
@@ -455,7 +455,7 @@ Table details related to hierarchy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;partitionCount&quot;: string
 }</code></pre></td>
 </tr>
@@ -485,7 +485,7 @@ Partition details related to hierarchy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;table&quot;: string
 }</code></pre></td>
 </tr>

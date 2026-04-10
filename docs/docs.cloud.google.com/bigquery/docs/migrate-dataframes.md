@@ -13,9 +13,9 @@ To avoid breaking changes, pin to a specific version of BigQuery DataFrames in y
 
 ## Use the `     allow_large_results    ` option
 
-BigQuery has a [maximum response size limit](/bigquery/quotas#query_jobs) for query jobs. Starting in BigQuery DataFrames version 2.0, BigQuery DataFrames enforces this limit by default in methods that return results to the client, such as `  peek()  ` , `  to_pandas()  ` , and `  to_pandas_batches()  ` . If your job returns large results, you can set `  allow_large_results  ` to `  True  ` in your `  BigQueryOptions  ` object to avoid breaking changes. This option is set to `  False  ` by default in BigQuery DataFrames version 2.0.
+BigQuery has a [maximum response size limit](https://docs.cloud.google.com/bigquery/quotas#query_jobs) for query jobs. Starting in BigQuery DataFrames version 2.0, BigQuery DataFrames enforces this limit by default in methods that return results to the client, such as `  peek()  ` , `  to_pandas()  ` , and `  to_pandas_batches()  ` . If your job returns large results, you can set `  allow_large_results  ` to `  True  ` in your `  BigQueryOptions  ` object to avoid breaking changes. This option is set to `  False  ` by default in BigQuery DataFrames version 2.0.
 
-``` text
+``` notranslate
 import bigframes.pandas as bpd
 
 bpd.options.bigquery.allow_large_results = True
@@ -23,7 +23,7 @@ bpd.options.bigquery.allow_large_results = True
 
 You can override the `  allow_large_results  ` option by using the `  allow_large_results  ` parameter in `  to_pandas()  ` and other methods. For example:
 
-``` text
+``` notranslate
 bf_df = bpd.read_gbq(query)
 # ... other operations on bf_df ...
 pandas_df = bf_df.to_pandas(allow_large_results=True)
@@ -53,7 +53,7 @@ To prevent passing values to an unintended parameter, BigQuery DataFrames versio
 
 When using these parameters, supply the parameter name. For example:
 
-``` text
+``` notranslate
 @remote_function(
   name="my_remote_function",
   ...
@@ -66,12 +66,12 @@ def my_remote_function(parameter: int) -> str:
 
 As of version 2.0, BigQuery DataFrames no longer uses the Compute Engine service account by default for the Cloud Run functions it deploys. To limit the permissions of the function that you deploy, do the following:
 
-1.  [Create a service account](/iam/docs/service-accounts-create) with minimal permissions.
+1.  [Create a service account](https://docs.cloud.google.com/iam/docs/service-accounts-create) with minimal permissions.
 2.  Supply the service account email to the `  cloud_function_service_account  ` parameter of the `  @remote_function  ` decorator.
 
 For example:
 
-``` text
+``` notranslate
 @remote_function(
   cloud_function_service_account="my-service-account@my-project.iam.gserviceaccount.com",
   ...
@@ -82,7 +82,7 @@ def my_remote_function(parameter: int) -> str:
 
 If you would like to use the Compute Engine service account, you can set the `  cloud_function_service_account  ` parameter of the `  @remote_function  ` decorator to `  "default"  ` . For example:
 
-``` text
+``` notranslate
 # This usage is discouraged. Use only if you have a specific reason to use the
 # default Compute Engine service account.
 @remote_function(cloud_function_service_account="default", ...)
@@ -92,9 +92,9 @@ def my_remote_function(parameter: int) -> str:
 
 ### Set ingress settings
 
-As of version 2.0, BigQuery DataFrames sets the [ingress settings of the Cloud Run functions](/functions/docs/networking/network-settings#ingress_settings) it deploys to `  "internal-only"  ` . Previously, the ingress settings were set to `  "all"  ` by default. You can change the ingress settings by setting the `  cloud_function_ingress_settings  ` parameter of the `  @remote_function  ` decorator. For example:
+As of version 2.0, BigQuery DataFrames sets the [ingress settings of the Cloud Run functions](https://docs.cloud.google.com/functions/docs/networking/network-settings#ingress_settings) it deploys to `  "internal-only"  ` . Previously, the ingress settings were set to `  "all"  ` by default. You can change the ingress settings by setting the `  cloud_function_ingress_settings  ` parameter of the `  @remote_function  ` decorator. For example:
 
-``` text
+``` notranslate
 @remote_function(cloud_function_ingress_settings="internal-and-gclb", ...)
 def my_remote_function(parameter: int) -> str:
   return str(parameter)
@@ -102,9 +102,9 @@ def my_remote_function(parameter: int) -> str:
 
 ## Use custom endpoints
 
-In BigQuery DataFrames versions earlier than 2.0, if a region didn't support [regional service endpoints](/vpc/docs/regional-service-endpoints#bigquery) and `  bigframes.pandas.options.bigquery.use_regional_endpoints = True  ` , then BigQuery DataFrames would fall back to [locational endpoints](/storage/docs/locational-endpoints) . Version 2.0 of BigQuery DataFrames removes this fallback behavior. To connect to locational endpoints in version 2.0, set the `  bigframes.pandas.options.bigquery.client_endpoints_override  ` option. For example:
+In BigQuery DataFrames versions earlier than 2.0, if a region didn't support [regional service endpoints](https://docs.cloud.google.com/vpc/docs/regional-service-endpoints#bigquery) and `  bigframes.pandas.options.bigquery.use_regional_endpoints = True  ` , then BigQuery DataFrames would fall back to [locational endpoints](https://docs.cloud.google.com/storage/docs/locational-endpoints) . Version 2.0 of BigQuery DataFrames removes this fallback behavior. To connect to locational endpoints in version 2.0, set the `  bigframes.pandas.options.bigquery.client_endpoints_override  ` option. For example:
 
-``` text
+``` notranslate
 import bigframes.pandas as bpd
 
 bpd.options.bigquery.client_endpoints_override = {
@@ -120,7 +120,7 @@ Replace LOCATION with the name of the BigQuery location that you want to connect
 
 In BigQuery DataFrames version 2.0, the default `  model_name  ` for `  GeminiTextGenerator  ` has been updated to `  "gemini-2.0-flash-001"  ` . It is recommended that you supply a `  model_name  ` directly to avoid breakages if the default model changes in the future.
 
-``` text
+``` notranslate
 import bigframes.ml.llm
 
 model = bigframes.ml.llm.GeminiTextGenerator(model_name="gemini-2.0-flash-001")
@@ -128,8 +128,8 @@ model = bigframes.ml.llm.GeminiTextGenerator(model_name="gemini-2.0-flash-001")
 
 ## What's next
 
-  - Learn how to [visualize graphs using BigQuery DataFrames](/bigquery/docs/dataframes-visualizations) .
-  - Learn how to [generate BigQuery DataFrames code with Gemini](/bigquery/docs/write-sql-gemini#dataframe) .
+  - Learn how to [visualize graphs using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
+  - Learn how to [generate BigQuery DataFrames code with Gemini](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini#dataframe) .
   - Learn how to [analyze package downloads from PyPI with BigQuery DataFrames](https://github.com/googleapis/python-bigquery-dataframes/blob/main/notebooks/dataframes/pypi.ipynb) .
   - View BigQuery DataFrames [source code](https://github.com/googleapis/python-bigquery-dataframes) , [sample notebooks](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks) , and [samples](https://github.com/googleapis/python-bigquery-dataframes/tree/main/samples/snippets) on GitHub.
   - Explore the [BigQuery DataFrames API reference](https://dataframes.bigquery.dev/reference/index.html) .

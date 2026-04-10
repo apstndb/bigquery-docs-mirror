@@ -1,10 +1,10 @@
 # Create table clones
 
-This document describes how to copy a table to a [table clone](/bigquery/docs/table-clones-intro) by using a [`  CREATE TABLE CLONE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) SQL statement, a [`  bq cp  `](/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or a [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) API call. This document is intended for users who are familiar with [table clones](/bigquery/docs/table-clones-intro) .
+This document describes how to copy a table to a [table clone](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) by using a [`  CREATE TABLE CLONE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) SQL statement, a [`  bq cp  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command, or a [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API call. This document is intended for users who are familiar with [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) .
 
 ## Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) that you need to create a table clone, and the [predefined IAM roles](/bigquery/docs/access-control#bigquery) that grant those permissions.
+This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need to create a table clone, and the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions.
 
 ### Permissions
 
@@ -80,13 +80,15 @@ Use GoogleSQL, the bq command-line tool, or the BigQuery API to create a table c
 
 ### SQL
 
-To clone a table, use the [CREATE TABLE CLONE](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) statement.
+To clone a table, use the [CREATE TABLE CLONE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_clone_statement) statement.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE
     myproject.myDataset_backup.myTableClone
     CLONE myproject.myDataset.myTable;
@@ -94,7 +96,7 @@ To clone a table, use the [CREATE TABLE CLONE](/bigquery/docs/reference/standard
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 Replace the following:
 
@@ -104,9 +106,11 @@ Replace the following:
 
 ### bq
 
-Use a [`  bq cp  `](/bigquery/docs/reference/bq-cli-reference#bq_cp) command with the `  --clone  ` flag:
+Use a [`  bq cp  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_cp) command with the `  --clone  ` flag:
 
-``` text
+[Go to Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
+
+``` notranslate
 bq cp --clone --no_clobber project1:myDataset.myTable PROJECT:DATASET.CLONE_NAME
 ```
 
@@ -120,13 +124,13 @@ The `  --no_clobber  ` flag is required.
 
 If you are creating a clone in the same project as the base table, you can skip specifying a project, as shown following:
 
-``` text
+``` notranslate
 bq cp --clone --no_clobber myDataset.myTable DATASET.CLONE_NAME
 ```
 
 ### API
 
-Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) method with the `  operationType  ` field set to `  CLONE  ` :
+Call the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) method with the `  operationType  ` field set to `  CLONE  ` :
 
 <table>
 <colgroup>
@@ -146,7 +150,7 @@ Call the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) metho
 </tr>
 <tr class="even">
 <td>Request body</td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
+<td><pre class="notranslate" dir="ltr" data-is-upgraded="" data-syntax="JSON"><code>{
   &quot;configuration&quot;: {
     &quot;copy&quot;: {
       &quot;sourceTables&quot;: [
@@ -180,15 +184,15 @@ Replace the following:
 
 When you create a table clone, access to the table clone is set as follows:
 
-  - [Row-level access policies](/bigquery/docs/row-level-security-intro) are copied from the base table to the table clone.
+  - [Row-level access policies](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) are copied from the base table to the table clone.
 
-  - [Column-level access policies](/bigquery/docs/column-level-security-intro) are copied from the base table to the table clone.
+  - [Column-level access policies](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) are copied from the base table to the table clone.
 
-  - [Table-level access](/bigquery/docs/table-access-controls-intro) is determined as follows:
+  - [Table-level access](https://docs.cloud.google.com/bigquery/docs/table-access-controls-intro) is determined as follows:
     
-      - If the table clone overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](/bigquery/docs/tags) aren't copied from the base table.
-      - If the table clone is a new resource, then the table-level access for the table clone is determined by the access policies of the dataset in which the table clone is created. Additionally, [tags](/bigquery/docs/tags) are copied from the base table to the table clone.
+      - If the table clone overwrites an existing table, then the table-level access for the existing table is maintained. [Tags](https://docs.cloud.google.com/bigquery/docs/tags) aren't copied from the base table.
+      - If the table clone is a new resource, then the table-level access for the table clone is determined by the access policies of the dataset in which the table clone is created. Additionally, [tags](https://docs.cloud.google.com/bigquery/docs/tags) are copied from the base table to the table clone.
 
 ## What's next
 
-  - After you create a table clone, you can use it like you use standard tables. For more information, see [Manage tables](/bigquery/docs/managing-tables) .
+  - After you create a table clone, you can use it like you use standard tables. For more information, see [Manage tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .

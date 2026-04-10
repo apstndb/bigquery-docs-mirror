@@ -1,12 +1,12 @@
 # Query Bigtable data
 
-This document describes how to use BigQuery to query data stored in a [Bigtable external table](/bigquery/docs/create-bigtable-external-table) . For information on how to query data directly from Bigtable, see [GoogleSQL for Bigtable overview](/bigtable/docs/googlesql-overview) .
+This document describes how to use BigQuery to query data stored in a [Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) . For information on how to query data directly from Bigtable, see [GoogleSQL for Bigtable overview](https://docs.cloud.google.com/bigtable/docs/googlesql-overview) .
 
-[Bigtable](/bigtable/docs) is Google's sparsely populated NoSQL database that can scale to billions of rows, thousands of columns, and petabytes of data. For information on the Bigtable data model, see [Storage model](/bigtable/docs/overview#storage-model) .
+[Bigtable](https://docs.cloud.google.com/bigtable/docs) is Google's sparsely populated NoSQL database that can scale to billions of rows, thousands of columns, and petabytes of data. For information on the Bigtable data model, see [Storage model](https://docs.cloud.google.com/bigtable/docs/overview#storage-model) .
 
 ## Query permanent external tables
 
-Before you begin, you or an administrator in your organization must create an external table for you to use. For details and required permissions, see [Create a BigQuery external table](/bigquery/docs/create-bigtable-external-table) .
+Before you begin, you or an administrator in your organization must create an external table for you to use. For details and required permissions, see [Create a BigQuery external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
 
 ### Required roles
 
@@ -16,22 +16,22 @@ To query Bigtable external tables, ensure you have the following roles.
   - BigQuery User ( `  roles/bigquery.user  ` )
   - Bigtable Reader ( `  roles/bigtable.reader  ` )
 
-Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](/iam/docs/viewing-grantable-roles) .
+Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
 To see the exact BigQuery permissions that are required to query external tables, expand the **Required permissions** section:
 
 #### Required permissions
 
   - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](/bigquery/docs/write-api-streaming) )
+  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
   - `  bigquery.tables.get  `
   - `  bigquery.tables.getData  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Query the table
 
-You can run a query against a permanent external Bigtable table exactly as if it were a [standard BigQuery table](/bigquery/docs/tables-intro#standard-tables) , subject to the [limitations](/bigquery/docs/external-tables#limitations) on external data sources. For more information, see [Run interactive and batch queries](/bigquery/docs/running-queries) .
+You can run a query against a permanent external Bigtable table exactly as if it were a [standard BigQuery table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) , subject to the [limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) on external data sources. For more information, see [Run interactive and batch queries](https://docs.cloud.google.com/bigquery/docs/running-queries) .
 
 ## Query temporary external tables
 
@@ -39,9 +39,9 @@ Querying an external data source using a temporary table is useful for one-time,
 
 To query an external data source without creating a permanent table, you provide a table definition for the temporary table, and then use that table definition in a command or call to query the temporary table. You can provide the table definition in any of the following ways:
 
-  - A [table definition file](/bigquery/external-table-definition)
+  - A [table definition file](https://docs.cloud.google.com/bigquery/external-table-definition)
   - An inline schema definition
-  - A [JSON schema file](/bigquery/docs/schemas#specifying_a_json_schema_file)
+  - A [JSON schema file](https://docs.cloud.google.com/bigquery/docs/schemas#specifying_a_json_schema_file)
 
 The table definition file or supplied schema is used to create the temporary external table, and the query runs against the temporary external table.
 
@@ -60,24 +60,24 @@ To query Bigtable temporary external tables, ensure you have the following roles
   - BigQuery User ( `  roles/bigquery.user  ` )
   - Bigtable Admin ( `  roles/bigtable.admin  ` )
 
-Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](/iam/docs/viewing-grantable-roles) .
+Depending on your permissions, you can grant these roles to yourself or ask your administrator to grant them to you. For more information about granting roles, see [Viewing the grantable roles on resources](https://docs.cloud.google.com/iam/docs/viewing-grantable-roles) .
 
 To see the exact BigQuery permissions that are required to query external tables, expand the **Required permissions** section:
 
 #### Required permissions
 
   - `  bigquery.jobs.create  `
-  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](/bigquery/docs/write-api-streaming) )
+  - `  bigquery.readsessions.create  ` (Only required if you are [streaming data with the BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api-streaming) )
   - `  bigquery.tables.get  `
   - `  bigquery.tables.getData  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Create and query the table
 
 To query Bigtable data using a temporary external table, you:
 
-  - Create a [table definition file](/bigquery/docs/external-table-definition#tabledef-bigtable)
+  - Create a [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable)
   - Submit both a query and a table definition file
 
 Creating and querying a temporary external table is supported by the bq command-line tool and the API.
@@ -86,9 +86,9 @@ Creating and querying a temporary external table is supported by the bq command-
 
 To query a temporary table using a table definition file, enter the `  bq query  ` command with the `  --external_table_definition  ` flag.
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](/bigquery/docs/locations) .
+(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/locations) .
 
-``` text
+``` notranslate
 bq --location=LOCATION query \
 --use_legacy_sql=false \
 --external_table_definition=TABLE::DEFINITION_FILE \
@@ -97,137 +97,133 @@ bq --location=LOCATION query \
 
 Replace the following:
 
-  - `  LOCATION  ` : the name of your [location](/bigquery/docs/locations) . The `  --location  ` flag is optional.
+  - `  LOCATION  ` : the name of your [location](https://docs.cloud.google.com/bigquery/docs/locations) . The `  --location  ` flag is optional.
   - `  TABLE  ` : the name of the temporary table you're creating.
-  - `  DEFINITION_FILE  ` : the path to the [table definition file](/bigquery/docs/external-table-definition#tabledef-bigtable) on your local machine.
+  - `  DEFINITION_FILE  ` : the path to the [table definition file](https://docs.cloud.google.com/bigquery/docs/external-table-definition#tabledef-bigtable) on your local machine.
   - `  QUERY  ` : the query you're submitting to the temporary table.
 
 For example, the following command creates and queries a temporary table named `  follows  ` using a table definition file named `  follows_def  ` .
 
-``` text
-bq query \
---use_legacy_sql=false \
---external_table_definition=follows::/tmp/follows_def \
-'SELECT
-  COUNT(rowkey)
- FROM
-   follows'
-```
+    bq query \
+    --use_legacy_sql=false \
+    --external_table_definition=follows::/tmp/follows_def \
+    'SELECT
+      COUNT(rowkey)
+     FROM
+       follows'
 
 ### API
 
-  - Create a query. See [Querying data](/bigquery/querying-data) for information about creating a query job.
+  - Create a query. See [Querying data](https://docs.cloud.google.com/bigquery/querying-data) for information about creating a query job.
 
-  - (Optional) Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/Job) .
+  - (Optional) Specify your location in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job) .
 
-  - Specify the external data source properties by setting the `  ExternalDataConfiguration  ` for the [table resource](/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
+  - Specify the external data source properties by setting the `  ExternalDataConfiguration  ` for the [table resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#externaldataconfiguration) .
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.BigtableColumn;
-import com.google.cloud.bigquery.BigtableColumnFamily;
-import com.google.cloud.bigquery.BigtableOptions;
-import com.google.cloud.bigquery.ExternalTableDefinition;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-import com.google.cloud.bigquery.TableResult;
-import com.google.common.collect.ImmutableList;
-import org.apache.commons.codec.binary.Base64;
-
-// Sample to queries an external bigtable data source using a temporary table
-public class QueryExternalBigtableTemp {
-
-  public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String projectId = "MY_PROJECT_ID";
-    String bigtableInstanceId = "MY_INSTANCE_ID";
-    String bigtableTableName = "MY_BIGTABLE_NAME";
-    String bigqueryTableName = "MY_TABLE_NAME";
-    String sourceUri =
-        String.format(
-            "https://googleapis.com/bigtable/projects/%s/instances/%s/tables/%s",
-            projectId, bigtableInstanceId, bigtableTableName);
-    String query = String.format("SELECT * FROM %s ", bigqueryTableName);
-    queryExternalBigtableTemp(bigqueryTableName, sourceUri, query);
-  }
-
-  public static void queryExternalBigtableTemp(String tableName, String sourceUri, String query) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      BigtableColumnFamily.Builder statsSummary = BigtableColumnFamily.newBuilder();
-
-      // Configuring Columns
-      BigtableColumn connectedCell =
-          BigtableColumn.newBuilder()
-              .setQualifierEncoded(Base64.encodeBase64String("connected_cell".getBytes()))
-              .setFieldName("connected_cell")
-              .setType("STRING")
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.BigtableColumn;
+    import com.google.cloud.bigquery.BigtableColumnFamily;
+    import com.google.cloud.bigquery.BigtableOptions;
+    import com.google.cloud.bigquery.ExternalTableDefinition;
+    import com.google.cloud.bigquery.QueryJobConfiguration;
+    import com.google.cloud.bigquery.TableResult;
+    import com.google.common.collect.ImmutableList;
+    import org.apache.commons.codec.binary.Base64;
+    
+    // Sample to queries an external bigtable data source using a temporary table
+    public class QueryExternalBigtableTemp {
+    
+      public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String projectId = "MY_PROJECT_ID";
+        String bigtableInstanceId = "MY_INSTANCE_ID";
+        String bigtableTableName = "MY_BIGTABLE_NAME";
+        String bigqueryTableName = "MY_TABLE_NAME";
+        String sourceUri =
+            String.format(
+                "https://googleapis.com/bigtable/projects/%s/instances/%s/tables/%s",
+                projectId, bigtableInstanceId, bigtableTableName);
+        String query = String.format("SELECT * FROM %s ", bigqueryTableName);
+        queryExternalBigtableTemp(bigqueryTableName, sourceUri, query);
+      }
+    
+      public static void queryExternalBigtableTemp(String tableName, String sourceUri, String query) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          BigtableColumnFamily.Builder statsSummary = BigtableColumnFamily.newBuilder();
+    
+          // Configuring Columns
+          BigtableColumn connectedCell =
+              BigtableColumn.newBuilder()
+                  .setQualifierEncoded(Base64.encodeBase64String("connected_cell".getBytes()))
+                  .setFieldName("connected_cell")
+                  .setType("STRING")
+                  .setEncoding("TEXT")
+                  .build();
+          BigtableColumn connectedWifi =
+              BigtableColumn.newBuilder()
+                  .setQualifierEncoded(Base64.encodeBase64String("connected_wifi".getBytes()))
+                  .setFieldName("connected_wifi")
+                  .setType("STRING")
+                  .setEncoding("TEXT")
+                  .build();
+          BigtableColumn osBuild =
+              BigtableColumn.newBuilder()
+                  .setQualifierEncoded(Base64.encodeBase64String("os_build".getBytes()))
+                  .setFieldName("os_build")
+                  .setType("STRING")
+                  .setEncoding("TEXT")
+                  .build();
+    
+          // Configuring column family and columns
+          statsSummary
+              .setColumns(ImmutableList.of(connectedCell, connectedWifi, osBuild))
+              .setFamilyID("stats_summary")
+              .setOnlyReadLatest(true)
               .setEncoding("TEXT")
-              .build();
-      BigtableColumn connectedWifi =
-          BigtableColumn.newBuilder()
-              .setQualifierEncoded(Base64.encodeBase64String("connected_wifi".getBytes()))
-              .setFieldName("connected_wifi")
               .setType("STRING")
-              .setEncoding("TEXT")
               .build();
-      BigtableColumn osBuild =
-          BigtableColumn.newBuilder()
-              .setQualifierEncoded(Base64.encodeBase64String("os_build".getBytes()))
-              .setFieldName("os_build")
-              .setType("STRING")
-              .setEncoding("TEXT")
-              .build();
-
-      // Configuring column family and columns
-      statsSummary
-          .setColumns(ImmutableList.of(connectedCell, connectedWifi, osBuild))
-          .setFamilyID("stats_summary")
-          .setOnlyReadLatest(true)
-          .setEncoding("TEXT")
-          .setType("STRING")
-          .build();
-
-      // Configuring BigtableOptions is optional.
-      BigtableOptions options =
-          BigtableOptions.newBuilder()
-              .setIgnoreUnspecifiedColumnFamilies(true)
-              .setReadRowkeyAsString(true)
-              .setColumnFamilies(ImmutableList.of(statsSummary.build()))
-              .build();
-
-      // Configure the external data source and query job.
-      ExternalTableDefinition externalTable =
-          ExternalTableDefinition.newBuilder(sourceUri, options).build();
-      QueryJobConfiguration queryConfig =
-          QueryJobConfiguration.newBuilder(query)
-              .addTableDefinition(tableName, externalTable)
-              .build();
-
-      // Example query
-      TableResult results = bigquery.query(queryConfig);
-
-      results
-          .iterateAll()
-          .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
-
-      System.out.println("Query on external temporary table performed successfully.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Query not performed \n" + e.toString());
+    
+          // Configuring BigtableOptions is optional.
+          BigtableOptions options =
+              BigtableOptions.newBuilder()
+                  .setIgnoreUnspecifiedColumnFamilies(true)
+                  .setReadRowkeyAsString(true)
+                  .setColumnFamilies(ImmutableList.of(statsSummary.build()))
+                  .build();
+    
+          // Configure the external data source and query job.
+          ExternalTableDefinition externalTable =
+              ExternalTableDefinition.newBuilder(sourceUri, options).build();
+          QueryJobConfiguration queryConfig =
+              QueryJobConfiguration.newBuilder(query)
+                  .addTableDefinition(tableName, externalTable)
+                  .build();
+    
+          // Example query
+          TableResult results = bigquery.query(queryConfig);
+    
+          results
+              .iterateAll()
+              .forEach(row -> row.forEach(val -> System.out.printf("%s,", val.toString())));
+    
+          System.out.println("Query on external temporary table performed successfully.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Query not performed \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ## Performance considerations
 
@@ -239,20 +235,20 @@ The performance of queries against Bigtable external data sources depends on thr
 
 BigQuery tries to read as little data as possible by only reading the column families that are referenced in the query. The extent of parallelization depends on how many nodes you have in your Bigtable cluster and how many splits you have for your table.
 
-Note that Bigtable auto-merges splits based on load. If your table is not being read frequently, there will be fewer splits over time and a gradual degradation in query performance. For more information, see [How BigQuery optimizes your data over time](/bigtable/docs/performance#optimization) .
+Note that Bigtable auto-merges splits based on load. If your table is not being read frequently, there will be fewer splits over time and a gradual degradation in query performance. For more information, see [How BigQuery optimizes your data over time](https://docs.cloud.google.com/bigtable/docs/performance#optimization) .
 
 ### Compute
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 When you query your Bigtable data from BigQuery, you have the following options for compute:
 
   - Cluster nodes, which is the default.
-  - [Data Boost](/bigtable/docs/data-boost-overview) (Preview), a serverless compute option that lets you isolate your analytics traffic without impacting the application-serving traffic that your clusters' nodes are handling.
+  - [Data Boost](https://docs.cloud.google.com/bigtable/docs/data-boost-overview) (Preview), a serverless compute option that lets you isolate your analytics traffic without impacting the application-serving traffic that your clusters' nodes are handling.
 
-To use Data Boost, you or your administrator must create a definition file that specifies a Data Boost app profile in the Bigtable URI. For more information, see [Create a Bigtable external table](/bigquery/docs/create-bigtable-external-table) .
+To use Data Boost, you or your administrator must create a definition file that specifies a Data Boost app profile in the Bigtable URI. For more information, see [Create a Bigtable external table](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table) .
 
 If you don't use Data Boost, be aware that querying Bigtable from BigQuery consumes Bigtable CPU cycles. CPU consumption by BigQuery when using provisioned nodes for compute might affect latency and throughput for other concurrent requests such as live user traffic serving. For example, high CPU usage on Bigtable affects long-tail queries and increases latency at the 99th percentile.
 
@@ -266,7 +262,7 @@ You can add query filters when querying an external table to reduce BigQuery res
 
 Queries with a row key equality filter only read that specific row. For example, in GoogleSQL syntax:
 
-``` text
+``` notranslate
 SELECT
   COUNT(follows.column.name)
 FROM
@@ -283,7 +279,7 @@ Range filters such as `  rowkey > '1'  ` and `  rowkey < '8'  ` are also support
 
 You can also select a specific column family or a specific qualifier within a column family. To filter by column family, select the column family name, and the result includes only the selected column family. In the following example, `  user_info  ` represents a column family:
 
-``` text
+``` notranslate
     SELECT
       rowkey AS user_id,
       user_info
@@ -293,7 +289,7 @@ You can also select a specific column family or a specific qualifier within a co
 
 To filter by a specific qualifier, you must first declare them in `  "columns"  ` in the external table definition:
 
-``` text
+``` notranslate
 CREATE OR REPLACE EXTERNAL TABLE project.dataset.table
   OPTIONS (
     format = 'CLOUD_BIGTABLE',
@@ -326,7 +322,7 @@ CREATE OR REPLACE EXTERNAL TABLE project.dataset.table
 
 After the external table is created, use a `  SELECT  ` statement to query a specific qualifier. This ensures that BigQuery pushes down the filter to Bigtable and only loads the specified qualifiers when running a `  SELECT  ` statement from BigQuery, not the entire column family's data. This reduces BigQuery resource consumption.
 
-``` text
+``` notranslate
     SELECT
       rowkey AS user_id,
       user_info.email.cell[SAFE_OFFSET(0)].value as email

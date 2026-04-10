@@ -4,14 +4,14 @@ This document describes how to manage materialized view replicas in BigQuery.
 
 BigQuery management of materialized view replicas includes the following operations:
 
-  - [List materialized view replicas](#list)
-  - [Get information about materialized view replicas](#get-info)
-  - [Delete materialized view replicas](#delete)
+  - [List materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-manage#list)
+  - [Get information about materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-manage#get-info)
+  - [Delete materialized view replicas](https://docs.cloud.google.com/bigquery/docs/materialized-view-replicas-manage#delete)
 
 For more information about materialized view replicas, see the following:
 
-  - [Materialized view replicas](/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas)
-  - [Create materialized view replicas](/bigquery/docs/load-data-using-cross-cloud-transfer#create)
+  - [Materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#materialized_view_replicas)
+  - [Create materialized view replicas](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer#create)
 
 ## Before you begin
 
@@ -34,11 +34,13 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.admin  `
 
-For more information on IAM roles and permissions in IAM, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information on IAM roles and permissions in IAM, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 To list the materialized view replicas in a dataset:
 
 1.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -65,19 +67,21 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataViewer  `
   - `  roles/bigquery.admin  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To get information about a materialized view replica, including the source [materialized view](/bigquery/docs/materialized-views-intro) :
+To get information about a materialized view replica, including the source [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) :
 
 ### SQL
 
-To get information about materialized view replicas, query the [`  INFORMATION_SCHEMA.TABLES  ` view](/bigquery/docs/information-schema-tables) :
+To get information about materialized view replicas, query the [`  INFORMATION_SCHEMA.TABLES  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-tables) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT * FROM PROJECT_ID.DATASET_ID.INFORMATION_SCHEMA.TABLES
     WHERE table_type = 'MATERIALIZED VIEW';
     ```
@@ -89,13 +93,13 @@ To get information about materialized view replicas, query the [`  INFORMATION_S
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Use the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) :
+Use the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) :
 
-``` text
+``` notranslate
 bq show --project=project_id --format=prettyjson dataset.materialized_view_replica
 ```
 
@@ -109,13 +113,11 @@ Example:
 
 Enter the following command to show information about the materialized view replica `  my_mv_replica  ` in the `  report_views  ` dataset in the `  myproject  ` project.
 
-``` text
-bq show --project=myproject --format=prettyjson report_views.my_mv_replica
-```
+    bq show --project=myproject --format=prettyjson report_views.my_mv_replica
 
 ### API
 
-To get materialized view replica information by using the API, call the [`  tables.get  `](/bigquery/docs/reference/rest/v2/tables/get) method.
+To get materialized view replica information by using the API, call the [`  tables.get  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/get) method.
 
 ## Delete materialized view replicas
 
@@ -133,9 +135,11 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  bigquery.dataOwner  `
   - `  bigquery.admin  `
 
-For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about BigQuery Identity and Access Management (IAM), see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 1.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the dataset.
 

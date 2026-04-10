@@ -1,16 +1,16 @@
 # Generate text by using the AI.GENERATE\_TEXT function
 
-This document shows you how to create a BigQuery ML [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a Vertex AI model, and then use that remote model with the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text.
+This document shows you how to create a BigQuery ML [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) that represents a Vertex AI model, and then use that remote model with the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) to generate text.
 
 The following types of remote models are supported:
 
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Anthropic Claude models](/vertex-ai/generative-ai/docs/partner-models/use-claude) .
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Llama models](/vertex-ai/generative-ai/docs/partner-models/llama)
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Mistral AI models](/vertex-ai/generative-ai/docs/partner-models/mistral)
-  - [Remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) over [supported open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) .
+  - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models.
+  - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Anthropic Claude models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) .
+  - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Llama models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama)
+  - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) over [Mistral AI models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral)
+  - [Remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) over [supported open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) .
 
-Depending on the Vertex AI model that you choose, you can generate text based on unstructured data input from [object tables](/bigquery/docs/object-table-introduction) or text input from [standard tables](/bigquery/docs/tables-intro#standard-tables) .
+Depending on the Vertex AI model that you choose, you can generate text based on unstructured data input from [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) or text input from [standard tables](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 ## Required roles
 
@@ -20,7 +20,7 @@ To create a remote model and generate text, you need the following Identity and 
 
   - Create, delegate, and use BigQuery connections: BigQuery Connections Admin ( `  roles/bigquery.connectionsAdmin  ` ) on your project.
     
-    If you don't have a [default connection](/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](/bigquery/docs/default-connections#configure_the_default_connection) .
+    If you don't have a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) configured, you can create and set one as part of running the `  CREATE MODEL  ` statement. To do so, you must have BigQuery Admin ( `  roles/bigquery.admin  ` ) on your project. For more information, see [Configure the default connection](https://docs.cloud.google.com/bigquery/docs/default-connections#configure_the_default_connection) .
 
   - Grant permissions to the connection's service account: Project IAM Admin ( `  roles/resourcemanager.projectIamAdmin  ` ) on the project that contains the Vertex AI endpoint. This is the current project for remote models that you create by specifying the model name as an endpoint. This is the project identified in the URL for remote models that you create by specifying a URL as an endpoint.
     
@@ -42,7 +42,7 @@ These predefined roles contain the permissions required to perform the tasks in 
       - `  bigquery.models.updateData  `
       - `  bigquery.models.updateMetadata  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Before you begin
 
@@ -51,17 +51,21 @@ You might also be able to get these permissions with [custom roles](/iam/docs/cr
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery, BigQuery Connection, and Vertex AI APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,bigqueryconnection.googleapis.com,aiplatform.googleapis.com)
 
 ## Create a dataset
 
@@ -70,8 +74,12 @@ Create a BigQuery dataset to contain your resources:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -92,26 +100,26 @@ Create a BigQuery dataset to contain your resources:
 
 ### bq
 
-1.  To create a new dataset, use the [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
+1.  To create a new dataset, use the [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) command with the `  --location  ` flag:
     
-    ``` text
+    ``` notranslate
     bq --location=LOCATION mk -d DATASET_ID
     ```
     
     Replace the following:
     
-      - `  LOCATION  ` : the dataset's [location](/bigquery/docs/locations) .
+      - `  LOCATION  ` : the dataset's [location](https://docs.cloud.google.com/bigquery/docs/locations) .
       - `  DATASET_ID  ` is the ID of the dataset that you're creating.
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ## Create a connection
 
-Create a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) for the remote model to use, and get the connection's service account. Create the connection in the same [location](/bigquery/docs/locations) as the dataset that you created in the previous step.
+Create a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) for the remote model to use, and get the connection's service account. Create the connection in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the dataset that you created in the previous step.
 
 You can skip this step if you either have a default connection configured, or you have the BigQuery Admin role.
 
@@ -120,8 +128,12 @@ Select one of the following options:
 ### Console
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -143,13 +155,15 @@ Select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE CONNECTION  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
+Use the [`  CREATE CONNECTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_connection_statement) :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE CONNECTION [IF NOT EXISTS] `CONNECTION_NAME`
     OPTIONS (
       connection_type = "CLOUD_RESOURCE",
@@ -166,13 +180,13 @@ Use the [`  CREATE CONNECTION  ` statement](/bigquery/docs/reference/standard-sq
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 1.  In a command-line environment, create a connection:
     
-    ``` text
+    ``` notranslate
     bq mk --connection --location=REGION --project_id=PROJECT_ID \
         --connection_type=CLOUD_RESOURCE CONNECTION_ID
     ```
@@ -181,13 +195,13 @@ For more information about how to run queries, see [Run an interactive query](/b
     
     Replace the following:
     
-      - `  REGION  ` : your [connection region](/bigquery/docs/locations#supported_locations)
+      - `  REGION  ` : your [connection region](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations)
       - `  PROJECT_ID  ` : your Google Cloud project ID
       - `  CONNECTION_ID  ` : an ID for your connection
     
     When you create a connection resource, BigQuery creates a unique system service account and associates it with the connection.
     
-    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](/sdk/docs/quickstart) :
+    **Troubleshooting** : If you get the following connection error, [update the Google Cloud SDK](https://docs.cloud.google.com/sdk/docs/quickstart) :
     
     ``` console
     Flags parsing error: flag --connection_type=CLOUD_RESOURCE: value should be one of...
@@ -195,7 +209,7 @@ For more information about how to run queries, see [Run an interactive query](/b
 
 2.  Retrieve and copy the service account ID for use in a later step:
     
-    ``` text
+    ``` notranslate
     bq show --connection PROJECT_ID.REGION.CONNECTION_ID
     ```
     
@@ -208,126 +222,122 @@ For more information about how to run queries, see [Run an interactive query](/b
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-import google.api_core.exceptions
-from google.cloud import bigquery_connection_v1
-
-client = bigquery_connection_v1.ConnectionServiceClient()
-
-
-def create_connection(
-    project_id: str,
-    location: str,
-    connection_id: str,
-):
-    """Creates a BigQuery connection to a Cloud Resource.
-
-    Cloud Resource connection creates a service account which can then be
-    granted access to other Google Cloud resources for federated queries.
-
-    Args:
-        project_id: The Google Cloud project ID.
-        location: The location of the connection (for example, "us-central1").
-        connection_id: The ID of the connection to create.
-    """
-
-    parent = client.common_location_path(project_id, location)
-
-    connection = bigquery_connection_v1.Connection(
-        friendly_name="Example Connection",
-        description="A sample connection for a Cloud Resource.",
-        cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
-    )
-
-    try:
-        created_connection = client.create_connection(
-            parent=parent, connection_id=connection_id, connection=connection
+    import google.api_core.exceptions
+    from google.cloud import bigquery_connection_v1
+    
+    client = bigquery_connection_v1.ConnectionServiceClient()
+    
+    
+    def create_connection(
+        project_id: str,
+        location: str,
+        connection_id: str,
+    ):
+        """Creates a BigQuery connection to a Cloud Resource.
+    
+        Cloud Resource connection creates a service account which can then be
+        granted access to other Google Cloud resources for federated queries.
+    
+        Args:
+            project_id: The Google Cloud project ID.
+            location: The location of the connection (for example, "us-central1").
+            connection_id: The ID of the connection to create.
+        """
+    
+        parent = client.common_location_path(project_id, location)
+    
+        connection = bigquery_connection_v1.Connection(
+            friendly_name="Example Connection",
+            description="A sample connection for a Cloud Resource.",
+            cloud_resource=bigquery_connection_v1.CloudResourceProperties(),
         )
-        print(f"Successfully created connection: {created_connection.name}")
-        print(f"Friendly name: {created_connection.friendly_name}")
-        print(
-            f"Service Account: {created_connection.cloud_resource.service_account_id}"
-        )
-
-    except google.api_core.exceptions.AlreadyExists:
-        print(f"Connection with ID '{connection_id}' already exists.")
-        print("Please use a different connection ID.")
-    except Exception as e:
-        print(f"An unexpected error occurred while creating the connection: {e}")
-```
+    
+        try:
+            created_connection = client.create_connection(
+                parent=parent, connection_id=connection_id, connection=connection
+            )
+            print(f"Successfully created connection: {created_connection.name}")
+            print(f"Friendly name: {created_connection.friendly_name}")
+            print(
+                f"Service Account: {created_connection.cloud_resource.service_account_id}"
+            )
+    
+        except google.api_core.exceptions.AlreadyExists:
+            print(f"Connection with ID '{connection_id}' already exists.")
+            print("Please use a different connection ID.")
+        except Exception as e:
+            print(f"An unexpected error occurred while creating the connection: {e}")
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-const {ConnectionServiceClient} =
-  require('@google-cloud/bigquery-connection').v1;
-const {status} = require('@grpc/grpc-js');
-
-const client = new ConnectionServiceClient();
-
-/**
- * Creates a new BigQuery connection to a Cloud Resource.
- *
- * A Cloud Resource connection creates a service account that can be granted access
- * to other Google Cloud resources.
- *
- * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
- * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
- * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
- */
-async function createConnection(projectId, location, connectionId) {
-  const parent = client.locationPath(projectId, location);
-
-  const connection = {
-    friendlyName: 'Example Connection',
-    description: 'A sample connection for a Cloud Resource',
-    // The service account for this cloudResource will be created by the API.
-    // Its ID will be available in the response.
-    cloudResource: {},
-  };
-
-  const request = {
-    parent,
-    connectionId,
-    connection,
-  };
-
-  try {
-    const [response] = await client.createConnection(request);
-
-    console.log(`Successfully created connection: ${response.name}`);
-    console.log(`Friendly name: ${response.friendlyName}`);
-
-    console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
-  } catch (err) {
-    if (err.code === status.ALREADY_EXISTS) {
-      console.log(`Connection '${connectionId}' already exists.`);
-    } else {
-      console.error(`Error creating connection: ${err.message}`);
+    const {ConnectionServiceClient} =
+      require('@google-cloud/bigquery-connection').v1;
+    const {status} = require('@grpc/grpc-js');
+    
+    const client = new ConnectionServiceClient();
+    
+    /**
+     * Creates a new BigQuery connection to a Cloud Resource.
+     *
+     * A Cloud Resource connection creates a service account that can be granted access
+     * to other Google Cloud resources.
+     *
+     * @param {string} projectId The Google Cloud project ID. for example, 'example-project-id'
+     * @param {string} location The location of the project to create the connection in. for example, 'us-central1'
+     * @param {string} connectionId The ID of the connection to create. for example, 'example-connection-id'
+     */
+    async function createConnection(projectId, location, connectionId) {
+      const parent = client.locationPath(projectId, location);
+    
+      const connection = {
+        friendlyName: 'Example Connection',
+        description: 'A sample connection for a Cloud Resource',
+        // The service account for this cloudResource will be created by the API.
+        // Its ID will be available in the response.
+        cloudResource: {},
+      };
+    
+      const request = {
+        parent,
+        connectionId,
+        connection,
+      };
+    
+      try {
+        const [response] = await client.createConnection(request);
+    
+        console.log(`Successfully created connection: ${response.name}`);
+        console.log(`Friendly name: ${response.friendlyName}`);
+    
+        console.log(`Service Account: ${response.cloudResource.serviceAccountId}`);
+      } catch (err) {
+        if (err.code === status.ALREADY_EXISTS) {
+          console.log(`Connection '${connectionId}' already exists.`);
+        } else {
+          console.error(`Error creating connection: ${err.message}`);
+        }
+      }
     }
-  }
-}
-```
 
 ### Terraform
 
 Use the [`  google_bigquery_connection  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_connection) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](/resource-manager/reference/rest) .
+**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 The following example creates a Cloud resource connection named `  my_cloud_resource_connection  ` in the `  US  ` region:
 
-``` terraform
+``` lang-terraform
 # This queries the provider for project information.
 data "google_project" "default" {}
 
@@ -351,9 +361,7 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
     
     You only need to run this command once per project, and you can run it in any directory.
     
-    ``` text
-    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    ```
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
     
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
@@ -363,9 +371,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
     
-    ``` text
-    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-    ```
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
@@ -379,31 +385,23 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 5.  Initialize Terraform. You only need to do this once per directory.
     
-    ``` text
-    terraform init
-    ```
+        terraform init
     
     Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
     
-    ``` text
-    terraform init -upgrade
-    ```
+        terraform init -upgrade
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
     
-    ``` text
-    terraform plan
-    ```
+        terraform plan
     
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
     
-    ``` text
-    terraform apply
-    ```
+        terraform apply
     
     Wait until Terraform displays the "Apply complete\!" message.
 
@@ -426,6 +424,8 @@ To grant the Vertex AI User role, follow these steps:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -439,11 +439,9 @@ To grant the Vertex AI User role, follow these steps:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](/sdk/gcloud/reference/projects/add-iam-policy-binding) .
+Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) .
 
-``` text
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
-```
+    gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
 
 Replace the following:
 
@@ -457,8 +455,12 @@ If you are using the remote model to generate text from object table data, grant
 To find the service account for the object table connection, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -481,6 +483,8 @@ To grant the role, follow these steps:
 ### Console
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click person\_add **Add** .
     
@@ -494,11 +498,9 @@ To grant the role, follow these steps:
 
 ### gcloud
 
-Use the [`  gcloud projects add-iam-policy-binding  ` command](/sdk/gcloud/reference/projects/add-iam-policy-binding) .
+Use the [`  gcloud projects add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/projects/add-iam-policy-binding) .
 
-``` text
-gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
-```
+    gcloud projects add-iam-policy-binding 'PROJECT_NUMBER' --member='serviceAccount:MEMBER' --role='roles/aiplatform.user' --condition=None
 
 Replace the following:
 
@@ -510,6 +512,8 @@ Replace the following:
 This step is only required if you want to use Anthropic Claude, Llama, or Mistral AI models.
 
 1.  In the Google Cloud console, go to the Vertex AI **Model Garden** page.
+    
+    [Go to Model Garden](https://console.cloud.google.com/vertex-ai/model-garden)
 
 2.  Search or browse for the partner model that you want to use.
 
@@ -525,7 +529,7 @@ This step is only required if you want to use Anthropic Claude, Llama, or Mistra
 
 ## Choose an open model deployment method
 
-If you are creating a remote model over a [supported open model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement. For more information, see [Deploy open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
+If you are creating a remote model over a [supported open model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , you can automatically deploy the open model at the same time that you create the remote model by specifying the Vertex AI Model Garden or Hugging Face model ID in the `  CREATE MODEL  ` statement. Alternatively, you can manually deploy the open model first, and then use that open model with the remote model by specifying the model endpoint in the `  CREATE MODEL  ` statement. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
 ## Create a BigQuery ML remote model
 
@@ -534,10 +538,12 @@ Create a remote model:
 ### Vertex AI models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  Using the SQL editor, create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
     
-    ``` text
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+
+2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
+    
+    ``` notranslate
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
     REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
@@ -548,7 +554,7 @@ Create a remote model:
     
       - `  PROJECT_ID  ` : your project ID.
     
-      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](/bigquery/docs/locations) as the connection that you are using.
+      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the connection that you are using.
     
       - `  MODEL_NAME  ` : the name of the model.
     
@@ -556,25 +562,27 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
       - `  ENDPOINT  ` : the endpoint of the Vertex AI model to use.
         
-        For pre-trained Vertex AI models, Claude models, and Mistral AI models, specify the name of the model. For some of these models, you can specify a particular [version](/vertex-ai/docs/generative-ai/learn/model-versioning) of the model as part of the name. For supported Gemini models, you can specify the [global endpoint](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#global-endpoint) to improve availability.
+        For pre-trained Vertex AI models, Claude models, and Mistral AI models, specify the name of the model. For some of these models, you can specify a particular [version](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/model-versioning) of the model as part of the name. For supported Gemini models, you can specify the [global endpoint](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#global-endpoint) to improve availability.
         
         For Llama models, specify an [OpenAI API](https://platform.openai.com/docs/api-reference/introduction) endpoint in the format `  openapi/<publisher_name>/<model_name>  ` . For example, `  openapi/meta/llama-3.1-405b-instruct-maas  ` .
         
-        For information about supported model names and versions, see [`  ENDPOINT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
+        For information about supported model names and versions, see [`  ENDPOINT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#endpoint) .
         
-        The Vertex AI model that you specify must be available in the location where you are creating the remote model. For more information, see [Locations](/bigquery/docs/locations#locations-for-remote-models) .
+        The Vertex AI model that you specify must be available in the location where you are creating the remote model. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ### New open models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  Using the SQL editor, create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` text
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+
+2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
+    
+    ``` notranslate
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
     REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
@@ -596,7 +604,7 @@ Create a remote model:
     
       - `  PROJECT_ID  ` : your project ID.
     
-      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](/bigquery/docs/locations) as the connection that you are using.
+      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the connection that you are using.
     
       - `  MODEL_NAME  ` : the name of the model.
     
@@ -604,11 +612,11 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-      - `  HUGGING_FACE_MODEL_ID  ` : a `  STRING  ` value that specifies the model ID for a [supported Hugging Face model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `  deepseek-ai/DeepSeek-R1  ` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
+      - `  HUGGING_FACE_MODEL_ID  ` : a `  STRING  ` value that specifies the model ID for a [supported Hugging Face model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#hugging-face-models) , in the format `  provider_name  ` / `  model_name  ` . For example, `  deepseek-ai/DeepSeek-R1  ` . You can get the model ID by clicking the model name in the Hugging Face Model Hub and then copying the model ID from the top of the model card.
     
-      - `  MODEL_GARDEN_MODEL_NAME  ` : a `  STRING  ` value that specifies the model ID and model version of a [supported Vertex AI Model Garden model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format `  publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `  publishers/openai/models/gpt-oss@gpt-oss-120b  ` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
+      - `  MODEL_GARDEN_MODEL_NAME  ` : a `  STRING  ` value that specifies the model ID and model version of a [supported Vertex AI Model Garden model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#model-garden-models) , in the format `  publishers/ publisher  ` /models/ `  model_name  ` @ `  model_version  ` . For example, `  publishers/openai/models/gpt-oss@gpt-oss-120b  ` . You can get the model ID by clicking the model card in the Vertex AI Model Garden and then copying the model ID from the **Model ID** field. You can get the default model version by copying it from the **Version** field on the model card. To see other model versions that you can use, click **Deploy model** and then click the **Resource ID** field.
     
       - `  HUGGING_FACE_TOKEN  ` : a `  STRING  ` value that specifies the Hugging Face [User Access Token](https://huggingface.co/docs/hub/en/security-tokens) to use. You can only specify a value for this option if you also specify a value for the `  HUGGING_FACE_MODEL_ID  ` option.
         
@@ -620,28 +628,28 @@ Create a remote model:
         2.  Locate and review the model's terms of service. A link to the service agreement is typically found on the model card.
         3.  Accept the terms as prompted on the page.
     
-      - `  MACHINE_TYPE  ` : a `  STRING  ` value that specifies the machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](/vertex-ai/docs/predictions/configure-compute#machine-types) . If you don't specify a value for the `  MACHINE_TYPE  ` option, the Vertex AI Model Garden default machine type for the model is used.
+      - `  MACHINE_TYPE  ` : a `  STRING  ` value that specifies the machine type to use when deploying the model to Vertex AI. For information about supported machine types, see [Machine types](https://docs.cloud.google.com/vertex-ai/docs/predictions/configure-compute#machine-types) . If you don't specify a value for the `  MACHINE_TYPE  ` option, the Vertex AI Model Garden default machine type for the model is used.
     
       - `  MIN_REPLICA_COUNT  ` : an `  INT64  ` value that specifies the minimum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `  MIN_REPLICA_COUNT  ` value and never higher than the `  MAX_REPLICA_COUNT  ` value. The `  MIN_REPLICA_COUNT  ` value must be in the range `  [1, 4096]  ` . The default value is `  1  ` .
     
       - `  MAX_REPLICA_COUNT  ` : an `  INT64  ` value that specifies the maximum number of machine replicas used when deploying the model on a Vertex AI endpoint. The service increases or decreases the replica count as required by the inference load on the endpoint. The number of replicas used is never lower than the `  MIN_REPLICA_COUNT  ` value and never higher than the `  MAX_REPLICA_COUNT  ` value. The `  MAX_REPLICA_COUNT  ` value must be in the range `  [1, 4096]  ` . The default value is the `  MIN_REPLICA_COUNT  ` value.
     
-      - `  RESERVATION_AFFINITY_TYPE  ` : determines whether the deployed model uses [Compute Engine reservations](/compute/docs/instances/reservations-overview) to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation. For more information, see [Compute Engine reservation affinity](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity) .
+      - `  RESERVATION_AFFINITY_TYPE  ` : determines whether the deployed model uses [Compute Engine reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-overview) to provide assured virtual machine (VM) availability when serving predictions, and specifies whether the model uses VMs from all available reservations or just one specific reservation. For more information, see [Compute Engine reservation affinity](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#reservation-affinity) .
         
-        You can only use Compute Engine reservations that are shared with Vertex AI. For more information, see [Allow a reservation to be consumed](/vertex-ai/docs/predictions/use-reservations#allow-consumption) .
+        You can only use Compute Engine reservations that are shared with Vertex AI. For more information, see [Allow a reservation to be consumed](https://docs.cloud.google.com/vertex-ai/docs/predictions/use-reservations#allow-consumption) .
         
         Supported values are as follows:
         
           - `  NO_RESERVATION  ` : no reservation is consumed when your model is deployed to a Vertex AI endpoint. Specifying `  NO_RESERVATION  ` has the same effect as not specifying a reservation affinity.
         
-          - `  ANY_RESERVATION  ` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
+          - `  ANY_RESERVATION  ` : the Vertex AI model deployment consumes virtual machines (VMs) from Compute Engine reservations that are in the current project or that are [shared with the project](https://docs.cloud.google.com/compute/docs/instances/reservations-overview#how-shared-reservations-work) , and that are [configured for automatic consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_any_matching_reservation) . Only VMs that meet the following qualifications are used:
             
               - They use the machine type specified by the `  MACHINE_TYPE  ` value.
               - If the BigQuery dataset in which you are creating the remote model is a single region, the reservation must be in the same region. If the dataset is in the `  US  ` multiregion, the reservation must be in the `  us-central1  ` region. If the dataset is in the `  EU  ` multiregion, the reservation must be in the `  europe-west4  ` region.
             
             If there isn't enough capacity in the available reservations, or if no suitable reservations are found, the system provisions on-demand Compute Engine VMs to meet the resource requirements.
         
-          - `  SPECIFIC_RESERVATION  ` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `  RESERVATION_AFFINITY_VALUES  ` value. This reservation must be [configured for specifically targeted consumption](/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
+          - `  SPECIFIC_RESERVATION  ` : the Vertex AI model deployment consumes VMs only from the reservation that you specify in the `  RESERVATION_AFFINITY_VALUES  ` value. This reservation must be [configured for specifically targeted consumption](https://docs.cloud.google.com/compute/docs/instances/reservations-consume#consuming_instances_from_a_specific_reservation) . Deployment fails if the specified reservation doesn't have sufficient capacity.
     
       - `  RESERVATION_AFFINITY_KEY  ` : the string `  compute.googleapis.com/reservation-name  ` . You must specify this option when the `  RESERVATION_AFFINITY_TYPE  ` value is `  SPECIFIC_RESERVATION  ` .
     
@@ -651,19 +659,19 @@ Create a remote model:
         
         For example, `  RESERVATION_AFFINITY_values = ['projects/myProject/zones/us-central1-a/reservations/myReservationName']  ` .
         
-        You can get the reservation name and zone from the **Reservations** page of the Google Cloud console. For more information, see [View reservations](/compute/docs/instances/reservations-view#view-reservations) .
+        You can get the reservation name and zone from the **Reservations** page of the Google Cloud console. For more information, see [View reservations](https://docs.cloud.google.com/compute/docs/instances/reservations-view#view-reservations) .
         
         You must specify this option when the `  RESERVATION_AFFINITY_TYPE  ` value is `  SPECIFIC_RESERVATION  ` .
     
       - `  ENDPOINT_IDLE_TTL  ` : an `  INTERVAL  ` value that specifies the duration of inactivity after which the open model is automatically undeployed from the Vertex AI endpoint.
         
-        To enable automatic undeployment, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
+        To enable automatic undeployment, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 390 minutes (6.5 hours) and 7 days. For example, specify `  INTERVAL 8 HOUR  ` to have the model undeployed after 8 hours of idleness. The default value is 390 minutes (6.5 hours).
         
         Model inactivity is defined as the amount of time that has passed since any of the following operations were performed on the model:
         
-          - Running the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
-          - Running the [`  ALTER MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .
-          - Sending an inference request to the model endpoint. For example, by running the [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
+          - Running the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) .
+          - Running the [`  ALTER MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-alter-model) with the `  DEPLOY_MODEL  ` argument set to `  TRUE  ` .
+          - Sending an inference request to the model endpoint. For example, by running the [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) or [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) function.
         
         Each of these operations resets the inactivity timer to zero. The reset is triggered at the start of the BigQuery job that performs the operation.
         
@@ -672,10 +680,12 @@ Create a remote model:
 ### Deployed open models
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  Using the SQL editor, create a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
     
-    ``` text
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+
+2.  Using the SQL editor, create a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open) :
+    
+    ``` notranslate
     CREATE OR REPLACE MODEL
     `PROJECT_ID.DATASET_ID.MODEL_NAME`
     REMOTE WITH CONNECTION {DEFAULT | `PROJECT_ID.REGION.CONNECTION_ID`}
@@ -688,7 +698,7 @@ Create a remote model:
     
       - `  PROJECT_ID  ` : your project ID.
     
-      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](/bigquery/docs/locations) as the connection that you are using.
+      - `  DATASET_ID  ` : the ID of the dataset to contain the model. This dataset must be in the same [location](https://docs.cloud.google.com/bigquery/docs/locations) as the connection that you are using.
     
       - `  MODEL_NAME  ` : the name of the model.
     
@@ -696,7 +706,7 @@ Create a remote model:
     
       - `  CONNECTION_ID  ` : the ID of your BigQuery connection.
         
-        You can get this value by [viewing the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+        You can get this value by [viewing the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console and copying the value in the last section of the fully qualified connection ID that is shown in **Connection ID** . For example, `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
       - `  ENDPOINT_REGION  ` : the region in which the open model is deployed.
     
@@ -706,11 +716,11 @@ Create a remote model:
 
 ## Generate text from standard table data
 
-Generate text by using the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with prompt data from a standard table:
+Generate text by using the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with prompt data from a standard table:
 
 ### Gemini
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
   MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
@@ -746,7 +756,7 @@ Replace the following:
     
     **Note:**
     
-    We recommend against using the [`  LIMIT and OFFSET  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
+    We recommend against using the [`  LIMIT and OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
 
   - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,8192]  ` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `  128  ` .
 
@@ -769,27 +779,27 @@ Replace the following:
     
     Supported thresholds are as follows:
     
-      - `  BLOCK_NONE  ` ( [Restricted](/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#how_to_remove_automated_response_blocking_for_select_safety_attributes) )
+      - `  BLOCK_NONE  ` ( [Restricted](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#how_to_remove_automated_response_blocking_for_select_safety_attributes) )
       - `  BLOCK_LOW_AND_ABOVE  `
       - `  BLOCK_MEDIUM_AND_ABOVE  ` (Default)
       - `  BLOCK_ONLY_HIGH  `
       - `  HARM_BLOCK_THRESHOLD_UNSPECIFIED  `
     
-    For more information, refer to the definition of [safety category](/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#safety_attribute_scoring) and [blocking threshold](/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#safety-settings) .
+    For more information, refer to the definition of [safety category](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#safety_attribute_scoring) and [blocking threshold](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#safety-settings) .
 
   - `  REQUEST_TYPE  ` : a `  STRING  ` value that specifies the type of inference request to send to the Gemini model. The request type determines what quota the request uses. Valid values are as follows:
     
       - `  DEDICATED  ` : The `  AI.GENERATE_TEXT  ` function only uses Provisioned Throughput quota. The `  AI.GENERATE_TEXT  ` function returns the error `  Provisioned throughput is not purchased or is not active  ` if Provisioned Throughput quota isn't available.
-      - `  SHARED  ` : The `  AI.GENERATE_TEXT  ` function only uses [dynamic shared quota (DSQ)](/vertex-ai/generative-ai/docs/dynamic-shared-quota) , even if you have purchased Provisioned Throughput quota.
+      - `  SHARED  ` : The `  AI.GENERATE_TEXT  ` function only uses [dynamic shared quota (DSQ)](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/dynamic-shared-quota) , even if you have purchased Provisioned Throughput quota.
       - `  UNSPECIFIED  ` : The `  AI.GENERATE_TEXT  ` function uses quota as follows:
           - If you haven't purchased Provisioned Throughput quota, the `  AI.GENERATE_TEXT  ` function uses DSQ quota.
           - If you have purchased Provisioned Throughput quota, the `  AI.GENERATE_TEXT  ` function uses the Provisioned Throughput quota first. If requests exceed the Provisioned Throughput quota, the overflow traffic uses DSQ quota.
     
     The default value is `  UNSPECIFIED  ` .
     
-    For more information, see [Use Vertex AI Provisioned Throughput](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
+    For more information, see [Use Vertex AI Provisioned Throughput](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-text#provisioned-throughput) .
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 
 **Example 1**
 
@@ -799,7 +809,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -814,12 +824,12 @@ FROM
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
   - Returns a short response.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -840,7 +850,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -859,7 +869,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -883,7 +893,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -903,7 +913,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -923,7 +933,7 @@ FROM
 
 ### Claude
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
   MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
@@ -955,7 +965,7 @@ Replace the following:
     
     **Note:**
     
-    We recommend against using the [`  LIMIT and OFFSET  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
+    We recommend against using the [`  LIMIT and OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
 
   - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,4096]  ` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `  128  ` .
 
@@ -963,7 +973,7 @@ Replace the following:
 
   - `  TOP_P  ` : a `  FLOAT64  ` value in the range `  [0.0,1.0]  ` helps determine the probability of the tokens selected. Specify a lower value for less random responses and a higher value for more random responses. If you don't specify a value, the model determines an appropriate value.
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 
 **Example 1**
 
@@ -973,7 +983,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -988,12 +998,12 @@ FROM
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
   - Returns a short response.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1014,7 +1024,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1024,7 +1034,7 @@ FROM
 
 ### Llama
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
   MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
@@ -1057,7 +1067,7 @@ Replace the following:
     
     **Note:**
     
-    We recommend against using the [`  LIMIT and OFFSET  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
+    We recommend against using the [`  LIMIT and OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
 
   - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,4096]  ` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `  128  ` .
 
@@ -1069,7 +1079,7 @@ Replace the following:
 
   - `  STOP_SEQUENCES  ` : an `  ARRAY<STRING>  ` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 
 **Example 1**
 
@@ -1079,7 +1089,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1094,12 +1104,12 @@ FROM
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
   - Returns a short response.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1120,7 +1130,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1130,7 +1140,7 @@ FROM
 
 ### Mistral AI
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
   MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
@@ -1163,7 +1173,7 @@ Replace the following:
     
     **Note:**
     
-    We recommend against using the [`  LIMIT and OFFSET  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
+    We recommend against using the [`  LIMIT and OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
 
   - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,4096]  ` . Specify a lower value for shorter responses and a higher value for longer responses. The default is `  128  ` .
 
@@ -1175,7 +1185,7 @@ Replace the following:
 
   - `  STOP_SEQUENCES  ` : an `  ARRAY<STRING>  ` value that removes the specified strings if they are included in responses from the model. Strings are matched exactly, including capitalization. The default is an empty array.
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 
 **Example 1**
 
@@ -1185,7 +1195,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1200,12 +1210,12 @@ FROM
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
   - Returns a short response.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1226,7 +1236,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1236,9 +1246,9 @@ FROM
 
 ### Open models
 
-**Note:** You must deploy open models in Vertex AI before you can use them. For more information, see [Deploy open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
+**Note:** You must deploy open models in Vertex AI before you can use them. For more information, see [Deploy open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#deploy_open_models) .
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
   MODEL `PROJECT_ID.DATASET_ID.MODEL_NAME`,
@@ -1271,7 +1281,7 @@ Replace the following:
     
     **Note:**
     
-    We recommend against using the [`  LIMIT and OFFSET  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
+    We recommend against using the [`  LIMIT and OFFSET  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#limit_and_offset_clause) in the prompt query. Using this clause causes the query to process all of the input data first and then apply `  LIMIT  ` and `  OFFSET  ` .
 
   - `  TOKENS  ` : an `  INT64  ` value that sets the maximum number of tokens that can be generated in the response. This value must be in the range `  [1,4096]  ` . Specify a lower value for shorter responses and a higher value for longer responses. If you don't specify a value, the model determines an appropriate value.
 
@@ -1283,7 +1293,7 @@ Replace the following:
 
   - `  TOP_P  ` : a `  FLOAT64  ` value in the range `  [0.0,1.0]  ` helps determine the probability of the tokens selected. Specify a lower value for less random responses and a higher value for more random responses. If you don't specify a value, the model determines an appropriate value.
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function. You must either specify every model parameter in the `  MODEL_PARAMS  ` field, or omit this field and specify each parameter separately.
 
 **Example 1**
 
@@ -1293,7 +1303,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1308,12 +1318,12 @@ FROM
 
 The following example shows a request with these characteristics:
 
-  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
+  - Uses a query to create the prompt data by concatenating strings that provide prompt [prefixes](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/text/text-prompts#prompt_structure) with table columns.
   - Returns a short response.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1334,7 +1344,7 @@ The following example shows a request with these characteristics:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT *
 FROM
   AI.GENERATE_TEXT(
@@ -1344,9 +1354,9 @@ FROM
 
 ## Generate text from object table data
 
-Generate text by using the [`  AI.GENERATE_TEXT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with a Gemini model to analyze unstructured data from an object table. You provide the prompt data in the `  prompt  ` parameter.
+Generate text by using the [`  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) with a Gemini model to analyze unstructured data from an object table. You provide the prompt data in the `  prompt  ` parameter.
 
-``` text
+``` notranslate
 SELECT *
 FROM AI.GENERATE_TEXT(
 MODEL `PROJECT_ID.DATASET.MODEL`,
@@ -1373,13 +1383,13 @@ Replace the following:
 
   - `  DATASET  ` : the dataset that contains the resource.
 
-  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `  CREATE MODEL  ` statement for remote models over LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
+  - `  MODEL  ` : the name of the remote model over the Vertex AI model. For more information about how to create this type of remote model, see [The `  CREATE MODEL  ` statement for remote models over LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) .
     
     You can confirm which model is used by the remote model by opening the Google Cloud console and looking at the **Remote endpoint** field in the model details page.
     
-    Note: Using a remote model based on a Gemini 2.5 model incurs charges for the [thinking process](/vertex-ai/generative-ai/docs/thinking) .
+    Note: Using a remote model based on a Gemini 2.5 model incurs charges for the [thinking process](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/thinking) .
 
-  - `  TABLE  ` : the name of the [object table](/bigquery/docs/object-table-introduction) that contains the content to analyze. For more information on what types of content you can analyze, see [Input](#input) .
+  - `  TABLE  ` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains the content to analyze. For more information on what types of content you can analyze, see [Input](https://docs.cloud.google.com/bigquery/docs/generate-text#input) .
     
     The Cloud Storage bucket used by the input object table must be in the same project where you have created the model and where you are calling the `  AI.GENERATE_TEXT  ` function.
 
@@ -1408,21 +1418,21 @@ Replace the following:
     
     Supported thresholds are as follows:
     
-      - `  BLOCK_NONE  ` ( [Restricted](/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#how_to_remove_automated_response_blocking_for_select_safety_attributes) )
+      - `  BLOCK_NONE  ` ( [Restricted](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-attributes#how_to_remove_automated_response_blocking_for_select_safety_attributes) )
       - `  BLOCK_LOW_AND_ABOVE  `
       - `  BLOCK_MEDIUM_AND_ABOVE  ` (Default)
       - `  BLOCK_ONLY_HIGH  `
       - `  HARM_BLOCK_THRESHOLD_UNSPECIFIED  `
     
-    For more information, refer to the definition of [safety category](/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#harm_categories) and [blocking threshold](/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how-to-configure-content-filters) .
+    For more information, refer to the definition of [safety category](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#harm_categories) and [blocking threshold](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/configure-safety-filters#how-to-configure-content-filters) .
 
-  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides additional parameters to the model. The value must conform to the [`  generateContent  ` request body](/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function.
+  - `  MODEL_PARAMS  ` : a JSON-formatted string literal that provides additional parameters to the model. The value must conform to the [`  generateContent  ` request body](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/reference/rest/v1/projects.locations.endpoints/generateContent) format. You can provide a value for any field in the request body except for the `  contents[]  ` field. If you set this field, then you can't also specify any model parameters in the top-level struct argument to the `  AI.GENERATE_TEXT  ` function.
 
 **Examples**
 
 This example translates and transcribes audio content from an object table that's named `  feedback  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
   AI.GENERATE_TEXT(
     MODEL `mydataset.audio_model`,
@@ -1432,7 +1442,7 @@ SELECT * FROM
 
 This example classifies PDF content from an object table that's named `  invoices  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
   AI.GENERATE_TEXT(
     MODEL `mydataset.classify_model`,

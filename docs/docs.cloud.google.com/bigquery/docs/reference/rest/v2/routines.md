@@ -1,26 +1,26 @@
-  - [Resource: Routine](#Routine)
-      - [JSON representation](#Routine.SCHEMA_REPRESENTATION)
-  - [RoutineReference](#RoutineReference)
-      - [JSON representation](#RoutineReference.SCHEMA_REPRESENTATION)
-  - [RoutineType](#RoutineType)
-  - [Language](#Language)
-  - [Argument](#Argument)
-      - [JSON representation](#Argument.SCHEMA_REPRESENTATION)
-  - [ArgumentKind](#ArgumentKind)
-  - [Mode](#Mode)
-  - [StandardSqlTableType](#StandardSqlTableType)
-      - [JSON representation](#StandardSqlTableType.SCHEMA_REPRESENTATION)
-  - [DeterminismLevel](#DeterminismLevel)
-  - [RemoteFunctionOptions](#RemoteFunctionOptions)
-      - [JSON representation](#RemoteFunctionOptions.SCHEMA_REPRESENTATION)
-  - [SparkOptions](#SparkOptions)
-      - [JSON representation](#SparkOptions.SCHEMA_REPRESENTATION)
-  - [DataGovernanceType](#DataGovernanceType)
-  - [PythonOptions](#PythonOptions)
-      - [JSON representation](#PythonOptions.SCHEMA_REPRESENTATION)
-  - [ExternalRuntimeOptions](#ExternalRuntimeOptions)
-      - [JSON representation](#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Routine](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Routine.SCHEMA_REPRESENTATION)
+  - [RoutineReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineReference.SCHEMA_REPRESENTATION)
+  - [RoutineType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RoutineType)
+  - [Language](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Language)
+  - [Argument](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Argument)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Argument.SCHEMA_REPRESENTATION)
+  - [ArgumentKind](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ArgumentKind)
+  - [Mode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#Mode)
+  - [StandardSqlTableType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#StandardSqlTableType)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#StandardSqlTableType.SCHEMA_REPRESENTATION)
+  - [DeterminismLevel](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#DeterminismLevel)
+  - [RemoteFunctionOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RemoteFunctionOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#RemoteFunctionOptions.SCHEMA_REPRESENTATION)
+  - [SparkOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#SparkOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#SparkOptions.SCHEMA_REPRESENTATION)
+  - [DataGovernanceType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#DataGovernanceType)
+  - [PythonOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#PythonOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#PythonOptions.SCHEMA_REPRESENTATION)
+  - [ExternalRuntimeOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#ExternalRuntimeOptions.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines#METHODS_SUMMARY)
 
 ## Resource: Routine
 
@@ -37,7 +37,7 @@ A user-defined function or a stored procedure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;etag&quot;: string,
   &quot;routineReference&quot;: {
     object (RoutineReference)
@@ -255,7 +255,7 @@ Id path of a routine.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;routineId&quot;: string
@@ -351,7 +351,7 @@ Input/output argument of a function or a stored procedure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;argumentKind&quot;: enum (ArgumentKind),
   &quot;mode&quot;: enum (Mode),
@@ -444,7 +444,7 @@ A table type
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columns&quot;: [
     {
       object (StandardSqlField)
@@ -502,7 +502,7 @@ Options for a remote user-defined function.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;endpoint&quot;: string,
   &quot;connection&quot;: string,
   &quot;userDefinedContext&quot;: {
@@ -556,7 +556,7 @@ Options for a user-defined Spark routine.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;connection&quot;: string,
   &quot;runtimeVersion&quot;: string,
   &quot;containerImage&quot;: string,
@@ -674,7 +674,7 @@ Options for a user-defined Python function.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;entryPoint&quot;: string,
   &quot;packages&quot;: [
     string
@@ -713,7 +713,7 @@ Options for the runtime of the external system.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;containerMemory&quot;: string,
   &quot;containerCpu&quot;: number,
   &quot;runtimeConnection&quot;: string,

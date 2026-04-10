@@ -1,46 +1,46 @@
-  - [Resource: Connection](#Connection)
-      - [JSON representation](#Connection.SCHEMA_REPRESENTATION)
-  - [CloudSqlProperties](#CloudSqlProperties)
-      - [JSON representation](#CloudSqlProperties.SCHEMA_REPRESENTATION)
-  - [DatabaseType](#DatabaseType)
-  - [CloudSqlCredential](#CloudSqlCredential)
-      - [JSON representation](#CloudSqlCredential.SCHEMA_REPRESENTATION)
-  - [AwsProperties](#AwsProperties)
-      - [JSON representation](#AwsProperties.SCHEMA_REPRESENTATION)
-  - [AwsAccessRole](#AwsAccessRole)
-      - [JSON representation](#AwsAccessRole.SCHEMA_REPRESENTATION)
-  - [AzureProperties](#AzureProperties)
-      - [JSON representation](#AzureProperties.SCHEMA_REPRESENTATION)
-  - [CloudSpannerProperties](#CloudSpannerProperties)
-      - [JSON representation](#CloudSpannerProperties.SCHEMA_REPRESENTATION)
-  - [CloudResourceProperties](#CloudResourceProperties)
-      - [JSON representation](#CloudResourceProperties.SCHEMA_REPRESENTATION)
-  - [SparkProperties](#SparkProperties)
-      - [JSON representation](#SparkProperties.SCHEMA_REPRESENTATION)
-  - [MetastoreServiceConfig](#MetastoreServiceConfig)
-      - [JSON representation](#MetastoreServiceConfig.SCHEMA_REPRESENTATION)
-  - [SparkHistoryServerConfig](#SparkHistoryServerConfig)
-      - [JSON representation](#SparkHistoryServerConfig.SCHEMA_REPRESENTATION)
-  - [SalesforceDataCloudProperties](#SalesforceDataCloudProperties)
-      - [JSON representation](#SalesforceDataCloudProperties.SCHEMA_REPRESENTATION)
-  - [ConnectorConfiguration](#ConnectorConfiguration)
-      - [JSON representation](#ConnectorConfiguration.SCHEMA_REPRESENTATION)
-  - [Endpoint](#Endpoint)
-      - [JSON representation](#Endpoint.SCHEMA_REPRESENTATION)
-  - [Authentication](#Authentication)
-      - [JSON representation](#Authentication.SCHEMA_REPRESENTATION)
-  - [UsernamePassword](#UsernamePassword)
-      - [JSON representation](#UsernamePassword.SCHEMA_REPRESENTATION)
-  - [Secret](#Secret)
-      - [JSON representation](#Secret.SCHEMA_REPRESENTATION)
-  - [SecretType](#SecretType)
-  - [Network](#Network)
-      - [JSON representation](#Network.SCHEMA_REPRESENTATION)
-  - [PrivateServiceConnect](#PrivateServiceConnect)
-      - [JSON representation](#PrivateServiceConnect.SCHEMA_REPRESENTATION)
-  - [Asset](#Asset)
-      - [JSON representation](#Asset.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Connection](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Connection)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Connection.SCHEMA_REPRESENTATION)
+  - [CloudSqlProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSqlProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSqlProperties.SCHEMA_REPRESENTATION)
+  - [DatabaseType](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#DatabaseType)
+  - [CloudSqlCredential](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSqlCredential)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSqlCredential.SCHEMA_REPRESENTATION)
+  - [AwsProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AwsProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AwsProperties.SCHEMA_REPRESENTATION)
+  - [AwsAccessRole](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AwsAccessRole)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AwsAccessRole.SCHEMA_REPRESENTATION)
+  - [AzureProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AzureProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#AzureProperties.SCHEMA_REPRESENTATION)
+  - [CloudSpannerProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSpannerProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudSpannerProperties.SCHEMA_REPRESENTATION)
+  - [CloudResourceProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudResourceProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#CloudResourceProperties.SCHEMA_REPRESENTATION)
+  - [SparkProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SparkProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SparkProperties.SCHEMA_REPRESENTATION)
+  - [MetastoreServiceConfig](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#MetastoreServiceConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#MetastoreServiceConfig.SCHEMA_REPRESENTATION)
+  - [SparkHistoryServerConfig](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SparkHistoryServerConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SparkHistoryServerConfig.SCHEMA_REPRESENTATION)
+  - [SalesforceDataCloudProperties](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SalesforceDataCloudProperties)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SalesforceDataCloudProperties.SCHEMA_REPRESENTATION)
+  - [ConnectorConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#ConnectorConfiguration)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#ConnectorConfiguration.SCHEMA_REPRESENTATION)
+  - [Endpoint](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Endpoint)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Endpoint.SCHEMA_REPRESENTATION)
+  - [Authentication](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Authentication)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Authentication.SCHEMA_REPRESENTATION)
+  - [UsernamePassword](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#UsernamePassword)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#UsernamePassword.SCHEMA_REPRESENTATION)
+  - [Secret](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Secret)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Secret.SCHEMA_REPRESENTATION)
+  - [SecretType](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#SecretType)
+  - [Network](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Network)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Network.SCHEMA_REPRESENTATION)
+  - [PrivateServiceConnect](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#PrivateServiceConnect)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#PrivateServiceConnect.SCHEMA_REPRESENTATION)
+  - [Asset](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Asset)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#Asset.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/bigqueryconnection/rest/v1/projects.locations.connections#METHODS_SUMMARY)
 
 ## Resource: Connection
 
@@ -57,7 +57,7 @@ Configuration parameters to establish connection with an external data source, e
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
@@ -210,7 +210,7 @@ Connection properties specific to the Cloud SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;instanceId&quot;: string,
   &quot;database&quot;: string,
   &quot;type&quot;: enum (DatabaseType),
@@ -290,7 +290,7 @@ Credential info for the Cloud SQL.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;username&quot;: string,
   &quot;password&quot;: string
 }</code></pre></td>
@@ -327,7 +327,7 @@ Connection properties specific to Amazon Web Services (AWS).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field authentication_method can be only one of the following:
   &quot;accessRole&quot;: {
@@ -364,7 +364,7 @@ Authentication method for Amazon Web Services (AWS) that uses Google owned Googl
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;iamRoleId&quot;: string,
   &quot;identity&quot;: string
 }</code></pre></td>
@@ -401,7 +401,7 @@ Container for connection properties specific to Azure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;application&quot;: string,
   &quot;clientId&quot;: string,
   &quot;objectId&quot;: string,
@@ -473,7 +473,7 @@ Connection properties specific to Cloud Spanner.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;database&quot;: string,
   &quot;useParallelism&quot;: boolean,
   &quot;maxParallelism&quot;: integer,
@@ -541,7 +541,7 @@ Container for connection properties for delegation of access to GCP resources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;serviceAccountId&quot;: string
 }</code></pre></td>
 </tr>
@@ -575,7 +575,7 @@ Container for connection properties to execute stored procedures for Apache Spar
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;serviceAccountId&quot;: string,
   &quot;metastoreServiceConfig&quot;: {
     object (MetastoreServiceConfig)
@@ -627,7 +627,7 @@ Configuration of the Dataproc Metastore Service.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;metastoreService&quot;: string
 }</code></pre></td>
 </tr>
@@ -661,7 +661,7 @@ Configuration of the Spark History Server.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataprocCluster&quot;: string
 }</code></pre></td>
 </tr>
@@ -695,7 +695,7 @@ Connection properties specific to Salesforce DataCloud. This is intended for use
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;instanceUri&quot;: string,
   &quot;identity&quot;: string,
   &quot;tenantId&quot;: string
@@ -739,7 +739,7 @@ Represents concrete parameter values for Connector Configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;connectorId&quot;: string,
   &quot;endpoint&quot;: {
     object (Endpoint)
@@ -805,7 +805,7 @@ Remote endpoint specification.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field endpoint can be only one of the following:
   &quot;hostPort&quot;: string
@@ -842,7 +842,7 @@ Client authentication.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;usernamePassword&quot;: {
     object (UsernamePassword)
   },
@@ -881,7 +881,7 @@ Username and Password authentication.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;username&quot;: string,
   &quot;password&quot;: {
     object (Secret)
@@ -920,7 +920,7 @@ Secret value parameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;secretType&quot;: enum (SecretType),
 
   // Union field secret can be only one of the following:
@@ -972,7 +972,7 @@ Network related configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field network can be only one of the following:
   &quot;privateServiceConnect&quot;: {
@@ -1011,7 +1011,7 @@ Private Service Connect configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;networkAttachment&quot;: string
 }</code></pre></td>
 </tr>
@@ -1041,7 +1041,7 @@ Data Asset - a resource within instance of the system, reachable under specified
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;database&quot;: string,
   &quot;googleCloudResource&quot;: string
 }</code></pre></td>

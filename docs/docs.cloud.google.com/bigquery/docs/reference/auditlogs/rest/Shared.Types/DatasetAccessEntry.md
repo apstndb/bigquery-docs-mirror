@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [DatasetReference](#DatasetReference)
-      - [JSON representation](#DatasetReference.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#SCHEMA_REPRESENTATION)
+  - [DatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#DatasetReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/DatasetAccessEntry#DatasetReference.SCHEMA_REPRESENTATION)
 
 Grants all resources of particular types in a particular dataset read access to the current dataset.
 
@@ -17,7 +17,7 @@ Similar to how individually authorized views work, updates to any resource grant
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: {
     object (DatasetReference)
   },
@@ -58,7 +58,7 @@ Identifier for a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetId&quot;: string,
   &quot;projectId&quot;: string
 }</code></pre></td>

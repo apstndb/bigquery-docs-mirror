@@ -39,9 +39,7 @@ The arithmetic mean of the values in the population. If `  count  ` is zero then
 
 The sum of squared deviations from the mean of the values in the population. For values x\_i this is:
 
-``` text
-Sum[i=1..n]((x_i - mean)^2)
-```
+    Sum[i=1..n]((x_i - mean)^2)
 
 Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.
 

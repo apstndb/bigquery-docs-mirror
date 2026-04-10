@@ -1,8 +1,8 @@
 GoogleSQL for BigQuery supports the following timestamp functions.
 
-IMPORTANT: Before working with these functions, you need to understand the difference between the formats in which timestamps are stored and displayed, and how time zones are used for the conversion between these formats. To learn more, see [How time zones work with timestamp functions](#timezone_definitions) .
+IMPORTANT: Before working with these functions, you need to understand the difference between the formats in which timestamps are stored and displayed, and how time zones are used for the conversion between these formats. To learn more, see [How time zones work with timestamp functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) .
 
-NOTE: These functions return a runtime error if overflow occurs; result values are bounded by the defined [`  DATE  ` range](/bigquery/docs/reference/standard-sql/data-types#date_type) and [`  TIMESTAMP  ` range](/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
+NOTE: These functions return a runtime error if overflow occurs; result values are bounded by the defined [`  DATE  ` range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) and [`  TIMESTAMP  ` range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 ## Function list
 
@@ -19,72 +19,72 @@ NOTE: These functions return a runtime error if overflow occurs; result values a
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp"><code dir="ltr" translate="no">        CURRENT_TIMESTAMP       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#current_timestamp"><code dir="ltr" translate="no">        CURRENT_TIMESTAMP       </code></a></td>
 <td>Returns the current date and time as a <code dir="ltr" translate="no">       TIMESTAMP      </code> object.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#extract"><code dir="ltr" translate="no">        EXTRACT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#extract"><code dir="ltr" translate="no">        EXTRACT       </code></a></td>
 <td>Extracts part of a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp"><code dir="ltr" translate="no">        FORMAT_TIMESTAMP       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#format_timestamp"><code dir="ltr" translate="no">        FORMAT_TIMESTAMP       </code></a></td>
 <td>Formats a <code dir="ltr" translate="no">       TIMESTAMP      </code> value according to the specified format string.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#generate_timestamp_array"><code dir="ltr" translate="no">        GENERATE_TIMESTAMP_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_timestamp_array"><code dir="ltr" translate="no">        GENERATE_TIMESTAMP_ARRAY       </code></a></td>
 <td>Generates an array of timestamps in a range.<br />
-For more information, see <a href="/bigquery/docs/reference/standard-sql/array_functions">Array functions</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions">Array functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp"><code dir="ltr" translate="no">        PARSE_TIMESTAMP       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#parse_timestamp"><code dir="ltr" translate="no">        PARSE_TIMESTAMP       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#string"><code dir="ltr" translate="no">        STRING       </code> (Timestamp)</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#string"><code dir="ltr" translate="no">        STRING       </code> (Timestamp)</a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to a <code dir="ltr" translate="no">       STRING      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp"><code dir="ltr" translate="no">        TIMESTAMP       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp"><code dir="ltr" translate="no">        TIMESTAMP       </code></a></td>
 <td>Constructs a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add"><code dir="ltr" translate="no">        TIMESTAMP_ADD       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_add"><code dir="ltr" translate="no">        TIMESTAMP_ADD       </code></a></td>
 <td>Adds a specified time interval to a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_diff"><code dir="ltr" translate="no">        TIMESTAMP_DIFF       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_diff"><code dir="ltr" translate="no">        TIMESTAMP_DIFF       </code></a></td>
 <td>Gets the number of unit boundaries between two <code dir="ltr" translate="no">       TIMESTAMP      </code> values at a particular time granularity.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros"><code dir="ltr" translate="no">        TIMESTAMP_MICROS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros"><code dir="ltr" translate="no">        TIMESTAMP_MICROS       </code></a></td>
 <td>Converts the number of microseconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis"><code dir="ltr" translate="no">        TIMESTAMP_MILLIS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis"><code dir="ltr" translate="no">        TIMESTAMP_MILLIS       </code></a></td>
 <td>Converts the number of milliseconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds"><code dir="ltr" translate="no">        TIMESTAMP_SECONDS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds"><code dir="ltr" translate="no">        TIMESTAMP_SECONDS       </code></a></td>
 <td>Converts the number of seconds since 1970-01-01 00:00:00 UTC to a <code dir="ltr" translate="no">       TIMESTAMP      </code> .</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_sub"><code dir="ltr" translate="no">        TIMESTAMP_SUB       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_sub"><code dir="ltr" translate="no">        TIMESTAMP_SUB       </code></a></td>
 <td>Subtracts a specified time interval from a <code dir="ltr" translate="no">       TIMESTAMP      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc"><code dir="ltr" translate="no">        TIMESTAMP_TRUNC       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc"><code dir="ltr" translate="no">        TIMESTAMP_TRUNC       </code></a></td>
 <td>Truncates a <code dir="ltr" translate="no">       TIMESTAMP      </code> or <code dir="ltr" translate="no">       DATETIME      </code> value at a particular granularity.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros"><code dir="ltr" translate="no">        UNIX_MICROS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros"><code dir="ltr" translate="no">        UNIX_MICROS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of microseconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis"><code dir="ltr" translate="no">        UNIX_MILLIS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis"><code dir="ltr" translate="no">        UNIX_MILLIS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of milliseconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds"><code dir="ltr" translate="no">        UNIX_SECONDS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds"><code dir="ltr" translate="no">        UNIX_SECONDS       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       TIMESTAMP      </code> value to the number of seconds since 1970-01-01 00:00:00 UTC.</td>
 </tr>
 </tbody>
@@ -92,13 +92,9 @@ For more information, see <a href="/bigquery/docs/reference/standard-sql/array_f
 
 ## `     CURRENT_TIMESTAMP    `
 
-``` text
-CURRENT_TIMESTAMP()
-```
+    CURRENT_TIMESTAMP()
 
-``` text
-CURRENT_TIMESTAMP
-```
+    CURRENT_TIMESTAMP
 
 **Description**
 
@@ -118,25 +114,21 @@ Not applicable
 
 **Examples**
 
-``` text
-SELECT CURRENT_TIMESTAMP() AS now;
-
-/*--------------------------------+
- | now                            |
- +--------------------------------+
- | 2020-06-02 23:57:12.120174 UTC |
- +--------------------------------*/
-```
+    SELECT CURRENT_TIMESTAMP() AS now;
+    
+    /*--------------------------------+
+     | now                            |
+     +--------------------------------+
+     | 2020-06-02 23:57:12.120174 UTC |
+     +--------------------------------*/
 
 ## `     EXTRACT    `
 
-``` text
-EXTRACT(part FROM timestamp_expression [AT TIME ZONE time_zone])
-```
+    EXTRACT(part FROM timestamp_expression [AT TIME ZONE time_zone])
 
 **Description**
 
-Returns a value that corresponds to the specified `  part  ` from a supplied `  timestamp_expression  ` . This function supports an optional `  time_zone  ` parameter. See [Time zone definitions](#timezone_definitions) for information on how to specify a time zone.
+Returns a value that corresponds to the specified `  part  ` from a supplied `  timestamp_expression  ` . This function supports an optional `  time_zone  ` parameter. See [Time zone definitions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) for information on how to specify a time zone.
 
 Allowed `  part  ` values are:
 
@@ -171,148 +163,130 @@ Returned values truncate lower order time periods. For example, when extracting 
 
 In the following example, `  EXTRACT  ` returns a value corresponding to the `  DAY  ` time part.
 
-``` text
-SELECT
-  EXTRACT(
-    DAY
-    FROM TIMESTAMP('2008-12-25 05:30:00+00') AT TIME ZONE 'UTC')
-    AS the_day_utc,
-  EXTRACT(
-    DAY
-    FROM TIMESTAMP('2008-12-25 05:30:00+00') AT TIME ZONE 'America/Los_Angeles')
-    AS the_day_california
-
-/*-------------+--------------------+
- | the_day_utc | the_day_california |
- +-------------+--------------------+
- | 25          | 24                 |
- +-------------+--------------------*/
-```
+    SELECT
+      EXTRACT(
+        DAY
+        FROM TIMESTAMP('2008-12-25 05:30:00+00') AT TIME ZONE 'UTC')
+        AS the_day_utc,
+      EXTRACT(
+        DAY
+        FROM TIMESTAMP('2008-12-25 05:30:00+00') AT TIME ZONE 'America/Los_Angeles')
+        AS the_day_california
+    
+    /*-------------+--------------------+
+     | the_day_utc | the_day_california |
+     +-------------+--------------------+
+     | 25          | 24                 |
+     +-------------+--------------------*/
 
 In the following examples, `  EXTRACT  ` returns values corresponding to different time parts from a column of type `  TIMESTAMP  ` .
 
-``` text
-SELECT
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS week
+    SELECT
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2005-01-03 12:34:56+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and
+    -- time zone where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2005    | 1       | 2005 | 1    |
+     +---------+---------+------+------*/
 
--- Display of results may differ, depending upon the environment and
--- time zone where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2005    | 1       | 2005 | 1    |
- +---------+---------+------+------*/
-```
+    SELECT
+      TIMESTAMP("2007-12-31 12:00:00+00") AS timestamp_value,
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2008    | 1       | 2007 | 52    |
+     +---------+---------+------+------*/
 
-``` text
-SELECT
-  TIMESTAMP("2007-12-31 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2007-12-31 12:00:00+00")) AS week
+    SELECT
+      TIMESTAMP("2009-01-01 12:00:00+00") AS timestamp_value,
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2009    | 1       | 2009 | 0    |
+     +---------+---------+------+------*/
 
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2008    | 1       | 2007 | 52    |
- +---------+---------+------+------*/
-```
+    SELECT
+      TIMESTAMP("2009-12-31 12:00:00+00") AS timestamp_value,
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2009    | 53      | 2009 | 52   |
+     +---------+---------+------+------*/
 
-``` text
-SELECT
-  TIMESTAMP("2009-01-01 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2009-01-01 12:00:00+00")) AS week
+    SELECT
+      TIMESTAMP("2017-01-02 12:00:00+00") AS timestamp_value,
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2017    | 1       | 2017 | 1    |
+     +---------+---------+------+------*/
 
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2009    | 1       | 2009 | 0    |
- +---------+---------+------+------*/
-```
-
-``` text
-SELECT
-  TIMESTAMP("2009-12-31 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2009-12-31 12:00:00+00")) AS week
-
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2009    | 53      | 2009 | 52   |
- +---------+---------+------+------*/
-```
-
-``` text
-SELECT
-  TIMESTAMP("2017-01-02 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2017-01-02 12:00:00+00")) AS week
-
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2017    | 1       | 2017 | 1    |
- +---------+---------+------+------*/
-```
-
-``` text
-SELECT
-  TIMESTAMP("2017-05-26 12:00:00+00") AS timestamp_value,
-  EXTRACT(ISOYEAR FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS isoyear,
-  EXTRACT(ISOWEEK FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS isoweek,
-  EXTRACT(YEAR FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS year,
-  EXTRACT(WEEK FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS week
-
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*---------+---------+------+------+
- | isoyear | isoweek | year | week |
- +---------+---------+------+------+
- | 2017    | 21      | 2017 | 21   |
- +---------+---------+------+------*/
-```
+    SELECT
+      TIMESTAMP("2017-05-26 12:00:00+00") AS timestamp_value,
+      EXTRACT(ISOYEAR FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS isoyear,
+      EXTRACT(ISOWEEK FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS isoweek,
+      EXTRACT(YEAR FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS year,
+      EXTRACT(WEEK FROM TIMESTAMP("2017-05-26 12:00:00+00")) AS week
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*---------+---------+------+------+
+     | isoyear | isoweek | year | week |
+     +---------+---------+------+------+
+     | 2017    | 21      | 2017 | 21   |
+     +---------+---------+------+------*/
 
 In the following example, `  timestamp_expression  ` falls on a Monday. `  EXTRACT  ` calculates the first column using weeks that begin on Sunday, and it calculates the second column using weeks that begin on Monday.
 
-``` text
-SELECT
-  EXTRACT(WEEK(SUNDAY) FROM TIMESTAMP("2017-11-06 00:00:00+00")) AS week_sunday,
-  EXTRACT(WEEK(MONDAY) FROM TIMESTAMP("2017-11-06 00:00:00+00")) AS week_monday
-
--- Display of results may differ, depending upon the environment and time zone
--- where this query was executed.
-/*-------------+---------------+
- | week_sunday | week_monday   |
- +-------------+---------------+
- | 45          | 44            |
- +-------------+---------------*/
-```
+    SELECT
+      EXTRACT(WEEK(SUNDAY) FROM TIMESTAMP("2017-11-06 00:00:00+00")) AS week_sunday,
+      EXTRACT(WEEK(MONDAY) FROM TIMESTAMP("2017-11-06 00:00:00+00")) AS week_monday
+    
+    -- Display of results may differ, depending upon the environment and time zone
+    -- where this query was executed.
+    /*-------------+---------------+
+     | week_sunday | week_monday   |
+     +-------------+---------------+
+     | 45          | 44            |
+     +-------------+---------------*/
 
 ## `     FORMAT_TIMESTAMP    `
 
-``` text
-FORMAT_TIMESTAMP(format_string, timestamp_expr[, time_zone])
-```
+    FORMAT_TIMESTAMP(format_string, timestamp_expr[, time_zone])
 
 **Description**
 
@@ -320,9 +294,9 @@ Formats a `  TIMESTAMP  ` value according to the specified format string.
 
 **Definitions**
 
-  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  timestamp_expr  ` .
+  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  timestamp_expr  ` .
   - `  timestamp_expr  ` : A `  TIMESTAMP  ` value that represents the timestamp to format.
-  - `  time_zone  ` : A `  STRING  ` value that represents a time zone. For more information about how to use a time zone with a timestamp, see [Time zone definitions](#timezone_definitions) .
+  - `  time_zone  ` : A `  STRING  ` value that represents a time zone. For more information about how to use a time zone with a timestamp, see [Time zone definitions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) .
 
 **Return Data Type**
 
@@ -330,55 +304,45 @@ Formats a `  TIMESTAMP  ` value according to the specified format string.
 
 **Examples**
 
-``` text
-SELECT FORMAT_TIMESTAMP("%c", TIMESTAMP "2050-12-25 15:30:55+00", "UTC")
-  AS formatted;
+    SELECT FORMAT_TIMESTAMP("%c", TIMESTAMP "2050-12-25 15:30:55+00", "UTC")
+      AS formatted;
+    
+    /*--------------------------+
+     | formatted                |
+     +--------------------------+
+     | Sun Dec 25 15:30:55 2050 |
+     +--------------------------*/
 
-/*--------------------------+
- | formatted                |
- +--------------------------+
- | Sun Dec 25 15:30:55 2050 |
- +--------------------------*/
-```
+    SELECT FORMAT_TIMESTAMP("%b-%d-%Y", TIMESTAMP "2050-12-25 15:30:55+00")
+      AS formatted;
+    
+    /*-------------+
+     | formatted   |
+     +-------------+
+     | Dec-25-2050 |
+     +-------------*/
 
-``` text
-SELECT FORMAT_TIMESTAMP("%b-%d-%Y", TIMESTAMP "2050-12-25 15:30:55+00")
-  AS formatted;
+    SELECT FORMAT_TIMESTAMP("%b %Y", TIMESTAMP "2050-12-25 15:30:55+00")
+      AS formatted;
+    
+    /*-------------+
+     | formatted   |
+     +-------------+
+     | Dec 2050    |
+     +-------------*/
 
-/*-------------+
- | formatted   |
- +-------------+
- | Dec-25-2050 |
- +-------------*/
-```
-
-``` text
-SELECT FORMAT_TIMESTAMP("%b %Y", TIMESTAMP "2050-12-25 15:30:55+00")
-  AS formatted;
-
-/*-------------+
- | formatted   |
- +-------------+
- | Dec 2050    |
- +-------------*/
-```
-
-``` text
-SELECT FORMAT_TIMESTAMP("%Y-%m-%dT%H:%M:%S%Z", TIMESTAMP "2050-12-25 15:30:55", "UTC")
-  AS formatted;
-
-/*+-----------------------+
- |       formatted        |
- +------------------------+
- | 2050-12-25T15:30:55UTC |
- +------------------------*/
-```
+    SELECT FORMAT_TIMESTAMP("%Y-%m-%dT%H:%M:%S%Z", TIMESTAMP "2050-12-25 15:30:55", "UTC")
+      AS formatted;
+    
+    /*+-----------------------+
+     |       formatted        |
+     +------------------------+
+     | 2050-12-25T15:30:55UTC |
+     +------------------------*/
 
 ## `     PARSE_TIMESTAMP    `
 
-``` text
-PARSE_TIMESTAMP(format_string, timestamp_string[, time_zone])
-```
+    PARSE_TIMESTAMP(format_string, timestamp_string[, time_zone])
 
 **Description**
 
@@ -386,27 +350,25 @@ Converts a `  STRING  ` value to a `  TIMESTAMP  ` value.
 
 **Definitions**
 
-  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  timestamp_string  ` .
+  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  timestamp_string  ` .
   - `  timestamp_string  ` : A `  STRING  ` value that represents the timestamp to parse.
-  - `  time_zone  ` : A `  STRING  ` value that represents a time zone. For more information about how to use a time zone with a timestamp, see [Time zone definitions](#timezone_definitions) .
+  - `  time_zone  ` : A `  STRING  ` value that represents a time zone. For more information about how to use a time zone with a timestamp, see [Time zone definitions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) .
 
 **Details**
 
 Each element in `  timestamp_string  ` must have a corresponding element in `  format_string  ` . The location of each element in `  format_string  ` must match the location of each element in `  timestamp_string  ` .
 
-``` text
--- This works because elements on both sides match.
-SELECT PARSE_TIMESTAMP("%a %b %e %I:%M:%S %Y", "Thu Dec 25 07:30:00 2008");
-
--- This produces an error because the year element is in different locations.
-SELECT PARSE_TIMESTAMP("%a %b %e %Y %I:%M:%S", "Thu Dec 25 07:30:00 2008");
-
--- This produces an error because one of the year elements is missing.
-SELECT PARSE_TIMESTAMP("%a %b %e %I:%M:%S", "Thu Dec 25 07:30:00 2008");
-
--- This works because %c can find all matching elements in timestamp_string.
-SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008");
-```
+    -- This works because elements on both sides match.
+    SELECT PARSE_TIMESTAMP("%a %b %e %I:%M:%S %Y", "Thu Dec 25 07:30:00 2008");
+    
+    -- This produces an error because the year element is in different locations.
+    SELECT PARSE_TIMESTAMP("%a %b %e %Y %I:%M:%S", "Thu Dec 25 07:30:00 2008");
+    
+    -- This produces an error because one of the year elements is missing.
+    SELECT PARSE_TIMESTAMP("%a %b %e %I:%M:%S", "Thu Dec 25 07:30:00 2008");
+    
+    -- This works because %c can find all matching elements in timestamp_string.
+    SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008");
 
 The format string fully supports most format elements, except for `  %P  ` .
 
@@ -426,26 +388,22 @@ The following additional considerations apply when using the `  PARSE_TIMESTAMP 
 
 **Example**
 
-``` text
-SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008") AS parsed;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | parsed                  |
- +-------------------------+
- | 2008-12-25 07:30:00 UTC |
- +-------------------------*/
-```
+    SELECT PARSE_TIMESTAMP("%c", "Thu Dec 25 07:30:00 2008") AS parsed;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | parsed                  |
+     +-------------------------+
+     | 2008-12-25 07:30:00 UTC |
+     +-------------------------*/
 
 ## `     STRING    `
 
-``` text
-STRING(timestamp_expression[, time_zone])
-```
+    STRING(timestamp_expression[, time_zone])
 
 **Description**
 
-Converts a timestamp to a string. Supports an optional parameter to specify a time zone. See [Time zone definitions](#timezone_definitions) for information on how to specify a time zone.
+Converts a timestamp to a string. Supports an optional parameter to specify a time zone. See [Time zone definitions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) for information on how to specify a time zone.
 
 **Return Data Type**
 
@@ -453,23 +411,19 @@ Converts a timestamp to a string. Supports an optional parameter to specify a ti
 
 **Example**
 
-``` text
-SELECT STRING(TIMESTAMP "2008-12-25 15:30:00+00", "UTC") AS string;
-
-/*-------------------------------+
- | string                        |
- +-------------------------------+
- | 2008-12-25 15:30:00+00        |
- +-------------------------------*/
-```
+    SELECT STRING(TIMESTAMP "2008-12-25 15:30:00+00", "UTC") AS string;
+    
+    /*-------------------------------+
+     | string                        |
+     +-------------------------------+
+     | 2008-12-25 15:30:00+00        |
+     +-------------------------------*/
 
 ## `     TIMESTAMP    `
 
-``` text
-TIMESTAMP(string_expression[, time_zone])
-TIMESTAMP(date_expression[, time_zone])
-TIMESTAMP(datetime_expression[, time_zone])
-```
+    TIMESTAMP(string_expression[, time_zone])
+    TIMESTAMP(date_expression[, time_zone])
+    TIMESTAMP(datetime_expression[, time_zone])
 
 **Description**
 
@@ -477,7 +431,7 @@ TIMESTAMP(datetime_expression[, time_zone])
   - `  date_expression[, time_zone]  ` : Converts a date to a timestamp. The value returned is the earliest timestamp that falls within the given date.
   - `  datetime_expression[, time_zone]  ` : Converts a datetime to a timestamp.
 
-This function supports an optional parameter to [specify a time zone](#timezone_definitions) . If no time zone is specified, the default time zone, UTC, is used.
+This function supports an optional parameter to [specify a time zone](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) . If no time zone is specified, the default time zone, UTC, is used.
 
 **Return Data Type**
 
@@ -485,66 +439,54 @@ This function supports an optional parameter to [specify a time zone](#timezone_
 
 **Examples**
 
-``` text
-SELECT TIMESTAMP("2008-12-25 15:30:00+00") AS timestamp_str;
+    SELECT TIMESTAMP("2008-12-25 15:30:00+00") AS timestamp_str;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_str           |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_str           |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP("2008-12-25 15:30:00", "America/Los_Angeles") AS timestamp_str;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_str           |
+     +-------------------------+
+     | 2008-12-25 23:30:00 UTC |
+     +-------------------------*/
 
-``` text
-SELECT TIMESTAMP("2008-12-25 15:30:00", "America/Los_Angeles") AS timestamp_str;
+    SELECT TIMESTAMP("2008-12-25 15:30:00 UTC") AS timestamp_str;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_str           |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_str           |
- +-------------------------+
- | 2008-12-25 23:30:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP(DATETIME "2008-12-25 15:30:00") AS timestamp_datetime;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_datetime      |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
-``` text
-SELECT TIMESTAMP("2008-12-25 15:30:00 UTC") AS timestamp_str;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_str           |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
-
-``` text
-SELECT TIMESTAMP(DATETIME "2008-12-25 15:30:00") AS timestamp_datetime;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_datetime      |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
-
-``` text
-SELECT TIMESTAMP(DATE "2008-12-25") AS timestamp_date;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_date          |
- +-------------------------+
- | 2008-12-25 00:00:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP(DATE "2008-12-25") AS timestamp_date;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_date          |
+     +-------------------------+
+     | 2008-12-25 00:00:00 UTC |
+     +-------------------------*/
 
 ## `     TIMESTAMP_ADD    `
 
-``` text
-TIMESTAMP_ADD(timestamp_expression, INTERVAL int64_expression date_part)
-```
+    TIMESTAMP_ADD(timestamp_expression, INTERVAL int64_expression date_part)
 
 **Description**
 
@@ -565,24 +507,20 @@ Adds `  int64_expression  ` units of `  date_part  ` to the timestamp, independe
 
 **Example**
 
-``` text
-SELECT
-  TIMESTAMP("2008-12-25 15:30:00+00") AS original,
-  TIMESTAMP_ADD(TIMESTAMP "2008-12-25 15:30:00+00", INTERVAL 10 MINUTE) AS later;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+-------------------------+
- | original                | later                   |
- +-------------------------+-------------------------+
- | 2008-12-25 15:30:00 UTC | 2008-12-25 15:40:00 UTC |
- +-------------------------+-------------------------*/
-```
+    SELECT
+      TIMESTAMP("2008-12-25 15:30:00+00") AS original,
+      TIMESTAMP_ADD(TIMESTAMP "2008-12-25 15:30:00+00", INTERVAL 10 MINUTE) AS later;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+-------------------------+
+     | original                | later                   |
+     +-------------------------+-------------------------+
+     | 2008-12-25 15:30:00 UTC | 2008-12-25 15:40:00 UTC |
+     +-------------------------+-------------------------*/
 
 ## `     TIMESTAMP_DIFF    `
 
-``` text
-TIMESTAMP_DIFF(end_timestamp, start_timestamp, granularity)
-```
+    TIMESTAMP_DIFF(end_timestamp, start_timestamp, granularity)
 
 **Description**
 
@@ -615,49 +553,41 @@ If `  end_timestamp  ` is earlier than `  start_timestamp  ` , the output is neg
 
 **Example**
 
-``` text
-SELECT
-  TIMESTAMP("2010-07-07 10:20:00+00") AS later_timestamp,
-  TIMESTAMP("2008-12-25 15:30:00+00") AS earlier_timestamp,
-  TIMESTAMP_DIFF(TIMESTAMP "2010-07-07 10:20:00+00", TIMESTAMP "2008-12-25 15:30:00+00", HOUR) AS hours;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+-------------------------+-------+
- | later_timestamp         | earlier_timestamp       | hours |
- +-------------------------+-------------------------+-------+
- | 2010-07-07 10:20:00 UTC | 2008-12-25 15:30:00 UTC | 13410 |
- +-------------------------+-------------------------+-------*/
-```
+    SELECT
+      TIMESTAMP("2010-07-07 10:20:00+00") AS later_timestamp,
+      TIMESTAMP("2008-12-25 15:30:00+00") AS earlier_timestamp,
+      TIMESTAMP_DIFF(TIMESTAMP "2010-07-07 10:20:00+00", TIMESTAMP "2008-12-25 15:30:00+00", HOUR) AS hours;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+-------------------------+-------+
+     | later_timestamp         | earlier_timestamp       | hours |
+     +-------------------------+-------------------------+-------+
+     | 2010-07-07 10:20:00 UTC | 2008-12-25 15:30:00 UTC | 13410 |
+     +-------------------------+-------------------------+-------*/
 
 In the following example, the first timestamp occurs before the second timestamp, resulting in a negative output.
 
-``` text
-SELECT TIMESTAMP_DIFF(TIMESTAMP "2018-08-14", TIMESTAMP "2018-10-14", DAY) AS negative_diff;
-
-/*---------------+
- | negative_diff |
- +---------------+
- | -61           |
- +---------------*/
-```
+    SELECT TIMESTAMP_DIFF(TIMESTAMP "2018-08-14", TIMESTAMP "2018-10-14", DAY) AS negative_diff;
+    
+    /*---------------+
+     | negative_diff |
+     +---------------+
+     | -61           |
+     +---------------*/
 
 In this example, the result is 0 because only the number of whole specified `  HOUR  ` intervals are included.
 
-``` text
-SELECT TIMESTAMP_DIFF("2001-02-01 01:00:00", "2001-02-01 00:00:01", HOUR) AS diff;
-
-/*---------------+
- | diff          |
- +---------------+
- | 0             |
- +---------------*/
-```
+    SELECT TIMESTAMP_DIFF("2001-02-01 01:00:00", "2001-02-01 00:00:01", HOUR) AS diff;
+    
+    /*---------------+
+     | diff          |
+     +---------------+
+     | 0             |
+     +---------------*/
 
 ## `     TIMESTAMP_MICROS    `
 
-``` text
-TIMESTAMP_MICROS(int64_expression)
-```
+    TIMESTAMP_MICROS(int64_expression)
 
 **Description**
 
@@ -669,22 +599,18 @@ Interprets `  int64_expression  ` as the number of microseconds since 1970-01-01
 
 **Example**
 
-``` text
-SELECT TIMESTAMP_MICROS(1230219000000000) AS timestamp_value;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_value         |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP_MICROS(1230219000000000) AS timestamp_value;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_value         |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
 ## `     TIMESTAMP_MILLIS    `
 
-``` text
-TIMESTAMP_MILLIS(int64_expression)
-```
+    TIMESTAMP_MILLIS(int64_expression)
 
 **Description**
 
@@ -696,22 +622,18 @@ Interprets `  int64_expression  ` as the number of milliseconds since 1970-01-01
 
 **Example**
 
-``` text
-SELECT TIMESTAMP_MILLIS(1230219000000) AS timestamp_value;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_value         |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP_MILLIS(1230219000000) AS timestamp_value;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_value         |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
 ## `     TIMESTAMP_SECONDS    `
 
-``` text
-TIMESTAMP_SECONDS(int64_expression)
-```
+    TIMESTAMP_SECONDS(int64_expression)
 
 **Description**
 
@@ -723,22 +645,18 @@ Interprets `  int64_expression  ` as the number of seconds since 1970-01-01 00:0
 
 **Example**
 
-``` text
-SELECT TIMESTAMP_SECONDS(1230219000) AS timestamp_value;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+
- | timestamp_value         |
- +-------------------------+
- | 2008-12-25 15:30:00 UTC |
- +-------------------------*/
-```
+    SELECT TIMESTAMP_SECONDS(1230219000) AS timestamp_value;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+
+     | timestamp_value         |
+     +-------------------------+
+     | 2008-12-25 15:30:00 UTC |
+     +-------------------------*/
 
 ## `     TIMESTAMP_SUB    `
 
-``` text
-TIMESTAMP_SUB(timestamp_expression, INTERVAL int64_expression date_part)
-```
+    TIMESTAMP_SUB(timestamp_expression, INTERVAL int64_expression date_part)
 
 **Description**
 
@@ -759,28 +677,22 @@ Subtracts `  int64_expression  ` units of `  date_part  ` from the timestamp, in
 
 **Example**
 
-``` text
-SELECT
-  TIMESTAMP("2008-12-25 15:30:00+00") AS original,
-  TIMESTAMP_SUB(TIMESTAMP "2008-12-25 15:30:00+00", INTERVAL 10 MINUTE) AS earlier;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+-------------------------+
- | original                | earlier                 |
- +-------------------------+-------------------------+
- | 2008-12-25 15:30:00 UTC | 2008-12-25 15:20:00 UTC |
- +-------------------------+-------------------------*/
-```
+    SELECT
+      TIMESTAMP("2008-12-25 15:30:00+00") AS original,
+      TIMESTAMP_SUB(TIMESTAMP "2008-12-25 15:30:00+00", INTERVAL 10 MINUTE) AS earlier;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+-------------------------+
+     | original                | earlier                 |
+     +-------------------------+-------------------------+
+     | 2008-12-25 15:30:00 UTC | 2008-12-25 15:20:00 UTC |
+     +-------------------------+-------------------------*/
 
 ## `     TIMESTAMP_TRUNC    `
 
-``` text
-TIMESTAMP_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
-```
+    TIMESTAMP_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
 
-``` text
-TIMESTAMP_TRUNC(datetime_value, datetime_granularity)
-```
+    TIMESTAMP_TRUNC(datetime_value, datetime_granularity)
 
 **Description**
 
@@ -790,15 +702,17 @@ Truncates a `  TIMESTAMP  ` or `  DATETIME  ` value at a particular granularity.
 
   - `  timestamp_value  ` : A `  TIMESTAMP  ` value to truncate.
 
-  - `  timestamp_granularity  ` : The truncation granularity for a `  TIMESTAMP  ` value. [Date granularities](#timestamp_trunc_granularity_date) and [time granularities](#timestamp_trunc_granularity_time) can be used.
+  - `  timestamp_granularity  ` : The truncation granularity for a `  TIMESTAMP  ` value. [Date granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc_granularity_date) and [time granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc_granularity_time) can be used.
 
-  - `  time_zone  ` : A time zone to use with the `  TIMESTAMP  ` value. [Time zone parts](#timestamp_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
+  - `  time_zone  ` : A time zone to use with the `  TIMESTAMP  ` value. [Time zone parts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
     
     **Note:** When truncating a timestamp to `  MINUTE  ` or `  HOUR  ` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `  HOUR  ` ) or the seconds (when truncating to `  MINUTE  ` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
 
   - `  datetime_value  ` : A `  DATETIME  ` value to truncate.
 
-  - `  datetime_granularity  ` : The truncation granularity for a `  DATETIME  ` value. [Date granularities](#timestamp_trunc_granularity_date) and [time granularities](#timestamp_trunc_granularity_time) can be used.
+  - `  datetime_granularity  ` : The truncation granularity for a `  DATETIME  ` value. [Date granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc_granularity_date) and [time granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc_granularity_time) can be used.
+
+<span id="timestamp_trunc_granularity_date"></span>
 
 **Date granularity definitions**
 
@@ -818,6 +732,8 @@ Truncates a `  TIMESTAMP  ` or `  DATETIME  ` value at a particular granularity.
 
   - `  ISOYEAR  ` : The first day in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year that contains the value to truncate. The ISO year is the Monday of the first week where Thursday belongs to the corresponding Gregorian calendar year.
 
+<span id="timestamp_trunc_granularity_time"></span>
+
 **Time granularity definitions**
 
   - `  MICROSECOND  ` : If used, nothing is truncated from the value.
@@ -829,6 +745,8 @@ Truncates a `  TIMESTAMP  ` or `  DATETIME  ` value at a particular granularity.
   - `  MINUTE  ` : The nearest lesser than or equal minute.
 
   - `  HOUR  ` : The nearest lesser than or equal hour.
+
+<span id="timestamp_time_zone_parts"></span>
 
 **Time zone part definitions**
 
@@ -853,56 +771,48 @@ The same data type as the first argument passed into this function.
 
 **Examples**
 
-``` text
-SELECT
-  TIMESTAMP_TRUNC(TIMESTAMP "2008-12-25 15:30:00+00", DAY, "UTC") AS utc,
-  TIMESTAMP_TRUNC(TIMESTAMP "2008-12-25 15:30:00+00", DAY, "America/Los_Angeles") AS la;
+    SELECT
+      TIMESTAMP_TRUNC(TIMESTAMP "2008-12-25 15:30:00+00", DAY, "UTC") AS utc,
+      TIMESTAMP_TRUNC(TIMESTAMP "2008-12-25 15:30:00+00", DAY, "America/Los_Angeles") AS la;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+-------------------------+
+     | utc                     | la                      |
+     +-------------------------+-------------------------+
+     | 2008-12-25 00:00:00 UTC | 2008-12-25 08:00:00 UTC |
+     +-------------------------+-------------------------*/
 
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+-------------------------+
- | utc                     | la                      |
- +-------------------------+-------------------------+
- | 2008-12-25 00:00:00 UTC | 2008-12-25 08:00:00 UTC |
- +-------------------------+-------------------------*/
-```
+In the following example, `  timestamp_expression  ` has a time zone offset of +12. The first column shows the `  timestamp_expression  ` in UTC time. The second column shows the output of `  TIMESTAMP_TRUNC  ` using weeks that start on Monday. Because the `  timestamp_expression  ` falls on a Sunday in UTC, `  TIMESTAMP_TRUNC  ` truncates it to the preceding Monday. The third column shows the same function with the optional [Time zone definition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) argument 'Pacific/Auckland'. Here, the function truncates the `  timestamp_expression  ` using New Zealand Daylight Time, where it falls on a Monday.
 
-In the following example, `  timestamp_expression  ` has a time zone offset of +12. The first column shows the `  timestamp_expression  ` in UTC time. The second column shows the output of `  TIMESTAMP_TRUNC  ` using weeks that start on Monday. Because the `  timestamp_expression  ` falls on a Sunday in UTC, `  TIMESTAMP_TRUNC  ` truncates it to the preceding Monday. The third column shows the same function with the optional [Time zone definition](#timezone_definitions) argument 'Pacific/Auckland'. Here, the function truncates the `  timestamp_expression  ` using New Zealand Daylight Time, where it falls on a Monday.
-
-``` text
-SELECT
-  timestamp_value AS timestamp_value,
-  TIMESTAMP_TRUNC(timestamp_value, WEEK(MONDAY), "UTC") AS utc_truncated,
-  TIMESTAMP_TRUNC(timestamp_value, WEEK(MONDAY), "Pacific/Auckland") AS nzdt_truncated
-FROM (SELECT TIMESTAMP("2017-11-06 00:00:00+12") AS timestamp_value);
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+-------------------------+-------------------------+
- | timestamp_value         | utc_truncated           | nzdt_truncated          |
- +-------------------------+-------------------------+-------------------------+
- | 2017-11-05 12:00:00 UTC | 2017-10-30 00:00:00 UTC | 2017-11-05 11:00:00 UTC |
- +-------------------------+-------------------------+-------------------------*/
-```
+    SELECT
+      timestamp_value AS timestamp_value,
+      TIMESTAMP_TRUNC(timestamp_value, WEEK(MONDAY), "UTC") AS utc_truncated,
+      TIMESTAMP_TRUNC(timestamp_value, WEEK(MONDAY), "Pacific/Auckland") AS nzdt_truncated
+    FROM (SELECT TIMESTAMP("2017-11-06 00:00:00+12") AS timestamp_value);
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+-------------------------+-------------------------+
+     | timestamp_value         | utc_truncated           | nzdt_truncated          |
+     +-------------------------+-------------------------+-------------------------+
+     | 2017-11-05 12:00:00 UTC | 2017-10-30 00:00:00 UTC | 2017-11-05 11:00:00 UTC |
+     +-------------------------+-------------------------+-------------------------*/
 
 In the following example, the original `  timestamp_expression  ` is in the Gregorian calendar year 2015. However, `  TIMESTAMP_TRUNC  ` with the `  ISOYEAR  ` date part truncates the `  timestamp_expression  ` to the beginning of the ISO year, not the Gregorian calendar year. The first Thursday of the 2015 calendar year was 2015-01-01, so the ISO year 2015 begins on the preceding Monday, 2014-12-29. Therefore the ISO year boundary preceding the `  timestamp_expression  ` 2015-06-15 00:00:00+00 is 2014-12-29.
 
-``` text
-SELECT
-  TIMESTAMP_TRUNC("2015-06-15 00:00:00+00", ISOYEAR) AS isoyear_boundary,
-  EXTRACT(ISOYEAR FROM TIMESTAMP "2015-06-15 00:00:00+00") AS isoyear_number;
-
--- Display of results may differ, depending upon the environment and time zone where this query was executed.
-/*-------------------------+----------------+
- | isoyear_boundary        | isoyear_number |
- +-------------------------+----------------+
- | 2014-12-29 00:00:00 UTC | 2015           |
- +-------------------------+----------------*/
-```
+    SELECT
+      TIMESTAMP_TRUNC("2015-06-15 00:00:00+00", ISOYEAR) AS isoyear_boundary,
+      EXTRACT(ISOYEAR FROM TIMESTAMP "2015-06-15 00:00:00+00") AS isoyear_number;
+    
+    -- Display of results may differ, depending upon the environment and time zone where this query was executed.
+    /*-------------------------+----------------+
+     | isoyear_boundary        | isoyear_number |
+     +-------------------------+----------------+
+     | 2014-12-29 00:00:00 UTC | 2015           |
+     +-------------------------+----------------*/
 
 ## `     UNIX_MICROS    `
 
-``` text
-UNIX_MICROS(timestamp_expression)
-```
+    UNIX_MICROS(timestamp_expression)
 
 **Description**
 
@@ -914,21 +824,17 @@ Returns the number of microseconds since `  1970-01-01 00:00:00 UTC  ` .
 
 **Examples**
 
-``` text
-SELECT UNIX_MICROS(TIMESTAMP "2008-12-25 15:30:00+00") AS micros;
-
-/*------------------+
- | micros           |
- +------------------+
- | 1230219000000000 |
- +------------------*/
-```
+    SELECT UNIX_MICROS(TIMESTAMP "2008-12-25 15:30:00+00") AS micros;
+    
+    /*------------------+
+     | micros           |
+     +------------------+
+     | 1230219000000000 |
+     +------------------*/
 
 ## `     UNIX_MILLIS    `
 
-``` text
-UNIX_MILLIS(timestamp_expression)
-```
+    UNIX_MILLIS(timestamp_expression)
 
 **Description**
 
@@ -940,31 +846,25 @@ Returns the number of milliseconds since `  1970-01-01 00:00:00 UTC  ` . Truncat
 
 **Examples**
 
-``` text
-SELECT UNIX_MILLIS(TIMESTAMP "2008-12-25 15:30:00+00") AS millis;
+    SELECT UNIX_MILLIS(TIMESTAMP "2008-12-25 15:30:00+00") AS millis;
+    
+    /*---------------+
+     | millis        |
+     +---------------+
+     | 1230219000000 |
+     +---------------*/
 
-/*---------------+
- | millis        |
- +---------------+
- | 1230219000000 |
- +---------------*/
-```
-
-``` text
-SELECT UNIX_MILLIS(TIMESTAMP "1970-01-01 00:00:00.0018+00") AS millis;
-
-/*---------------+
- | millis        |
- +---------------+
- | 1             |
- +---------------*/
-```
+    SELECT UNIX_MILLIS(TIMESTAMP "1970-01-01 00:00:00.0018+00") AS millis;
+    
+    /*---------------+
+     | millis        |
+     +---------------+
+     | 1             |
+     +---------------*/
 
 ## `     UNIX_SECONDS    `
 
-``` text
-UNIX_SECONDS(timestamp_expression)
-```
+    UNIX_SECONDS(timestamp_expression)
 
 **Description**
 
@@ -976,25 +876,21 @@ Returns the number of seconds since `  1970-01-01 00:00:00 UTC  ` . Truncates hi
 
 **Examples**
 
-``` text
-SELECT UNIX_SECONDS(TIMESTAMP "2008-12-25 15:30:00+00") AS seconds;
+    SELECT UNIX_SECONDS(TIMESTAMP "2008-12-25 15:30:00+00") AS seconds;
+    
+    /*------------+
+     | seconds    |
+     +------------+
+     | 1230219000 |
+     +------------*/
 
-/*------------+
- | seconds    |
- +------------+
- | 1230219000 |
- +------------*/
-```
-
-``` text
-SELECT UNIX_SECONDS(TIMESTAMP "1970-01-01 00:00:01.8+00") AS seconds;
-
-/*------------+
- | seconds    |
- +------------+
- | 1          |
- +------------*/
-```
+    SELECT UNIX_SECONDS(TIMESTAMP "1970-01-01 00:00:01.8+00") AS seconds;
+    
+    /*------------+
+     | seconds    |
+     +------------+
+     | 1          |
+     +------------*/
 
 ## Supplemental materials
 
@@ -1006,4 +902,4 @@ Some timestamp functions have a time zone argument. A time zone is needed to con
 
 Certain date and timestamp functions allow you to override the default time zone and specify a different one. You can specify a time zone by either supplying the time zone name (for example, `  America/Los_Angeles  ` ) or time zone offset from UTC (for example, -08).
 
-To learn more about how time zones work with the `  TIMESTAMP  ` type, see [Time zones](/bigquery/docs/reference/standard-sql/data-types#time_zones) .
+To learn more about how time zones work with the `  TIMESTAMP  ` type, see [Time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) .

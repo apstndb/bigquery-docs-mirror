@@ -1,116 +1,116 @@
-  - [Resource: Model](#Model)
-      - [JSON representation](#Model.SCHEMA_REPRESENTATION)
-  - [ModelReference](#ModelReference)
-      - [JSON representation](#ModelReference.SCHEMA_REPRESENTATION)
-  - [ModelType](#ModelType)
-  - [TrainingRun](#TrainingRun)
-      - [JSON representation](#TrainingRun.SCHEMA_REPRESENTATION)
-  - [TrainingOptions](#TrainingOptions)
-      - [JSON representation](#TrainingOptions.SCHEMA_REPRESENTATION)
-  - [LossType](#LossType)
-  - [DataSplitMethod](#DataSplitMethod)
-  - [LearnRateStrategy](#LearnRateStrategy)
-  - [DistanceType](#DistanceType)
-  - [OptimizationStrategy](#OptimizationStrategy)
-  - [BoosterType](#BoosterType)
-  - [DartNormalizeType](#DartNormalizeType)
-  - [TreeMethod](#TreeMethod)
-  - [FeedbackType](#FeedbackType)
-  - [KmeansInitializationMethod](#KmeansInitializationMethod)
-  - [ArimaOrder](#ArimaOrder)
-      - [JSON representation](#ArimaOrder.SCHEMA_REPRESENTATION)
-  - [DataFrequency](#DataFrequency)
-  - [HolidayRegion](#HolidayRegion)
-  - [HparamTuningObjective](#HparamTuningObjective)
-  - [EncodingMethod](#EncodingMethod)
-  - [PcaSolver](#PcaSolver)
-  - [ModelRegistry](#ModelRegistry)
-  - [IterationResult](#IterationResult)
-      - [JSON representation](#IterationResult.SCHEMA_REPRESENTATION)
-  - [ClusterInfo](#ClusterInfo)
-      - [JSON representation](#ClusterInfo.SCHEMA_REPRESENTATION)
-  - [ArimaResult](#ArimaResult)
-      - [JSON representation](#ArimaResult.SCHEMA_REPRESENTATION)
-  - [ArimaModelInfo](#ArimaModelInfo)
-      - [JSON representation](#ArimaModelInfo.SCHEMA_REPRESENTATION)
-  - [ArimaCoefficients](#ArimaCoefficients)
-      - [JSON representation](#ArimaCoefficients.SCHEMA_REPRESENTATION)
-  - [ArimaFittingMetrics](#ArimaFittingMetrics)
-      - [JSON representation](#ArimaFittingMetrics.SCHEMA_REPRESENTATION)
-  - [SeasonalPeriodType](#SeasonalPeriodType)
-  - [PrincipalComponentInfo](#PrincipalComponentInfo)
-      - [JSON representation](#PrincipalComponentInfo.SCHEMA_REPRESENTATION)
-  - [EvaluationMetrics](#EvaluationMetrics)
-      - [JSON representation](#EvaluationMetrics.SCHEMA_REPRESENTATION)
-  - [RegressionMetrics](#RegressionMetrics)
-      - [JSON representation](#RegressionMetrics.SCHEMA_REPRESENTATION)
-  - [BinaryClassificationMetrics](#BinaryClassificationMetrics)
-      - [JSON representation](#BinaryClassificationMetrics.SCHEMA_REPRESENTATION)
-  - [AggregateClassificationMetrics](#AggregateClassificationMetrics)
-      - [JSON representation](#AggregateClassificationMetrics.SCHEMA_REPRESENTATION)
-  - [BinaryConfusionMatrix](#BinaryConfusionMatrix)
-      - [JSON representation](#BinaryConfusionMatrix.SCHEMA_REPRESENTATION)
-  - [MultiClassClassificationMetrics](#MultiClassClassificationMetrics)
-      - [JSON representation](#MultiClassClassificationMetrics.SCHEMA_REPRESENTATION)
-  - [ConfusionMatrix](#ConfusionMatrix)
-      - [JSON representation](#ConfusionMatrix.SCHEMA_REPRESENTATION)
-  - [Row](#Row)
-      - [JSON representation](#Row.SCHEMA_REPRESENTATION)
-  - [Entry](#Entry)
-      - [JSON representation](#Entry.SCHEMA_REPRESENTATION)
-  - [ClusteringMetrics](#ClusteringMetrics)
-      - [JSON representation](#ClusteringMetrics.SCHEMA_REPRESENTATION)
-  - [Cluster](#Cluster)
-      - [JSON representation](#Cluster.SCHEMA_REPRESENTATION)
-  - [FeatureValue](#FeatureValue)
-      - [JSON representation](#FeatureValue.SCHEMA_REPRESENTATION)
-  - [CategoricalValue](#CategoricalValue)
-      - [JSON representation](#CategoricalValue.SCHEMA_REPRESENTATION)
-  - [CategoryCount](#CategoryCount)
-      - [JSON representation](#CategoryCount.SCHEMA_REPRESENTATION)
-  - [RankingMetrics](#RankingMetrics)
-      - [JSON representation](#RankingMetrics.SCHEMA_REPRESENTATION)
-  - [ArimaForecastingMetrics](#ArimaForecastingMetrics)
-      - [JSON representation](#ArimaForecastingMetrics.SCHEMA_REPRESENTATION)
-  - [ArimaSingleModelForecastingMetrics](#ArimaSingleModelForecastingMetrics)
-      - [JSON representation](#ArimaSingleModelForecastingMetrics.SCHEMA_REPRESENTATION)
-  - [DimensionalityReductionMetrics](#DimensionalityReductionMetrics)
-      - [JSON representation](#DimensionalityReductionMetrics.SCHEMA_REPRESENTATION)
-  - [DataSplitResult](#DataSplitResult)
-      - [JSON representation](#DataSplitResult.SCHEMA_REPRESENTATION)
-  - [GlobalExplanation](#GlobalExplanation)
-      - [JSON representation](#GlobalExplanation.SCHEMA_REPRESENTATION)
-  - [Explanation](#Explanation)
-      - [JSON representation](#Explanation.SCHEMA_REPRESENTATION)
-  - [TransformColumn](#TransformColumn)
-      - [JSON representation](#TransformColumn.SCHEMA_REPRESENTATION)
-  - [HparamSearchSpaces](#HparamSearchSpaces)
-      - [JSON representation](#HparamSearchSpaces.SCHEMA_REPRESENTATION)
-  - [DoubleHparamSearchSpace](#DoubleHparamSearchSpace)
-      - [JSON representation](#DoubleHparamSearchSpace.SCHEMA_REPRESENTATION)
-  - [DoubleRange](#DoubleRange)
-      - [JSON representation](#DoubleRange.SCHEMA_REPRESENTATION)
-  - [DoubleCandidates](#DoubleCandidates)
-      - [JSON representation](#DoubleCandidates.SCHEMA_REPRESENTATION)
-  - [IntHparamSearchSpace](#IntHparamSearchSpace)
-      - [JSON representation](#IntHparamSearchSpace.SCHEMA_REPRESENTATION)
-  - [IntRange](#IntRange)
-      - [JSON representation](#IntRange.SCHEMA_REPRESENTATION)
-  - [IntCandidates](#IntCandidates)
-      - [JSON representation](#IntCandidates.SCHEMA_REPRESENTATION)
-  - [IntArrayHparamSearchSpace](#IntArrayHparamSearchSpace)
-      - [JSON representation](#IntArrayHparamSearchSpace.SCHEMA_REPRESENTATION)
-  - [IntArray](#IntArray)
-      - [JSON representation](#IntArray.SCHEMA_REPRESENTATION)
-  - [StringHparamSearchSpace](#StringHparamSearchSpace)
-      - [JSON representation](#StringHparamSearchSpace.SCHEMA_REPRESENTATION)
-  - [HparamTuningTrial](#HparamTuningTrial)
-      - [JSON representation](#HparamTuningTrial.SCHEMA_REPRESENTATION)
-  - [TrialStatus](#TrialStatus)
-  - [RemoteModelInfo](#RemoteModelInfo)
-      - [JSON representation](#RemoteModelInfo.SCHEMA_REPRESENTATION)
-  - [RemoteServiceType](#RemoteServiceType)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Model](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Model.SCHEMA_REPRESENTATION)
+  - [ModelReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelReference.SCHEMA_REPRESENTATION)
+  - [ModelType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelType)
+  - [TrainingRun](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingRun)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingRun.SCHEMA_REPRESENTATION)
+  - [TrainingOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrainingOptions.SCHEMA_REPRESENTATION)
+  - [LossType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#LossType)
+  - [DataSplitMethod](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DataSplitMethod)
+  - [LearnRateStrategy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#LearnRateStrategy)
+  - [DistanceType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DistanceType)
+  - [OptimizationStrategy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#OptimizationStrategy)
+  - [BoosterType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#BoosterType)
+  - [DartNormalizeType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DartNormalizeType)
+  - [TreeMethod](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TreeMethod)
+  - [FeedbackType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#FeedbackType)
+  - [KmeansInitializationMethod](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#KmeansInitializationMethod)
+  - [ArimaOrder](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaOrder)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaOrder.SCHEMA_REPRESENTATION)
+  - [DataFrequency](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DataFrequency)
+  - [HolidayRegion](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HolidayRegion)
+  - [HparamTuningObjective](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HparamTuningObjective)
+  - [EncodingMethod](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#EncodingMethod)
+  - [PcaSolver](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#PcaSolver)
+  - [ModelRegistry](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ModelRegistry)
+  - [IterationResult](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IterationResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IterationResult.SCHEMA_REPRESENTATION)
+  - [ClusterInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ClusterInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ClusterInfo.SCHEMA_REPRESENTATION)
+  - [ArimaResult](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaResult.SCHEMA_REPRESENTATION)
+  - [ArimaModelInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaModelInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaModelInfo.SCHEMA_REPRESENTATION)
+  - [ArimaCoefficients](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaCoefficients)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaCoefficients.SCHEMA_REPRESENTATION)
+  - [ArimaFittingMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaFittingMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaFittingMetrics.SCHEMA_REPRESENTATION)
+  - [SeasonalPeriodType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#SeasonalPeriodType)
+  - [PrincipalComponentInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#PrincipalComponentInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#PrincipalComponentInfo.SCHEMA_REPRESENTATION)
+  - [EvaluationMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#EvaluationMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#EvaluationMetrics.SCHEMA_REPRESENTATION)
+  - [RegressionMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RegressionMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RegressionMetrics.SCHEMA_REPRESENTATION)
+  - [BinaryClassificationMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#BinaryClassificationMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#BinaryClassificationMetrics.SCHEMA_REPRESENTATION)
+  - [AggregateClassificationMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#AggregateClassificationMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#AggregateClassificationMetrics.SCHEMA_REPRESENTATION)
+  - [BinaryConfusionMatrix](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#BinaryConfusionMatrix)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#BinaryConfusionMatrix.SCHEMA_REPRESENTATION)
+  - [MultiClassClassificationMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#MultiClassClassificationMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#MultiClassClassificationMetrics.SCHEMA_REPRESENTATION)
+  - [ConfusionMatrix](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ConfusionMatrix)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ConfusionMatrix.SCHEMA_REPRESENTATION)
+  - [Row](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Row)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Row.SCHEMA_REPRESENTATION)
+  - [Entry](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Entry)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Entry.SCHEMA_REPRESENTATION)
+  - [ClusteringMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ClusteringMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ClusteringMetrics.SCHEMA_REPRESENTATION)
+  - [Cluster](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Cluster)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Cluster.SCHEMA_REPRESENTATION)
+  - [FeatureValue](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#FeatureValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#FeatureValue.SCHEMA_REPRESENTATION)
+  - [CategoricalValue](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#CategoricalValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#CategoricalValue.SCHEMA_REPRESENTATION)
+  - [CategoryCount](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#CategoryCount)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#CategoryCount.SCHEMA_REPRESENTATION)
+  - [RankingMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RankingMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RankingMetrics.SCHEMA_REPRESENTATION)
+  - [ArimaForecastingMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaForecastingMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaForecastingMetrics.SCHEMA_REPRESENTATION)
+  - [ArimaSingleModelForecastingMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaSingleModelForecastingMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#ArimaSingleModelForecastingMetrics.SCHEMA_REPRESENTATION)
+  - [DimensionalityReductionMetrics](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DimensionalityReductionMetrics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DimensionalityReductionMetrics.SCHEMA_REPRESENTATION)
+  - [DataSplitResult](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DataSplitResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DataSplitResult.SCHEMA_REPRESENTATION)
+  - [GlobalExplanation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#GlobalExplanation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#GlobalExplanation.SCHEMA_REPRESENTATION)
+  - [Explanation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Explanation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#Explanation.SCHEMA_REPRESENTATION)
+  - [TransformColumn](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TransformColumn)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TransformColumn.SCHEMA_REPRESENTATION)
+  - [HparamSearchSpaces](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HparamSearchSpaces)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HparamSearchSpaces.SCHEMA_REPRESENTATION)
+  - [DoubleHparamSearchSpace](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleHparamSearchSpace)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleHparamSearchSpace.SCHEMA_REPRESENTATION)
+  - [DoubleRange](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleRange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleRange.SCHEMA_REPRESENTATION)
+  - [DoubleCandidates](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleCandidates)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#DoubleCandidates.SCHEMA_REPRESENTATION)
+  - [IntHparamSearchSpace](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntHparamSearchSpace)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntHparamSearchSpace.SCHEMA_REPRESENTATION)
+  - [IntRange](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntRange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntRange.SCHEMA_REPRESENTATION)
+  - [IntCandidates](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntCandidates)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntCandidates.SCHEMA_REPRESENTATION)
+  - [IntArrayHparamSearchSpace](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntArrayHparamSearchSpace)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntArrayHparamSearchSpace.SCHEMA_REPRESENTATION)
+  - [IntArray](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntArray)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#IntArray.SCHEMA_REPRESENTATION)
+  - [StringHparamSearchSpace](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#StringHparamSearchSpace)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#StringHparamSearchSpace.SCHEMA_REPRESENTATION)
+  - [HparamTuningTrial](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HparamTuningTrial)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#HparamTuningTrial.SCHEMA_REPRESENTATION)
+  - [TrialStatus](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#TrialStatus)
+  - [RemoteModelInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RemoteModelInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RemoteModelInfo.SCHEMA_REPRESENTATION)
+  - [RemoteServiceType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#RemoteServiceType)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#METHODS_SUMMARY)
 
 ## Resource: Model
 
@@ -125,7 +125,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;etag&quot;: string,
   &quot;modelReference&quot;: {
     object (ModelReference)
@@ -330,7 +330,7 @@ Id path of a model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;modelId&quot;: string
@@ -484,7 +484,7 @@ Information about a single training query run for the model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;trainingOptions&quot;: {
     object (TrainingOptions)
   },
@@ -595,7 +595,7 @@ Options used in model training.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;maxIterations&quot;: string,
   &quot;lossType&quot;: enum (LossType),
   &quot;learnRate&quot;: number,
@@ -1478,7 +1478,7 @@ Arima order, can be used for both non-seasonal and seasonal parts.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;p&quot;: string,
   &quot;d&quot;: string,
   &quot;q&quot;: string
@@ -1978,7 +1978,7 @@ Information about a single iteration of the training run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;index&quot;: integer,
   &quot;durationMs&quot;: string,
   &quot;trainingLoss&quot;: number,
@@ -2067,7 +2067,7 @@ Information about a single cluster for clustering model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;centroidId&quot;: string,
   &quot;clusterRadius&quot;: number,
   &quot;clusterSize&quot;: string
@@ -2111,7 +2111,7 @@ Cluster size, the total number of points assigned to the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;arimaModelInfo&quot;: [
     {
       object (ArimaModelInfo)
@@ -2154,7 +2154,7 @@ Arima model information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;nonSeasonalOrder&quot;: {
     object (ArimaOrder)
   },
@@ -2257,7 +2257,7 @@ Arima coefficients.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;autoRegressiveCoefficients&quot;: [
     number
   ],
@@ -2305,7 +2305,7 @@ ARIMA model fitting metrics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;logLikelihood&quot;: number,
   &quot;aic&quot;: number,
   &quot;variance&quot;: number
@@ -2383,7 +2383,7 @@ Principal component infos, used only for eigen decomposition based models, e.g.,
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;principalComponentId&quot;: string,
   &quot;explainedVariance&quot;: number,
   &quot;explainedVarianceRatio&quot;: number,
@@ -2434,7 +2434,7 @@ Evaluation metrics of a model. These are either computed on all training data or
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field metrics can be only one of the following:
   &quot;regressionMetrics&quot;: {
@@ -2525,7 +2525,7 @@ Evaluation metrics for regression and explicit feedback type matrix factorizatio
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;meanAbsoluteError&quot;: number,
   &quot;meanSquaredError&quot;: number,
   &quot;meanSquaredLogError&quot;: number,
@@ -2583,7 +2583,7 @@ Evaluation metrics for binary classification/classifier models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;aggregateClassificationMetrics&quot;: {
     object (AggregateClassificationMetrics)
   },
@@ -2640,7 +2640,7 @@ Aggregate metrics for classification/classifier models. For multi-class models, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;precision&quot;: number,
   &quot;recall&quot;: number,
   &quot;accuracy&quot;: number,
@@ -2712,7 +2712,7 @@ Confusion matrix for binary classification models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;positiveClassThreshold&quot;: number,
   &quot;truePositives&quot;: string,
   &quot;falsePositives&quot;: string,
@@ -2798,7 +2798,7 @@ Evaluation metrics for multi-class classification/classifier models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;aggregateClassificationMetrics&quot;: {
     object (AggregateClassificationMetrics)
   },
@@ -2841,7 +2841,7 @@ Confusion matrix for multi-class classification models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;confidenceThreshold&quot;: number,
   &quot;rows&quot;: [
     {
@@ -2882,7 +2882,7 @@ A single row in the confusion matrix.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;actualLabel&quot;: string,
   &quot;entries&quot;: [
     {
@@ -2923,7 +2923,7 @@ A single entry in the confusion matrix.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;predictedLabel&quot;: string,
   &quot;itemCount&quot;: string
 }</code></pre></td>
@@ -2960,7 +2960,7 @@ Evaluation metrics for clustering models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;daviesBouldinIndex&quot;: number,
   &quot;meanSquaredDistance&quot;: number,
   &quot;clusters&quot;: [
@@ -3008,7 +3008,7 @@ Message containing the information about one cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;centroidId&quot;: string,
   &quot;featureValues&quot;: [
     {
@@ -3056,7 +3056,7 @@ Representative value of a single feature within the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;featureColumn&quot;: string,
 
   // Union field value can be only one of the following:
@@ -3107,7 +3107,7 @@ Representative value of a categorical feature.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;categoryCounts&quot;: [
     {
       object (CategoryCount)
@@ -3141,7 +3141,7 @@ Represents the count of a single category within the cluster.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;category&quot;: string,
   &quot;count&quot;: string
 }</code></pre></td>
@@ -3178,7 +3178,7 @@ Evaluation metrics used by weighted-ALS models specified by feedbackType=implici
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;meanAveragePrecision&quot;: number,
   &quot;meanSquaredError&quot;: number,
   &quot;normalizedDiscountedCumulativeGain&quot;: number,
@@ -3229,7 +3229,7 @@ Model evaluation metrics for ARIMA forecasting models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;nonSeasonalOrder&quot;: [
     {
       object (ArimaOrder)
@@ -3322,7 +3322,7 @@ Model evaluation metrics for a single ARIMA forecasting model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;nonSeasonalOrder&quot;: {
     object (ArimaOrder)
   },
@@ -3416,7 +3416,7 @@ Model evaluation metrics for dimensionality reduction models.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalExplainedVarianceRatio&quot;: number
 }</code></pre></td>
 </tr>
@@ -3446,7 +3446,7 @@ Data split result. This contains references to the training and evaluation data 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;trainingTable&quot;: {
     object (TableReference)
   },
@@ -3496,7 +3496,7 @@ Global explanations containing the top most important features after training.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;explanations&quot;: [
     {
       object (Explanation)
@@ -3537,7 +3537,7 @@ Explanation for a single feature.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;featureName&quot;: string,
   &quot;attribution&quot;: number
 }</code></pre></td>
@@ -3574,7 +3574,7 @@ Information about a single transform column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;type&quot;: {
     object (StandardSqlDataType)
@@ -3620,7 +3620,7 @@ Hyperparameter search spaces. These should be a subset of trainingOptions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;learnRate&quot;: {
     object (DoubleHparamSearchSpace)
   },
@@ -3841,7 +3841,7 @@ Search space for a double hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field search_space can be only one of the following:
   &quot;range&quot;: {
@@ -3887,7 +3887,7 @@ Range of a double hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;min&quot;: number,
   &quot;max&quot;: number
 }</code></pre></td>
@@ -3924,7 +3924,7 @@ Discrete candidates of a double hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;candidates&quot;: [
     number
   ]
@@ -3956,7 +3956,7 @@ Search space for an int hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field search_space can be only one of the following:
   &quot;range&quot;: {
@@ -4002,7 +4002,7 @@ Range of an int hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;min&quot;: string,
   &quot;max&quot;: string
 }</code></pre></td>
@@ -4039,7 +4039,7 @@ Discrete candidates of an int hyperparameter.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;candidates&quot;: [
     string
   ]
@@ -4071,7 +4071,7 @@ Search space for int array.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;candidates&quot;: [
     {
       object (IntArray)
@@ -4105,7 +4105,7 @@ An array of int.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;elements&quot;: [
     string
   ]
@@ -4137,7 +4137,7 @@ Search space for string and enum.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;candidates&quot;: [
     string
   ]
@@ -4169,7 +4169,7 @@ Training info of a trial in [hyperparameter tuning](https://cloud.google.com/big
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;trialId&quot;: string,
   &quot;startTimeMs&quot;: string,
   &quot;endTimeMs&quot;: string,
@@ -4302,7 +4302,7 @@ Remote Model Info
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;connection&quot;: string,
   &quot;maxBatchingRows&quot;: string,
   &quot;remoteModelVersion&quot;: string,

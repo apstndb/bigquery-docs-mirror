@@ -1,6 +1,6 @@
-  - [Resource: TransferResource](#TransferResource)
-      - [JSON representation](#TransferResource.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: TransferResource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources#TransferResource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources#TransferResource.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.transferConfigs.transferResources#METHODS_SUMMARY)
 
 ## Resource: TransferResource
 
@@ -17,7 +17,7 @@ Resource (table/partition) that is being transferred.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;type&quot;: enum (ResourceType),
   &quot;destination&quot;: enum (ResourceDestination),

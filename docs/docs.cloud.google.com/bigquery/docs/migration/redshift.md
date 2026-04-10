@@ -6,7 +6,9 @@ You can use the BigQuery Data Transfer Service to copy your data from an Amazon 
 
 This diagram shows the overall flow of data between an Amazon Redshift data warehouse and BigQuery during a migration.
 
-If you'd like to transfer data from your Amazon Redshift instance through a virtual private cloud (VPC) using private IP addresses, see [Migrating Amazon Redshift data with VPC](/bigquery/docs/migration/redshift-vpc) .
+![Workflow of Amazon Redshift to BigQuery migration.](https://docs.cloud.google.com/static/bigquery/images/redshift-overview-diagram.png)
+
+If you'd like to transfer data from your Amazon Redshift instance through a virtual private cloud (VPC) using private IP addresses, see [Migrating Amazon Redshift data with VPC](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc) .
 
 ## Before you begin
 
@@ -19,13 +21,13 @@ Before creating an Amazon Redshift transfer:
       - `  bigquery.transfers.update  ` permissions to create the transfer
       - Both `  bigquery.datasets.get  ` and `  bigquery.datasets.update  ` permissions on the target dataset
     
-    The `  roles/bigquery.admin  ` predefined Identity and Access Management (IAM) role includes `  bigquery.transfers.update  ` , `  bigquery.datasets.update  ` and `  bigquery.datasets.get  ` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](/bigquery/docs/access-control) .
+    The `  roles/bigquery.admin  ` predefined Identity and Access Management (IAM) role includes `  bigquery.transfers.update  ` , `  bigquery.datasets.update  ` and `  bigquery.datasets.get  ` permissions. For more information on IAM roles in BigQuery Data Transfer Service, see [Access control](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 2.  Consult the documentation for Amazon S3 to ensure you have configured any permissions necessary to enable the transfer. At a minimum, the Amazon S3 source data must have the AWS managed policy [`  AmazonS3ReadOnlyAccess  `](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html#attach-managed-policy-console) applied to it.
 
 ### Create a dataset
 
-[Create a BigQuery dataset](/bigquery/docs/datasets) to store your data. You do not need to create any tables.
+[Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data. You do not need to create any tables.
 
 ### Grant access to your Amazon Redshift cluster
 
@@ -670,6 +672,8 @@ Johannesburg
 You must have an Amazon S3 bucket to use as a staging area to transfer the Amazon Redshift data to BigQuery. For detailed instructions, see the [Amazon documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/) .
 
 1.  We recommended that you create a dedicated Amazon IAM user, and grant that user only Read access to Amazon Redshift and Read and Write access to Amazon S3. To achieve this step, you can apply the following policies:
+    
+    ![Amazon Redshift migration Amazon permissions](https://docs.cloud.google.com/static/bigquery/images/redshift-migration-amazon-permissions.png)
 
 2.  Create an Amazon [IAM user access key pair](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html) .
 
@@ -683,12 +687,12 @@ Gather the information that you need to set up the migration with the BigQuery D
 
   - Follow [these instructions](https://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html#obtain-jdbc-url) to get the JDBC URL.
   - Get the username and password of a user with appropriate permissions to your Amazon Redshift database.
-  - Follow the instructions at [Grant access to your Amazon S3 bucket](#grant_access_to_your_amazon_s3_bucket) to get an AWS access key pair.
+  - Follow the instructions at [Grant access to your Amazon S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift#grant_access_to_your_amazon_s3_bucket) to get an AWS access key pair.
   - <span id="s3_uri">Get the URI of the Amazon S3 bucket you want to use for the transfer. We recommend that you set up a [Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html) policy for this bucket to avoid unnecessary charges. The recommended expiration time is 24 hours to allow sufficient time to transfer all data to BigQuery.</span>
 
 ### Assess your data
 
-As part of the data transfer, BigQuery Data Transfer Service writes data from Amazon Redshift to Cloud Storage as CSV files. If these files contain the ASCII 0 character, they can't be loaded into BigQuery. We suggest you assess your data to determine if this could be an issue for you. If it is, you can work around this by exporting your data to Amazon S3 as Parquet files, and then importing those files by using BigQuery Data Transfer Service. For more information, see [Overview of Amazon S3 transfers](/bigquery/docs/s3-transfer-intro) .
+As part of the data transfer, BigQuery Data Transfer Service writes data from Amazon Redshift to Cloud Storage as CSV files. If these files contain the ASCII 0 character, they can't be loaded into BigQuery. We suggest you assess your data to determine if this could be an issue for you. If it is, you can work around this by exporting your data to Amazon S3 as Parquet files, and then importing those files by using BigQuery Data Transfer Service. For more information, see [Overview of Amazon S3 transfers](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro) .
 
 ## Set up an Amazon Redshift transfer
 
@@ -697,6 +701,8 @@ Select one of the following options:
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click **Data transfers** .
 
@@ -706,11 +712,11 @@ Select one of the following options:
 
 5.  In the **Transfer config name** section, enter a name for the transfer, such as `  My migration  ` , in the **Display name** field. The display name can be any value that allows you to easily identify the transfer if you need to modify it later.
 
-6.  In the **Destination settings** section, choose [the dataset you created](#create_a_dataset) from the **Dataset** list.
+6.  In the **Destination settings** section, choose [the dataset you created](https://docs.cloud.google.com/bigquery/docs/migration/redshift#create_a_dataset) from the **Dataset** list.
 
 7.  In the **Data source details** section, do the following:
     
-    1.  For **JDBC connection url for Amazon Redshift** , provide the [JDBC URL](#jdbc_url) to access your Amazon Redshift cluster.
+    1.  For **JDBC connection url for Amazon Redshift** , provide the [JDBC URL](https://docs.cloud.google.com/bigquery/docs/migration/redshift#jdbc_url) to access your Amazon Redshift cluster.
     
     2.  For **Username of your database** , enter the username for the Amazon Redshift database that you want to migrate.
     
@@ -718,9 +724,9 @@ Select one of the following options:
         
         **Note:** By providing your Amazon credentials you acknowledge that the BigQuery Data Transfer Service is your agent solely for the limited purpose of accessing your data for transfers.
     
-    4.  For **Access key ID** and **Secret access key** , enter the access key pair you obtained from [Grant access to your S3 bucket](#grant_access_to_your_S3_bucket) .
+    4.  For **Access key ID** and **Secret access key** , enter the access key pair you obtained from [Grant access to your S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift#grant_access_to_your_S3_bucket) .
     
-    5.  For **Amazon S3 URI** , enter the [URI of the S3 bucket](#s3_uri) you'll use as a staging area.
+    5.  For **Amazon S3 URI** , enter the [URI of the S3 bucket](https://docs.cloud.google.com/bigquery/docs/migration/redshift#s3_uri) you'll use as a staging area.
     
     6.  For **Amazon Redshift Schema** , enter the Amazon Redshift schema you're migrating.
     
@@ -731,19 +737,19 @@ Select one of the following options:
         
         Leave this field empty to migrate all tables from the specified schema.
         
-        **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](#quotas_and_limits) for each load job.
+        **Caution:** For very large tables, we recommend transferring one table at a time. [BigQuery has a load quota of 15 TB](https://docs.cloud.google.com/bigquery/docs/migration/redshift#quotas_and_limits) for each load job.
     
     8.  For **VPC and the reserved IP range** , leave the field blank.
 
-8.  In the **Service Account** menu, select a [service account](/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](/bigquery/docs/use-service-accounts) .
+8.  In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
     
-      - If you signed in with a [federated identity](/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
-      - The service account must have the [required permissions](#set_required_permissions) .
+      - If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
+      - The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set_required_permissions) .
 
 9.  Optional: In the **Notification options** section, do the following:
     
     1.  Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-    2.  For **Select a Pub/Sub topic** , choose your [topic](/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer.
+    2.  For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 10. Click **Save** .
 
@@ -761,7 +767,7 @@ Enter the `  bq mk  ` command and supply the transfer creation flag `  --transfe
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq mk \
     --transfer_config \
     --project_id=project_id \
@@ -778,7 +784,7 @@ Where:
   - data\_source is the data source: `  redshift  ` .
   - dataset is the BigQuery target dataset for the transfer configuration.
   - name is the display name for the transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
-  - service\_account : is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](#set_required_permissions) .
+  - service\_account : is the service account name used to authenticate your transfer. The service account should be owned by the same `  project_id  ` used to create the transfer and it should have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/migration/redshift#set_required_permissions) .
   - parameters contains the parameters for the created transfer configuration in JSON format. For example: `  --params='{"param":"param_value"}'  ` .
 
 Parameters required for an Amazon Redshift transfer configuration are:
@@ -794,110 +800,106 @@ Parameters required for an Amazon Redshift transfer configuration are:
 
 For example, the following command creates an Amazon Redshift transfer named `  My Transfer  ` with a target dataset named `  mydataset  ` and a project with the ID of `  google.com:myproject  ` .
 
-``` text
-bq mk \
-    --transfer_config \
-    --project_id=myproject \
-    --data_source=redshift \
-    --target_dataset=mydataset \
-    --display_name='My Transfer' \
-    --params='{"jdbc_url":"jdbc:postgresql://test-example-instance.sample.us-west-1.redshift.amazonaws.com:5439/dbname","database_username":"my_username","database_password":"1234567890","access_key_id":"A1B2C3D4E5F6G7H8I9J0","secret_access_key":"1234567890123456789012345678901234567890","s3_bucket":"s3://bucket/prefix","redshift_schema":"public","table_name_patterns":"table_name"}'
-```
+    bq mk \
+        --transfer_config \
+        --project_id=myproject \
+        --data_source=redshift \
+        --target_dataset=mydataset \
+        --display_name='My Transfer' \
+        --params='{"jdbc_url":"jdbc:postgresql://test-example-instance.sample.us-west-1.redshift.amazonaws.com:5439/dbname","database_username":"my_username","database_password":"1234567890","access_key_id":"A1B2C3D4E5F6G7H8I9J0","secret_access_key":"1234567890123456789012345678901234567890","s3_bucket":"s3://bucket/prefix","redshift_schema":"public","table_name_patterns":"table_name"}'
 
 **Note:** You cannot configure notifications using the command-line tool.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create redshift transfer config
-public class CreateRedshiftTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String datasetRegion = "US";
-    String jdbcUrl = "MY_JDBC_URL_CONNECTION_REDSHIFT";
-    String dbUserName = "MY_USERNAME";
-    String dbPassword = "MY_PASSWORD";
-    String accessKeyId = "MY_AWS_ACCESS_KEY_ID";
-    String secretAccessId = "MY_AWS_SECRET_ACCESS_ID";
-    String s3Bucket = "MY_S3_BUCKET_URI";
-    String redShiftSchema = "MY_REDSHIFT_SCHEMA";
-    String tableNamePatterns = "*";
-    String vpcAndReserveIpRange = "MY_VPC_AND_IP_RANGE";
-    Map<String, Value> params = new HashMap<>();
-    params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
-    params.put("database_username", Value.newBuilder().setStringValue(dbUserName).build());
-    params.put("database_password", Value.newBuilder().setStringValue(dbPassword).build());
-    params.put("access_key_id", Value.newBuilder().setStringValue(accessKeyId).build());
-    params.put("secret_access_key", Value.newBuilder().setStringValue(secretAccessId).build());
-    params.put("s3_bucket", Value.newBuilder().setStringValue(s3Bucket).build());
-    params.put("redshift_schema", Value.newBuilder().setStringValue(redShiftSchema).build());
-    params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
-    params.put(
-        "migration_infra_cidr", Value.newBuilder().setStringValue(vpcAndReserveIpRange).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDatasetRegion(datasetRegion)
-            .setDisplayName("Your Redshift Config Name")
-            .setDataSourceId("redshift")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .setSchedule("every 24 hours")
-            .build();
-    createRedshiftTransfer(projectId, transferConfig);
-  }
-
-  public static void createRedshiftTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Cloud redshift transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.print("Cloud redshift transfer was not created." + ex.toString());
+    import com.google.api.gax.rpc.ApiException;
+    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+    import com.google.protobuf.Struct;
+    import com.google.protobuf.Value;
+    import java.io.IOException;
+    import java.util.HashMap;
+    import java.util.Map;
+    
+    // Sample to create redshift transfer config
+    public class CreateRedshiftTransfer {
+    
+      public static void main(String[] args) throws IOException {
+        // TODO(developer): Replace these variables before running the sample.
+        final String projectId = "MY_PROJECT_ID";
+        String datasetId = "MY_DATASET_ID";
+        String datasetRegion = "US";
+        String jdbcUrl = "MY_JDBC_URL_CONNECTION_REDSHIFT";
+        String dbUserName = "MY_USERNAME";
+        String dbPassword = "MY_PASSWORD";
+        String accessKeyId = "MY_AWS_ACCESS_KEY_ID";
+        String secretAccessId = "MY_AWS_SECRET_ACCESS_ID";
+        String s3Bucket = "MY_S3_BUCKET_URI";
+        String redShiftSchema = "MY_REDSHIFT_SCHEMA";
+        String tableNamePatterns = "*";
+        String vpcAndReserveIpRange = "MY_VPC_AND_IP_RANGE";
+        Map<String, Value> params = new HashMap<>();
+        params.put("jdbc_url", Value.newBuilder().setStringValue(jdbcUrl).build());
+        params.put("database_username", Value.newBuilder().setStringValue(dbUserName).build());
+        params.put("database_password", Value.newBuilder().setStringValue(dbPassword).build());
+        params.put("access_key_id", Value.newBuilder().setStringValue(accessKeyId).build());
+        params.put("secret_access_key", Value.newBuilder().setStringValue(secretAccessId).build());
+        params.put("s3_bucket", Value.newBuilder().setStringValue(s3Bucket).build());
+        params.put("redshift_schema", Value.newBuilder().setStringValue(redShiftSchema).build());
+        params.put("table_name_patterns", Value.newBuilder().setStringValue(tableNamePatterns).build());
+        params.put(
+            "migration_infra_cidr", Value.newBuilder().setStringValue(vpcAndReserveIpRange).build());
+        TransferConfig transferConfig =
+            TransferConfig.newBuilder()
+                .setDestinationDatasetId(datasetId)
+                .setDatasetRegion(datasetRegion)
+                .setDisplayName("Your Redshift Config Name")
+                .setDataSourceId("redshift")
+                .setParams(Struct.newBuilder().putAllFields(params).build())
+                .setSchedule("every 24 hours")
+                .build();
+        createRedshiftTransfer(projectId, transferConfig);
+      }
+    
+      public static void createRedshiftTransfer(String projectId, TransferConfig transferConfig)
+          throws IOException {
+        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+          ProjectName parent = ProjectName.of(projectId);
+          CreateTransferConfigRequest request =
+              CreateTransferConfigRequest.newBuilder()
+                  .setParent(parent.toString())
+                  .setTransferConfig(transferConfig)
+                  .build();
+          TransferConfig config = client.createTransferConfig(request);
+          System.out.println("Cloud redshift transfer created successfully :" + config.getName());
+        } catch (ApiException ex) {
+          System.out.print("Cloud redshift transfer was not created." + ex.toString());
+        }
+      }
     }
-  }
-}
-```
 
 If multiple transfers are created for the same Amazon Redshift tables, the data is appended to the same BigQuery destination tables. The data is not deleted or overwritten.
 
 ## Quotas and limits
 
-BigQuery has a load quota of 15 TB for each load job for each table. Internally, Amazon Redshift compresses the table data, so the exported table size will be larger than the table size reported by Amazon Redshift. If you plan to migrate a table larger than 15 TB, please contact [Cloud Customer Care](/bigquery/docs/getting-support) first.
+BigQuery has a load quota of 15 TB for each load job for each table. Internally, Amazon Redshift compresses the table data, so the exported table size will be larger than the table size reported by Amazon Redshift. If you plan to migrate a table larger than 15 TB, please contact [Cloud Customer Care](https://docs.cloud.google.com/bigquery/docs/getting-support) first.
 
 Costs can be incurred outside of Google by using this service. Review the [Amazon Redshift](https://aws.amazon.com/redshift/pricing/) and [Amazon S3](https://aws.amazon.com/s3/pricing/) pricing pages for details.
 
-Because of [Amazon S3's consistency model](/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files will not be included in the transfer to BigQuery.
+Because of [Amazon S3's consistency model](https://docs.cloud.google.com/bigquery/docs/s3-transfer-intro#consistency_considerations) , it's possible that some files will not be included in the transfer to BigQuery.
 
 ## What's next
 
-  - Learn about [Migrating Amazon Redshift private instances with VPC](/bigquery/docs/migration/redshift-vpc) .
-  - Learn more about the [BigQuery Data Transfer Service](/bigquery/docs/transfer-service-overview) .
-  - Migrate SQL code with the [Batch SQL translation](/bigquery/docs/batch-sql-translator) .
+  - Learn about [Migrating Amazon Redshift private instances with VPC](https://docs.cloud.google.com/bigquery/docs/migration/redshift-vpc) .
+  - Learn more about the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/transfer-service-overview) .
+  - Migrate SQL code with the [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .

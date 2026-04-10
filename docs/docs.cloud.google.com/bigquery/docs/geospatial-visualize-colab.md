@@ -1,12 +1,12 @@
 In this tutorial, you visualize geospatial analytics data from BigQuery by using a Colab notebook.
 
-This tutorial uses the following BigQuery [public datasets](/bigquery/public-data) :
+This tutorial uses the following BigQuery [public datasets](https://docs.cloud.google.com/bigquery/public-data) :
 
   - [San Francisco Ford GoBike Share](https://console.cloud.google.com/bigquery\(cameo:product/san-francisco-public-data/sf-bike-share\))
   - [San Francisco Neighborhoods](https://console.cloud.google.com/bigquery?ws=!1m4!1m3!3m2!1sbigquery-public-data!2ssan_francisco_neighborhoods)
   - [San Francisco Police Department (SFPD) Reports](https://console.cloud.google.com/bigquery\(cameo:product/san-francisco-public-data/sfpd-reports\))
 
-For information on accessing these public datasets, see [Access public datasets in the Google Cloud console](/bigquery/public-data#public-ui) .
+For information on accessing these public datasets, see [Access public datasets in the Google Cloud console](https://docs.cloud.google.com/bigquery/public-data#public-ui) .
 
 You use the public datasets to create the following visualizations:
 
@@ -29,15 +29,15 @@ In this document, you use the following billable components of Google Cloud:
   - [BigQuery](https://cloud.google.com/bigquery/pricing)
   - [Google Maps Platform](https://mapsplatform.google.com/pricing/)
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](#clean-up) .
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize-colab#clean-up) .
 
 ## Before you begin
 
-1.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
+1.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize-colab#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 
@@ -47,11 +47,13 @@ If you are using an existing project you need the following project-level role i
 
 Make sure that you have the following role or roles on the project:
 
-  - [BigQuery User](/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.user  ` )
+  - [BigQuery User](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioUser) ( `  roles/bigquery.user  ` )
 
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -62,6 +64,8 @@ Make sure that you have the following role or roles on the project:
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -75,13 +79,15 @@ Make sure that you have the following role or roles on the project:
 
 7.  Click **Save** .
 
-For more information about roles in BigQuery, see [Predefined IAM roles](/bigquery/docs/access-control#bigquery) .
+For more information about roles in BigQuery, see [Predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) .
 
 ## Create a Colab notebook
 
 This tutorial builds a Colab notebook to visualize geospatial analytics data. You can open a prebuilt version of the notebook in Colab, Colab Enterprise, or BigQuery Studio by clicking the links at the top of the GitHub version of the tutorial— [BigQuery Geospatial Visualization in Colab](https://github.com/GoogleCloudPlatform/bigquery-utils/blob/master/notebooks/bigquery_geospatial_visualization.ipynb) .
 
 1.  Open Colab.
+    
+    [Open Colab](https://colab.research.google.com/)
 
 2.  In the **Open notebook** dialog, click **New notebook** .
 
@@ -101,7 +107,7 @@ This tutorial queries BigQuery datasets and uses the Google Maps JavaScript API.
 
 2.  To authenticate with your project, enter the following code:
     
-    ``` text
+    ``` notranslate
     # REQUIRED: Authenticate with your project.
     GCP_PROJECT_ID = "PROJECT_ID"  #@param {type:"string"}
     
@@ -150,7 +156,7 @@ This step is necessary only if you're using the Maps API. If you don't authentic
 
 8.  To authenticate with the Maps API, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Authenticate with the Google Maps JavaScript API.
     GMP_API_SECRET_KEY_NAME = "GMP_API_KEY" #@param {type:"string"}
     
@@ -187,7 +193,7 @@ After importing the libraries, you enable interactive tables for [`  pandas  ` D
 
 2.  To install the `  pydeck  ` and `  h3  ` packages, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Install pydeck and h3.
     !pip install pydeck>=0.9 h3>=4.2
     ```
@@ -202,7 +208,7 @@ After importing the libraries, you enable interactive tables for [`  pandas  ` D
 
 2.  To import the Python libraries, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Import data science libraries.
     import branca
     import geemap.deck as gmdk
@@ -222,7 +228,7 @@ After importing the libraries, you enable interactive tables for [`  pandas  ` D
 
 2.  To enable `  pandas  ` DataFrames, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Enable displaying pandas data frames as interactive tables by default.
     from google.colab import data_table
     data_table.enable_dataframe_formatter()
@@ -240,7 +246,7 @@ In this section, you create a shared routine that renders layers on a base map.
 
 2.  To create a shared routine for rendering layers on a map, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Set Google Maps as the base map provider.
     MAP_PROVIDER_GOOGLE = pdk.bindings.base_map_provider.BaseMapProvider.GOOGLE_MAPS.value
     
@@ -279,7 +285,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 2.  To query the San Francisco Ford GoBike Share public dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` text
+    ``` notranslate
     # Query the station ID, station name, station short name, and station
     # geometry from the bike share dataset.
     # NOTE: In this tutorial, the denormalized 'lat' and 'lon' columns are
@@ -305,7 +311,7 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 
 5.  To get a summary of the DataFrame, including columns and data types, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Get a summary of the DataFrame
     gdf_sf_bikestations.info()
     ```
@@ -314,25 +320,23 @@ The following example demonstrates how to use a layer and a scatterplot layer to
     
     The output should look like the following:
     
-    ``` text
-    <class 'geopandas.geodataframe.GeoDataFrame'>
-    RangeIndex: 472 entries, 0 to 471
-    Data columns (total 4 columns):
-    #   Column        Non-Null Count  Dtype
-    ---  ------        --------------  -----
-    0   station_id    472 non-null    object
-    1   name          472 non-null    object
-    2   short_name    472 non-null    object
-    3   station_geom  472 non-null    geometry
-    dtypes: geometry(1), object(3)
-    memory usage: 14.9+ KB
-    ```
+        <class 'geopandas.geodataframe.GeoDataFrame'>
+        RangeIndex: 472 entries, 0 to 471
+        Data columns (total 4 columns):
+        #   Column        Non-Null Count  Dtype
+        ---  ------        --------------  -----
+        0   station_id    472 non-null    object
+        1   name          472 non-null    object
+        2   short_name    472 non-null    object
+        3   station_geom  472 non-null    geometry
+        dtypes: geometry(1), object(3)
+        memory usage: 14.9+ KB
 
 7.  To insert a code cell, click add **Code** .
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Preview the first five rows
     gdf_sf_bikestations.head()
     ```
@@ -340,6 +344,8 @@ The following example demonstrates how to use a layer and a scatterplot layer to
 9.  Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The first five rows of the DataFrame.](https://docs.cloud.google.com/bigquery/images/station-geometry-results.png)
 
 Rendering the points requires you to extract the longitude and latitude as x and y coordinates from the `  station_geom  ` column in the bike share dataset.
 
@@ -349,7 +355,7 @@ Since `  gdf_sf_bikestations  ` is a `  geopandas.GeoDataFrame  ` , coordinates 
 
 2.  To extract the longitude and latitude values from the `  station_geom  ` column, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Extract the longitude (x) and latitude (y) from station_geom.
     gdf_sf_bikestations["longitude"] = gdf_sf_bikestations["station_geom"].x
     gdf_sf_bikestations["latitude"] = gdf_sf_bikestations["station_geom"].y
@@ -363,7 +369,7 @@ Since `  gdf_sf_bikestations  ` is a `  geopandas.GeoDataFrame  ` , coordinates 
 
 5.  To render the scatter plot of bike share stations based on the longitude and latitude values you extracted previously, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Render a scatter plot using pydeck with the extracted longitude and
     # latitude columns in the gdf_sf_bikestations geopandas.GeoDataFrame.
     scatterplot_layer = pdk.Layer(
@@ -383,19 +389,21 @@ Since `  gdf_sf_bikestations  ` is a `  geopandas.GeoDataFrame  ` , coordinates 
 6.  Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The rendered scatter plot of bike share stations.](https://docs.cloud.google.com/bigquery/images/colab-scatter-plot.png)
 
 ## Visualize polygons
 
 Geospatial analytics lets you analyze and visualize geospatial data in BigQuery by using `  GEOGRAPHY  ` data types and GoogleSQL geography functions.
 
-The [`  GEOGRAPHY  ` data type](/bigquery/docs/reference/standard-sql/data-types#geography_type) in geospatial analytics is a collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. A `  GEOGRAPHY  ` type can contain objects such as the following:
+The [`  GEOGRAPHY  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) in geospatial analytics is a collection of points, linestrings, and polygons, which is represented as a point set, or a subset of the surface of the Earth. A `  GEOGRAPHY  ` type can contain objects such as the following:
 
   - Points
   - Lines
   - Polygons
   - Multipolygons
 
-For a list of all supported objects, see the [`  GEOGRAPHY  ` type](/bigquery/docs/reference/standard-sql/data-types#geography_type) documentation.
+For a list of all supported objects, see the [`  GEOGRAPHY  ` type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#geography_type) documentation.
 
 If you are provided geospatial data without knowing the expected shapes, you can visualize the data to discover the shapes. You can visualize shapes by converting the geographic data to [`  GeoJSON  `](https://geojson.org/) format. You can then visualize the `  GeoJSON  ` data using a [`  GeoJSON  ` layer](https://deck.gl/docs/api-reference/layers/geojson-layer) from the `  deck.gl  ` framework.
 
@@ -405,7 +413,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 2.  To query the geographic data from the `  bigquery-public-data.san_francisco_neighborhoods.boundaries  ` table in the San Francisco Neighborhoods dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` text
+    ``` notranslate
     # Query the neighborhood name and geometry from the San Francisco
     # neighborhoods dataset.
     %%bigquery gdf_sanfrancisco_neighborhoods --project {GCP_PROJECT_ID} --use_geodataframe geometry
@@ -427,7 +435,7 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 
 5.  To get a summary of the DataFrame, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Get a summary of the DataFrame
     gdf_sanfrancisco_neighborhoods.info()
     ```
@@ -436,21 +444,19 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     
     The results should look like the following:
     
-    ``` text
-    <class 'geopandas.geodataframe.GeoDataFrame'>
-    RangeIndex: 117 entries, 0 to 116
-    Data columns (total 2 columns):
-    #   Column        Non-Null Count  Dtype
-    ---  ------        --------------  -----
-    0   neighborhood  117 non-null    object
-    1   geometry      117 non-null    geometry
-    dtypes: geometry(1), object(1)
-    memory usage: 2.0+ KB
-    ```
+        <class 'geopandas.geodataframe.GeoDataFrame'>
+        RangeIndex: 117 entries, 0 to 116
+        Data columns (total 2 columns):
+        #   Column        Non-Null Count  Dtype
+        ---  ------        --------------  -----
+        0   neighborhood  117 non-null    object
+        1   geometry      117 non-null    geometry
+        dtypes: geometry(1), object(1)
+        memory usage: 2.0+ KB
 
 7.  To preview the first row of the DataFrame, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Preview the first row
     gdf_sanfrancisco_neighborhoods.head(1)
     ```
@@ -459,13 +465,15 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
     
     The output is similar to the following:
     
+    ![The first row of the DataFrame.](https://docs.cloud.google.com/bigquery/images/converted-geodata-results.png)
+    
     In the results, notice that the data is a polygon.
 
 9.  To insert a code cell, click add **Code** .
 
 10. To visualize the polygons, enter the following code. `  pydeck  ` is used to convert each `  shapely  ` object instance in the geometry column into `  GeoJSON  ` format:
     
-    ``` text
+    ``` notranslate
     # Visualize the polygons.
     geojson_layer = pdk.Layer(
         'GeoJsonLayer',
@@ -485,6 +493,8 @@ In this section, you query geographic data in the San Francisco Neighborhoods da
 11. Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The rendered polygons from the San Francisco Neighborhoods dataset.](https://docs.cloud.google.com/bigquery/images/colab-polygons.png)
 
 ## Create a choropleth map
 
@@ -496,7 +506,7 @@ In this section, you use a polygon layer to render an array of points and use th
 
 2.  To aggregate and count the number of stations per neighborhood and to create a `  polygon  ` column that contains an array of points, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Aggregate and count the number of stations per neighborhood.
     gdf_count_stations = gdf_sanfrancisco_neighborhoods.sjoin(gdf_sf_bikestations, how='left', predicate='contains')
     gdf_count_stations = gdf_count_stations.groupby(by='neighborhood')['station_id'].count().rename('num_stations')
@@ -515,7 +525,7 @@ In this section, you use a polygon layer to render an array of points and use th
 
 5.  To add a `  fill_color  ` column for each of the polygons, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Create a color map gradient using the branch library, and add a fill_color
     # column for each of the polygons.
     colormap = branca.colormap.LinearColormap(
@@ -535,7 +545,7 @@ In this section, you use a polygon layer to render an array of points and use th
 
 8.  To render the polygon layer, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Render the polygon layer.
     polygon_layer = pdk.Layer(
       'PolygonLayer',
@@ -556,6 +566,8 @@ In this section, you use a polygon layer to render an array of points and use th
 9.  Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The rendered polygon layer for the San Francisco neighborhoods.](https://docs.cloud.google.com/bigquery/images/colab-choropleth.png)
 
 ## Create a heatmap
 
@@ -573,7 +585,7 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 
 2.  To query the data in the San Francisco Police Department (SFPD) Reports dataset, enter the following code. This code uses the [`  %%bigquery  ` magic function](https://googleapis.dev/python/bigquery-magics/latest/) to run the query and return the results in a DataFrame:
     
-    ``` text
+    ``` notranslate
     # Query the incident key and location  data from the SFPD reports dataset.
     %%bigquery gdf_incidents --project {GCP_PROJECT_ID} --use_geodataframe location_geography
     
@@ -600,7 +612,7 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 
 5.  To compute the cell for each incident's latitude and longitude, aggregate the incidents for each cell, construct a `  geopandas  ` DataFrame, and add the center of each hexagon for the heatmap layer, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Compute the cell for each incident's latitude and longitude.
     H3_RESOLUTION = 9
     gdf_incidents['h3_cell'] = gdf_incidents.geometry.apply(
@@ -621,24 +633,22 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
     
     The output is similar to the following:
     
-    ``` text
-    <class 'geopandas.geodataframe.GeoDataFrame'>
-    RangeIndex: 969 entries, 0 to 968
-    Data columns (total 3 columns):
-    #   Column         Non-Null Count  Dtype
-    --  ------         --------------  -----
-    0   h3_cell        969 non-null    object
-    1   num_incidents  969 non-null    Int64
-    2   h3_center      969 non-null    object
-    dtypes: Int64(1), object(2)
-    memory usage: 23.8+ KB
-    ```
+        <class 'geopandas.geodataframe.GeoDataFrame'>
+        RangeIndex: 969 entries, 0 to 968
+        Data columns (total 3 columns):
+        #   Column         Non-Null Count  Dtype
+        --  ------         --------------  -----
+        0   h3_cell        969 non-null    object
+        1   num_incidents  969 non-null    Int64
+        2   h3_center      969 non-null    object
+        dtypes: Int64(1), object(2)
+        memory usage: 23.8+ KB
 
 7.  To insert a code cell, click add **Code** .
 
 8.  To preview the first five rows of the DataFrame, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Preview the first five rows.
     gdf_incidents_x_cell.head()
     ```
@@ -646,12 +656,14 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 9.  Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The first five rows of the DataFrame.](https://docs.cloud.google.com/bigquery/images/incidents-preview.png)
 
 10. To insert a code cell, click add **Code** .
 
 11. To convert the data into a JSON format that can be used by `  HeatmapLayer  ` , enter the following code:
     
-    ``` text
+    ``` notranslate
     # Convert to a JSON format recognized by the HeatmapLayer.
     def _make_heatmap_datum(row) -> dict:
       return {
@@ -671,7 +683,7 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 
 14. To render the heatmap, enter the following code:
     
-    ``` text
+    ``` notranslate
     # Render the heatmap.
     heatmap_layer = pdk.Layer(
       "HeatmapLayer",
@@ -690,6 +702,8 @@ In this example, quantizing is done using the `  h3  ` Python library to aggrega
 15. Click play\_circle\_filled **Run cell** .
     
     The output is similar to the following:
+    
+    ![The rendered heatmap.](https://docs.cloud.google.com/bigquery/images/colab-heatmap.png)
 
 ## Clean up
 
@@ -708,6 +722,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -723,9 +739,7 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 Delete a Google Cloud project:
 
-``` text
-gcloud projects delete PROJECT_ID
-```
+    gcloud projects delete PROJECT_ID
 
 ### Delete your Google Maps API key and notebook
 
@@ -739,8 +753,8 @@ After you delete the Google Cloud project, if you used the Google Maps API, dele
 
 ## What's next
 
-  - For more information on geospatial analytics in BigQuery, see [Introduction to geospatial analytics in BigQuery](/bigquery/docs/geospatial-intro) .
-  - For an introduction to visualizing geospatial data in BigQuery, see [Visualize geospatial data](/bigquery/docs/geospatial-visualize) .
+  - For more information on geospatial analytics in BigQuery, see [Introduction to geospatial analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) .
+  - For an introduction to visualizing geospatial data in BigQuery, see [Visualize geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
   - To learn more about `  pydeck  ` and other `  deck.gl  ` chart types, you can find examples in the [`  pydeck  ` Gallery](https://deckgl.readthedocs.io/en/latest/) , the [`  deck.gl  ` Layer Catalog](https://deck.gl/docs/api-reference/layers) , and the [`  deck.gl  ` GitHub source](https://github.com/visgl/deck.gl) .
   - For more information on working with geospatial data in data frames, see the [GeoPandas Getting started page](https://geopandas.org/en/stable/getting_started.html) and the [GeoPandas User guide](https://geopandas.org/en/stable/docs/user_guide.html) .
   - For more information on geometric object manipulation, see the [Shapely user manual](https://shapely.readthedocs.io/en/stable/manual.html) .

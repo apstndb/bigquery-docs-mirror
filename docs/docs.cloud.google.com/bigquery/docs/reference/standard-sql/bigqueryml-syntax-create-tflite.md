@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for importing TensorFlow Lite models
 
-This document describes the `  CREATE MODEL  ` statement for importing [TensorFlow Lite](https://ai.google.dev/edge/litert) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for importing [TensorFlow Lite](https://ai.google.dev/edge/litert) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'TENSORFLOW_LITE', MODEL_PATH = string_value
@@ -45,9 +45,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'TENSORFLOW_LITE'
-```
+    MODEL_TYPE = 'TENSORFLOW_LITE'
 
 **Description**
 
@@ -57,13 +55,11 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-``` text
-MODEL_PATH = string_value
-```
+    MODEL_PATH = string_value
 
 **Description**
 
-Specifies the [Cloud Storage URI](/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the TensorFlow Lite model to import. This option is required.
+Specifies the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the TensorFlow Lite model to import. This option is required.
 
 **Arguments**
 
@@ -73,9 +69,7 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Example**
 
-``` text
-MODEL_PATH = 'gs://bucket/path/to/tflite_model/*'
-```
+    MODEL_PATH = 'gs://bucket/path/to/tflite_model/*'
 
 ### `     KMS_KEY_NAME    `
 
@@ -85,70 +79,31 @@ MODEL_PATH = 'gs://bucket/path/to/tflite_model/*'
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ## Supported data types for input and output columns
 
 BigQuery ML converts some TensorFlow Lite model input and output columns to BigQuery ML types, and some [TensorFlow Lite types](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/core/c/c_api_types.h#L96) aren't supported. Supported data types for input and output columns include the following:
 
-<table>
-<thead>
-<tr class="header">
-<th>TensorFlow Lite types</th>
-<th>Supported</th>
-<th>BigQuery type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       UINT8, UINT16, UINT32, UINT64, INT8, INT16, INT32, INT64      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FLOAT16, FLOAT32, FLOAT64      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COMPLEX64, COMPLEX128      </code></td>
-<td>Unsupported</td>
-<td>N/a</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RESOURCE      </code></td>
-<td>Unsupported</td>
-<td>N/a</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       VARIANT      </code></td>
-<td>Unsupported</td>
-<td>N/a</td>
-</tr>
-</tbody>
-</table>
+| TensorFlow Lite types                                                     | Supported   | BigQuery type                                                                                                                    |
+| ------------------------------------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `        UINT8, UINT16, UINT32, UINT64, INT8, INT16, INT32, INT64       ` | Supported   | [`         INT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types)          |
+| `        FLOAT16, FLOAT32, FLOAT64       `                                | Supported   | [`         FLOAT64        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) |
+| `        COMPLEX64, COMPLEX128       `                                    | Unsupported | N/a                                                                                                                              |
+| `        BOOL       `                                                     | Supported   | [`         BOOL        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type)            |
+| `        STRING       `                                                   | Supported   | [`         STRING        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type)           |
+| `        RESOURCE       `                                                 | Unsupported | N/a                                                                                                                              |
+| `        VARIANT       `                                                  | Unsupported | N/a                                                                                                                              |
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
@@ -157,7 +112,7 @@ Imported TensorFlow Lite models have the following limitations:
   - The TensorFlow Lite model must exist before you can import it into BigQuery.
   - Models must be stored in Cloud Storage.
   - TensorFlow Lite models must be in `  .tflite  ` format.
-  - You can only use TensorFlow Lite models with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+  - You can only use TensorFlow Lite models with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
   - Models are limited to 450 MB in size.
   - Only [TensorFlow core operations](https://ai.google.dev/edge/litert/models/op_select_allowlist#tensorflow_core_operators) and [TensorFlow Text operations](https://ai.google.dev/edge/litert/models/op_select_allowlist#tensorflow_text_and_sentencepiece_operators) are supported in BigQuery ML.
   - SentencePiece operators are not supported.
@@ -168,7 +123,7 @@ Imported TensorFlow Lite models have the following limitations:
 
 The following example imports a TensorFlow Lite model into BigQuery as a BigQuery ML model. The example assumes that there is an existing TensorFlow Lite model located at `  gs://bucket/path/to/tflite_model/*  ` .
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='TENSORFLOW_LITE',
          MODEL_PATH="gs://bucket/path/to/tflite_model/*")

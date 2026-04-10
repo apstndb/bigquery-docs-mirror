@@ -15,52 +15,52 @@ GoogleSQL for BigQuery supports the following range functions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/time-series-functions#appends"><code dir="ltr" translate="no">        APPENDS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#appends"><code dir="ltr" translate="no">        APPENDS       </code></a></td>
 <td>Returns all rows appended to a table for a given time range.<br />
-For more information, see <a href="/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">        CHANGES       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">        CHANGES       </code></a></td>
 <td>Returns all rows that have changed in a table for a given time range.<br />
-For more information, see <a href="/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions">Time series functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">        GENERATE_RANGE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#generate_range_array"><code dir="ltr" translate="no">        GENERATE_RANGE_ARRAY       </code></a></td>
 <td>Splits a range into an array of subranges.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range"><code dir="ltr" translate="no">        RANGE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range"><code dir="ltr" translate="no">        RANGE       </code></a></td>
 <td>Constructs a range of <code dir="ltr" translate="no">       DATE      </code> , <code dir="ltr" translate="no">       DATETIME      </code> , or <code dir="ltr" translate="no">       TIMESTAMP      </code> values.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">        RANGE_BUCKET       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions#range_bucket"><code dir="ltr" translate="no">        RANGE_BUCKET       </code></a></td>
 <td>Scans through a sorted array and returns the 0-based position of a point's upper bound.<br />
-For more information, see <a href="/bigquery/docs/reference/standard-sql/mathematical_functions">Mathematical functions</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/mathematical_functions">Mathematical functions</a> .</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_contains"><code dir="ltr" translate="no">        RANGE_CONTAINS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_contains"><code dir="ltr" translate="no">        RANGE_CONTAINS       </code></a></td>
 <td>Signature 1: Checks if one range is in another range.<br />
 <br />
 Signature 2: Checks if a value is in a range.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_end"><code dir="ltr" translate="no">        RANGE_END       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_end"><code dir="ltr" translate="no">        RANGE_END       </code></a></td>
 <td>Gets the upper bound of a range.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_intersect"><code dir="ltr" translate="no">        RANGE_INTERSECT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect"><code dir="ltr" translate="no">        RANGE_INTERSECT       </code></a></td>
 <td>Gets a segment of two ranges that intersect.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_overlaps"><code dir="ltr" translate="no">        RANGE_OVERLAPS       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_overlaps"><code dir="ltr" translate="no">        RANGE_OVERLAPS       </code></a></td>
 <td>Checks if two ranges overlap.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">        RANGE_SESSIONIZE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_sessionize"><code dir="ltr" translate="no">        RANGE_SESSIONIZE       </code></a></td>
 <td>Produces a table of sessionized ranges.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/range-functions#range_start"><code dir="ltr" translate="no">        RANGE_START       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_start"><code dir="ltr" translate="no">        RANGE_START       </code></a></td>
 <td>Gets the lower bound of a range.</td>
 </tr>
 </tbody>
@@ -68,13 +68,9 @@ Signature 2: Checks if a value is in a range.</td>
 
 ## `     GENERATE_RANGE_ARRAY    `
 
-``` text
-GENERATE_RANGE_ARRAY(range_to_split, step_interval)
-```
+    GENERATE_RANGE_ARRAY(range_to_split, step_interval)
 
-``` text
-GENERATE_RANGE_ARRAY(range_to_split, step_interval, include_last_partial_range)
-```
+    GENERATE_RANGE_ARRAY(range_to_split, step_interval, include_last_partial_range)
 
 **Description**
 
@@ -84,7 +80,7 @@ Splits a range into an array of subranges.
 
   - `  range_to_split  ` : The `  RANGE<T>  ` value to split.
 
-  - `  step_interval  ` : The `  INTERVAL  ` value, which determines the maximum size of each subrange in the resulting array. An [interval single date and time part](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) is supported, but an interval range of date and time parts isn't.
+  - `  step_interval  ` : The `  INTERVAL  ` value, which determines the maximum size of each subrange in the resulting array. An [interval single date and time part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) is supported, but an interval range of date and time parts isn't.
     
       - If `  range_to_split  ` is `  RANGE<DATE>  ` , these interval date parts are supported: `  YEAR  ` to `  DAY  ` .
     
@@ -110,86 +106,76 @@ Returns `  NULL  ` if any input is `  NULL  ` .
 
 In the following example, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are one day long. There are no partial ranges.
 
-``` text
-SELECT GENERATE_RANGE_ARRAY(
-  RANGE(DATE '2020-01-01', DATE '2020-01-06'),
-  INTERVAL 1 DAY) AS results;
-
-/*----------------------------+
- | results                    |
- +----------------------------+
- | [                          |
- |  [2020-01-01, 2020-01-02), |
- |  [2020-01-02, 2020-01-03), |
- |  [2020-01-03, 2020-01-04), |
- |  [2020-01-04, 2020-01-05), |
- |  [2020-01-05, 2020-01-06), |
- | ]                          |
- +----------------------------*/
-```
+    SELECT GENERATE_RANGE_ARRAY(
+      RANGE(DATE '2020-01-01', DATE '2020-01-06'),
+      INTERVAL 1 DAY) AS results;
+    
+    /*----------------------------+
+     | results                    |
+     +----------------------------+
+     | [                          |
+     |  [2020-01-01, 2020-01-02), |
+     |  [2020-01-02, 2020-01-03), |
+     |  [2020-01-03, 2020-01-04), |
+     |  [2020-01-04, 2020-01-05), |
+     |  [2020-01-05, 2020-01-06), |
+     | ]                          |
+     +----------------------------*/
 
 In the following examples, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are two days long. The final subrange is smaller than two days:
 
-``` text
-SELECT GENERATE_RANGE_ARRAY(
-  RANGE(DATE '2020-01-01', DATE '2020-01-06'),
-  INTERVAL 2 DAY) AS results;
+    SELECT GENERATE_RANGE_ARRAY(
+      RANGE(DATE '2020-01-01', DATE '2020-01-06'),
+      INTERVAL 2 DAY) AS results;
+    
+    /*----------------------------+
+     | results                    |
+     +----------------------------+
+     | [                          |
+     |  [2020-01-01, 2020-01-03), |
+     |  [2020-01-03, 2020-01-05), |
+     |  [2020-01-05, 2020-01-06)  |
+     | ]                          |
+     +----------------------------*/
 
-/*----------------------------+
- | results                    |
- +----------------------------+
- | [                          |
- |  [2020-01-01, 2020-01-03), |
- |  [2020-01-03, 2020-01-05), |
- |  [2020-01-05, 2020-01-06)  |
- | ]                          |
- +----------------------------*/
-```
-
-``` text
-SELECT GENERATE_RANGE_ARRAY(
-  RANGE(DATE '2020-01-01', DATE '2020-01-06'),
-  INTERVAL 2 DAY,
-  TRUE) AS results;
-
-/*----------------------------+
- | results                    |
- +----------------------------+
- | [                          |
- |  [2020-01-01, 2020-01-03), |
- |  [2020-01-03, 2020-01-05), |
- |  [2020-01-05, 2020-01-06)  |
- | ]                          |
- +----------------------------*/
-```
+    SELECT GENERATE_RANGE_ARRAY(
+      RANGE(DATE '2020-01-01', DATE '2020-01-06'),
+      INTERVAL 2 DAY,
+      TRUE) AS results;
+    
+    /*----------------------------+
+     | results                    |
+     +----------------------------+
+     | [                          |
+     |  [2020-01-01, 2020-01-03), |
+     |  [2020-01-03, 2020-01-05), |
+     |  [2020-01-05, 2020-01-06)  |
+     | ]                          |
+     +----------------------------*/
 
 In the following example, a date range between `  2020-01-01  ` and `  2020-01-06  ` is split into an array of subranges that are two days long, but the final subrange is excluded because it's smaller than two days:
 
-``` text
-SELECT GENERATE_RANGE_ARRAY(
-  RANGE(DATE '2020-01-01', DATE '2020-01-06'),
-  INTERVAL 2 DAY,
-  FALSE) AS results;
-
-/*----------------------------+
- | results                    |
- +----------------------------+
- | [                          |
- |  [2020-01-01, 2020-01-03), |
- |  [2020-01-03, 2020-01-05)  |
- | ]                          |
- +----------------------------*/
-```
+    SELECT GENERATE_RANGE_ARRAY(
+      RANGE(DATE '2020-01-01', DATE '2020-01-06'),
+      INTERVAL 2 DAY,
+      FALSE) AS results;
+    
+    /*----------------------------+
+     | results                    |
+     +----------------------------+
+     | [                          |
+     |  [2020-01-01, 2020-01-03), |
+     |  [2020-01-03, 2020-01-05)  |
+     | ]                          |
+     +----------------------------*/
 
 ## `     RANGE    `
 
-``` text
-RANGE(lower_bound, upper_bound)
-```
+    RANGE(lower_bound, upper_bound)
 
 **Description**
 
-Constructs a range of [`  DATE  `](/bigquery/docs/reference/standard-sql/data-types#date_type) , [`  DATETIME  `](/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [`  TIMESTAMP  `](/bigquery/docs/reference/standard-sql/data-types#timestamp_type) values.
+Constructs a range of [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) values.
 
 **Definitions**
 
@@ -210,77 +196,65 @@ Produces an error if `  lower_bound  ` is greater than or equal to `  upper_boun
 
 The following query constructs a date range:
 
-``` text
-SELECT RANGE(DATE '2022-12-01', DATE '2022-12-31') AS results;
-
-/*--------------------------+
- | results                  |
- +--------------------------+
- | [2022-12-01, 2022-12-31) |
- +--------------------------*/
-```
+    SELECT RANGE(DATE '2022-12-01', DATE '2022-12-31') AS results;
+    
+    /*--------------------------+
+     | results                  |
+     +--------------------------+
+     | [2022-12-01, 2022-12-31) |
+     +--------------------------*/
 
 The following query constructs a datetime range:
 
-``` text
-SELECT RANGE(DATETIME '2022-10-01 14:53:27',
-             DATETIME '2022-10-01 16:00:00') AS results;
-
-/*---------------------------------------------+
- | results                                     |
- +---------------------------------------------+
- | [2022-10-01T14:53:27, 2022-10-01T16:00:00)  |
- +---------------------------------------------*/
-```
+    SELECT RANGE(DATETIME '2022-10-01 14:53:27',
+                 DATETIME '2022-10-01 16:00:00') AS results;
+    
+    /*---------------------------------------------+
+     | results                                     |
+     +---------------------------------------------+
+     | [2022-10-01T14:53:27, 2022-10-01T16:00:00)  |
+     +---------------------------------------------*/
 
 The following query constructs a timestamp range:
 
-``` text
-SELECT RANGE(TIMESTAMP '2022-10-01 14:53:27 America/Los_Angeles',
-             TIMESTAMP '2022-10-01 16:00:00 America/Los_Angeles') AS results;
-
--- Results depend upon where this query was executed.
-/*------------------------------------------------------------------+
- | results                                                          |
- +------------------------------------------------------------------+
- | [2022-10-01 21:53:27.000000 UTC, 2022-10-01 23:00:00.000000 UTC) |
- +------------------------------------------------------------------*/
-```
+    SELECT RANGE(TIMESTAMP '2022-10-01 14:53:27 America/Los_Angeles',
+                 TIMESTAMP '2022-10-01 16:00:00 America/Los_Angeles') AS results;
+    
+    -- Results depend upon where this query was executed.
+    /*------------------------------------------------------------------+
+     | results                                                          |
+     +------------------------------------------------------------------+
+     | [2022-10-01 21:53:27.000000 UTC, 2022-10-01 23:00:00.000000 UTC) |
+     +------------------------------------------------------------------*/
 
 The following query constructs a date range with no lower bound:
 
-``` text
-SELECT RANGE(NULL, DATE '2022-12-31') AS results;
-
-/*-------------------------+
- | results                 |
- +-------------------------+
- | [UNBOUNDED, 2022-12-31) |
- +-------------------------*/
-```
+    SELECT RANGE(NULL, DATE '2022-12-31') AS results;
+    
+    /*-------------------------+
+     | results                 |
+     +-------------------------+
+     | [UNBOUNDED, 2022-12-31) |
+     +-------------------------*/
 
 The following query constructs a date range with no upper bound:
 
-``` text
-SELECT RANGE(DATE '2022-10-01', NULL) AS results;
-
-/*--------------------------+
- | results                  |
- +--------------------------+
- | [2022-10-01, UNBOUNDED)  |
- +--------------------------*/
-```
+    SELECT RANGE(DATE '2022-10-01', NULL) AS results;
+    
+    /*--------------------------+
+     | results                  |
+     +--------------------------+
+     | [2022-10-01, UNBOUNDED)  |
+     +--------------------------*/
 
 ## `     RANGE_CONTAINS    `
 
-  - [Signature 1](#signature_1) : Checks if every value in one range is in another range.
-  - [Signature 2](#signature_2) : Checks if a value is in a range.
+  - [Signature 1](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#signature_1) : Checks if every value in one range is in another range.
+  - [Signature 2](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#signature_2) : Checks if a value is in a range.
 
 #### Signature 1
 
-``` text
-RANGE_CONTAINS(outer_range, inner_range)
-```
+    RANGE_CONTAINS(outer_range, inner_range)
 
 **Description**
 
@@ -305,37 +279,31 @@ Returns `  TRUE  ` if `  inner_range  ` exists in `  outer_range  ` . Otherwise,
 
 In the following query, the inner range is in the outer range:
 
-``` text
-SELECT RANGE_CONTAINS(
-  RANGE<DATE> '[2022-01-01, 2023-01-01)',
-  RANGE<DATE> '[2022-04-01, 2022-07-01)') AS results;
-
-/*---------+
- | results |
- +---------+
- | TRUE    |
- +---------*/
-```
+    SELECT RANGE_CONTAINS(
+      RANGE<DATE> '[2022-01-01, 2023-01-01)',
+      RANGE<DATE> '[2022-04-01, 2022-07-01)') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | TRUE    |
+     +---------*/
 
 In the following query, the inner range isn't in the outer range:
 
-``` text
-SELECT RANGE_CONTAINS(
-  RANGE<DATE> '[2022-01-01, 2023-01-01)',
-  RANGE<DATE> '[2023-01-01, 2023-04-01)') AS results;
-
-/*---------+
- | results |
- +---------+
- | FALSE   |
- +---------*/
-```
+    SELECT RANGE_CONTAINS(
+      RANGE<DATE> '[2022-01-01, 2023-01-01)',
+      RANGE<DATE> '[2023-01-01, 2023-04-01)') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | FALSE   |
+     +---------*/
 
 #### Signature 2
 
-``` text
-RANGE_CONTAINS(range_to_search, value_to_find)
-```
+    RANGE_CONTAINS(range_to_search, value_to_find)
 
 **Description**
 
@@ -360,37 +328,31 @@ The data type for `  value_to_find  ` must be the same data type as `  T  ` in `
 
 In the following query, the value `  2022-04-01  ` is found in the range `  [2022-01-01, 2023-01-01)  ` :
 
-``` text
-SELECT RANGE_CONTAINS(
-  RANGE<DATE> '[2022-01-01, 2023-01-01)',
-  DATE '2022-04-01') AS results;
-
-/*---------+
- | results |
- +---------+
- | TRUE    |
- +---------*/
-```
+    SELECT RANGE_CONTAINS(
+      RANGE<DATE> '[2022-01-01, 2023-01-01)',
+      DATE '2022-04-01') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | TRUE    |
+     +---------*/
 
 In the following query, the value `  2023-04-01  ` isn't found in the range `  [2022-01-01, 2023-01-01)  ` :
 
-``` text
-SELECT RANGE_CONTAINS(
-  RANGE<DATE> '[2022-01-01, 2023-01-01)',
-  DATE '2023-04-01') AS results;
-
-/*---------+
- | results |
- +---------+
- | FALSE   |
- +---------*/
-```
+    SELECT RANGE_CONTAINS(
+      RANGE<DATE> '[2022-01-01, 2023-01-01)',
+      DATE '2023-04-01') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | FALSE   |
+     +---------*/
 
 ## `     RANGE_END    `
 
-``` text
-RANGE_END(range_to_check)
-```
+    RANGE_END(range_to_check)
 
 **Description**
 
@@ -414,33 +376,27 @@ Returns `  NULL  ` if `  range_to_check  ` is `  NULL  ` .
 
 In the following query, the upper bound of the range is retrieved:
 
-``` text
-SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
-
-/*------------+
- | results    |
- +------------+
- | 2022-12-31 |
- +------------*/
-```
+    SELECT RANGE_END(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
+    
+    /*------------+
+     | results    |
+     +------------+
+     | 2022-12-31 |
+     +------------*/
 
 In the following query, the upper bound of the range is unbounded, so `  NULL  ` is returned:
 
-``` text
-SELECT RANGE_END(RANGE<DATE> '[2022-12-01, UNBOUNDED)') AS results;
-
-/*------------+
- | results    |
- +------------+
- | NULL       |
- +------------*/
-```
+    SELECT RANGE_END(RANGE<DATE> '[2022-12-01, UNBOUNDED)') AS results;
+    
+    /*------------+
+     | results    |
+     +------------+
+     | NULL       |
+     +------------*/
 
 ## `     RANGE_INTERSECT    `
 
-``` text
-RANGE_INTERSECT(range_a, range_b)
-```
+    RANGE_INTERSECT(range_a, range_b)
 
 **Description**
 
@@ -465,47 +421,39 @@ Produces an error if `  range_a  ` and `  range_b  ` don't overlap. To return ` 
 
 **Examples**
 
-``` text
-SELECT RANGE_INTERSECT(
-  RANGE<DATE> '[2022-02-01, 2022-09-01)',
-  RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
+    SELECT RANGE_INTERSECT(
+      RANGE<DATE> '[2022-02-01, 2022-09-01)',
+      RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
+    
+    /*--------------------------+
+     | results                  |
+     +--------------------------+
+     | [2022-02-01, 2022-04-15) |
+     +--------------------------*/
 
-/*--------------------------+
- | results                  |
- +--------------------------+
- | [2022-02-01, 2022-04-15) |
- +--------------------------*/
-```
+    SELECT RANGE_INTERSECT(
+      RANGE<DATE> '[2022-02-01, UNBOUNDED)',
+      RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
+    
+    /*--------------------------+
+     | results                  |
+     +--------------------------+
+     | [2022-02-01, 2022-04-15) |
+     +--------------------------*/
 
-``` text
-SELECT RANGE_INTERSECT(
-  RANGE<DATE> '[2022-02-01, UNBOUNDED)',
-  RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
-
-/*--------------------------+
- | results                  |
- +--------------------------+
- | [2022-02-01, 2022-04-15) |
- +--------------------------*/
-```
-
-``` text
-SELECT RANGE_INTERSECT(
-  RANGE<DATE> '[2022-02-01, UNBOUNDED)',
-  RANGE<DATE> '[2021-06-15, UNBOUNDED)') AS results;
-
-/*-------------------------+
- | results                 |
- +-------------------------+
- | [2022-02-01, UNBOUNDED) |
- +-------------------------*/
-```
+    SELECT RANGE_INTERSECT(
+      RANGE<DATE> '[2022-02-01, UNBOUNDED)',
+      RANGE<DATE> '[2021-06-15, UNBOUNDED)') AS results;
+    
+    /*-------------------------+
+     | results                 |
+     +-------------------------+
+     | [2022-02-01, UNBOUNDED) |
+     +-------------------------*/
 
 ## `     RANGE_OVERLAPS    `
 
-``` text
-RANGE_OVERLAPS(range_a, range_b)
-```
+    RANGE_OVERLAPS(range_a, range_b)
 
 **Description**
 
@@ -522,7 +470,7 @@ Returns `  TRUE  ` if a part of `  range_a  ` intersects with `  range_b  ` , ot
 
 `  T  ` must be of the same type for all inputs.
 
-To get the part of the range that overlaps, use the [`  RANGE_INTERSECT  `](#range_intersect) function.
+To get the part of the range that overlaps, use the [`  RANGE_INTERSECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/range-functions#range_intersect) function.
 
 **Return type**
 
@@ -532,64 +480,54 @@ To get the part of the range that overlaps, use the [`  RANGE_INTERSECT  `](#ran
 
 In the following query, the first and second ranges overlap between `  2022-02-01  ` and `  2022-04-15  ` :
 
-``` text
-SELECT RANGE_OVERLAPS(
-  RANGE<DATE> '[2022-02-01, 2022-09-01)',
-  RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
-
-/*---------+
- | results |
- +---------+
- | TRUE    |
- +---------*/
-```
+    SELECT RANGE_OVERLAPS(
+      RANGE<DATE> '[2022-02-01, 2022-09-01)',
+      RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | TRUE    |
+     +---------*/
 
 In the following query, the first and second ranges don't overlap:
 
-``` text
-SELECT RANGE_OVERLAPS(
-  RANGE<DATE> '[2020-02-01, 2020-09-01)',
-  RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
-
-/*---------+
- | results |
- +---------+
- | FALSE   |
- +---------*/
-```
+    SELECT RANGE_OVERLAPS(
+      RANGE<DATE> '[2020-02-01, 2020-09-01)',
+      RANGE<DATE> '[2021-06-15, 2022-04-15)') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | FALSE   |
+     +---------*/
 
 In the following query, the first and second ranges overlap between `  2022-02-01  ` and `  UNBOUNDED  ` :
 
-``` text
-SELECT RANGE_OVERLAPS(
-  RANGE<DATE> '[2022-02-01, UNBOUNDED)',
-  RANGE<DATE> '[2021-06-15, UNBOUNDED)') AS results;
-
-/*---------+
- | results |
- +---------+
- | TRUE    |
- +---------*/
-```
+    SELECT RANGE_OVERLAPS(
+      RANGE<DATE> '[2022-02-01, UNBOUNDED)',
+      RANGE<DATE> '[2021-06-15, UNBOUNDED)') AS results;
+    
+    /*---------+
+     | results |
+     +---------+
+     | TRUE    |
+     +---------*/
 
 ## `     RANGE_SESSIONIZE    `
 
-``` text
-RANGE_SESSIONIZE(
-  TABLE table_name,
-  range_column,
-  partitioning_columns
-)
-```
+    RANGE_SESSIONIZE(
+      TABLE table_name,
+      range_column,
+      partitioning_columns
+    )
 
-``` text
-RANGE_SESSIONIZE(
-  TABLE table_name,
-  range_column,
-  partitioning_columns,
-  sessionize_option
-)
-```
+    RANGE_SESSIONIZE(
+      TABLE table_name,
+      range_column,
+      partitioning_columns,
+      sessionize_option
+    )
 
 **Description**
 
@@ -623,101 +561,91 @@ This function produces a table that includes all columns in the input table and 
 
 The examples in this section reference the following table called `  my_sessionized_range_table  ` in a dataset called `  mydataset  ` :
 
-``` text
-INSERT mydataset.my_sessionized_range_table (emp_id, dept_id, duration)
-VALUES(10, 1000, RANGE<DATE> '[2010-01-10, 2010-03-10)'),
-      (10, 2000, RANGE<DATE> '[2010-03-10, 2010-07-15)'),
-      (10, 2000, RANGE<DATE> '[2010-06-15, 2010-08-18)'),
-      (20, 2000, RANGE<DATE> '[2010-03-10, 2010-07-20)'),
-      (20, 1000, RANGE<DATE> '[2020-05-10, 2020-09-20)');
-
-SELECT * FROM mydataset.my_sessionized_range_table ORDER BY emp_id;
-
-/*--------+---------+--------------------------+
- | emp_id | dept_id | duration                 |
- +--------+---------+--------------------------+
- | 10     | 1000    | [2010-01-10, 2010-03-10) |
- | 10     | 2000    | [2010-03-10, 2010-07-15) |
- | 10     | 2000    | [2010-06-15, 2010-08-18) |
- | 20     | 2000    | [2010-03-10, 2010-07-20) |
- | 20     | 1000    | [2020-05-10, 2020-09-20) |
- +--------+---------+--------------------------*/
-```
+    INSERT mydataset.my_sessionized_range_table (emp_id, dept_id, duration)
+    VALUES(10, 1000, RANGE<DATE> '[2010-01-10, 2010-03-10)'),
+          (10, 2000, RANGE<DATE> '[2010-03-10, 2010-07-15)'),
+          (10, 2000, RANGE<DATE> '[2010-06-15, 2010-08-18)'),
+          (20, 2000, RANGE<DATE> '[2010-03-10, 2010-07-20)'),
+          (20, 1000, RANGE<DATE> '[2020-05-10, 2020-09-20)');
+    
+    SELECT * FROM mydataset.my_sessionized_range_table ORDER BY emp_id;
+    
+    /*--------+---------+--------------------------+
+     | emp_id | dept_id | duration                 |
+     +--------+---------+--------------------------+
+     | 10     | 1000    | [2010-01-10, 2010-03-10) |
+     | 10     | 2000    | [2010-03-10, 2010-07-15) |
+     | 10     | 2000    | [2010-06-15, 2010-08-18) |
+     | 20     | 2000    | [2010-03-10, 2010-07-20) |
+     | 20     | 1000    | [2020-05-10, 2020-09-20) |
+     +--------+---------+--------------------------*/
 
 In the following query, a table of sessionized data is produced for `  my_sessionized_range_table  ` , and only ranges that meet or overlap are sessionized:
 
-``` text
-SELECT
-  emp_id, duration, session_range
-FROM
-  RANGE_SESSIONIZE(
-    TABLE mydataset.my_sessionized_range_table,
-    'duration',
-    ['emp_id'])
-ORDER BY emp_id;
-
-/*--------+--------------------------+--------------------------+
- | emp_id | duration                 | session_range            |
- +--------+--------------------------+--------------------------+
- | 10     | [2010-01-10, 2010-03-10) | [2010-01-10, 2010-08-18) |
- | 10     | [2010-03-10, 2010-07-15) | [2010-01-10, 2010-08-18) |
- | 10     | [2010-06-15, 2010-08-18) | [2010-01-10, 2010-08-18) |
- | 20     | [2010-03-10, 2010-07-20) | [2010-03-10, 2010-07-20) |
- | 20     | [2020-05-10, 2020-09-20) | [2020-05-10, 2020-09-20) |
- +--------+-----------------------------------------------------*/
-```
+    SELECT
+      emp_id, duration, session_range
+    FROM
+      RANGE_SESSIONIZE(
+        TABLE mydataset.my_sessionized_range_table,
+        'duration',
+        ['emp_id'])
+    ORDER BY emp_id;
+    
+    /*--------+--------------------------+--------------------------+
+     | emp_id | duration                 | session_range            |
+     +--------+--------------------------+--------------------------+
+     | 10     | [2010-01-10, 2010-03-10) | [2010-01-10, 2010-08-18) |
+     | 10     | [2010-03-10, 2010-07-15) | [2010-01-10, 2010-08-18) |
+     | 10     | [2010-06-15, 2010-08-18) | [2010-01-10, 2010-08-18) |
+     | 20     | [2010-03-10, 2010-07-20) | [2010-03-10, 2010-07-20) |
+     | 20     | [2020-05-10, 2020-09-20) | [2020-05-10, 2020-09-20) |
+     +--------+-----------------------------------------------------*/
 
 In the following query, a table of sessionized data is produced for `  my_sessionized_range_table  ` , and only a range that's overlapped by another range is sessionized:
 
-``` text
-SELECT
-  emp_id, duration, session_range
-FROM
-  RANGE_SESSIONIZE(
-    TABLE mydataset.my_sessionized_range_table,
-    'duration',
-    ['emp_id'],
-    'OVERLAPS')
-ORDER BY emp_id;
-
-/*--------+--------------------------+--------------------------+
- | emp_id | duration                 | session_range            |
- +--------+--------------------------+--------------------------+
- | 10     | [2010-03-10, 2010-07-15) | [2010-03-10, 2010-08-18) |
- | 10     | [2010-06-15, 2010-08-18) | [2010-03-10, 2010-08-18) |
- | 10     | [2010-01-10, 2010-03-10) | [2010-01-10, 2010-03-10) |
- | 20     | [2020-05-10, 2020-09-20) | [2020-05-10, 2020-09-20) |
- | 20     | [2010-03-10, 2010-07-20) | [2010-03-10, 2010-07-20) |
- +--------+-----------------------------------------------------*/
-```
+    SELECT
+      emp_id, duration, session_range
+    FROM
+      RANGE_SESSIONIZE(
+        TABLE mydataset.my_sessionized_range_table,
+        'duration',
+        ['emp_id'],
+        'OVERLAPS')
+    ORDER BY emp_id;
+    
+    /*--------+--------------------------+--------------------------+
+     | emp_id | duration                 | session_range            |
+     +--------+--------------------------+--------------------------+
+     | 10     | [2010-03-10, 2010-07-15) | [2010-03-10, 2010-08-18) |
+     | 10     | [2010-06-15, 2010-08-18) | [2010-03-10, 2010-08-18) |
+     | 10     | [2010-01-10, 2010-03-10) | [2010-01-10, 2010-03-10) |
+     | 20     | [2020-05-10, 2020-09-20) | [2020-05-10, 2020-09-20) |
+     | 20     | [2010-03-10, 2010-07-20) | [2010-03-10, 2010-07-20) |
+     +--------+-----------------------------------------------------*/
 
 If you need to normalize sessionized data, you can use a query similar to the following:
 
-``` text
-SELECT emp_id, session_range AS normalized FROM (
-  SELECT emp_id, session_range
-  FROM RANGE_SESSIONIZE(
-    TABLE mydataset.my_sessionized_range_table,
-    'duration',
-    ['emp_id'],
-    'MEETS')
-)
-GROUP BY emp_id, normalized;
-
-/*--------+--------------------------+
- | emp_id | normalized               |
- +--------+--------------------------+
- | 20     | [2010-03-10, 2010-07-20) |
- | 10     | [2010-01-10, 2010-08-18) |
- | 20     | [2020-05-10, 2020-09-20) |
- +--------+--------------------------*/
-```
+    SELECT emp_id, session_range AS normalized FROM (
+      SELECT emp_id, session_range
+      FROM RANGE_SESSIONIZE(
+        TABLE mydataset.my_sessionized_range_table,
+        'duration',
+        ['emp_id'],
+        'MEETS')
+    )
+    GROUP BY emp_id, normalized;
+    
+    /*--------+--------------------------+
+     | emp_id | normalized               |
+     +--------+--------------------------+
+     | 20     | [2010-03-10, 2010-07-20) |
+     | 10     | [2010-01-10, 2010-08-18) |
+     | 20     | [2020-05-10, 2020-09-20) |
+     +--------+--------------------------*/
 
 ## `     RANGE_START    `
 
-``` text
-RANGE_START(range_to_check)
-```
+    RANGE_START(range_to_check)
 
 **Description**
 
@@ -741,24 +669,20 @@ Returns `  NULL  ` if `  range_to_check  ` is `  NULL  ` .
 
 In the following query, the lower bound of the range is retrieved:
 
-``` text
-SELECT RANGE_START(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
-
-/*------------+
- | results    |
- +------------+
- | 2022-12-01 |
- +------------*/
-```
+    SELECT RANGE_START(RANGE<DATE> '[2022-12-01, 2022-12-31)') AS results;
+    
+    /*------------+
+     | results    |
+     +------------+
+     | 2022-12-01 |
+     +------------*/
 
 In the following query, the lower bound of the range is unbounded, so `  NULL  ` is returned:
 
-``` text
-SELECT RANGE_START(RANGE<DATE> '[UNBOUNDED, 2022-12-31)') AS results;
-
-/*------------+
- | results    |
- +------------+
- | NULL       |
- +------------*/
-```
+    SELECT RANGE_START(RANGE<DATE> '[UNBOUNDED, 2022-12-31)') AS results;
+    
+    /*------------+
+     | results    |
+     +------------+
+     | NULL       |
+     +------------*/

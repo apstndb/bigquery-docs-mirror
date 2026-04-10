@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [DestinationDatasetReference](#DestinationDatasetReference)
-      - [JSON representation](#DestinationDatasetReference.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/DestinationDataset#SCHEMA_REPRESENTATION)
+  - [DestinationDatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/DestinationDataset#DestinationDatasetReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/DestinationDataset#DestinationDatasetReference.SCHEMA_REPRESENTATION)
 
 Defines the destination bigquery dataset.
 
@@ -15,7 +15,7 @@ Defines the destination bigquery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetReference&quot;: {
     object (DestinationDatasetReference)
   },
@@ -87,7 +87,7 @@ Optional. The geographic locations where the dataset should be replicated. See [
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetId&quot;: string,
   &quot;projectId&quot;: string
 }</code></pre></td>

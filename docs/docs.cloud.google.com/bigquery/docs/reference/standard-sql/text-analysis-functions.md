@@ -2,34 +2,15 @@ GoogleSQL for BigQuery supports the following text analysis functions.
 
 ## Function list
 
-<table>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/text-analysis-functions#bag_of_words"><code dir="ltr" translate="no">        BAG_OF_WORDS       </code></a></td>
-<td>Gets the frequency of each term (token) in a tokenized document.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze"><code dir="ltr" translate="no">        TEXT_ANALYZE       </code></a></td>
-<td>Extracts terms (tokens) from text and converts them into a tokenized document.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/text-analysis-functions#tf_idf"><code dir="ltr" translate="no">        TF_IDF       </code></a></td>
-<td>Evaluates how relevant a term (token) is to a tokenized document in a set of tokenized documents.</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                       | Summary                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [`         BAG_OF_WORDS        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#bag_of_words) | Gets the frequency of each term (token) in a tokenized document.                                  |
+| [`         TEXT_ANALYZE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) | Extracts terms (tokens) from text and converts them into a tokenized document.                    |
+| [`         TF_IDF        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#tf_idf)             | Evaluates how relevant a term (token) is to a tokenized document in a set of tokenized documents. |
 
 ## `     BAG_OF_WORDS    `
 
-``` text
-BAG_OF_WORDS(tokenized_document)
-```
+    BAG_OF_WORDS(tokenized_document)
 
 **Definition**
 
@@ -52,33 +33,29 @@ Definitions:
 
 The following query produces terms and their frequencies in two tokenized documents:
 
-``` text
-WITH
-  ExampleTable AS (
-    SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
-    SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f
-  )
-SELECT id, BAG_OF_WORDS(f) AS results
-FROM ExampleTable
-ORDER BY id;
-
-/*----+------------------------------------------------+
- | id | results                                        |
- +----+------------------------------------------------+
- | 1  | [(null, 1), ('I', 1), ('like', 1), ('pie', 3)] |
- | 2  | [(null, 1), ('pie', 1), ('yum', 2)]            |
- +----+------------------------------------------------*/
-```
+    WITH
+      ExampleTable AS (
+        SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
+        SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f
+      )
+    SELECT id, BAG_OF_WORDS(f) AS results
+    FROM ExampleTable
+    ORDER BY id;
+    
+    /*----+------------------------------------------------+
+     | id | results                                        |
+     +----+------------------------------------------------+
+     | 1  | [(null, 1), ('I', 1), ('like', 1), ('pie', 3)] |
+     | 2  | [(null, 1), ('pie', 1), ('yum', 2)]            |
+     +----+------------------------------------------------*/
 
 ## `     TEXT_ANALYZE    `
 
-``` text
-TEXT_ANALYZE(
-  text
-  [, analyzer => { 'LOG_ANALYZER' | 'NO_OP_ANALYZER' | 'PATTERN_ANALYZER' } ]
-  [, analyzer_options => analyzer_options_values ]
-)
-```
+    TEXT_ANALYZE(
+      text
+      [, analyzer => { 'LOG_ANALYZER' | 'NO_OP_ANALYZER' | 'PATTERN_ANALYZER' } ]
+      [, analyzer_options => analyzer_options_values ]
+    )
 
 **Description**
 
@@ -90,13 +67,13 @@ Extracts terms (tokens) from text and converts them into a tokenized document.
 
   - `  analyzer  ` : A named argument with a `  STRING  ` value. Determines which analyzer to use to convert `  text  ` into an array of terms (tokens). This can be:
     
-      - `  'LOG_ANALYZER'  ` (default): Breaks the input into terms when delimiters are encountered and then normalizes the terms. If `  analyzer  ` isn't specified, this is used by default. For more information, see [`  LOG_ANALYZER  ` text analyzer](/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) .
+      - `  'LOG_ANALYZER'  ` (default): Breaks the input into terms when delimiters are encountered and then normalizes the terms. If `  analyzer  ` isn't specified, this is used by default. For more information, see [`  LOG_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) .
     
-      - `  'NO_OP_ANALYZER'  ` : Extracts the text as a single term (token), but doesn't apply normalization. For more information, see [`  NO_OP_ANALYZER  ` text analyzer](/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
+      - `  'NO_OP_ANALYZER'  ` : Extracts the text as a single term (token), but doesn't apply normalization. For more information, see [`  NO_OP_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
     
-      - `  'PATTERN_ANALYZER'  ` : Breaks the input into terms that match a regular expression. For more information, see [`  PATTERN_ANALYZER  ` text analyzer](/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) .
+      - `  'PATTERN_ANALYZER'  ` : Breaks the input into terms that match a regular expression. For more information, see [`  PATTERN_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) .
 
-  - `  analyzer_options  ` : A named argument with a JSON-formatted `  STRING  ` value. Takes a list of text analysis rules. For more information, see [Text analyzer options](/bigquery/docs/reference/standard-sql/text-analysis#text_analyzer_options) .
+  - `  analyzer_options  ` : A named argument with a JSON-formatted `  STRING  ` value. Takes a list of text analysis rules. For more information, see [Text analyzer options](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#text_analyzer_options) .
 
 **Details**
 
@@ -110,65 +87,53 @@ If no analyzer is specified, the `  LOG_ANALYZER  ` analyzer is used by default.
 
 **Examples**
 
-The following query uses the default text analyzer, [`  LOG_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) , with the input text:
+The following query uses the default text analyzer, [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) , with the input text:
 
-``` text
-SELECT TEXT_ANALYZE('I like pie, you like-pie, they like 2 PIEs.') AS results
+    SELECT TEXT_ANALYZE('I like pie, you like-pie, they like 2 PIEs.') AS results
+    
+    /*--------------------------------------------------------------------------+
+     | results                                                                  |
+     +--------------------------------------------------------------------------+
+     | ['i', 'like', 'pie', 'you', 'like', 'pie', 'they', 'like', '2', 'pies' ] |
+     +--------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------+
- | results                                                                  |
- +--------------------------------------------------------------------------+
- | ['i', 'like', 'pie', 'you', 'like', 'pie', 'they', 'like', '2', 'pies' ] |
- +--------------------------------------------------------------------------*/
-```
+The following query uses the [`  NO_OP_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) text analyzer with the input text:
 
-The following query uses the [`  NO_OP_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) text analyzer with the input text:
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'NO_OP_ANALYZER'
+    ) AS results
+    
+    /*-----------------------------------------------+
+     | results                                       |
+     +-----------------------------------------------+
+     | 'I like pie, you like-pie, they like 2 PIEs.' |
+     +-----------------------------------------------*/
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'NO_OP_ANALYZER'
-) AS results
+The following query uses the [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with the input text:
 
-/*-----------------------------------------------+
- | results                                       |
- +-----------------------------------------------+
- | 'I like pie, you like-pie, they like 2 PIEs.' |
- +-----------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'PATTERN_ANALYZER'
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
+     +----------------------------------------------------------------*/
 
-The following query uses the [`  PATTERN_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer with the input text:
+For additional examples that include analyzer options, see [Text analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) .
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'PATTERN_ANALYZER'
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
- +----------------------------------------------------------------*/
-```
-
-For additional examples that include analyzer options, see [Text analysis](/bigquery/docs/reference/standard-sql/text-analysis) .
-
-For helpful analyzer recipes that you can use to enhance analyzer-supported queries, see [Search with text analyzers](/bigquery/docs/text-analysis-search) .
+For helpful analyzer recipes that you can use to enhance analyzer-supported queries, see [Search with text analyzers](https://docs.cloud.google.com/bigquery/docs/text-analysis-search) .
 
 ## `     TF_IDF    `
 
-``` text
-TF_IDF(tokenized_document) OVER()
-```
+    TF_IDF(tokenized_document) OVER()
 
-``` text
-TF_IDF(tokenized_document, max_distinct_tokens) OVER()
-```
+    TF_IDF(tokenized_document, max_distinct_tokens) OVER()
 
-``` text
-TF_IDF(tokenized_document, max_distinct_tokens, frequency_threshold) OVER()
-```
+    TF_IDF(tokenized_document, max_distinct_tokens, frequency_threshold) OVER()
 
 **Description**
 
@@ -194,21 +159,15 @@ This function uses a TF-IDF (term frequency-inverse document frequency) algorith
 
   - TDIF:
     
-    ``` text
-    term frequency * inverse document frequency
-    ```
+        term frequency * inverse document frequency
 
   - term frequency:
     
-    ``` text
-    (count of term in document) / (document size)
-    ```
+        (count of term in document) / (document size)
 
   - inverse document frequency:
     
-    ``` text
-    log(1 + document set size / (1 + count of documents containing term))
-    ```
+        log(1 + document set size / (1 + count of documents containing term))
 
 Terms are added to a dictionary of terms if they satisfy the criteria for `  max_distinct_tokens  ` and `  frequency_threshold  ` , otherwise they are considered the *unknown term* . The unknown term is always the first term in the dictionary and represented as `  NULL  ` . The rest of the dictionary is ordered by term frequency rather than alphabetically.
 
@@ -225,70 +184,66 @@ Definitions:
 
 The following query computes the relevance of up to 10 terms that appear at least twice in a set of tokenized documents. In this example, `  10  ` represents `  max_distinct_tokens  ` and `  2  ` represents `  frequency_threshold  ` :
 
-``` text
-WITH ExampleTable AS (
-  SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
-  SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 4 AS id, ['you', 'like', 'pie', 'too', NULL] AS f
-)
-SELECT id, TF_IDF(f, 10, 2) OVER() AS results
-FROM ExampleTable
-ORDER BY id;
-
-/*----+-------------------------------------------------+
- | id | results                                         |
- +----+-------------------------------------------------+
- | 1  | [{"index":null,"value":"0.1304033435859887"},   |
- |    |  {"index":"I","value":"0.1412163100645339"},    |
- |    |  {"index":"like","value":"0.1412163100645339"}, |
- |    |  {"index":"pie","value":"0.29389333245105953"}] |
- +----+-------------------------------------------------+
- | 2  | [{"index":null,"value":"0.1956050153789831"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}, |
- |    |  {"index":"yum","value":"0.4236489301936017"}]  |
- +----+-------------------------------------------------+
- | 3  | [{"index":null,"value":"0.1956050153789831"},   |
- |    |  {"index":"I","value":"0.21182446509680086"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}, |
- |    |  {"index":"yum","value":"0.21182446509680086"}] |
- +----+-------------------------------------------------+
- | 4  | [{"index":null,"value":"0.4694520369095594"},   |
- |    |  {"index":"like","value":"0.1694595720774407"}, |
- |    |  {"index":"pie","value":"0.11755733298042381"}] |
- +----+-------------------------------------------------*/
-```
+    WITH ExampleTable AS (
+      SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
+      SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
+      SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f UNION ALL
+      SELECT 4 AS id, ['you', 'like', 'pie', 'too', NULL] AS f
+    )
+    SELECT id, TF_IDF(f, 10, 2) OVER() AS results
+    FROM ExampleTable
+    ORDER BY id;
+    
+    /*----+-------------------------------------------------+
+     | id | results                                         |
+     +----+-------------------------------------------------+
+     | 1  | [{"index":null,"value":"0.1304033435859887"},   |
+     |    |  {"index":"I","value":"0.1412163100645339"},    |
+     |    |  {"index":"like","value":"0.1412163100645339"}, |
+     |    |  {"index":"pie","value":"0.29389333245105953"}] |
+     +----+-------------------------------------------------+
+     | 2  | [{"index":null,"value":"0.1956050153789831"},   |
+     |    |  {"index":"pie","value":"0.14694666622552977"}, |
+     |    |  {"index":"yum","value":"0.4236489301936017"}]  |
+     +----+-------------------------------------------------+
+     | 3  | [{"index":null,"value":"0.1956050153789831"},   |
+     |    |  {"index":"I","value":"0.21182446509680086"},   |
+     |    |  {"index":"pie","value":"0.14694666622552977"}, |
+     |    |  {"index":"yum","value":"0.21182446509680086"}] |
+     +----+-------------------------------------------------+
+     | 4  | [{"index":null,"value":"0.4694520369095594"},   |
+     |    |  {"index":"like","value":"0.1694595720774407"}, |
+     |    |  {"index":"pie","value":"0.11755733298042381"}] |
+     +----+-------------------------------------------------*/
 
 The following query computes the relevance of up to three terms that appear at least once in a set of tokenized documents:
 
-``` text
-WITH ExampleTable AS (
-  SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
-  SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f UNION ALL
-  SELECT 4 AS id, ['you', 'like', 'pie', 'too', NULL] AS f
-)
-SELECT id, TF_IDF(f, 3, 2) OVER() AS results
-FROM ExampleTable
-ORDER BY id;
-
-/*----+-------------------------------------------------+
- | id | results                                         |
- +----+-------------------------------------------------+
- | 1  | [{"index":null,"value":"0.12679902142647365"},  |
- |    |  {"index":"I","value":"0.1412163100645339"},    |
- |    |  {"index":"like","value":"0.1412163100645339"}, |
- |    |  {"index":"pie","value":"0.29389333245105953"}] |
- +----+-------------------------------------------------+
- | 2  | [{"index":null,"value":"0.5705955964191315"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}] |
- +----+-------------------------------------------------+
- | 3  | [{"index":null,"value":"0.380397064279421"},    |
- |    |  {"index":"I","value":"0.21182446509680086"},   |
- |    |  {"index":"pie","value":"0.14694666622552977"}] |
- +----+-------------------------------------------------+
- | 4  | [{"index":null,"value":"0.45647647713530515"},  |
- |    |  {"index":"like","value":"0.1694595720774407"}, |
- |    |  {"index":"pie","value":"0.11755733298042381"}] |
- +----+-------------------------------------------------*/
-```
+    WITH ExampleTable AS (
+      SELECT 1 AS id, ['I', 'like', 'pie', 'pie', 'pie', NULL] AS f UNION ALL
+      SELECT 2 AS id, ['yum', 'yum', 'pie', NULL] AS f UNION ALL
+      SELECT 3 AS id, ['I', 'yum', 'pie', NULL] AS f UNION ALL
+      SELECT 4 AS id, ['you', 'like', 'pie', 'too', NULL] AS f
+    )
+    SELECT id, TF_IDF(f, 3, 2) OVER() AS results
+    FROM ExampleTable
+    ORDER BY id;
+    
+    /*----+-------------------------------------------------+
+     | id | results                                         |
+     +----+-------------------------------------------------+
+     | 1  | [{"index":null,"value":"0.12679902142647365"},  |
+     |    |  {"index":"I","value":"0.1412163100645339"},    |
+     |    |  {"index":"like","value":"0.1412163100645339"}, |
+     |    |  {"index":"pie","value":"0.29389333245105953"}] |
+     +----+-------------------------------------------------+
+     | 2  | [{"index":null,"value":"0.5705955964191315"},   |
+     |    |  {"index":"pie","value":"0.14694666622552977"}] |
+     +----+-------------------------------------------------+
+     | 3  | [{"index":null,"value":"0.380397064279421"},    |
+     |    |  {"index":"I","value":"0.21182446509680086"},   |
+     |    |  {"index":"pie","value":"0.14694666622552977"}] |
+     +----+-------------------------------------------------+
+     | 4  | [{"index":null,"value":"0.45647647713530515"},  |
+     |    |  {"index":"like","value":"0.1694595720774407"}, |
+     |    |  {"index":"pie","value":"0.11755733298042381"}] |
+     +----+-------------------------------------------------*/

@@ -1,8 +1,8 @@
 # Migrate code with the batch SQL translator
 
-**Note:** For API-based translations, including new batch translations, we recommend that you use the [BigQuery Migration API](/bigquery/docs/api-sql-translator) to translate your SQL scripts. The BigQuery Migration API works much like the batch SQL translator, but without the need to install or use client code.
+**Note:** For API-based translations, including new batch translations, we recommend that you use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) to translate your SQL scripts. The BigQuery Migration API works much like the batch SQL translator, but without the need to install or use client code.
 
-This document describes how to use the batch SQL translator in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. This document is intended for users who are familiar with the [Google Cloud console](/bigquery/docs/bigquery-web-ui) .
+This document describes how to use the batch SQL translator in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
 
 ## Before you begin
 
@@ -59,6 +59,8 @@ You can have all the above necessary Cloud Storage permissions from the followin
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
+    
+    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
@@ -74,7 +76,7 @@ To help the service generate more accurate translation results, we recommend tha
 
 You can use the `  dwh-migration-dumper  ` command-line extraction tool to generate the metadata information, or you can provide your own metadata files. Once metadata files are prepared, you can include them along with the source files in the translation source folder. The translator automatically detects them and leverages them to translate source files, you don't need to configure any extra settings to enable this.
 
-To generate metadata information by using the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation](/bigquery/docs/generate-metadata) .
+To generate metadata information by using the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 To provide your own metadata, collect the data definition language (DDL) statements for the SQL objects in your source system into separate text files.
 
@@ -90,15 +92,15 @@ You have three options for submitting a batch translation job:
 
 ### Create configuration YAML files
 
-You can optionally create and use configuration [configuration YAML files](/bigquery/docs/config-yaml-translation) to customize your batch translations. These files can be used to transform your translation output in various ways. For example, you can [create a configuration YAML file to change the case of a SQL object](/bigquery/docs/config-yaml-translation#change_object-name_case) during translation.
+You can optionally create and use configuration [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to customize your batch translations. These files can be used to transform your translation output in various ways. For example, you can [create a configuration YAML file to change the case of a SQL object](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#change_object-name_case) during translation.
 
-If you want to use the Google Cloud console or the BigQuery Migration API for a batch translation job, you can [upload the configuration YAML file to the Cloud Storage bucket containing the source files](#upload-files) .
+If you want to use the Google Cloud console or the BigQuery Migration API for a batch translation job, you can [upload the configuration YAML file to the Cloud Storage bucket containing the source files](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#upload-files) .
 
 If you want to use the batch translation client, you can place the configuration YAML file in the local translation input folder.
 
 ### Upload input files to Cloud Storage
 
-If you want to use the Google Cloud console or the BigQuery Migration API to perform a translation job, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](/bigquery/docs/generate-metadata) or [configuration YAML files](/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket and directory containing the source files. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+If you want to use the Google Cloud console or the BigQuery Migration API to perform a translation job, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket and directory containing the source files. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ## Supported SQL dialects
 
@@ -129,7 +131,7 @@ Additionally, translation of the following SQL dialects is supported in [preview
   - SQLite
   - Vertica SQL
 
-**Important:** Translation is done on a best effort basis. Translation success can vary, depending on the uniqueness and complexity of the SQL statements in your source scripts. You might need to manually translate some scripts. Use the **Actions** tab in the [Google Cloud console output](#output) to diagnose and correct translation issues.
+**Important:** Translation is done on a best effort basis. Translation success can vary, depending on the uniqueness and complexity of the SQL statements in your source scripts. You might need to manually translate some scripts. Use the **Actions** tab in the [Google Cloud console output](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#output) to diagnose and correct translation issues.
 
 ### Handling unsupported SQL functions with helper UDFs
 
@@ -216,7 +218,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -230,7 +232,7 @@ Finland
 
 `  europe-north1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
@@ -240,13 +242,13 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
 `  europe-southwest1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
@@ -256,19 +258,19 @@ Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
 `  europe-west9  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
 `  europe-north2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
@@ -282,7 +284,7 @@ Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Americas**
 
@@ -294,13 +296,13 @@ Dallas
 
 `  us-south1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -322,19 +324,19 @@ Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Québec
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -344,7 +346,7 @@ Santiago
 
 `  southamerica-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
@@ -354,7 +356,7 @@ Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
@@ -389,6 +391,8 @@ Follow these steps to start a translation job, view its progress, and see the re
 These steps assume you have source files uploaded into a Cloud Storage bucket already.
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the **SQL translation** panel, click **Start translation** .
 
@@ -411,7 +415,7 @@ These steps assume you have source files uploaded into a Cloud Storage bucket al
 
 7.  Select any the optional settings that you need to customize metadata and any additional translation outputs.
 
-8.  You can further customize translation behavior by creating configuration YAML files and placing these files in the input Cloud Storage bucket. These files can be used to set rename objects, enable optimizations, enhance translations with Gemini and more. For more information about configuration YAML files, see [Create a configuration YAML file](/bigquery/docs/config-yaml-translation) .
+8.  You can further customize translation behavior by creating configuration YAML files and placing these files in the input Cloud Storage bucket. These files can be used to set rename objects, enable optimizations, enhance translations with Gemini and more. For more information about configuration YAML files, see [Create a configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) .
 
 9.  Click **Create** to start the translation job.
 
@@ -419,7 +423,7 @@ Once the translation job is created, you can see its status in the translation j
 
 ### Batch translation client
 
-**Note:** We recommend that new translations use the [BigQuery Migration API](/bigquery/docs/api-sql-translator) instead of the batch translation client.
+**Note:** We recommend that new translations use the [BigQuery Migration API](https://docs.cloud.google.com/bigquery/docs/api-sql-translator) instead of the batch translation client.
 
 1.  [Install the batch translation client and the Google Cloud CLI](https://github.com/google/dwh-migration-tools/blob/main/client/README.md#installation) .
 
@@ -438,27 +442,25 @@ Once the translation job is created, you can see its status in the translation j
 
 6.  Run the batch translation client using the following command:
     
-    ``` text
-    bin/dwh-migration-client
-    ```
+        bin/dwh-migration-client
 
 7.  Create a translation job.
     
       - The following example shows a command to create a translation job. The command will run the workflow and show output if this workflow is successful.
         
-        ``` text
+        ``` notranslate
         gcloud bq migration-workflows create --location=us --config-file=CONFIG_FILE_NAME.json
         ```
     
       - The following example shows a command to create and run the workflow with the `  --async  ` flag. The command will create and run the workflow and return immediately with a link to the workflow.
         
-        ``` text
+        ``` notranslate
         gcloud bq migration-workflows create --location=LOCATION  --config-file=CONFIG_FILE_NAME.json --async
         ```
     
       - The following example shows a command to list your translation jobs:
         
-        ``` text
+        ``` notranslate
         gcloud bq migration-workflows list --location=LOCATION
         ```
     
@@ -477,7 +479,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
     
     The following example shows a translation configuration YAML file for a Teradata to BigQuery translation:
     
-    ``` text
+    ``` notranslate
     tasks:
     translation_task:
       type: Teradata2BigQuery_Translation
@@ -498,7 +500,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
     
     The following example shows a translation configuration JSON file for a Teradata to BigQuery translation:
     
-    ``` text
+    ``` notranslate
     {
     "tasks": {
       "translation_task": {
@@ -536,7 +538,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
 
 2.  Once the translation configuration is created, run the following command to run the translation job.
     
-    ``` text
+    ``` notranslate
     bq mk --migration_workflow --location=LOCATION --config_file=CONFIG_FILE_NAME.json
     ```
     
@@ -549,7 +551,7 @@ You can run the batch SQL translator using the bq command-line tool command-line
 
   - To view details about a specific translation job, run the following command:
     
-    ``` text
+    ``` notranslate
     bq show --migration_workflow projects/PROJECT_ID/ locations/us/workflows/WORKFLOW_ID
     ```
     
@@ -560,19 +562,19 @@ You can run the batch SQL translator using the bq command-line tool command-line
 
   - To see the results of a specific translation job, run the following command:
     
-    ``` text
+    ``` notranslate
     gcloud bq migration-workflows describe projects/PROJECT_ID    /locations/us/workflows/WORKFLOW_ID
     ```
 
   - To remove a translation job from the list, run the following command:
     
-    ``` text
+    ``` notranslate
     bq rm --migration_workflow projects/PROJECT_ID/locations/us/workflows/WORKFLOW_ID
     ```
 
   - To list all your translation jobs, run the following command:
     
-    ``` text
+    ``` notranslate
     bq ls --migration_workflow --location=LOCATION
     ```
 
@@ -590,6 +592,8 @@ After running the translation job, you can see information about the job in the 
 To see translation job details, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job for which you want to see the translation details. Then, click the translation job name. You can see a Sankey visualization that illustrates the overall quality of the job, the number of input lines of code (excluding blank lines and comments), and a list of issues that occurred during the translation process. You should prioritize fixes from left to right. Issues in an early stage can cause additional issues in subsequent stages.
 
@@ -597,7 +601,7 @@ To see translation job details, follow these steps:
 
 4.  Select the **Log Summary** tab to see a summary of the translation issues, including issue categories, suggested actions, and how often each issue occurred. You can click the Sankey visualization bars to filter issues. You can also select an issue category to see log messages associated with that issue category.
 
-5.  Select the **Log Messages** tab to see more details about each translation issue, including the issue category, the specific issue message, and a link to the file in which the issue occurred. You can click the Sankey visualization bars to filter issues. You can select an issue in the **Log Message** tab to open the [**Code tab**](/bigquery/docs/batch-sql-translator#code-tab) that displays the input and output file if applicable.
+5.  Select the **Log Messages** tab to see more details about each translation issue, including the issue category, the specific issue message, and a link to the file in which the issue occurred. You can click the Sankey visualization bars to filter issues. You can select an issue in the **Log Message** tab to open the [**Code tab**](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#code-tab) that displays the input and output file if applicable.
 
 6.  Click the **Job details** tab to see the translation job configuration details.
 
@@ -608,6 +612,8 @@ The summary report is a CSV file that contains a table of all of the warning and
 To see the summary file in the Google Cloud console, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
@@ -617,72 +623,22 @@ To see the summary file in the Google Cloud console, follow these steps:
 
 The following table describes the summary file columns:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Column</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Timestamp</td>
-<td>The timestamp at which the issue occurred.</td>
-</tr>
-<tr class="even">
-<td>FilePath</td>
-<td>The path to the source file that the issue is associated with.</td>
-</tr>
-<tr class="odd">
-<td>FileName</td>
-<td>The name of the source file that the issue is associated with.</td>
-</tr>
-<tr class="even">
-<td>ScriptLine</td>
-<td>The line number where the issue occurred.</td>
-</tr>
-<tr class="odd">
-<td>ScriptColumn</td>
-<td>The column number where the issue occurred.</td>
-</tr>
-<tr class="even">
-<td>TranspilerComponent</td>
-<td>The translation engine internal component where the warning or error occurred. This column might be empty.</td>
-</tr>
-<tr class="odd">
-<td>Environment</td>
-<td>The translation dialect environment associated with the warning or error. This column might be empty.</td>
-</tr>
-<tr class="even">
-<td>ObjectName</td>
-<td>The SQL object in the source file that is associated with the warning or error. This column might be empty.</td>
-</tr>
-<tr class="odd">
-<td>Severity</td>
-<td>The severity of the issue, either warning or error.</td>
-</tr>
-<tr class="even">
-<td>Category</td>
-<td>The translation issue category.</td>
-</tr>
-<tr class="odd">
-<td>SourceType</td>
-<td>The source of this issue. The value in this column can either be <code dir="ltr" translate="no">       SQL      </code> , indicating an issue in the input SQL files, or <code dir="ltr" translate="no">       METADATA      </code> , indicating an issue in the metadata package.</td>
-</tr>
-<tr class="even">
-<td>Message</td>
-<td>The translation issue warning or error message.</td>
-</tr>
-<tr class="odd">
-<td>ScriptContext</td>
-<td>The SQL snippet in the source file that is associated with the issue.</td>
-</tr>
-<tr class="even">
-<td>Action</td>
-<td>The action we recommend you take to resolve the issue.</td>
-</tr>
-</tbody>
-</table>
+| **Column**          | **Description**                                                                                                                                                                                                 |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Timestamp           | The timestamp at which the issue occurred.                                                                                                                                                                      |
+| FilePath            | The path to the source file that the issue is associated with.                                                                                                                                                  |
+| FileName            | The name of the source file that the issue is associated with.                                                                                                                                                  |
+| ScriptLine          | The line number where the issue occurred.                                                                                                                                                                       |
+| ScriptColumn        | The column number where the issue occurred.                                                                                                                                                                     |
+| TranspilerComponent | The translation engine internal component where the warning or error occurred. This column might be empty.                                                                                                      |
+| Environment         | The translation dialect environment associated with the warning or error. This column might be empty.                                                                                                           |
+| ObjectName          | The SQL object in the source file that is associated with the warning or error. This column might be empty.                                                                                                     |
+| Severity            | The severity of the issue, either warning or error.                                                                                                                                                             |
+| Category            | The translation issue category.                                                                                                                                                                                 |
+| SourceType          | The source of this issue. The value in this column can either be `        SQL       ` , indicating an issue in the input SQL files, or `        METADATA       ` , indicating an issue in the metadata package. |
+| Message             | The translation issue warning or error message.                                                                                                                                                                 |
+| ScriptContext       | The SQL snippet in the source file that is associated with the issue.                                                                                                                                           |
+| Action              | The action we recommend you take to resolve the issue.                                                                                                                                                          |
 
 ### Code tab
 
@@ -691,18 +647,22 @@ The code tab lets you review further information about the input and output file
 To access the code tab, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
 3.  Select **Code tab** . The code tab consists of the following panels:
     
+    ![View the code tab in the SQL translation page.](https://docs.cloud.google.com/static/bigquery/images/sql-translation-code-tab.png)
+    
       - File explorer: Contains all SQL files used for translation. Click a file to view its translation input and output, and any translation issues from its translation.
-      - **Gemini-enhanced input** : The input SQL that was translated by the translation engine. If you have specified Gemini customization rules for the source SQL [in the Gemini configuration](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the translator transforms the original input first and then translates the Gemini-enhanced input. To view the original input, click **View original input** .
-      - **Translation output** : The translation result. If you have specified Gemini customization rules for the target SQL in [the Gemini configuration](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the transformation is applied to the translated result as a Gemini-enhanced output. If a Gemini-enhanced output is available, then you can click the **Gemini suggestion** button to review the Gemini-enhanced output.
+      - **Gemini-enhanced input** : The input SQL that was translated by the translation engine. If you have specified Gemini customization rules for the source SQL [in the Gemini configuration](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the translator transforms the original input first and then translates the Gemini-enhanced input. To view the original input, click **View original input** .
+      - **Translation output** : The translation result. If you have specified Gemini customization rules for the target SQL in [the Gemini configuration](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) , then the transformation is applied to the translated result as a Gemini-enhanced output. If a Gemini-enhanced output is available, then you can click the **Gemini suggestion** button to review the Gemini-enhanced output.
 
-4.  Optional: To view an input file and its output file in the [BigQuery interactive SQL translator](#debug-interactive-translator) , click **Edit** . You can edit the files and save the output file back to Cloud Storage.
+4.  Optional: To view an input file and its output file in the [BigQuery interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#debug-interactive-translator) , click **Edit** . You can edit the files and save the output file back to Cloud Storage.
 
-**Note:** You can view log summaries and messages for the overall translation job from the [Results page](/bigquery/docs/batch-sql-translator#explore_the_translation_output)
+**Note:** You can view log summaries and messages for the overall translation job from the [Results page](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output)
 
 ### Configuration tab
 
@@ -711,10 +671,14 @@ You can add, rename, view, or edit your configuration YAML files in the **Config
 To access the configuration tab, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, then click the job name or click **More options \> Show details** .
 
 3.  In the **Translation details** window, click the **Configuration** tab.
+
+![View the configuration tab in the SQL translation page.](https://docs.cloud.google.com/static/bigquery/images/sql-translation-config-tab.png)
 
 To add a new configuration file:
 
@@ -732,7 +696,7 @@ You can rename an existing configuration file by clicking more\_vert **More opti
 
 ### Consumed output name mapping file
 
-This JSON file contains the output name mapping rules that were used by the translation job. The rules in this file might differ from the [output name mapping](/bigquery/docs/output-name-mapping) rules that you specified for the translation job, due to either conflicts in the name mapping rules, or lack of name mapping rules for SQL objects that were identified during translation. Review this file to determine whether the name mapping rules need correction. If they do, create new output name mapping rules that address any issues you identify, and run a new translation job.
+This JSON file contains the output name mapping rules that were used by the translation job. The rules in this file might differ from the [output name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping) rules that you specified for the translation job, due to either conflicts in the name mapping rules, or lack of name mapping rules for SQL objects that were identified during translation. Review this file to determine whether the name mapping rules need correction. If they do, create new output name mapping rules that address any issues you identify, and run a new translation job.
 
 ### Translated files
 
@@ -747,6 +711,8 @@ You can use the BigQuery interactive SQL translator to review or debug a SQL que
 To start an interactive SQL translation by using a batch translation configuration ID, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, and then click more\_vert **More Options \> Open Interactive Translation** .
     
@@ -755,6 +721,8 @@ To start an interactive SQL translation by using a batch translation configurati
 To debug a batch translation file in the interactive SQL translator, follow these steps:
 
 1.  In the Google Cloud console, go to the **SQL Translation** page.
+    
+    [Go to SQL Translation](https://console.cloud.google.com/bigquery/migrations)
 
 2.  In the list of translation jobs, locate the job that you are interested in, and then click the job name or click **More options \> Show details** .
 
@@ -774,18 +742,16 @@ The translator can't translate user-defined functions (UDFs) from languages othe
 
 For example, say you have a UDF written in C that calculates the sum of two integers. To make sure that SQL statements that reference this UDF are correctly translated, create a placeholder SQL UDF that shares the same signature as the C UDF, as shown in the following example:
 
-``` text
-CREATE FUNCTION Test.MySum (a INT, b INT)
-  RETURNS INT
-  LANGUAGE SQL
-  RETURN a + b;
-```
+    CREATE FUNCTION Test.MySum (a INT, b INT)
+      RETURNS INT
+      LANGUAGE SQL
+      RETURN a + b;
 
 Save this placeholder UDF in a text file, and include that file as one of the source files for the translation job. This enables the translator to learn the UDF definition and identify the expected input and output data types.
 
 ## Quota and limits
 
-  - [BigQuery Migration API quotas](/bigquery/quotas#migration-api-limits) apply.
+  - [BigQuery Migration API quotas](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) apply.
   - Each project can have at most 10 active translation tasks.
   - While there is no hard limit on the total number of source and metadata files, we recommend keeping the number of files to under 1000 for better performance.
 
@@ -793,19 +759,19 @@ Save this placeholder UDF in a text file, and include that file as one of the so
 
 ### `     RelationNotFound    ` or `     AttributeNotFound    ` translation issues
 
-After translating a querying using the [batch SQL translator](/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
+After translating a querying using the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#submit_a_translation_job) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
 
 You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
 
 Translation works best with metadata DDLs. When SQL object definitions cannot be found, the translation engine raises `  RelationNotFound  ` or `  AttributeNotFound  ` issues. We recommend using the metadata extractor to generate metadata packages to make sure all object definitions are present. Adding metadata is the recommended first step to resolve most translation errors, as it often can fix many other errors that are indirectly caused from a lack of metadata.
 
-For more information, see [Generate metadata for translation and assessment](/bigquery/docs/generate-metadata) .
+For more information, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 #### Fix translation issues with Gemini
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
@@ -832,10 +798,10 @@ There is no charge to use the batch SQL translator. However, storage used to sto
 
 Learn more about the following steps in data warehouse migration:
 
-  - [Migration overview](/bigquery/docs/migration/migration-overview)
-  - [Migration assessment](/bigquery/docs/migration-assessment)
-  - [Schema and data transfer overview](/bigquery/docs/migration/schema-data-overview)
-  - [Data pipelines](/bigquery/docs/migration/pipelines)
-  - [Interactive SQL translation](/bigquery/docs/interactive-sql-translator)
-  - [Data security and governance](/bigquery/docs/data-governance)
+  - [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+  - [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
+  - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
+  - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
+  - [Interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
+  - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
   - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)

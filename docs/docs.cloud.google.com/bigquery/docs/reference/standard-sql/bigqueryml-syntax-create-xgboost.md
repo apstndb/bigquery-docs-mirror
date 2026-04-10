@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for importing XGBoost models
 
-This document describes the `  CREATE MODEL  ` statement for importing [XGBoost](https://xgboost.readthedocs.io/en/stable/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for importing [XGBoost](https://xgboost.readthedocs.io/en/stable/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 [INPUT(field_name field_type, …)
@@ -57,22 +57,18 @@ If the `  feature_names  ` field is populated in the XGBoost model file, the inp
 
 #### `     field_type    `
 
-Use `  field_type  ` to specify the data type of an input feature or a model output. Input data types must be one of the supported [numeric types](/bigquery/docs/reference/standard-sql/data-types?_gl=1*8e0821*_ga*MjA2ODgzNzQ1NS4xNjc2NDg3ODM1#numeric_types) . The output data type must be [`  FLOAT64  `](/bigquery/docs/reference/standard-sql/data-types?_gl=1*8e0821*_ga*MjA2ODgzNzQ1NS4xNjc2NDg3ODM1#floating_point_types) .
+Use `  field_type  ` to specify the data type of an input feature or a model output. Input data types must be one of the supported [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?_gl=1*8e0821*_ga*MjA2ODgzNzQ1NS4xNjc2NDg3ODM1#numeric_types) . The output data type must be [`  FLOAT64  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types?_gl=1*8e0821*_ga*MjA2ODgzNzQ1NS4xNjc2NDg3ODM1#floating_point_types) .
 
 **Example**
 
-``` text
-INPUT(f1 INT64, f2 FLOAT64, f3 FLOAT64)
-OUTPUT(predicted_label FLOAT64)
-```
+    INPUT(f1 INT64, f2 FLOAT64, f3 FLOAT64)
+    OUTPUT(predicted_label FLOAT64)
 
 ### `     MODEL_TYPE    `
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'XGBOOST'
-```
+    MODEL_TYPE = 'XGBOOST'
 
 **Description**
 
@@ -82,13 +78,11 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-``` text
-MODEL_PATH = string_value
-```
+    MODEL_PATH = string_value
 
 **Description**
 
-Specifies the [Cloud Storage URI](/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the XGBoost model to import. This option is required.
+Specifies the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the XGBoost model to import. This option is required.
 
 **Arguments**
 
@@ -98,9 +92,7 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Example**
 
-``` text
-MODEL_PATH = 'gs://bucket/path/to/xgboost_model/*'
-```
+    MODEL_PATH = 'gs://bucket/path/to/xgboost_model/*'
 
 ### `     KMS_KEY_NAME    `
 
@@ -110,19 +102,17 @@ MODEL_PATH = 'gs://bucket/path/to/xgboost_model/*'
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
@@ -131,11 +121,11 @@ Imported XGBoost models have the following limitations:
   - The XGBoost model must already exist before it can be imported into BigQuery.
   - Models must be stored in Cloud Storage.
   - XGBoost models must be in `  BST  ` or `  JSON  ` format.
-  - You can only use XGBoost models with the [`  ML.PREDICT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) and [`  ML.FEATURE_IMPORTANCE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance) functions.
+  - You can only use XGBoost models with the [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) and [`  ML.FEATURE_IMPORTANCE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-importance) functions.
   - Models are limited to 250 MB in size.
   - The memory limit to load and run the XGBoost model is 840 MB. You can reduce the model size by using fewer trees or shallower tree depth, or by using the XGBoost library's default `  save_model  ` method to save the models.
   - BigQuery ML uses the [XGBoost 1.5.1](https://xgboost.readthedocs.io/en/release_1.5.0/index.html) library to load and make predictions on XGBoost models. Forward compatibility for models saved with XGBoost version 1.6.0 or newer is not guaranteed.
-  - BigQuery XGBoost models only support [numeric types](/bigquery/docs/reference/standard-sql/data-types#numeric_types) as input data types and [`  FLOAT64  `](/bigquery/docs/reference/standard-sql/data-types#floating_point_types) as the output data type.
+  - BigQuery XGBoost models only support [numeric types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) as input data types and [`  FLOAT64  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) as the output data type.
   - Categorical features that use XGBoost built-in [categorical data](https://xgboost.readthedocs.io/en/stable/tutorials/categorical.html) support are treated as integer inputs.
   - BigQuery XGBoost models only support a single scalar or array output. [Multiple outputs](https://xgboost.readthedocs.io/en/stable/tutorials/multioutput.html) aren't supported.
   - You can only use an imported XGBoost model with an object table when you use capacity-based pricing through reservations. On-demand pricing isn't supported.
@@ -154,7 +144,7 @@ The following example imports a XGBoost model into BigQuery as a BigQuery model.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 CREATE OR REPLACE
   MODEL
     `project_id.mydataset.mymodel`
@@ -175,7 +165,7 @@ The following example imports a XGBoost model into BigQuery as a BigQuery model.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 CREATE OR REPLACE
   MODEL
     `project_id.mydataset.mymodel`

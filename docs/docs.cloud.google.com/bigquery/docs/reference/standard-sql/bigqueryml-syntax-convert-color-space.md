@@ -1,10 +1,10 @@
 # The ML.CONVERT\_COLOR\_SPACE function
 
-This document describes the `  ML.CONVERT_COLOR_SPACE  ` scalar function, which lets you convert images that have an `  RGB  ` color space to a different color space. You can use `  ML.CONVERT_COLOR_SPACE  ` with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
+This document describes the `  ML.CONVERT_COLOR_SPACE  ` scalar function, which lets you convert images that have an `  RGB  ` color space to a different color space. You can use `  ML.CONVERT_COLOR_SPACE  ` with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.CONVERT_COLOR_SPACE(image, target_color_space)
 ```
 
@@ -37,7 +37,7 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The following example uses the `  ML.CONVERT_COLOR_SPACE  ` function within the `  ML.PREDICT  ` function to change the color space for input images from `  RGB  ` to `  GRAYSCALE  ` :
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE mydataset.model_output
 AS (
   SELECT *
@@ -54,12 +54,12 @@ AS (
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
   - For more information about supported SQL statements and functions for each model type, see the following documents:
     
-      - [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

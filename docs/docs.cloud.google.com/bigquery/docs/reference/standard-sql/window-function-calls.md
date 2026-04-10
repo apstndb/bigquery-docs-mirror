@@ -6,24 +6,22 @@ With window functions you can compute moving averages, rank items, calculate cum
 
 ## Window function syntax
 
-``` text
-function_name ( [ argument_list ] ) OVER over_clause
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-
-window_frame_clause:
-  { rows_range } { frame_start | frame_between }
-
-rows_range:
-  { ROWS | RANGE }
-```
+    function_name ( [ argument_list ] ) OVER over_clause
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
+    
+    window_frame_clause:
+      { rows_range } { frame_start | frame_between }
+    
+    rows_range:
+      { ROWS | RANGE }
 
 **Description**
 
@@ -35,15 +33,15 @@ A window function computes results over a group of rows. You can use the followi
 
   - `  argument_list  ` : Arguments that are specific to the function. Some functions have them, some don't.
 
-  - `  OVER  ` : Keyword required in the window function syntax preceding the [`  OVER  ` clause](#def_over_clause) .
+  - `  OVER  ` : Keyword required in the window function syntax preceding the [`  OVER  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) .
 
-  - [`  over_clause  `](#def_over_clause) : References a window that defines a group of rows in a table upon which to use a window function.
+  - [`  over_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) : References a window that defines a group of rows in a table upon which to use a window function.
 
-  - [`  window_specification  `](#def_window_spec) : Defines the specifications for the window.
+  - [`  window_specification  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) : Defines the specifications for the window.
 
-  - [`  window_frame_clause  `](#def_window_frame) : Defines the window frame for the window.
+  - [`  window_frame_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the window frame for the window.
 
-  - [`  rows_range  `](#def_window_frame) : Defines the physical rows or a logical range for a window frame.
+  - [`  rows_range  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : Defines the physical rows or a logical range for a window frame.
 
 **Notes**
 
@@ -63,16 +61,14 @@ A single result for each row in the input.
 
 ### Defining the `     OVER    ` clause
 
-``` text
-function_name ( [ argument_list ] ) OVER over_clause
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-```
+    function_name ( [ argument_list ] ) OVER over_clause
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
 
 **Description**
 
-The `  OVER  ` clause references a window that defines a group of rows in a table upon which to use a window function. You can provide a [`  named_window  `](#ref_named_window) that is [defined in your query](/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , or you can define the [specifications for a new window](#def_window_spec) .
+The `  OVER  ` clause references a window that defines a group of rows in a table upon which to use a window function. You can provide a [`  named_window  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) that is [defined in your query](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , or you can define the [specifications for a new window](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
 
 **Notes**
 
@@ -82,37 +78,35 @@ If neither a named window nor window specification is provided, all input rows a
 
 These queries use window specifications:
 
-  - [Compute a grand total](#compute_a_grand_total)
-  - [Compute a subtotal](#compute_a_subtotal)
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Compute a moving average](#compute_a_moving_average)
-  - [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
-  - [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Compute rank](#compute_rank)
+  - [Compute a grand total](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_grand_total)
+  - [Compute a subtotal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_subtotal)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Compute a moving average](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_moving_average)
+  - [Compute the number of items within a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_the_number_of_items_within_a_range)
+  - [Get the most popular item in each category](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_most_popular_item_in_each_category)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Compute rank](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_rank)
 
 These queries use a named window:
 
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 ### Defining the window specification
 
-``` text
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC } ] [, ...] ]
-  [ window_frame_clause ]
-```
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC } ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
 Defines the specifications for the window.
 
-  - [`  named_window  `](#ref_named_window) : The name of an existing window that was defined with a [`  WINDOW  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#window_clause) .
+  - [`  named_window  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#ref_named_window) : The name of an existing window that was defined with a [`  WINDOW  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) .
 
-**Important:** If you use a named window, special rules apply to `  PARTITION BY  ` , `  ORDER BY  ` , and `  window_frame_clause  ` . See [Rules for using a named window in the window specification](#named_window_rules) .
+**Important:** If you use a named window, special rules apply to `  PARTITION BY  ` , `  ORDER BY  ` , and `  window_frame_clause  ` . See [Rules for using a named window in the window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#named_window_rules) .
 
   - `  PARTITION BY  ` : Breaks up the input rows into separate partitions, over which the window function is independently evaluated.
     
@@ -123,9 +117,9 @@ Defines the specifications for the window.
 
   - `  ORDER BY  ` : Defines how rows are ordered within a partition.
     
-    This clause is optional in most situations, but is required in some cases for [navigation functions](/bigquery/docs/reference/standard-sql/navigation_functions) .
+    This clause is optional in most situations, but is required in some cases for [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) .
 
-  - [`  window_frame_clause  `](#def_window_frame) : For aggregate analytic functions, defines the window frame within the current partition. The window frame determines what to include in the window. If this clause is used, `  ORDER BY  ` is required except for fully unbounded windows.
+  - [`  window_frame_clause  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_frame) : For aggregate analytic functions, defines the window frame within the current partition. The window frame determines what to include in the window. If this clause is used, `  ORDER BY  ` is required except for fully unbounded windows.
 
 **Notes**
 
@@ -133,27 +127,21 @@ If neither the `  ORDER BY  ` clause nor window frame clause are present, the wi
 
 For aggregate analytic functions, if the `  ORDER BY  ` clause is present but the window frame clause isn't, the following window frame clause is used by default:
 
-``` text
-RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-```
+    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
 
 For example, the following queries are equivalent:
 
-``` text
-SELECT book, LAST_VALUE(book)
-  OVER (ORDER BY year)
-FROM Library
-```
+    SELECT book, LAST_VALUE(book)
+      OVER (ORDER BY year)
+    FROM Library
 
-``` text
-SELECT book, LAST_VALUE(book)
-  OVER (
-    ORDER BY year
-    RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
-FROM Library
-```
+    SELECT book, LAST_VALUE(book)
+      OVER (
+        ORDER BY year
+        RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+    FROM Library
 
-**Rules for using a named window in the window specification**
+<span id="named_window_rules"></span> **Rules for using a named window in the window specification**
 
 If you use a named window in your window specifications, these rules apply:
 
@@ -163,19 +151,17 @@ If you use a named window in your window specifications, these rules apply:
 
   - The order of clauses matters. `  PARTITION BY  ` must come first, followed by `  ORDER BY  ` and `  window_frame_clause  ` . If you add a named window, its window specifications are processed first.
     
-    ``` text
-    --this works:
-    SELECT item, purchases, LAST_VALUE(item)
-      OVER (ItemWindow ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS most_popular
-    FROM Produce
-    WINDOW ItemWindow AS (ORDER BY purchases)
-    
-    --this doesn't work:
-    SELECT item, purchases, LAST_VALUE(item)
-      OVER (ItemWindow ORDER BY purchases) AS most_popular
-    FROM Produce
-    WINDOW ItemWindow AS (ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
-    ```
+        --this works:
+        SELECT item, purchases, LAST_VALUE(item)
+          OVER (ItemWindow ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS most_popular
+        FROM Produce
+        WINDOW ItemWindow AS (ORDER BY purchases)
+        
+        --this doesn't work:
+        SELECT item, purchases, LAST_VALUE(item)
+          OVER (ItemWindow ORDER BY purchases) AS most_popular
+        FROM Produce
+        WINDOW ItemWindow AS (ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
 
   - A named window and `  PARTITION BY  ` can't appear together in the window specification. If you need `  PARTITION BY  ` , add it to the named window.
 
@@ -185,73 +171,71 @@ If you use a named window in your window specifications, these rules apply:
 
 These queries define partitions in a window function:
 
-  - [Compute a subtotal](#compute_a_subtotal)
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Compute rank](#compute_rank)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Compute a subtotal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_subtotal)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Get the most popular item in each category](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_most_popular_item_in_each_category)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Compute rank](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_rank)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 These queries include a named window in a window specification:
 
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 These queries define how rows are ordered in a partition:
 
-  - [Compute a subtotal](#compute_a_subtotal)
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Compute a moving average](#compute_a_moving_average)
-  - [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
-  - [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Compute rank](#compute_rank)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Compute a subtotal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_subtotal)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Compute a moving average](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_moving_average)
+  - [Compute the number of items within a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_the_number_of_items_within_a_range)
+  - [Get the most popular item in each category](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_most_popular_item_in_each_category)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Compute rank](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_rank)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 ### Defining the window frame clause
 
-``` text
-window_frame_clause:
-  { rows_range } { frame_start | frame_between }
-
-rows_range:
-  { ROWS | RANGE }
-
-frame_between:
-  {
-    BETWEEN  unbounded_preceding AND frame_end_a
-    | BETWEEN numeric_preceding AND frame_end_a
-    | BETWEEN current_row AND frame_end_b
-    | BETWEEN numeric_following AND frame_end_c
-  }
-
-frame_start:
-  { unbounded_preceding | numeric_preceding | [ current_row ] }
-
-frame_end_a:
-  { numeric_preceding | current_row | numeric_following | unbounded_following }
-
-frame_end_b:
-  { current_row | numeric_following | unbounded_following }
-
-frame_end_c:
-  { numeric_following | unbounded_following }
-
-unbounded_preceding:
-  UNBOUNDED PRECEDING
-
-numeric_preceding:
-  numeric_expression PRECEDING
-
-unbounded_following:
-  UNBOUNDED FOLLOWING
-
-numeric_following:
-  numeric_expression FOLLOWING
-
-current_row:
-  CURRENT ROW
-```
+    window_frame_clause:
+      { rows_range } { frame_start | frame_between }
+    
+    rows_range:
+      { ROWS | RANGE }
+    
+    frame_between:
+      {
+        BETWEEN  unbounded_preceding AND frame_end_a
+        | BETWEEN numeric_preceding AND frame_end_a
+        | BETWEEN current_row AND frame_end_b
+        | BETWEEN numeric_following AND frame_end_c
+      }
+    
+    frame_start:
+      { unbounded_preceding | numeric_preceding | [ current_row ] }
+    
+    frame_end_a:
+      { numeric_preceding | current_row | numeric_following | unbounded_following }
+    
+    frame_end_b:
+      { current_row | numeric_following | unbounded_following }
+    
+    frame_end_c:
+      { numeric_following | unbounded_following }
+    
+    unbounded_preceding:
+      UNBOUNDED PRECEDING
+    
+    numeric_preceding:
+      numeric_expression PRECEDING
+    
+    unbounded_following:
+      UNBOUNDED FOLLOWING
+    
+    numeric_following:
+      numeric_expression FOLLOWING
+    
+    current_row:
+      CURRENT ROW
 
 The window frame clause defines the window frame around the current row within a partition, over which the window function is evaluated. Only aggregate analytic functions can use a window frame clause.
 
@@ -285,75 +269,73 @@ The window frame clause defines the window frame around the current row within a
 
 If a boundary extends beyond the beginning or end of a partition, the window frame will only include rows from within that partition.
 
-You can't use a window frame clause with some [navigation functions](/bigquery/docs/reference/standard-sql/navigation_functions) and [numbering functions](/bigquery/docs/reference/standard-sql/numbering_functions) , such as `  RANK()  ` .
+You can't use a window frame clause with some [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) and [numbering functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions) , such as `  RANK()  ` .
 
 **Examples using the window frame clause**
 
 These queries compute values with `  ROWS  ` :
 
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Compute a moving average](#compute_a_moving_average)
-  - [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Compute a moving average](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_moving_average)
+  - [Get the most popular item in each category](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_most_popular_item_in_each_category)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 These queries compute values with `  RANGE  ` :
 
-  - [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
+  - [Compute the number of items within a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_the_number_of_items_within_a_range)
 
 These queries compute values with a partially or fully unbound window:
 
-  - [Compute a grand total](#compute_a_grand_total)
-  - [Compute a subtotal](#compute_a_subtotal)
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Get the most popular item in each category](#get_the_most_popular_item_in_each_category)
-  - [Compute rank](#compute_rank)
+  - [Compute a grand total](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_grand_total)
+  - [Compute a subtotal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_subtotal)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Get the most popular item in each category](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_most_popular_item_in_each_category)
+  - [Compute rank](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_rank)
 
 These queries compute values with numeric boundaries:
 
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
-  - [Compute a moving average](#compute_a_moving_average)
-  - [Compute the number of items within a range](#compute_the_number_of_items_within_a_range)
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
+  - [Compute a moving average](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_moving_average)
+  - [Compute the number of items within a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_the_number_of_items_within_a_range)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 These queries compute values with the current row as a boundary:
 
-  - [Compute a grand total](#compute_a_grand_total)
-  - [Compute a subtotal](#compute_a_subtotal)
-  - [Compute a cumulative sum](#compute_a_cumulative_sum)
+  - [Compute a grand total](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_grand_total)
+  - [Compute a subtotal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_subtotal)
+  - [Compute a cumulative sum](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#compute_a_cumulative_sum)
 
 ### Referencing a named window
 
-``` text
-SELECT query_expr,
-  function_name ( [ argument_list ] ) OVER over_clause
-FROM from_item
-WINDOW named_window_expression [, ...]
+    SELECT query_expr,
+      function_name ( [ argument_list ] ) OVER over_clause
+    FROM from_item
+    WINDOW named_window_expression [, ...]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC } ] [, ...] ]
+      [ window_frame_clause ]
+    
+    named_window_expression:
+      named_window AS { named_window | ( [ window_specification ] ) }
 
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC } ] [, ...] ]
-  [ window_frame_clause ]
-
-named_window_expression:
-  named_window AS { named_window | ( [ window_specification ] ) }
-```
-
-A named window represents a group of rows in a table upon which to use an window function. A named window is defined in the [`  WINDOW  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , and referenced in a window function's [`  OVER  ` clause](#def_over_clause) . In an `  OVER  ` clause, a named window can appear either by itself or embedded within a [window specification](#def_window_spec) .
+A named window represents a group of rows in a table upon which to use an window function. A named window is defined in the [`  WINDOW  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#window_clause) , and referenced in a window function's [`  OVER  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_over_clause) . In an `  OVER  ` clause, a named window can appear either by itself or embedded within a [window specification](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_window_spec) .
 
 **Examples**
 
-  - [Get the last value in a range](#get_the_last_value_in_a_range)
-  - [Use a named window in a window frame clause](#def_use_named_window)
+  - [Get the last value in a range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#get_the_last_value_in_a_range)
+  - [Use a named window in a window frame clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#def_use_named_window)
 
 ## Filtering results with the QUALIFY clause
 
-The `  QUALIFY  ` clause can be used to filter the results of a window function. For more information and examples, see the [`  QUALIFY  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) .
+The `  QUALIFY  ` clause can be used to filter the results of a window function. For more information and examples, see the [`  QUALIFY  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#qualify_clause) .
 
 ## Window function examples
 
@@ -361,89 +343,83 @@ In these examples, the highlighted item is the current row. The **bolded items**
 
 ### Common tables used in examples
 
-The following tables are used in the subsequent aggregate analytic query examples: [`  Produce  `](#produce_table) , [`  Employees  `](#employees_table) , and [`  Farm  `](#farm_table) .
+The following tables are used in the subsequent aggregate analytic query examples: [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) , [`  Employees  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) , and [`  Farm  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) .
 
 #### Produce table
 
 Some examples reference a table called `  Produce  ` :
 
-``` text
-WITH Produce AS
- (SELECT 'kale' as item, 23 as purchases, 'vegetable' as category
-  UNION ALL SELECT 'banana', 2, 'fruit'
-  UNION ALL SELECT 'cabbage', 9, 'vegetable'
-  UNION ALL SELECT 'apple', 8, 'fruit'
-  UNION ALL SELECT 'leek', 2, 'vegetable'
-  UNION ALL SELECT 'lettuce', 10, 'vegetable')
-SELECT * FROM Produce
-
-/*-------------------------------------+
- | item      | category   | purchases  |
- +-------------------------------------+
- | kale      | vegetable  | 23         |
- | banana    | fruit      | 2          |
- | cabbage   | vegetable  | 9          |
- | apple     | fruit      | 8          |
- | leek      | vegetable  | 2          |
- | lettuce   | vegetable  | 10         |
- +-------------------------------------*/
-```
+    WITH Produce AS
+     (SELECT 'kale' as item, 23 as purchases, 'vegetable' as category
+      UNION ALL SELECT 'banana', 2, 'fruit'
+      UNION ALL SELECT 'cabbage', 9, 'vegetable'
+      UNION ALL SELECT 'apple', 8, 'fruit'
+      UNION ALL SELECT 'leek', 2, 'vegetable'
+      UNION ALL SELECT 'lettuce', 10, 'vegetable')
+    SELECT * FROM Produce
+    
+    /*-------------------------------------+
+     | item      | category   | purchases  |
+     +-------------------------------------+
+     | kale      | vegetable  | 23         |
+     | banana    | fruit      | 2          |
+     | cabbage   | vegetable  | 9          |
+     | apple     | fruit      | 8          |
+     | leek      | vegetable  | 2          |
+     | lettuce   | vegetable  | 10         |
+     +-------------------------------------*/
 
 #### Employees table
 
 Some examples reference a table called `  Employees  ` :
 
-``` text
-WITH Employees AS
- (SELECT 'Isabella' as name, 2 as department, DATE(1997, 09, 28) as start_date
-  UNION ALL SELECT 'Anthony', 1, DATE(1995, 11, 29)
-  UNION ALL SELECT 'Daniel', 2, DATE(2004, 06, 24)
-  UNION ALL SELECT 'Andrew', 1, DATE(1999, 01, 23)
-  UNION ALL SELECT 'Jacob', 1, DATE(1990, 07, 11)
-  UNION ALL SELECT 'Jose', 2, DATE(2013, 03, 17))
-SELECT * FROM Employees
-
-/*-------------------------------------+
- | name      | department | start_date |
- +-------------------------------------+
- | Isabella  | 2          | 1997-09-28 |
- | Anthony   | 1          | 1995-11-29 |
- | Daniel    | 2          | 2004-06-24 |
- | Andrew    | 1          | 1999-01-23 |
- | Jacob     | 1          | 1990-07-11 |
- | Jose      | 2          | 2013-03-17 |
- +-------------------------------------*/
-```
+    WITH Employees AS
+     (SELECT 'Isabella' as name, 2 as department, DATE(1997, 09, 28) as start_date
+      UNION ALL SELECT 'Anthony', 1, DATE(1995, 11, 29)
+      UNION ALL SELECT 'Daniel', 2, DATE(2004, 06, 24)
+      UNION ALL SELECT 'Andrew', 1, DATE(1999, 01, 23)
+      UNION ALL SELECT 'Jacob', 1, DATE(1990, 07, 11)
+      UNION ALL SELECT 'Jose', 2, DATE(2013, 03, 17))
+    SELECT * FROM Employees
+    
+    /*-------------------------------------+
+     | name      | department | start_date |
+     +-------------------------------------+
+     | Isabella  | 2          | 1997-09-28 |
+     | Anthony   | 1          | 1995-11-29 |
+     | Daniel    | 2          | 2004-06-24 |
+     | Andrew    | 1          | 1999-01-23 |
+     | Jacob     | 1          | 1990-07-11 |
+     | Jose      | 2          | 2013-03-17 |
+     +-------------------------------------*/
 
 #### Farm table
 
 Some examples reference a table called `  Farm  ` :
 
-``` text
-WITH Farm AS
- (SELECT 'cat' as animal, 23 as population, 'mammal' as category
-  UNION ALL SELECT 'duck', 3, 'bird'
-  UNION ALL SELECT 'dog', 2, 'mammal'
-  UNION ALL SELECT 'goose', 1, 'bird'
-  UNION ALL SELECT 'ox', 2, 'mammal'
-  UNION ALL SELECT 'goat', 2, 'mammal')
-SELECT * FROM Farm
-
-/*-------------------------------------+
- | animal    | category   | population |
- +-------------------------------------+
- | cat       | mammal     | 23         |
- | duck      | bird       | 3          |
- | dog       | mammal     | 2          |
- | goose     | bird       | 1          |
- | ox        | mammal     | 2          |
- | goat      | mammal     | 2          |
- +-------------------------------------*/
-```
+    WITH Farm AS
+     (SELECT 'cat' as animal, 23 as population, 'mammal' as category
+      UNION ALL SELECT 'duck', 3, 'bird'
+      UNION ALL SELECT 'dog', 2, 'mammal'
+      UNION ALL SELECT 'goose', 1, 'bird'
+      UNION ALL SELECT 'ox', 2, 'mammal'
+      UNION ALL SELECT 'goat', 2, 'mammal')
+    SELECT * FROM Farm
+    
+    /*-------------------------------------+
+     | animal    | category   | population |
+     +-------------------------------------+
+     | cat       | mammal     | 23         |
+     | duck      | bird       | 3          |
+     | dog       | mammal     | 2          |
+     | goose     | bird       | 1          |
+     | ox        | mammal     | 2          |
+     | goat      | mammal     | 2          |
+     +-------------------------------------*/
 
 ### Compute a grand total
 
-This computes a grand total for all items in the [`  Produce  `](#produce_table) table.
+This computes a grand total for all items in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
   - ( **banana** , **apple** , **leek** , **cabbage** , **lettuce** , **kale** ) = 54 total purchases
   - ( **banana** , **apple** , **leek** , **cabbage** , **lettuce** , **kale** ) = 54 total purchases
@@ -454,26 +430,24 @@ This computes a grand total for all items in the [`  Produce  `](#produce_table)
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, SUM(purchases)
-  OVER () AS total_purchases
-FROM Produce
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | total_purchases |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | 54              |
- | leek      | 2          | vegetable  | 54              |
- | apple     | 8          | fruit      | 54              |
- | cabbage   | 9          | vegetable  | 54              |
- | lettuce   | 10         | vegetable  | 54              |
- | kale      | 23         | vegetable  | 54              |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, SUM(purchases)
+      OVER () AS total_purchases
+    FROM Produce
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | total_purchases |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | 54              |
+     | leek      | 2          | vegetable  | 54              |
+     | apple     | 8          | fruit      | 54              |
+     | cabbage   | 9          | vegetable  | 54              |
+     | lettuce   | 10         | vegetable  | 54              |
+     | kale      | 23         | vegetable  | 54              |
+     +-------------------------------------------------------*/
 
 ### Compute a subtotal
 
-This computes a subtotal for each category in the [`  Produce  `](#produce_table) table.
+This computes a subtotal for each category in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
   - fruit
       - ( **banana** , **apple** ) = 10 total purchases
@@ -486,30 +460,28 @@ This computes a subtotal for each category in the [`  Produce  `](#produce_table
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, SUM(purchases)
-  OVER (
-    PARTITION BY category
-    ORDER BY purchases
-    ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-  ) AS total_purchases
-FROM Produce
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | total_purchases |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | 10              |
- | apple     | 8          | fruit      | 10              |
- | leek      | 2          | vegetable  | 44              |
- | cabbage   | 9          | vegetable  | 44              |
- | lettuce   | 10         | vegetable  | 44              |
- | kale      | 23         | vegetable  | 44              |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, SUM(purchases)
+      OVER (
+        PARTITION BY category
+        ORDER BY purchases
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+      ) AS total_purchases
+    FROM Produce
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | total_purchases |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | 10              |
+     | apple     | 8          | fruit      | 10              |
+     | leek      | 2          | vegetable  | 44              |
+     | cabbage   | 9          | vegetable  | 44              |
+     | lettuce   | 10         | vegetable  | 44              |
+     | kale      | 23         | vegetable  | 44              |
+     +-------------------------------------------------------*/
 
 ### Compute a cumulative sum
 
-This computes a cumulative sum for each category in the [`  Produce  `](#produce_table) table. The sum is computed with respect to the order defined using the `  ORDER BY  ` clause.
+This computes a cumulative sum for each category in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The sum is computed with respect to the order defined using the `  ORDER BY  ` clause.
 
   - fruit
       - ( **banana** , apple) = 2 total purchases
@@ -522,40 +494,36 @@ This computes a cumulative sum for each category in the [`  Produce  `](#produce
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, SUM(purchases)
-  OVER (
-    PARTITION BY category
-    ORDER BY purchases
-    ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
-  ) AS total_purchases
-FROM Produce
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | total_purchases |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | 2               |
- | apple     | 8          | fruit      | 10              |
- | leek      | 2          | vegetable  | 2               |
- | cabbage   | 9          | vegetable  | 11              |
- | lettuce   | 10         | vegetable  | 21              |
- | kale      | 23         | vegetable  | 44              |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, SUM(purchases)
+      OVER (
+        PARTITION BY category
+        ORDER BY purchases
+        ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+      ) AS total_purchases
+    FROM Produce
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | total_purchases |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | 2               |
+     | apple     | 8          | fruit      | 10              |
+     | leek      | 2          | vegetable  | 2               |
+     | cabbage   | 9          | vegetable  | 11              |
+     | lettuce   | 10         | vegetable  | 21              |
+     | kale      | 23         | vegetable  | 44              |
+     +-------------------------------------------------------*/
 
 This does the same thing as the preceding example. You don't have to add `  CURRENT ROW  ` as a boundary unless you would like to for readability.
 
-``` text
-SELECT item, purchases, category, SUM(purchases)
-  OVER (
-    PARTITION BY category
-    ORDER BY purchases
-    ROWS UNBOUNDED PRECEDING
-  ) AS total_purchases
-FROM Produce
-```
+    SELECT item, purchases, category, SUM(purchases)
+      OVER (
+        PARTITION BY category
+        ORDER BY purchases
+        ROWS UNBOUNDED PRECEDING
+      ) AS total_purchases
+    FROM Produce
 
-In this example, all items in the [`  Produce  `](#produce_table) table are included in the partition. Only preceding rows are analyzed. The analysis starts two rows prior to the current row in the partition.
+In this example, all items in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table are included in the partition. Only preceding rows are analyzed. The analysis starts two rows prior to the current row in the partition.
 
   - ( banana , leek, apple, cabbage, lettuce, kale) = NULL
   - (banana, leek , apple, cabbage, lettuce, kale) = NULL
@@ -566,29 +534,27 @@ In this example, all items in the [`  Produce  `](#produce_table) table are incl
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, SUM(purchases)
-  OVER (
-    ORDER BY purchases
-    ROWS BETWEEN UNBOUNDED PRECEDING AND 2 PRECEDING
-  ) AS total_purchases
-FROM Produce;
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | total_purchases |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | NULL            |
- | leek      | 2          | vegetable  | NULL            |
- | apple     | 8          | fruit      | 2               |
- | cabbage   | 9          | vegetable  | 4               |
- | lettuce   | 10         | vegetable  | 12              |
- | kale      | 23         | vegetable  | 21              |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, SUM(purchases)
+      OVER (
+        ORDER BY purchases
+        ROWS BETWEEN UNBOUNDED PRECEDING AND 2 PRECEDING
+      ) AS total_purchases
+    FROM Produce;
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | total_purchases |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | NULL            |
+     | leek      | 2          | vegetable  | NULL            |
+     | apple     | 8          | fruit      | 2               |
+     | cabbage   | 9          | vegetable  | 4               |
+     | lettuce   | 10         | vegetable  | 12              |
+     | kale      | 23         | vegetable  | 21              |
+     +-------------------------------------------------------*/
 
 ### Compute a moving average
 
-This computes a moving average in the [`  Produce  `](#produce_table) table. The lower boundary is 1 row before the current row. The upper boundary is 1 row after the current row.
+This computes a moving average in the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The lower boundary is 1 row before the current row. The upper boundary is 1 row after the current row.
 
   - ( **banana** , **leek** , apple, cabbage, lettuce, kale) = 2 average purchases
   - ( **banana** , **leek** , **apple** , cabbage, lettuce, kale) = 4 average purchases
@@ -599,29 +565,27 @@ This computes a moving average in the [`  Produce  `](#produce_table) table. The
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, AVG(purchases)
-  OVER (
-    ORDER BY purchases
-    ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
-  ) AS avg_purchases
-FROM Produce
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | avg_purchases   |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | 2               |
- | leek      | 2          | vegetable  | 4               |
- | apple     | 8          | fruit      | 6.33333         |
- | cabbage   | 9          | vegetable  | 9               |
- | lettuce   | 10         | vegetable  | 14              |
- | kale      | 23         | vegetable  | 16.5            |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, AVG(purchases)
+      OVER (
+        ORDER BY purchases
+        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+      ) AS avg_purchases
+    FROM Produce
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | avg_purchases   |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | 2               |
+     | leek      | 2          | vegetable  | 4               |
+     | apple     | 8          | fruit      | 6.33333         |
+     | cabbage   | 9          | vegetable  | 9               |
+     | lettuce   | 10         | vegetable  | 14              |
+     | kale      | 23         | vegetable  | 16.5            |
+     +-------------------------------------------------------*/
 
 ### Compute the number of items within a range
 
-This example gets the number of animals that have a similar population count in the [`  Farm  `](#farm_table) table.
+This example gets the number of animals that have a similar population count in the [`  Farm  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#farm_table) table.
 
   - ( **goose** , **dog** , **ox** , **goat** , duck, cat) = 4 animals between population range 0-2.
   - ( **goose** , **dog** , **ox** , **goat** , **duck** , cat) = 5 animals between population range 1-3.
@@ -632,29 +596,27 @@ This example gets the number of animals that have a similar population count in 
 
 <!-- end list -->
 
-``` text
-SELECT animal, population, category, COUNT(*)
-  OVER (
-    ORDER BY population
-    RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING
-  ) AS similar_population
-FROM Farm;
-
-/*----------------------------------------------------------+
- | animal    | population | category   | similar_population |
- +----------------------------------------------------------+
- | goose     | 1          | bird       | 4                  |
- | dog       | 2          | mammal     | 5                  |
- | ox        | 2          | mammal     | 5                  |
- | goat      | 2          | mammal     | 5                  |
- | duck      | 3          | bird       | 4                  |
- | cat       | 23         | mammal     | 1                  |
- +----------------------------------------------------------*/
-```
+    SELECT animal, population, category, COUNT(*)
+      OVER (
+        ORDER BY population
+        RANGE BETWEEN 1 PRECEDING AND 1 FOLLOWING
+      ) AS similar_population
+    FROM Farm;
+    
+    /*----------------------------------------------------------+
+     | animal    | population | category   | similar_population |
+     +----------------------------------------------------------+
+     | goose     | 1          | bird       | 4                  |
+     | dog       | 2          | mammal     | 5                  |
+     | ox        | 2          | mammal     | 5                  |
+     | goat      | 2          | mammal     | 5                  |
+     | duck      | 3          | bird       | 4                  |
+     | cat       | 23         | mammal     | 1                  |
+     +----------------------------------------------------------*/
 
 ### Get the most popular item in each category
 
-This example gets the most popular item in each category. It defines how rows in a window are partitioned and ordered in each partition. The [`  Produce  `](#produce_table) table is referenced.
+This example gets the most popular item in each category. It defines how rows in a window are partitioned and ordered in each partition. The [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table is referenced.
 
   - fruit
       - ( **banana** , **apple** ) = apple is most popular
@@ -667,30 +629,28 @@ This example gets the most popular item in each category. It defines how rows in
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (
-    PARTITION BY category
-    ORDER BY purchases
-    ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-  ) AS most_popular
-FROM Produce
-
-/*----------------------------------------------------+
- | item      | purchases  | category   | most_popular |
- +----------------------------------------------------+
- | banana    | 2          | fruit      | apple        |
- | apple     | 8          | fruit      | apple        |
- | leek      | 2          | vegetable  | kale         |
- | cabbage   | 9          | vegetable  | kale         |
- | lettuce   | 10         | vegetable  | kale         |
- | kale      | 23         | vegetable  | kale         |
- +----------------------------------------------------*/
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (
+        PARTITION BY category
+        ORDER BY purchases
+        ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+      ) AS most_popular
+    FROM Produce
+    
+    /*----------------------------------------------------+
+     | item      | purchases  | category   | most_popular |
+     +----------------------------------------------------+
+     | banana    | 2          | fruit      | apple        |
+     | apple     | 8          | fruit      | apple        |
+     | leek      | 2          | vegetable  | kale         |
+     | cabbage   | 9          | vegetable  | kale         |
+     | lettuce   | 10         | vegetable  | kale         |
+     | kale      | 23         | vegetable  | kale         |
+     +----------------------------------------------------*/
 
 ### Get the last value in a range
 
-This example gets the most popular item in a specific window frame, using the [`  Produce  `](#produce_table) table. The window frame analyzes up to three rows at a time. Take a close look at the `  most_popular  ` column for vegetables. Instead of getting the most popular item in a specific category, it gets the most popular item in a specific range in that category.
+This example gets the most popular item in a specific window frame, using the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table. The window frame analyzes up to three rows at a time. Take a close look at the `  most_popular  ` column for vegetables. Instead of getting the most popular item in a specific category, it gets the most popular item in a specific range in that category.
 
   - fruit
       - ( **banana** , **apple** ) = apple is most popular
@@ -703,44 +663,40 @@ This example gets the most popular item in a specific window frame, using the [`
 
 <!-- end list -->
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (
-    PARTITION BY category
-    ORDER BY purchases
-    ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
-  ) AS most_popular
-FROM Produce
-
-/*----------------------------------------------------+
- | item      | purchases  | category   | most_popular |
- +----------------------------------------------------+
- | banana    | 2          | fruit      | apple        |
- | apple     | 8          | fruit      | apple        |
- | leek      | 2          | vegetable  | cabbage      |
- | cabbage   | 9          | vegetable  | lettuce      |
- | lettuce   | 10         | vegetable  | kale         |
- | kale      | 23         | vegetable  | kale         |
- +----------------------------------------------------*/
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (
+        PARTITION BY category
+        ORDER BY purchases
+        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+      ) AS most_popular
+    FROM Produce
+    
+    /*----------------------------------------------------+
+     | item      | purchases  | category   | most_popular |
+     +----------------------------------------------------+
+     | banana    | 2          | fruit      | apple        |
+     | apple     | 8          | fruit      | apple        |
+     | leek      | 2          | vegetable  | cabbage      |
+     | cabbage   | 9          | vegetable  | lettuce      |
+     | lettuce   | 10         | vegetable  | kale         |
+     | kale      | 23         | vegetable  | kale         |
+     +----------------------------------------------------*/
 
 This example returns the same results as the preceding example, but it includes a named window called `  ItemWindow  ` . Some of the window specifications are defined directly in the `  OVER  ` clause and some are defined in the named window.
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (
-    ItemWindow
-    ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
-  ) AS most_popular
-FROM Produce
-WINDOW ItemWindow AS (
-  PARTITION BY category
-  ORDER BY purchases)
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (
+        ItemWindow
+        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+      ) AS most_popular
+    FROM Produce
+    WINDOW ItemWindow AS (
+      PARTITION BY category
+      ORDER BY purchases)
 
 ### Compute rank
 
-This example calculates the rank of each employee within their department, based on their start date. The window specification is defined directly in the `  OVER  ` clause. The [`  Employees  `](#employees_table) table is referenced.
+This example calculates the rank of each employee within their department, based on their start date. The window specification is defined directly in the `  OVER  ` clause. The [`  Employees  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#employees_table) table is referenced.
 
   - department 1
       - ( **Jacob** , **Anthony** , **Andrew** ) = Assign rank 1 to Jacob
@@ -753,81 +709,71 @@ This example calculates the rank of each employee within their department, based
 
 <!-- end list -->
 
-``` text
-SELECT name, department, start_date,
-  RANK() OVER (PARTITION BY department ORDER BY start_date) AS rank
-FROM Employees;
-
-/*--------------------------------------------+
- | name      | department | start_date | rank |
- +--------------------------------------------+
- | Jacob     | 1          | 1990-07-11 | 1    |
- | Anthony   | 1          | 1995-11-29 | 2    |
- | Andrew    | 1          | 1999-01-23 | 3    |
- | Isabella  | 2          | 1997-09-28 | 1    |
- | Daniel    | 2          | 2004-06-24 | 2    |
- | Jose      | 2          | 2013-03-17 | 3    |
- +--------------------------------------------*/
-```
+    SELECT name, department, start_date,
+      RANK() OVER (PARTITION BY department ORDER BY start_date) AS rank
+    FROM Employees;
+    
+    /*--------------------------------------------+
+     | name      | department | start_date | rank |
+     +--------------------------------------------+
+     | Jacob     | 1          | 1990-07-11 | 1    |
+     | Anthony   | 1          | 1995-11-29 | 2    |
+     | Andrew    | 1          | 1999-01-23 | 3    |
+     | Isabella  | 2          | 1997-09-28 | 1    |
+     | Daniel    | 2          | 2004-06-24 | 2    |
+     | Jose      | 2          | 2013-03-17 | 3    |
+     +--------------------------------------------*/
 
 ### Use a named window in a window frame clause
 
-You can define some of your logic in a named window and some of it in a window frame clause. This logic is combined. Here is an example, using the [`  Produce  `](#produce_table) table.
+You can define some of your logic in a named window and some of it in a window frame clause. This logic is combined. Here is an example, using the [`  Produce  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls#produce_table) table.
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (ItemWindow) AS most_popular
-FROM Produce
-WINDOW ItemWindow AS (
-  PARTITION BY category
-  ORDER BY purchases
-  ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
-
-/*-------------------------------------------------------+
- | item      | purchases  | category   | most_popular    |
- +-------------------------------------------------------+
- | banana    | 2          | fruit      | apple           |
- | apple     | 8          | fruit      | apple           |
- | leek      | 2          | vegetable  | lettuce         |
- | cabbage   | 9          | vegetable  | kale            |
- | lettuce   | 10         | vegetable  | kale            |
- | kale      | 23         | vegetable  | kale            |
- +-------------------------------------------------------*/
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (ItemWindow) AS most_popular
+    FROM Produce
+    WINDOW ItemWindow AS (
+      PARTITION BY category
+      ORDER BY purchases
+      ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
+    
+    /*-------------------------------------------------------+
+     | item      | purchases  | category   | most_popular    |
+     +-------------------------------------------------------+
+     | banana    | 2          | fruit      | apple           |
+     | apple     | 8          | fruit      | apple           |
+     | leek      | 2          | vegetable  | lettuce         |
+     | cabbage   | 9          | vegetable  | kale            |
+     | lettuce   | 10         | vegetable  | kale            |
+     | kale      | 23         | vegetable  | kale            |
+     +-------------------------------------------------------*/
 
 You can also get the previous results with these examples:
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (ItemWindow) AS most_popular
-FROM Produce
-WINDOW
-  a AS (PARTITION BY category),
-  b AS (a ORDER BY purchases),
-  c AS (b ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING),
-  ItemWindow AS (c)
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (ItemWindow) AS most_popular
+    FROM Produce
+    WINDOW
+      a AS (PARTITION BY category),
+      b AS (a ORDER BY purchases),
+      c AS (b ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING),
+      ItemWindow AS (c)
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (ItemWindow ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS most_popular
-FROM Produce
-WINDOW
-  a AS (PARTITION BY category),
-  b AS (a ORDER BY purchases),
-  ItemWindow AS (b)
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (ItemWindow ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING) AS most_popular
+    FROM Produce
+    WINDOW
+      a AS (PARTITION BY category),
+      b AS (a ORDER BY purchases),
+      ItemWindow AS (b)
 
 The following example produces an error because a window frame clause has been defined twice:
 
-``` text
-SELECT item, purchases, category, LAST_VALUE(item)
-  OVER (
-    ItemWindow
-    ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
-    ) AS most_popular
-FROM Produce
-WINDOW ItemWindow AS (
-  ORDER BY purchases
-  ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)
-```
+    SELECT item, purchases, category, LAST_VALUE(item)
+      OVER (
+        ItemWindow
+        ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING
+        ) AS most_popular
+    FROM Produce
+    WINDOW ItemWindow AS (
+      ORDER BY purchases
+      ROWS BETWEEN 2 PRECEDING AND 2 FOLLOWING)

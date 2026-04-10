@@ -2,17 +2,19 @@
 
 This document describes how to monitor listings in BigQuery sharing (formerly Analytics Hub). As a data provider, you can track the usage metrics for your listings. There are two methods to get the usage metrics for your shared data:
 
-  - [Use BigQuery sharing](#use-analytics-hub) . You can use Sharing to view the usage metrics dashboard for your listings. This dashboard includes daily subscriptions, daily executed jobs, the number of subscribers for each organization, and job frequency for each table. You can retrieve the usage metrics for your shared data by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
+  - [Use BigQuery sharing](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-analytics-hub) . You can use Sharing to view the usage metrics dashboard for your listings. This dashboard includes daily subscriptions, daily executed jobs, the number of subscribers for each organization, and job frequency for each table. You can retrieve the usage metrics for your shared data by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
 
-  - [Use the `  INFORMATION_SCHEMA  ` view](#use-information-schema) . You can track how subscribers use your datasets by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
+  - [Use the `  INFORMATION_SCHEMA  ` view](https://docs.cloud.google.com/bigquery/docs/analytics-hub-monitor-listings#use-information-schema) . You can track how subscribers use your datasets by querying the `  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view.
 
 ## Use Sharing
 
 To get usage metrics for your shared data using Sharing, follow these steps:
 
 1.  In the Google Cloud console, go to the **Sharing (Analytics Hub)** page.
+    
+    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
-2.  Click the name of the [data exchange](/bigquery/docs/analytics-hub-introduction#data_exchanges) that contains the listing to view its usage metrics.
+2.  Click the name of the [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) that contains the listing to view its usage metrics.
 
 3.  Click **Usage metrics** , and then do the following:
     
@@ -31,17 +33,15 @@ The page displays the following usage metrics:
   - **Daily Executed Jobs** : this chart displays the jobs consumption from the selected listing.
   - **Tables' job frequency** : the frequency at which the tables are accessed on the selected listing.
 
-**Note:** You can also use the [BigQuery sharing subscriber APIs](/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) to retrieve the **Total Subscriptions** , **Total Subscribers** , and **Daily Subscriptions** fields.
+**Note:** You can also use the [BigQuery sharing subscriber APIs](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.subscriptions/list) to retrieve the **Total Subscriptions** , **Total Subscribers** , and **Daily Subscriptions** fields.
 
 ## Use `     INFORMATION_SCHEMA    ` view
 
-Data providers can track how subscribers use datasets by querying the [`  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view](/bigquery/docs/information-schema-shared-dataset-usage) . Ensure that you have the required role to query this view.
+Data providers can track how subscribers use datasets by querying the [`  INFORMATION_SCHEMA.SHARED_DATASET_USAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-shared-dataset-usage) . Ensure that you have the required role to query this view.
 
 To run the query against a Google Cloud project other than your default project, use the following format:
 
-``` text
-PROJECT_ID.region-REGION_NAME.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
-```
+    PROJECT_ID.region-REGION_NAME.INFORMATION_SCHEMA.SHARED_DATASET_USAGE
 
 Replace the following:
 
@@ -54,9 +54,9 @@ The following examples describe how to view the usage metrics by querying the ` 
 
 ### Get the total number of jobs executed on all shared tables
 
-The following example calculates total jobs run by [subscribers](/bigquery/docs/analytics-hub-view-subscribe-listings) for a project:
+The following example calculates total jobs run by [subscribers](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) for a project:
 
-``` text
+``` notranslate
 SELECT
   COUNT(DISTINCT job_id) AS num_jobs
 FROM
@@ -65,7 +65,7 @@ FROM
 
 The result is similar to the following:
 
-``` text
+``` notranslate
 +------------+
 | num_jobs   |
 +------------+
@@ -82,7 +82,7 @@ To check the total jobs run by subscribers, use the `  WHERE  ` clause:
 
 The following query calculates the most used table based on the number of rows processed by subscribers.
 
-``` text
+``` notranslate
 SELECT
   dataset_id,
   table_id,
@@ -100,19 +100,17 @@ LIMIT
 
 The output is similar to the following:
 
-``` text
-+---------------+-------------+----------------+
-| dataset_id    | table_id      | usage_rows     |
-+---------------+-------------+----------------+
-| mydataset     | mytable     | 15             |
-+---------------+-------------+----------------+
-```
+    +---------------+-------------+----------------+
+    | dataset_id    | table_id      | usage_rows     |
+    +---------------+-------------+----------------+
+    | mydataset     | mytable     | 15             |
+    +---------------+-------------+----------------+
 
 ### Find the top organizations that consume your tables
 
 The following query calculates the top subscribers based on the number of bytes processed from your tables. You can also use the `  num_rows_processed  ` column as a metric.
 
-``` text
+``` notranslate
 SELECT
   subscriber_org_number,
   ANY_VALUE(subscriber_org_display_name) AS subscriber_org_display_name,
@@ -125,27 +123,25 @@ GROUP BY
 
 The output is similar to the following:
 
-``` text
-+--------------------------+--------------------------------+----------------+
-|subscriber_org_number     | subscriber_org_display_name    | usage_bytes    |
-+-----------------------------------------------------------+----------------+
-| 12345                    | myorganization                 | 15             |
-+--------------------------+--------------------------------+----------------+
-```
+    +--------------------------+--------------------------------+----------------+
+    |subscriber_org_number     | subscriber_org_display_name    | usage_bytes    |
+    +-----------------------------------------------------------+----------------+
+    | 12345                    | myorganization                 | 15             |
+    +--------------------------+--------------------------------+----------------+
 
 For subscribers without an organization, you can use `  job_project_number  ` instead of `  subscriber_org_number  ` .
 
 ### Get usage metrics for your data exchange
 
-If your [data exchange](/bigquery/docs/analytics-hub-introduction#data_exchanges) and source dataset are in different projects, follow these step to view the usage metrics for your data exchange:
+If your [data exchange](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#data_exchanges) and source dataset are in different projects, follow these step to view the usage metrics for your data exchange:
 
-1.  Find all [listings](/bigquery/docs/analytics-hub-introduction#listings) that belong to your data exchange.
+1.  Find all [listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#listings) that belong to your data exchange.
 2.  Retrieve the source dataset attached to the listing.
 3.  To view the usage metrics for your data exchange, use the following query:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -167,7 +163,7 @@ AND data_exchange_id="projects/4/locations/us/dataExchanges/x1"
 
 The following query displays the usage metrics for all of the shared views present in a project:
 
-``` text
+``` notranslate
 SELECT
   project_id,
   dataset_id,
@@ -183,21 +179,19 @@ WHERE shared_resource_type = 'VIEW'
 
 The output is similar to the following:
 
-``` text
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     project_id      |   dataset_id   | table_id | num_rows_processed | total_bytes_processed | shared_resource_id | shared_resource_type |                                                                                                              referenced_tables                                                                                                              |
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|     myproject       | source_dataset | view1    |                  6 |                    38 | view1              | VIEW                 | [{"project_id":"myproject","dataset_id":"source_dataset","table_id":"test_table","processed_bytes":"21"},
-{"project_id":"bq-dataexchange-exp","dataset_id":"other_dataset","table_id":"other_table","processed_bytes":"17"}]                 |
-
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-```
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |     project_id      |   dataset_id   | table_id | num_rows_processed | total_bytes_processed | shared_resource_id | shared_resource_type |                                                                                                              referenced_tables                                                                                                              |
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    |     myproject       | source_dataset | view1    |                  6 |                    38 | view1              | VIEW                 | [{"project_id":"myproject","dataset_id":"source_dataset","table_id":"test_table","processed_bytes":"21"},
+    {"project_id":"bq-dataexchange-exp","dataset_id":"other_dataset","table_id":"other_table","processed_bytes":"17"}]                 |
+    
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Get usage metrics for shared table valued functions
 
 The following query displays the usage metrics for all of the shared table valued functions present in a project:
 
-``` text
+``` notranslate
 SELECT
   project_id,
   dataset_id,
@@ -213,15 +207,13 @@ WHERE shared_resource_type = 'TABLE_VALUED_FUNCTION'
 
 The output is similar to the following:
 
-``` text
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
-|     project_id      |   dataset_id   | table_id | num_rows_processed | total_bytes_processed | shared_resource_id | shared_resource_type  |                                                  referenced_tables                                                  |
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
-|     myproject       | source_dataset |          |                  3 |                    45 | provider_exp       | TABLE_VALUED_FUNCTION | [{"project_id":"myproject","dataset_id":"source_dataset","table_id":"test_table","processed_bytes":"45"}]           |
-+---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
-```
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
+    |     project_id      |   dataset_id   | table_id | num_rows_processed | total_bytes_processed | shared_resource_id | shared_resource_type  |                                                  referenced_tables                                                  |
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
+    |     myproject       | source_dataset |          |                  3 |                    45 | provider_exp       | TABLE_VALUED_FUNCTION | [{"project_id":"myproject","dataset_id":"source_dataset","table_id":"test_table","processed_bytes":"45"}]           |
+    +---------------------+----------------+----------+--------------------+-----------------------+--------------------+-----------------------+---------------------------------------------------------------------------------------------------------------------+
 
 ## What's next
 
-  - Learn how to [manage BigQuery sharing listings](/bigquery/docs/analytics-hub-manage-listings) .
+  - Learn how to [manage BigQuery sharing listings](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings) .
   - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .

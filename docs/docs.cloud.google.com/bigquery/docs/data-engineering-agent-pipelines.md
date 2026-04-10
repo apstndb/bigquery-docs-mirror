@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or to ask questions about this preview feature, contact <bigquery-dea-feedback@google.com>
 
@@ -22,7 +22,7 @@ You can use natural language prompts with the Data Engineering Agent to create t
   - Create or use existing BigQuery routines (UDFs) to perform custom analysis and transformations on your data.
   - Define reusable guidelines for the agent in natural language.
 
-For more examples of prompts you can use with the Data Engineering Agent, see [Sample prompts](#sample_prompts) .
+For more examples of prompts you can use with the Data Engineering Agent, see [Sample prompts](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#sample_prompts) .
 
 ## Limitations
 
@@ -36,8 +36,8 @@ The Data Engineering Agent has the following limitations:
   - The Data Engineering Agent cannot execute pipelines. Users need to review and run or schedule pipelines.
   - The Data Engineering Agent cannot validate SQL that's dependent on non-existent intermediary resources without full pipeline invocation (user-triggered).
   - The Data Engineering Agent cannot search any web links or URLs provided through instructions or direct prompts.
-  - When importing files in an [agent instruction file](#create_agent_instructions_for_the_data_engineering_agent) , the `  @  ` import syntax only supports paths that begin with `  ./  ` , `  /  ` , or a letter.
-  - The [data preview](#review_a_data_pipeline) feature is only supported for tables, declarations, or queries with the `  hasOutput  ` flag set to `  true  ` .
+  - When importing files in an [agent instruction file](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions_for_the_data_engineering_agent) , the `  @  ` import syntax only supports paths that begin with `  ./  ` , `  /  ` , or a letter.
+  - The [data preview](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#review_a_data_pipeline) feature is only supported for tables, declarations, or queries with the `  hasOutput  ` flag set to `  true  ` .
 
 ## Supported regions
 
@@ -58,13 +58,13 @@ You can change the processing region for the Data Engineering Agent using one of
 
 ### BigQuery pipelines
 
-If you are using BigQuery pipelines, you can update your processing region by setting the default region for your code assets. For more information, see [Set the default region for code assets](/bigquery/docs/create-pipelines#set_the_default_region_for_code_assets) .
+If you are using BigQuery pipelines, you can update your processing region by setting the default region for your code assets. For more information, see [Set the default region for code assets](https://docs.cloud.google.com/bigquery/docs/create-pipelines#set_the_default_region_for_code_assets) .
 
 If the default region is not set, then the Data Engineering Agent processes your data globally.
 
 ### Dataform
 
-If you are using Dataform, you can update your processing region by changing the `  defaultLocation  ` value in your Dataform workflow settings file, or `  workflow_settings.yaml  ` . For more information, see [Configure Dataform workflow settings](/dataform/docs/manage-repository#configure-workflow-settings) .
+If you are using Dataform, you can update your processing region by changing the `  defaultLocation  ` value in your Dataform workflow settings file, or `  workflow_settings.yaml  ` . For more information, see [Configure Dataform workflow settings](https://docs.cloud.google.com/dataform/docs/manage-repository#configure-workflow-settings) .
 
 If the `  defaultLocation  ` value is not set, then the Data Engineering Agent processes your data globally.
 
@@ -74,27 +74,29 @@ To produce higher quality agent responses, the Data Engineering Agent can retrie
 
 ## Before you begin
 
-Ensure that Gemini in BigQuery is enabled for your Google Cloud project. For more information, see [Set up Gemini in BigQuery](/bigquery/docs/gemini-set-up) .
+Ensure that Gemini in BigQuery is enabled for your Google Cloud project. For more information, see [Set up Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 You must also enable the Gemini Data Analytics API.
 
 **Roles required to enable APIs**
 
-To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+
+[Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=geminidataanalytics.googleapis.com&redirect=https://console.cloud.google.com)
 
 ### Required roles
 
 To get the permission that you need to use the Data Engineering Agent, ask your administrator to grant you the following IAM roles on the project:
 
-  - [Dataform Code Editor](/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
-  - [BigQuery Job User](/iam/docs/roles-permissions/bigquery#bigquery.jobuser) ( `  roles/bigquery.jobuser  ` )
-  - [Gemini Data Analytics Stateless Chat User](/iam/docs/roles-permissions/geminidataanalytics#geminidataanalytics.dataAgentStatelessUser) ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` )
+  - [Dataform Code Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.codeEditor) ( `  roles/dataform.codeEditor  ` )
+  - [BigQuery Job User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.jobuser) ( `  roles/bigquery.jobuser  ` )
+  - [Gemini Data Analytics Stateless Chat User](https://docs.cloud.google.com/iam/docs/roles-permissions/geminidataanalytics#geminidataanalytics.dataAgentStatelessUser) ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  geminidataanalytics.locations.useDataEngineeringAgent  ` permission, which is required to use the Data Engineering Agent.
 
-You might also be able to get this permission with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Generate a data pipeline with the Data Engineering Agent
 
@@ -105,6 +107,8 @@ To use the Data Engineering Agent in BigQuery, select one of the following optio
 You can use the Data Engineering Agent in the BigQuery pipelines interface by doing the following:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click arrow\_drop\_down **Create new** \> **Pipeline** .
 
@@ -114,7 +118,7 @@ You can use the Data Engineering Agent in the BigQuery pipelines interface by do
 
 5.  In the **Ask agent** field, enter a natural language prompt to generate a data pipeline. For example:
     
-    ``` text
+    ``` 
       Create dimension tables for a taxi trips star schema from
       new_york_taxi_trips.tlc_green_trips_2022. Generate surrogate keys and all
       the descriptive attributes.
@@ -126,11 +130,15 @@ You can use the Data Engineering Agent in the BigQuery pipelines interface by do
 
 The data pipeline generated by the Data Engineering Agent is a proposed draft of a data pipeline. You can click a pipeline node to review the generated SQLX query. To apply the agent-suggested data pipeline, click **Apply** .
 
+![Apply changes suggested by the Data Engineering Agent on your data pipeline.](https://docs.cloud.google.com/static/bigquery/images/dea-apply.png)
+
 ### Dataform
 
 You can use the Data Engineering Agent in Dataform by doing the following:
 
 1.  Go to the **Dataform** page.
+    
+    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select a repository.
 
@@ -140,7 +148,7 @@ You can use the Data Engineering Agent in Dataform by doing the following:
 
 5.  In the **Ask agent** prompt that appears, enter a natural language prompt to generate a data pipeline. For example:
     
-    ``` text
+    ``` 
       Create dimension tables for a taxi trips star schema from
       new_york_taxi_trips.tlc_green_trips_2022. Generate surrogate keys and all
       the descriptive attributes.
@@ -161,6 +169,8 @@ In a data pipeline generated by the Data Engineering Agent, you can click a pipe
 
 You can edit your data pipeline using the Data Engineering Agent by clicking **Ask agent** and entering a prompt that suggests a change to the data pipeline.
 
+![Click on Ask Agent to use the Data Engineering Agent on your data pipeline.](https://docs.cloud.google.com/static/bigquery/images/dea-ask-agent.png)
+
 Review the changes proposed by the Data Engineering Agent, then click **Apply** to apply the changes.
 
 You can also edit a SQLX query manually by selecting a pipeline node and then clicking **Open** .
@@ -169,7 +179,7 @@ You can also edit a SQLX query manually by selecting a pipeline node and then cl
 
 Agent instructions are natural-language instructions for the data engineering agent that let you store persistent instructions so that the agent follows a set of custom, predefined rules. Use agent instructions if you want the results of your agent to be consistent across your organization, for example with naming conventions or to enforce a style guide.
 
-You can create a [`  GEMINI.MD  ` context file](/gemini/docs/codeassist/use-agentic-chat-pair-programmer#create-context-file) as an agent instruction file for the Data Engineering Agent. You can create agent instruction files to use in your local workspace, or you can use the same instruction files across multiple data pipelines using an external repository.
+You can create a [`  GEMINI.MD  ` context file](https://docs.cloud.google.com/gemini/docs/codeassist/use-agentic-chat-pair-programmer#create-context-file) as an agent instruction file for the Data Engineering Agent. You can create agent instruction files to use in your local workspace, or you can use the same instruction files across multiple data pipelines using an external repository.
 
 Create agent instructions by doing the following:
 
@@ -181,7 +191,7 @@ Create agent instructions by doing the following:
     
     The following example shows an agent instruction file with several rules:
     
-    ``` text
+    ``` 
       1. All event-specific tables MUST be prefixed with `cs_event_`.
       2. The primary key for any player activity table is a composite key of `player_id` and `event_timestamp_micros`.
       3. Filter out any player actions where `mana_spent` is greater than `max_mana_pool`. This is considered a data anomaly.
@@ -189,7 +199,7 @@ Create agent instructions by doing the following:
 
 4.  Click **Save** .
 
-For information on how best to structure your agent instruction files, see [Best practices with agent instruction files](#best_practices_with_agent_instruction_files) .
+For information on how best to structure your agent instruction files, see [Best practices with agent instruction files](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#best_practices_with_agent_instruction_files) .
 
 ### Load agent instructions from an external repository
 
@@ -206,15 +216,19 @@ You can also import other instruction files for the Data Engineering Agent into 
 
 ## Troubleshoot data pipeline errors
 
-If you encounter any errors during data pipeline generation, verify that you have done all the prerequisites required to run the Data Engineering Agent. For more information, see [Before you begin](#before_you_begin) .
+If you encounter any errors during data pipeline generation, verify that you have done all the prerequisites required to run the Data Engineering Agent. For more information, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#before_you_begin) .
 
 If the generated data pipeline encounters any errors, you can prompt the data engineering agent to diagnose any data pipeline failures and propose troubleshooting recommendations with the following steps:
 
 1.  In your pipeline or your development workspace, click the **Executions** tab.
 
 2.  From the executions list, find the failed data pipeline run. You can identify failed runs in the **Status** column of the execution run.
+    
+    ![Find failed execution runs in the status column of your pipelines.](https://docs.cloud.google.com/static/bigquery/images/dea-failed-runs.png)
 
 3.  Hover over the icon, then click **Investigate** . The Data Engineering Agent runs an analysis on your data pipeline execution for any errors.
+    
+    ![Prompt the Data Engineering Agent to diagnose errors on your pipeline.](https://docs.cloud.google.com/static/bigquery/images/dea-investigate.png)
 
 4.  Once the analysis is complete, the Data Engineering Agent generates a report in the **Observations and Hypothesis** section. This report includes:
     
@@ -239,7 +253,7 @@ The following sections show you some sample prompts that you can use with the Da
 
 With this prompt, the Data Engineering Agent uses the schema and samples to infer data grouping by key. The agent typically sets up a new table configuration with table and column descriptions.
 
-``` text
+``` 
   Create a daily sales report from the
   bigquery-public-data.thelook_ecommerce.order_items table into a
   reporting.daily_sales_aggregation table.
@@ -249,7 +263,7 @@ With this prompt, the Data Engineering Agent uses the schema and samples to infe
 
 With this prompt, the agent infers reasonable quality checks for the table based on the schema and samples. You could also add some opinionated assertions as part of the prompt.
 
-``` text
+``` 
   Add data quality checks for bigquery-public-data.thelook_ecommerce.users.
 ```
 
@@ -257,7 +271,7 @@ With this prompt, the agent infers reasonable quality checks for the table based
 
 This following prompt shows how you can add a table and a column, and specify quality checks to the table at the same time.
 
-``` text
+``` 
   Create a new table named staging.products from
   bigquery-public-data.thelook_ecommerce.products and add a calculated column
   named gross_profit, which is the retail_price minus the cost.
@@ -272,7 +286,7 @@ This following prompt shows how you can add a table and a column, and specify qu
 
 The Data Engineering Agent can also set up the DDL to create user-defined functions (UDFs). While the agent won't actually create the UDF, you can create the UDF by running the data pipeline. These UDFs can be used in model definitions in your data pipeline.
 
-``` text
+``` 
   Create a user-defined function (UDF) named get_age_group that takes an integer
   age as input and returns a string representing the age group ('Gen Z',
   'Millennial', 'Gen X', 'Baby Boomer').
@@ -292,11 +306,11 @@ The following sections suggest best practices for working with the Data Engineer
 
 **Utilize agent instructions for common requests.** If there are techniques you find yourself commonly applying, or if you frequently make the same corrections to the agent, use the agent instructions as a centralized location to store common instructions and requests.
 
-**Give the agent more context.** You can give the agent additional context from Dataplex Universal Catalog by attaching glossary terms to BigQuery tables and columns and generating data profile scans. Glossary terms can be used to tag columns that require additional context, such as columns containing personally-identifiable information (PII) that require special-handling instructions, or to identify matching columns with different naming across tables. Data profile scans provide the agent a better understanding of data distribution within columns of a table and can help the agent create more specified data quality assertions. For more information, see [About data profiling](/dataplex/docs/data-profiling-overview) .
+**Give the agent more context.** You can give the agent additional context from Dataplex Universal Catalog by attaching glossary terms to BigQuery tables and columns and generating data profile scans. Glossary terms can be used to tag columns that require additional context, such as columns containing personally-identifiable information (PII) that require special-handling instructions, or to identify matching columns with different naming across tables. Data profile scans provide the agent a better understanding of data distribution within columns of a table and can help the agent create more specified data quality assertions. For more information, see [About data profiling](https://docs.cloud.google.com/dataplex/docs/data-profiling-overview) .
 
 **Write with clarity.** State your request clearly and avoid being vague. Where possible, provide source and destination data sources when prompting, as seen in the following example:
 
-``` text
+``` 
   Extract data from the sales.customers table in the us_west_1 region, and load
   it into the reporting.dim_customers table in BigQuery. Match the schema of the
   destination table.
@@ -304,7 +318,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 **Provide direct and scoped requests.** Ask one question at a time, and keep prompts concise. For prompts with more than one question, you can itemize each distinct part of the question to improve clarity, as seen in the following example:
 
-``` text
+``` 
   1. Create a new table named staging.events_cleaned. Use raw.events as the
      source. This new table should filter out any records where the user_agent
      matches the pattern '%bot%'. All original columns should be included.
@@ -317,7 +331,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 **Give explicit instructions and emphasize key terms.** You can add emphasis to key terms or concepts in your prompts and label certain requirements as important, as seen in the following example:
 
-``` text
+``` 
   When creating the staging.customers table, it is *VERY IMPORTANT* that you
   transform the email column from the source table bronze.raw_customers.
   Coalesce any NULL values in the email column to an empty string ''.
@@ -325,7 +339,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 **Specify the order of operations.** For ordered tasks, you can structure your prompt in lists, where listed items are divided into small, focused steps, as seen in the following example:
 
-``` text
+``` 
   Create a pipeline with the following steps:
   1. Extract data from the ecomm.orders table.
   2. Join the extracted data with the marts.customers table on customer_id
@@ -334,7 +348,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 **Refine and iterate.** Keep trying different phrases and approaches to see what yields the best results. If the agent generates invalid SQL or other mistakes, guide the agent using examples or public documentation.
 
-``` text
+``` 
   The previous query was incorrect because it removed the timestamp. Please
   correct the SQL. Use the TIMESTAMP_TRUNC function to truncate the
   event_timestamp to the nearest hour, instead of casting it as a DATE. For
@@ -343,7 +357,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 ### Best practices with agent instruction files
 
-[Create agent instruction files](#create_agent_instructions_for_the_data_engineering_agent) to customize the Data Engineering Agent to suit your needs. When using agent instructions, we recommend that you do the following:
+[Create agent instruction files](https://docs.cloud.google.com/bigquery/docs/data-engineering-agent-pipelines#create_agent_instructions_for_the_data_engineering_agent) to customize the Data Engineering Agent to suit your needs. When using agent instructions, we recommend that you do the following:
 
   - All file paths in Dataform are relative to the root of the repository. Use relative paths for any `  @file.md  ` syntax to properly import instructions to `  GEMINI.md  ` .
   - Files imported in `  GEMINI.md  ` can themselves contain imports, which can create a nested structure. To prevent infinite recursion, `  GEMINI.md  ` has a maximum import depth of five levels.
@@ -355,7 +369,7 @@ The following sections suggest best practices for working with the Data Engineer
 
 The following example shows an agent instruction file named `  GEMINI.md  ` that utilizes our best practices for effective use of the Data Engineering Agent:
 
-``` text
+``` 
   ### Naming Conventions
 
   * Datasets: [business_domain]_[use_case] (e.g., ecommerce_sales)

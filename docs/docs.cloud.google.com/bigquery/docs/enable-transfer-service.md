@@ -1,11 +1,11 @@
 # Enable the BigQuery Data Transfer Service
 
-To use the BigQuery Data Transfer Service, you must complete the following steps as a project [Owner](/iam/docs/roles-overview#legacy-basic) :
+To use the BigQuery Data Transfer Service, you must complete the following steps as a project [Owner](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) :
 
   - Create a project and enable the BigQuery API.
   - Enable the BigQuery Data Transfer Service.
 
-For more information on Identity and Access Management (IAM) roles, see [Roles and permissions](/iam/docs/roles-overview) in the IAM documentation.
+For more information on Identity and Access Management (IAM) roles, see [Roles and permissions](https://docs.cloud.google.com/iam/docs/roles-overview) in the IAM documentation.
 
 **Note:** If you call the BigQuery Data Transfer Service API immediately after you enable BigQuery Data Transfer Service programmatically, you should implement a retry mechanism with backoff delays between consecutive calls. This is necessary because API enablement is asynchronous and subject to propagation delays caused by eventual consistency.
 
@@ -16,13 +16,15 @@ Before using the BigQuery Data Transfer Service, you must create a project and, 
 To create a project and enable the BigQuery API:
 
 1.  In the Google Cloud console, go to the project selector page.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
 2.  Select or create a Google Cloud project.
     
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
 
@@ -30,14 +32,15 @@ To create a project and enable the BigQuery API:
     
     Enabling billing is only required once per project, even if you are transferring data from multiple sources. Billing must also be enabled to query the data in BigQuery, after the data is transferred.
     
-    [Learn how to confirm that billing is enabled on your project](/billing/docs/how-to/modify-project) .
+    [Learn how to confirm that billing is enabled on your project](https://docs.cloud.google.com/billing/docs/how-to/modify-project) .
 
 4.  BigQuery is automatically enabled in new projects. To activate BigQuery in an existing project, enable the BigQuery API.  
       
+    [Enable the BigQuery API](https://console.cloud.google.com/apis/library/bigquery.googleapis.com)
 
 ## Enable the BigQuery Data Transfer Service
 
-Before you can create a transfer, you must enable the BigQuery Data Transfer Service. To enable the BigQuery Data Transfer Service, you must be granted the [Owner](/iam/docs/roles-overview#legacy-basic) role for your project.
+Before you can create a transfer, you must enable the BigQuery Data Transfer Service. To enable the BigQuery Data Transfer Service, you must be granted the [Owner](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) role for your project.
 
 To enable the BigQuery Data Transfer Service:
 
@@ -46,23 +49,25 @@ To enable the BigQuery Data Transfer Service:
 2.  From the drop-down menu, select the appropriate project.
 
 3.  Click the ENABLE button.
+    
+    [Enable the Data Transfer API](https://console.cloud.google.com/apis/library/bigquerydatatransfer.googleapis.com)
 
 ## Service Agent
 
-The BigQuery Data Transfer Service uses a [service agent](/iam/docs/service-account-types#service-agents) to access and manage your resources. This includes, but is not limited to, the following resources:
+The BigQuery Data Transfer Service uses a [service agent](https://docs.cloud.google.com/iam/docs/service-account-types#service-agents) to access and manage your resources. This includes, but is not limited to, the following resources:
 
   - Retrieving an access token for the service account to use when authorizing the data transfer.
   - Publishing notifications to the provided Pub/Sub topic if enabled.
   - Starting BigQuery jobs.
   - Retrieving events from the provided Pub/Sub subscription for Cloud Storage event-driven transfer
 
-The service agent is created automatically on your behalf after you enable the BigQuery Data Transfer Service and use the API for the first time. Upon service agent creation, Google grants the predefined [service agent role](/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) automatically.
+The service agent is created automatically on your behalf after you enable the BigQuery Data Transfer Service and use the API for the first time. Upon service agent creation, Google grants the predefined [service agent role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) automatically.
 
 ### Cross-project Service Account Authorization
 
 If you authorize the data transfer using a service account from a project that is different from the project with the BigQuery Data Transfer Service enabled, you must grant the `  roles/iam.serviceAccountTokenCreator  ` role to the service agent using the following Google Cloud CLI command:
 
-``` text
+``` notranslate
 gcloud iam service-accounts add-iam-policy-binding service_account \
 --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
 --role roles/iam.serviceAccountTokenCreator
@@ -73,7 +78,7 @@ Where:
   - service\_account is the cross-project service account used for authorizing the data transfer.
   - project\_number is the project number of the project where the BigQuery Data Transfer Service is enabled.
 
-For more information about cross-project resource configuration, see [Configuring for a resource in a different project](/iam/docs/attach-service-accounts#attaching-different-project) in the Identity and Access Management service account impersonation documentation.
+For more information about cross-project resource configuration, see [Configuring for a resource in a different project](https://docs.cloud.google.com/iam/docs/attach-service-accounts#attaching-different-project) in the Identity and Access Management service account impersonation documentation.
 
 When you enable the BigQuery Data Transfer Service API through the Google Cloud console, Google automatically attempts to grant the required permissions. However, if you enable the API or create transfers through Terraform, the Google Cloud CLI, or other programmatic methods, you must manually establish the required permissions. To authorize a transfer using a service account from a different project, consider the following:
 
@@ -85,13 +90,13 @@ When you enable the BigQuery Data Transfer Service API through the Google Cloud 
 
 If you want to trigger service agent creation before you interact with the API, for example, if you need to grant extra roles to the service agent, you can use one of the following approaches:
 
-  - API: [services.GenerateServiceIdentity](/service-usage/docs/reference/rest/v1beta1/services/generateServiceIdentity)
-  - gcloud CLI: [gcloud beta services identity create](/sdk/gcloud/reference/beta/services/identity/create)
+  - API: [services.GenerateServiceIdentity](https://docs.cloud.google.com/service-usage/docs/reference/rest/v1beta1/services/generateServiceIdentity)
+  - gcloud CLI: [gcloud beta services identity create](https://docs.cloud.google.com/sdk/gcloud/reference/beta/services/identity/create)
   - Terraform Provider: [google\_project\_service\_identity](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/project_service_identity)
 
-When you manually trigger service agent creation, Google doesn't grant the predefined [service agent role](/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) automatically. You must manually grant the service agent the predefined role using the following Google Cloud CLI command:
+When you manually trigger service agent creation, Google doesn't grant the predefined [service agent role](https://docs.cloud.google.com/bigquery/docs/access-control#bigquerydatatransfer.serviceAgent) automatically. You must manually grant the service agent the predefined role using the following Google Cloud CLI command:
 
-``` text
+``` notranslate
 gcloud projects add-iam-policy-binding project_number \
 --member serviceAccount:service-project_number@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com \
 --role roles/bigquerydatatransfer.serviceAgent
@@ -117,17 +122,19 @@ We recommend granting the `  bigquery.admin  ` predefined IAM role to users who 
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-**Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `  bigquery.datasets.getIamPolicy  ` and `  bigquery.datasets.setIamPolicy  ` permissions. For more information, see [Changes to dataset-level access controls](/bigquery/docs/dataset-access-control) .
+**Note:** Starting March 17, 2026, the BigQuery Data Transfer Service will require the `  bigquery.datasets.getIamPolicy  ` and `  bigquery.datasets.setIamPolicy  ` permissions. For more information, see [Changes to dataset-level access controls](https://docs.cloud.google.com/bigquery/docs/dataset-access-control) .
 
-**Note:** If the `  bigquery.admin  ` role is too broad for a specific use case, you can [create a custom IAM role](/iam/docs/creating-custom-roles) with only the necessary permissions.
+**Note:** If the `  bigquery.admin  ` role is too broad for a specific use case, you can [create a custom IAM role](https://docs.cloud.google.com/iam/docs/creating-custom-roles) with only the necessary permissions.
 
-In some cases, the required permissions might differ between different data sources. Refer to the "Required permissions" section in each data source transfer guide for specific IAM information. For example, see [Amazon S3 transfer permissions](/bigquery/docs/s3-transfer#required_permissions) or [Cloud Storage transfer permissions](/bigquery/docs/cloud-storage-transfer#required_permissions) .
+In some cases, the required permissions might differ between different data sources. Refer to the "Required permissions" section in each data source transfer guide for specific IAM information. For example, see [Amazon S3 transfer permissions](https://docs.cloud.google.com/bigquery/docs/s3-transfer#required_permissions) or [Cloud Storage transfer permissions](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer#required_permissions) .
 
 To grant the `  bigquery.admin  ` role:
 
 ### Console
 
 1.  Open the IAM page in the Google Cloud console
+    
+    [Open the IAM page](https://console.cloud.google.com/iam-admin/iam)
 
 2.  Click **Select a project** .
 
@@ -142,16 +149,18 @@ To grant the `  bigquery.admin  ` role:
       - In the **Select a role** drop-down, click **BigQuery \> BigQuery Admin** .
     
       - Click **Add** .
+        
+        ![Grant admin](https://docs.cloud.google.com/static/bigquery/images/grant-bigquery-admin.png)
 
 ### gcloud
 
 You can use the Google Cloud CLI to grant a user or group the `  bigquery.admin  ` role.
 
-**Note:** When managing access for users in [external identity providers](/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](/iam/docs/principal-identifiers) .
+**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 To add a single binding to your project's IAM policy, type the following command. To add a user, supply the `  --member  ` flag in the format `  user:user@example.com  ` . To add a group, supply the `  --member  ` flag in the format `  group:group@example.com  ` .
 
-``` text
+``` notranslate
 gcloud projects add-iam-policy-binding project_id \
 --member principal:address \
 --role roles/bigquery.admin
@@ -165,15 +174,13 @@ Where:
 
 For example:
 
-``` text
-gcloud projects add-iam-policy-binding myproject \
---member group:group@example.com \
---role roles/bigquery.admin
-```
+    gcloud projects add-iam-policy-binding myproject \
+    --member group:group@example.com \
+    --role roles/bigquery.admin
 
 The command outputs the updated policy:
 
-``` text
+``` 
     bindings:
     - members:
       - group:group@example.com
@@ -181,7 +188,7 @@ The command outputs the updated policy:
     
 ```
 
-For more information on IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) .
+For more information on IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ## What's next
 
@@ -189,50 +196,50 @@ After enabling the BigQuery Data Transfer Service, create a transfer for your da
 
 SaaS platforms:
 
-  - [Salesforce](/bigquery/docs/salesforce-transfer)
-  - [Salesforce Marketing Cloud](/bigquery/docs/sfmc-transfer)
-  - [ServiceNow](/bigquery/docs/servicenow-transfer)
+  - [Salesforce](https://docs.cloud.google.com/bigquery/docs/salesforce-transfer)
+  - [Salesforce Marketing Cloud](https://docs.cloud.google.com/bigquery/docs/sfmc-transfer) <span></span>
+  - <span></span> [ServiceNow](https://docs.cloud.google.com/bigquery/docs/servicenow-transfer)
 
 Marketing platforms:
 
-  - [Facebook Ads](/bigquery/docs/facebook-ads-transfer)
-  - [HubSpot](/bigquery/docs/hubspot-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Klaviyo](/bigquery/docs/klaviyo-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Mailchimp](/bigquery/docs/mailchimp-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Facebook Ads](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer)
+  - [HubSpot](https://docs.cloud.google.com/bigquery/docs/hubspot-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Klaviyo](https://docs.cloud.google.com/bigquery/docs/klaviyo-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Mailchimp](https://docs.cloud.google.com/bigquery/docs/mailchimp-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
 
 Payment platforms:
 
-  - [PayPal](/bigquery/docs/paypal-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Stripe](/bigquery/docs/stripe-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Shopify](/bigquery/docs/shopify-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [PayPal](https://docs.cloud.google.com/bigquery/docs/paypal-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Stripe](https://docs.cloud.google.com/bigquery/docs/stripe-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Shopify](https://docs.cloud.google.com/bigquery/docs/shopify-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
 
 Databases and data warehouses:
 
-  - [Amazon Redshift](/bigquery/docs/migration/redshift)
-  - [Apache Hive](/bigquery/docs/hdfs-data-lake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Microsoft SQL Server](/bigquery/docs/sqlserver-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [MySQL](/bigquery/docs/mysql-transfer)
-  - [Oracle](/bigquery/docs/oracle-transfer)
-  - [PostgreSQL](/bigquery/docs/postgresql-transfer)
-  - [Snowflake](/bigquery/docs/migration/snowflake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Teradata](/bigquery/docs/migration/teradata)
+  - [Amazon Redshift](https://docs.cloud.google.com/bigquery/docs/migration/redshift)
+  - [Apache Hive](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Microsoft SQL Server](https://docs.cloud.google.com/bigquery/docs/sqlserver-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [MySQL](https://docs.cloud.google.com/bigquery/docs/mysql-transfer)
+  - [Oracle](https://docs.cloud.google.com/bigquery/docs/oracle-transfer)
+  - [PostgreSQL](https://docs.cloud.google.com/bigquery/docs/postgresql-transfer)
+  - [Snowflake](https://docs.cloud.google.com/bigquery/docs/migration/snowflake-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata)
 
 Cloud storage:
 
-  - [Cloud Storage](/bigquery/docs/cloud-storage-transfer)
-  - [Amazon Simple Storage Service (Amazon S3)](/bigquery/docs/s3-transfer)
-  - [Azure Blob Storage](/bigquery/docs/blob-storage-transfer)
+  - [Cloud Storage](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer)
+  - [Amazon Simple Storage Service (Amazon S3)](https://docs.cloud.google.com/bigquery/docs/s3-transfer)
+  - [Azure Blob Storage](https://docs.cloud.google.com/bigquery/docs/blob-storage-transfer)
 
 Google Services:
 
-  - [Campaign Manager](/bigquery/docs/doubleclick-campaign-transfer)
-  - [Comparison Shopping Service (CSS)Center](/bigquery/docs/css-center-transfer-schedule-transfers) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Display & Video 360](/bigquery/docs/display-video-transfer)
-  - [Google Ads](/bigquery/docs/google-ads-transfer)
-  - [Google Ad Manager](/bigquery/docs/doubleclick-publisher-transfer)
-  - [Google Analytics 4](/bigquery/docs/google-analytics-4-transfer)
-  - [Google Merchant Center](/bigquery/docs/merchant-center-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
-  - [Search Ads 360](/bigquery/docs/search-ads-transfer)
-  - [Google Play](/bigquery/docs/play-transfer)
-  - [YouTube Channel](/bigquery/docs/youtube-channel-transfer)
-  - [YouTube Content Owner](/bigquery/docs/youtube-content-owner-transfer)
+  - [Campaign Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer)
+  - [Comparison Shopping Service (CSS)Center](https://docs.cloud.google.com/bigquery/docs/css-center-transfer-schedule-transfers) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Display & Video 360](https://docs.cloud.google.com/bigquery/docs/display-video-transfer)
+  - [Google Ads](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer)
+  - [Google Ad Manager](https://docs.cloud.google.com/bigquery/docs/doubleclick-publisher-transfer)
+  - [Google Analytics 4](https://docs.cloud.google.com/bigquery/docs/google-analytics-4-transfer)
+  - [Google Merchant Center](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Search Ads 360](https://docs.cloud.google.com/bigquery/docs/search-ads-transfer)
+  - [Google Play](https://docs.cloud.google.com/bigquery/docs/play-transfer)
+  - [YouTube Channel](https://docs.cloud.google.com/bigquery/docs/youtube-channel-transfer)
+  - [YouTube Content Owner](https://docs.cloud.google.com/bigquery/docs/youtube-content-owner-transfer)

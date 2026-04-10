@@ -8,7 +8,7 @@ When you load Parquet data from Cloud Storage, you can load the data into a new 
 
 When you load data from Cloud Storage into a BigQuery table, the dataset that contains the table must be in the same regional or multi- regional location as the Cloud Storage bucket.
 
-For information about loading Parquet data from a local file, see [Loading data from local files](/bigquery/docs/batch-loading-data) .
+For information about loading Parquet data from a local file, see [Loading data from local files](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) .
 
 ## Limitations
 
@@ -16,7 +16,7 @@ You are subject to the following limitations when you load data into BigQuery fr
 
   - BigQuery does not guarantee data consistency for external data sources. Changes to the underlying data while a query is running can result in unexpected behavior.
 
-  - BigQuery doesn't support [Cloud Storage object versioning](/storage/docs/object-versioning) . If you include a generation number in the Cloud Storage URI, then the load job fails.
+  - BigQuery doesn't support [Cloud Storage object versioning](https://docs.cloud.google.com/storage/docs/object-versioning) . If you include a generation number in the Cloud Storage URI, then the load job fails.
 
   - You can't use a wildcard in the Cloud Storage URI if any of the files to be loaded have different schemas. Any difference in the position of columns qualifies as a different schema.
 
@@ -55,11 +55,11 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 Additionally, if you have the `  bigquery.datasets.create  ` permission, you can create and update tables using a load job in the datasets that you create.
 
-For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) .
+For more information on IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Permissions to load data from Cloud Storage
 
-To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to load data from a Cloud Storage bucket, ask your administrator to grant you the [Storage Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.admin) ( `  roles/storage.admin  ` ) IAM role on the bucket. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to load data from a Cloud Storage bucket. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -71,11 +71,11 @@ The following permissions are required to load data from a Cloud Storage bucket:
   - `  storage.objects.get  `
   - `  storage.objects.list (required if you are using a URI wildcard )  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Create a dataset
 
-Create a [BigQuery dataset](/bigquery/docs/datasets) to store your data.
+Create a [BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
 
 ## Parquet schemas
 
@@ -83,26 +83,24 @@ When you load Parquet files into BigQuery, the table schema is automatically ret
 
 For example, you have the following Parquet files in Cloud Storage:
 
-``` text
-gs://mybucket/00/
-  a.parquet
-  z.parquet
-gs://mybucket/01/
-  b.parquet
-```
+    gs://mybucket/00/
+      a.parquet
+      z.parquet
+    gs://mybucket/01/
+      b.parquet
 
 Running this command in the bq command-line tool loads all of the files (as a comma-separated list), and the schema is derived from `  mybucket/01/b.parquet  ` :
 
-``` text
+``` notranslate
 bq load \
 --source_format=PARQUET \
 dataset.table \
 "gs://mybucket/00/*.parquet","gs://mybucket/01/*.parquet"
 ```
 
-When you load multiple Parquet files that have different schemas, identical columns specified in multiple schemas must have the same [mode](/bigquery/docs/schemas#modes) in each schema definition.
+When you load multiple Parquet files that have different schemas, identical columns specified in multiple schemas must have the same [mode](https://docs.cloud.google.com/bigquery/docs/schemas#modes) in each schema definition.
 
-When BigQuery detects the schema, some Parquet data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. For more information, see [Parquet conversions](#parquet_conversions) .
+When BigQuery detects the schema, some Parquet data types are converted to BigQuery data types to make them compatible with GoogleSQL syntax. For more information, see [Parquet conversions](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#parquet_conversions) .
 
 To provide a table schema for creating external tables, set the `  referenceFileSchemaUri  ` property in BigQuery API or  
 `  --reference_file_schema_uri  ` parameter in bq command-line tool to the URL of the reference file.
@@ -135,6 +133,8 @@ To load Parquet data from Cloud Storage into a new BigQuery table:
 
 In the Google Cloud console, go to the **BigQuery** page.
 
+[Go to BigQuery](https://console.cloud.google.com/bigquery)
+
 In the left pane, click explore **Explorer** .
 
 In the **Explorer** pane, expand your project, click **Datasets** , and then select a dataset.
@@ -144,33 +144,35 @@ In the **Dataset info** section, click add\_box **Create table** .
 In the **Create table** pane, specify the following details:
 
 1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
-    1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.
+    1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
     2.  For **File format** , select **Parquet** .
 2.  In the **Destination** section, specify the following details:
     1.  For **Dataset** , select the dataset in which you want to create the table.
     2.  In the **Table** field, enter the name of the table that you want to create.
     3.  Verify that the **Table type** field is set to **Native table** .
 3.  In the **Schema** section, no action is necessary. The schema is self-described in Parquet files.
-4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](/bigquery/docs/creating-clustered-tables) .
+4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 5.  Click **Advanced options** and do the following:
       - For **Write preference** , leave **Write if empty** selected. This option creates a new table and loads your data into it.
       - If you want to ignore values in a row that are not present in the table's schema, then select **Unknown values** .
-      - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](/docs/security/encryption/default-encryption) .
+      - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
 
 **Note:** When you load data into an empty table by using the Google Cloud console, you cannot add a label, description, table expiration, or partition expiration.  
   
-After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](/bigquery/docs/managing-tables) .
+After the table is created, you can update the table's expiration, description, and labels, but you cannot add a partition expiration after a table is created using the Google Cloud console. For more information, see [Managing tables](https://docs.cloud.google.com/bigquery/docs/managing-tables) .
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a Parquet file into the new table `  mytable  ` :
+Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example loads a Parquet file into the new table `  mytable  ` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     LOAD DATA OVERWRITE mydataset.mytable
     FROM FILES (
       format = 'PARQUET',
@@ -179,13 +181,13 @@ Use the [`  LOAD DATA  ` DDL statement](/bigquery/docs/reference/standard-sql/lo
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Use the `  bq load  ` command, specify `  PARQUET  ` using the `  --source_format  ` flag, and include a [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](/bigquery/docs/batch-loading-data#load-wildcards) .
+Use the `  bq load  ` command, specify `  PARQUET  ` using the `  --source_format  ` flag, and include a [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You can include a single URI, a comma-separated list of URIs, or a URI containing a [wildcard](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](/bigquery/docs/dataset-locations) .
+(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
@@ -195,29 +197,29 @@ Other optional flags include:
 
   - `  --time_partitioning_field  ` : The `  DATE  ` or `  TIMESTAMP  ` column used to create a partitioned table. If time-based partitioning is enabled without this value, an ingestion-time partitioned table is created.
 
-  - `  --require_partition_filter  ` : When enabled, this option requires users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter can reduce cost and improve performance. For more information, see [Require a partition filter in queries](/bigquery/docs/querying-partitioned-tables) .
+  - `  --require_partition_filter  ` : When enabled, this option requires users to include a `  WHERE  ` clause that specifies the partitions to query. Requiring a partition filter can reduce cost and improve performance. For more information, see [Require a partition filter in queries](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-  - `  --clustering_fields  ` : A comma-separated list of up to four column names used to create a [clustered table](/bigquery/docs/creating-clustered-tables) .
+  - `  --clustering_fields  ` : A comma-separated list of up to four column names used to create a [clustered table](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) .
 
   - `  --destination_kms_key  ` : The Cloud KMS key for encryption of the table data.
 
-  - `  --column_name_character_map  ` : Defines the scope and handling of characters in column names, with the option of enabling [flexible column names](/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) . For more information, see [`  load_option_list  `](/bigquery/docs/reference/standard-sql/load-statements#load_option_list) . For more information on supported and unsupported characters, see [flexible column names](/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) .
+  - `  --column_name_character_map  ` : Defines the scope and handling of characters in column names, with the option of enabling [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) . For more information, see [`  load_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) . For more information on supported and unsupported characters, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) .
     
     For more information on partitioned tables, see:
     
-      - [Creating partitioned tables](/bigquery/docs/creating-partitioned-tables)
+      - [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables)
     
     For more information on clustered tables, see:
     
-      - [Creating and using clustered tables](/bigquery/docs/creating-clustered-tables)
+      - [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables)
     
     For more information on table encryption, see:
     
-      - [Protecting data with Cloud KMS keys](/bigquery/docs/customer-managed-encryption)
+      - [Protecting data with Cloud KMS keys](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption)
 
 To load Parquet data into BigQuery, enter the following command:
 
-``` text
+``` notranslate
 bq --location=LOCATION load \
 --source_format=FORMAT \
 DATASET.TABLE \
@@ -226,17 +228,17 @@ PATH_TO_SOURCE
 
 Replace the following:
 
-  - `  LOCATION  ` : your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : your location. The `  --location  ` flag is optional. For example, if you are using BigQuery in the Tokyo region, you can set the flag's value to `  asia-northeast1  ` . You can set a default value for the location using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  FORMAT  ` : `  PARQUET  ` .
   - `  DATASET  ` : an existing dataset.
   - `  TABLE  ` : the name of the table into which you're loading data.
-  - `  PATH_TO_SOURCE  ` : a fully qualified [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+  - `  PATH_TO_SOURCE  ` : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
 The following command loads data from `  gs://mybucket/mydata.parquet  ` into a table named `  mytable  ` in `  mydataset  ` .
 
-``` text
+``` 
     bq load \
     --source_format=PARQUET \
     mydataset.mytable \
@@ -245,7 +247,7 @@ The following command loads data from `  gs://mybucket/mydata.parquet  ` into a 
 
 The following command loads data from `  gs://mybucket/mydata.parquet  ` into a new ingestion-time partitioned table named `  mytable  ` in `  mydataset  ` .
 
-``` text
+``` 
     bq load \
     --source_format=PARQUET \
     --time_partitioning_type=DAY \
@@ -255,7 +257,7 @@ The following command loads data from `  gs://mybucket/mydata.parquet  ` into a 
 
 The following command loads data from `  gs://mybucket/mydata.parquet  ` into a partitioned table named `  mytable  ` in `  mydataset  ` . The table is partitioned on the `  mytimestamp  ` column.
 
-``` text
+``` 
     bq load \
     --source_format=PARQUET \
     --time_partitioning_field mytimestamp \
@@ -265,7 +267,7 @@ The following command loads data from `  gs://mybucket/mydata.parquet  ` into a 
 
 The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The Cloud Storage URI uses a wildcard.
 
-``` text
+``` 
     bq load \
     --source_format=PARQUET \
     mydataset.mytable \
@@ -274,7 +276,7 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 The following command loads data from multiple files in `  gs://mybucket/  ` into a table named `  mytable  ` in `  mydataset  ` . The command includes a comma- separated list of Cloud Storage URIs with wildcards.
 
-``` text
+``` 
     bq load \
     --source_format=PARQUET \
     mydataset.mytable \
@@ -285,13 +287,13 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 1.  Create a `  load  ` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` . Each URI can contain one '\*' [wildcard character](/bigquery/docs/batch-loading-data#load-wildcards) .
+3.  The `  source URIs  ` property must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` . Each URI can contain one '\*' [wildcard character](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) .
 
 4.  Specify the Parquet data format by setting the `  sourceFormat  ` property to `  PARQUET  ` .
 
-5.  To check the job status, call [`  jobs.get( JOB_ID *)  `](/bigquery/docs/reference/v2/jobs/get) , replacing JOB\_ID with the ID of the job returned by the initial request.
+5.  To check the job status, call [`  jobs.get( JOB_ID *)  `](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs/get) , replacing JOB\_ID with the ID of the job returned by the initial request.
     
       - If `  status.state = DONE  ` , the job completed successfully.
       - If the `  status.errorResult  ` property is present, the request failed, and that object includes information describing what went wrong. When a request fails, no table is created and no data is loaded.
@@ -307,250 +309,240 @@ The following command loads data from multiple files in `  gs://mybucket/  ` int
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// importParquet demonstrates loading Apache Parquet data from Cloud Storage into a table.
-func importParquet(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydataset"
- // tableID := "mytable"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
- gcsRef.SourceFormat = bigquery.Parquet
- gcsRef.AutoDetect = true
- loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
-
- job, err := loader.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
-
- if status.Err() != nil {
-     return fmt.Errorf("job completed with error: %v", status.Err())
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // importParquet demonstrates loading Apache Parquet data from Cloud Storage into a table.
+    func importParquet(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydataset"
+     // tableID := "mytable"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
+     gcsRef.SourceFormat = bigquery.Parquet
+     gcsRef.AutoDetect = true
+     loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
+    
+     job, err := loader.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+    
+     if status.Err() != nil {
+         return fmt.Errorf("job completed with error: %v", status.Err())
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.FormatOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.LoadJobConfiguration;
-import com.google.cloud.bigquery.TableId;
-import java.math.BigInteger;
-
-public class LoadParquet {
-
-  public static void runLoadParquet() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    loadParquet(datasetName);
-  }
-
-  public static void loadParquet(String datasetName) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet";
-      TableId tableId = TableId.of(datasetName, "us_states");
-
-      LoadJobConfiguration configuration =
-          LoadJobConfiguration.builder(tableId, sourceUri)
-              .setFormatOptions(FormatOptions.parquet())
-              .build();
-
-      // For more information on Job see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-      // Load the table
-      Job job = bigquery.create(JobInfo.of(configuration));
-
-      // Blocks until this load table job completes its execution, either failing or succeeding.
-      Job completedJob = job.waitFor();
-      if (completedJob == null) {
-        System.out.println("Job not executed since it no longer exists.");
-        return;
-      } else if (completedJob.getStatus().getError() != null) {
-        System.out.println(
-            "BigQuery was unable to load the table due to an error: \n"
-                + job.getStatus().getError());
-        return;
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.FormatOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.LoadJobConfiguration;
+    import com.google.cloud.bigquery.TableId;
+    import java.math.BigInteger;
+    
+    public class LoadParquet {
+    
+      public static void runLoadParquet() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        loadParquet(datasetName);
       }
-
-      // Check number of rows loaded into the table
-      BigInteger numRows = bigquery.getTable(tableId).getNumRows();
-      System.out.printf("Loaded %d rows. \n", numRows);
-
-      System.out.println("GCS parquet loaded successfully.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("GCS Parquet was not loaded. \n" + e.toString());
+    
+      public static void loadParquet(String datasetName) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet";
+          TableId tableId = TableId.of(datasetName, "us_states");
+    
+          LoadJobConfiguration configuration =
+              LoadJobConfiguration.builder(tableId, sourceUri)
+                  .setFormatOptions(FormatOptions.parquet())
+                  .build();
+    
+          // For more information on Job see:
+          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+          // Load the table
+          Job job = bigquery.create(JobInfo.of(configuration));
+    
+          // Blocks until this load table job completes its execution, either failing or succeeding.
+          Job completedJob = job.waitFor();
+          if (completedJob == null) {
+            System.out.println("Job not executed since it no longer exists.");
+            return;
+          } else if (completedJob.getStatus().getError() != null) {
+            System.out.println(
+                "BigQuery was unable to load the table due to an error: \n"
+                    + job.getStatus().getError());
+            return;
+          }
+    
+          // Check number of rows loaded into the table
+          BigInteger numRows = bigquery.getTable(tableId).getNumRows();
+          System.out.printf("Loaded %d rows. \n", numRows);
+    
+          System.out.println("GCS parquet loaded successfully.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("GCS Parquet was not loaded. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-// Instantiate clients
-const bigquery = new BigQuery();
-const storage = new Storage();
-
-/**
- * This sample loads the Parquet file at
- * https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.parquet
- *
- * TODO(developer): Replace the following lines with the path to your file.
- */
-const bucketName = 'cloud-samples-data';
-const filename = 'bigquery/us-states/us-states.parquet';
-
-async function loadTableGCSParquet() {
-  // Imports a GCS file into a table with Parquet source format.
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = 'my_dataset';
-  // const tableId = 'my_table';
-
-  // Configure the load job. For full list of options, see:
-  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
-  const metadata = {
-    sourceFormat: 'PARQUET',
-    location: 'US',
-  };
-
-  // Load data from a Google Cloud Storage file into the table
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .load(storage.bucket(bucketName).file(filename), metadata);
-
-  // load() waits for the job to finish
-  console.log(`Job ${job.id} completed.`);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
+    // Import the Google Cloud client libraries
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const {Storage} = require('@google-cloud/storage');
+    
+    // Instantiate clients
+    const bigquery = new BigQuery();
+    const storage = new Storage();
+    
+    /**
+     * This sample loads the Parquet file at
+     * https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.parquet
+     *
+     * TODO(developer): Replace the following lines with the path to your file.
+     */
+    const bucketName = 'cloud-samples-data';
+    const filename = 'bigquery/us-states/us-states.parquet';
+    
+    async function loadTableGCSParquet() {
+      // Imports a GCS file into a table with Parquet source format.
+    
+      /**
+       * TODO(developer): Uncomment the following lines before running the sample.
+       */
+      // const datasetId = 'my_dataset';
+      // const tableId = 'my_table';
+    
+      // Configure the load job. For full list of options, see:
+      // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
+      const metadata = {
+        sourceFormat: 'PARQUET',
+        location: 'US',
+      };
+    
+      // Load data from a Google Cloud Storage file into the table
+      const [job] = await bigquery
+        .dataset(datasetId)
+        .table(tableId)
+        .load(storage.bucket(bucketName).file(filename), metadata);
+    
+      // load() waits for the job to finish
+      console.log(`Job ${job.id} completed.`);
+    
+      // Check the job's status for errors
+      const errors = job.status.errors;
+      if (errors && errors.length > 0) {
+        throw errors;
+      }
+    }
 
 ### PHP
 
-Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
+Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` php
-use Google\Cloud\BigQuery\BigQueryClient;
-use Google\Cloud\Core\ExponentialBackoff;
-
-/** Uncomment and populate these variables in your code */
-// $projectId  = 'The Google project ID';
-// $datasetId  = 'The BigQuery dataset ID';
-
-// instantiate the bigquery table service
-$bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
-]);
-$dataset = $bigQuery->dataset($datasetId);
-$table = $dataset->table('us_states');
-
-// create the import job
-$gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.parquet';
-$loadConfig = $table->loadFromStorage($gcsUri)->sourceFormat('PARQUET');
-$job = $table->runJob($loadConfig);
-// poll the job until it is complete
-$backoff = new ExponentialBackoff(10);
-$backoff->execute(function () use ($job) {
-    print('Waiting for job to complete' . PHP_EOL);
-    $job->reload();
-    if (!$job->isComplete()) {
-        throw new Exception('Job has not yet completed', 500);
+    use Google\Cloud\BigQuery\BigQueryClient;
+    use Google\Cloud\Core\ExponentialBackoff;
+    
+    /** Uncomment and populate these variables in your code */
+    // $projectId  = 'The Google project ID';
+    // $datasetId  = 'The BigQuery dataset ID';
+    
+    // instantiate the bigquery table service
+    $bigQuery = new BigQueryClient([
+        'projectId' => $projectId,
+    ]);
+    $dataset = $bigQuery->dataset($datasetId);
+    $table = $dataset->table('us_states');
+    
+    // create the import job
+    $gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.parquet';
+    $loadConfig = $table->loadFromStorage($gcsUri)->sourceFormat('PARQUET');
+    $job = $table->runJob($loadConfig);
+    // poll the job until it is complete
+    $backoff = new ExponentialBackoff(10);
+    $backoff->execute(function () use ($job) {
+        print('Waiting for job to complete' . PHP_EOL);
+        $job->reload();
+        if (!$job->isComplete()) {
+            throw new Exception('Job has not yet completed', 500);
+        }
+    });
+    // check if the job has errors
+    if (isset($job->info()['status']['errorResult'])) {
+        $error = $job->info()['status']['errorResult']['message'];
+        printf('Error running job: %s' . PHP_EOL, $error);
+    } else {
+        print('Data imported successfully' . PHP_EOL);
     }
-});
-// check if the job has errors
-if (isset($job->info()['status']['errorResult'])) {
-    $error = $job->info()['status']['errorResult']['message'];
-    printf('Error running job: %s' . PHP_EOL, $error);
-} else {
-    print('Data imported successfully' . PHP_EOL);
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-Use the [Client.load\_table\_from\_uri()](/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_load_table_from_uri) method to start a load job from Cloud Storage. To use Parquet, set the [LoadJobConfig.source\_format property](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the string `  PARQUET  ` and pass the job config as the `  job_config  ` argument to the `  load_table_from_uri()  ` method.
+Use the [Client.load\_table\_from\_uri()](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.client.Client#google_cloud_bigquery_client_Client_load_table_from_uri) method to start a load job from Cloud Storage. To use Parquet, set the [LoadJobConfig.source\_format property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_source_format) to the string `  PARQUET  ` and pass the job config as the `  job_config  ` argument to the `  load_table_from_uri()  ` method.
 
-``` python
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name"
-
-job_config = bigquery.LoadJobConfig(
-    source_format=bigquery.SourceFormat.PARQUET,
-)
-uri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet"
-
-load_job = client.load_table_from_uri(
-    uri, table_id, job_config=job_config
-)  # Make an API request.
-
-load_job.result()  # Waits for the job to complete.
-
-destination_table = client.get_table(table_id)
-print("Loaded {} rows.".format(destination_table.num_rows))
-```
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    # TODO(developer): Set table_id to the ID of the table to create.
+    # table_id = "your-project.your_dataset.your_table_name"
+    
+    job_config = bigquery.LoadJobConfig(
+        source_format=bigquery.SourceFormat.PARQUET,
+    )
+    uri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet"
+    
+    load_job = client.load_table_from_uri(
+        uri, table_id, job_config=job_config
+    )  # Make an API request.
+    
+    load_job.result()  # Waits for the job to complete.
+    
+    destination_table = client.get_table(table_id)
+    print("Loaded {} rows.".format(destination_table.num_rows))
 
 ## Appending to or overwriting a table with Parquet data
 
@@ -560,36 +552,11 @@ In the Google Cloud console, use the **Write preference** option to specify what
 
 You have the following options when you load additional data into a table:
 
-<table>
-<thead>
-<tr class="header">
-<th>Console option</th>
-<th>bq tool flag</th>
-<th>BigQuery API property</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Write if empty</td>
-<td>Not supported</td>
-<td><code dir="ltr" translate="no">       WRITE_EMPTY      </code></td>
-<td>Writes the data only if the table is empty.</td>
-</tr>
-<tr class="even">
-<td>Append to table</td>
-<td><code dir="ltr" translate="no">       --noreplace      </code> or <code dir="ltr" translate="no">       --replace=false      </code> ; if <code dir="ltr" translate="no">       --[no]replace      </code> is unspecified, the default is append</td>
-<td><code dir="ltr" translate="no">       WRITE_APPEND      </code></td>
-<td>( <a href="/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition">Default</a> ) Appends the data to the end of the table.</td>
-</tr>
-<tr class="odd">
-<td>Overwrite table</td>
-<td><code dir="ltr" translate="no">       --replace      </code> or <code dir="ltr" translate="no">       --replace=true      </code></td>
-<td><code dir="ltr" translate="no">       WRITE_TRUNCATE      </code></td>
-<td>Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.</td>
-</tr>
-</tbody>
-</table>
+| Console option  | bq tool flag                                                                                                                               | BigQuery API property           | Description                                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Write if empty  | Not supported                                                                                                                              | `        WRITE_EMPTY       `    | Writes the data only if the table is empty.                                                                                                                              |
+| Append to table | `        --noreplace       ` or `        --replace=false       ` ; if `        --[no]replace       ` is unspecified, the default is append | `        WRITE_APPEND       `   | ( [Default](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.write_disposition) ) Appends the data to the end of the table. |
+| Overwrite table | `        --replace       ` or `        --replace=true       `                                                                              | `        WRITE_TRUNCATE       ` | Erases all existing data in a table before writing the new data. This action also deletes the table schema, row level security, and removes any Cloud KMS key.           |
 
 If you load data into an existing table, the load job can append the data or overwrite the table.
 
@@ -600,13 +567,15 @@ You can append or overwrite a table by using one of the following:
   - The `  jobs.insert  ` API method and configuring a `  load  ` job
   - The client libraries
 
-**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+**Note:** This page does not cover appending or overwriting partitioned tables. For information on appending and overwriting partitioned tables, see: [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 To append or overwrite a table with Parquet data:
 
 ### Console
 
 In the Google Cloud console, go to the **BigQuery** page.
+
+[Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 In the left pane, click explore **Explorer** .
 
@@ -617,29 +586,31 @@ In the **Dataset info** section, click add\_box **Create table** .
 In the **Create table** pane, specify the following details:
 
 1.  In the **Source** section, select **Google Cloud Storage** in the **Create table from** list. Then, do the following:
-    1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite.
+    1.  Select a file from the Cloud Storage bucket, or enter the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) . You cannot include multiple URIs in the Google Cloud console, but [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are supported. The Cloud Storage bucket must be in the same location as the dataset that contains the table you want to create, append, or overwrite. ![select source file to create a BigQuery table](https://docs.cloud.google.com/static/bigquery/images/create-table-select-file.png)
     2.  For **File format** , select **Parquet** .
 2.  In the **Destination** section, specify the following details:
     1.  For **Dataset** , select the dataset in which you want to create the table.
     2.  In the **Table** field, enter the name of the table that you want to create.
     3.  Verify that the **Table type** field is set to **Native table** .
 3.  In the **Schema** section, no action is necessary. The schema is self-described in Parquet files.
-4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](/bigquery/docs/creating-clustered-tables) . You cannot convert a table to a partitioned or clustered table by appending or overwriting it. The Google Cloud console does not support appending to or overwriting partitioned or clustered tables in a load job.
+4.  Optional: Specify **Partition and cluster settings** . For more information, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) and [Creating and using clustered tables](https://docs.cloud.google.com/bigquery/docs/creating-clustered-tables) . You cannot convert a table to a partitioned or clustered table by appending or overwriting it. The Google Cloud console does not support appending to or overwriting partitioned or clustered tables in a load job.
 5.  Click **Advanced options** and do the following:
       - For **Write preference** , choose **Append to table** or **Overwrite table** .
       - If you want to ignore values in a row that are not present in the table's schema, then select **Unknown values** .
-      - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](/docs/security/encryption/default-encryption) .
+      - For **Encryption** , click **Customer-managed key** to use a [Cloud Key Management Service key](https://docs.cloud.google.com/bigquery/docs/customer-managed-encryption) . If you leave the **Google-managed key** setting, BigQuery [encrypts the data at rest](https://docs.cloud.google.com/docs/security/encryption/default-encryption) .
 6.  Click **Create table** .
 
 ### SQL
 
-Use the [`  LOAD DATA  ` DDL statement](/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a Parquet file to the table `  mytable  ` :
+Use the [`  LOAD DATA  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) . The following example appends a Parquet file to the table `  mytable  ` :
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     LOAD DATA INTO mydataset.mytable
     FROM FILES (
       format = 'PARQUET',
@@ -648,15 +619,15 @@ Use the [`  LOAD DATA  ` DDL statement](/bigquery/docs/reference/standard-sql/lo
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
 Enter the `  bq load  ` command with the `  --replace  ` flag to overwrite the table. Use the `  --noreplace  ` flag to append data to the table. If no flag is specified, the default is to append data. Supply the `  --source_format  ` flag and set it to `  PARQUET  ` . Because Parquet schemas are automatically retrieved from the self-describing source data, you don't need to provide a schema definition.
 
-**Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](/bigquery/docs/managing-table-schemas) .
+**Note:** It is possible to modify the table's schema when you append or overwrite it. For more information on supported schema changes during a load operation, see [Modifying table schemas](https://docs.cloud.google.com/bigquery/docs/managing-table-schemas) .
 
-(Optional) Supply the `  --location  ` flag and set the value to your [location](/bigquery/docs/dataset-locations) .
+(Optional) Supply the `  --location  ` flag and set the value to your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) .
 
 Other optional flags include:
 
@@ -664,7 +635,7 @@ Other optional flags include:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq --location=LOCATION load \
 --[no]replace \
 --source_format=FORMAT \
@@ -674,17 +645,17 @@ PATH_TO_SOURCE
 
 Replace the following:
 
-  - `  location  ` : your [location](/bigquery/docs/dataset-locations) . The `  --location  ` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  location  ` : your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) . The `  --location  ` flag is optional. You can set a default value for the location by using the [.bigqueryrc file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  format  ` : `  PARQUET  ` .
   - `  dataset  ` : an existing dataset.
   - `  table  ` : the name of the table into which you're loading data.
-  - `  path_to_source  ` : a fully qualified [Cloud Storage URI](/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+  - `  path_to_source  ` : a fully qualified [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#gcs-uri) or a comma-separated list of URIs. [Wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 Examples:
 
 The following command loads data from `  gs://mybucket/mydata.parquet  ` and overwrites a table named `  mytable  ` in `  mydataset  ` .
 
-``` text
+``` 
     bq load \
     --replace \
     --source_format=PARQUET \
@@ -694,7 +665,7 @@ The following command loads data from `  gs://mybucket/mydata.parquet  ` and ove
 
 The following command loads data from `  gs://mybucket/mydata.parquet  ` and appends data to a table named `  mytable  ` in `  mydataset  ` .
 
-``` text
+``` 
     bq load \
     --noreplace \
     --source_format=PARQUET \
@@ -702,15 +673,15 @@ The following command loads data from `  gs://mybucket/mydata.parquet  ` and app
     gs://mybucket/mydata.parquet
 ```
 
-For information on appending and overwriting partitioned tables using the bq command-line tool, see [Appending to and overwriting partitioned table data](/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
+For information on appending and overwriting partitioned tables using the bq command-line tool, see [Appending to and overwriting partitioned table data](https://docs.cloud.google.com/bigquery/docs/managing-partitioned-table-data#append-overwrite) .
 
 ### API
 
 1.  Create a `  load  ` job that points to the source data in Cloud Storage.
 
-2.  (Optional) Specify your [location](/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](/bigquery/docs/reference/rest/v2/jobs) .
+2.  (Optional) Specify your [location](https://docs.cloud.google.com/bigquery/docs/dataset-locations) in the `  location  ` property in the `  jobReference  ` section of the [job resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs) .
 
-3.  The `  source URIs  ` property must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
+3.  The `  source URIs  ` property must be fully qualified, in the format `  gs:// BUCKET / OBJECT  ` . You can include multiple URIs as a comma-separated list. Note that [wildcards](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#load-wildcards) are also supported.
 
 4.  Specify the data format by setting the `  configuration.load.sourceFormat  ` property to `  PARQUET  ` .
 
@@ -718,288 +689,278 @@ For information on appending and overwriting partitioned tables using the bq com
 
 ### Go
 
-Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
+Before trying this sample, follow the Go setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Go API reference documentation](https://godoc.org/cloud.google.com/go/bigquery) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` go
-import (
- "context"
- "fmt"
-
- "cloud.google.com/go/bigquery"
-)
-
-// importParquetTruncate demonstrates loading Apache Parquet data from Cloud Storage into a table
-// and overwriting/truncating existing data in the table.
-func importParquetTruncate(projectID, datasetID, tableID string) error {
- // projectID := "my-project-id"
- // datasetID := "mydataset"
- // tableID := "mytable"
- ctx := context.Background()
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     return fmt.Errorf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
- gcsRef.SourceFormat = bigquery.Parquet
- gcsRef.AutoDetect = true
- loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
- loader.WriteDisposition = bigquery.WriteTruncate
-
- job, err := loader.Run(ctx)
- if err != nil {
-     return err
- }
- status, err := job.Wait(ctx)
- if err != nil {
-     return err
- }
-
- if status.Err() != nil {
-     return fmt.Errorf("job completed with error: %v", status.Err())
- }
- return nil
-}
-```
+    import (
+     "context"
+     "fmt"
+    
+     "cloud.google.com/go/bigquery"
+    )
+    
+    // importParquetTruncate demonstrates loading Apache Parquet data from Cloud Storage into a table
+    // and overwriting/truncating existing data in the table.
+    func importParquetTruncate(projectID, datasetID, tableID string) error {
+     // projectID := "my-project-id"
+     // datasetID := "mydataset"
+     // tableID := "mytable"
+     ctx := context.Background()
+     client, err := bigquery.NewClient(ctx, projectID)
+     if err != nil {
+         return fmt.Errorf("bigquery.NewClient: %v", err)
+     }
+     defer client.Close()
+    
+     gcsRef := bigquery.NewGCSReference("gs://cloud-samples-data/bigquery/us-states/us-states.parquet")
+     gcsRef.SourceFormat = bigquery.Parquet
+     gcsRef.AutoDetect = true
+     loader := client.Dataset(datasetID).Table(tableID).LoaderFrom(gcsRef)
+     loader.WriteDisposition = bigquery.WriteTruncate
+    
+     job, err := loader.Run(ctx)
+     if err != nil {
+         return err
+     }
+     status, err := job.Wait(ctx)
+     if err != nil {
+         return err
+     }
+    
+     if status.Err() != nil {
+         return fmt.Errorf("job completed with error: %v", status.Err())
+     }
+     return nil
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.FormatOptions;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.JobInfo.WriteDisposition;
-import com.google.cloud.bigquery.LoadJobConfiguration;
-import com.google.cloud.bigquery.TableId;
-import java.math.BigInteger;
-
-public class LoadParquetReplaceTable {
-
-  public static void runLoadParquetReplaceTable() {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    loadParquetReplaceTable(datasetName);
-  }
-
-  public static void loadParquetReplaceTable(String datasetName) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      // Imports a GCS file into a table and overwrites table data if table already exists.
-      // This sample loads CSV file at:
-      // https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.csv
-      String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet";
-      TableId tableId = TableId.of(datasetName, "us_states");
-
-      // For more information on LoadJobConfiguration see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/LoadJobConfiguration.Builder.html
-      LoadJobConfiguration configuration =
-          LoadJobConfiguration.builder(tableId, sourceUri)
-              .setFormatOptions(FormatOptions.parquet())
-              // Set the write disposition to overwrite existing table data.
-              .setWriteDisposition(WriteDisposition.WRITE_TRUNCATE)
-              .build();
-
-      // For more information on Job see:
-      // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
-      // Load the table
-      Job job = bigquery.create(JobInfo.of(configuration));
-
-      // Load data from a GCS parquet file into the table
-      // Blocks until this load table job completes its execution, either failing or succeeding.
-      Job completedJob = job.waitFor();
-      if (completedJob == null) {
-        System.out.println("Job not executed since it no longer exists.");
-        return;
-      } else if (completedJob.getStatus().getError() != null) {
-        System.out.println(
-            "BigQuery was unable to load into the table due to an error: \n"
-                + job.getStatus().getError());
-        return;
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.FormatOptions;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.JobInfo.WriteDisposition;
+    import com.google.cloud.bigquery.LoadJobConfiguration;
+    import com.google.cloud.bigquery.TableId;
+    import java.math.BigInteger;
+    
+    public class LoadParquetReplaceTable {
+    
+      public static void runLoadParquetReplaceTable() {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        loadParquetReplaceTable(datasetName);
       }
-
-      // Check number of rows loaded into the table
-      BigInteger numRows = bigquery.getTable(tableId).getNumRows();
-      System.out.printf("Loaded %d rows. \n", numRows);
-
-      System.out.println("GCS parquet overwrote existing table successfully.");
-    } catch (BigQueryException | InterruptedException e) {
-      System.out.println("Table extraction job was interrupted. \n" + e.toString());
+    
+      public static void loadParquetReplaceTable(String datasetName) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          // Imports a GCS file into a table and overwrites table data if table already exists.
+          // This sample loads CSV file at:
+          // https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.csv
+          String sourceUri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet";
+          TableId tableId = TableId.of(datasetName, "us_states");
+    
+          // For more information on LoadJobConfiguration see:
+          // https://googleapis.dev/java/google-cloud-clients/latest/com/google/cloud/bigquery/LoadJobConfiguration.Builder.html
+          LoadJobConfiguration configuration =
+              LoadJobConfiguration.builder(tableId, sourceUri)
+                  .setFormatOptions(FormatOptions.parquet())
+                  // Set the write disposition to overwrite existing table data.
+                  .setWriteDisposition(WriteDisposition.WRITE_TRUNCATE)
+                  .build();
+    
+          // For more information on Job see:
+          // https://googleapis.dev/java/google-cloud-clients/latest/index.html?com/google/cloud/bigquery/package-summary.html
+          // Load the table
+          Job job = bigquery.create(JobInfo.of(configuration));
+    
+          // Load data from a GCS parquet file into the table
+          // Blocks until this load table job completes its execution, either failing or succeeding.
+          Job completedJob = job.waitFor();
+          if (completedJob == null) {
+            System.out.println("Job not executed since it no longer exists.");
+            return;
+          } else if (completedJob.getStatus().getError() != null) {
+            System.out.println(
+                "BigQuery was unable to load into the table due to an error: \n"
+                    + job.getStatus().getError());
+            return;
+          }
+    
+          // Check number of rows loaded into the table
+          BigInteger numRows = bigquery.getTable(tableId).getNumRows();
+          System.out.printf("Loaded %d rows. \n", numRows);
+    
+          System.out.println("GCS parquet overwrote existing table successfully.");
+        } catch (BigQueryException | InterruptedException e) {
+          System.out.println("Table extraction job was interrupted. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ### Node.js
 
-Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
+Before trying this sample, follow the Node.js setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Node.js API reference documentation](https://googleapis.dev/nodejs/bigquery/latest/index.html) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` javascript
-// Import the Google Cloud client libraries
-const {BigQuery} = require('@google-cloud/bigquery');
-const {Storage} = require('@google-cloud/storage');
-
-// Instantiate clients
-const bigquery = new BigQuery();
-const storage = new Storage();
-
-/**
- * This sample loads the CSV file at
- * https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.csv
- *
- * TODO(developer): Replace the following lines with the path to your file.
- */
-const bucketName = 'cloud-samples-data';
-const filename = 'bigquery/us-states/us-states.parquet';
-
-async function loadParquetFromGCSTruncate() {
-  /**
-   * Imports a GCS file into a table and overwrites
-   * table data if table already exists.
-   */
-
-  /**
-   * TODO(developer): Uncomment the following lines before running the sample.
-   */
-  // const datasetId = "my_dataset";
-  // const tableId = "my_table";
-
-  // Configure the load job. For full list of options, see:
-  // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
-  const metadata = {
-    sourceFormat: 'PARQUET',
-    // Set the write disposition to overwrite existing table data.
-    writeDisposition: 'WRITE_TRUNCATE',
-    location: 'US',
-  };
-
-  // Load data from a Google Cloud Storage file into the table
-  const [job] = await bigquery
-    .dataset(datasetId)
-    .table(tableId)
-    .load(storage.bucket(bucketName).file(filename), metadata);
-  // load() waits for the job to finish
-  console.log(`Job ${job.id} completed.`);
-
-  // Check the job's status for errors
-  const errors = job.status.errors;
-  if (errors && errors.length > 0) {
-    throw errors;
-  }
-}
-```
+    // Import the Google Cloud client libraries
+    const {BigQuery} = require('@google-cloud/bigquery');
+    const {Storage} = require('@google-cloud/storage');
+    
+    // Instantiate clients
+    const bigquery = new BigQuery();
+    const storage = new Storage();
+    
+    /**
+     * This sample loads the CSV file at
+     * https://storage.googleapis.com/cloud-samples-data/bigquery/us-states/us-states.csv
+     *
+     * TODO(developer): Replace the following lines with the path to your file.
+     */
+    const bucketName = 'cloud-samples-data';
+    const filename = 'bigquery/us-states/us-states.parquet';
+    
+    async function loadParquetFromGCSTruncate() {
+      /**
+       * Imports a GCS file into a table and overwrites
+       * table data if table already exists.
+       */
+    
+      /**
+       * TODO(developer): Uncomment the following lines before running the sample.
+       */
+      // const datasetId = "my_dataset";
+      // const tableId = "my_table";
+    
+      // Configure the load job. For full list of options, see:
+      // https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad
+      const metadata = {
+        sourceFormat: 'PARQUET',
+        // Set the write disposition to overwrite existing table data.
+        writeDisposition: 'WRITE_TRUNCATE',
+        location: 'US',
+      };
+    
+      // Load data from a Google Cloud Storage file into the table
+      const [job] = await bigquery
+        .dataset(datasetId)
+        .table(tableId)
+        .load(storage.bucket(bucketName).file(filename), metadata);
+      // load() waits for the job to finish
+      console.log(`Job ${job.id} completed.`);
+    
+      // Check the job's status for errors
+      const errors = job.status.errors;
+      if (errors && errors.length > 0) {
+        throw errors;
+      }
+    }
 
 ### PHP
 
-Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
+Before trying this sample, follow the PHP setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery PHP API reference documentation](https://docs.cloud.google.com/php/docs/reference/cloud-bigquery/latest/BigQueryClient) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` php
-use Google\Cloud\BigQuery\BigQueryClient;
-use Google\Cloud\Core\ExponentialBackoff;
-
-/** Uncomment and populate these variables in your code */
-// $projectId = 'The Google project ID';
-// $datasetId = 'The BigQuery dataset ID';
-// $tableID = 'The BigQuery table ID';
-
-// instantiate the bigquery table service
-$bigQuery = new BigQueryClient([
-    'projectId' => $projectId,
-]);
-$table = $bigQuery->dataset($datasetId)->table($tableId);
-
-// create the import job
-$gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.parquet';
-$loadConfig = $table->loadFromStorage($gcsUri)->sourceFormat('PARQUET')->writeDisposition('WRITE_TRUNCATE');
-$job = $table->runJob($loadConfig);
-
-// poll the job until it is complete
-$backoff = new ExponentialBackoff(10);
-$backoff->execute(function () use ($job) {
-    print('Waiting for job to complete' . PHP_EOL);
-    $job->reload();
-    if (!$job->isComplete()) {
-        throw new Exception('Job has not yet completed', 500);
+    use Google\Cloud\BigQuery\BigQueryClient;
+    use Google\Cloud\Core\ExponentialBackoff;
+    
+    /** Uncomment and populate these variables in your code */
+    // $projectId = 'The Google project ID';
+    // $datasetId = 'The BigQuery dataset ID';
+    // $tableID = 'The BigQuery table ID';
+    
+    // instantiate the bigquery table service
+    $bigQuery = new BigQueryClient([
+        'projectId' => $projectId,
+    ]);
+    $table = $bigQuery->dataset($datasetId)->table($tableId);
+    
+    // create the import job
+    $gcsUri = 'gs://cloud-samples-data/bigquery/us-states/us-states.parquet';
+    $loadConfig = $table->loadFromStorage($gcsUri)->sourceFormat('PARQUET')->writeDisposition('WRITE_TRUNCATE');
+    $job = $table->runJob($loadConfig);
+    
+    // poll the job until it is complete
+    $backoff = new ExponentialBackoff(10);
+    $backoff->execute(function () use ($job) {
+        print('Waiting for job to complete' . PHP_EOL);
+        $job->reload();
+        if (!$job->isComplete()) {
+            throw new Exception('Job has not yet completed', 500);
+        }
+    });
+    
+    // check if the job has errors
+    if (isset($job->info()['status']['errorResult'])) {
+        $error = $job->info()['status']['errorResult']['message'];
+        printf('Error running job: %s' . PHP_EOL, $error);
+    } else {
+        print('Data imported successfully' . PHP_EOL);
     }
-});
-
-// check if the job has errors
-if (isset($job->info()['status']['errorResult'])) {
-    $error = $job->info()['status']['errorResult']['message'];
-    printf('Error running job: %s' . PHP_EOL, $error);
-} else {
-    print('Data imported successfully' . PHP_EOL);
-}
-```
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-To append the rows to an existing table, set the [`  LoadJobConfig.write_disposition  ` property](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to [`  WRITE_APPEND  `](/python/docs/reference/bigquery/latest/google.cloud.bigquery.enums.WriteDisposition#google.cloud.bigquery.enums.WriteDisposition.WRITE_APPEND) .
+To append the rows to an existing table, set the [`  LoadJobConfig.write_disposition  ` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to [`  WRITE_APPEND  `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.enums.WriteDisposition#google.cloud.bigquery.enums.WriteDisposition.WRITE_APPEND) .
 
-To replace the rows in an existing table, set the [`  LoadJobConfig.write_disposition  ` property](/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to [`  WRITE_TRUNCATE  `](/python/docs/reference/bigquery/latest/google.cloud.bigquery.enums.WriteDisposition#google.cloud.bigquery.enums.WriteDisposition.WRITE_TRUNCATE) .
+To replace the rows in an existing table, set the [`  LoadJobConfig.write_disposition  ` property](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.job.LoadJobConfig#google_cloud_bigquery_job_LoadJobConfig_write_disposition) to [`  WRITE_TRUNCATE  `](https://docs.cloud.google.com/python/docs/reference/bigquery/latest/google.cloud.bigquery.enums.WriteDisposition#google.cloud.bigquery.enums.WriteDisposition.WRITE_TRUNCATE) .
 
-``` python
-import io
-
-from google.cloud import bigquery
-
-# Construct a BigQuery client object.
-client = bigquery.Client()
-
-# TODO(developer): Set table_id to the ID of the table to create.
-# table_id = "your-project.your_dataset.your_table_name
-
-job_config = bigquery.LoadJobConfig(
-    schema=[
-        bigquery.SchemaField("name", "STRING"),
-        bigquery.SchemaField("post_abbr", "STRING"),
-    ],
-)
-
-body = io.BytesIO(b"Washington,WA")
-client.load_table_from_file(body, table_id, job_config=job_config).result()
-previous_rows = client.get_table(table_id).num_rows
-assert previous_rows > 0
-
-job_config = bigquery.LoadJobConfig(
-    write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
-    source_format=bigquery.SourceFormat.PARQUET,
-)
-
-uri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet"
-load_job = client.load_table_from_uri(
-    uri, table_id, job_config=job_config
-)  # Make an API request.
-
-load_job.result()  # Waits for the job to complete.
-
-destination_table = client.get_table(table_id)
-print("Loaded {} rows.".format(destination_table.num_rows))
-```
+    import io
+    
+    from google.cloud import bigquery
+    
+    # Construct a BigQuery client object.
+    client = bigquery.Client()
+    
+    # TODO(developer): Set table_id to the ID of the table to create.
+    # table_id = "your-project.your_dataset.your_table_name
+    
+    job_config = bigquery.LoadJobConfig(
+        schema=[
+            bigquery.SchemaField("name", "STRING"),
+            bigquery.SchemaField("post_abbr", "STRING"),
+        ],
+    )
+    
+    body = io.BytesIO(b"Washington,WA")
+    client.load_table_from_file(body, table_id, job_config=job_config).result()
+    previous_rows = client.get_table(table_id).num_rows
+    assert previous_rows > 0
+    
+    job_config = bigquery.LoadJobConfig(
+        write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE,
+        source_format=bigquery.SourceFormat.PARQUET,
+    )
+    
+    uri = "gs://cloud-samples-data/bigquery/us-states/us-states.parquet"
+    load_job = client.load_table_from_uri(
+        uri, table_id, job_config=job_config
+    )  # Make an API request.
+    
+    load_job.result()  # Waits for the job to complete.
+    
+    destination_table = client.get_table(table_id)
+    print("Loaded {} rows.".format(destination_table.num_rows))
 
 ## Loading hive-partitioned Parquet data
 
-BigQuery supports loading hive partitioned Parquet data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading externally partitioned data](/bigquery/docs/hive-partitioned-loads-gcs) .
+BigQuery supports loading hive partitioned Parquet data stored on Cloud Storage and populates the hive partitioning columns as columns in the destination BigQuery managed table. For more information, see [Loading externally partitioned data](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-loads-gcs) .
 
 ## Parquet conversions
 
@@ -1009,102 +970,31 @@ Some Parquet data types (such as `  INT32  ` , `  INT64  ` , `  BYTE_ARRAY  ` , 
 
 For example, to convert the Parquet `  INT32  ` data type to the BigQuery `  DATE  ` data type, specify the following:
 
-``` text
-optional int32 date_col (DATE);
-```
+    optional int32 date_col (DATE);
 
 BigQuery converts Parquet data types to the BigQuery data types that are described in the following sections.
 
 ### Type conversions
 
-<table>
-<thead>
-<tr class="header">
-<th>Parquet type</th>
-<th>Parquet logical type(s)</th>
-<th>BigQuery data type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>None</td>
-<td>BOOLEAN</td>
-</tr>
-<tr class="even">
-<td>INT32</td>
-<td>None, <code dir="ltr" translate="no">       INTEGER      </code> ( <code dir="ltr" translate="no">       UINT_8      </code> , <code dir="ltr" translate="no">       UINT_16      </code> , <code dir="ltr" translate="no">       UINT_32      </code> , <code dir="ltr" translate="no">       INT_8      </code> , <code dir="ltr" translate="no">       INT_16      </code> , <code dir="ltr" translate="no">       INT_32      </code> )</td>
-<td>INT64</td>
-</tr>
-<tr class="odd">
-<td>INT32</td>
-<td><a href="#decimal_logical_type">DECIMAL</a></td>
-<td>NUMERIC, BIGNUMERIC, or STRING</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INT32      </code></td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td>DATE</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td>None, <code dir="ltr" translate="no">       INTEGER      </code> ( <code dir="ltr" translate="no">       UINT_64      </code> , <code dir="ltr" translate="no">       INT_64      </code> )</td>
-<td>INT64</td>
-</tr>
-<tr class="even">
-<td>INT64</td>
-<td><a href="#decimal_logical_type">DECIMAL</a></td>
-<td>NUMERIC, BIGNUMERIC, or STRING</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code> , <code dir="ltr" translate="no">       precision=MILLIS      </code> ( <code dir="ltr" translate="no">       TIMESTAMP_MILLIS      </code> )</td>
-<td>TIMESTAMP</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code> , <code dir="ltr" translate="no">       precision=MICROS      </code> ( <code dir="ltr" translate="no">       TIMESTAMP_MICROS      </code> )</td>
-<td>TIMESTAMP</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INT96      </code></td>
-<td>None</td>
-<td>TIMESTAMP</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FLOAT      </code></td>
-<td>None</td>
-<td>FLOAT64</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DOUBLE      </code></td>
-<td>None</td>
-<td>FLOAT64</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BYTE_ARRAY      </code></td>
-<td>None</td>
-<td>BYTES</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BYTE_ARRAY      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code> ( <code dir="ltr" translate="no">       UTF8      </code> )</td>
-<td>STRING</td>
-</tr>
-<tr class="even">
-<td>FIXED_LEN_BYTE_ARRAY</td>
-<td><a href="#decimal_logical_type">DECIMAL</a></td>
-<td>NUMERIC, BIGNUMERIC, or STRING</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FIXED_LEN_BYTE_ARRAY      </code></td>
-<td>None</td>
-<td>BYTES</td>
-</tr>
-</tbody>
-</table>
+| Parquet type                          | Parquet logical type(s)                                                                                                                                                                       | BigQuery data type             |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| `        BOOLEAN       `              | None                                                                                                                                                                                          | BOOLEAN                        |
+| INT32                                 | None, `        INTEGER       ` ( `        UINT_8       ` , `        UINT_16       ` , `        UINT_32       ` , `        INT_8       ` , `        INT_16       ` , `        INT_32       ` ) | INT64                          |
+| INT32                                 | [DECIMAL](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#decimal_logical_type)                                                                                | NUMERIC, BIGNUMERIC, or STRING |
+| `        INT32       `                | `        DATE       `                                                                                                                                                                         | DATE                           |
+| `        INT64       `                | None, `        INTEGER       ` ( `        UINT_64       ` , `        INT_64       ` )                                                                                                         | INT64                          |
+| INT64                                 | [DECIMAL](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#decimal_logical_type)                                                                                | NUMERIC, BIGNUMERIC, or STRING |
+| `        INT64       `                | `        TIMESTAMP       ` , `        precision=MILLIS       ` ( `        TIMESTAMP_MILLIS       ` )                                                                                          | TIMESTAMP                      |
+| `        INT64       `                | `        TIMESTAMP       ` , `        precision=MICROS       ` ( `        TIMESTAMP_MICROS       ` )                                                                                          | TIMESTAMP                      |
+| `        INT96       `                | None                                                                                                                                                                                          | TIMESTAMP                      |
+| `        FLOAT       `                | None                                                                                                                                                                                          | FLOAT64                        |
+| `        DOUBLE       `               | None                                                                                                                                                                                          | FLOAT64                        |
+| `        BYTE_ARRAY       `           | None                                                                                                                                                                                          | BYTES                          |
+| `        BYTE_ARRAY       `           | `        STRING       ` ( `        UTF8       ` )                                                                                                                                             | STRING                         |
+| FIXED\_LEN\_BYTE\_ARRAY               | [DECIMAL](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#decimal_logical_type)                                                                                | NUMERIC, BIGNUMERIC, or STRING |
+| `        FIXED_LEN_BYTE_ARRAY       ` | None                                                                                                                                                                                          | BYTES                          |
 
-Nested groups are converted into [`  STRUCT  `](/bigquery/docs/reference/standard-sql/data-types#struct_type) types. Other combinations of Parquet types and converted types are not supported.
+Nested groups are converted into [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) types. Other combinations of Parquet types and converted types are not supported.
 
 ### Unsigned logical types
 
@@ -1114,54 +1004,50 @@ The Parquet `  UINT_8  ` , `  UINT_16  ` , `  UINT_32  ` , and `  UINT_64  ` typ
 
 `  Decimal  ` logical types can be converted to `  NUMERIC  ` , `  BIGNUMERIC  ` , or `  STRING  ` types. The converted type depends on the precision and scale parameters of the `  decimal  ` logical type and the specified decimal target types. Specify the decimal target type as follows:
 
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.decimalTargetTypes  `](/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  bq load  `](/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --decimal_target_types  `](/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
-  - For a query against a [table with external sources](/bigquery/external-data-sources) : use the [`  ExternalDataConfiguration.decimalTargetTypes  `](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
-  - For a [persistent external table created with DDL](/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`  decimal_target_types  `](/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.decimal_target_types) field.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#flags_and_arguments_9) flag.
+  - For a query against a [table with external sources](https://docs.cloud.google.com/bigquery/external-data-sources) : use the [`  ExternalDataConfiguration.decimalTargetTypes  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types) field.
+  - For a [persistent external table created with DDL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) : use the [`  decimal_target_types  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) option.
 
 ### Enum logical type
 
 `  Enum  ` logical types can be converted to `  STRING  ` or `  BYTES  ` . Specify the converted target type as follows:
 
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.parquetOptions  `](/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.parquet_options) field.
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  bq load  `](/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --parquet_enum_as_string  `](/bigquery/docs/reference/bq-cli-reference#parquet_enum_as_string_flag) flag.
-  - For a persistent external table created with [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#bq_mk) : use the [`  --parquet_enum_as_string  `](/bigquery/docs/reference/bq-cli-reference#mk-table) flag.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API: use the [`  JobConfigurationLoad.parquetOptions  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.parquet_options) field.
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool: use the [`  --parquet_enum_as_string  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#parquet_enum_as_string_flag) flag.
+  - For a persistent external table created with [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) : use the [`  --parquet_enum_as_string  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) flag.
 
 ### List logical type
 
 You can enable schema inference for Parquet `  LIST  ` logical types. BigQuery checks whether the `  LIST  ` node is in the [standard form](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#lists) or in one of the forms described by the [backward-compatibility rules](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#backward-compatibility-rules) :
 
-``` text
-// standard form
-<optional | required> group <name> (LIST) {
-  repeated group list {
-    <optional | required> <element-type> element;
-  }
-}
-```
+    // standard form
+    <optional | required> group <name> (LIST) {
+      repeated group list {
+        <optional | required> <element-type> element;
+      }
+    }
 
 If yes, the corresponding field for the `  LIST  ` node in the converted schema is treated as if the node has the following schema:
 
-``` text
-repeated <element-type> <name>
-```
+    repeated <element-type> <name>
 
 The nodes "list" and "element" are omitted.
 
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](/bigquery/docs/reference/rest/v2/jobs/insert) API, use the [`  JobConfigurationLoad.parquetOptions  ` field](/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.parquet_options) .
-  - For a [load job](/bigquery/docs/batch-loading-data) using the [`  bq load  `](/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool, use the [`  --parquet_enable_list_inference  ` flag](/bigquery/docs/reference/bq-cli-reference#parquet_enable_list_inference_flag) .
-  - For a persistent external table created with [`  bq mk  `](/bigquery/docs/reference/bq-cli-reference#bq_mk) , use the [`  --parquet_enable_list_inference  ` flag](/bigquery/docs/reference/bq-cli-reference#mk-table) .
-  - For a persistent external table created with the [`  CREATE EXTERNAL TABLE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) , use the [`  enable_list_inference  ` option](/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) .
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  jobs.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) API, use the [`  JobConfigurationLoad.parquetOptions  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#JobConfigurationLoad.FIELDS.parquet_options) .
+  - For a [load job](https://docs.cloud.google.com/bigquery/docs/batch-loading-data) using the [`  bq load  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) command in the bq command-line tool, use the [`  --parquet_enable_list_inference  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#parquet_enable_list_inference_flag) .
+  - For a persistent external table created with [`  bq mk  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) , use the [`  --parquet_enable_list_inference  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) .
+  - For a persistent external table created with the [`  CREATE EXTERNAL TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) , use the [`  enable_list_inference  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list) .
 
 ### Geospatial data
 
-You can load Parquet files that contain [WKT](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) , hex-encoded [WKB](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) , or [GeoJSON](https://geojson.org/) in a `  STRING  ` column, or [WKB](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) in a `  BYTE_ARRAY  ` column by specifying a BigQuery schema with the type `  GEOGRAPHY  ` . For more information, see [Loading geospatial data](/bigquery/docs/geospatial-data#loading_geospatial_data) .
+You can load Parquet files that contain [WKT](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) , hex-encoded [WKB](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) , or [GeoJSON](https://geojson.org/) in a `  STRING  ` column, or [WKB](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) in a `  BYTE_ARRAY  ` column by specifying a BigQuery schema with the type `  GEOGRAPHY  ` . For more information, see [Loading geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data#loading_geospatial_data) .
 
-You can also load [GeoParquet](https://geoparquet.org) files. In this case, the columns described by the GeoParquet metadata are interpreted as type `  GEOGRAPHY  ` by default. You can also load the raw WKB data into a `  BYTES  ` column by providing an explicit schema. For more information, see [Loading GeoParquet files](/bigquery/docs/geospatial-data#loading_geoparquet_files) .
+You can also load [GeoParquet](https://geoparquet.org) files. In this case, the columns described by the GeoParquet metadata are interpreted as type `  GEOGRAPHY  ` by default. You can also load the raw WKB data into a `  BYTES  ` column by providing an explicit schema. For more information, see [Loading GeoParquet files](https://docs.cloud.google.com/bigquery/docs/geospatial-data#loading_geoparquet_files) .
 
 ### Column name conversions
 
-A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API requires special handling. For more information about flexible column name support, see [flexible column names](#flexible-column-names) .
+A column name can contain letters (a-z, A-Z), numbers (0-9), or underscores (\_), and it must start with a letter or underscore. If you use flexible column names, BigQuery supports starting a column name with a number. Exercise caution when starting columns with a number, since using flexible column names with the BigQuery Storage Read API or BigQuery Storage Write API requires special handling. For more information about flexible column name support, see [flexible column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#flexible-column-names) .
 
 Column names have a maximum length of 300 characters. Column names can't use any of the following prefixes:
 
@@ -1175,7 +1061,7 @@ Column names have a maximum length of 300 characters. Column names can't use any
   - `  _CHANGE_TYPE  `
   - `  _CHANGE_TIMESTAMP  `
 
-Duplicate column names are not allowed even if the case differs. For example, a column named `  Column1  ` is considered identical to a column named `  column1  ` . To learn more about column naming rules, see [Column names](/bigquery/docs/reference/standard-sql/lexical#column_names) in the GoogleSQL reference.
+Duplicate column names are not allowed even if the case differs. For example, a column named `  Column1  ` is considered identical to a column named `  column1  ` . To learn more about column naming rules, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) in the GoogleSQL reference.
 
 If a table name (for example, `  test  ` ) is the same as one of its column names (for example, `  test  ` ), the `  SELECT  ` expression interprets the `  test  ` column as a `  STRUCT  ` containing all other table columns. To avoid this collision, use one of the following methods:
 
@@ -1185,19 +1071,15 @@ If a table name (for example, `  test  ` ) is the same as one of its column name
 
   - Assign the table a different alias. For example, the following query assigns a table alias `  t  ` to the table `  project1.dataset.test  ` :
     
-    ``` text
-    SELECT test FROM project1.dataset.test AS t;
-    ```
+        SELECT test FROM project1.dataset.test AS t;
 
   - Include the table name when referencing a column. For example:
     
-    ``` text
-    SELECT test.test FROM project1.dataset.test;
-    ```
+        SELECT test.test FROM project1.dataset.test;
 
 ### Flexible column names
 
-You have more flexibility in what you name columns, including expanded access to characters in languages other than English as well as additional symbols. Make sure to use backtick ( ``  `  `` ) characters to enclose flexible column names if they are [Quoted Identifiers](/bigquery/docs/reference/standard-sql/lexical#quoted_identifiers) .
+You have more flexibility in what you name columns, including expanded access to characters in languages other than English as well as additional symbols. Make sure to use backtick ( ``  `  `` ) characters to enclose flexible column names if they are [Quoted Identifiers](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#quoted_identifiers) .
 
 Flexible column names support the following characters:
 
@@ -1228,7 +1110,7 @@ Flexible column names don't support the following special characters:
   - A right parenthesis ( `  )  ` ) as represented by the Unicode regular expression `  \u0029  ` .
   - An asterisk ( `  *  ` ) as represented by the Unicode regular expression `  \u002A  ` .
   - A comma ( `  ,  ` ) as represented by the Unicode regular expression `  \u002C  ` .
-  - A period ( `  .  ` ) as represented by the Unicode regular expression `  \u002E  ` . Periods are *not* replaced by underscores in Parquet file column names when a column name character map is used. For more information, see [flexible column limitations](/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) .
+  - A period ( `  .  ` ) as represented by the Unicode regular expression `  \u002E  ` . Periods are *not* replaced by underscores in Parquet file column names when a column name character map is used. For more information, see [flexible column limitations](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) .
   - A slash ( `  /  ` ) as represented by the Unicode regular expression `  \u002F  ` .
   - A semicolon ( `  ;  ` ) as represented by the Unicode regular expression `  \u003B  ` .
   - A question mark ( `  ?  ` ) as represented by the Unicode regular expression `  \u003F  ` .
@@ -1242,41 +1124,37 @@ Flexible column names don't support the following special characters:
   - A right curly bracket ( `  }  ` ) as represented by the Unicode regular expression `  \u007D  ` .
   - A tilde ( `  ~  ` ) as represented by the Unicode regular expression `  \u007E  ` .
 
-For additional guidelines, see [Column names](/bigquery/docs/reference/standard-sql/lexical#column_names) .
+For additional guidelines, see [Column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) .
 
 The expanded column characters are supported by both the BigQuery Storage Read API and the BigQuery Storage Write API. To use the expanded list of Unicode characters with the BigQuery Storage Read API, you must set a flag. You can use the `  displayName  ` attribute to retrieve the column name. The following example shows how to set a flag with the Python client:
 
-``` text
-from google.cloud.bigquery_storage import types
-requested_session = types.ReadSession()
-
-#set avro serialization options for flexible column.
-options = types.AvroSerializationOptions()
-options.enable_display_name_attribute = True
-requested_session.read_options.avro_serialization_options = options
-```
+    from google.cloud.bigquery_storage import types
+    requested_session = types.ReadSession()
+    
+    #set avro serialization options for flexible column.
+    options = types.AvroSerializationOptions()
+    options.enable_display_name_attribute = True
+    requested_session.read_options.avro_serialization_options = options
 
 To use the expanded list of Unicode characters with the BigQuery Storage Write API, you must provide the schema with `  column_name  ` notation, unless you are using the `  JsonStreamWriter  ` writer object. The following example shows how to provide the schema:
 
-``` text
-syntax = "proto2";
-package mypackage;
-// Source protos located in github.com/googleapis/googleapis
-import "google/cloud/bigquery/storage/v1/annotations.proto";
-
-message FlexibleSchema {
-  optional string item_name_column = 1
-  [(.google.cloud.bigquery.storage.v1.column_name) = "name-列"];
-  optional string item_description_column = 2
-  [(.google.cloud.bigquery.storage.v1.column_name) = "description-列"];
-}
-```
+    syntax = "proto2";
+    package mypackage;
+    // Source protos located in github.com/googleapis/googleapis
+    import "google/cloud/bigquery/storage/v1/annotations.proto";
+    
+    message FlexibleSchema {
+      optional string item_name_column = 1
+      [(.google.cloud.bigquery.storage.v1.column_name) = "name-列"];
+      optional string item_description_column = 2
+      [(.google.cloud.bigquery.storage.v1.column_name) = "description-列"];
+    }
 
 In this example, `  item_name_column  ` and `  item_description_column  ` are placeholder names which need to be compliant with the [protocol buffer](https://protobuf.dev/) naming convention. Note that `  column_name  ` annotations always take precedence over placeholder names.
 
 #### Limitations
 
-  - Flexible column names are not supported with [external tables](/bigquery/docs/external-tables) .
+  - Flexible column names are not supported with [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) .
 
   - You cannot load Parquet files containing columns that have a period (.) in the column name.
 
@@ -1286,18 +1164,16 @@ In this example, `  item_name_column  ` and `  item_description_column  ` are pl
 
 If your load jobs fail with data errors, you can use [PyArrow](https://arrow.apache.org/docs/python/index.html) to verify if your Parquet data files are corrupted. If PyArrow fails to read the files, the files are likely to be rejected by the BigQuery load job. The following example shows how to read the contents of a Parquet file by using PyArrow:
 
-``` text
-from pyarrow import parquet as pq
-
-# Read the entire file
-pq.read_table('your_sample_file.parquet')
-# Read specific columns
-pq.read_table('your_sample_file.parquet',columns=['some_column', 'another_column'])
-# Read the metadata of specific columns
-file_metadata=pq.read_metadata('your_sample_file.parquet')
-for col in file_metadata.row_group(0).to_dict()['columns']:
-    print col['column_path_in_schema']
-    print col['num_values']
-```
+    from pyarrow import parquet as pq
+    
+    # Read the entire file
+    pq.read_table('your_sample_file.parquet')
+    # Read specific columns
+    pq.read_table('your_sample_file.parquet',columns=['some_column', 'another_column'])
+    # Read the metadata of specific columns
+    file_metadata=pq.read_metadata('your_sample_file.parquet')
+    for col in file_metadata.row_group(0).to_dict()['columns']:
+        print col['column_path_in_schema']
+        print col['num_values']
 
 For more information, see the [PyArrow docs](https://arrow.apache.org/docs/python/index.html) .

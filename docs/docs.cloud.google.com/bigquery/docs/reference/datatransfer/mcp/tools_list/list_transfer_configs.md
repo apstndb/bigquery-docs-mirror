@@ -2,7 +2,7 @@
 
 List all transfer configurations for a project.
 
-If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `  US  ` multi-region.
+If the location isn't explicitly specified, and it can't be determined from the resources in the request, then the [default location](https://docs.cloud.google.com/bigquery/docs/locations#default_location) is used. If the default location isn't set, then the job runs in the `  US  ` multi-region.
 
 `  list_transfer_configs(project_id="myproject", location="myregion")  `
 
@@ -19,7 +19,7 @@ The following sample demonstrate how to use `  curl  ` to invoke the `  list_tra
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
 curl --location &#39;https://bigquerydatatransfer.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -56,7 +56,7 @@ A request to list data transfers configured for a BigQuery project.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parent&quot;: string,
   &quot;dataSourceIds&quot;: [
     string
@@ -117,7 +117,7 @@ The returned list of pipelines in the project.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;transferConfigs&quot;: [
     {
       object (TransferConfig)
@@ -156,7 +156,7 @@ Output only. The next-pagination token. For multiple-page list results, this tok
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;dataSourceId&quot;: string,
@@ -358,7 +358,7 @@ Output only. Information about the user whose credentials are used to transfer d
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: {
     string: value,
     ...
@@ -391,7 +391,7 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: value
 }</code></pre></td>
@@ -422,7 +422,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field kind can be only one of the following:
   &quot;nullValue&quot;: null,
@@ -492,7 +492,7 @@ Represents a JSON array.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;values&quot;: [
     value
   ]
@@ -522,7 +522,7 @@ Repeated field of dynamically typed values.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;disableAutoScheduling&quot;: boolean,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
@@ -568,7 +568,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;seconds&quot;: string,
   &quot;nanos&quot;: integer
 }</code></pre></td>
@@ -603,7 +603,7 @@ Non-negative fractions of a second at nanosecond resolution. This field is the n
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field schedule can be only one of the following:
   &quot;timeBasedSchedule&quot;: {
@@ -656,7 +656,7 @@ Event driven transfer schedule options. If set, the transfer will be scheduled u
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;schedule&quot;: string,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
@@ -704,7 +704,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field eventStream can be only one of the following:
   &quot;pubsubSubscription&quot;: string
@@ -737,7 +737,7 @@ Pub/Sub subscription name used to receive events. Only Google Cloud Storage data
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enableFailureEmail&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -765,7 +765,7 @@ If true, email notifications will be sent on transfer run failures.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field _email can be only one of the following:
   &quot;email&quot;: string
@@ -800,7 +800,7 @@ E-mail address of the user.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -828,7 +828,7 @@ The name of the KMS key used for encrypting BigQuery data.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -856,7 +856,7 @@ The string value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;code&quot;: integer,
   &quot;message&quot;: string,
   &quot;details&quot;: [
@@ -906,7 +906,7 @@ An object containing fields of an arbitrary type. An additional field `  "@type"
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;typeUrl&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>

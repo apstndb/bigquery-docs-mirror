@@ -12,420 +12,75 @@ The data is written to a table named `  Products_ MERCHANT_ID  ` if you are usin
 
 The `  Products_  ` table has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column</th>
-<th>BigQuery data type</th>
-<th>Description</th>
-<th>Example data</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       product_data_timestamp      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Timestamp of the product data.</td>
-<td>2023-09-14 11:49:50 UTC</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         product_id       </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Content API's REST ID of the product in the form: <code dir="ltr" translate="no">       channel:content_language:feed_label:offer_id      </code> . This is the primary key.</td>
-<td>online:en:AU:666840730</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       merchant_id      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Merchant account ID.</td>
-<td>1234</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       aggregator_id      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Aggregator account ID for multi-client accounts.</td>
-<td>12345</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       offer_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324405">id of the product</a> .</td>
-<td>tddy123uk</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       title      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Title of the item.</td>
-<td>TN2351 black USB</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><a href="https://support.google.com/merchants/answer/6324468">Description</a> of the item.</td>
-<td>The TN2351 black USB has redefined how XJS can impact LLCD experiences.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       link      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324416">URL of the landing page</a> of the product.</td>
-<td>https://www.example.com/tn2351-black-usb/6538811?skuId=1234</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       mobile_link      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324459">URL of a mobile-optimized version</a> of the landing page.</td>
-<td>https://www.example.com/tn2351-black-usb/6538811?skuId=1234</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       image_link      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324350">URL of the main product image</a> .</td>
-<td>https://www.example.com/tn2351-black-usb/6538811?skuId=1234</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       additional_image_links      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code> , <code dir="ltr" translate="no">       REPEATED      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324370">additional URLs</a> of images of the item.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       content_language      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The two-letter ISO 639-1 language code for the item.</td>
-<td>en</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       target_country      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Deprecated (always set to NULL) as part of a change to allow products to <a href="https://support.google.com/merchants/answer/7448571">target multiple countries</a> . Instead, use the following fields to read the status of each targeted country: <a href="#destinations.approved_countries">destinations.approved_countries</a> , <a href="#destinations.pending_countries">destinations.pending_countries</a> , <a href="#destinations.disapproved_countries">destinations.disapproved_countries</a> . Issues can now apply to certain target countries and not others, as indicated in the field <a href="#issues.applicable_countries">issues.applicable_countries</a> .</td>
-<td>null</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       feed_label      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The merchant provided <a href="https://support.google.com/merchants/answer/12453549">feed label</a> for the item, or <code dir="ltr" translate="no">       -      </code> if not provided.</td>
-<td>US</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       channel      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The item's channel, either <code dir="ltr" translate="no">       online      </code> or <code dir="ltr" translate="no">       local      </code> .</td>
-<td>local, online</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       expiration_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Merchant provided date and time on which the <a href="https://support.google.com/merchants/answer/6324499">item should expire</a> , as specified upon insertion. Set to null if not provided.</td>
-<td>2023-10-14 00:00:00 UTC</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       google_expiration_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Date and time on which the item expires in Google Shopping. Never set to null.</td>
-<td>2023-10-14 00:00:00 UTC</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       adult      </code></td>
-<td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>Set to true if the item is <a href="https://support.google.com/merchants/answer/6324508">targeted towards adults.</a></td>
-<td>true, false</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       age_group      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324463">target age group</a> of the item. NULL if not provided.</td>
-<td>newborn, infant, toddler, kids, adult</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       availability      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324448">availability</a> status of the item.</td>
-<td>in stock, out of stock</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       availability_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Merchant provided date and time <a href="https://support.google.com/merchants/answer/6324470">when a pre-ordered product becomes available</a> for delivery. NULL if not provided.</td>
-<td>2023-10-14 00:00:00 UTC</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       brand      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324351">brand</a> of the item. NULL if not provided.</td>
-<td>Brand Name</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       google_brand_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Google brand ID of the item.</td>
-<td>12759524623914508053</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       color      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324487">color</a> of the item. NULL if not provided.</td>
-<td>Silver, Gray, Multi</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       condition      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324469">Condition</a> or state of the item.</td>
-<td>new, used, refurbished</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       custom_labels      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324473">custom labels</a> for custom grouping of items in Shopping Ads. NULL if not provided.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       custom_labels.label_0      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Custom label 0.</td>
-<td>my custom label</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       custom_labels.label_1      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Custom label 1.</td>
-<td>my custom label</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       custom_labels.label_2      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Custom label 2.</td>
-<td>my custom label</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       custom_labels.label_3      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Custom label 3.</td>
-<td>my custom label</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       custom_labels.label_4      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Custom label 4.</td>
-<td>my custom label</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       gender      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided target <a href="https://support.google.com/merchants/answer/6324479">gender</a> of the item. NULL if not provided.</td>
-<td>unisex, male, female</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       gtin      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324461">Global Trade Item Number (GTIN)</a> of the item. NULL if not provided.</td>
-<td>3234567890126</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       item_group_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324507">Shared identifier</a> for all variants of the same product. NULL if not provided.</td>
-<td>AB12345</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       material      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324410">material</a> of which the item is made. NULL if not provided.</td>
-<td>Leather</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       mpn      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324482">Manufacturer Part Number</a> (MPN) of the item. Set to NULL if not provided.</td>
-<td>GO12345OOGLE</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       pattern      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324483">pattern</a> . NULL if not provided.</td>
-<td>Striped</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       price      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324371">price</a> of the item.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       price.value      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td>The price of the item.</td>
-<td>19.99</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       price.currency      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The currency of the price.</td>
-<td>USD</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sale_price      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Merchant provided <a href="https://support.google.com/merchants/answer/6324471">sale price</a> of the item.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       sale_price.value      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td>The sale price of the item. NULL if not provided.</td>
-<td>19.99</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sale_price.currency      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The currency of the sale price. NULL if not provided.</td>
-<td>USD</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       sale_price_effective_start_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Start date and time when the item is on sale.</td>
-<td>2023-10-14 00:00:00 UTC</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sale_price_effective_end_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>End date and time when the item is on sale.</td>
-<td>2023-10-14 00:00:00 UTC</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       google_product_category      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The item's <a href="https://support.google.com/merchants/answer/1705911">Google product category</a> ID. NULL if not provided.</td>
-<td>2271</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       google_product_category_ids      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER, REPEATED      </code></td>
-<td>The full path of <a href="https://support.google.com/merchants/answer/1705911">Google product categories</a> to the item, stored as a set of IDs. NULL if not provided.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       google_product_category_path      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>A human-readable version of the full path. Empty if not provided.</td>
-<td>Apparel &amp; Accessories &gt; Clothing &gt; Dresses</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       product_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Merchant-provided <a href="https://support.google.com/merchants/answer/6324406">category</a> of the item.</td>
-<td>Home &gt; Women &gt; Dresses &gt; Maxi Dresses</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       additional_product_types      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code> , <code dir="ltr" translate="no">       REPEATED      </code></td>
-<td>Additional categories of the item.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       promotion_ids      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code> , <code dir="ltr" translate="no">       REPEATED      </code></td>
-<td>The list of <a href="https://support.google.com/merchants/answer/7050148">promotion IDs</a> associated with the product.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       destinations      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code> , <code dir="ltr" translate="no">       REPEATED      </code></td>
-<td>The intended destinations for the product.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       destinations.name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the destination; only <code dir="ltr" translate="no">       Shopping      </code> is supported. This corresponds to the <a href="https://support.google.com/merchants/answer/15130232">Marketing Methods</a> "Shopping Ads" and "Local Inventory Ads" in Merchant Center.</td>
-<td>Shopping</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       destinations.status               *       </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Deprecated (always set to NULL) as part of a change to allow products to <a href="https://support.google.com/merchants/answer/7448571">target multiple countries</a> . Instead, use the following fields to read the status of each targeted country: <a href="#destinations.approved_countries">destinations.approved_countries</a> , <a href="#destinations.pending_countries">destinations.pending_countries</a> , <a href="#destinations.disapproved_countries">destinations.disapproved_countries</a> . Issues can now apply to certain target countries and not others, as indicated in the field <a href="#issues.applicable_countries">issues.applicable_countries</a> .</td>
-<td>NULL</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       destinations.approved_countries      </code></td>
-<td><code dir="ltr" translate="no">       STRING, REPEATED      </code></td>
-<td>List of <a href="http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml">CLDR territory codes</a> where the offer is approved.</td>
-<td>US, CH</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       destinations.pending_countries      </code></td>
-<td><code dir="ltr" translate="no">       STRING, REPEATED      </code></td>
-<td>List of <a href="http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml">CLDR territory codes</a> where the offer is pending.</td>
-<td>US, CH</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       destinations.disapproved_countries      </code></td>
-<td><code dir="ltr" translate="no">       STRING, REPEATED      </code></td>
-<td>List of <a href="http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml">CLDR territory codes</a> where the offer is disapproved.</td>
-<td>US, CH</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       issues      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code> , <code dir="ltr" translate="no">       REPEATED      </code></td>
-<td>The list of item level issues associated with the product.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       issues.code      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The error code of the issue.</td>
-<td>image_too_generic</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       issues.servability      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>How this issue affects serving of the offer.</td>
-<td>disapproved, unaffected</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       issues.resolution      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Whether the issue can be resolved by the merchant.</td>
-<td>merchant_action, pending_processing</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       issues.attribute_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The attribute's name, if the issue is caused by a single attribute. NULL otherwise.</td>
-<td>image link</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       issues.destination      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The destination the issue applies to. Always set to <code dir="ltr" translate="no">       Shopping      </code> .</td>
-<td>Shopping</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       issues.short_description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Short issue description in English.</td>
-<td>Generic image</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       issues.detailed_description      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Detailed issue description in English.</td>
-<td>Use an image that shows the product</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       issues.documentation      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>URL of a web page to help with resolving this issue.</td>
-<td>https://support.google.com/merchants/answer/6098288</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       issues.applicable_countries      </code></td>
-<td><code dir="ltr" translate="no">       STRING, REPEATED      </code></td>
-<td>List of <a href="http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml">CLDR territory codes</a> where the issue applies.</td>
-<td>CH</td>
-</tr>
-</tbody>
-</table>
+| Column                                                | BigQuery data type                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Example data                                                            |
+| ----------------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| `        product_data_timestamp       `               | `        TIMESTAMP       `                          | Timestamp of the product data.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 2023-09-14 11:49:50 UTC                                                 |
+| `          product_id        `                        | `        STRING       `                             | Content API's REST ID of the product in the form: `        channel:content_language:feed_label:offer_id       ` . This is the primary key.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | online:en:AU:666840730                                                  |
+| `        merchant_id       `                          | `        INTEGER       `                            | Merchant account ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 1234                                                                    |
+| `        aggregator_id       `                        | `        INTEGER       `                            | Aggregator account ID for multi-client accounts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | 12345                                                                   |
+| `        offer_id       `                             | `        STRING       `                             | Merchant provided [id of the product](https://support.google.com/merchants/answer/6324405) .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | tddy123uk                                                               |
+| `        title       `                                | `        STRING       `                             | Title of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | TN2351 black USB                                                        |
+| `        description       `                          | `        STRING       `                             | [Description](https://support.google.com/merchants/answer/6324468) of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | The TN2351 black USB has redefined how XJS can impact LLCD experiences. |
+| `        link       `                                 | `        STRING       `                             | Merchant provided [URL of the landing page](https://support.google.com/merchants/answer/6324416) of the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | https://www.example.com/tn2351-black-usb/6538811?skuId=1234             |
+| `        mobile_link       `                          | `        STRING       `                             | Merchant provided [URL of a mobile-optimized version](https://support.google.com/merchants/answer/6324459) of the landing page.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | https://www.example.com/tn2351-black-usb/6538811?skuId=1234             |
+| `        image_link       `                           | `        STRING       `                             | Merchant provided [URL of the main product image](https://support.google.com/merchants/answer/6324350) .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | https://www.example.com/tn2351-black-usb/6538811?skuId=1234             |
+| `        additional_image_links       `               | `        STRING       ` , `        REPEATED       ` | Merchant provided [additional URLs](https://support.google.com/merchants/answer/6324370) of images of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                         |
+| `        content_language       `                     | `        STRING       `                             | The two-letter ISO 639-1 language code for the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | en                                                                      |
+| `        target_country       `                       | `        STRING       `                             | Deprecated (always set to NULL) as part of a change to allow products to [target multiple countries](https://support.google.com/merchants/answer/7448571) . Instead, use the following fields to read the status of each targeted country: [destinations.approved\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.approved_countries) , [destinations.pending\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.pending_countries) , [destinations.disapproved\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.disapproved_countries) . Issues can now apply to certain target countries and not others, as indicated in the field [issues.applicable\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#issues.applicable_countries) . | null                                                                    |
+| `        feed_label       `                           | `        STRING       `                             | The merchant provided [feed label](https://support.google.com/merchants/answer/12453549) for the item, or `        -       ` if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | US                                                                      |
+| `        channel       `                              | `        STRING       `                             | The item's channel, either `        online       ` or `        local       ` .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | local, online                                                           |
+| `        expiration_date       `                      | `        TIMESTAMP       `                          | Merchant provided date and time on which the [item should expire](https://support.google.com/merchants/answer/6324499) , as specified upon insertion. Set to null if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 2023-10-14 00:00:00 UTC                                                 |
+| `        google_expiration_date       `               | `        TIMESTAMP       `                          | Date and time on which the item expires in Google Shopping. Never set to null.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 2023-10-14 00:00:00 UTC                                                 |
+| `        adult       `                                | `        BOOLEAN       `                            | Set to true if the item is [targeted towards adults.](https://support.google.com/merchants/answer/6324508)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | true, false                                                             |
+| `        age_group       `                            | `        STRING       `                             | Merchant provided [target age group](https://support.google.com/merchants/answer/6324463) of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | newborn, infant, toddler, kids, adult                                   |
+| `        availability       `                         | `        STRING       `                             | Merchant provided [availability](https://support.google.com/merchants/answer/6324448) status of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | in stock, out of stock                                                  |
+| `        availability_date       `                    | `        TIMESTAMP       `                          | Merchant provided date and time [when a pre-ordered product becomes available](https://support.google.com/merchants/answer/6324470) for delivery. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 2023-10-14 00:00:00 UTC                                                 |
+| `        brand       `                                | `        STRING       `                             | Merchant provided [brand](https://support.google.com/merchants/answer/6324351) of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Brand Name                                                              |
+| `        google_brand_id       `                      | `        STRING       `                             | Google brand ID of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 12759524623914508053                                                    |
+| `        color       `                                | `        STRING       `                             | Merchant provided [color](https://support.google.com/merchants/answer/6324487) of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Silver, Gray, Multi                                                     |
+| `        condition       `                            | `        STRING       `                             | Merchant provided [Condition](https://support.google.com/merchants/answer/6324469) or state of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | new, used, refurbished                                                  |
+| `        custom_labels       `                        | `        RECORD       `                             | Merchant provided [custom labels](https://support.google.com/merchants/answer/6324473) for custom grouping of items in Shopping Ads. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |                                                                         |
+| `        custom_labels.label_0       `                | `        STRING       `                             | Custom label 0.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | my custom label                                                         |
+| `        custom_labels.label_1       `                | `        STRING       `                             | Custom label 1.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | my custom label                                                         |
+| `        custom_labels.label_2       `                | `        STRING       `                             | Custom label 2.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | my custom label                                                         |
+| `        custom_labels.label_3       `                | `        STRING       `                             | Custom label 3.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | my custom label                                                         |
+| `        custom_labels.label_4       `                | `        STRING       `                             | Custom label 4.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | my custom label                                                         |
+| `        gender       `                               | `        STRING       `                             | Merchant provided target [gender](https://support.google.com/merchants/answer/6324479) of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | unisex, male, female                                                    |
+| `        gtin       `                                 | `        STRING       `                             | Merchant provided [Global Trade Item Number (GTIN)](https://support.google.com/merchants/answer/6324461) of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 3234567890126                                                           |
+| `        item_group_id       `                        | `        STRING       `                             | Merchant provided [Shared identifier](https://support.google.com/merchants/answer/6324507) for all variants of the same product. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | AB12345                                                                 |
+| `        material       `                             | `        STRING       `                             | Merchant provided [material](https://support.google.com/merchants/answer/6324410) of which the item is made. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Leather                                                                 |
+| `        mpn       `                                  | `        STRING       `                             | Merchant provided [Manufacturer Part Number](https://support.google.com/merchants/answer/6324482) (MPN) of the item. Set to NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | GO12345OOGLE                                                            |
+| `        pattern       `                              | `        STRING       `                             | Merchant provided [pattern](https://support.google.com/merchants/answer/6324483) . NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Striped                                                                 |
+| `        price       `                                | `        RECORD       `                             | Merchant provided [price](https://support.google.com/merchants/answer/6324371) of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |                                                                         |
+| `        price.value       `                          | `        NUMERIC       `                            | The price of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | 19.99                                                                   |
+| `        price.currency       `                       | `        STRING       `                             | The currency of the price.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | USD                                                                     |
+| `        sale_price       `                           | `        RECORD       `                             | Merchant provided [sale price](https://support.google.com/merchants/answer/6324471) of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                                                                         |
+| `        sale_price.value       `                     | `        NUMERIC       `                            | The sale price of the item. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 19.99                                                                   |
+| `        sale_price.currency       `                  | `        STRING       `                             | The currency of the sale price. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | USD                                                                     |
+| `        sale_price_effective_start_date       `      | `        TIMESTAMP       `                          | Start date and time when the item is on sale.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | 2023-10-14 00:00:00 UTC                                                 |
+| `        sale_price_effective_end_date       `        | `        TIMESTAMP       `                          | End date and time when the item is on sale.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | 2023-10-14 00:00:00 UTC                                                 |
+| `        google_product_category       `              | `        INTEGER       `                            | The item's [Google product category](https://support.google.com/merchants/answer/1705911) ID. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 2271                                                                    |
+| `        google_product_category_ids       `          | `        INTEGER, REPEATED       `                  | The full path of [Google product categories](https://support.google.com/merchants/answer/1705911) to the item, stored as a set of IDs. NULL if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |                                                                         |
+| `        google_product_category_path       `         | `        STRING       `                             | A human-readable version of the full path. Empty if not provided.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Apparel & Accessories \> Clothing \> Dresses                            |
+| `        product_type       `                         | `        STRING       `                             | Merchant-provided [category](https://support.google.com/merchants/answer/6324406) of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Home \> Women \> Dresses \> Maxi Dresses                                |
+| `        additional_product_types       `             | `        STRING       ` , `        REPEATED       ` | Additional categories of the item.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                         |
+| `        promotion_ids       `                        | `        STRING       ` , `        REPEATED       ` | The list of [promotion IDs](https://support.google.com/merchants/answer/7050148) associated with the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                                                         |
+| `        destinations       `                         | `        RECORD       ` , `        REPEATED       ` | The intended destinations for the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |                                                                         |
+| `        destinations.name       `                    | `        STRING       `                             | The name of the destination; only `        Shopping       ` is supported. This corresponds to the [Marketing Methods](https://support.google.com/merchants/answer/15130232) "Shopping Ads" and "Local Inventory Ads" in Merchant Center.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Shopping                                                                |
+| `        destinations.status               *        ` | `        STRING       `                             | Deprecated (always set to NULL) as part of a change to allow products to [target multiple countries](https://support.google.com/merchants/answer/7448571) . Instead, use the following fields to read the status of each targeted country: [destinations.approved\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.approved_countries) , [destinations.pending\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.pending_countries) , [destinations.disapproved\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#destinations.disapproved_countries) . Issues can now apply to certain target countries and not others, as indicated in the field [issues.applicable\_countries](https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema#issues.applicable_countries) . | NULL                                                                    |
+| `        destinations.approved_countries       `      | `        STRING, REPEATED       `                   | List of [CLDR territory codes](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) where the offer is approved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | US, CH                                                                  |
+| `        destinations.pending_countries       `       | `        STRING, REPEATED       `                   | List of [CLDR territory codes](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) where the offer is pending.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | US, CH                                                                  |
+| `        destinations.disapproved_countries       `   | `        STRING, REPEATED       `                   | List of [CLDR territory codes](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) where the offer is disapproved.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | US, CH                                                                  |
+| `        issues       `                               | `        RECORD       ` , `        REPEATED       ` | The list of item level issues associated with the product.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |                                                                         |
+| `        issues.code       `                          | `        STRING       `                             | The error code of the issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | image\_too\_generic                                                     |
+| `        issues.servability       `                   | `        STRING       `                             | How this issue affects serving of the offer.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | disapproved, unaffected                                                 |
+| `        issues.resolution       `                    | `        STRING       `                             | Whether the issue can be resolved by the merchant.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | merchant\_action, pending\_processing                                   |
+| `        issues.attribute_name       `                | `        STRING       `                             | The attribute's name, if the issue is caused by a single attribute. NULL otherwise.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | image link                                                              |
+| `        issues.destination       `                   | `        STRING       `                             | The destination the issue applies to. Always set to `        Shopping       ` .                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Shopping                                                                |
+| `        issues.short_description       `             | `        STRING       `                             | Short issue description in English.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Generic image                                                           |
+| `        issues.detailed_description       `          | `        STRING       `                             | Detailed issue description in English.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | Use an image that shows the product                                     |
+| `        issues.documentation       `                 | `        STRING       `                             | URL of a web page to help with resolving this issue.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | https://support.google.com/merchants/answer/6098288                     |
+| `        issues.applicable_countries       `          | `        STRING, REPEATED       `                   | List of [CLDR territory codes](http://www.unicode.org/repos/cldr/tags/latest/common/main/en.xml) where the issue applies.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | CH                                                                      |
 
 ## Query examples
 
@@ -433,7 +88,7 @@ The `  Products_  ` table has the following schema:
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   COUNT(*) AS num_products,
@@ -453,7 +108,7 @@ ORDER BY
 
 The following SQL sample query provides the number of products that are not approved for display in Shopping Ads, separated by country. Disapproval can result from the destination being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   disapproved_country,
@@ -474,7 +129,7 @@ ORDER BY
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by country.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   applicable_country,

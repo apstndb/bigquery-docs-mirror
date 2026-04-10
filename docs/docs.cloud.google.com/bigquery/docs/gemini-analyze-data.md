@@ -1,10 +1,10 @@
 # Analyze data with Gemini assistance
 
-This tutorial describes how you can use AI-powered assistance in [Gemini in BigQuery](/bigquery/docs/gemini-overview) to analyze data.
+This tutorial describes how you can use AI-powered assistance in [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) to analyze data.
 
 For the example in this tutorial, consider that you're a data analyst who needs to analyze and predict product sales from a dataset.
 
-This tutorial assumes that you're familiar with SQL and basic data analytics tasks. Knowledge of Google Cloud products is not assumed. If you're new to BigQuery, see the [BigQuery quickstarts](/bigquery/docs/quickstarts) .
+This tutorial assumes that you're familiar with SQL and basic data analytics tasks. Knowledge of Google Cloud products is not assumed. If you're new to BigQuery, see the [BigQuery quickstarts](https://docs.cloud.google.com/bigquery/docs/quickstarts) .
 
 ## Objectives
 
@@ -28,15 +28,19 @@ To estimate your costs based on your projected usage, use the [pricing calculato
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Ensure that Gemini in BigQuery is set up for your Google Cloud project](/bigquery/docs/gemini-set-up) .
+2.  [Ensure that Gemini in BigQuery is set up for your Google Cloud project](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) .
 
 3.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
-4.  [Create a dataset](/bigquery/docs/datasets) that's named `  bqml_tutorial  ` . You use the dataset to store database objects, including tables and models.
+4.  [Create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) that's named `  bqml_tutorial  ` . You use the dataset to store database objects, including tables and models.
 
 5.  To turn on the Gemini in BigQuery features that you need to complete this tutorial, in the BigQuery toolbar, click pen\_spark **Gemini** , and then select the following options:
     
@@ -59,7 +63,7 @@ Gemini in BigQuery can also provide information about how to analyze your data. 
 
 ## Access and analyze data
 
-As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](/gemini/docs/discover/responsible-ai) .
+As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 Gemini in BigQuery can help you know *what* data you can access for analysis, and *how* to analyze that data.
 
@@ -76,6 +80,8 @@ Before you can query data, you need to know what data you can access. Every data
 To get help, you can send Gemini in BigQuery a prompt like "How do I learn which datasets and tables are available to me in BigQuery?"
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the Google Cloud console toolbar, click spark **Open or close Gemini Cloud Assist chat** .
 
@@ -83,7 +89,7 @@ To get help, you can send Gemini in BigQuery a prompt like "How do I learn which
 
 4.  Click send **Send prompt** .
     
-    Learn [how and when Gemini for Google Cloud uses your data](/gemini/docs/discover/data-governance) .
+    Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
     
     The response includes several ways to list projects, datasets, or tables within a dataset.
 
@@ -100,35 +106,33 @@ For this example, assume that you selected data to analyze and now want to query
 Consider that you want to understand a complex query that someone else wrote. Gemini in BigQuery can explain the query in plain language—such as the query syntax, underlying schema, and business context.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, open or paste the query that you want explained. For example:
     
-    ``` text
-    SELECT
-      u.id AS user_id,
-      u.first_name,
-      u.last_name,
-      avg(oi.sale_price) AS avg_sale_price
-    FROM `bigquery-public-data.thelook_ecommerce.users` AS u
-    JOIN `bigquery-public-data.thelook_ecommerce.order_items` AS oi
-      ON u.id = oi.user_id
-    GROUP BY 1, 2, 3
-    ORDER BY avg_sale_price DESC
-    LIMIT 10
-    ```
+        SELECT
+          u.id AS user_id,
+          u.first_name,
+          u.last_name,
+          avg(oi.sale_price) AS avg_sale_price
+        FROM `bigquery-public-data.thelook_ecommerce.users` AS u
+        JOIN `bigquery-public-data.thelook_ecommerce.order_items` AS oi
+          ON u.id = oi.user_id
+        GROUP BY 1, 2, 3
+        ORDER BY avg_sale_price DESC
+        LIMIT 10
 
 3.  Highlight the query, and then click auto\_awesome **Explain this selected query** .
     
     In the **Cloud Assist** panel, a response is returned that's similar to the following:
     
-    ``` text
-    The intent of this query is to find the top 10 users by average sale price.
-    The query first joins the users and order_items tables on the user_id
-    column. It then groups the results by user_id, first_name, and last_name,
-    and calculates the average sale price for each group. The results are then
-    ordered by average sale price in descending order, and the top 10 results
-    are returned.
-    ```
+        The intent of this query is to find the top 10 users by average sale price.
+        The query first joins the users and order_items tables on the user_id
+        column. It then groups the results by user_id, first_name, and last_name,
+        and calculates the average sale price for each group. The results are then
+        ordered by average sale price in descending order, and the top 10 results
+        are returned.
 
 #### Generate a SQL query that groups sales by day and product
 
@@ -139,6 +143,8 @@ This type of query is often complex, but using Gemini in BigQuery, you can autom
 To prompt Gemini in BigQuery to generate a query that lists your top products, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Studio** .
 
@@ -146,24 +152,20 @@ To prompt Gemini in BigQuery to generate a query that lists your top products, f
 
 4.  In the query editor, enter the following prompt, and then press Enter :
     
-    ``` text
-    # select the sum of sales by date and product casted to day from bigquery-public-data.thelook_ecommerce.order_items joined with bigquery-public-data.thelook_ecommerce.products
-    ```
+        # select the sum of sales by date and product casted to day from bigquery-public-data.thelook_ecommerce.order_items joined with bigquery-public-data.thelook_ecommerce.products
     
     The pound character ( `  #  ` ) prompts Gemini in BigQuery to generate SQL. Gemini in BigQuery suggests a SQL query similar to the following:
     
-    ``` text
-    SELECT
-      sum(sale_price),
-      DATE(created_at),
-      product_id
-    FROM
-      `bigquery-public-data.thelook_ecommerce.order_items`
-        AS t1
-    INNER JOIN `bigquery-public-data.thelook_ecommerce.products` AS t2
-      ON t1.product_id = t2.id
-    GROUP BY 2, 3
-    ```
+        SELECT
+          sum(sale_price),
+          DATE(created_at),
+          product_id
+        FROM
+          `bigquery-public-data.thelook_ecommerce.order_items`
+            AS t1
+        INNER JOIN `bigquery-public-data.thelook_ecommerce.products` AS t2
+          ON t1.product_id = t2.id
+        GROUP BY 2, 3
     
     **Note:** Gemini in BigQuery might suggest multiple SQL statements for your prompt.
 
@@ -182,50 +184,44 @@ You use the following example query with actual sales, which are used as an inpu
 
 1.  To create a forecasting ML model, in the query editor, run the following SQL query:
     
-    ``` text
-    CREATE MODEL bqml_tutorial.sales_forecasting_model
-      OPTIONS (
-        MODEL_TYPE = 'ARIMA_PLUS',
-        time_series_timestamp_col = 'date_col',
-        time_series_data_col = 'total_sales',
-        time_series_id_col = 'product_id')
-    AS
-    SELECT
-      sum(sale_price) AS total_sales,
-      DATE(created_at) AS date_col,
-      product_id
-    FROM
-      `bigquery-public-data.thelook_ecommerce.order_items`
-        AS t1
-    INNER JOIN `bigquery-public-data.thelook_ecommerce.products` AS t2
-      ON t1.product_id = t2.id
-    GROUP BY 2, 3;
-    ```
+        CREATE MODEL bqml_tutorial.sales_forecasting_model
+          OPTIONS (
+            MODEL_TYPE = 'ARIMA_PLUS',
+            time_series_timestamp_col = 'date_col',
+            time_series_data_col = 'total_sales',
+            time_series_id_col = 'product_id')
+        AS
+        SELECT
+          sum(sale_price) AS total_sales,
+          DATE(created_at) AS date_col,
+          product_id
+        FROM
+          `bigquery-public-data.thelook_ecommerce.order_items`
+            AS t1
+        INNER JOIN `bigquery-public-data.thelook_ecommerce.products` AS t2
+          ON t1.product_id = t2.id
+        GROUP BY 2, 3;
     
-    You can use Gemini in BigQuery to help you [understand this query](#prompt-gemini-explain-sql-queries) .
+    You can use Gemini in BigQuery to help you [understand this query](https://docs.cloud.google.com/bigquery/docs/gemini-analyze-data#prompt-gemini-explain-sql-queries) .
     
     **Note:** While the model is running, you can also prompt Gemini in BigQuery in the **Cloud Assist** panel with questions like `  What is an ARIMA_PLUS model type?  `
     
     When the model is created, the **Results** tab of the **Query results** pane displays a message that's similar to the following:
     
-    ``` text
-    Successfully created model named sales_forecasting_model.
-    ```
+        Successfully created model named sales_forecasting_model.
 
 2.  In the **Cloud Assist** panel, enter a prompt for Gemini in BigQuery to help you write a query to get a forecast from the model when it's completed—for example, enter `  How can I get a forecast in SQL from the model?  `
     
     Based on the context of the prompt, the response includes an example of an ML model that forecasts sales:
     
-    ``` text
-    SELECT
-      *
-    FROM
-      ML.FORECAST(
-        MODEL `PROJECT_ID.bqml_tutorial.sales_forecasting_model`,
-        STRUCT(
-          7 AS horizon,
-          0.95 AS confidence_level))
-    ```
+        SELECT
+          *
+        FROM
+          ML.FORECAST(
+            MODEL `PROJECT_ID.bqml_tutorial.sales_forecasting_model`,
+            STRUCT(
+              7 AS horizon,
+              0.95 AS confidence_level))
     
     In this response, `  PROJECT_ID  ` is your Google Cloud project.
     
@@ -250,6 +246,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -259,6 +257,8 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, then you can delete the dataset that you created in this tutorial.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, select the **`  bqml_tutorial  `** dataset that you created.
 
@@ -268,8 +268,8 @@ Deleting your project removes all datasets and all tables in the project. If you
 
 ## What's next
 
-  - Read [Gemini for Google Cloud overview](/gemini/docs/overview) .
-  - Learn about [Gemini for Google Cloud quotas and limits](/gemini/docs/quotas) .
-  - Learn about [locations for Gemini for Google Cloud](/gemini/docs/locations) .
-  - Learn how to [explore your data by generating data insights](/bigquery/docs/data-insights) .
-  - Learn more about how to [write queries with Gemini assistance in BigQuery](/bigquery/docs/write-sql-gemini) .
+  - Read [Gemini for Google Cloud overview](https://docs.cloud.google.com/gemini/docs/overview) .
+  - Learn about [Gemini for Google Cloud quotas and limits](https://docs.cloud.google.com/gemini/docs/quotas) .
+  - Learn about [locations for Gemini for Google Cloud](https://docs.cloud.google.com/gemini/docs/locations) .
+  - Learn how to [explore your data by generating data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .
+  - Learn more about how to [write queries with Gemini assistance in BigQuery](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .

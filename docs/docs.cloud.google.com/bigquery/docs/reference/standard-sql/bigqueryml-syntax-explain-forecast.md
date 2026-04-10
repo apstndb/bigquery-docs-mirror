@@ -4,7 +4,7 @@ This document describes the `  ML.EXPLAIN_FORECAST  ` function, which lets you g
 
 ## Syntax
 
-``` sql
+``` lang-sql
 # `ARIMA_PLUS` models:
 ML.EXPLAIN_FORECAST(
   MODEL `PROJECT_ID.DATASET.MODEL`,
@@ -35,17 +35,17 @@ ML.EXPLAIN_FORECAST(
 
   - `  TABLE  ` : the name of the input table that contains the data to be evaluated.
     
-    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
     If there are unused columns from the table, they are ignored.
     
     The `  TABLE  ` argument is required for the `  ARIMA_PLUS_XREG  ` model.
 
-  - `  QUERY_STATEMENT  ` : the GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : the GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
-    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
 
-  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of time points to forecast. The maximum value is the horizon value specified in the [`  CREATE MODEL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for the time series model, or `  1000  ` if unspecified. The default value is `  3  ` . When forecasting multiple time series at the same time, this parameter applies to each time series.
+  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of time points to forecast. The maximum value is the horizon value specified in the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for the time series model, or `  1000  ` if unspecified. The default value is `  3  ` . When forecasting multiple time series at the same time, this parameter applies to each time series.
     
     **Note:** Forecasting takes place when the `  CREATE MODEL  ` statement runs. The `  ML.EXPLAIN_FORECAST  ` function retrieves the forecasting values and computes the prediction intervals. If you want to filter results when you're forecasting multiple time series, use the `  ML.EXPLAIN_FORECAST  ` function. To save query time, specify a value for the `  HORIZON  ` option in the `  CREATE MODEL  ` statement.
 
@@ -57,13 +57,13 @@ The `  ML.EXPLAIN_FORECAST  ` function returns the following columns:
 
   - `  time_series_id_col  ` or `  time_series_id_cols  ` : a value that contains the identifiers of a time series. `  time_series_id_col  ` can be an `  INT64  ` or `  STRING  ` value. `  time_series_id_cols  ` can be an `  ARRAY<INT64>  ` or `  ARRAY<STRING>  ` value. Only present when forecasting multiple time series at once. The column names and types are inherited from the `  TIME_SERIES_ID_COL  ` option as specified in the `  CREATE MODEL  ` statement.
 
-  - `  time_series_timestamp  ` : a `  TIMESTAMP  ` value that contains the timestamp of the time series. This column has a type of `  TIMESTAMP  ` regardless of the type of the input [`  time_series_timestamp_col  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) . For each time series, the output rows are sorted in chronological order by the `  time_series_timestamp  ` value.
+  - `  time_series_timestamp  ` : a `  TIMESTAMP  ` value that contains the timestamp of the time series. This column has a type of `  TIMESTAMP  ` regardless of the type of the input [`  time_series_timestamp_col  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) . For each time series, the output rows are sorted in chronological order by the `  time_series_timestamp  ` value.
 
   - `  time_series_type  ` : a `  STRING  ` value that contains either `  history  ` or `  forecast  ` . The rows that have a value of `  history  ` in this column are used in training, either directly from the training table, or from interpolation using the training data.
 
   - `  time_series_data  ` : a `  FLOAT64  ` value that contains the data of the time series. For rows that have a value of `  history  ` in the `  time_series_type  ` column, `  time_series_data  ` is either the training data or the interpolated value using the training data. For rows that have a value of `  forecast  ` in the `  time_series_type  ` column, `  time_series_data  ` is the forecast value.
 
-  - `  time_series_adjusted_data  ` : a `  FLOAT64  ` value that contains the adjusted data of the time series. For rows that have a value of `  history  ` in the `  time_series_type  ` column, this is the value after cleaning spikes and dips, adjusting the step changes, and removing the residuals. It is the aggregation of all the valid components: [holiday effect](#holiday_effect) , [seasonal components](#seasonal_components) , and [trend](#trend) . For rows that have a value of `  forecast  ` in the `  time_series_type  ` column, this is the forecast value, which is the same as the value of `  time_series_data  ` .
+  - `  time_series_adjusted_data  ` : a `  FLOAT64  ` value that contains the adjusted data of the time series. For rows that have a value of `  history  ` in the `  time_series_type  ` column, this is the value after cleaning spikes and dips, adjusting the step changes, and removing the residuals. It is the aggregation of all the valid components: [holiday effect](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast#holiday_effect) , [seasonal components](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast#seasonal_components) , and [trend](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast#trend) . For rows that have a value of `  forecast  ` in the `  time_series_type  ` column, this is the forecast value, which is the same as the value of `  time_series_data  ` .
 
   - `  standard_error  ` : a `  FLOAT64  ` value that contains the standard error of the residuals during the ARIMA fitting. The values are the same for all rows that have a value of `  history  ` in the `  time_series_type  ` column. For rows that have a value of `  forecast  ` in the `  time_series_type  ` column, this value increases with time, as the forecast values become less reliable.
 
@@ -134,20 +134,16 @@ The following formulas show what components make up the `  time_series_data  ` v
     
     <!-- end list -->
     
-    ``` text
-    time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
-                        + seasonal_period_weekly + seasonal_period_daily + holiday_effect
-                        + spikes_and_dips + step_changes + residual
-    ```
+        time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
+                            + seasonal_period_weekly + seasonal_period_daily + holiday_effect
+                            + spikes_and_dips + step_changes + residual
     
       - Forecast data:
     
     <!-- end list -->
     
-    ``` text
-    time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
-                      + seasonal_period_weekly + seasonal_period_daily + holiday_effect
-    ```
+        time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
+                          + seasonal_period_weekly + seasonal_period_daily + holiday_effect
 
   - For `  ARIMA_PLUS_XREG  ` models:
     
@@ -155,22 +151,18 @@ The following formulas show what components make up the `  time_series_data  ` v
     
     <!-- end list -->
     
-    ``` text
-    time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
-                      + seasonal_period_weekly + seasonal_period_daily + holiday_effect
-                      + spikes_and_dips + step_changes + residual
-                      + (attribution_feature_1 + ... + attribution_feature_n)
-    ```
+        time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
+                          + seasonal_period_weekly + seasonal_period_daily + holiday_effect
+                          + spikes_and_dips + step_changes + residual
+                          + (attribution_feature_1 + ... + attribution_feature_n)
     
       - Forecast data:
     
     <!-- end list -->
     
-    ``` text
-    time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
-                      + seasonal_period_weekly + seasonal_period_daily + holiday_effect
-                      + (attribution_feature_1 + ... + attribution_feature_n)
-    ```
+        time_series_data = trend + seasonal_period_yearly + seasonal_period_quarterly + seasonal_period_monthly
+                          + seasonal_period_weekly + seasonal_period_daily + holiday_effect
+                          + (attribution_feature_1 + ... + attribution_feature_n)
 
 ### `     time_series_adjusted_data    `
 
@@ -178,19 +170,15 @@ The `  time_series_adjusted_data  ` value is the value that remains after cleani
 
   - For `  ARIMA_PLUS  ` models:
     
-    ``` text
-    time_series_adjusted_data = trend + seasonal_period_yearly + seasonal_period_quarterly
-                                + seasonal_period_monthly + seasonal_period_weekly + seasonal_period_daily
-                                + holiday_effect
-    ```
+        time_series_adjusted_data = trend + seasonal_period_yearly + seasonal_period_quarterly
+                                    + seasonal_period_monthly + seasonal_period_weekly + seasonal_period_daily
+                                    + holiday_effect
 
   - For `  ARIMA_PLUS_XREG  ` models:
     
-    ``` text
-    time_series_adjusted_data = trend + seasonal_period_yearly + seasonal_period_quarterly
-                                + seasonal_period_monthly + seasonal_period_weekly + seasonal_period_daily
-                                + holiday_effect + (attribution_feature_1 + ... + attribution_feature_n)
-    ```
+        time_series_adjusted_data = trend + seasonal_period_yearly + seasonal_period_quarterly
+                                    + seasonal_period_monthly + seasonal_period_weekly + seasonal_period_daily
+                                    + holiday_effect + (attribution_feature_1 + ... + attribution_feature_n)
 
 **Note:** For rows that have a value of `  forecast  ` in the `  time_series_type  ` column, you might notice that the `  time_series_data  ` and `  time_series_adjusted_data  ` values are the same .
 
@@ -202,7 +190,7 @@ The `  holiday_effect_ holiday_name  ` value is a subcomponent . The `  holiday_
 
 The following example forecasts 30 time points with a confidence level of `  0.8  ` :
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -214,7 +202,7 @@ FROM
 
 The following example forecasts 30 time points with a confidence level of `  0.8  ` with future features:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -225,5 +213,5 @@ FROM
 
 ## What's next
 
-  - For more information about Explainable AI, see [BigQuery Explainable AI overview](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
-  - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast) .
+  - For more information about Explainable AI, see [BigQuery Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
+  - For more information about supported SQL statements and functions for time series forecasting models, see [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .

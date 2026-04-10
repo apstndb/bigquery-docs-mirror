@@ -6,9 +6,9 @@ A *federated dataset* mirrors the schema and tables from an external data source
 
 Ensure that you have a connection to access AWS Glue data.
 
-  - To create or modify a connection, follow the instructions in [Connect to Amazon S3](/bigquery/docs/omni-aws-create-connection) . When you create that connection, include the following policy statement for AWS Glue in your [AWS Identity and Access Management policy for BigQuery](/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) . Include this statement in addition to the other permissions on the Amazon S3 bucket where the data in your AWS Glue tables is stored.
+  - To create or modify a connection, follow the instructions in [Connect to Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection) . When you create that connection, include the following policy statement for AWS Glue in your [AWS Identity and Access Management policy for BigQuery](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-connection#creating-aws-iam-policy) . Include this statement in addition to the other permissions on the Amazon S3 bucket where the data in your AWS Glue tables is stored.
     
-    ``` text
+    ``` notranslate
     {
      "Effect": "Allow",
      "Action": [
@@ -33,7 +33,7 @@ Ensure that you have a connection to access AWS Glue data.
 
 ### Required permissions
 
-To get the permissions that you need to create a federated dataset, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a federated dataset, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a federated dataset. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -45,9 +45,9 @@ The following permissions are required to create a federated dataset:
   - `  bigquery.connections.use  `
   - `  bigquery.connections.delegate  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Create a federated dataset
 
@@ -56,8 +56,12 @@ To create a federated dataset, do the following:
 ### Console
 
 1.  Open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -84,13 +88,15 @@ To create a federated dataset, do the following:
 
 ### SQL
 
-Use the [`  CREATE EXTERNAL SCHEMA  ` data definition language (DDL) statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_schema_statement) .
+Use the [`  CREATE EXTERNAL SCHEMA  ` data definition language (DDL) statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_schema_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE EXTERNAL SCHEMA DATASET_NAME
     WITH CONNECTION PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME
       OPTIONS (
@@ -109,13 +115,13 @@ Use the [`  CREATE EXTERNAL SCHEMA  ` data definition language (DDL) statement](
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-In a command-line environment, create a dataset by using the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
+In a command-line environment, create a dataset by using the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) :
 
-``` text
+``` notranslate
 bq --location=LOCATION mk --dataset \
     --external_source aws-glue://AWS_GLUE_SOURCE \
     --connection_id PROJECT_ID.CONNECTION_LOCATION.CONNECTION_NAME \
@@ -124,7 +130,7 @@ bq --location=LOCATION mk --dataset \
 
 Replace the following:
 
-  - `  LOCATION  ` : the location of your new dataset in BigQuery—for example, `  aws-us-east-1  ` . After you create a dataset, you can't change its location. You can set a default location value by using the [`  .bigqueryrc  ` file](/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
+  - `  LOCATION  ` : the location of your new dataset in BigQuery—for example, `  aws-us-east-1  ` . After you create a dataset, you can't change its location. You can set a default location value by using the [`  .bigqueryrc  ` file](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool#setting_default_values_for_command-line_flags) .
   - `  AWS_GLUE_SOURCE  ` : the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html) of the AWS Glue database—for example, `  arn:aws:glue:us-east-1:123456789:database/test_database  ` .
   - `  PROJECT_ID  ` : your BigQuery project ID.
   - `  CONNECTION_LOCATION  ` : the location of your AWS connection—for example, `  aws-us-east-1  ` .
@@ -135,13 +141,13 @@ Replace the following:
 
 Use the [`  google_bigquery_dataset  ` resource](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_dataset#example-usage---bigquery-dataset-external-reference-aws-docs) .
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](/resource-manager/reference/rest) .
+**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 The following example creates an AWS Glue federated dataset:
 
-``` text
+``` notranslate
 resource "google_bigquery_dataset" "dataset" {
   provider                    = google-beta
   dataset_id                  = "example_dataset"
@@ -166,9 +172,7 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
     
     You only need to run this command once per project, and you can run it in any directory.
     
-    ``` text
-    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    ```
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
     
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
@@ -178,9 +182,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
     
-    ``` text
-    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-    ```
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
@@ -194,31 +196,23 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 5.  Initialize Terraform. You only need to do this once per directory.
     
-    ``` text
-    terraform init
-    ```
+        terraform init
     
     Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
     
-    ``` text
-    terraform init -upgrade
-    ```
+        terraform init -upgrade
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
     
-    ``` text
-    terraform plan
-    ```
+        terraform plan
     
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
     
-    ``` text
-    terraform apply
-    ```
+        terraform apply
     
     Wait until Terraform displays the "Apply complete\!" message.
 
@@ -228,27 +222,27 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  datasets.insert  ` method](/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) and [`  externalDatasetReference  ` field](/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference) for your AWS Glue database.
+Call the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) and [`  externalDatasetReference  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference) for your AWS Glue database.
 
 ## List tables in a federated dataset
 
-To list the tables that are available for query in your federated dataset, see [Listing datasets](/bigquery/docs/listing-datasets) .
+To list the tables that are available for query in your federated dataset, see [Listing datasets](https://docs.cloud.google.com/bigquery/docs/listing-datasets) .
 
 ## Get table information
 
-To get information on the tables in your federated dataset, such as schema details, see [Get table information](/bigquery/docs/tables#get_table_information) .
+To get information on the tables in your federated dataset, such as schema details, see [Get table information](https://docs.cloud.google.com/bigquery/docs/tables#get_table_information) .
 
 ## Control access to tables
 
-To manage access to the tables in your federated dataset, see [Control access to resources with IAM](/bigquery/docs/control-access-to-resources-iam) .
+To manage access to the tables in your federated dataset, see [Control access to resources with IAM](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 
-[Row-level security](/bigquery/docs/managing-row-level-security) , [column-level security](/bigquery/docs/column-level-security-intro) , and [data masking](/bigquery/docs/column-data-masking-intro) are also supported for tables in federated datasets.
+[Row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) , [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , and [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) are also supported for tables in federated datasets.
 
 Schema operations that might invalidate security policies, such as deleting a column in AWS Glue, can cause jobs to fail until the policies are updated. Additionally, if you delete a table in AWS Glue and recreate it, your security policies no longer apply to the recreated table.
 
 ## Query AWS Glue data
 
-[Querying tables](/bigquery/docs/running-queries) in federated datasets is the same as querying tables in any other BigQuery dataset.
+[Querying tables](https://docs.cloud.google.com/bigquery/docs/running-queries) in federated datasets is the same as querying tables in any other BigQuery dataset.
 
 You can query AWS Glue tables in the following formats:
 
@@ -292,74 +286,24 @@ The location of each BigQuery table is determined by the following:
 
 Additionally, some AWS Glue table properties are automatically mapped to format-specific options in BigQuery:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Format</strong></th>
-<th><strong>SerializationLib</strong></th>
-<th><strong>AWS Glue table value</strong></th>
-<th><strong>BigQuery option</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>CSV</td>
-<td>LazySimpleSerDe</td>
-<td>Table.StorageDescriptor.SerdeInfo.Parameters["field.delim"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .fieldDelimiter</td>
-</tr>
-<tr class="even">
-<td>CSV</td>
-<td>LazySimpleSerDe</td>
-<td>Table.StorageDescriptor.Parameters["serialization.encoding"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .encoding</td>
-</tr>
-<tr class="odd">
-<td>CSV</td>
-<td>LazySimpleSerDe</td>
-<td>Table.StorageDescriptor.Parameters["skip.header.line.count"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .skipLeadingRows</td>
-</tr>
-<tr class="even">
-<td>CSV</td>
-<td>OpenCsvSerDe</td>
-<td>Table.StorageDescriptor.SerdeInfo.Parameters["separatorChar"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .fieldDelimiter</td>
-</tr>
-<tr class="odd">
-<td>CSV</td>
-<td>OpenCsvSerDe</td>
-<td>Table.StorageDescriptor.SerdeInfo.Parameters["quoteChar"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .quote</td>
-</tr>
-<tr class="even">
-<td>CSV</td>
-<td>OpenCsvSerDe</td>
-<td>Table.StorageDescriptor.Parameters["serialization.encoding"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .encoding</td>
-</tr>
-<tr class="odd">
-<td>CSV</td>
-<td>OpenCsvSerDe</td>
-<td>Table.StorageDescriptor.Parameters["skip.header.line.count"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#csvoptions">CsvOptions</a> .skipLeadingRows</td>
-</tr>
-<tr class="even">
-<td>JSON</td>
-<td>Hive <a href="https://github.com/apache/hive/blob/master/hcatalog/core/src/main/java/org/apache/hive/hcatalog/data/JsonSerDe.java">JsonSerDe</a></td>
-<td>Table.StorageDescriptor.Parameters["serialization.encoding"]</td>
-<td><a href="/bigquery/docs/reference/rest/v2/tables#jsonoptions">JsonOptions</a> .encoding</td>
-</tr>
-</tbody>
-</table>
+| **Format** | **SerializationLib**                                                                                                                  | **AWS Glue table value**                                        | **BigQuery option**                                                                                            |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| CSV        | LazySimpleSerDe                                                                                                                       | Table.StorageDescriptor.SerdeInfo.Parameters\["field.delim"\]   | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .fieldDelimiter  |
+| CSV        | LazySimpleSerDe                                                                                                                       | Table.StorageDescriptor.Parameters\["serialization.encoding"\]  | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .encoding        |
+| CSV        | LazySimpleSerDe                                                                                                                       | Table.StorageDescriptor.Parameters\["skip.header.line.count"\]  | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .skipLeadingRows |
+| CSV        | OpenCsvSerDe                                                                                                                          | Table.StorageDescriptor.SerdeInfo.Parameters\["separatorChar"\] | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .fieldDelimiter  |
+| CSV        | OpenCsvSerDe                                                                                                                          | Table.StorageDescriptor.SerdeInfo.Parameters\["quoteChar"\]     | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .quote           |
+| CSV        | OpenCsvSerDe                                                                                                                          | Table.StorageDescriptor.Parameters\["serialization.encoding"\]  | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .encoding        |
+| CSV        | OpenCsvSerDe                                                                                                                          | Table.StorageDescriptor.Parameters\["skip.header.line.count"\]  | [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#csvoptions) .skipLeadingRows |
+| JSON       | Hive [JsonSerDe](https://github.com/apache/hive/blob/master/hcatalog/core/src/main/java/org/apache/hive/hcatalog/data/JsonSerDe.java) | Table.StorageDescriptor.Parameters\["serialization.encoding"\]  | [JsonOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#jsonoptions) .encoding      |
 
 ## Create a view in a federated dataset
 
-You can't create a view in a federated dataset. However, you can create a view in a standard dataset that's based on a table in a federated dataset. For more information, see [Create views](/bigquery/docs/views) .
+You can't create a view in a federated dataset. However, you can create a view in a standard dataset that's based on a table in a federated dataset. For more information, see [Create views](https://docs.cloud.google.com/bigquery/docs/views) .
 
 ## Delete a federated dataset
 
-Deleting a federated dataset is the same as deleting any other BigQuery dataset. For more information, see [Delete datasets](/bigquery/docs/managing-datasets#delete-datasets) .
+Deleting a federated dataset is the same as deleting any other BigQuery dataset. For more information, see [Delete datasets](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
 ## Pricing
 
@@ -367,16 +311,16 @@ For information about pricing, see [BigQuery Omni pricing](https://cloud.google.
 
 ## Limitations
 
-  - All [BigQuery Omni limitations](/bigquery/docs/omni-introduction#limitations) apply.
+  - All [BigQuery Omni limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) apply.
   - You can't add, delete, or update data or metadata in tables in an AWS Glue federated dataset.
   - You can't create new tables, views, or materialized views in an AWS Glue federated dataset.
-  - [`  INFORMATION_SCHEMA  ` views](/bigquery/docs/information-schema-intro) aren't supported.
-  - [Metadata caching](/bigquery/docs/biglake-intro#metadata_caching_for_performance) isn't supported.
+  - [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) aren't supported.
+  - [Metadata caching](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) isn't supported.
   - Dataset-level settings that are related to table creation defaults don't affect federated datasets because you can't create tables manually.
   - The Apache Hive data type `  UNION  ` isn't supported for Avro tables.
-  - [External table limitations](/bigquery/docs/external-tables#limitations) apply.
+  - [External table limitations](https://docs.cloud.google.com/bigquery/docs/external-tables#limitations) apply.
 
 ## What's next
 
-  - Learn more about [BigQuery Omni](/bigquery/docs/omni-introduction) .
+  - Learn more about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
   - Try the [BigQuery Omni with AWS lab](https://www.cloudskillsboost.google/catalog_lab/5345) .

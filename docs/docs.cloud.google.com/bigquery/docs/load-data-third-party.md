@@ -1,12 +1,14 @@
 # Load data using a third-party application
 
-Some third-party applications and services provide connectors that can ingest data into BigQuery. For example, [Informatica](/bigquery/docs/bigquery-ready-partners#informatica) lets you load data from external sources into BigQuery's storage.
+Some third-party applications and services provide connectors that can ingest data into BigQuery. For example, [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) lets you load data from external sources into BigQuery's storage.
 
 ## Load data using Informatica
 
 To load data using Informatica Data Loader, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -27,6 +29,8 @@ To load data using Informatica Data Loader, follow these steps:
 To load data using Fivetran Data Pipelines, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click add **Add** .
     
@@ -44,5 +48,5 @@ To load data using Fivetran Data Pipelines, follow these steps:
 
 ## What's next
 
-  - Learn how to [work with BigQuery connections](/bigquery/docs/working-with-connections) .
-  - Learn about [Informatica](/bigquery/docs/bigquery-ready-partners#informatica) .
+  - Learn how to [work with BigQuery connections](https://docs.cloud.google.com/bigquery/docs/working-with-connections) .
+  - Learn about [Informatica](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#informatica) .

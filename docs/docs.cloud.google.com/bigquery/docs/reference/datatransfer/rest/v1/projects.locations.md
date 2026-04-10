@@ -1,6 +1,6 @@
-  - [Resource: Location](#Location)
-      - [JSON representation](#Location.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Location](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations#Location)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations#Location.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations#METHODS_SUMMARY)
 
 ## Resource: Location
 
@@ -17,7 +17,7 @@ A resource that represents a Google Cloud location.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;locationId&quot;: string,
   &quot;displayName&quot;: string,
@@ -61,9 +61,7 @@ The friendly name for this location, typically a nearby city name. For example, 
 
 Cross-service attributes for the location. For example
 
-``` text
-{"cloud.googleapis.com/region": "us-east1"}
-```
+    {"cloud.googleapis.com/region": "us-east1"}
 
 An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "wrench", "mass": "1.3kg", "count": "3" }  ` .
 

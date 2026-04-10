@@ -1,6 +1,6 @@
 # Changes to dataset-level access controls
 
-If you opt into enforcement of the `  enable_fine_grained_dataset_acls_option  ` configuration for dataset-level access controls, the `  bigquery.datasets.getIamPolicy  ` Identity and Access Management (IAM) permission is required to view a dataset's access controls and to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](/bigquery/docs/information-schema-object-privileges) view. The `  bigquery.datasets.setIamPolicy  ` permission is required to update a dataset's access controls or to [create a dataset with access controls using the API](#changes_to_api_methods) .
+If you opt into enforcement of the `  enable_fine_grained_dataset_acls_option  ` configuration for dataset-level access controls, the `  bigquery.datasets.getIamPolicy  ` Identity and Access Management (IAM) permission is required to view a dataset's access controls and to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) view. The `  bigquery.datasets.setIamPolicy  ` permission is required to update a dataset's access controls or to [create a dataset with access controls using the API](https://docs.cloud.google.com/bigquery/docs/dataset-access-control#changes_to_api_methods) .
 
 If you don't opt in, the dataset-level access controls are unchanged.
 
@@ -8,7 +8,7 @@ If you don't opt in, the dataset-level access controls are unchanged.
 
 You can opt into enforcement of the permission changes. When you opt in, the `  bigquery.datasets.getIamPolicy  ` permission is necessary to get a dataset's access controls, and the `  bigquery.datasets.setIamPolicy  ` permission is necessary to update a dataset's access controls or to create a dataset with access controls using the API.
 
-To opt into enforcement, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  TRUE  ` at the organization or project level. If you want to opt out after opt in, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  FALSE  ` at the organization or project level. For instructions on enabling configuration settings, see [Manage configuration settings](/bigquery/docs/default-configuration) .
+To opt into enforcement, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  TRUE  ` at the organization or project level. If you want to opt out after opt in, set the `  enable_fine_grained_dataset_acls_option  ` configuration setting to `  FALSE  ` at the organization or project level. For instructions on enabling configuration settings, see [Manage configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration) .
 
 ### Configuration setting examples
 
@@ -16,19 +16,19 @@ The following examples show you how to set and remove the `  enable_fine_grained
 
 #### Configure organization settings
 
-To configure organization settings, use the [`  ALTER ORGANIZATION SET OPTIONS  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) . The following example sets `  enable_fine_grained_dataset_acls_option  ` to `  TRUE  ` at the organization level:
+To configure organization settings, use the [`  ALTER ORGANIZATION SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) . The following example sets `  enable_fine_grained_dataset_acls_option  ` to `  TRUE  ` at the organization level:
 
-``` text
+``` notranslate
 ALTER ORGANIZATION
 SET OPTIONS (
   `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
 ```
 
-Replace REGION with the [region](/bigquery/docs/locations#regions) associated with your organization—for example, `  us  ` or `  europe-west6  ` .
+Replace REGION with the [region](https://docs.cloud.google.com/bigquery/docs/locations#regions) associated with your organization—for example, `  us  ` or `  europe-west6  ` .
 
 The following example clears the organization-level `  enable_fine_grained_dataset_acls_option  ` setting:
 
-``` text
+``` notranslate
 ALTER ORGANIZATION
 SET OPTIONS (
   `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
@@ -36,11 +36,11 @@ SET OPTIONS (
 
 #### Configure project settings
 
-To configure project settings, use the [`  ALTER PROJECT SET OPTIONS  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) . The `  ALTER PROJECT SET OPTIONS  ` DDL statement optionally accepts the `  project_id  ` variable. If the `  project_id  ` is not specified, it defaults to the current project where the query runs.
+To configure project settings, use the [`  ALTER PROJECT SET OPTIONS  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) . The `  ALTER PROJECT SET OPTIONS  ` DDL statement optionally accepts the `  project_id  ` variable. If the `  project_id  ` is not specified, it defaults to the current project where the query runs.
 
 The following example sets `  enable_fine_grained_dataset_acls_option  ` to `  TRUE  ` .
 
-``` text
+``` notranslate
 ALTER PROJECT PROJECT_ID
 SET OPTIONS (
   `region-REGION.enable_fine_grained_dataset_acls_option` = TRUE);
@@ -50,7 +50,7 @@ Replace PROJECT\_ID with your project ID.
 
 The following example clears the project-level `  enable_fine_grained_dataset_acls_option  ` setting:
 
-``` text
+``` notranslate
 ALTER PROJECT PROJECT_ID
 SET OPTIONS (
   `region-REGION.enable_fine_grained_dataset_acls_option` = FALSE);
@@ -70,7 +70,7 @@ When you opt into early enforcement, the following bq tool commands are affected
 
 ### bq show
 
-You can use the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_show) command with the following flag:
+You can use the [`  bq show  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) command with the following flag:
 
   - **`  --dataset_view={METADATA|ACL|FULL}  `**  
     Specifies how to apply permissions when you're viewing a dataset's access controls or metadata. Use one of the following values:
@@ -80,7 +80,7 @@ You can use the [`  bq show  `](/bigquery/docs/reference/bq-cli-reference#bq_sho
 
 ### bq update
 
-You can use the [`  bq update  `](/bigquery/docs/reference/bq-cli-reference#bq_update) command with the following flag:
+You can use the [`  bq update  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) command with the following flag:
 
   - **`  --update_mode={UPDATE_METADATA|UPDATE_ACL|UPDATE_FULL}  `**  
     Specifies how to apply permissions when you're updating a dataset's access controls or metadata. Use one of the following values:
@@ -90,13 +90,13 @@ You can use the [`  bq update  `](/bigquery/docs/reference/bq-cli-reference#bq_u
 
 ## Changes to data control language (DCL) statements
 
-When you opt into early enforcement, the following permissions are required to run `  GRANT  ` and `  REVOKE  ` statements on datasets using the [data control language (DCL)](/bigquery/docs/reference/standard-sql/data-control-language) :
+When you opt into early enforcement, the following permissions are required to run `  GRANT  ` and `  REVOKE  ` statements on datasets using the [data control language (DCL)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-control-language) :
 
   - `  bigquery.datasets.setIamPolicy  `
 
 ## Changes to `     INFORMATION_SCHEMA    ` view queries
 
-When you opt into early enforcement, the `  bigquery.datasets.getIamPolicy  ` permission is required to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](/bigquery/docs/information-schema-object-privileges) view.
+When you opt into early enforcement, the `  bigquery.datasets.getIamPolicy  ` permission is required to query the [`  INFORMATION_SCHEMA.OBJECT_PRIVILEGES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-object-privileges) view.
 
 ## Changes to API methods
 
@@ -104,11 +104,11 @@ After you opt into early enforcement, the following REST v2 API dataset methods 
 
 ### datasets.get method
 
-The [`  datasets.get  ` method](/bigquery/docs/reference/rest/v2/datasets/get) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/get#query-parameters) named `  dataset_view  ` .
+The [`  datasets.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get) has an additional [query parameter](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/get#query-parameters) named `  dataset_view  ` .
 
 This parameter gives you more control over the information returned by the `  datasets.get  ` method. Rather than always returning both access controls and metadata, the `  dataset_view  ` parameter lets you specify whether to return just metadata, just access controls, or both.
 
-The `  access  ` field in the [dataset resource](/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
+The `  access  ` field in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
 
 The following table shows the required permission and API response for the different values supported by the `  dataset_view  ` parameter:
 
@@ -165,7 +165,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, you 
 
 The following example sends a `  GET  ` request with the `  dataset_view  ` parameter set to `  METADATA  ` :
 
-``` text
+``` notranslate
 GET https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?datasetView=METADATA&key=YOUR_API_KEY HTTP/1.1
 ```
 
@@ -177,11 +177,11 @@ Replace the following:
 
 ### datasets.update method
 
-The [`  datasets.update  ` method](/bigquery/docs/reference/rest/v2/datasets/update) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/update#query-parameters) named `  update_mode  ` .
+The [`  datasets.update  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update) has an additional [query parameter](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/update#query-parameters) named `  update_mode  ` .
 
 This parameter gives you more control over the fields updated by the `  datasets.update  ` method. Rather than always allowing updates to both access controls and metadata, the `  update_mode  ` parameter lets you specify whether to update just metadata, just access controls, or both.
 
-The `  access  ` field in the [dataset resource](/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
+The `  access  ` field in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
 
 The following table shows the required permission and API response for the different values supported by the `  update_mode  ` parameter:
 
@@ -239,7 +239,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `  PUT  ` request with the `  update_mode  ` parameter set to `  METADATA  ` :
 
-``` text
+``` notranslate
 PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
 ```
 
@@ -251,11 +251,11 @@ Replace the following:
 
 ### datasets.patch method
 
-The [`  datasets.patch  ` method](/bigquery/docs/reference/rest/v2/datasets/patch) has an additional [query parameter](/bigquery/docs/reference/rest/v2/datasets/patch#query-parameters) named `  update_mode  ` .
+The [`  datasets.patch  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) has an additional [query parameter](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch#query-parameters) named `  update_mode  ` .
 
 This parameter gives you more control over the fields updated by the `  datasets.patch  ` method. Rather than always allowing updates to both access controls and metadata, the `  update_mode  ` parameter lets you specify whether to update just metadata, just access controls, or both.
 
-The `  access  ` field in the [dataset resource](/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
+The `  access  ` field in the [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) contains the dataset's access controls. The other fields such as `  friendlyName  ` , `  description  ` , and `  labels  ` represent the dataset's metadata.
 
 The following table shows the required permission and API response for the different values supported by the `  update_mode  ` parameter:
 
@@ -312,7 +312,7 @@ If you don't opt into early enforcement, or if you opt out after opting in, BigQ
 
 The following example sends a `  PUT  ` request with the `  update_mode  ` parameter set to `  METADATA  ` :
 
-``` text
+``` notranslate
 PUT https://bigquery.googleapis.com/bigquery/v2/projects/YOUR_PROJECT/datasets/YOUR_DATASET?updateMode=METADATA&key=YOUR_API_KEY HTTP/1.1
 ```
 
@@ -324,6 +324,6 @@ Replace the following:
 
 ### datasets.insert method
 
-If you opt into early enforcement and use the [`  datasets.insert  ` method](/bigquery/docs/reference/rest/v2/datasets/patch) , to create a dataset with access controls, BigQuery verifies that the `  bigquery.datasets.create  ` and `  bigquery.datasets.setIamPolicy  ` permissions are granted to the user.
+If you opt into early enforcement and use the [`  datasets.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/patch) , to create a dataset with access controls, BigQuery verifies that the `  bigquery.datasets.create  ` and `  bigquery.datasets.setIamPolicy  ` permissions are granted to the user.
 
 If you use the API to create a dataset without access controls, only the `  bigquery.datasets.create  ` permission is required.

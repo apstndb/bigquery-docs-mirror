@@ -1,12 +1,12 @@
 # The ML.TRANSFORM function
 
-This document describes the `  ML.TRANSFORM  ` function, which you can use to preprocess feature data. This function processes input data by applying the data transformations captured in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of an existing model. The statistics that were calculated for data transformation during model training are applied to the input data of the function.
+This document describes the `  ML.TRANSFORM  ` function, which you can use to preprocess feature data. This function processes input data by applying the data transformations captured in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of an existing model. The statistics that were calculated for data transformation during model training are applied to the input data of the function.
 
-For more information about which models support this function, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about which models support this function, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.TRANSFORM(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) }
@@ -21,15 +21,15 @@ ML.TRANSFORM(
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a model. The model must have been created by using a `  CREATE MODEL  ` statement that includes a [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to manually preprocess feature data. You can check to see if a model uses a `  TRANSFORM  ` clause by using the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) to look at the [model's metadata](/bigquery/docs/getting-model-metadata#get_model_metadata) . If the model was trained using a `  TRANSFORM  ` clause, the model metadata contains a section about the transform columns. The function returns an error if you specify a model that was trained without a `  TRANSFORM  ` clause.
+  - `  MODEL_NAME  ` : the name of a model. The model must have been created by using a `  CREATE MODEL  ` statement that includes a [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) to manually preprocess feature data. You can check to see if a model uses a `  TRANSFORM  ` clause by using the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to look at the [model's metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata#get_model_metadata) . If the model was trained using a `  TRANSFORM  ` clause, the model metadata contains a section about the transform columns. The function returns an error if you specify a model that was trained without a `  TRANSFORM  ` clause.
 
   - `  TABLE_NAME  ` : the name of the input table that contains the feature data to preprocess.
     
-    If you specify a value for the `  TABLE_NAME  ` argument, the input column names in the table must match the input column names in the model's `  TRANSFORM  ` clause, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . You can get the input column names and data types from the [model's metadata](/bigquery/docs/getting-model-metadata#get_model_metadata) , in the section about the feature columns.
+    If you specify a value for the `  TABLE_NAME  ` argument, the input column names in the table must match the input column names in the model's `  TRANSFORM  ` clause, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . You can get the input column names and data types from the [model's metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata#get_model_metadata) , in the section about the feature columns.
 
-  - `  QUERY_STATEMENT  ` : A query that generates the feature data to preprocess. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : A query that generates the feature data to preprocess. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
-    If you specify a value for the `  QUERY_STATEMENT  ` argument, the input column names from the query must match the input column names in the model's `  TRANSFORM  ` clause, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . You can get the input column names and data types from the [model's metadata](/bigquery/docs/getting-model-metadata#get_model_metadata) , in the section about the feature columns.
+    If you specify a value for the `  QUERY_STATEMENT  ` argument, the input column names from the query must match the input column names in the model's `  TRANSFORM  ` clause, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) . You can get the input column names and data types from the [model's metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata#get_model_metadata) , in the section about the feature columns.
 
 ## Output
 
@@ -41,7 +41,7 @@ The following example returns feature data that has been preprocessed by using t
 
 Create the model that contains the `  TRANSFORM  ` clause:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL `mydataset.mymodel`
   TRANSFORM(
     species,
@@ -62,14 +62,12 @@ AS (
 
 Return feature data preprocessed by the model's `  TRANSFORM  ` clause:
 
-``` text
-SELECT
-  *
-FROM
-  ML.TRANSFORM(
-    MODEL `mydataset.mymodel`,
-    TABLE `bigquery-public-data.ml_datasets.penguins`);
-```
+    SELECT
+      *
+    FROM
+      ML.TRANSFORM(
+        MODEL `mydataset.mymodel`,
+        TABLE `bigquery-public-data.ml_datasets.penguins`);
 
 The result is similar to the following:
 
@@ -84,4 +82,4 @@ The result is similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

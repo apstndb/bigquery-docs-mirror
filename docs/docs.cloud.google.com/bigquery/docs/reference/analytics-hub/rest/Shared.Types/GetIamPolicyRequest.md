@@ -1,6 +1,6 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [GetPolicyOptions](#GetPolicyOptions)
-      - [JSON representation](#GetPolicyOptions.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetIamPolicyRequest#SCHEMA_REPRESENTATION)
+  - [GetPolicyOptions](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/GetIamPolicyRequest#GetPolicyOptions.SCHEMA_REPRESENTATION)
 
 Request message for `  GetIamPolicy  ` method.
 
@@ -15,7 +15,7 @@ Request message for `  GetIamPolicy  ` method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: string,
   &quot;options&quot;: {
     object (GetPolicyOptions)
@@ -54,7 +54,7 @@ Encapsulates settings provided to GetIamPolicy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;requestedPolicyVersion&quot;: integer
 }</code></pre></td>
 </tr>

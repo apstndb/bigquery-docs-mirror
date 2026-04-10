@@ -2,8 +2,8 @@
 
 This tutorial shows you how to do the following tasks:
 
-  - Create an [`  ARIMA_PLUS_XREG  ` time series forecasting model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Detect anomalies in the time series data by running the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) against the model.
+  - Create an [`  ARIMA_PLUS_XREG  ` time series forecasting model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+  - Detect anomalies in the time series data by running the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) against the model.
 
 This tutorial uses the following tables from the public `  epa_historical_air_quality  ` dataset, which contains daily PM 2.5, temperature, and wind speed information collected from multiple US cities:
 
@@ -27,7 +27,7 @@ This tutorial uses the following tables from the public `  epa_historical_air_qu
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Costs
 
@@ -35,9 +35,9 @@ In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery:** You incur costs for the data you process in BigQuery.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
@@ -50,6 +50,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -65,11 +67,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -78,15 +80,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -106,10 +108,12 @@ The PM2.5, temperature, and wind speed data are in separate tables. Create the `
 The new table has daily data from August 11, 2009 to January 31, 2022.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE `bqml_tutorial.seattle_air_quality_daily`
     AS
     WITH
@@ -153,10 +157,12 @@ The new table has daily data from August 11, 2009 to January 31, 2022.
 Create a multivariate time series model, using the data from `  bqml_tutorial.seattle_air_quality_daily  ` as training data.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.arimax_model`
       OPTIONS (
         model_type = 'ARIMA_PLUS_XREG',
@@ -182,10 +188,12 @@ Create a multivariate time series model, using the data from `  bqml_tutorial.se
 Run anomaly detection against the historical data that you used to train the model.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -199,27 +207,27 @@ Run anomaly detection against the historical data that you used to train the mod
     
     The results look similar to the following:
     
-    ``` text
-    +-------------------------+-------------+------------+--------------------+--------------------+---------------------+
-    | date                    | temperature | is_anomaly | lower_bound        | upper_bound        | anomaly_probability |
-    +--------------------------------------------------------------------------------------------------------------------+
-    | 2009-08-11 00:00:00 UTC | 70.1        | false      | 67.647370742988727 | 72.552629257011262 | 0                   |
-    +--------------------------------------------------------------------------------------------------------------------+
-    | 2009-08-12 00:00:00 UTC | 73.4        | false      | 71.7035428351283   | 76.608801349150838 | 0.20478819992561115 |
-    +--------------------------------------------------------------------------------------------------------------------+
-    | 2009-08-13 00:00:00 UTC | 64.6        | true       | 67.740408724826068 | 72.6456672388486   | 0.945588334903206   |
-    +-------------------------+-------------+------------+--------------------+--------------------+---------------------+
-    ```
+        +-------------------------+-------------+------------+--------------------+--------------------+---------------------+
+        | date                    | temperature | is_anomaly | lower_bound        | upper_bound        | anomaly_probability |
+        +--------------------------------------------------------------------------------------------------------------------+
+        | 2009-08-11 00:00:00 UTC | 70.1        | false      | 67.647370742988727 | 72.552629257011262 | 0                   |
+        +--------------------------------------------------------------------------------------------------------------------+
+        | 2009-08-12 00:00:00 UTC | 73.4        | false      | 71.7035428351283   | 76.608801349150838 | 0.20478819992561115 |
+        +--------------------------------------------------------------------------------------------------------------------+
+        | 2009-08-13 00:00:00 UTC | 64.6        | true       | 67.740408724826068 | 72.6456672388486   | 0.945588334903206   |
+        +-------------------------+-------------+------------+--------------------+--------------------+---------------------+
 
 ## Perform anomaly detection on new data
 
 Run anomaly detection on the new data that you generate.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the SQL editor pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -251,17 +259,15 @@ Run anomaly detection on the new data that you generate.
     
     The results look similar to the following:
     
-    ``` text
-    +-------------------------+-------------+------------+--------------------+--------------------+---------------------+------------+------------+
-    | date                    | temperature | is_anomaly | lower_bound        | upper_bound        | anomaly_probability | pm25       | wind_speed |
-    +----------------------------------------------------------------------------------------------------------------------------------------------+
-    | 2023-02-01 00:00:00 UTC | 44.0        | true       | 36.89918003713138  | 41.8044385511539   | 0.88975675709801583 | 8.8166665  | 1.6525     |
-    +----------------------------------------------------------------------------------------------------------------------------------------------+
-    | 2023-02-02 00:00:00 UTC | 40.5        | false      | 34.439946284051572 | 40.672021330796483 | 0.57358239699845348 | 11.8354165 | 1.558333   |
-    +--------------------------------------------------------------------------------------------------------------------+-------------------------+
-    | 2023-02-03 00:00:00 UTC | 46.5        | true       | 33.615139992931191 | 40.501364463964549 | 0.97902867696346974 | 10.1395835 | 1.6895835  |
-    +-------------------------+-------------+------------+--------------------+--------------------+---------------------+-------------------------+
-    ```
+        +-------------------------+-------------+------------+--------------------+--------------------+---------------------+------------+------------+
+        | date                    | temperature | is_anomaly | lower_bound        | upper_bound        | anomaly_probability | pm25       | wind_speed |
+        +----------------------------------------------------------------------------------------------------------------------------------------------+
+        | 2023-02-01 00:00:00 UTC | 44.0        | true       | 36.89918003713138  | 41.8044385511539   | 0.88975675709801583 | 8.8166665  | 1.6525     |
+        +----------------------------------------------------------------------------------------------------------------------------------------------+
+        | 2023-02-02 00:00:00 UTC | 40.5        | false      | 34.439946284051572 | 40.672021330796483 | 0.57358239699845348 | 11.8354165 | 1.558333   |
+        +--------------------------------------------------------------------------------------------------------------------+-------------------------+
+        | 2023-02-03 00:00:00 UTC | 46.5        | true       | 33.615139992931191 | 40.501364463964549 | 0.97902867696346974 | 10.1395835 | 1.6895835  |
+        +-------------------------+-------------+------------+--------------------+--------------------+---------------------+-------------------------+
 
 ## Clean up
 
@@ -273,6 +279,8 @@ Run anomaly detection on the new data that you generate.
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

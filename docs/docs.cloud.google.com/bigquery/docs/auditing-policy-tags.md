@@ -1,6 +1,6 @@
 # Audit policy tags
 
-This document describes how to use [Cloud Logging](/logging/docs) to audit activities related to policy tags. For example, you can determine:
+This document describes how to use [Cloud Logging](https://docs.cloud.google.com/logging/docs) to audit activities related to policy tags. For example, you can determine:
 
   - The email address for the principal that grants or removes access on a policy tag
 
@@ -10,11 +10,13 @@ This document describes how to use [Cloud Logging](/logging/docs) to audit activ
 
 ## Access to logs
 
-For information about the permission you need to view logs, see the [Cloud Logging access control guide](/logging/docs/access-control) .
+For information about the permission you need to view logs, see the [Cloud Logging access control guide](https://docs.cloud.google.com/logging/docs/access-control) .
 
 ## Viewing logs for policy tag events
 
 1.  Go to the **Logs Explorer** page in the Google Cloud console.
+    
+    [Go to Logs Explorer](https://console.cloud.google.com/logs/query)
 
 2.  In the resources drop-down list, click **Audited Resource** , click **Audited Resources** again, and then click **datacatalog.googleapis.com** . You will see recent audit log entries of Data Catalog resources.
 
@@ -30,4 +32,4 @@ For information about the permission you need to view logs, see the [Cloud Loggi
 
 ## What's next
 
-Learn about [best practices for policy tags](/bigquery/docs/best-practices-policy-tags) .
+Learn about [best practices for policy tags](https://docs.cloud.google.com/bigquery/docs/best-practices-policy-tags) .

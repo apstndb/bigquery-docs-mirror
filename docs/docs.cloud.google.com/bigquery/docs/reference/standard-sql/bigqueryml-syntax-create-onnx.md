@@ -1,12 +1,12 @@
 # The CREATE MODEL statement for importing ONNX models
 
-This document describes the `  CREATE MODEL  ` statement for importing [Open Neural Network Exchange (ONNX)](https://onnx.ai/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. ONNX is an open standard format for representing machine learning models.
+This document describes the `  CREATE MODEL  ` statement for importing [Open Neural Network Exchange (ONNX)](https://onnx.ai/) models into BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. ONNX is an open standard format for representing machine learning models.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(MODEL_TYPE = 'ONNX', MODEL_PATH = string_value
@@ -45,9 +45,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'ONNX'
-```
+    MODEL_TYPE = 'ONNX'
 
 **Description**
 
@@ -57,13 +55,11 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-``` text
-MODEL_PATH = string_value
-```
+    MODEL_PATH = string_value
 
 **Description**
 
-Specifies the [Cloud Storage URI](/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the ONNX model to import. This option is required.
+Specifies the [Cloud Storage URI](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#gcs-uri) of the ONNX model to import. This option is required.
 
 **Arguments**
 
@@ -73,13 +69,9 @@ BigQuery ML imports the model from Cloud Storage by using the credentials of the
 
 **Examples**
 
-``` text
-MODEL_PATH = 'gs://bucket/path/to/onnx_model/*'
-```
+    MODEL_PATH = 'gs://bucket/path/to/onnx_model/*'
 
-``` text
-MODEL_PATH = 'gs://bucket/path/to/onnx_model/model.onnx'
-```
+    MODEL_PATH = 'gs://bucket/path/to/onnx_model/model.onnx'
 
 ### `     KMS_KEY_NAME    `
 
@@ -89,15 +81,13 @@ MODEL_PATH = 'gs://bucket/path/to/onnx_model/model.onnx'
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ## Supported data types for input and output columns
 
@@ -135,7 +125,7 @@ BigQuery ML converts some ONNX model input and output columns to BigQuery data t
 <code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT32      </code><br />
 <code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT64      </code></td>
 <td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types"><code dir="ltr" translate="no">        INT64       </code></a></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT16      </code><br />
@@ -143,17 +133,17 @@ BigQuery ML converts some ONNX model input and output columns to BigQuery data t
 <code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT      </code><br />
 <code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_DOUBLE      </code></td>
 <td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types"><code dir="ltr" translate="no">        FLOAT64       </code></a></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_BOOL      </code></td>
 <td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#boolean_type"><code dir="ltr" translate="no">        BOOL       </code></a></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING      </code></td>
 <td>Supported</td>
-<td><a href="/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type"><code dir="ltr" translate="no">        STRING       </code></a></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       ONNX_TENSOR_ELEMENT_DATA_TYPE_COMPLEX64      </code><br />
@@ -166,14 +156,14 @@ BigQuery ML converts some ONNX model input and output columns to BigQuery data t
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
 Imported ONNX models have the following limitations:
 
   - ONNX models must be in `  .onnx  ` format.
-  - You can only use imported ONNX models with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+  - You can only use imported ONNX models with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
   - Model size is limited to 450 MB.
   - Among [ONNX value types](https://onnxruntime.ai/docs/api/java/ai/onnxruntime/OnnxValue.OnnxValueType.html) , only the [Tensor type](https://onnxruntime.ai/docs/api/java/ai/onnxruntime/OnnxValue.OnnxValueType.html#ONNX_TYPE_TENSOR) is supported in BigQuery ML.
   - BigQuery ML uses the [ONNX Runtime 1.12.0](https://onnxruntime.ai/docs/) library to make predictions on ONNX models. Check [ONNX Runtime compatibility](https://onnxruntime.ai/docs/reference/compatibility.html) for the [ONNX version](https://github.com/onnx/onnx/blob/master/docs/Versioning.md) supported by the 1.12 library.
@@ -183,11 +173,9 @@ Imported ONNX models have the following limitations:
 
 The following example imports an ONNX model into BigQuery as a BigQuery model. The example assumes that there is an existing ONNX model located at `  gs://bucket/path/to/onnx_model/*  ` .
 
-``` text
-CREATE MODEL `project_id.mydataset.mymodel`
- OPTIONS(MODEL_TYPE='ONNX',
-         MODEL_PATH="gs://bucket/path/to/onnx_model/*")
-```
+    CREATE MODEL `project_id.mydataset.mymodel`
+     OPTIONS(MODEL_TYPE='ONNX',
+             MODEL_PATH="gs://bucket/path/to/onnx_model/*")
 
 ## Troubleshooting
 

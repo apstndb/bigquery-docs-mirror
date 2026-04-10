@@ -5,18 +5,18 @@ This document describes the `  ML.DETECT_ANOMALIES  ` function, which lets you p
 You can use the following types of models with `  ML.DETECT_ANOMALIES  ` , depending on the type of input data you want to analyze:
 
   - For time series data, use one of the following models:
-      - [`  ARIMA_PLUS  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - [`  ARIMA_PLUS_XREG  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
+      - [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+      - [`  ARIMA_PLUS_XREG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series)
   - For [independent and identically distributed random variables (IID)](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) data, use one of the following models:
-      - [K-means models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
-      - [Principal component analysis (PCA) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
-      - [Autoencoder models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
+      - [K-means models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+      - [Principal component analysis (PCA) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+      - [Autoencoder models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder)
 
-If you don't want to manage your own times series anomaly detection model, you can use the [`  AI.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) with BigQuery ML's built-in [TimesFM time series model](/bigquery/docs/timesfm-model) to perform anomaly detection.
+If you don't want to manage your own times series anomaly detection model, you can use the [`  AI.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-detect-anomalies) with BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to perform anomaly detection.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 # ARIMA_PLUS and ARIMA_PLUS_XREG models:
 ML.DETECT_ANOMALIES(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`
@@ -44,7 +44,7 @@ ML.DETECT_ANOMALIES(
 
   - `  TABLE  ` : The name of the table to use to perform anomaly detection.
 
-  - `  QUERY_STATEMENT  ` : The GoogleSQL query that generates the data to use to perform anomaly detection. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : The GoogleSQL query that generates the data to use to perform anomaly detection. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  ANOMALY_PROB_THRESHOLD  ` : a `  FLOAT64  ` value that identifies the custom threshold to use for anomaly detection. The value must be in the range `  [0, 1)  ` , with a default value of `  0.95  ` .
     
@@ -52,7 +52,7 @@ ML.DETECT_ANOMALIES(
 
   - `  CONTAMINATION  ` : a `  FLOAT64  ` value that identifies the proportion of anomalies in the training dataset that are used to create the autoencoder, k-means, or PCA input models. The value must be in the range `  [0, 0.5]  ` .
     
-    For example, a `  CONTAMINATION  ` value of `  0.1  ` means that 10% of the training data that was used to create the input model is anomalous. The `  CONTAMINATION  ` value determines the cutoff threshold of the target metric to become anomalous, and any input data with a target metric greater than the cutoff threshold is identified as anomalous. The target metric is [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for autoencoder and PCA models, and the target metric is normalized distance for k-means models. For more information on normalized distance, see [K-means model output](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies#k-means_model_output) .
+    For example, a `  CONTAMINATION  ` value of `  0.1  ` means that 10% of the training data that was used to create the input model is anomalous. The `  CONTAMINATION  ` value determines the cutoff threshold of the target metric to become anomalous, and any input data with a target metric greater than the cutoff threshold is identified as anomalous. The target metric is [mean squared error](https://en.wikipedia.org/wiki/Mean_squared_error) for autoencoder and PCA models, and the target metric is normalized distance for k-means models. For more information on normalized distance, see [K-means model output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies#k-means_model_output) .
 
 ## Input
 
@@ -62,19 +62,19 @@ The input requirements for the `  ML.DETECT_ANOMALIES  ` function depend upon th
 
 Anomaly detection with `  ARIMA_PLUS  ` and `  ARIMA_PLUS_XREG  ` models has the following requirements:
 
-  - To detect anomalies in historical time-series data, the [`  DECOMPOSE_TIME_SERIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option must be set as its default value of `  TRUE  ` when the input model is created. Neither `  table_name  ` nor `  query_statement  ` is accepted.
+  - To detect anomalies in historical time-series data, the [`  DECOMPOSE_TIME_SERIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option must be set as its default value of `  TRUE  ` when the input model is created. Neither `  table_name  ` nor `  query_statement  ` is accepted.
   - The `  anomaly_prob_threshold  ` value must be specified to detect anomalies in new time-series data.
   - The column names of either the `  table_name  ` input table or the `  query_statement  ` clause must match the column names that are used to create the input model.
   - The data types of the `  TIME_SERIES_ID_COL  ` columns must match the data types of the columns that are used to create the input model.
 
-For a list of supported data types, see [`  TIME_SERIES_TIMESTAMP_COL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) and [`  TIME_SERIES_DATA_COL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_data_col) .
+For a list of supported data types, see [`  TIME_SERIES_TIMESTAMP_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) and [`  TIME_SERIES_DATA_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_data_col) .
 
 ### Autoencoder, k-means, or PCA model input
 
 Anomaly detection with autoencoder, k-means, or PCA models has the following requirements:
 
-  - The column names of the input data from either the `  table  ` or the `  query_statement  ` argument must match the column names of the model. The column data types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) .
-  - If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause can appear in `  query_statement  ` .
+  - The column names of the input data from either the `  table  ` or the `  query_statement  ` argument must match the column names of the model. The column data types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) .
+  - If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause can appear in `  query_statement  ` .
 
 ## Output
 
@@ -85,8 +85,8 @@ Anomaly detection with autoencoder, k-means, or PCA models has the following req
 `  ARIMA_PLUS  ` and `  ARIMA_PLUS_XREG  ` model output includes the following columns, followed by the input table columns, if present. Output can include the following:
 
   - `  time_series_id_col  ` or `  time_series_id_cols  ` : the identifiers of a time series. Only present when forecasting multiple time series at once. The column names and types are inherited from the `  TIME_SERIES_ID_COL  ` option as specified in the model creation query.
-  - `  time_series_timestamp  ` : a `  STRING  ` value that contains the timestamp column for a time series. The column name is inherited from the `  TIME_SERIES_TIMESTAMP_COL  ` option as specified in the `  CREATE MODEL  ` statement. The column has a type of `  TIMESTAMP  ` , regardless of the [`  TIME_SERIES_TIMESTAMP_COL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) input column data type.
-  - `  time_series_data  ` : a `  STRING  ` value that contains the data column for a time series. The column name is inherited from the `  TIME_SERIES_DATA_COL  ` option as specified in the `  CREATE MODEL  ` statement. The column has a type of `  FLOAT64  ` , regardless of the [`  TIME_SERIES_DATA_COL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_data_col) input column data type.
+  - `  time_series_timestamp  ` : a `  STRING  ` value that contains the timestamp column for a time series. The column name is inherited from the `  TIME_SERIES_TIMESTAMP_COL  ` option as specified in the `  CREATE MODEL  ` statement. The column has a type of `  TIMESTAMP  ` , regardless of the [`  TIME_SERIES_TIMESTAMP_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_timestamp_col) input column data type.
+  - `  time_series_data  ` : a `  STRING  ` value that contains the data column for a time series. The column name is inherited from the `  TIME_SERIES_DATA_COL  ` option as specified in the `  CREATE MODEL  ` statement. The column has a type of `  FLOAT64  ` , regardless of the [`  TIME_SERIES_DATA_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#time_series_data_col) input column data type.
   - `  is_anomaly  ` : a `  BOOL  ` value that indicates whether the value at a specific timestamp is an anomaly. If the `  anomaly_probability  ` value is above the `  anomaly_prob_threshold  ` value, then the `  time_series_data  ` value is out of the range for the lower and upper bounds and the `  is_anomaly  ` value is `  TRUE  ` .
   - `  lower_bound  ` : a `  FLOAT64  ` value that contains the lower bound of the prediction result.
   - `  upper_bound  ` : a `  FLOAT64  ` value that that contains the upper bound of the prediction result.
@@ -96,8 +96,8 @@ Anomaly detection with autoencoder, k-means, or PCA models has the following req
 
   - The function returns `  NULL  ` values in the `  is_anomaly  ` , `  upper_bound  ` , `  lower_bound  ` and `  anomaly_probability  ` columns for rows with invalid input, which include the following cases:
       - The value in the `  TIME_SERIES_ID_COL  ` column does not exist in the model.
-      - The value in the `  TIME_SERIES_TIMESTAMP_COL  ` column is not in the range of the forecast [horizon](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#horizon) .
-      - The value in the `  TIME_SERIES_TIMESTAMP_COL  ` column does not follow the same [frequency](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#data_frequency) as the one in the model.
+      - The value in the `  TIME_SERIES_TIMESTAMP_COL  ` column is not in the range of the forecast [horizon](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#horizon) .
+      - The value in the `  TIME_SERIES_TIMESTAMP_COL  ` column does not follow the same [frequency](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#data_frequency) as the one in the model.
 
 ### Autoencoder and PCA model output
 
@@ -111,7 +111,7 @@ Autoencoder and PCA model output includes the following columns, followed by the
 K-means model output includes the following, followed by the input table columns:
 
   - `  is_anomaly  ` : a `  BOOL  ` value that indicates whether the value is anomalous.
-  - `  normalized_distance  ` : a `  FLOAT64  ` value that contains the shortest distance among the normalized distances from the input data to each cluster centroid. Normalized distances are computed as the absolute distance from the input data to a cluster centroid, divided by the cluster's radius. The cluster radius is defined as the root mean square of all of the distances from each cluster's assigned data points to its centroid. Normalized distance is used in favor of absolute distance to determine anomalies because anomalies might not be detected as effectively using absolute distances, since they don't account for cluster radius. The distance type is determined by the [`  DISTANCE_TYPE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#distance_type) value specified during model training.
+  - `  normalized_distance  ` : a `  FLOAT64  ` value that contains the shortest distance among the normalized distances from the input data to each cluster centroid. Normalized distances are computed as the absolute distance from the input data to a cluster centroid, divided by the cluster's radius. The cluster radius is defined as the root mean square of all of the distances from each cluster's assigned data points to its centroid. Normalized distance is used in favor of absolute distance to determine anomalies because anomalies might not be detected as effectively using absolute distances, since they don't account for cluster radius. The distance type is determined by the [`  DISTANCE_TYPE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#distance_type) value specified during model training.
   - `  centroid_id  ` : an `  INT64  ` value that contains the centroid ID.
 
 ## Examples
@@ -120,9 +120,9 @@ The following examples show how to use `  ML.DETECT_ANOMALIES  ` with different 
 
 ### `     ARIMA_PLUS    ` model without specified settings
 
-The following example detects anomalies using an `  ARIMA_PLUS  ` model that has the [`  DECOMPOSE_TIME_SERIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `  TRUE  ` , without specifying the `  anomaly_prob_threshold  ` argument.
+The following example detects anomalies using an `  ARIMA_PLUS  ` model that has the [`  DECOMPOSE_TIME_SERIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `  TRUE  ` , without specifying the `  anomaly_prob_threshold  ` argument.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -131,20 +131,18 @@ FROM
 
 If the time series input column names are `  ts_timestamp  ` and `  ts_data  ` , then this query returns results similar to the following:
 
-``` text
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-|      ts_timestamp       | ts_data  | is_anomaly | lower_bound | upper_bound | anomaly_probability |
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-| 2021-01-01 00:00:01 UTC |  125.3   |   FALSE    |  123.5      |  139.1      |  0.93               |
-| 2021-01-02 00:00:01 UTC |  145.3   |   TRUE     |  128.5      |  143.1      |  0.96               |
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-```
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
+    |      ts_timestamp       | ts_data  | is_anomaly | lower_bound | upper_bound | anomaly_probability |
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
+    | 2021-01-01 00:00:01 UTC |  125.3   |   FALSE    |  123.5      |  139.1      |  0.93               |
+    | 2021-01-02 00:00:01 UTC |  145.3   |   TRUE     |  128.5      |  143.1      |  0.96               |
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
 
 ### `     ARIMA_PLUS    ` model with a custom `     anomaly_prob_threshold    ` value
 
-The following example detects anomalies using an `  ARIMA_PLUS  ` model that has the [`  DECOMPOSE_TIME_SERIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `  TRUE  ` , using a custom `  anomaly_prob_threshold  ` value of `  0.8  ` :
+The following example detects anomalies using an `  ARIMA_PLUS  ` model that has the [`  DECOMPOSE_TIME_SERIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#decompose_time_series) training option set to its default value of `  TRUE  ` , using a custom `  anomaly_prob_threshold  ` value of `  0.8  ` :
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -154,20 +152,18 @@ FROM
 
 If the time series input column names are `  ts_timestamp  ` and `  ts_data  ` , then this query returns results similar to the following:
 
-``` text
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-|      ts_timestamp       | ts_data  | is_anomaly | lower_bound | upper_bound | anomaly_probability |
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-| 2021-01-01 00:00:01 UTC |  125.3   |    TRUE    |  129.5      |  133.6      |  0.93               |
-| 2021-01-02 00:00:01 UTC |  145.3   |    TRUE    |  131.5      |  136.6      |  0.96               |
-+-------------------------+----------+------------+-------------+-------------+---------------------+
-```
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
+    |      ts_timestamp       | ts_data  | is_anomaly | lower_bound | upper_bound | anomaly_probability |
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
+    | 2021-01-01 00:00:01 UTC |  125.3   |    TRUE    |  129.5      |  133.6      |  0.93               |
+    | 2021-01-02 00:00:01 UTC |  145.3   |    TRUE    |  131.5      |  136.6      |  0.96               |
+    +-------------------------+----------+------------+-------------+-------------+---------------------+
 
 ### `     ARIMA_PLUS    ` model with input data as a query statement
 
 The following example detects anomalies using an `  ARIMA_PLUS  ` model, using a custom `  anomaly_prob_threshold  ` value of `  0.9  ` and passing an input data table into the query:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -188,20 +184,18 @@ This example uses the following column values:
 
 This example returns results similar to the following:
 
-``` text
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-| state |   city     |           date          | temperature | is_anomaly | lower_bound | upper_bound | anomaly_probability | weather |
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-| "WA"  | "Kirkland" | 2021-01-01 00:00:00 UTC |   38.1      |   FALSE    |     36.4    |    42.0     |        0.8293       | "sunny" |
-| "WA"  | "Kirkland" | 2021-01-02 00:00:00 UTC |   37.1      |   TRUE     |     37.4    |    43.3     |        0.9124       | "rainy" |
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-```
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
+    | state |   city     |           date          | temperature | is_anomaly | lower_bound | upper_bound | anomaly_probability | weather |
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
+    | "WA"  | "Kirkland" | 2021-01-01 00:00:00 UTC |   38.1      |   FALSE    |     36.4    |    42.0     |        0.8293       | "sunny" |
+    | "WA"  | "Kirkland" | 2021-01-02 00:00:00 UTC |   37.1      |   TRUE     |     37.4    |    43.3     |        0.9124       | "rainy" |
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
 
 ### `     ARIMA_PLUS    ` model with input data as a table
 
 The following example detects anomalies using an `  ARIMA_PLUS  ` model, using a custom `  anomaly_prob_threshold  ` value of `  0.9  ` and passing an input data table into the query:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -212,20 +206,18 @@ FROM
 
 If the `  TIME_SERIES_ID_COL  ` column names are `  state  ` , `  city  ` , and `  TIME_SERIES_TIMESTAMP_COL  ` , and the `  TIME_SERIES_DATA_COL  ` column names are `  date  ` and `  temperature  ` , and one additional column `  weather  ` is in the input data table, then this query returns results similar to the following:
 
-``` text
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-| state |   city     |           date          | temperature | is_anomaly | lower_bound | upper_bound | anomaly_probability | weather |
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-| "WA"  | "Kirkland" | 2021-01-01 00:00:00 UTC |   38.1      |   FALSE    |     36.4    |    42.0     |        0.8293       | "sunny" |
-| "WA"  | "Kirkland" | 2021-01-02 00:00:00 UTC |   37.1      |   TRUE     |     37.4    |    43.3     |        0.9124       | "rainy" |
-+-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
-```
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
+    | state |   city     |           date          | temperature | is_anomaly | lower_bound | upper_bound | anomaly_probability | weather |
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
+    | "WA"  | "Kirkland" | 2021-01-01 00:00:00 UTC |   38.1      |   FALSE    |     36.4    |    42.0     |        0.8293       | "sunny" |
+    | "WA"  | "Kirkland" | 2021-01-02 00:00:00 UTC |   37.1      |   TRUE     |     37.4    |    43.3     |        0.9124       | "rainy" |
+    +-------+------------+-------------------------+-------------+------------+-------------+-------------+---------------------+---------+
 
 ### `     ARIMA_PLUS_XREG    ` model with a custom `     anomaly_prob_threshold    ` value
 
 The following example detects anomalies using an `  ARIMA_PLUS_XREG  ` model that uses a custom `  anomaly_prob_threshold  ` value of `  0.6  ` :
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -239,21 +231,19 @@ ORDER BY
 
 If the time series input column names are `  date  ` and `  temperature  ` , then this query returns results similar to the following:
 
-``` text
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-|      date               | temperature | is_anomaly | lower_bound         | upper_bound         | anomaly_probability  |
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-| 2009-08-11 00:00:00 UTC |  70.1       |    false   |  67.65879917809896  |  72.541200821901029 |  0.0                 |
-| 2009-08-12 00:00:00 UTC |  73.4       |    false   |  71.714971312549849 |  76.597372956351919 |  0.20573021642489953 |
-| 2009-08-13 00:00:00 UTC |  64.6       |    true    |  67.7428898975034   |  72.625291541305472 |  0.94632610424009034 |
-+-------------------------+-------------+------------+---------------------+---------------------+----------------------+
-```
+    +-------------------------+-------------+------------+---------------------+---------------------+----------------------+
+    |      date               | temperature | is_anomaly | lower_bound         | upper_bound         | anomaly_probability  |
+    +-------------------------+-------------+------------+---------------------+---------------------+----------------------+
+    | 2009-08-11 00:00:00 UTC |  70.1       |    false   |  67.65879917809896  |  72.541200821901029 |  0.0                 |
+    | 2009-08-12 00:00:00 UTC |  73.4       |    false   |  71.714971312549849 |  76.597372956351919 |  0.20573021642489953 |
+    | 2009-08-13 00:00:00 UTC |  64.6       |    true    |  67.7428898975034   |  72.625291541305472 |  0.94632610424009034 |
+    +-------------------------+-------------+------------+---------------------+---------------------+----------------------+
 
 ### Autoencoder model
 
 The following example detects anomalies using an autoencoder model and a `  contamination  ` value of `  0.1  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -264,20 +254,18 @@ FROM
 
 If the feature column names are `  f1  ` and `  f2  ` , then this query returns results similar to the following:
 
-``` text
-+------------+--------------------+---------+--------+
-| is_anomaly | mean_squared_error |    f1   |   f2   |
-+------------+--------------------+---------+--------+
-|   FALSE    |     0.63456        |   120   |  "a"   |
-|   TRUE     |     11.342         |  15000  |  "b"   |
-+------------+--------------------+---------+--------+
-```
+    +------------+--------------------+---------+--------+
+    | is_anomaly | mean_squared_error |    f1   |   f2   |
+    +------------+--------------------+---------+--------+
+    |   FALSE    |     0.63456        |   120   |  "a"   |
+    |   TRUE     |     11.342         |  15000  |  "b"   |
+    +------------+--------------------+---------+--------+
 
 ### K-means model
 
 The following example detects anomalies using a k-means model and a `  contamination  ` value of `  0.2  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -293,20 +281,18 @@ FROM
 
 This query returns results similar to the following:
 
-``` text
-+------------+---------------------+-------------+--------+--------+
-| is_anomaly | normalized_distance | centroid_id |   f1   |   f2   |
-+------------+---------------------+-------------+--------+--------+
-|   FALSE    |     0.63456         |     1       |  120   |  "a"   |
-|   TRUE     |     6.3243          |     2       | 15000  |  "b"   |
-+------------+---------------------+-------------+--------+--------+
-```
+    +------------+---------------------+-------------+--------+--------+
+    | is_anomaly | normalized_distance | centroid_id |   f1   |   f2   |
+    +------------+---------------------+-------------+--------+--------+
+    |   FALSE    |     0.63456         |     1       |  120   |  "a"   |
+    |   TRUE     |     6.3243          |     2       | 15000  |  "b"   |
+    +------------+---------------------+-------------+--------+--------+
 
 ### PCA model
 
 The following example detects anomalies using a PCA model and a `  contamination  ` value of `  0.1  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -317,14 +303,12 @@ FROM
 
 If the feature column names are `  f1  ` , `  f2  ` and `  f3  ` , then this query returns results similar to the following:
 
-``` text
-+------------+--------------------+---------+--------+------+
-| is_anomaly | mean_squared_error |    f1   |   f2   |  f3  |
-+------------+--------------------+---------+--------+------+
-|   FALSE    |     0.63456        |   120   |  "a"   |  0.9 |
-|   TRUE     |     11.342         |  15000  |  "b"   |  25  |
-+------------+--------------------+---------+--------+------+
-```
+    +------------+--------------------+---------+--------+------+
+    | is_anomaly | mean_squared_error |    f1   |   f2   |  f3  |
+    +------------+--------------------+---------+--------+------+
+    |   FALSE    |     0.63456        |   120   |  "a"   |  0.9 |
+    |   TRUE     |     11.342         |  15000  |  "b"   |  25  |
+    +------------+--------------------+---------+--------+------+
 
 ## Pricing
 
@@ -332,9 +316,9 @@ All queries that use the `  ML.DETECT_ANOMALIES  ` function are billable, regard
 
 ## What's next
 
-  - For more information about model inference, see [Model inference overview](/bigquery/docs/inference-overview) .
+  - For more information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
 
   - For more information about supported SQL statements and functions for models that work with `  ML.DETECT_ANOMALIES  ` , see the following documents:
     
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)

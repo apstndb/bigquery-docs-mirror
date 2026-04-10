@@ -10,7 +10,7 @@ Product targeting data helps merchants understand which products are targeted by
 
 ## Table name
 
-If you choose the **Product Targeting** report option when you [set up a Google Merchant Center transfer](/bigquery/docs/merchant-center-transfer-schedule-transfers#set_up_a_google_merchant_center_transfer) , BigQuery creates a table for the data during the transfer. The table name starts with the `  ProductTargeting_  ` prefix:
+If you choose the **Product Targeting** report option when you [set up a Google Merchant Center transfer](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer-schedule-transfers#set_up_a_google_merchant_center_transfer) , BigQuery creates a table for the data during the transfer. The table name starts with the `  ProductTargeting_  ` prefix:
 
   - If you configured the transfer with an individual merchant ID, the table name is `  ProductTargeting_ MERCHANT_ID  ` .
   - If you configured the transfer with an MCA account, the table name is `  ProductTargeting_ AGGREGATOR_ID  ` .
@@ -52,7 +52,7 @@ The Product Targeting table has the following schema:
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Whether the product is targeted by Ads campaigns.<br />
 
-<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code dir="ltr" translate="no">        destinations.status       </code> field of the <a href="/bigquery/docs/merchant-center-products-schema">Products report</a> .</td>
+<strong>Note:</strong> Products targeted by Ads campaigns might not be eligible to serve. To check if your products are eligible, use the <code dir="ltr" translate="no">        destinations.status       </code> field of the <a href="https://docs.cloud.google.com/bigquery/docs/merchant-center-products-schema">Products report</a> .</td>
 <td>TARGETED, NOT_TARGETED</td>
 </tr>
 </tbody>

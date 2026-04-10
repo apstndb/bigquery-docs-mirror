@@ -1,150 +1,150 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobInsertion](#BigQueryAuditMetadata.JobInsertion)
-      - [JSON representation](#BigQueryAuditMetadata.JobInsertion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.Job](#BigQueryAuditMetadata.Job)
-      - [JSON representation](#BigQueryAuditMetadata.Job.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobConfig](#BigQueryAuditMetadata.JobConfig)
-      - [JSON representation](#BigQueryAuditMetadata.JobConfig.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobConfig.Query](#BigQueryAuditMetadata.JobConfig.Query)
-      - [JSON representation](#BigQueryAuditMetadata.JobConfig.Query.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableDefinition](#BigQueryAuditMetadata.TableDefinition)
-      - [JSON representation](#BigQueryAuditMetadata.TableDefinition.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.EncryptionInfo](#BigQueryAuditMetadata.EncryptionInfo)
-      - [JSON representation](#BigQueryAuditMetadata.EncryptionInfo.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobConfig.Load](#BigQueryAuditMetadata.JobConfig.Load)
-      - [JSON representation](#BigQueryAuditMetadata.JobConfig.Load.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobConfig.Extract](#BigQueryAuditMetadata.JobConfig.Extract)
-      - [JSON representation](#BigQueryAuditMetadata.JobConfig.Extract.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobConfig.TableCopy](#BigQueryAuditMetadata.JobConfig.TableCopy)
-      - [JSON representation](#BigQueryAuditMetadata.JobConfig.TableCopy.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStatus](#BigQueryAuditMetadata.JobStatus)
-      - [JSON representation](#BigQueryAuditMetadata.JobStatus.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStats](#BigQueryAuditMetadata.JobStats)
-      - [JSON representation](#BigQueryAuditMetadata.JobStats.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStats.Query](#BigQueryAuditMetadata.JobStats.Query)
-      - [JSON representation](#BigQueryAuditMetadata.JobStats.Query.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.AuthorizationResult](#BigQueryAuditMetadata.AuthorizationResult)
-      - [JSON representation](#BigQueryAuditMetadata.AuthorizationResult.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStats.Load](#BigQueryAuditMetadata.JobStats.Load)
-      - [JSON representation](#BigQueryAuditMetadata.JobStats.Load.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStats.Extract](#BigQueryAuditMetadata.JobStats.Extract)
-      - [JSON representation](#BigQueryAuditMetadata.JobStats.Extract.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobStats.ReservationResourceUsage](#BigQueryAuditMetadata.JobStats.ReservationResourceUsage)
-      - [JSON representation](#BigQueryAuditMetadata.JobStats.ReservationResourceUsage.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobChange](#BigQueryAuditMetadata.JobChange)
-      - [JSON representation](#BigQueryAuditMetadata.JobChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.JobDeletion](#BigQueryAuditMetadata.JobDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.JobDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.DatasetCreation](#BigQueryAuditMetadata.DatasetCreation)
-      - [JSON representation](#BigQueryAuditMetadata.DatasetCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.Dataset](#BigQueryAuditMetadata.Dataset)
-      - [JSON representation](#BigQueryAuditMetadata.Dataset.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.EntityInfo](#BigQueryAuditMetadata.EntityInfo)
-      - [JSON representation](#BigQueryAuditMetadata.EntityInfo.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.BigQueryAcl](#BigQueryAuditMetadata.BigQueryAcl)
-      - [JSON representation](#BigQueryAuditMetadata.BigQueryAcl.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.DatasetChange](#BigQueryAuditMetadata.DatasetChange)
-      - [JSON representation](#BigQueryAuditMetadata.DatasetChange.SCHEMA_REPRESENTATION)
-  - [BindingDelta](#BindingDelta)
-      - [JSON representation](#BindingDelta.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.AccessChange](#BigQueryAuditMetadata.AccessChange)
-      - [JSON representation](#BigQueryAuditMetadata.AccessChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.DatasetDeletion](#BigQueryAuditMetadata.DatasetDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.DatasetDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableCreation](#BigQueryAuditMetadata.TableCreation)
-      - [JSON representation](#BigQueryAuditMetadata.TableCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.Table](#BigQueryAuditMetadata.Table)
-      - [JSON representation](#BigQueryAuditMetadata.Table.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableViewDefinition](#BigQueryAuditMetadata.TableViewDefinition)
-      - [JSON representation](#BigQueryAuditMetadata.TableViewDefinition.SCHEMA_REPRESENTATION)
-  - [PrivacyPolicy](#PrivacyPolicy)
-      - [JSON representation](#PrivacyPolicy.SCHEMA_REPRESENTATION)
-  - [AggregationThresholdPolicy](#AggregationThresholdPolicy)
-      - [JSON representation](#AggregationThresholdPolicy.SCHEMA_REPRESENTATION)
-  - [DifferentialPrivacyPolicy](#DifferentialPrivacyPolicy)
-      - [JSON representation](#DifferentialPrivacyPolicy.SCHEMA_REPRESENTATION)
-  - [JoinRestrictionPolicy](#JoinRestrictionPolicy)
-      - [JSON representation](#JoinRestrictionPolicy.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableConstraints](#BigQueryAuditMetadata.TableConstraints)
-      - [JSON representation](#BigQueryAuditMetadata.TableConstraints.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableConstraints.PrimaryKey](#BigQueryAuditMetadata.TableConstraints.PrimaryKey)
-      - [JSON representation](#BigQueryAuditMetadata.TableConstraints.PrimaryKey.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableConstraints.ForeignKey](#BigQueryAuditMetadata.TableConstraints.ForeignKey)
-      - [JSON representation](#BigQueryAuditMetadata.TableConstraints.ForeignKey.SCHEMA_REPRESENTATION)
-  - [TimePartitioning](#TimePartitioning)
-      - [JSON representation](#TimePartitioning.SCHEMA_REPRESENTATION)
-  - [RangePartitioning](#RangePartitioning)
-      - [JSON representation](#RangePartitioning.SCHEMA_REPRESENTATION)
-  - [Clustering](#Clustering)
-      - [JSON representation](#Clustering.SCHEMA_REPRESENTATION)
-  - [PartitioningDefinition](#PartitioningDefinition)
-      - [JSON representation](#PartitioningDefinition.SCHEMA_REPRESENTATION)
-  - [PartitionedColumn](#PartitionedColumn)
-      - [JSON representation](#PartitionedColumn.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableChange](#BigQueryAuditMetadata.TableChange)
-      - [JSON representation](#BigQueryAuditMetadata.TableChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableChange.AlterTableStats](#BigQueryAuditMetadata.TableChange.AlterTableStats)
-      - [JSON representation](#BigQueryAuditMetadata.TableChange.AlterTableStats.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableDeletion](#BigQueryAuditMetadata.TableDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.TableDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableDataRead](#BigQueryAuditMetadata.TableDataRead)
-      - [JSON representation](#BigQueryAuditMetadata.TableDataRead.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.TableDataChange](#BigQueryAuditMetadata.TableDataChange)
-      - [JSON representation](#BigQueryAuditMetadata.TableDataChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ModelDeletion](#BigQueryAuditMetadata.ModelDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.ModelDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ModelCreation](#BigQueryAuditMetadata.ModelCreation)
-      - [JSON representation](#BigQueryAuditMetadata.ModelCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.Model](#BigQueryAuditMetadata.Model)
-      - [JSON representation](#BigQueryAuditMetadata.Model.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ModelMetadataChange](#BigQueryAuditMetadata.ModelMetadataChange)
-      - [JSON representation](#BigQueryAuditMetadata.ModelMetadataChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ModelDataChange](#BigQueryAuditMetadata.ModelDataChange)
-      - [JSON representation](#BigQueryAuditMetadata.ModelDataChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ModelDataRead](#BigQueryAuditMetadata.ModelDataRead)
-      - [JSON representation](#BigQueryAuditMetadata.ModelDataRead.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RoutineCreation](#BigQueryAuditMetadata.RoutineCreation)
-      - [JSON representation](#BigQueryAuditMetadata.RoutineCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.Routine](#BigQueryAuditMetadata.Routine)
-      - [JSON representation](#BigQueryAuditMetadata.Routine.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RoutineChange](#BigQueryAuditMetadata.RoutineChange)
-      - [JSON representation](#BigQueryAuditMetadata.RoutineChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RoutineDeletion](#BigQueryAuditMetadata.RoutineDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.RoutineDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RowAccessPolicyCreation](#BigQueryAuditMetadata.RowAccessPolicyCreation)
-      - [JSON representation](#BigQueryAuditMetadata.RowAccessPolicyCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RowAccessPolicy](#BigQueryAuditMetadata.RowAccessPolicy)
-      - [JSON representation](#BigQueryAuditMetadata.RowAccessPolicy.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RowAccessPolicyChange](#BigQueryAuditMetadata.RowAccessPolicyChange)
-      - [JSON representation](#BigQueryAuditMetadata.RowAccessPolicyChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.RowAccessPolicyDeletion](#BigQueryAuditMetadata.RowAccessPolicyDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.RowAccessPolicyDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.UnlinkDataset](#BigQueryAuditMetadata.UnlinkDataset)
-      - [JSON representation](#BigQueryAuditMetadata.UnlinkDataset.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.SearchIndexCreation](#BigQueryAuditMetadata.SearchIndexCreation)
-      - [JSON representation](#BigQueryAuditMetadata.SearchIndexCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.SearchIndex](#BigQueryAuditMetadata.SearchIndex)
-      - [JSON representation](#BigQueryAuditMetadata.SearchIndex.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.SearchIndexChange](#BigQueryAuditMetadata.SearchIndexChange)
-      - [JSON representation](#BigQueryAuditMetadata.SearchIndexChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.SearchIndexDeletion](#BigQueryAuditMetadata.SearchIndexDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.SearchIndexDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.VectorIndexCreation](#BigQueryAuditMetadata.VectorIndexCreation)
-      - [JSON representation](#BigQueryAuditMetadata.VectorIndexCreation.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.VectorIndex](#BigQueryAuditMetadata.VectorIndex)
-      - [JSON representation](#BigQueryAuditMetadata.VectorIndex.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.VectorIndexChange](#BigQueryAuditMetadata.VectorIndexChange)
-      - [JSON representation](#BigQueryAuditMetadata.VectorIndexChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.VectorIndexDeletion](#BigQueryAuditMetadata.VectorIndexDeletion)
-      - [JSON representation](#BigQueryAuditMetadata.VectorIndexDeletion.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.ConnectionChange](#BigQueryAuditMetadata.ConnectionChange)
-      - [JSON representation](#BigQueryAuditMetadata.ConnectionChange.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.AnalyticsHubSubscribeListing](#BigQueryAuditMetadata.AnalyticsHubSubscribeListing)
-      - [JSON representation](#BigQueryAuditMetadata.AnalyticsHubSubscribeListing.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.FirstPartyAppMetadata](#BigQueryAuditMetadata.FirstPartyAppMetadata)
-      - [JSON representation](#BigQueryAuditMetadata.FirstPartyAppMetadata.SCHEMA_REPRESENTATION)
-  - [BigQueryAuditMetadata.SheetsMetadata](#BigQueryAuditMetadata.SheetsMetadata)
-      - [JSON representation](#BigQueryAuditMetadata.SheetsMetadata.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobInsertion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobInsertion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobInsertion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.Job](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Job)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Job.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobConfig](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobConfig.Query](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Query)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Query.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDefinition.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.EncryptionInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EncryptionInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EncryptionInfo.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobConfig.Load](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Load)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Load.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobConfig.Extract](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Extract)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.Extract.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobConfig.TableCopy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.TableCopy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobConfig.TableCopy.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStatus](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStatus.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStats](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStats.Query](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Query)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Query.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.AuthorizationResult](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AuthorizationResult)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AuthorizationResult.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStats.Load](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Load)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Load.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStats.Extract](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Extract)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.Extract.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobStats.ReservationResourceUsage](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.ReservationResourceUsage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobStats.ReservationResourceUsage.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.JobDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.JobDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DatasetCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.Dataset](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Dataset)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Dataset.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.EntityInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EntityInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.EntityInfo.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.BigQueryAcl](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.BigQueryAcl)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.BigQueryAcl.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DatasetChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetChange.SCHEMA_REPRESENTATION)
+  - [BindingDelta](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BindingDelta)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BindingDelta.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.AccessChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AccessChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AccessChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.DatasetDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.DatasetDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.Table](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Table)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Table.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableViewDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableViewDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableViewDefinition.SCHEMA_REPRESENTATION)
+  - [PrivacyPolicy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PrivacyPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PrivacyPolicy.SCHEMA_REPRESENTATION)
+  - [AggregationThresholdPolicy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#AggregationThresholdPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#AggregationThresholdPolicy.SCHEMA_REPRESENTATION)
+  - [DifferentialPrivacyPolicy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#DifferentialPrivacyPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#DifferentialPrivacyPolicy.SCHEMA_REPRESENTATION)
+  - [JoinRestrictionPolicy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#JoinRestrictionPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#JoinRestrictionPolicy.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableConstraints](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableConstraints.PrimaryKey](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints.PrimaryKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints.PrimaryKey.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableConstraints.ForeignKey](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints.ForeignKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableConstraints.ForeignKey.SCHEMA_REPRESENTATION)
+  - [TimePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#TimePartitioning)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#TimePartitioning.SCHEMA_REPRESENTATION)
+  - [RangePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#RangePartitioning)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#RangePartitioning.SCHEMA_REPRESENTATION)
+  - [Clustering](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#Clustering)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#Clustering.SCHEMA_REPRESENTATION)
+  - [PartitioningDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PartitioningDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PartitioningDefinition.SCHEMA_REPRESENTATION)
+  - [PartitionedColumn](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PartitionedColumn)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#PartitionedColumn.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableChange.AlterTableStats](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableChange.AlterTableStats)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableChange.AlterTableStats.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableDataRead](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDataRead)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDataRead.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.TableDataChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDataChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.TableDataChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ModelDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ModelCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.Model](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Model)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Model.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ModelMetadataChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelMetadataChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelMetadataChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ModelDataChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDataChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDataChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ModelDataRead](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDataRead)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ModelDataRead.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RoutineCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.Routine](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Routine)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.Routine.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RoutineChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RoutineDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RoutineDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RowAccessPolicyCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RowAccessPolicy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicy.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RowAccessPolicyChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.RowAccessPolicyDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.RowAccessPolicyDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.UnlinkDataset](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.UnlinkDataset)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.UnlinkDataset.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SearchIndexCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SearchIndex](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndex)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndex.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SearchIndexChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SearchIndexDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SearchIndexDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.VectorIndexCreation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexCreation)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexCreation.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.VectorIndex](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndex)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndex.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.VectorIndexChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.VectorIndexDeletion](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexDeletion)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.VectorIndexDeletion.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.ConnectionChange](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ConnectionChange)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.ConnectionChange.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.AnalyticsHubSubscribeListing](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AnalyticsHubSubscribeListing)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.AnalyticsHubSubscribeListing.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.FirstPartyAppMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.FirstPartyAppMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.FirstPartyAppMetadata.SCHEMA_REPRESENTATION)
+  - [BigQueryAuditMetadata.SheetsMetadata](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SheetsMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata#BigQueryAuditMetadata.SheetsMetadata.SCHEMA_REPRESENTATION)
 
 BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 
@@ -159,7 +159,7 @@ BigQueryAuditMetaData is exposed as part of the new AuditData.metadata messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;firstPartyAppMetadata&quot;: {
     object (BigQueryAuditMetadata.FirstPartyAppMetadata)
   },
@@ -475,7 +475,7 @@ Job insertion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;job&quot;: {
     object (BigQueryAuditMetadata.Job)
   },
@@ -514,7 +514,7 @@ BigQuery job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobName&quot;: string,
   &quot;jobConfig&quot;: {
     object (BigQueryAuditMetadata.JobConfig)
@@ -573,7 +573,7 @@ Job configuration. See the [Jobs](https://cloud.google.com/bigquery/docs/referen
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: enum (BigQueryAuditMetadata.JobConfig.Type),
   &quot;labels&quot;: {
     string: string,
@@ -663,7 +663,7 @@ Query job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;queryTruncated&quot;: boolean,
   &quot;destinationTable&quot;: string,
@@ -762,7 +762,7 @@ Definition of an external data source used in a query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;sourceUris&quot;: [
     string
@@ -801,7 +801,7 @@ Encryption properties for a table or a job
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -833,7 +833,7 @@ Load job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceUris&quot;: [
     string
   ],
@@ -916,7 +916,7 @@ Extract job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;destinationUris&quot;: [
     string
   ],
@@ -976,7 +976,7 @@ Table copy job configuration.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceTables&quot;: [
     string
   ],
@@ -1061,7 +1061,7 @@ Status of a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobState&quot;: enum (BigQueryAuditMetadata.JobState),
   &quot;errorResult&quot;: {
     object (Status)
@@ -1111,7 +1111,7 @@ Job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;createTime&quot;: string,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string,
@@ -1227,7 +1227,7 @@ Query job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalProcessedBytes&quot;: string,
   &quot;totalBilledBytes&quot;: string,
   &quot;billingTier&quot;: integer,
@@ -1321,7 +1321,7 @@ Authorization result for authorized resource
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;authorizedResource&quot;: string,
   &quot;permission&quot;: string
 }</code></pre></td>
@@ -1358,7 +1358,7 @@ Load job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalOutputBytes&quot;: string
 }</code></pre></td>
 </tr>
@@ -1388,7 +1388,7 @@ Extract job statistics.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalInputBytes&quot;: string,
   &quot;totalBytesExtracted&quot;: string
 }</code></pre></td>
@@ -1425,7 +1425,7 @@ Job resource usage breakdown by reservation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;slotMs&quot;: string
 }</code></pre></td>
@@ -1462,7 +1462,7 @@ Job state change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;before&quot;: enum (BigQueryAuditMetadata.JobState),
   &quot;after&quot;: enum (BigQueryAuditMetadata.JobState),
   &quot;job&quot;: {
@@ -1508,7 +1508,7 @@ Job deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobName&quot;: string,
   &quot;reason&quot;: enum (BigQueryAuditMetadata.JobDeletion.Reason)
 }</code></pre></td>
@@ -1547,7 +1547,7 @@ Dataset creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: {
     object (BigQueryAuditMetadata.Dataset)
   },
@@ -1595,7 +1595,7 @@ BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetName&quot;: string,
   &quot;datasetInfo&quot;: {
     object (BigQueryAuditMetadata.EntityInfo)
@@ -1700,7 +1700,7 @@ User-provided metadata for an entity, e.g. dataset, table or model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
   &quot;labels&quot;: {
@@ -1749,7 +1749,7 @@ An access control list.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;policy&quot;: {
     object (Policy)
   },
@@ -1792,7 +1792,7 @@ Dataset change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: {
     object (BigQueryAuditMetadata.Dataset)
   },
@@ -1862,7 +1862,7 @@ One delta entry for Binding. Each individual change (only one member in each ent
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;action&quot;: enum (BindingDelta.Action),
   &quot;role&quot;: string,
   &quot;member&quot;: string,
@@ -1915,7 +1915,7 @@ One change entry for Access.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;action&quot;: enum (BigQueryAuditMetadata.AccessChange.Action),
   &quot;access&quot;: {
     &quot;role&quot;: string,
@@ -2044,7 +2044,7 @@ Dataset deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.DatasetDeletion.Reason),
   &quot;jobName&quot;: string
 }</code></pre></td>
@@ -2083,7 +2083,7 @@ Table creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;table&quot;: {
     object (BigQueryAuditMetadata.Table)
   },
@@ -2138,7 +2138,7 @@ BigQuery table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tableName&quot;: string,
   &quot;tableInfo&quot;: {
     object (BigQueryAuditMetadata.EntityInfo)
@@ -2318,7 +2318,7 @@ View definition.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;queryTruncated&quot;: boolean,
   &quot;privacyPolicy&quot;: {
@@ -2364,7 +2364,7 @@ Represents privacy policy that contains the privacy requirements specified by th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field privacy_policy can be only one of the following:
   &quot;aggregationThresholdPolicy&quot;: {
@@ -2419,7 +2419,7 @@ Represents privacy policy associated with "aggregation threshold" method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;privacyUnitColumns&quot;: [
     string
   ],
@@ -2458,7 +2458,7 @@ Represents privacy policy associated with "differential privacy" method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;maxEpsilonPerQuery&quot;: number,
   &quot;deltaPerQuery&quot;: number,
   &quot;maxGroupsContributed&quot;: string,
@@ -2537,7 +2537,7 @@ Represents privacy policy associated with "join restrictions". Join restriction 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;joinAllowedColumns&quot;: [
     string
   ],
@@ -2576,7 +2576,7 @@ Describes constraints defined on a BigQuery table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;primaryKey&quot;: {
     object (BigQueryAuditMetadata.TableConstraints.PrimaryKey)
   },
@@ -2619,7 +2619,7 @@ Describes a primary key defined on a table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columns&quot;: [
     string
   ]
@@ -2651,7 +2651,7 @@ Describes a foreign key defined on a table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;referencingColumns&quot;: [
     string
@@ -2718,7 +2718,7 @@ The project of the referenced table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string,
   &quot;expirationMs&quot;: string,
   &quot;field&quot;: string,
@@ -2769,7 +2769,7 @@ If set to true, queries over this table require a partition filter that can be u
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;field&quot;: string,
   &quot;range&quot;: {
     &quot;start&quot;: string,
@@ -2828,7 +2828,7 @@ Configures table clustering.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     string
   ]
@@ -2862,7 +2862,7 @@ The partitioning information, which includes managed table, external table and m
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;partitionedColumn&quot;: [
     {
       object (PartitionedColumn)
@@ -2900,7 +2900,7 @@ The partitioning column information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;field&quot;: string
 }</code></pre></td>
 </tr>
@@ -2930,7 +2930,7 @@ Table metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;table&quot;: {
     object (BigQueryAuditMetadata.Table)
   },
@@ -3021,7 +3021,7 @@ Statistics for ALTER TABLE sql statement.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;addedColumns&quot;: integer,
   &quot;droppedColumns&quot;: integer,
   &quot;updatedColumns&quot;: integer,
@@ -3072,7 +3072,7 @@ Table deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.TableDeletion.Reason),
   &quot;jobName&quot;: string
 }</code></pre></td>
@@ -3111,7 +3111,7 @@ Table data read event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     string
   ],
@@ -3254,7 +3254,7 @@ Table data change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;deletedRowsCount&quot;: string,
   &quot;insertedRowsCount&quot;: string,
   &quot;truncated&quot;: boolean,
@@ -3334,7 +3334,7 @@ Model deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDeletion.Reason),
   &quot;jobName&quot;: string
 }</code></pre></td>
@@ -3373,7 +3373,7 @@ Model creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;model&quot;: {
     object (BigQueryAuditMetadata.Model)
   },
@@ -3421,7 +3421,7 @@ Trained BigQuery ML model.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;modelName&quot;: string,
   &quot;modelInfo&quot;: {
     object (BigQueryAuditMetadata.EntityInfo)
@@ -3498,7 +3498,7 @@ Model metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;model&quot;: {
     object (BigQueryAuditMetadata.Model)
   },
@@ -3546,7 +3546,7 @@ Model data change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataChange.Reason),
   &quot;jobName&quot;: string
 }</code></pre></td>
@@ -3585,7 +3585,7 @@ Model data read event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.ModelDataRead.Reason),
   &quot;jobName&quot;: string
 }</code></pre></td>
@@ -3624,7 +3624,7 @@ Routine creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;routine&quot;: {
     object (BigQueryAuditMetadata.Routine)
   },
@@ -3672,7 +3672,7 @@ User Defined Function (UDF) or Stored Procedure.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;routineName&quot;: string,
   &quot;createTime&quot;: string,
   &quot;updateTime&quot;: string
@@ -3722,7 +3722,7 @@ Routine change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;routine&quot;: {
     object (BigQueryAuditMetadata.Routine)
   },
@@ -3770,7 +3770,7 @@ Routine deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;routine&quot;: {
     object (BigQueryAuditMetadata.Routine)
   },
@@ -3818,7 +3818,7 @@ Row access policy creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;rowAccessPolicy&quot;: {
     object (BigQueryAuditMetadata.RowAccessPolicy)
   },
@@ -3859,7 +3859,7 @@ BigQuery row access policy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;rowAccessPolicyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -3891,7 +3891,7 @@ Row access policy change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;rowAccessPolicy&quot;: {
     object (BigQueryAuditMetadata.RowAccessPolicy)
   },
@@ -3932,7 +3932,7 @@ Row access policy deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;rowAccessPolicies&quot;: [
     {
       object (BigQueryAuditMetadata.RowAccessPolicy)
@@ -3982,7 +3982,7 @@ Unlink linked dataset from its source dataset event
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;linkedDataset&quot;: string,
   &quot;sourceDataset&quot;: string,
   &quot;reason&quot;: enum (BigQueryAuditMetadata.UnlinkDataset.Reason)
@@ -4030,7 +4030,7 @@ Search index creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;searchIndex&quot;: {
     object (BigQueryAuditMetadata.SearchIndex)
   },
@@ -4078,7 +4078,7 @@ BigQuery Search Index.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;searchIndexName&quot;: string
 }</code></pre></td>
 </tr>
@@ -4110,7 +4110,7 @@ Search index configuration change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;searchIndex&quot;: {
     object (BigQueryAuditMetadata.SearchIndex)
   },
@@ -4158,7 +4158,7 @@ Search index deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;searchIndex&quot;: {
     object (BigQueryAuditMetadata.SearchIndex)
   },
@@ -4206,7 +4206,7 @@ Vector index creation event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;vectorIndex&quot;: {
     object (BigQueryAuditMetadata.VectorIndex)
   },
@@ -4254,7 +4254,7 @@ BigQuery Vector Index.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;vectorIndexName&quot;: string
 }</code></pre></td>
 </tr>
@@ -4286,7 +4286,7 @@ Vector index change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;vectorIndex&quot;: {
     object (BigQueryAuditMetadata.VectorIndex)
   },
@@ -4334,7 +4334,7 @@ Vector index deletion event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;vectorIndex&quot;: {
     object (BigQueryAuditMetadata.VectorIndex)
   },
@@ -4382,7 +4382,7 @@ Connection metadata change event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: enum (BigQueryAuditMetadata.ConnectionChange.Reason),
   &quot;bindingDeltas&quot;: [
     {
@@ -4423,7 +4423,7 @@ Listing subscription event. This won't be logged for subscriptions created using
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: string,
   &quot;reason&quot;: enum (BigQueryAuditMetadata.AnalyticsHubSubscribeListing.Reason)
 }</code></pre></td>
@@ -4462,7 +4462,7 @@ First party (Google) application specific request metadata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field metadata can be only one of the following:
   &quot;sheetsMetadata&quot;: {
@@ -4501,7 +4501,7 @@ Google Sheets specific request metadata.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;docId&quot;: string
 }</code></pre></td>
 </tr>

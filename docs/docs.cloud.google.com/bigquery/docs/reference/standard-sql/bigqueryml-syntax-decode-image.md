@@ -1,10 +1,10 @@
 # The ML.DECODE\_IMAGE function
 
-This document describes the `  ML.DECODE_IMAGE  ` scalar function, which lets you convert image bytes to a multi-dimensional `  ARRAY  ` representation. This conversion lets you do inference using the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) on vision models that require images to be in `  ARRAY  ` format.
+This document describes the `  ML.DECODE_IMAGE  ` scalar function, which lets you convert image bytes to a multi-dimensional `  ARRAY  ` representation. This conversion lets you do inference using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) on vision models that require images to be in `  ARRAY  ` format.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.DECODE_IMAGE(data) AS input_field
 ```
 
@@ -22,7 +22,7 @@ ML.DECODE_IMAGE(data) AS input_field
     
       - The `  data  ` pseudocolumn of an object table.
         
-        If you are referencing only the object table in the [`  query_statement  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `  ML.PREDICT  ` function, you can specify `  data  ` as the value. If you are joining the object table with other tables in the `  query_statement  ` of the `  ML.PREDICT  ` function, then you should fully qualify the `  data  ` value as `  dataset_name  ` . `  object_table_name  ` . `  data  ` . This lets you avoid ambiguity if the tables share any column names.
+        If you are referencing only the object table in the [`  query_statement  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#arguments) of the `  ML.PREDICT  ` function, you can specify `  data  ` as the value. If you are joining the object table with other tables in the `  query_statement  ` of the `  ML.PREDICT  ` function, then you should fully qualify the `  data  ` value as `  dataset_name  ` . `  object_table_name  ` . `  data  ` . This lets you avoid ambiguity if the tables share any column names.
     
     The `  data  ` argument value must be \<= 10 MB (10,000,000 bytes).
 
@@ -42,7 +42,7 @@ You can use `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` functio
 
 **Note:** If you reference `  ML.DECODE_IMAGE  ` in SQL statements in the BigQuery editor, it is possible for the function output to be too large to display. If this occurs, write the output to a table instead.
 
-If you are using `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` function, you must alias the output of this function with the name of an input field for the model that is referenced in the `  ML.PREDICT  ` function. You can find this information by [inspecting the model](/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section. For more information, see [Run inference on image object tables](/bigquery/docs/object-table-inference) .
+If you are using `  ML.DECODE_IMAGE  ` output directly in an `  ML.PREDICT  ` function, you must alias the output of this function with the name of an input field for the model that is referenced in the `  ML.PREDICT  ` function. You can find this information by [inspecting the model](https://docs.cloud.google.com/bigquery/docs/object-table-inference#inspect_the_model) and looking at the field names in the **Features** section. For more information, see [Run inference on image object tables](https://docs.cloud.google.com/bigquery/docs/object-table-inference) .
 
 ## Examples
 
@@ -52,7 +52,7 @@ The following examples show different ways you can use the `  ML.DECODE_IMAGE  `
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. It returns the inference results for all images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
@@ -65,7 +65,7 @@ ML.PREDICT(
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function, and uses the `  ML.CONVERT_COLOR_SPACE  ` function in the `  ML.PREDICT  ` function to convert the image color space from `  RBG  ` to `  YIQ  ` . It also shows how to use object table fields to filter the objects included in inference. It returns the inference results for all JPG images in the object table, for a model with an input field of `  input  ` and an output field of `  feature  ` :
 
-``` text
+``` notranslate
 SELECT * FROM
   ML.PREDICT(
     MODEL `my_dataset.vision_model`,
@@ -81,7 +81,7 @@ The following example uses results from `  ML.DECODE_IMAGE  ` that have been wri
 
 Create the decoded images table:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `my_dataset.decoded_images`
   AS (SELECT ML.DECODE_IMAGE(data) AS decoded_image
   FROM `my_dataset.object_table`);
@@ -89,7 +89,7 @@ CREATE OR REPLACE TABLE `my_dataset.decoded_images`
 
 Run inference on the decoded images table:
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL`my_dataset.vision_model`,
@@ -104,7 +104,7 @@ The following example uses results from `  ML.DECODE_IMAGE  ` that have been wri
 
 Create the table:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `my_dataset.decoded_images`
   AS (SELECT ML.RESIZE_IMAGE(ML.DECODE_IMAGE(data) 480, 480, FALSE) AS decoded_image
   FROM `my_dataset.object_table`);
@@ -112,7 +112,7 @@ CREATE OR REPLACE TABLE `my_dataset.decoded_images`
 
 Run inference on the decoded images table:
 
-``` text
+``` notranslate
 SELECT * FROM
 ML.PREDICT(
   MODEL `my_dataset.vision_model`,
@@ -125,7 +125,7 @@ ML.PREDICT(
 
 The following example uses the `  ML.DECODE_IMAGE  ` function directly in the `  ML.PREDICT  ` function. In this example, the model has an output field of `  embeddings  ` and two input fields: one that expects an image, `  f_img  ` , and one that expects a string, `  f_txt  ` . The image input comes from the object table and the string input comes from a standard BigQuery table that is joined with the object table by using the `  uri  ` column.
 
-``` text
+``` notranslate
 SELECT * FROM
   ML.PREDICT(
     MODEL `my_dataset.mixed_model`,
@@ -139,12 +139,12 @@ SELECT * FROM
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
   - For more information about supported SQL statements and functions for each model type, see the following documents:
     
-      - [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

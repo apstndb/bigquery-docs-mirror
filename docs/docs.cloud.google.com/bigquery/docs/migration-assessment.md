@@ -2,25 +2,25 @@
 
 The BigQuery migration assessment lets you plan and review the migration of your existing data warehouse into BigQuery. You can run the BigQuery migration assessment to generate a report to assess the cost to store your data in BigQuery, to see how BigQuery can optimize your existing workload for cost savings, and to prepare a migration plan that outlines the time and effort required to complete your data warehouse migration to BigQuery.
 
-This document describes how to use the BigQuery migration assessment and the different ways you can review the assessment results. This document is intended for users who are familiar with the [Google Cloud console](/bigquery/docs/bigquery-web-ui) and the [batch SQL translator](/bigquery/docs/batch-sql-translator) .
+This document describes how to use the BigQuery migration assessment and the different ways you can review the assessment results. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) and the [batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) .
 
 ## Before you begin
 
 To prepare and run a BigQuery migration assessment, follow these steps:
 
-1.  [Create a Cloud Storage bucket](/storage/docs/creating-buckets) .
+1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
     
-    **Note:** [Use the `  --pap  ` flag](/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
+    **Note:** [Use the `  --pap  ` flag](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/create#FLAGS) to prevent your Cloud Storage bucket data from being publicly accessible.
 
-2.  [Extract metadata and query logs](#extract-metadata-logs) from your data warehouse using the `  dwh-migration-dumper  ` tool.
+2.  [Extract metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#extract-metadata-logs) from your data warehouse using the `  dwh-migration-dumper  ` tool.
 
-3.  [Upload your metadata and query logs](#upload) to your Cloud Storage bucket.
+3.  [Upload your metadata and query logs](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload) to your Cloud Storage bucket.
 
-4.  [Run the migration assessment](#run-migration-assessment) .
+4.  [Run the migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment#run-migration-assessment) .
 
-5.  [Review the Looker Studio report](#review_the_data_studio_report) .
+5.  [Review the Looker Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
 
-6.  Optional: [Query the assessment results](#query_assessment_output) to find detailed or specific assessment information.
+6.  Optional: [Query the assessment results](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) to find detailed or specific assessment information.
 
 ## Extract metadata and query logs from your data warehouse
 
@@ -54,13 +54,13 @@ Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration
 
 ### Bash
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
@@ -70,13 +70,13 @@ The `  True  ` result confirms successful checksum verification.
 
 The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to set up and use the extraction tool, see [Generate metadata for translation and assessment](/bigquery/docs/generate-metadata) .
+For details about how to set up and use the extraction tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 Use the extraction tool to extract logs and metadata from your Teradata data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata \
   --database DATABASES \
@@ -91,7 +91,7 @@ dwh-migration-dumper \
 
 Generate the zip file containing query logs:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata-logs \
   --driver path/terajdbc4.jar \
@@ -124,7 +124,7 @@ For example:
 
 ### Bash
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata-logs \
   --driver path/terajdbc4.jar \
@@ -142,7 +142,7 @@ dwh-migration-dumper \
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 dwh-migration-dumper `
   --connector teradata-logs `
   --driver path\terajdbc4.jar `
@@ -160,7 +160,7 @@ dwh-migration-dumper `
 
 By default, the `  dwh-migration-dumper  ` tool extracts the last seven days of query logs. Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You can specify a custom time range by using the `  --query-log-start  ` and `  --query-log-end  ` flags. For example:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector teradata-logs \
   --driver path/terajdbc4.jar \
@@ -192,13 +192,13 @@ Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration
 
 ### Bash
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
@@ -208,13 +208,13 @@ The `  True  ` result confirms successful checksum verification.
 
 The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](/bigquery/docs/generate-metadata) page.
+For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
 Use the `  dwh-migration-dumper  ` tool to extract logs and metadata from your Amazon Redshift data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector redshift \
   --database DATABASE \
@@ -227,7 +227,7 @@ dwh-migration-dumper \
 
 Generate the zip file containing query logs:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector redshift-raw-logs \
   --database DATABASE \
@@ -252,7 +252,7 @@ By default, the `  dwh-migration-dumper  ` tool extracts the last seven days of 
 
 Google recommends that you provide at least two weeks of query logs to be able to view more thorough insights. You might need to run the extraction tool a few times over the course of two weeks to get the best results. You can specify a custom range by using the `  --query-log-start  ` and `  --query-log-end  ` flags. For example:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector redshift-raw-logs \
   --database DATABASE \
@@ -285,13 +285,13 @@ You can also generate multiple zip files containing query logs covering differen
 
 Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://github.com/google/dwh-migration-tools/releases/latest) .
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [Generate metadata](/bigquery/docs/generate-metadata) page.
+For details about how to use the `  dwh-migration-dumper  ` tool, see the [Generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
 Use the `  dwh-migration-dumper  ` tool to extract usage logs and metadata from your Amazon Redshift Serverless namespace as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector redshift \
   --database DATABASE \
@@ -304,7 +304,7 @@ dwh-migration-dumper \
 
 Generate the zip file containing query logs:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector redshift-serverless-logs \
   --database DATABASE \
@@ -347,13 +347,13 @@ Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration
 
 ### Bash
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
@@ -363,13 +363,13 @@ The `  True  ` result confirms successful checksum verification.
 
 The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](/bigquery/docs/generate-metadata) page.
+For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
 Use the `  dwh-migration-dumper  ` tool to extract logs and metadata from your Snowflake data warehouse as two zip files. Run the following commands on a machine with access to the source data warehouse to generate the files.
 
 Generate the metadata zip file:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector snowflake \
   --host HOST_NAME \
@@ -383,7 +383,7 @@ dwh-migration-dumper \
 
 Generate the zip file containing query logs:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector snowflake-logs \
   --host HOST_NAME \
@@ -400,11 +400,11 @@ dwh-migration-dumper \
 Replace the following:
 
   - `  HOST_NAME  ` : the hostname of your Snowflake instance.
-  - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](#requirements-snowflake) .
+  - `  USER_NAME  ` : the username to use for the database connection, where the user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) .
   - `  PRIVATE_KEY_PATH  ` : the path to the RSA private key used for authentication.
   - `  PRIVATE_KEY_PASSWORD  ` : (Optional) the password that was used when creating the RSA private key. It is required only if private key is encrypted.
   - `  ROLE_NAME  ` : (Optional) the user role when running the `  dwh-migration-dumper  ` tool—for example, `  ACCOUNTADMIN  ` .
-  - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](#requirements-snowflake) extracts all warehouse artefacts in this account.
+  - `  WAREHOUSE  ` : the warehouse used to execute the dumping operations. If you have multiple virtual warehouses, you can specify any warehouse to execute this query. Running this query with the access permissions detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-snowflake) extracts all warehouse artefacts in this account.
   - `  STARTING_DATE  ` : (Optional) used to indicate the start date in a date range of query logs, written in the format `  YYYY-MM-DD  ` .
   - `  ENDING_DATE  ` : (Optional) used to indicate the end date in a date range of query logs, written in the format `  YYYY-MM-DD  ` .
 
@@ -414,7 +414,7 @@ You can also generate multiple zip files containing query logs covering non-over
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -435,11 +435,11 @@ Download the [`  dwh-migration-dumper  ` command-line extraction tool](https://g
 
 Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration-tools/releases/latest/download/SHA256SUMS.txt) and run the following command to verify zip correctness:
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](/bigquery/docs/generate-metadata) page.
+For details about how to use the `  dwh-migration-dumper  ` tool, see the [generate metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) page.
 
 Use the `  dwh-migration-dumper  ` tool to extract metadata and performance statistics to the zip file. By default, statistics are extracted from the Oracle AWR that requires the Oracle Tuning and Diagnostics Pack. If this data is not available, `  dwh-migration-dumper  ` uses STATSPACK instead.
 
@@ -447,7 +447,7 @@ For multitenant databases, the `  dwh-migration-dumper  ` tool must be executed 
 
 Generate the metadata zip file:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector oracle-stats \
   --host HOST_NAME \
@@ -465,13 +465,13 @@ Replace the following:
   - `  PORT  ` : the connection port number. The default value is 1521.
   - `  SERVICE_NAME  ` : the Oracle service name to use for the connection.
   - `  JDBC_DRIVER_PATH  ` : the absolute or relative path to the driver JAR file. You can download this file from the [Oracle JDBC driver downloads](https://www.oracle.com/pl/database/technologies/appdev/jdbc-downloads.html) page. You should select the driver version that is compatible with your database version.
-  - `  USER_NAME  ` : name of the user used to connect to your Oracle instance. The user must have the access permissions as detailed in the [requirements section](#requirements-oracle) .
+  - `  USER_NAME  ` : name of the user used to connect to your Oracle instance. The user must have the access permissions as detailed in the [requirements section](https://docs.cloud.google.com/bigquery/docs/migration-assessment#requirements-oracle) .
 
 ### Hadoop / Cloudera
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -491,16 +491,16 @@ You must have the following to extract metadata from Cloudera:
 
 3.  In your command-line environment, verify zip correctness:
     
-    ``` text
+    ``` notranslate
       sha256sum --check SHA256SUMS.txt
       
     ```
     
-    For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](/bigquery/docs/generate-metadata) .
+    For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 4.  Use the `  dwh-migration-dumper  ` tool to extract metadata and performance statistics to the zip file:
     
-    ``` text
+    ``` notranslate
     dwh-migration-dumper \
         --connector cloudera-manager \
         --user USER_NAME \
@@ -531,7 +531,7 @@ If you use Oozie in your Cloudera cluster, you can dump Oozie job history with t
 
 For Kerberos authentication, run the following:
 
-``` text
+``` notranslate
 kinit
 dwh-migration-dumper \
     --connector oozie \
@@ -545,7 +545,7 @@ Replace the following:
 
 For basic authentication, run the following:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
     --connector oozie \
     --user USER_NAME \
@@ -564,7 +564,7 @@ Replace the following:
 
 If you use Airflow in your Cloudera cluster, you can dump DAGs history with the Airflow connector:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
     --connector airflow \
     --user USER_NAME \
@@ -593,7 +593,7 @@ To use the Hive connector, see the Apache Hive tab.
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 ### Requirements
 
@@ -614,13 +614,13 @@ Download the [`  SHA256SUMS.txt  ` file](https://github.com/google/dwh-migration
 
 ### Bash
 
-``` text
+``` notranslate
 sha256sum --check SHA256SUMS.txt
 ```
 
 ### Windows PowerShell
 
-``` text
+``` notranslate
 (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
 ```
 
@@ -630,7 +630,7 @@ The `  True  ` result confirms successful checksum verification.
 
 The `  False  ` result indicates verification error. Make sure the checksum and zip files are downloaded from the same release version and placed in the same directory.
 
-For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](/bigquery/docs/generate-metadata) .
+For details about how to use the `  dwh-migration-dumper  ` tool, see [Generate metadata for translation and assessment](https://docs.cloud.google.com/bigquery/docs/generate-metadata) .
 
 Use the `  dwh-migration-dumper  ` tool to generate metadata from your Hive data warehouse as a zip file.
 
@@ -638,7 +638,7 @@ Use the `  dwh-migration-dumper  ` tool to generate metadata from your Hive data
 
 To generate the metadata zip file, run the following command on a machine that has access to the source data warehouse:
 
-``` text
+``` notranslate
 dwh-migration-dumper \
   --connector hiveql \
   --database DATABASES \
@@ -651,7 +651,7 @@ dwh-migration-dumper \
 
 To authenticate to the metastore, sign in as a user that has access to the Apache Hive metastore and generate a Kerberos ticket. Then, generate the metadata zip file with the following command:
 
-``` text
+``` notranslate
 JAVA_OPTS="-Djavax.security.auth.useSubjectCredsOnly=false" \
   dwh-migration-dumper \
   --connector hiveql \
@@ -677,9 +677,9 @@ Replace the following:
 
 To extract query logs, follow these steps:
 
-1.  [Upload the `  hadoop-migration-assessment  ` logging hook](#upload-hadoop-hive-hook) .
-2.  [Configure the logging hook properties](#configure-properties) .
-3.  [Verify the logging hook](#verify-hive-hook) .
+1.  [Upload the `  hadoop-migration-assessment  ` logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#upload-hadoop-hive-hook) .
+2.  [Configure the logging hook properties](https://docs.cloud.google.com/bigquery/docs/migration-assessment#configure-properties) .
+3.  [Verify the logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#verify-hive-hook) .
 
 #### Upload the `       hadoop-migration-assessment      ` logging hook
 
@@ -719,21 +719,15 @@ If you already have other values for the following configuration keys, append th
 
 After you restart the `  hive-server2  ` process, run a test query and analyze your debug logs. You can see the following message:
 
-``` text
-Logger successfully started, waiting for query events. Log directory is '[dwhassessment.hook.base-directory value]'; rollover interval is '60' minutes;
-rollover eligibility check is '10' minutes
-```
+    Logger successfully started, waiting for query events. Log directory is '[dwhassessment.hook.base-directory value]'; rollover interval is '60' minutes;
+    rollover eligibility check is '10' minutes
 
 The logging hook creates a date-partitioned subfolder in the configured folder. The Avro file with query events appears in that folder after the `  dwhassessment.hook.rollover-interval  ` interval or `  hive-server2  ` process termination. You can look for similar messages in your debug logs to see the status of the rollover operation:
 
-``` text
-Updated rollover time for logger ID 'my_logger_id' to '2023-12-25T10:15:30'
-```
+    Updated rollover time for logger ID 'my_logger_id' to '2023-12-25T10:15:30'
 
-``` text
-Performed rollover check for logger ID 'my_logger_id'. Expected rollover time
-is '2023-12-25T10:15:30'
-```
+    Performed rollover check for logger ID 'my_logger_id'. Expected rollover time
+    is '2023-12-25T10:15:30'
 
 Rollover happens at the specified intervals or when the day changes. When the date changes, the logging hook also creates a new subfolder for that date.
 
@@ -745,7 +739,7 @@ You can also generate folders containing query logs from different Hive clusters
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-edw-migration-support@google.com> .
 
@@ -765,7 +759,7 @@ Alternatively, you can also run the `  pmrep  ` command to export your object fi
 
 <!-- end list -->
 
-``` text
+``` notranslate
   pmrep connect -r `REPOSITORY_NAME` -d `DOMAIN_NAME` -n `USERNAME` -x `PASSWORD`
 ```
 
@@ -782,7 +776,7 @@ Replace the following:
 
 <!-- end list -->
 
-``` text
+``` notranslate
   pmrep objectexport -n `OBJECT_NAME` -o `OBJECT_TYPE` -f `FOLDER_NAME` -u `OUTPUT_FILE_NAME.xml`
 ```
 
@@ -799,7 +793,7 @@ Once you have extracted the metadata and query logs from your data warehouse, yo
 
 ### Teradata
 
-Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) . The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
+Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) . The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
 
 The entries in all the zip files containing query logs are divided into the following:
 
@@ -812,7 +806,7 @@ In case the query logs are archived in a different database, see the description
 
 ### Redshift
 
-Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) . The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
+Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) . The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
 
 The entries in all the zip files containing query logs are divided into the following:
 
@@ -825,7 +819,7 @@ The limit for the total uncompressed size of all the query history files is 5 TB
 
 **Preview:** BigQuery Migration Assessment for Amazon Redshift Serverless is in [Preview](https://cloud.google.com/products#product-launch-stages) . To use this feature, you must be added to the allowlist. To request access, fill out the [application form](https://docs.google.com/forms/d/e/1FAIpQLScr8inhgfdAFg5phMFjs9TQRTDuucmQ3vACzKgtRGmjmqlzdA/viewform) or send an email to <bq-edw-migration-support@google.com> .
 
-Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+Upload the metadata and one or more zip files containing query logs to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Snowflake
 
@@ -837,43 +831,43 @@ Upload the metadata and the zip file(s) containing query logs and usage historie
   - You must upload all of the metadata and query logs zip files exactly as they are output by `  dwh-migration-dumper  ` tool. Don't extract, combine, or otherwise modify them.
   - The total uncompressed size of all the query history files must be less than 5 TB.
 
-For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Oracle
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
 Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `  dwh-migration-oracle-stats.zip  ` , but you can customize this by specifying it in the `  --output  ` flag. The limit for the total uncompressed size of all the files inside the zip file is 50 GB.
 
-For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Hadoop / Cloudera
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
 Upload the zip file containing metadata and performance statistics to a Cloud Storage bucket. By default, the filename for the zip file is `  dwh-migration-cloudera-manager- RUN_DATE .zip  ` (for example `  dwh-migration-cloudera-manager-20250312T145808.zip  ` ), but you can customize it with the `  --output  ` flag. The limit for the total uncompressed size of all files inside the zip file is 50 GB.
 
-For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](/storage/docs/creating-buckets) and [Upload objects from a file system](/storage/docs/uploading-objects) .
+For more information about creating buckets and uploading files to Cloud Storage, see [Create a bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a file system](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ### Apache Hive
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Upload the metadata and folders containing query logs from one or multiple Hive clusters to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+Upload the metadata and folders containing query logs from one or multiple Hive clusters to your Cloud Storage bucket. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 The limit for the total uncompressed size of all the files inside the metadata zip file is 50 GB.
 
-You can use [Cloud Storage connector](/dataproc/docs/concepts/connectors/cloud-storage#non-clusters) to copy query logs directly to the Cloud Storage folder. The folders containing subfolders with query logs must be uploaded to the same Cloud Storage folder, where the metadata zip file is uploaded.
+You can use [Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage#non-clusters) to copy query logs directly to the Cloud Storage folder. The folders containing subfolders with query logs must be uploaded to the same Cloud Storage folder, where the metadata zip file is uploaded.
 
 Query logs folders have query history files with the `  dwhassessment_  ` prefix. The limit for the total uncompressed size of all the query history files is 5 TB.
 
@@ -881,20 +875,20 @@ Query logs folders have query history files with the `  dwhassessment_  ` prefix
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
 Upload a zip file containing your Informatica XML repository objects to a Cloud Storage bucket. This zip file must also include a `  compilerworks-metadata.yaml  ` file that contains the following:
 
-``` text
+``` notranslate
   product:
     arguments: "ConnectorArguments{connector=informatica, assessment=true}"
 ```
 
 The limit for the total uncompressed size of all files inside the zip file is 50 GB.
 
-For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ## Run a BigQuery migration assessment
 
@@ -918,7 +912,7 @@ To access and use the BigQuery Migration Service, you need the following permiss
   - `  bigquerymigration.subtasks.get  `
   - `  bigquerymigration.subtasks.list  `
 
-**Note:** You can only set the permissions and roles with the `  bigquerymigration.*  ` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](/sdk/gcloud) .
+**Note:** You can only set the permissions and roles with the `  bigquerymigration.*  ` prefix using the Google Cloud CLI. For information on how to set up and use the Google Cloud CLI, see the [gcloud CLI tool overview](https://docs.cloud.google.com/sdk/gcloud) .
 
 To run the BigQuery Migration Service, you need the following additional permissions.
 
@@ -955,7 +949,7 @@ To share the Looker Studio report with a user, you need to grant the following r
 
 The following example shows you how to grant the required roles to a user that you want to share the report with:
 
-``` text
+``` notranslate
 gcloud projects add-iam-policy-binding \
   " translate="no">PROJECT \
   --member=user:REPORT_VIEWER_EMAIL \
@@ -976,7 +970,7 @@ Replace the following:
 
 We recommend that you create and set up a new project to run your migration assessment. You can use the following script to create a new Google Cloud project with all the necessary permissions and role assignments to run the assessment:
 
-``` text
+``` notranslate
 #!/bin/bash
 
 # --- Configuration ---
@@ -1034,7 +1028,7 @@ Replace the following:
 
 ### Supported locations
 
-The BigQuery migration assessment feature is supported in all BigQuery locations. For a list of BigQuery locations, see [Supported locations](/bigquery/docs/locations#supported_locations) .
+The BigQuery migration assessment feature is supported in all BigQuery locations. For a list of BigQuery locations, see [Supported locations](https://docs.cloud.google.com/bigquery/docs/locations#supported_locations) .
 
 ### Before you begin
 
@@ -1045,12 +1039,14 @@ Before you run the assessment, you must enable the BigQuery Migration API and cr
 Enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
+    
+    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
 #### Create a dataset for the assessment results
 
-The BigQuery migration assessment writes the assessment results to tables in BigQuery. Before you begin, [create a dataset](/bigquery/docs/datasets) to hold these tables. When you share the Looker Studio report, you must also give users permission to read this dataset. For more information, see [Make the report available to users](#share_the_data_studio_report) .
+The BigQuery migration assessment writes the assessment results to tables in BigQuery. Before you begin, [create a dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to hold these tables. When you share the Looker Studio report, you must also give users permission to read this dataset. For more information, see [Make the report available to users](https://docs.cloud.google.com/bigquery/docs/migration-assessment#share_the_data_studio_report) .
 
 **Note:** The dataset should be in the same region as the Cloud Storage bucket containing the metadata and log files extracted from the source database. However, if the Cloud Storage bucket is located in a multi-region, then the dataset must be in any of the regions inside this multi-region.
 
@@ -1059,6 +1055,8 @@ The BigQuery migration assessment writes the assessment results to tables in Big
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu under `  Migration  ` , click **Services** .
 
@@ -1077,15 +1075,17 @@ The BigQuery migration assessment writes the assessment results to tables in Big
           - Keep the **Automatically create the new BigQuery dataset** checkbox selected to have the BigQuery dataset created automatically. The name of the dataset is generated automatically.
           - Clear the **Automatically create the new BigQuery dataset** checkbox and either choose the existing empty BigQuery dataset using the format `  projectId.datasetId  ` , or create a new dataset name. In this option you can choose the BigQuery dataset name.
         
-        **Important:** The Cloud Storage bucket location and the BigQuery dataset location must be in the same multi-region or in the location inside this multi-region. For more information on location constraints, see [Location considerations](/bigquery/docs/batch-loading-data#data-locations) .
+        **Important:** The Cloud Storage bucket location and the BigQuery dataset location must be in the same multi-region or in the location inside this multi-region. For more information on location constraints, see [Location considerations](https://docs.cloud.google.com/bigquery/docs/batch-loading-data#data-locations) .
     
-    **Option 1** - automatic BigQuery dataset generation (default)
+    **Option 1** - automatic BigQuery dataset generation (default) ![Assessment configuration dialog.](https://docs.cloud.google.com/static/bigquery/images/assessment-config.png)
     
-    **Option 2** - manual BigQuery dataset creation:
+    **Option 2** - manual BigQuery dataset creation: ![Assessment configuration dialog with manual dataset creation.](https://docs.cloud.google.com/static/bigquery/images/assessment-config-manual.png)
 
 5.  Click **Create** . You can see the status of the job in the assessment jobs list.
     
     While the assessment is running, you can check its progress and estimated time to complete in the tooltip of the status icon.
+    
+    ![Assessment progress in the tooltip.](https://docs.cloud.google.com/static/bigquery/images/assessment-progress-tooltip.png)
 
 6.  While the assessment is running, you can click the **View report** link in the assessment jobs list to view the assessment report with partial data in Looker Studio. The **View report** link might take some time to appear while the assessment is running. The report opens in a new tab.
     
@@ -1095,33 +1095,39 @@ The BigQuery migration assessment writes the assessment results to tables in Big
 
 ### API
 
-Call the [`  create  `](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) method with a defined [workflow](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows) .
+Call the [`  create  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) method with a defined [workflow](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows) .
 
-Then call the [`  start  `](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start) method to start the assessment workflow.
+Then call the [`  start  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/start) method to start the assessment workflow.
 
-The assessment creates tables in the BigQuery dataset you created earlier. You can query these for information about the tables and queries used in your existing data warehouse. For information about the output files of the translation, see [Batch SQL translator](/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
+The assessment creates tables in the BigQuery dataset you created earlier. You can query these for information about the tables and queries used in your existing data warehouse. For information about the output files of the translation, see [Batch SQL translator](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator#explore_the_translation_output) .
 
 #### Shareable aggregated assessment result
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 For Amazon Redshift, Teradata, and Snowflake assessments, in addition to the previously created BigQuery dataset, the workflow creates another lightweight dataset with the same name, plus the `  _shareableRedactedAggregate  ` suffix. This dataset contains highly aggregated data that is derived from the output dataset, and contains no personally identifiable information (PII).
 
-To find, inspect, and securely share the dataset with other users, see [Query the migration assessment output tables](#query_assessment_output) .
+To find, inspect, and securely share the dataset with other users, see [Query the migration assessment output tables](https://docs.cloud.google.com/bigquery/docs/migration-assessment#query_assessment_output) .
 
-The feature is on by default, but you can opt out using the [public API](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) .
+The feature is on by default, but you can opt out using the [public API](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows/create) .
 
 ### Assessment details
 
 To view the Assessment details page, click the display name in the assessment jobs list.
 
+![Assessment list page.](https://docs.cloud.google.com/static/bigquery/images/assessment-list.png)
+
 The assessment details page contains the **Configuration** tab, where you can view more information about an assessment job, and the **Errors** tab, where you can review any errors that happened during the assessment processing.
 
 View the **Configuration** tab to see the properties of the assessment.
 
+![Assessment details page - configuration tab.](https://docs.cloud.google.com/static/bigquery/images/assessment-details.png)
+
 View the **Errors** tab to see the errors that happened during assessment processing.
+
+![Assessment details page - errors tab.](https://docs.cloud.google.com/static/bigquery/images/assessment-details-errors.png)
 
 ## Review and share the Looker Studio report
 
@@ -1132,6 +1138,8 @@ After the assessment task completes, you can create and share a Looker Studio re
 Click the **View report** link listed next to your individual assessment task. The Looker Studio report opens in a new tab, in a preview mode. You can use preview mode to review the content of the report before sharing it further.
 
 The report looks similar to the following screenshot:
+
+![Assessment report.](https://docs.cloud.google.com/static/bigquery/images/assessment-report.png)
 
 To see which views are contained in the report, select your data warehouse:
 
@@ -1227,7 +1235,7 @@ The **BigQuery steady state** section contains the following views:
     The Unique Constraints view displays both `  SET  ` tables and unique indexes defined within the source data warehouse. In BigQuery, it's recommended to use staging tables and a `  MERGE  ` statement to insert only unique records into a target table. Use the contents of this view to help determine which tables you might need to adjust ETL for during the migration.
 
   - Default Values / Check Constraints  
-    This view shows tables that use check constraints to set default column values. In BigQuery, see [Specify default column values](/bigquery/docs/default-values) .
+    This view shows tables that use check constraints to set default column values. In BigQuery, see [Specify default column values](https://docs.cloud.google.com/bigquery/docs/default-values) .
 
 The **Migration path** section of the report contains the following views:
 
@@ -1240,12 +1248,12 @@ The **Migration path** section of the report contains the following views:
   - Table Updates Schedule  
     The Table Updates Schedule view shows when and how frequently tables are updated to help you plan how and when to move them.
   - Data Migration to BigQuery  
-    The Data Migration to BigQuery view outlines the migration path with the expected time to migrate your data using the BigQuery Data Transfer Service. For more information, see the [BigQuery Data Transfer Service for Teradata guide](/bigquery/docs/migration/teradata) .
+    The Data Migration to BigQuery view outlines the migration path with the expected time to migrate your data using the BigQuery Data Transfer Service. For more information, see the [BigQuery Data Transfer Service for Teradata guide](https://docs.cloud.google.com/bigquery/docs/migration/teradata) .
 
 The Appendix section contains the following views:
 
   - Case Sensitivity  
-    The Case Sensitivity view shows tables in the source data warehouse that are configured to perform case-insensitive comparisons. By default, string comparisons in BigQuery are case-sensitive. For more information, see [Collation](/bigquery/docs/reference/standard-sql/collation-concepts) .
+    The Case Sensitivity view shows tables in the source data warehouse that are configured to perform case-insensitive comparisons. By default, string comparisons in BigQuery are case-sensitive. For more information, see [Collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) .
 
 ### Redshift
 
@@ -1338,7 +1346,7 @@ The **Migration path** section contains the following views:
     The Table Scale view lists your tables with the most columns.
 
   - Data Migration to BigQuery  
-    The Data Migration to BigQuery view outlines the migration path with the expected time to migrate your data using the BigQuery Migration Service Data Transfer Service. For more information, see the [BigQuery Data Transfer Service for Redshift guide](/bigquery/docs/migration/redshift) .
+    The Data Migration to BigQuery view outlines the migration path with the expected time to migrate your data using the BigQuery Migration Service Data Transfer Service. For more information, see the [BigQuery Data Transfer Service for Redshift guide](https://docs.cloud.google.com/bigquery/docs/migration/redshift) .
 
   - Assessment execution summary  
     The Assessment execution summary contains the report completeness, the progress of the on-going assessment, and the status of processed files and errors.
@@ -1346,6 +1354,8 @@ The **Migration path** section contains the following views:
     Report completeness represents the percentage of successfully processed data that is recommended to display meaningful insights in the assessment report. If the data for a particular section of the report is missing, this information is listed in the **Assessment Modules** table under the **Report Completeness** indicator.
     
     The **progress** metric indicates the percentage of the data processed so far along with the estimate of the remaining time to process all of the data. After the processing is complete, the progress metric is not displayed.
+    
+    ![Assessment execution summary.](https://docs.cloud.google.com/static/bigquery/images/assessment-execution-summary.png)
 
 ### Redshift Serverless
 
@@ -1380,6 +1390,8 @@ The **Appendix** section contains this view:
 ### Snowflake
 
 The report consists of different sections that can be used either separately or together. The following diagram organizes these sections into three common user goals to help you assess your migration needs:
+
+![Migration assessment report flowchart for Snowflake](https://docs.cloud.google.com/static/bigquery/images/migration-assessment-snowflake-flowchart.png)
 
 ### Migration Highlights views
 
@@ -1448,7 +1460,7 @@ The **PoC** (proof of concept) section contains the following views:
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-edw-migration-support@google.com> .
 
@@ -1620,17 +1632,17 @@ When you open the report from the Google Cloud console, you are viewing the repo
 1.  Click **Edit and share** . Looker Studio prompts you to attach newly created Looker Studio connectors to the new report.
 2.  Click **Add to report** . The report receives an individual report ID, which you can use to access the report.
 3.  To share the Looker Studio report with other users, follow the steps given in [Share reports with viewers and editors](https://support.google.com/looker-studio/answer/7459147) .
-4.  Grant the users permission to view the BigQuery dataset that was used to run the assessment task. For more information, see [Granting access to a dataset](/bigquery/docs/migration-assessment#required_permissions) .
+4.  Grant the users permission to view the BigQuery dataset that was used to run the assessment task. For more information, see [Granting access to a dataset](https://docs.cloud.google.com/bigquery/docs/migration-assessment#required_permissions) .
 
 ## Query the migration assessment output tables
 
-Although the Looker Studio reports are the most convenient way to view the assessment results, you can also [view and query the underlying data](/bigquery/docs/bigquery-web-ui#open-ui) in the BigQuery dataset.
+Although the Looker Studio reports are the most convenient way to view the assessment results, you can also [view and query the underlying data](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui#open-ui) in the BigQuery dataset.
 
 ### Example query
 
 The following example gets the total number of unique queries, the number of queries that failed translation, and the percentage of unique queries that failed translation.
 
-``` text
+``` notranslate
   SELECT
     QueryCount.v AS QueryCount,
     ErrorCount.v as ErrorCount,
@@ -1653,11 +1665,13 @@ The following example gets the total number of unique queries, the number of que
 
 ### Share your dataset with users in other projects
 
-After inspecting the dataset, if you would like to share it with a user that is not in your project, you can do so by utilizing the [publisher workflow of BigQuery sharing (formerly Analytics Hub)](/bigquery/docs/analytics-hub-introduction#publisher_workflow) .
+After inspecting the dataset, if you would like to share it with a user that is not in your project, you can do so by utilizing the [publisher workflow of BigQuery sharing (formerly Analytics Hub)](https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction#publisher_workflow) .
 
-**Note:** There is no additional cost for managing [data exchanges](/bigquery/docs/analytics-hub-manage-exchanges) or listings in sharing.
+**Note:** There is no additional cost for managing [data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges) or listings in sharing.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the dataset to view its details.
 
@@ -1667,7 +1681,7 @@ After inspecting the dataset, if you would like to share it with a user that is 
     
     If you already have a data exchange, skip step 5.
 
-5.  [Create a data exchange and set permissions](/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) . To allow a user to view your listings in this exchange, add them to the **Subscribers** list.
+5.  [Create a data exchange and set permissions](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#create-exchange) . To allow a user to view your listings in this exchange, add them to the **Subscribers** list.
 
 6.  Enter the listing details.
     
@@ -1689,7 +1703,7 @@ This section explains some common issues and troubleshooting techniques for migr
 
 ### `     dwh-migration-dumper    ` tool errors
 
-To troubleshoot errors and warnings in the `  dwh-migration-dumper  ` tool terminal output that occurred during metadata or query logs extraction, see [generate metadata troubleshooting](/bigquery/docs/generate-metadata#troubleshooting) .
+To troubleshoot errors and warnings in the `  dwh-migration-dumper  ` tool terminal output that occurred during metadata or query logs extraction, see [generate metadata troubleshooting](https://docs.cloud.google.com/bigquery/docs/generate-metadata#troubleshooting) .
 
 ### Hive migration errors
 
@@ -1707,18 +1721,12 @@ This issue might be caused by the misconfiguration or problems during logging ho
 
 Search your `  hive-server2  ` debug logs for the following logging hook messages:
 
-``` text
-Unable to initialize logger, logging disabled
-```
+    Unable to initialize logger, logging disabled
 
-``` text
-Log dir configuration key 'dwhassessment.hook.base-directory' is not set,
-logging disabled.
-```
+    Log dir configuration key 'dwhassessment.hook.base-directory' is not set,
+    logging disabled.
 
-``` text
-Error while trying to set permission
-```
+    Error while trying to set permission
 
 Review the issue details and see if there is anything that you need to correct to fix the problem.
 
@@ -1728,17 +1736,11 @@ This issue might be caused by the problems encountered during an event processin
 
 Search in your `  hive-server2  ` debug logs for the following logging hook messages:
 
-``` text
-Failed to close writer for file
-```
+    Failed to close writer for file
 
-``` text
-Got exception while processing event
-```
+    Got exception while processing event
 
-``` text
-Error writing record for query
-```
+    Error writing record for query
 
 Review the issue details and see if there is anything that you need to correct to fix the problem.
 
@@ -1748,9 +1750,7 @@ This issue might be caused by the logging hook thread queue overflow.
 
 Search in your `  hive-server2  ` debug logs for the following logging hook message:
 
-``` text
-Writer queue is full. Ignoring event
-```
+    Writer queue is full. Ignoring event
 
 If there are such messages, consider increasing the `  dwhassessment.hook.queue.capacity  ` parameter.
 
@@ -1760,10 +1760,10 @@ For more information about the `  dwh-migration-dumper  ` tool, see [dwh-migrati
 
 You can also learn more about the following steps in data warehouse migration:
 
-  - [Migration overview](/bigquery/docs/migration/migration-overview)
-  - [Schema and data transfer overview](/bigquery/docs/migration/schema-data-overview)
-  - [Data pipelines](/bigquery/docs/migration/pipelines)
-  - [Batch SQL translation](/bigquery/docs/batch-sql-translator)
-  - [Interactive SQL translation](/bigquery/docs/interactive-sql-translator)
-  - [Data security and governance](/bigquery/docs/data-governance)
+  - [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+  - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
+  - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
+  - [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
+  - [Interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator)
+  - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
   - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)

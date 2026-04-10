@@ -4,7 +4,7 @@ When you purchase reserved slots in BigQuery, you must estimate the right number
 
 You can use the slot estimator for your edition, reservation and on-demand workloads to perform the following tasks:
 
-For the selected [edition](/bigquery/docs/editions-intro) workloads:
+For the selected [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) workloads:
 
   - View slot capacity and utilization data for the past 30 days and identify periods of peak utilization when the most slots are used.
   - View cost-optimal recommendations for commitment and autoscaling slots with similar performance.
@@ -21,12 +21,12 @@ For on-demand billing workloads:
   - View on-demand slot usage data of the entire organization or an individual project for the past 30 days.
   - View cost-optimal recommendations for commitment and autoscaling slots with similar performance if you move to the Enterprise edition.
 
-Customers who use Enterprise edition, Enterprise Plus edition, or on-demand billing can use BigQuery slot recommender to view slot usage, optimize commitments, and improve performance. For more information, see [View edition slot recommendations](/bigquery/docs/slot-recommender) .
+Customers who use Enterprise edition, Enterprise Plus edition, or on-demand billing can use BigQuery slot recommender to view slot usage, optimize commitments, and improve performance. For more information, see [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender) .
 
 ## Limitations
 
   - Data is limited to the past 30 days.
-  - The models do not include [`  ML_EXTERNAL  `](/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `  ML_EXTERNAL  ` assignments, then the modeled results are less accurate.
+  - The models do not include [`  ML_EXTERNAL  `](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#assignments) assignments. If a large percentage of your slots are used for `  ML_EXTERNAL  ` assignments, then the modeled results are less accurate.
 
 ## Before you begin
 
@@ -48,7 +48,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.resourceViewer  `
   - `  roles/bigquery.user  `
 
-To use the slot estimator for on-demand usage data, you need to [enable the Reservations API](/bigquery/docs/reservations-commitments#enabling-reservations-api) on a project you intend to use as the administration project to manage reservations. Other than the permissions above, you also need one of the following IAM permissions on your organization to see organization-level data or the project to see project-level data:
+To use the slot estimator for on-demand usage data, you need to [enable the Reservations API](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#enabling-reservations-api) on a project you intend to use as the administration project to manage reservations. Other than the permissions above, you also need one of the following IAM permissions on your organization to see organization-level data or the project to see project-level data:
 
   - `  bigquery.jobs.listExecutionMetadata  ` (can only be applied on organization level)
   - `  bigquery.jobs.listAll  ` (can be applied on both organization or project level)
@@ -60,15 +60,17 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.resourceEditor  `
   - `  roles/bigquery.resourceViewer  `
 
-To view the commitment slots recommendations, you also need the permissions described in [View edition slot recommendations](/bigquery/docs/slot-recommender#required_permissions) .
+To view the commitment slots recommendations, you also need the permissions described in [View edition slot recommendations](https://docs.cloud.google.com/bigquery/docs/slot-recommender#required_permissions) .
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## View slot capacity and utilization
 
 To view slot capacity and utilization over time, navigate to the slot estimator:
 
 1.  In the Google Cloud console, open the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your administration project.
     
@@ -83,11 +85,17 @@ The utilization chart shows slot capacity and utilization over the past 30 days,
 
 The **Usage and utilization by percentage** tab shows slot utilization as a percentage of slot usage by max slots.
 
+![Utilization percentage](https://docs.cloud.google.com/static/bigquery/images/slot-estimator-1.png)
+
 The **Usage and utilization by capacity** tab shows max slots and usage as absolute values.
+
+![Usage and capacity](https://docs.cloud.google.com/static/bigquery/images/slot-estimator-2.png)
 
 You can choose an edition or on-demand option from the **Source** drop-down to view statistics for different scopes. Selecting an edition populates the **Reservation** drop-down with relevant reservations.
 
 For on-demand options, you can choose either an individual project or the entire organization from the **Recommendations for** drop-down if you have organization-level permissions. The Slot Estimator page only shows the project-level information if you only have project-level permissions.
+
+![Slot estimator on-demand options](https://docs.cloud.google.com/static/bigquery/images/slot-estimator-on-demand-options.png)
 
 The statistics for **Usage and utilization by capacity** tab may vary slightly based on different scope:
 
@@ -108,6 +116,8 @@ The estimated performance improvement is based on several factors. The most impo
 To model slot performance, perform the following steps:
 
 1.  In the Google Cloud console, open the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Select your administration project.
     
@@ -124,6 +134,8 @@ To model slot performance, perform the following steps:
 
 The table under **Changes in job performance with additional slots** shows job performance data from the past 30 days, along with the estimated change in performance from increasing or decreasing max slots. The data is grouped into percentages by job duration for all jobs that ran in the selected timeframe. The column denoted by the light bulb icon corresponds to the performance-enhancing recommendation for the selected reservation.
 
+![Slot modeling](https://docs.cloud.google.com/static/bigquery/images/slot-estimator-4.png)
+
 The performance data is broken down by percentile. The table splits the data into at most 12 buckets: P10 through P90, plus P95, P99, and P100. The P100 bucket represents the top 1% of jobs that took the longest time to run; P99 includes the top 96% to 99%; P95 includes the top 91% to 95%; P90 includes 81% to 90%; and so forth. Depending on the data, the table may group the data into fewer buckets. In that case, the table contains fewer rows.
 
 For each percentile bucket, the table shows the following information:
@@ -139,13 +151,13 @@ The table also lists an estimated "30-day change" statistic for each model. This
 
 For fixed-capacity reservations, if idle slot sharing is enabled, then jobs in that reservation can borrow idle slots from other reservations. As a result, utilization can exceed 100% of allocated slots. If a reservation consistently utilizes idle slots from other reservations, it suggests that the reservation size might need to be increased. This is important because the workload's performance could degrade if idle slot availability decreases in the future. On the other hand, if a reservation seldom uses its full capacity, the reservation might be too large.
 
-Reservations that use [autoscaling](/bigquery/docs/slots-autoscaling-intro) use and add slots in the following priority:
+Reservations that use [autoscaling](https://docs.cloud.google.com/bigquery/docs/slots-autoscaling-intro) use and add slots in the following priority:
 
 1.  Baseline slots.
 2.  Idle slot sharing (if enabled).
 3.  Autoscale slots.
 
-If an autoscaling reservation is consistently maxing out autoscaling slots, this might be a signal to increase the max reservation slots. For information about viewing your slot usage, see [View administrative resource charts](/bigquery/docs/admin-resource-charts#view-admin-resource-charts) .
+If an autoscaling reservation is consistently maxing out autoscaling slots, this might be a signal to increase the max reservation slots. For information about viewing your slot usage, see [View administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-admin-resource-charts) .
 
 ## Pricing
 

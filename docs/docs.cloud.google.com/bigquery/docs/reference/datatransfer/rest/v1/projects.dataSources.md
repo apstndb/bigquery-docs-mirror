@@ -1,12 +1,12 @@
-  - [Resource: DataSource](#DataSource)
-      - [JSON representation](#DataSource.SCHEMA_REPRESENTATION)
-      - [TransferType](#DataSource.TransferType)
-      - [DataSourceParameter](#DataSource.DataSourceParameter)
-          - [JSON representation](#DataSource.DataSourceParameter.SCHEMA_REPRESENTATION)
-      - [Type](#DataSource.Type)
-      - [AuthorizationType](#DataSource.AuthorizationType)
-      - [DataRefreshType](#DataSource.DataRefreshType)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: DataSource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.SCHEMA_REPRESENTATION)
+      - [TransferType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.TransferType)
+      - [DataSourceParameter](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.DataSourceParameter)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.DataSourceParameter.SCHEMA_REPRESENTATION)
+      - [Type](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.Type)
+      - [AuthorizationType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.AuthorizationType)
+      - [DataRefreshType](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#DataSource.DataRefreshType)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.dataSources#METHODS_SUMMARY)
 
 ## Resource: DataSource
 
@@ -23,7 +23,7 @@ Defines the properties and custom parameters for a data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;dataSourceId&quot;: string,
   &quot;displayName&quot;: string,
@@ -204,7 +204,7 @@ A parameter used to define custom fields in a data source definition.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;paramId&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,

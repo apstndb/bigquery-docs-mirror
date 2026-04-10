@@ -1,71 +1,34 @@
-GoogleSQL for BigQuery supports statistical aggregate functions. To learn about the syntax for aggregate function calls, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+GoogleSQL for BigQuery supports statistical aggregate functions. To learn about the syntax for aggregate function calls, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
 ## Function list
 
-<table>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr"><code dir="ltr" translate="no">        CORR       </code></a></td>
-<td>Computes the Pearson coefficient of correlation of a set of number pairs.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop"><code dir="ltr" translate="no">        COVAR_POP       </code></a></td>
-<td>Computes the population covariance of a set of number pairs.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp"><code dir="ltr" translate="no">        COVAR_SAMP       </code></a></td>
-<td>Computes the sample covariance of a set of number pairs.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev"><code dir="ltr" translate="no">        STDDEV       </code></a></td>
-<td>An alias of the <code dir="ltr" translate="no">       STDDEV_SAMP      </code> function.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop"><code dir="ltr" translate="no">        STDDEV_POP       </code></a></td>
-<td>Computes the population (biased) standard deviation of the values.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp"><code dir="ltr" translate="no">        STDDEV_SAMP       </code></a></td>
-<td>Computes the sample (unbiased) standard deviation of the values.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop"><code dir="ltr" translate="no">        VAR_POP       </code></a></td>
-<td>Computes the population (biased) variance of the values.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp"><code dir="ltr" translate="no">        VAR_SAMP       </code></a></td>
-<td>Computes the sample (unbiased) variance of the values.</td>
-</tr>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance"><code dir="ltr" translate="no">        VARIANCE       </code></a></td>
-<td>An alias of <code dir="ltr" translate="no">       VAR_SAMP      </code> .</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                             | Summary                                                                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| [`         CORR        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)               | Computes the Pearson coefficient of correlation of a set of number pairs. |
+| [`         COVAR_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)     | Computes the population covariance of a set of number pairs.              |
+| [`         COVAR_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)   | Computes the sample covariance of a set of number pairs.                  |
+| [`         STDDEV        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev)           | An alias of the `        STDDEV_SAMP       ` function.                    |
+| [`         STDDEV_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_pop)   | Computes the population (biased) standard deviation of the values.        |
+| [`         STDDEV_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) | Computes the sample (unbiased) standard deviation of the values.          |
+| [`         VAR_POP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_pop)         | Computes the population (biased) variance of the values.                  |
+| [`         VAR_SAMP        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp)       | Computes the sample (unbiased) variance of the values.                    |
+| [`         VARIANCE        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#variance)       | An alias of `        VAR_SAMP       ` .                                   |
 
 ## `     CORR    `
 
-``` text
-CORR(
-  X1, X2
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    CORR(
+      X1, X2
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -82,9 +45,9 @@ This function ignores any input pairs that contain one or more `  NULL  ` values
   - The variance of `  X1  ` or `  X2  ` is `  0  ` .
   - The covariance of `  X1  ` and `  X2  ` is `  0  ` .
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -92,111 +55,97 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Examples**
 
-``` text
-SELECT CORR(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 5.0 AS x),
-      (3.0, 9.0),
-      (4.0, 7.0)]);
+    SELECT CORR(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 5.0 AS x),
+          (3.0, 9.0),
+          (4.0, 7.0)]);
+    
+    /*--------------------+
+     | results            |
+     +--------------------+
+     | 0.6546536707079772 |
+     +--------------------*/
 
-/*--------------------+
- | results            |
- +--------------------+
- | 0.6546536707079772 |
- +--------------------*/
-```
+    SELECT CORR(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 5.0 AS x),
+          (3.0, 9.0),
+          (4.0, NULL)]);
+    
+    /*---------+
+     | results |
+     +---------+
+     | 1       |
+     +---------*/
 
-``` text
-SELECT CORR(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 5.0 AS x),
-      (3.0, 9.0),
-      (4.0, NULL)]);
+    SELECT CORR(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 1       |
- +---------*/
-```
+    SELECT CORR(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT CORR(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
+    SELECT CORR(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 5.0 AS x),
+          (3.0, 9.0),
+          (4.0, 7.0),
+          (5.0, 1.0),
+          (7.0, CAST('Infinity' as FLOAT64))])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT CORR(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT CORR(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 5.0 AS x),
-      (3.0, 9.0),
-      (4.0, 7.0),
-      (5.0, 1.0),
-      (7.0, CAST('Infinity' as FLOAT64))])
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
-
-``` text
-SELECT CORR(x, y) AS results
-FROM
-  (
-    SELECT 0 AS x, 0 AS y
-    UNION ALL
-    SELECT 0 AS x, 0 AS y
-  )
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT CORR(x, y) AS results
+    FROM
+      (
+        SELECT 0 AS x, 0 AS y
+        UNION ALL
+        SELECT 0 AS x, 0 AS y
+      )
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     COVAR_POP    `
 
-``` text
-COVAR_POP(
-  X1, X2
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    COVAR_POP(
+      X1, X2
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -211,11 +160,11 @@ This function ignores any input pairs that contain one or more `  NULL  ` values
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -223,99 +172,87 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Examples**
 
-``` text
-SELECT COVAR_POP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (9.0, 3.0)])
+    SELECT COVAR_POP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (9.0, 3.0)])
+    
+    /*---------------------+
+     | results             |
+     +---------------------+
+     | -1.6800000000000002 |
+     +---------------------*/
 
-/*---------------------+
- | results             |
- +---------------------+
- | -1.6800000000000002 |
- +---------------------*/
-```
+    SELECT COVAR_POP(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | 0       |
+     +---------*/
 
-``` text
-SELECT COVAR_POP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
+    SELECT COVAR_POP(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 0       |
- +---------*/
-```
+    SELECT COVAR_POP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (NULL, 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | -1      |
+     +---------*/
 
-``` text
-SELECT COVAR_POP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT COVAR_POP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (NULL, 3.0)])
-
-/*---------+
- | results |
- +---------+
- | -1      |
- +---------*/
-```
-
-``` text
-SELECT COVAR_POP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (CAST('Infinity' as FLOAT64), 3.0)])
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT COVAR_POP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (CAST('Infinity' as FLOAT64), 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     COVAR_SAMP    `
 
-``` text
-COVAR_SAMP(
-  X1, X2
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    COVAR_SAMP(
+      X1, X2
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -330,11 +267,11 @@ This function ignores any input pairs that contain one or more `  NULL  ` values
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -342,123 +279,109 @@ To learn more about the `  OVER  ` clause and how to use it, see [Window functio
 
 **Examples**
 
-``` text
-SELECT COVAR_SAMP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (9.0, 3.0)])
+    SELECT COVAR_SAMP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (9.0, 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | -2.1    |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | -2.1    |
- +---------*/
-```
+    SELECT COVAR_SAMP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (NULL, 3.0)])
+    
+    /*----------------------+
+     | results              |
+     +----------------------+
+     | --1.3333333333333333 |
+     +----------------------*/
 
-``` text
-SELECT COVAR_SAMP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (NULL, 3.0)])
+    SELECT COVAR_SAMP(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-/*----------------------+
- | results              |
- +----------------------+
- | --1.3333333333333333 |
- +----------------------*/
-```
+    SELECT COVAR_SAMP(y, x) AS results
+    FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT COVAR_SAMP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, 3.0)])
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT COVAR_SAMP(y, x) AS results
-FROM UNNEST([STRUCT(1.0 AS y, NULL AS x),(9.0, NULL)])
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT COVAR_SAMP(y, x) AS results
-FROM
-  UNNEST(
-    [
-      STRUCT(1.0 AS y, 1.0 AS x),
-      (2.0, 6.0),
-      (9.0, 3.0),
-      (2.0, 6.0),
-      (CAST('Infinity' as FLOAT64), 3.0)])
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT COVAR_SAMP(y, x) AS results
+    FROM
+      UNNEST(
+        [
+          STRUCT(1.0 AS y, 1.0 AS x),
+          (2.0, 6.0),
+          (9.0, 3.0),
+          (2.0, 6.0),
+          (CAST('Infinity' as FLOAT64), 3.0)])
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     STDDEV    `
 
-``` text
-STDDEV(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    STDDEV(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
-An alias of [STDDEV\_SAMP](#stddev_samp) .
+An alias of [STDDEV\_SAMP](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev_samp) .
 
 ## `     STDDEV_POP    `
 
-``` text
-STDDEV_POP(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    STDDEV_POP(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -473,11 +396,11 @@ This function ignores any `  NULL  ` inputs. If all inputs are ignored, this fun
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -485,74 +408,62 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Examples**
 
-``` text
-SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    
+    /*-------------------+
+     | results           |
+     +-------------------+
+     | 3.265986323710904 |
+     +-------------------*/
 
-/*-------------------+
- | results           |
- +-------------------+
- | 3.265986323710904 |
- +-------------------*/
-```
+    SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | 2       |
+     +---------*/
 
-``` text
-SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    SELECT STDDEV_POP(x) AS results FROM UNNEST([10, NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | 0       |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 2       |
- +---------*/
-```
+    SELECT STDDEV_POP(x) AS results FROM UNNEST([NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT STDDEV_POP(x) AS results FROM UNNEST([10, NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | 0       |
- +---------*/
-```
-
-``` text
-SELECT STDDEV_POP(x) AS results FROM UNNEST([NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT STDDEV_POP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     STDDEV_SAMP    `
 
-``` text
-STDDEV_SAMP(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    STDDEV_SAMP(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -567,11 +478,11 @@ This function ignores any `  NULL  ` inputs. If there are fewer than two non- ` 
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -579,74 +490,62 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Examples**
 
-``` text
-SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | 4       |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 4       |
- +---------*/
-```
+    SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    
+    /*--------------------+
+     | results            |
+     +--------------------+
+     | 2.8284271247461903 |
+     +--------------------*/
 
-``` text
-SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-/*--------------------+
- | results            |
- +--------------------+
- | 2.8284271247461903 |
- +--------------------*/
-```
+    SELECT STDDEV_SAMP(x) AS results FROM UNNEST([NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT STDDEV_SAMP(x) AS results FROM UNNEST([NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT STDDEV_SAMP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     VAR_POP    `
 
-``` text
-VAR_POP(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    VAR_POP(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -661,7 +560,7 @@ This function ignores any `  NULL  ` inputs. If all inputs are ignored, this fun
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -669,74 +568,62 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Examples**
 
-``` text
-SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    
+    /*--------------------+
+     | results            |
+     +--------------------+
+     | 10.666666666666666 |
+     +--------------------*/
 
-/*--------------------+
- | results            |
- +--------------------+
- | 10.666666666666666 |
- +--------------------*/
-```
+    SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    
+    /*----------+
+     | results |
+     +---------+
+     | 4       |
+     +---------*/
 
-``` text
-SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    SELECT VAR_POP(x) AS results FROM UNNEST([10, NULL]) AS x
+    
+    /*----------+
+     | results |
+     +---------+
+     | 0       |
+     +---------*/
 
-/*----------+
- | results |
- +---------+
- | 4       |
- +---------*/
-```
+    SELECT VAR_POP(x) AS results FROM UNNEST([NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT VAR_POP(x) AS results FROM UNNEST([10, NULL]) AS x
-
-/*----------+
- | results |
- +---------+
- | 0       |
- +---------*/
-```
-
-``` text
-SELECT VAR_POP(x) AS results FROM UNNEST([NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT VAR_POP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     VAR_SAMP    `
 
-``` text
-VAR_SAMP(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    VAR_SAMP(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
@@ -751,11 +638,11 @@ This function ignores any `  NULL  ` inputs. If there are fewer than two non- ` 
   - Any input value is `  NaN  `
   - Any input value is positive infinity or negative infinity.
 
-To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
+To learn more about the optional aggregate clauses that you can pass into this function, see [Aggregate function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-function-calls) .
 
-This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
+This function can be used with the [`  AGGREGATION_THRESHOLD  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#agg_threshold_clause) .
 
-If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](/bigquery/docs/reference/standard-sql/window-function-calls) .
+If this function is used with the `  OVER  ` clause, it's part of a window function call. In a window function call, aggregate function clauses can't be used. To learn more about the `  OVER  ` clause and how to use it, see [Window function calls](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
 
 **Return Data Type**
 
@@ -763,75 +650,63 @@ If this function is used with the `  OVER  ` clause, it's part of a window funct
 
 **Examples**
 
-``` text
-SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, 18]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | 16      |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 16      |
- +---------*/
-```
+    SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | 8       |
+     +---------*/
 
-``` text
-SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, NULL]) AS x
+    SELECT VAR_SAMP(x) AS results FROM UNNEST([10, NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-/*---------+
- | results |
- +---------+
- | 8       |
- +---------*/
-```
+    SELECT VAR_SAMP(x) AS results FROM UNNEST([NULL]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NULL    |
+     +---------*/
 
-``` text
-SELECT VAR_SAMP(x) AS results FROM UNNEST([10, NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT VAR_SAMP(x) AS results FROM UNNEST([NULL]) AS x
-
-/*---------+
- | results |
- +---------+
- | NULL    |
- +---------*/
-```
-
-``` text
-SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
-
-/*---------+
- | results |
- +---------+
- | NaN     |
- +---------*/
-```
+    SELECT VAR_SAMP(x) AS results FROM UNNEST([10, 14, CAST('Infinity' as FLOAT64)]) AS x
+    
+    /*---------+
+     | results |
+     +---------+
+     | NaN     |
+     +---------*/
 
 ## `     VARIANCE    `
 
-``` text
-VARIANCE(
-  [ DISTINCT ]
-  expression
-)
-[ OVER over_clause ]
-
-over_clause:
-  { named_window | ( [ window_specification ] ) }
-
-window_specification:
-  [ named_window ]
-  [ PARTITION BY partition_expression [, ...] ]
-  [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
-  [ window_frame_clause ]
-```
+    VARIANCE(
+      [ DISTINCT ]
+      expression
+    )
+    [ OVER over_clause ]
+    
+    over_clause:
+      { named_window | ( [ window_specification ] ) }
+    
+    window_specification:
+      [ named_window ]
+      [ PARTITION BY partition_expression [, ...] ]
+      [ ORDER BY expression [ { ASC | DESC }  ] [, ...] ]
+      [ window_frame_clause ]
 
 **Description**
 
-An alias of [VAR\_SAMP](#var_samp) .
+An alias of [VAR\_SAMP](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#var_samp) .

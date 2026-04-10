@@ -14,4 +14,4 @@ The bigquery.googleapis.com MCP server has the following MCP endpoint:
 
 An [MCP tool](https://modelcontextprotocol.io/legacy/concepts/tools) is a function or executable capability that an MCP server exposes to a LLM or AI application to perform an action in the real world.
 
-To view the tools' details for the bigquery.googleapis.com MCP server, head to the [tools overview](/bigquery/docs/reference/mcp/tools_overview) section.
+To view the tools' details for the bigquery.googleapis.com MCP server, head to the [tools overview](https://docs.cloud.google.com/bigquery/docs/reference/mcp/tools_overview) section.

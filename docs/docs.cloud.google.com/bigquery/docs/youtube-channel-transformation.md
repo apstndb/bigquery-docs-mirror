@@ -4,129 +4,28 @@ When your YouTube Channel reports are transferred to BigQuery, the reports are t
 
 When you view the tables and views in BigQuery, the value for suffix is the table suffix you configured when you created the transfer.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>YouTube Channel report</strong></th>
-<th><strong>BigQuery table</strong></th>
-<th><strong>BigQuery view</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Video reports</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-user-activity">User activity</a></td>
-<td>p_channel_basic_a3_ suffix</td>
-<td>channel_basic_a3_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-province">User activity by province</a></td>
-<td>p_channel_province_a3_ suffix</td>
-<td>channel_province_a3_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-playback-locations">Playback locations</a></td>
-<td>p_channel_playback_location_a3_ suffix</td>
-<td>channel_playback_location_a3_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-traffic-sources">Traffic sources</a></td>
-<td>p_channel_traffic_source_a3_ suffix</td>
-<td>channel_traffic_source_a3_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-device-type-and-operating-system">Device type and operating system</a></td>
-<td>p_channel_device_os_a3_ suffix</td>
-<td>channel_device_os_a3_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-viewer-demographics">Viewer demographics</a></td>
-<td>p_channel_demographics_a1_ suffix</td>
-<td>channel_demographics_a1_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-content-sharing">Content sharing by platform</a></td>
-<td>p_channel_sharing_service_a1_ suffix</td>
-<td>channel_sharing_service_a1_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-annotations">Annotations</a></td>
-<td>p_channel_annotations_a1_ suffix</td>
-<td>channel_annotations_a1_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-cards">Cards</a></td>
-<td>p_channel_cards_a1_ suffix</td>
-<td>channel_cards_a1_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-end-screens">End screens</a></td>
-<td>p_channel_end_screens_a1_ suffix</td>
-<td>channel_end_screens_a1_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-subtitles">Subtitles</a></td>
-<td>p_channel_subtitles_a3_ suffix</td>
-<td>channel_subtitles_a3_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-combined">Combined</a></td>
-<td>p_channel_combined_a3_ suffix</td>
-<td>channel_combined_a3_ suffix</td>
-</tr>
-<tr class="even">
-<td><strong>Playlist reports</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-user-activity">User activity</a></td>
-<td>p_playlist_basic_a2_ suffix</td>
-<td>playlist_basic_a2_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-province">User activity by province</a></td>
-<td>p_playlist_province_a2_ suffix</td>
-<td>playlist_province_a2_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-playback-locations">Playback locations</a></td>
-<td>p_playlist_playback_location_a2_ suffix</td>
-<td>playlist_playback_location_a2_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-traffic-sources">Traffic sources</a></td>
-<td>p_playlist_traffic_source_a2_ suffix</td>
-<td>playlist_traffic_source_a2_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-device-type-and-operating-system">Device type and operating system</a></td>
-<td>p_playlist_device_os_a2_ suffix</td>
-<td>playlist_device_os_a2_ suffix</td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-combined">Combined</a></td>
-<td>p_playlist_combined_a2_ suffix</td>
-<td>playlist_combined_a2_ suffix</td>
-</tr>
-<tr class="odd">
-<td><strong>Reach reports</strong></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#reach-reports">Reach basic</a></td>
-<td>p_channel_reach_basic_a1_ suffix</td>
-<td>channel_reach_basic_a1_ suffix</td>
-</tr>
-<tr class="odd">
-<td><a href="https://developers.google.com/youtube/reporting/v1/reports/channel_reports#reach-reports">Reach combined</a></td>
-<td>p_channel_reach_combined_a1_ suffix</td>
-<td>channel_reach_combined_a1_ suffix</td>
-</tr>
-</tbody>
-</table>
+| **YouTube Channel report**                                                                                                                               | **BigQuery table**                           | **BigQuery view**                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- | ----------------------------------------- |
+| **Video reports**                                                                                                                                        |                                              |                                           |
+| [User activity](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-user-activity)                                          | p\_channel\_basic\_a3\_ suffix               | channel\_basic\_a3\_ suffix               |
+| [User activity by province](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-province)                                   | p\_channel\_province\_a3\_ suffix            | channel\_province\_a3\_ suffix            |
+| [Playback locations](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-playback-locations)                                | p\_channel\_playback\_location\_a3\_ suffix  | channel\_playback\_location\_a3\_ suffix  |
+| [Traffic sources](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-traffic-sources)                                      | p\_channel\_traffic\_source\_a3\_ suffix     | channel\_traffic\_source\_a3\_ suffix     |
+| [Device type and operating system](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-device-type-and-operating-system)    | p\_channel\_device\_os\_a3\_ suffix          | channel\_device\_os\_a3\_ suffix          |
+| [Viewer demographics](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-viewer-demographics)                              | p\_channel\_demographics\_a1\_ suffix        | channel\_demographics\_a1\_ suffix        |
+| [Content sharing by platform](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-content-sharing)                          | p\_channel\_sharing\_service\_a1\_ suffix    | channel\_sharing\_service\_a1\_ suffix    |
+| [Annotations](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-annotations)                                              | p\_channel\_annotations\_a1\_ suffix         | channel\_annotations\_a1\_ suffix         |
+| [Cards](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-cards)                                                          | p\_channel\_cards\_a1\_ suffix               | channel\_cards\_a1\_ suffix               |
+| [End screens](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-end-screens)                                              | p\_channel\_end\_screens\_a1\_ suffix        | channel\_end\_screens\_a1\_ suffix        |
+| [Subtitles](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-subtitles)                                                  | p\_channel\_subtitles\_a3\_ suffix           | channel\_subtitles\_a3\_ suffix           |
+| [Combined](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#video-combined)                                                    | p\_channel\_combined\_a3\_ suffix            | channel\_combined\_a3\_ suffix            |
+| **Playlist reports**                                                                                                                                     |                                              |                                           |
+| [User activity](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-user-activity)                                       | p\_playlist\_basic\_a2\_ suffix              | playlist\_basic\_a2\_ suffix              |
+| [User activity by province](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-province)                                | p\_playlist\_province\_a2\_ suffix           | playlist\_province\_a2\_ suffix           |
+| [Playback locations](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-playback-locations)                             | p\_playlist\_playback\_location\_a2\_ suffix | playlist\_playback\_location\_a2\_ suffix |
+| [Traffic sources](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-traffic-sources)                                   | p\_playlist\_traffic\_source\_a2\_ suffix    | playlist\_traffic\_source\_a2\_ suffix    |
+| [Device type and operating system](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-device-type-and-operating-system) | p\_playlist\_device\_os\_a2\_ suffix         | playlist\_device\_os\_a2\_ suffix         |
+| [Combined](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#playlist-combined)                                                 | p\_playlist\_combined\_a2\_ suffix           | playlist\_combined\_a2\_ suffix           |
+| **Reach reports**                                                                                                                                        |                                              |                                           |
+| [Reach basic](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#reach-reports)                                                  | p\_channel\_reach\_basic\_a1\_ suffix        | channel\_reach\_basic\_a1\_ suffix        |
+| [Reach combined](https://developers.google.com/youtube/reporting/v1/reports/channel_reports#reach-reports)                                               | p\_channel\_reach\_combined\_a1\_ suffix     | channel\_reach\_combined\_a1\_ suffix     |

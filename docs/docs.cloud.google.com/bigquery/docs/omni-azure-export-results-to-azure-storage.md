@@ -1,21 +1,21 @@
 # Export query results to Blob Storage
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](/biglake/docs/introduction) .
+**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
-This document describes how to export the result of a query that runs against a [BigLake table](/bigquery/docs/biglake-intro) to your Azure Blob Storage.
+This document describes how to export the result of a query that runs against a [BigLake table](https://docs.cloud.google.com/bigquery/docs/biglake-intro) to your Azure Blob Storage.
 
-For information about how data flows between BigQuery and Azure Blob Storage, see [Data flow when exporting data](/bigquery/docs/omni-introduction#export-data) .
+For information about how data flows between BigQuery and Azure Blob Storage, see [Data flow when exporting data](https://docs.cloud.google.com/bigquery/docs/omni-introduction#export-data) .
 
 ## Limitations
 
-For a full list of limitations that apply to BigLake tables based on Amazon S3 and Blob Storage, see [Limitations](/bigquery/docs/omni-introduction#limitations) .
+For a full list of limitations that apply to BigLake tables based on Amazon S3 and Blob Storage, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
 ## Before you begin
 
 Ensure that you have the following resources:
 
-  - A [connection to access your Blob Storage](/bigquery/docs/omni-azure-create-connection) . Within the connection, you must create a policy for the Blob Storage container path that you want to export to. Then, within that policy, create a role that has the `  Microsoft.Storage/storageAccounts/blobServices/containers/write  ` permission.
-  - An [Blob Storage BigLake table](/bigquery/docs/omni-azure-create-external-table) .
+  - A [connection to access your Blob Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-connection) . Within the connection, you must create a policy for the Blob Storage container path that you want to export to. Then, within that policy, create a role that has the `  Microsoft.Storage/storageAccounts/blobServices/containers/write  ` permission.
+  - An [Blob Storage BigLake table](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table) .
 
 <!-- end list -->
 
@@ -26,10 +26,12 @@ Ensure that you have the following resources:
 BigQuery Omni writes to the specified Blob Storage location regardless of any existing content. The export query can overwrite existing data or mix the query result with existing data. We recommend that you export the query result to an empty Blob Storage container.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Query editor** field, enter a GoogleSQL export query:
     
-    ``` text
+    ``` notranslate
     EXPORT DATA WITH CONNECTION \`CONNECTION_REGION.CONNECTION_NAME\`
     OPTIONS(
       uri="azure://AZURE_STORAGE_ACCOUNT_NAME.blob.core.windows.net/CONTAINER_NAME/FILE_PATH/*",
@@ -52,11 +54,11 @@ BigQuery Omni writes to the specified Blob Storage location regardless of any ex
 
 ## Troubleshooting
 
-If you get an error related to `  quota failure  ` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](#before_you_begin) in this document.
+If you get an error related to `  quota failure  ` , then check if you have reserved capacity for your queries. For more information about slot reservations, see [Before you begin](https://docs.cloud.google.com/bigquery/docs/omni-azure-export-results-to-azure-storage#before_you_begin) in this document.
 
 ## What's next
 
-  - Learn about [BigQuery Omni](/bigquery/docs/omni-introduction) .
-  - Learn how to [export table data](/bigquery/docs/exporting-data) .
-  - Learn how to [query data stored in Blob Storage](/bigquery/docs/query-azure-data) .
-  - Learn how to [set up VPC Service Controls for BigQuery Omni](/bigquery/docs/omni-vpc-sc) .
+  - Learn about [BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-introduction) .
+  - Learn how to [export table data](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
+  - Learn how to [query data stored in Blob Storage](https://docs.cloud.google.com/bigquery/docs/query-azure-data) .
+  - Learn how to [set up VPC Service Controls for BigQuery Omni](https://docs.cloud.google.com/bigquery/docs/omni-vpc-sc) .

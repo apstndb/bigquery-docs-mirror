@@ -1,10 +1,10 @@
 # The ML.ANNOTATE\_IMAGE function
 
-This document describes the `  ML.ANNOTATE_IMAGE  ` function, which lets you annotate images that are stored in BigQuery [object tables](/bigquery/docs/object-table-introduction) by using the [Cloud Vision API](/vision) .
+This document describes the `  ML.ANNOTATE_IMAGE  ` function, which lets you annotate images that are stored in BigQuery [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) by using the [Cloud Vision API](https://docs.cloud.google.com/vision) .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.ANNOTATE_IMAGE(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   TABLE `PROJECT_ID.DATASET.OBJECT_TABLE`,
@@ -20,27 +20,27 @@ ML.ANNOTATE_IMAGE(
 
   - `  DATASET  ` : the BigQuery dataset that contains the resource.
 
-  - `  MODEL_NAME  ` : the name of a [remote model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  ` argument](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_VISION_V1  ` .
+  - `  MODEL_NAME  ` : the name of a [remote model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) with a [`  REMOTE_SERVICE_TYPE  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service#remote_service_type) of `  CLOUD_AI_VISION_V1  ` .
 
-  - `  OBJECT_TABLE  ` : the name of the [object table](/bigquery/docs/object-table-introduction) that contains URIs of the images.
+  - `  OBJECT_TABLE  ` : the name of the [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) that contains URIs of the images.
 
   - `  VISION_FEATURES  ` : a `  ARRAY<STRING>  ` value that specifies one or more feature names of supported Vision API features, in the format `  ['feature_name_1', 'feature_name_2', ...]  ` . The supported features are as follows:
     
-      - [`  FACE_DETECTION  `](/vision/docs/detecting-faces)
+      - [`  FACE_DETECTION  `](https://docs.cloud.google.com/vision/docs/detecting-faces)
     
-      - [`  LANDMARK_DETECTION  `](/vision/docs/detecting-landmarks)
+      - [`  LANDMARK_DETECTION  `](https://docs.cloud.google.com/vision/docs/detecting-landmarks)
     
-      - [`  LOGO_DETECTION  `](/vision/docs/detecting-logos)
+      - [`  LOGO_DETECTION  `](https://docs.cloud.google.com/vision/docs/detecting-logos)
     
-      - [`  LABEL_DETECTION  `](/vision/docs/labels)
+      - [`  LABEL_DETECTION  `](https://docs.cloud.google.com/vision/docs/labels)
     
-      - [`  TEXT_DETECTION  `](/vision/docs/ocr)
+      - [`  TEXT_DETECTION  `](https://docs.cloud.google.com/vision/docs/ocr)
     
-      - [`  DOCUMENT_TEXT_DETECTION  `](/vision/docs/pdf)
+      - [`  DOCUMENT_TEXT_DETECTION  `](https://docs.cloud.google.com/vision/docs/pdf)
     
-      - [`  IMAGE_PROPERTIES  `](/vision/docs/detecting-properties)
+      - [`  IMAGE_PROPERTIES  `](https://docs.cloud.google.com/vision/docs/detecting-properties)
     
-      - [`  OBJECT_LOCALIZATION  `](/vision/docs/object-localizer)
+      - [`  OBJECT_LOCALIZATION  `](https://docs.cloud.google.com/vision/docs/object-localizer)
 
 ## Output
 
@@ -51,15 +51,13 @@ ML.ANNOTATE_IMAGE(
 
 ## Quotas
 
-See [Cloud AI service functions quotas and limits](/bigquery/quotas#cloud_ai_service_functions) .
+See [Cloud AI service functions quotas and limits](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) .
 
 ## Known issues
 
 Sometimes after a query job that uses this function finishes successfully, some returned rows contain the following error message:
 
-``` text
-A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
-```
+    A retryable error occurred: RESOURCE EXHAUSTED error from <remote endpoint>
 
 This issue occurs because BigQuery query jobs finish successfully even if the function fails for some of the rows. The function fails when the volume of API calls to the remote endpoint exceeds the quota limits for that service. This issue occurs most often when you are running multiple parallel batch queries. BigQuery retries these calls, but if the retries fail, the `  resource exhausted  ` error message is returned.
 
@@ -67,7 +65,7 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 ## Locations
 
-`  ML.ANNOTATE_IMAGE  ` must run in the same region as the remote model that the function references. For more information about supported locations for models based on the Vision API, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+`  ML.ANNOTATE_IMAGE  ` must run in the same region as the remote model that the function references. For more information about supported locations for models based on the Vision API, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Examples
 
@@ -75,7 +73,7 @@ To iterate through inference calls until all rows are successfully processed, yo
 
 The following example performs label detection on the object table `  mytable  ` in `  mydataset  ` :
 
-``` text
+``` notranslate
 # Create model
 CREATE OR REPLACE MODEL
 `myproject.mydataset.myvisionmodel`
@@ -83,7 +81,7 @@ REMOTE WITH CONNECTION `myproject.myregion.myconnection`
 OPTIONS (remote_service_type = 'cloud_ai_vision_v1');
 ```
 
-``` text
+``` notranslate
 # Annotate image
 SELECT *
 FROM ML.ANNOTATE_IMAGE(
@@ -95,17 +93,15 @@ FROM ML.ANNOTATE_IMAGE(
 
 The result is similar to the following:
 
-``` text
-ml_annotate_image_result  | ml_annotate_image_status | uri | generation | content_type |  size   |  md5_hash  |  updated | metadata |
-------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | --------
-{"label_annotations":[{"description":"Food","mid":"/m/02wbm","score":0.97591567,"topicality":0.97591567}]}  | | gs://my-bucket/images/Cheeseburger.jpg | 1661921874516197 | image/jpeg   |  174600 | a259a5076c22696848a1bc10b7162cc2 | 2022-08-31 04:57:54 | []
-```
+    ml_annotate_image_result  | ml_annotate_image_status | uri | generation | content_type |  size   |  md5_hash  |  updated | metadata |
+    ------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | --------
+    {"label_annotations":[{"description":"Food","mid":"/m/02wbm","score":0.97591567,"topicality":0.97591567}]}  | | gs://my-bucket/images/Cheeseburger.jpg | 1661921874516197 | image/jpeg   |  174600 | a259a5076c22696848a1bc10b7162cc2 | 2022-08-31 04:57:54 | []
 
 **Example 2**
 
 The following example annotates images in the object table `  mytable  ` , selects the rows where the detected label is `  food  ` and the score is higher than `  0.97  ` , and then returns the results in separate columns:
 
-``` text
+``` notranslate
 CREATE TABLE
   `mydataset.label_score` AS (
   SELECT
@@ -131,15 +127,13 @@ WHERE
 
 The result is similar to the following:
 
-``` text
-Input image path  | Detected label | Score | Topicality | Status |
-------- | -------- | -------- | -------- | --------
-gs://my-bucket/images/Cheeseburger.jpg | Food |  0.97591567 | 0.97591567 | |
-```
+    Input image path  | Detected label | Score | Topicality | Status |
+    ------- | -------- | -------- | -------- | --------
+    gs://my-bucket/images/Cheeseburger.jpg | Food |  0.97591567 | 0.97591567 | |
 
-If you get an error like `  query limit exceeded  ` , you might have exceeded the [quota](/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
+If you get an error like `  query limit exceeded  ` , you might have exceeded the [quota](https://docs.cloud.google.com/bigquery/quotas#cloud_ai_service_functions) for this function, which can leave you with unprocessed rows. Use the following query to complete processing the unprocessed rows:
 
-``` text
+``` notranslate
 CREATE TABLE
   `mydataset.label_score_next` AS (
   SELECT
@@ -162,7 +156,7 @@ SELECT * FROM `mydataset.label_score_next`;
 
 ## What's next
 
-  - Get step-by-step instructions on how to [annotate images in an object table](/bigquery/docs/annotate-image) using the `  ML.ANNOTATE_IMAGE  ` function.
-  - Learn more about [other functions you can use](/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models) to analyze BigQuery data.
-  - For information about model inference, see [Model inference overview](/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai) .
+  - Get step-by-step instructions on how to [annotate images in an object table](https://docs.cloud.google.com/bigquery/docs/annotate-image) using the `  ML.ANNOTATE_IMAGE  ` function.
+  - Learn more about [other functions you can use](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#pretrained-models) to analyze BigQuery data.
+  - For information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

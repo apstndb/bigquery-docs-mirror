@@ -1,22 +1,24 @@
 # The CREATE MODEL statement for ARIMA\_PLUS\_XREG models
 
-This document describes the `  CREATE MODEL  ` statement for creating multivariate time series models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. You can use a multivariate time series model to [forecast](/bigquery/docs/forecasting-overview) the future value for a given column based on the analysis of multiple variables. You can also use multivariate time series models to detect anomalies in time series data.
+This document describes the `  CREATE MODEL  ` statement for creating multivariate time series models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. You can use a multivariate time series model to [forecast](https://docs.cloud.google.com/bigquery/docs/forecasting-overview) the future value for a given column based on the analysis of multiple variables. You can also use multivariate time series models to detect anomalies in time series data.
 
 You can use multivariate time series models with the following functions:
 
-  - Use the [`  ML.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) to retrieve the forecasted values that were generated when you created the model.
-  - Use the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) function to retrieve the forecasted values that were generated when you created the model, and compute the prediction intervals.
-  - Use the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview) .
+  - Use the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) to retrieve the forecasted values that were generated when you created the model.
+  - Use the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) function to retrieve the forecasted values that were generated when you created the model, and compute the prediction intervals.
+  - Use the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-**Note:** If you don't want to create and manage your own model, you can use BigQuery ML's built-in [TimesFM time series model](/bigquery/docs/timesfm-model) with the [`  AI.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
+**Note:** If you don't want to create and manage your own model, you can use BigQuery ML's built-in [TimesFM time series model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) with the [`  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to perform forecasting.
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journey for time series forecasting models](/bigquery/docs/e2e-journey-forecast) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journey for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast) .
 
 ## Time series modeling pipeline
 
-The multivariate `  ARIMA_PLUS_XREG  ` time series model is an [`  ARIMA_PLUS  ` model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) with linear external regressors. For more information, see [ARIMA\_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in Google BigQuery](https://arxiv.org/abs/2510.24452) . The following diagram shows the model pipeline:
+The multivariate `  ARIMA_PLUS_XREG  ` time series model is an [`  ARIMA_PLUS  ` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) with linear external regressors. For more information, see [ARIMA\_PLUS: Large-scale, Accurate, Automatic and Interpretable In-Database Time Series Forecasting and Anomaly Detection in Google BigQuery](https://arxiv.org/abs/2510.24452) . The following diagram shows the model pipeline:
 
-For a diagram that shows the details of the **ARIMA\_PLUS Pipeline** section in the preceding diagram, see [Time series modeling pipeline](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) .
+![ARIMA\_PLUS\_XREG\_DIAGRAM](https://docs.cloud.google.com/static/bigquery/images/BQ_ARIMA_PLUS_XREG_diagram.png)
+
+For a diagram that shows the details of the **ARIMA\_PLUS Pipeline** section in the preceding diagram, see [Time series modeling pipeline](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline) .
 
 The modeling pipeline for the `  ARIMA_PLUS  ` time series models performs the following functions:
 
@@ -32,7 +34,9 @@ The modeling pipeline for the `  ARIMA_PLUS  ` time series models performs the f
 
 ## Large-scale time series
 
-You can forecast up to 100,000,000 time series simultaneously with a single query by using the [`  TIME_SERIES_ID_COL  `](#time_series_id_col) option. With this option, different modeling pipelines run in parallel, as long as enough [slots](/bigquery/docs/slots) are available. The following diagram shows this process:
+You can forecast up to 100,000,000 time series simultaneously with a single query by using the [`  TIME_SERIES_ID_COL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#time_series_id_col) option. With this option, different modeling pipelines run in parallel, as long as enough [slots](https://docs.cloud.google.com/bigquery/docs/slots) are available. The following diagram shows this process:
+
+![MULTIPLE\_TIME\_SERIES\_DIAGRAM](https://docs.cloud.google.com/static/bigquery/images/BQ_Multiple_ARIMA_diagram.png)
 
 ## Large-scale time series forecasting best practices
 
@@ -42,12 +46,12 @@ Forecasting many time series simultaneously can lead to long-running queries, be
   - You can use the `  AUTO_ARIMA_MAX_ORDER  ` option to balance between query run time and forecast accuracy. Increasing `  AUTO_ARIMA_MAX_ORDER  ` expands the hyperparameter search space to try more complex ARIMA models, that is, ARIMA models with higher non-seasonal p and q. This increases forecast accuracy but also increases query run time. Decreasing the value of `  AUTO_ARIMA_MAX_ORDER  ` decreases forecast accuracy but also decreases query run time. For example, if you specify a value of `  1  ` instead of using the `  2  ` for this option, the query run time is reduced by more than 50%. The forecast accuracy might drop slightly for some of the time series. If a shorter training time is important to your use case, use a smaller value for `  AUTO_ARIMA_MAX_ORDER  ` .
   - The model training time for each time series has a linear relationship to its length, which is based on the number of data points. The longer the time series, the longer the training takes. However, not all data points contribute equally to the model fitting process. Instead, the more recent the data point is, the more it contributes to the process. Therefore, if you have a long time series, for example ten years of daily data, you don't need to train a time series model using all of the data points. The most recent two or three years of data points are enough.
   - You can use the `  TIME_SERIES_LENGTH_FRACTION  ` , `  MIN_TIME_SERIES_LENGTH  ` and `  MAX_TIME_SERIES_LENGTH  ` training options to enable fast model training with little to no loss of forecasting accuracy. The idea behind these options is that while periodic modeling, such as seasonality, requires a certain number of time points, trend modeling doesn't need many time points. However, trend modeling is much more computationally expensive than other time series components. By using the aforementioned training options, you can efficiently model the trend component with a subset of the time series, while the other time series components use the entire time series.
-  - To avoid a single long-running query, use BigQuery [multi-statement queries](/bigquery/docs/multi-statement-queries) .
+  - To avoid a single long-running query, use BigQuery [multi-statement queries](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries) .
   - In some cases, your input table might be missing values in the feature columns. For example, in a multivariate time series with features A and B, most of the rows contain valid values for both A and B, while some might have `  NULL  ` values for one or the other of the features. BigQuery ML fills in the missing values by using the mean value of the entire data column, which might include values from different time series. This causes discrepancies in the results when compared to single time series training, because the input values are affected by other time series. The best practice is to analyze the data and impute the missing feature values before running `  CREATE MODEL  ` . For example, using the mean value of that feature within each time series, or assigning a value of zero.
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 model_name
 OPTIONS(model_option_list)
@@ -115,9 +119,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = 'ARIMA_PLUS_XREG'
-```
+    MODEL_TYPE = 'ARIMA_PLUS_XREG'
 
 **Description**
 
@@ -197,9 +199,7 @@ An `  INT64  ` value. The default value is `  1,000  ` . The maximum value is ` 
 
 **Syntax**
 
-``` text
-AUTO_ARIMA = { TRUE | FALSE }
-```
+    AUTO_ARIMA = { TRUE | FALSE }
 
 **Description**
 
@@ -271,9 +271,7 @@ A tuple of three `  INT64  ` values. For example, `  (1, 2, 1)  ` .
 
 **Syntax**
 
-``` text
-DATA_FREQUENCY = { 'AUTO_FREQUENCY' | 'PER_MINUTE' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY' }
-```
+    DATA_FREQUENCY = { 'AUTO_FREQUENCY' | 'PER_MINUTE' | 'HOURLY' | 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'QUARTERLY' | 'YEARLY' }
 
 **Description**
 
@@ -296,9 +294,7 @@ This option accepts the following values:
 
 **Syntax**
 
-``` text
-INCLUDE_DRIFT = { TRUE | FALSE }
-```
+    INCLUDE_DRIFT = { TRUE | FALSE }
 
 **Description**
 
@@ -323,7 +319,7 @@ The geographical region based on which the holiday effect is applied in modeling
 
 Holiday effect modeling is only applicable when the time series is daily or weekly, and longer than a year. If the input time series doesn't meet these requirements, holiday effect modeling isn't used even if you specify this option.
 
-For more information about the holidays included in each region, see [Holiday data](#holiday_data) .
+For more information about the holidays included in each region, see [Holiday data](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_data) .
 
 **Arguments**
 
@@ -331,15 +327,11 @@ A `  STRING  ` or `  ARRAY<STRING>  ` value.
 
 Use a single string value to identify one region. For example:
 
-``` text
-HOLIDAY_REGION = 'GLOBAL'
-```
+    HOLIDAY_REGION = 'GLOBAL'
 
 Use an array of string values to identify multiple regions. For example:
 
-``` text
-HOLIDAY_REGION = ['US', 'GB']
-```
+    HOLIDAY_REGION = ['US', 'GB']
 
 This option accepts the following values:
 
@@ -423,9 +415,7 @@ This option accepts the following values:
 
 **Syntax**
 
-``` text
-CLEAN_SPIKES_AND_DIPS = { TRUE | FALSE }
-```
+    CLEAN_SPIKES_AND_DIPS = { TRUE | FALSE }
 
 **Description**
 
@@ -439,9 +429,7 @@ A `  BOOL  ` value. The default value is `  TRUE  ` .
 
 **Syntax**
 
-``` text
-ADJUST_STEP_CHANGES = { TRUE | FALSE }
-```
+    ADJUST_STEP_CHANGES = { TRUE | FALSE }
 
 **Description**
 
@@ -507,7 +495,7 @@ An `  INT64  ` value greater than or equal to `  4  ` . There is no default valu
 
 The smoothing window size for the trend component. When you specify a value, a center moving average smoothing is applied on the history trend. When the smoothing window is out of the boundary at the beginning or the end of the trend, the first element or the last element is padded to fill the smoothing window before the average is applied.
 
-Specifying a value for `  TREND_SMOOTHING_WINDOW_SIZE  ` doesn't affect forecasting results. It only affects the smoothness of the trend component, which you can see by using the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
+Specifying a value for `  TREND_SMOOTHING_WINDOW_SIZE  ` doesn't affect forecasting results. It only affects the smoothness of the trend component, which you can see by using the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 **Arguments**
 
@@ -529,7 +517,7 @@ A `  FLOAT64  ` value.
 
 ### `     MODEL_REGISTRY    `
 
-The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](/bigquery/docs/create_vertex#register-model) .
+The `  MODEL_REGISTRY  ` option specifies the model registry destination. `  VERTEX_AI  ` is the only supported model registry destination. To learn more, see [Register a BigQuery ML model](https://docs.cloud.google.com/bigquery/docs/create_vertex#register-model) .
 
 ### `     VERTEX_AI_MODEL_ID    `
 
@@ -541,7 +529,7 @@ You can only set the `  VERTEX_AI_MODEL_ID  ` option when the `  MODEL_REGISTRY 
 
 ### `     VERTEX_AI_MODEL_VERSION_ALIASES    `
 
-The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](/vertex-ai/docs/model-registry/model-alias) .
+The `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option specifies a Vertex AI model alias to use when registering a model. Model aliases are helpful for fetching or deploying a particular model version by reference without needing to know the specific version ID. To learn more about how Model Registry aliases work, see [How to use model version aliases](https://docs.cloud.google.com/vertex-ai/docs/model-registry/model-alias) .
 
 You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MODEL_REGISTRY  ` option is set to `  VERTEX_AI  ` .
 
@@ -553,27 +541,25 @@ You can only set the `  VERTEX_AI_MODEL_VERSION_ALIASES  ` option when the `  MO
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ### `     AS    `
 
 All time series forecasting models support the following `  AS  ` clause syntax for specifying the training data:
 
-``` googlesql
+``` lang-googlesql
 AS query_statement
 ```
 
-For time series forecasting models that have a `  DATA_FREQUENCY  ` value of either `  DAILY  ` or `  AUTO_FREQUENCY  ` , you can optionally use the following `  AS  ` clause syntax to perform [custom holiday modeling](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
+For time series forecasting models that have a `  DATA_FREQUENCY  ` value of either `  DAILY  ` or `  AUTO_FREQUENCY  ` , you can optionally use the following `  AS  ` clause syntax to perform [custom holiday modeling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#custom_holidays) in addition to specifying the training data:
 
-``` googlesql
+``` lang-googlesql
 AS (
   training_data AS (query_statement),
   custom_holiday AS (holiday_statement)
@@ -582,7 +568,7 @@ AS (
 
 #### `     query_statement    `
 
-The `  query_statement  ` argument specifies the query that is used to generate the training data. For information about the supported SQL syntax of the `  query_statement  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+The `  query_statement  ` argument specifies the query that is used to generate the training data. For information about the supported SQL syntax of the `  query_statement  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
 #### `     holiday_statement    `
 
@@ -590,15 +576,15 @@ The `  holiday_statement  ` argument specifies the query that provides custom ho
 
   - `  region  ` : Required. A `  STRING  ` value that identifies the region to target for holiday modeling. Use one of the following options:
     
-      - An upper-case [holiday region code](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) . Use this option to overwrite or supplement the holidays for the specified region. You can see the holidays for a region by running `  SELECT * FROM bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE region = region  ` .
+      - An upper-case [holiday region code](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#holiday_region) . Use this option to overwrite or supplement the holidays for the specified region. You can see the holidays for a region by running `  SELECT * FROM bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE region = region  ` .
       - An arbitrary string. Use this option to specify a custom region that you want to model holidays for. For example, you could specify `  London  ` if you are only modeling holidays for that city.
     
     Be sure not to use an existing holiday region code when you are trying to model for a custom region. For example, if you want to model a holiday in California, and specify `  CA  ` as the `  region  ` value, the service recognizes that as the holiday region code for Canada and targets that region. Because the argument is case-sensitive, you could specify `  ca  ` , `  California  ` , or some other value that isn't a holiday region code.
 
   - `  holiday_name  ` : Required. A `  STRING  ` value that identifies the holiday to target for holiday modeling. Use one of the following options:
     
-      - The holiday name as it is represented in the `  bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting  ` public table, including case. Use this option to [overwrite](#change_the_metadata_for_built-in_holidays) or [supplement](#supplement_built-in_holidays_with_additional_custom_holidays) the specified holiday.
-      - A string that represents a custom holiday. The string must be a valid column name so that it can be used in `  ML.EXPLAIN_FORECAST  ` output. For example, it cannot contain space. For more information on column naming, see [Column names](/bigquery/docs/schemas#column_names) .
+      - The holiday name as it is represented in the `  bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting  ` public table, including case. Use this option to [overwrite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#change_the_metadata_for_built-in_holidays) or [supplement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#supplement_built-in_holidays_with_additional_custom_holidays) the specified holiday.
+      - A string that represents a custom holiday. The string must be a valid column name so that it can be used in `  ML.EXPLAIN_FORECAST  ` output. For example, it cannot contain space. For more information on column naming, see [Column names](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
 
   - `  primary_date  ` : Required. A `  DATE  ` value that specifies the date the holiday falls on.
 
@@ -610,7 +596,7 @@ The `  preholiday_days  ` and `  postholiday_days  ` arguments together describe
 
 To achieve the best holiday modeling result, provide as much historical and forecast information about the occurrences of each included holiday as possible. For example, if you have time series data from 2018 to 2022 and would like to forecast for 2023, you get the best result by providing the custom holiday information for all of those years, similar to the following:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL mydataset.arima_model
   OPTIONS (
     model_type = 'ARIMA_PLUS_XREG',
@@ -641,291 +627,52 @@ CREATE OR REPLACE MODEL mydataset.arima_model
 
 When you perform holiday modeling by specifying the `  HOLIDAY_REGION  ` option, the model uses holiday data from the region or regions you specify. For example, the following table describes the holiday data used in the `  US  ` region for the year 2022-2023.
 
-  - `  region  ` specifies the geographic region to which the holiday applies. The supported regions are listed in [`  HOLIDAY_REGION  `](#holiday_region) .
+  - `  region  ` specifies the geographic region to which the holiday applies. The supported regions are listed in [`  HOLIDAY_REGION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_region) .
   - `  holiday_name  ` contains the name of the holiday.
   - `  primary_date  ` specifies the date of the holiday. For holidays that span multiple days, this is usually the first day of the holiday.
   - `  preholiday_days  ` describes the number of days the holiday effect starts before the `  primary_date  ` value.
   - `  postholiday_days  ` describes the number of days the holiday effect ends after the `  primary_date  ` value.
 
-<table>
-<thead>
-<tr class="header">
-<th>region</th>
-<th>holiday_name</th>
-<th>primary_date</th>
-<th>preholiday_days</th>
-<th>postholiday_days</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>US</td>
-<td>Christmas</td>
-<td>2022-12-25</td>
-<td>10</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Christmas</td>
-<td>2023-12-25</td>
-<td>10</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>MothersDay</td>
-<td>2022-05-08</td>
-<td>6</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>MothersDay</td>
-<td>2023-05-14</td>
-<td>6</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>NewYear</td>
-<td>2022-01-01</td>
-<td>5</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>NewYear</td>
-<td>2023-01-01</td>
-<td>5</td>
-<td>3</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>DaylightSavingEnd</td>
-<td>2022-11-06</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>DaylightSavingEnd</td>
-<td>2023-11-05</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>DaylightSavingStart</td>
-<td>2022-03-13</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>DaylightSavingStart</td>
-<td>2023-03-12</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>Thanksgiving</td>
-<td>2022-11-24</td>
-<td>3</td>
-<td>5</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Thanksgiving</td>
-<td>2023-11-23</td>
-<td>3</td>
-<td>5</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>Valentine</td>
-<td>2022-02-14</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Valentine</td>
-<td>2023-02-14</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>EasterMonday</td>
-<td>2022-04-18</td>
-<td>8</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>EasterMonday</td>
-<td>2023-04-10</td>
-<td>8</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>Halloween</td>
-<td>2022-10-31</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Halloween</td>
-<td>2023-10-31</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>StPatrickDay</td>
-<td>2022-03-17</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>StPatrickDay</td>
-<td>2023-03-17</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>ColumbusDay</td>
-<td>2022-10-10</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>ColumbusDay</td>
-<td>2023-10-09</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>IndependenceDay</td>
-<td>2022-07-04</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>IndependenceDay</td>
-<td>2023-07-04</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>Juneteenth</td>
-<td>2022-06-19</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Juneteenth</td>
-<td>2023-06-19</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>LaborDay</td>
-<td>2022-09-05</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>LaborDay</td>
-<td>2023-09-04</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>MemorialDay</td>
-<td>2022-05-30</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>MemorialDay</td>
-<td>2023-05-29</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>MLKDay</td>
-<td>2022-01-17</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>MLKDay</td>
-<td>2023-01-16</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>PresidentDay</td>
-<td>2022-02-21</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>PresidentDay</td>
-<td>2023-02-20</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>Superbowl</td>
-<td>2022-02-13</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>Superbowl</td>
-<td>2023-02-05</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>US</td>
-<td>VeteranDay</td>
-<td>2022-11-11</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td>US</td>
-<td>VeteranDay</td>
-<td>2023-11-11</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+| region | holiday\_name       | primary\_date | preholiday\_days | postholiday\_days |
+| ------ | ------------------- | ------------- | ---------------- | ----------------- |
+| US     | Christmas           | 2022-12-25    | 10               | 1                 |
+| US     | Christmas           | 2023-12-25    | 10               | 1                 |
+| US     | MothersDay          | 2022-05-08    | 6                | 1                 |
+| US     | MothersDay          | 2023-05-14    | 6                | 1                 |
+| US     | NewYear             | 2022-01-01    | 5                | 3                 |
+| US     | NewYear             | 2023-01-01    | 5                | 3                 |
+| US     | DaylightSavingEnd   | 2022-11-06    | 1                | 1                 |
+| US     | DaylightSavingEnd   | 2023-11-05    | 1                | 1                 |
+| US     | DaylightSavingStart | 2022-03-13    | 1                | 1                 |
+| US     | DaylightSavingStart | 2023-03-12    | 1                | 1                 |
+| US     | Thanksgiving        | 2022-11-24    | 3                | 5                 |
+| US     | Thanksgiving        | 2023-11-23    | 3                | 5                 |
+| US     | Valentine           | 2022-02-14    | 3                | 1                 |
+| US     | Valentine           | 2023-02-14    | 3                | 1                 |
+| US     | EasterMonday        | 2022-04-18    | 8                | 1                 |
+| US     | EasterMonday        | 2023-04-10    | 8                | 1                 |
+| US     | Halloween           | 2022-10-31    | 1                | 1                 |
+| US     | Halloween           | 2023-10-31    | 1                | 1                 |
+| US     | StPatrickDay        | 2022-03-17    | 1                | 1                 |
+| US     | StPatrickDay        | 2023-03-17    | 1                | 1                 |
+| US     | ColumbusDay         | 2022-10-10    | 1                | 1                 |
+| US     | ColumbusDay         | 2023-10-09    | 1                | 1                 |
+| US     | IndependenceDay     | 2022-07-04    | 1                | 1                 |
+| US     | IndependenceDay     | 2023-07-04    | 1                | 1                 |
+| US     | Juneteenth          | 2022-06-19    | 1                | 1                 |
+| US     | Juneteenth          | 2023-06-19    | 1                | 1                 |
+| US     | LaborDay            | 2022-09-05    | 1                | 1                 |
+| US     | LaborDay            | 2023-09-04    | 1                | 1                 |
+| US     | MemorialDay         | 2022-05-30    | 1                | 1                 |
+| US     | MemorialDay         | 2023-05-29    | 1                | 1                 |
+| US     | MLKDay              | 2022-01-17    | 1                | 1                 |
+| US     | MLKDay              | 2023-01-16    | 1                | 1                 |
+| US     | PresidentDay        | 2022-02-21    | 1                | 1                 |
+| US     | PresidentDay        | 2023-02-20    | 1                | 1                 |
+| US     | Superbowl           | 2022-02-13    | 1                | 1                 |
+| US     | Superbowl           | 2023-02-05    | 1                | 1                 |
+| US     | VeteranDay          | 2022-11-11    | 1                | 1                 |
+| US     | VeteranDay          | 2023-11-11    | 1                | 1                 |
 
 You can also see the holidays for a region by running `  SELECT * FROM bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting WHERE region = region  ` .
 
@@ -962,7 +709,7 @@ The `  bigquery-public-data.ml_datasets.holidays_and_events_for_forecasting  ` t
 
 ## Custom holidays
 
-You can combine use of the [`  holiday_statement  ` argument](#holiday_statement) and the [`  HOLIDAY_REGION  ` option](#holiday_region) to enable several different custom holiday scenarios, as described in the following sections.
+You can combine use of the [`  holiday_statement  ` argument](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_statement) and the [`  HOLIDAY_REGION  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series#holiday_region) to enable several different custom holiday scenarios, as described in the following sections.
 
 ### Supplement built-in holidays with additional custom holidays
 
@@ -970,7 +717,7 @@ To model one or more custom holidays in addition to a region's built-in holidays
 
 The following example models all built-in holidays for the `  US  ` holiday region, and additionally models the custom holiday `  members_day  ` :
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL mydataset.arima_model
   OPTIONS (
     model_type = 'ARIMA_PLUS_XREG',
@@ -1000,7 +747,7 @@ To model only custom holidays, don't specify a value for the `  HOLIDAY_REGION  
 
 The following example models only the custom holiday `  members_day  ` for the `  US  ` holiday region:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL mydataset.arima_model
   OPTIONS (
     model_type = 'ARIMA_PLUS_XREG',
@@ -1031,7 +778,7 @@ You can change the primary date and holiday effect window used by the model for 
 
 The following example models all built-in holidays for the `  US  ` holiday region, but models 3 years of the `  EasterMonday  ` holiday with a 3-day holiday effect window instead of the default 9-day holiday effect window:
 
-``` text
+``` notranslate
   OPTIONS (
     model_type = 'ARIMA_PLUS_XREG',
     holiday_region = 'US',...) AS (
@@ -1060,7 +807,7 @@ To model only a subset of built-in holidays, don't specify a value for the `  HO
 
 The following example models all built-in holidays for the `  US  ` holiday region except for the `  Christmas  ` and `  NewYears  ` holidays:
 
-``` text
+``` notranslate
 CREATE OR REPLACE MODEL mydataset.arima_model
   OPTIONS (
     model_type = 'ARIMA_PLUS_XREG',
@@ -1080,7 +827,7 @@ CREATE OR REPLACE MODEL mydataset.arima_model
 ### Custom holiday limitations
 
   - Custom holiday modeling only works for models that have a `  data_frequency  ` value of either `  DAILY  ` or `  AUTO_FREQUENCY  ` . If you use `  AUTO_FREQUENCY  ` , the actual frequency of the time series data needs to be daily.
-  - You can't use the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of the `  CREATE MODEL  ` statement if you are performing custom holiday modeling.
+  - You can't use the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) of the `  CREATE MODEL  ` statement if you are performing custom holiday modeling.
   - `  holiday_name  ` column cannot have more than 500 distinct values.
   - Custom holiday modeling uses an algorithm that automatically detects the significance of the holiday effect within the provided holiday effect window, and only extracts the holiday effect on the days that the algorithm classifies as significant. For example, if `  primary date  ` is `  01/02  ` with `  preholiday_days  ` and `  postholiday_days  ` set to `  1  ` , the algorithm analyzes the holiday effect for these three days: `  [01/01, 01/02, 01/03]  ` . In the `  ML.EXPLAIN_FORECAST  ` output, it is not guaranteed that all three of these days will have a holiday effect. Only those days within this window that have a significant holiday effect are associated with a non-zero holiday effect in the output.
   - To get a better result from custom holiday modeling, don't specify the same holiday more than twice a year.
@@ -1090,7 +837,7 @@ CREATE OR REPLACE MODEL mydataset.arima_model
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
@@ -1110,7 +857,7 @@ The following examples show how to create different types of `  ARIMA_PLUS_XREG 
 
 This example shows how to create a time series model that forecasts a single time series:
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='ARIMA_PLUS_XREG',
          time_series_timestamp_col='date',
@@ -1128,7 +875,7 @@ FROM
 
 This example shows how to create a time series model while improving training speed by using the `  TIME_SERIES_LENGTH_FRACTION  ` and `  MIN_TIME_SERIES_LENGTH  ` options:
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
  OPTIONS(MODEL_TYPE='ARIMA_PLUS_XREG',
          time_series_timestamp_col='date',
@@ -1147,6 +894,6 @@ FROM
 ## What's next
 
   - Walk through our tutorials that use the multivariate time series model in BigQuery ML:
-      - [Perform single time-series forecasting from Seattle air quality data](/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
-      - [Perform anomaly detection with a multivariate time-series forecasting model](/bigquery/docs/time-series-anomaly-detection-tutorial)
-      - [Perform multiple time-series forecasting with a multivariate model](/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial)
+      - [Perform single time-series forecasting from Seattle air quality data](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial)
+      - [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial)
+      - [Perform multiple time-series forecasting with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-multiple-time-series-forecasting-tutorial)

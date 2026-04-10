@@ -12,31 +12,35 @@ In this document, you use the following billable components of Google Cloud:
   - [BigQuery](https://cloud.google.com/bigquery/pricing)
   - [BigQuery ML](https://cloud.google.com/bigquery/pricing#bqml)
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
-When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](#clean-up) .
+When you finish the tasks that are described in this document, you can avoid continued billing by deleting the resources that you created. For more information, see [Clean up](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models#clean-up) .
 
 ## Before you begin
 
-1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Ensure that the BigQuery API is enabled.
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
-3.  Ensure that you have the [necessary permissions](#required_permissions) to perform the tasks in this document.
+3.  Ensure that you have the [necessary permissions](https://docs.cloud.google.com/bigquery/docs/making-predictions-with-imported-tensorflow-models#required_permissions) to perform the tasks in this document.
 
 ### Required roles
 
 If you create a new project, you are the project owner, and you are granted all of the required Identity and Access Management (IAM) permissions that you need to complete this tutorial.
 
-If you are using an existing project, the [BigQuery Studio Admin](/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` ) role grants all of the permissions that are needed to complete this tutorial.
+If you are using an existing project, the [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` ) role grants all of the permissions that are needed to complete this tutorial.
 
-Make sure that you have the following role or roles on the project: [BigQuery Studio Admin](/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` ).
+Make sure that you have the following role or roles on the project: [BigQuery Studio Admin](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.studioAdmin) ( `  roles/bigquery.studioAdmin  ` ).
 
 #### Check for the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -47,6 +51,8 @@ Make sure that you have the following role or roles on the project: [BigQuery St
 #### Grant the roles
 
 1.  In the Google Cloud console, go to the **IAM** page.
+    
+    [Go to IAM](https://console.cloud.google.com/projectselector/iam-admin/iam?supportedpurview=project)
 
 2.  Select the project.
 
@@ -60,7 +66,7 @@ Make sure that you have the following role or roles on the project: [BigQuery St
 
 7.  Click **Save** .
 
-For more information about IAM permissions in BigQuery, see [BigQuery permissions](/bigquery/docs/access-control#bq-permissions) .
+For more information about IAM permissions in BigQuery, see [BigQuery permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) .
 
 ## Create a dataset
 
@@ -69,6 +75,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -84,11 +92,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -97,15 +105,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -126,12 +134,14 @@ To import the TensorFlow model into your dataset, follow these steps.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  For **Create new** , click **SQL query** .
 
 3.  In the query editor, enter this `  CREATE MODEL  ` statement, and then click **Run** .
     
-    ``` text
+    ``` notranslate
       CREATE OR REPLACE MODEL `bqml_tutorial.imported_tf_model`
       OPTIONS (MODEL_TYPE='TENSORFLOW',
         MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')
@@ -139,15 +149,17 @@ To import the TensorFlow model into your dataset, follow these steps.
     
     When the operation is complete, you should see a message like `  Successfully created model named imported_tf_model  ` .
 
-4.  Your new model appears in the **Resources** panel. Models are indicated by the model icon: .
+4.  Your new model appears in the **Resources** panel. Models are indicated by the model icon: ![model icon](https://docs.cloud.google.com/static/bigquery/images/model-icon.png) .
 
 5.  If you select the new model in the **Resources** panel, information about the model appears below the **Query editor** .
+    
+    ![TensorFlow model info](https://docs.cloud.google.com/static/bigquery/images/tf-model-info.png)
 
 ### bq
 
 1.  Import the TensorFlow model from Cloud Storage by entering the following `  CREATE MODEL  ` statement.
     
-    ``` text
+    ``` notranslate
     bq query --use_legacy_sql=false \
     "CREATE OR REPLACE MODEL
       `bqml_tutorial.imported_tf_model`
@@ -158,13 +170,13 @@ To import the TensorFlow model into your dataset, follow these steps.
 
 2.  After you import the model, verify that the model appears in the dataset.
     
-    ``` text
+    ``` notranslate
     bq ls -m bqml_tutorial
     ```
     
     The output is similar to the following:
     
-    ``` text
+    ``` notranslate
     tableId             Type
     ------------------- -------
     imported_tf_model   MODEL
@@ -172,9 +184,9 @@ To import the TensorFlow model into your dataset, follow these steps.
 
 ### API
 
-[Insert a new job](/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](/bigquery/docs/reference/rest/v2/jobs/query) property in the request body.
+[Insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) property in the request body.
 
-``` text
+``` notranslate
 {
   "query": "CREATE MODEL `PROJECT_ID:bqml_tutorial.imported_tf_model` OPTIONS(MODEL_TYPE='TENSORFLOW' MODEL_PATH='gs://cloud-training-demos/txtclass/export/exporter/1549825580/*')"
 }
@@ -184,30 +196,28 @@ Replace `  PROJECT_ID  ` with the name of your project and dataset.
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
 Import the model by using the `  TensorFlowModel  ` object.
 
-``` python
-import bigframes
-from bigframes.ml.imported import TensorFlowModel
+    import bigframes
+    from bigframes.ml.imported import TensorFlowModel
+    
+    bigframes.options.bigquery.project = PROJECT_ID
+    # You can change the location to one of the valid locations: https://cloud.google.com/bigquery/docs/locations#supported_locations
+    bigframes.options.bigquery.location = "US"
+    
+    imported_tensorflow_model = TensorFlowModel(
+        model_path="gs://cloud-training-demos/txtclass/export/exporter/1549825580/*"
+    )
 
-bigframes.options.bigquery.project = PROJECT_ID
-# You can change the location to one of the valid locations: https://cloud.google.com/bigquery/docs/locations#supported_locations
-bigframes.options.bigquery.location = "US"
-
-imported_tensorflow_model = TensorFlowModel(
-    model_path="gs://cloud-training-demos/txtclass/export/exporter/1549825580/*"
-)
-```
-
-For more information about importing TensorFlow models into BigQuery ML, including format and storage requirements, see the [`  CREATE MODEL  ` statement for importing TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
+For more information about importing TensorFlow models into BigQuery ML, including format and storage requirements, see the [`  CREATE MODEL  ` statement for importing TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
 
 ## Make predictions with the imported TensorFlow model
 
-After importing the TensorFlow model, you use the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions with the model.
+After importing the TensorFlow model, you use the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to make predictions with the model.
 
 The following query uses `  imported_tf_model  ` to make predictions using input data from the `  full  ` table in the public dataset `  hacker_news  ` . In the query, the TensorFlow model's `  serving_input_fn  ` function specifies that the model expects a single input string named `  input  ` . The subquery assigns the alias `  input  ` to the `  title  ` column in the subquery's `  SELECT  ` statement.
 
@@ -216,12 +226,14 @@ To make predictions with the imported TensorFlow model, follow these steps.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Under **Create new** , click **SQL query** .
 
 3.  In the query editor, enter this query that uses the `  ML.PREDICT  ` function.
     
-    ``` text
+    ``` notranslate
     SELECT *
       FROM ML.PREDICT(MODEL `bqml_tutorial.imported_tf_model`,
         (
@@ -232,12 +244,14 @@ To make predictions with the imported TensorFlow model, follow these steps.
     ```
     
     The query results should look like this:
+    
+    ![Query results](https://docs.cloud.google.com/static/bigquery/images/ml-predict-tf.png)
 
 ### bq
 
 Enter this command to run the query that uses `  ML.PREDICT  ` .
 
-``` text
+``` notranslate
 bq query \
 --use_legacy_sql=false \
 'SELECT *
@@ -261,9 +275,9 @@ The results should look like this:
 
 ### API
 
-[Insert a new job](/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](/bigquery/docs/reference/rest/v2/jobs/query) property as in the request body. Replace `  project_id  ` with the name of your project.
+[Insert a new job](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert) and populate the [jobs\#configuration.query](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query) property as in the request body. Replace `  project_id  ` with the name of your project.
 
-``` text
+``` notranslate
 {
   "query": "SELECT * FROM ML.PREDICT(MODEL `project_id.bqml_tutorial.imported_tf_model`, (SELECT * FROM input_data))"
 }
@@ -271,22 +285,22 @@ The results should look like this:
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-Use the [`  predict  `](/python/docs/reference/bigframes/latest/bigframes.ml.llm.PaLM2TextGenerator#bigframes_ml_llm_PaLM2TextGenerator_predict) function to run the TensorFlow model:
+Use the [`  predict  `](https://docs.cloud.google.com/python/docs/reference/bigframes/latest/bigframes.ml.llm.PaLM2TextGenerator#bigframes_ml_llm_PaLM2TextGenerator_predict) function to run the TensorFlow model:
 
-``` python
-import bigframes.pandas as bpd
-
-df = bpd.read_gbq("bigquery-public-data.hacker_news.full")
-df_pred = df.rename(columns={"title": "input"})
-predictions = imported_tensorflow_model.predict(df_pred)
-predictions.head(5)
-```
+    import bigframes.pandas as bpd
+    
+    df = bpd.read_gbq("bigquery-public-data.hacker_news.full")
+    df_pred = df.rename(columns={"title": "input"})
+    predictions = imported_tensorflow_model.predict(df_pred)
+    predictions.head(5)
 
 The results should look like this:
+
+![Result\_visualization](https://docs.cloud.google.com/static/bigquery/images/imported_tensorflow_predictions.png)
 
 In the query results, the `  dense_1  ` column contains an array of probability values, and the `  input  ` column contains the corresponding string values from the input table. Each array element value represents the probability that the corresponding input string is an article title from a particular publication.
 
@@ -307,6 +321,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -322,27 +338,25 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 Delete a Google Cloud project:
 
-``` text
-gcloud projects delete PROJECT_ID
-```
+    gcloud projects delete PROJECT_ID
 
 ### Delete individual resources
 
 Alternatively, remove the individual resources used in this tutorial:
 
-1.  [Delete the imported model](/bigquery/docs/deleting-models) .
+1.  [Delete the imported model](https://docs.cloud.google.com/bigquery/docs/deleting-models) .
 
-2.  Optional: [Delete the dataset](/bigquery/docs/managing-datasets#delete-datasets) .
+2.  Optional: [Delete the dataset](https://docs.cloud.google.com/bigquery/docs/managing-datasets#delete-datasets) .
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](/bigquery/docs/bqml-introduction) .
-  - To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](/bigquery/docs/create-machine-learning-model) .
-  - For more information about importing TensorFlow models, see [The `  CREATE MODEL  ` statement for importing TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
+  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+  - To get started using BigQuery ML, see [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model) .
+  - For more information about importing TensorFlow models, see [The `  CREATE MODEL  ` statement for importing TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
   - For more information about working with models, see these resources:
-      - [Get model metadata](/bigquery/docs/getting-model-metadata)
-      - [Update model metadata](/bigquery/docs/updating-model-metadata)
-      - [Manage models](/bigquery/docs/managing-models)
+      - [Get model metadata](https://docs.cloud.google.com/bigquery/docs/getting-model-metadata)
+      - [Update model metadata](https://docs.cloud.google.com/bigquery/docs/updating-model-metadata)
+      - [Manage models](https://docs.cloud.google.com/bigquery/docs/managing-models)
   - For more information on using the BigQuery DataFrames API in a BigQuery notebook, see:
-      - [Introduction to BigQuery notebooks](/bigquery/docs/notebooks-introduction)
-      - [Overview of BigQuery DataFrames](/python/docs/reference/bigframes/latest)
+      - [Introduction to BigQuery notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+      - [Overview of BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest)

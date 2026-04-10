@@ -2,17 +2,17 @@
 
 This document provides examples of how to extend differential privacy for BigQuery differential privacy.
 
-BigQuery lets you extend [differential privacy](/bigquery/docs/differential-privacy) to multi-cloud data sources and external differential privacy libraries. This document provides examples of how to apply differential privacy for multi-cloud data sources like AWS S3 with BigQuery Omni, how to call an external differential privacy library using a remote function, and how to perform differential privacy aggregations with [PipelineDP](https://pipelinedp.io/) , a Python library that can run with Apache Spark and Apache Beam.
+BigQuery lets you extend [differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) to multi-cloud data sources and external differential privacy libraries. This document provides examples of how to apply differential privacy for multi-cloud data sources like AWS S3 with BigQuery Omni, how to call an external differential privacy library using a remote function, and how to perform differential privacy aggregations with [PipelineDP](https://pipelinedp.io/) , a Python library that can run with Apache Spark and Apache Beam.
 
 **Note:** In this document, the privacy parameters in the examples are not recommendations. You should work with your privacy or security officer to determine the optimal privacy parameters for your dataset and organization.
 
-For more information about differential privacy, see [Use differential privacy](/bigquery/docs/differential-privacy) .
+For more information about differential privacy, see [Use differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
 
 ## Differential privacy with BigQuery Omni
 
-BigQuery differential privacy supports calls to multi-cloud data sources like AWS S3. The following example queries an external source of data, `  foo.wikidata  ` , and applies differential privacy. For more information about the syntax of the differential privacy clause, see [Differential privacy clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+BigQuery differential privacy supports calls to multi-cloud data sources like AWS S3. The following example queries an external source of data, `  foo.wikidata  ` , and applies differential privacy. For more information about the syntax of the differential privacy clause, see [Differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
 
-``` text
+``` notranslate
 SELECT
   WITH
     DIFFERENTIAL_PRIVACY
@@ -26,34 +26,32 @@ FROM foo.wikidata;
 
 This example returns results similar to the following:
 
-``` text
--- These results will change each time you run the query.
-+----------+
-| results  |
-+----------+
-| 3465     |
-+----------+
-```
+    -- These results will change each time you run the query.
+    +----------+
+    | results  |
+    +----------+
+    | 3465     |
+    +----------+
 
-For more information about BigQuery Omni limitations, see [Limitations](/bigquery/docs/omni-introduction#limitations) .
+For more information about BigQuery Omni limitations, see [Limitations](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) .
 
 ## Call external differential privacy libraries with remote functions
 
-You can call external differential privacy libraries using [remote functions](/bigquery/docs/remote-functions) . The following link uses a remote function to call an external library hosted by [Tumult Analytics](https://www.tmlt.dev) to use zero-concentrated differential privacy on a retail sales dataset.
+You can call external differential privacy libraries using [remote functions](https://docs.cloud.google.com/bigquery/docs/remote-functions) . The following link uses a remote function to call an external library hosted by [Tumult Analytics](https://www.tmlt.dev) to use zero-concentrated differential privacy on a retail sales dataset.
 
 For information about working with Tumult Analytics, see the [Tumult Analytics launch post](https://www.tmlt.io/resources/gcp-launch-post) {: .external}.
 
 ## Differential privacy aggregations with PipelineDP
 
-PipelineDP is a Python library that performs differential privacy aggregations and can run with Apache Spark and Apache Beam. BigQuery can run Apache Spark stored procedures written in Python. For more information about running Apache Spark stored procedures, see [Work with stored procedures for Apache Spark](/bigquery/docs/spark-procedures) .
+PipelineDP is a Python library that performs differential privacy aggregations and can run with Apache Spark and Apache Beam. BigQuery can run Apache Spark stored procedures written in Python. For more information about running Apache Spark stored procedures, see [Work with stored procedures for Apache Spark](https://docs.cloud.google.com/bigquery/docs/spark-procedures) .
 
-The following example performs a differential privacy aggregation using the PipelineDP library. It uses the [Chicago Taxi Trips public dataset](/bigquery/public-data) and computes for each taxi car - the number of trips, and sum and mean of tips for these trips.
+The following example performs a differential privacy aggregation using the PipelineDP library. It uses the [Chicago Taxi Trips public dataset](https://docs.cloud.google.com/bigquery/public-data) and computes for each taxi car - the number of trips, and sum and mean of tips for these trips.
 
 ### Before you begin
 
 A standard Apache Spark image does not include PipelineDP. You must create a [Docker](https://www.docker.com/) image that contains all necessary dependencies before running a PipelineDP stored procedure. This section describes how to create and push a Docker image to Google Cloud.
 
-Before you begin, ensure you have installed Docker on your local machine and set up authentication for pushing Docker images to [gcr.io](/artifact-registry) . For more information about pushing Docker images, see [Push and pull images](/artifact-registry/docs/pushing-and-pulling) .
+Before you begin, ensure you have installed Docker on your local machine and set up authentication for pushing Docker images to [gcr.io](https://docs.cloud.google.com/artifact-registry) . For more information about pushing Docker images, see [Push and pull images](https://docs.cloud.google.com/artifact-registry/docs/pushing-and-pulling) .
 
 #### Create and push a Docker image
 
@@ -65,7 +63,7 @@ To create and push a Docker image with required dependencies, follow these steps
 
 3.  Save the following text to the [Dockerfile](https://docs.docker.com/engine/reference/builder/#:%7E:text=A%20Dockerfile%20is%20a%20text,can%20use%20in%20a%20Dockerfile%20) .
     
-    ``` text
+    ``` notranslate
       # Debian 11 is recommended.
       FROM debian:11-slim
     
@@ -148,7 +146,7 @@ To create and push a Docker image with required dependencies, follow these steps
 
 4.  Run the following command.
     
-    ``` text
+    ``` notranslate
     IMAGE=gcr.io/PROJECT_ID/DOCKER_IMAGE:0.0.1
     # Build and push the image.
     docker build -t "${IMAGE}"
@@ -164,9 +162,9 @@ To create and push a Docker image with required dependencies, follow these steps
 
 ### Run a PipelineDP stored procedure
 
-1.  To create a stored procedure, use the [CREATE PROCEDURE](/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) statement.
+1.  To create a stored procedure, use the [CREATE PROCEDURE](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) statement.
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE
     PROCEDURE
       `PROJECT_ID.DATASET_ID.pipeline_dp_example_spark_proc`()
@@ -233,9 +231,9 @@ To create and push a Docker image with required dependencies, follow these steps
       - `  CONNECTION_ID  ` : the name of the connection.
       - `  TABLE_NAME  ` : the name of the table.
 
-2.  Use the [CALL](/bigquery/docs/reference/standard-sql/procedural-language#call) statement to call the procedure.
+2.  Use the [CALL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#call) statement to call the procedure.
     
-    ``` text
+    ``` notranslate
     CALL `PROJECT_ID.DATASET_ID.pipeline_dp_example_spark_proc`()
     ```
     
@@ -246,6 +244,6 @@ To create and push a Docker image with required dependencies, follow these steps
 
 ## What's next
 
-  - Learn how to [use differential privacy](/bigquery/docs/differential-privacy) .
-  - Learn about the [differential privacy clause](/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
-  - Learn how to use [differentially private aggregate functions](/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .
+  - Learn how to [use differential privacy](https://docs.cloud.google.com/bigquery/docs/differential-privacy) .
+  - Learn about the [differential privacy clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#dp_clause) .
+  - Learn how to use [differentially private aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate-dp-functions) .

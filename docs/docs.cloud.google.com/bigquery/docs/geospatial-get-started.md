@@ -7,7 +7,7 @@ In this tutorial, you:
   - Use a geospatial analytics function to convert latitude and longitude columns into geographical points
   - Run a query that finds all the Citi Bike stations with more than 30 bikes available for rental
   - Visualize your results in BigQuery
-  - Visualize your results in [BigQuery Geo Viz](/bigquery/docs/geospatial-visualize)
+  - Visualize your results in [BigQuery Geo Viz](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize)
 
 ## Costs
 
@@ -27,11 +27,13 @@ You incur charges for:
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Explore the sample data
 
-This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](https://cloud.google.com/datasets) . A public dataset is any dataset that is stored in BigQuery and made available to the general public. The public datasets are datasets that BigQuery hosts for you to access and integrate into your applications. Google pays for the storage of these datasets and provides public access to the data by using a [project](/bigquery/docs/projects) . You pay only for the queries that you perform on the data (the first 1 TB per month is free, subject to [query pricing details](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .)
+This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](https://cloud.google.com/datasets) . A public dataset is any dataset that is stored in BigQuery and made available to the general public. The public datasets are datasets that BigQuery hosts for you to access and integrate into your applications. Google pays for the storage of these datasets and provides public access to the data by using a [project](https://docs.cloud.google.com/bigquery/docs/projects) . You pay only for the queries that you perform on the data (the first 1 TB per month is free, subject to [query pricing details](https://cloud.google.com/bigquery/pricing#analysis_pricing_models) .)
 
 ### The NYC Citi Bike Trips dataset
 
@@ -40,6 +42,8 @@ This tutorial uses a dataset available through the [Google Cloud Public Dataset 
 Citi Bike is the nation's largest bike share program, with 10,000 bikes and 600 stations across Manhattan, Brooklyn, Queens, and Jersey City. This dataset includes Citi Bike trips since Citi Bike launched in September 2013 and is updated daily. The data is processed by Citi Bike to remove trips that are taken by staff to service and inspect the system and any trips that are less than 60 seconds in duration, which are considered false starts.
 
 You can start exploring this data in the BigQuery console by viewing the details of the `  citibike_stations  ` table:
+
+[Go to citibike\_stations schema](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york_citibike&t=citibike_stations&page=table)
 
 Three columns in this table are relevant to this tutorial:
 
@@ -55,7 +59,7 @@ In this section of the tutorial, you run a GoogleSQL query that finds all the Ci
 
 The following GoogleSQL query is used to find the Citi Bike stations with more than 30 bikes.
 
-``` text
+``` notranslate
 SELECT
   ST_GeogPoint(longitude, latitude)  AS WKT,
   num_bikes_available
@@ -80,10 +84,12 @@ The query clauses do the following:
 To run the query by using the Google Cloud console:
 
 1.  Go to the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  Enter the following GoogleSQL query in the **Query editor** text area.
     
-    ``` text
+    ``` notranslate
     -- Finds Citi Bike stations with > 30 bikes
     SELECT
       ST_GeogPoint(longitude, latitude)  AS WKT,
@@ -96,12 +102,16 @@ To run the query by using the Google Cloud console:
 3.  Click **Run** .
     
     The query takes a moment to complete. After the query runs, your results appear in the **Query results** pane.
+    
+    ![Bike station query results.](https://docs.cloud.google.com/static/bigquery/images/bike-query-results.png)
 
 ## Visualize the results in BigQuery
 
 To visualize the results in an interactive map, follow these steps:
 
 1.  In the **Query results** pane, click **Visualization** .
+    
+    ![Visualization of bike station locations.](https://docs.cloud.google.com/static/bigquery/images/visualization-citibike-stations.png)
     
     The points on the map show the locations of each bike station.
 
@@ -112,6 +122,8 @@ To visualize the results in an interactive map, follow these steps:
 4.  To view the properties of a geography, click it.
 
 5.  To view the map in satellite mode, click **Satellite** .
+
+![Stylized visualization of bike station locations.](https://docs.cloud.google.com/static/bigquery/images/visualization-citibike-stations-stylized.png)
 
 ## Visualize the query results in Geo Viz
 
@@ -125,13 +137,21 @@ To set up Geo Viz:
 
 1.  Open the Geo Viz web tool.
     
+    [Open the Geo Viz web tool](https://bigquerygeoviz.appspot.com/)
+    
     You might need to enable cookies to authorize and use this tool.
 
 2.  Under step one, **Query** , click **Authorize** .
+    
+    ![Geo Viz authorization button.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-auth.png)
 
 3.  In the **Choose an account** dialog, click your Google Account.
+    
+    ![Choose account dialog.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-account.png)
 
 4.  In the access dialog, click **Allow** to give Geo Viz access to your BigQuery data.
+    
+    ![Allow access dialog.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-access.png)
 
 ### Run a GoogleSQL query on geospatial data
 
@@ -143,7 +163,7 @@ To run the query:
 
 2.  In the query window, enter the following GoogleSQL query.
     
-    ``` text
+    ``` notranslate
     -- Finds Citi Bike stations with > 30 bikes
     SELECT
       ST_GeogPoint(longitude, latitude)  AS WKT,
@@ -156,8 +176,12 @@ To run the query:
 3.  Click **Run** .
 
 4.  When the query completes, click **Show results** . You can also click step two **Define columns** .
+    
+    ![See results.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-see-results.png)
 
 5.  This moves you to step two. In step two, for **Geometry column** , choose **WKT** . This plots the points corresponding to the bike stations on your map.
+    
+    ![Mapped results.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-map-results.png)
 
 ### Format your visualization
 
@@ -192,14 +216,22 @@ To format your map:
 3.  In the **Value** field, enter **`  #0000FF  `** , the HTML color code for blue.
 
 4.  Click **Apply Style** .
+    
+    ![Fill color.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-fill-color.png)
 
 5.  Examine your map. If you click one of your points, the value is displayed.
+    
+    ![Map point details.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-point-details.png)
 
 6.  Click **fillOpacity** .
 
 7.  In the **Value** field, enter **`  0.5  `** and click **Apply Style** .
+    
+    ![Fill opacity.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-fill-opacity.png)
 
 8.  Examine your map. The fill color of the points is now semi-transparent.
+    
+    ![Map with semi-transparent points.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-map-opacity.png)
 
 9.  Change the size of the points based on the number of bikes available. Click **circleRadius** .
 
@@ -214,8 +246,12 @@ To format your map:
     4.  For **Domain** , enter **`  30  `** in the first box and **`  60  `** in the second.
     
     5.  For **Range** , enter **`  5  `** in the first box and **`  20  `** in the second.
+        
+        ![Circle radius.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-radius.png)
 
 11. Examine your map. The radius of each circle now corresponds to the number of bikes available at that location.
+    
+    ![Final map.](https://docs.cloud.google.com/static/bigquery/images/geo-viz-analyst-map.png)
 
 12. Close Geo Viz.
 
@@ -237,13 +273,15 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - To learn more about visualization options for geospatial analytics, see [Visualizing geospatial data](/bigquery/docs/geospatial-visualize) .
-  - To learn more about working with geospatial analytics data, see [Working with geospatial data](/bigquery/docs/geospatial-data) .
-  - For a tutorial on using geospatial analytics, see [Using geospatial analytics to plot a hurricane's path](/bigquery/docs/geospatial-tutorial-hurricane) .
-  - For documentation on GoogleSQL functions in geospatial analytics, see [Geography functions in GoogleSQL](/bigquery/docs/reference/standard-sql/geography_functions) .
+  - To learn more about visualization options for geospatial analytics, see [Visualizing geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-visualize) .
+  - To learn more about working with geospatial analytics data, see [Working with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .
+  - For a tutorial on using geospatial analytics, see [Using geospatial analytics to plot a hurricane's path](https://docs.cloud.google.com/bigquery/docs/geospatial-tutorial-hurricane) .
+  - For documentation on GoogleSQL functions in geospatial analytics, see [Geography functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .

@@ -1,90 +1,90 @@
-  - [Resource: Table](#Table)
-      - [JSON representation](#Table.SCHEMA_REPRESENTATION)
-  - [TableSchema](#TableSchema)
-      - [JSON representation](#TableSchema.SCHEMA_REPRESENTATION)
-  - [TableFieldSchema](#TableFieldSchema)
-      - [JSON representation](#TableFieldSchema.SCHEMA_REPRESENTATION)
-  - [DataPolicyOption](#DataPolicyOption)
-      - [JSON representation](#DataPolicyOption.SCHEMA_REPRESENTATION)
-  - [FieldElementType](#FieldElementType)
-      - [JSON representation](#FieldElementType.SCHEMA_REPRESENTATION)
-  - [TimePartitioning](#TimePartitioning)
-      - [JSON representation](#TimePartitioning.SCHEMA_REPRESENTATION)
-  - [RangePartitioning](#RangePartitioning)
-      - [JSON representation](#RangePartitioning.SCHEMA_REPRESENTATION)
-  - [Clustering](#Clustering)
-      - [JSON representation](#Clustering.SCHEMA_REPRESENTATION)
-  - [PartitioningDefinition](#PartitioningDefinition)
-      - [JSON representation](#PartitioningDefinition.SCHEMA_REPRESENTATION)
-  - [PartitionedColumn](#PartitionedColumn)
-      - [JSON representation](#PartitionedColumn.SCHEMA_REPRESENTATION)
-  - [ViewDefinition](#ViewDefinition)
-      - [JSON representation](#ViewDefinition.SCHEMA_REPRESENTATION)
-  - [UserDefinedFunctionResource](#UserDefinedFunctionResource)
-      - [JSON representation](#UserDefinedFunctionResource.SCHEMA_REPRESENTATION)
-  - [PrivacyPolicy](#PrivacyPolicy)
-      - [JSON representation](#PrivacyPolicy.SCHEMA_REPRESENTATION)
-  - [AggregationThresholdPolicy](#AggregationThresholdPolicy)
-      - [JSON representation](#AggregationThresholdPolicy.SCHEMA_REPRESENTATION)
-  - [MaterializedViewDefinition](#MaterializedViewDefinition)
-      - [JSON representation](#MaterializedViewDefinition.SCHEMA_REPRESENTATION)
-  - [MaterializedViewStatus](#MaterializedViewStatus)
-      - [JSON representation](#MaterializedViewStatus.SCHEMA_REPRESENTATION)
-  - [ErrorProto](#ErrorProto)
-      - [JSON representation](#ErrorProto.SCHEMA_REPRESENTATION)
-  - [ExternalDataConfiguration](#ExternalDataConfiguration)
-      - [JSON representation](#ExternalDataConfiguration.SCHEMA_REPRESENTATION)
-  - [FileSetSpecType](#FileSetSpecType)
-  - [CsvOptions](#CsvOptions)
-      - [JSON representation](#CsvOptions.SCHEMA_REPRESENTATION)
-  - [JsonOptions](#JsonOptions)
-      - [JSON representation](#JsonOptions.SCHEMA_REPRESENTATION)
-  - [BigtableOptions](#BigtableOptions)
-      - [JSON representation](#BigtableOptions.SCHEMA_REPRESENTATION)
-  - [BigtableColumnFamily](#BigtableColumnFamily)
-      - [JSON representation](#BigtableColumnFamily.SCHEMA_REPRESENTATION)
-  - [BigtableColumn](#BigtableColumn)
-      - [JSON representation](#BigtableColumn.SCHEMA_REPRESENTATION)
-  - [BigtableProtoConfig](#BigtableProtoConfig)
-      - [JSON representation](#BigtableProtoConfig.SCHEMA_REPRESENTATION)
-  - [GoogleSheetsOptions](#GoogleSheetsOptions)
-      - [JSON representation](#GoogleSheetsOptions.SCHEMA_REPRESENTATION)
-  - [HivePartitioningOptions](#HivePartitioningOptions)
-      - [JSON representation](#HivePartitioningOptions.SCHEMA_REPRESENTATION)
-  - [DecimalTargetType](#DecimalTargetType)
-  - [AvroOptions](#AvroOptions)
-      - [JSON representation](#AvroOptions.SCHEMA_REPRESENTATION)
-  - [JsonExtension](#JsonExtension)
-  - [ParquetOptions](#ParquetOptions)
-      - [JSON representation](#ParquetOptions.SCHEMA_REPRESENTATION)
-  - [MapTargetType](#MapTargetType)
-  - [ObjectMetadata](#ObjectMetadata)
-  - [MetadataCacheMode](#MetadataCacheMode)
-  - [BigLakeConfiguration](#BigLakeConfiguration)
-      - [JSON representation](#BigLakeConfiguration.SCHEMA_REPRESENTATION)
-  - [FileFormat](#FileFormat)
-  - [TableFormat](#TableFormat)
-  - [Streamingbuffer](#Streamingbuffer)
-      - [JSON representation](#Streamingbuffer.SCHEMA_REPRESENTATION)
-  - [SnapshotDefinition](#SnapshotDefinition)
-      - [JSON representation](#SnapshotDefinition.SCHEMA_REPRESENTATION)
-  - [CloneDefinition](#CloneDefinition)
-      - [JSON representation](#CloneDefinition.SCHEMA_REPRESENTATION)
-  - [TableConstraints](#TableConstraints)
-      - [JSON representation](#TableConstraints.SCHEMA_REPRESENTATION)
-  - [PrimaryKey](#PrimaryKey)
-      - [JSON representation](#PrimaryKey.SCHEMA_REPRESENTATION)
-  - [ForeignKey](#ForeignKey)
-      - [JSON representation](#ForeignKey.SCHEMA_REPRESENTATION)
-  - [ColumnReference](#ColumnReference)
-      - [JSON representation](#ColumnReference.SCHEMA_REPRESENTATION)
-  - [ExternalCatalogTableOptions](#ExternalCatalogTableOptions)
-      - [JSON representation](#ExternalCatalogTableOptions.SCHEMA_REPRESENTATION)
-  - [StorageDescriptor](#StorageDescriptor)
-      - [JSON representation](#StorageDescriptor.SCHEMA_REPRESENTATION)
-  - [SerDeInfo](#SerDeInfo)
-      - [JSON representation](#SerDeInfo.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Table](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.SCHEMA_REPRESENTATION)
+  - [TableSchema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableSchema.SCHEMA_REPRESENTATION)
+  - [TableFieldSchema](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.SCHEMA_REPRESENTATION)
+  - [DataPolicyOption](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyOption)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DataPolicyOption.SCHEMA_REPRESENTATION)
+  - [FieldElementType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FieldElementType.SCHEMA_REPRESENTATION)
+  - [TimePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.SCHEMA_REPRESENTATION)
+  - [RangePartitioning](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#RangePartitioning)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#RangePartitioning.SCHEMA_REPRESENTATION)
+  - [Clustering](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Clustering)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Clustering.SCHEMA_REPRESENTATION)
+  - [PartitioningDefinition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PartitioningDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PartitioningDefinition.SCHEMA_REPRESENTATION)
+  - [PartitionedColumn](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PartitionedColumn)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PartitionedColumn.SCHEMA_REPRESENTATION)
+  - [ViewDefinition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ViewDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ViewDefinition.SCHEMA_REPRESENTATION)
+  - [UserDefinedFunctionResource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#UserDefinedFunctionResource.SCHEMA_REPRESENTATION)
+  - [PrivacyPolicy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PrivacyPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PrivacyPolicy.SCHEMA_REPRESENTATION)
+  - [AggregationThresholdPolicy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#AggregationThresholdPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#AggregationThresholdPolicy.SCHEMA_REPRESENTATION)
+  - [MaterializedViewDefinition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MaterializedViewDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MaterializedViewDefinition.SCHEMA_REPRESENTATION)
+  - [MaterializedViewStatus](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MaterializedViewStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MaterializedViewStatus.SCHEMA_REPRESENTATION)
+  - [ErrorProto](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ErrorProto)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ErrorProto.SCHEMA_REPRESENTATION)
+  - [ExternalDataConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.SCHEMA_REPRESENTATION)
+  - [FileSetSpecType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FileSetSpecType)
+  - [CsvOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CsvOptions.SCHEMA_REPRESENTATION)
+  - [JsonOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#JsonOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#JsonOptions.SCHEMA_REPRESENTATION)
+  - [BigtableOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableOptions.SCHEMA_REPRESENTATION)
+  - [BigtableColumnFamily](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumnFamily)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumnFamily.SCHEMA_REPRESENTATION)
+  - [BigtableColumn](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableColumn.SCHEMA_REPRESENTATION)
+  - [BigtableProtoConfig](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableProtoConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigtableProtoConfig.SCHEMA_REPRESENTATION)
+  - [GoogleSheetsOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#GoogleSheetsOptions.SCHEMA_REPRESENTATION)
+  - [HivePartitioningOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#HivePartitioningOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#HivePartitioningOptions.SCHEMA_REPRESENTATION)
+  - [DecimalTargetType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#DecimalTargetType)
+  - [AvroOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#AvroOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#AvroOptions.SCHEMA_REPRESENTATION)
+  - [JsonExtension](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#JsonExtension)
+  - [ParquetOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ParquetOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ParquetOptions.SCHEMA_REPRESENTATION)
+  - [MapTargetType](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MapTargetType)
+  - [ObjectMetadata](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ObjectMetadata)
+  - [MetadataCacheMode](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#MetadataCacheMode)
+  - [BigLakeConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigLakeConfiguration)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#BigLakeConfiguration.SCHEMA_REPRESENTATION)
+  - [FileFormat](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#FileFormat)
+  - [TableFormat](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFormat)
+  - [Streamingbuffer](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Streamingbuffer)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Streamingbuffer.SCHEMA_REPRESENTATION)
+  - [SnapshotDefinition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#SnapshotDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#SnapshotDefinition.SCHEMA_REPRESENTATION)
+  - [CloneDefinition](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CloneDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#CloneDefinition.SCHEMA_REPRESENTATION)
+  - [TableConstraints](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableConstraints)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableConstraints.SCHEMA_REPRESENTATION)
+  - [PrimaryKey](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PrimaryKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#PrimaryKey.SCHEMA_REPRESENTATION)
+  - [ForeignKey](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ForeignKey)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ForeignKey.SCHEMA_REPRESENTATION)
+  - [ColumnReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ColumnReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ColumnReference.SCHEMA_REPRESENTATION)
+  - [ExternalCatalogTableOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalCatalogTableOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalCatalogTableOptions.SCHEMA_REPRESENTATION)
+  - [StorageDescriptor](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#StorageDescriptor)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#StorageDescriptor.SCHEMA_REPRESENTATION)
+  - [SerDeInfo](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#SerDeInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#SerDeInfo.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#METHODS_SUMMARY)
 
 ## Resource: Table
 
@@ -99,7 +99,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;id&quot;: string,
@@ -499,7 +499,7 @@ Schema of a table
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     {
       object (TableFieldSchema)
@@ -533,7 +533,7 @@ A field in TableSchema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;type&quot;: string,
   &quot;mode&quot;: string,
@@ -728,7 +728,7 @@ Data policy option. For more information, see [Mask data by applying data polici
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string
 }</code></pre></td>
 </tr>
@@ -758,7 +758,7 @@ Represents the type of a field element.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string
 }</code></pre></td>
 </tr>
@@ -786,7 +786,7 @@ Required. The type of a field element. For more information, see `  TableFieldSc
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string,
   &quot;expirationMs&quot;: string,
   &quot;field&quot;: string,
@@ -837,7 +837,7 @@ If set to true, queries over this table require a partition filter that can be u
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;field&quot;: string,
   &quot;range&quot;: {
     &quot;start&quot;: string,
@@ -896,7 +896,7 @@ Configures table clustering.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     string
   ]
@@ -930,7 +930,7 @@ The partitioning information, which includes managed table, external table and m
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;partitionedColumn&quot;: [
     {
       object (PartitionedColumn)
@@ -968,7 +968,7 @@ The partitioning column information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;field&quot;: string
 }</code></pre></td>
 </tr>
@@ -998,7 +998,7 @@ Describes the definition of a logical view.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;userDefinedFunctionResources&quot;: [
     {
@@ -1059,7 +1059,7 @@ For additional information on migrating, see: <https://cloud.google.com/bigquery
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resourceUri&quot;: string,
   &quot;inlineCode&quot;: string
 }</code></pre></td>
@@ -1096,7 +1096,7 @@ Represents privacy policy that contains the privacy requirements specified by th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field privacy_policy can be only one of the following:
   &quot;aggregationThresholdPolicy&quot;: {
@@ -1133,7 +1133,7 @@ Represents privacy policy associated with "aggregation threshold" method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;privacyUnitColumns&quot;: [
     string
   ],
@@ -1172,7 +1172,7 @@ Definition and configuration of a materialized view.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;lastRefreshTime&quot;: string,
   &quot;enableRefresh&quot;: boolean,
@@ -1230,7 +1230,7 @@ Status of a materialized view. The last refresh timestamp status is omitted here
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;refreshWatermark&quot;: string,
   &quot;lastRefreshStatus&quot;: {
     object (ErrorProto)
@@ -1269,7 +1269,7 @@ Error details.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: string,
   &quot;location&quot;: string,
   &quot;debugInfo&quot;: string,
@@ -1318,7 +1318,7 @@ A human-readable description of the error.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceUris&quot;: [
     string
   ],
@@ -1571,7 +1571,7 @@ Information related to a CSV data source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fieldDelimiter&quot;: string,
   &quot;skipLeadingRows&quot;: string,
   &quot;quote&quot;: string,
@@ -1672,7 +1672,7 @@ Json Options for load and make external tables.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;encoding&quot;: string
 }</code></pre></td>
 </tr>
@@ -1702,7 +1702,7 @@ Options specific to Google Cloud Bigtable data sources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columnFamilies&quot;: [
     {
       object (BigtableColumnFamily)
@@ -1757,7 +1757,7 @@ Information related to a Bigtable column family.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;familyId&quot;: string,
   &quot;type&quot;: string,
   &quot;encoding&quot;: string,
@@ -1837,7 +1837,7 @@ Information related to a Bigtable column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;qualifierEncoded&quot;: string,
   &quot;qualifierString&quot;: string,
   &quot;fieldName&quot;: string,
@@ -1920,7 +1920,7 @@ Information related to a Bigtable protobuf column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;schemaBundleId&quot;: string,
   &quot;protoMessageName&quot;: string
 }</code></pre></td>
@@ -1957,7 +1957,7 @@ Options specific to Google Sheets data sources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;skipLeadingRows&quot;: string,
   &quot;range&quot;: string
 }</code></pre></td>
@@ -1994,7 +1994,7 @@ Options for configuring hive partitioning detect.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;mode&quot;: string,
   &quot;sourceUriPrefix&quot;: string,
   &quot;requirePartitionFilter&quot;: boolean,
@@ -2097,7 +2097,7 @@ Options for external data sources.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;useAvroLogicalTypes&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -2141,7 +2141,7 @@ Parquet Options for load and make external tables.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enumAsString&quot;: boolean,
   &quot;enableListInference&quot;: boolean,
   &quot;mapTargetType&quot;: enum (MapTargetType)
@@ -2231,7 +2231,7 @@ Configuration for BigQuery tables for Apache Iceberg (formerly BigLake managed t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;connectionId&quot;: string,
   &quot;storageUri&quot;: string,
   &quot;fileFormat&quot;: enum (FileFormat),
@@ -2308,7 +2308,7 @@ Apache Iceberg format.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;estimatedBytes&quot;: string,
   &quot;estimatedRows&quot;: string,
   &quot;oldestEntryTime&quot;: string
@@ -2352,7 +2352,7 @@ Information about base table and snapshot time of the snapshot.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;baseTableReference&quot;: {
     object (TableReference)
   },
@@ -2391,7 +2391,7 @@ Information about base table and clone time of a table clone.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;baseTableReference&quot;: {
     object (TableReference)
   },
@@ -2430,7 +2430,7 @@ The TableConstraints defines the primary key and foreign key.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;primaryKey&quot;: {
     object (PrimaryKey)
   },
@@ -2473,7 +2473,7 @@ Represents the primary key constraint on a table's columns.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columns&quot;: [
     string
   ]
@@ -2505,7 +2505,7 @@ Represents a foreign key constraint on a table's columns.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;referencedTable&quot;: {
     object (TableReference)
@@ -2555,7 +2555,7 @@ The pair of the foreign key column and primary key column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;referencingColumn&quot;: string,
   &quot;referencedColumn&quot;: string
 }</code></pre></td>
@@ -2592,7 +2592,7 @@ Metadata about open source compatible table. The fields contained in these optio
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parameters&quot;: {
     string: string,
     ...
@@ -2641,7 +2641,7 @@ Contains information about how a table's data is stored and accessed by open sou
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;locationUri&quot;: string,
   &quot;inputFormat&quot;: string,
   &quot;outputFormat&quot;: string,
@@ -2694,7 +2694,7 @@ Serializer and deserializer information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;serializationLibrary&quot;: string,
   &quot;parameters&quot;: {

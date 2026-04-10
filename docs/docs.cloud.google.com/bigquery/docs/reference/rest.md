@@ -1,13 +1,13 @@
 A data platform for customers to create, manage, share and query data.
 
-  - [REST Resource: v2.datasets](#v2.datasets)
-  - [REST Resource: v2.jobs](#v2.jobs)
-  - [REST Resource: v2.models](#v2.models)
-  - [REST Resource: v2.projects](#v2.projects)
-  - [REST Resource: v2.routines](#v2.routines)
-  - [REST Resource: v2.rowAccessPolicies](#v2.rowAccessPolicies)
-  - [REST Resource: v2.tabledata](#v2.tabledata)
-  - [REST Resource: v2.tables](#v2.tables)
+  - [REST Resource: v2.datasets](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.datasets)
+  - [REST Resource: v2.jobs](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.jobs)
+  - [REST Resource: v2.models](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.models)
+  - [REST Resource: v2.projects](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.projects)
+  - [REST Resource: v2.routines](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.routines)
+  - [REST Resource: v2.rowAccessPolicies](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.rowAccessPolicies)
+  - [REST Resource: v2.tabledata](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.tabledata)
+  - [REST Resource: v2.tables](https://docs.cloud.google.com/bigquery/docs/reference/rest#v2.tables)
 
 ## Service: bigquery.googleapis.com
 
@@ -25,7 +25,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigquery.googleapis.com  `
 
-## REST Resource: [v2.datasets](/bigquery/docs/reference/rest/v2/datasets)
+## REST Resource: [v2.datasets](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets)
 
 Methods
 
@@ -64,7 +64,7 @@ Undeletes a dataset which is within time travel window based on datasetId.
 `  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}  `  
 Updates information in an existing dataset.
 
-## REST Resource: [v2.jobs](/bigquery/docs/reference/rest/v2/jobs)
+## REST Resource: [v2.jobs](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs)
 
 Methods
 
@@ -104,7 +104,7 @@ Lists all jobs that you started in the specified project.
 `  POST /bigquery/v2/projects/{projectId}/queries  `  
 Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.
 
-## REST Resource: [v2.models](/bigquery/docs/reference/rest/v2/models)
+## REST Resource: [v2.models](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models)
 
 Methods
 
@@ -128,7 +128,7 @@ Lists all models in the specified dataset.
 `  PATCH /bigquery/v2/projects/{projectId}/datasets/{datasetId}/models/{modelId}  `  
 Patch specific fields in the specified model.
 
-## REST Resource: [v2.projects](/bigquery/docs/reference/rest/v2/projects)
+## REST Resource: [v2.projects](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/projects)
 
 Methods
 
@@ -142,7 +142,7 @@ RPC to get the service account for a project used for interactions with Google C
 `  GET /bigquery/v2/projects  `  
 RPC to list projects to which the user has been granted any project role.
 
-## REST Resource: [v2.routines](/bigquery/docs/reference/rest/v2/routines)
+## REST Resource: [v2.routines](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/routines)
 
 Methods
 
@@ -186,7 +186,7 @@ Returns permissions that a caller has on the specified resource.
 `  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/routines/{routineId}  `  
 Updates information in an existing routine.
 
-## REST Resource: [v2.rowAccessPolicies](/bigquery/docs/reference/rest/v2/rowAccessPolicies)
+## REST Resource: [v2.rowAccessPolicies](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies)
 
 Methods
 
@@ -230,7 +230,7 @@ Returns permissions that a caller has on the specified resource.
 `  PUT /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies/{policyId}  `  
 Updates a row access policy.
 
-## REST Resource: [v2.tabledata](/bigquery/docs/reference/rest/v2/tabledata)
+## REST Resource: [v2.tabledata](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tabledata)
 
 Methods
 
@@ -244,7 +244,7 @@ Streams data into BigQuery one record at a time without needing to run a load jo
 `  GET /bigquery/v2/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data  `  
 List the content of a table in rows.
 
-## REST Resource: [v2.tables](/bigquery/docs/reference/rest/v2/tables)
+## REST Resource: [v2.tables](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables)
 
 Methods
 

@@ -1,6 +1,6 @@
 # Work with raster data using Earth Engine in BigQuery
 
-This document explains how to combine raster and vector data by using the [`  ST_REGIONSTATS  ` function](/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) , which uses Google Earth Engine to get access to image and raster data in BigQuery.
+This document explains how to combine raster and vector data by using the [`  ST_REGIONSTATS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) , which uses Google Earth Engine to get access to image and raster data in BigQuery.
 
 ## Overview
 
@@ -14,23 +14,29 @@ Geospatial raster and vector data is often combined using a *zonal statistics* o
   - Solar potential for a collection of building polygons.
   - Fire risk summarized along power line corridors in forested areas.
 
-BigQuery excels in processing vector data, and Google Earth Engine excels in processing raster data. You can use the [`  ST_REGIONSTATS  ` geography function](/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) to combine raster data using Earth Engine with your vector data stored in BigQuery.
+BigQuery excels in processing vector data, and Google Earth Engine excels in processing raster data. You can use the [`  ST_REGIONSTATS  ` geography function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_regionstats) to combine raster data using Earth Engine with your vector data stored in BigQuery.
+
+![A map of the Earth with raster values and computed zonal statistics.](https://docs.cloud.google.com/static/bigquery/images/raster-example.png)
 
 ## Before you begin
 
 1.  To use the `  ST_REGIONSTATS  ` function in your queries, enable the Earth Engine API.
+    
+    [Enable the API](https://console.cloud.google.com/apis/library/earthengine.googleapis.com)
 
 2.  Optional: To subscribe to and use data published to BigQuery sharing (formerly Analytics Hub) by using the `  ST_REGIONSTATS  ` function, enable the Analytics Hub API.
+    
+    [Enable the API](https://console.cloud.google.com/apis/library/analyticshub.googleapis.com)
 
 ### Required permissions
 
 To get the permissions that you need to call the `  ST_REGIONSTATS  ` function, ask your administrator to grant you the following IAM roles on your project:
 
-  - [Earth Engine Resource Viewer](/iam/docs/roles-permissions/earthengine#earthengine.viewer) ( `  roles/earthengine.viewer  ` )
-  - [Service Usage Consumer](/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `  roles/serviceusage.serviceUsageConsumer  ` )
-  - Subscribe to datasets in BigQuery sharing: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - [Earth Engine Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/earthengine#earthengine.viewer) ( `  roles/earthengine.viewer  ` )
+  - [Service Usage Consumer](https://docs.cloud.google.com/iam/docs/roles-permissions/serviceusage#serviceusage.serviceUsageConsumer) ( `  roles/serviceusage.serviceUsageConsumer  ` )
+  - Subscribe to datasets in BigQuery sharing: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to call the `  ST_REGIONSTATS  ` function. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -42,7 +48,7 @@ The following permissions are required to call the `  ST_REGIONSTATS  ` function
   - `  serviceusage.services.use  `
   - `  bigquery.datasets.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Find raster data
 
@@ -50,11 +56,13 @@ The `  raster_id  ` parameter in the `  ST_REGIONSTATS  ` function is a string t
 
 ### BigQuery image tables
 
-You can use BigQuery sharing (formerly Analytics Hub) to discover and access raster datasets in BigQuery. To use BigQuery sharing, you need to [enable the Analytics Hub API](/bigquery/docs/analytics-hub-manage-exchanges#before_you_begin) and ensure that you have required permissions to [view and subscribe to listings and data exchanges](/bigquery/docs/analytics-hub-view-subscribe-listings) .
+You can use BigQuery sharing (formerly Analytics Hub) to discover and access raster datasets in BigQuery. To use BigQuery sharing, you need to [enable the Analytics Hub API](https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-exchanges#before_you_begin) and ensure that you have required permissions to [view and subscribe to listings and data exchanges](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings) .
 
-Google Earth Engine publishes publicly available datasets that contain raster data in the `  US  ` and `  EU  ` multi-regions. To [subscribe](/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) to an Earth Engine dataset with raster data, follow these steps:
+Google Earth Engine publishes publicly available datasets that contain raster data in the `  US  ` and `  EU  ` multi-regions. To [subscribe](https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings#subscribe-listings) to an Earth Engine dataset with raster data, follow these steps:
 
 1.  Go to the **Sharing (Analytics Hub)** page.
+    
+    [Go to Sharing (Analytics Hub)](https://console.cloud.google.com/bigquery/analytics-hub)
 
 2.  Click search **Search listings** .
 
@@ -80,92 +88,88 @@ For example, the ERA5-Land dataset provides daily climate variable statistics an
 
 ### SQL
 
-``` text
-WITH SimplifiedCountries AS (
-  SELECT
-    ST_SIMPLIFY(geometry, 10000) AS simplified_geometry,
-    names.primary AS name
-  FROM
-    `bigquery-public-data.overture_maps.division_area`
-  WHERE
-    subtype = 'country'
-)
-SELECT
-  sc.simplified_geometry AS geometry,
-  sc.name,
-  ST_REGIONSTATS(
-    sc.simplified_geometry,
-    (SELECT assets.image.href
-    FROM `LINKED_DATASET_NAME.climate`
-    WHERE start_datetime = '2025-01-01 00:00:00'),
-    'temperature_2m'
-  ).mean - 273.15 AS mean_temperature
-FROM
-  SimplifiedCountries AS sc
-ORDER BY
-  mean_temperature DESC;
-```
+    WITH SimplifiedCountries AS (
+      SELECT
+        ST_SIMPLIFY(geometry, 10000) AS simplified_geometry,
+        names.primary AS name
+      FROM
+        `bigquery-public-data.overture_maps.division_area`
+      WHERE
+        subtype = 'country'
+    )
+    SELECT
+      sc.simplified_geometry AS geometry,
+      sc.name,
+      ST_REGIONSTATS(
+        sc.simplified_geometry,
+        (SELECT assets.image.href
+        FROM `LINKED_DATASET_NAME.climate`
+        WHERE start_datetime = '2025-01-01 00:00:00'),
+        'temperature_2m'
+      ).mean - 273.15 AS mean_temperature
+    FROM
+      SimplifiedCountries AS sc
+    ORDER BY
+      mean_temperature DESC;
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-import datetime
-from typing import cast
-
-import bigframes.bigquery as bbq
-import bigframes.pandas as bpd
-
-# TODO: Set the project_id to your Google Cloud project ID.
-# project_id = "your-project-id"
-bpd.options.bigquery.project = project_id
-
-# TODO: Set the dataset_id to the ID of the dataset that contains the
-# `climate` table. This is likely a linked dataset to Earth Engine.
-# See: https://cloud.google.com/bigquery/docs/link-earth-engine
-linked_dataset = "era5_land_daily_aggregated"
-
-# For the best efficiency, use partial ordering mode.
-bpd.options.bigquery.ordering_mode = "partial"
-
-# Load the table of country boundaries.
-countries = bpd.read_gbq("bigquery-public-data.overture_maps.division_area")
-
-# Filter to just the countries.
-countries = countries[countries["subtype"] == "country"].copy()
-countries["name"] = countries["names"].struct.field("primary")
-countries["simplified_geometry"] = bbq.st_simplify(
-    countries["geometry"],
-    tolerance_meters=10_000,
-)
-
-# Get the reference to the temperature data from a linked dataset.
-# Note: This sample assumes you have a linked dataset to Earth Engine.
-image_href = (
-    bpd.read_gbq(f"{project_id}.{linked_dataset}.climate")
-    .set_index("start_datetime")
-    .loc[[datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc)], :]
-)
-raster_id = image_href["assets"].struct.field("image").struct.field("href")
-raster_id = raster_id.item()
-stats = bbq.st_regionstats(
-    countries["simplified_geometry"],
-    raster_id=cast(str, raster_id),
-    band="temperature_2m",
-)
-
-# Extract the mean and convert from Kelvin to Celsius.
-countries["mean_temperature"] = stats.struct.field("mean") - 273.15
-
-# Sort by the mean temperature to find the warmest countries.
-result = countries[["name", "mean_temperature"]].sort_values(
-    "mean_temperature", ascending=False
-)
-print(result.head(10))
-```
+    import datetime
+    from typing import cast
+    
+    import bigframes.bigquery as bbq
+    import bigframes.pandas as bpd
+    
+    # TODO: Set the project_id to your Google Cloud project ID.
+    # project_id = "your-project-id"
+    bpd.options.bigquery.project = project_id
+    
+    # TODO: Set the dataset_id to the ID of the dataset that contains the
+    # `climate` table. This is likely a linked dataset to Earth Engine.
+    # See: https://cloud.google.com/bigquery/docs/link-earth-engine
+    linked_dataset = "era5_land_daily_aggregated"
+    
+    # For the best efficiency, use partial ordering mode.
+    bpd.options.bigquery.ordering_mode = "partial"
+    
+    # Load the table of country boundaries.
+    countries = bpd.read_gbq("bigquery-public-data.overture_maps.division_area")
+    
+    # Filter to just the countries.
+    countries = countries[countries["subtype"] == "country"].copy()
+    countries["name"] = countries["names"].struct.field("primary")
+    countries["simplified_geometry"] = bbq.st_simplify(
+        countries["geometry"],
+        tolerance_meters=10_000,
+    )
+    
+    # Get the reference to the temperature data from a linked dataset.
+    # Note: This sample assumes you have a linked dataset to Earth Engine.
+    image_href = (
+        bpd.read_gbq(f"{project_id}.{linked_dataset}.climate")
+        .set_index("start_datetime")
+        .loc[[datetime.datetime(2025, 1, 1, tzinfo=datetime.timezone.utc)], :]
+    )
+    raster_id = image_href["assets"].struct.field("image").struct.field("href")
+    raster_id = raster_id.item()
+    stats = bbq.st_regionstats(
+        countries["simplified_geometry"],
+        raster_id=cast(str, raster_id),
+        band="temperature_2m",
+    )
+    
+    # Extract the mean and convert from Kelvin to Celsius.
+    countries["mean_temperature"] = stats.struct.field("mean") - 273.15
+    
+    # Sort by the mean temperature to find the warmest countries.
+    result = countries[["name", "mean_temperature"]].sort_values(
+        "mean_temperature", ascending=False
+    )
+    print(result.head(10))
 
 ### Cloud Storage GeoTIFF
 
@@ -204,15 +208,11 @@ Weight values don't have the same precision as `  FLOAT64  ` values. In practice
 
 You can provide an expression using Earth Engine [image expression syntax](https://developers.google.com/earth-engine/guides/image_math#expressions) in your `  include  ` argument to dynamically weight pixels based on specific criteria within raster bands. For example, the following expression restricts calculations to pixels where the `  probability  ` band exceeds 70%:
 
-``` text
-include => 'probability > 0.7'
-```
+    include => 'probability > 0.7'
 
 If the dataset includes a weight-factor band, you can use it with the following syntax:
 
-``` text
-include => 'weight_factor_band_name'
-```
+    include => 'weight_factor_band_name'
 
 ## Pixel size and scale of analysis
 
@@ -226,18 +226,18 @@ Changing the pixel size changes the number of pixels that intersect a given geog
 
 To change the pixel size, set the `  scale  ` in the `  options  ` argument to the `  ST_REGIONSTATS  ` function. For example, to compute statistics over 1,000-meter pixels, use `  options => JSON '{"scale":1000}'  ` , which tells Earth Engine to resample the image at the requested scale. To learn more about how Earth Engine handles rescaling, see [Scale](https://developers.google.com/earth-engine/guides/scale) in the Google Earth Engine documentation.
 
-Computing statistics for polygons that are significantly smaller than the pixels of the raster can produce inaccurate or null results. In such a case, one alternative is to replace the polygon with its centroid point using [`  ST_CENTROID  `](/bigquery/docs/reference/standard-sql/geography_functions#st_centroid) .
+Computing statistics for polygons that are significantly smaller than the pixels of the raster can produce inaccurate or null results. In such a case, one alternative is to replace the polygon with its centroid point using [`  ST_CENTROID  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions#st_centroid) .
 
 ## Billing
 
-When you run a query, usage of the `  ST_REGIONSTATS  ` function is billed separately from the rest of the query because Earth Engine computes the results of the function call. You are billed for this usage in slot hours under the BigQuery Services SKU, regardless of whether you use on-demand billing or reservations. To see the amount billed for BigQuery calls to Earth Engine, [view your billing report](/billing/docs/how-to/reports#overview) and use [labels](/billing/docs/how-to/reports#filter-by-labels) to filter by the label key `  goog-bq-feature-type  ` , with value `  EARTH_ENGINE  ` . If the `  ST_REGIONSTATS  ` function fails, then you aren't billed for any Earth Engine computation that was used.
+When you run a query, usage of the `  ST_REGIONSTATS  ` function is billed separately from the rest of the query because Earth Engine computes the results of the function call. You are billed for this usage in slot hours under the BigQuery Services SKU, regardless of whether you use on-demand billing or reservations. To see the amount billed for BigQuery calls to Earth Engine, [view your billing report](https://docs.cloud.google.com/billing/docs/how-to/reports#overview) and use [labels](https://docs.cloud.google.com/billing/docs/how-to/reports#filter-by-labels) to filter by the label key `  goog-bq-feature-type  ` , with value `  EARTH_ENGINE  ` . If the `  ST_REGIONSTATS  ` function fails, then you aren't billed for any Earth Engine computation that was used.
 
-For each query, you can use the [`  jobs.get  ` method](/bigquery/docs/reference/rest/v2/jobs/get) in the BigQuery API to see the following information:
+For each query, you can use the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) in the BigQuery API to see the following information:
 
-  - The [`  slotMs  ` field](/bigquery/docs/reference/rest/v2/Job#externalservicecost) , which shows the number of slot milliseconds consumed by Earth Engine when the `  externalService  ` field is `  EARTH_ENGINE  ` and the `  billingMethod  ` field is `  SERVICES_SKU  ` .
-  - The [`  totalServicesSkuSlotMs  ` field](/bigquery/docs/reference/rest/v2/Job#jobstatistics2) , which shows the total number of slot milliseconds used by all BigQuery external services that get billed on the BigQuery Services SKU.
+  - The [`  slotMs  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#externalservicecost) , which shows the number of slot milliseconds consumed by Earth Engine when the `  externalService  ` field is `  EARTH_ENGINE  ` and the `  billingMethod  ` field is `  SERVICES_SKU  ` .
+  - The [`  totalServicesSkuSlotMs  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#jobstatistics2) , which shows the total number of slot milliseconds used by all BigQuery external services that get billed on the BigQuery Services SKU.
 
-You can also query the `  total_services_sku_slot_ms  ` field in the [`  INFORMATION_SCHEMA.JOBS  ` view](/bigquery/docs/information-schema-jobs) to find the total slot milliseconds consumed by external services billed on the BigQuery Services SKU.
+You can also query the `  total_services_sku_slot_ms  ` field in the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) to find the total slot milliseconds consumed by external services billed on the BigQuery Services SKU.
 
 ### Cost factors
 
@@ -262,7 +262,7 @@ The following factors impact the compute usage when you run the `  ST_REGIONSTAT
 
 ### Control costs
 
-To control costs associated with the `  ST_REGIONSTATS  ` function, you can adjust the quota that controls the amount of slot time that the function is allowed to consume. The default is 350 slot-hours per day. When you [view your quotas](/docs/quotas/view-manage) , filter the **Metric** list to `  earthengine.googleapis.com/bigquery_slot_usage_time  ` to see the Earth Engine quota associated with calls from BigQuery. For more information, read about [BigQuery raster functions quotas](https://developers.google.com/earth-engine/guides/usage#bigquery_slot-time_per_day) in the Google Earth Engine documentation.
+To control costs associated with the `  ST_REGIONSTATS  ` function, you can adjust the quota that controls the amount of slot time that the function is allowed to consume. The default is 350 slot-hours per day. When you [view your quotas](https://docs.cloud.google.com/docs/quotas/view-manage) , filter the **Metric** list to `  earthengine.googleapis.com/bigquery_slot_usage_time  ` to see the Earth Engine quota associated with calls from BigQuery. For more information, read about [BigQuery raster functions quotas](https://developers.google.com/earth-engine/guides/usage#bigquery_slot-time_per_day) in the Google Earth Engine documentation.
 
 **Note:** Like custom query quotas in BigQuery, this quota is approximate. It provides a safeguard against excessive spending, but it's not designed to strictly limit slot time. BigQuery might occasionally run a query that exceeds the quota limit, and you might exhaust your quota without being billed for the entire consumed amount.
 
@@ -278,6 +278,6 @@ Queries that call the `  ST_REGIONSTATS  ` function must run in one of the follo
 
 ## What's next
 
-  - Try the tutorial that shows you how to [use raster data to analyze temperature](/bigquery/docs/raster-tutorial-weather) .
-  - Learn more about [geography functions in BigQuery](/bigquery/docs/reference/standard-sql/geography_functions) .
-  - Learn more about [working with geospatial data](/bigquery/docs/geospatial-data) .
+  - Try the tutorial that shows you how to [use raster data to analyze temperature](https://docs.cloud.google.com/bigquery/docs/raster-tutorial-weather) .
+  - Learn more about [geography functions in BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/geography_functions) .
+  - Learn more about [working with geospatial data](https://docs.cloud.google.com/bigquery/docs/geospatial-data) .

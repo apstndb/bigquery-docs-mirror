@@ -15,7 +15,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.metadataViewer  `
   - `  roles/bigquery.dataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -122,7 +122,7 @@ The `  INFORMATION_SCHEMA.ROUTINES  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       ddl      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The <a href="/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to create the routine, such as <code dir="ltr" translate="no">         CREATE FUNCTION       </code> or <code dir="ltr" translate="no">         CREATE PROCEDURE       </code></td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language">DDL statement</a> that can be used to create the routine, such as <code dir="ltr" translate="no">         CREATE FUNCTION       </code> or <code dir="ltr" translate="no">         CREATE PROCEDURE       </code></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       connection      </code></td>
@@ -136,46 +136,27 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a dataset or a region qualifier. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset or a region qualifier. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.ROUTINES      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.ROUTINES      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                             | Resource scope | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.ROUTINES       `` | Project level  | `          REGION        ` |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.ROUTINES       `        | Dataset level  | Dataset location           |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 **Example**
 
-``` text
--- Returns metadata for routines in a single dataset.
-SELECT * FROM myDataset.INFORMATION_SCHEMA.ROUTINES;
-
--- Returns metadata for routines in a region.
-SELECT * FROM region-us.INFORMATION_SCHEMA.ROUTINES;
-```
+    -- Returns metadata for routines in a single dataset.
+    SELECT * FROM myDataset.INFORMATION_SCHEMA.ROUTINES;
+    
+    -- Returns metadata for routines in a region.
+    SELECT * FROM region-us.INFORMATION_SCHEMA.ROUTINES;
 
 ## Example
 
@@ -183,15 +164,13 @@ SELECT * FROM region-us.INFORMATION_SCHEMA.ROUTINES;
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format:
 
-``` text
-`PROJECT_ID`.INFORMATION_SCHEMA.ROUTINES
-```
+    `PROJECT_ID`.INFORMATION_SCHEMA.ROUTINES
 
 . For example, ``  `myproject`.INFORMATION_SCHEMA.ROUTINES  `` .
 
 The following example retrieves all columns from the `  INFORMATION_SCHEMA.ROUTINES  ` view. The metadata returned is for all routines in `  mydataset  ` in your default project — `  myproject  ` . The dataset `  mydataset  ` contains a routine named `  myroutine1  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -202,13 +181,11 @@ FROM
 
 The result is similar to the following:
 
-``` text
-+------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+
-| specific_catalog | specific_schema | specific_name | routine_catalog | routine_schema | routine_name | routine_type | data_type | routine_body | routine_definition | external_language | is_deterministic | security_type |           created           |         last_altered        |                            ddl                             |
-+------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+
-| myproject        | mydataset       | myroutine1    | myproject       | mydataset      | myroutine1   | FUNCTION     | NULL      | SQL          | x + 3              | NULL              | NULL             | NULL          | 2019-10-03 17:29:00.235 UTC | 2019-10-03 17:29:00.235 UTC | CREATE FUNCTION myproject.mydataset.myroutine1(x FLOAT64) |
-|                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | AS (                                                      |
-|                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | x + 3                                                     |
-|                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | );                                                        |
-+------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+
-```
+    +------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+
+    | specific_catalog | specific_schema | specific_name | routine_catalog | routine_schema | routine_name | routine_type | data_type | routine_body | routine_definition | external_language | is_deterministic | security_type |           created           |         last_altered        |                            ddl                             |
+    +------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+
+    | myproject        | mydataset       | myroutine1    | myproject       | mydataset      | myroutine1   | FUNCTION     | NULL      | SQL          | x + 3              | NULL              | NULL             | NULL          | 2019-10-03 17:29:00.235 UTC | 2019-10-03 17:29:00.235 UTC | CREATE FUNCTION myproject.mydataset.myroutine1(x FLOAT64) |
+    |                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | AS (                                                      |
+    |                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | x + 3                                                     |
+    |                  |                 |               |                 |                |              |              |           |              |                    |                   |                  |               |                             |                             | );                                                        |
+    +------------------+-----------------+---------------+-----------------+----------------+--------------+--------------+-----------+--------------+--------------------+-------------------+------------------+---------------+-----------------------------+-----------------------------+-----------------------------------------------------------+

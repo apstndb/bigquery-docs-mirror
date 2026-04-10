@@ -1,8 +1,8 @@
 # Best practices for row-level security in BigQuery
 
-This document explains best practices when using [row-level security](/bigquery/docs/row-level-security-intro) .
+This document explains best practices when using [row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
 
-Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](/bigquery/docs/row-level-security-intro) and [Working with row-level security](/bigquery/docs/managing-row-level-security) .
+Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [Working with row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
 ## Restrict user permissions to limit side-channel attacks
 
@@ -14,28 +14,11 @@ To mitigate such opportunities, BigQuery hides sensitive statistics on all queri
 
 *We recommend that admins should refrain from granting the following permissions to users who should only see filtered data, to avoid giving access to sensitive data.*
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Permissions</strong></th>
-<th><strong>Sensitive data</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Project Owner</td>
-<td>Project owners can view bytes processed and related data only in audit logs. The billing metadata cannot be viewed from the job details. There's no specific permission or role to grant viewer access to this billing metadata.</td>
-</tr>
-<tr class="even">
-<td>BigQuery Data Edit, Owner, or Viewer roles</td>
-<td>View error messages on queries.</td>
-</tr>
-<tr class="odd">
-<td>Cloud Billing viewer permissions</td>
-<td>View BigQuery billing.</td>
-</tr>
-</tbody>
-</table>
+| **Permissions**                            | **Sensitive data**                                                                                                                                                                                                               |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Project Owner                              | Project owners can view bytes processed and related data only in audit logs. The billing metadata cannot be viewed from the job details. There's no specific permission or role to grant viewer access to this billing metadata. |
+| BigQuery Data Edit, Owner, or Viewer roles | View error messages on queries.                                                                                                                                                                                                  |
+| Cloud Billing viewer permissions           | View BigQuery billing.                                                                                                                                                                                                           |
 
 **Examples**
 
@@ -49,7 +32,7 @@ To mitigate such opportunities, BigQuery hides sensitive statistics on all queri
 
 **Best practice:** Don't grant table write permissions to users who should only see filtered data.
 
-Users with write permissions to a table can insert data into the table with the [`  bq load  ` command](/bigquery/docs/reference/bq-cli-reference#bq_load) or with the BigQuery Storage Write API. This can allow the user with write permissions to alter the query results of other users.
+Users with write permissions to a table can insert data into the table with the [`  bq load  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) or with the BigQuery Storage Write API. This can allow the user with write permissions to alter the query results of other users.
 
 *We recommend that admins create separate Google groups for table write access and row-level access policies. Users that should only see filtered table results shouldn't have write access to the filtered table.*
 
@@ -61,7 +44,7 @@ When you add a row access policy on a table for the first time, you immediately 
 
 *We recommend that admins pay special attention when recreating the last row-level access policy on a table, by following these guidelines:*
 
-1.  First remove all access to the table, by using [table access controls](/bigquery/docs/control-access-to-resources-iam) .
+1.  First remove all access to the table, by using [table access controls](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam) .
 2.  Remove all row-level access policies.
 3.  Re-create the row-level access policies.
 4.  Re-enable access to the table.
@@ -74,21 +57,21 @@ Alternatively, you can first create new row-level access policies on the table, 
 
 Don't use the row-level security feature across organizations, to help prevent data leakage through side-channel attacks, and to maintain greater control over access to sensitive data.
 
-For subquery row-level access policies, create and search tables within organizations or projects. This leads to better security and simpler ACL configuration, as grantees must have the `  bigquery.tables.getData  ` permission on the target and referenced tables in policies, as well as any relevant [column-level security](/bigquery/docs/column-level-security-intro) permissions.
+For subquery row-level access policies, create and search tables within organizations or projects. This leads to better security and simpler ACL configuration, as grantees must have the `  bigquery.tables.getData  ` permission on the target and referenced tables in policies, as well as any relevant [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) permissions.
 
 *We recommend using row-level security feature for within-organization security constraints only (such as for sharing data within an organization/enterprise/company), and not for cross-organizational or public security.*
 
 **Example**
 
-Outside of your organization, you have less control over who has access to data. Within your organization, you can control who has been granted access to billing information of queries against tables with row-level access policies. Billing information is a vector for [side-channel attacks](#limit-side-channel-attacks) .
+Outside of your organization, you have less control over who has access to data. Within your organization, you can control who has been granted access to billing information of queries against tables with row-level access policies. Billing information is a vector for [side-channel attacks](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#limit-side-channel-attacks) .
 
 ## Manage the `     Filtered Data Viewer    ` role through row-level access policies
 
 **Best practice:** `  bigquery.filteredDataViewer  ` is a system-managed role granted through row-level access policies. Manage the role only through row-level access policies. Don't apply the role through Identity and Access Management (IAM).
 
-When you [create a row-level access policy](/bigquery/docs/managing-row-level-security#create-policy) , the principals in the policy are automatically granted the `  bigquery.filteredDataViewer  ` role. You can only add or remove principals from the access policy [with a DDL statement](/bigquery/docs/managing-row-level-security#examples) .
+When you [create a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) , the principals in the policy are automatically granted the `  bigquery.filteredDataViewer  ` role. You can only add or remove principals from the access policy [with a DDL statement](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#examples) .
 
-The `  bigquery.filteredDataViewer  ` role *must not* be granted through [IAM](/bigquery/access-control) to a higher-level resource, such as a table, dataset, or project. Granting the role in this way lets users view rows defined by *all* row-level access policies within that scope, regardless of intended restrictions. While the union of row-level access policy filters might not encompass the entire table, this practice poses a significant security risk and undermines the purpose of row-level security.
+The `  bigquery.filteredDataViewer  ` role *must not* be granted through [IAM](https://docs.cloud.google.com/bigquery/access-control) to a higher-level resource, such as a table, dataset, or project. Granting the role in this way lets users view rows defined by *all* row-level access policies within that scope, regardless of intended restrictions. While the union of row-level access policy filters might not encompass the entire table, this practice poses a significant security risk and undermines the purpose of row-level security.
 
 We recommend managing the `  bigquery.filteredDataViewer  ` role exclusively through row-level access policies. This method ensures that principals are granted the `  bigquery.filteredDataViewer  ` role implicitly and correctly, respecting the defined filter predicates for each policy.
 
@@ -96,6 +79,6 @@ We recommend managing the `  bigquery.filteredDataViewer  ` role exclusively thr
 
 **Best practice:** Try to avoid making row access policies that filter on clustered and partitioned columns.
 
-Row-level access policy filters don't participate in query [pruning on partitioned and clustered tables](/bigquery/docs/using-row-level-security-with-features#partitioned_and_clustered_tables) .
+Row-level access policy filters don't participate in query [pruning on partitioned and clustered tables](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#partitioned_and_clustered_tables) .
 
 If your row-level access policy names a partitioned column, your query does not receive the performance benefits of query pruning.

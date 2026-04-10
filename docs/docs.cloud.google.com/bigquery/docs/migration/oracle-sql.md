@@ -1,6 +1,6 @@
 # Oracle SQL translation guide
 
-This document details the similarities and differences in SQL syntax between Oracle and BigQuery to help you plan your migration. Use [batch SQL translation](/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries.
+This document details the similarities and differences in SQL syntax between Oracle and BigQuery to help you plan your migration. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad-hoc queries.
 
 **Note:** In some cases, there is no direct mapping between a SQL element in Oracle and BigQuery. However, in most cases, you can achieve the same functionality in BigQuery that you can in Oracle using an alternative means, as shown in the examples in this document.
 
@@ -74,7 +74,7 @@ This section shows equivalents between data types in Oracle and in BigQuery.
 <p>Additionally, before storing a decimal number Oracle rounds up if that number has more digits after the decimal point than is specified for the corresponding column. In BigQuery this feature could be implemented using <code dir="ltr" translate="no">        ROUND()       </code> function.</p></td>
 </tr>
 <tr class="odd">
-<td><code dir="ltr" translate="no">         NUMBER(*, x)       </code></td>
+<td><code dir="ltr" translate="no">         NUMBER(*, x)       </code> <a href="https://docs.oracle.com/cd/B19306_01/olap.102/b14346/dml_datatypes002.htm"></a></td>
 <td><code dir="ltr" translate="no">         NUMERIC       </code></td>
 <td>BigQuery does not allow user specification of custom values for precision or scale. As a result, a column in Oracle may be defined so that it has a bigger scale than BigQuery supports.
 <p>Additionally, before storing a decimal number Oracle rounds up if that number has more digits after the decimal point than is specified for the corresponding column. In BigQuery this feature could be implemented using <code dir="ltr" translate="no">        ROUND()       </code> function.</p></td>
@@ -189,7 +189,7 @@ Oracle SQL uses a set of default formats set as parameters for displaying expres
 
 By default, BigQuery expects all source data to be UTF-8 encoded when loading. Optionally, if you have CSV files with data encoded in ISO-8859-1 format, you can explicitly specify the encoding when you import your data so that BigQuery can properly convert your data to UTF-8 during the import process.
 
-It is only possible to import data that is ISO-8859-1 or UTF-8 encoded. BigQuery stores and returns the data as UTF-8 encoded. Intended date format or time zone can be set in [`  DATE  `](/bigquery/docs/reference/standard-sql/date_functions) and [`  TIMESTAMP  `](/bigquery/docs/reference/standard-sql/timestamp_functions) functions.
+It is only possible to import data that is ISO-8859-1 or UTF-8 encoded. BigQuery stores and returns the data as UTF-8 encoded. Intended date format or time zone can be set in [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) and [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) functions.
 
 ### Timestamp and date type formatting
 
@@ -254,121 +254,39 @@ The following sections list mappings between Oracle functions and BigQuery equiv
 
 ### Comparison operators
 
-Oracle and BigQuery comparison operators are ANSI SQL:2011 compliant. The comparison operators in the table below are the same in both BigQuery and Oracle. You can use [`  REGEXP_CONTAINS  `](/bigquery/docs/reference/standard-sql/string_functions#regexp_contains) instead of `  REGEXP_LIKE  ` in BigQuery.
+Oracle and BigQuery comparison operators are ANSI SQL:2011 compliant. The comparison operators in the table below are the same in both BigQuery and Oracle. You can use [`  REGEXP_CONTAINS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#regexp_contains) instead of `  REGEXP_LIKE  ` in BigQuery.
 
-<table>
-<thead>
-<tr class="header">
-<th>Operator</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       "="      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Equal</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       &lt;&gt;      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Not equal</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       !=      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Not equal</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       &gt;      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Greater than</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       &gt;=      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Greater than or equal</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       &lt;      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Less than</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       &lt;=      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Less than or equal</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       IN ( )      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Matches a value in a list</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       NOT      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Negates a condition</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BETWEEN      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Within a range (inclusive)</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       IS NULL      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators"><code dir="ltr" translate="no">        NULL       </code> value</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       IS NOT NULL      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Not <code dir="ltr" translate="no">        NULL       </code> value</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       LIKE      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Pattern matching with %</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       EXISTS      </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators#comparison_operators">Condition is met if subquery returns at least one row</a></td>
-</tr>
-</tbody>
-</table>
+| Operator                     | Description                                                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        "="       `         | [Equal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                                 |
+| `        <>       `          | [Not equal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                             |
+| `        !=       `          | [Not equal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                             |
+| `        >       `           | [Greater than](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                          |
+| `        >=       `          | [Greater than or equal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                 |
+| `        <       `           | [Less than](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                             |
+| `        <=       `          | [Less than or equal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                    |
+| `        IN ( )       `      | [Matches a value in a list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                             |
+| `        NOT       `         | [Negates a condition](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                                   |
+| `        BETWEEN       `     | [Within a range (inclusive)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                            |
+| `        IS NULL       `     | [`         NULL        ` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                         |
+| `        IS NOT NULL       ` | [Not `         NULL        ` value](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                     |
+| `        LIKE       `        | [Pattern matching with %](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators)                               |
+| `        EXISTS       `      | [Condition is met if subquery returns at least one row](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#comparison_operators) |
 
 The operators on the table are the same both in BigQuery and Oracle.
 
 ### Logical expressions and functions
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CASE       </code></td>
-<td><code dir="ltr" translate="no">         CASE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COALESCE       </code></td>
-<td><code dir="ltr" translate="no">         COALESCE(expr1, ..., exprN)       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         DECODE       </code></td>
-<td><code dir="ltr" translate="no">         CASE.. WHEN.. END       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NANVL       </code></td>
-<td><code dir="ltr" translate="no">         IFNULL       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         FETCH NEXT&gt;       </code></td>
-<td><code dir="ltr" translate="no">         LIMIT       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NULLIF       </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/conditional_expressions#nullif"><code dir="ltr" translate="no">        NULLIF(expression, expression_to_match)       </code></a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         NVL       </code></td>
-<td><code dir="ltr" translate="no">         IFNULL(expr, 0), COALESCE(exp, 0)       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NVL2       </code></td>
-<td><code dir="ltr" translate="no">         IF(expr, true_result, else_result)       </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                          | BigQuery                                                                                                                                                        |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          CASE        `        | `          CASE        `                                                                                                                                        |
+| `          COALESCE        `    | `          COALESCE(expr1, ..., exprN)        `                                                                                                                 |
+| `          DECODE        `      | `          CASE.. WHEN.. END        `                                                                                                                           |
+| `          NANVL        `       | `          IFNULL        `                                                                                                                                      |
+| `          FETCH NEXT>        ` | `          LIMIT        `                                                                                                                                       |
+| `          NULLIF        `      | [`         NULLIF(expression, expression_to_match)        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#nullif) |
+| `          NVL        `         | `          IFNULL(expr, 0), COALESCE(exp, 0)        `                                                                                                           |
+| `          NVL2        `        | `          IF(expr, true_result, else_result)        `                                                                                                          |
 
 ### Aggregate functions
 
@@ -430,7 +348,7 @@ BigQuery doesn't support the rest of arguments that Oracle defines.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         BIT_COMPLEMENT       </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators">bitwise not operator: ~</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators">bitwise not operator: ~</a></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         BIT_OR       </code></td>
@@ -470,7 +388,7 @@ BigQuery doesn't support the rest of arguments that Oracle defines.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         FIRST       </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using <a href="/bigquery/docs/user-defined-functions">user-defined functions (UDFs)</a> .</td>
+<td>Does not exist implicitly in BigQuery. Consider using <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions">user-defined functions (UDFs)</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         GROUP_ID       </code></td>
@@ -486,7 +404,7 @@ BigQuery doesn't support the rest of arguments that Oracle defines.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       LAST      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using <a href="/bigquery/docs/user-defined-functions">UDFs</a> .</td>
+<td>Does not exist implicitly in BigQuery. Consider using <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions">UDFs</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         LISTAGG       </code></td>
@@ -629,236 +547,63 @@ BigQuery offers the following additional aggregate functions:
 
 The following table shows mappings between common Oracle analytic and aggregate analytic functions with their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         AVG       </code></td>
-<td><code dir="ltr" translate="no">         AVG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         BIT_COMPLEMENT       </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/operators">bitwise not operator: ~</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         BIT_OR       </code></td>
-<td><code dir="ltr" translate="no">         BIT_OR              ,               X | Y       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         BIT_XOR       </code></td>
-<td><code dir="ltr" translate="no">         BIT_XOR              ,               X ^ Y       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         BITAND       </code></td>
-<td><code dir="ltr" translate="no">         BIT_AND              ,               X &amp; Y       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BOOL_TO_INT      </code></td>
-<td><code dir="ltr" translate="no">         CAST              (X AS INT64)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       COUNT      </code></td>
-<td><code dir="ltr" translate="no">         COUNT       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COVAR_POP       </code></td>
-<td><code dir="ltr" translate="no">         COVAR_POP       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         COVAR_SAMP       </code></td>
-<td><code dir="ltr" translate="no">         COVAR_SAMP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CUBE_TABLE      </code></td>
-<td>Isn't supported in BigQuery. Consider using a BI tool or a custom UDF</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CUME_DIST       </code></td>
-<td><code dir="ltr" translate="no">         CUME_DIST       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         DENSE_RANK              (ANSI)      </code></td>
-<td><code dir="ltr" translate="no">         DENSE_RANK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FEATURE_COMPARE      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FEATURE_DETAILS      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FEATURE_ID      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       FEATURE_SET      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FEATURE_VALUE      </code></td>
-<td>Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         FIRST_VALUE       </code></td>
-<td><code dir="ltr" translate="no">         FIRST_VALUE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HIER_CAPTION      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HIER_CHILD_COUNT      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HIER_COLUMN      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HIER_DEPTH      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HIER_DESCRIPTION      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HIER_HAS_CHILDREN      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HIER_LEVEL      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HIER_MEMBER_NAME      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       HIER_ORDER      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       HIER_UNIQUE_MEMBER_NAME      </code></td>
-<td>Hierarchical queries are not supported in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LAST_VALUE       </code></td>
-<td><code dir="ltr" translate="no">         LAST_VALUE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LAG       </code></td>
-<td><code dir="ltr" translate="no">         LAG       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LEAD       </code></td>
-<td><code dir="ltr" translate="no">         LEAD       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LISTAGG      </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG                 STRING_AGG                 ARRAY_CONCAT_AGG       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MATCH_NUMBER       </code></td>
-<td>Pattern recognition and calculation can be done with regular expressions and UDFs in BigQuery</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MATCH_RECOGNIZE       </code></td>
-<td>Pattern recognition and calculation can be done with regular expressions and UDFs in BigQuery</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MAX       </code></td>
-<td><code dir="ltr" translate="no">         MAX       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MEDIAN       </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT(x, 0.5 RESPECT NULLS) OVER()       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MIN       </code></td>
-<td><code dir="ltr" translate="no">         MIN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NTH_VALUE       </code></td>
-<td><code dir="ltr" translate="no">         NTH_VALUE              (value_expression, constant_integer_expression [{RESPECT | IGNORE} NULLS])      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         NTILE       </code></td>
-<td><code dir="ltr" translate="no">         NTILE              (constant_integer_expression)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         PERCENT_RANK               PERCENT_RANKM      </code></td>
-<td><code dir="ltr" translate="no">         PERCENT_RANK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT                 PERCENTILE_DISC       </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT                 PERCENTILE_DISC       </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_DISC       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PRESENTNNV       </code></td>
-<td>Oracle specific, does not exist in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         PRESENTV       </code></td>
-<td>Oracle specific, does not exist in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PREVIOUS       </code></td>
-<td>Oracle specific, does not exist in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         RANK       </code> (ANSI)</td>
-<td><code dir="ltr" translate="no">         RANK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         RATIO_TO_REPORT              (expr) OVER (partition clause)      </code></td>
-<td><code dir="ltr" translate="no">       expr / SUM(expr) OVER (partition clause)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ROW_NUMBER       </code></td>
-<td><code dir="ltr" translate="no">         ROW_NUMBER       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         STDDEV_POP       </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_POP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         STDDEV_SAMP       </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_SAMP              ,               STDDEV       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         SUM       </code></td>
-<td><code dir="ltr" translate="no">         SUM       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         VAR_POP       </code></td>
-<td><code dir="ltr" translate="no">         VAR_POP       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         VAR_SAMP       </code></td>
-<td><code dir="ltr" translate="no">         VAR_SAMP              ,               VARIANCE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         VARIANCE       </code></td>
-<td><code dir="ltr" translate="no">         VARIANCE              ()      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         WIDTH_BUCKET       </code></td>
-<td>UDF can be used.</td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                               | BigQuery                                                                                                              |
+| -------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `          AVG        `                                                                                              | `          AVG        `                                                                                               |
+| `          BIT_COMPLEMENT        `                                                                                   | [bitwise not operator: \~](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators)              |
+| `          BIT_OR        `                                                                                           | `          BIT_OR              ,               X \| Y        `                                                        |
+| `          BIT_XOR        `                                                                                          | `          BIT_XOR              ,               X ^ Y        `                                                        |
+| `          BITAND        `                                                                                           | `          BIT_AND              ,               X & Y        `                                                        |
+| `        BOOL_TO_INT       `                                                                                         | `          CAST              (X AS INT64)       `                                                                     |
+| `        COUNT       `                                                                                               | `          COUNT        `                                                                                             |
+| `          COVAR_POP        `                                                                                        | `          COVAR_POP        `                                                                                         |
+| `          COVAR_SAMP        `                                                                                       | `          COVAR_SAMP        `                                                                                        |
+| `        CUBE_TABLE       `                                                                                          | Isn't supported in BigQuery. Consider using a BI tool or a custom UDF                                                 |
+| `          CUME_DIST        ` [](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/CUME_DIST.html) | `          CUME_DIST        `                                                                                         |
+| `          DENSE_RANK              (ANSI)       `                                                                    | `          DENSE_RANK        `                                                                                        |
+| `        FEATURE_COMPARE       `                                                                                     | Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML                                            |
+| `        FEATURE_DETAILS       `                                                                                     | Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML                                            |
+| `        FEATURE_ID       `                                                                                          | Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML                                            |
+| `        FEATURE_SET       `                                                                                         | Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML                                            |
+| `        FEATURE_VALUE       `                                                                                       | Does not exist implicitly in BigQuery. Consider using UDFs and BigQuery ML                                            |
+| `          FIRST_VALUE        `                                                                                      | `          FIRST_VALUE        `                                                                                       |
+| `        HIER_CAPTION       `                                                                                        | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_CHILD_COUNT       `                                                                                    | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_COLUMN       `                                                                                         | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_DEPTH       `                                                                                          | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_DESCRIPTION       `                                                                                    | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_HAS_CHILDREN       `                                                                                   | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_LEVEL       `                                                                                          | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_MEMBER_NAME       `                                                                                    | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_ORDER       `                                                                                          | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `        HIER_UNIQUE_MEMBER_NAME       `                                                                             | Hierarchical queries are not supported in BigQuery.                                                                   |
+| `          LAST_VALUE        `                                                                                       | `          LAST_VALUE        `                                                                                        |
+| `          LAG        `                                                                                              | `          LAG        `                                                                                               |
+| `          LEAD        `                                                                                             | `          LEAD        `                                                                                              |
+| `        LISTAGG       `                                                                                             | `          ARRAY_AGG                 STRING_AGG                 ARRAY_CONCAT_AGG        `                             |
+| `          MATCH_NUMBER        `                                                                                     | Pattern recognition and calculation can be done with regular expressions and UDFs in BigQuery                         |
+| `          MATCH_RECOGNIZE        `                                                                                  | Pattern recognition and calculation can be done with regular expressions and UDFs in BigQuery                         |
+| `          MAX        `                                                                                              | `          MAX        `                                                                                               |
+| `          MEDIAN        `                                                                                           | `          PERCENTILE_CONT(x, 0.5 RESPECT NULLS) OVER()        `                                                      |
+| `          MIN        `                                                                                              | `          MIN        `                                                                                               |
+| `          NTH_VALUE        `                                                                                        | `          NTH_VALUE              (value_expression, constant_integer_expression [{RESPECT \| IGNORE} NULLS])       ` |
+| `          NTILE        `                                                                                            | `          NTILE              (constant_integer_expression)       `                                                   |
+| `          PERCENT_RANK               PERCENT_RANKM       `                                                          | `          PERCENT_RANK        `                                                                                      |
+| `          PERCENTILE_CONT                 PERCENTILE_DISC        `                                                  | `          PERCENTILE_CONT        `                                                                                   |
+| `          PERCENTILE_CONT                 PERCENTILE_DISC        `                                                  | `          PERCENTILE_DISC        `                                                                                   |
+| `          PRESENTNNV        `                                                                                       | Oracle specific, does not exist in BigQuery.                                                                          |
+| `          PRESENTV        `                                                                                         | Oracle specific, does not exist in BigQuery.                                                                          |
+| `          PREVIOUS        `                                                                                         | Oracle specific, does not exist in BigQuery.                                                                          |
+| `          RANK        ` (ANSI)                                                                                      | `          RANK        `                                                                                              |
+| `          RATIO_TO_REPORT              (expr) OVER (partition clause)       `                                       | `        expr / SUM(expr) OVER (partition clause)       `                                                             |
+| `          ROW_NUMBER        `                                                                                       | `          ROW_NUMBER        `                                                                                        |
+| `          STDDEV_POP        `                                                                                       | `          STDDEV_POP        `                                                                                        |
+| `          STDDEV_SAMP        `                                                                                      | `          STDDEV_SAMP              ,               STDDEV        `                                                   |
+| `          SUM        `                                                                                              | `          SUM        `                                                                                               |
+| `          VAR_POP        `                                                                                          | `          VAR_POP        `                                                                                           |
+| `          VAR_SAMP        `                                                                                         | `          VAR_SAMP              ,               VARIANCE        `                                                    |
+| `          VARIANCE        `                                                                                         | `          VARIANCE              ()       `                                                                           |
+| `          WIDTH_BUCKET        `                                                                                     | UDF can be used.                                                                                                      |
 
 ### Date/time functions
 
@@ -1114,7 +859,7 @@ The following table shows mappings between Oracle string functions and their Big
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         LOWER       </code></td>
-<td><code dir="ltr" translate="no">        LOWER      </code></td>
+<td><code dir="ltr" translate="no">         LOWER      </code></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         LPAD       </code></td>
@@ -1252,168 +997,46 @@ BigQuery offers the following additional string functions:
 
 The following table shows mappings between Oracle math functions and their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ABS       </code></td>
-<td><code dir="ltr" translate="no">         ABS       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ACOS       </code></td>
-<td><code dir="ltr" translate="no">         ACOS       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ACOSH      </code></td>
-<td><code dir="ltr" translate="no">         ACOSH       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ASIN       </code></td>
-<td><code dir="ltr" translate="no">         ASIN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ASINH      </code></td>
-<td><code dir="ltr" translate="no">         ASINH       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ATAN       </code></td>
-<td><code dir="ltr" translate="no">         ATAN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ATAN2       </code></td>
-<td><code dir="ltr" translate="no">         ATAN2       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       ATANH      </code></td>
-<td><code dir="ltr" translate="no">         ATANH       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CEIL       </code></td>
-<td><code dir="ltr" translate="no">         CEIL       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       CEILING      </code></td>
-<td><code dir="ltr" translate="no">         CEILING       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         COS       </code></td>
-<td><code dir="ltr" translate="no">         COS       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COSH       </code></td>
-<td><code dir="ltr" translate="no">         COSH       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         EXP       </code></td>
-<td><code dir="ltr" translate="no">         EXP       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         FLOOR       </code></td>
-<td><code dir="ltr" translate="no">         FLOOR       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         GREATEST       </code></td>
-<td><code dir="ltr" translate="no">         GREATEST       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LEAST       </code></td>
-<td><code dir="ltr" translate="no">         LEAST       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LN       </code></td>
-<td><code dir="ltr" translate="no">         LN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LNNVL       </code></td>
-<td>use with <code dir="ltr" translate="no">       ISNULL      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LOG       </code></td>
-<td><code dir="ltr" translate="no">         LOG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MOD              (% operator)      </code></td>
-<td><code dir="ltr" translate="no">         MOD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         POWER              (** operator)      </code></td>
-<td><code dir="ltr" translate="no">         POWER              ,               POW       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DBMS_RANDOM.VALUE      </code></td>
-<td><code dir="ltr" translate="no">         RAND       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       RANDOMBYTES      </code></td>
-<td>Isn't supported in BigQuery. Consider using a custom UDF and RAND function</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       RANDOMINTEGER      </code></td>
-<td><code dir="ltr" translate="no">       CAST(FLOOR(10*RAND()) AS INT64)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       RANDOMNUMBER      </code></td>
-<td>Isn't supported in BigQuery. Consider using a custom UDF and RAND function</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         REMAINDER       </code></td>
-<td><code dir="ltr" translate="no">         MOD       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ROUND       </code></td>
-<td><code dir="ltr" translate="no">         ROUND       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ROUND_TIES_TO_EVEN       </code></td>
-<td><code dir="ltr" translate="no">       ROUND()      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         SIGN       </code></td>
-<td><code dir="ltr" translate="no">         SIGN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         SIN       </code></td>
-<td><code dir="ltr" translate="no">         SIN       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         SINH       </code></td>
-<td><code dir="ltr" translate="no">         SINH       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         SQRT       </code></td>
-<td><code dir="ltr" translate="no">         SQRT       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         STANDARD_HASH       </code></td>
-<td><code dir="ltr" translate="no">       FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         STDDEV       </code></td>
-<td><a href="/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev">STDDEV</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         TAN       </code></td>
-<td><code dir="ltr" translate="no">         TAN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         TANH       </code></td>
-<td><code dir="ltr" translate="no">         TANH       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         TRUNC       </code></td>
-<td><code dir="ltr" translate="no">         TRUNC       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NVL      </code></td>
-<td><code dir="ltr" translate="no">         IFNULL              (expr, 0),               COALESCE              (exp, 0)      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                            | BigQuery                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `          ABS        `                                                                                           | `          ABS        `                                                                                             |
+| `          ACOS        `                                                                                          | `          ACOS        `                                                                                            |
+| `        ACOSH       `                                                                                            | `          ACOSH        `                                                                                           |
+| `          ASIN        `                                                                                          | `          ASIN        `                                                                                            |
+| `        ASINH       `                                                                                            | `          ASINH        `                                                                                           |
+| `          ATAN        `                                                                                          | `          ATAN        `                                                                                            |
+| `          ATAN2        `                                                                                         | `          ATAN2        `                                                                                           |
+| `        ATANH       `                                                                                            | `          ATANH        `                                                                                           |
+| `          CEIL        `                                                                                          | `          CEIL        `                                                                                            |
+| `        CEILING       `                                                                                          | `          CEILING        `                                                                                         |
+| `          COS        `                                                                                           | `          COS        `                                                                                             |
+| `          COSH        `                                                                                          | `          COSH        `                                                                                            |
+| `          EXP        `                                                                                           | `          EXP        `                                                                                             |
+| `          FLOOR        `                                                                                         | `          FLOOR        `                                                                                           |
+| `          GREATEST        `                                                                                      | `          GREATEST        `                                                                                        |
+| `          LEAST        `                                                                                         | `          LEAST        `                                                                                           |
+| `          LN        `                                                                                            | `          LN        `                                                                                              |
+| `          LNNVL        `                                                                                         | use with `        ISNULL       `                                                                                    |
+| `          LOG        `                                                                                           | `          LOG        `                                                                                             |
+| `          MOD              (% operator)       `                                                                  | `          MOD        `                                                                                             |
+| `          POWER              (** operator)       `                                                               | `          POWER              ,               POW        `                                                          |
+| `        DBMS_RANDOM.VALUE       `                                                                                | `          RAND        `                                                                                            |
+| `        RANDOMBYTES       `                                                                                      | Isn't supported in BigQuery. Consider using a custom UDF and RAND function                                          |
+| `        RANDOMINTEGER       `                                                                                    | `        CAST(FLOOR(10*RAND()) AS INT64)       `                                                                    |
+| `        RANDOMNUMBER       `                                                                                     | Isn't supported in BigQuery. Consider using a custom UDF and RAND function                                          |
+| `          REMAINDER        `                                                                                     | `          MOD        `                                                                                             |
+| `          ROUND        `                                                                                         | `          ROUND        `                                                                                           |
+| `          ROUND_TIES_TO_EVEN        `                                                                            | `        ROUND()       `                                                                                            |
+| `          SIGN        `                                                                                          | `          SIGN        `                                                                                            |
+| `          SIN        `                                                                                           | `          SIN        `                                                                                             |
+| `          SINH        `                                                                                          | `          SINH        `                                                                                            |
+| `          SQRT        `                                                                                          | `          SQRT        `                                                                                            |
+| `          STANDARD_HASH        `                                                                                 | `        FARM_FINGERPRINT, MD5, SHA1, SHA256, SHA512       `                                                        |
+| `          STDDEV        `                                                                                        | [STDDEV](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#stddev) |
+| `          TAN        `                                                                                           | `          TAN        `                                                                                             |
+| `          TANH        `                                                                                          | `          TANH        `                                                                                            |
+| `          TRUNC        ` [](https://docs.oracle.com/en/database/oracle/oracle-database/21/sqlrf/TRUNC-date.html) | `          TRUNC        `                                                                                           |
+| `        NVL       `                                                                                              | `          IFNULL              (expr, 0),               COALESCE              (exp, 0)       `                      |
 
 BigQuery offers the following additional math functions:
 
@@ -1572,72 +1195,25 @@ Isn't supported in BigQuery. Consider using a custom UDF
 
 The following table shows mappings between Oracle JSON functions and their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       AS_JSON      </code></td>
-<td><code dir="ltr" translate="no">       TO_JSON_STRING(value[, pretty_print])      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         JSON_ARRAY       </code></td>
-<td>Consider using UDFs and <code dir="ltr" translate="no">       TO_JSON_STRING      </code> function</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_ARRAYAGG       </code></td>
-<td>Consider using UDFs and <code dir="ltr" translate="no">       TO_JSON_STRING      </code> function</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         JSON_DATAGUIDE       </code></td>
-<td>Custom user-defined function.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_EQUAL       </code></td>
-<td>Custom user-defined function.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         JSON_EXIST       </code></td>
-<td>Consider using UDFs and <code dir="ltr" translate="no">       JSON_EXTRACT      </code> or <code dir="ltr" translate="no">       JSON_EXTRACT_SCALAR      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_MERGEPATCH       </code></td>
-<td>Custom user-defined function.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         JSON_OBJECT       </code></td>
-<td>Is not supported by BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_OBJECTAGG       </code></td>
-<td>Is not supported by BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         JSON_QUERY       </code></td>
-<td>Consider using UDFs and <code dir="ltr" translate="no">       JSON_EXTRACT      </code> or <code dir="ltr" translate="no">       JSON_EXTRACT_SCALAR      </code> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_TABLE       </code></td>
-<td>Custom user-defined function.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       JSON_TEXTCONTAINS      </code></td>
-<td>Consider using UDFs and <code dir="ltr" translate="no">       JSON_EXTRACT      </code> or <code dir="ltr" translate="no">       JSON_EXTRACT_SCALAR      </code> .</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         JSON_VALUE       </code></td>
-<td><code dir="ltr" translate="no">       JSON_EXTRACT_SCALAR      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                              | BigQuery                                                                                        |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `        AS_JSON       `            | `        TO_JSON_STRING(value[, pretty_print])       `                                          |
+| `          JSON_ARRAY        `      | Consider using UDFs and `        TO_JSON_STRING       ` function                                |
+| `          JSON_ARRAYAGG        `   | Consider using UDFs and `        TO_JSON_STRING       ` function                                |
+| `          JSON_DATAGUIDE        `  | Custom user-defined function.                                                                   |
+| `          JSON_EQUAL        `      | Custom user-defined function.                                                                   |
+| `          JSON_EXIST        `      | Consider using UDFs and `        JSON_EXTRACT       ` or `        JSON_EXTRACT_SCALAR       `   |
+| `          JSON_MERGEPATCH        ` | Custom user-defined function.                                                                   |
+| `          JSON_OBJECT        `     | Is not supported by BigQuery.                                                                   |
+| `          JSON_OBJECTAGG        `  | Is not supported by BigQuery.                                                                   |
+| `          JSON_QUERY        `      | Consider using UDFs and `        JSON_EXTRACT       ` or `        JSON_EXTRACT_SCALAR       ` . |
+| `          JSON_TABLE        `      | Custom user-defined function.                                                                   |
+| `        JSON_TEXTCONTAINS       `  | Consider using UDFs and `        JSON_EXTRACT       ` or `        JSON_EXTRACT_SCALAR       ` . |
+| `          JSON_VALUE        `      | `        JSON_EXTRACT_SCALAR       `                                                            |
 
 ### XML functions
 
-BigQuery does not provide implicit XML functions. XML can be loaded to BigQuery as string and UDFs can be used to parse XML. Alternatively, XML processing be done by an ETL/ELT tool such as [Dataflow](/dataflow/docs) . The following list shows Oracle XML functions:
+BigQuery does not provide implicit XML functions. XML can be loaded to BigQuery as string and UDFs can be used to parse XML. Alternatively, XML processing be done by an ETL/ELT tool such as [Dataflow](https://docs.cloud.google.com/dataflow/docs) . The following list shows Oracle XML functions:
 
 Oracle
 
@@ -1759,11 +1335,11 @@ BigQuery [UDFs]() or ETL tool like Dataflow can be used to process XML.
 
 Machine learning (ML) functions in Oracle and BigQuery are different. Oracle requires advanced analytics pack and licenses to do ML on the database. Oracle uses the `  DBMS_DATA_MINING  ` package for ML. Converting Oracle data miner jobs requires rewriting the code to work with BigQuery features. You can choose from comprehensive [Google AI offerings](https://cloud.google.com/products/ai/) , including the following products and features:
 
-  - [BigQuery AI](/bigquery/docs/ai-introduction)
-  - [Vertex AI](/vertex-ai/docs/start/introduction-unified-platform)
+  - [BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction)
+  - [Vertex AI](https://docs.cloud.google.com/vertex-ai/docs/start/introduction-unified-platform)
   - [AI APIs for Google Cloud](https://cloud.google.com/ai/apis)
 
-You can use [BigQuery ML](/bigquery/docs/bqml-introduction) or [Vertex AI development tools](/vertex-ai/docs/general/developer-tools-overview) to develop, train, and evaluate ML models.
+You can use [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) or [Vertex AI development tools](https://docs.cloud.google.com/vertex-ai/docs/general/developer-tools-overview) to develop, train, and evaluate ML models.
 
 The following table shows Oracle ML functions:
 
@@ -1773,7 +1349,7 @@ BigQuery
 
 `  CLASSIFIER  `
 
-See [BigQuery ML](/bigquery/docs/bqml-introduction) for machine learning classifier and regression options
+See [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) for machine learning classifier and regression options
 
 `  CLUSTER_DETAILS  `
 
@@ -1801,101 +1377,51 @@ See [BigQuery ML](/bigquery/docs/bqml-introduction) for machine learning classif
 
 The following table shows the functions for identifying the user in Oracle and BigQuery:
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         UID       </code></td>
-<td><code dir="ltr" translate="no">         SESSION_USER       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       USER/SESSION_USER/CURRENT_USER      </code></td>
-<td><code dir="ltr" translate="no">         SESSION_USER()       </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                          | BigQuery                           |
+| ----------------------------------------------- | ---------------------------------- |
+| `          UID        `                         | `          SESSION_USER        `   |
+| `        USER/SESSION_USER/CURRENT_USER       ` | `          SESSION_USER()        ` |
 
 ### Set or array functions
 
 The following table shows set or array functions in Oracle and their equivalents in BigQuery:
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MULTISET       </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MULTISET EXCEPT       </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG([DISTINCT] expression)       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MULTISET INTERSECT       </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG([DISTINCT])       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MULTISET UNION       </code></td>
-<td><code dir="ltr" translate="no">         ARRAY_AGG       </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                 | BigQuery                                             |
+| -------------------------------------- | ---------------------------------------------------- |
+| `          MULTISET        `           | `          ARRAY_AGG        `                        |
+| `          MULTISET EXCEPT        `    | `          ARRAY_AGG([DISTINCT] expression)        ` |
+| `          MULTISET INTERSECT        ` | `          ARRAY_AGG([DISTINCT])        `            |
+| `          MULTISET UNION        `     | `          ARRAY_AGG        `                        |
 
 ### Window functions
 
 The following table shows window functions in Oracle and their equivalents in BigQuery.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LAG       </code></td>
-<td><code dir="ltr" translate="no">         LAG              (value_expression[, offset [, default_expression]])      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LEAD       </code></td>
-<td><code dir="ltr" translate="no">         LEAD              (value_expression[, offset [, default_expression]])      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                   | BigQuery                                                                                 |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| `          LAG        `  | `          LAG              (value_expression[, offset [, default_expression]])       `  |
+| `          LEAD        ` | `          LEAD              (value_expression[, offset [, default_expression]])       ` |
 
 ### Hierarchical or recursive queries
 
-[Hierarchical](https://docs.oracle.com/cd/B19306_01/server.102/b14200/queries003.htm) or recursive queries are not used in BigQuery. If the depth of the hierarchy is known similar functionality can be achieved with joins, as illustrated in the following example. Another solution would be to utilize the [BigQueryStorage API](/bigquery/docs/reference/storage) and [Spark](http://sqlandhadoop.com/how-to-implement-recursive-queries-in-spark/) .
+[Hierarchical](https://docs.oracle.com/cd/B19306_01/server.102/b14200/queries003.htm) or recursive queries are not used in BigQuery. If the depth of the hierarchy is known similar functionality can be achieved with joins, as illustrated in the following example. Another solution would be to utilize the [BigQueryStorage API](https://docs.cloud.google.com/bigquery/docs/reference/storage) and [Spark](http://sqlandhadoop.com/how-to-implement-recursive-queries-in-spark/) .
 
-``` text
-select
-  array(
-    select e.update.element
-    union all
-    select c1 from e.update.element.child as c1
-    union all
-    select c2 from e.update.element.child as c1, c1.child as c2
-    union all
-    select c3 from e.update.element.child as c1, c1.child as c2, c2.child as c3
-    union all
-    select c4 from e.update.element.child as c1, c1.child as c2, c2.child as c3, c3.child as c4
-    union all
-    select c5 from e.update.element.child as c1, c1.child as c2, c2.child as c3, c3.child as c4, c4.child as c5
-  ) as flattened,
-  e as event
-from t, t.events as e
-```
+    select
+      array(
+        select e.update.element
+        union all
+        select c1 from e.update.element.child as c1
+        union all
+        select c2 from e.update.element.child as c1, c1.child as c2
+        union all
+        select c3 from e.update.element.child as c1, c1.child as c2, c2.child as c3
+        union all
+        select c4 from e.update.element.child as c1, c1.child as c2, c2.child as c3, c3.child as c4
+        union all
+        select c5 from e.update.element.child as c1, c1.child as c2, c2.child as c3, c3.child as c4, c4.child as c5
+      ) as flattened,
+      e as event
+    from t, t.events as e
 
 The following table shows hierarchical functions in Oracle.
 
@@ -1913,11 +1439,11 @@ Hierarchical queries are not used in BigQuery.
 
 ### UTL functions
 
-[`  UTL_File  `](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS069) package is mainly used for reading and writing the operating system files from PL/SQL. Cloud Storage can be used for any kind of raw file staging. [External tables](/bigquery/external-table-definition) and BigQuery [load](/bigquery/docs/loading-data) and [export](/bigquery/docs/exporting-data) should be used to read and write files from and to Cloud Storage. For more information, see [Introduction to external data sources](/bigquery/external-data-sources) .
+[`  UTL_File  `](https://docs.oracle.com/database/121/ARPLS/u_file.htm#ARPLS069) package is mainly used for reading and writing the operating system files from PL/SQL. Cloud Storage can be used for any kind of raw file staging. [External tables](https://docs.cloud.google.com/bigquery/external-table-definition) and BigQuery [load](https://docs.cloud.google.com/bigquery/docs/loading-data) and [export](https://docs.cloud.google.com/bigquery/docs/exporting-data) should be used to read and write files from and to Cloud Storage. For more information, see [Introduction to external data sources](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
 ### Spatial functions
 
-You can use BigQuery geospatial analytics to replace spatial functionality. There are `  SDO_*  ` functions and types in Oracle such as `  SDO_GEOM_KEY  ` , `  SDO_GEOM_MBR  ` , `  SDO_GEOM_MMB  ` . These functions are used for spatial analysis. You can use [geospatial analytics](/bigquery/docs/geospatial-intro) to do spatial analysis.
+You can use BigQuery geospatial analytics to replace spatial functionality. There are `  SDO_*  ` functions and types in Oracle such as `  SDO_GEOM_KEY  ` , `  SDO_GEOM_MBR  ` , `  SDO_GEOM_MMB  ` . These functions are used for spatial analysis. You can use [geospatial analytics](https://docs.cloud.google.com/bigquery/docs/geospatial-intro) to do spatial analysis.
 
 ## DML syntax
 
@@ -1927,7 +1453,7 @@ This section addresses differences in data management language syntax between Or
 
 Most Oracle `  INSERT  ` statements are compatible with BigQuery. The following table shows exceptions.
 
-DML scripts in BigQuery have slightly different consistency semantics than the equivalent statements in Oracle. For an overview of snapshot isolation and session and transaction handling, see the [`  CREATE [UNIQUE] INDEX section  `](#create-index) elsewhere in this document.
+DML scripts in BigQuery have slightly different consistency semantics than the equivalent statements in Oracle. For an overview of snapshot isolation and session and transaction handling, see the [`  CREATE [UNIQUE] INDEX section  `](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql#create-index) elsewhere in this document.
 
 <table>
 <colgroup>
@@ -1950,7 +1476,7 @@ DML scripts in BigQuery have slightly different consistency semantics than the e
 <tr class="even">
 <td><code dir="ltr" translate="no">         INSERT INTO                table              VALUES (1,2,3);              INSERT INTO               table              VALUES (4,5,6);              INSERT INTO               table              VALUES (7,8,9);              INSERT ALL              INTO               table              (col1, col2) VALUES ('val1_1', 'val1_2')              INTO               table              (col1, col2) VALUES ('val2_1', 'val2_2')              INTO               table              (col1, col2) VALUES ('val3_1', 'val3_2')              .              .              .              SELECT 1 FROM DUAL;      </code></td>
 <td><code dir="ltr" translate="no">         INSERT INTO                table              VALUES (1,2,3), (4,5,6),              (7,8,9);      </code>
-<p>BigQuery imposes <a href="/bigquery/quotas#data-manipulation-language-statements">DML quotas</a> , which restrict the number of DML statements you can execute daily. To make the best use of your quota, consider the following approaches:</p>
+<p>BigQuery imposes <a href="https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements">DML quotas</a> , which restrict the number of DML statements you can execute daily. To make the best use of your quota, consider the following approaches:</p>
 <ul>
 <li>Combine multiple rows in a single <code dir="ltr" translate="no">         INSERT        </code> statement, instead of one row per <code dir="ltr" translate="no">         INSERT        </code> operation.</li>
 <li>Combine multiple DML statements (including <code dir="ltr" translate="no">         INSERT        </code> ) using a <code dir="ltr" translate="no">         MERGE        </code> statement.</li>
@@ -1964,32 +1490,21 @@ DML scripts in BigQuery have slightly different consistency semantics than the e
 
 Oracle `  UPDATE  ` statements are mostly compatible with BigQuery, however, in BigQuery the `  UPDATE  ` statement must have a `  WHERE  ` clause.
 
-As a best practice, you should prefer batch DML statements over multiple single `  UPDATE  ` and `  INSERT  ` statements. DML scripts in BigQuery have slightly different consistency semantics than equivalent statements in Oracle. For an overview on snapshot isolation and session and transaction handling see the [`  CREATE INDEX  `](#create-index) section in this document.
+As a best practice, you should prefer batch DML statements over multiple single `  UPDATE  ` and `  INSERT  ` statements. DML scripts in BigQuery have slightly different consistency semantics than equivalent statements in Oracle. For an overview on snapshot isolation and session and transaction handling see the [`  CREATE INDEX  `](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql#create-index) section in this document.
 
 The following table shows Oracle `  UPDATE  ` statements and BigQuery statements that accomplish the same tasks.
 
-In BigQuery the `  UPDATE  ` statement must have a `  WHERE  ` clause. For more information about `  UPDATE  ` in BigQuery, see the [BigQuery UPDATE examples](/bigquery/docs/reference/standard-sql/dml-syntax#update_examples) in the DML documentation.
+In BigQuery the `  UPDATE  ` statement must have a `  WHERE  ` clause. For more information about `  UPDATE  ` in BigQuery, see the [BigQuery UPDATE examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#update_examples) in the DML documentation.
 
 ### `     DELETE    ` and `     TRUNCATE    ` statements
 
 The `  DELETE  ` and `  TRUNCATE  ` statements are both ways to remove rows from a table without affecting the table schema. `  TRUNCATE  ` is not used in BigQuery. However, you can use `  DELETE  ` statements to achieve the same effect.
 
-In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see the [BigQuery `  DELETE  ` examples](/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) in the DML documentation.
+In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see the [BigQuery `  DELETE  ` examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) in the DML documentation.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         DELETE                database              .               table              ;      </code></td>
-<td><code dir="ltr" translate="no">         DELETE              FROM               table              WHERE TRUE;      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                              | BigQuery                                                                                 |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `          DELETE                database              .               table              ;       ` | `          DELETE              FROM               table              WHERE TRUE;       ` |
 
 ### `     MERGE    ` statement
 
@@ -2010,14 +1525,14 @@ Most Oracle [`  CREATE TABLE  `](https://docs.oracle.com/cd/B28359_01/server.111
   - `  DEFAULT  `
   - `  GENERATED ALWAYS AS  `
   - `  ENCRYPT  `
-  - `  PRIMARY KEY ( col , ...)  ` . For more information, see [`  CREATE INDEX  `](#create-index) .
-  - `  UNIQUE INDEX  ` . For more information, see [`  CREATE INDEX  `](#create-index) .
+  - `  PRIMARY KEY ( col , ...)  ` . For more information, see [`  CREATE INDEX  `](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql#create-index) .
+  - `  UNIQUE INDEX  ` . For more information, see [`  CREATE INDEX  `](https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql#create-index) .
   - `  CONSTRAINT..REFERENCES  `
   - `  DEFAULT  `
   - `  PARALLEL  `
   - `  COMPRESS  `
 
-For more information about `  CREATE TABLE  ` in BigQuery, see the [BigQuery `  CREATE TABLE  ` examples](/bigquery/docs/reference/standard-sql/data-definition-language#create-table-examples) .
+For more information about `  CREATE TABLE  ` in BigQuery, see the [BigQuery `  CREATE TABLE  ` examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create-table-examples) .
 
 #### Column options and attributes
 
@@ -2026,58 +1541,25 @@ Identity columns are introduced with Oracle 12c version which enables auto-incre
   - [BigQuery Surrogate Keys](https://medium.com/google-cloud/bigquery-surrogate-keys-672b2e110f80)
   - [BigQuery and surrogate keys: A practical approach](https://cloud.google.com/blog/products/data-analytics/bigquery-and-surrogate-keys-practical-approach)
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CREATE TABLE              table (              id NUMBER GENERATED ALWAYS AS IDENTITY,              description VARCHAR2(30)              );      </code></td>
-<td><code dir="ltr" translate="no">         INSERT INTO              dataset.table SELECT              *,              ROW_NUMBER() OVER () AS id              FROM dataset.table      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                                                                          | BigQuery                                                                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          CREATE TABLE              table (              id NUMBER GENERATED ALWAYS AS IDENTITY,              description VARCHAR2(30)              );       ` | `          INSERT INTO              dataset.table SELECT              *,              ROW_NUMBER() OVER () AS id              FROM dataset.table       ` |
 
 #### Column comments
 
 Oracle uses `  Comment  ` syntax to add comments on columns. This feature can be similarly implemented in BigQuery using the column description as shown in the following table:
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       Comment on column               table              is '               column desc              ';      </code></td>
-<td><code dir="ltr" translate="no">         CREATE TABLE                dataset.table              (                col1              STRING                OPTIONS              (description="               column desc              ")              );      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                             | BigQuery                                                                                                                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        Comment on column               table              is '               column desc              ';       ` | `          CREATE TABLE                dataset.table              (                col1              STRING                OPTIONS              (description="               column desc              ")              );       ` |
 
 #### Temporary tables
 
-Oracle supports [temporary](https://docs.oracle.com/cd/B28359_01/server.111/b28310/tables003.htm#ADMIN11633) tables, which are often used to store intermediate results in scripts. [Temporary](/bigquery/docs/multi-statement-queries#temporary_tables) tables are supported in BigQuery.
+Oracle supports [temporary](https://docs.oracle.com/cd/B28359_01/server.111/b28310/tables003.htm#ADMIN11633) tables, which are often used to store intermediate results in scripts. [Temporary](https://docs.cloud.google.com/bigquery/docs/multi-statement-queries#temporary_tables) tables are supported in BigQuery.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CREATE GLOBAL TEMPORARY TABLE               temp_tab              (x INTEGER,              y VARCHAR2(50))              ON COMMIT DELETE ROWS;              COMMIT;      </code></td>
-<td><code dir="ltr" translate="no">         CREATE TEMP TABLE              temp_tab              (              x INT64,              y STRING              );              DELETE FROM temp_tab WHERE TRUE;      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                                                                                                 | BigQuery                                                                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          CREATE GLOBAL TEMPORARY TABLE               temp_tab              (x INTEGER,              y VARCHAR2(50))              ON COMMIT DELETE ROWS;              COMMIT;       ` | `          CREATE TEMP TABLE              temp_tab              (              x INT64,              y STRING              );              DELETE FROM temp_tab WHERE TRUE;       ` |
 
 The following Oracle elements are not used in BigQuery:
 
@@ -2090,13 +1572,11 @@ There are also some other ways to emulate temporary tables in BigQuery:
 
   - **Table TTL:** Create a table that has a table-specific short time to live using DDL statements similar to the following:
     
-    ``` text
-    CREATE TABLE temp.name (col1, col2, ...)
-    
-    OPTIONS(expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR));
-    ```
+        CREATE TABLE temp.name (col1, col2, ...)
+        
+        OPTIONS(expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 1 HOUR));
 
-  - **`  WITH  ` clause:** If a temporary table is needed only within the same block, use a temporary result using a [`  WITH  `](/bigquery/docs/reference/standard-sql/query-syntax#with_clause) statement or subquery.
+  - **`  WITH  ` clause:** If a temporary table is needed only within the same block, use a temporary result using a [`  WITH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) statement or subquery.
 
 ### `     CREATE SEQUENCE    ` statement
 
@@ -2107,47 +1587,24 @@ Sequences are not used in BigQuery, this can be achieved with the following batc
 
 <!-- end list -->
 
-``` text
-INSERT INTO dataset.table
-    SELECT *,
-      ROW_NUMBER() OVER () AS id
-      FROM dataset.table
-```
+    INSERT INTO dataset.table
+        SELECT *,
+          ROW_NUMBER() OVER () AS id
+          FROM dataset.table
 
 ### `     CREATE VIEW    ` statement
 
 The following table shows equivalents between Oracle and BigQuery for the `  CREATE VIEW  ` statement.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CREATE VIEW                view_name              AS SELECT ...      </code></td>
-<td><code dir="ltr" translate="no">         CREATE VIEW                view_name              AS SELECT ...      </code></td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         CREATE OR REPLACE VIEW                view_name              AS SELECT ...      </code></td>
-<td><code dir="ltr" translate="no">         CREATE OR REPLACE VIEW       </code> <code dir="ltr" translate="no">         view_name              AS      </code> <code dir="ltr" translate="no">       SELECT ...      </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Not supported</td>
-<td><code dir="ltr" translate="no">         CREATE VIEW IF NOT EXISTS       </code> <code dir="ltr" translate="no">         view_name       </code> <code dir="ltr" translate="no">       OPTIONS(               view_option_list              )      </code> <code dir="ltr" translate="no">       AS SELECT ...      </code></td>
-<td>Creates a new view only if the view does not currently exist in the specified dataset.</td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                        | BigQuery                                                                                                                                                                           | Notes                                                                                  |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `          CREATE VIEW                view_name              AS SELECT ...       `            | `          CREATE VIEW                view_name              AS SELECT ...       `                                                                                                 |                                                                                        |
+| `          CREATE OR REPLACE VIEW                view_name              AS SELECT ...       ` | `          CREATE OR REPLACE VIEW        ` `          view_name              AS       ` `        SELECT ...       `                                                                |                                                                                        |
+| Not supported                                                                                 | `          CREATE VIEW IF NOT EXISTS        ` `          view_name        ` `        OPTIONS(               view_option_list              )       ` `        AS SELECT ...       ` | Creates a new view only if the view does not currently exist in the specified dataset. |
 
 ### `     CREATE MATERIALIZED VIEW    ` statement
 
-In BigQuery materialized view refresh operations are done automatically. There is no need to specify refresh options (for example, on commit or on schedule) in BigQuery. For more information, see [Introduction to materialized views](/bigquery/docs/materialized-views-intro) .
+In BigQuery materialized view refresh operations are done automatically. There is no need to specify refresh options (for example, on commit or on schedule) in BigQuery. For more information, see [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 
 In case the base table keeps changing by appends only, the query that uses materialized view (whether view is explicitly referenced or selected by the query optimizer) scans all materialized view plus a delta in the base table since the last view refresh. This means queries are faster and cheaper.
 
@@ -2157,22 +1614,9 @@ Also, the data from the streaming buffer of the base table is not saved into mat
 
 The following table shows equivalents between Oracle and BigQuery for the `  CREATE MATERIALIZED VIEW  ` statement.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CREATE MATERIALIZED VIEW                view_name               REFRESH FAST NEXT sysdate + 7              AS SELECT … FROM TABLE_1      </code></td>
-<td><code dir="ltr" translate="no">         CREATE MATERIALIZED VIEW                 view_name              AS SELECT ...      </code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                                                                 | BigQuery                                                                                         | Notes |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----- |
+| `          CREATE MATERIALIZED VIEW                view_name               REFRESH FAST NEXT sysdate + 7              AS SELECT … FROM TABLE_1       ` | `          CREATE MATERIALIZED VIEW                 view_name              AS SELECT ...       ` |       |
 
 ### `     CREATE [UNIQUE] INDEX    ` statement
 
@@ -2180,7 +1624,7 @@ This section describes approaches in BigQuery for how to create functionality si
 
 #### Indexing for performance
 
-BigQuery doesn't need explicit indexes, because it's a column-oriented database with query and storage optimization. BigQuery provides functionality such as [partitioning and clustering](/bigquery/docs/clustered-tables#combine-clustered-partitioned-tables) as well as [nested fields](/bigquery/docs/nested-repeated) , which can increase query efficiency and performance by optimizing how data is stored.
+BigQuery doesn't need explicit indexes, because it's a column-oriented database with query and storage optimization. BigQuery provides functionality such as [partitioning and clustering](https://docs.cloud.google.com/bigquery/docs/clustered-tables#combine-clustered-partitioned-tables) as well as [nested fields](https://docs.cloud.google.com/bigquery/docs/nested-repeated) , which can increase query efficiency and performance by optimizing how data is stored.
 
 #### Indexing for consistency (UNIQUE, PRIMARY INDEX)
 
@@ -2194,17 +1638,17 @@ Oracle
 
 BigQuery
 
-`  CREATE [UNIQUE] INDEX name;  `
+`  CREATE [UNIQUE] INDEX name;  ` <span></span>
 
 ``  MERGE `prototype.FIN_MERGE` t \ USING `prototype.FIN_TEMP_IMPORT` m \ ON t. col1 = m. col1 \ AND t. col2 = m. col2 \ WHEN MATCHED THEN \ UPDATE SET t. col1 = ERROR(CONCAT('Encountered Error for ', m. col1 , ' ', m. col2 )) \ WHEN NOT MATCHED THEN \ INSERT ( col1 , col2 , col3 , col4 , col5 , col6 , col7 , col8 ) VALUES( col1 , col2 , col3 , col4 , col5 , col6 , CURRENT_TIMESTAMP(),CURRENT_TIMESTAMP());  ``
 
-More often, users prefer to [remove duplicates independently](/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) in order to find errors in downstream systems.
+More often, users prefer to [remove duplicates independently](https://docs.cloud.google.com/bigquery/streaming-data-into-bigquery#manually_removing_duplicates) in order to find errors in downstream systems.
 
 BigQuery does not support `  DEFAULT  ` and `  IDENTITY  ` (sequences) columns.
 
 ### Locking
 
-BigQuery doesn't have a lock mechanism like Oracle and can run concurrent queries (up to your [quota](/bigquery/quotas) ). Only DML statements have certain [concurrency limits](/bigquery/quotas#data-manipulation-language-statements) and might require a [table lock during execution](/bigquery/docs/data-manipulation-language#dml-limitations) in some scenarios.
+BigQuery doesn't have a lock mechanism like Oracle and can run concurrent queries (up to your [quota](https://docs.cloud.google.com/bigquery/quotas) ). Only DML statements have certain [concurrency limits](https://docs.cloud.google.com/bigquery/quotas#data-manipulation-language-statements) and might require a [table lock during execution](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) in some scenarios.
 
 ## Procedural SQL statements
 
@@ -2214,32 +1658,11 @@ This section describes how to convert procedural SQL statements used in stored p
 
 Stored Procedure is supported as part of BigQuery Scripting Beta.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CREATE PROCEDURE       </code></td>
-<td><code dir="ltr" translate="no">         CREATE PROCEDURE       </code></td>
-<td>Similar to Oracle, BigQuery supports <code dir="ltr" translate="no">       IN, OUT, INOUT      </code> argument modes. Other syntax specifications are not supported in BigQuery.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         CREATE OR REPLACE PROCEDURE       </code></td>
-<td><code dir="ltr" translate="no">         CREATE OR REPLACE PROCEDURE       </code></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CALL       </code></td>
-<td><code dir="ltr" translate="no">         CALL       </code></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                          | BigQuery                                        | Notes                                                                                                                                           |
+| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          CREATE PROCEDURE        `            | `          CREATE PROCEDURE        `            | Similar to Oracle, BigQuery supports `        IN, OUT, INOUT       ` argument modes. Other syntax specifications are not supported in BigQuery. |
+| `          CREATE OR REPLACE PROCEDURE        ` | `          CREATE OR REPLACE PROCEDURE        ` |                                                                                                                                                 |
+| `          CALL        `                        | `          CALL        `                        |                                                                                                                                                 |
 
 The sections that follow describe ways to convert existing Oracle procedural statements to BigQuery scripting statements that have similar functionality.
 
@@ -2251,24 +1674,10 @@ Triggers are not used in BigQuery. Row based application logic should be handled
 
 The following table shows Oracle `  DECLARE  ` statements and their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       DECLARE              L_VAR NUMBER;              BEGIN              L_VAR := 10 + 20;              END;      </code></td>
-<td><code dir="ltr" translate="no">         DECLARE              L_VAR int64;              BEGIN              SET L_VAR = 10 + 20;              SELECT L_VAR;              END      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SET               var              =               value              ;      </code></td>
-<td><code dir="ltr" translate="no">         SET                var              =               value              ;      </code></td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                                  | BigQuery                                                                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        DECLARE              L_VAR NUMBER;              BEGIN              L_VAR := 10 + 20;              END;       ` | `          DECLARE              L_VAR int64;              BEGIN              SET L_VAR = 10 + 20;              SELECT L_VAR;              END       ` |
+| `        SET               var              =               value              ;       `                                | `          SET                var              =               value              ;       `                                                           |
 
 ### Cursor declarations and operations
 
@@ -2311,52 +1720,17 @@ The following Oracle Dynamic SQL statement and its BigQuery equivalent:
 
 The following table shows Oracle flow-of-control statements and their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th>Oracle</th>
-<th>BigQuery</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         IF              condition THEN              [if_statement_list]              [               ELSE               else_statement_list              ]              END IF;      </code></td>
-<td><code dir="ltr" translate="no">         IF              condition THEN              [if_statement_list]              [ELSE              else_statement_list              ]              END IF;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       SET SERVEROUTPUT ON;              DECLARE              x INTEGER DEFAULT 0;              y INTEGER DEFAULT 0;              BEGIN              LOOP              IF x&gt;= 10 THEN              EXIT;                ELSIF              x&gt;= 5 THEN              y := 5;              END IF;              x := x + 1;              END LOOP;              dbms_output.put_line(x||','||y);              END;              /      </code></td>
-<td><code dir="ltr" translate="no">         DECLARE              x INT64 DEFAULT 0;              DECLARE y INT64 DEFAULT 0;              LOOP              IF x&gt;= 10 THEN              LEAVE;              ELSE IF x&gt;= 5 THEN              SET y = 5;              END IF;              END IF;              SET x = x + 1;              END LOOP;              SELECT x,y;      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LOOP               sql_statement_list              END LOOP;      </code></td>
-<td><code dir="ltr" translate="no">         LOOP               sql_statement_list              END LOOP;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         WHILE              boolean_expression DO              sql_statement_list              END WHILE;      </code></td>
-<td><code dir="ltr" translate="no">         WHILE              boolean_expression DO              sql_statement_list              END WHILE;      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         FOR LOOP       </code></td>
-<td><code dir="ltr" translate="no">       FOR LOOP      </code> is not used in BigQuery. Use other <code dir="ltr" translate="no">       LOOP      </code> statements.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BREAK      </code></td>
-<td><code dir="ltr" translate="no">         BREAK       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CONTINUE       </code></td>
-<td><code dir="ltr" translate="no">         CONTINUE       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         CONTINUE/EXIT WHEN       </code></td>
-<td>Use <code dir="ltr" translate="no">       CONTINUE      </code> with <code dir="ltr" translate="no">       IF      </code> condition.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         GOTO       </code></td>
-<td><code dir="ltr" translate="no">       GOTO      </code> statement does not exist in BigQuery. Use <code dir="ltr" translate="no">       IF      </code> condition.</td>
-</tr>
-</tbody>
-</table>
+| Oracle                                                                                                                                                                                                                                                                                                                                                                                                                                       | BigQuery                                                                                                                                                                                                                                                                                                                                           |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          IF              condition THEN              [if_statement_list]              [               ELSE               else_statement_list              ]              END IF;       `                                                                                                                                                                                                                                                   | `          IF              condition THEN              [if_statement_list]              [ELSE              else_statement_list              ]              END IF;       `                                                                                                                                                                         |
+| `        SET SERVEROUTPUT ON;              DECLARE              x INTEGER DEFAULT 0;              y INTEGER DEFAULT 0;              BEGIN              LOOP              IF x>= 10 THEN              EXIT;                ELSIF              x>= 5 THEN              y := 5;              END IF;              x := x + 1;              END LOOP;              dbms_output.put_line(x\|\|','\|\|y);              END;              /       ` | `          DECLARE              x INT64 DEFAULT 0;              DECLARE y INT64 DEFAULT 0;              LOOP              IF x>= 10 THEN              LEAVE;              ELSE IF x>= 5 THEN              SET y = 5;              END IF;              END IF;              SET x = x + 1;              END LOOP;              SELECT x,y;       ` |
+| `          LOOP               sql_statement_list              END LOOP;       `                                                                                                                                                                                                                                                                                                                                                              | `          LOOP               sql_statement_list              END LOOP;       `                                                                                                                                                                                                                                                                    |
+| `          WHILE              boolean_expression DO              sql_statement_list              END WHILE;       `                                                                                                                                                                                                                                                                                                                          | `          WHILE              boolean_expression DO              sql_statement_list              END WHILE;       `                                                                                                                                                                                                                                |
+| `          FOR LOOP        `                                                                                                                                                                                                                                                                                                                                                                                                                 | `        FOR LOOP       ` is not used in BigQuery. Use other `        LOOP       ` statements.                                                                                                                                                                                                                                                     |
+| `        BREAK       `                                                                                                                                                                                                                                                                                                                                                                                                                       | `          BREAK        `                                                                                                                                                                                                                                                                                                                          |
+| `          CONTINUE        `                                                                                                                                                                                                                                                                                                                                                                                                                 | `          CONTINUE        `                                                                                                                                                                                                                                                                                                                       |
+| `          CONTINUE/EXIT WHEN        `                                                                                                                                                                                                                                                                                                                                                                                                       | Use `        CONTINUE       ` with `        IF       ` condition.                                                                                                                                                                                                                                                                                  |
+| `          GOTO        `                                                                                                                                                                                                                                                                                                                                                                                                                     | `        GOTO       ` statement does not exist in BigQuery. Use `        IF       ` condition.                                                                                                                                                                                                                                                     |
 
 ## Metadata and transaction SQL statements
 
@@ -2383,23 +1757,23 @@ The following table shows Oracle flow-of-control statements and their BigQuery e
 <tr class="odd">
 <td><code dir="ltr" translate="no">       Alter session set isolation_level=serializable; /      </code>
 <p><code dir="ltr" translate="no">          SET TRANSACTION                ...       </code></p></td>
-<td>BigQuery always uses Snapshot Isolation. For details, see <a href="#consistency_guarantees_and_transaction_isolation">Consistency guarantees and transaction isolation</a> in this document.</td>
+<td>BigQuery always uses Snapshot Isolation. For details, see <a href="https://docs.cloud.google.com/bigquery/docs/migration/oracle-sql#consistency_guarantees_and_transaction_isolation">Consistency guarantees and transaction isolation</a> in this document.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         EXPLAIN PLAN              ...      </code></td>
 <td>Not used in BigQuery.
-<p>Similar features are the <a href="/bigquery/query-plan-explanation">query plan explanation in the BigQuery web UI</a> and the slot allocation, and in <a href="/bigquery/docs/monitoring">audit logging in Stackdriver</a> .</p></td>
+<p>Similar features are the <a href="https://docs.cloud.google.com/bigquery/query-plan-explanation">query plan explanation in the BigQuery web UI</a> and the slot allocation, and in <a href="https://docs.cloud.google.com/bigquery/docs/monitoring">audit logging in Stackdriver</a> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       SELECT * FROM DBA_[*];      </code>
 <p>(Oracle DBA_/ALL_/V$ views)</p></td>
 <td><code dir="ltr" translate="no">       SELECT * FROM mydataset.INFORMATION_SCHEMA.TABLES;      </code>
-<p>For more information, see <a href="/bigquery/docs/information-schema-intro">Introduction to BigQuery INFORMATION_SCHEMA</a> .</p></td>
+<p>For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-intro">Introduction to BigQuery INFORMATION_SCHEMA</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       SELECT * FROM               GV$SESSION              ;      </code>
 <p><code dir="ltr" translate="no">        SELECT * FROM                 V$ACTIVE_SESSION_HISTORY                ;       </code></p></td>
-<td>BigQuery does not have the traditional session concept. You can view query jobs in the UI or export stackdriver audit logs to BigQuery and analyze BigQuery logs for analyzing jobs. For more information, see <a href="/bigquery/docs/managing-jobs#view-job">View job details</a> .</td>
+<td>BigQuery does not have the traditional session concept. You can view query jobs in the UI or export stackdriver audit logs to BigQuery and analyze BigQuery logs for analyzing jobs. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job">View job details</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       START TRANSACTION;      </code>
@@ -2407,7 +1781,7 @@ The following table shows Oracle flow-of-control statements and their BigQuery e
 <p><code dir="ltr" translate="no">        DELETE FROM                 table_A                ;       </code></p>
 <p><code dir="ltr" translate="no">        INSERT INTO                 table_A                SELECT * FROM                 table_B                ;       </code></p>
 <p><code dir="ltr" translate="no">        COMMIT;       </code></p></td>
-<td>Replacing the contents of a table with query output is the equivalent of a transaction. You can do this with either a <a href="/bigquery/docs/reference/bq-cli-reference#bq_query">query</a> or a <a href="/bigquery/docs/managing-tables#copy-table">copy</a> operation.
+<td>Replacing the contents of a table with query output is the equivalent of a transaction. You can do this with either a <a href="https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_query">query</a> or a <a href="https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table">copy</a> operation.
 <p>Using a query:</p>
 <p><code dir="ltr" translate="no">        bq query --replace --                 destination_table                  table_A                'SELECT * FROM                 table_B                ';       </code></p>
 <p>Using a copy:</p>
@@ -2418,11 +1792,11 @@ The following table shows Oracle flow-of-control statements and their BigQuery e
 
 ### Multi-statement and multi-line SQL statements
 
-Both Oracle and BigQuery support transactions (sessions) and therefore support statements separated by semicolons that are consistently executed together. For more information, see [Multi-statement transactions](/bigquery/docs/transactions) .
+Both Oracle and BigQuery support transactions (sessions) and therefore support statements separated by semicolons that are consistently executed together. For more information, see [Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) .
 
 ## Error codes and messages
 
-[Oracle error codes](https://docs.oracle.com/database/121/DRDAS/error_code.htm#DRDAS513) and [BigQuery error codes](/bigquery/troubleshooting-errors) are different. If your application logic is currently catching the errors, try to eliminate the source of the error, because BigQuery doesn't return the same error codes.
+[Oracle error codes](https://docs.oracle.com/database/121/DRDAS/error_code.htm#DRDAS513) and [BigQuery error codes](https://docs.cloud.google.com/bigquery/troubleshooting-errors) are different. If your application logic is currently catching the errors, try to eliminate the source of the error, because BigQuery doesn't return the same error codes.
 
 ## Consistency guarantees and transaction isolation
 
@@ -2432,15 +1806,15 @@ Both Oracle and BigQuery are atomic—that is, ACID-compliant on a per-mutation 
 
 Oracle provides read committed or serializable [transaction isolation levels](https://blogs.oracle.com/oraclemagazine/on-transaction-isolation-levels) . Deadlocks are possible. Oracle insert append jobs run independently.
 
-BigQuery also [supports transactions](/bigquery/docs/transactions) . BigQuery helps ensure [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit wins) with [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency on a per-row, per-mutation basis and across rows within the same DML statement, yet avoids deadlocks. In the case of multiple `  UPDATE  ` statements against the same table, BigQuery switches to [pessimistic concurrency control](/bigquery/docs/data-manipulation-language#dml-limitations) and [queues](https://cloud.google.com/blog/products/data-analytics/dml-without-limits-now-in-bigquery) multiple `  UPDATE  ` statements, automatically retrying in case of conflicts. `  INSERT  ` DML statements and load jobs can run concurrently and independently to append to tables.
+BigQuery also [supports transactions](https://docs.cloud.google.com/bigquery/docs/transactions) . BigQuery helps ensure [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit wins) with [snapshot isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency on a per-row, per-mutation basis and across rows within the same DML statement, yet avoids deadlocks. In the case of multiple `  UPDATE  ` statements against the same table, BigQuery switches to [pessimistic concurrency control](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) and [queues](https://cloud.google.com/blog/products/data-analytics/dml-without-limits-now-in-bigquery) multiple `  UPDATE  ` statements, automatically retrying in case of conflicts. `  INSERT  ` DML statements and load jobs can run concurrently and independently to append to tables.
 
 ### Rollback
 
-Oracle supports [rollbacks](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9021.htm) . As there is no explicit transaction boundary in BigQuery, there is no concept of an explicit rollback in BigQuery. The workarounds are [table decorators](/bigquery/docs/table-decorators) or using [`  FOR SYSTEM_TIME AS OF  `](/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) .
+Oracle supports [rollbacks](https://docs.oracle.com/cd/B19306_01/server.102/b14200/statements_9021.htm) . As there is no explicit transaction boundary in BigQuery, there is no concept of an explicit rollback in BigQuery. The workarounds are [table decorators](https://docs.cloud.google.com/bigquery/docs/table-decorators) or using [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) .
 
 ## Database limits
 
-Check [BigQuery latest quotas and limits](/bigquery/quotas) . Many quotas for large-volume users can be raised by contacting the Cloud Customer Care. The following table shows a comparison of the Oracle and BigQuery database limits.
+Check [BigQuery latest quotas and limits](https://docs.cloud.google.com/bigquery/quotas) . Many quotas for large-volume users can be raised by contacting the Cloud Customer Care. The following table shows a comparison of the Oracle and BigQuery database limits.
 
 <table>
 <colgroup>
@@ -2501,7 +1875,7 @@ Check [BigQuery latest quotas and limits](/bigquery/quotas) . Many quotas for la
 <tr class="even">
 <td>Maximum number of concurrent sessions</td>
 <td>Limited by the sessions or processes parameters</td>
-<td>100 concurrent queries (can be raised with <a href="/bigquery/docs/slots">slot reservation</a> ), 300 concurrent API requests per user.</td>
+<td>100 concurrent queries (can be raised with <a href="https://docs.cloud.google.com/bigquery/docs/slots">slot reservation</a> ), 300 concurrent API requests per user.</td>
 </tr>
 <tr class="odd">
 <td>Maximum number of concurrent (fast) loads</td>

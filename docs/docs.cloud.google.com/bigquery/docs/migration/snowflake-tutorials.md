@@ -19,8 +19,8 @@ To [extract data from Snowflake](https://docs.snowflake.com/en/user-guide/data-u
 
 You can then load your data from Cloud Storage to BigQuery using one of the following tools:
 
-  - [The BigQuery Data Transfer Service for Cloud Storage connector](/bigquery/docs/cloud-storage-transfer-overview)
-  - The [`  LOAD  ` command](/bigquery/docs/reference/bq-cli-reference#bq_load) using the bq command-line tool
+  - [The BigQuery Data Transfer Service for Cloud Storage connector](https://docs.cloud.google.com/bigquery/docs/cloud-storage-transfer-overview)
+  - The [`  LOAD  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_load) using the bq command-line tool
   - BigQuery API client libraries
 
 #### Other tools to extract data from Snowflake
@@ -28,14 +28,14 @@ You can then load your data from Cloud Storage to BigQuery using one of the foll
 You can also use the following tools to extract data from Snowflake:
 
   - Dataflow
-      - [JDBC to BigQuery template](/dataflow/docs/guides/templates/provided/jdbc-to-bigquery)
+      - [JDBC to BigQuery template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/jdbc-to-bigquery)
       - [SnowflakeIO connector](https://beam.apache.org/documentation/io/built-in/snowflake/)
-  - [Cloud Data Fusion](/data-fusion/docs)
-      - [JDBC drivers](/data-fusion/docs/how-to/using-jdbc-drivers)
+  - [Cloud Data Fusion](https://docs.cloud.google.com/data-fusion/docs)
+      - [JDBC drivers](https://docs.cloud.google.com/data-fusion/docs/how-to/using-jdbc-drivers)
   - Dataproc
-      - [Apache Spark BigQuery connector](/dataproc/docs/tutorials/bigquery-connector-spark-example)
+      - [Apache Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
       - [Snowflake connector for Apache Spark](https://docs.snowflake.com/en/user-guide/spark-connector.html)
-      - [Hadoop BigQuery connector](/dataproc/docs/concepts/connectors/bigquery)
+      - [Hadoop BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery)
       - The JDBC driver from Snowflake and Sqoop to extract data from Snowflake into Cloud Storage:
           - [Moving data with Apache Sqoop in Dataproc](https://medium.com/google-cloud/moving-data-with-apache-sqoop-in-google-cloud-dataproc-4056b8fa2600)
 
@@ -46,14 +46,14 @@ You can also use the following tools to load data to BigQuery:
   - Dataflow
       - [Read from Cloud Storage](https://beam.apache.org/documentation/programming-guide/#pipeline-io-reading-data)
       - [Write to BigQuery](https://beam.apache.org/documentation/io/built-in/google-bigquery/#writing-to-bigquery)
-      - [Cloud Storage Text to BigQuery template](/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery)
+      - [Cloud Storage Text to BigQuery template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/cloud-storage-to-bigquery)
   - Cloud Data Fusion
-      - [Create a target campaign pipeline](/data-fusion/docs/tutorials/targeting-campaign-pipeline)
+      - [Create a target campaign pipeline](https://docs.cloud.google.com/data-fusion/docs/tutorials/targeting-campaign-pipeline)
   - Dataproc
-      - [Cloud Storage connector with Spark](/dataproc/docs/tutorials/gcs-connector-spark-tutorial)
-      - [Spark BigQuery connector](/dataproc/docs/tutorials/bigquery-connector-spark-example)
-      - [Hadoop Cloud Storage connector](/dataproc/docs/concepts/connectors/cloud-storage)
-      - [Hadoop BigQuery connector](/dataproc/docs/concepts/connectors/bigquery)
+      - [Cloud Storage connector with Spark](https://docs.cloud.google.com/dataproc/docs/tutorials/gcs-connector-spark-tutorial)
+      - [Spark BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example)
+      - [Hadoop Cloud Storage connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage)
+      - [Hadoop BigQuery connector](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/bigquery)
   - [Dataprep by Trifacta](https://docs.trifacta.com/Dataprep/en/product-overview.html)
       - [Read from Cloud Storage](https://docs.trifacta.com/Dataprep/en/platform/connections/connection-types/google-cloud-storage-access.html##)
       - [Write to BigQuery](https://docs.trifacta.com/Dataprep/en/platform/connections/connection-types/bigquery-connections.html##)
@@ -63,7 +63,7 @@ You can also use the following tools to load data to BigQuery:
 If you want to transform your data before loading it into BigQuery, consider the following tools:
 
   - Dataflow
-      - Clone the [JDBC to BigQuery template](/dataflow/docs/guides/templates/provided/jdbc-to-bigquery) code and modify the template to add [Apache Beam transforms](https://beam.apache.org/documentation/programming-guide/#transforms) .
+      - Clone the [JDBC to BigQuery template](https://docs.cloud.google.com/dataflow/docs/guides/templates/provided/jdbc-to-bigquery) code and modify the template to add [Apache Beam transforms](https://beam.apache.org/documentation/programming-guide/#transforms) .
   - Cloud Data Fusion
       - Create a reusable pipeline and transform your data using [CDAP plugins](https://cdap.io/resources/plugins/) .
   - Dataproc
@@ -71,7 +71,7 @@ If you want to transform your data before loading it into BigQuery, consider the
 
 ### Partner tools for migration
 
-There are multiple vendors that specialize in the EDW migration space. For a list of key partners and their provided solutions, see [BigQuery partners](/bigquery/docs/bigquery-ready-partners) .
+There are multiple vendors that specialize in the EDW migration space. For a list of key partners and their provided solutions, see [BigQuery partners](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners) .
 
 ## Snowflake export tutorial
 
@@ -87,22 +87,18 @@ This tutorial prepares the file in `  PARQUET  ` format.
 
 1.  Use Snowflake SQL statements to create a [named file format specification](https://docs.snowflake.com/en/user-guide/data-unload-prepare.html#creating-a-named-file-format) .
     
-    ``` text
-    create or replace file format NAMED_FILE_FORMAT
-        type = 'PARQUET'
-    ```
+        create or replace file format NAMED_FILE_FORMAT
+            type = 'PARQUET'
     
     Replace `  NAMED_FILE_FORMAT  ` with a name for the file format. For example, `  my_parquet_unload_format  ` .
 
 2.  Create an integration with the [`  CREATE STORAGE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/create-storage-integration) command.
     
-    ``` text
-    create storage integration INTEGRATION_NAME
-        type = external_stage
-        storage_provider = gcs
-        enabled = true
-        storage_allowed_locations = ('BUCKET_NAME')
-    ```
+        create storage integration INTEGRATION_NAME
+            type = external_stage
+            storage_provider = gcs
+            enabled = true
+            storage_allowed_locations = ('BUCKET_NAME')
     
     Replace the following:
     
@@ -111,33 +107,27 @@ This tutorial prepares the file in `  PARQUET  ` format.
 
 3.  [Retrieve the Cloud Storage service account for Snowflake](https://docs.snowflake.com/en/user-guide/data-load-gcs-config.html#step-2-retrieve-the-cloud-storage-service-account-for-your-snowflake-account) with the [`  DESCRIBE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
     
-    ``` text
-    desc storage integration INTEGRATION_NAME;
-    ```
+        desc storage integration INTEGRATION_NAME;
     
     The output is similar to the following:
     
-    ``` text
-    +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------+
-    | property                    | property_type | property_value                                                              | property_default |
-    +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------|
-    | ENABLED                     | Boolean       | true                                                                        | false            |
-    | STORAGE_ALLOWED_LOCATIONS   | List          | gcs://mybucket1/path1/,gcs://mybucket2/path2/                               | []               |
-    | STORAGE_BLOCKED_LOCATIONS   | List          | gcs://mybucket1/path1/sensitivedata/,gcs://mybucket2/path2/sensitivedata/   | []               |
-    | STORAGE_GCP_SERVICE_ACCOUNT | String        | service-account-id@iam.gserviceaccount.com                 |                  |
-    +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------+
-    ```
+        +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------+
+        | property                    | property_type | property_value                                                              | property_default |
+        +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------|
+        | ENABLED                     | Boolean       | true                                                                        | false            |
+        | STORAGE_ALLOWED_LOCATIONS   | List          | gcs://mybucket1/path1/,gcs://mybucket2/path2/                               | []               |
+        | STORAGE_BLOCKED_LOCATIONS   | List          | gcs://mybucket1/path1/sensitivedata/,gcs://mybucket2/path2/sensitivedata/   | []               |
+        | STORAGE_GCP_SERVICE_ACCOUNT | String        | service-account-id@iam.gserviceaccount.com                 |                  |
+        +-----------------------------+---------------+-----------------------------------------------------------------------------+------------------+
 
 4.  Grant the service account listed as `  STORAGE_GCP_SERVICE_ACCOUNT  ` read and write access to the bucket specified in the storage integration command. In this example, grant the `  service-account-id@  ` service account read and write access to the `  <var>UNLOAD_BUCKET</var>  ` bucket.
 
 5.  Create an external Cloud Storage stage that references the integration that you created previously.
     
-    ``` text
-    create or replace stage STAGE_NAME
-        url='UNLOAD_BUCKET'
-        storage_integration = INTEGRATION_NAME
-        file_format = NAMED_FILE_FORMAT;
-    ```
+        create or replace stage STAGE_NAME
+            url='UNLOAD_BUCKET'
+            storage_integration = INTEGRATION_NAME
+            file_format = NAMED_FILE_FORMAT;
     
     Replace the following:
     
@@ -151,14 +141,12 @@ The following example shows how to [move data from a Snowflake table to an Amazo
     
     This step involves [configuring access permissions](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-1-configure-access-permissions-for-the-s3-bucket) to the Amazon S3 bucket, [creating the Amazon Web Services (AWS) IAM role](https://docs.snowflake.com/en/user-guide/data-load-s3-config.html#step-2-create-the-iam-role-in-aws) , and creating a storage integration in Snowflake with the `  CREATE STORAGE INTEGRATION  ` command:
     
-    ``` text
-    create storage integration INTEGRATION_NAME
-    type = external_stage
-    storage_provider = s3
-    enabled = true
-    storage_aws_role_arn = 'arn:aws:iam::001234567890:role/myrole'
-    storage_allowed_locations = ('BUCKET_NAME')
-    ```
+        create storage integration INTEGRATION_NAME
+        type = external_stage
+        storage_provider = s3
+        enabled = true
+        storage_aws_role_arn = 'arn:aws:iam::001234567890:role/myrole'
+        storage_allowed_locations = ('BUCKET_NAME')
     
     Replace the following:
     
@@ -167,28 +155,24 @@ The following example shows how to [move data from a Snowflake table to an Amazo
 
 2.  [Retrieve the AWS IAM user](https://docs.snowflake.com/en/user-guide/data-load-s3-config-storage-integration.html#step-4-retrieve-the-aws-iam-user-for-your-snowflake-account) with the [`  DESCRIBE INTEGRATION  `](https://docs.snowflake.com/en/sql-reference/sql/desc-integration.html) command.
     
-    ``` text
-    desc integration INTEGRATION_NAME;
-    ```
+        desc integration INTEGRATION_NAME;
     
     The output is similar to the following:
     
-    ``` text
-    +---------------------------+---------------+================================================================================+------------------+
-    | property                  | property_type | property_value                                                                 | property_default |
-    +---------------------------+---------------+================================================================================+------------------|
-    | ENABLED                   | Boolean       | true                                                                           | false            |
-    | STORAGE_ALLOWED_LOCATIONS | List          | s3://mybucket1/mypath1/,s3://mybucket2/mypath2/                                | []               |
-    | STORAGE_BLOCKED_LOCATIONS | List          | s3://mybucket1/mypath1/sensitivedata/,s3://mybucket2/mypath2/sensitivedata/    | []               |
-    | STORAGE_AWS_IAM_USER_ARN  | String        | arn:aws:iam::123456789001:user/abc1-b-self1234                                 |                  |
-    | STORAGE_AWS_ROLE_ARN      | String        | arn:aws:iam::001234567890:role/myrole                                          |                  |
-    | STORAGE_AWS_EXTERNAL_ID   | String        | MYACCOUNT_SFCRole=                                                   |                  |
-    +---------------------------+---------------+================================================================================+------------------+
-    ```
+        +---------------------------+---------------+================================================================================+------------------+
+        | property                  | property_type | property_value                                                                 | property_default |
+        +---------------------------+---------------+================================================================================+------------------|
+        | ENABLED                   | Boolean       | true                                                                           | false            |
+        | STORAGE_ALLOWED_LOCATIONS | List          | s3://mybucket1/mypath1/,s3://mybucket2/mypath2/                                | []               |
+        | STORAGE_BLOCKED_LOCATIONS | List          | s3://mybucket1/mypath1/sensitivedata/,s3://mybucket2/mypath2/sensitivedata/    | []               |
+        | STORAGE_AWS_IAM_USER_ARN  | String        | arn:aws:iam::123456789001:user/abc1-b-self1234                                 |                  |
+        | STORAGE_AWS_ROLE_ARN      | String        | arn:aws:iam::001234567890:role/myrole                                          |                  |
+        | STORAGE_AWS_EXTERNAL_ID   | String        | MYACCOUNT_SFCRole=                                                   |                  |
+        +---------------------------+---------------+================================================================================+------------------+
 
 3.  Create a role that has the `  CREATE STAGE  ` privilege for the schema, and the `  USAGE  ` privilege for the storage integration:
     
-    ``` text
+    ``` 
         CREATE role ROLE_NAME;  
         GRANT CREATE STAGE ON SCHEMA public TO ROLE ROLE_NAME;
         GRANT USAGE ON INTEGRATION s3_int TO ROLE ROLE_NAME;
@@ -198,7 +182,7 @@ The following example shows how to [move data from a Snowflake table to an Amazo
 
 4.  Grant the AWS IAM user permissions to access the Amazon S3 bucket, and [create an external stage](https://docs.snowflake.com/en/user-guide/data-load-s3-create-stage) with the `  CREATE STAGE  ` command:
     
-    ``` text
+    ``` 
         USE SCHEMA mydb.public;
     
         create or replace stage STAGE_NAME
@@ -215,7 +199,7 @@ The following example shows how to [move data from a Snowflake table to an Amazo
 
 After you have prepared your data, you can move your data to Google Cloud. Use the `  COPY INTO  ` command to copy data from the Snowflake database table into a Cloud Storage or Amazon S3 bucket by specifying the external stage object, `  STAGE_NAME  ` .
 
-``` text
+``` 
     copy into @STAGE_NAME/d1
     from TABLE_NAME;
 ```
@@ -226,4 +210,4 @@ As a result of this command, the table data is copied to the stage object, which
 
 ### Other export methods
 
-To use Azure Blob Storage for your data exports, follow the steps detailed in [Unloading into Microsoft Azure](https://docs.snowflake.com/en/user-guide/data-unload-azure.html) . Then, transfer the exported files into Cloud Storage using [Storage Transfer Service](/storage-transfer/docs/create-manage-transfer-program) .
+To use Azure Blob Storage for your data exports, follow the steps detailed in [Unloading into Microsoft Azure](https://docs.snowflake.com/en/user-guide/data-unload-azure.html) . Then, transfer the exported files into Cloud Storage using [Storage Transfer Service](https://docs.cloud.google.com/storage-transfer/docs/create-manage-transfer-program) .

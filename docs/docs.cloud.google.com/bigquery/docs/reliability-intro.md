@@ -10,9 +10,9 @@ This introduction helps you address three primary considerations:
 
 ## Select BigQuery
 
-[BigQuery](/bigquery/docs/introduction) is a fully managed enterprise Data Warehouse built to store and analyze massive datasets. It provides a way to ingest, store, read, and query megabytes to petabytes of data with consistent performance without having to manage any of the underlying infrastructure. Because of its power and performance, BigQuery is well suited to be used in a range of solutions. Some of these are documented in detail as [reference patterns](/bigquery/docs/reference-patterns) .
+[BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction) is a fully managed enterprise Data Warehouse built to store and analyze massive datasets. It provides a way to ingest, store, read, and query megabytes to petabytes of data with consistent performance without having to manage any of the underlying infrastructure. Because of its power and performance, BigQuery is well suited to be used in a range of solutions. Some of these are documented in detail as [reference patterns](https://docs.cloud.google.com/bigquery/docs/reference-patterns) .
 
-Generally, BigQuery is very well suited for workloads where large amounts of data are being ingested and analyzed. Specifically, it can be effectively deployed for use cases such as real-time and predictive data analytics (with [streaming ingestion](/bigquery/docs/streaming-data-into-bigquery) and [BigQuery ML](/bigquery/docs/bqml-introduction) ), anomaly detection, and other use cases where analyzing large volumes of data with predictable performance is key. However, if you are looking for a database to support Online Transaction Processing (OLTP) style applications, you should consider other Google Cloud services such as [Spanner](/spanner) , [Cloud SQL](/sql) , or [Bigtable](/bigtable) that may be better suited for these use cases.
+Generally, BigQuery is very well suited for workloads where large amounts of data are being ingested and analyzed. Specifically, it can be effectively deployed for use cases such as real-time and predictive data analytics (with [streaming ingestion](https://docs.cloud.google.com/bigquery/docs/streaming-data-into-bigquery) and [BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) ), anomaly detection, and other use cases where analyzing large volumes of data with predictable performance is key. However, if you are looking for a database to support Online Transaction Processing (OLTP) style applications, you should consider other Google Cloud services such as [Spanner](https://docs.cloud.google.com/spanner) , [Cloud SQL](https://docs.cloud.google.com/sql) , or [Bigtable](https://docs.cloud.google.com/bigtable) that may be better suited for these use cases.
 
 ## Dimensions of reliability in BigQuery
 
@@ -23,7 +23,7 @@ Availability defines the user's ability to read data from BigQuery or write data
   - The BigQuery service
   - Compute resources required to execute the specific query
 
-Reliability of the service is a function of the specific BigQuery API being used to retrieve the data. The availability of compute resources depends on the capacity available to the user at the time when the query is run. See [Understand slots](/bigquery/docs/slots) for more information about the fundamental unit of compute for BigQuery and the resulting [slot resource economy](/bigquery/docs/slots#slot_resource_economy) .
+Reliability of the service is a function of the specific BigQuery API being used to retrieve the data. The availability of compute resources depends on the capacity available to the user at the time when the query is run. See [Understand slots](https://docs.cloud.google.com/bigquery/docs/slots) for more information about the fundamental unit of compute for BigQuery and the resulting [slot resource economy](https://docs.cloud.google.com/bigquery/docs/slots#slot_resource_economy) .
 
 ### Durability
 
@@ -31,7 +31,7 @@ Durability is discussed in the [Implementing SLOs chapter](https://sre.google/wo
 
 ### Data consistency
 
-Consistency defines the expectations that users have for how the data is able to be queried once it's written or modified. One aspect of data consistency is ensuring "exactly-once" semantics for data ingestion. For more information, see [Retry failed job insertions](#retry_failed_job_insertions) .
+Consistency defines the expectations that users have for how the data is able to be queried once it's written or modified. One aspect of data consistency is ensuring "exactly-once" semantics for data ingestion. For more information, see [Retry failed job insertions](https://docs.cloud.google.com/bigquery/docs/reliability-intro#retry_failed_job_insertions) .
 
 ### Consistency of performance
 
@@ -84,7 +84,7 @@ When you create a BigQuery dataset, you select a location in which to store your
   - A region: a specific geographical location, such as Iowa ( `  us-central1  ` ) or Montréal ( `  northamerica-northeast1  ` ).
   - A multi-region: a large geographic area that contains two or more geographic places, such as the United States ( `  US  ` ) or Europe ( `  EU  ` ).
 
-In either case, BigQuery automatically stores copies of your data in two different Google Cloud [zones](/docs/geography-and-regions#regions_and_zones) within a single region in the selected location.
+In either case, BigQuery automatically stores copies of your data in two different Google Cloud [zones](https://docs.cloud.google.com/docs/geography-and-regions#regions_and_zones) within a single region in the selected location.
 
 In addition to storage redundancy, BigQuery also maintains redundant compute capacity across multiple zones. By combining redundant storage and compute across multiple availability zones, BigQuery provides both high availability and durability.
 
@@ -92,29 +92,29 @@ In addition to storage redundancy, BigQuery also maintains redundant compute cap
 
 In the event of a machine-level failure, BigQuery continues to run with no more than a few milliseconds of delay. All currently running queries continue processing. In the event of either a soft or hard zonal failure, no data loss is expected. However, currently running queries might fail and need to be resubmitted. A soft zonal failure, such as resulting from a power outage, destroyed transformer, or network partition, is a well-tested path and is automatically mitigated within a few minutes.
 
-A soft regional failure, such as a region-wide loss of network connectivity, results in loss of availability until the region is brought back online, but it doesn't result in lost data. A hard regional failure, for example, if a disaster destroys the entire region, could result in loss of data stored in that region. BigQuery does not automatically provide a backup or replica of your data in another geographic region. You can use [cross-region dataset replication](/bigquery/docs/data-replication) or [managed disaster recovery](/bigquery/docs/managed-disaster-recovery) to enhance your resiliency to hard regional failures.
+A soft regional failure, such as a region-wide loss of network connectivity, results in loss of availability until the region is brought back online, but it doesn't result in lost data. A hard regional failure, for example, if a disaster destroys the entire region, could result in loss of data stored in that region. BigQuery does not automatically provide a backup or replica of your data in another geographic region. You can use [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) or [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) to enhance your resiliency to hard regional failures.
 
-To learn more about BigQuery dataset locations, see [Location considerations](/bigquery/docs/locations#data-locations) .
+To learn more about BigQuery dataset locations, see [Location considerations](https://docs.cloud.google.com/bigquery/docs/locations#data-locations) .
 
 ### Scenario: Loss of region
 
 BigQuery does not offer durability or availability in the extraordinarily unlikely and unprecedented event of physical region loss. This is true for both regions and multi-regions. Hence maintaining durability and availability under such a scenario requires customer planning. In the case of temporary loss, such as a network outage, redundant availability should be considered if BigQuery's 99.99% SLA is not considered sufficient.
 
-To avoid data loss in the face of destructive regional loss, you need to back up data to another geographic location. For example, you could use [cross-region dataset replication](/bigquery/docs/data-replication) to continuously replicate your data to a geographically distinct region.
+To avoid data loss in the face of destructive regional loss, you need to back up data to another geographic location. For example, you could use [cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) to continuously replicate your data to a geographically distinct region.
 
-In the case of BigQuery multi-regions, you should avoid backing up to regions within the scope of the multi-region. See [BigQuery locations](/bigquery/docs/locations#multi-regions) for information about the scope of the multi-regions. For example, if you are backing up data from the US multi-region then you should avoid choosing one of the overlapping regions such as us-central1, given the chance of correlated failure during a disaster.
+In the case of BigQuery multi-regions, you should avoid backing up to regions within the scope of the multi-region. See [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) for information about the scope of the multi-regions. For example, if you are backing up data from the US multi-region then you should avoid choosing one of the overlapping regions such as us-central1, given the chance of correlated failure during a disaster.
 
-To avoid an extended unavailability, you need to have both data replicated and slots provisioned in two geographically separate BigQuery locations. You can use [managed disaster recovery](/bigquery/docs/managed-disaster-recovery) to automatically provision slots in a secondary region, and control failover of your workloads from one region to another.
+To avoid an extended unavailability, you need to have both data replicated and slots provisioned in two geographically separate BigQuery locations. You can use [managed disaster recovery](https://docs.cloud.google.com/bigquery/docs/managed-disaster-recovery) to automatically provision slots in a secondary region, and control failover of your workloads from one region to another.
 
 ### Scenario: Accidental deletion or data corruption
 
-By virtue of BigQuery's [multiversion concurrency control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) architecture, BigQuery supports [time travel](/bigquery/docs/time-travel) . With this feature you can query data from any point in time over the last seven days. This allows for self service restoration of any data that has been mistakenly deleted, modified, or corrupted within a 7 day window. Time travel even works on tables that have been deleted.
+By virtue of BigQuery's [multiversion concurrency control](https://en.wikipedia.org/wiki/Multiversion_concurrency_control) architecture, BigQuery supports [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) . With this feature you can query data from any point in time over the last seven days. This allows for self service restoration of any data that has been mistakenly deleted, modified, or corrupted within a 7 day window. Time travel even works on tables that have been deleted.
 
-BigQuery also supports the ability to [snapshot tables](/bigquery/docs/table-snapshots-intro) . With this feature you can explicitly backup data within the same region for longer than the 7 day time travel window. A snapshot is purely a metadata operation and results in no additional storage bytes. While this can add protection against accidental deletion, it does not increase the durability of the data.
+BigQuery also supports the ability to [snapshot tables](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) . With this feature you can explicitly backup data within the same region for longer than the 7 day time travel window. A snapshot is purely a metadata operation and results in no additional storage bytes. While this can add protection against accidental deletion, it does not increase the durability of the data.
 
 ### Use case: Real-time analytics
 
-In this use case, streaming data is being ingested from endpoint logs into BigQuery continuously. Protecting against extended BigQuery unavailability for the entire region requires continuously replicating data and provisioning slots in a different region. Given that the architecture is resilient to BigQuery unavailability due to the [use of Pub/Sub and Dataflow in the ingestion path](/bigquery/docs/loading-data#methods) , this high level of redundancy is likely not worth the cost.
+In this use case, streaming data is being ingested from endpoint logs into BigQuery continuously. Protecting against extended BigQuery unavailability for the entire region requires continuously replicating data and provisioning slots in a different region. Given that the architecture is resilient to BigQuery unavailability due to the [use of Pub/Sub and Dataflow in the ingestion path](https://docs.cloud.google.com/bigquery/docs/loading-data#methods) , this high level of redundancy is likely not worth the cost.
 
 Assuming the user has configured BigQuery data in us-east4 to be exported nightly by using extract jobs to Cloud Storage under the Archive Storage class in us-central1. This provides a durable backup in case of catastrophic data loss in us-east4. In this case, the Recovery Point Objective (RPO) is 24 hours, as the last exported backup can be up to 24 hours old in the worst case. The Recovery Time Objective (RTO) is potentially days, as data needs to be restored from the Cloud Storage backup to BigQuery in us-central1. If BigQuery is to be provisioned in a different region from where backups are placed, data needs to be transferred to this region first. Also note that unless you have purchased redundant slots in the recovery region in advance, there may be an additional delay in getting the required BigQuery capacity provisioned depending on the quantity requested.
 
@@ -134,7 +134,7 @@ Clients of BigQuery, including client libraries and partner tools, should use [t
 
 Employing this method of retries makes your application much more robust in the face of errors. Even under normal operating conditions, you can expect on the order of one in ten thousand requests to fail as described in BigQuery's [99.99% availability SLA](https://cloud.google.com/bigquery/sla) . Under abnormal conditions, this error rate may increase, but if errors are randomly distributed the strategy of exponential backoff can mitigate all but the most severe cases.
 
-If you encounter a scenario where a request fails persistently with a 5XX error, then you should escalate to Google Cloud Support. Be sure to [clearly communicate the impact](/support/docs/procedures#support_case_priority) the failure is having on your business so that the issue can be triaged correctly. If, on the other hand, a request persistently fails with a 4XX error, the problem should be addressable by changes to your application. Read the error message for details.
+If you encounter a scenario where a request fails persistently with a 5XX error, then you should escalate to Google Cloud Support. Be sure to [clearly communicate the impact](https://docs.cloud.google.com/support/docs/procedures#support_case_priority) the failure is having on your business so that the issue can be triaged correctly. If, on the other hand, a request persistently fails with a 4XX error, the problem should be addressable by changes to your application. Read the error message for details.
 
 ### Exponential backoff logic example
 
@@ -166,7 +166,7 @@ The wait time between retries and the number of retries depend on your use case 
 
 ### Retry failed job insertions
 
-If exactly-once insertion semantics are important for your application, there are additional considerations when it comes to inserting jobs. How to achieve at most once semantics depends on which [WriteDisposition](/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) you specify. The write disposition tells BigQuery what it should do when encountering existing data in a table: fail, overwrite or append.
+If exactly-once insertion semantics are important for your application, there are additional considerations when it comes to inserting jobs. How to achieve at most once semantics depends on which [WriteDisposition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.WriteDisposition) you specify. The write disposition tells BigQuery what it should do when encountering existing data in a table: fail, overwrite or append.
 
 With a `  WRITE_EMPTY  ` or `  WRITE_TRUNCATE  ` disposition, this is achieved by simply retrying any failed job insertion or execution. This is because all rows ingested by a job are atomically written to the table.
 
@@ -180,7 +180,7 @@ BigQuery might be a critical component of a variety of architectures. Depending 
 
 ### Real-time analytics
 
-The first example is an event data processing pipeline. In this example, log events from endpoints are ingested using Pub/Sub. From there, a streaming Dataflow pipeline performs some operations on the data prior to writing it into BigQuery using the [Storage Write API](/bigquery/docs/write-api) . The data is then used both for ad hoc querying to, for example, recreate sequences of events that may have resulted in specific endpoint outcomes, and for feeding near-real time dashboards to allow the detection of trends and patterns in the data through visualization.
+The first example is an event data processing pipeline. In this example, log events from endpoints are ingested using Pub/Sub. From there, a streaming Dataflow pipeline performs some operations on the data prior to writing it into BigQuery using the [Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) . The data is then used both for ad hoc querying to, for example, recreate sequences of events that may have resulted in specific endpoint outcomes, and for feeding near-real time dashboards to allow the detection of trends and patterns in the data through visualization.
 
 This example requires you to consider multiple aspects of reliability. Because the end-to-end data freshness requirements are quite high, **latency** of the ingestion process is critical. Once data is written to BigQuery, **reliability** is perceived as the ability of users to issue ad hoc queries with **consistent** and predictable latency and ensuring that dashboards utilizing the data reflect the absolute latest available information.
 

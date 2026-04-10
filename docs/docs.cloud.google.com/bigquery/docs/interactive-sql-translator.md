@@ -1,14 +1,16 @@
 # Translate queries with the interactive SQL translator
 
-This document describes how to translate a query from a different SQL dialect into a GoogleSQL query by using the BigQuery interactive SQL translator. The interactive SQL translator can help reduce time and effort when you migrate workloads to BigQuery. This document is intended for users who are familiar with the [Google Cloud console](/bigquery/docs/bigquery-web-ui) .
+This document describes how to translate a query from a different SQL dialect into a GoogleSQL query by using the BigQuery interactive SQL translator. The interactive SQL translator can help reduce time and effort when you migrate workloads to BigQuery. This document is intended for users who are familiar with the [Google Cloud console](https://docs.cloud.google.com/bigquery/docs/bigquery-web-ui) .
 
-You can use the [translation rule feature](#customize) to customize the way the interactive SQL translator translates SQL.
+You can use the [translation rule feature](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#customize) to customize the way the interactive SQL translator translates SQL.
 
 ## Before you begin
 
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
+    
+    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
@@ -16,11 +18,11 @@ If your Google Cloud CLI project was created before February 15, 2022, enable th
 
 ### Permissions and roles
 
-This section describes the [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) that you need in order to use the interactive SQL translator, including the [predefined IAM roles](/bigquery/docs/access-control#bigquery) that grant those permissions. The section also describes the permissions needed to configure additional translation configurations.
+This section describes the [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) that you need in order to use the interactive SQL translator, including the [predefined IAM roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery) that grant those permissions. The section also describes the permissions needed to configure additional translation configurations.
 
 #### Permissions to use the interactive SQL translator
 
-To get the permissions that you need to use the interactive translator, ask your administrator to grant you the [MigrationWorkflow Editor](/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` ) IAM role on the `  parent  ` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to use the interactive translator, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` ) IAM role on the `  parent  ` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to use the interactive translator. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -31,7 +33,7 @@ The following permissions are required to use the interactive translator:
   - `  bigquerymigration.workflows.create  `
   - `  bigquerymigration.workflows.get  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 #### Permissions to configure additional translation configurations
 
@@ -44,7 +46,7 @@ The following predefined IAM role provide the permissions that you need to confi
 
   - `  roles/bigquerymigration.viewer  `
 
-For more information about BigQuery IAM, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery IAM, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Supported SQL dialects
 
@@ -160,7 +162,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -174,7 +176,7 @@ Finland
 
 `  europe-north1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
@@ -184,13 +186,13 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
 `  europe-southwest1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
@@ -200,19 +202,19 @@ Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
 `  europe-west9  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
 `  europe-north2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
@@ -226,7 +228,7 @@ Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Americas**
 
@@ -238,13 +240,13 @@ Dallas
 
 `  us-south1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -266,19 +268,19 @@ Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Québec
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -288,7 +290,7 @@ Santiago
 
 `  southamerica-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
@@ -298,7 +300,7 @@ Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
@@ -324,13 +326,15 @@ Israel
 
 `  me-west1  `
 
-[Gemini-based translation configurations](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) are only available in specific processing locations. For more information, see [Google model endpoint locations](/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
+[Gemini-based translation configurations](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) are only available in specific processing locations. For more information, see [Google model endpoint locations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#google_model_endpoint_locations)
 
 ## Translate a query into GoogleSQL
 
 Follow these steps to translate a query into GoogleSQL:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, click **More** , and then select **Translation settings** .
 
@@ -349,6 +353,8 @@ Follow these steps to translate a query into GoogleSQL:
 8.  Click **Translate** .
     
     BigQuery translates your query into GoogleSQL and displays it in the right pane. For example, the following screenshot shows translated Teradata SQL:
+    
+    ![Displays a Teradata SQL query translated into GoogleSQL](https://docs.cloud.google.com/static/bigquery/images/translated-teradata-query.png)
 
 9.  Optional: To run the translated GoogleSQL query, click **Run** .
 
@@ -372,7 +378,11 @@ To create a Gemini-enhanced SQL translation rule, you can either create it in th
 
 To create a Gemini-enhanced SQL translation rule for the input SQL, write an input SQL query in the query editor, then click **ASSIST** \> **Customize** . ( [Preview](https://cloud.google.com/products#product-launch-stages) )
 
+![Customize translation input](https://docs.cloud.google.com/static/bigquery/images/customize-translation-input.png)
+
 Similarly, to create a Gemini-enhanced SQL translation rule for the output SQL, run an interactive translation, then click **ASSIST** \> **Customize this translation** .
+
+![Customize translation output](https://docs.cloud.google.com/static/bigquery/images/customize-translation-output.png)
 
 When the **Customize** menu appears, continue with the following steps.
 
@@ -389,20 +399,24 @@ When the **Customize** menu appears, continue with the following steps.
 2.  Click **Preview** .
 
 3.  In the **Suggestions generated by Gemini** dialog, review the changes made by the Gemini-enhanced SQL translation to the SQL query based on your rule.
+    
+    ![Apply changes from Gemini-based configuration YAML file](https://docs.cloud.google.com/static/bigquery/images/gemini-suggested-changes-1.png)
 
 4.  Optional: To add this rule for use with future translations, select the **Save this prompt...** checkbox.
     
-    Rules are saved in the default configuration YAML file, or `  __default.ai_config.yaml  ` . This configuration YAML file is saved to the Cloud Storage folder as specified in the **Translation Configuration Source Location** field in the [translation settings](#translate-with-additional-configs) . If the **Translation Configuration Source Location** isn't already set, a folder browser appears and lets you select one. A configuration YAML file is subject to [configuration file size limitations](#config-limitations) .
+    Rules are saved in the default configuration YAML file, or `  __default.ai_config.yaml  ` . This configuration YAML file is saved to the Cloud Storage folder as specified in the **Translation Configuration Source Location** field in the [translation settings](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate-with-additional-configs) . If the **Translation Configuration Source Location** isn't already set, a folder browser appears and lets you select one. A configuration YAML file is subject to [configuration file size limitations](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#config-limitations) .
 
 5.  To apply the suggested changes to the SQL query, click **Apply** .
 
 ### YAML
 
-To create a Gemini-enhanced SQL translation rule, you can create a Gemini-based configuration YAML file and upload it to Cloud Storage. For more information, see [Create a Gemini-based configuration YAML file](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
+To create a Gemini-enhanced SQL translation rule, you can create a Gemini-based configuration YAML file and upload it to Cloud Storage. For more information, see [Create a Gemini-based configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
 
 Once you have uploaded a Gemini-enhanced SQL translation rule and uploaded it to Cloud Storage, you can apply the rule by doing the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, click **More \> Translation settings** .
 
@@ -417,6 +431,8 @@ If a Gemini suggestion is available for the input based on your rule, then the *
 If a Gemini suggestion is available for the output based on your rule, a notification banner appears in the code editor. To review and apply these suggestions, do the following:
 
 1.  Click **Assist** \> **View suggestions** on either side of the code editor to revisit the suggested changes to the corresponding query.
+    
+    ![Apply changes from Gemini-based configuration YAML file](https://docs.cloud.google.com/static/bigquery/images/gemini-suggested-changes-2.png)
 
 2.  In the **Suggestions generated by Gemini** dialog, review the changes made by Gemini to the SQL query based on your translation rule.
 
@@ -440,7 +456,7 @@ To update an existing configuration YAML file, do the following:
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** With Gemini-enhanced SQL translations, you can generate text explanation for your scripts by the Gemini model. Gemini-enhanced SQL translations are allowed a limited amount of Gemini usage at no charge. This usage is sufficient for most migration projects. To request an increase to this limit, or to get support and provide feedback for this Preview feature, contact <ai-sql-translation-help@google.com> .
 
@@ -449,6 +465,8 @@ After running an interactive translation, you can request a Gemini-generated tex
 To get Gemini-generate SQL translation explanation, do the following:
 
 1.  To create a Gemini-generated SQL translation explanation, click **Assist** , and then click **Explain this translation** .
+    
+    ![Explain translation button.](https://docs.cloud.google.com/static/bigquery/images/int-translate-explain.png)
 
 ### Translate with a batch translation configuration ID
 
@@ -472,7 +490,7 @@ To specify translation configurations by providing a location to the translation
 
 2.  In the **Translation Configuration Source Location** field, specify the path to the translation configuration files stored in a Cloud Storage folder.
     
-    The BigQuery interactive SQL translator supports metadata ZIP files containing [translation metadata](/bigquery/docs/generate-metadata) and [object name mapping](/bigquery/docs/output-name-mapping#json_file_format) . For information on how to upload files to Cloud Storage, see [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+    The BigQuery interactive SQL translator supports metadata ZIP files containing [translation metadata](https://docs.cloud.google.com/bigquery/docs/generate-metadata) and [object name mapping](https://docs.cloud.google.com/bigquery/docs/output-name-mapping#json_file_format) . For information on how to upload files to Cloud Storage, see [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 3.  Click **Save** .
 
@@ -482,7 +500,7 @@ When you use a translation configuration file with the BigQuery interactive SQL 
 
 `  CONFIG ERROR: Skip reading file "gs://metadata-file.zip". File size (150,000,000 bytes) exceeds limit (50 MB).  `
 
-One method to reduce metadata file size is to use the `  --database  ` or `  --schema  ` flags to only extract metadata for databases or schemas that are relevant for the translation input queries. For more information about using these flags when you [generate metadata files](/bigquery/docs/generate-metadata) , see [Global flags](/bigquery/docs/generate-metadata#global_flags) .
+One method to reduce metadata file size is to use the `  --database  ` or `  --schema  ` flags to only extract metadata for databases or schemas that are relevant for the translation input queries. For more information about using these flags when you [generate metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) , see [Global flags](https://docs.cloud.google.com/bigquery/docs/generate-metadata#global_flags) .
 
 ## Troubleshoot translation errors
 
@@ -490,26 +508,24 @@ The following are commonly encountered errors when using the interactive SQL tra
 
 ### `     RelationNotFound    ` or `     AttributeNotFound    ` translation issues
 
-After translating a querying using the [interactive SQL translator](/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
+After translating a querying using the [interactive SQL translator](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator#translate_a_query_into_standard_sql) , you might encounter a failed translation with the `  RelationNotFound  ` or `  AttributeNotFound  ` error.
 
 You can find failed translations by navigating to the **Translation details** page and opening the **Log Messages** tab.
 
 To ensure the most accurate translation, you can input the data definition language (DDL) statements for any tables used in a query prior to the query itself. For example, if you want to translate the Amazon Redshift query `  select table1.field1, table2.field1 from table1, table2 where table1.id = table2.id;  ` , you would input the following SQL statements into the interactive SQL translator:
 
-``` text
-create table schema1.table1 (id int, field1 int, field2 varchar(16));
-create table schema1.table2 (id int, field1 varchar(30), field2 date);
-
-select table1.field1, table2.field1
-from table1, table2
-where table1.id = table2.id;
-```
+    create table schema1.table1 (id int, field1 int, field2 varchar(16));
+    create table schema1.table2 (id int, field1 varchar(30), field2 date);
+    
+    select table1.field1, table2.field1
+    from table1, table2
+    where table1.id = table2.id;
 
 #### Fix translation issues with Gemini
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To request feedback or support for this feature, contact <bq-edw-migration-support@google.com> .
 
@@ -533,10 +549,10 @@ There is no charge to use the interactive SQL translator. However, storage used 
 
 Learn more about the following steps in data warehouse migration:
 
-  - [Migration overview](/bigquery/docs/migration/migration-overview)
-  - [Migration assessment](/bigquery/docs/migration-assessment)
-  - [Schema and data transfer overview](/bigquery/docs/migration/schema-data-overview)
-  - [Batch SQL translation](/bigquery/docs/batch-sql-translator)
-  - [Data pipelines](/bigquery/docs/migration/pipelines)
-  - [Data security and governance](/bigquery/docs/data-governance)
+  - [Migration overview](https://docs.cloud.google.com/bigquery/docs/migration/migration-overview)
+  - [Migration assessment](https://docs.cloud.google.com/bigquery/docs/migration-assessment)
+  - [Schema and data transfer overview](https://docs.cloud.google.com/bigquery/docs/migration/schema-data-overview)
+  - [Batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator)
+  - [Data pipelines](https://docs.cloud.google.com/bigquery/docs/migration/pipelines)
+  - [Data security and governance](https://docs.cloud.google.com/bigquery/docs/data-governance)
   - [Data validation tool](https://github.com/GoogleCloudPlatform/professional-services-data-validator#data-validation-tool)

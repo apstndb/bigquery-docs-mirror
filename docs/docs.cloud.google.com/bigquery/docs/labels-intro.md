@@ -6,7 +6,7 @@ After labeling your resources, you can search for them based on label values. Fo
 
 ## What are labels?
 
-A label is a key-value pair that you can assign to Google Cloud BigQuery resources. They help you organize these resources and manage your costs at scale, with the granularity you need. You can attach a label to each resource, then filter the resources based on their labels. Information about labels is forwarded to the billing system that lets you break down your billed charges by label. With built-in [billing reports](/billing/docs/how-to/reports) , you can filter and group costs by resource labels. You can also use labels to query [billing data exports](/billing/docs/how-to/bq-examples) .
+A label is a key-value pair that you can assign to Google Cloud BigQuery resources. They help you organize these resources and manage your costs at scale, with the granularity you need. You can attach a label to each resource, then filter the resources based on their labels. Information about labels is forwarded to the billing system that lets you break down your billed charges by label. With built-in [billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) , you can filter and group costs by resource labels. You can also use labels to query [billing data exports](https://docs.cloud.google.com/billing/docs/how-to/bq-examples) .
 
 ## Requirements for labels
 
@@ -40,7 +40,7 @@ We don't recommend creating large numbers of unique labels, such as for timestam
 
 ## Labels and tags
 
-Labels can be used as queryable annotations for resources, but can't be used to set conditions on policies. Tags provide a way to conditionally allow or deny policies based on whether a resource has a specific tag, by providing fine-grained control over policies. For more information, see the [Tags overview](/resource-manager/docs/tags/tags-overview) .
+Labels can be used as queryable annotations for resources, but can't be used to set conditions on policies. Tags provide a way to conditionally allow or deny policies based on whether a resource has a specific tag, by providing fine-grained control over policies. For more information, see the [Tags overview](https://docs.cloud.google.com/resource-manager/docs/tags/tags-overview) .
 
 ## Limitations
 
@@ -48,9 +48,9 @@ Labels can be used as queryable annotations for resources, but can't be used to 
 
 ## What's next
 
-  - Learn how to [add labels](/bigquery/docs/adding-labels) to BigQuery resources.
-  - Learn how to [view labels](/bigquery/docs/viewing-labels) on BigQuery resources.
-  - Learn how to [update labels](/bigquery/docs/updating-labels) on BigQuery resources.
-  - Learn how to [filter resources using labels](/bigquery/docs/filtering-labels) .
-  - Learn how to [delete labels](/bigquery/docs/deleting-labels) on BigQuery resources.
-  - Read about [Using labels](/resource-manager/docs/using-labels) in the Resource Manager documentation.
+  - Learn how to [add labels](https://docs.cloud.google.com/bigquery/docs/adding-labels) to BigQuery resources.
+  - Learn how to [view labels](https://docs.cloud.google.com/bigquery/docs/viewing-labels) on BigQuery resources.
+  - Learn how to [update labels](https://docs.cloud.google.com/bigquery/docs/updating-labels) on BigQuery resources.
+  - Learn how to [filter resources using labels](https://docs.cloud.google.com/bigquery/docs/filtering-labels) .
+  - Learn how to [delete labels](https://docs.cloud.google.com/bigquery/docs/deleting-labels) on BigQuery resources.
+  - Read about [Using labels](https://docs.cloud.google.com/resource-manager/docs/using-labels) in the Resource Manager documentation.

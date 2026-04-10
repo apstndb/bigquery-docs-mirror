@@ -2,7 +2,7 @@ A GoogleSQL statement comprises a series of tokens. Tokens include identifiers, 
 
 ## Identifiers
 
-Identifiers are names that are associated with columns, tables, fields, path expressions, and more. They can be [unquoted](#unquoted_identifiers) or [quoted](#quoted_identifiers) and some are [case-sensitive](#case_sensitivity) .
+Identifiers are names that are associated with columns, tables, fields, path expressions, and more. They can be [unquoted](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#unquoted_identifiers) or [quoted](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#quoted_identifiers) and some are [case-sensitive](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#case_sensitivity) .
 
 ### Unquoted identifiers
 
@@ -14,141 +14,113 @@ Identifiers are names that are associated with columns, tables, fields, path exp
   - Must be enclosed by backtick (\`) characters.
   - Can contain any characters, including spaces and symbols.
   - Can't be empty.
-  - Have the same escape sequences as [string literals](#string_and_bytes_literals) .
-  - If an identifier is the same as a [reserved keyword](#reserved_keywords) , the identifier must be quoted. For example, the identifier `  FROM  ` must be quoted. Additional rules apply for [path expressions](#path_expressions) , [table names](#table_names) , [column names](#column_names) , and [field names](#field_names) .
+  - Have the same escape sequences as [string literals](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#string_and_bytes_literals) .
+  - If an identifier is the same as a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , the identifier must be quoted. For example, the identifier `  FROM  ` must be quoted. Additional rules apply for [path expressions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#path_expressions) , [table names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#table_names) , [column names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#column_names) , and [field names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#field_names) .
 
 ### Identifier examples
 
 Path expression examples:
 
-``` text
--- Valid. _5abc and dataField are valid identifiers.
-_5abc.dataField
-
--- Valid. `5abc` and dataField are valid identifiers.
-`5abc`.dataField
-
--- Invalid. 5abc is an invalid identifier because it's unquoted and starts
--- with a number rather than a letter or underscore.
-5abc.dataField
-
--- Valid. abc5 and dataField are valid identifiers.
-abc5.dataField
-
--- Invalid. abc5! is an invalid identifier because it's unquoted and contains
--- a character that isn't a letter, number, or underscore.
-abc5!.dataField
-
--- Valid. `GROUP` and dataField are valid identifiers.
-`GROUP`.dataField
-
--- Invalid. GROUP is an invalid identifier because it's unquoted and is a
--- stand-alone reserved keyword.
-GROUP.dataField
-
--- Valid. abc5 and GROUP are valid identifiers.
-abc5.GROUP
-```
+    -- Valid. _5abc and dataField are valid identifiers.
+    _5abc.dataField
+    
+    -- Valid. `5abc` and dataField are valid identifiers.
+    `5abc`.dataField
+    
+    -- Invalid. 5abc is an invalid identifier because it's unquoted and starts
+    -- with a number rather than a letter or underscore.
+    5abc.dataField
+    
+    -- Valid. abc5 and dataField are valid identifiers.
+    abc5.dataField
+    
+    -- Invalid. abc5! is an invalid identifier because it's unquoted and contains
+    -- a character that isn't a letter, number, or underscore.
+    abc5!.dataField
+    
+    -- Valid. `GROUP` and dataField are valid identifiers.
+    `GROUP`.dataField
+    
+    -- Invalid. GROUP is an invalid identifier because it's unquoted and is a
+    -- stand-alone reserved keyword.
+    GROUP.dataField
+    
+    -- Valid. abc5 and GROUP are valid identifiers.
+    abc5.GROUP
 
 Function examples:
 
-``` text
--- Valid. dataField is a valid identifier in a function called foo().
-foo().dataField
-```
+    -- Valid. dataField is a valid identifier in a function called foo().
+    foo().dataField
 
 Array access operation examples:
 
-``` text
--- Valid. dataField is a valid identifier in an array called items.
-items[OFFSET(3)].dataField
-```
+    -- Valid. dataField is a valid identifier in an array called items.
+    items[OFFSET(3)].dataField
 
 Named query parameter examples:
 
-``` text
--- Valid. param and dataField are valid identifiers.
-@param.dataField
-```
+    -- Valid. param and dataField are valid identifiers.
+    @param.dataField
 
 Table name examples:
 
-``` text
--- Valid table path.
-myproject.mydatabase.mytable287
-```
+    -- Valid table path.
+    myproject.mydatabase.mytable287
 
-``` text
--- Valid table path.
-myproject287.mydatabase.mytable
-```
+    -- Valid table path.
+    myproject287.mydatabase.mytable
 
-``` text
--- Invalid table path. The project name starts with a number and is unquoted.
-287myproject.mydatabase.mytable
-```
+    -- Invalid table path. The project name starts with a number and is unquoted.
+    287myproject.mydatabase.mytable
 
-``` text
--- Invalid table name. The table name is unquoted and isn't a valid
--- dashed identifier, as the part after the dash is neither a number nor
--- an identifier starting with a letter or an underscore.
-mytable-287a
-```
+    -- Invalid table name. The table name is unquoted and isn't a valid
+    -- dashed identifier, as the part after the dash is neither a number nor
+    -- an identifier starting with a letter or an underscore.
+    mytable-287a
 
-``` text
--- Valid table path.
-my-project.mydataset.mytable
-```
+    -- Valid table path.
+    my-project.mydataset.mytable
 
-``` text
--- Valid table name.
-my-table
-```
+    -- Valid table name.
+    my-table
 
-``` text
--- Invalid table path because the dash isn't in the first part
--- of the path.
-myproject.mydataset.my-table
-```
+    -- Invalid table path because the dash isn't in the first part
+    -- of the path.
+    myproject.mydataset.my-table
 
-``` text
--- Invalid table path because a dataset name can't contain dashes.
-my-dataset.mytable
-```
+    -- Invalid table path because a dataset name can't contain dashes.
+    my-dataset.mytable
 
 ## Path expressions
 
 A path expression describes how to navigate to an object in a graph of objects and generally follows this structure:
 
-``` text
-path:
-  [path_expression][. ...]
-
-path_expression:
-  [first_part]/subsequent_part[ { / | : | - } subsequent_part ][...]
-
-first_part:
-  { unquoted_identifier | quoted_identifier }
-
-subsequent_part:
-  { unquoted_identifier | quoted_identifier | number }
-```
+    path:
+      [path_expression][. ...]
+    
+    path_expression:
+      [first_part]/subsequent_part[ { / | : | - } subsequent_part ][...]
+    
+    first_part:
+      { unquoted_identifier | quoted_identifier }
+    
+    subsequent_part:
+      { unquoted_identifier | quoted_identifier | number }
 
   - `  path  ` : A graph of one or more objects.
   - `  path_expression  ` : An object in a graph of objects.
-  - `  first_part  ` : A path expression can start with a quoted or unquoted identifier. If the path expressions starts with a [reserved keyword](#reserved_keywords) , it must be a quoted identifier.
-  - `  subsequent_part  ` : Subsequent parts of a path expression can include non-identifiers, such as reserved keywords. If a subsequent part of a path expressions starts with a [reserved keyword](#reserved_keywords) , it may be quoted or unquoted.
+  - `  first_part  ` : A path expression can start with a quoted or unquoted identifier. If the path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it must be a quoted identifier.
+  - `  subsequent_part  ` : Subsequent parts of a path expression can include non-identifiers, such as reserved keywords. If a subsequent part of a path expressions starts with a [reserved keyword](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) , it may be quoted or unquoted.
 
 Examples:
 
-``` text
-foo.bar
-foo.bar/25
-foo/bar:25
-foo/bar/25-31
-/foo/bar
-/25/foo/bar
-```
+    foo.bar
+    foo.bar/25
+    foo/bar:25
+    foo/bar/25-31
+    /foo/bar
+    /25/foo/bar
 
 ## Table names
 
@@ -158,11 +130,11 @@ A table name represents the name of a table.
 
   - A table name that's an unquoted identifier can additionally include single dashes if the table name is referenced in a `  FROM  ` or `  TABLE  ` clause. Only the first identifier in the table path (the project ID or the table name) can have dashes. Dashes aren't supported in datasets.
 
-  - A table name can be a [fully qualified table name (table path)](/bigquery/docs/reference/standard-sql/data-definition-language#table_path) that includes up to three quoted or unquoted identifiers:
+  - A table name can be a [fully qualified table name (table path)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_path) that includes up to three quoted or unquoted identifiers:
     
-      - An optional [project ID](/resource-manager/docs/creating-managing-projects#before_you_begin)
+      - An optional [project ID](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin)
     
-      - An optional [dataset name](/bigquery/docs/datasets#dataset-naming)
+      - An optional [dataset name](https://docs.cloud.google.com/bigquery/docs/datasets#dataset-naming)
     
       - A required table name.
     
@@ -170,31 +142,27 @@ A table name represents the name of a table.
 
   - Table names can be path expressions.
 
-  - Table names have [case-sensitivity rules](#case_sensitivity) .
+  - Table names have [case-sensitivity rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#case_sensitivity) .
 
-  - Table names have [additional rules](/bigquery/docs/tables#table_naming) .
+  - Table names have [additional rules](https://docs.cloud.google.com/bigquery/docs/tables#table_naming) .
 
 Examples:
 
-``` text
-my-project.mydataset.mytable
-mydataset.mytable
-my-table
-mytable
-`287mytable`
-```
+    my-project.mydataset.mytable
+    mydataset.mytable
+    my-table
+    mytable
+    `287mytable`
 
 ## Column names
 
-A column name represents the name of a column in a table. Column names can be quoted identifiers or unquoted identifiers. Column names also have [additional rules](/bigquery/docs/schemas#column_names) .
+A column name represents the name of a column in a table. Column names can be quoted identifiers or unquoted identifiers. Column names also have [additional rules](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) .
 
 Examples:
 
-``` text
-columnA
-`column-a`
-`287column`
-```
+    columnA
+    `column-a`
+    `287column`
 
 ## Field names
 
@@ -209,7 +177,7 @@ A literal represents a constant value of a built-in data type. Some, but not all
 
 ### String and bytes literals
 
-A string literal represents a constant value of the [string data type](/bigquery/docs/reference/standard-sql/data-types#string_type) . A bytes literal represents a constant value of the [bytes data type](/bigquery/docs/reference/standard-sql/data-types#bytes_type) .
+A string literal represents a constant value of the [string data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#string_type) . A bytes literal represents a constant value of the [bytes data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type) .
 
 Both string and bytes literals must be *quoted* , either with single ( `  '  ` ) or double ( `  "  ` ) quotation marks, or *triple-quoted* with groups of three single ( `  '''  ` ) or three double ( `  """  ` ) quotation marks.
 
@@ -322,7 +290,7 @@ Examples:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
  r&#39;\n&#39; /*Only the prev is raw!*/ &#39;\n&#39; &quot;b&quot; &quot;&quot;&quot;c&quot;d&quot;e&quot;&quot;&quot; &#39;&#39;&#39;f&#39;g&#39;h&#39;&#39;&#39; &quot;1&quot; &quot;2&quot;,
  br&#39;\n&#39;/*Only the prev is raw!*/ b&#39;\n&#39; b&quot;b&quot; b&quot;&quot;&quot;c&quot;d&quot;e&quot;&quot;&quot; b&#39;&#39;&#39;f&#39;g&#39;h&#39;&#39;&#39; b&quot;1&quot; b&quot;2&quot;,
   NUMERIC &quot;1&quot; r&#39;2&#39;,
@@ -334,7 +302,7 @@ Examples:
   DATETIME &#39;2016-01-01 &#39; r&quot;12:00:00&quot;,
   TIMESTAMP &#39;2018-10-01 &#39; &quot;12:00:00+08&quot;
 </code></pre></td>
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>SELECT
  &quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
  b&quot;\\n\nbc\&quot;d\&quot;ef&#39;g&#39;h12&quot;,
   NUMERIC &quot;12&quot;,
@@ -444,15 +412,13 @@ The range D800-DFFF isn't allowed, as these values are surrogate unicode values.
 
 Integer literals are either a sequence of decimal digits (0–9) or a hexadecimal value that's prefixed with " `  0x  ` " or " `  0X  ` ". Integers can be prefixed by " `  +  ` " or " `  -  ` " to represent positive and negative values, respectively. Examples:
 
-``` text
-123
-0xABC
--123
-```
+    123
+    0xABC
+    -123
 
 An integer literal is interpreted as an `  INT64  ` .
 
-A integer literal represents a constant value of the [integer data type](/bigquery/docs/reference/standard-sql/data-types#integer_types) .
+A integer literal represents a constant value of the [integer data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#integer_types) .
 
 ### `     NUMERIC    ` literals
 
@@ -460,16 +426,14 @@ You can construct `  NUMERIC  ` literals using the `  NUMERIC  ` keyword followe
 
 Examples:
 
-``` text
-SELECT NUMERIC '0';
-SELECT NUMERIC '123456';
-SELECT NUMERIC '-3.14';
-SELECT NUMERIC '-0.54321';
-SELECT NUMERIC '1.23456e05';
-SELECT NUMERIC '-9.876e-3';
-```
+    SELECT NUMERIC '0';
+    SELECT NUMERIC '123456';
+    SELECT NUMERIC '-3.14';
+    SELECT NUMERIC '-0.54321';
+    SELECT NUMERIC '1.23456e05';
+    SELECT NUMERIC '-9.876e-3';
 
-A `  NUMERIC  ` literal represents a constant value of the [`  NUMERIC  ` data type](/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+A `  NUMERIC  ` literal represents a constant value of the [`  NUMERIC  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
 ### `     BIGNUMERIC    ` literals
 
@@ -477,37 +441,31 @@ You can construct `  BIGNUMERIC  ` literals using the `  BIGNUMERIC  ` keyword f
 
 Examples:
 
-``` text
-SELECT BIGNUMERIC '0';
-SELECT BIGNUMERIC '123456';
-SELECT BIGNUMERIC '-3.14';
-SELECT BIGNUMERIC '-0.54321';
-SELECT BIGNUMERIC '1.23456e05';
-SELECT BIGNUMERIC '-9.876e-3';
-```
+    SELECT BIGNUMERIC '0';
+    SELECT BIGNUMERIC '123456';
+    SELECT BIGNUMERIC '-3.14';
+    SELECT BIGNUMERIC '-0.54321';
+    SELECT BIGNUMERIC '1.23456e05';
+    SELECT BIGNUMERIC '-9.876e-3';
 
-A `  BIGNUMERIC  ` literal represents a constant value of the [`  BIGNUMERIC  ` data type](/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
+A `  BIGNUMERIC  ` literal represents a constant value of the [`  BIGNUMERIC  ` data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#decimal_types) .
 
 ### Floating point literals
 
 Syntax options:
 
-``` text
-[+-]DIGITS.[DIGITS][e[+-]DIGITS]
-[+-][DIGITS].DIGITS[e[+-]DIGITS]
-DIGITSe[+-]DIGITS
-```
+    [+-]DIGITS.[DIGITS][e[+-]DIGITS]
+    [+-][DIGITS].DIGITS[e[+-]DIGITS]
+    DIGITSe[+-]DIGITS
 
 `  DIGITS  ` represents one or more decimal numbers (0 through 9) and `  e  ` represents the exponent marker (e or E).
 
 Examples:
 
-``` text
-123.456e-67
-.1E4
-58.
-4e2
-```
+    123.456e-67
+    .1E4
+    58.
+    4e2
 
 Numeric literals that contain either a decimal point or an exponent marker are presumed to be type double.
 
@@ -519,7 +477,7 @@ There is no literal representation of NaN or infinity, but the following case-in
   - "inf" or "+inf"
   - "-inf"
 
-A floating-point literal represents a constant value of the [floating-point data type](/bigquery/docs/reference/standard-sql/data-types#floating_point_types) .
+A floating-point literal represents a constant value of the [floating-point data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#floating_point_types) .
 
 ### Array literals
 
@@ -527,118 +485,76 @@ Array literals are comma-separated lists of elements enclosed in square brackets
 
 Examples:
 
-``` text
-[1, 2, 3]
-['x', 'y', 'xy']
-ARRAY[1, 2, 3]
-ARRAY<STRING>['x', 'y', 'xy']
-ARRAY<INT64>[]
-```
+    [1, 2, 3]
+    ['x', 'y', 'xy']
+    ARRAY[1, 2, 3]
+    ARRAY<STRING>['x', 'y', 'xy']
+    ARRAY<INT64>[]
 
-An array literal represents a constant value of the [array data type](/bigquery/docs/reference/standard-sql/data-types#array_type) .
+An array literal represents a constant value of the [array data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type) .
 
 ### Struct literals
 
-A struct literal is a struct whose fields are all literals. Struct literals can be written using any of the syntaxes for [constructing a struct](/bigquery/docs/reference/standard-sql/data-types#constructing_a_struct) (tuple syntax, typeless struct syntax, or typed struct syntax).
+A struct literal is a struct whose fields are all literals. Struct literals can be written using any of the syntaxes for [constructing a struct](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#constructing_a_struct) (tuple syntax, typeless struct syntax, or typed struct syntax).
 
 Note that tuple syntax requires at least two fields, in order to distinguish it from an ordinary parenthesized expression. To write a struct literal with a single field, use typeless struct syntax or typed struct syntax.
 
-<table>
-<thead>
-<tr class="header">
-<th>Example</th>
-<th>Output Type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       (1, 2, 3)      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64, INT64, INT64&gt;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       (1, 'abc')      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64, STRING&gt;      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRUCT(1 AS foo, 'abc' AS bar)      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;foo INT64, bar STRING&gt;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64, STRING&gt;(1, 'abc')      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64, STRING&gt;      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRUCT(1)      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64&gt;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64&gt;(1)      </code></td>
-<td><code dir="ltr" translate="no">       STRUCT&lt;INT64&gt;      </code></td>
-</tr>
-</tbody>
-</table>
+| Example                                          | Output Type                                    |
+| ------------------------------------------------ | ---------------------------------------------- |
+| `        (1, 2, 3)       `                       | `        STRUCT<INT64, INT64, INT64>       `   |
+| `        (1, 'abc')       `                      | `        STRUCT<INT64, STRING>       `         |
+| `        STRUCT(1 AS foo, 'abc' AS bar)       `  | `        STRUCT<foo INT64, bar STRING>       ` |
+| `        STRUCT<INT64, STRING>(1, 'abc')       ` | `        STRUCT<INT64, STRING>       `         |
+| `        STRUCT(1)       `                       | `        STRUCT<INT64>       `                 |
+| `        STRUCT<INT64>(1)       `                | `        STRUCT<INT64>       `                 |
 
-A struct literal represents a constant value of the [struct data type](/bigquery/docs/reference/standard-sql/data-types#struct_type) .
+A struct literal represents a constant value of the [struct data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type) .
 
 ### Date literals
 
 Syntax:
 
-``` text
-DATE 'date_canonical_format'
-```
+    DATE 'date_canonical_format'
 
-Date literals contain the `  DATE  ` keyword followed by [`  date_canonical_format  `](/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_date_literals) , a string literal that conforms to the canonical date format, enclosed in single quotation marks. Date literals support a range between the years 1 and 9999, inclusive. Dates outside of this range are invalid.
+Date literals contain the `  DATE  ` keyword followed by [`  date_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_date_literals) , a string literal that conforms to the canonical date format, enclosed in single quotation marks. Date literals support a range between the years 1 and 9999, inclusive. Dates outside of this range are invalid.
 
 For example, the following date literal represents September 27, 2014:
 
-``` text
-DATE '2014-09-27'
-```
+    DATE '2014-09-27'
 
 String literals in canonical date format also implicitly coerce to DATE type when used where a DATE-type expression is expected. For example, in the query
 
-``` text
-SELECT * FROM foo WHERE date_col = "2014-09-27"
-```
+    SELECT * FROM foo WHERE date_col = "2014-09-27"
 
 the string literal `  "2014-09-27"  ` will be coerced to a date literal.
 
-A date literal represents a constant value of the [date data type](/bigquery/docs/reference/standard-sql/data-types#date_type) .
+A date literal represents a constant value of the [date data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) .
 
 ### Time literals
 
 Syntax:
 
-``` text
-TIME 'time_canonical_format'
-```
+    TIME 'time_canonical_format'
 
-Time literals contain the `  TIME  ` keyword and [`  time_canonical_format  `](/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_time_literals) , a string literal that conforms to the canonical time format, enclosed in single quotation marks.
+Time literals contain the `  TIME  ` keyword and [`  time_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_time_literals) , a string literal that conforms to the canonical time format, enclosed in single quotation marks.
 
 For example, the following time represents 12:30 p.m.:
 
-``` text
-TIME '12:30:00.45'
-```
+    TIME '12:30:00.45'
 
-A time literal represents a constant value of the [time data type](/bigquery/docs/reference/standard-sql/data-types#time_type) .
+A time literal represents a constant value of the [time data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type) .
 
 ### Datetime literals
 
 Syntax:
 
-``` text
-DATETIME 'datetime_canonical_format'
-```
+    DATETIME 'datetime_canonical_format'
 
-Datetime literals contain the `  DATETIME  ` keyword and [`  datetime_canonical_format  `](/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_datetime_literals) , a string literal that conforms to the canonical datetime format, enclosed in single quotation marks.
+Datetime literals contain the `  DATETIME  ` keyword and [`  datetime_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_datetime_literals) , a string literal that conforms to the canonical datetime format, enclosed in single quotation marks.
 
 For example, the following datetime represents 12:30 p.m. on September 27, 2014:
 
-``` text
-DATETIME '2014-09-27 12:30:00.45'
-```
+    DATETIME '2014-09-27 12:30:00.45'
 
 Datetime literals support a range between the years 1 and 9999, inclusive. Datetimes outside of this range are invalid.
 
@@ -646,56 +562,44 @@ String literals with the canonical datetime format implicitly coerce to a dateti
 
 For example:
 
-``` text
-SELECT * FROM foo
-WHERE datetime_col = "2014-09-27 12:30:00.45"
-```
+    SELECT * FROM foo
+    WHERE datetime_col = "2014-09-27 12:30:00.45"
 
 In the query above, the string literal `  "2014-09-27 12:30:00.45"  ` is coerced to a datetime literal.
 
 A datetime literal can also include the optional character `  T  ` or `  t  ` . If you use this character, a space can't be included before or after it. These are valid:
 
-``` text
-DATETIME '2014-09-27T12:30:00.45'
-DATETIME '2014-09-27t12:30:00.45'
-```
+    DATETIME '2014-09-27T12:30:00.45'
+    DATETIME '2014-09-27t12:30:00.45'
 
-A datetime literal represents a constant value of the [datatime data type](/bigquery/docs/reference/standard-sql/data-types#datetime_type) .
+A datetime literal represents a constant value of the [datatime data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) .
 
 ### Timestamp literals
 
 Syntax:
 
-``` text
-TIMESTAMP 'timestamp_canonical_format'
-```
+    TIMESTAMP 'timestamp_canonical_format'
 
-Timestamp literals contain the `  TIMESTAMP  ` keyword and [`  timestamp_canonical_format  `](/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_timestamp_literals) , a string literal that conforms to the canonical timestamp format, enclosed in single quotation marks.
+Timestamp literals contain the `  TIMESTAMP  ` keyword and [`  timestamp_canonical_format  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#canonical_format_for_timestamp_literals) , a string literal that conforms to the canonical timestamp format, enclosed in single quotation marks.
 
 Timestamp literals support a range between the years 1 and 9999, inclusive. Timestamps outside of this range are invalid.
 
 A timestamp literal can include a numerical suffix to indicate the time zone:
 
-``` text
-TIMESTAMP '2014-09-27 12:30:00.45-08'
-```
+    TIMESTAMP '2014-09-27 12:30:00.45-08'
 
 If this suffix is absent, the default time zone, UTC, is used.
 
 For example, the following timestamp represents 12:30 p.m. on September 27, 2014 in the default time zone, UTC:
 
-``` text
-TIMESTAMP '2014-09-27 12:30:00.45'
-```
+    TIMESTAMP '2014-09-27 12:30:00.45'
 
-For more information about time zones, see [Time zone](#timezone) .
+For more information about time zones, see [Time zone](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#timezone) .
 
 String literals with the canonical timestamp format, including those with time zone names, implicitly coerce to a timestamp literal when used where a timestamp expression is expected. For example, in the following query, the string literal `  "2014-09-27 12:30:00.45 America/Los_Angeles"  ` is coerced to a timestamp literal.
 
-``` text
-SELECT * FROM foo
-WHERE timestamp_col = "2014-09-27 12:30:00.45 America/Los_Angeles"
-```
+    SELECT * FROM foo
+    WHERE timestamp_col = "2014-09-27 12:30:00.45 America/Los_Angeles"
 
 A timestamp literal can include these optional characters:
 
@@ -704,118 +608,88 @@ A timestamp literal can include these optional characters:
 
 If you use one of these characters, a space can't be included before or after it. These are valid:
 
-``` text
-TIMESTAMP '2017-01-18T12:34:56.123456Z'
-TIMESTAMP '2017-01-18t12:34:56.123456'
-TIMESTAMP '2017-01-18 12:34:56.123456z'
-TIMESTAMP '2017-01-18 12:34:56.123456Z'
-```
+    TIMESTAMP '2017-01-18T12:34:56.123456Z'
+    TIMESTAMP '2017-01-18t12:34:56.123456'
+    TIMESTAMP '2017-01-18 12:34:56.123456z'
+    TIMESTAMP '2017-01-18 12:34:56.123456Z'
 
-A timestamp literal represents a constant value of the [timestamp data type](/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
+A timestamp literal represents a constant value of the [timestamp data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) .
 
 #### Time zone
 
 Since timestamp literals must be mapped to a specific point in time, a time zone is necessary to correctly interpret a literal. If a time zone isn't specified as part of the literal itself, then GoogleSQL uses the default time zone value, which the GoogleSQL implementation sets.
 
-GoogleSQL can represent a time zones using a string, which represents the [offset from Coordinated Universal Time (UTC)](/bigquery/docs/reference/standard-sql/data-types#utc_offset) .
+GoogleSQL can represent a time zones using a string, which represents the [offset from Coordinated Universal Time (UTC)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#utc_offset) .
 
 Examples:
 
-``` text
-'-08:00'
-'-8:15'
-'+3:00'
-'+07:30'
-'-7'
-```
+    '-08:00'
+    '-8:15'
+    '+3:00'
+    '+07:30'
+    '-7'
 
-Time zones can also be expressed using string [time zone names](/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
+Time zones can also be expressed using string [time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
 
 Examples:
 
-``` text
-TIMESTAMP '2014-09-27 12:30:00 America/Los_Angeles'
-TIMESTAMP '2014-09-27 12:30:00 America/Argentina/Buenos_Aires'
-```
+    TIMESTAMP '2014-09-27 12:30:00 America/Los_Angeles'
+    TIMESTAMP '2014-09-27 12:30:00 America/Argentina/Buenos_Aires'
 
 ### Range literals
 
 Syntax:
 
-``` text
-RANGE<T> '[lower_bound, upper_bound)'
-```
+    RANGE<T> '[lower_bound, upper_bound)'
 
-A range literal contains a contiguous range between two [dates](/bigquery/docs/reference/standard-sql/data-types#date_type) , [datetimes](/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [timestamps](/bigquery/docs/reference/standard-sql/data-types#timestamp_type) . The lower or upper bound can be unbounded, if desired.
+A range literal contains a contiguous range between two [dates](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#date_type) , [datetimes](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#datetime_type) , or [timestamps](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#timestamp_type) . The lower or upper bound can be unbounded, if desired.
 
 Example of a date range literal with a lower and upper bound:
 
-``` text
-RANGE<DATE> '[2020-01-01, 2020-12-31)'
-```
+    RANGE<DATE> '[2020-01-01, 2020-12-31)'
 
 Example of a datetime range literal with a lower and upper bound:
 
-``` text
-RANGE<DATETIME> '[2020-01-01 12:00:00, 2020-12-31 12:00:00)'
-```
+    RANGE<DATETIME> '[2020-01-01 12:00:00, 2020-12-31 12:00:00)'
 
 Example of a timestamp range literal with a lower and upper bound:
 
-``` text
-RANGE<TIMESTAMP> '[2020-10-01 12:00:00+08, 2020-12-31 12:00:00+08)'
-```
+    RANGE<TIMESTAMP> '[2020-10-01 12:00:00+08, 2020-12-31 12:00:00+08)'
 
 Examples of a range literal without a lower bound:
 
-``` text
-RANGE<DATE> '[UNBOUNDED, 2020-12-31)'
-```
+    RANGE<DATE> '[UNBOUNDED, 2020-12-31)'
 
-``` text
-RANGE<DATE> '[NULL, 2020-12-31)'
-```
+    RANGE<DATE> '[NULL, 2020-12-31)'
 
 Examples of a range literal without an upper bound:
 
-``` text
-RANGE<DATE> '[2020-01-01, UNBOUNDED)'
-```
+    RANGE<DATE> '[2020-01-01, UNBOUNDED)'
 
-``` text
-RANGE<DATE> '[2020-01-01, NULL)'
-```
+    RANGE<DATE> '[2020-01-01, NULL)'
 
 Examples of a range literal that includes all possible values:
 
-``` text
-RANGE<DATE> '[UNBOUNDED, UNBOUNDED)'
-```
+    RANGE<DATE> '[UNBOUNDED, UNBOUNDED)'
 
-``` text
-RANGE<DATE> '[NULL, NULL)'
-```
+    RANGE<DATE> '[NULL, NULL)'
 
 There must be a single whitespace after the comma in a range literal, otherwise an error is produced. For example:
 
-``` text
--- This range literal is valid:
-RANGE<DATE> '[2020-01-01, 2020-12-31)'
-```
+    -- This range literal is valid:
+    RANGE<DATE> '[2020-01-01, 2020-12-31)'
 
-``` text
--- This range literal produces an error:
-RANGE<DATE> '[2020-01-01,2020-12-31)'
-```
+    -- This range literal produces an error:
+    RANGE<DATE> '[2020-01-01,2020-12-31)'
 
-A range literal represents a constant value of the [range data type](/bigquery/docs/reference/standard-sql/data-types#range_type) .
+A range literal represents a constant value of the [range data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_type) .
 
 ### Interval literals
 
-An interval literal represents a constant value of the [interval data type](/bigquery/docs/reference/standard-sql/data-types#interval_type) . There are two types of interval literals:
+An interval literal represents a constant value of the [interval data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_type) . There are two types of interval literals:
 
-  - [Interval literal with a single datetime part](#interval_literal_single)
-  - [Interval literal with a datetime part range](#interval_literal_range)
+  - [Interval literal with a single datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_single)
+  - [Interval literal with a datetime part range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literal_range)
 
 An interval literal can be used directly inside of the `  SELECT  ` statement and as an argument in some functions that support the interval data type.
 
@@ -823,204 +697,127 @@ An interval literal can be used directly inside of the `  SELECT  ` statement an
 
 Syntax:
 
-``` text
-INTERVAL int64_expression datetime_part
-```
+    INTERVAL int64_expression datetime_part
 
-The single datetime part syntax includes an `  INT64  ` expression and a single [interval-supported datetime part](/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
+The single datetime part syntax includes an `  INT64  ` expression and a single [interval-supported datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) . For example:
 
-``` text
--- 0 years, 0 months, 5 days, 0 hours, 0 minutes, 0 seconds (0-0 5 0:0:0)
-INTERVAL 5 DAY
-
--- 0 years, 0 months, -5 days, 0 hours, 0 minutes, 0 seconds (0-0 -5 0:0:0)
-INTERVAL -5 DAY
-
--- 0 years, 0 months, 0 days, 0 hours, 0 minutes, 1 seconds (0-0 0 0:0:1)
-INTERVAL 1 SECOND
-```
+    -- 0 years, 0 months, 5 days, 0 hours, 0 minutes, 0 seconds (0-0 5 0:0:0)
+    INTERVAL 5 DAY
+    
+    -- 0 years, 0 months, -5 days, 0 hours, 0 minutes, 0 seconds (0-0 -5 0:0:0)
+    INTERVAL -5 DAY
+    
+    -- 0 years, 0 months, 0 days, 0 hours, 0 minutes, 1 seconds (0-0 0 0:0:1)
+    INTERVAL 1 SECOND
 
 When a negative sign precedes the year or month part in an interval literal, the negative sign distributes over the years and months. Or, when a negative sign precedes the time part in an interval literal, the negative sign distributes over the hours, minutes, and seconds. For example:
 
-``` text
--- -2 years, -1 months, 0 days, 0 hours, 0 minutes, and 0 seconds (-2-1 0 0:0:0)
-INTERVAL -25 MONTH
+    -- -2 years, -1 months, 0 days, 0 hours, 0 minutes, and 0 seconds (-2-1 0 0:0:0)
+    INTERVAL -25 MONTH
+    
+    -- 0 years, 0 months, 0 days, -1 hours, -30 minutes, and 0 seconds (0-0 0 -1:30:0)
+    INTERVAL -90 MINUTE
 
--- 0 years, 0 months, 0 days, -1 hours, -30 minutes, and 0 seconds (0-0 0 -1:30:0)
-INTERVAL -90 MINUTE
-```
-
-For more information on how to construct interval with a single datetime part, see [Construct an interval with a single datetime part](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) .
+For more information on how to construct interval with a single datetime part, see [Construct an interval with a single datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) .
 
 #### Interval literal with a datetime part range
 
 Syntax:
 
-``` text
-INTERVAL datetime_parts_string starting_datetime_part TO ending_datetime_part
-```
+    INTERVAL datetime_parts_string starting_datetime_part TO ending_datetime_part
 
-The range datetime part syntax includes a [datetime parts string](/bigquery/docs/reference/standard-sql/data-types#range_datetime_part_interval) , a [starting datetime part](/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) , and an [ending datetime part](/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) .
+The range datetime part syntax includes a [datetime parts string](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#range_datetime_part_interval) , a [starting datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) , and an [ending datetime part](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#interval_datetime_parts) .
 
 For example:
 
-``` text
--- 0 years, 0 months, 0 days, 10 hours, 20 minutes, 30 seconds (0-0 0 10:20:30.520)
-INTERVAL '10:20:30.52' HOUR TO SECOND
-
--- 1 year, 2 months, 0 days, 0 hours, 0 minutes, 0 seconds (1-2 0 0:0:0)
-INTERVAL '1-2' YEAR TO MONTH
-
--- 0 years, 1 month, -15 days, 0 hours, 0 minutes, 0 seconds (0-1 -15 0:0:0)
-INTERVAL '1 -15' MONTH TO DAY
-
--- 0 years, 0 months, 1 day, 5 hours, 30 minutes, 0 seconds (0-0 1 5:30:0)
-INTERVAL '1 5:30' DAY TO MINUTE
-```
+    -- 0 years, 0 months, 0 days, 10 hours, 20 minutes, 30 seconds (0-0 0 10:20:30.520)
+    INTERVAL '10:20:30.52' HOUR TO SECOND
+    
+    -- 1 year, 2 months, 0 days, 0 hours, 0 minutes, 0 seconds (1-2 0 0:0:0)
+    INTERVAL '1-2' YEAR TO MONTH
+    
+    -- 0 years, 1 month, -15 days, 0 hours, 0 minutes, 0 seconds (0-1 -15 0:0:0)
+    INTERVAL '1 -15' MONTH TO DAY
+    
+    -- 0 years, 0 months, 1 day, 5 hours, 30 minutes, 0 seconds (0-0 1 5:30:0)
+    INTERVAL '1 5:30' DAY TO MINUTE
 
 When a negative sign precedes the year or month part in an interval literal, the negative sign distributes over the years and months. Or, when a negative sign precedes the time part in an interval literal, the negative sign distributes over the hours, minutes, and seconds. For example:
 
-``` text
--- -23 years, -2 months, 10 days, -12 hours, -30 minutes, and 0 seconds (-23-2 10 -12:30:0)
-INTERVAL '-23-2 10 -12:30' YEAR TO MINUTE
+    -- -23 years, -2 months, 10 days, -12 hours, -30 minutes, and 0 seconds (-23-2 10 -12:30:0)
+    INTERVAL '-23-2 10 -12:30' YEAR TO MINUTE
+    
+    -- -23 years, -2 months, 10 days, 0 hours, -30 minutes, and 0 seconds (-23-2 10 -0:30:0)
+    SELECT INTERVAL '-23-2 10 -0:30' YEAR TO MINUTE
+    
+    -- Produces an error because the negative sign for minutes must come before the hour.
+    SELECT INTERVAL '-23-2 10 0:-30' YEAR TO MINUTE
+    
+    -- Produces an error because the negative sign for months must come before the year.
+    SELECT INTERVAL '23--2 10 0:30' YEAR TO MINUTE
+    
+    -- 0 years, -2 months, 10 days, 0 hours, 30 minutes, and 0 seconds (-0-2 10 0:30:0)
+    SELECT INTERVAL '-2 10 0:30' MONTH TO MINUTE
+    
+    -- 0 years, 0 months, 0 days, 0 hours, -30 minutes, and -10 seconds (0-0 0 -0:30:10)
+    SELECT INTERVAL '-30:10' MINUTE TO SECOND
 
--- -23 years, -2 months, 10 days, 0 hours, -30 minutes, and 0 seconds (-23-2 10 -0:30:0)
-SELECT INTERVAL '-23-2 10 -0:30' YEAR TO MINUTE
-
--- Produces an error because the negative sign for minutes must come before the hour.
-SELECT INTERVAL '-23-2 10 0:-30' YEAR TO MINUTE
-
--- Produces an error because the negative sign for months must come before the year.
-SELECT INTERVAL '23--2 10 0:30' YEAR TO MINUTE
-
--- 0 years, -2 months, 10 days, 0 hours, 30 minutes, and 0 seconds (-0-2 10 0:30:0)
-SELECT INTERVAL '-2 10 0:30' MONTH TO MINUTE
-
--- 0 years, 0 months, 0 days, 0 hours, -30 minutes, and -10 seconds (0-0 0 -0:30:10)
-SELECT INTERVAL '-30:10' MINUTE TO SECOND
-```
-
-For more information on how to construct interval with a datetime part range, see [Construct an interval with a datetime part range](/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) .
+For more information on how to construct interval with a datetime part range, see [Construct an interval with a datetime part range](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#single_datetime_part_interval) .
 
 ### JSON literals
 
 Syntax:
 
-``` text
-JSON 'json_formatted_data'
-```
+    JSON 'json_formatted_data'
 
 A JSON literal represents [JSON](https://en.wikipedia.org/wiki/JSON) -formatted data.
 
 Example:
 
-``` text
-JSON '
-{
-  "id": 10,
-  "type": "fruit",
-  "name": "apple",
-  "on_menu": true,
-  "recipes":
+    JSON '
     {
-      "salads":
-      [
-        { "id": 2001, "type": "Walnut Apple Salad" },
-        { "id": 2002, "type": "Apple Spinach Salad" }
-      ],
-      "desserts":
-      [
-        { "id": 3001, "type": "Apple Pie" },
-        { "id": 3002, "type": "Apple Scones" },
-        { "id": 3003, "type": "Apple Crumble" }
-      ]
+      "id": 10,
+      "type": "fruit",
+      "name": "apple",
+      "on_menu": true,
+      "recipes":
+        {
+          "salads":
+          [
+            { "id": 2001, "type": "Walnut Apple Salad" },
+            { "id": 2002, "type": "Apple Spinach Salad" }
+          ],
+          "desserts":
+          [
+            { "id": 3001, "type": "Apple Pie" },
+            { "id": 3002, "type": "Apple Scones" },
+            { "id": 3003, "type": "Apple Crumble" }
+          ]
+        }
     }
-}
-'
-```
+    '
 
-A JSON literal represents a constant value of the [JSON data type](/bigquery/docs/reference/standard-sql/data-types#json_type) .
+A JSON literal represents a constant value of the [JSON data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#json_type) .
 
 ## Case sensitivity
 
 GoogleSQL follows these rules for case sensitivity:
 
-<table>
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Case-sensitive?</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Keywords</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Built-in Function names</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>User-Defined Function names</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Table names</td>
-<td>See Notes</td>
-<td>Dataset and table names are case-sensitive unless the <a href="/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list"><code dir="ltr" translate="no">        is_case_insensitive       </code></a> option is set to <code dir="ltr" translate="no">       TRUE      </code> .</td>
-</tr>
-<tr class="odd">
-<td>Column names</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Field names</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Enum type names</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>String values</td>
-<td>Yes</td>
-<td>Any value of type <code dir="ltr" translate="no">       STRING      </code> preserves its case. For example, the result of an expression that produces a <code dir="ltr" translate="no">       STRING      </code> value or a column value that's of type <code dir="ltr" translate="no">       STRING      </code> .</td>
-</tr>
-<tr class="odd">
-<td>String comparisons</td>
-<td>Yes</td>
-<td>However, string comparisons are case-insensitive in <a href="/bigquery/docs/reference/standard-sql/collation-concepts">collations</a> that are case-insensitive. This behavior also applies to operations affected by collation, such as <code dir="ltr" translate="no">       GROUP BY      </code> and <code dir="ltr" translate="no">       DISTINCT      </code> clauses.</td>
-</tr>
-<tr class="even">
-<td>Aliases within a query</td>
-<td>No</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Regular expression matching</td>
-<td>See Notes</td>
-<td>Regular expression matching is case-sensitive by default, unless the expression itself specifies that it should be case-insensitive.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       LIKE      </code> matching</td>
-<td>Yes</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Module statements</td>
-<td>See Notes</td>
-<td>In the statement <code dir="ltr" translate="no">       MODULE x.y.z;      </code> , the identifier path <code dir="ltr" translate="no">       x.y.z      </code> is case-insensitive. However, some contexts like code linter checks might enforce a specific module name based on the module's source file location. In the statement <code dir="ltr" translate="no">       IMPORT MODULE x.y.z;      </code> , the identifier path <code dir="ltr" translate="no">       x.y.z      </code> is case-sensitive in practice because modules are typically loaded from file storage, which treats filenames case-sensitively.</td>
-</tr>
-</tbody>
-</table>
+| Category                       | Case-sensitive? | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Keywords                       | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Built-in Function names        | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| User-Defined Function names    | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Table names                    | See Notes       | Dataset and table names are case-sensitive unless the [`         is_case_insensitive        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list) option is set to `        TRUE       ` .                                                                                                                                                                                                                              |
+| Column names                   | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Field names                    | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Enum type names                | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| String values                  | Yes             | Any value of type `        STRING       ` preserves its case. For example, the result of an expression that produces a `        STRING       ` value or a column value that's of type `        STRING       ` .                                                                                                                                                                                                                                                                      |
+| String comparisons             | Yes             | However, string comparisons are case-insensitive in [collations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) that are case-insensitive. This behavior also applies to operations affected by collation, such as `        GROUP BY       ` and `        DISTINCT       ` clauses.                                                                                                                                                          |
+| Aliases within a query         | No              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Regular expression matching    | See Notes       | Regular expression matching is case-sensitive by default, unless the expression itself specifies that it should be case-insensitive.                                                                                                                                                                                                                                                                                                                                                 |
+| `        LIKE       ` matching | Yes             |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| Module statements              | See Notes       | In the statement `        MODULE x.y.z;       ` , the identifier path `        x.y.z       ` is case-insensitive. However, some contexts like code linter checks might enforce a specific module name based on the module's source file location. In the statement `        IMPORT MODULE x.y.z;       ` , the identifier path `        x.y.z       ` is case-sensitive in practice because modules are typically loaded from file storage, which treats filenames case-sensitively. |
 
 ## Reserved keywords
 
@@ -1156,9 +953,7 @@ You can optionally use a trailing comma ( `  ,  ` ) at the end of a column list 
 
 **Example**
 
-``` text
-SELECT name, release_date, FROM Books
-```
+    SELECT name, release_date, FROM Books
 
 ## Query parameters
 
@@ -1172,11 +967,9 @@ Query parameters can't be used in the SQL body of these statements: `  CREATE FU
 
 Syntax:
 
-``` text
-@parameter_name
-```
+    @parameter_name
 
-A named query parameter is denoted using an [identifier](#identifiers) preceded by the `  @  ` character. Named query parameters can't be used alongside [positional query parameters](#positional_query_parameters) .
+A named query parameter is denoted using an [identifier](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#identifiers) preceded by the `  @  ` character. Named query parameters can't be used alongside [positional query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#positional_query_parameters) .
 
 A named query parameter can start with an identifier or a reserved keyword. An identifier can be unquoted or quoted.
 
@@ -1184,21 +977,17 @@ A named query parameter can start with an identifier or a reserved keyword. An i
 
 This example returns all rows where `  LastName  ` is equal to the value of the named query parameter `  myparam  ` .
 
-``` text
-SELECT * FROM Roster WHERE LastName = @myparam
-```
+    SELECT * FROM Roster WHERE LastName = @myparam
 
 ### Positional query parameters
 
-Positional query parameters are denoted using the `  ?  ` character. Positional parameters are evaluated by the order in which they are passed in. Positional query parameters can't be used alongside [named query parameters](#named_query_parameters) .
+Positional query parameters are denoted using the `  ?  ` character. Positional parameters are evaluated by the order in which they are passed in. Positional query parameters can't be used alongside [named query parameters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#named_query_parameters) .
 
 **Example:**
 
 This query returns all rows where `  LastName  ` and `  FirstName  ` are equal to the values passed into this query. The order in which these values are passed in matters. If the last name is passed in first, followed by the first name, the expected results will not be returned.
 
-``` text
-SELECT * FROM Roster WHERE FirstName = ? and LastName = ?
-```
+    SELECT * FROM Roster WHERE FirstName = ? and LastName = ?
 
 ## Comments
 
@@ -1210,26 +999,18 @@ Use a single-line comment if you want the comment to appear on a line by itself.
 
 **Examples**
 
-``` text
-# this is a single-line comment
-SELECT book FROM library;
-```
+    # this is a single-line comment
+    SELECT book FROM library;
 
-``` text
--- this is a single-line comment
-SELECT book FROM library;
-```
+    -- this is a single-line comment
+    SELECT book FROM library;
 
-``` text
-/* this is a single-line comment */
-SELECT book FROM library;
-```
+    /* this is a single-line comment */
+    SELECT book FROM library;
 
-``` text
-SELECT book FROM library
-/* this is a single-line comment */
-WHERE book = "Ulysses";
-```
+    SELECT book FROM library
+    /* this is a single-line comment */
+    WHERE book = "Ulysses";
 
 ### Inline comments
 
@@ -1237,21 +1018,13 @@ Use an inline comment if you want the comment to appear on the same line as a st
 
 **Examples**
 
-``` text
-SELECT book FROM library; # this is an inline comment
-```
+    SELECT book FROM library; # this is an inline comment
 
-``` text
-SELECT book FROM library; -- this is an inline comment
-```
+    SELECT book FROM library; -- this is an inline comment
 
-``` text
-SELECT book FROM library; /* this is an inline comment */
-```
+    SELECT book FROM library; /* this is an inline comment */
 
-``` text
-SELECT book FROM library /* this is an inline comment */ WHERE book = "Ulysses";
-```
+    SELECT book FROM library /* this is an inline comment */ WHERE book = "Ulysses";
 
 ### Multiline comments
 
@@ -1259,18 +1032,14 @@ Use a multiline comment if you need the comment to span multiple lines. Nested m
 
 **Examples**
 
-``` text
-SELECT book FROM library
-/*
-  This is a multiline comment
-  on multiple lines
-*/
-WHERE book = "Ulysses";
-```
+    SELECT book FROM library
+    /*
+      This is a multiline comment
+      on multiple lines
+    */
+    WHERE book = "Ulysses";
 
-``` text
-SELECT book FROM library
-/* this is a multiline comment
-on two lines */
-WHERE book = "Ulysses";
-```
+    SELECT book FROM library
+    /* this is a multiline comment
+    on two lines */
+    WHERE book = "Ulysses";

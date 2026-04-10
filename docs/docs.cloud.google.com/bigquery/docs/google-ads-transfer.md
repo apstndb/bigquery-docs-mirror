@@ -1,8 +1,8 @@
 # Load Google Ads data into BigQuery
 
-You can load data from Google Ads (formerly known as Google AdWords) to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Google Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Google Ads to BigQuery.
+You can load data from Google Ads (formerly known as Google AdWords) to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Google Ads connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Google Ads to BigQuery.
 
-To learn about recent data source changes, see [BigQuery Data Transfer Service data source change log](/bigquery/docs/transfer-changes) .
+To learn about recent data source changes, see [BigQuery Data Transfer Service data source change log](https://docs.cloud.google.com/bigquery/docs/transfer-changes) .
 
 ## Connector overview
 
@@ -23,26 +23,26 @@ The BigQuery Data Transfer Service for the Google Ads connector supports the fol
 <tr class="odd">
 <td>Supported reports</td>
 <td>The Google Ads connector supports the transfer of data from the reports in <a href="https://developers.google.com/google-ads/api/fields/v22/overview">Google Ads API v22</a> .
-<p>For information about how Google Ads reports are transformed into BigQuery tables and views, see <a href="/bigquery/docs/google-ads-transformation">Google Ads report transformation</a> .</p></td>
+<p>For information about how Google Ads reports are transformed into BigQuery tables and views, see <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transformation">Google Ads report transformation</a> .</p></td>
 </tr>
 <tr class="even">
 <td>Repeat frequency</td>
 <td>The Google Ads connector supports daily data transfers.<br />
 <br />
-By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="#setup-data-transfer">set up your data transfer</a> .</td>
+By default, data transfers are scheduled at the time when the data transfer is created. You can configure the time of data transfer when you <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer">set up your data transfer</a> .</td>
 </tr>
 <tr class="odd">
 <td>Refresh window</td>
-<td>You can schedule your data transfers to retrieve Google Ads data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you <a href="#setup-data-transfer">set up your data transfer</a> .<br />
+<td>You can schedule your data transfers to retrieve Google Ads data from up to 30 days at the time the data transfer is run. You can configure the duration of the refresh window when you <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer">set up your data transfer</a> .<br />
 <br />
 By default, the Google Ads connector has a refresh window of 7 days.<br />
 <br />
-For more information, see <a href="#refresh">Refresh windows</a> .
-<p>Snapshots of <a href="/bigquery/docs/google-ads-transformation#google_ads_match_tables">Match Tables</a> are taken once a day and stored in the partition for the last run date. Match Table snapshots are not updated for backfills or for days loaded using the refresh window.</p></td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#refresh">Refresh windows</a> .
+<p>Snapshots of <a href="https://docs.cloud.google.com/bigquery/docs/google-ads-transformation#google_ads_match_tables">Match Tables</a> are taken once a day and stored in the partition for the last run date. Match Table snapshots are not updated for backfills or for days loaded using the refresh window.</p></td>
 </tr>
 <tr class="even">
 <td>Backfill data availability</td>
-<td><a href="/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
 <br />
 For information about the data retention policy for Google Ads, see <a href="https://support.google.com/google-ads/answer/15188209">Google Ads Data Retention Policy</a> .</td>
 </tr>
@@ -66,20 +66,20 @@ A *refresh window* is the number of days that a data transfer retrieves data whe
 
 When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window. For example, if the refresh window is three days and you run the data transfer for the first time, the BigQuery Data Transfer Service retrieves all source data within three days.
 
-To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Limitations
 
-  - The maximum frequency that you can configure a Google Ads data transfer for is once every 24 hours. By default, a transfer starts at the time that you create the transfer. However, you can configure the transfer start time when you [create your transfer](/bigquery/docs/google-ads-transfer#setup-data-transfer) .
+  - The maximum frequency that you can configure a Google Ads data transfer for is once every 24 hours. By default, a transfer starts at the time that you create the transfer. However, you can configure the transfer start time when you [create your transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) .
   - The BigQuery Data Transfer Service does not support incremental data transfers during a Google Ads transfer. When you specify a date for a data transfer, all of the data that is available for that date is transferred.
 
 ## Before you begin
 
 Before you create a Google Ads data transfer, do the following:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery Data Transfer Service dataset](/bigquery/docs/datasets) to store the Google Ads data.
-  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` permission. Pub/Sub permissions are not required if you set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery Data Transfer Service dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Google Ads data.
+  - If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` permission. Pub/Sub permissions are not required if you set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -87,7 +87,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -105,9 +105,9 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Google Ads roles
 
@@ -124,6 +124,8 @@ To create a data transfer for Google Ads reporting, select one of the following 
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -133,12 +135,12 @@ To create a data transfer for Google Ads reporting, select one of the following 
     
     1.  For **Customer ID** , enter your Google Ads customer ID.
     2.  For **Report type** , select either **Standard** or **Custom** .
-          - If you've selected **Standard** , the transfer includes the standard set of reports and fields as detailed in [Google Ads report transformation](/bigquery/docs/google-ads-transformation) .
+          - If you've selected **Standard** , the transfer includes the standard set of reports and fields as detailed in [Google Ads report transformation](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation) .
               - Optional: Select options to exclude removed or deactivated items and include tables new to Google Ads.
               - Optional: Enter a comma-separated list of tables to include, for example, `  Campaign, AdGroup  ` . Prefix this list with the `  -  ` character to exclude certain tables, for example `  -Campaign, AdGroup  ` . All tables are included by default.
-              - Optional: Select the option to include tables specific to PMax reports. For more information about PMax support, see [PMax support](/bigquery/docs/google-ads-transfer#pmax-support) .
+              - Optional: Select the option to include tables specific to PMax reports. For more information about PMax support, see [PMax support](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#pmax-support) .
               - Optional: For **Refresh window** , enter a value between 1 and 30.
-          - If you've selected **Custom** , enter an output table and a Google Ads query for each [custom report](/bigquery/docs/google-ads-transfer#custom_reports) you want to include in this transfer.
+          - If you've selected **Custom** , enter an output table and a Google Ads query for each [custom report](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) you want to include in this transfer.
               - Optional: Click **Add query** to add a new custom report.
               - Optional: For **Refresh window** , enter a value between 1 and 30.
 
@@ -154,15 +156,15 @@ To create a data transfer for Google Ads reporting, select one of the following 
           - On-demand
       - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
-8.  In the **Service Account** menu, select a [service account](/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your data transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](/bigquery/docs/use-service-accounts) .
+8.  In the **Service Account** menu, select a [service account](https://docs.cloud.google.com/iam/docs/service-account-overview) from the service accounts associated with your Google Cloud project. You can associate a service account with your data transfer instead of using your user credentials. For more information about using service accounts with data transfers, see [Use service accounts](https://docs.cloud.google.com/bigquery/docs/use-service-accounts) .
     
-      - If you signed in with a [federated identity](/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
-      - The service account must have the [required permissions](/bigquery/docs/google-ads-transfer#required_permissions) .
+      - If you signed in with a [federated identity](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , then a service account is required to create a transfer. If you signed in with a [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) , then a service account for the transfer is optional.
+      - The service account must have the [required permissions](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#required_permissions) .
 
 9.  Optional: In the **Notification options** section:
     
       - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification if a transfer run fails.
-      - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer.
+      - Click the toggle to enable Pub/Sub notifications. For **Select a Cloud Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview#types) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 10. Click **Save** .
 
@@ -179,13 +181,13 @@ The following flags are optional:
 
   - `  --project_id  ` : Specifies which project to use. If the flag is not specified, the default project is used.
   - `  --table_filter  ` : Specifies which tables to include in the data transfer. If the flag is not specified, all tables are included. To include only specific tables, use a comma-separated list of values (for example, `  Ad  ` , `  Campaign  ` , `  AdGroup  ` ). To exclude specific tables, prefix the values with a hyphen ( `  -  ` ) (for example, `  -Ad  ` , `  Campaign  ` , `  AdGroup  ` ).
-  - `  --schedule  ` : Specifies how often the query runs. If you don't specify `  --schedule  ` , the default is set to `  every 24 hours  ` . For information about the schedule syntax, see [Formatting the schedule](/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
+  - `  --schedule  ` : Specifies how often the query runs. If you don't specify `  --schedule  ` , the default is set to `  every 24 hours  ` . For information about the schedule syntax, see [Formatting the schedule](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) .
   - `  --refresh_window_days  ` : Specifies the refresh window for a transfer configuration in days. The default value is `  7  ` .
   - `  --service_account_name  ` : Specifies a service account to use for the Google Ads transfer authentication instead of your user account.
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq mk \
 --transfer_config \
 --project_id=PROJECT_ID \
@@ -206,27 +208,25 @@ Where:
   - NAME is the display name for the data transfer configuration. The transfer name can be any value that lets you identify the transfer if you need to modify it later.
   - PARAMETERS contains the following JSON parameters for the transfer configuration: `  --params='{"param":"param_value"}'  ` .
       - `  customer_id  ` : enter your Google Ads customer ID. This field is required.
-      - `  custom_report_table_names  ` : a list of table names for the [custom reports](#custom_reports) included in this transfer. This list corresponds to the queries in `  custom_report_queries  ` . The length of this list must match the length of the list in `  custom_report_queries  ` .
-      - `  custom_report_queries  ` : a list of [Google Ads Query Language (GAQL) queries](#custom_reports) for the custom reports included in this transfer. This list corresponds to the names in `  custom_report_table_names  ` . The length of this list must match the length of the list in `  custom_report_table_names  ` .
+      - `  custom_report_table_names  ` : a list of table names for the [custom reports](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) included in this transfer. This list corresponds to the queries in `  custom_report_queries  ` . The length of this list must match the length of the list in `  custom_report_queries  ` .
+      - `  custom_report_queries  ` : a list of [Google Ads Query Language (GAQL) queries](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#custom_reports) for the custom reports included in this transfer. This list corresponds to the names in `  custom_report_table_names  ` . The length of this list must match the length of the list in `  custom_report_table_names  ` .
       - Optional: set the `  exclude_removed_items  ` parameter to `  true  ` to prevent removed or disabled entities and metrics from being transferred.
   - DATA\_SOURCE is the data source — `  google_ads  ` .
   - TABLES is the comma-separated list of tables to include or exclude from the data transfer.
   - SCHEDULE is how often you want the query to run. If `  --schedule  ` isn't specified, the default is every 24 hours, starting from the time the transfer is created.
   - REFRESH\_DAYS is an integer that specifies the refresh window for a transfer configuration in days. The default value is `  7  ` .
-  - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account must be owned by the same `  project_id  ` used to create the transfer and it must have all of the [required permissions](#required_permissions) .
+  - SERVICE\_ACCOUNT\_NAME is the service account name used to authenticate your transfer. The service account must be owned by the same `  project_id  ` used to create the transfer and it must have all of the [required permissions](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#required_permissions) .
 
 **Caution:** You can't configure notifications using the command-line tool.
 
 For example, the following command creates a Google Ads data transfer named `  My Transfer  ` using Customer ID `  123-123-1234  ` and target dataset `  mydataset  ` . The data transfer is created in the default project:
 
-``` text
-bq mk \
---transfer_config \
---target_dataset=mydataset \
---display_name='My Transfer' \
---params='{"customer_id":"123-123-1234","exclude_removed_items":"true"}' \
---data_source=google_ads
-```
+    bq mk \
+    --transfer_config \
+    --target_dataset=mydataset \
+    --display_name='My Transfer' \
+    --params='{"customer_id":"123-123-1234","exclude_removed_items":"true"}' \
+    --data_source=google_ads
 
 The first time you run the command, you receive a message like the following:
 
@@ -236,70 +236,68 @@ Follow the instructions in the message and paste the authentication code on the 
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create ads(formerly AdWords) transfer config
-public class CreateAdsTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    // the customer_id only allows digits and hyphen ('-').
-    String customerId = "012-345-6789";
-    String refreshWindow = "100";
-    Map<String, Value> params = new HashMap<>();
-    params.put("customer_id", Value.newBuilder().setStringValue(customerId).build());
-    params.put("refreshWindow", Value.newBuilder().setStringValue(refreshWindow).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Ads Transfer Config Name")
-            .setDataSourceId("adwords")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createAdsTransfer(projectId, transferConfig);
-  }
-
-  public static void createAdsTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Ads transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.print("Ads transfer was not created." + ex.toString());
+    import com.google.api.gax.rpc.ApiException;
+    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+    import com.google.protobuf.Struct;
+    import com.google.protobuf.Value;
+    import java.io.IOException;
+    import java.util.HashMap;
+    import java.util.Map;
+    
+    // Sample to create ads(formerly AdWords) transfer config
+    public class CreateAdsTransfer {
+    
+      public static void main(String[] args) throws IOException {
+        // TODO(developer): Replace these variables before running the sample.
+        final String projectId = "MY_PROJECT_ID";
+        String datasetId = "MY_DATASET_ID";
+        // the customer_id only allows digits and hyphen ('-').
+        String customerId = "012-345-6789";
+        String refreshWindow = "100";
+        Map<String, Value> params = new HashMap<>();
+        params.put("customer_id", Value.newBuilder().setStringValue(customerId).build());
+        params.put("refreshWindow", Value.newBuilder().setStringValue(refreshWindow).build());
+        TransferConfig transferConfig =
+            TransferConfig.newBuilder()
+                .setDestinationDatasetId(datasetId)
+                .setDisplayName("Your Ads Transfer Config Name")
+                .setDataSourceId("adwords")
+                .setParams(Struct.newBuilder().putAllFields(params).build())
+                .build();
+        createAdsTransfer(projectId, transferConfig);
+      }
+    
+      public static void createAdsTransfer(String projectId, TransferConfig transferConfig)
+          throws IOException {
+        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+          ProjectName parent = ProjectName.of(projectId);
+          CreateTransferConfigRequest request =
+              CreateTransferConfigRequest.newBuilder()
+                  .setParent(parent.toString())
+                  .setTransferConfig(transferConfig)
+                  .build();
+          TransferConfig config = client.createTransferConfig(request);
+          System.out.println("Ads transfer created successfully :" + config.getName());
+        } catch (ApiException ex) {
+          System.out.print("Ads transfer was not created." + ex.toString());
+        }
+      }
     }
-  }
-}
-```
 
 ## Manually trigger a Google Ads transfer
 
-When you [manually trigger a transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) for Google Ads, snapshots of Match Tables are taken once a day and stored in the partition for the latest run date. When you trigger a manual transfer, Match Table snapshots for the following tables are not updated:
+When you [manually trigger a transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) for Google Ads, snapshots of Match Tables are taken once a day and stored in the partition for the latest run date. When you trigger a manual transfer, Match Table snapshots for the following tables are not updated:
 
   - Ad
   - AdGroup
@@ -332,9 +330,9 @@ When you [manually trigger a transfer](/bigquery/docs/working-with-transfers#man
 
 ## Custom reports
 
-The BigQuery Data Transfer Service for Google Ads connector also supports the use of custom reports using Google Ads Query Language (GAQL) queries in the Google Ads transfer configuration. These custom reports ingest data from all resources available in the [Google Ads API version supported by the BigQuery Data Transfer Service](#connector_overview) . For more information about using and validating a GAQL query, see [Google Ads Query Builder](https://developers.google.com/google-ads/api/fields/v22/overview_query_builder) .
+The BigQuery Data Transfer Service for Google Ads connector also supports the use of custom reports using Google Ads Query Language (GAQL) queries in the Google Ads transfer configuration. These custom reports ingest data from all resources available in the [Google Ads API version supported by the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#connector_overview) . For more information about using and validating a GAQL query, see [Google Ads Query Builder](https://developers.google.com/google-ads/api/fields/v22/overview_query_builder) .
 
-You can specify custom reports when you [Create a Google Ads transfer](/bigquery/docs/google-ads-transfer#setup-data-transfer) .
+You can specify custom reports when you [Create a Google Ads transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) .
 
 ### Custom reports limitations
 
@@ -342,12 +340,12 @@ Custom reports with the Google Ads connector are subject to the following limita
 
   - The Google Ads connector doesn't support `  WHERE  ` , `  ORDER BY  ` , `  LIMIT  ` , and `  PARAMETERS  ` clauses. Your GAQL query should be in the format similar to the following: `  SELECT FIELD_NAME , FIELD_NAME ,... FROM RESOURCE_NAME  ` .
   - The Google Ads connector automatically appends `  WHERE segments.date = run_date  ` when there is a core date segment (for example, `  segments.date  ` , `  segments.week  ` , `  segments.month  ` , `  segments.quarter  ` , `  segments.year  ` ) in the query. This can cause the [Google Ads Query Validator](https://developers.google.com/google-ads/api/fields/v22/query_validator) to return an error, for example, `  The filtering conditions in the WHERE clause must combine to form a valid, finite date range composed of the core date segments ...  ` . You can safely ignore these errors.
-  - GAQL queries without a [`  segments.date  ` field](https://developers.google.com/google-ads/api/fields/v22/segments#segments.date) acts as [match tables](/bigquery/docs/google-ads-transformation#google_ads_match_tables) , which are only updated once per day and are not supported in backfill runs. If you want to backfill data, you must include a `  segments.date  ` field in the GAQL query.
+  - GAQL queries without a [`  segments.date  ` field](https://developers.google.com/google-ads/api/fields/v22/segments#segments.date) acts as [match tables](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation#google_ads_match_tables) , which are only updated once per day and are not supported in backfill runs. If you want to backfill data, you must include a `  segments.date  ` field in the GAQL query.
   - The Google Ads connector supports up to 100 custom reports in a single transfer.
 
 ## Performance Max (PMax) campaigns
 
-The Google Ads connector lets you export [PMax campaigns](https://support.google.com/google-ads/answer/10724817) data. You must select the **Include PMax Campaign Tables** checkbox when [creating a data transfer](#setup-data-transfer) , as PMax data is not exported by default.
+The Google Ads connector lets you export [PMax campaigns](https://support.google.com/google-ads/answer/10724817) data. You must select the **Include PMax Campaign Tables** checkbox when [creating a data transfer](https://docs.cloud.google.com/bigquery/docs/google-ads-transfer#setup-data-transfer) , as PMax data is not exported by default.
 
 Including PMax data removes `  ad_group  ` fields from certain tables and includes new tables. You cannot include `  ad_group  ` fields because the Google Ads API filters the PMax data.
 
@@ -403,7 +401,7 @@ The following list shows the Customer IDs linked to particular Google Ads manage
           - 9999 — Customer ID
       - 0000 — Customer ID
 
-Each Customer ID linked to a manager account appears in each report. For more information about the Google Ads reporting structure in BigQuery Data Transfer Service, see [Google Ads report transformation](/bigquery/docs/google-ads-transformation) .
+Each Customer ID linked to a manager account appears in each report. For more information about the Google Ads reporting structure in BigQuery Data Transfer Service, see [Google Ads report transformation](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation) .
 
 #### Transfer configuration for Customer ID 1234567890
 
@@ -455,23 +453,23 @@ A transfer configuration for Customer ID 0000 would generate data transfer runs 
 
 ### Migrate Google Ads data to MCCs
 
-To migrate your existing Google Ads data in BigQuery Data Transfer Service to the MCC structure, you can [set up a backfill](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer_or_backfill) to add your existing data to the tables created by the transfer configuration linked to the manager account. Note that when you schedule a backfill, match tables are not updated.
+To migrate your existing Google Ads data in BigQuery Data Transfer Service to the MCC structure, you can [set up a backfill](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer_or_backfill) to add your existing data to the tables created by the transfer configuration linked to the manager account. Note that when you schedule a backfill, match tables are not updated.
 
 ## Troubleshoot Google Ads transfer setup
 
-If you are having issues setting up your data transfer, see [Google Ads transfer issues](/bigquery/docs/transfer-troubleshooting#ads-transfer) in [Troubleshooting transfer configurations](/bigquery/docs/transfer-troubleshooting) .
+If you are having issues setting up your data transfer, see [Google Ads transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#ads-transfer) in [Troubleshooting transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
 
 ## Query your data
 
-When your data is transferred to BigQuery Data Transfer Service, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery Data Transfer Service, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ## Google Ads sample queries
 
 You can use the following Google Ads sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Google Ads data with BigQuery Data Transfer Service. For additional questions about what you can do with these reports, contact your Google Ads technical representative.
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ### Campaign performance
 
@@ -479,7 +477,7 @@ The following sample query analyzes Google Ads campaign performance for the past
 
 ### Console
 
-``` text
+``` notranslate
 SELECT
   c.customer_id,
   c.campaign_name,
@@ -505,7 +503,7 @@ ORDER BY
 
 ### bq
 
-``` text
+``` notranslate
   bq query --use_legacy_sql=false '
   SELECT
     c.customer_id,
@@ -541,7 +539,7 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### Console
 
-``` text
+``` 
   SELECT
     c.campaign_status AS CampaignStatus,
     a.ad_group_status AS AdGroupStatus,
@@ -566,7 +564,7 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### bq
 
-``` text
+``` notranslate
   bq query --use_legacy_sql=false '
   SELECT
     c.campaign_status AS CampaignStatus,

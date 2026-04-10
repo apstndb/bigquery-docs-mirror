@@ -1,6 +1,6 @@
 # EFFECTIVE\_PROJECT\_OPTIONS view
 
-You can query the `  INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS  ` view to retrieve real-time metadata about BigQuery effective project options. This view contains configuration options that are set at the organization or project level. If the same configuration option is set at both the organization and project level, the project configuration value is shown. To view the default values for a configuration option, see [configuration settings](/bigquery/docs/default-configuration#configuration-settings) .
+You can query the `  INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS  ` view to retrieve real-time metadata about BigQuery effective project options. This view contains configuration options that are set at the organization or project level. If the same configuration option is set at both the organization and project level, the project configuration value is shown. To view the default values for a configuration option, see [configuration settings](https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings) .
 
 ## Required permissions
 
@@ -10,7 +10,7 @@ The following predefined IAM role includes the permissions that you need in orde
 
   - `  roles/bigquery.jobUser  `
 
-For more information about granular BigQuery permissions, see [roles and permissions](/bigquery/docs/access-control) .
+For more information about granular BigQuery permissions, see [roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -82,47 +82,14 @@ The `  INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS  ` view has the following sc
 
 ##### Options table
 
-<table>
-<thead>
-<tr class="header">
-<th><code dir="ltr" translate="no">       option_name      </code></th>
-<th><code dir="ltr" translate="no">       option_type      </code></th>
-<th><code dir="ltr" translate="no">       option_value      </code></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_time_zone      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The effective default time zone for this project.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       default_kms_key_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The effective default key name for this project.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_query_job_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td>The effective default query timeout in milliseconds for this project.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       default_interactive_query_queue_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The effective default timeout in milliseconds for queued interactive queries for this project.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       default_batch_query_queue_timeout_ms      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The effective default timeout in milliseconds for queued batch queries for this project.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       enable_reservation_based_fairness      </code></td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td>Use reservation-based fairness as opposed to project-based fairness.</td>
-</tr>
-</tbody>
-</table>
+| `        option_name       `                                | `        option_type       ` | `        option_value       `                                                                  |
+| ----------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------- |
+| `        default_time_zone       `                          | `        STRING       `      | The effective default time zone for this project.                                              |
+| `        default_kms_key_name       `                       | `        STRING       `      | The effective default key name for this project.                                               |
+| `        default_query_job_timeout_ms       `               | `        INT64       `       | The effective default query timeout in milliseconds for this project.                          |
+| `        default_interactive_query_queue_timeout_ms       ` | `        STRING       `      | The effective default timeout in milliseconds for queued interactive queries for this project. |
+| `        default_batch_query_queue_timeout_ms       `       | `        STRING       `      | The effective default timeout in milliseconds for queued batch queries for this project.       |
+| `        enable_reservation_based_fairness       `          | `        BOOL       `        | Use reservation-based fairness as opposed to project-based fairness.                           |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -132,34 +99,21 @@ This view contains currently running sessions and the history of sessions comple
 
 ## Scope and syntax
 
-Queries against this view must have a [region qualifier](/bigquery/docs/information-schema-intro#syntax) .
+Queries against this view must have a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) .
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       `region-               REGION              `.INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS      </code></td>
-<td>Configuration options within the specified project.</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                    | Resource scope                                      | Region scope               |
+| ------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | -------------------------- |
+| ``        `region-               REGION              `.INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS       `` | Configuration options within the specified project. | `          REGION        ` |
 
 Replace the following:
 
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, `  region-us  ` .
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  region-us  ` .
 
 ## Examples
 
 The following example retrieves the `  OPTION_NAME  ` , `  OPTION_TYPE  ` , `  OPTION_VALUE  ` , `  OPTION_SET_LEVEL  ` , and `  OPTION_SET_ON_ID  ` columns from the `  INFORMATION_SCHEMA.EFFECTIVE_PROJECT_OPTIONS  ` view.
 
-``` text
+``` notranslate
 SELECT
   option_name, option_type, option_value, option_set_level, option_set_on_id
 FROM
@@ -170,7 +124,7 @@ FROM
 
 The result is similar to the following:
 
-``` text
+``` 
   +--------------------------------------------+-------------+---------------------+------------------+--------------------+
   | option_name                                | option_type | option_value        | option_set_level | option_set_on_id   |
   +--------------------------------------------+-------------+---------------------+------------------+--------------------+

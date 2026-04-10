@@ -4,9 +4,9 @@ A table function, also called a table-valued function (TVF), is a user-defined f
 
 ## Create table functions
 
-To create a table function, use the [`  CREATE TABLE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `  INT64  ` parameter and uses this value inside a `  WHERE  ` clause in a query over a [public dataset](/bigquery/public-data) called `  bigquery-public-data.usa_names.usa_1910_current  ` :
+To create a table function, use the [`  CREATE TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_function_statement) statement. A table function contains a query that produces a table. The function returns the query result. The following table function takes an `  INT64  ` parameter and uses this value inside a `  WHERE  ` clause in a query over a [public dataset](https://docs.cloud.google.com/bigquery/public-data) called `  bigquery-public-data.usa_names.usa_1910_current  ` :
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year(y INT64)
 AS (
   SELECT year, name, SUM(number) AS total
@@ -18,7 +18,7 @@ AS (
 
 To filter in other ways, you can pass multiple parameters to a table function. The following table function filters the data by year and name prefix:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE FUNCTION mydataset.names_by_year_and_prefix(
   y INT64, z STRING)
 AS (
@@ -35,7 +35,7 @@ AS (
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Note: To request support or provide feedback for this feature, email <bq-dcr-eng@google.com> .
 
@@ -43,7 +43,7 @@ You can set TVF parameters to be tables. Following the table parameter name, you
 
 The following table function returns a table that contains total sales for `  item_name  ` from the `  orders  ` table:
 
-``` text
+``` notranslate
 CREATE TABLE FUNCTION mydataset.compute_sales (
   orders TABLE<sales INT64, item STRING>, item_name STRING)
 AS (
@@ -62,47 +62,39 @@ If a table function parameter matches the name of a table column, it can create 
 
 You can call a table function in any context where a table is valid. The following example calls the `  mydataset.names_by_year  ` function in the `  FROM  ` clause of a `  SELECT  ` statement:
 
-``` text
-SELECT * FROM mydataset.names_by_year(1950)
-  ORDER BY total DESC
-  LIMIT 5
-```
+    SELECT * FROM mydataset.names_by_year(1950)
+      ORDER BY total DESC
+      LIMIT 5
 
 The results look like the following:
 
-``` text
-+------+--------+-------+
-| year |  name  | total |
-+------+--------+-------+
-| 1950 | James  | 86447 |
-| 1950 | Robert | 83717 |
-| 1950 | Linda  | 80498 |
-| 1950 | John   | 79561 |
-| 1950 | Mary   | 65546 |
-+------+--------+-------+
-```
+    +------+--------+-------+
+    | year |  name  | total |
+    +------+--------+-------+
+    | 1950 | James  | 86447 |
+    | 1950 | Robert | 83717 |
+    | 1950 | Linda  | 80498 |
+    | 1950 | John   | 79561 |
+    | 1950 | Mary   | 65546 |
+    +------+--------+-------+
 
 You can join the output from a table function with another table:
 
-``` text
-SELECT *
-  FROM `bigquery-public-data.samples.shakespeare` AS s
-  JOIN mydataset.names_by_year(1950) AS n
-  ON n.name = s.word
-```
+    SELECT *
+      FROM `bigquery-public-data.samples.shakespeare` AS s
+      JOIN mydataset.names_by_year(1950) AS n
+      ON n.name = s.word
 
-You can also use a table function in a [subquery](/bigquery/docs/reference/standard-sql/subqueries#array_subquery_concepts) :
+You can also use a table function in a [subquery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/subqueries#array_subquery_concepts) :
 
-``` text
-SELECT ARRAY(
-  SELECT name FROM mydataset.names_by_year(1950)
-  ORDER BY total DESC
-  LIMIT 5)
-```
+    SELECT ARRAY(
+      SELECT name FROM mydataset.names_by_year(1950)
+      ORDER BY total DESC
+      LIMIT 5)
 
 When you call a table function that has a table parameter, you must use the `  TABLE  ` keyword before the name of the table argument. The table argument can have columns not listed in the table parameter schema:
 
-``` text
+``` notranslate
 CREATE TABLE FUNCTION mydataset.compute_sales (
   orders TABLE<sales INT64, item STRING>, item_name STRING)
 AS (
@@ -130,26 +122,24 @@ FROM mydataset.compute_sales(TABLE my_orders, "apple");
 
 ## List table functions
 
-Table functions are a type of routine. To list all of the routines in a dataset, see [List routines](/bigquery/docs/routines#list_routines) .
+Table functions are a type of routine. To list all of the routines in a dataset, see [List routines](https://docs.cloud.google.com/bigquery/docs/routines#list_routines) .
 
 ## Delete table functions
 
-To delete a table function, use the [`  DROP TABLE FUNCTION  `](/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function) statement:
+To delete a table function, use the [`  DROP TABLE FUNCTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_table_function) statement:
 
-``` text
-DROP TABLE FUNCTION mydataset.names_by_year
-```
+    DROP TABLE FUNCTION mydataset.names_by_year
 
 ## Authorize routines
 
-You can authorize table functions as *routines* . Authorized routines let you share query results with specific users or groups without giving them access to the underlying tables that generated the results. For example, an authorized routine can compute an aggregation over data or look up a table value and use that value in a computation. For more information, see [Authorized routines](/bigquery/docs/authorized-routines) .
+You can authorize table functions as *routines* . Authorized routines let you share query results with specific users or groups without giving them access to the underlying tables that generated the results. For example, an authorized routine can compute an aggregation over data or look up a table value and use that value in a computation. For more information, see [Authorized routines](https://docs.cloud.google.com/bigquery/docs/authorized-routines) .
 
 ## Limitations
 
-  - The query body must be a `  SELECT  ` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
+  - The query body must be a `  SELECT  ` statement and cannot modify anything. For example, data definition language (DDL) and data manipulation language (DML) statements are not allowed in table functions. If you need side-effects, consider writing a [procedure](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_procedure) instead.
 
   - Table functions must be stored in the same location as the tables they reference.
 
 ## Quotas
 
-For more information about table function quotas and limits, see [Quotas and limits](/bigquery/quotas#table_function_limits) .
+For more information about table function quotas and limits, see [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas#table_function_limits) .

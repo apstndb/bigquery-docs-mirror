@@ -6,9 +6,9 @@ This document describes the `  ML.EVALUATE  ` function, which lets you evaluate 
 
 You can use the `  ML.EVALUATE  ` function with all model types except for the following:
 
-  - [Imported TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
-  - [Remote models over Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
-  - [Remote models over embedding models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
+  - [Imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow)
+  - [Remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service)
+  - [Remote models over embedding models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model)
 
 ## Syntax
 
@@ -16,7 +16,7 @@ The `  ML.EVALUATE  ` function syntax differs depending on the type of model tha
 
 ### Times series
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -41,19 +41,19 @@ ML.EVALUATE(
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
+    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
 
 <!-- end list -->
 
   - `  PERFORM_AGGREGATION  ` : a `  BOOL  ` value that indicates the level of evaluation for forecasting accuracy. If you specify `  TRUE  ` , then the forecasting accuracy is on the time series level. If you specify `  FALSE  ` , the forecasting accuracy is on the timestamp level. The default value is `  TRUE  ` .
 
-  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of forecasted time points against which the evaluation metrics are computed. The default value is the horizon value specified in the [`  CREATE MODEL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for the time series model, or `  1000  ` if unspecified. When evaluating multiple time series at the same time, this parameter applies to each time series.
+  - `  HORIZON  ` : an `  INT64  ` value that specifies the number of forecasted time points against which the evaluation metrics are computed. The default value is the horizon value specified in the [`  CREATE MODEL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) statement for the time series model, or `  1000  ` if unspecified. When evaluating multiple time series at the same time, this parameter applies to each time series.
     
     You can only use the `  HORIZON  ` argument when the following conditions are met:
     
@@ -78,7 +78,7 @@ For `  ARIMA_PLUS  ` and `  ARIMA_PLUS_XREG  ` models, the output columns differ
 
 ### Classification & regression
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -102,15 +102,15 @@ ML.EVALUATE(
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
     The table must have a column that matches the label column name that is provided during model training. You can provide this value by using the `  input_label_cols  ` option during model training. If `  input_label_cols  ` is unspecified, the column named `  label  ` in the training data is used.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
+    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
     
     The query must have a column that matches the label column name that is provided during model training. You can provide this value by using the `  input_label_cols  ` option during model training. If `  input_label_cols  ` is unspecified, the column named `  label  ` in the training data is used.
 
@@ -128,7 +128,7 @@ ML.EVALUATE(
 
 ### Remote over Gemini
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -154,7 +154,7 @@ ML.EVALUATE(
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If the remote model isn't configured to use [supervised tuning](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , the following column naming requirements apply:
+    If the remote model isn't configured to use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , the following column naming requirements apply:
     
       - The table must have a column named `  input_text  ` that contains the prompt text to use when evaluating the model.
       - The table must have a column named `  output_text  ` that contains the generated text that you would expect to be returned by the model.
@@ -167,13 +167,13 @@ ML.EVALUATE(
         
         You can find information about the label and prompt columns by looking at the model schema information in the Google Cloud console.
     
-    For more information, see [`  AS SELECT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) .
+    For more information, see [`  AS SELECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) .
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If the remote model isn't configured to use [supervised tuning](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , the following column naming requirements apply:
+    If the remote model isn't configured to use [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , the following column naming requirements apply:
     
       - The query must have a column named `  input_text  ` that contains the prompt text to use when evaluating the model.
       - The query must have a column named `  output_text  ` that contains the generated text that you would expect to be returned by the model.
@@ -186,7 +186,7 @@ ML.EVALUATE(
         
         You can find information about the label and prompt columns by looking at the model schema information in the Google Cloud console.
     
-    For more information, see [`  AS SELECT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) .
+    For more information, see [`  AS SELECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) .
 
 <!-- end list -->
 
@@ -223,7 +223,7 @@ ML.EVALUATE(
 
 ### Remote over Claude
 
-``` text
+``` notranslate
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -254,7 +254,7 @@ ML.EVALUATE(
       - The table must have a column named `  input_text  ` that contains the prompt text to use when evaluating the model.
       - The table must have a column named `  output_text  ` that contains the generated text that you would expect to be returned by the model.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
@@ -298,7 +298,7 @@ ML.EVALUATE(
 
 ### Remote over Llama or Mistral AI
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -329,7 +329,7 @@ ML.EVALUATE(
       - The table must have a column named `  input_text  ` that contains the prompt text to use when evaluating the model.
       - The table must have a column named `  output_text  ` that contains the generated text that you would expect to be returned by the model.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
@@ -373,7 +373,7 @@ ML.EVALUATE(
 
 ### Remote over open
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -405,7 +405,7 @@ ML.EVALUATE(
       - The table must have a column named `  input_text  ` that contains the prompt text to use when evaluating the model.
       - The table must have a column named `  output_text  ` that contains the generated text that you would expect to be returned by the model.
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
@@ -457,7 +457,7 @@ ML.EVALUATE(
 
 ### All other models
 
-``` sql
+``` lang-sql
 ML.EVALUATE(
   MODEL `PROJECT_ID.DATASET.MODEL`
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }],
@@ -481,13 +481,13 @@ ML.EVALUATE(
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If you specify a `  TABLE  ` value, the input column names in the table must match the column names in the model, and their types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
 
-  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
     If you don't specify a table or query to provide input data, the evaluation metrics that are generated for the model during training are returned.
     
-    If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
+    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then you can only specify the input columns present in the `  TRANSFORM  ` clause in the query.
 
 <!-- end list -->
 
@@ -713,7 +713,7 @@ When you specify the `  QUESTION_ANSWERING  ` task type, the following columns a
 
 `  ML.EVALUATE  ` returns the following column for PCA models:
 
-  - `  total_explained_variance_ratio  ` : a `  FLOAT64  ` value that contains the percentage of the cumulative variance explained by all the returned principal components. For more information, see [the `  ML.PRINCIPAL_COMPONENT_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info) .
+  - `  total_explained_variance_ratio  ` : a `  FLOAT64  ` value that contains the percentage of the cumulative variance explained by all the returned principal components. For more information, see [the `  ML.PRINCIPAL_COMPONENT_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-principal-component-info) .
 
 ### Autoencoder
 
@@ -727,7 +727,7 @@ When you specify the `  QUESTION_ANSWERING  ` task type, the following columns a
 
 `  ML.EVALUATE  ` is subject to the following limitations:
 
-  - `  ML.EVALUATE  ` doesn't support [imported TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [remote models over Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) .
+  - `  ML.EVALUATE  ` doesn't support [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) or [remote models over Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) .
   - For remote models over Vertex AI endpoints, `  ML.EVALUATE  ` fetches evaluation result from the Vertex AI endpoint and doesn't take any input data.
 
 ## Costs
@@ -735,7 +735,7 @@ When you specify the `  QUESTION_ANSWERING  ` task type, the following columns a
 When used with remote models over Vertex AI LLMs, `  ML.EVALUATE  ` costs are calculated based on the following:
 
   - The bytes processed from the input table. These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - The input to and output from the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](/vertex-ai/generative-ai/pricing) .
+  - The input to and output from the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing) .
 
 ## Examples
 
@@ -745,7 +745,7 @@ The following examples show how to use `  ML.EVALUATE  ` .
 
 The following query evaluates a model with no input data specified:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -756,7 +756,7 @@ FROM
 
 The following query evaluates a model with input data and a custom threshold of `  0.55  ` :
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -775,7 +775,7 @@ FROM
 
 The following query evaluates the 30-point forecasting accuracy for a time series model:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -793,7 +793,7 @@ FROM
 
 The following query evaluates the forecasting accuracy for each of the 30 forecasted points of a time series model. It also computes the prediction interval based on a confidence level of `  0.9  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -812,7 +812,7 @@ FROM
 
 The following query evaluates the forecasting accuracy for each of the 30 forecasted points of a time series model. It also computes the prediction interval based on a confidence level of `  0.9  ` . Note that you need to include the side features for the evaluation data.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -833,7 +833,7 @@ FROM
 
 The following query evaluates the LLM text generation accuracy for the classification task type for each label from the evaluation table.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -849,5 +849,5 @@ FROM
 
 ## What's next
 
-  - For more information about model evaluation, see [BigQuery ML model evaluation overview](/bigquery/docs/evaluate-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model evaluation, see [BigQuery ML model evaluation overview](https://docs.cloud.google.com/bigquery/docs/evaluate-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

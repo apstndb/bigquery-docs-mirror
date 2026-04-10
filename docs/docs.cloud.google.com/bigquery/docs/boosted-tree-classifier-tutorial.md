@@ -1,4 +1,4 @@
-This tutorial teaches you how to use a [boosted trees classifier model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) to predict the income range of individuals based on their demographic data. The model predicts whether a value falls into one of two categories, in this case whether an individual's annual income falls above or below $50,000.
+This tutorial teaches you how to use a [boosted trees classifier model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) to predict the income range of individuals based on their demographic data. The model predicts whether a value falls into one of two categories, in this case whether an individual's annual income falls above or below $50,000.
 
 This tutorial uses the [`  bigquery-public-data.ml_datasets.census_adult_income  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=ml_datasets&t=census_adult_income&page=table) dataset. This dataset contains the demographic and income information of US residents from 2000 and 2010.
 
@@ -6,9 +6,9 @@ This tutorial uses the [`  bigquery-public-data.ml_datasets.census_adult_income 
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a boosted trees model to predict census respondents' income bracket by using the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) .
-  - Evaluating the model by using the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Getting predictions from the model by using the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+  - Creating a boosted trees model to predict census respondents' income bracket by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) .
+  - Evaluating the model by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Getting predictions from the model by using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
 
 ## Costs
 
@@ -29,7 +29,9 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
@@ -47,7 +49,7 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Create a dataset
 
@@ -56,6 +58,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -71,11 +75,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -84,15 +88,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -102,16 +106,14 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-import google.cloud.bigquery
-
-bqclient = google.cloud.bigquery.Client()
-bqclient.create_dataset("bqml_tutorial", exists_ok=True)
-```
+    import google.cloud.bigquery
+    
+    bqclient = google.cloud.bigquery.Client()
+    bqclient.create_dataset("bqml_tutorial", exists_ok=True)
 
 ## Prepare the sample data
 
@@ -130,15 +132,17 @@ You separate the data into training, evaluation, and prediction sets by creating
 
 ### SQL
 
-To prepare your sample data, create a [view](/bigquery/docs/views-intro) to contain the training data. This view is used by the `  CREATE MODEL  ` statement later in this tutorial.
+To prepare your sample data, create a [view](https://docs.cloud.google.com/bigquery/docs/views-intro) to contain the training data. This view is used by the `  CREATE MODEL  ` statement later in this tutorial.
 
 Run the query that prepares the sample data:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE VIEW
       `bqml_tutorial.input_data` AS
     SELECT
@@ -160,6 +164,8 @@ Run the query that prepares the sample data:
 
 3.  In the left pane, click explore **Explorer** :
     
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
+    
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
 4.  In the **Explorer** pane, search for the `  bqml_tutorial  ` dataset.
@@ -172,34 +178,32 @@ Run the query that prepares the sample data:
 
 Create a DataFrame called `  input_data  ` . You use `  input_data  ` later in this tutorial to use to train the model, evaluate it, and make predictions.
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-import bigframes.pandas as bpd
-
-input_data = bpd.read_gbq(
-    "bigquery-public-data.ml_datasets.census_adult_income",
-    columns=(
-        "age",
-        "workclass",
-        "marital_status",
-        "education_num",
-        "occupation",
-        "hours_per_week",
-        "income_bracket",
-        "functional_weight",
-    ),
-)
-input_data["dataframe"] = bpd.Series("training", index=input_data.index,).case_when(
-    [
-        (((input_data["functional_weight"] % 10) == 8), "evaluation"),
-        (((input_data["functional_weight"] % 10) == 9), "prediction"),
-    ]
-)
-del input_data["functional_weight"]
-```
+    import bigframes.pandas as bpd
+    
+    input_data = bpd.read_gbq(
+        "bigquery-public-data.ml_datasets.census_adult_income",
+        columns=(
+            "age",
+            "workclass",
+            "marital_status",
+            "education_num",
+            "occupation",
+            "hours_per_week",
+            "income_bracket",
+            "functional_weight",
+        ),
+    )
+    input_data["dataframe"] = bpd.Series("training", index=input_data.index,).case_when(
+        [
+            (((input_data["functional_weight"] % 10) == 8), "evaluation"),
+            (((input_data["functional_weight"] % 10) == 9), "prediction"),
+        ]
+    )
+    del input_data["functional_weight"]
 
 ## Create the boosted trees model
 
@@ -210,10 +214,12 @@ Create a boosted trees model to predict census respondents' income bracket, and 
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE MODEL `bqml_tutorial.tree_model`
     OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
             BOOSTER_TYPE = 'GBTREE',
@@ -232,33 +238,31 @@ Follow these steps to create the model:
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-from bigframes.ml import ensemble
-
-# input_data is defined in an earlier step.
-training_data = input_data[input_data["dataframe"] == "training"]
-X = training_data.drop(columns=["income_bracket", "dataframe"])
-y = training_data["income_bracket"]
-
-# create and train the model
-tree_model = ensemble.XGBClassifier(
-    n_estimators=1,
-    booster="gbtree",
-    tree_method="hist",
-    max_iterations=1,  # For a more accurate model, try 50 iterations.
-    subsample=0.85,
-)
-tree_model.fit(X, y)
-
-tree_model.to_gbq(
-    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-    replace=True,
-)
-```
+    from bigframes.ml import ensemble
+    
+    # input_data is defined in an earlier step.
+    training_data = input_data[input_data["dataframe"] == "training"]
+    X = training_data.drop(columns=["income_bracket", "dataframe"])
+    y = training_data["income_bracket"]
+    
+    # create and train the model
+    tree_model = ensemble.XGBClassifier(
+        n_estimators=1,
+        booster="gbtree",
+        tree_method="hist",
+        max_iterations=1,  # For a more accurate model, try 50 iterations.
+        subsample=0.85,
+    )
+    tree_model.fit(X, y)
+    
+    tree_model.to_gbq(
+        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+        replace=True,
+    )
 
 ## Evaluate the model
 
@@ -267,10 +271,12 @@ tree_model.to_gbq(
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
       SELECT
         *
       FROM
@@ -298,35 +304,33 @@ Follow these steps to evaluate the model:
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-# Select model you'll use for predictions. `read_gbq_model` loads model
-# data from BigQuery, but you could also use the `tree_model` object
-# from the previous step.
-tree_model = bpd.read_gbq_model(
-    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-)
-
-# input_data is defined in an earlier step.
-evaluation_data = input_data[input_data["dataframe"] == "evaluation"]
-X = evaluation_data.drop(columns=["income_bracket", "dataframe"])
-y = evaluation_data["income_bracket"]
-
-# The score() method evaluates how the model performs compared to the
-# actual data. Output DataFrame matches that of ML.EVALUATE().
-score = tree_model.score(X, y)
-score.peek()
-# Output:
-#    precision    recall  accuracy  f1_score  log_loss   roc_auc
-# 0   0.671924  0.578804  0.839429  0.621897  0.344054  0.887335
-```
+    # Select model you'll use for predictions. `read_gbq_model` loads model
+    # data from BigQuery, but you could also use the `tree_model` object
+    # from the previous step.
+    tree_model = bpd.read_gbq_model(
+        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+    )
+    
+    # input_data is defined in an earlier step.
+    evaluation_data = input_data[input_data["dataframe"] == "evaluation"]
+    X = evaluation_data.drop(columns=["income_bracket", "dataframe"])
+    y = evaluation_data["income_bracket"]
+    
+    # The score() method evaluates how the model performs compared to the
+    # actual data. Output DataFrame matches that of ML.EVALUATE().
+    score = tree_model.score(X, y)
+    score.peek()
+    # Output:
+    #    precision    recall  accuracy  f1_score  log_loss   roc_auc
+    # 0   0.671924  0.578804  0.839429  0.621897  0.344054  0.887335
 
 The evaluation metrics indicate good model performance, in particular, the fact that the [`  roc_auc  ` score](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc) is greater than `  0.8  ` .
 
-For more information about the evaluation metrics, see [Output](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
+For more information about the evaluation metrics, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
 
 ## Use the model to predict classifications
 
@@ -335,10 +339,12 @@ For more information about the evaluation metrics, see [Output](/bigquery/docs/r
 Follow these steps to forecast data with the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
       SELECT
         *
       FROM
@@ -377,36 +383,34 @@ The first few columns of the results should look similar to the following:
 
 ### BigQuery DataFrames
 
-Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](/python/docs/reference/bigframes/latest) .
+Before trying this sample, follow the BigQuery DataFrames setup instructions in the [BigQuery quickstart using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-quickstart) . For more information, see the [BigQuery DataFrames reference documentation](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](/docs/authentication/set-up-adc-local-dev-environment) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up ADC for a local development environment](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment) .
 
-``` python
-# Select model you'll use for predictions. `read_gbq_model` loads model
-# data from BigQuery, but you could also use the `tree_model` object
-# from previous steps.
-tree_model = bpd.read_gbq_model(
-    your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
-)
-
-# input_data is defined in an earlier step.
-prediction_data = input_data[input_data["dataframe"] == "prediction"]
-
-predictions = tree_model.predict(prediction_data)
-predictions.peek()
-# Output:
-# predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_bracket_probs.prob
-#                   <=50K                                   >50K                   0.05183430016040802
-#                                                           <50K                   0.94816571474075317
-#                   <=50K                                   >50K                   0.00365859130397439
-#                                                           <50K                   0.99634140729904175
-#                   <=50K                                   >50K                   0.037775970995426178
-#                                                           <50K                   0.96222406625747681
-```
+    # Select model you'll use for predictions. `read_gbq_model` loads model
+    # data from BigQuery, but you could also use the `tree_model` object
+    # from previous steps.
+    tree_model = bpd.read_gbq_model(
+        your_model_id,  # For example: "your-project.bqml_tutorial.tree_model"
+    )
+    
+    # input_data is defined in an earlier step.
+    prediction_data = input_data[input_data["dataframe"] == "prediction"]
+    
+    predictions = tree_model.predict(prediction_data)
+    predictions.peek()
+    # Output:
+    # predicted_income_bracket   predicted_income_bracket_probs.label  predicted_income_bracket_probs.prob
+    #                   <=50K                                   >50K                   0.05183430016040802
+    #                                                           <50K                   0.94816571474075317
+    #                   <=50K                                   >50K                   0.00365859130397439
+    #                                                           <50K                   0.99634140729904175
+    #                   <=50K                                   >50K                   0.037775970995426178
+    #                                                           <50K                   0.96222406625747681
 
 The `  predicted_income_bracket  ` contains the predicted value from the model. The `  predicted_income_bracket_probs.label  ` shows the two labels that the model had to choose between, and the `  predicted_income_bracket_probs.prob  ` column shows the probability of the given label being the correct one.
 
-For more information about the output columns, see [Classification models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#classification_models) .
+For more information about the output columns, see [Classification models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict#classification_models) .
 
 ## Clean up
 
@@ -420,6 +424,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -440,11 +446,13 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [create a logistic regression classification model](/bigquery/docs/logistic-regression-prediction) .
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](/bigquery/docs/bqml-introduction) .
+  - Learn how to [create a logistic regression classification model](https://docs.cloud.google.com/bigquery/docs/logistic-regression-prediction) .
+  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

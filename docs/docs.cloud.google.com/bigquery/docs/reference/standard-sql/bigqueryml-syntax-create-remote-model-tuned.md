@@ -1,23 +1,23 @@
 # The CREATE MODEL statement for fine-tuning Vertex AI Gemini models
 
-This document describes the `  CREATE MODEL  ` statement for fine-tuning Gemini models in Vertex AI by using SQL. For pre-trained models, see [The CREATE MODEL statement for Vertex AI AI LLMs as MaaS](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) . Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for fine-tuning Gemini models in Vertex AI by using SQL. For pre-trained models, see [The CREATE MODEL statement for Vertex AI AI LLMs as MaaS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) . Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
 After you create the remote model, you can use one of the following functions to perform generative AI with that model:
 
-  - [`  AI.GENERATE_TABLE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
-  - [`  AI.GENERATE_TEXT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
+  - [`  AI.GENERATE_TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table)
+  - [`  AI.GENERATE_TEXT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text)
 
 ## Supervised tuning
 
-To configure [supervised tuning](/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning) , you must create a remote model that references one of the [supported models](/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
+To configure [supervised tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning) , you must create a remote model that references one of the [supported models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
 
-To configure supervised tuning, specify the `  AS SELECT  ` clause, and optionally some of the other `  CREATE MODEL  ` arguments that affect supervised tuning. Supervised tuning lets you train the model on your own data to make it better suited for your use case. However, not all models have their performance improved by tuning. To learn more about whether tuning would make sense for your use case, see [Use cases for using supervised fine-tuning](/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#use_cases_for_using_supervised_fine-tuning) .
+To configure supervised tuning, specify the `  AS SELECT  ` clause, and optionally some of the other `  CREATE MODEL  ` arguments that affect supervised tuning. Supervised tuning lets you train the model on your own data to make it better suited for your use case. However, not all models have their performance improved by tuning. To learn more about whether tuning would make sense for your use case, see [Use cases for using supervised fine-tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#use_cases_for_using_supervised_fine-tuning) .
 
-After you create a tuned model, use the [`  EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to evaluate whether the tuned model performs well for your use case. To learn more, try the [Use tuning and evaluation to improve LLM performance](/bigquery/docs/tune-evaluate) tutorial.
+After you create a tuned model, use the [`  EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) to evaluate whether the tuned model performs well for your use case. To learn more, try the [Use tuning and evaluation to improve LLM performance](https://docs.cloud.google.com/bigquery/docs/tune-evaluate) tutorial.
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL}
 `project_id.dataset.model_name`
 REMOTE WITH CONNECTION {DEFAULT | `project_id.region.connection_id`}
@@ -65,75 +65,65 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-`[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
-```
+    `[PROJECT_ID].[LOCATION].[CONNECTION_ID]`
 
-BigQuery uses a [Cloud resource connection](/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
+BigQuery uses a [Cloud resource connection](https://docs.cloud.google.com/bigquery/docs/create-cloud-resource-connection) to interact with the Vertex AI endpoint.
 
 The connection elements are as follows:
 
   - `  PROJECT_ID  ` : the project ID of the project that contains the connection.
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) used by the connection. The connection must be in the same location as the dataset that contains the model.
 
   - `  CONNECTION_ID  ` : the connection ID—for example, `  myconnection  ` .
     
-    To find your connection ID, [view the connection details](/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
+    To find your connection ID, [view the connection details](https://docs.cloud.google.com/bigquery/docs/working-with-connections#view-connections) in the Google Cloud console. The connection ID is the value in the last section of the fully qualified connection ID that is shown in **Connection ID** —for example `  projects/myproject/locations/connection_location/connections/ myconnection  ` .
     
-    To use a [default connection](/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
+    To use a [default connection](https://docs.cloud.google.com/bigquery/docs/default-connections) , specify `  DEFAULT  ` instead of the connection string containing PROJECT\_ID . LOCATION . CONNECTION\_ID .
 
-If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
+If you are creating a remote model over a Vertex AI model that uses supervised tuning, you need to grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the connection's service account in the project where you create the model. Otherwise, you need to grant the [Vertex AI User role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user) to the connection's service account in the project where you create the model.
 
-If you are using the remote model to analyze unstructured data from an [object table](/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
+If you are using the remote model to analyze unstructured data from an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) , you must also grant the [Vertex AI Service Agent role](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.serviceAgent) to the service account of the connection associated with the object table. You can find the object table's connection in the Google Cloud console, on the **Details** pane for the object table.
 
 **Example**
 
-``` text
-`myproject.us.my_connection`
-```
+    `myproject.us.my_connection`
 
 ### `     ENDPOINT    `
 
 **Syntax**
 
-``` text
-ENDPOINT = 'vertex_ai_gemini_endpoint'
-```
+    ENDPOINT = 'vertex_ai_gemini_endpoint'
 
 **Description**
 
-The endpoint for a Vertex AI Gemini that [supports](/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Vertex AI Gemini model, for example `  gemini-2.5-flash  ` , or you can specify the Vertex AI model's endpoint URL, for example `  https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash  ` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Vertex AI model based on the location of the dataset in which you create the model.
+The endpoint for a Vertex AI Gemini that [supports](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) supervised fine tuning. You can specify the name of the Vertex AI Gemini model, for example `  gemini-2.5-flash  ` , or you can specify the Vertex AI model's endpoint URL, for example `  https://europe-west6-aiplatform.googleapis.com/v1/projects/myproject/locations/europe-west6/publishers/google/models/gemini-2.5-flash  ` . If you specify the model name, BigQuery ML automatically identifies and uses the full endpoint of the Vertex AI model based on the location of the dataset in which you create the model.
 
 **Arguments**
 
-A `  STRING  ` value that contains the model name of a Vertex AI Gemini model that [supports fine-tuning](/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
+A `  STRING  ` value that contains the model name of a Vertex AI Gemini model that [supports fine-tuning](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-supervised-tuning#supported_models) .
 
 **Note:** To provide feedback or request support for the models in preview, send an email to <bqml-feedback@google.com> .
 
-For [supported Gemini models](/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
+For [supported Gemini models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#supported_models) , you can specify the [global endpoint](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/locations#use_the_global_endpoint) , as shown in the following example:
 
-``` text
-https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.0-flash-001
-```
+    https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.0-flash-001
 
 Using the global endpoint for your requests can improve overall availability while reducing resource exhausted (429) errors, which occur when you exceed your quota for a regional endpoint. If you want to use Gemini in a region where it isn't available, you can avoid migrating your data to a different region by using the global endpoint instead.
 
 **Note:** Don't use the global endpoint if you have requirements for the data processing location, because when you use the global endpoint, you can't control or know the region where your processing requests are handled.
 
-For information that can help you choose between the supported models, see [Model information](/vertex-ai/docs/generative-ai/learn/models) .
+For information that can help you choose between the supported models, see [Model information](https://docs.cloud.google.com/vertex-ai/docs/generative-ai/learn/models) .
 
 #### Retired models
 
-For more information on retired Vertex AI models, see [Retired models](/vertex-ai/generative-ai/docs/learn/model-versions#retired-models) .
+For more information on retired Vertex AI models, see [Retired models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions#retired-models) .
 
 ### `     PROMPT_COL    `
 
 **Syntax**
 
-``` text
-PROMPT_COL = 'prompt_col'
-```
+    PROMPT_COL = 'prompt_col'
 
 **Description**
 
@@ -147,9 +137,7 @@ A `  STRING  ` value. The default value is `  prompt  ` .
 
 **Syntax**
 
-``` text
-INPUT_LABEL_COLS = input_label_cols
-```
+    INPUT_LABEL_COLS = input_label_cols
 
 **Description**
 
@@ -163,19 +151,17 @@ A one-element `  ARRAY<STRING>  ` value. The default value is an empty array.
 
 **Syntax**
 
-``` text
-MAX_ITERATIONS = max_iterations
-```
+    MAX_ITERATIONS = max_iterations
 
 **Description**
 
-The number of steps to run when performing supervised tuning. You can only use this option when performing [supervised tuning](#supervised_tuning) with a supported model. If you specify this option, you must also specify the [`  AS SELECT  ` clause](#as_select) .
+The number of steps to run when performing supervised tuning. You can only use this option when performing [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) with a supported model. If you specify this option, you must also specify the [`  AS SELECT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) .
 
 When you use a Gemini model, BigQuery ML automatically converts the `  MAX_ITERATIONS  ` value to epochs, which is what Gemini models use for training. The default value for `  MAX_ITERATIONS  ` is the number of rows in the input data, which is equivalent to one epoch. To use multiple epochs, specify a multiple of the number of rows in your training data. For example, if you have 100 rows of input data and you want to use two epochs, specify `  200  ` for the argument value. If you provide a value that isn't a multiple of the number of rows in the input data, BigQuery ML rounds up to the nearest epoch. For example, if you have 100 rows of input data and you specify `  101  ` for the `  MAX_ITERATIONS  ` value, training is performed with two epochs.
 
-For more information about the parameters that are used to tune Gemini models, see [Create a tuning job](/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#create_a_text_model_supervised_tuning_job) .
+For more information about the parameters that are used to tune Gemini models, see [Create a tuning job](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#create_a_text_model_supervised_tuning_job) .
 
-For more guidance on choosing the number of epochs for Gemini models, see [Recommended configurations](/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#recommended_configurations) .
+For more guidance on choosing the number of epochs for Gemini models, see [Recommended configurations](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models/gemini-use-supervised-tuning#recommended_configurations) .
 
 **Arguments**
 
@@ -185,9 +171,7 @@ An `  INT64  ` value between `  1  ` and ∞. Typically, 100 steps takes about a
 
 **Syntax**
 
-``` text
-LEARNING_RATE_MULTIPLIER = learning_rate_multiplier
-```
+    LEARNING_RATE_MULTIPLIER = learning_rate_multiplier
 
 **Description**
 
@@ -201,9 +185,7 @@ A positive `  FLOAT64  ` value. The default value is `  1.0  ` .
 
 **Syntax**
 
-``` text
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
-```
+    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
 
 **Description**
 
@@ -216,7 +198,7 @@ The percentage sizes of the data sets produced by the various arguments for this
 You can see the model's data split information in the following ways:
 
   - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the **BigQuery** page of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
@@ -231,13 +213,13 @@ This option accepts the following values:
           - If there are between 500 and 50,000 rows in the input data, then 20% of the data is used as evaluation data and 80% is used as training data.
           - If there are more than 50,000 rows, then 10,000 rows are used as evaluation data and the remaining rows are used as training data.
 
-  - `  RANDOM  ` : Data is randomized before being split into sets. To customize the data split, you can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  ` option](#data_split_eval_fraction) . If you don't specify that option, data is split in the same way as for the `  AUTO_SPLIT  ` option.
+  - `  RANDOM  ` : Data is randomized before being split into sets. To customize the data split, you can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . If you don't specify that option, data is split in the same way as for the `  AUTO_SPLIT  ` option.
     
     A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
     
-    **Note:** A random split is based on the [FARM\_FINGERPRINT](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
+    **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas might get different splitting and different evaluation metrics.
 
-  - `  CUSTOM  ` : Split data using the value provided in the [`  DATA_SPLIT_COL  ` option](#data_split_col) . The `  DATA_SPLIT_COL  ` value must be the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, and rows with a value of `  FALSE  ` are used as training data.
+  - `  CUSTOM  ` : Split data using the value provided in the [`  DATA_SPLIT_COL  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) . The `  DATA_SPLIT_COL  ` value must be the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, and rows with a value of `  FALSE  ` are used as training data.
 
   - `  SEQ  ` : Split data sequentially by using the value in a specified column of one of the following types:
     
@@ -248,11 +230,11 @@ This option accepts the following values:
     
     The data is sorted smallest to largest based on the specified column.
     
-    The first n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The remaining rows are used as training data.
+    The first n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
     
     All rows with split values smaller than the threshold are used as training data. The remaining rows, including those with `  NULL  ` values, are used as evaluation data.
     
-    Use the [`  DATA_SPLIT_COL  ` option](#data_split_col) option to identify the column that contains the data split information.
+    Use the [`  DATA_SPLIT_COL  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_col) option to identify the column that contains the data split information.
 
   - `  NO_SPLIT  ` : No data split; all input data is used as training data.
 
@@ -264,7 +246,7 @@ This option accepts the following values:
 
 **Description**
 
-The fraction of the data to use as evaluation data when performing supervised tuning. Use when you specify `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) .
+The fraction of the data to use as evaluation data when performing supervised tuning. Use when you specify `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_method) .
 
 **Arguments**
 
@@ -280,7 +262,7 @@ A `  FLOAT64  ` value in the range `  [0, 1.0]  ` . The default is `  0.2  ` . T
 
 The name of the column to use to sort input data into the training or evaluation set when performing supervised tuning. Use when you are specifying `  CUSTOM  ` or `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` .
 
-If you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The remaining rows are used as training data.
+If you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#data_split_eval_fraction) . The remaining rows are used as training data.
 
 If you are specifying `  CUSTOM  ` as the value for `  DATA_SPLIT_COL  ` , then you must provide the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, rows with a value of `  FALSE  ` are used as training data.
 
@@ -294,9 +276,7 @@ A `  STRING  ` value.
 
 **Syntax**
 
-``` text
-EVALUATION_TASK = 'evaluation_task'
-```
+    EVALUATION_TASK = 'evaluation_task'
 
 **Description**
 
@@ -318,10 +298,8 @@ The default value is `  UNSPECIFIED  ` .
 
 **Syntax**
 
-``` text
-AS SELECT prompt_column, label_column FROM
-  `project_id.dataset.table_name`
-```
+    AS SELECT prompt_column, label_column FROM
+      `project_id.dataset.table_name`
 
 **Description**
 
@@ -339,12 +317,12 @@ Provides the training data to use when performing supervised tuning.
 
 When using supervised tuning with remote models over Vertex AI LLMs, costs are calculated based on the following:
 
-  - The bytes processed from the training data table specified in the [`  AS SELECT  ` clause](#as_select) . These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - The number of tokens processed to tune the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](/vertex-ai/generative-ai/pricing#gemini-models) .
+  - The bytes processed from the training data table specified in the [`  AS SELECT  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#as_select) . These charges are billed from BigQuery to your project. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+  - The number of tokens processed to tune the LLM. These charges are billed from Vertex AI to your project. For more information, see [Vertex AI pricing](https://docs.cloud.google.com/vertex-ai/generative-ai/pricing#gemini-models) .
 
 ## Locations
 
-For information about supported locations, see [Locations for remote models](/bigquery/docs/locations#locations-for-remote-models) .
+For information about supported locations, see [Locations for remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-remote-models) .
 
 ## Examples
 
@@ -354,24 +332,22 @@ The following examples create BigQuery ML remote models.
 
 The following example creates a BigQuery ML remote model over a tuned version of a Vertex AI Gemini model:
 
-``` text
-CREATE OR REPLACE MODEL `mydataset.tuned_model`
-  REMOTE WITH CONNECTION `myproject.us.test_connection`
-  OPTIONS (
-    endpoint = 'gemini-2.0-flash-001',
-    max_iterations = 500,
-    prompt_col = 'prompt',
-    input_label_cols = ['label'])
-AS
-SELECT
-  CONCAT(
-    'Please do sentiment analysis on the following text and only output a number from 0 to 5 where 0 means sadness, 1 means joy, 2 means love, 3 means anger, 4 means fear, and 5 means surprise. Text: ',
-    sentiment_column) AS prompt,
-  text_column AS label
-FROM `mydataset.emotion_classification_train`;
-```
+    CREATE OR REPLACE MODEL `mydataset.tuned_model`
+      REMOTE WITH CONNECTION `myproject.us.test_connection`
+      OPTIONS (
+        endpoint = 'gemini-2.0-flash-001',
+        max_iterations = 500,
+        prompt_col = 'prompt',
+        input_label_cols = ['label'])
+    AS
+    SELECT
+      CONCAT(
+        'Please do sentiment analysis on the following text and only output a number from 0 to 5 where 0 means sadness, 1 means joy, 2 means love, 3 means anger, 4 means fear, and 5 means surprise. Text: ',
+        sentiment_column) AS prompt,
+      text_column AS label
+    FROM `mydataset.emotion_classification_train`;
 
 ## What's next
 
-  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](/bigquery/docs/generative-ai-overview) .
-  - Try [customizing a model by using supervised fine tuning](/bigquery/docs/generate-text-tuning) .
+  - For more information about using Vertex AI models with BigQuery ML, see [Generative AI overview](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
+  - Try [customizing a model by using supervised fine tuning](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .

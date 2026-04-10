@@ -1,10 +1,10 @@
 # The ML.GLOBAL\_EXPLAIN function
 
-This document describes the `  ML.GLOBAL_EXPLAIN  ` function, which lets you provide explanations for the entire model by aggregating the local explanations of the evaluation data. You can only use `  ML.GLOBAL_EXPLAIN  ` with models that are trained with the [`  ENABLE_GLOBAL_EXPLAIN  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#enable_global_explain) set to `  TRUE  ` .
+This document describes the `  ML.GLOBAL_EXPLAIN  ` function, which lets you provide explanations for the entire model by aggregating the local explanations of the evaluation data. You can only use `  ML.GLOBAL_EXPLAIN  ` with models that are trained with the [`  ENABLE_GLOBAL_EXPLAIN  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#enable_global_explain) set to `  TRUE  ` .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.GLOBAL_EXPLAIN(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT(
@@ -50,7 +50,7 @@ The following examples assume your model is in your default project.
 
 This example gets global feature importance for the boosted tree regression model `  mymodel  ` in `  mydataset  ` . The dataset is in your default project.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -61,7 +61,7 @@ FROM
 
 This example gets global feature importance for the boosted tree classifier model `  mymodel  ` in `  mydataset  ` . The dataset is in your default project.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -70,5 +70,5 @@ FROM
 
 ## What's next
 
-  - For information about Explainable AI, see [BigQuery Explainable AI overview](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For information about Explainable AI, see [BigQuery Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

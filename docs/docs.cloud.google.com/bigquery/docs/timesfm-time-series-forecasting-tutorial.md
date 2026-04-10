@@ -1,4 +1,4 @@
-This tutorial teaches you how to use the [`  AI.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.
+This tutorial teaches you how to use the [`  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with BigQuery ML's built-in [TimesFM univariate model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) to forecast the future value for a given column, based on the historical value of that column.
 
 This tutorial uses data from the public [`  bigquery-public-data.san_francisco_bikeshare.bikeshare_trips  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_bikeshare&t=bikeshare_trips&page=table) table.
 
@@ -25,7 +25,9 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Forecast a single bike share trips time series
 
@@ -36,10 +38,12 @@ The following query forecasts the number of subscriber bike share trips per hour
 Follow these steps to forecast data with the TimesFM model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       AI.FORECAST(
@@ -78,10 +82,12 @@ Chart the `  AI.FORECAST  ` function output alongside a subset of the function i
 Follow these steps to chart the function output:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       AI.FORECAST(
@@ -100,6 +106,8 @@ Follow these steps to chart the function output:
 
 3.  When the query is finished running, click the **Visualization** tab in the **Query results** pane. For **Visualization type** , select **Line** . For **Dimension** , select `  time_series_timestamp  ` . For **Measures** , select `  time_series_data  ` , `  prediction_interval_lower_bound  ` , and `  prediction_interval_upper_bound  ` . The resulting chart looks similar to the following:
     
+    ![Graph 100 time points of input data along with the AI.FORECAST function output data to evaluate their similarity.](https://docs.cloud.google.com/static/bigquery/images/ai-forecast-output-comparison.png)
+    
     You can see that the input data and the forecasted data show similar bike share usage. You can also see that the prediction interval lower and upper bounds increase as the forecasted time points get further into the future.
 
 ## Forecast multiple bike share trips time series
@@ -109,10 +117,12 @@ The following query forecasts the number of bike share trips per subscriber type
 Follow these steps to forecast data with the TimesFM model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       AI.FORECAST(
@@ -162,10 +172,12 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](/bigquery/docs/bqml-introduction) .
+  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

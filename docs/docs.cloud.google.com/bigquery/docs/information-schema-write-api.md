@@ -2,7 +2,7 @@
 
 The `  INFORMATION_SCHEMA.WRITE_API_TIMELINE  ` view contains per minute aggregated BigQuery Storage Write API ingestion statistics for the current project.
 
-You can query the `  INFORMATION_SCHEMA  ` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API. See [BigQuery Storage Write API](/bigquery/docs/write-api) for more information.
+You can query the `  INFORMATION_SCHEMA  ` Write API views to retrieve historical and real-time information about data ingestion into BigQuery that uses the BigQuery Storage Write API. See [BigQuery Storage Write API](https://docs.cloud.google.com/bigquery/docs/write-api) for more information.
 
 **Note:** The view names `  INFORMATION_SCHEMA.WRITE_API_TIMELINE  ` and `  INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_PROJECT  ` are synonymous and can be used interchangeably.
 
@@ -20,9 +20,9 @@ Each of the following predefined IAM roles includes the required permission:
   - `  roles/bigquery.resourceAdmin  `
   - `  roles/bigquery.admin  `
 
-**Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](/bigquery/docs/access-control-basic-roles) Owner or Editor.
+**Caution:** The required \`bigquery.tables.list\` permission is *not* included in the [basic roles](https://docs.cloud.google.com/bigquery/docs/access-control-basic-roles) Owner or Editor.
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -30,67 +30,18 @@ When you query the `  INFORMATION_SCHEMA  ` BigQuery Storage Write API views, th
 
 The `  INFORMATION_SCHEMA.WRITE_API_TIMELINE  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       start_timestamp      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><em>(Partitioning column)</em> Start timestamp of the 1 minute interval for the aggregated statistics.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       project_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><em>(Clustering column)</em> ID of the project.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       project_number      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Number of the project.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       dataset_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><em>(Clustering column)</em> ID of the dataset.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><em>(Clustering column)</em> ID of the table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       stream_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The <a href="/bigquery/docs/write-api#overview">stream type</a> used for the data ingestion with BigQuery Storage Write API. It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING".</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       error_code      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Error code returned for the requests specified by this row. "OK" for successful requests.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       total_requests      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Total number of requests within the 1 minute interval.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       total_rows      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Total number of rows from all requests within the 1 minute interval.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       total_input_bytes      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Total number of bytes from all rows within the 1 minute interval.</td>
-</tr>
-</tbody>
-</table>
+| Column name                        | Data type                  | Value                                                                                                                                                                                                                        |
+| ---------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        start_timestamp       `   | `        TIMESTAMP       ` | *(Partitioning column)* Start timestamp of the 1 minute interval for the aggregated statistics.                                                                                                                              |
+| `        project_id       `        | `        STRING       `    | *(Clustering column)* ID of the project.                                                                                                                                                                                     |
+| `        project_number       `    | `        INTEGER       `   | Number of the project.                                                                                                                                                                                                       |
+| `        dataset_id       `        | `        STRING       `    | *(Clustering column)* ID of the dataset.                                                                                                                                                                                     |
+| `        table_id       `          | `        STRING       `    | *(Clustering column)* ID of the table.                                                                                                                                                                                       |
+| `        stream_type       `       | `        STRING       `    | The [stream type](https://docs.cloud.google.com/bigquery/docs/write-api#overview) used for the data ingestion with BigQuery Storage Write API. It is supposed to be one of "DEFAULT", "COMMITTED", "BUFFERED", or "PENDING". |
+| `        error_code       `        | `        STRING       `    | Error code returned for the requests specified by this row. "OK" for successful requests.                                                                                                                                    |
+| `        total_requests       `    | `        INTEGER       `   | Total number of requests within the 1 minute interval.                                                                                                                                                                       |
+| `        total_rows       `        | `        INTEGER       `   | Total number of rows from all requests within the 1 minute interval.                                                                                                                                                         |
+| `        total_input_bytes       ` | `        INTEGER       `   | Total number of bytes from all rows within the 1 minute interval.                                                                                                                                                            |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -100,30 +51,17 @@ This view contains the BigQuery Storage Write API ingestion history of the past 
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you don't specify a regional qualifier, metadata is retrieved from all regions. The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.WRITE_API_TIMELINE[_BY_PROJECT]      </code></td>
-<td>Project level</td>
-<td>REGION</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                                    | Resource scope | Region scope |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | ------------ |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.WRITE_API_TIMELINE[_BY_PROJECT]       `` | Project level  | REGION       |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 **Example**
 
@@ -131,7 +69,7 @@ Replace the following:
   - To query data in the EU multi-region, use ``  `region-eu`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_PROJECT  ``
   - To query data in the asia-northeast1 region, use ``  `region-asia-northeast1`.INFORMATION_SCHEMA.WRITE_API_TIMELINE_BY_PROJECT  ``
 
-For a list of available regions, see [Dataset locations](/bigquery/docs/locations) .
+For a list of available regions, see [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## Examples
 
@@ -139,7 +77,7 @@ For a list of available regions, see [Dataset locations](/bigquery/docs/location
 
 The following example calculates the per minute breakdown of total failed requests for all tables in the project in the last 30 minutes, split by stream type and error code:
 
-``` text
+``` notranslate
 SELECT
   start_timestamp,
   stream_type,
@@ -162,24 +100,22 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+---------------------+-------------+------------------+---------------------+
-|   start_timestamp   | stream_type |    error_code    | num_failed_requests |
-+---------------------+-------------+------------------+---------------------+
-| 2023-02-24 00:25:00 | PENDING     | NOT_FOUND        |                   5 |
-| 2023-02-24 00:25:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
-| 2023-02-24 00:25:00 | DEFAULT     | DEADLINE_EXCEEDED|                   4 |
-| 2023-02-24 00:24:00 | PENDING     | INTERNAL         |                   3 |
-| 2023-02-24 00:24:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
-| 2023-02-24 00:24:00 | DEFAULT     | DEADLINE_EXCEEDED|                   2 |
-+---------------------+-------------+------------------+---------------------+
-```
+    +---------------------+-------------+------------------+---------------------+
+    |   start_timestamp   | stream_type |    error_code    | num_failed_requests |
+    +---------------------+-------------+------------------+---------------------+
+    | 2023-02-24 00:25:00 | PENDING     | NOT_FOUND        |                   5 |
+    | 2023-02-24 00:25:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
+    | 2023-02-24 00:25:00 | DEFAULT     | DEADLINE_EXCEEDED|                   4 |
+    | 2023-02-24 00:24:00 | PENDING     | INTERNAL         |                   3 |
+    | 2023-02-24 00:24:00 | DEFAULT     | INVALID_ARGUMENT |                   1 |
+    | 2023-02-24 00:24:00 | DEFAULT     | DEADLINE_EXCEEDED|                   2 |
+    +---------------------+-------------+------------------+---------------------+
 
 ##### Example 2: Per minute breakdown for all requests with error codes
 
 The following example calculates a per minute breakdown of successful and failed append requests, split into error code categories. This query could be used to populate a dashboard.
 
-``` text
+``` notranslate
 SELECT
   start_timestamp,
   SUM(total_requests) AS total_requests,
@@ -213,22 +149,20 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+---------------------+----------------+------------+-------------------+------------+--------------+-------------+
-|   start_timestamp   | total_requests | total_rows | total_input_bytes | user_error | server_error | total_error |
-+---------------------+----------------+------------+-------------------+------------+--------------+-------------+
-| 2020-04-15 22:00:00 |         441854 |     441854 |       23784853118 |          0 |           17 |          17 |
-| 2020-04-15 21:59:00 |         355627 |     355627 |       26101982742 |          8 |            0 |          13 |
-| 2020-04-15 21:58:00 |         354603 |     354603 |       26160565341 |          0 |            0 |           0 |
-| 2020-04-15 21:57:00 |         298823 |     298823 |       23877821442 |          2 |            0 |           2 |
-+---------------------+----------------+------------+-------------------+------------+--------------+-------------+
-```
+    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+    |   start_timestamp   | total_requests | total_rows | total_input_bytes | user_error | server_error | total_error |
+    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
+    | 2020-04-15 22:00:00 |         441854 |     441854 |       23784853118 |          0 |           17 |          17 |
+    | 2020-04-15 21:59:00 |         355627 |     355627 |       26101982742 |          8 |            0 |          13 |
+    | 2020-04-15 21:58:00 |         354603 |     354603 |       26160565341 |          0 |            0 |           0 |
+    | 2020-04-15 21:57:00 |         298823 |     298823 |       23877821442 |          2 |            0 |           2 |
+    +---------------------+----------------+------------+-------------------+------------+--------------+-------------+
 
 ##### Example 3: Tables with the most incoming traffic
 
 The following example returns the BigQuery Storage Write API ingestion statistics for the 10 tables with the most incoming traffic:
 
-``` text
+``` notranslate
 SELECT
   project_id,
   dataset_id,
@@ -251,28 +185,26 @@ LIMIT 10;
 
 The result is similar to the following:
 
-``` text
-+----------------------+------------+-------------------------------+------------+----------------+--------------+
-|      project_id      | dataset_id |           table_id            |  num_rows  |   num_bytes    | num_requests |
-+----------------------+------------+-------------------------------+------------+----------------+--------------+
-| my-project           | dataset1   | table1                        | 8016725532 | 73787301876979 |   8016725532 |
-| my-project           | dataset1   | table2                        |   26319580 | 34199853725409 |     26319580 |
-| my-project           | dataset2   | table1                        |   38355294 | 22879180658120 |     38355294 |
-| my-project           | dataset1   | table3                        |  270126906 | 17594235226765 |    270126906 |
-| my-project           | dataset2   | table2                        |   95511309 | 17376036299631 |     95511309 |
-| my-project           | dataset2   | table3                        |   46500443 | 12834920497777 |     46500443 |
-| my-project           | dataset2   | table4                        |   25846270 |  7487917957360 |     25846270 |
-| my-project           | dataset1   | table4                        |   18318404 |  5665113765882 |     18318404 |
-| my-project           | dataset1   | table5                        |   42829431 |  5343969665771 |     42829431 |
-| my-project           | dataset1   | table6                        |    8771021 |  5119004622353 |      8771021 |
-+----------------------+------------+-------------------------------+------------+----------------+--------------+
-```
+    +----------------------+------------+-------------------------------+------------+----------------+--------------+
+    |      project_id      | dataset_id |           table_id            |  num_rows  |   num_bytes    | num_requests |
+    +----------------------+------------+-------------------------------+------------+----------------+--------------+
+    | my-project           | dataset1   | table1                        | 8016725532 | 73787301876979 |   8016725532 |
+    | my-project           | dataset1   | table2                        |   26319580 | 34199853725409 |     26319580 |
+    | my-project           | dataset2   | table1                        |   38355294 | 22879180658120 |     38355294 |
+    | my-project           | dataset1   | table3                        |  270126906 | 17594235226765 |    270126906 |
+    | my-project           | dataset2   | table2                        |   95511309 | 17376036299631 |     95511309 |
+    | my-project           | dataset2   | table3                        |   46500443 | 12834920497777 |     46500443 |
+    | my-project           | dataset2   | table4                        |   25846270 |  7487917957360 |     25846270 |
+    | my-project           | dataset1   | table4                        |   18318404 |  5665113765882 |     18318404 |
+    | my-project           | dataset1   | table5                        |   42829431 |  5343969665771 |     42829431 |
+    | my-project           | dataset1   | table6                        |    8771021 |  5119004622353 |      8771021 |
+    +----------------------+------------+-------------------------------+------------+----------------+--------------+
 
 ##### Example 4: BigQuery Storage Write API ingestion error ratio for a table
 
 The following example calculates a per-day breakdown of errors for a specific table, split by error code:
 
-``` text
+``` notranslate
 SELECT
   TIMESTAMP_TRUNC(start_timestamp, DAY) as day,
   project_id,
@@ -296,15 +228,13 @@ ORDER BY
 
 The result is similar to the following:
 
-``` text
-+---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
-|         day         |  project_id | dataset_id | table_id |   error_code   | num_rows | num_bytes | num_requests |
-+---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
-| 2020-04-21 00:00:00 | my_project  | my_dataset | my_table | OK             |       41 |    252893 |           41 |
-| 2020-04-20 00:00:00 | my_project  | my_dataset | my_table | OK             |     2798 |  10688286 |         2798 |
-| 2020-04-19 00:00:00 | my_project  | my_dataset | my_table | OK             |     2005 |   7979495 |         2005 |
-| 2020-04-18 00:00:00 | my_project  | my_dataset | my_table | OK             |     2054 |   7972378 |         2054 |
-| 2020-04-17 00:00:00 | my_project  | my_dataset | my_table | OK             |     2056 |   6978079 |         2056 |
-| 2020-04-17 00:00:00 | my_project  | my_dataset | my_table | INTERNAL       |        4 |     10825 |            4 |
-+---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
-```
+    +---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
+    |         day         |  project_id | dataset_id | table_id |   error_code   | num_rows | num_bytes | num_requests |
+    +---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+
+    | 2020-04-21 00:00:00 | my_project  | my_dataset | my_table | OK             |       41 |    252893 |           41 |
+    | 2020-04-20 00:00:00 | my_project  | my_dataset | my_table | OK             |     2798 |  10688286 |         2798 |
+    | 2020-04-19 00:00:00 | my_project  | my_dataset | my_table | OK             |     2005 |   7979495 |         2005 |
+    | 2020-04-18 00:00:00 | my_project  | my_dataset | my_table | OK             |     2054 |   7972378 |         2054 |
+    | 2020-04-17 00:00:00 | my_project  | my_dataset | my_table | OK             |     2056 |   6978079 |         2056 |
+    | 2020-04-17 00:00:00 | my_project  | my_dataset | my_table | INTERNAL       |        4 |     10825 |            4 |
+    +---------------------+-------------+------------+----------+----------------+----------+-----------+--------------+

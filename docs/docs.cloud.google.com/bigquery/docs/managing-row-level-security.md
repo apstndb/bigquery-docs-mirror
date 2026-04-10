@@ -1,16 +1,16 @@
 # Use row-level security
 
-This document explains how to use row-level security in BigQuery to restrict access to data at the table row level. Before you read this document, familiarize yourself with an overview about row-level security by reading [Introduction to BigQuery row-level security](/bigquery/docs/row-level-security-intro) .
+This document explains how to use row-level security in BigQuery to restrict access to data at the table row level. Before you read this document, familiarize yourself with an overview about row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) .
 
 You can perform the following tasks with row-level access policies:
 
-  - [Create or update a row-level access policy](#create-policy) on a table
-  - [Combine row-level access policies](#combine_row-level_access_policies) on a table
-  - [List a table's row-level access policies](#list-policy)
-  - [Delete a row-level access policy](#delete-policy) from a table
-  - [Query a table with a row-level access policy](#query-policy)
+  - [Create or update a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) on a table
+  - [Combine row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#combine_row-level_access_policies) on a table
+  - [List a table's row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#list-policy)
+  - [Delete a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#delete-policy) from a table
+  - [Query a table with a row-level access policy](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#query-policy)
 
-**Note:** When managing access for users in [external identity providers](/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](/iam/docs/principal-identifiers) .
+**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## Limitations
 
@@ -47,9 +47,9 @@ Each of the following predefined IAM roles includes the permissions that you nee
 
 #### The `     bigquery.filteredDataViewer    ` role
 
-When you create a row-level access policy, BigQuery automatically grants the `  bigquery.filteredDataViewer  ` role to the members of the grantee list. When you [list a table's row-level access policies](#list-policy) in the Google Cloud console, this role is displayed in association with the members of the policy's grantee list.
+When you create a row-level access policy, BigQuery automatically grants the `  bigquery.filteredDataViewer  ` role to the members of the grantee list. When you [list a table's row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#list-policy) in the Google Cloud console, this role is displayed in association with the members of the policy's grantee list.
 
-**Caution:** Don't apply the `  bigquery.filteredDataViewer  ` role directly to a resource through IAM. `  bigquery.filteredDataViewer  ` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
+**Caution:** Don't apply the `  bigquery.filteredDataViewer  ` role directly to a resource through IAM. `  bigquery.filteredDataViewer  ` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
 
 ### Create or update row-level access policies
 
@@ -67,17 +67,17 @@ To create or update a row-level access policy, use one of the following DDL stat
       - Like a `  WHERE  ` clause, the `  filter_expression  ` matches the data that you want to be visible to the members of the `  grantee_list  ` .
       - You can combine a series of users and groups in the `  grantee_list  ` list, if they are comma-separated and quoted separately.
       - All identities in the `  grantee_list  ` must exist. If any identity does not exist, the policy is not created and the statement fails.
-      - You cannot apply row-level access policies on [JSON columns](/bigquery/docs/json-data) . To learn about additional limitations for row-level security, see [Limitations](/bigquery/docs/row-level-security-intro#limitations)
+      - You cannot apply row-level access policies on [JSON columns](https://docs.cloud.google.com/bigquery/docs/json-data) . To learn about additional limitations for row-level security, see [Limitations](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#limitations)
 
 ### Examples
 
-The following examples show you how to create and update row access policies for different types of [principal identifiers](/iam/docs/principal-identifiers#allow) including Google Accounts and federated identities. For more information on federated identities, see [Workload identity federation](/iam/docs/workload-identity-federation) .
+The following examples show you how to create and update row access policies for different types of [principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers#allow) including Google Accounts and federated identities. For more information on federated identities, see [Workload identity federation](https://docs.cloud.google.com/iam/docs/workload-identity-federation) .
 
 #### Create a new policy and grant access to a Google Account
 
 Create a new row access policy. Access to the table is restricted to the user `  abc@example.com  ` . Only the rows where `  region = 'APAC'  ` are visible:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY apac_filter
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
@@ -88,7 +88,7 @@ FILTER USING (region = 'APAC');
 
 Create a new row access policy. Access to the table is restricted to a single identity in a workforce identity pool using this format: `  principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` . Only the rows where `  region = 'APAC'  ` are visible:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY apac_filter
 ON project.dataset.my_table
 GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/abc@example.com')
@@ -99,7 +99,7 @@ FILTER USING (region = 'APAC');
 
 Update the `  apac_filter  ` access policy to apply to the service account `  example@exampleproject.iam.gserviceaccount.com  ` :
 
-``` text
+``` notranslate
 CREATE OR REPLACE ROW ACCESS POLICY apac_filter
 ON project.dataset.my_table
 GRANT TO ('serviceAccount:example@exampleproject.iam.gserviceaccount.com')
@@ -110,7 +110,7 @@ FILTER USING (region = 'APAC');
 
 Create a row access policy that grants access to a user and two groups:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY sales_us_filter
 ON project.dataset.my_table
 GRANT TO ('user:john@example.com',
@@ -123,7 +123,7 @@ FILTER USING (region = 'US');
 
 Create a row access policy that grants access to all workforce identities in groups using this format `  principal://iam.googleapis.com/locations/global/workforcePools/ POOL_ID /subject/ IDENTITY  ` :
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY sales_us_filter
 ON project.dataset.my_table
 GRANT TO ('principal://iam.googleapis.com/locations/global/workforcePools/example-contractors/subject/sales-us@example.com',
@@ -135,7 +135,7 @@ FILTER USING (region = 'US');
 
 Create a row access policy with `  allAuthenticatedUsers  ` as the grantees:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY us_filter
 ON project.dataset.my_table
 GRANT TO ('allAuthenticatedUsers')
@@ -146,7 +146,7 @@ FILTER USING (region = 'US');
 
 Create a row access policy with a filter based on the current user:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY my_row_filter
 ON dataset.my_table
 GRANT TO ('domain:example.com')
@@ -157,7 +157,7 @@ FILTER USING (email = SESSION_USER());
 
 Create a row access policy with a filter on a column with an `  ARRAY  ` type:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY my_reports_filter
 ON project.dataset.my_table
 GRANT TO ('domain:example.com')
@@ -170,17 +170,15 @@ Create a row access policy with a subquery to replace multiple policies with a r
 
 Consider the following table, `  lookup_table  ` :
 
-``` text
-+-----------------+--------------+
-|      email      |    region    |
-+-----------------+--------------+
-| xyz@example.com | europe-west1 |
-| abc@example.com | us-west1     |
-| abc@example.com | us-west2     |
-+-----------------+--------------+
-```
+    +-----------------+--------------+
+    |      email      |    region    |
+    +-----------------+--------------+
+    | xyz@example.com | europe-west1 |
+    | abc@example.com | us-west1     |
+    | abc@example.com | us-west2     |
+    +-----------------+--------------+
 
-``` text
+``` notranslate
 CREATE OR REPLACE ROW ACCESS POLICY apac_filter
 ON project.dataset.my_table
 GRANT TO ('domain:example.com')
@@ -195,7 +193,7 @@ FILTER USING (region IN (
 
 Using the subquery on `  lookup_table  ` lets you avoid creating multiple row access policies. For example, the preceding statement yields the same result as the following, with fewer queries:
 
-``` text
+``` notranslate
 CREATE OR REPLACE ROW ACCESS POLICY apac_filter
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
@@ -207,20 +205,20 @@ GRANT TO ('user:xyz@example.com')
 FILTER USING (region = 'europe-west1');
 ```
 
-For more information on the syntax and available options, see the [`  CREATE ROW ACCESS POLICY  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement) reference.
+For more information on the syntax and available options, see the [`  CREATE ROW ACCESS POLICY  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_row_access_policy_statement) reference.
 
 ## Combine row-level access policies
 
 If two or more row-level access policies grant a user or group access to the same table, then the user or group has access to all of the data covered by any of the policies. For example, the following policies grant the user `  abc@example.com  ` access to specified rows in the `  my_table  ` table:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY shoes
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
 FILTER USING (product_category = 'shoes');
 ```
 
-``` text
+``` notranslate
 CREATE OR REPLACE ROW ACCESS POLICY blue_products
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
@@ -231,7 +229,7 @@ In the preceding example, the user `  abc@example.com  ` has access to the rows 
 
 This access is equivalent to the access provided by the following single row-level access policy:
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY shoes_and_blue_products
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
@@ -240,7 +238,7 @@ FILTER USING (product_category = 'shoes' OR color = 'blue');
 
 On the other hand, to specify access that is dependent on more than one condition being true, use a filter with an `  AND  ` operator. For example, the following row-level access policy grants `  abc@example.com  ` access only to rows that have both the `  product_category  ` field set to `  shoes  ` and the `  color  ` field set to `  blue  ` :
 
-``` text
+``` notranslate
 CREATE ROW ACCESS POLICY blue_shoes
 ON project.dataset.my_table
 GRANT TO ('user:abc@example.com')
@@ -264,7 +262,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.admin  `
   - `  roles/bigquery.dataOwner  `
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### List table row-level access policies
 
@@ -273,12 +271,20 @@ To list row-level access policies, do the following:
 ### Console
 
 1.  To view row-level access policies, go to the BigQuery page in the Google Cloud console.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Click the table name to see its details, and then click **View row access policies** .
+    
+    ![View row access policies](https://docs.cloud.google.com/static/bigquery/images/view-row-access-policies-console.png)
 
 3.  When the **Row access policies** panel opens, you see a list of all the row-level access policies on the table, by name, and the `  filter_expression  ` for each policy.
+    
+    ![Row access policies detail](https://docs.cloud.google.com/static/bigquery/images/view-row-access-policies-detail.png)
 
-4.  To see all the roles and users affected by a row-level access policy, click **VIEW** next to the policy. For example, in the following image, you can see in the **View permissions** panel that members of the grantee list have the [`  bigquery.filteredDataViewer  ` role](#filtered-data-viewer-role) .
+4.  To see all the roles and users affected by a row-level access policy, click **VIEW** next to the policy. For example, in the following image, you can see in the **View permissions** panel that members of the grantee list have the [`  bigquery.filteredDataViewer  ` role](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#filtered-data-viewer-role) .
+    
+    ![Row access policies detail](https://docs.cloud.google.com/static/bigquery/images/view-row-access-policy-permissions.png)
     
     **Important:** adding members to a policy and removing members from a policy are only supported using DDL statements.
 
@@ -286,19 +292,19 @@ To list row-level access policies, do the following:
 
 Enter the `  bq ls  ` command and supply the `  --row_access_policies  ` flag. The dataset and table names are required.
 
-``` text
+``` 
     bq ls --row_access_policies dataset.table
 ```
 
 For example, the following command lists information about the row-level access policies on a table named `  my_table  ` in a dataset with the ID `  my_dataset  ` :
 
-``` text
+``` 
     bq ls --row_access_policies my_dataset.my_table
 ```
 
 ### API
 
-Use the [`  RowAccessPolicies.List  ` method](/bigquery/docs/reference/rest/v2/rowAccessPolicies/list) in the REST API reference section.
+Use the [`  RowAccessPolicies.List  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies/list) in the REST API reference section.
 
 ## Delete row-level access policies
 
@@ -324,7 +330,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.admin  `
   - `  roles/bigquery.dataOwner  `
 
-For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](/bigquery/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/access-control) .
 
 ### Delete row-level access policies
 
@@ -336,23 +342,23 @@ To delete a row access policy from a table, use the following DDL statements:
 
   - The `  DROP ALL ROW ACCESS POLICIES  ` statement deletes all row-level access policies on the specified table.
 
-**Important:** You cannot delete the last row-level access policy from a table using `  DROP ROW ACCESS POLICY  ` . Attempting to do so results in an error. To delete the last row-level access policy on a table, you must use `  DROP ALL ROW ACCESS POLICIES  ` instead. For more information about dropping the last row-level access policy on a table, see [Best practices for row-level security](/bigquery/docs/best-practices-row-level-security#avoid_inadvertent_access_when_re-creating_row-level_access_policies) .
+**Important:** You cannot delete the last row-level access policy from a table using `  DROP ROW ACCESS POLICY  ` . Attempting to do so results in an error. To delete the last row-level access policy on a table, you must use `  DROP ALL ROW ACCESS POLICIES  ` instead. For more information about dropping the last row-level access policy on a table, see [Best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#avoid_inadvertent_access_when_re-creating_row-level_access_policies) .
 
 ### Examples
 
 Delete a row-level access policy from a table:
 
-``` text
+``` notranslate
 DROP ROW ACCESS POLICY my_row_filter ON project.dataset.my_table;
 ```
 
 Delete all the row-level access policies from a table:
 
-``` text
+``` notranslate
 DROP ALL ROW ACCESS POLICIES ON project.dataset.my_table;
 ```
 
-For more information about deleting a row-level access policy, see the [`  DROP ROW ACCESS POLICY  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement) reference.
+For more information about deleting a row-level access policy, see the [`  DROP ROW ACCESS POLICY  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_row_access_policy_statement) reference.
 
 ## Query tables with row access policies
 
@@ -362,15 +368,17 @@ A user must first have access to a BigQuery table to be able to query it, even i
 
 To query a BigQuery table with row-level access policies, you must have the `  bigquery.tables.getData  ` permission on the table. You also need the `  bigquery.rowAccessPolicies.getFilteredData  ` permission.
 
-To gain these permissions with predefined roles, you need to be granted the [`  roles/bigquery.dataViewer  `](/bigquery/docs/access-control#bigquery.dataViewer) role on the table using IAM, and you must be granted the [`  roles/bigquery.filteredDataViewer  `](#filtered-data-viewer-role) IAM role on the table through the row-level access policy.
+To gain these permissions with predefined roles, you need to be granted the [`  roles/bigquery.dataViewer  `](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.dataViewer) role on the table using IAM, and you must be granted the [`  roles/bigquery.filteredDataViewer  `](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#filtered-data-viewer-role) IAM role on the table through the row-level access policy.
 
-**Caution:** Don't apply the `  bigquery.filteredDataViewer  ` role directly to a resource through IAM. `  bigquery.filteredDataViewer  ` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
+**Caution:** Don't apply the `  bigquery.filteredDataViewer  ` role directly to a resource through IAM. `  bigquery.filteredDataViewer  ` is a system-managed role. Grant the role only by using row-level access policies. For more information, see [best practices for row-level security](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security#filtered-data-viewer) .
 
-You must have the `  datacatalog.categories.fineGrainedGet  ` permission on all relevant columns with [column-level security](/bigquery/docs/column-level-security-intro) . To gain this permission with predefined roles, you need the `  datacatalog.categoryFineGrainedReader  ` role.
+You must have the `  datacatalog.categories.fineGrainedGet  ` permission on all relevant columns with [column-level security](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) . To gain this permission with predefined roles, you need the `  datacatalog.categoryFineGrainedReader  ` role.
 
 ### View query results
 
 In the Google Cloud console, when you query a table with a row-level access policy, BigQuery displays a banner notice indicating that your results might be filtered by a row-level access policy. This notice displays even if you are a member of the grantee list for the policy.
+
+![Query result on table with row-level access policy](https://docs.cloud.google.com/static/bigquery/images/query-results-row-level-security.png)
 
 ### Job statistics
 
@@ -380,33 +388,31 @@ When you query a table with a row-level access policy using the Job API, BigQuer
 
 This `  Job  ` object response has been truncated for simplicity:
 
-``` text
-{
-  "configuration": {
-    "jobType": "QUERY",
-    "query": {
-      "priority": "INTERACTIVE",
-      "query": "SELECT * FROM dataset.table",
-      "useLegacySql": false
+    {
+      "configuration": {
+        "jobType": "QUERY",
+        "query": {
+          "priority": "INTERACTIVE",
+          "query": "SELECT * FROM dataset.table",
+          "useLegacySql": false
+        }
+      },
+      ...
+      "statistics": {
+        ...
+        rowLevelSecurityStatistics: {
+          rowLevelSecurityApplied: true
+        },
+        ...
+      },
+      "status": {
+        "state": "DONE"
+      },
+      ...
     }
-  },
-  ...
-  "statistics": {
-    ...
-    rowLevelSecurityStatistics: {
-      rowLevelSecurityApplied: true
-    },
-    ...
-  },
-  "status": {
-    "state": "DONE"
-  },
-  ...
-}
-```
 
 ## What's next
 
-  - For information about how row-level security works with other BigQuery features and services, see [Using row level security with other BigQuery features](/bigquery/docs/using-row-level-security-with-features) .
+  - For information about how row-level security works with other BigQuery features and services, see [Using row level security with other BigQuery features](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features) .
 
-  - For information about best practices for row-level security, see [Best Practices for row-level security in BigQuery](/bigquery/docs/best-practices-row-level-security) .
+  - For information about best practices for row-level security, see [Best Practices for row-level security in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security) .

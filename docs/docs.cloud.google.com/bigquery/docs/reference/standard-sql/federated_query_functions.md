@@ -2,38 +2,23 @@ GoogleSQL for BigQuery supports the following federated query functions.
 
 ## Function list
 
-<table>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/federated_query_functions#external_query"><code dir="ltr" translate="no">        EXTERNAL_QUERY       </code></a></td>
-<td>Executes a query on an external database and returns the results as a temporary table.</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                             | Summary                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| [`         EXTERNAL_QUERY        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) | Executes a query on an external database and returns the results as a temporary table. |
 
 ## `     EXTERNAL_QUERY    `
 
-``` text
-EXTERNAL_QUERY('connection_id', '''external_database_query'''[, 'options'])
-```
+    EXTERNAL_QUERY('connection_id', '''external_database_query'''[, 'options'])
 
 **Description**
 
-Executes a query on an external database and returns the results as a temporary table. The external database data type is converted to a [GoogleSQL data type](/bigquery/docs/reference/standard-sql/data-types#data_type_list) in the temporary result table with [these data type mappings](#data_type_mappings) .
+Executes a query on an external database and returns the results as a temporary table. The external database data type is converted to a [GoogleSQL data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#data_type_list) in the temporary result table with [these data type mappings](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#data_type_mappings) .
 
   - `  external_database_query  ` : The query to run on the external database.
 
-  - `  connection_id  ` : The ID of the [connection resource](/bigquery/docs/connections-api-intro) . The connection resource contains settings for the connection between the external database and BigQuery. If you don't have a default project configured, prepend the project ID to the connection ID in following format:
+  - `  connection_id  ` : The ID of the [connection resource](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) . The connection resource contains settings for the connection between the external database and BigQuery. If you don't have a default project configured, prepend the project ID to the connection ID in following format:
     
-    ``` text
-    projects/PROJECT_ID/locations/LOCATION/connections/CONNECTION_ID
-    ```
+        projects/PROJECT_ID/locations/LOCATION/connections/CONNECTION_ID
     
     Replace the following:
     
@@ -45,30 +30,17 @@ Executes a query on an external database and returns the results as a temporary 
     
     **Caution:** If you have a view that's shared across multiple projects where you use `  EXTERNAL_QUERY  ` , always use the fully qualified connection ID (projects/ PROJECT\_ID /locations/ LOCATION /connections/ CONNECTION\_ID ), otherwise the wrong project might be used.
 
-  - `  options  ` : An optional string of a JSON format map with key value pairs of option name and value (both are case sensitive).
+  - <span id="external_query_options"></span> `  options  ` : An optional string of a JSON format map with key value pairs of option name and value (both are case sensitive).
     
     For example: `  '{"default_type_for_decimal_columns":"numeric"}'  `
     
     Supported options:
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>Option Name</th>
-    <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>"default_type_for_decimal_columns"</td>
-    <td>Can be "float64", "numeric", "bignumeric" or "string". With this option, the MySQL Decimal type or PostgreSQL Numeric type will be mapped to the provided BigQuery type. When this option isn't provided, the MySQL Decimal type or PostgreSQL Numeric type will be mapped to BigQuery NUMERIC type.</td>
-    </tr>
-    <tr class="even">
-    <td>"query_execution_priority"</td>
-    <td>Can be "low", "medium" or "high". Only supported in Spanner. Specifies priority for execution of the query. Execution priority is "medium" by default.</td>
-    </tr>
-    </tbody>
-    </table>
+    | Option Name                            | Description                                                                                                                                                                                                                                                                                          |
+    | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | "default\_type\_for\_decimal\_columns" | Can be "float64", "numeric", "bignumeric" or "string". With this option, the MySQL Decimal type or PostgreSQL Numeric type will be mapped to the provided BigQuery type. When this option isn't provided, the MySQL Decimal type or PostgreSQL Numeric type will be mapped to BigQuery NUMERIC type. |
+    | "query\_execution\_priority"           | Can be "low", "medium" or "high". Only supported in Spanner. Specifies priority for execution of the query. Execution priority is "medium" by default.                                                                                                                                               |
+    
 
 Additional notes:
 
@@ -90,69 +62,61 @@ Suppose you need the date of the first order for each of your customers to inclu
 
 <!-- end list -->
 
-``` text
-SELECT
-  c.customer_id, c.name, SUM(t.amount) AS total_revenue, rq.first_order_date
-FROM customers AS c
-INNER JOIN transaction_fact AS t ON c.customer_id = t.customer_id
-LEFT OUTER JOIN
-  EXTERNAL_QUERY(
-    'connection_id',
-    '''SELECT customer_id, MIN(order_date) AS first_order_date
-       FROM orders
-       GROUP BY customer_id'''
-  ) AS rq
-  ON rq.customer_id = c.customer_id
-GROUP BY c.customer_id, c.name, rq.first_order_date;
-```
+    SELECT
+      c.customer_id, c.name, SUM(t.amount) AS total_revenue, rq.first_order_date
+    FROM customers AS c
+    INNER JOIN transaction_fact AS t ON c.customer_id = t.customer_id
+    LEFT OUTER JOIN
+      EXTERNAL_QUERY(
+        'connection_id',
+        '''SELECT customer_id, MIN(order_date) AS first_order_date
+           FROM orders
+           GROUP BY customer_id'''
+      ) AS rq
+      ON rq.customer_id = c.customer_id
+    GROUP BY c.customer_id, c.name, rq.first_order_date;
 
 You can use the `  EXTERNAL_QUERY()  ` function to query information\_schema tables to access database metadata, such as list all tables in the database or show table schema. The following example information\_schema queries work in both [MySQL](https://dev.mysql.com/doc/refman/8.0/en/information-schema-introduction.html) and [PostgreSQL](https://www.postgresql.org/docs/9.1/information-schema.html) .
 
-``` text
--- List all tables in a database.
-SELECT *
-FROM
-  EXTERNAL_QUERY(
-    'connection_id',
-    '''SELECT * FROM information_schema.tables'''
-  );
-```
+    -- List all tables in a database.
+    SELECT *
+    FROM
+      EXTERNAL_QUERY(
+        'connection_id',
+        '''SELECT * FROM information_schema.tables'''
+      );
 
-``` text
--- List all columns in a table.
-SELECT *
-FROM
-  EXTERNAL_QUERY(
-    'connection_id',
-    '''SELECT * FROM information_schema.columns WHERE table_name='x';'''
-  );
-```
+    -- List all columns in a table.
+    SELECT *
+    FROM
+      EXTERNAL_QUERY(
+        'connection_id',
+        '''SELECT * FROM information_schema.columns WHERE table_name='x';'''
+      );
 
 `  EXTERNAL_QUERY()  ` won't honor the ordering of the external query result, even if your external query includes `  ORDER BY  ` . The following example query orders rows by customer ID in the external database, but BigQuery will not output the result rows in that order.
 
-``` text
--- ORDER BY will not order rows.
-SELECT *
-FROM
-  EXTERNAL_QUERY(
-    'connection_id',
-    '''SELECT * FROM customers AS c ORDER BY c.customer_id'''
-  );
-```
+    -- ORDER BY will not order rows.
+    SELECT *
+    FROM
+      EXTERNAL_QUERY(
+        'connection_id',
+        '''SELECT * FROM customers AS c ORDER BY c.customer_id'''
+      );
 
 #### Data type mappings
 
-When you execute a federated query, the data from the external database are converted to GoogleSQL types. Below are the data type mappings from [MySQL to BigQuery](#mysql_mapping) and [PostgreSQL to BigQuery](#postgresql_mapping) .
+When you execute a federated query, the data from the external database are converted to GoogleSQL types. Below are the data type mappings from [MySQL to BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#mysql_mapping) and [PostgreSQL to BigQuery](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#postgresql_mapping) .
 
 Things to know about mapping:
 
   - Most MySQL data types can be matched to the same BigQuery data type, with a few exceptions such as `  decimal  ` , `  timestamp  ` , and `  time  ` .
   - PostgreSQL supports many non-standard data types which aren't supported in BigQuery, for example `  money  ` , `  path  ` , `  uuid  ` , `  boxer  ` , and others.
-  - The numeric data types in MySQL and PostgreSQL will be mapped to BigQuery `  NUMERIC  ` value by default. The BigQuery `  NUMERIC  ` value range is smaller than in MySQL and PostgreSQL. It can also be mapped to [`  BIGNUMERIC  `](/bigquery/docs/reference/standard-sql/data-types#numeric_types) , `  FLOAT64  ` , or `  STRING  ` with ["default\_type\_for\_decimal\_columns"](#external_query_options) in `  EXTERNAL_QUERY  ` options.
+  - The numeric data types in MySQL and PostgreSQL will be mapped to BigQuery `  NUMERIC  ` value by default. The BigQuery `  NUMERIC  ` value range is smaller than in MySQL and PostgreSQL. It can also be mapped to [`  BIGNUMERIC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) , `  FLOAT64  ` , or `  STRING  ` with ["default\_type\_for\_decimal\_columns"](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query_options) in `  EXTERNAL_QUERY  ` options.
 
 **Error handling**
 
-If your external query contains a data type that's unsupported in BigQuery, the query will fail immediately. You can cast the unsupported data type to a different MySQL / PostgreSQL data type that is supported. See [unsupported data types](#unsupported_data_types) for more information on how to cast.
+If your external query contains a data type that's unsupported in BigQuery, the query will fail immediately. You can cast the unsupported data type to a different MySQL / PostgreSQL data type that is supported. See [unsupported data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#unsupported_data_types) for more information on how to cast.
 
 #### MySQL to BigQuery type mapping
 
@@ -211,7 +175,7 @@ A decimal represents by (M,D) where M is the total number of digits and D is the
 NUMERIC, BIGNUMERIC, FLOAT64, or STRING  
   
 
-DECIMAL (M,D) will to mapped to NUMERIC by default, or can be mapped to BIGNUMERIC, FLOAT64, or STRING with [default\_type\_for\_decimal\_columns](#external_query_options) .
+DECIMAL (M,D) will to mapped to NUMERIC by default, or can be mapped to BIGNUMERIC, FLOAT64, or STRING with [default\_type\_for\_decimal\_columns](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query_options) .
 
 **Approximate numeric**
 
@@ -366,324 +330,59 @@ NOT YET SUPPORTED
 
 #### PostgreSQL to BigQuery type mapping
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Name</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>BigQuery type</strong></th>
-<th><strong>Type difference</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Integer</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>smallint</td>
-<td>2 bytes, -32768 to +32767</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>smallserial</td>
-<td>See smallint</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>integer</td>
-<td>4 bytes, -2147483648 to +2147483647</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>serial</td>
-<td>See integer</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>bigint</td>
-<td>8 bytes, -9223372036854775808 to 9223372036854775807</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>bigserial</td>
-<td>See bigint</td>
-<td>INT64</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Exact numeric</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>numeric [ (p, s) ]</td>
-<td>Precision up to 1,000.</td>
-<td>NUMERIC, BIGNUMERIC, FLOAT64, or STRING</td>
-<td>numeric [ (p, s) ] will to mapped to NUMERIC by default, or can be mapped to BIGNUMERIC, FLOAT64, or STRING with <a href="#external_query_options">default_type_for_decimal_columns</a> .</td>
-</tr>
-<tr class="even">
-<td>Decimal [ (p, s) ]</td>
-<td>See numeric</td>
-<td>NUMERIC</td>
-<td>See numeric</td>
-</tr>
-<tr class="odd">
-<td>money</td>
-<td>8 bytes, 2 digit scale, -92233720368547758.08 to +92233720368547758.07</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Approximate numeric</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>real</td>
-<td>4 bytes, single precision floating-point number</td>
-<td>FLOAT64</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>double precision</td>
-<td>8 bytes, double precision floating-point number</td>
-<td>FLOAT64</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><strong>Date and time</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>date</td>
-<td>calendar date (year, month, day)</td>
-<td>DATE</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>time [ (p) ] [ without time zone ]</td>
-<td>time of day (no time zone)</td>
-<td>TIME</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>time [ (p) ] with time zone</td>
-<td>time of day, including time zone</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>timestamp [ (p) ] [ without time zone ]</td>
-<td>date and time (no time zone)</td>
-<td>DATETIME</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>timestamp [ (p) ] with time zone</td>
-<td>date and time, including time zone</td>
-<td>TIMESTAMP</td>
-<td>PostgreSQL TIMESTAMP is retrieved as UTC timezone no matter where user call BigQuery</td>
-</tr>
-<tr class="odd">
-<td>interval</td>
-<td>A time duration</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Character and strings</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>character [ (n) ]</td>
-<td>fixed-length character string</td>
-<td>STRING</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>character varying [ (n) ]</td>
-<td>variable-length character string</td>
-<td>STRING</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>text</td>
-<td>variable-length character string</td>
-<td>STRING</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Binary</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>bytea</td>
-<td>binary data ("byte array")</td>
-<td>BYTES</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>bit [ (n) ]</td>
-<td>fixed-length bit string</td>
-<td>BYTES</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>bit varying [ (n) ]</td>
-<td>variable-length bit string</td>
-<td>BYTES</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><strong>Other</strong></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>boolean</td>
-<td>logical Boolean (true/false)</td>
-<td>BOOL</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>inet</td>
-<td>IPv4 or IPv6 host address</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>path</td>
-<td>geometric path on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>pg_lsn</td>
-<td>PostgreSQL Log Sequence Number</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>point</td>
-<td>geometric point on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>polygon</td>
-<td>closed geometric path on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>tsquery</td>
-<td>text search query</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>tsvector</td>
-<td>text search document</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>txid_snapshot</td>
-<td>user-level transaction ID snapshot</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>uuid</td>
-<td>universally unique identifier</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>xml</td>
-<td>XML data</td>
-<td>STRING</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>box</td>
-<td>rectangular box on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>cidr</td>
-<td>IPv4 or IPv6 network address</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>circle</td>
-<td>circle on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>interval [ fields ] [ (p) ]</td>
-<td>time span</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>json</td>
-<td>textual JSON data</td>
-<td>STRING</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>jsonb</td>
-<td>binary JSON data, decomposed</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>line</td>
-<td>infinite line on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>lseg</td>
-<td>line segment on a plane</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>macaddr</td>
-<td>MAC (Media Access Control) address</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>macaddr8</td>
-<td>MAC (Media Access Control) address (EUI-64 format)</td>
-<td>NOT SUPPORTED</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| **Name**                                    | **Description**                                                        | **BigQuery type**                       | **Type difference**                                                                                                                                                                                                                                                              |
+| ------------------------------------------- | ---------------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Integer**                                 |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| smallint                                    | 2 bytes, -32768 to +32767                                              | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| smallserial                                 | See smallint                                                           | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| integer                                     | 4 bytes, -2147483648 to +2147483647                                    | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| serial                                      | See integer                                                            | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| bigint                                      | 8 bytes, -9223372036854775808 to 9223372036854775807                   | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| bigserial                                   | See bigint                                                             | INT64                                   |                                                                                                                                                                                                                                                                                  |
+| **Exact numeric**                           |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| numeric \[ (p, s) \]                        | Precision up to 1,000.                                                 | NUMERIC, BIGNUMERIC, FLOAT64, or STRING | numeric \[ (p, s) \] will to mapped to NUMERIC by default, or can be mapped to BIGNUMERIC, FLOAT64, or STRING with [default\_type\_for\_decimal\_columns](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query_options) . |
+| Decimal \[ (p, s) \]                        | See numeric                                                            | NUMERIC                                 | See numeric                                                                                                                                                                                                                                                                      |
+| money                                       | 8 bytes, 2 digit scale, -92233720368547758.08 to +92233720368547758.07 | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| **Approximate numeric**                     |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| real                                        | 4 bytes, single precision floating-point number                        | FLOAT64                                 |                                                                                                                                                                                                                                                                                  |
+| double precision                            | 8 bytes, double precision floating-point number                        | FLOAT64                                 |                                                                                                                                                                                                                                                                                  |
+| **Date and time**                           |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| date                                        | calendar date (year, month, day)                                       | DATE                                    |                                                                                                                                                                                                                                                                                  |
+| time \[ (p) \] \[ without time zone \]      | time of day (no time zone)                                             | TIME                                    |                                                                                                                                                                                                                                                                                  |
+| time \[ (p) \] with time zone               | time of day, including time zone                                       | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| timestamp \[ (p) \] \[ without time zone \] | date and time (no time zone)                                           | DATETIME                                |                                                                                                                                                                                                                                                                                  |
+| timestamp \[ (p) \] with time zone          | date and time, including time zone                                     | TIMESTAMP                               | PostgreSQL TIMESTAMP is retrieved as UTC timezone no matter where user call BigQuery                                                                                                                                                                                             |
+| interval                                    | A time duration                                                        | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| **Character and strings**                   |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| character \[ (n) \]                         | fixed-length character string                                          | STRING                                  |                                                                                                                                                                                                                                                                                  |
+| character varying \[ (n) \]                 | variable-length character string                                       | STRING                                  |                                                                                                                                                                                                                                                                                  |
+| text                                        | variable-length character string                                       | STRING                                  |                                                                                                                                                                                                                                                                                  |
+| **Binary**                                  |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| bytea                                       | binary data ("byte array")                                             | BYTES                                   |                                                                                                                                                                                                                                                                                  |
+| bit \[ (n) \]                               | fixed-length bit string                                                | BYTES                                   |                                                                                                                                                                                                                                                                                  |
+| bit varying \[ (n) \]                       | variable-length bit string                                             | BYTES                                   |                                                                                                                                                                                                                                                                                  |
+| **Other**                                   |                                                                        |                                         |                                                                                                                                                                                                                                                                                  |
+| boolean                                     | logical Boolean (true/false)                                           | BOOL                                    |                                                                                                                                                                                                                                                                                  |
+| inet                                        | IPv4 or IPv6 host address                                              | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| path                                        | geometric path on a plane                                              | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| pg\_lsn                                     | PostgreSQL Log Sequence Number                                         | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| point                                       | geometric point on a plane                                             | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| polygon                                     | closed geometric path on a plane                                       | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| tsquery                                     | text search query                                                      | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| tsvector                                    | text search document                                                   | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| txid\_snapshot                              | user-level transaction ID snapshot                                     | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| uuid                                        | universally unique identifier                                          | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| xml                                         | XML data                                                               | STRING                                  |                                                                                                                                                                                                                                                                                  |
+| box                                         | rectangular box on a plane                                             | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| cidr                                        | IPv4 or IPv6 network address                                           | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| circle                                      | circle on a plane                                                      | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| interval \[ fields \] \[ (p) \]             | time span                                                              | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| json                                        | textual JSON data                                                      | STRING                                  |                                                                                                                                                                                                                                                                                  |
+| jsonb                                       | binary JSON data, decomposed                                           | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| line                                        | infinite line on a plane                                               | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| lseg                                        | line segment on a plane                                                | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| macaddr                                     | MAC (Media Access Control) address                                     | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
+| macaddr8                                    | MAC (Media Access Control) address (EUI-64 format)                     | NOT SUPPORTED                           |                                                                                                                                                                                                                                                                                  |
 
 #### Unsupported MySQL and PostgreSQL data types
 
@@ -704,72 +403,19 @@ If your external query contains a data type that's unsupported in BigQuery, the 
 
 When you execute a Spanner federated query, the data from Spanner is converted to GoogleSQL types.
 
-<table>
-<thead>
-<tr class="header">
-<th>Spanner GoogleSQL type</th>
-<th>Spanner PostgreSQL type</th>
-<th>BigQuery type</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-<td>-</td>
-<td><code dir="ltr" translate="no">       ARRAY      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-<td><code dir="ltr" translate="no">       bool      </code></td>
-<td><code dir="ltr" translate="no">       BOOL      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-<td><code dir="ltr" translate="no">       bytea      </code></td>
-<td><code dir="ltr" translate="no">       BYTES      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-<td><code dir="ltr" translate="no">       date      </code></td>
-<td><code dir="ltr" translate="no">       DATE      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-<td><code dir="ltr" translate="no">       float8      </code></td>
-<td><code dir="ltr" translate="no">       FLOAT64      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-<td><code dir="ltr" translate="no">       bigint      </code></td>
-<td><code dir="ltr" translate="no">       INT64      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td><code dir="ltr" translate="no">       JSONB      </code></td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td><code dir="ltr" translate="no">       numeric      </code> *</td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td><code dir="ltr" translate="no">       varchar      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td>-</td>
-<td>Not supported for Spanner federated queries</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td><code dir="ltr" translate="no">       timestamptz      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code> with nanoseconds truncated</td>
-</tr>
-</tbody>
-</table>
+| Spanner GoogleSQL type     | Spanner PostgreSQL type      | BigQuery type                                         |
+| -------------------------- | ---------------------------- | ----------------------------------------------------- |
+| `        ARRAY       `     | \-                           | `        ARRAY       `                                |
+| `        BOOL       `      | `        bool       `        | `        BOOL       `                                 |
+| `        BYTES       `     | `        bytea       `       | `        BYTES       `                                |
+| `        DATE       `      | `        date       `        | `        DATE       `                                 |
+| `        FLOAT64       `   | `        float8       `      | `        FLOAT64       `                              |
+| `        INT64       `     | `        bigint       `      | `        INT64       `                                |
+| `        JSON       `      | `        JSONB       `       | `        JSON       `                                 |
+| `        NUMERIC       `   | `        numeric       ` \*  | `        NUMERIC       `                              |
+| `        STRING       `    | `        varchar       `     | `        STRING       `                               |
+| `        STRUCT       `    | \-                           | Not supported for Spanner federated queries           |
+| `        TIMESTAMP       ` | `        timestamptz       ` | `        TIMESTAMP       ` with nanoseconds truncated |
 
 \* PostgreSQL numeric values with a precision that's greater than the precision that BigQuery supports are rounded. Values that are larger than the maximum value generate an `  Invalid NUMERIC value  ` error.
 
@@ -777,7 +423,7 @@ If your external query contains a data type that's unsupported for federated que
 
 #### SAP Datasphere to BigQuery type mapping
 
-When you execute a [SAP Datasphere federated query](/bigquery/docs/sap-datasphere-federated-queries) , the data from SAP Datasphere is converted to the following GoogleSQL types.
+When you execute a [SAP Datasphere federated query](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) , the data from SAP Datasphere is converted to the following GoogleSQL types.
 
 <table>
 <colgroup>

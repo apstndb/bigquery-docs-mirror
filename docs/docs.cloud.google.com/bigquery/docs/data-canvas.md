@@ -1,24 +1,24 @@
 # Analyze with BigQuery data canvas
 
-This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Dataplex Universal Catalog](/dataplex/docs/introduction) .
+This document describes how to use data canvas for data analysis. You can also manage data canvas metadata by using [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) .
 
-BigQuery data canvas, which is a [Gemini in BigQuery](/bigquery/docs/gemini-overview) feature, lets you find, transform, query, and visualize data by using natural language prompts and a graphic interface for analysis workflows.
+BigQuery data canvas, which is a [Gemini in BigQuery](https://docs.cloud.google.com/bigquery/docs/gemini-overview) feature, lets you find, transform, query, and visualize data by using natural language prompts and a graphic interface for analysis workflows.
 
 For analysis workflows, BigQuery data canvas uses a [directed acyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph) (DAG), which provides a graphical view of your workflow. In BigQuery data canvas, you can iterate on query results and work with multiple branches of inquiry in a single place.
 
-BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. It doesn't require that you have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Dataplex Universal Catalog](/dataplex/docs/introduction) metadata to identify appropriate tables based on natural language.
+BigQuery data canvas is designed to accelerate analytics tasks and help data professionals such as data analysts, data engineers, and others with their data-to-insights journey. It doesn't require that you have technical knowledge of specific tools, only basic familiarity with reading and writing SQL. BigQuery data canvas works with [Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) metadata to identify appropriate tables based on natural language.
 
 BigQuery data canvas isn't intended for direct use by business users.
 
 BigQuery data canvas uses Gemini in BigQuery to find your data, create SQL, generate charts, and create data summaries.
 
-Learn [how and when Gemini for Google Cloud uses your data](/gemini/docs/discover/data-governance) .
+Learn [how and when Gemini for Google Cloud uses your data](https://docs.cloud.google.com/gemini/docs/discover/data-governance) .
 
 ## Capabilities
 
 BigQuery data canvas lets you do the following:
 
-  - Use natural language queries or [keyword search syntax](/data-catalog/docs/how-to/search-reference) with Dataplex Universal Catalog metadata to find assets such as tables, views, or materialized views.
+  - Use natural language queries or [keyword search syntax](https://docs.cloud.google.com/data-catalog/docs/how-to/search-reference) with Dataplex Universal Catalog metadata to find assets such as tables, views, or materialized views.
 
   - Use natural language for basic SQL queries such as the following:
     
@@ -62,26 +62,26 @@ For more information, see [Prompting best practices for BigQuery data canvas](ht
 
 ## Before you begin
 
-1.  [Ensure that Gemini in BigQuery is enabled for your Google Cloud project.](/bigquery/docs/gemini-set-up) An administrator typically performs this step.
-2.  Ensure that you have the [necessary Identity and Access Management (IAM) permissions](#required-roles) to use BigQuery data canvas.
-3.  To manage data canvas metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](/dataplex/docs/enable-api) is enabled in your Google Cloud project.
+1.  [Ensure that Gemini in BigQuery is enabled for your Google Cloud project.](https://docs.cloud.google.com/bigquery/docs/gemini-set-up) An administrator typically performs this step.
+2.  Ensure that you have the [necessary Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/data-canvas#required-roles) to use BigQuery data canvas.
+3.  To manage data canvas metadata in Dataplex Universal Catalog, ensure that the [Dataplex API](https://docs.cloud.google.com/dataplex/docs/enable-api) is enabled in your Google Cloud project.
 
 ### Required roles
 
 To get the permissions that you need to use BigQuery data canvas, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Studio User](/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
-  - [Gemini for Google Cloud User](/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` )
+  - [BigQuery Studio User](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.studioUser) ( `  roles/bigquery.studioUser  ` )
+  - [Gemini for Google Cloud User](https://docs.cloud.google.com/iam/docs/roles-permissions/cloudaicompanion#cloudaicompanion.user) ( `  roles/cloudaicompanion.user  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
-To manage data canvas metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](/dataplex/docs/iam-roles) and the [`  dataform.repositories.get  `](/dataform/docs/access-control#predefined-roles) permission.
+To manage data canvas metadata in Dataplex Universal Catalog, ensure that you have the required [Dataplex Universal Catalog roles](https://docs.cloud.google.com/dataplex/docs/iam-roles) and the [`  dataform.repositories.get  `](https://docs.cloud.google.com/dataform/docs/access-control#predefined-roles) permission.
 
-**Note:** When you create a data canvas, BigQuery grants you the [Dataform Admin role](/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on that data canvas. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the data canvases created in the project. To override this behavior, see [Grant a specific role upon resource creation](/dataform/docs/access-control#grant-specific-role) .
+**Note:** When you create a data canvas, BigQuery grants you the [Dataform Admin role](https://docs.cloud.google.com/dataform/docs/access-control#dataform.admin) ( `  roles/dataform.admin  ` ) on that data canvas. All users with the Dataform Admin role granted on the Google Cloud project have owner access to all the data canvases created in the project. To override this behavior, see [Grant a specific role upon resource creation](https://docs.cloud.google.com/dataform/docs/access-control#grant-specific-role) .
 
 ## Node types
 
@@ -144,7 +144,7 @@ In BigQuery data canvas, a SQL node lets you execute custom SQL queries directly
 
 The SQL node executes the provided SQL query against the specified data sources. The SQL node produces a result table, which can then be connected to other nodes in the canvas for further analysis or visualization. The outputs from the execution of a SQL node, known as the *query result* , can also be persisted to their own table through a *destination node* .
 
-After the query has run, you can export it as a [scheduled query](/bigquery/docs/scheduling-queries) , [export the query results](/bigquery/docs/export-file) , or [share](/bigquery/docs/work-with-saved-queries#share-saved-query) the canvas, similar to [running an interactive query](/bigquery/docs/running-queries#queries) .
+After the query has run, you can export it as a [scheduled query](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) , [export the query results](https://docs.cloud.google.com/bigquery/docs/export-file) , or [share](https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries#share-saved-query) the canvas, similar to [running an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 From the SQL node, you can do the following:
 
@@ -208,7 +208,7 @@ Within the data canvas, you can do the following:
 
 In BigQuery data canvas, an insights node lets you generate insights and summaries from the data within your data canvas. This helps you uncover patterns, assess data quality, and perform statistical analysis on your canvas. It identifies trends, patterns, anomalies, and correlations within your data, as well as generates concise and clear summaries of the data analysis results.
 
-For more information about data insights, see [Generate data insights in BigQuery](/bigquery/docs/data-insights) .
+For more information about data insights, see [Generate data insights in BigQuery](https://docs.cloud.google.com/bigquery/docs/data-insights) .
 
 From the insights node, you can do the following:
 
@@ -220,15 +220,19 @@ From the insights node, you can do the following:
 
 Advanced analysis, also called a Python node, is a [Preview](https://cloud.google.com/products/#product-launch-stages) feature.
 
-This feature is now deprecated. To continue using your canvas, [export your query to a notebook](/bigquery/docs/data-canvas#export-notebook) .
+This feature is now deprecated. To continue using your canvas, [export your query to a notebook](https://docs.cloud.google.com/bigquery/docs/data-canvas#export-notebook) .
 
 ## Use BigQuery data canvas
 
 You can use BigQuery data canvas in the Google Cloud console, a query, or a table.
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+    
+    ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
 3.  In the **Natural language** prompt field, enter a natural language prompt.
     
@@ -238,13 +242,17 @@ You can use BigQuery data canvas in the Google Cloud console, a query, or a tabl
     
     A table node for the selected table is added to BigQuery data canvas. To view schema information, view table details, or preview the data, select the various tabs in the table node.
 
-5.  Optional: After you save the data canvas, use the following toolbar to view data canvas details or the [version history](#view_and_compare_data_canvas_versions) , add new comments, or reply to or get a link to an existing comment:
+5.  Optional: After you save the data canvas, use the following toolbar to view data canvas details or the [version history](https://docs.cloud.google.com/bigquery/docs/data-canvas#view_and_compare_data_canvas_versions) , add new comments, or reply to or get a link to an existing comment:
+    
+    ![Toolbar adjacent to the data canvas.](https://docs.cloud.google.com/static/bigquery/images/code-assets-toolbar.png)
     
     The **Comments** toolbar feature is in [Preview](https://cloud.google.com/products#product-launch-stages) . To provide feedback or request support for this feature, send an email to <bqui-workspace-pod@google.com> .
 
 ### Canvas controls
 
 The data canvas toolbar provides the following controls for adding nodes and managing the canvas view:
+
+![Data canvas toolbar.](https://docs.cloud.google.com/static/bigquery/images/data-canvas-toolbar.png)
 
   - **Search** : Adds a search node to the canvas.
   - **SQL** : Adds a SQL node to the canvas.
@@ -268,8 +276,12 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 #### Prompt 1: Find data
 
 1.  In the Google Cloud console, go the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+    
+    ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
 3.  Click **Search for data** .
 
@@ -277,9 +289,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 5.  In the **Natural language** prompt field, enter the following natural language prompt:
     
-    ``` text
-    Chicago taxi trips
-    ```
+        Chicago taxi trips
     
     BigQuery data canvas generates a list of potential tables based on Dataplex Universal Catalog metadata. You can select multiple tables.
 
@@ -289,7 +299,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 #### Prompt 2: Generate a SQL query in the selected table
 
-As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](/gemini/docs/discover/responsible-ai) .
+As an early-stage technology, Gemini for Google Cloud products can generate output that seems plausible but is factually incorrect. We recommend that you validate all output from Gemini for Google Cloud products before you use it. For more information, see [Gemini for Google Cloud and responsible AI](https://docs.cloud.google.com/gemini/docs/discover/responsible-ai) .
 
 To generate a SQL query for the `  bigquery-public-data.chicago_taxi_trips.taxi_trips  ` table, do the following:
 
@@ -297,13 +307,11 @@ To generate a SQL query for the `  bigquery-public-data.chicago_taxi_trips.taxi_
 
 2.  In the **Natural language** prompt field, enter the following:
     
-    ``` text
-    Get me the 100 longest trips
-    ```
+        Get me the 100 longest trips
     
     BigQuery data canvas generates a SQL query similar to the following:
     
-    ``` text
+    ``` notranslate
     SELECT
       taxi_id,
       trip_start_timestamp,
@@ -323,13 +331,11 @@ To edit the query that you generated, you can manually edit the query, or you ca
 
 1.  In the **Natural language** prompt field, enter the following:
     
-    ``` text
-    Get me the 100 longest trips where the payment type is cash
-    ```
+        Get me the 100 longest trips where the payment type is cash
     
     BigQuery data canvas generates a SQL query similar to the following:
     
-    ``` text
+    ``` notranslate
     SELECT
       taxi_id,
       trip_start_timestamp,
@@ -371,9 +377,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 1.  In the **Natural language** prompt field, enter the following prompt:
     
-    ``` text
-    Information about trees
-    ```
+        Information about trees
     
     BigQuery data canvas suggests several tables that have information about trees.
 
@@ -391,9 +395,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 3.  In the **Natural language** prompt field, enter the following prompt:
     
-    ``` text
-    Information about trees
-    ```
+        Information about trees
 
 4.  Select the `  bigquery-public-data.new_york_trees.tree_census_2005  ` table, and then click **Add to canvas** .
     
@@ -405,13 +407,11 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 7.  In the **Natural language** prompt field, enter the following prompt:
     
-    ``` text
-    Join on address
-    ```
+        Join on address
     
     BigQuery data canvas suggests the SQL query to join these two tables on their address:
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -441,9 +441,7 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 1.  To find data about US names, enter the following prompt:
     
-    ``` text
-    Find data about USA names
-    ```
+        Find data about USA names
     
     BigQuery data canvas generates a list of tables.
 
@@ -453,13 +451,11 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 1.  To query the data, in the data canvas, click **Query** , and then enter the following prompt:
     
-    ``` text
-    Summarize this data
-    ```
+        Summarize this data
     
     BigQuery data canvas generates a query similar to the following:
     
-    ``` text
+    ``` notranslate
     SELECT
       state,
       gender,
@@ -478,13 +474,11 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 
 2.  To filter the data, in the **SQL** prompt field, enter the following prompt:
     
-    ``` text
-    Get me the top 10 most popular names in 1980
-    ```
+        Get me the top 10 most popular names in 1980
     
     BigQuery data canvas generates a query similar to the following:
     
-    ``` text
+    ``` notranslate
     SELECT
       name,
       SUM(number) AS total_count
@@ -511,6 +505,8 @@ In this example, you use natural language prompts in BigQuery data canvas to fin
 2.  For this example, click **Create bar chart** .
     
     BigQuery data canvas creates a bar chart similar to the following:
+    
+    ![Top-ten names bar chart.](https://docs.cloud.google.com/static/bigquery/images/data-canvas-bar-chart.png)
 
 Along with providing a chart, BigQuery data canvas summarizes some of the key details of the data backing the visualization. You can modify the chart by clicking **Visualization details** and editing your chart in the side panel.
 
@@ -518,11 +514,11 @@ Along with providing a chart, BigQuery data canvas summarizes some of the key de
 
 1.  In the **Visualization** prompt field, enter the following:
     
-    ``` text
-    Create a bar chart sorted high to low, with a gradient
-    ```
+        Create a bar chart sorted high to low, with a gradient
     
     BigQuery data canvas creates a bar chart similar to the following:
+    
+    ![Top-ten names bar chart sorted.](https://docs.cloud.google.com/static/bigquery/images/data-canvas-bar-chart-sorted.png)
 
 2.  Optional: To make further changes, click **Edit** .
     
@@ -532,7 +528,7 @@ Along with providing a chart, BigQuery data canvas summarizes some of the key de
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <datacanvas-feedback@google.com> .
 
@@ -607,7 +603,7 @@ To get the best results when working with the BigQuery data canvas assistant, fo
 
   - **Clearly state calculations.** Specify the chosen calculation, such as `  SUM  ` , `  MAX  ` , or `  AVERAGE  ` . For example, say `  Find the MAX  ` trip duration per `  bike_id  ` .
 
-  - **Use system instructions for persistent context and preferences.** Use [system instructions](#add_instructions) to state information rules, and preferences that apply across all prompts.
+  - **Use system instructions for persistent context and preferences.** Use [system instructions](https://docs.cloud.google.com/bigquery/docs/data-canvas#add_instructions) to state information rules, and preferences that apply across all prompts.
 
   - **Review the canvas.** Always review the generated nodes to verify that the logic aligns with your request and the results are accurate.
 
@@ -620,8 +616,12 @@ To get the best results when working with the BigQuery data canvas assistant, fo
 In this example, you use natural language prompts with the Gemini assistant to find, query, and visualize data.
 
 1.  In the Google Cloud console, go the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, next to add\_box **SQL query** , click arrow\_drop\_down **Create new** , and then click **Data canvas** .
+    
+    ![Create data canvas icon.](https://docs.cloud.google.com/static/bigquery/images/create-data-canvas.png)
 
 3.  Click **Search for data** .
 
@@ -629,9 +629,7 @@ In this example, you use natural language prompts with the Gemini assistant to f
 
 5.  In the **Natural language** prompt field, enter the following natural language prompt:
     
-    ``` text
-    bikeshare
-    ```
+        bikeshare
     
     BigQuery data canvas generates a list of potential tables based on Dataplex Universal Catalog metadata. You can select multiple tables.
 
@@ -645,32 +643,24 @@ In this example, you use natural language prompts with the Gemini assistant to f
 
 9.  In the **Instructions** field, add the following instructions for the assistant:
     
-    ``` text
-    Tasks:
-      - Visualize findings with charts
-      - Show many charts per question
-      - Make sure to cover each part via a separate line of reasoning
-    ```
+        Tasks:
+          - Visualize findings with charts
+          - Show many charts per question
+          - Make sure to cover each part via a separate line of reasoning
 
 10. Close the **Canvas assistant settings** pane.
 
 11. In the **Ask a data question** field, enter the following natural language prompt:
     
-    ``` text
-    Show the number of trips by council district and subscriber type
-    ```
+        Show the number of trips by council district and subscriber type
 
 12. You can continue to enter prompts in the **Ask a data question** field. Enter the following natural language prompt:
     
-    ``` text
-    What are most popular stations among the top 5 subscriber types
-    ```
+        What are most popular stations among the top 5 subscriber types
 
 13. Enter the final prompt:
     
-    ``` text
-    What station is least used to start and end a trip
-    ```
+        What station is least used to start and end a trip
     
     Once you've asked all of the relevant prompts, your canvas is populated with the relevant query and visualization nodes according to the prompts and instructions you gave the assistant. Continue to enter prompts or modify existing prompts to get the results you are looking for.
 
@@ -679,8 +669,12 @@ In this example, you use natural language prompts with the Gemini assistant to f
 To view a list of all data canvases in your project, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -697,22 +691,26 @@ To view a list of all data canvases in your project, do the following:
 To view data canvas metadata, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data canvases** .
 
 4.  Click the name of the data canvas you want to view metadata for.
 
-5.  Click info\_outline **Details** to see information about the data canvas such as the [region](/bigquery/docs/saved-queries-introduction#supported_regions) it uses and the date it was last modified.
+5.  Click info\_outline **Details** to see information about the data canvas such as the [region](https://docs.cloud.google.com/bigquery/docs/saved-queries-introduction#supported_regions) it uses and the date it was last modified.
 
 ## Work with data canvas versions
 
-You can choose to create a data canvas either inside of or outside of a [repository](/bigquery/docs/repository-intro) . Data canvas versioning is handled differently based on where the data canvas is located.
+You can choose to create a data canvas either inside of or outside of a [repository](https://docs.cloud.google.com/bigquery/docs/repository-intro) . Data canvas versioning is handled differently based on where the data canvas is located.
 
 ### Data canvas versioning in repositories
 
-Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](/bigquery/docs/workspaces-intro) in repositories to perform version control on data canvases. For more information, see [Use version control with a file](/bigquery/docs/workspaces#use_version_control_with_a_file) .
+Repositories are Git repositories that reside either in BigQuery or with a third-party provider. You can use [workspaces](https://docs.cloud.google.com/bigquery/docs/workspaces-intro) in repositories to perform version control on data canvases. For more information, see [Use version control with a file](https://docs.cloud.google.com/bigquery/docs/workspaces#use_version_control_with_a_file) .
 
 ### Data canvas versioning outside of repositories
 
@@ -723,8 +721,12 @@ You can view, compare, and restore versions of a data canvas.
 To view different versions of a data canvas and compare them with the current version, do the following:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data canvases** .
 
@@ -741,6 +743,8 @@ To view different versions of a data canvas and compare them with the current ve
 Restoring from the comparison pane lets you compare the previous version of the data canvas to the current version before choosing whether to restore it.
 
 1.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 2.  In the **Explorer** pane, expand your project and click **Data canvases** .
 
@@ -758,9 +762,9 @@ Restoring from the comparison pane lets you compare the previous version of the 
 
 ## Manage metadata in Dataplex Universal Catalog
 
-[Dataplex Universal Catalog](/dataplex/docs/introduction) lets you view and manage metadata for data canvases. Data canvases are available in Dataplex Universal Catalog by default, without additional configuration.
+[Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/introduction) lets you view and manage metadata for data canvases. Data canvases are available in Dataplex Universal Catalog by default, without additional configuration.
 
-You can use Dataplex Universal Catalog to manage data canvases in all [BigQuery locations](/bigquery/docs/locations) . Managing data canvases in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
+You can use Dataplex Universal Catalog to manage data canvases in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . Managing data canvases in Dataplex Universal Catalog is subject to [Dataplex Universal Catalog quotas and limits](https://docs.cloud.google.com/dataplex/docs/quotas) and [Dataplex Universal Catalog pricing](https://cloud.google.com/dataplex/pricing) .
 
 Dataplex Universal Catalog automatically retrieves the following metadata from data canvases:
 
@@ -770,18 +774,18 @@ Dataplex Universal Catalog automatically retrieves the following metadata from d
   - Data asset type
   - Corresponding Google Cloud project
 
-Dataplex Universal Catalog logs data canvases as [entries](/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
+Dataplex Universal Catalog logs data canvases as [entries](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entries) with the following entry values:
 
   - System entry group  
-    The [system entry group](/dataplex/docs/ingest-custom-sources#entry-groups) for data canvases is `  @dataform  ` . To view details of data canvas entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
+    The [system entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-groups) for data canvases is `  @dataform  ` . To view details of data canvas entries in Dataplex Universal Catalog, you need to view the `  dataform  ` system entry group. For instructions about how to view a list of all entries in an entry group, see [View details of an entry group](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-group-details) in the Dataplex Universal Catalog documentation.
   - System entry type  
-    The [system entry type](/dataplex/docs/ingest-custom-sources#entry-types) for data canvases is `  dataform-code-asset  ` . To view details of data canvases, you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  DATA_CANVAS  `](/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data canvas. For instructions about how to view details of a selected entry type, see [View details of an entry type](/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
+    The [system entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-types) for data canvases is `  dataform-code-asset  ` . To view details of data canvases, you need to view the `  dataform-code-asset  ` system entry type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  DATA_CANVAS  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . Then, select an entry of the selected data canvas. For instructions about how to view details of a selected entry type, see [View details of an entry type](https://docs.cloud.google.com/dataplex/docs/ingest-custom-sources#entry-type-details) in the Dataplex Universal Catalog documentation. For instructions about how to view details of a selected entry, see [View details of an entry](https://docs.cloud.google.com/dataplex/docs/search-assets#view-entry-details) in the Dataplex Universal Catalog documentation.
   - System aspect type  
-    The [system aspect type](/dataplex/docs/enrich-entries-metadata#aspect-types) for data canvases is `  dataform-code-asset  ` . To provide additional context to data canvases in Dataplex Universal Catalog by annotating data canvas entries with [aspects](/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  DATA_CANVAS  `](/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
+    The [system aspect type](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspect-types) for data canvases is `  dataform-code-asset  ` . To provide additional context to data canvases in Dataplex Universal Catalog by annotating data canvas entries with [aspects](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata#aspects) , view the `  dataform-code-asset  ` aspect type, filter the results with an aspect-based filter, and [set the `  type  ` field inside `  dataform-code-asset  ` aspect to `  DATA_CANVAS  `](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) . For instructions about how to annotate entries with aspects, see [Manage aspects and enrich metadata](https://docs.cloud.google.com/dataplex/docs/enrich-entries-metadata) in the Dataplex Universal Catalog documentation.
   - Type  
-    The type for data canvases is `  DATA_CANVAS  ` . This type lets you filter data canvases in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS  ` query in an [aspect-based filter](/dataplex/docs/search-syntax#aspect-search) .
+    The type for data canvases is `  DATA_CANVAS  ` . This type lets you filter data canvases in the `  dataform-code-asset  ` system entry type and the `  dataform-code-asset  ` aspect type by using the `  aspect:dataplex-types.global.dataform-code-asset.type=DATA_CANVAS  ` query in an [aspect-based filter](https://docs.cloud.google.com/dataplex/docs/search-syntax#aspect-search) .
 
-For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
+For instructions about how to search for assets in Dataplex Universal Catalog, see [Search for data assets in Dataplex Universal Catalog](https://docs.cloud.google.com/dataplex/docs/search-assets) in the Dataplex Universal Catalog documentation.
 
 ## Pricing
 
@@ -789,11 +793,11 @@ For details about pricing for this feature, see [Gemini in BigQuery pricing over
 
 ## Quotas and limits
 
-For information about quotas and limits for this feature, see [Quotas for Gemini in BigQuery](/bigquery/quotas#gemini-quotas) .
+For information about quotas and limits for this feature, see [Quotas for Gemini in BigQuery](https://docs.cloud.google.com/bigquery/quotas#gemini-quotas) .
 
 ## Locations
 
-You can use BigQuery data canvas in all [BigQuery locations](/bigquery/docs/locations) . To learn about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](/bigquery/docs/gemini-locations) .
+You can use BigQuery data canvas in all [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) . To learn about where Gemini in BigQuery processes your data, see [Where Gemini in BigQuery processes your data](https://docs.cloud.google.com/bigquery/docs/gemini-locations) .
 
 ## Provide feedback
 
@@ -812,8 +816,8 @@ To provide direct feedback about this feature, you can also contact <datacanvas-
 
 ## What's next
 
-  - Learn how to [write queries with Gemini assistance](/bigquery/docs/write-sql-gemini) .
+  - Learn how to [write queries with Gemini assistance](https://docs.cloud.google.com/bigquery/docs/write-sql-gemini) .
 
-  - Learn how to [create notebooks](/bigquery/docs/create-notebooks) .
+  - Learn how to [create notebooks](https://docs.cloud.google.com/bigquery/docs/create-notebooks) .
 
-  - Learn how to generate natural language queries about your data with [data insights](/bigquery/docs/data-insights) .
+  - Learn how to generate natural language queries about your data with [data insights](https://docs.cloud.google.com/bigquery/docs/data-insights) .

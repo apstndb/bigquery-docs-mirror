@@ -6,13 +6,13 @@ The BigQuery Validation Program lets partners validate their integrations into B
   - **Enhance:** We take the results from the Evaluate phase and work with our partners to fill in the gaps, if any.
   - **Enable:** Together with our partners, we refine existing documentation to make sure our mutual customers have everything they need to successfully work with our products.
 
-This document lists the partner solutions that have been validated as part of the [**Google Cloud Ready - BigQuery** program](/bigquery/docs/bigquery-ready-overview) . Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended. These solutions are organized by the following categories:
+This document lists the partner solutions that have been validated as part of the [**Google Cloud Ready - BigQuery** program](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) . Third-party software is not supported by Cloud Customer Care when it has been identified that BigQuery is working as intended. These solutions are organized by the following categories:
 
-  - [BI, ML, & Advanced Analytics](#bi-ml-analytics)
-  - [Connectors & Developer Tools](#connectors-developer-tools)
-  - [Data Governance, Security, & MDM](#data-governance-mdm)
-  - [Data Quality, Observability, & FinOps](#data-quality-observability)
-  - [ETL & Data Integration](#etl-data-integration)
+  - [BI, ML, & Advanced Analytics](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#bi-ml-analytics)
+  - [Connectors & Developer Tools](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#connectors-developer-tools)
+  - [Data Governance, Security, & MDM](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-governance-mdm)
+  - [Data Quality, Observability, & FinOps](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#data-quality-observability)
+  - [ETL & Data Integration](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-partners#etl-data-integration)
 
 ## BI, ML, & Advanced Analytics
 
@@ -2056,7 +2056,7 @@ Datadog offers services in infrastructure performance, availability, and monitor
 
   - [BigQuery Integration](https://docs.datadoghq.com/integrations/google_cloud_bigquery/)
   - [Query Results Save Detection](https://docs.datadoghq.com/security/default_rules/google-cloud-bq-exfil-via-cloud-storage/)
-  - [Google Cloud Monitoring](https://www.datadoghq.com/solutions/gcp/#)
+  - [Google Cloud Monitoring](https://www.datadoghq.com/solutions/gcp/)
 
 **Partner Advantage page**
 
@@ -2984,32 +2984,12 @@ Estuary builds a DataOps platform called Estuary Flow that integrates all of the
 
 #### HVR hub
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Solution</strong></th>
-<th><a href="https://www.fivetran.com/data-movement/database-replication" class="external">HVR hub</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Category</strong></td>
-<td>ETL &amp; Data Integration</td>
-</tr>
-<tr class="even">
-<td><strong>Description</strong></td>
-<td>HVR is a scalable enterprise data replication and validation platform that lets you simplify high-volume, real-time data movement. HVR's simple yet powerful data integration and synchronization solution reduces infrastructure costs while allowing you to create new and improved services driven by data stored on-premises and in the cloud. With HVR, you can replace your batch processes with a variety of real-time data delivery and integration scenarios and enable consolidated, real-time analytics that improve your business insights.</td>
-</tr>
-<tr class="odd">
-<td><strong>Partner references</strong></td>
-<td><a href="https://www.fivetran.com/connectors/bigquery" class="external">Real-time data integration - Google BigQuery</a></td>
-</tr>
-<tr class="even">
-<td><strong>Partner Advantage page</strong></td>
-<td><a href="https://cloud.google.com/find-a-partner/partner/hvr">Direct link</a></td>
-</tr>
-</tbody>
-</table>
+| **Solution**               | [HVR hub](https://www.fivetran.com/data-movement/database-replication)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Category**               | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Description**            | HVR is a scalable enterprise data replication and validation platform that lets you simplify high-volume, real-time data movement. HVR's simple yet powerful data integration and synchronization solution reduces infrastructure costs while allowing you to create new and improved services driven by data stored on-premises and in the cloud. With HVR, you can replace your batch processes with a variety of real-time data delivery and integration scenarios and enable consolidated, real-time analytics that improve your business insights. |
+| **Partner references**     | [Real-time data integration - Google BigQuery](https://www.fivetran.com/connectors/bigquery)                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| **Partner Advantage page** | [Direct link](https://cloud.google.com/find-a-partner/partner/hvr)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 
 ### Fullstory
 
@@ -3377,32 +3357,12 @@ Prophecy is a low-code data transformation platform for data engineers. The inte
 
 ### Qlik
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Solution</strong></th>
-<th><a href="https://www.qlik.com/us/products/qlik-replicate" class="external">Qlik Replicate</a></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Category</strong></td>
-<td>ETL &amp; Data Integration</td>
-</tr>
-<tr class="even">
-<td><strong>Description</strong></td>
-<td>Qlik Replicate (formerly Attunity Replicate) is a high-performance data-replication tool offering optimized data ingestion from a broad array of data sources and platforms and seamless integration with all major big data analytics platforms. Qlik Replicate is primarily used for data migration and CDC (change data capture) and can be used in conjunction with other ETL or DBA tools.</td>
-</tr>
-<tr class="odd">
-<td><strong>Partner references</strong></td>
-<td><a href="https://help.qlik.com/en-US/replicate/November2021/Content/Replicate/Main/Google%20Cloud%20BigQuery/bigquery_postgresql.htm" class="external">Using BigQuery as a target - Qlik Replicate</a></td>
-</tr>
-<tr class="even">
-<td><strong>Partner Advantage page</strong></td>
-<td><a href="https://cloud.google.com/find-a-partner/partner/qliktech-inc">Direct link</a></td>
-</tr>
-</tbody>
-</table>
+| **Solution**               | [Qlik Replicate](https://www.qlik.com/us/products/qlik-replicate)                                                                                                                                                                                                                                                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Category**               | ETL & Data Integration                                                                                                                                                                                                                                                                                                                                                                          |
+| **Description**            | Qlik Replicate (formerly Attunity Replicate) is a high-performance data-replication tool offering optimized data ingestion from a broad array of data sources and platforms and seamless integration with all major big data analytics platforms. Qlik Replicate is primarily used for data migration and CDC (change data capture) and can be used in conjunction with other ETL or DBA tools. |
+| **Partner references**     | [Using BigQuery as a target - Qlik Replicate](https://help.qlik.com/en-US/replicate/November2021/Content/Replicate/Main/Google%20Cloud%20BigQuery/bigquery_postgresql.htm)                                                                                                                                                                                                                      |
+| **Partner Advantage page** | [Direct link](https://cloud.google.com/find-a-partner/partner/qliktech-inc)                                                                                                                                                                                                                                                                                                                     |
 
 ### Quix
 
@@ -3855,5 +3815,5 @@ Y42's Turnkey Data Orchestration Platform with embedded observability gives data
 
 ## What's next
 
-  - Learn more about the [Google Cloud Ready - BigQuery partner program](/bigquery/docs/bigquery-ready-overview) .
-  - View the [BigQuery partner page](/bigquery#section-15) .
+  - Learn more about the [Google Cloud Ready - BigQuery partner program](https://docs.cloud.google.com/bigquery/docs/bigquery-ready-overview) .
+  - View the [BigQuery partner page](https://docs.cloud.google.com/bigquery#section-15) .

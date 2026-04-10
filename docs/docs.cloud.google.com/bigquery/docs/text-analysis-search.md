@@ -1,8 +1,8 @@
 # Work with text analyzers
 
-The [`  CREATE SEARCH INDEX  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , [`  SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions) , and [`  TEXT_ANALYZE  ` function](/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) support advanced text analyzer configuration options. Understanding BigQuery's text analyzers and their options lets you refine your search experience.
+The [`  CREATE SEARCH INDEX  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) , [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) , and [`  TEXT_ANALYZE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze) support advanced text analyzer configuration options. Understanding BigQuery's text analyzers and their options lets you refine your search experience.
 
-This document provides an overview of the different text analyzers available in BigQuery and their configuration options, as well as examples of how text analyzers work with [search](/bigquery/docs/search) in BigQuery. For more information about text analyzer syntax, see [Text analysis](/bigquery/docs/reference/standard-sql/text-analysis) .
+This document provides an overview of the different text analyzers available in BigQuery and their configuration options, as well as examples of how text analyzers work with [search](https://docs.cloud.google.com/bigquery/docs/search) in BigQuery. For more information about text analyzer syntax, see [Text analysis](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis) .
 
 ## Text analyzers
 
@@ -14,7 +14,7 @@ BigQuery supports the following text analyzers:
 
 ### `     NO_OP_ANALYZER    `
 
-Use the `  NO_OP_ANALYZER  ` when you have pre-processed data that you want to match exactly. There is no tokenization or normalization applied to the text. Since this analyzer does not perform tokenization or normalization, it accepts no configuration. For more information about `  NO_OP_ANALYZER  ` , see [`  NO_OP_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
+Use the `  NO_OP_ANALYZER  ` when you have pre-processed data that you want to match exactly. There is no tokenization or normalization applied to the text. Since this analyzer does not perform tokenization or normalization, it accepts no configuration. For more information about `  NO_OP_ANALYZER  ` , see [`  NO_OP_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) .
 
 ### `     LOG_ANALYZER    `
 
@@ -26,13 +26,11 @@ The `  LOG_ANALYZER  ` modifies data in the following ways:
 
   - Text is split into individual terms called *tokens* by the following delimiters:
     
-    ``` text
-    [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
-    %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
-    %0a %2C %2c %28 %29
-    ```
+        [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
+        %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
+        %0a %2C %2c %28 %29
     
-    If you don't want to use the default delimiters, you can specify the delimiters you want to use as text analyzer options. `  LOG_ANALYZER  ` lets you configure specific delimiters and token filters for more control over your search results. For more information about the specific configuration options available when using the `  LOG_ANALYZER  ` , see [`  delimiters  ` analyzer option](/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) and [`  token_filters  ` analyzer option](/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) .
+    If you don't want to use the default delimiters, you can specify the delimiters you want to use as text analyzer options. `  LOG_ANALYZER  ` lets you configure specific delimiters and token filters for more control over your search results. For more information about the specific configuration options available when using the `  LOG_ANALYZER  ` , see [`  delimiters  ` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) and [`  token_filters  ` analyzer option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) .
 
 ### `     PATTERN_ANALYZER    `
 
@@ -155,7 +153,7 @@ Note the use of <a href="https://stackoverflow.com/questions/2301285/what-do-laz
 </tbody>
 </table>
 
-Using the `  PATTERN_ANALYZER  ` text analyzer gives you more control over the tokens extracted from a text when used with the [`  SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions) . The following table shows how different patterns and results result in different `  SEARCH  ` results:
+Using the `  PATTERN_ANALYZER  ` text analyzer gives you more control over the tokens extracted from a text when used with the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) . The following table shows how different patterns and results result in different `  SEARCH  ` results:
 
 <table style="width:100%;">
 <colgroup>
@@ -349,15 +347,15 @@ The following examples demonstrates the use of text analysis with customization 
 
 The following example configures `  LOG_ANALYZER  ` options with [NFKC ICU](https://en.wikipedia.org/wiki/Unicode_equivalence) normalization and stop words. The example assumes the following data table with data already populated:
 
-``` text
+``` notranslate
 CREATE TABLE dataset.data_table(
   text_data STRING
 );
 ```
 
-To create a search index with NFKC ICU normalization and a list of stop words, create a JSON-formatted string in the `  analyzer_options  ` option of the [`  CREATE SEARCH INDEX  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `  LOG_ANALYZER  ` , see [`  LOG_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) . For this example, our stop words are `  "the", "of", "and", "for"  ` .
+To create a search index with NFKC ICU normalization and a list of stop words, create a JSON-formatted string in the `  analyzer_options  ` option of the [`  CREATE SEARCH INDEX  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `  LOG_ANALYZER  ` , see [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) . For this example, our stop words are `  "the", "of", "and", "for"  ` .
 
-``` text
+``` notranslate
 CREATE OR REPLACE SEARCH INDEX `my_index` ON `dataset.data_table`(ALL COLUMNS) OPTIONS(
   analyzer='PATTERN_ANALYZER',
   analyzer_options= '''{
@@ -420,9 +418,9 @@ Finally, the stop words filter does nothing because none of the tokens are in th
 </tbody>
 </table>
 
-Now that the search index has been created, you can use the [`  SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions) to search the table using the same analyzer configurations specified in the search index. Note that if the analyzer configurations in the `  SEARCH  ` function don't match those of the search index, the search index won't be used. Use the following query:
+Now that the search index has been created, you can use the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table using the same analyzer configurations specified in the search index. Note that if the analyzer configurations in the `  SEARCH  ` function don't match those of the search index, the search index won't be used. Use the following query:
 
-``` text
+``` notranslate
 SELECT
   SEARCH(
   analyzer => 'LOG_ANALYZER',
@@ -517,15 +515,15 @@ The following example configures the `  PATTERN_ANALYZER  ` text analyzer to sea
 
 This example assumes that the following table is populated with data:
 
-``` text
+``` notranslate
 CREATE TABLE dataset.data_table(
   text_data STRING
 );
 ```
 
-To create a search index the `  pattern  ` option and a list of stop words, create a JSON-formatted string in the `  analyzer_options  ` option of the [`  CREATE SEARCH INDEX  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `  PATTERN_ANALYZER  ` , see [`  PATTERN_ANALYZER  `](/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) . For this example, our stop words are the localhost address, `  127.0.0.1  ` .
+To create a search index the `  pattern  ` option and a list of stop words, create a JSON-formatted string in the `  analyzer_options  ` option of the [`  CREATE SEARCH INDEX  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement) . For a complete list of options available in when creating a search index with the `  PATTERN_ANALYZER  ` , see [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) . For this example, our stop words are the localhost address, `  127.0.0.1  ` .
 
-``` text
+``` notranslate
 CREATE SEARCH INDEX my_index
 ON dataset.data_table(text_data)
 OPTIONS (analyzer = 'PATTERN_ANALYZER', analyzer_options = '''{
@@ -547,31 +545,14 @@ When using regular expressions with `  analyzer_options  ` , include three leadi
 
 The following table describes the tokenization options for various values of `  text_data  `
 
-<table>
-<thead>
-<tr class="header">
-<th>Data Text</th>
-<th>Tokens for index</th>
-<th>Explanation</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>abc192.168.1.1def 172.217.20.142</td>
-<td>["192.168.1.1", "172.217.20.142"]</td>
-<td>The IPv4 patterns capture the IPv4 addresses even if there's no space between the address and the text.</td>
-</tr>
-<tr class="even">
-<td>104.24.12.10abc 127.0.0.1</td>
-<td>["104.24.12.10"]</td>
-<td>"127.0.0.1" is filtered out since it's in the list of stop words.</td>
-</tr>
-</tbody>
-</table>
+| Data Text                        | Tokens for index                    | Explanation                                                                                             |
+| -------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| abc192.168.1.1def 172.217.20.142 | \["192.168.1.1", "172.217.20.142"\] | The IPv4 patterns capture the IPv4 addresses even if there's no space between the address and the text. |
+| 104.24.12.10abc 127.0.0.1        | \["104.24.12.10"\]                  | "127.0.0.1" is filtered out since it's in the list of stop words.                                       |
 
-Now that the search index has been created, you can use the [`  SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions) to search the table based on the tokenization specified in `  analyzer_options  ` . Use the following query:
+Now that the search index has been created, you can use the [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions) to search the table based on the tokenization specified in `  analyzer_options  ` . Use the following query:
 
-``` text
+``` notranslate
 SELECT
   SEARCH(dataset.data_table.text_data
   "search_data",
@@ -644,5 +625,5 @@ Note that backticks are treated as regular characters for PATTERN_ANALYZER.</td>
 
 ## What's next
 
-  - For an overview of search index use cases, pricing, required permissions, and limitations, see the [Introduction to search in BigQuery](/bigquery/docs/search-intro) .
-  - For information about efficient searching of indexed columns, see [Search with an index](/bigquery/docs/search) .
+  - For an overview of search index use cases, pricing, required permissions, and limitations, see the [Introduction to search in BigQuery](https://docs.cloud.google.com/bigquery/docs/search-intro) .
+  - For information about efficient searching of indexed columns, see [Search with an index](https://docs.cloud.google.com/bigquery/docs/search) .

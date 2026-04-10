@@ -2,26 +2,26 @@
 
 This document describes audit logging for BigQuery sharing. Google Cloud services generate audit logs that record administrative and access activities within your Google Cloud resources. For more information about Cloud Audit Logs, see the following:
 
-  - [Types of audit logs](/logging/docs/audit#types)
-  - [Audit log entry structure](/logging/docs/audit#audit_log_entry_structure)
-  - [Storing and routing audit logs](/logging/docs/audit#storing_and_routing_audit_logs)
-  - [Cloud Logging pricing summary](/stackdriver/pricing#logs-pricing-summary)
-  - [Enable Data Access audit logs](/logging/docs/audit/configure-data-access)
+  - [Types of audit logs](https://docs.cloud.google.com/logging/docs/audit#types)
+  - [Audit log entry structure](https://docs.cloud.google.com/logging/docs/audit#audit_log_entry_structure)
+  - [Storing and routing audit logs](https://docs.cloud.google.com/logging/docs/audit#storing_and_routing_audit_logs)
+  - [Cloud Logging pricing summary](https://docs.cloud.google.com/stackdriver/pricing#logs-pricing-summary)
+  - [Enable Data Access audit logs](https://docs.cloud.google.com/logging/docs/audit/configure-data-access)
 
 ## Service name
 
 BigQuery sharing audit logs use the service name `  analyticshub.googleapis.com  ` . Filter for this service:
 
-``` text
+``` 
     protoPayload.serviceName="analyticshub.googleapis.com"
   
 ```
 
 ## Methods by permission type
 
-Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery sharing generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](/logging/docs/audit#admin-activity) audit logs.
+Each IAM permission has a `  type  ` property, whose value is an enum that can be one of four values: `  ADMIN_READ  ` , `  ADMIN_WRITE  ` , `  DATA_READ  ` , or `  DATA_WRITE  ` . When you call a method, BigQuery sharing generates an audit log whose category is dependent on the `  type  ` property of the permission required to perform the method. Methods that require an IAM permission with the `  type  ` property value of `  DATA_READ  ` , `  DATA_WRITE  ` , or `  ADMIN_READ  ` generate [Data Access](https://docs.cloud.google.com/logging/docs/audit#data-access) audit logs. Methods that require an IAM permission with the `  type  ` property value of `  ADMIN_WRITE  ` generate [Admin Activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity) audit logs.
 
-API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](/logging/docs/audit/understanding-audit-logs#lro) .
+API methods in the following list that are marked with (LRO) are long-running operations (LROs). These methods usually generate two audit log entries: one when the operation starts and another when it ends. For more information see [Audit logs for long-running operations](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro) .
 
 <table>
 <colgroup>
@@ -90,7 +90,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     CreateDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.create - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -99,7 +99,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     CreateListing    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.create - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -108,7 +108,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     DeleteDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.delete - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -117,7 +117,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     DeleteListing    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.delete - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -126,16 +126,16 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     DeleteSubscription    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.subscriptions.delete - ADMIN_WRITE  `
-  - **Method is a long-running or streaming operation** : [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
   - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription"  `  
 
 #### `     GetDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -144,7 +144,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetIamPolicy    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.getIamPolicy - ADMIN_READ  `
       - `  analyticshub.listings.getIamPolicy - ADMIN_READ  `
@@ -154,7 +154,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetListing    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -163,7 +163,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetSubscription    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.subscriptions.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -172,7 +172,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListDataExchanges    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.list - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -181,7 +181,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListListings    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.list - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -190,7 +190,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListOrgDataExchanges    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -199,7 +199,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListSharedResourceSubscriptions    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.viewSubscriptions - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -208,7 +208,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListSubscriptions    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.subscriptions.list - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -217,16 +217,16 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     RefreshSubscription    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.subscriptions.update - ADMIN_WRITE  `
-  - **Method is a long-running or streaming operation** : [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
   - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription"  `  
 
 #### `     RevokeSubscription    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
       - `  analyticshub.listings.update - ADMIN_WRITE  `
@@ -236,7 +236,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     SetIamPolicy    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.setIamPolicy - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -245,16 +245,16 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     SubscribeDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.subscriptions.create - ADMIN_WRITE  `
-  - **Method is a long-running or streaming operation** : [**Long-running operation**](/logging/docs/audit/understanding-audit-logs#lro)  
+  - **Method is a long-running or streaming operation** : [**Long-running operation**](https://docs.cloud.google.com/logging/docs/audit/understanding-audit-logs#lro)  
   - **Filter for this method** : `  protoPayload.methodName="google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange"  `  
 
 #### `     SubscribeListing    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.subscribe - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -263,7 +263,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     UpdateDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -272,7 +272,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     UpdateListing    `
 
   - **Method** : `  google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.update - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -285,7 +285,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     CreateDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.create - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -294,7 +294,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     CreateListing    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.CreateListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.create - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -303,7 +303,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     DeleteDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.delete - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -312,7 +312,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     DeleteListing    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.DeleteListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.delete - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -321,7 +321,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetDataExchange  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -330,7 +330,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetIamPolicy    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetIamPolicy  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.getIamPolicy - ADMIN_READ  `
       - `  analyticshub.listings.getIamPolicy - ADMIN_READ  `
@@ -340,7 +340,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     GetListing    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.GetListing  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -349,7 +349,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListDataExchanges    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListDataExchanges  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.list - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -358,7 +358,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListListings    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListListings  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.list - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -367,7 +367,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     ListOrgDataExchanges    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.ListOrgDataExchanges  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.get - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -376,7 +376,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     SetIamPolicy    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SetIamPolicy  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.setIamPolicy - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -385,7 +385,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     SubscribeListing    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.SubscribeListing  `  
-  - **Audit log type** : [Data access](/logging/docs/audit#data-access)  
+  - **Audit log type** : [Data access](https://docs.cloud.google.com/logging/docs/audit#data-access)  
   - **Permissions** :
       - `  analyticshub.listings.subscribe - ADMIN_READ  `
   - **Method is a long-running or streaming operation** : No.  
@@ -394,7 +394,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     UpdateDataExchange    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateDataExchange  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.dataExchanges.update - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  
@@ -403,7 +403,7 @@ The following audit logs are associated with methods belonging to `  google.clou
 #### `     UpdateListing    `
 
   - **Method** : `  google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService.UpdateListing  `  
-  - **Audit log type** : [Admin activity](/logging/docs/audit#admin-activity)  
+  - **Audit log type** : [Admin activity](https://docs.cloud.google.com/logging/docs/audit#admin-activity)  
   - **Permissions** :
       - `  analyticshub.listings.update - ADMIN_WRITE  `
   - **Method is a long-running or streaming operation** : No.  

@@ -1,6 +1,6 @@
 # BigQuery regional endpoints
 
-This page describes how you can use [Private Service Connect regional endpoints](/vpc/docs/about-accessing-regional-google-apis-endpoints) to access resources in BigQuery. Regional endpoints let you run your workloads in a manner that complies with [data residency](/assured-workloads/docs/data-residency) and data sovereignty requirements, where your request traffic is routed directly to the region specified in the endpoint.
+This page describes how you can use [Private Service Connect regional endpoints](https://docs.cloud.google.com/vpc/docs/about-accessing-regional-google-apis-endpoints) to access resources in BigQuery. Regional endpoints let you run your workloads in a manner that complies with [data residency](https://docs.cloud.google.com/assured-workloads/docs/data-residency) and data sovereignty requirements, where your request traffic is routed directly to the region specified in the endpoint.
 
 ## Overview
 
@@ -8,46 +8,17 @@ Regional endpoints are request endpoints that help restrict requests to proceed 
 
 Unlike global endpoints, where requests can be routed through a different location from where the resource resides, regional endpoints can help to restrict your requests to the location specified by the endpoint where the resource resides. Regional endpoints terminate TLS sessions in the location specified by the endpoint for requests received from the Internet, other Google Cloud resources (such as Compute Engine virtual machines), on-premise services using VPN or Interconnect, and Virtual Private Clouds (VPCs).
 
-Regional endpoints help to ensure data residency by keeping your at-rest and in-transit table data within the location specified by the endpoint. This excludes resource metadata, such as dataset names and IAM policies. For more information, see [Note on service data](/assured-workloads/docs/data-residency#service-data) .
+Regional endpoints help to ensure data residency by keeping your at-rest and in-transit table data within the location specified by the endpoint. This excludes resource metadata, such as dataset names and IAM policies. For more information, see [Note on service data](https://docs.cloud.google.com/assured-workloads/docs/data-residency#service-data) .
 
 BigQuery includes multiple APIs. The following APIs are available for use with regional endpoint:
 
-<table>
-<thead>
-<tr class="header">
-<th>API</th>
-<th>URL</th>
-<th>Reference</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>BigQuery API</td>
-<td><code dir="ltr" translate="no">       bigquery.               LOCATION              .rep.googleapis.com      </code></td>
-<td><a href="/bigquery/docs/reference/rest">REST</a></td>
-</tr>
-<tr class="even">
-<td>BigQuery Storage API</td>
-<td><code dir="ltr" translate="no">       bigquerystorage.               LOCATION              .rep.googleapis.com      </code></td>
-<td><a href="/bigquery/docs/reference/storage/rpc">RPC</a></td>
-</tr>
-<tr class="odd">
-<td>BigQuery Reservations API</td>
-<td><code dir="ltr" translate="no">       bigqueryreservation.               LOCATION              .rep.googleapis.com      </code></td>
-<td><a href="/bigquery/docs/reference/reservations/rpc">RPC</a> and <a href="/bigquery/docs/reference/reservations/rest">REST</a></td>
-</tr>
-<tr class="even">
-<td>BigQuery Migration API</td>
-<td><code dir="ltr" translate="no">       bigquerymigration.               LOCATION              .rep.googleapis.com      </code></td>
-<td><a href="/bigquery/docs/reference/migration/rest">REST</a></td>
-</tr>
-<tr class="odd">
-<td>BigQuery Data Transfer Service API</td>
-<td><code dir="ltr" translate="no">       bigquerydatatransfer.               LOCATION              .rep.googleapis.com      </code></td>
-<td><a href="/bigquery/docs/reference/datatransfer/rpc">RPC</a> and <a href="/bigquery/docs/reference/datatransfer/rest">REST</a></td>
-</tr>
-</tbody>
-</table>
+| API                                | URL                                                                                            | Reference                                                                                                                                                         |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| BigQuery API                       | `        bigquery.               LOCATION              .rep.googleapis.com       `             | [REST](https://docs.cloud.google.com/bigquery/docs/reference/rest)                                                                                                |
+| BigQuery Storage API               | `        bigquerystorage.               LOCATION              .rep.googleapis.com       `      | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc)                                                                                          |
+| BigQuery Reservations API          | `        bigqueryreservation.               LOCATION              .rep.googleapis.com       `  | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest) |
+| BigQuery Migration API             | `        bigquerymigration.               LOCATION              .rep.googleapis.com       `    | [REST](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest)                                                                                      |
+| BigQuery Data Transfer Service API | `        bigquerydatatransfer.               LOCATION              .rep.googleapis.com       ` | [RPC](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rpc) and [REST](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest) |
 
 ## Supported locations
 
@@ -101,10 +72,10 @@ Regional endpoints cannot be used to perform the following operations:
 
 Keep in mind the following restrictions when using regional endpoints:
 
-  - Regional endpoints don't support [mutual Transport Layer Security (mTLS)](/chrome-enterprise-premium/docs/understand-mtls) .
-  - Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](/resource-manager/docs/organization-policy/defining-locations) .
-  - [Cross-region dataset replication](/bigquery/docs/data-replication) and [cross-region table copying](/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
-  - Running [global queries](/bigquery/docs/global-queries)
+  - Regional endpoints don't support [mutual Transport Layer Security (mTLS)](https://docs.cloud.google.com/chrome-enterprise-premium/docs/understand-mtls) .
+  - Using a regional endpoint won't restrict the creation of resources outside of the endpoint region. To restrict resource creation, use [Organization Policy Service resource locations constraint](https://docs.cloud.google.com/resource-manager/docs/organization-policy/defining-locations) .
+  - [Cross-region dataset replication](https://docs.cloud.google.com/bigquery/docs/data-replication) and [cross-region table copying](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) aren't restricted by endpoint protection.
+  - Running [global queries](https://docs.cloud.google.com/bigquery/docs/global-queries)
 
 ## Tools for using regional endpoints
 
@@ -112,28 +83,11 @@ Keep in mind the following restrictions when using regional endpoints:
 
 To access BigQuery resources in a manner that's compliant with data residency or sovereignty requirements, use the jurisdictional Google Cloud console URLs:
 
-<table>
-<thead>
-<tr class="header">
-<th>Resource</th>
-<th>URL</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Dataset list for a project</td>
-<td><code dir="ltr" translate="no">         https://console.                   JURISDICTION                  .cloud.google.com/bigquery?project=                   PROJECT_ID         </code></td>
-</tr>
-<tr class="even">
-<td>Table list for a dataset</td>
-<td><code dir="ltr" translate="no">         https://console.                   JURISDICTION                  .cloud.google.com/bigquery/projects/                   PROJECT_ID                  /datasets/                   DATASET_NAME                  /tables        </code></td>
-</tr>
-<tr class="odd">
-<td>Details for a table</td>
-<td><code dir="ltr" translate="no">         https://console.                   JURISDICTION                  .cloud.google.com/bigquery/projects/                   PROJECT_ID                  /datasets/                   DATASET_NAME                  /tables/                   TABLE_NAME         </code></td>
-</tr>
-</tbody>
-</table>
+| Resource                   | URL                                                                                                                                                                                                                                                                        |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dataset list for a project | `          https://console.                   JURISDICTION                  .cloud.google.com/bigquery?project=                   PROJECT_ID          `                                                                                                                    |
+| Table list for a dataset   | `          https://console.                   JURISDICTION                  .cloud.google.com/bigquery/projects/                   PROJECT_ID                  /datasets/                   DATASET_NAME                  /tables         `                                |
+| Details for a table        | `          https://console.                   JURISDICTION                  .cloud.google.com/bigquery/projects/                   PROJECT_ID                  /datasets/                   DATASET_NAME                  /tables/                   TABLE_NAME          ` |
 
 Replace `  JURISDICTION  ` with one of the following values:
 
@@ -151,20 +105,16 @@ To configure the Google Cloud CLI for use with regional endpoints, complete the 
 
 2.  Set the `  api_endpoint_overrides/bigquery  ` property to the regional endpoint you want to use:
     
-    ``` text
-    gcloud config set api_endpoint_overrides/bigquery https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/
-    ```
+        gcloud config set api_endpoint_overrides/bigquery https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/
     
     Alternatively, you can set the `  CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY  ` environment variable to the endpoint:
     
-    ``` text
-    CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY=https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/ gcloud  alpha bq  datasets list
-    ```
+        CLOUDSDK_API_ENDPOINT_OVERRIDES_BIGQUERY=https://bigquery.LOCATION.rep.googleapis.com/bigquery/v2/ gcloud  alpha bq  datasets list
 
 ### REST APIs
 
-For REST API, instead of sending a REST request to a [service endpoint](/bigquery/docs/reference/rest#service-endpoint) , send the request to the regional endpoint in the following format: `  https://bigquery. LOCATION .rep.googleapis.com  ` .
+For REST API, instead of sending a REST request to a [service endpoint](https://docs.cloud.google.com/bigquery/docs/reference/rest#service-endpoint) , send the request to the regional endpoint in the following format: `  https://bigquery. LOCATION .rep.googleapis.com  ` .
 
 ## Restrict global API endpoint usage
 
-To help enforce the use of regional endpoints, use the `  constraints/gcp.restrictEndpointUsage  ` organization policy constraint to block requests to the global API endpoint. For more information, see [Restrict endpoint usage](/docs/security/compliance/restrict-endpoint-usage) .
+To help enforce the use of regional endpoints, use the `  constraints/gcp.restrictEndpointUsage  ` organization policy constraint to block requests to the global API endpoint. For more information, see [Restrict endpoint usage](https://docs.cloud.google.com/docs/security/compliance/restrict-endpoint-usage) .

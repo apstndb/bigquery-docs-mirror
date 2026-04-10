@@ -2,16 +2,16 @@
 
 This document describes the `  ML.IMPUTER  ` function, which lets you replace `  NULL  ` values in a string or numerical expression. You can replace `  NULL  ` values with the most frequently used value for string expressions, or the [mean](https://en.wikipedia.org/wiki/Mean) or [median](https://en.wikipedia.org/wiki/Median) value for numerical expressions.
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the values calculated during training for mean, median, and most frequently used value are automatically used in prediction.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the values calculated during training for mean, median, and most frequently used value are automatically used in prediction.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.IMPUTER(expression, strategy) OVER()
 ```
 
@@ -19,7 +19,7 @@ ML.IMPUTER(expression, strategy) OVER()
 
 `  ML.IMPUTER  ` takes the following arguments:
 
-  - `  expression  ` : the [numerical](/bigquery/docs/reference/standard-sql/data-types#numeric_types) or `  STRING  ` expression to impute.
+  - `  expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) or `  STRING  ` expression to impute.
   - `  strategy  ` : a `  STRING  ` value that specifies how to replace `  NULL  ` values. Valid values are as follows:
       - `  mean  ` : the mean of `  expression  ` . You can only use this value with numerical expressions.
       - `  median  ` : the median of `  expression  ` . You can only use this value with numerical expressions.
@@ -35,7 +35,7 @@ ML.IMPUTER(expression, strategy) OVER()
 
 The following example imputes numerical expressions:
 
-``` text
+``` notranslate
 SELECT f, ML.IMPUTER(f, 'mean') OVER () AS output
 FROM
   UNNEST([NULL, -3, -3, -3, 1, 2, 3, 4, 5]) AS f
@@ -64,7 +64,7 @@ The output looks similar to the following:
 
 The following example imputes string expressions:
 
-``` text
+``` notranslate
 SELECT f, ML.IMPUTER(f, 'most_frequent') OVER () AS output
 FROM
   UNNEST([NULL, NULL, NULL, NULL, 'a', 'a', 'b', 'b', 'c', 'c', 'c']) AS f
@@ -93,4 +93,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

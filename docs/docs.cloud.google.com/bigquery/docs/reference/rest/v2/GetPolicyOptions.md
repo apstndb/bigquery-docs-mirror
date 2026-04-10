@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/GetPolicyOptions#SCHEMA_REPRESENTATION)
 
 Encapsulates settings provided to tables.getIamPolicy.
 
@@ -13,7 +13,7 @@ Encapsulates settings provided to tables.getIamPolicy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;requestedPolicyVersion&quot;: integer
 }</code></pre></td>
 </tr>

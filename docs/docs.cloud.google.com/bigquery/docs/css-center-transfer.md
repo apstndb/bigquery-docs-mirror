@@ -2,19 +2,19 @@
 
 **Preview**
 
-This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for Comparison Shopping Service (CSS) Center transfers with BigQuery Data Transfer Service, contact <gmc-transfer-preview@google.com> .
 
-You can load data from CSS Center to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for CSS Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your CSS Center to BigQuery.
+You can load data from CSS Center to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for CSS Center connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your CSS Center to BigQuery.
 
 ## Supported reports
 
-The BigQuery Data Transfer Service for the CSS Center supports the following data from the [product and product issues reports](/bigquery/docs/merchant-center-transfer#products_and_product_issues) of associated Merchant Center accounts.
+The BigQuery Data Transfer Service for the CSS Center supports the following data from the [product and product issues reports](https://docs.cloud.google.com/bigquery/docs/merchant-center-transfer#products_and_product_issues) of associated Merchant Center accounts.
 
 ### Products and product issues
 
-This report contains data that merchants associated with your CSS Center have uploaded to their Merchant Center accounts. This report also includes item level issues detected by Google for your merchants' products. For information on how this data is loaded into BigQuery, see the [CSS Center product table schema](/bigquery/docs/css-center-products-schema) .
+This report contains data that merchants associated with your CSS Center have uploaded to their Merchant Center accounts. This report also includes item level issues detected by Google for your merchants' products. For information on how this data is loaded into BigQuery, see the [CSS Center product table schema](https://docs.cloud.google.com/bigquery/docs/css-center-products-schema) .
 
 ## Data ingestion from CSS Center transfers
 
@@ -36,11 +36,11 @@ You can configure the access rights of a CSS user by [configuring the user's acc
 
 ## Query your data
 
-When your data is transferred to BigQuery, the data is written to [ingestion-time partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery, the data is written to [ingestion-time partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-When you query your CSS Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+When you query your CSS Center table, you must use the `  _PARTITIONTIME  ` or `  _PARTITIONDATE  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
-The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) .
+The `  Products_  ` table contains nested and repeated fields. For information on handling nested and repeated data, see [Differences in repeated field handling](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_repeated_field_handling) .
 
 ## CSS Center sample queries
 
@@ -56,7 +56,7 @@ The following queries analyze data from the products and product issues report.
 
 The following SQL sample query provides the number of products, products with issues, and issues by day.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   COUNT(*) AS num_products,
@@ -76,7 +76,7 @@ ORDER BY
 
 The following SQL sample query provides the number of products that are not approved for display, separated by region and reporting context. Disapproval can result from the reporting context being [excluded](https://support.google.com/merchants/answer/6324486) or because of an issue with the product.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   statuses.region as disapproved_region,
@@ -98,7 +98,7 @@ ORDER BY
 
 The following SQL sample query retrieves the number of products with disapproved issues, separated by region.
 
-``` text
+``` notranslate
 SELECT
   _PARTITIONDATE AS date,
   disapproved_region,

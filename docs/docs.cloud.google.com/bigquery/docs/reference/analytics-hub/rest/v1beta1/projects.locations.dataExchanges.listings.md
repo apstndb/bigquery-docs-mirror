@@ -1,16 +1,16 @@
-  - [Resource: Listing](#Listing)
-      - [JSON representation](#Listing.SCHEMA_REPRESENTATION)
-  - [BigQueryDatasetSource](#BigQueryDatasetSource)
-      - [JSON representation](#BigQueryDatasetSource.SCHEMA_REPRESENTATION)
-  - [State](#State)
-  - [DataProvider](#DataProvider)
-      - [JSON representation](#DataProvider.SCHEMA_REPRESENTATION)
-  - [Category](#Category)
-  - [Publisher](#Publisher)
-      - [JSON representation](#Publisher.SCHEMA_REPRESENTATION)
-  - [RestrictedExportConfig](#RestrictedExportConfig)
-      - [JSON representation](#RestrictedExportConfig.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Listing](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#Listing)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#Listing.SCHEMA_REPRESENTATION)
+  - [BigQueryDatasetSource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#BigQueryDatasetSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#BigQueryDatasetSource.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#State)
+  - [DataProvider](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#DataProvider)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#DataProvider.SCHEMA_REPRESENTATION)
+  - [Category](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#Category)
+  - [Publisher](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#Publisher)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#Publisher.SCHEMA_REPRESENTATION)
+  - [RestrictedExportConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#RestrictedExportConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#RestrictedExportConfig.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1beta1/projects.locations.dataExchanges.listings#METHODS_SUMMARY)
 
 ## Resource: Listing
 
@@ -27,7 +27,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,
@@ -165,7 +165,7 @@ A reference to a shared dataset. It is an existing BigQuery dataset with a colle
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: string
 }</code></pre></td>
 </tr>
@@ -209,7 +209,7 @@ Contains details of the data provider.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;primaryContact&quot;: string
 }</code></pre></td>
@@ -294,7 +294,7 @@ Contains details of the listing publisher.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;primaryContact&quot;: string
 }</code></pre></td>
@@ -331,7 +331,7 @@ Restricted export config, used to configure restricted export on linked dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enabled&quot;: boolean,
   &quot;restrictDirectTableAccess&quot;: boolean,
   &quot;restrictQueryResult&quot;: boolean

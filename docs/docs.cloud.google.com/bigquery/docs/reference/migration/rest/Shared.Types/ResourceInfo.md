@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/ResourceInfo#SCHEMA_REPRESENTATION)
 
 Describes the resource that is being accessed.
 
@@ -13,7 +13,7 @@ Describes the resource that is being accessed.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resourceType&quot;: string,
   &quot;resourceName&quot;: string,
   &quot;owner&quot;: string,

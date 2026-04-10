@@ -6,35 +6,18 @@ Additionally, computing [cardinalities](https://en.wikipedia.org/wiki/Cardinalit
 
 Consider a table with the following data:
 
-<table>
-<thead>
-<tr class="header">
-<th>Product</th>
-<th>Number of users</th>
-<th>Median visit duration</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Product A</td>
-<td>500 million</td>
-<td>10 minutes</td>
-</tr>
-<tr class="even">
-<td>Product B</td>
-<td>20 million</td>
-<td>2 minutes</td>
-</tr>
-</tbody>
-</table>
+| Product   | Number of users | Median visit duration |
+| --------- | --------------- | --------------------- |
+| Product A | 500 million     | 10 minutes            |
+| Product B | 20 million      | 2 minutes             |
 
 Computing the total number of users for both products isn't possible because we don't know how many users used both products in the table. Likewise, computing the median visit duration isn't possible because the distribution of the visit durations has been lost.
 
 A solution is to store sketches in the table instead. Each sketch is an approximate and compact representation of a particular input property, such as cardinality, that you can store, merge (or re-aggregate), and query for near-exact results. In the previous example, you can estimate the number of distinct users for Product A and Product B by creating and merging (re-aggregating) the sketches for each product. You can also estimate the median visit duration with quantile sketches that you can likewise merge and query.
 
-For example, the following query uses [HLL++](#sketches_hll) and [KLL](#sketches_kll) sketches to estimate distinct users and median visit duration for YouTube (Product A) and Google Maps (Product B):
+For example, the following query uses [HLL++](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_hll) and [KLL](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_kll) sketches to estimate distinct users and median visit duration for YouTube (Product A) and Google Maps (Product B):
 
-``` text
+``` notranslate
 -- Build sketches for YouTube stats.
 CREATE TABLE user.YOUTUBE_ACCESS_STATS
 AS
@@ -104,19 +87,19 @@ Sketch re-aggregation is also useful in online analytical processing (OLAP). You
 
 ## Which type of sketch should I use?
 
-Different sketching algorithms are designed for different types of metrics, such as [HLL++](#sketches_hll) for distinct counts and [KLL](#sketches_kll) for quantiles. GoogleSQL also provides [Approximate aggregate functions](#approx_functions) that you can use to query these types of data without having to specify query details such as precision level.
+Different sketching algorithms are designed for different types of metrics, such as [HLL++](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_hll) for distinct counts and [KLL](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_kll) for quantiles. GoogleSQL also provides [Approximate aggregate functions](https://docs.cloud.google.com/bigquery/docs/sketches#approx_functions) that you can use to query these types of data without having to specify query details such as precision level.
 
 The sketch that you use depends on the type of data that you need to estimate.
 
 ### Estimate cardinality
 
-If you need to estimate [cardinality](https://en.wikipedia.org/wiki/Cardinality) , use an [HLL++ sketch](#sketches_hll) .
+If you need to estimate [cardinality](https://en.wikipedia.org/wiki/Cardinality) , use an [HLL++ sketch](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_hll) .
 
 For example, to get the number of unique users who actively used a product in a given month (MAU or 28DAU metrics), use an HLL++ sketch.
 
 ### Compute a quantile
 
-If you need to get a [quantile](https://en.wikipedia.org/wiki/Quantile) of a data set, use a [KLL sketch](#sketches_kll) .
+If you need to get a [quantile](https://en.wikipedia.org/wiki/Quantile) of a data set, use a [KLL sketch](https://docs.cloud.google.com/bigquery/docs/sketches#sketches_kll) .
 
 For example, to get the median visit duration of customers in a store, or to track the 95th percentile latency that tickets stay in a queue before being addressed, use a KLL sketch.
 
@@ -128,130 +111,31 @@ HyperLogLog++ (HLL++) is a sketching algorithm for estimating cardinality. HLL++
 
 HLL++ estimates very small and very large cardinalities. HLL++ includes a 64-bit hash function, sparse representation to reduce memory requirements for small cardinality estimates, and empirical bias correction for small cardinality estimates.
 
+<span id="precision_hll"></span>
+
 **Precision**
 
 HLL++ sketches support custom precision. The following table shows the supported precision values, the maximum storage size, and the confidence interval (CI) of typical precision levels:
 
-<table>
-<thead>
-<tr class="header">
-<th>Precision</th>
-<th>Max storage size</th>
-<th>65% CI</th>
-<th>95% CI</th>
-<th>99% CI</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>10</td>
-<td>1 KiB + 28 B</td>
-<td>±3.25%</td>
-<td>±6.50%</td>
-<td>±9.75%</td>
-</tr>
-<tr class="even">
-<td>11</td>
-<td>2 KiB + 28 B</td>
-<td>±2.30%</td>
-<td>±4.60%</td>
-<td>±6.89%</td>
-</tr>
-<tr class="odd">
-<td>12</td>
-<td>4 KiB + 28 B</td>
-<td>±1.63%</td>
-<td>±3.25%</td>
-<td>±4.88%</td>
-</tr>
-<tr class="even">
-<td>13</td>
-<td>8 KiB + 28 B</td>
-<td>±1.15%</td>
-<td>±2.30%</td>
-<td>±3.45%</td>
-</tr>
-<tr class="odd">
-<td>14</td>
-<td>16 KiB + 30 B</td>
-<td>±0.81%</td>
-<td>±1.63%</td>
-<td>±2.44%</td>
-</tr>
-<tr class="even">
-<td>15 (default)</td>
-<td>32 KiB + 30 B</td>
-<td>±0.57%</td>
-<td>±1.15%</td>
-<td>±1.72%</td>
-</tr>
-<tr class="odd">
-<td>16</td>
-<td>64 KiB + 30 B</td>
-<td>±0.41%</td>
-<td>±0.81%</td>
-<td>±1.22%</td>
-</tr>
-<tr class="even">
-<td>17</td>
-<td>128 KiB + 30 B</td>
-<td>±0.29%</td>
-<td>±0.57%</td>
-<td>±0.86%</td>
-</tr>
-<tr class="odd">
-<td>18</td>
-<td>256 KiB + 30 B</td>
-<td>±0.20%</td>
-<td>±0.41%</td>
-<td>±0.61%</td>
-</tr>
-<tr class="even">
-<td>19</td>
-<td>512 KiB + 30 B</td>
-<td>±0.14%</td>
-<td>±0.29%</td>
-<td>±0.43%</td>
-</tr>
-<tr class="odd">
-<td>20</td>
-<td>1024 KiB + 30 B</td>
-<td>±0.10%</td>
-<td>±0.20%</td>
-<td>±0.30%</td>
-</tr>
-<tr class="even">
-<td>21</td>
-<td>2048 KiB + 32 B</td>
-<td>±0.07%</td>
-<td>±0.14%</td>
-<td>±0.22%</td>
-</tr>
-<tr class="odd">
-<td>22</td>
-<td>4096 KiB + 32 B</td>
-<td>±0.05%</td>
-<td>±0.10%</td>
-<td>±0.15%</td>
-</tr>
-<tr class="even">
-<td>23</td>
-<td>8192 KiB + 32 B</td>
-<td>±0.04%</td>
-<td>±0.07%</td>
-<td>±0.11%</td>
-</tr>
-<tr class="odd">
-<td>24</td>
-<td>16384 KiB + 32 B</td>
-<td>±0.03%</td>
-<td>±0.05%</td>
-<td>±0.08%</td>
-</tr>
-</tbody>
-</table>
+| Precision    | Max storage size | 65% CI | 95% CI | 99% CI |
+| ------------ | ---------------- | ------ | ------ | ------ |
+| 10           | 1 KiB + 28 B     | ±3.25% | ±6.50% | ±9.75% |
+| 11           | 2 KiB + 28 B     | ±2.30% | ±4.60% | ±6.89% |
+| 12           | 4 KiB + 28 B     | ±1.63% | ±3.25% | ±4.88% |
+| 13           | 8 KiB + 28 B     | ±1.15% | ±2.30% | ±3.45% |
+| 14           | 16 KiB + 30 B    | ±0.81% | ±1.63% | ±2.44% |
+| 15 (default) | 32 KiB + 30 B    | ±0.57% | ±1.15% | ±1.72% |
+| 16           | 64 KiB + 30 B    | ±0.41% | ±0.81% | ±1.22% |
+| 17           | 128 KiB + 30 B   | ±0.29% | ±0.57% | ±0.86% |
+| 18           | 256 KiB + 30 B   | ±0.20% | ±0.41% | ±0.61% |
+| 19           | 512 KiB + 30 B   | ±0.14% | ±0.29% | ±0.43% |
+| 20           | 1024 KiB + 30 B  | ±0.10% | ±0.20% | ±0.30% |
+| 21           | 2048 KiB + 32 B  | ±0.07% | ±0.14% | ±0.22% |
+| 22           | 4096 KiB + 32 B  | ±0.05% | ±0.10% | ±0.15% |
+| 23           | 8192 KiB + 32 B  | ±0.04% | ±0.07% | ±0.11% |
+| 24           | 16384 KiB + 32 B | ±0.03% | ±0.05% | ±0.08% |
 
-You can define precision for an HLL++ sketch when you initialize it with the [`  HLL_COUNT.INIT  `](/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) function.
+You can define precision for an HLL++ sketch when you initialize it with the [`  HLL_COUNT.INIT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions#hll_countinit) function.
 
 **Deletion**
 
@@ -259,7 +143,7 @@ You can't delete values from an HLL++ sketch.
 
 **Additional details**
 
-For a list of functions that you can use with HLL++ sketches, see [HLL++ functions](/bigquery/docs/reference/standard-sql/hll_functions) .
+For a list of functions that you can use with HLL++ sketches, see [HLL++ functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hll_functions) .
 
 ### Sketch integration
 
@@ -269,7 +153,9 @@ In addition to GoogleSQL, you can use HLL++ sketches with [Java](https://github.
 
 ## KLL sketches
 
-KLL (short for Karnin-Lang-Liberty) is a streaming algorithm to compute sketches for approximate [quantiles](#quantiles) . It computes arbitrary quantiles far more efficiently than exact computations at the price of a small approximation error.
+KLL (short for Karnin-Lang-Liberty) is a streaming algorithm to compute sketches for approximate [quantiles](https://docs.cloud.google.com/bigquery/docs/sketches#quantiles) . It computes arbitrary quantiles far more efficiently than exact computations at the price of a small approximation error.
+
+<span id="precision_kll"></span>
 
 **Precision**
 
@@ -283,102 +169,29 @@ For example, suppose you want to find the median value, `  Φ = 0.5  ` , and you
 
 If you use a custom precision of `  100  ` to find the median value, then the rank of the value returned by the `  KLL_QUANTILES.EXTRACT_POINT  ` function differs from the true rank by at most `  n/100  ` in 99.999% of cases. In other words, the returned value is almost always between the 49th and 51st percentiles. If you have 1,000,000 items in your sketch, then the rank of the returned median is almost always between 490,000 and 510,000.
 
-You can define precision for a KLL sketch when you initialize it with the [`  KLL_QUANTILES.INIT  `](/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) function.
+You can define precision for a KLL sketch when you initialize it with the [`  KLL_QUANTILES.INIT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_quantilesinit_int64) function.
+
+<span id="phi_kll"></span>
 
 **Size**
 
 KLL sketch size depends on the precision parameter and the input type. If your input type is `  INT64  ` , the sketches can use additional optimization that's especially helpful if the input values come from a small universe. The following table contains two columns for `  INT64  ` . One column provides an upper bound on sketch size for items from a limited universe of size 1B, and a second column provides an upper bound for arbitrary input values.
 
-<table>
-<thead>
-<tr class="header">
-<th>Precision</th>
-<th>FLOAT64</th>
-<th>INT64 (&lt;1B)</th>
-<th>INT64 (Any)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>10</td>
-<td>761 B</td>
-<td>360 B</td>
-<td>717 B</td>
-</tr>
-<tr class="even">
-<td>20</td>
-<td>1.46 KB</td>
-<td>706 B</td>
-<td>1.47 KB</td>
-</tr>
-<tr class="odd">
-<td>50</td>
-<td>3.49 KB</td>
-<td>1.72 KB</td>
-<td>3.60 KB</td>
-</tr>
-<tr class="even">
-<td>100</td>
-<td>6.94 KB</td>
-<td>3.44 KB</td>
-<td>7.12 KB</td>
-</tr>
-<tr class="odd">
-<td>200</td>
-<td>13.87 KB</td>
-<td>6.33 KB</td>
-<td>13.98 KB</td>
-</tr>
-<tr class="even">
-<td>500</td>
-<td>35.15 KB</td>
-<td>14.47 KB</td>
-<td>35.30 KB</td>
-</tr>
-<tr class="odd">
-<td>1000</td>
-<td>71.18 KB</td>
-<td>27.86 KB</td>
-<td>71.28 KB</td>
-</tr>
-<tr class="even">
-<td>2000</td>
-<td>144.51 KB</td>
-<td>55.25 KB</td>
-<td>144.57 KB</td>
-</tr>
-<tr class="odd">
-<td>5000</td>
-<td>368.87 KB</td>
-<td>139.54 KB</td>
-<td>368.96 KB</td>
-</tr>
-<tr class="even">
-<td>10000</td>
-<td>749.82 KB</td>
-<td>282.27 KB</td>
-<td>697.80 KB</td>
-</tr>
-<tr class="odd">
-<td>20000</td>
-<td>1.52 MB</td>
-<td>573.16 KB</td>
-<td>1.37 MB</td>
-</tr>
-<tr class="even">
-<td>50000</td>
-<td>3.90 MB</td>
-<td>1.12 MB</td>
-<td>3.45 MB</td>
-</tr>
-<tr class="odd">
-<td>100000</td>
-<td>7.92 MB</td>
-<td>2.18 MB</td>
-<td>6.97 MB</td>
-</tr>
-</tbody>
-</table>
+| Precision | FLOAT64   | INT64 (\<1B) | INT64 (Any) |
+| --------- | --------- | ------------ | ----------- |
+| 10        | 761 B     | 360 B        | 717 B       |
+| 20        | 1.46 KB   | 706 B        | 1.47 KB     |
+| 50        | 3.49 KB   | 1.72 KB      | 3.60 KB     |
+| 100       | 6.94 KB   | 3.44 KB      | 7.12 KB     |
+| 200       | 13.87 KB  | 6.33 KB      | 13.98 KB    |
+| 500       | 35.15 KB  | 14.47 KB     | 35.30 KB    |
+| 1000      | 71.18 KB  | 27.86 KB     | 71.28 KB    |
+| 2000      | 144.51 KB | 55.25 KB     | 144.57 KB   |
+| 5000      | 368.87 KB | 139.54 KB    | 368.96 KB   |
+| 10000     | 749.82 KB | 282.27 KB    | 697.80 KB   |
+| 20000     | 1.52 MB   | 573.16 KB    | 1.37 MB     |
+| 50000     | 3.90 MB   | 1.12 MB      | 3.45 MB     |
+| 100000    | 7.92 MB   | 2.18 MB      | 6.97 MB     |
 
 **Phi**
 
@@ -386,7 +199,7 @@ Phi (Φ) represents the quantile to produce as a fraction of the total number of
 
 **Additional details**
 
-For a list of functions that you can use with KLL sketches, see [KLL quantile functions](/bigquery/docs/reference/standard-sql/kll_functions#kll_functions) .
+For a list of functions that you can use with KLL sketches, see [KLL quantile functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/kll_functions#kll_functions) .
 
 The KLL algorithm is defined in the paper [Optimal Quantile Approximation in Streams](https://arxiv.org/pdf/1603.05346v2.pdf) , and is named after its authors, Karnin, Lang, and Liberty, who published the paper in 2016. The KLL algorithm improves the older [MP80 algorithm](https://polylogblog.files.wordpress.com/2009/08/80munro-median.pdf) by using variable-size buffers to reduce memory use for large data sets, reducing the sketch size from `  O(log n)  ` to `  O(1)  ` . Due to the non-deterministic nature of the algorithm, sketches created on the same set of data with the same precision might not be identical.
 
@@ -410,4 +223,4 @@ For example, you can use a quantiles-supporting sketch to get the median of the 
 
 As an alternative to specific sketch-based approximation functions, GoogleSQL provides predefined approximate aggregate functions. These approximate aggregate functions support sketches for common estimations such as distinct count, quantiles, and top count, but they don't allow custom precision. They also don't expose and store the sketch for re-aggregation like other types of sketches. The approximate aggregate functions are designed for running quick sketch-based queries without detailed configuration.
 
-For a list of approximate aggregate functions that you can use with sketch-based approximation, see [Approximate aggregate functions](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions) .
+For a list of approximate aggregate functions that you can use with sketch-based approximation, see [Approximate aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions) .

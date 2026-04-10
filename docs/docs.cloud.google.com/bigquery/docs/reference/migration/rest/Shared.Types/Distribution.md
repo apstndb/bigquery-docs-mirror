@@ -1,16 +1,16 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [Range](#Range)
-      - [JSON representation](#Range.SCHEMA_REPRESENTATION)
-  - [BucketOptions](#BucketOptions)
-      - [JSON representation](#BucketOptions.SCHEMA_REPRESENTATION)
-  - [Linear](#Linear)
-      - [JSON representation](#Linear.SCHEMA_REPRESENTATION)
-  - [Exponential](#Exponential)
-      - [JSON representation](#Exponential.SCHEMA_REPRESENTATION)
-  - [Explicit](#Explicit)
-      - [JSON representation](#Explicit.SCHEMA_REPRESENTATION)
-  - [Exemplar](#Exemplar)
-      - [JSON representation](#Exemplar.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#SCHEMA_REPRESENTATION)
+  - [Range](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Range)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Range.SCHEMA_REPRESENTATION)
+  - [BucketOptions](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#BucketOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#BucketOptions.SCHEMA_REPRESENTATION)
+  - [Linear](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Linear)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Linear.SCHEMA_REPRESENTATION)
+  - [Exponential](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Exponential)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Exponential.SCHEMA_REPRESENTATION)
+  - [Explicit](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Explicit)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Explicit.SCHEMA_REPRESENTATION)
+  - [Exemplar](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Exemplar)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/Shared.Types/Distribution#Exemplar.SCHEMA_REPRESENTATION)
 
 `  Distribution  ` contains summary statistics for a population of values. It optionally contains a histogram representing the distribution of those values across a set of buckets.
 
@@ -29,7 +29,7 @@ Although it is not forbidden, it is generally a bad idea to include non-finite v
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;count&quot;: string,
   &quot;mean&quot;: number,
   &quot;sumOfSquaredDeviation&quot;: number,
@@ -72,9 +72,7 @@ The arithmetic mean of the values in the population. If `  count  ` is zero then
 
 The sum of squared deviations from the mean of the values in the population. For values x\_i this is:
 
-``` text
-Sum[i=1..n]((x_i - mean)^2)
-```
+    Sum[i=1..n]((x_i - mean)^2)
 
 Knuth, "The Art of Computer Programming", Vol. 2, page 232, 3rd edition describes Welford's method for accumulating this sum in one pass.
 
@@ -123,7 +121,7 @@ The range of the population values.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;min&quot;: number,
   &quot;max&quot;: number
 }</code></pre></td>
@@ -162,7 +160,7 @@ A bucket has an inclusive lower bound and exclusive upper bound for the values t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field options can be only one of the following:
   &quot;linearBuckets&quot;: {
@@ -223,7 +221,7 @@ Lower bound (1 \<= i \< N): offset + (width \* (i - 1)).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;numFiniteBuckets&quot;: integer,
   &quot;width&quot;: number,
   &quot;offset&quot;: number
@@ -273,7 +271,7 @@ Lower bound (1 \<= i \< N): scale \* (growthFactor ^ (i - 1)).
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;numFiniteBuckets&quot;: integer,
   &quot;growthFactor&quot;: number,
   &quot;scale&quot;: number
@@ -323,7 +321,7 @@ The `  bounds  ` field must contain at least one element. If `  bounds  ` has on
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;bounds&quot;: [
     number
   ]
@@ -355,7 +353,7 @@ Exemplars are example points that may be used to annotate aggregated distributio
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: number,
   &quot;timestamp&quot;: string,
   &quot;attachments&quot;: [

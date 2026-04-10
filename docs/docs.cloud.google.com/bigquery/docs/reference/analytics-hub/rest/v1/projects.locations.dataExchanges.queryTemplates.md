@@ -1,10 +1,10 @@
-  - [Resource: QueryTemplate](#QueryTemplate)
-      - [JSON representation](#QueryTemplate.SCHEMA_REPRESENTATION)
-  - [State](#State)
-  - [Routine](#Routine)
-      - [JSON representation](#Routine.SCHEMA_REPRESENTATION)
-  - [RoutineType](#RoutineType)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: QueryTemplate](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#QueryTemplate)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#QueryTemplate.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#State)
+  - [Routine](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#Routine)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#Routine.SCHEMA_REPRESENTATION)
+  - [RoutineType](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#RoutineType)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.queryTemplates#METHODS_SUMMARY)
 
 ## Resource: QueryTemplate
 
@@ -21,7 +21,7 @@ A query template is a container for sharing table-valued functions defined by co
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,
@@ -146,7 +146,7 @@ Represents a bigquery routine.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;routineType&quot;: enum (RoutineType),
   &quot;definitionBody&quot;: string
 }</code></pre></td>

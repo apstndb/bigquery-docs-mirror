@@ -1,14 +1,14 @@
 # The CREATE MODEL statement for autoencoder models
 
-This document describes the `  CREATE MODEL  ` statement for creating [autoencoder](https://wikipedia.org/wiki/Autoencoder) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
+This document describes the `  CREATE MODEL  ` statement for creating [autoencoder](https://wikipedia.org/wiki/Autoencoder) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself.
 
-You can use autoencoder models with the [`  ML.PREDICT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`  AI.GENERATE_EMBEDDING  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview) .
+You can use autoencoder models with the [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or [`  AI.GENERATE_EMBEDDING  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-embedding) functions to embed data into a lower-dimensional space, and with the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -65,9 +65,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = { 'AUTOENCODER' }
-```
+    MODEL_TYPE = { 'AUTOENCODER' }
 
 **Description**
 
@@ -222,17 +220,13 @@ The number of layers in `  hidden_units  ` must be odd, and we recommend that th
 
 The following example defines a model architecture that uses three hidden layers with 256, 128, and 64 nodes, respectively.
 
-``` text
-HIDDEN_UNITS = [256, 128, 64]
-```
+    HIDDEN_UNITS = [256, 128, 64]
 
 If you are running hyperparameter tuning, then you must use the `  HPARAM_CANDIDATES  ` keyword and specify an array in the form `  ARRAY<STRUCT<ARRAY<INT64>>>  ` to provide discrete values to use for the hyperparameter. Each struct value in the outer array represents a candidate neural architecture. The array of `  INT64  ` values in each struct represents a hidden layer.
 
 The following example represents a neural architecture search with three candidates, which include a single layer of 8 neurons, two layers of neurons with 8 and 16 in sequence, and three layers of neurons with 16, 32 and 64 in sequence, respectively.
 
-``` text
-hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
-```
+    hidden_units=hparam_candidates([struct([8]), struct([8, 16]), struct([16, 32, 64])])
 
 The valid range for the `  INT64  ` arrays is `  [1, ∞)  ` .
 
@@ -240,9 +234,7 @@ The valid range for the `  INT64  ` arrays is `  [1, ∞)  ` .
 
 **Syntax**
 
-``` text
-TF_VERSION = { '1.15' | '2.8.0' }
-```
+    TF_VERSION = { '1.15' | '2.8.0' }
 
 **Description**
 
@@ -254,13 +246,11 @@ Set `  TF_VERSION  ` to `  2.8.0  ` to use TensorFlow2 with the Keras API.
 
 **Syntax**
 
-``` text
-EARLY_STOP = { TRUE | FALSE }
-```
+    EARLY_STOP = { TRUE | FALSE }
 
 **Description**
 
-Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](#min_rel_progress) .
+Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#min_rel_progress) .
 
 **Arguments**
 
@@ -274,7 +264,7 @@ A `  BOOL  ` value. The default value is `  TRUE  ` .
 
 **Description**
 
-The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
+The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
 
 **Arguments**
 
@@ -298,15 +288,13 @@ An `  INT64  ` value. The default value is `  20  ` .
 
 **Syntax**
 
-``` text
-WARM_START = { TRUE | FALSE }
-```
+    WARM_START = { TRUE | FALSE }
 
 **Description**
 
 Determines whether to train a model with new training data, new model options, or both. Unless you explicitly override them, the initial options used to train the model are used for the warm start run.
 
-In a warm start run, the iteration numbers are reset to start from zero. Use the training run or iteration information returned by the [`  ML.TRAINING_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to distinguish the warm start run from the original run.
+In a warm start run, the iteration numbers are reset to start from zero. Use the training run or iteration information returned by the [`  ML.TRAINING_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-train) to distinguish the warm start run from the original run.
 
 The values of the `  MODEL_TYPE  ` , the `  HIDDEN_UNITS  ` options, and the model retraining data schema must all remain the same as they were in the previous training job.
 
@@ -338,31 +326,29 @@ An `  INT64  ` value between `  1  ` and `  100  ` , inclusive.
 
 **Description**
 
-The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#num_trials) .
 
 **Arguments**
 
 An `  INT64  ` value between `  1  ` and `  5  ` , inclusive. The default value is `  1  ` .
 
-**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `     HPARAM_TUNING_ALGORITHM    `
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
-```
+    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
 
 **Description**
 
-The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#num_trials) .
 
 **Arguments**
 
 Specify one of the following values:
 
-  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
   - `  RANDOM_SEARCH  ` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
@@ -372,17 +358,15 @@ Specify one of the following values:
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
-```
+    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' }
 
 **Description**
 
-The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#num_trials) .
 
 **Arguments**
 
-The possible objectives are a subset of the [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the `  MEAN_SQUARED_ERROR  ` objective is used.
+The possible objectives are a subset of the [model evaluation metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the `  MEAN_SQUARED_ERROR  ` objective is used.
 
 ### `     KMS_KEY_NAME    `
 
@@ -392,37 +376,33 @@ The possible objectives are a subset of the [model evaluation metrics](/bigquery
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ### Internal parameter defaults
 
 BigQuery ML uses the following default values when building models:
 
-``` text
-loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
-
-batch_norm = False
-```
+    loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
+    
+    batch_norm = False
 
 ### `     query_statement    `
 
-The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
+The `  AS query_statement  ` clause specifies the GoogleSQL query used to generate the training data. See the [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) page for the supported SQL syntax of the `  query_statement  ` clause.
 
 ## Hyperparameter tuning
 
-Autoencoder models support [hyperparameter tuning](/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
+Autoencoder models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
 
-Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](#hparam_tuning_objectives) to tune for a different metric if you need to.
+Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-autoencoder#hparam_tuning_objectives) to tune for a different metric if you need to.
 
-For more information about the training objectives and hyperparameters supported for autoencoder models, see [`  AUTOENCODER  `](/bigquery/docs/hp-tuning-overview#autoencoder) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial) .
+For more information about the training objectives and hyperparameters supported for autoencoder models, see [`  AUTOENCODER  `](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#autoencoder) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
 
 ## Supported machine learning functions
 
@@ -440,13 +420,13 @@ The following machine learning functions are supported for the Autoencoder model
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Example
 
 The following example trains an autoencoder model against the table `  mytable  ` .
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
 OPTIONS(MODEL_TYPE='AUTOENCODER',
         ACTIVATION_FN = 'RELU',

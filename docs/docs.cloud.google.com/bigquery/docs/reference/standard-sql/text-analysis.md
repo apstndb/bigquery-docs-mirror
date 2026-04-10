@@ -4,17 +4,17 @@ GoogleSQL supports text analysis, which is a technique that you can use to ident
 
 Text analysis is supported in the following GoogleSQL functions and statements:
 
-  - [`  SEARCH  ` function](/bigquery/docs/reference/standard-sql/search_functions#search)
-  - [`  TEXT_ANALYZE  ` function](/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze)
-  - [`  CREATE SEARCH INDEX  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement)
+  - [`  SEARCH  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/search_functions#search)
+  - [`  TEXT_ANALYZE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis-functions#text_analyze)
+  - [`  CREATE SEARCH INDEX  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_search_index_statement)
 
 ## Text analyzers
 
 GoogleSQL for BigQuery supports several types of text analyzers, which you can use to extract data from unstructured text. You can pass an analyzer into some functions and statements with the `  analyzer  ` argument. Each text analyzer has a unique way of extracting information. Your choices are:
 
-  - [`  NO_OP_ANALYZER  `](#no_op_analyzer) : Extracts the input as a single term (token).
-  - [`  LOG_ANALYZER  `](#log_analyzer) : Breaks the input into terms when delimiters are encountered.
-  - [`  PATTERN_ANALYZER  `](#pattern_analyzer) : Breaks the input into terms that match a regular expression.
+  - [`  NO_OP_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#no_op_analyzer) : Extracts the input as a single term (token).
+  - [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) : Breaks the input into terms when delimiters are encountered.
+  - [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) : Breaks the input into terms that match a regular expression.
 
 ### `     NO_OP_ANALYZER    ` analyzer
 
@@ -26,18 +26,16 @@ This analyzer doesn't support any text analyzer options or token filters.
 
 The following query uses `  NO_OP_ANALYZER  ` as the text analyzer:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'NO_OP_ANALYZER'
-) AS results
-
-/*-----------------------------------------------+
- | results                                       |
- +-----------------------------------------------+
- | 'I like pie, you like-pie, they like 2 PIEs.' |
- +-----------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'NO_OP_ANALYZER'
+    ) AS results
+    
+    /*-----------------------------------------------+
+     | results                                       |
+     +-----------------------------------------------+
+     | 'I like pie, you like-pie, they like 2 PIEs.' |
+     +-----------------------------------------------*/
 
 ### `     LOG_ANALYZER    ` analyzer
 
@@ -49,40 +47,34 @@ Details:
 
   - Text is split into individual terms when one the following delimiters, such as a space, period, or other non-letter character, is encountered:
     
-    ``` text
-    [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
-    %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
-    %0a %2C %2c %28 %29
-    ```
+        [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
+        %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
+        %0a %2C %2c %28 %29
     
-    If you don't want to use these default delimiters, you can specify the specific delimiters you want to use as text analyzer options. For more information, see [`  delimiters  ` option](#log_analyzer_options) .
+    If you don't want to use these default delimiters, you can specify the specific delimiters you want to use as text analyzer options. For more information, see [`  delimiters  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) .
 
-This analyzer supports token filters. For more information, see [`  token_filters  ` option](#token_filters_option) . If the `  token_filters  ` option isn't specified, [ASCII lowercase normalization](#token_filters_ascii_lower) is used by default.
+This analyzer supports token filters. For more information, see [`  token_filters  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) . If the `  token_filters  ` option isn't specified, [ASCII lowercase normalization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_ascii_lower) is used by default.
 
 **Example**
 
 The following query uses `  LOG_ANALYZER  ` as the text analyzer:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'LOG_ANALYZER'
-) AS results
-
-/*---------------------------------------------------------------------------+
- | results                                                                   |
- +---------------------------------------------------------------------------+
- | [ 'i', 'like', 'pie', 'you', 'like', 'pie', 'they', 'like', '2', 'pies' ] |
- +---------------------------------------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'LOG_ANALYZER'
+    ) AS results
+    
+    /*---------------------------------------------------------------------------+
+     | results                                                                   |
+     +---------------------------------------------------------------------------+
+     | [ 'i', 'like', 'pie', 'you', 'like', 'pie', 'they', 'like', '2', 'pies' ] |
+     +---------------------------------------------------------------------------*/
 
 Because `  LOG_ANALYZER  ` is the default text analyzer, you don't need to specify it in the query. For example, the following query produces the same results as the preceding query:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.'
-) AS results
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.'
+    ) AS results
 
 ### `     PATTERN_ANALYZER    ` analyzer
 
@@ -90,26 +82,24 @@ The `  PATTERN_ANALYZER  ` analyzer extracts terms (tokens) from unstructured te
 
 This analyzer finds the first term from the left side of the input text that matches the regular expression and adds this term to the output. Then, it removes the prefix in the input text up to the newly found term. This process is repeated until the input text is empty.
 
-By default, the regular expression `  \b\w{2,}\b  ` is used. This regular expression matches non-Unicode words that have at least two characters. If you would like to use another regular expression, see [`  patterns  ` option](#pattern_analyzer_options) .
+By default, the regular expression `  \b\w{2,}\b  ` is used. This regular expression matches non-Unicode words that have at least two characters. If you would like to use another regular expression, see [`  patterns  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer_options) .
 
-This analyzer supports token filters. For more information, see [`  token_filters  ` option](#token_filters_option) . If the `  token_filters  ` option isn't specified, [ASCII lowercase normalization](#token_filters_ascii_lower) is used by default.
+This analyzer supports token filters. For more information, see [`  token_filters  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) . If the `  token_filters  ` option isn't specified, [ASCII lowercase normalization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_ascii_lower) is used by default.
 
 **Example**
 
 The following query uses `  PATTERN_ANALYZER  ` as the text analyzer. Because the default regular expression is used, only words that have two or more characters are included as terms. Also, the results are lowercase. Notice that `  i  ` and `  2  ` don't appear in the results.
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'PATTERN_ANALYZER'
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
- +----------------------------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'PATTERN_ANALYZER'
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
+     +----------------------------------------------------------------*/
 
 ## Text analyzer options
 
@@ -117,21 +107,19 @@ Text analyzers support custom options that determine how input text is analyzed.
 
 Your choices are:
 
-  - [`  delimiters  `](#log_analyzer_options) : Breaks the input into terms when these delimiters are encountered.
-  - [`  patterns  `](#pattern_analyzer_options) : Breaks the input into terms that match a regular expression.
-  - [`  token_filters  `](#token_filters_option) : After the input text has been tokenized into terms, apply filters on the terms.
+  - [`  delimiters  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer_options) : Breaks the input into terms when these delimiters are encountered.
+  - [`  patterns  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer_options) : Breaks the input into terms that match a regular expression.
+  - [`  token_filters  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_option) : After the input text has been tokenized into terms, apply filters on the terms.
 
 ### `     delimiters    ` analyzer option
 
-``` text
-'{
-  "delimiters": array_of_delimiters
-}'
-```
+    '{
+      "delimiters": array_of_delimiters
+    }'
 
 **Description**
 
-If you are using the [`  LOG_ANALYZER  ` text analyzer](#log_analyzer) and you don't want to use the default delimiters, you can specify the specific delimiters that you want to use to filter the input text.
+If you are using the [`  LOG_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) and you don't want to use the default delimiters, you can specify the specific delimiters that you want to use to filter the input text.
 
 **Definitions**
 
@@ -143,39 +131,33 @@ When there are two delimiters with the same prefix, for example: `  %  ` and `  
 
 You can add any ASCII string as a delimiter. The length of a delimiter must be less than or equal to 16 characters. Some common delimiters that you might want to include are:
 
-``` text
-[ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
-%2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
-%0a %2C %2c %28 %29
-```
+    [ ] < > ( ) { } | ! ; , ' " * & ? + / : = @ . - $ % \ _ \n \r \s \t %21 %26
+    %2526 %3B %3b %7C %7c %20 %2B %2b %3D %3d %2520 %5D %5d %5B %5b %3A %3a %0A
+    %0a %2C %2c %28 %29
 
 **Example**
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'{"delimiters": [",", ".", "-"]}'
-) AS results
-
-/*-------------------------------------------------------+
- | results                                               |
- +-------------------------------------------------------+
- | ['i like pie', 'you like', 'pie', 'they like 2 pies]' |
- +-------------------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'{"delimiters": [",", ".", "-"]}'
+    ) AS results
+    
+    /*-------------------------------------------------------+
+     | results                                               |
+     +-------------------------------------------------------+
+     | ['i like pie', 'you like', 'pie', 'they like 2 pies]' |
+     +-------------------------------------------------------*/
 
 ### `     patterns    ` analyzer option
 
-``` text
-'{
-  "patterns": array_of_regex_patterns
-}'
-```
+    '{
+      "patterns": array_of_regex_patterns
+    }'
 
 **Description**
 
-If you are using the [`  PATTERN_ANALYZER  ` text analyzer](#pattern_analyzer) and you don't want to use the default regular expression, you can specify the regular expression that you want to use to filter the input text.
+If you are using the [`  PATTERN_ANALYZER  ` text analyzer](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) and you don't want to use the default regular expression, you can specify the regular expression that you want to use to filter the input text.
 
 **Definitions**
 
@@ -187,31 +169,27 @@ If this analyzer option isn't provided for the `  PATTERN_ANALYZER  ` text analy
 
 **Example**
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'PATTERN_ANALYZER',
-  analyzer_options=>'{"patterns": ["[a-zA-Z]*"]}'
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
- +----------------------------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'PATTERN_ANALYZER',
+      analyzer_options=>'{"patterns": ["[a-zA-Z]*"]}'
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['like', 'pie', 'you', 'like', 'pie', 'they', 'like', 'pies' ] |
+     +----------------------------------------------------------------*/
 
 ### `     token_filters    ` analyzer option
 
-``` text
-'{
-  "token_filters": array_of_token_filters
-}'
-```
+    '{
+      "token_filters": array_of_token_filters
+    }'
 
 **Description**
 
-If you are using the [`  LOG_ANALYZER  `](#log_analyzer) or [`  PATTERN_ANALYZER  `](#pattern_analyzer) text analyzer, you can sequentially apply one or more token filters to the input text after the input text has been tokenized.
+If you are using the [`  LOG_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#log_analyzer) or [`  PATTERN_ANALYZER  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#pattern_analyzer) text analyzer, you can sequentially apply one or more token filters to the input text after the input text has been tokenized.
 
 **Definitions**
 
@@ -219,60 +197,56 @@ If you are using the [`  LOG_ANALYZER  `](#log_analyzer) or [`  PATTERN_ANALYZER
 
 **Details**
 
-For more information about the specific token filters you can add, see [Token filters](#token_filters) .
+For more information about the specific token filters you can add, see [Token filters](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters) .
 
 **Example**
 
 For example, this query contains both `  patterns  ` and `  token_filters  ` options:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'PATTERN_ANALYZER',
-  analyzer_options=>'''
-  {
-    "patterns": ["[a-zA-Z]*"],
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'PATTERN_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "LOWER"
-        }
-      },
-      {
-        "stop_words": ["they", "pie"]
+        "patterns": ["[a-zA-Z]*"],
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "LOWER"
+            }
+          },
+          {
+            "stop_words": ["they", "pie"]
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------------------+
- | results                                      |
- +----------------------------------------------+
- | ['i', 'like', 'you', 'like', 'like, 'pies' ] |
- +----------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*----------------------------------------------+
+     | results                                      |
+     +----------------------------------------------+
+     | ['i', 'like', 'you', 'like', 'like, 'pies' ] |
+     +----------------------------------------------*/
 
 ## Token filters
 
-``` text
-'{
-  "token_filters": [
-    {
-      "normalizer": {
-        "mode": json_string,
-        "icu_normalize_mode": json_string,
-        "icu_case_folding": json_boolean
-      }
-    },
-    {
-      "stop_words": json_string_array
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        {
+          "normalizer": {
+            "mode": json_string,
+            "icu_normalize_mode": json_string,
+            "icu_case_folding": json_boolean
+          }
+        },
+        {
+          "stop_words": json_string_array
+        }
+      ]
+    }'
 
-Token filters can modify or delete terms (tokens) that are extracted from input text. If no token filters are specified for a text analyzer that supports token filters, the [ASCII lowercase normalization](#token_filters_ascii_lower) token filter is applied by default. If multiple token filters are added, they are applied in the order in which they are specified. The same token filter can be included multiple times in the `  token_filters  ` array. See the examples in this section for details.
+Token filters can modify or delete terms (tokens) that are extracted from input text. If no token filters are specified for a text analyzer that supports token filters, the [ASCII lowercase normalization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_ascii_lower) token filter is applied by default. If multiple token filters are added, they are applied in the order in which they are specified. The same token filter can be included multiple times in the `  token_filters  ` array. See the examples in this section for details.
 
 **Definitions**
 
@@ -311,7 +285,7 @@ Each token filter has a unique JSON syntax that contains some of these JSON key-
 
 Token filters can be used with all but the `  NO_OP_ANALYZER  ` text analyzer in the same query. Token filters are applied after the text analyzer breaks input text into terms.
 
-If `  token_filters  ` isn't specified for an analyzer that supports token filters, [ASCII lowercase normalization](#token_filters_ascii_lower) is applied by default.
+If `  token_filters  ` isn't specified for an analyzer that supports token filters, [ASCII lowercase normalization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_ascii_lower) is applied by default.
 
 You can add multiple token filters to the token filters array ( `  token_filters  ` ). If multiple token filters are added, they are applied to the terms in the order in which they are specified. For more information, see the examples in this section.
 
@@ -319,126 +293,118 @@ You can add the same token filter multiple times to the token filters array. For
 
 Here are some of the filters that you can apply to terms, using the token filter JSON syntax:
 
-  - [No normalization](#token_filters_none)
-  - [Convert to lowercase (ASCII)](#token_filters_ascii_lower)
-  - [Convert to lowercase (UNICODE\_LOWER)](#token_filters_unicode_lower)
-  - [Convert to lowercase (ICU case folding)](#token_filters_casefold_lower)
-  - [Preserve uppercase](#token_filters_casefold_upper)
-  - [ICU normalize with NFC](#token_filters_nfc)
-  - [ICU normalize with NFKC](#token_filters_nfkc)
-  - [ICU normalize with NFD](#token_filters_nfd)
-  - [ICU normalize with NFKD](#token_filters_nfkd)
-  - [Remove words](#token_filters_stop_words)
+  - [No normalization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_none)
+  - [Convert to lowercase (ASCII)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_ascii_lower)
+  - [Convert to lowercase (UNICODE\_LOWER)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_unicode_lower)
+  - [Convert to lowercase (ICU case folding)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_casefold_lower)
+  - [Preserve uppercase](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_casefold_upper)
+  - [ICU normalize with NFC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_nfc)
+  - [ICU normalize with NFKC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_nfkc)
+  - [ICU normalize with NFD](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_nfd)
+  - [ICU normalize with NFKD](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_nfkd)
+  - [Remove words](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/text-analysis#token_filters_stop_words)
 
 **Examples**
 
 In the following example, the terms are NFKC normalized, and then because ICU case folding is `  true  ` , the terms are converted to lowercase. Finally, the lowercase words `  pies  ` and `  2  ` are removed from the query.
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
-      },
-      {
-        "stop_words": ["pies", "2"]
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC",
+              "icu_case_folding": true
+            }
+          },
+          {
+            "stop_words": ["pies", "2"]
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*------------------------------------------+
- | results                                  |
- +------------------------------------------+
- | ['i', 'like', '❶', 'you', 'like', 'ño' ] |
- +------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*------------------------------------------+
+     | results                                  |
+     +------------------------------------------+
+     | ['i', 'like', '❶', 'you', 'like', 'ño' ] |
+     +------------------------------------------*/
 
 The following query is similar to the preceding one, but the order of token filters is re-ordered, and this affects the outcome of the query. In the results, `  2  ` and `  PIEs  ` is retained because `  ②  ` is normalized to `  2  ` and `  PIEs  ` is normalized to `  pies  ` after the stop words token filter is applied:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "stop_words": ["pies", "2"]
-      },
-      {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
+        "token_filters": [
+          {
+            "stop_words": ["pies", "2"]
+          },
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC",
+              "icu_case_folding": true
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*-------------------------------------------------------+
- | results                                               |
- +-------------------------------------------------------+
- | ['i', 'like', '❶', '2', 'you', 'like', 'ño', 'pies' ] |
- +-------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*-------------------------------------------------------+
+     | results                                               |
+     +-------------------------------------------------------+
+     | ['i', 'like', '❶', '2', 'you', 'like', 'ño', 'pies' ] |
+     +-------------------------------------------------------*/
 
 You can use the same token filter as many times as you'd like in a query. In the following query, `  stop_words  ` is used twice:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "stop_words": ["like", "you"]
-      },
-      {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC",
-          "icu_case_folding": true
-        }
-      },
-      {
-        "stop_words": ["ño"]
+        "token_filters": [
+          {
+            "stop_words": ["like", "you"]
+          },
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC",
+              "icu_case_folding": true
+            }
+          },
+          {
+            "stop_words": ["ño"]
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------+
- | results                          |
- +----------------------------------+
- | ['i', '❶', '2', 'pies', 'pies' ] |
- +----------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*----------------------------------+
+     | results                          |
+     +----------------------------------+
+     | ['i', '❶', '2', 'pies', 'pies' ] |
+     +----------------------------------*/
 
 ### No normalization
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "NONE"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "NONE"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -448,41 +414,37 @@ Normalization isn't applied to terms.
 
 In the following query, normalization isn't applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "NONE"
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "NONE"
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['I', 'like', '❶', '②', 'pies', 'you', 'like', 'Ño', 'PIEs' ] |
- +----------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['I', 'like', '❶', '②', 'pies', 'you', 'like', 'Ño', 'PIEs' ] |
+     +----------------------------------------------------------------*/
 
 ### Convert to lowercase (ASCII)
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "LOWER"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "LOWER"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -492,41 +454,37 @@ Performs ASCII lowercasing on the resulting terms.
 
 In the following query, ASCII lowercasing is applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "LOWER"
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "LOWER"
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['i', 'like', '❶', '②', 'pies', 'you', 'like', 'Ño', 'pies' ] |
- +----------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['i', 'like', '❶', '②', 'pies', 'you', 'like', 'Ño', 'pies' ] |
+     +----------------------------------------------------------------*/
 
 ### Convert to lowercase (Unicode)
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "UNICODE_LOWER"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "UNICODE_LOWER"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -536,42 +494,38 @@ Performs Unicode lowercasing on the resulting terms. Mapping between lowercase a
 
 In the following query, Unicode lowercasing is applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "UNICODE_LOWER"
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "UNICODE_LOWER"
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*----------------------------------------------------------------+
- | results                                                        |
- +----------------------------------------------------------------+
- | ['i', 'like', '❶', '②', 'pies', 'you', 'like', 'ño', 'pies' ] |
- +----------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*----------------------------------------------------------------+
+     | results                                                        |
+     +----------------------------------------------------------------+
+     | ['i', 'like', '❶', '②', 'pies', 'you', 'like', 'ño', 'pies' ] |
+     +----------------------------------------------------------------*/
 
 ### Convert to lowercase (ICU case folding)
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_case_folding": true
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_case_folding": true
+        }
+      ]
+    }'
 
 **Description**
 
@@ -581,43 +535,39 @@ Performs ICU case folding, which converts the resulting terms to lowercase.
 
 In the following query, ICU case folding is applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_case_folding": true
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_case_folding": true
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*--------------------------------------------------------------+
- | results                                                      |
- +--------------------------------------------------------------+
- | ['i', 'like', '❶', '2' 'pies', 'you', 'like', 'ño', 'pies' ] |
- +--------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*--------------------------------------------------------------+
+     | results                                                      |
+     +--------------------------------------------------------------+
+     | ['i', 'like', '❶', '2' 'pies', 'you', 'like', 'ño', 'pies' ] |
+     +--------------------------------------------------------------*/
 
 ### Preserve uppercase
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_case_folding": false
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_case_folding": false
+        }
+      ]
+    }'
 
 **Description**
 
@@ -627,43 +577,39 @@ Don't convert uppercase characters to lowercase characters in the resulting term
 
 In the following query, ICU case folding isn't applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_case_folding": false
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_case_folding": false
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*---------------------------------------------------------------+
- | results                                                       |
- +---------------------------------------------------------------+
- | ['I', 'like', '❶', '2' 'pies', 'you', 'like',  'Ño', 'PIEs' ] |
- +---------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*---------------------------------------------------------------+
+     | results                                                       |
+     +---------------------------------------------------------------+
+     | ['I', 'like', '❶', '2' 'pies', 'you', 'like',  'Ño', 'PIEs' ] |
+     +---------------------------------------------------------------*/
 
 ### ICU normalize with NFC
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_normalize_mode": "NFC"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFC"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -673,43 +619,39 @@ Normalizes text with [ICU NFC normalization](https://en.wikipedia.org/wiki/Unico
 
 In the following query, NFC normalization is applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFC"
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFC"
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*---------------------------------------------------------------+
- | results                                                       |
- +---------------------------------------------------------------+
- | ['i', 'like', '❶', '②' 'pies', 'you', 'like',  'ño', 'pies' ] |
- +---------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*---------------------------------------------------------------+
+     | results                                                       |
+     +---------------------------------------------------------------+
+     | ['i', 'like', '❶', '②' 'pies', 'you', 'like',  'ño', 'pies' ] |
+     +---------------------------------------------------------------*/
 
 ### ICU normalize with NFKC
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_normalize_mode": "NFKC"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFKC"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -719,42 +661,38 @@ Normalizes text with [ICU NFKC normalization](https://en.wikipedia.org/wiki/Unic
 
 In the following query, NFKC normalization is applied to the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFKC"
-        }
-      }
-    ]
-  }'''
-) AS results
-
-/*---------------------------------------------------------------+
- | results                                                       |
- +---------------------------------------------------------------+
- | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
- +---------------------------------------------------------------*/
-```
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFKC"
+            }
+          }
+        ]
+      }'''
+    ) AS results
+    
+    /*---------------------------------------------------------------+
+     | results                                                       |
+     +---------------------------------------------------------------+
+     | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
+     +---------------------------------------------------------------*/
 
 ### ICU normalize with NFD
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_normalize_mode": "NFD"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFD"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -764,43 +702,39 @@ Normalizes text with [ICU NFD normalization](https://en.wikipedia.org/wiki/Unico
 
 In the following query, although the input and output for `  ñ  ` look the same, the bytes are different (input is `  \u00f1  ` , output is `  \u006e \u0303  ` ).
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "normalizer": {
-          "mode": "ICU_NORMALIZE",
-          "icu_normalize_mode": "NFD"
-        }
+        "token_filters": [
+          {
+            "normalizer": {
+              "mode": "ICU_NORMALIZE",
+              "icu_normalize_mode": "NFD"
+            }
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*---------------------------------------------------------------+
- | results                                                       |
- +---------------------------------------------------------------+
- | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
- +---------------------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*---------------------------------------------------------------+
+     | results                                                       |
+     +---------------------------------------------------------------+
+     | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
+     +---------------------------------------------------------------*/
 
 ### ICU normalize with NFKD
 
-``` text
-'{
-  "token_filters": [
-    "normalizer": {
-      "mode": "ICU_NORMALIZE",
-      "icu_normalize_mode": "NFKD"
-    }
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "normalizer": {
+          "mode": "ICU_NORMALIZE",
+          "icu_normalize_mode": "NFKD"
+        }
+      ]
+    }'
 
 **Description**
 
@@ -810,38 +744,34 @@ Normalizes text with [ICU NFKD normalization](https://en.wikipedia.org/wiki/Unic
 
 In the following query, although the input and output for `  ñ  ` look the same, the bytes are different (input is `  \u00f1  ` , output is `  \u006e \u0303  ` ).
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like ❶ ② pies, you like Ño PIEs',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
-      {"normalizer": {
-        "mode": "ICU_NORMALIZE",
-        "icu_normalize_mode": "NFKD"
-        }
-      }
-    ]
-  }'''
-) AS results
-
-/*---------------------------------------------------------------+
- | results                                                       |
- +---------------------------------------------------------------+
- | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
- +---------------------------------------------------------------*/
-```
+    SELECT TEXT_ANALYZE(
+      'I like ❶ ② pies, you like Ño PIEs',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
+      {
+        "token_filters": [
+          {"normalizer": {
+            "mode": "ICU_NORMALIZE",
+            "icu_normalize_mode": "NFKD"
+            }
+          }
+        ]
+      }'''
+    ) AS results
+    
+    /*---------------------------------------------------------------+
+     | results                                                       |
+     +---------------------------------------------------------------+
+     | ['i', 'like', '❶', '2' 'pies', 'you', 'like',  'ño', 'pies' ] |
+     +---------------------------------------------------------------*/
 
 ### Remove words
 
-``` text
-'{
-  "token_filters": [
-    "stop_words": array_of_stop_words
-  ]
-}'
-```
+    '{
+      "token_filters": [
+        "stop_words": array_of_stop_words
+      ]
+    }'
 
 **Description**
 
@@ -855,24 +785,22 @@ Exclude a list of terms (tokens) from the results.
 
 In the following query, the words `  they  ` and `  pie  ` are excluded from the results:
 
-``` text
-SELECT TEXT_ANALYZE(
-  'I like pie, you like-pie, they like 2 PIEs.',
-  analyzer=>'LOG_ANALYZER',
-  analyzer_options=>'''
-  {
-    "token_filters": [
+    SELECT TEXT_ANALYZE(
+      'I like pie, you like-pie, they like 2 PIEs.',
+      analyzer=>'LOG_ANALYZER',
+      analyzer_options=>'''
       {
-        "stop_words": ["they", "pie"]
+        "token_filters": [
+          {
+            "stop_words": ["they", "pie"]
+          }
+        ]
       }
-    ]
-  }
-  '''
-) AS results
-
-/*---------------------------------------------------+
- | results                                           |
- +---------------------------------------------------+
- | ['I', 'like', 'you', 'like', 'like, '2', 'PIEs' ] |
- +---------------------------------------------------*/
-```
+      '''
+    ) AS results
+    
+    /*---------------------------------------------------+
+     | results                                           |
+     +---------------------------------------------------+
+     | ['I', 'like', 'you', 'like', 'like, '2', 'PIEs' ] |
+     +---------------------------------------------------*/

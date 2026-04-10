@@ -1,6 +1,6 @@
 # TABLE\_OPTIONS view
 
-The `  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view contains one row for each option, for each table or view in a dataset. The `  TABLES  ` and `  TABLE_OPTIONS  ` views also contain high-level information about views. For detailed information, query the [`  INFORMATION_SCHEMA.VIEWS  `](/bigquery/docs/information-schema-views) view.
+The `  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view contains one row for each option, for each table or view in a dataset. The `  TABLES  ` and `  TABLE_OPTIONS  ` views also contain high-level information about views. For detailed information, query the [`  INFORMATION_SCHEMA.VIEWS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-views) view.
 
 ## Required permissions
 
@@ -17,124 +17,38 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataViewer  `
   - `  roles/bigquery.metadataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-When you query the `  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view, the query results contain one row for each option, for each table or view in a dataset. For detailed information about views, query the [`  INFORMATION_SCHEMA.VIEWS  ` view](/bigquery/docs/information-schema-views) instead.
+When you query the `  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view, the query results contain one row for each option, for each table or view in a dataset. For detailed information about views, query the [`  INFORMATION_SCHEMA.VIEWS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-views) instead.
 
 The `  INFORMATION_SCHEMA.TABLE_OPTIONS  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_catalog      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The project ID of the project that contains the dataset</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       table_schema      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the dataset that contains the table or view also referred to as the <code dir="ltr" translate="no">       datasetId      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       table_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the table or view also referred to as the <code dir="ltr" translate="no">       tableId      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       option_name      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>One of the name values in the <a href="#options_table">options table</a></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       option_type      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>One of the data type values in the <a href="#options_table">options table</a></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       option_value      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>One of the value options in the <a href="#options_table">options table</a></td>
-</tr>
-</tbody>
-</table>
+| Column name                    | Data type               | Value                                                                                                                                          |
+| ------------------------------ | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        table_catalog       ` | `        STRING       ` | The project ID of the project that contains the dataset                                                                                        |
+| `        table_schema       `  | `        STRING       ` | The name of the dataset that contains the table or view also referred to as the `        datasetId       `                                     |
+| `        table_name       `    | `        STRING       ` | The name of the table or view also referred to as the `        tableId       `                                                                 |
+| `        option_name       `   | `        STRING       ` | One of the name values in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options#options_table)      |
+| `        option_type       `   | `        STRING       ` | One of the data type values in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options#options_table) |
+| `        option_value       `  | `        STRING       ` | One of the value options in the [options table](https://docs.cloud.google.com/bigquery/docs/information-schema-table-options#options_table)    |
 
 ##### Options table
 
-<table>
-<thead>
-<tr class="header">
-<th><p><code dir="ltr" translate="no">        OPTION_NAME       </code></p></th>
-<th><p><code dir="ltr" translate="no">        OPTION_TYPE       </code></p></th>
-<th><p><code dir="ltr" translate="no">        OPTION_VALUE       </code></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        description       </code></p></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td>A description of the table</td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        enable_refresh       </code></p></td>
-<td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
-<td>Whether automatic refresh is enabled for a materialized view</td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        expiration_timestamp       </code></p></td>
-<td><p><code dir="ltr" translate="no">        TIMESTAMP       </code></p></td>
-<td>The time when this table expires</td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        friendly_name       </code></p></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td>The table's descriptive name</td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        kms_key_name       </code></p></td>
-<td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
-<td>The name of the Cloud KMS key used to encrypt the table</td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        labels       </code></p></td>
-<td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
-<td>An array of <code dir="ltr" translate="no">       STRUCT      </code> 's that represent the labels on the table</td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        max_staleness       </code></p></td>
-<td><p><code dir="ltr" translate="no">        INTERVAL       </code></p></td>
-<td>The configured table's maximum staleness for <a href="/bigquery/docs/change-data-capture#manage_table_staleness">BigQuery change data capture (CDC) upserts</a></td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        partition_expiration_days       </code></p></td>
-<td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
-<td>The default lifetime, in days, of all partitions in a partitioned table</td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        refresh_interval_minutes       </code></p></td>
-<td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
-<td>How frequently a materialized view is refreshed</td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        require_partition_filter       </code></p></td>
-<td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
-<td>Whether queries over the table require a partition filter</td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        tags       </code></p></td>
-<td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
-<td>Tags attached to a table in a namespaced &lt;key, value&gt; syntax. For more information, see <a href="/iam/docs/tags-access-control">Tags and conditional access</a> .</td>
-</tr>
-</tbody>
-</table>
+| `         OPTION_NAME        `               | `         OPTION_TYPE        `                   | `         OPTION_VALUE        `                                                                                                                                                       |
+| -------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `         description        `               | `         STRING        `                        | A description of the table                                                                                                                                                            |
+| `         enable_refresh        `            | `         BOOL        `                          | Whether automatic refresh is enabled for a materialized view                                                                                                                          |
+| `         expiration_timestamp        `      | `         TIMESTAMP        `                     | The time when this table expires                                                                                                                                                      |
+| `         friendly_name        `             | `         STRING        `                        | The table's descriptive name                                                                                                                                                          |
+| `         kms_key_name        `              | `         STRING        `                        | The name of the Cloud KMS key used to encrypt the table                                                                                                                               |
+| `         labels        `                    | `         ARRAY<STRUCT<STRING, STRING>>        ` | An array of `        STRUCT       ` 's that represent the labels on the table                                                                                                         |
+| `         max_staleness        `             | `         INTERVAL        `                      | The configured table's maximum staleness for [BigQuery change data capture (CDC) upserts](https://docs.cloud.google.com/bigquery/docs/change-data-capture#manage_table_staleness)     |
+| `         partition_expiration_days        ` | `         FLOAT64        `                       | The default lifetime, in days, of all partitions in a partitioned table                                                                                                               |
+| `         refresh_interval_minutes        `  | `         FLOAT64        `                       | How frequently a materialized view is refreshed                                                                                                                                       |
+| `         require_partition_filter        `  | `         BOOL        `                          | Whether queries over the table require a partition filter                                                                                                                             |
+| `         tags        `                      | `         ARRAY<STRUCT<STRING, STRING>>        ` | Tags attached to a table in a namespaced \<key, value\> syntax. For more information, see [Tags and conditional access](https://docs.cloud.google.com/iam/docs/tags-access-control) . |
 
 For external tables, the following options are possible:
 
@@ -174,9 +88,9 @@ Defines the scope of supported column name characters and the handling behavior 
 
 Supported values include:
 
-  - `  STRICT  ` . Enables [flexible column names](/bigquery/docs/schemas#flexible-column-names) . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the [`  default_column_name_character_map  `](/bigquery/docs/default-configuration) configuration setting.
-  - `  V1  ` . Column names can only contain [standard column name characters](/bigquery/docs/schemas#column_names) . Unsupported characters (except [periods in Parquet file column names](/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores. This is the default behavior for tables created before the introduction of `  column_name_character_map  ` .
-  - `  V2  ` . Besides [standard column name characters](/bigquery/docs/schemas#column_names) , it also supports [flexible column names](/bigquery/docs/schemas#flexible-column-names) . Unsupported characters (except [periods in Parquet file column names](/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores.
+  - `  STRICT  ` . Enables [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the [`  default_column_name_character_map  `](https://docs.cloud.google.com/bigquery/docs/default-configuration) configuration setting.
+  - `  V1  ` . Column names can only contain [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores. This is the default behavior for tables created before the introduction of `  column_name_character_map  ` .
+  - `  V2  ` . Besides [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) , it also supports [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores.
 
 `  compression  `
 
@@ -190,7 +104,7 @@ Applies to CSV and JSON data.
 
 `  ARRAY<STRING>  `
 
-Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
+Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
 
 Example: `  ["NUMERIC", "BIGNUMERIC"]  ` .
 
@@ -212,7 +126,7 @@ Applies to Parquet data.
 
 `  BOOL  `
 
-If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
+If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
 
 Applies to Avro data.
 
@@ -252,9 +166,9 @@ Applies to CSV data.
 
 `  STRING  `
 
-The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
-Supported values for [`  LOAD DATA  `](/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+Supported values for [`  LOAD DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
 The value `  JSON  ` is equivalent to `  NEWLINE_DELIMITED_JSON  ` .
 
@@ -296,7 +210,7 @@ Applies to CSV and JSON data.
 For JSON data, indicates a particular JSON interchange format. If not specified, BigQuery reads the data as generic JSON records.
 
 Supported values include:  
-`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](/bigquery/docs/geospatial-data#external-geojson) .
+`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](https://docs.cloud.google.com/bigquery/docs/geospatial-data#external-geojson) .
 
 `  max_bad_records  `
 
@@ -310,13 +224,13 @@ Applies to: CSV, JSON, and Google Sheets data.
 
 `  INTERVAL  `
 
-Applicable for [BigLake tables](/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
+Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
 
 Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
 
 To disable metadata caching, specify 0. This is the default.
 
-To enable metadata caching, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
+To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
 
 `  null_marker  `
 
@@ -340,7 +254,7 @@ Applies to CSV data.
 
 `  STRING  `
 
-Only required when creating an [object table](/bigquery/docs/object-table-introduction) .
+Only required when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 Set the value of this option to `  SIMPLE  ` when creating an object table.
 
@@ -421,7 +335,7 @@ Supported values include:
 
 `  <ARRAY<STRUCT<STRING, STRING>>>  `
 
-An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](/iam/docs/tags-access-control#definitions) , and the value should be the [short name](/iam/docs/tags-access-control#definitions) .
+An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) , and the value should be the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
 `  time_zone  `
 
@@ -429,7 +343,7 @@ An array of IAM tags for the table, expressed as key-value pairs. The key should
 
 Default time zone that will apply when parsing timestamp values that have no specific time zone.
 
-Check [valid time zone names](/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
+Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
 
 If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
 
@@ -439,11 +353,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
 
-If this value is present, this format is the only compatible DATE format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
 
-If this value is not present, the DATE field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -451,11 +365,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
 
-If this value is not present, the DATETIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -463,11 +377,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
 
-If this value is not present, the TIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -475,11 +389,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
 
-If this value is not present, the TIMESTAMP field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -489,7 +403,7 @@ For external tables, including object tables, that aren't Bigtable tables:
 
 `  ARRAY<STRING>  `
 
-An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
+An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
 
 The following examples show valid `  uris  ` values:
 
@@ -507,42 +421,25 @@ The URI identifying the Bigtable table to use as a data source. You can only spe
 
 Example: `  https://googleapis.com/bigtable/projects/ project_id /instances/ instance_id [/appProfiles/ app_profile ]/tables/ table_name  `
 
-For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
+For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
 ## Scope and syntax
 
-Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_OPTIONS      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.TABLE_OPTIONS      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                  | Resource scope | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------------ | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.TABLE_OPTIONS       `` | Project level  | `          REGION        ` |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.TABLE_OPTIONS       `        | Dataset level  | Dataset location           |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Example
 
@@ -554,7 +451,7 @@ To run the query against a project other than your default project, add the proj
 
 **Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
 
-``` text
+``` notranslate
   SELECT
     *
   FROM
@@ -565,7 +462,7 @@ To run the query against a project other than your default project, add the proj
 
 The result is similar to the following:
 
-``` text
+``` 
   +----------------+---------------+------------+----------------------+-------------+--------------------------------------+
   | table_catalog  | table_schema  | table_name |     option_name      | option_type |             option_value             |
   +----------------+---------------+------------+----------------------+-------------+--------------------------------------+
@@ -583,7 +480,7 @@ The following example retrieves metadata about all tables in `  mydataset  ` tha
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format: ``  ` project_id `. dataset .INFORMATION_SCHEMA. view  `` ; for example, ``  `myproject`.mydataset.INFORMATION_SCHEMA.TABLE_OPTIONS  `` .
 
-``` text
+``` notranslate
   SELECT
     *
   FROM
@@ -595,7 +492,7 @@ To run the query against a project other than your default project, add the proj
 
 The result is similar to the following:
 
-``` text
+``` 
   +----------------+---------------+------------+-------------+-------------+--------------+
   | table_catalog  | table_schema  | table_name | option_name | option_type | option_value |
   +----------------+---------------+------------+-------------+-------------+--------------+

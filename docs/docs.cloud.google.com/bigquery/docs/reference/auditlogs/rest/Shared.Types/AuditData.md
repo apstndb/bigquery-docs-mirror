@@ -1,86 +1,86 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [TableInsertRequest](#TableInsertRequest)
-      - [JSON representation](#TableInsertRequest.SCHEMA_REPRESENTATION)
-  - [Table](#Table)
-      - [JSON representation](#Table.SCHEMA_REPRESENTATION)
-  - [TableName](#TableName)
-      - [JSON representation](#TableName.SCHEMA_REPRESENTATION)
-  - [TableInfo](#TableInfo)
-      - [JSON representation](#TableInfo.SCHEMA_REPRESENTATION)
-  - [TableViewDefinition](#TableViewDefinition)
-      - [JSON representation](#TableViewDefinition.SCHEMA_REPRESENTATION)
-  - [EncryptionInfo](#EncryptionInfo)
-      - [JSON representation](#EncryptionInfo.SCHEMA_REPRESENTATION)
-  - [TableUpdateRequest](#TableUpdateRequest)
-      - [JSON representation](#TableUpdateRequest.SCHEMA_REPRESENTATION)
-  - [DatasetListRequest](#DatasetListRequest)
-      - [JSON representation](#DatasetListRequest.SCHEMA_REPRESENTATION)
-  - [DatasetInsertRequest](#DatasetInsertRequest)
-      - [JSON representation](#DatasetInsertRequest.SCHEMA_REPRESENTATION)
-  - [Dataset](#Dataset)
-      - [JSON representation](#Dataset.SCHEMA_REPRESENTATION)
-  - [DatasetName](#DatasetName)
-      - [JSON representation](#DatasetName.SCHEMA_REPRESENTATION)
-  - [DatasetInfo](#DatasetInfo)
-      - [JSON representation](#DatasetInfo.SCHEMA_REPRESENTATION)
-  - [BigQueryAcl](#BigQueryAcl)
-      - [JSON representation](#BigQueryAcl.SCHEMA_REPRESENTATION)
-  - [BigQueryAcl.Entry](#BigQueryAcl.Entry)
-      - [JSON representation](#BigQueryAcl.Entry.SCHEMA_REPRESENTATION)
-  - [DatasetUpdateRequest](#DatasetUpdateRequest)
-      - [JSON representation](#DatasetUpdateRequest.SCHEMA_REPRESENTATION)
-  - [JobInsertRequest](#JobInsertRequest)
-      - [JSON representation](#JobInsertRequest.SCHEMA_REPRESENTATION)
-  - [Job](#Job)
-      - [JSON representation](#Job.SCHEMA_REPRESENTATION)
-  - [JobName](#JobName)
-      - [JSON representation](#JobName.SCHEMA_REPRESENTATION)
-  - [JobConfiguration](#JobConfiguration)
-      - [JSON representation](#JobConfiguration.SCHEMA_REPRESENTATION)
-  - [JobConfiguration.Query](#JobConfiguration.Query)
-      - [JSON representation](#JobConfiguration.Query.SCHEMA_REPRESENTATION)
-  - [TableDefinition](#TableDefinition)
-      - [JSON representation](#TableDefinition.SCHEMA_REPRESENTATION)
-  - [JobConfiguration.Load](#JobConfiguration.Load)
-      - [JSON representation](#JobConfiguration.Load.SCHEMA_REPRESENTATION)
-  - [JobConfiguration.Extract](#JobConfiguration.Extract)
-      - [JSON representation](#JobConfiguration.Extract.SCHEMA_REPRESENTATION)
-  - [JobConfiguration.TableCopy](#JobConfiguration.TableCopy)
-      - [JSON representation](#JobConfiguration.TableCopy.SCHEMA_REPRESENTATION)
-  - [JobStatus](#JobStatus)
-      - [JSON representation](#JobStatus.SCHEMA_REPRESENTATION)
-  - [JobStatistics](#JobStatistics)
-      - [JSON representation](#JobStatistics.SCHEMA_REPRESENTATION)
-  - [JobStatistics.ReservationResourceUsage](#JobStatistics.ReservationResourceUsage)
-      - [JSON representation](#JobStatistics.ReservationResourceUsage.SCHEMA_REPRESENTATION)
-  - [JobQueryRequest](#JobQueryRequest)
-      - [JSON representation](#JobQueryRequest.SCHEMA_REPRESENTATION)
-  - [JobGetQueryResultsRequest](#JobGetQueryResultsRequest)
-      - [JSON representation](#JobGetQueryResultsRequest.SCHEMA_REPRESENTATION)
-  - [TableDataListRequest](#TableDataListRequest)
-      - [JSON representation](#TableDataListRequest.SCHEMA_REPRESENTATION)
-  - [SetIamPolicyRequest](#SetIamPolicyRequest)
-      - [JSON representation](#SetIamPolicyRequest.SCHEMA_REPRESENTATION)
-  - [TableInsertResponse](#TableInsertResponse)
-      - [JSON representation](#TableInsertResponse.SCHEMA_REPRESENTATION)
-  - [TableUpdateResponse](#TableUpdateResponse)
-      - [JSON representation](#TableUpdateResponse.SCHEMA_REPRESENTATION)
-  - [DatasetInsertResponse](#DatasetInsertResponse)
-      - [JSON representation](#DatasetInsertResponse.SCHEMA_REPRESENTATION)
-  - [DatasetUpdateResponse](#DatasetUpdateResponse)
-      - [JSON representation](#DatasetUpdateResponse.SCHEMA_REPRESENTATION)
-  - [JobInsertResponse](#JobInsertResponse)
-      - [JSON representation](#JobInsertResponse.SCHEMA_REPRESENTATION)
-  - [JobQueryResponse](#JobQueryResponse)
-      - [JSON representation](#JobQueryResponse.SCHEMA_REPRESENTATION)
-  - [JobGetQueryResultsResponse](#JobGetQueryResultsResponse)
-      - [JSON representation](#JobGetQueryResultsResponse.SCHEMA_REPRESENTATION)
-  - [JobQueryDoneResponse](#JobQueryDoneResponse)
-      - [JSON representation](#JobQueryDoneResponse.SCHEMA_REPRESENTATION)
-  - [JobCompletedEvent](#JobCompletedEvent)
-      - [JSON representation](#JobCompletedEvent.SCHEMA_REPRESENTATION)
-  - [TableDataReadEvent](#TableDataReadEvent)
-      - [JSON representation](#TableDataReadEvent.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#SCHEMA_REPRESENTATION)
+  - [TableInsertRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInsertRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInsertRequest.SCHEMA_REPRESENTATION)
+  - [Table](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Table)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Table.SCHEMA_REPRESENTATION)
+  - [TableName](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableName)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableName.SCHEMA_REPRESENTATION)
+  - [TableInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInfo.SCHEMA_REPRESENTATION)
+  - [TableViewDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableViewDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableViewDefinition.SCHEMA_REPRESENTATION)
+  - [EncryptionInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#EncryptionInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#EncryptionInfo.SCHEMA_REPRESENTATION)
+  - [TableUpdateRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableUpdateRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableUpdateRequest.SCHEMA_REPRESENTATION)
+  - [DatasetListRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetListRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetListRequest.SCHEMA_REPRESENTATION)
+  - [DatasetInsertRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInsertRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInsertRequest.SCHEMA_REPRESENTATION)
+  - [Dataset](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Dataset)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Dataset.SCHEMA_REPRESENTATION)
+  - [DatasetName](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetName)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetName.SCHEMA_REPRESENTATION)
+  - [DatasetInfo](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInfo.SCHEMA_REPRESENTATION)
+  - [BigQueryAcl](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#BigQueryAcl)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#BigQueryAcl.SCHEMA_REPRESENTATION)
+  - [BigQueryAcl.Entry](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#BigQueryAcl.Entry)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#BigQueryAcl.Entry.SCHEMA_REPRESENTATION)
+  - [DatasetUpdateRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetUpdateRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetUpdateRequest.SCHEMA_REPRESENTATION)
+  - [JobInsertRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobInsertRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobInsertRequest.SCHEMA_REPRESENTATION)
+  - [Job](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Job)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#Job.SCHEMA_REPRESENTATION)
+  - [JobName](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobName)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobName.SCHEMA_REPRESENTATION)
+  - [JobConfiguration](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.SCHEMA_REPRESENTATION)
+  - [JobConfiguration.Query](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Query)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Query.SCHEMA_REPRESENTATION)
+  - [TableDefinition](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDefinition)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDefinition.SCHEMA_REPRESENTATION)
+  - [JobConfiguration.Load](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Load)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Load.SCHEMA_REPRESENTATION)
+  - [JobConfiguration.Extract](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Extract)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.Extract.SCHEMA_REPRESENTATION)
+  - [JobConfiguration.TableCopy](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.TableCopy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobConfiguration.TableCopy.SCHEMA_REPRESENTATION)
+  - [JobStatus](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatus)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatus.SCHEMA_REPRESENTATION)
+  - [JobStatistics](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatistics)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatistics.SCHEMA_REPRESENTATION)
+  - [JobStatistics.ReservationResourceUsage](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatistics.ReservationResourceUsage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobStatistics.ReservationResourceUsage.SCHEMA_REPRESENTATION)
+  - [JobQueryRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryRequest.SCHEMA_REPRESENTATION)
+  - [JobGetQueryResultsRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobGetQueryResultsRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobGetQueryResultsRequest.SCHEMA_REPRESENTATION)
+  - [TableDataListRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDataListRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDataListRequest.SCHEMA_REPRESENTATION)
+  - [SetIamPolicyRequest](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#SetIamPolicyRequest)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#SetIamPolicyRequest.SCHEMA_REPRESENTATION)
+  - [TableInsertResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInsertResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableInsertResponse.SCHEMA_REPRESENTATION)
+  - [TableUpdateResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableUpdateResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableUpdateResponse.SCHEMA_REPRESENTATION)
+  - [DatasetInsertResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInsertResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetInsertResponse.SCHEMA_REPRESENTATION)
+  - [DatasetUpdateResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetUpdateResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#DatasetUpdateResponse.SCHEMA_REPRESENTATION)
+  - [JobInsertResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobInsertResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobInsertResponse.SCHEMA_REPRESENTATION)
+  - [JobQueryResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryResponse.SCHEMA_REPRESENTATION)
+  - [JobGetQueryResultsResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobGetQueryResultsResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobGetQueryResultsResponse.SCHEMA_REPRESENTATION)
+  - [JobQueryDoneResponse](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryDoneResponse)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobQueryDoneResponse.SCHEMA_REPRESENTATION)
+  - [JobCompletedEvent](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobCompletedEvent)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#JobCompletedEvent.SCHEMA_REPRESENTATION)
+  - [TableDataReadEvent](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDataReadEvent)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/AuditData#TableDataReadEvent.SCHEMA_REPRESENTATION)
 
 BigQuery AuditData represents the older AuditData.serviceData log messages.
 
@@ -95,7 +95,7 @@ BigQuery AuditData represents the older AuditData.serviceData log messages.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobCompletedEvent&quot;: {
     object (JobCompletedEvent)
   },
@@ -319,7 +319,7 @@ Table insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Table)
   }
@@ -338,7 +338,7 @@ The new table.
 
 ## Table
 
-Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) API resource for more details on individual fields. Note: `  Table.schema  ` has been deprecated in favor of `  Table.schemaJson  ` . `  Table.schema  ` may continue to be present in your logs during this transition.
+Describes a BigQuery table. See the [Table](https://docs.cloud.google.com/bigquery/docs/reference/v2/tables) API resource for more details on individual fields. Note: `  Table.schema  ` has been deprecated in favor of `  Table.schemaJson  ` . `  Table.schema  ` may continue to be present in your logs during this transition.
 
 <table>
 <colgroup>
@@ -351,7 +351,7 @@ Describes a BigQuery table. See the [Table](/bigquery/docs/reference/v2/tables) 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tableName&quot;: {
     object (TableName)
   },
@@ -453,7 +453,7 @@ The fully-qualified name for a table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string
@@ -497,7 +497,7 @@ User-provided metadata for a table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
   &quot;labels&quot;: {
@@ -546,7 +546,7 @@ Describes a virtual table defined by a SQL query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string
 }</code></pre></td>
 </tr>
@@ -576,7 +576,7 @@ Describes encryption properties for a table or a job
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -606,7 +606,7 @@ Table update request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Table)
   }
@@ -638,7 +638,7 @@ Dataset list request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;listAll&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -668,7 +668,7 @@ Dataset insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Dataset)
   }
@@ -687,7 +687,7 @@ The dataset to be inserted.
 
 ## Dataset
 
-BigQuery dataset information. See the [Dataset](/bigquery/docs/reference/v2/datasets) API resource for more details on individual fields.
+BigQuery dataset information. See the [Dataset](https://docs.cloud.google.com/bigquery/docs/reference/v2/datasets) API resource for more details on individual fields.
 
 <table>
 <colgroup>
@@ -700,7 +700,7 @@ BigQuery dataset information. See the [Dataset](/bigquery/docs/reference/v2/data
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetName&quot;: {
     object (DatasetName)
   },
@@ -777,7 +777,7 @@ The fully-qualified name for a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string
 }</code></pre></td>
@@ -814,7 +814,7 @@ User-provided metadata for a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;friendlyName&quot;: string,
   &quot;description&quot;: string,
   &quot;labels&quot;: {
@@ -863,7 +863,7 @@ An access control list.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;entries&quot;: [
     {
       object (BigQueryAcl.Entry)
@@ -897,7 +897,7 @@ Access control entry.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;role&quot;: string,
   &quot;groupEmail&quot;: string,
   &quot;userEmail&quot;: string,
@@ -964,7 +964,7 @@ Dataset update request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Dataset)
   }
@@ -996,7 +996,7 @@ Job insert request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Job)
   }
@@ -1028,7 +1028,7 @@ Describes a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;jobName&quot;: {
     object (JobName)
   },
@@ -1087,7 +1087,7 @@ The fully-qualified name for a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;jobId&quot;: string,
   &quot;location&quot;: string
@@ -1118,7 +1118,7 @@ The job location.
 
 ## JobConfiguration
 
-Job configuration information. See the [Jobs](/bigquery/docs/reference/v2/jobs) API resource for more details on individual fields.
+Job configuration information. See the [Jobs](https://docs.cloud.google.com/bigquery/docs/reference/v2/jobs) API resource for more details on individual fields.
 
 <table>
 <colgroup>
@@ -1131,7 +1131,7 @@ Job configuration information. See the [Jobs](/bigquery/docs/reference/v2/jobs) 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dryRun&quot;: boolean,
   &quot;labels&quot;: {
     string: string,
@@ -1214,7 +1214,7 @@ Describes a query job, which executes a SQL-like query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;destinationTable&quot;: {
     object (TableName)
@@ -1310,7 +1310,7 @@ Describes an external data source used in a query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;sourceUris&quot;: [
     string
@@ -1349,7 +1349,7 @@ Describes a load job, which loads data from an external source via the import pi
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceUris&quot;: [
     string
   ],
@@ -1420,7 +1420,7 @@ Describes an extract job, which exports data to an external source via the expor
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;destinationUris&quot;: [
     string
   ],
@@ -1461,7 +1461,7 @@ Describes a copy job, which copies an existing table to another table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceTables&quot;: [
     {
       object (TableName)
@@ -1527,7 +1527,7 @@ Running state of a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;state&quot;: string,
   &quot;error&quot;: {
     object (Status)
@@ -1577,7 +1577,7 @@ Job statistics that may change after a job starts.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;createTime&quot;: string,
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string,
@@ -1725,7 +1725,7 @@ This field is deprecated. Job resource usage breakdown by reservation.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;slotMs&quot;: string
 }</code></pre></td>
@@ -1762,7 +1762,7 @@ Job query request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;maxResults&quot;: integer,
   &quot;defaultDataset&quot;: {
@@ -1822,7 +1822,7 @@ Job getQueryResults request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;maxResults&quot;: integer,
   &quot;startRow&quot;: string
 }</code></pre></td>
@@ -1859,7 +1859,7 @@ Table data-list request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;startRow&quot;: string,
   &quot;maxResults&quot;: integer
 }</code></pre></td>
@@ -1896,7 +1896,7 @@ Request message for `  SetIamPolicy  ` method.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: string,
   &quot;policy&quot;: {
     object (Policy)
@@ -1946,7 +1946,7 @@ Table insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Table)
   }
@@ -1978,7 +1978,7 @@ Table update response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Table)
   }
@@ -2010,7 +2010,7 @@ Dataset insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Dataset)
   }
@@ -2042,7 +2042,7 @@ Dataset update response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Dataset)
   }
@@ -2074,7 +2074,7 @@ Job insert response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resource&quot;: {
     object (Job)
   }
@@ -2106,7 +2106,7 @@ Job query response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalResults&quot;: string,
   &quot;job&quot;: {
     object (Job)
@@ -2145,7 +2145,7 @@ Job getQueryResults response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;totalResults&quot;: string,
   &quot;job&quot;: {
     object (Job)
@@ -2184,7 +2184,7 @@ Job getQueryDone response.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;job&quot;: {
     object (Job)
   }
@@ -2216,7 +2216,7 @@ Query job completed event.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;eventName&quot;: string,
   &quot;job&quot;: {
     object (Job)
@@ -2255,7 +2255,7 @@ Table data read event. Only present for tables, not views, and is only included 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tableName&quot;: {
     object (TableName)
   },

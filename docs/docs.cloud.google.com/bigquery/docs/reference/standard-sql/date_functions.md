@@ -15,56 +15,56 @@ GoogleSQL for BigQuery supports the following date functions.
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#current_date"><code dir="ltr" translate="no">        CURRENT_DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#current_date"><code dir="ltr" translate="no">        CURRENT_DATE       </code></a></td>
 <td>Returns the current date as a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date"><code dir="ltr" translate="no">        DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date"><code dir="ltr" translate="no">        DATE       </code></a></td>
 <td>Constructs a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">        DATE_ADD       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add"><code dir="ltr" translate="no">        DATE_ADD       </code></a></td>
 <td>Adds a specified time interval to a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date_diff"><code dir="ltr" translate="no">        DATE_DIFF       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_diff"><code dir="ltr" translate="no">        DATE_DIFF       </code></a></td>
 <td>Gets the number of unit boundaries between two <code dir="ltr" translate="no">       DATE      </code> values at a particular time granularity.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date"><code dir="ltr" translate="no">        DATE_FROM_UNIX_DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date"><code dir="ltr" translate="no">        DATE_FROM_UNIX_DATE       </code></a></td>
 <td>Interprets an <code dir="ltr" translate="no">       INT64      </code> expression as the number of days since 1970-01-01.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date_sub"><code dir="ltr" translate="no">        DATE_SUB       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub"><code dir="ltr" translate="no">        DATE_SUB       </code></a></td>
 <td>Subtracts a specified time interval from a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#date_trunc"><code dir="ltr" translate="no">        DATE_TRUNC       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc"><code dir="ltr" translate="no">        DATE_TRUNC       </code></a></td>
 <td>Truncates a <code dir="ltr" translate="no">       DATE      </code> , <code dir="ltr" translate="no">       DATETIME      </code> , or <code dir="ltr" translate="no">       TIMESTAMP      </code> value at a particular granularity.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#extract"><code dir="ltr" translate="no">        EXTRACT       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#extract"><code dir="ltr" translate="no">        EXTRACT       </code></a></td>
 <td>Extracts part of a date from a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#format_date"><code dir="ltr" translate="no">        FORMAT_DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date"><code dir="ltr" translate="no">        FORMAT_DATE       </code></a></td>
 <td>Formats a <code dir="ltr" translate="no">       DATE      </code> value according to a specified format string.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/array_functions#generate_date_array"><code dir="ltr" translate="no">        GENERATE_DATE_ARRAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_date_array"><code dir="ltr" translate="no">        GENERATE_DATE_ARRAY       </code></a></td>
 <td>Generates an array of dates in a range.<br />
-For more information, see <a href="/bigquery/docs/reference/standard-sql/array_functions">Array functions</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/array_functions">Array functions</a> .</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#last_day"><code dir="ltr" translate="no">        LAST_DAY       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#last_day"><code dir="ltr" translate="no">        LAST_DAY       </code></a></td>
 <td>Gets the last day in a specified time period that contains a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#parse_date"><code dir="ltr" translate="no">        PARSE_DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date"><code dir="ltr" translate="no">        PARSE_DATE       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       STRING      </code> value to a <code dir="ltr" translate="no">       DATE      </code> value.</td>
 </tr>
 <tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/date_functions#unix_date"><code dir="ltr" translate="no">        UNIX_DATE       </code></a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#unix_date"><code dir="ltr" translate="no">        UNIX_DATE       </code></a></td>
 <td>Converts a <code dir="ltr" translate="no">       DATE      </code> value to the number of days since 1970-01-01.</td>
 </tr>
 </tbody>
@@ -72,17 +72,11 @@ For more information, see <a href="/bigquery/docs/reference/standard-sql/array_f
 
 ## `     CURRENT_DATE    `
 
-``` text
-CURRENT_DATE()
-```
+    CURRENT_DATE()
 
-``` text
-CURRENT_DATE(time_zone_expression)
-```
+    CURRENT_DATE(time_zone_expression)
 
-``` text
-CURRENT_DATE
-```
+    CURRENT_DATE
 
 **Description**
 
@@ -90,7 +84,7 @@ Returns the current date as a `  DATE  ` object. Parentheses are optional when c
 
 This function supports the following arguments:
 
-  - `  time_zone_expression  ` : A `  STRING  ` expression that represents a [time zone](/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) . If no time zone is specified, the default time zone, UTC, is used. If this expression is used and it evaluates to `  NULL  ` , this function returns `  NULL  ` .
+  - `  time_zone_expression  ` : A `  STRING  ` expression that represents a [time zone](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) . If no time zone is specified, the default time zone, UTC, is used. If this expression is used and it evaluates to `  NULL  ` , this function returns `  NULL  ` .
 
 The current date value is set at the start of the query statement that contains this function. All invocations of `  CURRENT_DATE()  ` within a query statement yield the same value.
 
@@ -102,67 +96,51 @@ The current date value is set at the start of the query statement that contains 
 
 The following query produces the current date in the default time zone:
 
-``` text
-SELECT CURRENT_DATE() AS the_date;
-
-/*--------------+
- | the_date     |
- +--------------+
- | 2016-12-25   |
- +--------------*/
-```
+    SELECT CURRENT_DATE() AS the_date;
+    
+    /*--------------+
+     | the_date     |
+     +--------------+
+     | 2016-12-25   |
+     +--------------*/
 
 The following queries produce the current date in a specified time zone:
 
-``` text
-SELECT CURRENT_DATE('America/Los_Angeles') AS the_date;
+    SELECT CURRENT_DATE('America/Los_Angeles') AS the_date;
+    
+    /*--------------+
+     | the_date     |
+     +--------------+
+     | 2016-12-25   |
+     +--------------*/
 
-/*--------------+
- | the_date     |
- +--------------+
- | 2016-12-25   |
- +--------------*/
-```
-
-``` text
-SELECT CURRENT_DATE('-08') AS the_date;
-
-/*--------------+
- | the_date     |
- +--------------+
- | 2016-12-25   |
- +--------------*/
-```
+    SELECT CURRENT_DATE('-08') AS the_date;
+    
+    /*--------------+
+     | the_date     |
+     +--------------+
+     | 2016-12-25   |
+     +--------------*/
 
 The following query produces the current date in the default time zone. Parentheses aren't needed if the function has no arguments.
 
-``` text
-SELECT CURRENT_DATE AS the_date;
-
-/*--------------+
- | the_date     |
- +--------------+
- | 2016-12-25   |
- +--------------*/
-```
+    SELECT CURRENT_DATE AS the_date;
+    
+    /*--------------+
+     | the_date     |
+     +--------------+
+     | 2016-12-25   |
+     +--------------*/
 
 ## `     DATE    `
 
-``` text
-DATE(year, month, day)
-```
+    DATE(year, month, day)
 
-``` text
-DATE(timestamp_expression)
-```
+    DATE(timestamp_expression)
 
-``` text
-DATE(timestamp_expression, time_zone_expression)
-```
+    DATE(timestamp_expression, time_zone_expression)
 
-``` text
-DATE(datetime_expression)
-```
+    DATE(datetime_expression)
 
 **Description**
 
@@ -174,7 +152,7 @@ This function supports the following arguments:
   - `  month  ` : The `  INT64  ` value for month.
   - `  day  ` : The `  INT64  ` value for day.
   - `  timestamp_expression  ` : A `  TIMESTAMP  ` expression that contains the date.
-  - `  time_zone_expression  ` : A `  STRING  ` expression that represents a [time zone](/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) . If no time zone is specified with `  timestamp_expression  ` , the default time zone, UTC, is used.
+  - `  time_zone_expression  ` : A `  STRING  ` expression that represents a [time zone](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) . If no time zone is specified with `  timestamp_expression  ` , the default time zone, UTC, is used.
   - `  datetime_expression  ` : A `  DATETIME  ` expression that contains the date.
 
 **Return Data Type**
@@ -183,24 +161,20 @@ This function supports the following arguments:
 
 **Example**
 
-``` text
-SELECT
-  DATE(2016, 12, 25) AS date_ymd,
-  DATE(DATETIME '2016-12-25 23:59:59') AS date_dt,
-  DATE(TIMESTAMP '2016-12-25 05:30:00+07', 'America/Los_Angeles') AS date_tstz;
-
-/*------------+------------+------------+
- | date_ymd   | date_dt    | date_tstz  |
- +------------+------------+------------+
- | 2016-12-25 | 2016-12-25 | 2016-12-24 |
- +------------+------------+------------*/
-```
+    SELECT
+      DATE(2016, 12, 25) AS date_ymd,
+      DATE(DATETIME '2016-12-25 23:59:59') AS date_dt,
+      DATE(TIMESTAMP '2016-12-25 05:30:00+07', 'America/Los_Angeles') AS date_tstz;
+    
+    /*------------+------------+------------+
+     | date_ymd   | date_dt    | date_tstz  |
+     +------------+------------+------------+
+     | 2016-12-25 | 2016-12-25 | 2016-12-24 |
+     +------------+------------+------------*/
 
 ## `     DATE_ADD    `
 
-``` text
-DATE_ADD(date_expression, INTERVAL int64_expression date_part)
-```
+    DATE_ADD(date_expression, INTERVAL int64_expression date_part)
 
 **Description**
 
@@ -222,21 +196,17 @@ DATE
 
 **Example**
 
-``` text
-SELECT DATE_ADD(DATE '2008-12-25', INTERVAL 5 DAY) AS five_days_later;
-
-/*--------------------+
- | five_days_later    |
- +--------------------+
- | 2008-12-30         |
- +--------------------*/
-```
+    SELECT DATE_ADD(DATE '2008-12-25', INTERVAL 5 DAY) AS five_days_later;
+    
+    /*--------------------+
+     | five_days_later    |
+     +--------------------+
+     | 2008-12-30         |
+     +--------------------*/
 
 ## `     DATE_DIFF    `
 
-``` text
-DATE_DIFF(end_date, start_date, granularity)
-```
+    DATE_DIFF(end_date, start_date, granularity)
 
 **Description**
 
@@ -271,64 +241,54 @@ If `  end_date  ` is earlier than `  start_date  ` , the output is negative.
 
 **Example**
 
-``` text
-SELECT DATE_DIFF(DATE '2010-07-07', DATE '2008-12-25', DAY) AS days_diff;
+    SELECT DATE_DIFF(DATE '2010-07-07', DATE '2008-12-25', DAY) AS days_diff;
+    
+    /*-----------+
+     | days_diff |
+     +-----------+
+     | 559       |
+     +-----------*/
 
-/*-----------+
- | days_diff |
- +-----------+
- | 559       |
- +-----------*/
-```
-
-``` text
-SELECT
-  DATE_DIFF(DATE '2017-10-15', DATE '2017-10-14', DAY) AS days_diff,
-  DATE_DIFF(DATE '2017-10-15', DATE '2017-10-14', WEEK) AS weeks_diff;
-
-/*-----------+------------+
- | days_diff | weeks_diff |
- +-----------+------------+
- | 1         | 1          |
- +-----------+------------*/
-```
+    SELECT
+      DATE_DIFF(DATE '2017-10-15', DATE '2017-10-14', DAY) AS days_diff,
+      DATE_DIFF(DATE '2017-10-15', DATE '2017-10-14', WEEK) AS weeks_diff;
+    
+    /*-----------+------------+
+     | days_diff | weeks_diff |
+     +-----------+------------+
+     | 1         | 1          |
+     +-----------+------------*/
 
 The example above shows the result of `  DATE_DIFF  ` for two days in succession. `  DATE_DIFF  ` with the date part `  WEEK  ` returns 1 because `  DATE_DIFF  ` counts the number of date part boundaries in this range of dates. Each `  WEEK  ` begins on Sunday, so there is one date part boundary between Saturday, 2017-10-14 and Sunday, 2017-10-15.
 
 The following example shows the result of `  DATE_DIFF  ` for two dates in different years. `  DATE_DIFF  ` with the date part `  YEAR  ` returns 3 because it counts the number of Gregorian calendar year boundaries between the two dates. `  DATE_DIFF  ` with the date part `  ISOYEAR  ` returns 2 because the second date belongs to the ISO year 2015. The first Thursday of the 2015 calendar year was 2015-01-01, so the ISO year 2015 begins on the preceding Monday, 2014-12-29.
 
-``` text
-SELECT
-  DATE_DIFF('2017-12-30', '2014-12-30', YEAR) AS year_diff,
-  DATE_DIFF('2017-12-30', '2014-12-30', ISOYEAR) AS isoyear_diff;
-
-/*-----------+--------------+
- | year_diff | isoyear_diff |
- +-----------+--------------+
- | 3         | 2            |
- +-----------+--------------*/
-```
+    SELECT
+      DATE_DIFF('2017-12-30', '2014-12-30', YEAR) AS year_diff,
+      DATE_DIFF('2017-12-30', '2014-12-30', ISOYEAR) AS isoyear_diff;
+    
+    /*-----------+--------------+
+     | year_diff | isoyear_diff |
+     +-----------+--------------+
+     | 3         | 2            |
+     +-----------+--------------*/
 
 The following example shows the result of `  DATE_DIFF  ` for two days in succession. The first date falls on a Monday and the second date falls on a Sunday. `  DATE_DIFF  ` with the date part `  WEEK  ` returns 0 because this date part uses weeks that begin on Sunday. `  DATE_DIFF  ` with the date part `  WEEK(MONDAY)  ` returns 1. `  DATE_DIFF  ` with the date part `  ISOWEEK  ` also returns 1 because ISO weeks begin on Monday.
 
-``` text
-SELECT
-  DATE_DIFF('2017-12-18', '2017-12-17', WEEK) AS week_diff,
-  DATE_DIFF('2017-12-18', '2017-12-17', WEEK(MONDAY)) AS week_weekday_diff,
-  DATE_DIFF('2017-12-18', '2017-12-17', ISOWEEK) AS isoweek_diff;
-
-/*-----------+-------------------+--------------+
- | week_diff | week_weekday_diff | isoweek_diff |
- +-----------+-------------------+--------------+
- | 0         | 1                 | 1            |
- +-----------+-------------------+--------------*/
-```
+    SELECT
+      DATE_DIFF('2017-12-18', '2017-12-17', WEEK) AS week_diff,
+      DATE_DIFF('2017-12-18', '2017-12-17', WEEK(MONDAY)) AS week_weekday_diff,
+      DATE_DIFF('2017-12-18', '2017-12-17', ISOWEEK) AS isoweek_diff;
+    
+    /*-----------+-------------------+--------------+
+     | week_diff | week_weekday_diff | isoweek_diff |
+     +-----------+-------------------+--------------+
+     | 0         | 1                 | 1            |
+     +-----------+-------------------+--------------*/
 
 ## `     DATE_FROM_UNIX_DATE    `
 
-``` text
-DATE_FROM_UNIX_DATE(int64_expression)
-```
+    DATE_FROM_UNIX_DATE(int64_expression)
 
 **Description**
 
@@ -340,21 +300,17 @@ DATE
 
 **Example**
 
-``` text
-SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch;
-
-/*-----------------+
- | date_from_epoch |
- +-----------------+
- | 2008-12-25      |
- +-----------------+*/
-```
+    SELECT DATE_FROM_UNIX_DATE(14238) AS date_from_epoch;
+    
+    /*-----------------+
+     | date_from_epoch |
+     +-----------------+
+     | 2008-12-25      |
+     +-----------------+*/
 
 ## `     DATE_SUB    `
 
-``` text
-DATE_SUB(date_expression, INTERVAL int64_expression date_part)
-```
+    DATE_SUB(date_expression, INTERVAL int64_expression date_part)
 
 **Description**
 
@@ -376,29 +332,21 @@ DATE
 
 **Example**
 
-``` text
-SELECT DATE_SUB(DATE '2008-12-25', INTERVAL 5 DAY) AS five_days_ago;
-
-/*---------------+
- | five_days_ago |
- +---------------+
- | 2008-12-20    |
- +---------------*/
-```
+    SELECT DATE_SUB(DATE '2008-12-25', INTERVAL 5 DAY) AS five_days_ago;
+    
+    /*---------------+
+     | five_days_ago |
+     +---------------+
+     | 2008-12-20    |
+     +---------------*/
 
 ## `     DATE_TRUNC    `
 
-``` text
-DATE_TRUNC(date_value, date_granularity)
-```
+    DATE_TRUNC(date_value, date_granularity)
 
-``` text
-DATE_TRUNC(datetime_value, datetime_granularity)
-```
+    DATE_TRUNC(datetime_value, datetime_granularity)
 
-``` text
-DATE_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
-```
+    DATE_TRUNC(timestamp_value, timestamp_granularity[, time_zone])
 
 **Description**
 
@@ -408,19 +356,21 @@ Truncates a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` value at a particul
 
   - `  date_value  ` : A `  DATE  ` value to truncate.
 
-  - `  date_granularity  ` : The truncation granularity for a `  DATE  ` value. [Date granularities](#date_trunc_granularity_date) can be used.
+  - `  date_granularity  ` : The truncation granularity for a `  DATE  ` value. [Date granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc_granularity_date) can be used.
 
   - `  datetime_value  ` : A `  DATETIME  ` value to truncate.
 
-  - `  datetime_granularity  ` : The truncation granularity for a `  DATETIME  ` value. [Date granularities](#date_trunc_granularity_date) and [time granularities](#date_trunc_granularity_time) can be used.
+  - `  datetime_granularity  ` : The truncation granularity for a `  DATETIME  ` value. [Date granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc_granularity_date) and [time granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc_granularity_time) can be used.
 
   - `  timestamp_value  ` : A `  TIMESTAMP  ` value to truncate.
 
-  - `  timestamp_granularity  ` : The truncation granularity for a `  TIMESTAMP  ` value. [Date granularities](#date_trunc_granularity_date) and [time granularities](#date_trunc_granularity_time) can be used.
+  - `  timestamp_granularity  ` : The truncation granularity for a `  TIMESTAMP  ` value. [Date granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc_granularity_date) and [time granularities](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_trunc_granularity_time) can be used.
 
-  - `  time_zone  ` : A time zone to use with the `  TIMESTAMP  ` value. [Time zone parts](#date_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
+  - `  time_zone  ` : A time zone to use with the `  TIMESTAMP  ` value. [Time zone parts](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_time_zone_parts) can be used. Use this argument if you want to use a time zone other than the default time zone, UTC, as part of the truncate operation.
     
     **Note:** When truncating a timestamp to `  MINUTE  ` or `  HOUR  ` parts, this function determines the civil time of the timestamp in the specified (or default) time zone and subtracts the minutes and seconds (when truncating to `  HOUR  ` ) or the seconds (when truncating to `  MINUTE  ` ) from that timestamp. While this provides intuitive results in most cases, the result is non-intuitive near daylight savings transitions that aren't hour-aligned.
+
+<span id="date_trunc_granularity_date"></span>
 
 **Date granularity definitions**
 
@@ -440,6 +390,8 @@ Truncates a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` value at a particul
 
   - `  ISOYEAR  ` : The first day in the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) week-numbering year that contains the value to truncate. The ISO year is the Monday of the first week where Thursday belongs to the corresponding Gregorian calendar year.
 
+<span id="date_trunc_granularity_time"></span>
+
 **Time granularity definitions**
 
   - `  MICROSECOND  ` : If used, nothing is truncated from the value.
@@ -451,6 +403,8 @@ Truncates a `  DATE  ` , `  DATETIME  ` , or `  TIMESTAMP  ` value at a particul
   - `  MINUTE  ` : The nearest lesser than or equal minute.
 
   - `  HOUR  ` : The nearest lesser than or equal hour.
+
+<span id="date_time_zone_parts"></span>
 
 **Time zone part definitions**
 
@@ -475,48 +429,40 @@ The same data type as the first argument passed into this function.
 
 **Examples**
 
-``` text
-SELECT DATE_TRUNC(DATE '2008-12-25', MONTH) AS month;
-
-/*------------+
- | month      |
- +------------+
- | 2008-12-01 |
- +------------*/
-```
+    SELECT DATE_TRUNC(DATE '2008-12-25', MONTH) AS month;
+    
+    /*------------+
+     | month      |
+     +------------+
+     | 2008-12-01 |
+     +------------*/
 
 In the following example, the original date falls on a Sunday. Because the `  date_part  ` is `  WEEK(MONDAY)  ` , `  DATE_TRUNC  ` returns the `  DATE  ` for the preceding Monday.
 
-``` text
-SELECT date AS original, DATE_TRUNC(date, WEEK(MONDAY)) AS truncated
-FROM (SELECT DATE('2017-11-05') AS date);
-
-/*------------+------------+
- | original   | truncated  |
- +------------+------------+
- | 2017-11-05 | 2017-10-30 |
- +------------+------------*/
-```
+    SELECT date AS original, DATE_TRUNC(date, WEEK(MONDAY)) AS truncated
+    FROM (SELECT DATE('2017-11-05') AS date);
+    
+    /*------------+------------+
+     | original   | truncated  |
+     +------------+------------+
+     | 2017-11-05 | 2017-10-30 |
+     +------------+------------*/
 
 In the following example, the original `  date_expression  ` is in the Gregorian calendar year 2015. However, `  DATE_TRUNC  ` with the `  ISOYEAR  ` date part truncates the `  date_expression  ` to the beginning of the ISO year, not the Gregorian calendar year. The first Thursday of the 2015 calendar year was 2015-01-01, so the ISO year 2015 begins on the preceding Monday, 2014-12-29. Therefore the ISO year boundary preceding the `  date_expression  ` 2015-06-15 is 2014-12-29.
 
-``` text
-SELECT
-  DATE_TRUNC('2015-06-15', ISOYEAR) AS isoyear_boundary,
-  EXTRACT(ISOYEAR FROM DATE '2015-06-15') AS isoyear_number;
-
-/*------------------+----------------+
- | isoyear_boundary | isoyear_number |
- +------------------+----------------+
- | 2014-12-29       | 2015           |
- +------------------+----------------*/
-```
+    SELECT
+      DATE_TRUNC('2015-06-15', ISOYEAR) AS isoyear_boundary,
+      EXTRACT(ISOYEAR FROM DATE '2015-06-15') AS isoyear_number;
+    
+    /*------------------+----------------+
+     | isoyear_boundary | isoyear_number |
+     +------------------+----------------+
+     | 2014-12-29       | 2015           |
+     +------------------+----------------*/
 
 ## `     EXTRACT    `
 
-``` text
-EXTRACT(part FROM date_expression)
-```
+    EXTRACT(part FROM date_expression)
 
 **Description**
 
@@ -541,73 +487,65 @@ INT64
 
 In the following example, `  EXTRACT  ` returns a value corresponding to the `  DAY  ` date part.
 
-``` text
-SELECT EXTRACT(DAY FROM DATE '2013-12-25') AS the_day;
-
-/*---------+
- | the_day |
- +---------+
- | 25      |
- +---------*/
-```
+    SELECT EXTRACT(DAY FROM DATE '2013-12-25') AS the_day;
+    
+    /*---------+
+     | the_day |
+     +---------+
+     | 25      |
+     +---------*/
 
 In the following example, `  EXTRACT  ` returns values corresponding to different date parts from a column of dates near the end of the year.
 
-``` text
-SELECT
-  date,
-  EXTRACT(ISOYEAR FROM date) AS isoyear,
-  EXTRACT(ISOWEEK FROM date) AS isoweek,
-  EXTRACT(YEAR FROM date) AS year,
-  EXTRACT(WEEK FROM date) AS week
-FROM UNNEST(GENERATE_DATE_ARRAY('2015-12-23', '2016-01-09')) AS date
-ORDER BY date;
-
-/*------------+---------+---------+------+------+
- | date       | isoyear | isoweek | year | week |
- +------------+---------+---------+------+------+
- | 2015-12-23 | 2015    | 52      | 2015 | 51   |
- | 2015-12-24 | 2015    | 52      | 2015 | 51   |
- | 2015-12-25 | 2015    | 52      | 2015 | 51   |
- | 2015-12-26 | 2015    | 52      | 2015 | 51   |
- | 2015-12-27 | 2015    | 52      | 2015 | 52   |
- | 2015-12-28 | 2015    | 53      | 2015 | 52   |
- | 2015-12-29 | 2015    | 53      | 2015 | 52   |
- | 2015-12-30 | 2015    | 53      | 2015 | 52   |
- | 2015-12-31 | 2015    | 53      | 2015 | 52   |
- | 2016-01-01 | 2015    | 53      | 2016 | 0    |
- | 2016-01-02 | 2015    | 53      | 2016 | 0    |
- | 2016-01-03 | 2015    | 53      | 2016 | 1    |
- | 2016-01-04 | 2016    | 1       | 2016 | 1    |
- | 2016-01-05 | 2016    | 1       | 2016 | 1    |
- | 2016-01-06 | 2016    | 1       | 2016 | 1    |
- | 2016-01-07 | 2016    | 1       | 2016 | 1    |
- | 2016-01-08 | 2016    | 1       | 2016 | 1    |
- | 2016-01-09 | 2016    | 1       | 2016 | 1    |
- +------------+---------+---------+------+------*/
-```
+    SELECT
+      date,
+      EXTRACT(ISOYEAR FROM date) AS isoyear,
+      EXTRACT(ISOWEEK FROM date) AS isoweek,
+      EXTRACT(YEAR FROM date) AS year,
+      EXTRACT(WEEK FROM date) AS week
+    FROM UNNEST(GENERATE_DATE_ARRAY('2015-12-23', '2016-01-09')) AS date
+    ORDER BY date;
+    
+    /*------------+---------+---------+------+------+
+     | date       | isoyear | isoweek | year | week |
+     +------------+---------+---------+------+------+
+     | 2015-12-23 | 2015    | 52      | 2015 | 51   |
+     | 2015-12-24 | 2015    | 52      | 2015 | 51   |
+     | 2015-12-25 | 2015    | 52      | 2015 | 51   |
+     | 2015-12-26 | 2015    | 52      | 2015 | 51   |
+     | 2015-12-27 | 2015    | 52      | 2015 | 52   |
+     | 2015-12-28 | 2015    | 53      | 2015 | 52   |
+     | 2015-12-29 | 2015    | 53      | 2015 | 52   |
+     | 2015-12-30 | 2015    | 53      | 2015 | 52   |
+     | 2015-12-31 | 2015    | 53      | 2015 | 52   |
+     | 2016-01-01 | 2015    | 53      | 2016 | 0    |
+     | 2016-01-02 | 2015    | 53      | 2016 | 0    |
+     | 2016-01-03 | 2015    | 53      | 2016 | 1    |
+     | 2016-01-04 | 2016    | 1       | 2016 | 1    |
+     | 2016-01-05 | 2016    | 1       | 2016 | 1    |
+     | 2016-01-06 | 2016    | 1       | 2016 | 1    |
+     | 2016-01-07 | 2016    | 1       | 2016 | 1    |
+     | 2016-01-08 | 2016    | 1       | 2016 | 1    |
+     | 2016-01-09 | 2016    | 1       | 2016 | 1    |
+     +------------+---------+---------+------+------*/
 
 In the following example, `  date_expression  ` falls on a Sunday. `  EXTRACT  ` calculates the first column using weeks that begin on Sunday, and it calculates the second column using weeks that begin on Monday.
 
-``` text
-WITH table AS (SELECT DATE('2017-11-05') AS date)
-SELECT
-  date,
-  EXTRACT(WEEK(SUNDAY) FROM date) AS week_sunday,
-  EXTRACT(WEEK(MONDAY) FROM date) AS week_monday FROM table;
-
-/*------------+-------------+-------------+
- | date       | week_sunday | week_monday |
- +------------+-------------+-------------+
- | 2017-11-05 | 45          | 44          |
- +------------+-------------+-------------*/
-```
+    WITH table AS (SELECT DATE('2017-11-05') AS date)
+    SELECT
+      date,
+      EXTRACT(WEEK(SUNDAY) FROM date) AS week_sunday,
+      EXTRACT(WEEK(MONDAY) FROM date) AS week_monday FROM table;
+    
+    /*------------+-------------+-------------+
+     | date       | week_sunday | week_monday |
+     +------------+-------------+-------------+
+     | 2017-11-05 | 45          | 44          |
+     +------------+-------------+-------------*/
 
 ## `     FORMAT_DATE    `
 
-``` text
-FORMAT_DATE(format_string, date_expr)
-```
+    FORMAT_DATE(format_string, date_expr)
 
 **Description**
 
@@ -615,7 +553,7 @@ Formats a `  DATE  ` value according to a specified format string.
 
 **Definitions**
 
-  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  date_expr  ` .
+  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  date_expr  ` .
   - `  date_expr  ` : A `  DATE  ` value that represents the date to format.
 
 **Return Data Type**
@@ -624,41 +562,33 @@ Formats a `  DATE  ` value according to a specified format string.
 
 **Examples**
 
-``` text
-SELECT FORMAT_DATE('%x', DATE '2008-12-25') AS US_format;
+    SELECT FORMAT_DATE('%x', DATE '2008-12-25') AS US_format;
+    
+    /*------------+
+     | US_format  |
+     +------------+
+     | 12/25/08   |
+     +------------*/
 
-/*------------+
- | US_format  |
- +------------+
- | 12/25/08   |
- +------------*/
-```
+    SELECT FORMAT_DATE('%b-%d-%Y', DATE '2008-12-25') AS formatted;
+    
+    /*-------------+
+     | formatted   |
+     +-------------+
+     | Dec-25-2008 |
+     +-------------*/
 
-``` text
-SELECT FORMAT_DATE('%b-%d-%Y', DATE '2008-12-25') AS formatted;
-
-/*-------------+
- | formatted   |
- +-------------+
- | Dec-25-2008 |
- +-------------*/
-```
-
-``` text
-SELECT FORMAT_DATE('%b %Y', DATE '2008-12-25') AS formatted;
-
-/*-------------+
- | formatted   |
- +-------------+
- | Dec 2008    |
- +-------------*/
-```
+    SELECT FORMAT_DATE('%b %Y', DATE '2008-12-25') AS formatted;
+    
+    /*-------------+
+     | formatted   |
+     +-------------+
+     | Dec 2008    |
+     +-------------*/
 
 ## `     LAST_DAY    `
 
-``` text
-LAST_DAY(date_expression[, date_part])
-```
+    LAST_DAY(date_expression[, date_part])
 
 **Description**
 
@@ -682,67 +612,55 @@ You can optionally specify the date part for which the last day is returned. If 
 
 These both return the last day of the month:
 
-``` text
-SELECT LAST_DAY(DATE '2008-11-25', MONTH) AS last_day
+    SELECT LAST_DAY(DATE '2008-11-25', MONTH) AS last_day
+    
+    /*------------+
+     | last_day   |
+     +------------+
+     | 2008-11-30 |
+     +------------*/
 
-/*------------+
- | last_day   |
- +------------+
- | 2008-11-30 |
- +------------*/
-```
-
-``` text
-SELECT LAST_DAY(DATE '2008-11-25') AS last_day
-
-/*------------+
- | last_day   |
- +------------+
- | 2008-11-30 |
- +------------*/
-```
+    SELECT LAST_DAY(DATE '2008-11-25') AS last_day
+    
+    /*------------+
+     | last_day   |
+     +------------+
+     | 2008-11-30 |
+     +------------*/
 
 This returns the last day of the year:
 
-``` text
-SELECT LAST_DAY(DATE '2008-11-25', YEAR) AS last_day
-
-/*------------+
- | last_day   |
- +------------+
- | 2008-12-31 |
- +------------*/
-```
+    SELECT LAST_DAY(DATE '2008-11-25', YEAR) AS last_day
+    
+    /*------------+
+     | last_day   |
+     +------------+
+     | 2008-12-31 |
+     +------------*/
 
 This returns the last day of the week for a week that starts on a Sunday:
 
-``` text
-SELECT LAST_DAY(DATE '2008-11-10', WEEK(SUNDAY)) AS last_day
-
-/*------------+
- | last_day   |
- +------------+
- | 2008-11-15 |
- +------------*/
-```
+    SELECT LAST_DAY(DATE '2008-11-10', WEEK(SUNDAY)) AS last_day
+    
+    /*------------+
+     | last_day   |
+     +------------+
+     | 2008-11-15 |
+     +------------*/
 
 This returns the last day of the week for a week that starts on a Monday:
 
-``` text
-SELECT LAST_DAY(DATE '2008-11-10', WEEK(MONDAY)) AS last_day
-
-/*------------+
- | last_day   |
- +------------+
- | 2008-11-16 |
- +------------*/
-```
+    SELECT LAST_DAY(DATE '2008-11-10', WEEK(MONDAY)) AS last_day
+    
+    /*------------+
+     | last_day   |
+     +------------+
+     | 2008-11-16 |
+     +------------*/
 
 ## `     PARSE_DATE    `
 
-``` text
-PARSE_DATE(format_string, date_string)
-```
+    PARSE_DATE(format_string, date_string)
 
 **Description**
 
@@ -750,26 +668,24 @@ Converts a `  STRING  ` value to a `  DATE  ` value.
 
 **Definitions**
 
-  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  date_string  ` .
+  - `  format_string  ` : A `  STRING  ` value that contains the [format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time) to use with `  date_string  ` .
   - `  date_string  ` : A `  STRING  ` value that represents the date to parse.
 
 **Details**
 
 Each element in `  date_string  ` must have a corresponding element in `  format_string  ` . The location of each element in `  format_string  ` must match the location of each element in `  date_string  ` .
 
-``` text
--- This works because elements on both sides match.
-SELECT PARSE_DATE('%A %b %e %Y', 'Thursday Dec 25 2008');
-
--- This produces an error because the year element is in different locations.
-SELECT PARSE_DATE('%Y %A %b %e', 'Thursday Dec 25 2008');
-
--- This produces an error because one of the year elements is missing.
-SELECT PARSE_DATE('%A %b %e', 'Thursday Dec 25 2008');
-
--- This works because %F can find all matching elements in date_string.
-SELECT PARSE_DATE('%F', '2000-12-30');
-```
+    -- This works because elements on both sides match.
+    SELECT PARSE_DATE('%A %b %e %Y', 'Thursday Dec 25 2008');
+    
+    -- This produces an error because the year element is in different locations.
+    SELECT PARSE_DATE('%Y %A %b %e', 'Thursday Dec 25 2008');
+    
+    -- This produces an error because one of the year elements is missing.
+    SELECT PARSE_DATE('%A %b %e', 'Thursday Dec 25 2008');
+    
+    -- This works because %F can find all matching elements in date_string.
+    SELECT PARSE_DATE('%F', '2000-12-30');
 
 The following additional considerations apply when using the `  PARSE_DATE  ` function:
 
@@ -788,33 +704,27 @@ The following additional considerations apply when using the `  PARSE_DATE  ` fu
 
 This example converts a `  MM/DD/YY  ` formatted string to a `  DATE  ` object:
 
-``` text
-SELECT PARSE_DATE('%x', '12/25/08') AS parsed;
-
-/*------------+
- | parsed     |
- +------------+
- | 2008-12-25 |
- +------------*/
-```
+    SELECT PARSE_DATE('%x', '12/25/08') AS parsed;
+    
+    /*------------+
+     | parsed     |
+     +------------+
+     | 2008-12-25 |
+     +------------*/
 
 This example converts a `  YYYYMMDD  ` formatted string to a `  DATE  ` object:
 
-``` text
-SELECT PARSE_DATE('%Y%m%d', '20081225') AS parsed;
-
-/*------------+
- | parsed     |
- +------------+
- | 2008-12-25 |
- +------------*/
-```
+    SELECT PARSE_DATE('%Y%m%d', '20081225') AS parsed;
+    
+    /*------------+
+     | parsed     |
+     +------------+
+     | 2008-12-25 |
+     +------------*/
 
 ## `     UNIX_DATE    `
 
-``` text
-UNIX_DATE(date_expression)
-```
+    UNIX_DATE(date_expression)
 
 **Description**
 
@@ -826,12 +736,10 @@ INT64
 
 **Example**
 
-``` text
-SELECT UNIX_DATE(DATE '2008-12-25') AS days_from_epoch;
-
-/*-----------------+
- | days_from_epoch |
- +-----------------+
- | 14238           |
- +-----------------*/
-```
+    SELECT UNIX_DATE(DATE '2008-12-25') AS days_from_epoch;
+    
+    /*-----------------+
+     | days_from_epoch |
+     +-----------------+
+     | 14238           |
+     +-----------------*/

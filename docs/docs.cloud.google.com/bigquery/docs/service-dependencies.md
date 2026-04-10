@@ -4,8 +4,8 @@ This document describes the Google Cloud services and APIs that BigQuery depends
 
 Some services are enabled by default in every Google Cloud project that you create. Other APIs are automatically enabled for all Google Cloud projects that use BigQuery. The remaining services must be explicitly enabled before you can use their functionality. For more information, see the following resources:
 
-  - [Services enabled by default](/service-usage/docs/enabled-service#default)
-  - [Enabling and disabling services](/service-usage/docs/enable-disable)
+  - [Services enabled by default](https://docs.cloud.google.com/service-usage/docs/enabled-service#default)
+  - [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable)
 
 This document is intended for administrators.
 
@@ -30,9 +30,9 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="odd">
 <td><code dir="ltr" translate="no">       analyticshub.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/analytics-hub-introduction">Publish data exchanges</a></li>
-<li><a href="/bigquery/docs/analytics-hub-manage-listings">Publish listings</a> and <a href="/bigquery/docs/analytics-hub-manage-subscriptions">manage subscriptions</a></li>
-<li><a href="/bigquery/docs/data-clean-rooms">Data clean rooms</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-introduction">Publish data exchanges</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-listings">Publish listings</a> and <a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-manage-subscriptions">manage subscriptions</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-clean-rooms">Data clean rooms</a></li>
 </ul></td>
 <td><ul>
 <li>You can't create or manage data exchanges, listings, data clean rooms, or subscriptions.</li>
@@ -45,9 +45,9 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="even">
 <td><code dir="ltr" translate="no">       bigqueryconnection.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/federated-queries-intro">Federated queries</a> to data stored outside of BigQuery</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/federated-queries-intro">Federated queries</a> to data stored outside of BigQuery</li>
 <li>External tables and datasets</li>
-<li><a href="/bigquery/docs/about-bqms">BigQuery metastore</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/about-bqms">BigQuery metastore</a></li>
 </ul></td>
 <td><ul>
 <li>You can't manage external connections.</li>
@@ -59,8 +59,8 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bigquerymigration.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/migration-assessment">Data migration assessment</a></li>
-<li><a href="/bigquery/docs/interactive-sql-translator">SQL query translation</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/migration-assessment">Data migration assessment</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator">SQL query translation</a></li>
 </ul></td>
 <td><ul>
 <li>You can't create migration tasks or assessments.</li>
@@ -71,7 +71,7 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="even">
 <td><code dir="ltr" translate="no">       bigquerydatapolicy.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/column-data-masking-intro">Data masking</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro">Data masking</a></li>
 </ul></td>
 <td><ul>
 <li>You can't manage your data masking policies.</li>
@@ -81,7 +81,7 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bigquerydatatransfer.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/dts-introduction">Scheduled data transfers</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/dts-introduction">Scheduled data transfers</a></li>
 </ul></td>
 <td><ul>
 <li>You can't manage your scheduled data transfers.</li>
@@ -91,7 +91,7 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="even">
 <td><code dir="ltr" translate="no">       bigqueryreservation.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/reservations-get-started">Capacity-based workload management</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reservations-get-started">Capacity-based workload management</a></li>
 </ul></td>
 <td><ul>
 <li>You can't create or manage capacity commitments, reservations, or assignments.</li>
@@ -103,24 +103,24 @@ The following services are enabled by default for every new Google Cloud project
 <tr class="odd">
 <td><code dir="ltr" translate="no">       bigquerystorage.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/write-api-streaming">Streaming data ingestion</a></li>
-<li><a href="/bigquery/docs/write-api-batch">Batch data loading</a></li>
-<li><a href="/bigquery/docs/change-data-capture">Change data capture</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/write-api-streaming">Streaming data ingestion</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/write-api-batch">Batch data loading</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture">Change data capture</a></li>
 </ul></td>
 <td><ul>
-<li>You can't use the <a href="/bigquery/docs/reference/storage">Storage Read API</a> or the <a href="/bigquery/docs/write-api">Storage Write API</a> to access your BigQuery data.</li>
+<li>You can't use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/storage">Storage Read API</a> or the <a href="https://docs.cloud.google.com/bigquery/docs/write-api">Storage Write API</a> to access your BigQuery data.</li>
 </ul></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       dataform.googleapis.com      </code></td>
 <td>Dataform provides code repositories that are leveraged by the following features:
 <ul>
-<li><a href="/dataform/docs/quickstart-create-workflow">BigQuery pipelines</a></li>
-<li><a href="/bigquery/docs/work-with-saved-queries">Saved queries</a></li>
-<li><a href="/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
-<li><a href="/dataform/docs">Dataform</a></li>
-<li><a href="/bigquery/docs/data-prep-introduction">Data preparation</a></li>
-<li><a href="/bigquery/docs/data-canvas">Data canvas</a></li>
+<li><a href="https://docs.cloud.google.com/dataform/docs/quickstart-create-workflow">BigQuery pipelines</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/work-with-saved-queries">Saved queries</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
+<li><a href="https://docs.cloud.google.com/dataform/docs">Dataform</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-prep-introduction">Data preparation</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-canvas">Data canvas</a></li>
 </ul></td>
 <td><ul>
 <li>You can't create pipelines, saved queries, Colab notebooks, data canvases, data preparations, or Dataform projects.</li>
@@ -135,12 +135,12 @@ The following services are enabled by default for every new Google Cloud project
 <ul>
 <li>Resource Explorer in BigQuery Studio</li>
 <li>Autocomplete in BigQuery Studio SQL editor</li>
-<li><a href="/bigquery/docs/analytics-hub-view-subscribe-listings">BigQuery sharing (formerly Analytics Hub) search for listings</a></li>
-<li><a href="/bigquery/docs/data-profile-scan">Profile insights</a></li>
-<li><a href="/bigquery/docs/data-quality-scan">Data quality scans</a></li>
-<li><a href="/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> viewing</li>
-<li><a href="/bigquery/docs/data-insights">Table and dataset insights</a></li>
-<li><a href="/bigquery/docs/data-canvas">Data canvas</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/analytics-hub-view-subscribe-listings">BigQuery sharing (formerly Analytics Hub) search for listings</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-profile-scan">Profile insights</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-quality-scan">Data quality scans</a></li>
+<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> viewing</li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-insights">Table and dataset insights</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/data-canvas">Data canvas</a></li>
 </ul></li>
 </ul></td>
 <td><ul>
@@ -169,7 +169,7 @@ Disabling the BigQuery API also disables the following services which are depend
 
 The BigQuery Unified API ( `  bigqueryunified.googleapis.com  ` ) includes a curated collection of services that are required for various BigQuery features to function. If you enable the BigQuery Unified API, then all of these services are activated simultaneously. Google can update the services in this collection, and those services are automatically enabled in projects with this API enabled. You can disable individual services and APIs.
 
-For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enabling and disabling services](/service-usage/docs/enable-disable) .
+For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable) .
 
 <table>
 <colgroup>
@@ -188,8 +188,8 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 <tr class="odd">
 <td><code dir="ltr" translate="no">       aiplatform.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
-<li><a href="/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">BigQuery ML remote models</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/notebooks-introduction">Colab notebooks</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model">BigQuery ML remote models</a></li>
 </ul></td>
 <td><ul>
 <li>You won't be able to run your notebooks.</li>
@@ -221,9 +221,9 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 <tr class="even">
 <td><code dir="ltr" translate="no">       dataproc.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/bqms-use-dataproc">Query data with open source engines such as Apache Spark.</a></li>
-<li><a href="/bigquery/docs/bqms-use-dataproc-serverless">Use Spark SQL or PySpark with Google Cloud Serverless for Apache Spark.</a></li>
-<li><a href="/bigquery/docs/spark-procedures">Use stored procedures for Spark.</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc">Query data with open source engines such as Apache Spark.</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/bqms-use-dataproc-serverless">Use Spark SQL or PySpark with Google Cloud Serverless for Apache Spark.</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/spark-procedures">Use stored procedures for Spark.</a></li>
 </ul></td>
 <td><ul>
 <li>You can't create Dataproc clusters to run open source data analytics.</li>
@@ -234,7 +234,7 @@ For instructions on enabling `  bigqueryunified.googleapis.com  ` , see [Enablin
 <tr class="odd">
 <td><code dir="ltr" translate="no">       datastream.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/datastream/docs/overview">Provides change data capture and replication to BigQuery.</a></li>
+<li><a href="https://docs.cloud.google.com/datastream/docs/overview">Provides change data capture and replication to BigQuery.</a></li>
 </ul></td>
 <td><ul>
 <li>All data streams are paused and aren't accessible.</li>
@@ -268,13 +268,13 @@ You must manually enable the following services for the corresponding capabiliti
 </ul></td>
 <td><ul>
 <li><p>Code completion, generation, and explanation features stop working.</p>
-<p>Learn more about <a href="/bigquery/docs/gemini-set-up#turn-off">turning off Gemini in BigQuery</a> .</p></li>
+<p>Learn more about <a href="https://docs.cloud.google.com/bigquery/docs/gemini-set-up#turn-off">turning off Gemini in BigQuery</a> .</p></li>
 </ul></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       composer.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/bigquery/docs/orchestrate-workloads">Schedule workloads</a></li>
+<li><a href="https://docs.cloud.google.com/bigquery/docs/orchestrate-workloads">Schedule workloads</a></li>
 </ul></td>
 <td><ul>
 <li>Existing Cloud Composer DAGs aren't listed on the Scheduling page and stop.</li>
@@ -284,7 +284,7 @@ You must manually enable the following services for the corresponding capabiliti
 <tr class="odd">
 <td><code dir="ltr" translate="no">       datalineage.googleapis.com      </code></td>
 <td><ul>
-<li><a href="/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> capture and viewing</li>
+<li><a href="https://docs.cloud.google.com/dataplex/docs/use-lineage#view-bq-lineage">Data lineage</a> capture and viewing</li>
 </ul></td>
 <td><ul>
 <li>Data lineage isn't captured for your project.</li>
@@ -306,19 +306,21 @@ Before March 2024, these APIs were not automatically enabled by default. If you 
 
 ### Before you begin
 
-To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ).
+To manually enable code asset management, you must have the Identity and Access Management (IAM) [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ).
 
 ### Manually enable BigQuery code assets
 
 To enable required API dependencies for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  On the **Studio** , in the tab bar of the editor pane, click the arrow\_drop\_down arrow drop-down next to the **+** sign, hold the pointer over **Notebook** , and then select **Empty notebook** .
 
 3.  Click **Enable APIs** .
     
-    If you don't see this option, check if you have the required IAM [Owner role](/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ). If an empty notebook opens, then you already have the necessary APIs enabled.
+    If you don't see this option, check if you have the required IAM [Owner role](https://docs.cloud.google.com/iam/docs/roles-overview#legacy-basic) ( `  roles/owner  ` ). If an empty notebook opens, then you already have the necessary APIs enabled.
 
 4.  In the **Enable core features** pane, in the **Core feature APIs** section, do the following:
     
@@ -333,16 +335,16 @@ To enable required API dependencies for code assets, follow these steps:
 
 6.  Click **Next** .
 
-7.  Optional: In the **Additional APIs** section, click **Enable all** to enable the APIs that you need to create BigQuery remote procedures by using [BigQuery DataFrames](/python/docs/reference/bigframes/latest) .
+7.  Optional: In the **Additional APIs** section, click **Enable all** to enable the APIs that you need to create BigQuery remote procedures by using [BigQuery DataFrames](https://docs.cloud.google.com/python/docs/reference/bigframes/latest) .
 
 8.  If you chose not to enable the additional APIs, click **Close** to close the **Enable core features** pane.
 
 ### Restrict access to code assets
 
-You can help prevent enablement of additional APIs by setting the [Restrict Resource Service Usage organization policy constraint](/resource-manager/docs/organization-policy/restricting-resources) . You can [turn off selected APIs](/service-usage/docs/enable-disable#disabling) at any time.
+You can help prevent enablement of additional APIs by setting the [Restrict Resource Service Usage organization policy constraint](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-resources) . You can [turn off selected APIs](https://docs.cloud.google.com/service-usage/docs/enable-disable#disabling) at any time.
 
 ## What's next?
 
-  - To learn how to manage Google Cloud services, see [Enabling and disabling services](/service-usage/docs/enable-disable) .
-  - To learn how to manage API access at a granular level with organization policy constraints, see [Restricting resource usage](/resource-manager/docs/organization-policy/restricting-resources) .
-  - To learn how to control access to services with Identity and Access Management (IAM) roles and permissions for BigQuery, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+  - To learn how to manage Google Cloud services, see [Enabling and disabling services](https://docs.cloud.google.com/service-usage/docs/enable-disable) .
+  - To learn how to manage API access at a granular level with organization policy constraints, see [Restricting resource usage](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-resources) .
+  - To learn how to control access to services with Identity and Access Management (IAM) roles and permissions for BigQuery, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .

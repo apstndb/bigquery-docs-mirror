@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
 
@@ -14,11 +14,13 @@ You can use the Hive managed tables migration connector in the BigQuery Data Tra
   - Amazon S3
   - Azure Blob Storage or Azure Data Lake Storage Gen2
 
-With the Hive managed tables migration connector, you can register your Hive managed tables with [Dataproc Metastore](/dataproc-metastore/docs/overview) or [BigLake metastore Iceberg REST Catalog](/bigquery/docs/blms-rest-catalog) while using Cloud Storage as the file storage.
+With the Hive managed tables migration connector, you can register your Hive managed tables with [Dataproc Metastore](https://docs.cloud.google.com/dataproc-metastore/docs/overview) or [BigLake metastore Iceberg REST Catalog](https://docs.cloud.google.com/bigquery/docs/blms-rest-catalog) while using Cloud Storage as the file storage.
 
 This connector supports both full and metadata-only transfers. Full transfers will transfer both your data and metadata from your source tables to your target metastore. You can make a metadata-only transfer if you already have your data migrated to Cloud Storage.
 
 The following diagram provides an overview of the table migration process from Hadoop cluster.
+
+![Overview of table migration from Hive data lake to BigQuery.](https://docs.cloud.google.com/static/bigquery/images/hadoop-migration-overview.png)
 
 ## Limitations
 
@@ -26,15 +28,15 @@ Hive managed tables transfers are subject to the following limitations:
 
   - To migrate Apache Iceberg tables, you must register the tables with the BigLake metastore Iceberg REST catalog to allow write access for open-source engines (such as Apache Spark or Flink).
   - To migrate Hive managed tables, you must register the tables with Dataproc Metastore to allow write access for open-source engines, and to allow read access for BigQuery.
-  - File names must comply with [Cloud Storage object naming requirements](/storage/docs/objects#naming) .
+  - File names must comply with [Cloud Storage object naming requirements](https://docs.cloud.google.com/storage/docs/objects#naming) .
   - Storage Transfer Service has specific behaviors if data is changed at the source while a transfer is in progress. We don't recommend writing to tables while the table is being actively migrated.
   - Cloud Storage has a 5 TiB limit for single objects. Files within your Apache Hive tables larger than 5 TiB will fail to transfer.
 
-For a list of other limitations, see [Storage Transfer Service Known Limitations](/storage-transfer/docs/known-limitations) .
+For a list of other limitations, see [Storage Transfer Service Known Limitations](https://docs.cloud.google.com/storage-transfer/docs/known-limitations) .
 
 ### Quotas and concurrency limits
 
-When you migrate data from Hive managed tables, Storage Transfer Service quotas and limits apply. For more information, see [Quotas & Limits](/storage-transfer/quotas) .
+When you migrate data from Hive managed tables, Storage Transfer Service quotas and limits apply. For more information, see [Quotas & Limits](https://docs.cloud.google.com/storage-transfer/quotas) .
 
 ## Before you begin
 
@@ -42,22 +44,22 @@ Before you schedule Hive managed tables transfer, you must perform the following
 
 ### Generate metadata file for Apache Hive
 
-Run the `  dwh-migration-dumper  ` tool to [extract metadata](/bigquery/docs/hadoop-metadata#apache-hive) for Apache Hive. The tool generates a file named `  hive-dumper-output.zip  ` to a Cloud Storage bucket, referred to in this document as `  DUMPER_BUCKET  ` .
+Run the `  dwh-migration-dumper  ` tool to [extract metadata](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata#apache-hive) for Apache Hive. The tool generates a file named `  hive-dumper-output.zip  ` to a Cloud Storage bucket, referred to in this document as `  DUMPER_BUCKET  ` .
 
 ### Enable APIs
 
-[Enable the following APIs](/endpoints/docs/openapi/enable-api) in your Google Cloud project:
+[Enable the following APIs](https://docs.cloud.google.com/endpoints/docs/openapi/enable-api) in your Google Cloud project:
 
   - Data Transfer API
   - Storage Transfer API
 
-A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is created when you enable the Data Transfer API.
+A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) is created when you enable the Data Transfer API.
 
 ### Configure permissions
 
 1.  Create a service account and grant it the BigQuery Admin role ( `  roles/bigquery.admin  ` ). This service account is used to create the transfer configuration.
 
-2.  A [service agent](/bigquery/docs/enable-transfer-service#service_agent) (P4SA) is created upon enabling the Data Transfer API. Grant it the following roles:
+2.  A [service agent](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#service_agent) (P4SA) is created upon enabling the Data Transfer API. Grant it the following roles:
     
       - `  roles/metastore.metadataOwner  `
       - `  roles/storagetransfer.admin  `
@@ -68,9 +70,7 @@ A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is creat
 
 3.  Grant the service agent the `  roles/iam.serviceAccountTokenCreator  ` role with the following command:
     
-    ``` text
-    gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator
-    ```
+        gcloud iam service-accounts add-iam-policy-binding SERVICE_ACCOUNT --member serviceAccount:service-PROJECT_NUMBER@gcp-sa-bigquerydatatransfer.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator
 
 4.  Grant the Storage Transfer Service service agent ( `  project-<var>PROJECT_NUMBER</var>@storage-transfer-service.iam.gserviceaccount.com  ` ) the following roles in the project:
     
@@ -79,32 +79,32 @@ A [service agent](/bigquery/docs/enable-transfer-service#service_agent) is creat
     
     You can also configure more granular permissions. For more information, see the source-specific permissions guides:
     
-      - [HDFS permissions](/storage-transfer/docs/file-system-permissions)
-      - [Amazon S3 and Microsoft Azure permissions](/storage-transfer/docs/iam-cloud)
+      - [HDFS permissions](https://docs.cloud.google.com/storage-transfer/docs/file-system-permissions)
+      - [Amazon S3 and Microsoft Azure permissions](https://docs.cloud.google.com/storage-transfer/docs/iam-cloud)
 
 ### Configure your Storage Transfer Agent for HDFS data lakes
 
 Required when the file is stored in HDFS. To set up the storage transfer agent required for an HDFS data lake transfer, do the following:
 
-1.  [Install Docker](/storage-transfer/docs/on-prem-set-up#install_docker) on on-premises agent machines.
-2.  [Create a Storage Transfer Service agent pool](/storage-transfer/docs/on-prem-agent-pools#create-pool) in your Google Cloud project.
-3.  [Install agents](/storage-transfer/docs/create-transfers/agent-based/hdfs#install_agents) on your on-premises agent machines.
+1.  [Install Docker](https://docs.cloud.google.com/storage-transfer/docs/on-prem-set-up#install_docker) on on-premises agent machines.
+2.  [Create a Storage Transfer Service agent pool](https://docs.cloud.google.com/storage-transfer/docs/on-prem-agent-pools#create-pool) in your Google Cloud project.
+3.  [Install agents](https://docs.cloud.google.com/storage-transfer/docs/create-transfers/agent-based/hdfs#install_agents) on your on-premises agent machines.
 
 ### Configure Storage Transfer Service permissions for Amazon S3
 
 Required when the file is stored in Amazon S3. Transfers from Amazon S3 are agentless transfers, which require specific permissions. To configure the Storage Transfer Service for a Amazon S3 transfer, do the following:
 
-1.  [Setup access credentials for AWS Amazon S3](/storage-transfer/docs/source-amazon-s3#access_credentials) .
+1.  [Setup access credentials for AWS Amazon S3](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#access_credentials) .
       - Note the access key ID and secret access key after setting up your access credentials.
-2.  [Add IP ranges](/storage-transfer/docs/source-amazon-s3#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your AWS project uses IP restrictions.
+2.  [Add IP ranges](https://docs.cloud.google.com/storage-transfer/docs/source-amazon-s3#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your AWS project uses IP restrictions.
 
 ### Configure Storage Transfer Service permissions for Microsoft Azure Storage
 
 Required when the file is stored in Azure Blob Storage or Azure Data Lake Storage Gen2. Transfers from Microsoft Azure Storage are agentless transfers, which require specific permissions. To configure the Storage Transfer Service for a Microsoft Azure Storage transfer, do the following:
 
-1.  [Generate a Shared Access Signature (SAS) token](/storage-transfer/docs/source-microsoft-azure#sas-token) for your Microsoft Azure storage account.
+1.  [Generate a Shared Access Signature (SAS) token](https://docs.cloud.google.com/storage-transfer/docs/source-microsoft-azure#sas-token) for your Microsoft Azure storage account.
       - Note the SAS token after generating it.
-2.  [Add IP ranges](/storage-transfer/docs/source-microsoft-azure#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your Microsoft Azure storage account uses IP restrictions.
+2.  [Add IP ranges](https://docs.cloud.google.com/storage-transfer/docs/source-microsoft-azure#ip_restrictions) used by Storage Transfer Service workers to your list of allowed IPs if your Microsoft Azure storage account uses IP restrictions.
 
 ## Schedule Hive managed tables transfer
 
@@ -113,6 +113,8 @@ Select one of the following options:
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -124,7 +126,7 @@ Select one of the following options:
 
 6.  In the **Schedule options** section, do the following:
     
-      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - In the **Repeat frequency** list, select an option to specify how often this data transfer runs. To specify a custom repeat frequency, select **Custom** . If you select **On-demand** , then this transfer runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either **Start now** or **Start at set time** , and provide a start date and run time.
 
 7.  In the **Data source details** section, do the following:
@@ -139,7 +141,7 @@ Select one of the following options:
           - `  db1..*  ` matches all tables in db1.
           - `  db1.table1;db2.table2  ` matches table1 in db1 and table2 in db2.
     
-    3.  For **BQMS discovery dump gcs path** , enter the path to the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](#generate-metadata-dump-for-apache-hive) . If you are using [dumper output orchestration with `  cron  `](#dumper-output-orchestration) , provide the Cloud Storage folder path configured in `  --gcs-base-path  ` , which contains dumper output ZIP files.
+    3.  For **BQMS discovery dump gcs path** , enter the path to the `  hive-dumper-output.zip  ` file that you generated when [creating a metadata file for Apache Hive](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#generate-metadata-dump-for-apache-hive) . If you are using [dumper output orchestration with `  cron  `](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#dumper-output-orchestration) , provide the Cloud Storage folder path configured in `  --gcs-base-path  ` , which contains dumper output ZIP files.
     
     4.  Choose the Metastore type from the drop-down list:
         
@@ -152,17 +154,17 @@ Select one of the following options:
     
     7.  For **Storage type** , select one of the following options. This field is only available if **Transfer strategy** is set to `  FULL_TRANSFER  ` :
         
-          - `  HDFS  ` : Select this option if your file storage is `  HDFS  ` . In the **STS agent pool name** field, you must provide the name of the agent pool that you created when you [configured your Storage Transfer Agent](#configure-storage-transfer-agent-hdfs) .
-          - `  S3  ` : Select this option if your file storage is `  Amazon S3  ` . In the **Access key ID** and **Secret access key** fields, you must provide the access key ID and secret access key that you created when you [set up your access credentials](#configure-storage-transfer-permission-s3) .
-          - `  AZURE  ` : Select this option if your file storage is `  Azure Blob Storage  ` . In the **SAS token** field, you must provide the SAS token that you created when you [set up your access credentials](#configure-storage-transfer-permission-azure) .
+          - `  HDFS  ` : Select this option if your file storage is `  HDFS  ` . In the **STS agent pool name** field, you must provide the name of the agent pool that you created when you [configured your Storage Transfer Agent](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-agent-hdfs) .
+          - `  S3  ` : Select this option if your file storage is `  Amazon S3  ` . In the **Access key ID** and **Secret access key** fields, you must provide the access key ID and secret access key that you created when you [set up your access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-permission-s3) .
+          - `  AZURE  ` : Select this option if your file storage is `  Azure Blob Storage  ` . In the **SAS token** field, you must provide the SAS token that you created when you [set up your access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-permission-azure) .
     
-    8.  Optional: For **Partition Filter gcs path** , enter a full Cloud Storage path to a custom filter JSON file to [filter partitions](#filter-partitions) .
+    8.  Optional: For **Partition Filter gcs path** , enter a full Cloud Storage path to a custom filter JSON file to [filter partitions](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#filter-partitions) .
 
 ### bq
 
 To schedule Hive managed tables transfer, enter the `  bq mk  ` command and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
   bq mk --transfer_config
   --data_source=hadoop
   --display_name='TRANSFER_NAME'
@@ -199,7 +201,7 @@ Replace the following:
   - `  LIST_OF_TABLES  ` : a list of entities to be transferred. Use a hierarchical naming spec - `  database . table  ` . This field supports RE2 regular expression to specify tables. For example:
       - `  db1..*  ` : specifies all tables in the database
       - `  db1.table1;db2.table2  ` : a list of tables
-  - `  DUMPER_BUCKET  ` : the Cloud Storage bucket containing the `  hive-dumper-output.zip  ` file. If you are using [dumper output orchestration with `  cron  `](#dumper-output-orchestration) , then change `  table_metadata_path  ` to be the Cloud Storage folder path configured with `  --gcs-base-path  ` in cron setup—for example: `  "table_metadata_path":"<var>GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT</var>"  ` .
+  - `  DUMPER_BUCKET  ` : the Cloud Storage bucket containing the `  hive-dumper-output.zip  ` file. If you are using [dumper output orchestration with `  cron  `](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#dumper-output-orchestration) , then change `  table_metadata_path  ` to be the Cloud Storage folder path configured with `  --gcs-base-path  ` in cron setup—for example: `  "table_metadata_path":"<var>GCS_PATH_TO_UPLOAD_DUMPER_OUTPUT</var>"  ` .
   - `  MIGRATION_BUCKET  ` : Destination GCS path to which all underlying files will be loaded. Available only if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  METASTORE  ` : The type of metastore to migrate to. Set this to one of the following values:
       - `  DATAPROC_METASTORE  ` : To transfer metadata to Dataproc Metastore.
@@ -208,12 +210,12 @@ Replace the following:
   - `  BIGLAKE_METASTORE_DATASET  ` : The BigQuery dataset for your BigLake metastore. Required if `  metastore  ` is `  BIGLAKE_METASTORE  ` and `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  STORAGE_TYPE  ` : Specify the underlying file storage for your tables. Supported types are `  HDFS  ` , `  S3  ` , and `  AZURE  ` . Required if `  transfer_strategy  ` is `  FULL_TRANSFER  ` .
   - `  AGENT_POOL_NAME  ` : the name of the agent pool used for creating agents. Required if `  storage_type  ` is `  HDFS  ` .
-  - `  AWS_ACCESS_KEY_ID  ` : the access key ID from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
-  - `  AWS_SECRET_ACCESS_KEY  ` : the secret access key from [access credentials](#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
-  - `  AZURE_SAS_TOKEN  ` : the SAS token from [access credentials](#configure-storage-transfer-permission-azure) . Required if `  storage_type  ` is `  AZURE  ` .
-  - `  FILTER_GCS_PATH  ` : (Optional) A full Cloud Storage path to a custom filter JSON file to [filter partitions](#filter-partitions) .
+  - `  AWS_ACCESS_KEY_ID  ` : the access key ID from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
+  - `  AWS_SECRET_ACCESS_KEY  ` : the secret access key from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-permission-s3) . Required if `  storage_type  ` is `  S3  ` .
+  - `  AZURE_SAS_TOKEN  ` : the SAS token from [access credentials](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#configure-storage-transfer-permission-azure) . Required if `  storage_type  ` is `  AZURE  ` .
+  - `  FILTER_GCS_PATH  ` : (Optional) A full Cloud Storage path to a custom filter JSON file to [filter partitions](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#filter-partitions) .
 
-Run this command to create the transfer configuration and start the Hive managed tables transfer. Transfers are scheduled to run every 24 hours by default, but can be configured with [transfer scheduling options](#transfer_scheduling_options) .
+Run this command to create the transfer configuration and start the Hive managed tables transfer. Transfers are scheduled to run every 24 hours by default, but can be configured with [transfer scheduling options](https://docs.cloud.google.com/bigquery/docs/hdfs-data-lake-transfer#transfer_scheduling_options) .
 
 When the transfer is complete, your tables in Hadoop cluster will be migrated to `  MIGRATION_BUCKET  ` .
 
@@ -227,7 +229,7 @@ When a transfer configuration is set up with a recurring schedule, every subsequ
 
 ### Transfer scheduling options
 
-By default, transfers are scheduled to run every 24 hours by default. To configure how often transfers are run, add the `  --schedule  ` flag to the transfer configuration, and specify a transfer schedule using [the `  schedule  ` syntax](/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . Hive managed tables transfers must have a minimum of 24 hours between transfer runs.
+By default, transfers are scheduled to run every 24 hours by default. To configure how often transfers are run, add the `  --schedule  ` flag to the transfer configuration, and specify a transfer schedule using [the `  schedule  ` syntax](https://docs.cloud.google.com/appengine/docs/flexible/scheduling-jobs-with-cron-yaml#formatting_the_schedule) . Hive managed tables transfers must have a minimum of 24 hours between transfer runs.
 
 For one-time transfers, you can add the `  end_time  ` flag to the transfer configuration to only run the transfer once.
 
@@ -237,32 +239,30 @@ You can transfer a subset of partitions from your Hive managed tables by providi
 
 The following is an example of the filter JSON file structure:
 
-``` text
-{
-  "filters": [
     {
-      "table": "db1.table1",
-      "condition": "IN",
-      "partition": ["partition1=value1/partition2=value2"]
-    },
-    {
-      "table": "db1.table2",
-      "condition": "LESS_THAN",
-      "partition": ["partition1;value1"]
-    },
-    {
-      "table": "db1.table3",
-      "condition": "GREATER_THAN",
-      "partition": ["partition1;value1"]
-    },
-    {
-      "table": "db1.table4",
-      "condition": "RANGE",
-      "partition": ["partition1;value1;value2"]
+      "filters": [
+        {
+          "table": "db1.table1",
+          "condition": "IN",
+          "partition": ["partition1=value1/partition2=value2"]
+        },
+        {
+          "table": "db1.table2",
+          "condition": "LESS_THAN",
+          "partition": ["partition1;value1"]
+        },
+        {
+          "table": "db1.table3",
+          "condition": "GREATER_THAN",
+          "partition": ["partition1;value1"]
+        },
+        {
+          "table": "db1.table4",
+          "condition": "RANGE",
+          "partition": ["partition1;value1;value2"]
+        }
+      ]
     }
-  ]
-}
-```
 
 #### Filter conditions
 
@@ -289,7 +289,7 @@ You can configure a unique Cloud Storage path and database for each migrated tab
 
 1.  Create a configuration YAML file (suffixed with `  config.yaml  ` ) in the `  DUMPER_BUCKET  ` that contains the following:
     
-    ``` text
+    ``` 
         type: object_rewriter
         relation:
         - match:
@@ -302,7 +302,7 @@ You can configure a unique Cloud Storage path and database for each migrated tab
 
 2.  Create another configuration YAML file (suffixed with `  config.yaml  ` ) in the `  DUMPER_BUCKET  ` that contains the following:
     
-    ``` text
+    ``` 
         type: experimental_object_rewriter
         relation:
           - match:
@@ -314,40 +314,38 @@ You can configure a unique Cloud Storage path and database for each migrated tab
     
       - Replace `  SOURCE_DATABASE  ` and `  TARGET_DATABASE  ` with the name of source database name and Dataproc Metastore database or BigQuery dataset depending on the chosen metastore. Ensure that the BigQuery dataset exists if you are configuring the database for BigLake metastore.
     
-    For more information about these configuration YAML, see [Guidelines to create a configuration YAML file](/bigquery/docs/config-yaml-translation#yaml_guidelines) .
+    For more information about these configuration YAML, see [Guidelines to create a configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#yaml_guidelines) .
 
 3.  Generate tables mapping YAML file using the following command:
     
-    ``` text
-    curl -d '{
-      "tasks": {
-          "string": {
-            "type": "HiveQL2BigQuery_Translation",
-            "translation_details": {
-                "target_base_uri": "TRANSLATION_OUTPUT_BUCKET",
-                "source_target_mapping": {
-                  "source_spec": {
-                      "base_uri": "DUMPER_BUCKET"
-                  }
-                },
-                "target_types": ["metadata"]
-            }
+        curl -d '{
+          "tasks": {
+              "string": {
+                "type": "HiveQL2BigQuery_Translation",
+                "translation_details": {
+                    "target_base_uri": "TRANSLATION_OUTPUT_BUCKET",
+                    "source_target_mapping": {
+                      "source_spec": {
+                          "base_uri": "DUMPER_BUCKET"
+                      }
+                    },
+                    "target_types": ["metadata"]
+                }
+              }
           }
-      }
-      }' \
-      -H "Content-Type:application/json" \
-      -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
-    ```
+          }' \
+          -H "Content-Type:application/json" \
+          -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
     
     Replace the following:
     
-      - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](/bigquery/docs/hadoop-transfer#metadata_migration) .
+      - `  TRANSLATION_OUTPUT_BUCKET  ` : (Optional) Specify a Cloud Storage bucket for the translation output. For more information, see [Using Translation output](https://docs.cloud.google.com/bigquery/docs/hadoop-transfer#metadata_migration) .
       - `  DUMPER_BUCKET  ` : the base URI for Cloud Storage bucket that contains the `  hive-dumper-output.zip  ` and configuration YAML file.
       - `  TOKEN  ` : the OAuth token. You can generate this in the command line with the command `  gcloud auth print-access-token  ` .
       - `  PROJECT_ID  ` : the project to process the translation.
       - `  LOCATION  ` : the location where the job is processed. For example, `  eu  ` or `  us  ` .
 
-4.  [Monitor the status of this job](/bigquery/docs/api-sql-translator#explore_the_translation_output) . When completed, a mapping file is generated for each table in database within a predefined path in `  TRANSLATION_OUTPUT_BUCKET  ` .
+4.  [Monitor the status of this job](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) . When completed, a mapping file is generated for each table in database within a predefined path in `  TRANSLATION_OUTPUT_BUCKET  ` .
 
 ### Orchestrate dumper execution by using the `     cron    ` command
 
@@ -357,21 +355,19 @@ You can automate incremental transfers by using a [`  cron  `](https://man7.org/
 
 Before using this automation script, you must do the following:
 
-1.  Complete all [dumper installation prerequisites](/bigquery/docs/generate-metadata#prerequisites) , including installing the `  dwh-migration-dumper  ` tool and configuring IAM permissions.
+1.  Complete all [dumper installation prerequisites](https://docs.cloud.google.com/bigquery/docs/generate-metadata#prerequisites) , including installing the `  dwh-migration-dumper  ` tool and configuring IAM permissions.
 
-2.  [Install the Google Cloud CLI](/sdk/docs/install) . The script uses the `  gsutil  ` command-line tool to upload dumper output to Cloud Storage.
+2.  [Install the Google Cloud CLI](https://docs.cloud.google.com/sdk/docs/install) . The script uses the `  gsutil  ` command-line tool to upload dumper output to Cloud Storage.
 
 3.  Authenticate with Google Cloud to allow `  gsutil  ` to upload files to Cloud Storage with the following command:
     
-    ``` text
-    gcloud auth application-default login
-    ```
+        gcloud auth application-default login
 
 #### Scheduling the automation
 
 1.  Save the following script to a local file. This script is designed to be configured and executed by a `  cron  ` daemon to automate the extraction and upload process of dumper output:
     
-    ``` text
+    ``` notranslate
     #!/bin/bash
     
     # Exit immediately if a command exits with a non-zero status.
@@ -618,7 +614,7 @@ Before using this automation script, you must do the following:
 
 2.  Run the following command to make the script executable:
     
-    ``` text
+    ``` notranslate
     chmod +x PATH_TO_SCRIPT
     ```
 
@@ -628,7 +624,7 @@ Before using this automation script, you must do the following:
     
     **Without Kerberos authentication**
     
-    ``` text
+    ``` notranslate
     # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer.
     30 2 * * * PATH_TO_SCRIPT 
     
@@ -643,7 +639,7 @@ Before using this automation script, you must do the following:
     
     **With Kerberos authentication**
     
-    ``` text
+    ``` notranslate
     # Run the Hive dumper daily at 2:30 AM for incremental BigQuery transfer with Kerberos authentication.
     30 2 * * * PATH_TO_SCRIPT 
     
@@ -676,7 +672,7 @@ We recommend performing a few trial runs of the script manually to determine the
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for this feature, contact <dts-preview-support@google.com> .
 
@@ -687,6 +683,8 @@ To view the progress and status of your resources, select one of the following o
 ### Console
 
 1.  In the Google Cloud console, go to the **Data transfers** page.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click your transfer configuration from the list.
 
@@ -708,11 +706,11 @@ You can query the status of transfer resources using the BigQuery Data Transfer 
 
 **List all resources and their statuses**
 
-To list all resources and their statuses, use the [`  projects.locations.transferConfigs.transferResources.list  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/list) .
+To list all resources and their statuses, use the [`  projects.locations.transferConfigs.transferResources.list  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/list) .
 
 Run the API request with the following information:
 
-``` text
+``` notranslate
   GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources
   Example Response (abridged) (JSON):
   {
@@ -732,7 +730,7 @@ Run the API request with the following information:
 
 `  curl  ` command:
 
-``` text
+``` notranslate
   curl -X GET 
 
   "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources" 
@@ -753,18 +751,18 @@ Replace the following:
 
 **Get a specific resource**
 
-To get the status of a specific table or partition, use the [`  projects.locations.transferConfigs.transferResources.get  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/get) .
+To get the status of a specific table or partition, use the [`  projects.locations.transferConfigs.transferResources.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.transferResources/get) .
 
 Run the API request with the following information:
 
-``` text
+``` notranslate
   GET https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID
   
 ```
 
 `  curl  ` command:
 
-``` text
+``` notranslate
   curl -X GET 
 
   "https://bigquerydatatransfer.googleapis.com/v1/projects/PROJECT_ID/locations/LOCATION/transferConfigs/CONFIG_ID/transferResources/RESOURCE_ID" 

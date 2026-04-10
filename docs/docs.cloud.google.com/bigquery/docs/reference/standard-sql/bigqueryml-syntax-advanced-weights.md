@@ -6,9 +6,9 @@ This document describes the `  ML.ADVANCED_WEIGHTS  ` function, which lets you s
 
 You can only use `  ML.ADVANCED_WEIGHTS  ` on linear and binary logistic regression models that are trained with the following option settings:
 
-  - The [`  CALCULATE_P_VALUES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#calculate_p_values) value is `  TRUE  ` .
-  - The [`  CATEGORY_ENCODING_METHOD  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#category_encoding_method) value is `  DUMMY_ENCODING  ` .
-  - The [`  L1_REG  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#l1_reg) value is `  0  ` .
+  - The [`  CALCULATE_P_VALUES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#calculate_p_values) value is `  TRUE  ` .
+  - The [`  CATEGORY_ENCODING_METHOD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#category_encoding_method) value is `  DUMMY_ENCODING  ` .
+  - The [`  L1_REG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#l1_reg) value is `  0  ` .
 
 It's common to require standard errors or p-values for either the regression coefficients or other estimated quantities for these penalized regression methods. In principle, such standard errors can be calculated—for example, using the bootstrap. In practice, this calculation isn't done for reasons that the authors of the [R package](https://cran.r-project.org/web/packages/penalized/vignettes/penalized.pdf) explain as follows:
 
@@ -18,7 +18,7 @@ Multiclass logistic regression models aren't supported.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.ADVANCED_WEIGHTS(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT(
@@ -38,7 +38,7 @@ ML.ADVANCED_WEIGHTS(
 
 `  ML.ADVANCED_WEIGHTS  ` returns the following columns:
 
-  - `  processed_input  ` : a `  STRING  ` value that contains the name of the feature column. The value of this column is the name of the feature column that's provided in the [`  query_statement  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) used during model training. If the feature is non-numeric, then there are multiple rows with the same `  processed_input  ` value, one for each category of the feature.
+  - `  processed_input  ` : a `  STRING  ` value that contains the name of the feature column. The value of this column is the name of the feature column that's provided in the [`  query_statement  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#query_statement) used during model training. If the feature is non-numeric, then there are multiple rows with the same `  processed_input  ` value, one for each category of the feature.
 
   - `  category  ` : a `  STRING  ` value that contains the category name if the column identified in the `  processed_input  ` value is non-numeric. Returns a `  NULL  ` value for numeric columns.
 
@@ -52,15 +52,15 @@ ML.ADVANCED_WEIGHTS(
     
     such that $\\hat\\beta\_j$ is the weight of feature $j$ after training and $\\sigma\_j$ is its standard error.
 
-If the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) was used in the `  CREATE MODEL  ` statement that created the model, `  ML.ADVANCED_WEIGHTS  ` outputs the weights of the `  TRANSFORM  ` output features. The weights are denormalized by default, with the option to get normalized weights, exactly like models that are created without `  TRANSFORM  ` .
+If the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) was used in the `  CREATE MODEL  ` statement that created the model, `  ML.ADVANCED_WEIGHTS  ` outputs the weights of the `  TRANSFORM  ` output features. The weights are denormalized by default, with the option to get normalized weights, exactly like models that are created without `  TRANSFORM  ` .
 
 ## Permissions
 
-You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  ` [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) in order to run `  ML.ADVANCED_WEIGHTS  ` .
+You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  ` [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) in order to run `  ML.ADVANCED_WEIGHTS  ` .
 
 ## Limitations
 
-The total cardinality of training features must be less than 1,000. This limitation is the result of the [limitations of computing p-values and standard error](#usage_requirements) when you set the `  CALCULATE_P_VALUES  ` option to `  TRUE  ` when training the model.
+The total cardinality of training features must be less than 1,000. This limitation is the result of the [limitations of computing p-values and standard error](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-advanced-weights#usage_requirements) when you set the `  CALCULATE_P_VALUES  ` option to `  TRUE  ` when training the model.
 
 ## Examples
 
@@ -72,7 +72,7 @@ The following example retrieves weight information from `  mymodel  ` in `  myda
 
 The query returns the weights associated with each one-hot encoded category for the input column `  input_col  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -88,7 +88,7 @@ The following example retrieves weight information from `  mymodel  ` in `  myda
 
 The query retrieves standardized weights, which assume all features have a mean of `  0  ` and a standard deviation of `  1.0  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -98,5 +98,5 @@ FROM
 
 ## What's next
 
-  - For information about Explainable AI, see [BigQuery Explainable AI overview](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For information about Explainable AI, see [BigQuery Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

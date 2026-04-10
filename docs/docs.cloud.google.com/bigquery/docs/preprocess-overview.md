@@ -4,13 +4,13 @@
 
 BigQuery ML provides the following feature preprocessing techniques:
 
-  - **Automatic preprocessing** . BigQuery ML performs automatic preprocessing during training. For more information, see [Automatic feature preprocessing](/bigquery/docs/reference/standard-sql/bigqueryml-auto-preprocessing) .
+  - **Automatic preprocessing** . BigQuery ML performs automatic preprocessing during training. For more information, see [Automatic feature preprocessing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-auto-preprocessing) .
 
-  - **Manual preprocessing** . You can use the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement to define custom preprocessing using [manual preprocessing functions](/bigquery/docs/manual-preprocessing#types_of_preprocessing_functions) . You can also use these functions outside of the `  TRANSFORM  ` clause to process training data before creating the model.
+  - **Manual preprocessing** . You can use the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement to define custom preprocessing using [manual preprocessing functions](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing#types_of_preprocessing_functions) . You can also use these functions outside of the `  TRANSFORM  ` clause to process training data before creating the model.
 
 ## Get feature information
 
-You can use the [`  ML.FEATURE_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) to retrieve the statistics of all input feature columns.
+You can use the [`  ML.FEATURE_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-feature) to retrieve the statistics of all input feature columns.
 
 ## Recommended knowledge
 
@@ -24,10 +24,10 @@ By using the default settings in the `  CREATE MODEL  ` statements and the infer
 
 ## What's next
 
-  - Learn about [feature serving](/bigquery/docs/feature-serving) in BigQuery ML.
+  - Learn about [feature serving](https://docs.cloud.google.com/bigquery/docs/feature-serving) in BigQuery ML.
 
   - For more information about supported SQL statements and functions for models that support feature preprocessing, see the following documents:
     
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

@@ -1,6 +1,6 @@
 # Committed use discounts
 
-**Important:** This page describes committed use discounts for BigQuery PAYG capacity. For information about other Google Cloud CUDs, see [Committed use discounts](/billing/docs/resources/multiprice-cuds) .
+**Important:** This page describes committed use discounts for BigQuery PAYG capacity. For information about other Google Cloud CUDs, see [Committed use discounts](https://docs.cloud.google.com/billing/docs/resources/multiprice-cuds) .
 
 This page describes how spend-based committed use discounts (CUDs) work with BigQuery.
 
@@ -21,7 +21,7 @@ BigQuery spend-based CUDs are ideal for workloads with predictable spend across 
 
 You can purchase spend-based CUDs from any Cloud Billing account, and the applicable discount applies to any eligible usage in projects that the Cloud Billing account pays for. When you purchase a BigQuery spend-based CUD, you pay the same commitment fee for the entirety of the commitment term, even if the price of applicable usage changes. The commitment fee is billed monthly. Any overage in usage is charged at the PAYG rate.
 
-**Note** : This document discusses some spend-based committed use discounts (CUDs) that automatically migrated to a new consumption model, which leverages discounts rather than credits. The migration date is indicated by a notification in the Google Cloud console Billing Overview page. For more information about the improvements, the affected CUDs, and any required actions on your part, see [Spend-based CUDs](/docs/cuds-multiprice) .
+**Note** : This document discusses some spend-based committed use discounts (CUDs) that automatically migrated to a new consumption model, which leverages discounts rather than credits. The migration date is indicated by a notification in the Google Cloud console Billing Overview page. For more information about the improvements, the affected CUDs, and any required actions on your part, see [Spend-based CUDs](https://docs.cloud.google.com/docs/cuds-multiprice) .
 
 When deciding to purchase spend-based CUDs, keep the following in mind:
 
@@ -39,13 +39,13 @@ Spend-based CUDs automatically apply to aggregate BigQuery instance usage in a r
   - BigQuery services
   - Google Cloud Serverless for Apache Spark (previously known as *Dataproc Serverless* )
 
-For a complete list of applicable SKUs, see [BigQuery CUD Eligible SKUs](/skus/sku-groups/bigquery-cud-eligible-skus) .
+For a complete list of applicable SKUs, see [BigQuery CUD Eligible SKUs](https://docs.cloud.google.com/skus/sku-groups/bigquery-cud-eligible-skus) .
 
 ## Purchase BigQuery spend-based CUDs
 
-After your purchase a CUD, you can't cancel your commitment. Make sure the size and duration of your commitment aligns with both your historical and your expected minimum expenditure on BigQuery capacity. For more information, see [Canceling commitments](/docs/cuds-spend-based#canceling_commitments) .
+After your purchase a CUD, you can't cancel your commitment. Make sure the size and duration of your commitment aligns with both your historical and your expected minimum expenditure on BigQuery capacity. For more information, see [Canceling commitments](https://docs.cloud.google.com/docs/cuds-spend-based#canceling_commitments) .
 
-To purchase or manage BigQuery committed use discounts for your Cloud Billing account, follow the instructions at [Purchasing spend-based commitments](/docs/cuds-spend-based#purchasing) .
+To purchase or manage BigQuery committed use discounts for your Cloud Billing account, follow the instructions at [Purchasing spend-based commitments](https://docs.cloud.google.com/docs/cuds-spend-based#purchasing) .
 
 ## Calculate the spend-based CUD discount
 
@@ -64,7 +64,7 @@ For example, assume you are running a workload that uses Enterprise edition slot
 
 Use the [BigQuery pricing](https://cloud.google.com/bigquery/pricing) page to determine the per hour cost for a three-year commitment, for example $0.036 / slot hour (20% discount). That amount is your commitment price, which you commit to spend per hour on BigQuery for three years in `  us-central1  ` across all projects. Any overage in usage is charged at the PAYG rate.
 
-In the legacy CUDs program before automatic account migration, your commitment amount was the on-demand price instead. For more information, see [Spend-based CUDs](/docs/cuds-multiprice) .
+In the legacy CUDs program before automatic account migration, your commitment amount was the on-demand price instead. For more information, see [Spend-based CUDs](https://docs.cloud.google.com/docs/cuds-multiprice) .
 
 You are charged a minimum of $0.036 / slot hour for the whole year, independent from actual usage. When you make the commitment, you're charged that amount even if you decide to stop or reduce the hourly usage for the duration of the commitment.
 
@@ -76,4 +76,4 @@ For more information about BigQuery spend-based CUDs pricing, see [BigQuery pric
 
 ## What's next
 
-  - Learn how to purchase spend-based commitments in [Committed use discounts](/docs/cuds-spend-based) .
+  - Learn how to purchase spend-based commitments in [Committed use discounts](https://docs.cloud.google.com/docs/cuds-spend-based) .

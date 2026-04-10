@@ -2,25 +2,23 @@
 
 This document describes the `  ML.VALIDATE_DATA_SKEW  ` function, which you can use to compute the data skew between a model's training and serving data. This function computes the statistics for the serving data, compares them to the statistics that were computed for the training data at the time the model was created, and identifies where there are anomalous differences between the two data sets.
 
-You can optionally visualize the function output by using [Vertex AI model monitoring](/vertex-ai/docs/model-monitoring/overview) . For more information, see [Monitoring visualization](/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
+You can optionally visualize the function output by using [Vertex AI model monitoring](https://docs.cloud.google.com/vertex-ai/docs/model-monitoring/overview) . For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
-Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost. For models that were created with use of the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the statistics are based on the raw feature data before feature preprocessing within the `  TRANSFORM  ` clause.
+Statistics are only computed for feature columns in the serving data that match feature columns in the training data, in order to achieve better performance and lower cost. For models that were created with use of the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the statistics are based on the raw feature data before feature preprocessing within the `  TRANSFORM  ` clause.
 
 ## Syntax
 
-``` text
-ML.VALIDATE_DATA_SKEW(
-  MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
-  { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
-  STRUCT(
-    [CATEGORICAL_DEFAULT_THRESHOLD AS categorical_default_threshold]
-    [, CATEGORICAL_METRIC_TYPE AS categorical_metric_type]
-    [, NUMERICAL_DEFAULT_THRESHOLD AS numerical_default_threshold]
-    [, NUMERICAL_METRIC_TYPE AS numerical_metric_type]
-    [, THRESHOLDS AS thresholds]
-    [, ENABLE_VISUALIZATION_LINK AS enable_visualization_link])
-)
-```
+    ML.VALIDATE_DATA_SKEW(
+      MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
+      { TABLE `PROJECT_ID.DATASET.TABLE_NAME` | (QUERY_STATEMENT) },
+      STRUCT(
+        [CATEGORICAL_DEFAULT_THRESHOLD AS categorical_default_threshold]
+        [, CATEGORICAL_METRIC_TYPE AS categorical_metric_type]
+        [, NUMERICAL_DEFAULT_THRESHOLD AS numerical_default_threshold]
+        [, NUMERICAL_METRIC_TYPE AS numerical_metric_type]
+        [, THRESHOLDS AS thresholds]
+        [, ENABLE_VISUALIZATION_LINK AS enable_visualization_link])
+    )
 
 ### Arguments
 
@@ -34,7 +32,7 @@ ML.VALIDATE_DATA_SKEW(
 
   - `  TABLE_NAME  ` : the name of the input table that contains the serving data to calculate statistics for.
 
-  - `  QUERY_STATEMENT  ` : a query that generates the serving data to calculate statistics for. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : a query that generates the serving data to calculate statistics for. For the supported SQL syntax of the `  QUERY_STATEMENT  ` clause, see [GoogleSQL query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
 
   - `  CATEGORICAL_DEFAULT_THRESHOLD  ` : a `  FLOAT64  ` value that specifies the custom threshold to use for anomaly detection for categorical and `  ARRAY<categorical>  ` features. The value must be in the range `  [0, 1)  ` . The default value is `  0.3  ` .
 
@@ -51,7 +49,7 @@ ML.VALIDATE_DATA_SKEW(
 
   - `  ENABLE_VISUALIZATION_LINK  ` : a `  BOOL  ` value that determines whether to return links to the visualized function output. When you specify `  TRUE  ` for this argument, the `  ML.VALIDATE_DATA_DRIFT  ` output includes the `  visualization_link  ` column. The `  visualization_link  ` column provides URLs that link to visualizations of the function results in Vertex AI monitoring.
     
-    When you specify `  TRUE  ` for this argument, the `  model  ` argument value must refer to a BigQuery ML model that is [registered](/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. If the model isn't registered, an invalid query error is returned.
+    When you specify `  TRUE  ` for this argument, the `  model  ` argument value must refer to a BigQuery ML model that is [registered](https://docs.cloud.google.com/bigquery/docs/managing-models-vertex#register_models) with Vertex AI. If the model isn't registered, an invalid query error is returned.
 
 ## Output
 
@@ -75,13 +73,11 @@ ML.VALIDATE_DATA_SKEW(
     
     For example:
     
-    ``` text
-    https://console.cloud.google.com/vertex-ai/model-monitoring/locations/us-central1/model-monitors/bq123456789012345647/model-monitoring-jobs/bqjob890123456789012/feature-drift?project=myproject&featureName=petal_length
-    ```
+        https://console.cloud.google.com/vertex-ai/model-monitoring/locations/us-central1/model-monitors/bq123456789012345647/model-monitoring-jobs/bqjob890123456789012/feature-drift?project=myproject&featureName=petal_length
     
     This column is only returned when the `  enable_visualization_link  ` argument value is `  TRUE  ` .
     
-    For more information, see [Monitoring visualization](/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
+    For more information, see [Monitoring visualization](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview#monitoring_visualization) .
 
 ## Examples
 
@@ -91,7 +87,7 @@ The following examples demonstrate how to use the `  ML.VALIDATE_DATA_SKEW  ` fu
 
 The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `  0.2  ` :
 
-``` text
+``` notranslate
 SELECT *
 FROM ML.VALIDATE_DATA_SKEW(
   MODEL `myproject.mydataset.mymodel`,
@@ -102,21 +98,19 @@ FROM ML.VALIDATE_DATA_SKEW(
 
 The output looks similar to the following:
 
-``` text
-+------------------+--------------------------+-----------+--------+------------+
-| input            | metric                   | threshold |  value | is_anomaly |
-+------------------+--------------------------+-----------+--------+------------+
-| dropoff_latitude | JENSEN_SHANNON_DIVERGENCE| 0.2       | 0.7    | true       |
-+------------------+--------------------------+-----------+--------+------------+
-| payment_type     | L_INTFY                  | 0.3       | 0.2    | false      |
-+------------------+--------------------------+-----------+--------+------------+
-```
+    +------------------+--------------------------+-----------+--------+------------+
+    | input            | metric                   | threshold |  value | is_anomaly |
+    +------------------+--------------------------+-----------+--------+------------+
+    | dropoff_latitude | JENSEN_SHANNON_DIVERGENCE| 0.2       | 0.7    | true       |
+    +------------------+--------------------------+-----------+--------+------------+
+    | payment_type     | L_INTFY                  | 0.3       | 0.2    | false      |
+    +------------------+--------------------------+-----------+--------+------------+
 
 ### Run `     ML.VALIDATE_DATA_SKEW    ` and visualize the results
 
 The following example computes data skew between the serving data and the training data used to create the model, with a categorical feature threshold of `  0.2  ` :
 
-``` text
+``` notranslate
 SELECT *
 FROM ML.VALIDATE_DATA_SKEW(
   MODEL `myproject.mydataset.mymodel`,
@@ -128,33 +122,35 @@ FROM ML.VALIDATE_DATA_SKEW(
 
 The output looks similar to the following:
 
-``` text
-+------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
-| input            | metric                   | threshold |  value | is_anomaly | visualization_link                                     |
-+------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
-| dropoff_latitude | JENSEN_SHANNON_DIVERGENCE| 0.2       | 0.7    | true       | https://console.cloud.google.com/vertex-ai/            |
-|                  |                          |           |        |            | model-monitoring/locations/us-central1/model-monitors/ |
-|                  |                          |           |        |            | bq1111222233334444555/model-monitoring-jobs/           |
-|                  |                          |           |        |            | bqjob1234512345123451234/feature-drift?project=        |
-|                  |                          |           |        |            | myproject&featureName=dropoff_latitude                 |
-+------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
-| payment_type     | L_INTFY                  | 0.3       | 0.2    | false      | https://console.cloud.google.com/vertex-ai/            |
-|                  |                          |           |        |            | model-monitoring/locations/us-central1/model-monitors/ |
-|                  |                          |           |        |            | bq1111222233334444555/model-monitoring-jobs/           |
-|                  |                          |           |        |            | bqjob1234512345123451234/feature-drift?project=        |
-|                  |                          |           |        |            | myproject&featureName=payment_type                     |
-+------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
-```
+    +------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
+    | input            | metric                   | threshold |  value | is_anomaly | visualization_link                                     |
+    +------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
+    | dropoff_latitude | JENSEN_SHANNON_DIVERGENCE| 0.2       | 0.7    | true       | https://console.cloud.google.com/vertex-ai/            |
+    |                  |                          |           |        |            | model-monitoring/locations/us-central1/model-monitors/ |
+    |                  |                          |           |        |            | bq1111222233334444555/model-monitoring-jobs/           |
+    |                  |                          |           |        |            | bqjob1234512345123451234/feature-drift?project=        |
+    |                  |                          |           |        |            | myproject&featureName=dropoff_latitude                 |
+    +------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
+    | payment_type     | L_INTFY                  | 0.3       | 0.2    | false      | https://console.cloud.google.com/vertex-ai/            |
+    |                  |                          |           |        |            | model-monitoring/locations/us-central1/model-monitors/ |
+    |                  |                          |           |        |            | bq1111222233334444555/model-monitoring-jobs/           |
+    |                  |                          |           |        |            | bqjob1234512345123451234/feature-drift?project=        |
+    |                  |                          |           |        |            | myproject&featureName=payment_type                     |
+    +------------------+--------------------------+-----------+--------+------------+--------------------------------------------------------+
 
 Copying and pasting the visualization link into a browser tab returns results similar to the following for numerical features:
 
+![A graph that visualizes the monitoring output for the \`ML.VALIDATE\_DATA\_SKEW\` function](https://docs.cloud.google.com/static/bigquery/images/model-monitoring-results.png)
+
 Copying and pasting the visualization link into a browser tab returns results similar to the following for categorical features:
+
+![A bar chart that visualizes the monitoring output for the \`ML.VALIDATE\_DATA\_SKEW\` function](https://docs.cloud.google.com/static/bigquery/images/model-monitoring-results2.png)
 
 ### Automate skew detection
 
 The following example shows how to automate skew detection for a linear regression model:
 
-``` text
+``` notranslate
 DECLARE anomalies ARRAY<STRING>;
 
 SET anomalies = (
@@ -213,22 +209,22 @@ END IF;
 
   - `  ML.VALIDATE_DATA_SKEW  ` doesn't support the following types of models:
     
-      - [AutoML](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
-      - [Matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
-      - [`  ARIMA_PLUS  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
-      - Remote models over [LLMs](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [Cloud AI services](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , or [Vertex AI endpoints](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
-      - Imported [Open Neural Network Exchange (ONNX)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [TensorFlow](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , or [XGBoost](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) models
+      - [AutoML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+      - [Matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+      - [`  ARIMA_PLUS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+      - Remote models over [LLMs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) , [Cloud AI services](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-service) , or [Vertex AI endpoints](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-https)
+      - Imported [Open Neural Network Exchange (ONNX)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-onnx) , [TensorFlow](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) , [TensorFlow Lite](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tflite) , or [XGBoost](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-xgboost) models
 
-  - `  ML.VALIDATE_DATA_SKEW  ` doesn't support models created before March 28, 2024, or models that use the [`  WARM START  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#warm_start) . To enable use of `  ML.VALIDATE_DATA_SKEW  ` , retrain the model by running the [`  CREATE OR REPLACE model  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_or_replace_model) .
+  - `  ML.VALIDATE_DATA_SKEW  ` doesn't support models created before March 28, 2024, or models that use the [`  WARM START  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#warm_start) . To enable use of `  ML.VALIDATE_DATA_SKEW  ` , retrain the model by running the [`  CREATE OR REPLACE model  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#create_or_replace_model) .
 
-  - Running the `  ML.VALIDATE_DATA_SKEW  ` function on a large amount of input data can cause the query to return the error `  Dry run query timed out  ` . To resolve the error, [disable retrieval of cached results for the query](/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) .
+  - Running the `  ML.VALIDATE_DATA_SKEW  ` function on a large amount of input data can cause the query to return the error `  Dry run query timed out  ` . To resolve the error, [disable retrieval of cached results for the query](https://docs.cloud.google.com/bigquery/docs/cached-results#disabling_retrieval_of_cached_results) .
 
   - `  ML.VALIDATE_DATA_SKEW  ` doesn't conduct schema validation between the two sets of input data, and so handles data type mismatches as follows:
     
       - If you specify `  JENSEN_SHANNON_DIVERGENCE  ` for the `  categorical_default_threshold  ` or `  numerical_default_threshold  ` argument, the feature isn't included in the final anomaly report.
       - If you specify `  L_INFTY  ` for the `  categorical_default_threshold  ` argument, the function outputs the computed feature distance as expected.
     
-    However, when you run inference on the serving data, the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) handles schema validation.
+    However, when you run inference on the serving data, the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) handles schema validation.
 
 ## Pricing
 
@@ -236,5 +232,5 @@ The `  ML.VALIDATE_DATA_SKEW  ` function uses [BigQuery on-demand compute pricin
 
 ## What's next
 
-  - For more information about model monitoring in BigQuery ML, see [Model monitoring overview](/bigquery/docs/model-monitoring-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model monitoring in BigQuery ML, see [Model monitoring overview](https://docs.cloud.google.com/bigquery/docs/model-monitoring-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

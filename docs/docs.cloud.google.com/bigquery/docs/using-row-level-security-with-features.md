@@ -2,9 +2,9 @@
 
 This document describes how to use row-level access security with other BigQuery features.
 
-Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](/bigquery/docs/row-level-security-intro) and [Working with row-level security](/bigquery/docs/managing-row-level-security) .
+Before you read this document, familiarize yourself with row-level security by reading [Introduction to BigQuery row-level security](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) and [Working with row-level security](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security) .
 
-**Note:** When managing access for users in [external identity providers](/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](/iam/docs/principal-identifiers) .
+**Note:** When managing access for users in [external identity providers](https://docs.cloud.google.com/iam/docs/workforce-identity-federation) , replace instances of Google Account principal identifiers—like `  user:kiran@example.com  ` , `  group:support@example.com  ` , and `  domain:example.com  ` —with appropriate [Workforce Identity Federation principal identifiers](https://docs.cloud.google.com/iam/docs/principal-identifiers) .
 
 ## The `     TRUE    ` filter
 
@@ -14,27 +14,25 @@ Any user can be granted `  TRUE  ` filter access, including a service account.
 
 Examples of non-query operations are:
 
-  - Other BigQuery APIs, such as the [BigQuery Storage Read API](/bigquery/docs/reference/storage) .
-  - Some [`  bq  ` command-line tool](/bigquery/docs/bq-command-line-tool) commands, such as the [`  bq head  `](/bigquery/docs/reference/bq-cli-reference#bq_head) command.
-  - [Copying a table](#features_that_work_with_the_true_filter)
+  - Other BigQuery APIs, such as the [BigQuery Storage Read API](https://docs.cloud.google.com/bigquery/docs/reference/storage) .
+  - Some [`  bq  ` command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool) commands, such as the [`  bq head  `](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_head) command.
+  - [Copying a table](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter)
 
 ### `     TRUE    ` filter example
 
-``` text
-CREATE ROW ACCESS POLICY all_access ON project.dataset.table1
-GRANT TO ("group:all-rows-access@example.com")
-FILTER USING (TRUE);
-```
+    CREATE ROW ACCESS POLICY all_access ON project.dataset.table1
+    GRANT TO ("group:all-rows-access@example.com")
+    FILTER USING (TRUE);
 
 ### Features that work with the `     TRUE    ` filter
 
-When you use a [DML](/bigquery/docs/reference/standard-sql/dml-syntax) operation on a table protected by row access policies, you must use a `  TRUE  ` filter which implies access to the whole table. Any operations that don't alter the table schema maintain any row access policies on the table.
+When you use a [DML](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax) operation on a table protected by row access policies, you must use a `  TRUE  ` filter which implies access to the whole table. Any operations that don't alter the table schema maintain any row access policies on the table.
 
-For example, the [`  ALTER TABLE RENAME TO  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) statement copies row access policies from the original table to the new table. As another example, the [`  TRUNCATE TABLE  `](/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement removes all of the rows from a table but maintains the table schema as well as any row access policies.
+For example, the [`  ALTER TABLE RENAME TO  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) statement copies row access policies from the original table to the new table. As another example, the [`  TRUNCATE TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#truncate_table_statement) statement removes all of the rows from a table but maintains the table schema as well as any row access policies.
 
 #### Copy jobs
 
-To [copy a table](/bigquery/docs/managing-tables#copy-table) with one or more row-level access policies on it, you must first be granted `  TRUE  ` filter access on the source table. All row-level access policies on the source table are also copied to the new destination table. If you copy a source table without row-level access policies onto a destination table that does have row-level access policies, then the row-level access policies are removed from the destination table, unless the `  --append_table  ` flag is used or `  "writeDisposition": "WRITE_APPEND"  ` is set.
+To [copy a table](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) with one or more row-level access policies on it, you must first be granted `  TRUE  ` filter access on the source table. All row-level access policies on the source table are also copied to the new destination table. If you copy a source table without row-level access policies onto a destination table that does have row-level access policies, then the row-level access policies are removed from the destination table, unless the `  --append_table  ` flag is used or `  "writeDisposition": "WRITE_APPEND"  ` is set.
 
 Cross-region copies are allowed and all policies are copied. Subsequent queries might be broken after the copy is complete if the queries contain invalid table references in subquery policies.
 
@@ -44,38 +42,15 @@ Row-level access policies on a table must have unique names. A collision in row-
 
 ##### Required permissions to copy a table with a row-level access policy
 
-To copy a table with one or more row-level access policies, you must have the following permissions, in addition to the [roles to copy tables and partitions](/bigquery/docs/managing-tables#roles_to_copy_tables_and_partitions) .
+To copy a table with one or more row-level access policies, you must have the following permissions, in addition to the [roles to copy tables and partitions](https://docs.cloud.google.com/bigquery/docs/managing-tables#roles_to_copy_tables_and_partitions) .
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Permission</strong></th>
-<th><strong>Resource</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.list      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.getIamPolicy      </code></td>
-<td>The source table.</td>
-</tr>
-<tr class="odd">
-<td>The <a href="#the_true_filter"><code dir="ltr" translate="no">        TRUE       </code> filter</a></td>
-<td>The source table.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.create      </code></td>
-<td>The destination table.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       bigquery.rowAccessPolicies.setIamPolicy      </code></td>
-<td>The destination table.</td>
-</tr>
-</tbody>
-</table>
+| **Permission**                                                                                                                           | **Resource**           |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `        bigquery.rowAccessPolicies.list       `                                                                                         | The source table.      |
+| `        bigquery.rowAccessPolicies.getIamPolicy       `                                                                                 | The source table.      |
+| The [`         TRUE        ` filter](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) | The source table.      |
+| `        bigquery.rowAccessPolicies.create       `                                                                                       | The destination table. |
+| `        bigquery.rowAccessPolicies.setIamPolicy       `                                                                                 | The destination table. |
 
 #### Tabledata.list in BigQuery API
 
@@ -92,21 +67,21 @@ In particular, `  MERGE  ` statements interact with row-level access policies as
 
 #### Table snapshots
 
-[Table snapshots](/bigquery/docs/table-snapshots-intro) support row-level security. The permissions that you need for the base table (source table) and the table snapshot (destination table) are described in [Required permissions to copy a table with a row-level access policy](#required_permissions_to_copy_a_table_with_a_row-level_access_policy) .
+[Table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) support row-level security. The permissions that you need for the base table (source table) and the table snapshot (destination table) are described in [Required permissions to copy a table with a row-level access policy](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#required_permissions_to_copy_a_table_with_a_row-level_access_policy) .
 
 ## BigQuery table with JSON columns
 
-Row-level access policies cannot be applied on [JSON columns](/bigquery/docs/json-data) . To learn more about the limitations for row-level security, see [Limitations](/bigquery/docs/row-level-security-intro#limitations) .
+Row-level access policies cannot be applied on [JSON columns](https://docs.cloud.google.com/bigquery/docs/json-data) . To learn more about the limitations for row-level security, see [Limitations](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro#limitations) .
 
 ## BigQuery BI Engine and Looker Studio
 
-[BigQuery BI Engine](/bigquery/docs/bi-engine-intro) does not accelerate queries that are run on tables with one or more row-level access policies; those queries are run as standard queries in BigQuery.
+[BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) does not accelerate queries that are run on tables with one or more row-level access policies; those queries are run as standard queries in BigQuery.
 
 The data in a Looker Studio dashboard is filtered according to the underlying source table's row-level access policies.
 
 ## Column-level security
 
-Row-level security and column-level security, which includes both [column-level access control](/bigquery/docs/column-level-security-intro) and [dynamic data masking](/bigquery/docs/column-data-masking-intro) , are fully compatible.
+Row-level security and column-level security, which includes both [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) and [dynamic data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , are fully compatible.
 
 Key points are:
 
@@ -126,37 +101,12 @@ Suppose that you have the DataOwner role for a dataset named `  my_dataset  ` wh
 
 In this example, one user is **Alice** , whose email address is `  alice@example.com  ` . A second user is **Bob** , Alice's colleague.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>rank</strong></th>
-<th><strong>fruit</strong></th>
-<th><strong>color</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>apple</td>
-<td>red</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>orange</td>
-<td>orange</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>lime</td>
-<td>green</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>lemon</td>
-<td>yellow</td>
-</tr>
-</tbody>
-</table>
+| **rank** | **fruit** | **color** |
+| -------- | --------- | --------- |
+| 1        | apple     | red       |
+| 2        | orange    | orange    |
+| 3        | lime      | green     |
+| 4        | lemon     | yellow    |
 
 #### The security
 
@@ -164,10 +114,8 @@ You want Alice to be able to see all the rows that have odd numbers in the `  ra
 
   - To restrict Alice from seeing the even-numbered rows, you create a row-level access policy which has a filter expression based on the data that appears in the `  rank  ` column. To prevent Bob from seeing even or odd rows, you don't include him in the grantee list.
     
-    ``` text
-    CREATE ROW ACCESS POLICY only_odd ON my_dataset.my_table GRANT
-    TO ('user:alice@example.com') FILTER USING (MOD(rank, 2) = 1);
-    ```
+        CREATE ROW ACCESS POLICY only_odd ON my_dataset.my_table GRANT
+        TO ('user:alice@example.com') FILTER USING (MOD(rank, 2) = 1);
 
   - To restrict all users from seeing data in the column named `  fruit  ` , you create a column-level security policy tag that prohibits all users from accessing any of its data.
 
@@ -175,10 +123,8 @@ Finally, you also restrict access to the column named `  color  ` in two ways: t
 
   - This second row-level access policy only displays rows with the value `  green  ` in the `  color  ` column.
     
-    ``` text
-    CREATE ROW ACCESS POLICY only_green ON my_dataset.my_table
-    GRANT TO ('user:alice@example.com') FILTER USING (color="green");
-    ```
+        CREATE ROW ACCESS POLICY only_green ON my_dataset.my_table
+        GRANT TO ('user:alice@example.com') FILTER USING (color="green");
 
 #### Bob's query
 
@@ -323,11 +269,11 @@ A message is displayed to Alice that says her results may be filtered by the row
 
 #### `     TRUE    ` filter access
 
-Finally, as explained in [the section about `  TRUE  ` filter access](#the_true_filter) , if Alice or Bob has `  TRUE  ` filter access, then they can see all of the rows in the table, and use it in non-query jobs. However, if the table has column-level security, then it still applies and can affect the results.
+Finally, as explained in [the section about `  TRUE  ` filter access](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#the_true_filter) , if Alice or Bob has `  TRUE  ` filter access, then they can see all of the rows in the table, and use it in non-query jobs. However, if the table has column-level security, then it still applies and can affect the results.
 
 ## Execution graph
 
-You can't use the [query execution graph](/bigquery/docs/query-insights) for jobs with row-level access policies.
+You can't use the [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights) for jobs with row-level access policies.
 
 ## Extract jobs
 
@@ -335,11 +281,11 @@ If a table has row-level access policies, then only the data that you can view i
 
 ## Legacy SQL
 
-Row-level access policies are not compatible with Legacy SQL. Queries over tables with row-level access policies must use [GoogleSQL](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) . Legacy SQL queries are rejected.
+Row-level access policies are not compatible with Legacy SQL. Queries over tables with row-level access policies must use [GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) . Legacy SQL queries are rejected.
 
 ## Partitioned and clustered tables
 
-Row-level security does not participate in query [pruning](/bigquery/docs/querying-partitioned-tables) , which is a feature of [partitioned tables](/bigquery/docs/partitioned-tables) .
+Row-level security does not participate in query [pruning](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) , which is a feature of [partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
 While row-level security is compatible with partitioned and clustered tables, the row-level access policies that filter row data aren't applied during partition pruning. You can still use partition pruning on a table that uses row-level security by specifying a `  WHERE  ` clause that operates on the partition column. Similarly, row-level access policies themselves don't create any performance benefits for queries against clustered tables, but they don't interfere with other filtering that you apply.
 
@@ -347,17 +293,17 @@ Query pruning is performed during the execution of row-level access policies usi
 
 ## Rename a table
 
-You don't need `  TRUE  ` filter access to rename a table with one or more row access policies on it. You can [rename a table with a DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) .
+You don't need `  TRUE  ` filter access to rename a table with one or more row access policies on it. You can [rename a table with a DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_rename_to_statement) .
 
-As an alternative, you can also copy a table and give the destination table a different name. If the source table has a row-level access policy on it, see [table copy jobs](#features_that_work_with_the_true_filter) on this page for more information.
+As an alternative, you can also copy a table and give the destination table a different name. If the source table has a row-level access policy on it, see [table copy jobs](https://docs.cloud.google.com/bigquery/docs/using-row-level-security-with-features#features_that_work_with_the_true_filter) on this page for more information.
 
 ## Streaming updates
 
-To perform streaming table `  UPDATE  ` or `  DELETE  ` operations with [change data capture](/bigquery/docs/change-data-capture) , you must have `  TRUE  ` filter access.
+To perform streaming table `  UPDATE  ` or `  DELETE  ` operations with [change data capture](https://docs.cloud.google.com/bigquery/docs/change-data-capture) , you must have `  TRUE  ` filter access.
 
 ## Time travel
 
-Only a table administrator can access historical data for a table that has, or has previously had, row-level access policies. Other users get an `  access denied  ` error if they use a time travel decorator on a table that has had row-level access. For more information, see [Time travel and row-level access](/bigquery/docs/time-travel#time_travel_and_row-level_access) .
+Only a table administrator can access historical data for a table that has, or has previously had, row-level access policies. Other users get an `  access denied  ` error if they use a time travel decorator on a table that has had row-level access. For more information, see [Time travel and row-level access](https://docs.cloud.google.com/bigquery/docs/time-travel#time_travel_and_row-level_access) .
 
 ## Logical, materialized, and authorized views
 
@@ -371,16 +317,16 @@ The data displayed in either type of view is filtered according to the underlyin
 
 ### Performance for materialized views
 
-In addition, when a [materialized view](/bigquery/docs/materialized-views-intro) is derived from an underlying table that has row-level access policies, then the query performance is the same as when you query the source table directly. In other words, if the source table has row-level security, you don't see the typical performance benefits of querying a materialized view versus querying the source table.
+In addition, when a [materialized view](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) is derived from an underlying table that has row-level access policies, then the query performance is the same as when you query the source table directly. In other words, if the source table has row-level security, you don't see the typical performance benefits of querying a materialized view versus querying the source table.
 
 ### Authorized views
 
-You can also authorize a logical or materialized view, which means sharing the view with specific users or groups (principals). Principals can then query a view, but don't have access to the underlying table. For more information, see [Authorized views](/bigquery/docs/authorized-views) .
+You can also authorize a logical or materialized view, which means sharing the view with specific users or groups (principals). Principals can then query a view, but don't have access to the underlying table. For more information, see [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
 ## Wildcard queries
 
-[Wildcard queries](/bigquery/docs/querying-wildcard-tables) against tables with row-level access policies fail with an `  INVALID_INPUT  ` error.
+[Wildcard queries](https://docs.cloud.google.com/bigquery/docs/querying-wildcard-tables) against tables with row-level access policies fail with an `  INVALID_INPUT  ` error.
 
 ## What's next
 
-  - For information about best practices for row-level access policies, see [Best practices for row-level security in BigQuery](/bigquery/docs/best-practices-row-level-security) .
+  - For information about best practices for row-level access policies, see [Best practices for row-level security in BigQuery](https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security) .

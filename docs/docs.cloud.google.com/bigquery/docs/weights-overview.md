@@ -24,7 +24,7 @@ What the function does
 
 Supervised models
 
-[Linear & Logistic Regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+[Linear & Logistic Regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
 
 `  ML.WEIGHTS  `
 
@@ -32,19 +32,19 @@ Retrieves the feature coefficients and the intercept.
 
 Unsupervised models
 
-[Kmeans](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
+[Kmeans](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans)
 
 `  ML.CENTROIDS  `
 
 Retrieves the feature coefficients for all of the centroids.
 
-[Matrix Factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
+[Matrix Factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization)
 
 `  ML.WEIGHTS  `
 
 Retrieves the weights of all of the latent factors. They represent the two decomposed matrixes, the user matrix and the item matrix.
 
-[PCA](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
+[PCA](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-pca)
 
 `  ML.PRINCIPAL_COMPONENTS  `
 
@@ -56,7 +56,7 @@ Retrieves the statistics of each principal component, such as eigenvalue.
 
 Time series models
 
-[ARIMA\_PLUS](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
+[ARIMA\_PLUS](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series)
 
 `  ML.ARIMA_COEFFICIENTS  `
 
@@ -64,16 +64,16 @@ Retrieves the coefficients of the ARIMA model, which is used to model the trend 
 
 BigQuery ML doesn't support model weight functions for the following types of models:
 
-  - [Boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-  - [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
-  - [Deep neural network (DNN)](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
-  - [Wide-and-deep](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
-  - [AutoML Tables](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
+  - [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+  - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+  - [Deep neural network (DNN)](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models)
+  - [Wide-and-deep](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-wnd-models)
+  - [AutoML Tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-automl)
 
 To see the weights of all of these model types except for AutoML Tables models, export the model from BigQuery ML to Cloud Storage. You can then use the XGBoost library to visualize the tree structure for boosted tree and random forest models, or the TensorFlow library to visualize the graph structure for DNN and wide-and-deep models. There is no method for getting model weight information for AutoML Tables models.
 
-For more information about exporting a model, see [`  EXPORT MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model) and [Export a BigQuery ML model for online prediction](/bigquery/docs/export-model-tutorial) .
+For more information about exporting a model, see [`  EXPORT MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-export-model) and [Export a BigQuery ML model for online prediction](https://docs.cloud.google.com/bigquery/docs/export-model-tutorial) .
 
 ## What's next
 
-For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

@@ -2,16 +2,16 @@
 
 This document describes the `  ML.MIN_MAX_SCALER  ` function, which lets you scale a numerical\_expression to the range `  [0, 1]  ` . Negative values are set to `  0  ` , and values above `  1  ` are set to `  1  ` .
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the range of `  [0,1]  ` is automatically used in prediction, and predicted values outside that range are similarly capped.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the range of `  [0,1]  ` is automatically used in prediction, and predicted values outside that range are similarly capped.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.MIN_MAX_SCALER(numerical_expression) OVER()
 ```
 
@@ -19,7 +19,7 @@ ML.MIN_MAX_SCALER(numerical_expression) OVER()
 
 `  ML.MIN_MAX_SCALER  ` takes the following argument:
 
-  - `  numerical_expression  ` : the [numerical](/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
@@ -29,7 +29,7 @@ ML.MIN_MAX_SCALER(numerical_expression) OVER()
 
 The following example scales a set of numerical expressions to values between `  0  ` and `  1  ` :
 
-``` text
+``` notranslate
 SELECT
   f, ML.MIN_MAX_SCALER(f) OVER() AS output
 FROM
@@ -52,4 +52,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

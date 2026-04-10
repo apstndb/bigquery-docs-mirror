@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Policy#SCHEMA_REPRESENTATION)
 
 An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources.
 
@@ -8,7 +8,7 @@ For some types of Google Cloud resources, a `  binding  ` can also specify a `  
 
 **JSON example:**
 
-``` text
+``` 
     {
       "bindings": [
         {
@@ -39,7 +39,7 @@ For some types of Google Cloud resources, a `  binding  ` can also specify a `  
 
 **YAML example:**
 
-``` text
+``` 
     bindings:
     - members:
       - user:mike@example.com
@@ -71,7 +71,7 @@ For a description of IAM and its features, see the [IAM documentation](https://c
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;version&quot;: integer,
   &quot;bindings&quot;: [
     {

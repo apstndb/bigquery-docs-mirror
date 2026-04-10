@@ -1,46 +1,50 @@
 # Manage workload commitments
 
-The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
+The BigQuery Reservation API lets you purchase dedicated slots (called [*commitments*](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) ), create pools of slots (called [*reservations*](https://docs.cloud.google.com/bigquery/docs/reservations-intro#reservations) ), and assign projects, folders, and organizations to those reservations.
 
-A *capacity commitment* is a purchase of BigQuery compute capacity for some minimum duration of time. Purchasing a capacity commitment is optional when creating a reservation with an [edition](/bigquery/docs/editions-intro) , but can provide cost savings.
+A *capacity commitment* is a purchase of BigQuery compute capacity for some minimum duration of time. Purchasing a capacity commitment is optional when creating a reservation with an [edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , but can provide cost savings.
 
 Commitments are a regional resource. Commitments purchased in one region or multi-region cannot be used in any other regions or multi-regions. Commitments cannot be moved between regions or between regions and multi-regions. Commitments cannot be moved between projects.
 
 ## Enable the Reservations API
 
-The BigQuery Reservation API is distinct from the existing BigQuery API and must be enabled independently. For more information, see [Enabling and disabling APIs](/apis/docs/getting-started#enabling_apis) .
+The BigQuery Reservation API is distinct from the existing BigQuery API and must be enabled independently. For more information, see [Enabling and disabling APIs](https://docs.cloud.google.com/apis/docs/getting-started#enabling_apis) .
 
   - The name of the API is "BigQuery Reservations API"
   - The endpoint for the BigQuery Reservation API is `  bigqueryreservation.googleapis.com  ` .
 
-**Note:** If you want to prevent anyone in your organization from enabling the BigQuery Reservation API, [contact support](/bigquery/docs/getting-support) .
+![Enable API.](https://docs.cloud.google.com/static/bigquery/images/reservations-enable-api.png)
+
+**Note:** If you want to prevent anyone in your organization from enabling the BigQuery Reservation API, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
 ## Purchase commitments
 
-To reserve capacity for some minimum amount of time, you can purchase a [capacity commitment](/bigquery/docs/reservations-workload-management#slot_commitments) . This provides a discount and saves on costs. For more information about the specific costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+To reserve capacity for some minimum amount of time, you can purchase a [capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) . This provides a discount and saves on costs. For more information about the specific costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
 ### Required permissions
 
 To create a capacity commitment, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.capacityCommitments.create  ` on the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `  bigquery.capacityCommitments.create  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
   - `  BigQuery Admin  `
   - `  BigQuery Resource Admin  `
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### Create a capacity commitment
 
-**Caution:** Before creating a capacity commitment, understand the details of the [commitment plans](/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
+**Caution:** Before creating a capacity commitment, understand the details of the [commitment plans](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) and [pricing](https://cloud.google.com/bigquery/pricing#capacity_compute_analysis_pricing) .
 
 Commitments are a regional resource. Commitments purchased in one region or multi-region cannot be used in any other regions or multi-regions. Commitments cannot be moved between regions or between regions and multi-regions. Commitments cannot be moved between projects.
 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -56,13 +60,13 @@ Commitments are a regional resource. Commitments purchased in one region or mult
         
         1.  In the **Edition** list, select the edition. Capacity commitments are only supported in the Enterprise and Enterprise Plus editions.
     
-    4.  Select the **Commitment duration** , which specifies your [commitment plan](/bigquery/docs/reservations-workload-management#slot_commitments) .
+    4.  Select the **Commitment duration** , which specifies your [commitment plan](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
     
     5.  If you are purchasing an **Annual** commitment, select the **Renewal plan that you want to take effect when the commitment expires** :
         
         1.  **Renew annually** . When the annual commitment expires, it renews for another year as an annual commitment.
         
-        For more information, see [Slot commitments](/bigquery/docs/reservations-workload-management#slot_commitments) .
+        For more information, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
     
     6.  Enter the **Number of slots** you want to purchase.
     
@@ -83,27 +87,29 @@ The first time you purchase capacity, a `  default  ` reservation is created.
 
 ### SQL
 
-To create a capacity commitment, use the [`  CREATE CAPACITY  ` DDL statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement) .
+To create a capacity commitment, use the [`  CREATE CAPACITY  ` DDL statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_capacity_statement) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE CAPACITY
       `ADMIN_PROJECT_ID.region-LOCATION.COMMITMENT_ID`
     OPTIONS (
       slot_count = NUMBER_OF_SLOTS,
       edition = EDITION,
-      plan = &#39;PLAN_TYPE',
+      plan = 'PLAN_TYPE',
       renewal_plan = 'RENEWAL_PLAN_TYPE');
     ```
     
     Replace the following:
     
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership of this commitment
+      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership of this commitment
     
-      - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitment
+      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitment
     
       - `  COMMITMENT_ID  ` : the ID of the commitment
         
@@ -111,21 +117,21 @@ To create a capacity commitment, use the [`  CREATE CAPACITY  ` DDL statement](/
     
       - `  NUMBER_OF_SLOTS  ` : the number of slots to purchase
     
-      - `  EDITION  ` : the edition associated with the capacity commitment. You can only create a capacity commitment with the Enterprise or Enterprise Plus editions. To learn more about editions, see [Introduction to BigQuery editions](/bigquery/docs/editions-intro) .
+      - `  EDITION  ` : the edition associated with the capacity commitment. You can only create a capacity commitment with the Enterprise or Enterprise Plus editions. To learn more about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
     
-      - `  PLAN_TYPE  ` : the [plan type](/bigquery/docs/reservations-workload-management#slot_commitments) . The options are `  ANNUAL  ` or `  THREE_YEAR  ` .
+      - `  PLAN_TYPE  ` : the [plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) . The options are `  ANNUAL  ` or `  THREE_YEAR  ` .
     
-      - `  RENEWAL_PLAN_TYPE  ` : the [renewal plan type](/bigquery/docs/reservations-workload-management#renew-commitments) . The options are `  NONE  ` , `  ANNUAL  ` or `  THREE_YEAR  ` .
+      - `  RENEWAL_PLAN_TYPE  ` : the [renewal plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) . The options are `  NONE  ` , `  ANNUAL  ` or `  THREE_YEAR  ` .
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Use the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) with the [`  --capacity_commitment  ` flag](/bigquery/docs/reference/bq-cli-reference#mk-capacity-commitment) to purchase slots.
+Use the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) with the [`  --capacity_commitment  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-capacity-commitment) to purchase slots.
 
-``` text
+``` notranslate
 bq mk \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
@@ -138,11 +144,11 @@ bq mk \
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership this commitment
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitment
-  - `  EDITION  ` : the edition associated with the capacity commitment. You can only create a capacity commitment with the Enterprise or Enterprise Plus editions. To learn more about editions, see [Introduction to BigQuery editions](/bigquery/docs/editions-intro) .
-  - `  PLAN_TYPE  ` : the [plan type](/bigquery/docs/reservations-workload-management#slot_commitments) . The options are `  ANNUAL  ` or `  THREE_YEAR  ` .
-  - `  RENEWAL_PLAN_TYPE  ` : the [renewal plan type](/bigquery/docs/reservations-workload-management#renew-commitments) . The options are `  NONE  ` , `  ANNUAL  ` or `  THREE_YEAR  ` .
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership this commitment
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitment
+  - `  EDITION  ` : the edition associated with the capacity commitment. You can only create a capacity commitment with the Enterprise or Enterprise Plus editions. To learn more about editions, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
+  - `  PLAN_TYPE  ` : the [plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) . The options are `  ANNUAL  ` or `  THREE_YEAR  ` .
+  - `  RENEWAL_PLAN_TYPE  ` : the [renewal plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) . The options are `  NONE  ` , `  ANNUAL  ` or `  THREE_YEAR  ` .
   - `  NUMBER_OF_SLOTS  ` : the number of slots to purchase.
 
 ## View capacity commitments
@@ -153,7 +159,7 @@ The following sections describe how to view your existing capacity commitments.
 
 To view commitments, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.capacityCommitments.list  ` on the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `  bigquery.capacityCommitments.list  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
@@ -163,7 +169,7 @@ Each of the following predefined IAM roles includes this permission:
   - `  BigQuery Resource Viewer  `
   - `  BigQuery User  `
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### View capacity commitments by project
 
@@ -172,6 +178,8 @@ To view your capacity commitments by project:
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -179,36 +187,38 @@ To view your capacity commitments by project:
 
 ### SQL
 
-To view the commitments for an administration project, query the [`  INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT  ` view](/bigquery/docs/information-schema-reservations#schema) .
+To view the commitments for an administration project, query the [`  INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations#schema) .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     SELECT
       capacity_commitment_id
     FROM
       `region-LOCATION`.INFORMATION_SCHEMA.CAPACITY_COMMITMENTS_BY_PROJECT
     WHERE
-      project_id = &#39;ADMIN_PROJECT_ID'
+      project_id = 'ADMIN_PROJECT_ID'
       AND slot_count = 100;
     ```
     
     Replace the following:
     
-      - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitments
-      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that owns the commitments
+      - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitments
+      - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the commitments
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### bq
 
-Use the [`  bq ls  ` command](/bigquery/docs/reference/bq-cli-reference#bq_ls) with the [`  --capacity_commitment  ` flag](/bigquery/docs/reference/bq-cli-reference#ls-capacity_commitment-flag) to list the commitments for an administration project.
+Use the [`  bq ls  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_ls) with the [`  --capacity_commitment  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#ls-capacity_commitment-flag) to list the commitments for an administration project.
 
-``` text
+``` notranslate
 bq ls \
     --capacity_commitment=true \
     --location=LOCATION \
@@ -217,8 +227,8 @@ bq ls \
 
 Replace the following:
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitments
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that owns the commitments
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitments
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the commitments
 
 ## Update capacity commitments
 
@@ -233,24 +243,26 @@ You can make the following updates to a capacity commitment:
 
 To update capacity commitments, you need the following Identity and Access Management (IAM) permission:
 
-  - `  bigquery.capacityCommitments.update  ` on the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
+  - `  bigquery.capacityCommitments.update  ` on the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that maintains ownership of the commitments.
 
 Each of the following predefined IAM roles includes this permission:
 
   - `  BigQuery Admin  `
   - `  BigQuery Resource Admin  `
 
-For more information about IAM roles in BigQuery, see [Predefined roles and permissions](/bigquery/docs/access-control) .
+For more information about IAM roles in BigQuery, see [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ### Renew a commitment
 
-Annual commitments have a renewal plan, which you specify when you create or convert to an annual commitment. You can change your [annual commitment's renewal plan](/bigquery/docs/reservations-workload-management#renew-commitments) at any time before the commitment end date.
+Annual commitments have a renewal plan, which you specify when you create or convert to an annual commitment. You can change your [annual commitment's renewal plan](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) at any time before the commitment end date.
 
 ### Console
 
 You can change your renewal plan for an annual commitment as follows:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -264,9 +276,9 @@ You can change your renewal plan for an annual commitment as follows:
 
 ### bq
 
-To change the renewal plan choice for an annual commitment, use the [`  bq update  ` command](/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`  --capacity_commitment  ` flag](/bigquery/docs/reference/bq-cli-reference#update-capacity-commitment-flag) and the [`  --renewal_plan  ` flag](/bigquery/docs/reference/bq-cli-reference#renewal_plan_flag) .
+To change the renewal plan choice for an annual commitment, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`  --capacity_commitment  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#update-capacity-commitment-flag) and the [`  --renewal_plan  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#renewal_plan_flag) .
 
-``` text
+``` notranslate
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
@@ -277,15 +289,15 @@ bq update \
 
 Replace the following:
 
-  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership this commitment
+  - `  ADMIN_PROJECT_ID  ` : the project ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that will maintain ownership this commitment
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitment
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitment
 
-  - `  PLAN_TYPE  ` : the [plan type](/bigquery/docs/reservations-workload-management#slot_commitments) , such as `  ANNUAL  ` or `  THREE_YEAR  ` .
+  - `  PLAN_TYPE  ` : the [plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) , such as `  ANNUAL  ` or `  THREE_YEAR  ` .
 
   - `  COMMITMENT_ID  ` : the ID of the commitment
     
-    To get the ID, see [View purchased commitments](#view-commitments) .
+    To get the ID, see [View purchased commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#view-commitments) .
 
 ### Convert a commitment to longer duration
 
@@ -293,9 +305,9 @@ You can choose to convert your commitment to a longer-duration commitment type a
 
 As soon as you update your commitment, you are charged the rate associated with the new plan, and the end date resets.
 
-To convert a commitment, use the [`  bq update  ` command](/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`  --plan  ` flag](/bigquery/docs/reference/bq-cli-reference#update-plan-flag) .
+To convert a commitment, use the [`  bq update  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_update) with the [`  --plan  ` flag](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#update-plan-flag) .
 
-``` text
+``` notranslate
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
@@ -309,27 +321,29 @@ Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the project ID
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitment
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitment
 
-  - `  PLAN_TYPE  ` : the [plan type](/bigquery/docs/reservations-workload-management#slot_commitments) , such as `  ANNUAL  ` or `  THREE_YEAR  ` .
+  - `  PLAN_TYPE  ` : the [plan type](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) , such as `  ANNUAL  ` or `  THREE_YEAR  ` .
 
-  - `  RENEWAL_PLAN  ` : the [renewal](/bigquery/docs/reservations-workload-management#renew-commitments) plan
+  - `  RENEWAL_PLAN  ` : the [renewal](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#renew-commitments) plan
     
     This applies only if the `  PLAN_TYPE  ` is `  ANNUAL  ` .
 
   - `  COMMITMENT_ID  ` : the ID of the commitment
     
-    To get the ID, see [View purchased commitments](#view-commitments) .
+    To get the ID, see [View purchased commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#view-commitments) .
 
 ### Split a commitment
 
-You can split your commitment into two commitments. This can be useful if you want to [renew](#renewing-commitments) part of a commitment. For example, if you have an annual commitment of 1,000 slots, you could split off 300 slots into a new commitment, leaving 700 slots in the original commitment. You could then renew 700 slots at the annual rate, and convert 300 slots to a three-year commitment. You can split a commitment in increments of 50 slots.
+You can split your commitment into two commitments. This can be useful if you want to [renew](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#renewing-commitments) part of a commitment. For example, if you have an annual commitment of 1,000 slots, you could split off 300 slots into a new commitment, leaving 700 slots in the original commitment. You could then renew 700 slots at the annual rate, and convert 300 slots to a three-year commitment. You can split a commitment in increments of 50 slots.
 
 When you split a commitment, the new commitment has the same plan and the same commitment end date as the original commitment.
 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -347,7 +361,7 @@ When you split a commitment, the new commitment has the same plan and the same c
 
 To split commitments, use the `  bq update  ` command.
 
-``` text
+``` notranslate
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
@@ -361,13 +375,13 @@ Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the project ID
 
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitment
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitment
 
   - `  SLOTS_TO_SPLIT  ` : the number of slots to split from the original commitment into a new commitment
 
   - `  COMMITMENT_ID  ` : the ID of the commitment
     
-    To get the ID, see [View purchased commitments](#view-commitments) .
+    To get the ID, see [View purchased commitments](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#view-commitments) .
 
 ### Merge two commitments
 
@@ -376,6 +390,8 @@ You can merge multiple commitments into one commitment. The merging commitments 
 ### Console
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Capacity management** .
 
@@ -391,7 +407,7 @@ You can merge multiple commitments into one commitment. The merging commitments 
 
 To merge two commitments into one commitment, use the `  bq update  ` command:
 
-``` text
+``` notranslate
 bq update \
     --project_id=ADMIN_PROJECT_ID \
     --location=LOCATION \
@@ -403,7 +419,7 @@ bq update \
 Replace the following:
 
   - `  ADMIN_PROJECT_ID  ` : the project ID
-  - `  LOCATION  ` : the [location](/bigquery/docs/locations) of the commitments
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/locations) of the commitments
   - `  COMMITMENT1  ` : the first commitment to merge
   - `  COMMITMENT2  ` : the second commitment to merge
 
@@ -411,13 +427,13 @@ Replace the following:
 
 You can't directly upgrade a commitment to a new edition. For example, you can't upgrade a commitment from the Enterprise edition to the Enterprise Plus edition. Instead, follow these steps to upgrade a commitment:
 
-1.  [Create a new commitment](#purchase-commitment) . Choose the appropriate upgraded edition. Note that this new commitment has a different commitment end date than your existing commitment.
+1.  [Create a new commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#purchase-commitment) . Choose the appropriate upgraded edition. Note that this new commitment has a different commitment end date than your existing commitment.
 
-2.  [Contact support](/bigquery/docs/getting-support) to request a cancellation of your existing commitment.
+2.  [Contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) to request a cancellation of your existing commitment.
 
 ## Commitment expiration
 
-Commitments expire at the end of their duration. You can't delete a commitment while it is still active. If the renewal plan is set to `  NONE  ` , the commitment is automatically deleted. Otherwise it is renewed with an annual or three-year commitment, depending on the renewal plan. To change the renewal plan to `  NONE  ` , follow the steps in [Renew a commitment](#renewing-commitments) .
+Commitments expire at the end of their duration. You can't delete a commitment while it is still active. If the renewal plan is set to `  NONE  ` , the commitment is automatically deleted. Otherwise it is renewed with an annual or three-year commitment, depending on the renewal plan. To change the renewal plan to `  NONE  ` , follow the steps in [Renew a commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#renewing-commitments) .
 
 After renewing a commitment, the value of **Start time** isn't changed. It refers to the start time of the original commitment. The value of **End time** is the time the renewed commitment expires. For example, if you have one annual commitment created on December 13, 2022, and it's renewed on December 13, 2023. If you view the commitment details on December 14, 2023, the value of **Start time** would be December 13, 2022 and the value of **End time** would be December 12, 2024.
 
@@ -425,31 +441,29 @@ Baseline slots are always charged. If a capacity commitment expires you might ne
 
 ## Control the creation of capacity commitments
 
-You can use [IAM deny policies](/iam/docs/deny-overview) for additional control over who can create capacity commitments.
+You can use [IAM deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) for additional control over who can create capacity commitments.
 
 Deny policies can be created for a set of users or all, and they can be configured with exceptions and conditions.
 
 For example, the following policy denies all users the permission to create capacity commitments with the exception of the principal "lucian@example.com":
 
-``` text
-{
-  "deniedPrincipals": [
-    "principalSet://goog/public:all"
-  ],
-  "deniedPermissions": [
-    "bigquery.googleapis.com/capacityCommitments.create"
-  ],
-  "exceptionPrincipals": [
-    &quot;principal://goog/subject/lucian@example.com"
-  ]
-}
-```
+    {
+      "deniedPrincipals": [
+        "principalSet://goog/public:all"
+      ],
+      "deniedPermissions": [
+        "bigquery.googleapis.com/capacityCommitments.create"
+      ],
+      "exceptionPrincipals": [
+        "principal://goog/subject/lucian@example.com"
+      ]
+    }
 
 This policy can then be attached to an organization to control who can create the commitments.
 
 Note that these policies take precedence over the IAM roles, so even a user with the `  bigquery.admin  ` role wouldn't be able to create a commitment unless the policy is deleted or modified.
 
-For more information, see [Deny access to resources](/iam/docs/deny-access) .
+For more information, see [Deny access to resources](https://docs.cloud.google.com/iam/docs/deny-access) .
 
 ## Troubleshooting capacity commitments
 
@@ -462,6 +476,6 @@ Slots are subject to available capacity. When you purchase slot commitments and 
 1.  Delete the pending commitment.
 2.  Purchase a new commitment for a smaller number of slots. Depending on capacity, the smaller commitment might become active immediately.
 3.  Purchase the remaining slots as a separate commitment. These slots might show as pending in the **Status** column, but they generally become active within a few hours.
-4.  Optional: When both commitments are available, you can [merge](#merging-commitments) them into a single commitment, as long as you purchased the same plan for both.
+4.  Optional: When both commitments are available, you can [merge](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#merging-commitments) them into a single commitment, as long as you purchased the same plan for both.
 
 If a slot commitment fails or takes a long time to complete, consider using [on-demand pricing](https://cloud.google.com/bigquery/pricing#on_demand_pricing) temporarily. With this solution, you might need to run critical queries on a different project that's not assigned to any reservations, or you might need to remove the project assignment altogether.

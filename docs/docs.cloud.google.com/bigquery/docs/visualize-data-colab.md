@@ -2,9 +2,9 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
-Use this quickstart to run SQL and visualize your results in a [BigQuery notebook](/bigquery/docs/notebooks-introduction) :
+Use this quickstart to run SQL and visualize your results in a [BigQuery notebook](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction) :
 
   - Run a query using the `  bigquery-public-data.ml_datasets.penguins  ` public dataset.
   - Use a SQL cell to iterate on your query results.
@@ -12,9 +12,11 @@ Use this quickstart to run SQL and visualize your results in a [BigQuery noteboo
 
 ## Before you begin
 
-1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Verify that the BigQuery API is enabled.
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
     
     If you created a new project, the BigQuery API is automatically enabled.
 
@@ -22,12 +24,12 @@ Use this quickstart to run SQL and visualize your results in a [BigQuery noteboo
 
 To create and run notebooks, you need the following Identity and Access Management (IAM) roles:
 
-  - [BigQuery User ( `  roles/bigquery.user  ` )](/bigquery/docs/access-control#bigquery.user)
-  - [Colab Enterprise User ( `  roles/aiplatform.colabEnterpriseUser  ` )](/vertex-ai/docs/general/access-control#aiplatform.colabEnterpriseUser)
+  - [BigQuery User ( `  roles/bigquery.user  ` )](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery.user)
+  - [Colab Enterprise User ( `  roles/aiplatform.colabEnterpriseUser  ` )](https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.colabEnterpriseUser)
 
 ## Create a notebook
 
-Follow the instructions in [Create a notebook from the BigQuery editor](/bigquery/docs/create-notebooks#create-notebook-console) to create a new notebook.
+Follow the instructions in [Create a notebook from the BigQuery editor](https://docs.cloud.google.com/bigquery/docs/create-notebooks#create-notebook-console) to create a new notebook.
 
 ## Run a query
 
@@ -37,9 +39,7 @@ To run a SQL query in a notebook, follow these steps:
 
 2.  Enter the following query:
     
-    ``` text
-    SELECT * FROM `bigquery-public-data.ml_datasets.penguins`;
-    ```
+        SELECT * FROM `bigquery-public-data.ml_datasets.penguins`;
 
 3.  Click play\_circle **Run cell** .
     
@@ -49,9 +49,7 @@ To run a SQL query in a notebook, follow these steps:
 
 5.  Enter the following query, which references the DataFrame you just created and filters the results to only include female penguins:
     
-    ``` text
-    SELECT * FROM {df} WHERE sex = 'FEMALE';
-    ```
+        SELECT * FROM {df} WHERE sex = 'FEMALE';
 
 6.  Click play\_circle **Run cell** .
     
@@ -71,6 +69,8 @@ To run a SQL query in a notebook, follow these steps:
 
 5.  For each metric, click edit **Edit** . For **Aggregation** select **Average** .
 
+![Bar chart showing visualization](https://docs.cloud.google.com/static/bigquery/images/penguin-visualization.png)
+
 ## Clean up
 
 The easiest way to eliminate billing is to delete the project that you created for the tutorial.
@@ -86,14 +86,16 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn more about [BigQuery DataFrames](/bigquery/docs/bigquery-dataframes-introduction) .
-  - Learn more about [SQL cells in Colab Enterprise](/colab/docs/sql-cells) .
-  - Learn more about [visualization cells in Colab Enterprise](/colab/docs/visualization-cells) .
-  - Learn how to [visualize graphs using BigQuery DataFrames](/bigquery/docs/dataframes-visualizations) .
+  - Learn more about [BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/bigquery-dataframes-introduction) .
+  - Learn more about [SQL cells in Colab Enterprise](https://docs.cloud.google.com/colab/docs/sql-cells) .
+  - Learn more about [visualization cells in Colab Enterprise](https://docs.cloud.google.com/colab/docs/visualization-cells) .
+  - Learn how to [visualize graphs using BigQuery DataFrames](https://docs.cloud.google.com/bigquery/docs/dataframes-visualizations) .
   - Learn how to [use a BigQuery DataFrames notebook](https://github.com/googleapis/python-bigquery-dataframes/tree/main/notebooks/getting_started/getting_started_bq_dataframes.ipynb) .

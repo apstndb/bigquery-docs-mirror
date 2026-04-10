@@ -1,6 +1,6 @@
 # Migrating Teradata to BigQuery tutorial
 
-This document describes how to [migrate from Teradata to BigQuery](/bigquery/docs/migration/teradata) using sample data. It provides a proof-of-concept that walks you through the process of transferring both schema and data from a Teradata data warehouse to BigQuery.
+This document describes how to [migrate from Teradata to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/teradata) using sample data. It provides a proof-of-concept that walks you through the process of transferring both schema and data from a Teradata data warehouse to BigQuery.
 
 ## Objectives
 
@@ -33,7 +33,7 @@ You can use the [pricing calculator](https://cloud.google.com/products/calculato
 
 ## Introduction
 
-This quickstart guides you through a migration proof of concept. During the quickstart, you generate synthetic data and load it into Teradata. Then you use the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) to move the schema and data to BigQuery. Finally, you run queries on both sides to compare results. The end state is that the schema and data from Teradata are mapped one-for-one into BigQuery.
+This quickstart guides you through a migration proof of concept. During the quickstart, you generate synthetic data and load it into Teradata. Then you use the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) to move the schema and data to BigQuery. Finally, you run queries on both sides to compare results. The end state is that the schema and data from Teradata are mapped one-for-one into BigQuery.
 
 This quickstart is intended for data warehouse administrators, developers, and data practitioners in general who are interested in a hands-on experience with a schema and data migration using the BigQuery Data Transfer Service.
 
@@ -49,39 +49,29 @@ The [TPC-H specification](http://www.tpc.org/tpch/default5.asp) is a benchmark t
 
 3.  Extract the downloaded zip file. Replace file-name with the name of the file you downloaded:
     
-    ``` text
-    unzip file-name.zip
-    ```
+        unzip file-name.zip
     
     A directory whose name includes the tools version number is extracted. This directory includes the TPC source code for the DBGEN data generation tool and the TPC-H specification itself.
 
 4.  Go to the `  dbgen  ` subdirectory. Use the parent directory name corresponding to your version, as in the following example:
     
-    ``` text
-    cd 2.18.0_rc2/dbgen
-    ```
+        cd 2.18.0_rc2/dbgen
 
 5.  Create a makefile using the provided template:
     
-    ``` text
-    cp makefile.suite makefile
-    ```
+        cp makefile.suite makefile
 
 6.  Edit the makefile with a text editor. For example, use vi to edit the file:
     
-    ``` text
-    vi makefile
-    ```
+        vi makefile
 
 7.  In the makefile, change the values for the following variables:
     
-    ``` text
-    CC       = gcc
-    # TDAT -> TERADATA
-    DATABASE = TDAT
-    MACHINE  = LINUX
-    WORKLOAD = TPCH
-    ```
+        CC       = gcc
+        # TDAT -> TERADATA
+        DATABASE = TDAT
+        MACHINE  = LINUX
+        WORKLOAD = TPCH
     
     Depending on your environment, the C compiler ( `  CC  ` ) or `  MACHINE  ` values might be different. if needed, ask your system administrator.
 
@@ -89,15 +79,11 @@ The [TPC-H specification](http://www.tpc.org/tpch/default5.asp) is a benchmark t
 
 9.  Process the makefile:
     
-    ``` text
-    make
-    ```
+        make
 
 10. Generate the TPC-H data using the `  dbgen  ` tool:
     
-    ``` text
-    dbgen -v
-    ```
+        dbgen -v
     
     The data generation takes a couple of minutes. The `  -v  ` (verbose) flag causes the command to report on the progress. When data generation is done, you find 8 ASCII files with the `  .tbl  ` extension in the current folder. They contain pipe-delimited synthetic data to be loaded in each one of the TPC-H tables.
 
@@ -111,28 +97,20 @@ The Teradata client, called [Basic Teradata Query (BTEQ)](https://docs.teradata.
 
 1.  Open the Teradata BTEQ client:
     
-    ``` text
-    bteq
-    ```
+        bteq
 
 2.  Log in to Teradata. Replace the teradata-ip and teradata-user with the corresponding values for your environment.
     
-    ``` text
-    .LOGON teradata-ip/teradata-user
-    ```
+        .LOGON teradata-ip/teradata-user
 
 3.  Create a database named `  tpch  ` with 2 GB of allocated space:
     
-    ``` text
-    CREATE DATABASE tpch
-    AS PERM=2e+09;
-    ```
+        CREATE DATABASE tpch
+        AS PERM=2e+09;
 
 4.  Exit BTEQ:
     
-    ``` text
-    .QUIT
-    ```
+        .QUIT
 
 ### Load the generated data
 
@@ -142,114 +120,108 @@ The following procedure shows how to create the `  lineitem  ` table, which is t
 
 1.  Using a text editor, create a new file named `  fastload_lineitem.fl  ` :
     
-    ``` text
-    vi fastload_lineitem.fl
-    ```
+        vi fastload_lineitem.fl
 
 2.  Copy the following script into the file, which connects to the Teradata database and creates a table named `  lineitem  ` .
     
     In the `  logon  ` command, replace teradata-ip , teradata-user , and teradata-pwd with your connection details.
     
-    ``` text
-    logon teradata-ip/teradata-user,teradata-pwd;
-    
-    drop table tpch.lineitem;
-    drop table tpch.error_1;
-    drop table tpch.error_2;
-    
-    CREATE multiset TABLE tpch.lineitem,
-        NO FALLBACK,
-        NO BEFORE JOURNAL,
-        NO AFTER JOURNAL,
-        CHECKSUM = DEFAULT,
-        DEFAULT MERGEBLOCKRATIO
-        (
-         L_ORDERKEY INTEGER NOT NULL,
-         L_PARTKEY INTEGER NOT NULL,
-         L_SUPPKEY INTEGER NOT NULL,
-         L_LINENUMBER INTEGER NOT NULL,
-         L_QUANTITY DECIMAL(15,2) NOT NULL,
-         L_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,
-         L_DISCOUNT DECIMAL(15,2) NOT NULL,
-         L_TAX DECIMAL(15,2) NOT NULL,
-         L_RETURNFLAG CHAR(1) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
-         L_LINESTATUS CHAR(1) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
-         L_SHIPDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
-         L_COMMITDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
-         L_RECEIPTDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
-         L_SHIPINSTRUCT CHAR(25) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
-         L_SHIPMODE CHAR(10) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
-         L_COMMENT VARCHAR(44) CHARACTER SET LATIN CASESPECIFIC NOT NULL)
-    PRIMARY INDEX ( L_ORDERKEY )
-    PARTITION BY RANGE_N(L_COMMITDATE BETWEEN DATE '1992-01-01'
-                                     AND     DATE '1998-12-31'
-                   EACH INTERVAL '1' DAY);
-    ```
+        logon teradata-ip/teradata-user,teradata-pwd;
+        
+        drop table tpch.lineitem;
+        drop table tpch.error_1;
+        drop table tpch.error_2;
+        
+        CREATE multiset TABLE tpch.lineitem,
+            NO FALLBACK,
+            NO BEFORE JOURNAL,
+            NO AFTER JOURNAL,
+            CHECKSUM = DEFAULT,
+            DEFAULT MERGEBLOCKRATIO
+            (
+             L_ORDERKEY INTEGER NOT NULL,
+             L_PARTKEY INTEGER NOT NULL,
+             L_SUPPKEY INTEGER NOT NULL,
+             L_LINENUMBER INTEGER NOT NULL,
+             L_QUANTITY DECIMAL(15,2) NOT NULL,
+             L_EXTENDEDPRICE DECIMAL(15,2) NOT NULL,
+             L_DISCOUNT DECIMAL(15,2) NOT NULL,
+             L_TAX DECIMAL(15,2) NOT NULL,
+             L_RETURNFLAG CHAR(1) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+             L_LINESTATUS CHAR(1) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+             L_SHIPDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
+             L_COMMITDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
+             L_RECEIPTDATE DATE FORMAT 'yyyy-mm-dd' NOT NULL,
+             L_SHIPINSTRUCT CHAR(25) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+             L_SHIPMODE CHAR(10) CHARACTER SET LATIN CASESPECIFIC NOT NULL,
+             L_COMMENT VARCHAR(44) CHARACTER SET LATIN CASESPECIFIC NOT NULL)
+        PRIMARY INDEX ( L_ORDERKEY )
+        PARTITION BY RANGE_N(L_COMMITDATE BETWEEN DATE '1992-01-01'
+                                         AND     DATE '1998-12-31'
+                       EACH INTERVAL '1' DAY);
     
     The script first makes sure that the `  lineitem  ` table and temporary error tables do not exist, and proceeds to create the `  lineitem  ` table.
 
 3.  In the same file, add the following code, which loads the data into the newly created table. Complete all of the table fields in the three blocks ( `  define  ` , `  insert  ` and `  values  ` ), making sure you use `  varchar  ` as their load data type.
     
-    ``` text
-    begin loading tpch.lineitem
-    errorfiles tpch.error_1, tpch.error_2;
-     set record vartext;
-    define
-     in_ORDERKEY(varchar(50)),
-     in_PARTKEY(varchar(50)),
-     in_SUPPKEY(varchar(50)),
-     in_LINENUMBER(varchar(50)),
-     in_QUANTITY(varchar(50)),
-     in_EXTENDEDPRICE(varchar(50)),
-     in_DISCOUNT(varchar(50)),
-     in_TAX(varchar(50)),
-     in_RETURNFLAG(varchar(50)),
-     in_LINESTATUS(varchar(50)),
-     in_SHIPDATE(varchar(50)),
-     in_COMMITDATE(varchar(50)),
-     in_RECEIPTDATE(varchar(50)),
-     in_SHIPINSTRUCT(varchar(50)),
-     in_SHIPMODE(varchar(50)),
-     in_COMMENT(varchar(50))
-     file = lineitem.tbl;
-    insert into tpch.lineitem (
-      L_ORDERKEY,
-      L_PARTKEY,
-      L_SUPPKEY,
-      L_LINENUMBER,
-      L_QUANTITY,
-      L_EXTENDEDPRICE,
-      L_DISCOUNT,
-      L_TAX,
-      L_RETURNFLAG,
-      L_LINESTATUS,
-      L_SHIPDATE,
-      L_COMMITDATE,
-      L_RECEIPTDATE,
-      L_SHIPINSTRUCT,
-      L_SHIPMODE,
-      L_COMMENT
-    ) values (
-      :in_ORDERKEY,
-      :in_PARTKEY,
-      :in_SUPPKEY,
-      :in_LINENUMBER,
-      :in_QUANTITY,
-      :in_EXTENDEDPRICE,
-      :in_DISCOUNT,
-      :in_TAX,
-      :in_RETURNFLAG,
-      :in_LINESTATUS,
-      :in_SHIPDATE,
-      :in_COMMITDATE,
-      :in_RECEIPTDATE,
-      :in_SHIPINSTRUCT,
-      :in_SHIPMODE,
-      :in_COMMENT
-    );
-    end loading;
-    logoff;
-    ```
+        begin loading tpch.lineitem
+        errorfiles tpch.error_1, tpch.error_2;
+         set record vartext;
+        define
+         in_ORDERKEY(varchar(50)),
+         in_PARTKEY(varchar(50)),
+         in_SUPPKEY(varchar(50)),
+         in_LINENUMBER(varchar(50)),
+         in_QUANTITY(varchar(50)),
+         in_EXTENDEDPRICE(varchar(50)),
+         in_DISCOUNT(varchar(50)),
+         in_TAX(varchar(50)),
+         in_RETURNFLAG(varchar(50)),
+         in_LINESTATUS(varchar(50)),
+         in_SHIPDATE(varchar(50)),
+         in_COMMITDATE(varchar(50)),
+         in_RECEIPTDATE(varchar(50)),
+         in_SHIPINSTRUCT(varchar(50)),
+         in_SHIPMODE(varchar(50)),
+         in_COMMENT(varchar(50))
+         file = lineitem.tbl;
+        insert into tpch.lineitem (
+          L_ORDERKEY,
+          L_PARTKEY,
+          L_SUPPKEY,
+          L_LINENUMBER,
+          L_QUANTITY,
+          L_EXTENDEDPRICE,
+          L_DISCOUNT,
+          L_TAX,
+          L_RETURNFLAG,
+          L_LINESTATUS,
+          L_SHIPDATE,
+          L_COMMITDATE,
+          L_RECEIPTDATE,
+          L_SHIPINSTRUCT,
+          L_SHIPMODE,
+          L_COMMENT
+        ) values (
+          :in_ORDERKEY,
+          :in_PARTKEY,
+          :in_SUPPKEY,
+          :in_LINENUMBER,
+          :in_QUANTITY,
+          :in_EXTENDEDPRICE,
+          :in_DISCOUNT,
+          :in_TAX,
+          :in_RETURNFLAG,
+          :in_LINESTATUS,
+          :in_SHIPDATE,
+          :in_COMMITDATE,
+          :in_RECEIPTDATE,
+          :in_SHIPINSTRUCT,
+          :in_SHIPMODE,
+          :in_COMMENT
+        );
+        end loading;
+        logoff;
     
     The FastLoad script loads the data from a file in the same directory called `  lineitem.tbl  ` , which you generated in the previous section.
 
@@ -257,15 +229,13 @@ The following procedure shows how to create the `  lineitem  ` table, which is t
 
 5.  Run the FastLoad script:
     
-    ``` text
-    fastload < fastload_lineitem.fl
-    ```
+        fastload < fastload_lineitem.fl
 
 6.  Repeat this procedure for the rest of the TPC-H tables listed in section 1.4 of the TPC-H specification. Make sure that you adjust the steps for each table.
 
 ## Migrating the schema and data to BigQuery
 
-The instructions for how to migrate the schema and data to BigQuery are in a separate tutorial: [Migrate data from Teradata](/bigquery/docs/migration/teradata) . We've included details in this section on how to proceed with certain steps of that tutorial. When you've finished the steps in the other tutorial, return to this document and continue with the next section, [Verifying query results](#verifying_query_results) .
+The instructions for how to migrate the schema and data to BigQuery are in a separate tutorial: [Migrate data from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata) . We've included details in this section on how to proceed with certain steps of that tutorial. When you've finished the steps in the other tutorial, return to this document and continue with the next section, [Verifying query results](https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial#verifying_query_results) .
 
 **Note:** You run all of the commands in this section in [Cloud Shell](https://console.cloud.google.com/cloudshell) .
 
@@ -273,48 +243,40 @@ The instructions for how to migrate the schema and data to BigQuery are in a sep
 
 During the initial Google Cloud configuration steps, you're asked to create a dataset in BigQuery to hold the tables after they're migrated. Name the dataset `  tpch  ` . The queries at the end of this quickstart assume this name, and don't require any modifications.
 
-``` text
-# Use the bq utility to create the dataset
-bq mk --location=US tpch
-```
+    # Use the bq utility to create the dataset
+    bq mk --location=US tpch
 
 ### Create a service account
 
-Also as part of the Google Cloud configuration steps, you must create an Identity and Access Management (IAM) service account. This service account is used to write the data into BigQuery and to store temporary data in [Cloud Storage](/storage) .
+Also as part of the Google Cloud configuration steps, you must create an Identity and Access Management (IAM) service account. This service account is used to write the data into BigQuery and to store temporary data in [Cloud Storage](https://docs.cloud.google.com/storage) .
 
-``` text
-# Set the PROJECT variable
-export PROJECT=$(gcloud config get-value project)
-
-# Create a service account
-gcloud iam service-accounts create tpch-transfer
-```
+    # Set the PROJECT variable
+    export PROJECT=$(gcloud config get-value project)
+    
+    # Create a service account
+    gcloud iam service-accounts create tpch-transfer
 
 Grant permissions to the service account that let it administer BigQuery datasets and the staging area in Cloud Storage:
 
-``` text
-# Set TPCH_SVC_ACCOUNT = service account email
-export TPCH_SVC_ACCOUNT=tpch-transfer@${PROJECT}.iam.gserviceaccount.com
-
-# Bind the service account to the BigQuery Admin role
-gcloud projects add-iam-policy-binding ${PROJECT} \
-    --member serviceAccount:${TPCH_SVC_ACCOUNT} \
-    --role roles/bigquery.admin
-
-# Bind the service account to the Storage Admin role
-gcloud projects add-iam-policy-binding ${PROJECT} \
-    --member serviceAccount:${TPCH_SVC_ACCOUNT} \
-    --role roles/storage.admin
-```
+    # Set TPCH_SVC_ACCOUNT = service account email
+    export TPCH_SVC_ACCOUNT=tpch-transfer@${PROJECT}.iam.gserviceaccount.com
+    
+    # Bind the service account to the BigQuery Admin role
+    gcloud projects add-iam-policy-binding ${PROJECT} \
+        --member serviceAccount:${TPCH_SVC_ACCOUNT} \
+        --role roles/bigquery.admin
+    
+    # Bind the service account to the Storage Admin role
+    gcloud projects add-iam-policy-binding ${PROJECT} \
+        --member serviceAccount:${TPCH_SVC_ACCOUNT} \
+        --role roles/storage.admin
 
 ### Create the staging Cloud Storage bucket
 
 One additional task in the Google Cloud configuration is to create a Cloud Storage bucket. This bucket is used by the BigQuery Data Transfer Service as a staging area for data files to be ingested into BigQuery.
 
-``` text
-# Use gcloud storage to create the bucket
-gcloud storage buckets create gs://${PROJECT}-tpch --location=us-central1
-```
+    # Use gcloud storage to create the bucket
+    gcloud storage buckets create gs://${PROJECT}-tpch --location=us-central1
 
 ### Specify the table name patterns
 
@@ -322,9 +284,7 @@ During the configuration of a new transfer in the BigQuery Data Transfer Service
 
 The format of the expression is *`  database  `* . *`  table  `* , and the table name can be replaced by a wildcard. Because wildcards in Java start with two dots, the expression to transfer all of the tables from the `  tpch  ` database is as follows:
 
-``` text
-tpch..*
-```
+    tpch..*
 
 Notice that there are two dots.
 
@@ -338,37 +298,33 @@ The first query is the pricing summary report query (section 2.4.1 of the TPC-H 
 
 The following listing shows the complete query:
 
-``` text
-SELECT
- l_returnflag,
- l_linestatus,
- SUM(l_quantity) AS sum_qty,
- SUM(l_extendedprice) AS sum_base_price,
- SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
- SUM(l_extendedprice*(1-l_discount)*(1+l_tax)) AS sum_charge,
- AVG(l_quantity) AS avg_qty,
- AVG(l_extendedprice) AS avg_price,
- AVG(l_discount) AS avg_disc,
- COUNT(*) AS count_order
-FROM tpch.lineitem
-WHERE l_shipdate BETWEEN '1996-01-01' AND '1996-01-10'
-GROUP BY
- l_returnflag,
- l_linestatus
-ORDER BY
- l_returnflag,
- l_linestatus;
-```
+    SELECT
+     l_returnflag,
+     l_linestatus,
+     SUM(l_quantity) AS sum_qty,
+     SUM(l_extendedprice) AS sum_base_price,
+     SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
+     SUM(l_extendedprice*(1-l_discount)*(1+l_tax)) AS sum_charge,
+     AVG(l_quantity) AS avg_qty,
+     AVG(l_extendedprice) AS avg_price,
+     AVG(l_discount) AS avg_disc,
+     COUNT(*) AS count_order
+    FROM tpch.lineitem
+    WHERE l_shipdate BETWEEN '1996-01-01' AND '1996-01-10'
+    GROUP BY
+     l_returnflag,
+     l_linestatus
+    ORDER BY
+     l_returnflag,
+     l_linestatus;
 
 Run the query in Teradata:
 
-1.  Run BTEQ and connect to Teradata. For details, see [Create the TPC-H database](#heading=h.gecocvk60w6h) earlier in this document.
+1.  Run BTEQ and connect to Teradata. For details, see [Create the TPC-H database](https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial#heading=h.gecocvk60w6h) earlier in this document.
 
 2.  Change the output display width to 500 characters:
     
-    ``` text
-    .set width 500
-    ```
+        .set width 500
 
 3.  Copy the query and paste it at the BTEQ prompt.
     
@@ -383,6 +339,8 @@ Run the query in Teradata:
 Run the same query in BigQuery:
 
 1.  Go to the BigQuery console:
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Copy the query into the query editor.
 
@@ -400,37 +358,39 @@ The second example query is the local supplier volume query report (section 2.4.
 
 The following listing shows the complete query:
 
-``` text
-SELECT
- n_name AS nation,
- SUM(l_extendedprice * (1 - l_discount) / 1000) AS revenue
-FROM
- tpch.customer,
- tpch.orders,
- tpch.lineitem,
- tpch.supplier,
- tpch.nation,
- tpch.region
-WHERE c_custkey = o_custkey
- AND l_orderkey = o_orderkey
- AND l_suppkey = s_suppkey
- AND c_nationkey = s_nationkey
- AND s_nationkey = n_nationkey
- AND n_regionkey = r_regionkey
- AND r_name = 'EUROPE'
- AND o_orderdate >= '1996-01-01'
- AND o_orderdate < '1997-01-01'
-GROUP BY
- n_name
-ORDER BY
- revenue DESC;
-```
+    SELECT
+     n_name AS nation,
+     SUM(l_extendedprice * (1 - l_discount) / 1000) AS revenue
+    FROM
+     tpch.customer,
+     tpch.orders,
+     tpch.lineitem,
+     tpch.supplier,
+     tpch.nation,
+     tpch.region
+    WHERE c_custkey = o_custkey
+     AND l_orderkey = o_orderkey
+     AND l_suppkey = s_suppkey
+     AND c_nationkey = s_nationkey
+     AND s_nationkey = n_nationkey
+     AND n_regionkey = r_regionkey
+     AND r_name = 'EUROPE'
+     AND o_orderdate >= '1996-01-01'
+     AND o_orderdate < '1997-01-01'
+    GROUP BY
+     n_name
+    ORDER BY
+     revenue DESC;
 
 Run the query in Teradata BTEQ and in the BigQuery console as described in the previous section.
 
 This is the result returned by Teradata:
 
+![Teradata results for the local supplier volume results query.](https://docs.cloud.google.com/static/solutions/images/teradata-bigquery-migration-quickstart-local-supplier-volume-results-teradata.png)
+
 This is the result returned by BigQuery:
+
+![BigQuery results for the local supplier volume results query.](https://docs.cloud.google.com/static/solutions/images/teradata-bigquery-migration-quickstart-local-supplier-volume-results-bigquery.png)
 
 Both Teradata and BigQuery return the same results.
 
@@ -440,43 +400,45 @@ The final test to verify the migration is the product type profit measure query 
 
 The following listing shows the complete query:
 
-``` text
-SELECT
- nation,
- o_year,
- SUM(amount) AS sum_profit
-FROM (
- SELECT
-   n_name AS nation,
-   EXTRACT(YEAR FROM o_orderdate) AS o_year,
-   (l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity)/1e+3 AS amount
- FROM
-   tpch.part,
-   tpch.supplier,
-   tpch.lineitem,
-   tpch.partsupp,
-   tpch.orders,
-   tpch.nation
-WHERE s_suppkey = l_suppkey
-  AND ps_suppkey = l_suppkey
-  AND ps_partkey = l_partkey
-  AND p_partkey = l_partkey
-  AND o_orderkey = l_orderkey
-  AND s_nationkey = n_nationkey
-  AND p_name like '%blue%' ) AS profit
-GROUP BY
- nation,
- o_year
-ORDER BY
- nation,
- o_year DESC;
-```
+    SELECT
+     nation,
+     o_year,
+     SUM(amount) AS sum_profit
+    FROM (
+     SELECT
+       n_name AS nation,
+       EXTRACT(YEAR FROM o_orderdate) AS o_year,
+       (l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity)/1e+3 AS amount
+     FROM
+       tpch.part,
+       tpch.supplier,
+       tpch.lineitem,
+       tpch.partsupp,
+       tpch.orders,
+       tpch.nation
+    WHERE s_suppkey = l_suppkey
+      AND ps_suppkey = l_suppkey
+      AND ps_partkey = l_partkey
+      AND p_partkey = l_partkey
+      AND o_orderkey = l_orderkey
+      AND s_nationkey = n_nationkey
+      AND p_name like '%blue%' ) AS profit
+    GROUP BY
+     nation,
+     o_year
+    ORDER BY
+     nation,
+     o_year DESC;
 
 Run the query in Teradata BTEQ and in the BigQuery console as described in the previous section.
 
 This is the result returned by Teradata:
 
+![Teradata results for the product type profit measure query.](https://docs.cloud.google.com/static/solutions/images/teradata-bigquery-migration-quickstart-product-type-profit-measure-teradata.png)
+
 This is the result returned by BigQuery:
+
+![BigQuery results for the product type profit measure query.](https://docs.cloud.google.com/static/solutions/images/teradata-bigquery-migration-quickstart-product-type-profit-measure-bigquery.png)
 
 Both Teradata and BigQuery return the same results, although Teradata uses scientific notation for the sum.
 
@@ -503,10 +465,12 @@ The simplest way to stop billing charges is to delete the project you created fo
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Get step-by-step instructions to [Migrate Teradata to BigQuery](/bigquery/docs/migration/teradata) .
+  - Get step-by-step instructions to [Migrate Teradata to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration/teradata) .

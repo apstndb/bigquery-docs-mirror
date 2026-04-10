@@ -1,6 +1,6 @@
-This tutorial teaches you how to use [hyperparameter tuning](/bigquery/docs/hp-tuning-overview) in BigQuery ML to tune a machine learning model and improve its performance.
+This tutorial teaches you how to use [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) in BigQuery ML to tune a machine learning model and improve its performance.
 
-You perform hyperparameter tuning by specifying the [`  NUM_TRIALS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#num_trials) of the `  CREATE MODEL  ` statement, in combination with other model-specific options. When you set these options, BigQuery ML trains multiple versions, or *trials* of the model, each with slightly different parameters, and returns the trial that performs the best.
+You perform hyperparameter tuning by specifying the [`  NUM_TRIALS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#num_trials) of the `  CREATE MODEL  ` statement, in combination with other model-specific options. When you set these options, BigQuery ML trains multiple versions, or *trials* of the model, each with slightly different parameters, and returns the trial that performs the best.
 
 This tutorial uses the public [`  tlc_yellow_trips_2018  ` sample table](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=new_york_taxi_trips&t=tlc_yellow_trips_2018&page=table) , which contains information about taxi trip in New York City in 2018.
 
@@ -8,12 +8,12 @@ This tutorial uses the public [`  tlc_yellow_trips_2018  ` sample table](https:/
 
 This tutorial guides you through completing the following tasks:
 
-  - Using the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) to create a baseline linear regression model.
-  - Evaluating the baseline model by using the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm) to create a baseline linear regression model.
+  - Evaluating the baseline model by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
   - Using the `  CREATE MODEL  ` statement with hyperparameter tuning options to train twenty trials of a linear regression model.
-  - Reviewing the trials by using the [`  ML.TRIAL_INFO  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info) .
+  - Reviewing the trials by using the [`  ML.TRIAL_INFO  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-trial-info) .
   - Evaluating the trials by using the `  ML.EVALUATE  ` function.
-  - Get predictions about taxi trips from the optimal model among the trials by using the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+  - Get predictions about taxi trips from the optimal model among the trials by using the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
 
 ## Costs
 
@@ -32,7 +32,9 @@ For more information about BigQuery costs, see the [BigQuery pricing](https://cl
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required permissions
 
@@ -50,7 +52,7 @@ For more information about BigQuery costs, see the [BigQuery pricing](https://cl
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Create a dataset
 
@@ -59,6 +61,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -74,11 +78,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -87,15 +91,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -110,10 +114,12 @@ Create a table of training data, based on a subset of the `  tlc_yellow_trips_20
 Follow these steps to create the table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE `bqml_tutorial.taxi_tip_input`
     AS
     SELECT * EXCEPT (tip_amount), tip_amount AS label
@@ -131,10 +137,12 @@ Create a linear regression model without hyperparameter tuning and train it on t
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.baseline_taxi_tip_model`
       OPTIONS (
         MODEL_TYPE = 'LINEAR_REG'
@@ -155,10 +163,12 @@ Evaluate the performance of the model by using the `  ML.EVALUATE  ` function. T
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.EVALUATE(MODEL `bqml_tutorial.baseline_taxi_tip_model`);
@@ -182,9 +192,9 @@ Create a linear regression model with hyperparameter tuning and train it on the 
 
 You use the following hyperparameter tuning options in the `  CREATE MODEL  ` statement:
 
-  - The [`  NUM_TRIALS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#num_trials) to set the number of trials to twenty.
-  - The [`  MAX_PARALLEL_TRIALS  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_parallel_trials) to run two trials in each training job, for a total of ten jobs and twenty trials. This reduces the training time needed. However, the two concurrent trials don't benefit from each other's training results.
-  - The [`  L1_REG  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l1_reg) to try different L1 regularization values in the different trials. L1 regularization removes irrelevant features from the model, which helps prevent [overfitting](https://developers.google.com/machine-learning/glossary/#overfitting) .
+  - The [`  NUM_TRIALS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#num_trials) to set the number of trials to twenty.
+  - The [`  MAX_PARALLEL_TRIALS  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#max_parallel_trials) to run two trials in each training job, for a total of ten jobs and twenty trials. This reduces the training time needed. However, the two concurrent trials don't benefit from each other's training results.
+  - The [`  L1_REG  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm#l1_reg) to try different L1 regularization values in the different trials. L1 regularization removes irrelevant features from the model, which helps prevent [overfitting](https://developers.google.com/machine-learning/glossary/#overfitting) .
 
 The other hyperparameter tuning options supported by the model use their default values, as follows:
 
@@ -195,10 +205,12 @@ The other hyperparameter tuning options supported by the model use their default
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.hp_taxi_tip_model`
       OPTIONS (
         MODEL_TYPE = 'LINEAR_REG',
@@ -221,10 +233,12 @@ Get information about all of the trials, including their hyperparameter values, 
 Follow these steps to get trial information:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.TRIAL_INFO(MODEL `bqml_tutorial.hp_taxi_tip_model`)
@@ -254,10 +268,12 @@ Evaluate the performance of the trials by using the `  ML.EVALUATE  ` function. 
 Follow these steps to evaluate the model trials:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.EVALUATE(MODEL `bqml_tutorial.hp_taxi_tip_model`)
@@ -282,7 +298,7 @@ Follow these steps to evaluate the model trials:
 
 You can evaluate a specific trial by specifying the `  TRIAL_ID  ` argument in the `  ML.EVALUATE  ` function.
 
-For more information about the difference between `  ML.TRIAL_INFO  ` objectives and `  ML.EVALUATE  ` evaluation metrics, see [Model serving functions](/bigquery/docs/hp-tuning-overview#model_serving_functions) .
+For more information about the difference between `  ML.TRIAL_INFO  ` objectives and `  ML.EVALUATE  ` evaluation metrics, see [Model serving functions](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#model_serving_functions) .
 
 ## Use the tuned model to predict taxi tips
 
@@ -291,10 +307,12 @@ Use the optimal model returned by tuning to predict tips for different taxi trip
 Follow these steps to get predictions:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM
       ML.PREDICT(
@@ -334,6 +352,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation panel, click the **bqml\_tutorial** dataset you created.
 
@@ -354,6 +374,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -361,5 +383,5 @@ In the dialog, type the project ID, and then click **Shut down** to delete the p
 ## What's next
 
   - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](/bigquery/docs/bqml-introduction) .
-  - To learn more about the Google Cloud console, see [Using the Google Cloud console](/bigquery/bigquery-web-ui) .
+  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+  - To learn more about the Google Cloud console, see [Using the Google Cloud console](https://docs.cloud.google.com/bigquery/bigquery-web-ui) .

@@ -1,6 +1,6 @@
 # COLUMN\_FIELD\_PATHS view
 
-The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view contains one row for each top-level column or column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
+The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view contains one row for each top-level column or column [nested](https://docs.cloud.google.com/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
 ## Required permissions
 
@@ -16,13 +16,13 @@ Each of the following predefined IAM roles includes the preceding permissions:
   - `  roles/bigquery.dataEditor  `
   - `  roles/bigquery.metadataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
-Query results contain one row for each top-level column or column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
+Query results contain one row for each top-level column or column [nested](https://docs.cloud.google.com/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
-When you query the `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view, the query results contain one row for each column [nested](/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
+When you query the `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view, the query results contain one row for each column [nested](https://docs.cloud.google.com/bigquery/docs/nested-repeated) within a `  RECORD  ` (or `  STRUCT  ` ) column.
 
 The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view has the following schema:
 
@@ -63,12 +63,12 @@ The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view has the following schema:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       field_path      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the top-level column or the path to the column <a href="/bigquery/docs/nested-repeated">nested</a> within a <code dir="ltr" translate="no">       RECORD      </code> or <code dir="ltr" translate="no">       STRUCT      </code> column.</td>
+<td>The name of the top-level column or the path to the column <a href="https://docs.cloud.google.com/bigquery/docs/nested-repeated">nested</a> within a <code dir="ltr" translate="no">       RECORD      </code> or <code dir="ltr" translate="no">       STRUCT      </code> column.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       data_type      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The column's GoogleSQL <a href="/bigquery/docs/reference/standard-sql/data-types">data type</a> .</td>
+<td>The column's GoogleSQL <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">data type</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       description      </code></td>
@@ -78,7 +78,7 @@ The `  INFORMATION_SCHEMA.COLUMN_FIELD_PATHS  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       collation_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the <a href="/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">       NULL      </code> .<br />
+<td>The name of the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts">collation specification</a> if it exists; otherwise, <code dir="ltr" translate="no">       NULL      </code> .<br />
 <br />
 If a <code dir="ltr" translate="no">       STRING      </code> , <code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code> , or <code dir="ltr" translate="no">       STRING      </code> field in a <code dir="ltr" translate="no">       STRUCT      </code> is passed in, the collation specification is returned if it exists; otherwise, <code dir="ltr" translate="no">       NULL      </code> is returned.</td>
 </tr>
@@ -104,36 +104,19 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
+Queries against this view must include a dataset or a region qualifier. For queries with a dataset qualifier, you must have permissions for the dataset. For queries with a region qualifier, you must have permissions for the project. For more information see [Syntax](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region and resource scopes for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.COLUMN_FIELD_PATHS      </code></td>
-<td>Dataset level</td>
-<td>Dataset location</td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                       | Resource scope | Region scope               |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.COLUMN_FIELD_PATHS       `` | Project level  | `          REGION        ` |
+| `        [               PROJECT_ID              .]               DATASET_ID              .INFORMATION_SCHEMA.COLUMN_FIELD_PATHS       `        | Dataset level  | Dataset location           |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](/bigquery/docs/information-schema-intro#dataset_qualifier) .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+  - `  DATASET_ID  ` : the ID of your dataset. For more information, see [Dataset qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#dataset_qualifier) .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 ## Example
 
@@ -152,7 +135,7 @@ To view metadata about the `  author  ` and `  difference  ` columns, run the fo
 
 **Note:** `  INFORMATION_SCHEMA  ` view names are case-sensitive.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -164,7 +147,7 @@ WHERE
 
 The result is similar to the following. For readability, some columns are excluded from the result.
 
-``` text
+``` 
   +------------+-------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+-------------+-------------+
   | table_name | column_name |     field_path      |                                                                      data_type                                                                      | description | policy_tags |
   +------------+-------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------+-------------+-------------+

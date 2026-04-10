@@ -2,36 +2,40 @@
 
 This document describes how to schedule data preparation pipelines and perform manual runs.
 
-Data preparations are powered by [Dataform](/dataform/docs/overview) . Each data preparation schedule is run using your Google Account user credentials or a [custom service account](/dataform/docs/access-control#about-service-accounts) that you select when you configure the schedule or test run.
+Data preparations are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) . Each data preparation schedule is run using your Google Account user credentials or a [custom service account](https://docs.cloud.google.com/dataform/docs/access-control#about-service-accounts) that you select when you configure the schedule or test run.
 
 Changes you make to the data preparation steps aren't automatically saved. You must save and deploy the changes before they can be executed with a schedule. Schedules always run the latest deployed version of your data preparation and exclude any undeployed changes you might be developing.
 
 ## Before you begin
 
-Before you begin, [create a data preparation](/bigquery/docs/data-prep-get-suggestions) .
+Before you begin, [create a data preparation](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
 
 ### Required roles
 
-To authorize a data preparation with a service account when [manually running the data preparation in development](#run-undeployed-manually) or [scheduling the data preparation](#create-schedule) , you must grant roles to the service account that you plan to use for executing the data preparation runs. For more information, see [Give access to the Dataform service account](/bigquery/docs/manage-data-preparations#dataform-service-account-iam) .
+To authorize a data preparation with a service account when [manually running the data preparation in development](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#run-undeployed-manually) or [scheduling the data preparation](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#create-schedule) , you must grant roles to the service account that you plan to use for executing the data preparation runs. For more information, see [Give access to the Dataform service account](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations#dataform-service-account-iam) .
 
 Before scheduling data preparations with a custom service account, do the following:
 
-  - Ask your administrator to grant you the [Service Account User role](/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) on the custom service account.
-  - Grant the [Service Account User role](/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) and the [Service Account Token Creator role](/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `  roles/iam.serviceAccountTokenCreator  ` ) to the default Dataform service agent on the custom service account.
+  - Ask your administrator to grant you the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) on the custom service account.
+  - Grant the [Service Account User role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountUser) ( `  roles/iam.serviceAccountUser  ` ) and the [Service Account Token Creator role](https://docs.cloud.google.com/iam/docs/roles-permissions/iam#iam.serviceAccountTokenCreator) ( `  roles/iam.serviceAccountTokenCreator  ` ) to the default Dataform service agent on the custom service account.
 
-To enhance security for scheduling, see [Implement enhanced scheduling permissions](/dataform/docs/access-control#enhanced-scheduling-permissions) .
+To enhance security for scheduling, see [Implement enhanced scheduling permissions](https://docs.cloud.google.com/dataform/docs/access-control#enhanced-scheduling-permissions) .
 
 ## Develop a data preparation
 
-As you develop a data preparation, you can manually run the steps and inspect the output before you deploy the changes to production. You can test the current version you're developing on your data, while BigQuery continues to run the latest deployed version, according to a [schedule](#create-schedule) . Before you can perform the run, you must [configure the destination](/bigquery/docs/data-prep-get-suggestions#add-or-change-destination) , and fix any validation errors.
+As you develop a data preparation, you can manually run the steps and inspect the output before you deploy the changes to production. You can test the current version you're developing on your data, while BigQuery continues to run the latest deployed version, according to a [schedule](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#create-schedule) . Before you can perform the run, you must [configure the destination](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-or-change-destination) , and fix any validation errors.
 
 ### Manually run a data preparation in development
 
 To test your data preparation steps and validate the results in your destination table, run the data preparation manually from the data preparation editor:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -56,7 +60,7 @@ To test your data preparation steps and validate the results in your destination
 
 10. In the **Run now** dialog, click **Confirm** to acknowledge that this manual run writes data to a destination table, which you might also be using for scheduled runs.
     
-    If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+    If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
     
     The run then executes your steps and loads the output to the destination.
 
@@ -69,8 +73,12 @@ To schedule runs for a version of your data preparation, you must first deploy i
 To deploy a data preparation, follow these steps:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data preparations** .
 
@@ -82,17 +90,21 @@ To deploy a data preparation, follow these steps:
 
 ## Create a schedule
 
-**Tip:** You can also use the **Pipelines & Connections** page to schedule a data preparation using a [streamlined, BigQuery-specific workflow](/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
+**Tip:** You can also use the **Pipelines & Connections** page to schedule a data preparation using a [streamlined, BigQuery-specific workflow](https://docs.cloud.google.com/bigquery/docs/pipeline-connection-page) . This feature is in [preview](https://cloud.google.com/products/#product-launch-stages) .
 
-To create a schedule that executes the deployed data preparation steps and loads the prepared data into the destination table, you must first schedule a data preparation run. To schedule the run, you must [configure the destination](/bigquery/docs/data-prep-get-suggestions#add-or-change-destination) , and fix any validation errors.
+To create a schedule that executes the deployed data preparation steps and loads the prepared data into the destination table, you must first schedule a data preparation run. To schedule the run, you must [configure the destination](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions#add-or-change-destination) , and fix any validation errors.
 
 To create a data preparation schedule, follow these steps:
 
 ### **Explorer** pane
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project and click **Data preparations** .
 
@@ -111,11 +123,13 @@ To create a data preparation schedule, follow these steps:
 
 8.  Schedule a frequency.
 
-9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+9.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 ### **Scheduling** page
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click **Create** , and then select **Data Preparation schedule** from the menu.
 
@@ -136,17 +150,17 @@ To create a data preparation schedule, follow these steps:
     2.  In the **At time** field, enter the time for scheduled data preparation runs.
     3.  In the **Timezone** menu, select the timezone for the schedule.
 
-7.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
+7.  Click **Create schedule** . If you selected **Execute with my user credentials** for your authentication method, you must [authorize your Google Account](https://docs.cloud.google.com/bigquery/docs/orchestrate-data-preparations#authorize-google-account) ( [Preview](https://cloud.google.com/products#product-launch-stages) ).
 
 ## Authorize your Google Account
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To request support or provide feedback for this feature, contact <dataform-preview-support@google.com> .
 
-To authenticate the resource with your [Google Account](/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
+To authenticate the resource with your [Google Account](https://docs.cloud.google.com/iam/docs/principals-overview#google-account) user credentials, you must manually grant permission for BigQuery pipelines to get the access token for your Google Account and access the source data on your behalf. You can grant manual approval with the OAuth dialog interface.
 
 You only need to give permission to BigQuery pipelines once.
 
@@ -167,6 +181,8 @@ When you manually run a data preparation in a selected schedule, BigQuery execut
 To manually run a scheduled data preparation, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected data preparation schedule.
 
@@ -188,6 +204,8 @@ To view the schedule for a data preparation, follow these steps:
 To view all data preparation schedules in your project, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Optional: To view the run history and details of a selected schedule, click the name of the schedule. History of manual runs is not shown.
 
@@ -208,6 +226,8 @@ To edit a schedule, follow these steps:
 To edit a schedule, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  Click the name of the selected data preparation schedule.
 
@@ -224,10 +244,12 @@ To edit a schedule, follow these steps:
 To permanently delete a schedule for a selected data preparation, follow these steps:
 
 1.  In the Google Cloud console, go to the **Scheduling** page.
+    
+    [Go to Scheduling](https://console.cloud.google.com/bigquery/orchestration)
 
 2.  In the row that contains the schedule, click more\_vert **Actions \> Delete** .
 
 ## What's next
 
-  - Learn how to [create data preparations](/bigquery/docs/data-prep-get-suggestions) .
-  - Learn more about [managing data preparations](/bigquery/docs/manage-data-preparations) .
+  - Learn how to [create data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-get-suggestions) .
+  - Learn more about [managing data preparations](https://docs.cloud.google.com/bigquery/docs/manage-data-preparations) .

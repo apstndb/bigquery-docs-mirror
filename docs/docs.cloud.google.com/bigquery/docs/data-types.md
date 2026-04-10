@@ -1,6 +1,6 @@
 # Legacy SQL data types
 
-This document details the data types supported by BigQuery's legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. For information on data types in GoogleSQL, see the [GoogleSQL data types](/bigquery/docs/reference/standard-sql/data-types) .
+This document details the data types supported by BigQuery's legacy SQL query syntax. The preferred query syntax for BigQuery is GoogleSQL. For information on data types in GoogleSQL, see the [GoogleSQL data types](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) .
 
 ## Legacy SQL data types
 
@@ -41,11 +41,11 @@ Your data can include the following data types:
 </tr>
 <tr class="odd">
 <td>NUMERIC</td>
-<td>Legacy SQL has limited support for NUMERIC. For more information, see <a href="#numeric-type-support">Exact numeric in legacy SQL</a> .</td>
+<td>Legacy SQL has limited support for NUMERIC. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-types#numeric-type-support">Exact numeric in legacy SQL</a> .</td>
 </tr>
 <tr class="even">
 <td>BIGNUMERIC</td>
-<td>Legacy SQL has limited support for BIGNUMERIC. For more information, see <a href="#numeric-type-support">Exact numeric in legacy SQL</a> .</td>
+<td>Legacy SQL has limited support for BIGNUMERIC. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-types#numeric-type-support">Exact numeric in legacy SQL</a> .</td>
 </tr>
 <tr class="odd">
 <td>BOOLEAN</td>
@@ -85,41 +85,41 @@ Your data can include the following data types:
 <tbody>
 <tr class="odd">
 <td>Minor (M4.2) earthquake near Oklahoma City</td>
-<td><div class="sourceCode" id="cb1" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1"></a><span class="ex">1408452095.220</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="ex">1408452095.220000</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb2" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="ex">2014-08-19</span> 07:41:35.220 -05:00</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="ex">2014-08-19</span> 12:41:35.220 UTC</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="ex">2014-08-19</span> 12:41:35.220</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="ex">2014-08-19</span> 12:41:35.220000</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="ex">2014-08-19T12</span>:41:35.220Z</span></code></pre></div></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>1408452095.220
+1408452095.220000</code></pre></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>2014-08-19 07:41:35.220 -05:00
+2014-08-19 12:41:35.220 UTC
+2014-08-19 12:41:35.220
+2014-08-19 12:41:35.220000
+2014-08-19T12:41:35.220Z</code></pre></td>
 </tr>
 <tr class="even">
 <td>Neil Armstrong sets foot on the moon</td>
-<td><div class="sourceCode" id="cb3" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="ex">-14182916</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb4" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="ex">1969-07-20</span> 20:18:04</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="ex">1969-07-20</span> 20:18:04 UTC</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="ex">1969-07-20T20</span>:18:04</span></code></pre></div></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>-14182916</code></pre></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>1969-07-20 20:18:04
+1969-07-20 20:18:04 UTC
+1969-07-20T20:18:04</code></pre></td>
 </tr>
 <tr class="odd">
 <td>Deadline for fixing <a href="https://en.wikipedia.org/wiki/Year_10,000_problem">Y10k bug</a></td>
-<td><div class="sourceCode" id="cb5" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="ex">253402300800</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="ex">2.53402300800e11</span></span></code></pre></div></td>
-<td><div class="sourceCode" id="cb6" dir="ltr" data-is-upgraded="" translate="no"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="ex">10000-01-01</span> 00:00</span></code></pre></div></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>253402300800
+2.53402300800e11</code></pre></td>
+<td><pre class="lang-sh" dir="ltr" data-is-upgraded="" translate="no"><code>10000-01-01 00:00</code></pre></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 <tr class="even">
 <td>DATE</td>
-<td>Legacy SQL has limited support for DATE. For more information, see <a href="#civil-time">Civil time in legacy SQL</a> .</td>
+<td>Legacy SQL has limited support for DATE. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-types#civil-time">Civil time in legacy SQL</a> .</td>
 </tr>
 <tr class="odd">
 <td>TIME</td>
-<td>Legacy SQL has limited support for TIME. For more information, see <a href="#civil-time">Civil time in legacy SQL</a> .</td>
+<td>Legacy SQL has limited support for TIME. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-types#civil-time">Civil time in legacy SQL</a> .</td>
 </tr>
 <tr class="even">
 <td>DATETIME</td>
-<td>Legacy SQL has limited support for DATETIME. For more information, see <a href="#civil-time">Civil time in legacy SQL</a> .</td>
+<td>Legacy SQL has limited support for DATETIME. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/data-types#civil-time">Civil time in legacy SQL</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -150,9 +150,9 @@ The following casts and conversion functions are supported in legacy SQL:
 
 In practice, legacy SQL interprets civil time values as integers, and operations on integers that you think are civil time values produce unexpected results.
 
-To compute values using civil time data types, consider [GoogleSQL](/bigquery/sql-reference) , which supports all SQL operations on the [DATE](/bigquery/sql-reference/data-types#date-type) , [DATETIME](/bigquery/sql-reference/data-types#datetime-type) , and [TIME](/bigquery/sql-reference/data-types#time-type) data types.
+To compute values using civil time data types, consider [GoogleSQL](https://docs.cloud.google.com/bigquery/sql-reference) , which supports all SQL operations on the [DATE](https://docs.cloud.google.com/bigquery/sql-reference/data-types#date-type) , [DATETIME](https://docs.cloud.google.com/bigquery/sql-reference/data-types#datetime-type) , and [TIME](https://docs.cloud.google.com/bigquery/sql-reference/data-types#time-type) data types.
 
 ## What's next
 
-  - To set a field's data type using the API, see [`  schema.fields.type  `](/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
-  - For GoogleSQL data types, see [data types](/bigquery/sql-reference/data-types) .
+  - To set a field's data type using the API, see [`  schema.fields.type  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.type) .
+  - For GoogleSQL data types, see [data types](https://docs.cloud.google.com/bigquery/sql-reference/data-types) .

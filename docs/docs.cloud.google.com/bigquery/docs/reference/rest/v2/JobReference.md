@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/JobReference#SCHEMA_REPRESENTATION)
 
 A job reference is a fully qualified identifier for referring to a job.
 
@@ -13,7 +13,7 @@ A job reference is a fully qualified identifier for referring to a job.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;jobId&quot;: string,
   &quot;location&quot;: string

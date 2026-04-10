@@ -1,34 +1,34 @@
-  - [Resource: Listing](#Listing)
-      - [JSON representation](#Listing.SCHEMA_REPRESENTATION)
-  - [BigQueryDatasetSource](#BigQueryDatasetSource)
-      - [JSON representation](#BigQueryDatasetSource.SCHEMA_REPRESENTATION)
-  - [SelectedResource](#SelectedResource)
-      - [JSON representation](#SelectedResource.SCHEMA_REPRESENTATION)
-  - [RestrictedExportPolicy](#RestrictedExportPolicy)
-      - [JSON representation](#RestrictedExportPolicy.SCHEMA_REPRESENTATION)
-  - [Replica](#Replica)
-      - [JSON representation](#Replica.SCHEMA_REPRESENTATION)
-  - [ReplicaState](#ReplicaState)
-  - [PrimaryState](#PrimaryState)
-  - [PubSubTopicSource](#PubSubTopicSource)
-      - [JSON representation](#PubSubTopicSource.SCHEMA_REPRESENTATION)
-  - [State](#State)
-  - [DataProvider](#DataProvider)
-      - [JSON representation](#DataProvider.SCHEMA_REPRESENTATION)
-  - [Category](#Category)
-  - [Publisher](#Publisher)
-      - [JSON representation](#Publisher.SCHEMA_REPRESENTATION)
-  - [RestrictedExportConfig](#RestrictedExportConfig)
-      - [JSON representation](#RestrictedExportConfig.SCHEMA_REPRESENTATION)
-  - [StoredProcedureConfig](#StoredProcedureConfig)
-      - [JSON representation](#StoredProcedureConfig.SCHEMA_REPRESENTATION)
-  - [StoredProcedureType](#StoredProcedureType)
-  - [CommercialInfo](#CommercialInfo)
-      - [JSON representation](#CommercialInfo.SCHEMA_REPRESENTATION)
-  - [GoogleCloudMarketplaceInfo](#GoogleCloudMarketplaceInfo)
-      - [JSON representation](#GoogleCloudMarketplaceInfo.SCHEMA_REPRESENTATION)
-  - [CommercialState](#CommercialState)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Listing](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Listing)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Listing.SCHEMA_REPRESENTATION)
+  - [BigQueryDatasetSource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#BigQueryDatasetSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#BigQueryDatasetSource.SCHEMA_REPRESENTATION)
+  - [SelectedResource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#SelectedResource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#SelectedResource.SCHEMA_REPRESENTATION)
+  - [RestrictedExportPolicy](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#RestrictedExportPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#RestrictedExportPolicy.SCHEMA_REPRESENTATION)
+  - [Replica](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Replica)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Replica.SCHEMA_REPRESENTATION)
+  - [ReplicaState](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#ReplicaState)
+  - [PrimaryState](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#PrimaryState)
+  - [PubSubTopicSource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#PubSubTopicSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#PubSubTopicSource.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#State)
+  - [DataProvider](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#DataProvider)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#DataProvider.SCHEMA_REPRESENTATION)
+  - [Category](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Category)
+  - [Publisher](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Publisher)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#Publisher.SCHEMA_REPRESENTATION)
+  - [RestrictedExportConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#RestrictedExportConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#RestrictedExportConfig.SCHEMA_REPRESENTATION)
+  - [StoredProcedureConfig](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#StoredProcedureConfig)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#StoredProcedureConfig.SCHEMA_REPRESENTATION)
+  - [StoredProcedureType](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#StoredProcedureType)
+  - [CommercialInfo](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#CommercialInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#CommercialInfo.SCHEMA_REPRESENTATION)
+  - [GoogleCloudMarketplaceInfo](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#GoogleCloudMarketplaceInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#GoogleCloudMarketplaceInfo.SCHEMA_REPRESENTATION)
+  - [CommercialState](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#CommercialState)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/v1/projects.locations.dataExchanges.listings#METHODS_SUMMARY)
 
 ## Resource: Listing
 
@@ -45,7 +45,7 @@ A listing is what gets published into a data exchange that a subscriber can subs
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;displayName&quot;: string,
   &quot;description&quot;: string,
@@ -231,7 +231,7 @@ A reference to a shared dataset. It is an existing BigQuery dataset with a colle
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;dataset&quot;: string,
   &quot;selectedResources&quot;: [
     {
@@ -301,7 +301,7 @@ Resource in this dataset that is selectively shared.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field resource can be only one of the following:
   &quot;table&quot;: string,
@@ -345,7 +345,7 @@ Restricted export policy used to configure restricted export on linked dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enabled&quot;: boolean,
   &quot;restrictDirectTableAccess&quot;: boolean,
   &quot;restrictQueryResult&quot;: boolean
@@ -389,7 +389,7 @@ Represents the state of a replica of a shared dataset. It includes the geographi
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;location&quot;: string,
   &quot;replicaState&quot;: enum (ReplicaState),
   &quot;primaryState&quot;: enum (PrimaryState)
@@ -465,7 +465,7 @@ Pub/Sub topic source.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;topic&quot;: string,
   &quot;dataAffinityRegions&quot;: [
     string
@@ -518,7 +518,7 @@ Contains details of the data provider.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;primaryContact&quot;: string
 }</code></pre></td>
@@ -603,7 +603,7 @@ Contains details of the listing publisher.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;primaryContact&quot;: string
 }</code></pre></td>
@@ -640,7 +640,7 @@ Restricted export config, used to configure restricted export on linked dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enabled&quot;: boolean,
   &quot;restrictDirectTableAccess&quot;: boolean,
   &quot;restrictQueryResult&quot;: boolean
@@ -684,7 +684,7 @@ Stored procedure configuration, used to configure stored procedure sharing on li
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enabled&quot;: boolean,
   &quot;allowedStoredProcedureTypes&quot;: [
     enum (StoredProcedureType)
@@ -737,7 +737,7 @@ Commercial info contains the information about the commercial data products asso
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;cloudMarketplace&quot;: {
     object (GoogleCloudMarketplaceInfo)
   }
@@ -769,7 +769,7 @@ Specifies the details of the Marketplace Data Product associated with the Listin
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;service&quot;: string,
   &quot;commercialState&quot;: enum (CommercialState)
 }</code></pre></td>

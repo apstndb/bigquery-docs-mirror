@@ -13,29 +13,27 @@ The `  EXPORT DATA  ` statement exports the results of a query to an external st
 
 ### Syntax
 
-``` text
-EXPORT DATA
-[WITH CONNECTION connection_name]
-OPTIONS (export_option_list) AS
-query_statement
-```
+    EXPORT DATA
+    [WITH CONNECTION connection_name]
+    OPTIONS (export_option_list) AS
+    query_statement
 
 ### Arguments
 
-  - `  connection_name  ` : Specifies a [connection](/bigquery/docs/connections-api-intro) that has credentials for accessing the Amazon S3 data. Specify the connection name in the form `  PROJECT_ID . LOCATION . CONNECTION_ID  ` . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). Connections aren't required to export to Google Cloud services.
+  - `  connection_name  ` : Specifies a [connection](https://docs.cloud.google.com/bigquery/docs/connections-api-intro) that has credentials for accessing the Amazon S3 data. Specify the connection name in the form `  PROJECT_ID . LOCATION . CONNECTION_ID  ` . If the project ID or location contains a dash, enclose the connection name in backticks ( ``  `  `` ). Connections aren't required to export to Google Cloud services.
 
   - `  export_option_list  ` : Specifies a list of options for the export operation, including the URI of the destination. For more information, see the following sections:
     
-      - [Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Blob Storage export option list](#gcs_s3_export_option)
-      - [Bigtable export option list](#bigtable_export_option)
-      - [Pub/Sub export option list](#pubsub_export_option)
-      - [Spanner export option list](#spanner_export_option)
+      - [Cloud Storage, Amazon Simple Storage Service (Amazon S3), and Blob Storage export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#gcs_s3_export_option)
+      - [Bigtable export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#bigtable_export_option)
+      - [Pub/Sub export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#pubsub_export_option)
+      - [Spanner export option list](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/export-statements#spanner_export_option)
 
   - `  query_statement  ` : A SQL query. The query result is exported to the external destination. The query can't reference metatables, including `  INFORMATION_SCHEMA  ` views, system tables, or wildcard tables.
 
 ## Export to Cloud Storage, Amazon S3, or Blob Storage
 
-You can export BigQuery data to Cloud Storage, Amazon S3, or Blob Storage in Avro, CSV, JSON, and Parquet formats. For more information about exporting to Cloud Storage, see [Export table data to Cloud Storage](/bigquery/docs/exporting-data) .
+You can export BigQuery data to Cloud Storage, Amazon S3, or Blob Storage in Avro, CSV, JSON, and Parquet formats. For more information about exporting to Cloud Storage, see [Export table data to Cloud Storage](https://docs.cloud.google.com/bigquery/docs/exporting-data) .
 
 Use the `  format  ` option to specify the format of the exported data. The following limitations apply:
 
@@ -90,7 +88,7 @@ Note: When `  overwrite  ` is `  true  ` , files are only overwritten, no files 
 
 `  STRING  `
 
-Required. The destination URI for the export. The `  uri  ` option must be a single-wildcard URI as described in [Exporting data into one or more files](/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
+Required. The destination URI for the export. The `  uri  ` option must be a single-wildcard URI as described in [Exporting data into one or more files](https://docs.cloud.google.com/bigquery/docs/exporting-data#exporting_data_into_one_or_more_files) .
 
 Examples: `  "gs://bucket/path/file_*.csv"  ` or `  "s3://bucket/path/file_*.csv"  `
 
@@ -100,7 +98,7 @@ Examples: `  "gs://bucket/path/file_*.csv"  ` or `  "s3://bucket/path/file_*.csv
 
 Whether to use appropriate AVRO logical types when exporting `  TIMESTAMP  ` , `  DATETIME  ` , `  TIME  ` and `  DATE  ` types.
 
-Applies to: AVRO. For more information, see [Avro export details](/bigquery/docs/exporting-data#avro_export_details) .
+Applies to: AVRO. For more information, see [Avro export details](https://docs.cloud.google.com/bigquery/docs/exporting-data#avro_export_details) .
 
 ### Examples
 
@@ -110,7 +108,7 @@ The following examples show common use cases for exporting to Cloud Storage, Ama
 
 The following example exports data to a CSV file. It includes options to overwrite the destination location, write header rows, and use `  ';'  ` as a delimiter.
 
-``` text
+``` notranslate
 EXPORT DATA OPTIONS(
   uri='gs://bucket/folder/*.csv',
   format='CSV',
@@ -124,7 +122,7 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 The following example exports data to Avro format using Snappy compression.
 
-``` text
+``` notranslate
 EXPORT DATA OPTIONS(
   uri='gs://bucket/folder/*',
   format='AVRO',
@@ -136,7 +134,7 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 The following example exports data to Parquet format. It includes the option to overwrite the destination location.
 
-``` text
+``` notranslate
 EXPORT DATA OPTIONS(
   uri='gs://bucket/folder/*',
   format='PARQUET',
@@ -146,9 +144,9 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 #### Export data to Amazon S3 in JSON format
 
-The following example [exports query results](/bigquery/docs/omni-aws-export-results-to-s3) that run against a BigLake table based on Amazon S3 to your Amazon S3 bucket:
+The following example [exports query results](https://docs.cloud.google.com/bigquery/docs/omni-aws-export-results-to-s3) that run against a BigLake table based on Amazon S3 to your Amazon S3 bucket:
 
-``` text
+``` notranslate
 EXPORT DATA
   WITH CONNECTION myproject.us.myconnection
   OPTIONS(
@@ -160,7 +158,7 @@ SELECT field1, field2 FROM mydataset.table1 ORDER BY field1 LIMIT 10
 
 ## Export to Bigtable
 
-You can export BigQuery data to a Bigtable table by using the `  EXPORT DATA  ` statement. For Bigtable export examples and configuration options, see [Export data to Bigtable](/bigquery/docs/export-to-bigtable) .
+You can export BigQuery data to a Bigtable table by using the `  EXPORT DATA  ` statement. For Bigtable export examples and configuration options, see [Export data to Bigtable](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable) .
 
 You are not billed for the export operation, but you are billed for running the query and for storing data in Bigtable. For more information, see [Bigtable pricing](https://cloud.google.com/bigtable/pricing) .
 
@@ -180,7 +178,7 @@ Required. When exporting to Bigtable, the value must always be `  CLOUD_BIGTABLE
 
 `  STRING  `
 
-JSON string containing configurations related to mapping exported fields to Bigtable columns families and columns. For more information, see [Configure exports with `  bigtable_options  ` .](/bigquery/docs/export-to-bigtable#bigtable_options)
+JSON string containing configurations related to mapping exported fields to Bigtable columns families and columns. For more information, see [Configure exports with `  bigtable_options  ` .](https://docs.cloud.google.com/bigquery/docs/export-to-bigtable#bigtable_options)
 
 `  overwrite  `
 
@@ -212,7 +210,7 @@ If `  true  ` , allows export to create missing column families in the target ta
 
 The following example exports data to a Bigtable table. Data in `  field1  ` becomes a row key in Bigtable destination table. The fields `  field2  ` , `  field3  ` and `  field4  ` are written as columns `  cbtFeld2  ` , `  cbtField3  ` and `  cbtField4  ` into column family `  column_family  ` .
 
-``` text
+``` notranslate
 EXPORT DATA OPTIONS (
 uri="https://bigtable.googleapis.com/projects/my-project/instances/my-instance/tables/my-table",
 format="CLOUD_BIGTABLE",
@@ -239,13 +237,13 @@ FROM `bigquery_table`
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To enroll in the continuous queries preview, fill out [the request form](https://docs.google.com/forms/d/e/1FAIpQLSc-SL89C9K997jSm_u3oQH-UGGe3brzsybbX6mf5VFaA0a4iA/viewform) . To give feedback or request support for this feature, contact <bq-continuous-queries-feedback@google.com> .
 
-You can export BigQuery data to a Pub/Sub topic by using the `  EXPORT DATA  ` statement in a [continuous query](/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](/bigquery/docs/export-to-pubsub) .
+You can export BigQuery data to a Pub/Sub topic by using the `  EXPORT DATA  ` statement in a [continuous query](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) . For more information about Pub/Sub configuration options, see [Export data to Pub/Sub](https://docs.cloud.google.com/bigquery/docs/export-to-pubsub) .
 
-For information about the costs involved with exporting to Pub/Sub by using a continuous query, see [Costs](/bigquery/docs/continuous-queries-introduction#pricing) .
+For information about the costs involved with exporting to Pub/Sub by using a continuous query, see [Costs](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction#pricing) .
 
 ### Pub/Sub export option list
 
@@ -269,7 +267,7 @@ Required. The destination URI for the export. The `  uri  ` option for a Pub/Sub
 
 The following example shows a continuous query that filters data from a BigQuery table that is receiving streaming taxi ride information, and publishes the data to a Pub/Sub topic in real time:
 
-``` text
+``` notranslate
 EXPORT DATA
   OPTIONS (
     format = 'CLOUD_PUBSUB',
@@ -289,7 +287,7 @@ AS (
 
 ## Export to Spanner
 
-You can export data from a BigQuery table to a [Spanner](/spanner/docs/overview) table by using the `  EXPORT DATA  ` statement.
+You can export data from a BigQuery table to a [Spanner](https://docs.cloud.google.com/spanner/docs/overview) table by using the `  EXPORT DATA  ` statement.
 
 ### Spanner export option list
 
@@ -313,7 +311,7 @@ Required. The destination URI for the export. For Spanner, the URI must be provi
 
 `  STRING  `
 
-Required. A JSON string containing configurations related to mapping exported fields to Spanner column families and columns. For more information, see [Configure exports with `  spanner_options  ` option.](/bigquery/docs/export-to-spanner#spanner_options)
+Required. A JSON string containing configurations related to mapping exported fields to Spanner column families and columns. For more information, see [Configure exports with `  spanner_options  ` option.](https://docs.cloud.google.com/bigquery/docs/export-to-spanner#spanner_options)
 
 ### Examples
 
@@ -321,7 +319,7 @@ Required. A JSON string containing configurations related to mapping exported fi
 
 The following example exports data to a Spanner table:
 
-``` text
+``` notranslate
 EXPORT DATA OPTIONS (
   uri="https://spanner.googleapis.com/projects/my-project/instances/my-instance/databases/my-database",
   format="CLOUD_SPANNER",
@@ -330,4 +328,4 @@ EXPORT DATA OPTIONS (
 AS SELECT * FROM `bigquery_table`
 ```
 
-For more Spanner export examples and configuration options, see [Export data to Spanner](/bigquery/docs/export-to-spanner) .
+For more Spanner export examples and configuration options, see [Export data to Spanner](https://docs.cloud.google.com/bigquery/docs/export-to-spanner) .

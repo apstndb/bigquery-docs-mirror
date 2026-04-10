@@ -1,17 +1,17 @@
 # Load MySQL data into BigQuery
 
-You can load data from MySQL to BigQuery by using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
+You can load data from MySQL to BigQuery by using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for MySQL connector. It supports MySQL instances that are hosted in your on-premises environment, in [Cloud SQL](https://docs.cloud.google.com/sql/docs/introduction) , and in other public cloud providers such as Amazon Web Services (AWS) and Microsoft Azure. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from MySQL to BigQuery.
 
 ## Before you begin
 
   - [Create a user](https://dev.mysql.com/doc/mysql-monitor/8.0/en/mem-acl-creating-user-roles-tasks.html) in the MySQL database.
-  - Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store your data.
-  - Verify that you have the [required roles](#required-roles) to complete the tasks in this document.
+  - Verify that you have completed all the actions that are required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store your data.
+  - Verify that you have the [required roles](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#required-roles) to complete the tasks in this document.
 
 ### Required roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -29,21 +29,21 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
-If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+If you intend to set up transfer run notifications for Pub/Sub, ensure that you have the `  pubsub.topics.setIamPolicy  ` Identity and Access Management (IAM) permission. Pub/Sub permissions are not required if you only set up email notifications. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ### Network connections
 
-If a public IP address is not available for the MySQL database connection, you must [set up a network attachment](/vpc/docs/create-manage-network-attachments) .
+If a public IP address is not available for the MySQL database connection, you must [set up a network attachment](https://docs.cloud.google.com/vpc/docs/create-manage-network-attachments) .
 
 For detailed instructions on the required network setup, refer to the following documents:
 
-  - If you're transferring from Cloud SQL, see [Configure Cloud SQL instance access](/bigquery/docs/cloud-sql-instance-access) .
-  - If you're transferring from AWS, see [Set up the AWS-Google Cloud VPN and network attachment](/bigquery/docs/aws-vpn-network-attachment) .
-  - If you're transferring from Azure, see [Set up the Azure-Google Cloud VPN and network attachment](/bigquery/docs/azure-vpn-network-attachment) .
+  - If you're transferring from Cloud SQL, see [Configure Cloud SQL instance access](https://docs.cloud.google.com/bigquery/docs/cloud-sql-instance-access) .
+  - If you're transferring from AWS, see [Set up the AWS-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/aws-vpn-network-attachment) .
+  - If you're transferring from Azure, see [Set up the Azure-Google Cloud VPN and network attachment](https://docs.cloud.google.com/bigquery/docs/azure-vpn-network-attachment) .
 
 ## Limitations
 
@@ -86,7 +86,7 @@ Incremental MySQL transfers are subject to the following limitations:
 
   - You cannot change the watermark column or the primary key after the first incremental ingestion run.
 
-  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](/bigquery/docs/clustered-tables#limitations) .
+  - The destination BigQuery table is clustered using the provided primary key and is subject to [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) .
 
   - When you update an existing transfer configuration to the incremental ingestion mode for the first time, the first data transfer after that update transfers all available data from your data source. Any subsequent incremental data transfers will transfer only the new and updated rows from your data source.
 
@@ -136,13 +136,13 @@ You can specify PEM-encoded certificates in the **Trusted PEM Certificate** fiel
 
 ### Full or incremental transfers
 
-You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a MySQL transfer](#set-up-a-mysql-data-transfer) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
+You can specify how data is loaded into BigQuery by selecting either the *Full* or *Incremental* write preference in the transfer configuration when you [set up a MySQL transfer](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#set-up-a-mysql-data-transfer) . Incremental transfers are supported in [Preview](https://cloud.google.com/products#product-launch-stages) .
 
 **Note:** To request feedback or support for incremental transfers, send email to <dts-preview-support@google.com> .
 
 You can configure a *full* data transfer to transfer all data from your MySQL datasets with each data transfer.
 
-Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify either the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
+Alternatively, you can configure an *incremental* data transfer ( [Preview](https://cloud.google.com/products#product-launch-stages) ) to only transfer data that was changed since the last data transfer, instead of loading the entire dataset with each data transfer. If you have configured an incremental data transfer, then you must specify the *append* or *upsert* write modes to define how data is written to BigQuery during an incremental data transfer. The following sections describe the available write modes.
 
 #### Append write mode
 
@@ -150,7 +150,7 @@ The append write mode only inserts new rows to your destination table. This opti
 
 When you select the append mode, you must select a watermark column. A watermark column is required for the MySQL connector to track changes in the source table.
 
-For MySQL transfers, we recommend selecting a column that is only updated when the record was created, and that won't change with subsequent updates—for example, the `  CREATED_AT  ` column.
+For MySQL transfers, we recommend selecting a column that is only updated when the record was created, and won't change with subsequent updates. For example, the `  CREATED_AT  ` column.
 
 #### Upsert write mode
 
@@ -159,8 +159,7 @@ The upsert write mode either updates a row or inserts a new row in your destinat
 When you select the upsert mode, you must select a watermark column and a primary key:
 
   - A watermark column is required for the MySQL connector to track changes in the source table.
-    
-    Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
+      - Select a watermark column that updates every time a row is modified. We recommend columns similar to the `  UPDATED_AT  ` or `  LAST_MODIFIED  ` column.
 
 <!-- end list -->
 
@@ -196,7 +195,7 @@ When you make changes to the table schema in your data source, incremental data 
 </tr>
 <tr class="odd">
 <td>Changing the data type in a column</td>
-<td>The connector only supports <a href="/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
+<td>The connector only supports <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#details_21">data type conversions that are supported by the <code dir="ltr" translate="no">        ALTER COLUMN       </code> DDL statement</a> . Any other data type conversions causes the data transfer to fail.
 <p>If you encounter any issues, we recommend creating a new transfer configuration.</p></td>
 </tr>
 <tr class="even">
@@ -213,6 +212,8 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 ### Console
 
 1.  Go to the **Data transfers** page.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -220,7 +221,7 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 
 4.  In the **Data source details** section, do the following:
     
-      - For **Network attachment** , select an existing network attachment or click **Create Network Attachment** . For more information, see the [Network connections](#network-connections) section of this document.
+      - For **Network attachment** , select an existing network attachment or click **Create Network Attachment** . For more information, see the [Network connections](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#network-connections) section of this document.
     
       - For **Host** , enter the hostname or IP address of the MySQL database server.
     
@@ -232,15 +233,15 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
     
       - For **Password** , enter the password of the MySQL user initiating the MySQL database connection.
     
-      - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](#tls_configuration) .
+      - For **TLS Mode** , select an option from the menu. For more information about TLS modes, see [TLS configuration](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#tls_configuration) .
     
-      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) .
+      - For **Trusted PEM Certificate** , enter the public certificate of the certificate authority (CA) that issued the TLS certificate of the database server. For more information, see [Trusted Server Certificate (PEM)](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) .
     
-      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](#data_type_mapping) . Select **false** to use the updated data type mapping. If you are making an incremental transfer, this value must be **false** . For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+      - For **Enable legacy mapping** , select **true** (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#data_type_mapping) . Select **false** to use the updated data type mapping. If you are making an incremental transfer, this value must be **false** . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-mysql) .
     
       - For **Ingestion type** , select **Full** or **Incremental** .
         
-          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](#full_or_incremental_transfers) .
+          - If you select **Incremental** ( [Preview](https://cloud.google.com/products#product-launch-stages) ), for **Write mode** , select either **Append** or **Upsert** . For more information about the different write modes, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#full_or_incremental_transfers) .
     
       - For **MySQL objects to transfer** , click **Browse** .
         
@@ -253,7 +254,7 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 
 6.  In the **Schedule options** section, do the following:
     
-      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+      - Select a repeat frequency. If you select the **Hours** , **Days** (default), **Weeks** , or **Months** option, you must also specify a frequency. You can also select the **Custom** option to create a more specific repeat frequency. If you select the **On-demand** option, this data transfer only runs when you [manually trigger the transfer](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
       - If applicable, select either the **Start now** or **Start at a set time** option and provide a start date and run time.
 
 7.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data, or click **Create new dataset** and create one to use as the destination dataset.
@@ -261,15 +262,15 @@ Add MySQL data into BigQuery by setting up a transfer configuration using one of
 8.  Optional: In the **Notification options** section, do the following:
     
       - To enable email notifications, click the **Email notifications** toggle to the on position. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-      - To configure Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](/pubsub/docs/admin) name or click **Create a topic** to create one.
+      - To configure Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer, click the **Pub/Sub notifications** toggle to the on position. You can select your [topic](https://docs.cloud.google.com/pubsub/docs/admin) name or click **Create a topic** to create one.
 
 9.  Click **Save** .
 
 ### bq
 
-Enter the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
+Enter the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_mk) and supply the transfer creation flag `  --transfer_config  ` :
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --project_id=PROJECT_ID
@@ -298,14 +299,14 @@ Replace the following:
       - `  connector.authentication.username  ` : the username of the database user.
       - `  connector.authentication.password  ` : the password of the database user. connector.connectionType
       - `  connector.connectionType  ` (optional): the connection type to determine the connection URL. This can be `  SERVICE  ` , `  SID  ` , or `  TNS  ` . When not provided, this defaults to `  SERVICE  ` .
-      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. If you are making an incremental transfer, this value must be `  false  ` . For more information about the data type mapping updates, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
-      - `  connector.tls.mode  ` : specify a [TLS configuration](#tls_configuration) to use with this transfer:
+      - `  connector.legacyMapping  ` : set to `  true  ` (default) to use the [legacy data type mapping](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#data_type_mapping) . Set to `  false  ` to use the updated data type mapping. If you are making an incremental transfer, this value must be `  false  ` . For more information about the data type mapping updates, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-mysql) .
+      - `  connector.tls.mode  ` : specify a [TLS configuration](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#tls_configuration) to use with this transfer:
           - `  ENCRYPT_VERIFY_CA_AND_HOST  ` to encrypt data, and verify CA and hostname
           - `  ENCRYPT_VERIFY_CA  ` to encrypt data, and verify CA only
           - `  ENCRYPT_VERIFY_NONE  ` for data encryption only
           - `  DISABLE  ` for no encryption or verification
-      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
-      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](#full_or_incremental_transfers) .
+      - `  connector.tls.trustedServerCertificate  ` : (optional) provide one or more [PEM-encoded certificates](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#trusted_server_certificate_pem) . Required only if `  connector.tls.mode  ` is `  ENCRYPT_VERIFY_CA_AND_HOST  ` or `  ENCRYPT_VERIFY_CA  ` .
+      - `  ingestionType  ` : specify either `  FULL  ` or `  INCREMENTAL  ` . Incremental transfers are supported in [preview](https://cloud.google.com/products#product-launch-stages) . For more information, see [Full or incremental transfers](https://docs.cloud.google.com/bigquery/docs/mysql-transfer#full_or_incremental_transfers) .
       - `  writeMode  ` : specify either `  WRITE_MODE_APPEND  ` or `  WRITE_MODE_UPSERT  ` .
       - `  watermarkColumns  ` : specify columns in your table as watermark columns. This field is required for incremental transfers.
       - `  primaryKeys  ` : specify columns in your table as primary keys. This field is required for incremental transfers.
@@ -313,7 +314,7 @@ Replace the following:
 
 For example, the following command creates a MySQL transfer called `  My Transfer  ` :
 
-``` text
+``` notranslate
 bq mk
     --transfer_config
     --target_dataset=mydataset
@@ -336,7 +337,7 @@ bq mk
 
 When specifying multiple assets during an incremental transfer, the values of the `  watermarkColumns  ` and `  primaryKeys  ` fields correspond to the position of values in the `  assets  ` field. In the following example, `  dep_id  ` corresponds to the table `  DB1/USER1/DEPARTMENT  ` , while `  report_by  ` and `  report_title  ` corresponds to the table `  DB1/USER1/EMPLOYEES  ` .
 
-``` text
+``` notranslate
       "primaryKeys":[['dep_id'], ['report_by','report_title']],
       "assets":["DB1/USER1/DEPARTMENT","DB1/USER1/EMPLOYEES"],
   
@@ -344,15 +345,15 @@ When specifying multiple assets during an incremental transfer, the values of th
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  ` method](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
+Use the [`  projects.locations.transferConfigs.create  ` method](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) and supply an instance of the [`  TransferConfig  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) .
 
 When you save the transfer configuration, the MySQL connector automatically triggers a transfer run according to your schedule option. With every transfer run, the MySQL connector transfers all available data from MySQL into BigQuery.
 
-To manually run a data transfer outside of your regular schedule, you can start a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To manually run a data transfer outside of your regular schedule, you can start a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Data type mapping
 
-**Note:** On March 16, 2027, the MySQL connector will update some of its data type mapping. For more information, see [March 16, 2027](/bigquery/docs/transfer-changes#Mar16-mysql) .
+**Note:** On March 16, 2027, the MySQL connector will update some of its data type mapping. For more information, see [March 16, 2027](https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-mysql) .
 
 The following table maps MySQL data types to the corresponding BigQuery data types.
 
@@ -366,7 +367,7 @@ The following table maps MySQL data types to the corresponding BigQuery data typ
 <tr class="header">
 <th>MySQL data type</th>
 <th>BigQuery data type</th>
-<th><a href="/bigquery/docs/transfer-changes#Mar16-mysql">Updated BigQuery data type</a></th>
+<th><a href="https://docs.cloud.google.com/bigquery/docs/transfer-changes#Mar16-mysql">Updated BigQuery data type</a></th>
 </tr>
 </thead>
 <tbody>
@@ -531,14 +532,14 @@ The following table maps MySQL data types to the corresponding BigQuery data typ
 
 ## Troubleshoot
 
-If you are having issues setting up your data transfer, see [MySQL transfer issues](/bigquery/docs/transfer-troubleshooting#mysql-issues) .
+If you are having issues setting up your data transfer, see [MySQL transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#mysql-issues) .
 
 ## Pricing
 
-For pricing information about MySQL transfers, see [Data Transfer Service pricing](/bigquery/pricing#data-transfer-service-pricing) .
+For pricing information about MySQL transfers, see [Data Transfer Service pricing](https://docs.cloud.google.com/bigquery/pricing#data-transfer-service-pricing) .
 
 ## What's next
 
-  - Read [an overview about the BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) .
-  - Learn about [managing transfers](/bigquery/docs/working-with-transfers) , including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history.
-  - Learn how to [load data with cross-cloud operations](/bigquery/docs/load-data-using-cross-cloud-transfer) .
+  - Read [an overview about the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) .
+  - Learn about [managing transfers](https://docs.cloud.google.com/bigquery/docs/working-with-transfers) , including getting information about a transfer configuration, listing transfer configurations, and viewing a transfer's run history.
+  - Learn how to [load data with cross-cloud operations](https://docs.cloud.google.com/bigquery/docs/load-data-using-cross-cloud-transfer) .

@@ -4,14 +4,14 @@ Forecasting is a technique where you analyze historical data in order to make an
 
 You can perform forecasting in the following ways:
 
-  - By using the [`  AI.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with the built-in [TimesFM model](/bigquery/docs/timesfm-model) . Use this approach when you need to forecast future values for a single variable. This approach doesn't require you to create and manage a model.
-  - By using the [`  ML.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`  ARIMA_PLUS  ` model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) . Use this approach when you need to run an ARIMA-based modeling pipeline and decompose the time series into multiple components in order to explain the results. This approach requires you to create and manage a model.
-  - By using the [`  ML.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`  ARIMA_PLUS_XREG  ` model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) . Use this approach when you need to forecast future values for multiple variables. This approach requires you to create and manage a model.
+  - By using the [`  AI.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-forecast) with the built-in [TimesFM model](https://docs.cloud.google.com/bigquery/docs/timesfm-model) . Use this approach when you need to forecast future values for a single variable. This approach doesn't require you to create and manage a model.
+  - By using the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`  ARIMA_PLUS  ` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series) . Use this approach when you need to run an ARIMA-based modeling pipeline and decompose the time series into multiple components in order to explain the results. This approach requires you to create and manage a model.
+  - By using the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) with the [`  ARIMA_PLUS_XREG  ` model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) . Use this approach when you need to forecast future values for multiple variables. This approach requires you to create and manage a model.
 
 In addition to forecasting, you can use `  ARIMA_PLUS  ` and `  ARIMA_PLUS_XREG  ` models for anomaly detection. For more information, see the following documents:
 
-  - [Anomaly detection overview](/bigquery/docs/anomaly-detection-overview)
-  - [Perform anomaly detection with a multivariate time-series forecasting model](/bigquery/docs/time-series-anomaly-detection-tutorial)
+  - [Anomaly detection overview](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview)
+  - [Perform anomaly detection with a multivariate time-series forecasting model](https://docs.cloud.google.com/bigquery/docs/time-series-anomaly-detection-tutorial)
 
 ## Compare `     ARIMA_PLUS    ` models and the TimesFM model
 
@@ -33,7 +33,7 @@ Use the following table to determine whether to use TimesFM, `  ARIMA_PLUS  ` , 
 <tbody>
 <tr class="odd">
 <td>Model details</td>
-<td>Statistical model that uses the <code dir="ltr" translate="no">       ARIMA      </code> algorithm for the trend component, and a variety of other algorithms for non-trend components. For more information, see <a href="/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline">Time series modeling pipeline</a> and publication below.</td>
+<td>Statistical model that uses the <code dir="ltr" translate="no">       ARIMA      </code> algorithm for the trend component, and a variety of other algorithms for non-trend components. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series#modeling-pipeline">Time series modeling pipeline</a> and publication below.</td>
 <td>Transformer-based foundation model. For more information, see the publications in the next row.</td>
 </tr>
 <tr class="even">
@@ -63,7 +63,7 @@ Use the following table to determine whether to use TimesFM, `  ARIMA_PLUS  ` , 
 </tr>
 <tr class="odd">
 <td>Customization</td>
-<td>High. The <a href="/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series"><code dir="ltr" translate="no">        CREATE MODEL       </code> statement</a> offers arguments that let you tune many model settings, such as the following:
+<td>High. The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-time-series"><code dir="ltr" translate="no">        CREATE MODEL       </code> statement</a> offers arguments that let you tune many model settings, such as the following:
 <ul>
 <li>Seasonality</li>
 <li>Holiday effects</li>
@@ -76,12 +76,12 @@ Use the following table to determine whether to use TimesFM, `  ARIMA_PLUS  ` , 
 </tr>
 <tr class="even">
 <td>Supports covariates</td>
-<td>Yes, when using the <a href="/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series"><code dir="ltr" translate="no">        ARIMA_PLUS_XREG       </code> model</a> .</td>
+<td>Yes, when using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series"><code dir="ltr" translate="no">        ARIMA_PLUS_XREG       </code> model</a> .</td>
 <td>No.</td>
 </tr>
 <tr class="odd">
 <td>Explainability</td>
-<td>High. You can use the <a href="/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">        ML.EXPLAIN_FORECAST       </code> function</a> to inspect model components.</td>
+<td>High. You can use the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast"><code dir="ltr" translate="no">        ML.EXPLAIN_FORECAST       </code> function</a> to inspect model components.</td>
 <td>Low.</td>
 </tr>
 <tr class="even">

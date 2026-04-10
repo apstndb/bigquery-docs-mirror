@@ -4,7 +4,7 @@ This document describes the `  ML.PRINCIPAL_COMPONENT_INFO  ` function, which le
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.PRINCIPAL_COMPONENT_INFO(
   MODEL `PROJECT_ID.DATASET.MODEL`
 )
@@ -31,7 +31,7 @@ ML.PRINCIPAL_COMPONENT_INFO(
 
 The following example retrieves the eigenvalue-related information of each principal component in the model `  mydataset.mymodel  ` in your default project.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -40,5 +40,5 @@ FROM
 
 ## What's next
 
-  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](/bigquery/docs/weights-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

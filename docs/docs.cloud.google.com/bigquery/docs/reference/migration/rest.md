@@ -1,9 +1,9 @@
 The migration service, exposing apis for migration jobs operations, and agent management.
 
-  - [REST Resource: v2alpha.projects.locations.workflows](#v2alpha.projects.locations.workflows)
-  - [REST Resource: v2alpha.projects.locations.workflows.subtasks](#v2alpha.projects.locations.workflows.subtasks)
-  - [REST Resource: v2.projects.locations.workflows](#v2.projects.locations.workflows)
-  - [REST Resource: v2.projects.locations.workflows.subtasks](#v2.projects.locations.workflows.subtasks)
+  - [REST Resource: v2alpha.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest#v2alpha.projects.locations.workflows)
+  - [REST Resource: v2alpha.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest#v2alpha.projects.locations.workflows.subtasks)
+  - [REST Resource: v2.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest#v2.projects.locations.workflows)
+  - [REST Resource: v2.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest#v2.projects.locations.workflows.subtasks)
 
 ## Service: bigquerymigration.googleapis.com
 
@@ -22,7 +22,7 @@ A [service endpoint](https://cloud.google.com/apis/design/glossary#api_service_e
 
   - `  https://bigquerymigration.googleapis.com  `
 
-## REST Resource: [v2alpha.projects.locations.workflows](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows)
+## REST Resource: [v2alpha.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows)
 
 Methods
 
@@ -51,7 +51,7 @@ Lists previously created migration workflow.
 `  POST /v2alpha/{name=projects/*/locations/*/workflows/*}:start  `  
 Starts a previously created migration workflow.
 
-## REST Resource: [v2alpha.projects.locations.workflows.subtasks](/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks)
+## REST Resource: [v2alpha.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks)
 
 Methods
 
@@ -65,7 +65,7 @@ Gets a previously created migration subtask.
 `  GET /v2alpha/{parent=projects/*/locations/*/workflows/*}/subtasks  `  
 Lists previously created migration subtasks.
 
-## REST Resource: [v2.projects.locations.workflows](/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows)
+## REST Resource: [v2.projects.locations.workflows](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows)
 
 Methods
 
@@ -94,7 +94,7 @@ Lists previously created migration workflow.
 `  POST /v2/{name=projects/*/locations/*/workflows/*}:start  `  
 Starts a previously created migration workflow.
 
-## REST Resource: [v2.projects.locations.workflows.subtasks](/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows.subtasks)
+## REST Resource: [v2.projects.locations.workflows.subtasks](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows.subtasks)
 
 Methods
 

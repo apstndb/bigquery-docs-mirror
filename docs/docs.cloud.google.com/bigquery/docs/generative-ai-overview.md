@@ -1,6 +1,6 @@
 # Generative AI overview
 
-This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Vertex AI models](/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
+This document describes the generative artificial intelligence (AI) functions that BigQuery supports. These functions accept natural language inputs and use pre-trained [Vertex AI models](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/models) and built-in BigQuery models.
 
 ## Overview
 
@@ -16,25 +16,25 @@ BigQuery offers a variety of AI functions to help with tasks such as the followi
 
 The following categories of AI functions to help you accomplish these tasks:
 
-  - **[General-purpose AI functions](#general_purpose_ai) :** These functions give you full control and transparency on the choice of model, prompt, and parameters to use.
+  - **[General-purpose AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#general_purpose_ai) :** These functions give you full control and transparency on the choice of model, prompt, and parameters to use.
     
-      - [Perform LLM inference](#inference) , such as to answer questions about your data
+      - [Perform LLM inference](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#inference) , such as to answer questions about your data
         
           - `  AI.GENERATE  ` is the most flexible inference function, which lets you analyze any structured or unstructured data.
           - `  AI.GENERATE_TEXT  ` is a table-valued version of `  AI.GENERATE  ` that also supports partner models and open models.
     
-      - [Generate structured output](#generate_structured_data) , such as extracting names, addresses, or object descriptions from text, documents, or images.
+      - [Generate structured output](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#generate_structured_data) , such as extracting names, addresses, or object descriptions from text, documents, or images.
         
           - `  AI.GENERATE  ` , when you specify an output schema.
           - `  AI.GENERATE_TABLE  ` is a table-valued version of `  AI.GENERATE  ` that calls a remote model and lets you specify a custom output schema.
           - If your output schema has a single field, you can use one of the specialized functions: `  AI.GENERATE_BOOL  ` , `  AI.GENERATE_DOUBLE  ` , or `  AI.GENERATE_INT  ` .
     
-      - [Generate embeddings](#text_embedding) for semantic search and clustering
+      - [Generate embeddings](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#text_embedding) for semantic search and clustering
         
           - `  AI.EMBED  ` : Create an embedding from text or image data.
           - `  AI.GENERATE_EMBEDDING  ` : A table-valued function that adds a column of embedded text, image, audio, video, or document data to your table.
 
-  - **[Managed AI functions](#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality.
+  - **[Managed AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#managed_ai_functions) :** These functions have a streamlined syntax and are optimized for cost and quality.
     
       - `  AI.IF  ` : filter your data with natural language conditions.
     
@@ -44,7 +44,7 @@ The following categories of AI functions to help you accomplish these tasks:
     
       - `  AI.AGG  ` : aggregate input to summarize or analyze your data.
 
-  - **[Task-specific functions](#task-specific_functions) :** These functions use Cloud AI APIs to help you perform tasks such as natural language processing, machine translation, document processing, audio transcription, and computer vision.
+  - **[Task-specific functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview#task-specific_functions) :** These functions use Cloud AI APIs to help you perform tasks such as natural language processing, machine translation, document processing, audio transcription, and computer vision.
 
 ## General-purpose AI functions
 
@@ -52,23 +52,23 @@ General-purpose AI functions give you full control and transparency on the choic
 
 ### Perform LLM inference
 
-The [`  AI.GENERATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) is a flexible inference function that works by sending requests to a Vertex AI Gemini model and returning that model's response. You can use this function to analyze text, image, audio, video, or PDF data. For example, you might analyze images of home furnishings to generate text for a `  design_type  ` column, so that the furnishings SKU has an associated description, such as `  mid-century modern  ` or `  farmhouse  ` .
+The [`  AI.GENERATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) is a flexible inference function that works by sending requests to a Vertex AI Gemini model and returning that model's response. You can use this function to analyze text, image, audio, video, or PDF data. For example, you might analyze images of home furnishings to generate text for a `  design_type  ` column, so that the furnishings SKU has an associated description, such as `  mid-century modern  ` or `  farmhouse  ` .
 
-You can perform generative AI tasks by using remote models in BigQuery ML to reference models deployed to or hosted in Vertex AI with the [`  AI.GENERATE_TEXT  ` table-valued function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) . You can use the following types of [remote models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
+You can perform generative AI tasks by using remote models in BigQuery ML to reference models deployed to or hosted in Vertex AI with the [`  AI.GENERATE_TEXT  ` table-valued function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-text) . You can use the following types of [remote models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model) :
 
-  - Remote models over any of the [generally available](/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](/vertex-ai/generative-ai/docs/models#preview_models) Gemini models to analyze text, image, audio, video, or PDF content from standard tables or object tables with a prompt that you provide as a function argument.
+  - Remote models over any of the [generally available](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#generally_available_models) or [preview](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/models#preview_models) Gemini models to analyze text, image, audio, video, or PDF content from standard tables or object tables with a prompt that you provide as a function argument.
 
-  - Remote models over [Anthropic Claude](/vertex-ai/generative-ai/docs/partner-models/use-claude) , [Mistral AI](/vertex-ai/generative-ai/docs/partner-models/mistral) , or [Llama](/vertex-ai/generative-ai/docs/partner-models/llama) partner models, or [supported open models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , to analyze a prompt that you provide in a query or from a column in a [standard table](/bigquery/docs/tables-intro#standard-tables) .
+  - Remote models over [Anthropic Claude](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/use-claude) , [Mistral AI](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/mistral) , or [Llama](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/partner-models/llama) partner models, or [supported open models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-open#supported_open_models) , to analyze a prompt that you provide in a query or from a column in a [standard table](https://docs.cloud.google.com/bigquery/docs/tables-intro#standard-tables) .
 
 Use the following topics to try text generation in BigQuery ML:
 
-  - [Generate text by using a Gemini model and the `  AI.GENERATE_TEXT  ` function](/bigquery/docs/generate-text-tutorial-gemini) .
-  - [Generate text by using a Gemma model and the `  AI.GENERATE_TEXT  ` function](/bigquery/docs/generate-text-tutorial-gemma) .
-  - [Analyze images with a Gemini model](/bigquery/docs/image-analysis) .
-  - [Generate text by using the `  AI.GENERATE_TEXT  ` function with your data](/bigquery/docs/generate-text) .
-  - [Tune a model using your data](/bigquery/docs/generate-text-tuning) .
+  - [Generate text by using a Gemini model and the `  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemini) .
+  - [Generate text by using a Gemma model and the `  AI.GENERATE_TEXT  ` function](https://docs.cloud.google.com/bigquery/docs/generate-text-tutorial-gemma) .
+  - [Analyze images with a Gemini model](https://docs.cloud.google.com/bigquery/docs/image-analysis) .
+  - [Generate text by using the `  AI.GENERATE_TEXT  ` function with your data](https://docs.cloud.google.com/bigquery/docs/generate-text) .
+  - [Tune a model using your data](https://docs.cloud.google.com/bigquery/docs/generate-text-tuning) .
 
-For some models, you can optionally choose to configure [supervised tuning](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , which lets you train the model on your own data to make it better suited for your use case. All inference occurs in Vertex AI. The results are stored in BigQuery.
+For some models, you can optionally choose to configure [supervised tuning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model-tuned#supervised_tuning) , which lets you train the model on your own data to make it better suited for your use case. All inference occurs in Vertex AI. The results are stored in BigQuery.
 
 ### Generate structured data
 
@@ -76,19 +76,19 @@ Structured data generation is very similar to text generation, except that you c
 
 You can generate data structured data in the following ways:
 
-  - The [`  AI.GENERATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) calls a Vertex AI endpoint and can generate a `  STRUCT  ` value with your custom schema.
+  - The [`  AI.GENERATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate) calls a Vertex AI endpoint and can generate a `  STRUCT  ` value with your custom schema.
     
-    To try it out, see how to [use structured output](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) when you call the `  AI.GENERATE  ` function.
+    To try it out, see how to [use structured output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate#use_structured_output) when you call the `  AI.GENERATE  ` function.
 
-  - The [`  AI.GENERATE_TABLE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) calls a remote model and is a table-valued function that generates a table with your custom schema.
+  - The [`  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-generate-table) calls a remote model and is a table-valued function that generates a table with your custom schema.
     
-    To try creating structured data, see [Generate structured data by using the `  AI.GENERATE_TABLE  ` function](/bigquery/docs/generate-table) .
+    To try creating structured data, see [Generate structured data by using the `  AI.GENERATE_TABLE  ` function](https://docs.cloud.google.com/bigquery/docs/generate-table) .
 
   - For a single output field, you can use one of the following specialized inference functions:
     
-      - [`  AI.GENERATE_BOOL  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool)
-      - [`  AI.GENERATE_DOUBLE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
-      - [`  AI.GENERATE_INT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int)
+      - [`  AI.GENERATE_BOOL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-bool)
+      - [`  AI.GENERATE_DOUBLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-double)
+      - [`  AI.GENERATE_INT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-generate-int)
 
 ### Generate embeddings
 
@@ -101,22 +101,22 @@ Some common use cases for embedding generation are as follows:
   - Performing semantic search to find similar items for recommendations, substitution, and record deduplication.
   - Creating embeddings to use with a k-means model for clustering.
 
-For more information about how to generate embeddings and use them to perform these tasks, see the [Introduction to embeddings and vector search](/bigquery/docs/vector-search-intro) .
+For more information about how to generate embeddings and use them to perform these tasks, see the [Introduction to embeddings and vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro) .
 
 ## Managed AI functions
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 Managed AI functions are purpose-built to automate routine tasks, such as classification, ordering, aggregation, or filtering. These functions use Gemini and don't require customization. BigQuery uses prompt engineering and can select the appropriate model and parameters to use for the specific task to optimize the quality and consistency of your results. Each function returns a scalar value, such as a `  BOOL  ` , `  FLOAT64  ` or `  STRING  ` , and doesn't include additional status information from the model. The following managed AI functions are available:
 
-  - [`  AI.IF  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : Filter text or multi-modal data, such as in a `  WHERE  ` or `  JOIN  ` clause, based on a prompt. For example, you could filter product descriptions by those that describe an item that would make a good gift.
-  - [`  AI.SCORE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : Rate inputs based on a prompt in order to rank rows by quality, similarity, or other criteria. You can use this function in an `  ORDER BY  ` clause to extract the top K items according to score. For example, you could find the top 10 most positive or negative user reviews for a product.
-  - [`  AI.CLASSIFY  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : Classify text into user-defined categories. You can use this function in a `  GROUP BY  ` clause to group inputs according to the categories that you define. For example, you could classify support tickets by whether they relate to billing, shipping, product quality, or something else.
-  - [`  AI.AGG  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) : Aggregate input based on natural language instructions to summarize or analyze your data. For example, you could scan logs of user application sessions to determine where customers are having difficulty, or you could summarize the contents of a large set of images.
+  - [`  AI.IF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-if) : Filter text or multi-modal data, such as in a `  WHERE  ` or `  JOIN  ` clause, based on a prompt. For example, you could filter product descriptions by those that describe an item that would make a good gift.
+  - [`  AI.SCORE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-score) : Rate inputs based on a prompt in order to rank rows by quality, similarity, or other criteria. You can use this function in an `  ORDER BY  ` clause to extract the top K items according to score. For example, you could find the top 10 most positive or negative user reviews for a product.
+  - [`  AI.CLASSIFY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-classify) : Classify text into user-defined categories. You can use this function in a `  GROUP BY  ` clause to group inputs according to the categories that you define. For example, you could classify support tickets by whether they relate to billing, shipping, product quality, or something else.
+  - [`  AI.AGG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-agg) : Aggregate input based on natural language instructions to summarize or analyze your data. For example, you could scan logs of user application sessions to determine where customers are having difficulty, or you could summarize the contents of a large set of images.
 
-For a tutorial that shows examples of how to use these functions, see [Perform semantic analysis with managed AI functions](/bigquery/docs/semantic-analysis) .
+For a tutorial that shows examples of how to use these functions, see [Perform semantic analysis with managed AI functions](https://docs.cloud.google.com/bigquery/docs/semantic-analysis) .
 
 For a notebook tutorial that shows how to use managed and general-purpose AI functions, see [Semantic analysis with AI functions](https://github.com/GoogleCloudPlatform/generative-ai/blob/main/gemini/use-cases/applying-llms-to-data/bigquery_ai_operators.ipynb) .
 
@@ -124,17 +124,17 @@ For a notebook tutorial that shows how to use managed and general-purpose AI fun
 
 In addition to the more general functions described in the previous sections, you can develop task-specific solutions in BigQuery ML by using Cloud AI APIs. Supported tasks include the following:
 
-  - [Natural language processing](/bigquery/docs/ai-application-overview#natural_language_processing)
-  - [Machine translation](/bigquery/docs/ai-application-overview#machine_translation)
-  - [Document processing](/bigquery/docs/ai-application-overview#document_processing)
-  - [Audio transcription](/bigquery/docs/ai-application-overview#audio_transcription)
-  - [Computer vision](/bigquery/docs/ai-application-overview#computer_vision)
+  - [Natural language processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#natural_language_processing)
+  - [Machine translation](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#machine_translation)
+  - [Document processing](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#document_processing)
+  - [Audio transcription](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#audio_transcription)
+  - [Computer vision](https://docs.cloud.google.com/bigquery/docs/ai-application-overview#computer_vision)
 
-For more information, see [Task-specific solutions overview](/bigquery/docs/ai-application-overview) .
+For more information, see [Task-specific solutions overview](https://docs.cloud.google.com/bigquery/docs/ai-application-overview) .
 
 ## Locations
 
-Supported locations for text generation and embedding models vary based on the model type and version that you use. For more information, see [Locations](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
+Supported locations for text generation and embedding models vary based on the model type and version that you use. For more information, see [Locations](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-remote-model#locations) .
 
 ## Pricing
 
@@ -146,15 +146,15 @@ For more information, see [BigQuery ML pricing](https://cloud.google.com/bigquer
 
 The generative AI functions in BigQuery work by sending requests to Vertex AI, which can incur costs. To track the Vertex AI costs incurred by a job that you run in BigQuery, follow these steps:
 
-1.  [View your billing reports](/billing/docs/how-to/reports) in Cloud Billing.
+1.  [View your billing reports](https://docs.cloud.google.com/billing/docs/how-to/reports) in Cloud Billing.
 
-2.  [Use filters](/billing/docs/how-to/reports#filters) to refine your results.
+2.  [Use filters](https://docs.cloud.google.com/billing/docs/how-to/reports#filters) to refine your results.
     
     For services, select **Vertex AI** .
 
-3.  To see the charges for a specific job, [filter by label](/billing/docs/how-to/reports#filter-by-labels) .
+3.  To see the charges for a specific job, [filter by label](https://docs.cloud.google.com/billing/docs/how-to/reports#filter-by-labels) .
     
-    Set the key to `  bigquery_job_id_prefix  ` and the value to the [job ID](/bigquery/docs/managing-jobs#view-job) of your job. If your job ID is longer than 63 characters, only use the first 63 characters. If your job ID contains any uppercase characters, change them to lowercase. Alternatively, you can [associate jobs with a custom label](/bigquery/docs/adding-labels#adding-label-to-session) to help you look them up later.
+    Set the key to `  bigquery_job_id_prefix  ` and the value to the [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) of your job. If your job ID is longer than 63 characters, only use the first 63 characters. If your job ID contains any uppercase characters, change them to lowercase. Alternatively, you can [associate jobs with a custom label](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session) to help you look them up later.
 
 It can take up to 24 hours for some charges to appear in Cloud Billing.
 
@@ -162,22 +162,20 @@ It can take up to 24 hours for some charges to appear in Cloud Billing.
 
 To better understand the behavior of AI functions that you call in BigQuery, you can enable request and response logging. To log the entire request and response sent to and received from Vertex AI, follow these steps:
 
-1.  [Enable request-response logs](/vertex-ai/generative-ai/docs/multimodal/request-response-logging) in Vertex AI. The logs are stored in BigQuery. You must separately enable logging for each different foundation model and region. To log queries that run in the `  us  ` region, specify the `  us-central1  ` region in your request. To log queries that run in the `  eu  ` region, specify the `  europe-west4  ` region in your request.
+1.  [Enable request-response logs](https://docs.cloud.google.com/vertex-ai/generative-ai/docs/multimodal/request-response-logging) in Vertex AI. The logs are stored in BigQuery. You must separately enable logging for each different foundation model and region. To log queries that run in the `  us  ` region, specify the `  us-central1  ` region in your request. To log queries that run in the `  eu  ` region, specify the `  europe-west4  ` region in your request.
 
 2.  Run a query using an AI function that makes a call to Vertex AI using the model that you enabled logging for in the previous step.
 
-3.  To view the full Vertex AI request and response, query your logging table for rows where the `  labels.bigquery_job_id_prefix  ` field of the `  full_request  ` column matches the first 63 characters of your [job ID](/bigquery/docs/managing-jobs#view-job) . Optionally, you can [use a custom query label](/bigquery/docs/adding-labels#adding-label-to-session) to help you look up the query in the logs.
+3.  To view the full Vertex AI request and response, query your logging table for rows where the `  labels.bigquery_job_id_prefix  ` field of the `  full_request  ` column matches the first 63 characters of your [job ID](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) . Optionally, you can [use a custom query label](https://docs.cloud.google.com/bigquery/docs/adding-labels#adding-label-to-session) to help you look up the query in the logs.
     
     For example, you can use a query similar to the following:
     
-    ``` text
-    SELECT *
-    FROM `my_project.my_dataset.request_response_logging`
-    WHERE JSON_VALUE(full_request, '$.labels.bigquery_job_id_prefix') = 'bquxjob_123456...';
-    ```
+        SELECT *
+        FROM `my_project.my_dataset.request_response_logging`
+        WHERE JSON_VALUE(full_request, '$.labels.bigquery_job_id_prefix') = 'bquxjob_123456...';
 
 ## What's next
 
-  - For an introduction to AI and ML in BigQuery, see [Introduction to AI and ML in BigQuery](/bigquery/docs/bqml-introduction) .
-  - For more information about performing inference over machine learning models, see [Model inference overview](/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai) .
+  - For an introduction to AI and ML in BigQuery, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
+  - For more information about performing inference over machine learning models, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+  - For more information about supported SQL statements and functions for generative AI models, see [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai) .

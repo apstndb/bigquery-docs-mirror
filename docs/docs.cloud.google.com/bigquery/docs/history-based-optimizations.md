@@ -8,61 +8,28 @@ History-based optimizations use information from already completed executions of
 
 The following is an example of how history-based optimizations work with BigQuery:
 
-<table>
-<thead>
-<tr class="header">
-<th>Execution count</th>
-<th>Query slot time consumed</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>60</td>
-<td>Original execution.</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>30</td>
-<td>First history-based optimization applied.</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>20</td>
-<td>Second history-based optimization applied.</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>21</td>
-<td>No additional history-based optimizations to apply.</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>19</td>
-<td>No additional history-based optimizations to apply.</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>20</td>
-<td>No additional history-based optimizations to apply.</td>
-</tr>
-</tbody>
-</table>
+| Execution count | Query slot time consumed | Notes                                               |
+| --------------- | ------------------------ | --------------------------------------------------- |
+| 1               | 60                       | Original execution.                                 |
+| 2               | 30                       | First history-based optimization applied.           |
+| 3               | 20                       | Second history-based optimization applied.          |
+| 4               | 21                       | No additional history-based optimizations to apply. |
+| 5               | 19                       | No additional history-based optimizations to apply. |
+| 6               | 20                       | No additional history-based optimizations to apply. |
 
 History-based optimizations are only applied when there is high confidence that there will be a beneficial impact to the query performance. In addition, when an optimization does not significantly improve query performance, that optimization is revoked and not used in future executions of that query.
 
 ## Roles and permissions
 
-  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `  ALTER PROJECT  ` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](#enable-history-based-optimization) .
+  - To enable or disable history-based optimizations, you must have the required permissions to create BigQuery default configurations, and then you must use the `  ALTER PROJECT  ` statement to enable history-based optimizations. Once you've enabled history-based optimizations, all jobs in that project use history-based optimizations, regardless of which user created the job. To learn more about required roles and permissions for default configurations, see [Required roles](https://docs.cloud.google.com/bigquery/docs/default-configuration#required_permissions) for default configurations. To enable history-based optimizations, see [Enable history-based optimizations](https://docs.cloud.google.com/bigquery/docs/history-based-optimizations#enable-history-based-optimization) .
 
-  - To review the history-based optimizations for a job using the `  INFORMATION_SCHEMA.JOBS  ` view, you must have the required role. For more information, see [Required role](/bigquery/docs/information-schema-jobs#required_role) for `  INFORMATION_SCHEMA.JOBS  ` view.
+  - To review the history-based optimizations for a job using the `  INFORMATION_SCHEMA.JOBS  ` view, you must have the required role. For more information, see [Required role](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#required_role) for `  INFORMATION_SCHEMA.JOBS  ` view.
 
 ## Enable history-based optimizations
 
-History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `  default_query_optimizer_options = 'adaptive=on'  ` parameter in your [`  ALTER PROJECT  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
+History-based optimizations are enabled by default. If history-based optimizations have been disabled for a project or organization, you can manually re-enable history-based optimizations by including the `  default_query_optimizer_options = 'adaptive=on'  ` parameter in your [`  ALTER PROJECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
-``` text
+``` notranslate
 ALTER PROJECT PROJECT_NAME
 SET OPTIONS (
   `region-LOCATION.default_query_optimizer_options` = 'adaptive=on'
@@ -78,9 +45,9 @@ Replace the following:
 
 ## Disable history-based optimizations
 
-To disable history-based optimizations in a project, include the `  default_query_optimizer_options = 'adaptive=off'  ` parameter in the [`  ALTER PROJECT  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
+To disable history-based optimizations in a project, include the `  default_query_optimizer_options = 'adaptive=off'  ` parameter in the [`  ALTER PROJECT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_project_set_options_statement) or [`  ALTER ORGANIZATION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_organization_set_options_statement) statement. For example:
 
-``` text
+``` notranslate
 ALTER PROJECT PROJECT_NAME
 SET OPTIONS (
   `region-LOCATION.default_query_optimizer_options` = 'adaptive=off'
@@ -100,106 +67,98 @@ To review the history-based optimizations for a job, you can use a SQL query or 
 
 ### SQL
 
-You can use a query to get the history-based optimizations for a job. The query must include [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](/bigquery/docs/information-schema-jobs#schema) and the `  query_info.optimization_details  ` column name.
+You can use a query to get the history-based optimizations for a job. The query must include [`  INFORMATION_SCHEMA.JOBS_BY_PROJECT  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) and the `  query_info.optimization_details  ` column name.
 
 In the following example, the optimization details are returned for a job called `  sample_job  ` . If no history-based optimizations were applied, `  NULL  ` is produced for `  optimization_details  ` :
 
-``` text
-SELECT
-  job_id,
-  query_info.optimization_details
-FROM `PROJECT_NAME.region-LOCATION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE job_id = 'sample_job'
-LIMIT 1;
-```
+    SELECT
+      job_id,
+      query_info.optimization_details
+    FROM `PROJECT_NAME.region-LOCATION`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE job_id = 'sample_job'
+    LIMIT 1;
 
 The results look similar to the following:
 
-``` text
--- The JSON in optimization_details has been formatted for readability.
-/*------------+-----------------------------------------------------------------*
- | job_id     | optimization_details                                            |
- +------------+-----------------------------------------------------------------+
- | sample_job | {                                                               |
- |            |   "optimizations": [                                            |
- |            |     {                                                           |
- |            |       "semi_join_reduction": "web_sales.web_date,RIGHT"         |
- |            |     },                                                          |
- |            |     {                                                           |
- |            |       "semi_join_reduction": "catalog_sales.catalog_date,RIGHT" |
- |            |     },                                                          |
- |            |     {                                                           |
- |            |       "semi_join_reduction": "store_sales.store_date,RIGHT"     |
- |            |     },
- |            |     {                                                           |
- |            |       "join_commutation": "web_returns.web_item"                |
- |            |     },
- |            |     {                                                           |
- |            |       "parallelism_adjustment": "applied"                       |
- |            |     },
- |            |   ]                                                             |
- |            | }                                                               |
- *------------+-----------------------------------------------------------------*/
-```
+    -- The JSON in optimization_details has been formatted for readability.
+    /*------------+-----------------------------------------------------------------*
+     | job_id     | optimization_details                                            |
+     +------------+-----------------------------------------------------------------+
+     | sample_job | {                                                               |
+     |            |   "optimizations": [                                            |
+     |            |     {                                                           |
+     |            |       "semi_join_reduction": "web_sales.web_date,RIGHT"         |
+     |            |     },                                                          |
+     |            |     {                                                           |
+     |            |       "semi_join_reduction": "catalog_sales.catalog_date,RIGHT" |
+     |            |     },                                                          |
+     |            |     {                                                           |
+     |            |       "semi_join_reduction": "store_sales.store_date,RIGHT"     |
+     |            |     },
+     |            |     {                                                           |
+     |            |       "join_commutation": "web_returns.web_item"                |
+     |            |     },
+     |            |     {                                                           |
+     |            |       "parallelism_adjustment": "applied"                       |
+     |            |     },
+     |            |   ]                                                             |
+     |            | }                                                               |
+     *------------+-----------------------------------------------------------------*/
 
 ### API
 
-To get the optimization details for a job, you can call the [`  jobs.get  ` method](/bigquery/docs/reference/rest/v2/jobs/get) .
+To get the optimization details for a job, you can call the [`  jobs.get  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/get) .
 
-In the following example, the `  jobs.get  ` method returns the optimization details ( [`  optimizationDetails  `](/bigquery/docs/reference/rest/v2/Job#queryinfo) ) in the full response:
+In the following example, the `  jobs.get  ` method returns the optimization details ( [`  optimizationDetails  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#queryinfo) ) in the full response:
 
-``` text
-{
-  "jobReference": {
-    "projectId": "myProject",
-    "jobId": "sample_job"
-  }
-}
-```
+    {
+      "jobReference": {
+        "projectId": "myProject",
+        "jobId": "sample_job"
+      }
+    }
 
 The results look similar to the following:
 
-``` text
--- The unrelated parts in the full response have been removed.
-{
-  "jobReference": {
-    "projectId": "myProject",
-    "jobId": "sample_job",
-    "location": "US"
-  },
-  "statistics": {
-    "query": {
-      "queryInfo": {
-        "optimizationDetails": {
-          "optimizations": [
-            {
-              "semi_join_reduction": "web_sales.web_date,RIGHT"
-            },
-            {
-              "semi_join_reduction": "catalog_sales.catalog_date,RIGHT"
-            },
-            {
-              "semi_join_reduction": "store_sales.store_date,RIGHT"
-            },
-            {
-              "join_commutation": "web_returns.web_item"
-            },
-            {
-              "parallelism_adjustment": "applied"
+    -- The unrelated parts in the full response have been removed.
+    {
+      "jobReference": {
+        "projectId": "myProject",
+        "jobId": "sample_job",
+        "location": "US"
+      },
+      "statistics": {
+        "query": {
+          "queryInfo": {
+            "optimizationDetails": {
+              "optimizations": [
+                {
+                  "semi_join_reduction": "web_sales.web_date,RIGHT"
+                },
+                {
+                  "semi_join_reduction": "catalog_sales.catalog_date,RIGHT"
+                },
+                {
+                  "semi_join_reduction": "store_sales.store_date,RIGHT"
+                },
+                {
+                  "join_commutation": "web_returns.web_item"
+                },
+                {
+                  "parallelism_adjustment": "applied"
+                }
+              ]
             }
-          ]
+          }
         }
       }
     }
-  }
-}
-```
 
 ## Estimate impact of history-based optimizations
 
 To estimate the impact of history-based optimizations, you can use the following sample SQL query to identify project queries with the greatest estimated improvement to execution time.
 
-``` text
+``` 
   WITH
     jobs AS (
       SELECT
@@ -238,7 +197,7 @@ To estimate the impact of history-based optimizations, you can use the following
 
 The result of the preceding query is similar to the following if history-based optimizations were applied:
 
-``` text
+``` 
   /*--------------+------------------------------+------------------+-----------------------*
    |    job_id    | percent_execution_time_saved | new_execution_ms | original_execution_ms |
    +--------------+------------------------------+------------------+-----------------------+
@@ -259,4 +218,4 @@ The results of this query is only an estimation of history-based optimization im
 
 If the result of this sample query is empty, then either no jobs have used history-based optimizations, or all queries were optimized more than 30 days ago.
 
-This query can be applied to other query performance metrics such as `  total_slot_ms  ` and `  total_bytes_billed  ` . For more information, see the schema for [`  INFORMATION_SCHEMA.JOBS  `](/bigquery/docs/information-schema-jobs#schema) .
+This query can be applied to other query performance metrics such as `  total_slot_ms  ` and `  total_bytes_billed  ` . For more information, see the schema for [`  INFORMATION_SCHEMA.JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) .

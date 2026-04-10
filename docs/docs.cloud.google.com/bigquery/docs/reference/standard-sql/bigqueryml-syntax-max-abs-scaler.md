@@ -2,16 +2,16 @@
 
 This document describes the `  ML.MAX_ABS_SCALER  ` function, which lets you scale a numerical expression to the range `  [-1, 1]  ` by dividing with the maximum absolute value. It doesn't shift or center the data, and so doesn't destroy any sparsity.
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the maximum absolute value calculated during training is automatically used in prediction.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the maximum absolute value calculated during training is automatically used in prediction.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.MAX_ABS_SCALER(numerical_expression) OVER()
 ```
 
@@ -19,7 +19,7 @@ ML.MAX_ABS_SCALER(numerical_expression) OVER()
 
 `  ML.MAX_ABS_SCALER  ` takes the following argument:
 
-  - `  numerical_expression  ` : the [numerical](/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
+  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to scale.
 
 ## Output
 
@@ -29,7 +29,7 @@ ML.MAX_ABS_SCALER(numerical_expression) OVER()
 
 The following example scales a set of numerical expressions to have values between `  -1  ` and `  1  ` :
 
-``` text
+``` notranslate
 SELECT f, ML.MAX_ABS_SCALER(f) OVER () AS output
 FROM
   UNNEST([NULL, -3, 1, 2, 3, 4, 5]) AS f
@@ -54,4 +54,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

@@ -1,6 +1,6 @@
 # Translate SQL queries with the translation API
 
-This document describes how to use the translation API in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. The translation API can simplify the process of [migrating workloads to BigQuery](/bigquery/docs/migration-intro) .
+This document describes how to use the translation API in BigQuery to translate scripts written in other SQL dialects into GoogleSQL queries. The translation API can simplify the process of [migrating workloads to BigQuery](https://docs.cloud.google.com/bigquery/docs/migration-intro) .
 
 ## Before you begin
 
@@ -13,7 +13,7 @@ Before you submit a translation job, complete the following steps:
 
 ### Required permissions
 
-To get the permissions that you need to create translation jobs using the translation API, ask your administrator to grant you the [MigrationWorkflow Editor](/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` ) IAM role on the `  parent  ` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create translation jobs using the translation API, ask your administrator to grant you the [MigrationWorkflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` ) IAM role on the `  parent  ` resource. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create translation jobs using the translation API. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -24,13 +24,15 @@ The following permissions are required to create translation jobs using the tran
   - `  bigquerymigration.workflows.create  `
   - `  bigquerymigration.workflows.get  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ### Enable the BigQuery Migration API
 
 If your Google Cloud CLI project was created before February 15, 2022, enable the BigQuery Migration API as follows:
 
 1.  In the Google Cloud console, go to the **BigQuery Migration API** page.
+    
+    [Go to BigQuery Migration API](https://console.cloud.google.com/apis/api/bigquerymigration.googleapis.com/overview)
 
 2.  Click **Enable** .
 
@@ -38,7 +40,7 @@ If your Google Cloud CLI project was created before February 15, 2022, enable th
 
 ### Upload input files to Cloud Storage
 
-If you want to use the Google Cloud console or the BigQuery Migration API to perform a translation job, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](/bigquery/docs/generate-metadata) or [configuration YAML files](/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](/storage/docs/creating-buckets) and [Upload objects from a filesystem](/storage/docs/uploading-objects) .
+If you want to use the Google Cloud console or the BigQuery Migration API to perform a translation job, you must upload the source files containing the queries and scripts you want to translate to Cloud Storage. You can also upload [any metadata files](https://docs.cloud.google.com/bigquery/docs/generate-metadata) or [configuration YAML files](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation) to the same Cloud Storage bucket containing the source files. For more information about creating buckets and uploading files to Cloud Storage, see [Create buckets](https://docs.cloud.google.com/storage/docs/creating-buckets) and [Upload objects from a filesystem](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 ## Supported task types
 
@@ -148,7 +150,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -162,7 +164,7 @@ Finland
 
 `  europe-north1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
@@ -172,13 +174,13 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
 `  europe-southwest1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
@@ -188,19 +190,19 @@ Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
 `  europe-west9  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
 `  europe-north2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
@@ -214,7 +216,7 @@ Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Americas**
 
@@ -226,13 +228,13 @@ Dallas
 
 `  us-south1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -254,19 +256,19 @@ Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Québec
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -276,7 +278,7 @@ Santiago
 
 `  southamerica-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
@@ -286,7 +288,7 @@ Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
@@ -314,38 +316,36 @@ Israel
 
 ## Submit a translation job
 
-To submit a translation job using the translation API, use the [`  projects.locations.workflows.create  `](/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) method and supply an instance of the [`  MigrationWorkflow  `](/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#resource:-migrationworkflow) resource with a [supported task type](#supported_task_types) .
+To submit a translation job using the translation API, use the [`  projects.locations.workflows.create  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows/create) method and supply an instance of the [`  MigrationWorkflow  `](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2/projects.locations.workflows#resource:-migrationworkflow) resource with a [supported task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) .
 
-Once the job is submitted, you can [issue a query to get results](#explore_the_translation_output) .
+Once the job is submitted, you can [issue a query to get results](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) .
 
 ### Create a batch translation
 
 The following `  curl  ` command creates a batch translation job where the input and output files are stored in Cloud Storage. The `  source_target_mapping  ` field contains a list that maps the source `  literal  ` entries to an optional relative path for the target output.
 
-``` text
-curl -d "{
-  \"tasks\": {
-      string: {
-        \"type\": \"TYPE\",
-        \"translation_details\": {
-            \"target_base_uri\": \"TARGET_BASE\",
-            \"source_target_mapping\": {
-              \"source_spec\": {
-                  \"base_uri\": \"BASE\"
-              }
-            },
-            \"target_types\": \"TARGET_TYPES\",
-        }
+    curl -d "{
+      \"tasks\": {
+          string: {
+            \"type\": \"TYPE\",
+            \"translation_details\": {
+                \"target_base_uri\": \"TARGET_BASE\",
+                \"source_target_mapping\": {
+                  \"source_spec\": {
+                      \"base_uri\": \"BASE\"
+                  }
+                },
+                \"target_types\": \"TARGET_TYPES\",
+            }
+          }
       }
-  }
-  }" \
-  -H "Content-Type:application/json" \
-  -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
-```
+      }" \
+      -H "Content-Type:application/json" \
+      -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
 
 Replace the following:
 
-  - `  TYPE  ` : the [task type](#supported_task_types) of the translation, which determines the source and target dialect.
+  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) of the translation, which determines the source and target dialect.
 
   - `  TARGET_BASE  ` : the base URI for all translation outputs.
 
@@ -362,7 +362,7 @@ Replace the following:
 
   - `  PROJECT_ID  ` : the project to process the translation.
 
-  - `  LOCATION  ` : the [location](#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
 
 The preceding command returns a response that includes a workflow ID written in the format `  projects/ PROJECT_ID /locations/ LOCATION /workflows/ WORKFLOW_ID  ` .
 
@@ -370,70 +370,64 @@ The preceding command returns a response that includes a workflow ID written in 
 
 To translate the Teradata SQL scripts in the Cloud Storage directory `  gs://my_data_bucket/teradata/input/  ` and store the results in the Cloud Storage directory `  gs://my_data_bucket/teradata/output/  ` , you might use the following query:
 
-``` text
-{
-  "tasks": {
-     "task_name": {
-       "type": "Teradata2BigQuery_Translation",
-       "translation_details": {
-         "target_base_uri": "gs://my_data_bucket/teradata/output/",
-           "source_target_mapping": {
-             "source_spec": {
-               "base_uri": "gs://my_data_bucket/teradata/input/"
-             }
-          },
-       }
+    {
+      "tasks": {
+         "task_name": {
+           "type": "Teradata2BigQuery_Translation",
+           "translation_details": {
+             "target_base_uri": "gs://my_data_bucket/teradata/output/",
+               "source_target_mapping": {
+                 "source_spec": {
+                   "base_uri": "gs://my_data_bucket/teradata/input/"
+                 }
+              },
+           }
+        }
+      }
     }
-  }
-}
-```
 
 **Note:** The string `  "task_name"  ` in this example is an identifier for the translation task and can be set to any value you prefer.
 
 This call will return a message containing the created workflow ID in the `  "name"  ` field:
 
-``` text
-{
-  "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
-  "tasks": {
-    "task_name": { /*...*/ }
-  },
-  "state": "RUNNING"
-}
-```
+    {
+      "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
+      "tasks": {
+        "task_name": { /*...*/ }
+      },
+      "state": "RUNNING"
+    }
 
-To get the updated status for the workflow, [run a `  GET  ` query](#explore_the_translation_output) . The job sends outputs to Cloud Storage as it progresses. The job `  state  ` changes to `  COMPLETED  ` after all the requested `  target_types  ` are generated. If the task succeeds, you can find the translated SQL query in `  gs://my_data_bucket/teradata/output  ` .
+To get the updated status for the workflow, [run a `  GET  ` query](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) . The job sends outputs to Cloud Storage as it progresses. The job `  state  ` changes to `  COMPLETED  ` after all the requested `  target_types  ` are generated. If the task succeeds, you can find the translated SQL query in `  gs://my_data_bucket/teradata/output  ` .
 
 #### Example batch translation with AI suggestions
 
 **Preview**
 
-This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This product or feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA products and features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** The translation API can call Gemini using BigQuery Vertex AI integration to generate suggestions to your translated SQL query based on your AI configuration YAML file.
 
 The following example translates the Teradata SQL scripts located in the `  gs://my_data_bucket/teradata/input/  ` Cloud Storage directory and stores results in the Cloud Storage directory `  gs://my_data_bucket/teradata/output/  ` with additional AI suggestion:
 
-``` text
-{
-  "tasks": {
-     "task_name": {
-       "type": "Teradata2BigQuery_Translation",
-       "translation_details": {
-         "target_base_uri": "gs://my_data_bucket/teradata/output/",
-           "source_target_mapping": {
-             "source_spec": {
-               "base_uri": "gs://my_data_bucket/teradata/input/"
-             }
-          },
-          "target_types": "suggestion",
-       }
+    {
+      "tasks": {
+         "task_name": {
+           "type": "Teradata2BigQuery_Translation",
+           "translation_details": {
+             "target_base_uri": "gs://my_data_bucket/teradata/output/",
+               "source_target_mapping": {
+                 "source_spec": {
+                   "base_uri": "gs://my_data_bucket/teradata/input/"
+                 }
+              },
+              "target_types": "suggestion",
+           }
+        }
+      }
     }
-  }
-}
-```
 
-**Note:** To generate AI suggestions, the Cloud Storage source directory must contain at least one configuration YAML file with a suffix of `  .ai_config.yaml  ` . To learn how to write the configuration YAML file for AI suggestions, see [Create a Gemini-based configuration YAML file](/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
+**Note:** To generate AI suggestions, the Cloud Storage source directory must contain at least one configuration YAML file with a suffix of `  .ai_config.yaml  ` . To learn how to write the configuration YAML file for AI suggestions, see [Create a Gemini-based configuration YAML file](https://docs.cloud.google.com/bigquery/docs/config-yaml-translation#ai_yaml_guidelines) .
 
 After the task runs successfully, AI suggestions can be found in `  gs://my_data_bucket/teradata/output/suggestion  ` Cloud Storage directory.
 
@@ -441,65 +435,61 @@ After the task runs successfully, AI suggestions can be found in `  gs://my_data
 
 The following `  curl  ` command creates a translation job with string literal inputs and outputs. The `  source_target_mapping  ` field contains a list that maps the source directories to an optional relative path for the target output.
 
-``` text
-curl -d "{
-  \"tasks\": {
-      string: {
-        \"type\": \"TYPE\",
-        \"translation_details\": {
-        \"source_target_mapping\": {
-            \"source_spec\": {
-              \"literal\": {
-              \"relative_path\": \"PATH\",
-              \"literal_string\": \"STRING\"
-              }
+    curl -d "{
+      \"tasks\": {
+          string: {
+            \"type\": \"TYPE\",
+            \"translation_details\": {
+            \"source_target_mapping\": {
+                \"source_spec\": {
+                  \"literal\": {
+                  \"relative_path\": \"PATH\",
+                  \"literal_string\": \"STRING\"
+                  }
+                }
+            },
+            \"target_return_literals\": \"TARGETS\",
             }
-        },
-        \"target_return_literals\": \"TARGETS\",
-        }
+          }
       }
-  }
-  }" \
-  -H "Content-Type:application/json" \
-  -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
-```
+      }" \
+      -H "Content-Type:application/json" \
+      -H "Authorization: Bearer TOKEN" -X POST https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows
 
 Replace the following:
 
-  - `  TYPE  ` : the [task type](#supported_task_types) of the translation, which determines the source and target dialect.
+  - `  TYPE  ` : the [task type](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#supported_task_types) of the translation, which determines the source and target dialect.
   - `  PATH  ` : the identifier of the literal entry, similar to a filename or path.
   - `  STRING  ` : string of literal input data (for example, SQL) to be translated.
   - `  TARGETS  ` : the expected targets that the user wants to be directly returned in the response in the `  literal  ` format. These should be in the target URI format (for example, GENERATED\_DIR + `  target_spec.relative_path  ` + `  source_spec.literal.relative_path  ` ). Anything not in this list is not returned in the response. The generated directory, GENERATED\_DIR for general SQL translations is `  sql/  ` .
   - `  TOKEN  ` : the token for authentication. To generate a token, use the `  gcloud auth print-access-token  ` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) (use the scope `  https://www.googleapis.com/auth/cloud-platform  ` ).
   - `  PROJECT_ID  ` : the project to process the translation.
-  - `  LOCATION  ` : the [location](#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
 
 The preceding command returns a response that includes a workflow ID written in the format `  projects/ PROJECT_ID /locations/ LOCATION /workflows/ WORKFLOW_ID  ` .
 
-When your job completes, you can view the results by by [querying the job](#explore_the_translation_output) and examining the inline `  translation_literals  ` field in the response after the workflow completes.
+When your job completes, you can view the results by by [querying the job](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) and examining the inline `  translation_literals  ` field in the response after the workflow completes.
 
 #### Example Interactive Translation
 
 To translate the Hive SQL string `  select 1  ` interactively, you might use the following query:
 
-``` text
-"tasks": {
-  string: {
-    "type": "HiveQL2BigQuery_Translation",
-    "translation_details": {
-      "source_target_mapping": {
-        "source_spec": {
-          "literal": {
-            "relative_path": "input_file",
-            "literal_string": "select 1"
-          }
+    "tasks": {
+      string: {
+        "type": "HiveQL2BigQuery_Translation",
+        "translation_details": {
+          "source_target_mapping": {
+            "source_spec": {
+              "literal": {
+                "relative_path": "input_file",
+                "literal_string": "select 1"
+              }
+            }
+          },
+          "target_return_literals": "sql/input_file",
         }
-      },
-      "target_return_literals": "sql/input_file",
+      }
     }
-  }
-}
-```
 
 **Note:** The string `  "task_name"  ` in this example is an identifier for the translation task and can be set to any value you prefer.
 
@@ -507,63 +497,57 @@ You can use any `  relative_path  ` you would like for your literal, but the tra
 
 This call will return a message containing the created workflow ID in the `  "name"  ` field:
 
-``` text
-{
-  "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
-  "tasks": {
-    "task_name": { /*...*/ }
-  },
-  "state": "RUNNING"
-}
-```
+    {
+      "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
+      "tasks": {
+        "task_name": { /*...*/ }
+      },
+      "state": "RUNNING"
+    }
 
-To get the updated status for the workflow, [run a `  GET  ` query](#explore_the_translation_output) . The job is complete when `  "state"  ` changes to `  COMPLETED  ` . If the task succeeds, you will find the translated SQL in the response message:
+To get the updated status for the workflow, [run a `  GET  ` query](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#explore_the_translation_output) . The job is complete when `  "state"  ` changes to `  COMPLETED  ` . If the task succeeds, you will find the translated SQL in the response message:
 
-``` text
-{
-  "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
-  "tasks": {
-    "string": {
-      "id": "0fedba98-7654-3210-1234-56789abcdef",
-      "type": "HiveQL2BigQuery_Translation",
-      /* ... */
-      "taskResult": {
-        "translationTaskResult": {
-          "translatedLiterals": [
-            {
-              "relativePath": "sql/input_file",
-              "literalString": "-- Translation time: 2023-10-05T21:50:49.885839Z\n-- Translation job ID: projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00\n-- Source: input_file\n-- Translated from: Hive\n-- Translated to: BigQuery\n\nSELECT\n    1\n;\n"
+    {
+      "name": "projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00",
+      "tasks": {
+        "string": {
+          "id": "0fedba98-7654-3210-1234-56789abcdef",
+          "type": "HiveQL2BigQuery_Translation",
+          /* ... */
+          "taskResult": {
+            "translationTaskResult": {
+              "translatedLiterals": [
+                {
+                  "relativePath": "sql/input_file",
+                  "literalString": "-- Translation time: 2023-10-05T21:50:49.885839Z\n-- Translation job ID: projects/123456789/locations/us/workflows/12345678-9abc-def1-2345-6789abcdef00\n-- Source: input_file\n-- Translated from: Hive\n-- Translated to: BigQuery\n\nSELECT\n    1\n;\n"
+                }
+              ],
+              "reportLogMessages": [
+                ...
+              ]
             }
-          ],
-          "reportLogMessages": [
-            ...
-          ]
+          },
+          /* ... */
         }
       },
-      /* ... */
+      "state": "COMPLETED",
+      "createTime": "2023-10-05T21:50:49.543221Z",
+      "lastUpdateTime": "2023-10-05T21:50:50.462758Z"
     }
-  },
-  "state": "COMPLETED",
-  "createTime": "2023-10-05T21:50:49.543221Z",
-  "lastUpdateTime": "2023-10-05T21:50:50.462758Z"
-}
-```
 
 ## Explore the translation output
 
 After running the translation job, retrieve the results by specifying the translation job workflow ID using the following command:
 
-``` text
-curl \
--H "Content-Type:application/json" \
--H "Authorization:Bearer TOKEN" -X GET https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
-```
+    curl \
+    -H "Content-Type:application/json" \
+    -H "Authorization:Bearer TOKEN" -X GET https://bigquerymigration.googleapis.com/v2alpha/projects/PROJECT_ID/locations/LOCATION/workflows/WORKFLOW_ID
 
 Replace the following:
 
   - `  TOKEN  ` : the token for authentication. To generate a token, use the `  gcloud auth print-access-token  ` command or the [OAuth 2.0 playground](https://developers.google.com/oauthplayground/) (use the scope `  https://www.googleapis.com/auth/cloud-platform  ` ).
   - `  PROJECT_ID  ` : the project to process the translation.
-  - `  LOCATION  ` : the [location](#locations) where the job is processed.
+  - `  LOCATION  ` : the [location](https://docs.cloud.google.com/bigquery/docs/api-sql-translator#locations) where the job is processed.
   - `  WORKFLOW_ID  ` : the ID generated when you create a translation workflow.
 
 The response contains the status of your migration workflow, and any completed files in `  target_return_literals  ` .

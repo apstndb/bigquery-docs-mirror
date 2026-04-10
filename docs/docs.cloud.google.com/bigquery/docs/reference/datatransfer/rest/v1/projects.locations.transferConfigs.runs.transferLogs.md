@@ -1,7 +1,7 @@
-  - [Resource: TransferMessage](#TransferMessage)
-      - [JSON representation](#TransferMessage.SCHEMA_REPRESENTATION)
-      - [MessageSeverity](#TransferMessage.MessageSeverity)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: TransferMessage](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.SCHEMA_REPRESENTATION)
+      - [MessageSeverity](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#TransferMessage.MessageSeverity)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs.runs.transferLogs#METHODS_SUMMARY)
 
 ## Resource: TransferMessage
 
@@ -18,7 +18,7 @@ Represents a user facing message for a particular data transfer run.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;messageTime&quot;: string,
   &quot;severity&quot;: enum (MessageSeverity),
   &quot;messageText&quot;: string

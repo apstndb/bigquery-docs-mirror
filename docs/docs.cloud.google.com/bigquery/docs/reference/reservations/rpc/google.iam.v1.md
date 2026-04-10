@@ -19,43 +19,41 @@ If there are AuditConfigs for both `  allServices  ` and a specific service, the
 
 Example Policy with multiple AuditConfigs:
 
-``` text
-{
-  "audit_configs": [
     {
-      "service": "allServices",
-      "audit_log_configs": [
+      "audit_configs": [
         {
-          "log_type": "DATA_READ",
-          "exempted_members": [
-            "user:jose@example.com"
+          "service": "allServices",
+          "audit_log_configs": [
+            {
+              "log_type": "DATA_READ",
+              "exempted_members": [
+                "user:jose@example.com"
+              ]
+            },
+            {
+              "log_type": "DATA_WRITE"
+            },
+            {
+              "log_type": "ADMIN_READ"
+            }
           ]
         },
         {
-          "log_type": "DATA_WRITE"
-        },
-        {
-          "log_type": "ADMIN_READ"
-        }
-      ]
-    },
-    {
-      "service": "sampleservice.googleapis.com",
-      "audit_log_configs": [
-        {
-          "log_type": "DATA_READ"
-        },
-        {
-          "log_type": "DATA_WRITE",
-          "exempted_members": [
-            "user:aliya@example.com"
+          "service": "sampleservice.googleapis.com",
+          "audit_log_configs": [
+            {
+              "log_type": "DATA_READ"
+            },
+            {
+              "log_type": "DATA_WRITE",
+              "exempted_members": [
+                "user:aliya@example.com"
+              ]
+            }
           ]
         }
       ]
     }
-  ]
-}
-```
 
 For sampleservice, this policy enables DATA\_READ, DATA\_WRITE and ADMIN\_READ logging. It also exempts `  jose@example.com  ` from DATA\_READ logging, and `  aliya@example.com  ` from DATA\_WRITE logging.
 
@@ -77,21 +75,19 @@ The configuration for logging of each type of permission.
 
 Provides the configuration for logging a type of permissions. Example:
 
-``` text
-{
-  "audit_log_configs": [
     {
-      "log_type": "DATA_READ",
-      "exempted_members": [
-        "user:jose@example.com"
+      "audit_log_configs": [
+        {
+          "log_type": "DATA_READ",
+          "exempted_members": [
+            "user:jose@example.com"
+          ]
+        },
+        {
+          "log_type": "DATA_WRITE"
+        }
       ]
-    },
-    {
-      "log_type": "DATA_WRITE"
     }
-  ]
-}
-```
 
 This enables 'DATA\_READ' and 'DATA\_WRITE' logging, while exempting <jose@example.com> from DATA\_READ logging.
 
@@ -255,7 +251,7 @@ For some types of Google Cloud resources, a `  binding  ` can also specify a `  
 
 **JSON example:**
 
-``` text
+``` 
     {
       "bindings": [
         {
@@ -286,7 +282,7 @@ For some types of Google Cloud resources, a `  binding  ` can also specify a `  
 
 **YAML example:**
 
-``` text
+``` 
     bindings:
     - members:
       - user:mike@example.com

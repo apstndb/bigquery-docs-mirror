@@ -1,20 +1,20 @@
-This tutorial teaches you how to use a [multivariate time series model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) to forecast the future value for a given column, based on the historical value of multiple input features.
+This tutorial teaches you how to use a [multivariate time series model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) to forecast the future value for a given column, based on the historical value of multiple input features.
 
 This tutorial forecasts for multiple time series. Forecasted values are calculated for each time point, for each value in one or more specified columns. For example, if you wanted to forecast weather and specified a column containing state data, the forecasted data would contain forecasts for all time points for State A, then forecasted values for all time points for State B, and so forth. If you wanted to forecast weather and specified columns containing state and city data, the forecasted data would contain forecasts for all time points for State A and City A, then forecasted values for all time points for State A and City B, and so forth.
 
 This tutorial uses data from the public [`  bigquery-public-data.iowa_liquor_sales.sales  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=iowa_liquor_sales&page=dataset&t=sales&page=table) and [`  bigquery-public-data.covid19_weathersource_com.postal_code_day_history  `](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=covid19_weathersource_com&page=dataset&t=postal_code_day_history&page=table) tables. The `  bigquery-public-data.iowa_liquor_sales.sales  ` table contains liquor sales data collected from multiple cities in the state of Iowa. The `  bigquery-public-data.covid19_weathersource_com.postal_code_day_history  ` table contains historical weather data, such as temperature and humidity, from around the world.
 
-Before reading this tutorial, we highly recommend that you read [Forecast a single time series with a multivariate model](/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial) .
+Before reading this tutorial, we highly recommend that you read [Forecast a single time series with a multivariate model](https://docs.cloud.google.com/bigquery/docs/arima-plus-xreg-single-time-series-forecasting-tutorial) .
 
 ## Objectives
 
 This tutorial guides you through completing the following tasks:
 
-  - Creating a time series model to forecast liquor store orders by using the [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
-  - Retrieving the forecasted order values from the model by using the [`  ML.FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
-  - Retrieving components of the time series, such as seasonality, trend, and feature attributions, by using the [`  ML.EXPLAIN_FORECAST  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
-  - Evaluate the model's accuracy by using the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Detect anomalies by using the model with the [`  ML.DETECT_ANOMALIES  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
+  - Creating a time series model to forecast liquor store orders by using the [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-multivariate-time-series) .
+  - Retrieving the forecasted order values from the model by using the [`  ML.FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+  - Retrieving components of the time series, such as seasonality, trend, and feature attributions, by using the [`  ML.EXPLAIN_FORECAST  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) . You can inspect these time series components in order to explain the forecasted values.
+  - Evaluate the model's accuracy by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Detect anomalies by using the model with the [`  ML.DETECT_ANOMALIES  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
 
 ## Costs
 
@@ -35,7 +35,9 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Create a dataset
 
@@ -44,6 +46,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -59,11 +63,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -72,15 +76,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -102,10 +106,12 @@ Create a table of data that you can use to train and evaluate the model. This ta
 Follow these steps to create the input data table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE
       `bqml_tutorial.iowa_liquor_sales_with_weather` AS
     WITH
@@ -167,10 +173,12 @@ Create a time series model to forecast bottles sold for each combination of stor
 Follow these steps to create the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE
     OR REPLACE MODEL `bqml_tutorial.multi_time_series_arimax_model`
     OPTIONS(
@@ -200,10 +208,12 @@ The data signature of the input data for the `  ML.FORECAST  ` function is the s
 Follow these steps to forecast data with the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -223,9 +233,11 @@ Follow these steps to forecast data with the model:
     
     The results should look similar to the following:
     
+    ![Forecasted data for the number of bottles sold.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-forecast-output.png)
+    
     The output rows are in order by the `  store_number  ` value, then by the `  item_ID  ` value, then in chronological order by the `  forecast_timestamp  ` column value. In time series forecasting, the prediction interval, as represented by the `  prediction_interval_lower_bound  ` and `  prediction_interval_upper_bound  ` column values, is as important as the `  forecast_value  ` column value. The `  forecast_value  ` value is the middle point of the prediction interval. The prediction interval depends on the `  standard_error  ` and `  confidence_level  ` column values.
     
-    For more information about the output columns, see [`  ML.FORECAST  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
+    For more information about the output columns, see [`  ML.FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-forecast) .
 
 ## Explain the forecasting results
 
@@ -238,10 +250,12 @@ The `  ML.EXPLAIN_FORECAST  ` function provides both historical data and forecas
 Follow these steps to explain the model's results:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -261,9 +275,11 @@ Follow these steps to explain the model's results:
     
     The results should look similar to the following:
     
+    ![The first nine output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast1.png) ![The tenth through seventeenth output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast2.png) ![The last six output columns of forecasted data and forecast explanations.](https://docs.cloud.google.com/static/bigquery/images/arima-multiple-series-ml-explain-forecast3.png)
+    
     The output rows are ordered chronologically by the `  time_series_timestamp  ` column value.
     
-    For more information about the output columns, see [`  ML.EXPLAIN_FORECAST  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
+    For more information about the output columns, see [`  ML.EXPLAIN_FORECAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-forecast) .
 
 ## Evaluate forecasting accuracy
 
@@ -274,10 +290,12 @@ In the following GoogleSQL query, the second `  SELECT  ` statement provides the
 Follow these steps to evaluate the model's accuracy:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -296,7 +314,9 @@ Follow these steps to evaluate the model's accuracy:
     
     The results should look similar to the following:
     
-    For more information about the output columns, see [`  ML.EVALUATE  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+    ![Evaluation metrics for the model.](https://docs.cloud.google.com/static/bigquery/images/arima-plus-xreg-multiple-time-series-ml-evaluate.png)
+    
+    For more information about the output columns, see [`  ML.EVALUATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
 
 ## Use the model to detect anomalies
 
@@ -307,10 +327,12 @@ In the following query, the `  STRUCT(0.95 AS anomaly_prob_threshold)  ` clause 
 Follow these steps to detect anomalies in the training data:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -322,9 +344,11 @@ Follow these steps to detect anomalies in the training data:
     
     The results should look similar to the following:
     
+    ![Anomaly detection information for the training data.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-anomaly-detection.png)
+    
     The `  anomaly_probability  ` column in the results identifies the likelihood that a given `  bottles_sold  ` column value is anomalous.
     
-    For more information about the output columns, see [`  ML.DETECT_ANOMALIES  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
+    For more information about the output columns, see [`  ML.DETECT_ANOMALIES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-detect-anomalies) .
 
 ### Detect anomalies in new data
 
@@ -333,10 +357,12 @@ Detect anomalies in the new data by providing input data to the `  ML.DETECT_ANO
 Follow these steps to detect anomalies in new data:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -355,6 +381,8 @@ Follow these steps to detect anomalies in new data:
     ```
     
     The results should look similar to the following:
+    
+    ![Anomaly detection information for new data.](https://docs.cloud.google.com/static/bigquery/images/multivariate-multiple-anomaly-detection2.png)
 
 ## Clean up
 
@@ -368,6 +396,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -388,14 +418,16 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Learn how to [forecast a single time series with a univariate model](/bigquery/docs/arima-single-time-series-forecasting-tutorial)
-  - Learn how to [forecast multiple time series with a univariate model](/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
-  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](/bigquery/docs/arima-speed-up-tutorial) .
-  - Learn how to [hierarchically forecast multiple time series with a univariate model](/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
-  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](/bigquery/docs/bqml-introduction) .
+  - Learn how to [forecast a single time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-single-time-series-forecasting-tutorial)
+  - Learn how to [forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-multiple-time-series-forecasting-tutorial)
+  - Learn how to [scale a univariate model when forecasting multiple time series over many rows](https://docs.cloud.google.com/bigquery/docs/arima-speed-up-tutorial) .
+  - Learn how to [hierarchically forecast multiple time series with a univariate model](https://docs.cloud.google.com/bigquery/docs/arima-time-series-forecasting-with-hierarchical-time-series)
+  - For an overview of BigQuery ML, see [Introduction to AI and ML in BigQuery](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .

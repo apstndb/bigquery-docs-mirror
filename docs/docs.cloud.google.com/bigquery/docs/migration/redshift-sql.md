@@ -1,6 +1,6 @@
 # Amazon Redshift SQL translation guide
 
-This document details the similarities and differences in SQL syntax between Amazon Redshift and BigQuery to help you plan your migration. Use [batch SQL translation](/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](/bigquery/docs/interactive-sql-translator) to translate ad hoc queries.
+This document details the similarities and differences in SQL syntax between Amazon Redshift and BigQuery to help you plan your migration. Use [batch SQL translation](https://docs.cloud.google.com/bigquery/docs/batch-sql-translator) to migrate your SQL scripts in bulk, or [interactive SQL translation](https://docs.cloud.google.com/bigquery/docs/interactive-sql-translator) to translate ad hoc queries.
 
 The intended audience for this guide is enterprise architects, database administrators, application developers, and IT security specialists. It assumes you are familiar with Amazon Redshift.
 
@@ -102,7 +102,7 @@ Amazon Redshift's `  BOOLEAN  ` can use `  TRUE  ` , `  t  ` , `  true  ` , `  y
 
 `  TIMESTAMP  `
 
-Note: In BigQuery, [time zones](/bigquery/docs/reference/standard-sql/data-types#time_zones) are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. [Time zone names](https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations) or [offset from UTC](/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) using (-|+)HH:MM are supported, but time zone abbreviations such as PDT are not supported.
+Note: In BigQuery, [time zones](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones) are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. [Time zone names](https://en.wikipedia.org/wiki/List_of_time_zone_abbreviations) or [offset from UTC](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions) using (-|+)HH:MM are supported, but time zone abbreviations such as PDT are not supported.
 
 `  GEOMETRY  `
 
@@ -112,10 +112,10 @@ Support for querying geospatial data.
 
 BigQuery also has the following data types that do not have a direct Amazon Redshift analog:
 
-  - [`  ARRAY  `](/bigquery/docs/reference/standard-sql/data-types#array_type)
-  - [`  BYTES  `](/bigquery/docs/reference/standard-sql/data-types#bytes_type)
-  - [`  TIME  `](/bigquery/docs/reference/standard-sql/data-types#time_type)
-  - [`  STRUCT  `](/bigquery/docs/reference/standard-sql/data-types#struct_type)
+  - [`  ARRAY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#array_type)
+  - [`  BYTES  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#bytes_type)
+  - [`  TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_type)
+  - [`  STRUCT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#struct_type)
 
 ### Implicit conversion types
 
@@ -123,28 +123,11 @@ When migrating to BigQuery, you need to convert most of your [Amazon Redshift im
 
 BigQuery performs implicit conversions for the following data types:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>From BigQuery type</strong></th>
-<th><strong>To BigQuery type</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        INT64       </code></p></td>
-<td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
-</tr>
-<tr class="even">
-<td><p><code dir="ltr" translate="no">        INT64       </code></p></td>
-<td><p><code dir="ltr" translate="no">        NUMERIC       </code></p></td>
-</tr>
-<tr class="odd">
-<td><p><code dir="ltr" translate="no">        NUMERIC       </code></p></td>
-<td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
-</tr>
-</tbody>
-</table>
+| **From BigQuery type**     | **To BigQuery type**       |
+| -------------------------- | -------------------------- |
+| `         INT64        `   | `         FLOAT64        ` |
+| `         INT64        `   | `         NUMERIC        ` |
+| `         NUMERIC        ` | `         FLOAT64        ` |
 
 BigQuery also performs implicit conversions for the following literals:
 
@@ -185,9 +168,9 @@ BigQuery also performs implicit conversions for the following literals:
 
 ### Explicit conversion types
 
-You can convert Amazon Redshift data types that BigQuery doesn't implicitly convert using BigQuery's [`  CAST(expression AS type)  `](/bigquery/docs/reference/standard-sql/conversion_functions#cast) function or any of the [`  DATE  `](/bigquery/docs/reference/standard-sql/date_functions) and [`  TIMESTAMP  `](/bigquery/docs/reference/standard-sql/timestamp_functions) conversion functions.
+You can convert Amazon Redshift data types that BigQuery doesn't implicitly convert using BigQuery's [`  CAST(expression AS type)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) function or any of the [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) and [`  TIMESTAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) conversion functions.
 
-When migrating your queries, change any occurrences of the Amazon Redshift [`  CONVERT(type, expression)  `](https://docs.aws.amazon.com/redshift/latest/dg/r_CAST_function.html#convert-function) function (or the :: syntax) to BigQuery's [`  CAST(expression AS type)  `](/bigquery/docs/reference/standard-sql/conversion_functions#cast) function, as shown in the table in the [Data type formatting functions](#data_type_formatting_functions) section.
+When migrating your queries, change any occurrences of the Amazon Redshift [`  CONVERT(type, expression)  `](https://docs.aws.amazon.com/redshift/latest/dg/r_CAST_function.html#convert-function) function (or the :: syntax) to BigQuery's [`  CAST(expression AS type)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#cast) function, as shown in the table in the [Data type formatting functions](https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql#data_type_formatting_functions) section.
 
 ## Query syntax
 
@@ -224,8 +207,8 @@ Note: Redshift supports creating and referencing an alias in the same <code dir=
 
 BigQuery also supports the following expressions in `  SELECT  ` statements, which do not have a Amazon Redshift equivalent:
 
-  - [`  EXCEPT  `](/bigquery/docs/reference/standard-sql/query-syntax#select_except)
-  - [`  REPLACE  `](/bigquery/docs/reference/standard-sql/query-syntax#select_replace)
+  - [`  EXCEPT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_except)
+  - [`  REPLACE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#select_replace)
 
 ### `     FROM    ` clause
 
@@ -239,9 +222,9 @@ BigQuery tables can be referenced in the `  FROM  ` clause using the following:
 
 BigQuery also supports additional table references:
 
-  - Historical versions of the table definition and rows using [`  FOR SYSTEM_TIME AS OF  `](/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) .
-  - [Field paths](/bigquery/docs/reference/standard-sql/query-syntax#field_path) , or any path that resolves to a field within a data type (such as a `  STRUCT  ` ).
-  - [Flattened arrays](/bigquery/docs/arrays#querying_nested_arrays) .
+  - Historical versions of the table definition and rows using [`  FOR SYSTEM_TIME AS OF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#for_system_time_as_of) .
+  - [Field paths](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#field_path) , or any path that resolves to a field within a data type (such as a `  STRUCT  ` ).
+  - [Flattened arrays](https://docs.cloud.google.com/bigquery/docs/arrays#querying_nested_arrays) .
 
 ### `     JOIN    ` types
 
@@ -251,7 +234,7 @@ Both Amazon Redshift and BigQuery support the following types of join:
   - `  LEFT [OUTER] JOIN  `
   - `  RIGHT [OUTER] JOIN  `
   - `  FULL [OUTER] JOIN  `
-  - `  CROSS JOIN  ` and the equivalent [implicit comma cross join](/bigquery/docs/reference/standard-sql/query-syntax#cross_join) .
+  - `  CROSS JOIN  ` and the equivalent [implicit comma cross join](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#cross_join) .
 
 The following table contains a list of minor differences.
 
@@ -278,11 +261,11 @@ Note: In BigQuery, <code dir="ltr" translate="no">       JOIN      </code> claus
 
 ### `     WITH    ` clause
 
-A BigQuery [`  WITH  `](/bigquery/docs/reference/standard-sql/query-syntax#with_clause) clause contains one or more named subqueries that execute when a subsequent `  SELECT  ` statement references them. Amazon Redshift [`  WITH  `](https://docs.aws.amazon.com/redshift/latest/dg/r_WITH_clause.html) clauses behave the same as BigQuery's with the exception that you can evaluate the clause once and reuse its results.
+A BigQuery [`  WITH  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#with_clause) clause contains one or more named subqueries that execute when a subsequent `  SELECT  ` statement references them. Amazon Redshift [`  WITH  `](https://docs.aws.amazon.com/redshift/latest/dg/r_WITH_clause.html) clauses behave the same as BigQuery's with the exception that you can evaluate the clause once and reuse its results.
 
 ### Set operators
 
-There are some minor differences between [Amazon Redshift set operators](https://docs.aws.amazon.com/redshift/latest/dg/r_UNION.html#r_UNION-order-of-evaluation-for-set-operators) and [BigQuery set](/bigquery/docs/reference/standard-sql/query-syntax#set_operators) [operators](/bigquery/docs/reference/standard-sql/query-syntax#set_operators) . However, all set operations that are feasible in Amazon Redshift are replicable in BigQuery.
+There are some minor differences between [Amazon Redshift set operators](https://docs.aws.amazon.com/redshift/latest/dg/r_UNION.html#r_UNION-order-of-evaluation-for-set-operators) and [BigQuery set](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators) [operators](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#set_operators) . However, all set operations that are feasible in Amazon Redshift are replicable in BigQuery.
 
 <table>
 <colgroup>
@@ -324,7 +307,7 @@ Note: BigQuery requires parentheses to separate different set operations. If the
 
 ### `     ORDER BY    ` clause
 
-There are some minor differences between Amazon Redshift [`  ORDER BY  `](https://docs.amazonaws.cn/en_us/redshift/latest/dg/r_ORDER_BY_clause.html) clauses and BigQuery [`  ORDER BY  `](/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) clauses.
+There are some minor differences between Amazon Redshift [`  ORDER BY  `](https://docs.amazonaws.cn/en_us/redshift/latest/dg/r_ORDER_BY_clause.html) clauses and BigQuery [`  ORDER BY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#order_by_clause) clauses.
 
 <table>
 <colgroup>
@@ -503,233 +486,92 @@ Note: Does not cover aggregation use cases.</td>
 </tbody>
 </table>
 
-BigQuery also offers the following [aggregate](/bigquery/docs/reference/standard-sql/aggregate_functions) , [aggregate analytic](/bigquery/docs/reference/standard-sql/aggregate_analytic_functions) , and [approximate aggregate](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions) functions, which do not have a direct analogue in Amazon Redshift:
+BigQuery also offers the following [aggregate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) , [aggregate analytic](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_analytic_functions) , and [approximate aggregate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions) functions, which do not have a direct analogue in Amazon Redshift:
 
-  - [`  ANY_VALUE  `](/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)
-  - [`  APPROX_TOP_COUNT  `](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
-  - [`  APPROX_TOP_SUM  `](/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
-  - [`  ARRAY_AGG  `](/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)
-  - [`  ARRAY_CONCAT_AGG  `](/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
-  - [`  COUNTIF  `](/bigquery/docs/reference/standard-sql/aggregate_functions#countif)
-  - [`  CORR  `](/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)
-  - [`  COVAR_POP  `](/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)
-  - [`  COVAR_SAMP  `](/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)
+  - [`  ANY_VALUE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#any_value)
+  - [`  APPROX_TOP_COUNT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_count)
+  - [`  APPROX_TOP_SUM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions#approx_top_sum)
+  - [`  ARRAY_AGG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_agg)
+  - [`  ARRAY_CONCAT_AGG  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#array_concat_agg)
+  - [`  COUNTIF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#countif)
+  - [`  CORR  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#corr)
+  - [`  COVAR_POP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_pop)
+  - [`  COVAR_SAMP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/statistical_aggregate_functions#covar_samp)
 
 ### Bitwise aggregate functions
 
 The following table shows mappings between common Amazon Redshift bitwise aggregate functions with their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         BIT_AND              (expression)      </code></td>
-<td><code dir="ltr" translate="no">         BIT_AND              (expression)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         BIT_OR              (expression)      </code></td>
-<td><code dir="ltr" translate="no">         BIT_OR              (expression)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         BOOL_AND              &gt;(expression)      </code></td>
-<td><code dir="ltr" translate="no">         LOGICAL_AND              (expression)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         BOOL_OR              (expression)      </code></td>
-<td><code dir="ltr" translate="no">         LOGICAL_OR              (expression)      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                    | **BigQuery**                                             |
+| ------------------------------------------------------ | -------------------------------------------------------- |
+| `          BIT_AND              (expression)       `   | `          BIT_AND              (expression)       `     |
+| `          BIT_OR              (expression)       `    | `          BIT_OR              (expression)       `      |
+| `          BOOL_AND              >(expression)       ` | `          LOGICAL_AND              (expression)       ` |
+| `          BOOL_OR              (expression)       `   | `          LOGICAL_OR              (expression)       `  |
 
-BigQuery also offers the following [bit-wise aggregate](/bigquery/docs/reference/standard-sql/bit_functions) function, which does not have a direct analogue in Amazon Redshift:
+BigQuery also offers the following [bit-wise aggregate](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bit_functions) function, which does not have a direct analogue in Amazon Redshift:
 
-  - [`  BIT_XOR  `](/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)
+  - [`  BIT_XOR  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#bit_xor)
 
 ### Window functions
 
-The following table shows mappings between common Amazon Redshift window functions with their BigQuery equivalents. Windowing functions in BigQuery include [analytic aggregate functions](/bigquery/docs/reference/standard-sql/aggregate_analytic_functions) , [aggregate functions](/bigquery/docs/reference/standard-sql/aggregate_functions) , [navigation functions](/bigquery/docs/reference/standard-sql/navigation_functions) , and [numbering functions](/bigquery/docs/reference/standard-sql/numbering_functions) .
+The following table shows mappings between common Amazon Redshift window functions with their BigQuery equivalents. Windowing functions in BigQuery include [analytic aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_analytic_functions) , [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions) , [navigation functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/navigation_functions) , and [numbering functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/numbering_functions) .
 
   
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         AVG              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         AVG              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COUNT              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         COUNT              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CUME_DIST              () OVER              (              [PARTITION BY partition_expression]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         CUME_DIST              () OVER              (              [PARTITION BY partition_expression]              ORDER BY order_list              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         DENSE_RANK              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         DENSE_RANK              () OVER              (              [PARTITION BY expr_list]              ORDER BY order_list              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         FIRST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         FIRST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LAST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         LAST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LAG              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )      </code></td>
-<td><code dir="ltr" translate="no">         LAG              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LEAD              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )      </code></td>
-<td><code dir="ltr" translate="no">         LEAD              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LISTAGG              (              [DISTINCT] expression              [, delimiter]              )              [WITHIN GROUP              (ORDER BY order_list)]              OVER (              [PARTITION BY partition_expression] )      </code></td>
-<td><code dir="ltr" translate="no">         STRING_AGG              (              [DISTINCT] aggregate_expression              [, delimiter]  )              OVER (              [PARTITION BY partition_list]              [ORDER BY order_list] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MAX              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         MAX              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         MEDIAN              (median_expression) OVER              (              [PARTITION BY partition_expression] )      </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT              (              median_expression,              0.5              )              OVER ( [PARTITION BY partition_expression] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MIN              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         MIN              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         NTH_VALUE              (expression, offset) OVER ( [PARTITION BY window_partition] [ORDER BY window_ordering frame_clause] )      </code></td>
-<td><code dir="ltr" translate="no">         NTH_VALUE              (expression, offset)  OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              [frame_clause]              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NTILE              (expr) OVER              (              [PARTITION BY expression_list]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         NTILE              (expr) OVER              (              [PARTITION BY expression_list]              ORDER BY order_list              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PERCENT_RANK              () OVER              (              [PARTITION BY partition_expression]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         PERCENT_RANK              () OVER              (              [PARTITION BY partition_expression]              ORDER BY order_list              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT              (percentile)              WITHIN GROUP (ORDER BY expr) OVER              (              [PARTITION BY expr_list] )      </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_CONT              (expr, percentile) OVER              (              [PARTITION BY expr_list] )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PERCENTILE_DISC              (percentile)  WITHIN GROUP (ORDER BY expr) OVER              (              [PARTITION BY expr_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         PERCENTILE_DISC              (expr, percentile) OVER              (              [PARTITION BY expr_list] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         RANK              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         RANK              () OVER              (              [PARTITION BY expr_list]              ORDER BY order_list              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         RATIO_TO_REPORT              (ratio_expression) OVER              (              [PARTITION BY partition_expression] )      </code></td>
-<td><code dir="ltr" translate="no">       ratio_expression               SUM              (ratio_expression) OVER              (              [PARTITION BY partition_expression] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ROW_NUMBER              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )      </code></td>
-<td><code dir="ltr" translate="no">         ROW_NUMBER              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         STDDEV              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         STDDEV_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         STDDEV_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         STDDEV_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause] )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         SUM              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         SUM              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         VAR_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         VAR_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         VAR_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         VAR_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         VARIANCE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-<td><code dir="ltr" translate="no">         VARIANCE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                                                                                                                                                          | **BigQuery**                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          AVG              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list frame_clause]              )       `                                                                                    | `          AVG              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                    |
+| `          COUNT              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                                     | `          COUNT              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                  |
+| `          CUME_DIST              () OVER              (              [PARTITION BY partition_expression]              [ORDER BY order_list]              )       `                                                                                          | `          CUME_DIST              () OVER              (              [PARTITION BY partition_expression]              ORDER BY order_list              )       `                                                           |
+| `          DENSE_RANK              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )       `                                                                                                    | `          DENSE_RANK              () OVER              (              [PARTITION BY expr_list]              ORDER BY order_list              )       `                                                                     |
+| `          FIRST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                               | `          FIRST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                            |
+| `          LAST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                                | `          LAST_VALUE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                               |
+| `          LAG              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )       `                                                                            | `          LAG              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )       `                                           |
+| `          LEAD              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )       `                                                                           | `          LEAD              (value_expr [, offset]) OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              )       `                                          |
+| `          LISTAGG              (              [DISTINCT] expression              [, delimiter]              )              [WITHIN GROUP              (ORDER BY order_list)]              OVER (              [PARTITION BY partition_expression] )       ` | `          STRING_AGG              (              [DISTINCT] aggregate_expression              [, delimiter]  )              OVER (              [PARTITION BY partition_list]              [ORDER BY order_list] )       ` |
+| `          MAX              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                                       | `          MAX              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                    |
+| `          MEDIAN              (median_expression) OVER              (              [PARTITION BY partition_expression] )       `                                                                                                                            | `          PERCENTILE_CONT              (              median_expression,              0.5              )              OVER ( [PARTITION BY partition_expression] )       `                                                 |
+| `          MIN              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                                       | `          MIN              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                    |
+| `          NTH_VALUE              (expression, offset) OVER ( [PARTITION BY window_partition] [ORDER BY window_ordering frame_clause] )       `                                                                                                              | `          NTH_VALUE              (expression, offset)  OVER              (              [PARTITION BY window_partition]              ORDER BY window_ordering              [frame_clause]              )       `           |
+| `          NTILE              (expr) OVER              (              [PARTITION BY expression_list]              [ORDER BY order_list]              )       `                                                                                               | `          NTILE              (expr) OVER              (              [PARTITION BY expression_list]              ORDER BY order_list              )       `                                                                |
+| `          PERCENT_RANK              () OVER              (              [PARTITION BY partition_expression]              [ORDER BY order_list]              )       `                                                                                       | `          PERCENT_RANK              () OVER              (              [PARTITION BY partition_expression]              ORDER BY order_list              )       `                                                        |
+| `          PERCENTILE_CONT              (percentile)              WITHIN GROUP (ORDER BY expr) OVER              (              [PARTITION BY expr_list] )       `                                                                                           | `          PERCENTILE_CONT              (expr, percentile) OVER              (              [PARTITION BY expr_list] )       `                                                                                              |
+| `          PERCENTILE_DISC              (percentile)  WITHIN GROUP (ORDER BY expr) OVER              (              [PARTITION BY expr_list]              )       `                                                                                          | `          PERCENTILE_DISC              (expr, percentile) OVER              (              [PARTITION BY expr_list] )       `                                                                                              |
+| `          RANK              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )       `                                                                                                          | `          RANK              () OVER              (              [PARTITION BY expr_list]              ORDER BY order_list              )       `                                                                           |
+| `          RATIO_TO_REPORT              (ratio_expression) OVER              (              [PARTITION BY partition_expression] )       `                                                                                                                    | `        ratio_expression               SUM              (ratio_expression) OVER              (              [PARTITION BY partition_expression] )       `                                                                  |
+| `          ROW_NUMBER              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )       `                                                                                                    | `          ROW_NUMBER              () OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              )       `                                                                   |
+| `          STDDEV              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                                    | `          STDDEV              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause] )       `                                              |
+| `          STDDEV_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list              frame_clause]              )       `                                                               | `          STDDEV_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                            |
+| `          STDDEV_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                                              | `          STDDEV_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause] )       `                                          |
+| `          SUM              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                                                     | `          SUM              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                    |
+| `          VAR_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                                                 | `          VAR_POP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                |
+| `          VAR_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                                                | `          VAR_SAMP              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                               |
+| `          VARIANCE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                                                                | `          VARIANCE              (expression) OVER              (              [PARTITION BY expr_list]              [ORDER BY order_list]              [frame_clause]              )       `                               |
 
 ### Conditional expressions
 
 The following table shows mappings between common Amazon Redshift conditional expressions with their BigQuery equivalents.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CASE              expression              WHEN value THEN result              [WHEN...]              [ELSE else_result]              END      </code></td>
-<td><code dir="ltr" translate="no">         CASE              expression              WHEN value THEN result              [WHEN...]              [ELSE else_result]              END      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COALESCE              (expression1[, ...])      </code></td>
-<td><code dir="ltr" translate="no">         COALESCE              (expression1[, ...])      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         DECODE              (              expression,              search1, result1              [, search2, result2...]              [, default]              )      </code></td>
-<td><code dir="ltr" translate="no">         CASE              expression              WHEN value1 THEN result1              [WHEN value2 THEN result2]              [ELSE default]              END      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         GREATEST              (value [, ...])      </code></td>
-<td><code dir="ltr" translate="no">         GREATEST              (value [, ...])      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LEAST              (value [, ...])      </code></td>
-<td><code dir="ltr" translate="no">         LEAST              (value [, ...])      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NVL              (expression1[, ...])      </code></td>
-<td><code dir="ltr" translate="no">         COALESCE              (expression1[, ...])      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         NVL2              (              expression,              not_null_return_value,              null_return_value              )      </code></td>
-<td><code dir="ltr" translate="no">         IF              (              expression IS NULL,              null_return_value,              not_null_return_value              )      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         NULLIF              (expression1, expression2)      </code></td>
-<td><code dir="ltr" translate="no">         NULLIF              (expression1, expression2)      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                                                                          | **BigQuery**                                                                                                                                                               |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          CASE              expression              WHEN value THEN result              [WHEN...]              [ELSE else_result]              END       `                  | `          CASE              expression              WHEN value THEN result              [WHEN...]              [ELSE else_result]              END       `                |
+| `          COALESCE              (expression1[, ...])       `                                                                                                                | `          COALESCE              (expression1[, ...])       `                                                                                                              |
+| `          DECODE              (              expression,              search1, result1              [, search2, result2...]              [, default]              )       ` | `          CASE              expression              WHEN value1 THEN result1              [WHEN value2 THEN result2]              [ELSE default]              END       ` |
+| `          GREATEST              (value [, ...])       `                                                                                                                     | `          GREATEST              (value [, ...])       `                                                                                                                   |
+| `          LEAST              (value [, ...])       `                                                                                                                        | `          LEAST              (value [, ...])       `                                                                                                                      |
+| `          NVL              (expression1[, ...])       `                                                                                                                     | `          COALESCE              (expression1[, ...])       `                                                                                                              |
+| `          NVL2              (              expression,              not_null_return_value,              null_return_value              )       `                            | `          IF              (              expression IS NULL,              null_return_value,              not_null_return_value              )       `                    |
+| `          NULLIF              (expression1, expression2)       `                                                                                                            | `          NULLIF              (expression1, expression2)       `                                                                                                          |
 
 BigQuery also offers the following conditional expressions, which do not have a direct analogue in Amazon Redshift:
 
-  - [`  IF  `](/bigquery/docs/reference/standard-sql/conditional_expressions#if)
-  - [`  IFNULL  `](/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull)
+  - [`  IF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#if)
+  - [`  IFNULL  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions#ifnull)
 
 ### Date and time functions
 
-The following table shows mappings between common Amazon Redshift date and time functions with their BigQuery equivalents. BigQuery data and time functions include [date functions](/bigquery/docs/reference/standard-sql/date_functions) , [datetime](/bigquery/docs/reference/standard-sql/datetime_functions) [functions](/bigquery/docs/reference/standard-sql/datetime_functions) , [time functions](/bigquery/docs/reference/standard-sql/time_functions) , and [timestamp functions](/bigquery/docs/reference/standard-sql/timestamp_functions) .
+The following table shows mappings between common Amazon Redshift date and time functions with their BigQuery equivalents. BigQuery data and time functions include [date functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions) , [datetime](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions) [functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions) , [time functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions) , and [timestamp functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions) .
 
 Keep in mind that functions that seem identical in Amazon Redshift and BigQuery might return different data types.
 
@@ -753,7 +595,7 @@ Keep in mind that functions that seem identical in Amazon Redshift and BigQuery 
 <td>timestamptz_or_timestamp <code dir="ltr" translate="no">         AT TIME ZONE              timezone      </code></td>
 <td><code dir="ltr" translate="no">         PARSE_TIMESTAMP              (              "%c%z",                FORMAT_TIMESTAMP              (              "%c%z",              timestamptz_or_timestamp,              timezone              )              )      </code><br />
 <br />
-Note: <a href="/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported, but time zone abbreviations (such as PDT) are not supported.</td>
+Note: <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported, but time zone abbreviations (such as PDT) are not supported.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         CONVERT_TIMEZONE              (              [source_timezone],              target_timezone,              timestamp              )      </code></td>
@@ -887,13 +729,13 @@ Note: BigQuery compares timestamps in the UTC time zone.</td>
 <td><code dir="ltr" translate="no">         TIMEZONE              (              timezone,              Timestamptz_or_timestamp              )      </code></td>
 <td><code dir="ltr" translate="no">         PARSE_TIMESTAMP              (              "%c%z",               FORMAT_TIMESTAMP              (              "%c%z",              timestamptz_or_timestamp,              timezone              )              )      </code><br />
 <br />
-Note: <a href="/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported but time zone abbreviations (such as PDT) are not supported.</td>
+Note: <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported but time zone abbreviations (such as PDT) are not supported.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         TO_TIMESTAMP              (timestamp, format)      </code></td>
 <td><code dir="ltr" translate="no">         PARSE_TIMESTAMP              (                format              ,                FORMAT_TIMESTAMP              (                format              ,              timestamp              )              )      </code><br />
 <br />
-Note: BigQuery follows a different set of <a href="/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time">format elements</a> . <a href="/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported in the format string but time zone abbreviations (such as PDT) are not supported.</td>
+Note: BigQuery follows a different set of <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_elements_date_time">format elements</a> . <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zones">Time zones</a> are used when parsing timestamps or formatting timestamps for display. A string-formatted timestamp might include a time zone, but when BigQuery parses the string, it stores the timestamp in the equivalent UTC time. When a time zone is not explicitly specified, the default time zone, UTC, is used. <a href="http://www.iana.org/time-zones">Time zone names</a> or <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timezone_definitions">offset from UTC</a> (-HH:MM) are supported in the format string but time zone abbreviations (such as PDT) are not supported.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         TRUNC              (timestamp)      </code></td>
@@ -904,35 +746,35 @@ Note: BigQuery follows a different set of <a href="/bigquery/docs/reference/stan
 
 BigQuery also offers the following date and time functions, which do not have a direct analogue in Amazon Redshift:
 
-  - [`  EXTRACT  `](/bigquery/docs/reference/standard-sql/date_functions#extract)
-  - [`  DATE  `](/bigquery/docs/reference/standard-sql/date_functions#date)
-  - [`  DATE_SUB  `](/bigquery/docs/reference/standard-sql/date_functions#date_sub)
-  - [`  DATE_ADD  `](/bigquery/docs/reference/standard-sql/date_functions#date_add) (returning `  DATE  ` data type)
-  - [`  DATE_FROM_UNIX_DATE  `](/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date)
-  - [`  FORMAT_DATE  `](/bigquery/docs/reference/standard-sql/date_functions#format_date)
-  - [`  PARSE_DATE  `](/bigquery/docs/reference/standard-sql/date_functions#parse_date)
-  - [`  UNIX_DATE  `](/bigquery/docs/reference/standard-sql/date_functions#unix_date)
-  - [`  DATETIME  `](/bigquery/docs/reference/standard-sql/datetime_functions#datetime)
-  - [`  DATETIME_ADD  `](/bigquery/docs/reference/standard-sql/datetime_functions#datetime_add)
-  - [`  DATETIME_SUB  `](/bigquery/docs/reference/standard-sql/datetime_functions#datetime_sub)
-  - [`  DATETIME_DIFF  `](/bigquery/docs/reference/standard-sql/datetime_functions#datetime_diff)
-  - [`  DATETIME_TRUNC  `](/bigquery/docs/reference/standard-sql/datetime_functions#datetime_trunc)
-  - [`  FORMAT_DATETIME  `](/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)
-  - [`  PARSE_DATETIME  `](/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime)
-  - [`  CURRENT_TIME  `](/bigquery/docs/reference/standard-sql/time_functions#current_time)
-  - [`  TIME  `](/bigquery/docs/reference/standard-sql/time_functions#time)
-  - [`  TIME_ADD  `](/bigquery/docs/reference/standard-sql/time_functions#time_add)
-  - [`  TIME_SUB  `](/bigquery/docs/reference/standard-sql/time_functions#time_sub)
-  - [`  TIME_DIFF  `](/bigquery/docs/reference/standard-sql/time_functions#time_diff)
-  - [`  TIME_TRUNC  `](/bigquery/docs/reference/standard-sql/time_functions#time_trunc)
-  - [`  FORMAT_TIME  `](/bigquery/docs/reference/standard-sql/time_functions#format_time)
-  - [`  PARSE_TIME  `](/bigquery/docs/reference/standard-sql/time_functions#parse_time)
-  - [`  TIMESTAMP_SECONDS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds)
-  - [`  TIMESTAMP_MILLIS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis)
-  - [`  TIMESTAMP_MICROS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros)
-  - [`  UNIX_SECONDS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds)
-  - [`  UNIX_MILLIS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis)
-  - [`  UNIX_MICROS  `](/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros)
+  - [`  EXTRACT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#extract)
+  - [`  DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date)
+  - [`  DATE_SUB  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_sub)
+  - [`  DATE_ADD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_add) (returning `  DATE  ` data type)
+  - [`  DATE_FROM_UNIX_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#date_from_unix_date)
+  - [`  FORMAT_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#format_date)
+  - [`  PARSE_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#parse_date)
+  - [`  UNIX_DATE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions#unix_date)
+  - [`  DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime)
+  - [`  DATETIME_ADD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_add)
+  - [`  DATETIME_SUB  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_sub)
+  - [`  DATETIME_DIFF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_diff)
+  - [`  DATETIME_TRUNC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#datetime_trunc)
+  - [`  FORMAT_DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#format_datetime)
+  - [`  PARSE_DATETIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/datetime_functions#parse_datetime)
+  - [`  CURRENT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#current_time)
+  - [`  TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time)
+  - [`  TIME_ADD  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_add)
+  - [`  TIME_SUB  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_sub)
+  - [`  TIME_DIFF  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_diff)
+  - [`  TIME_TRUNC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#time_trunc)
+  - [`  FORMAT_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#format_time)
+  - [`  PARSE_TIME  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time_functions#parse_time)
+  - [`  TIMESTAMP_SECONDS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_seconds)
+  - [`  TIMESTAMP_MILLIS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_millis)
+  - [`  TIMESTAMP_MICROS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_micros)
+  - [`  UNIX_SECONDS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_seconds)
+  - [`  UNIX_MILLIS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_millis)
+  - [`  UNIX_MICROS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#unix_micros)
 
 ### Mathematical operators
 
@@ -1036,144 +878,43 @@ b'\x00' if the second operand <code dir="ltr" translate="no">       Y      </cod
 
 BigQuery also offers the following mathematical operator, which does not have a direct analog in Amazon Redshift:
 
-  - [`  X ^ Y  `](/bigquery/docs/reference/standard-sql/operators#bitwise_operators) (Bitwise xor)
+  - [`  X ^ Y  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators#bitwise_operators) (Bitwise xor)
 
 ### Math functions
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ABS              (number)      </code></td>
-<td><code dir="ltr" translate="no">         ABS              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ACOS              (number)      </code></td>
-<td><code dir="ltr" translate="no">         ACOS              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ASIN              (number)      </code></td>
-<td><code dir="ltr" translate="no">         ASIN              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         ATAN              (number)      </code></td>
-<td><code dir="ltr" translate="no">         ATAN              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ATAN2              (number1, number2)      </code></td>
-<td><code dir="ltr" translate="no">         ATAN2              (number1, number2)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         CBRT              (number)      </code></td>
-<td><code dir="ltr" translate="no">         POWER              (number, 1/3)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CEIL              (number)      </code></td>
-<td><code dir="ltr" translate="no">         CEIL              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         CEILING              (number)      </code></td>
-<td><code dir="ltr" translate="no">         CEILING              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         CHECKSUM              (expression)      </code></td>
-<td><code dir="ltr" translate="no">         FARM_FINGERPRINT              (expression)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         COS              (number)      </code></td>
-<td><code dir="ltr" translate="no">         COS              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         COT              (number)      </code></td>
-<td><code dir="ltr" translate="no">       1/               TAN              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         DEGREES              (number)      </code></td>
-<td><code dir="ltr" translate="no">       number      </code> *180/ <code dir="ltr" translate="no">         ACOS              (-1)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         DEXP              (number)      </code></td>
-<td><code dir="ltr" translate="no">         EXP              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         DLOG1              (number)      </code></td>
-<td><code dir="ltr" translate="no">         LN              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         DLOG10              (number)      </code></td>
-<td><code dir="ltr" translate="no">         LOG10              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         EXP              (number)      </code></td>
-<td><code dir="ltr" translate="no">         EXP              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         FLOOR              (number)      </code></td>
-<td><code dir="ltr" translate="no">         FLOOR              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         LN              number)      </code></td>
-<td><code dir="ltr" translate="no">         LN              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         LOG              (number)      </code></td>
-<td><code dir="ltr" translate="no">         LOG10              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         MOD              (number1, number2)      </code></td>
-<td><code dir="ltr" translate="no">         MOD              (number1, number2)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         PI       </code></td>
-<td><code dir="ltr" translate="no">         ACOS              (-1)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         POWER              (expression1, expression2)      </code></td>
-<td><code dir="ltr" translate="no">         POWER              (expression1,         expression2)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         RADIANS              (number)      </code></td>
-<td><code dir="ltr" translate="no">         ACOS              (-1)*(number/180)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         RANDOM              ()      </code></td>
-<td><code dir="ltr" translate="no">         RAND              ()      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         ROUND              (number [, integer])      </code></td>
-<td><code dir="ltr" translate="no">         ROUND              (number [, integer])      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         SIN              (number)      </code></td>
-<td><code dir="ltr" translate="no">         SIN              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         SIGN              (number)      </code></td>
-<td><code dir="ltr" translate="no">         SIGN              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         SQRT              (number)      </code></td>
-<td><code dir="ltr" translate="no">         SQRT              (number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         TAN              (number)      </code></td>
-<td><code dir="ltr" translate="no">         TAN              (number)      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         TO_HEX              (number)      </code></td>
-<td><code dir="ltr" translate="no">         FORMAT              ('%x', number)      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         TRUNC              (number [, integer])+-+++      </code></td>
-<td><code dir="ltr" translate="no">         TRUNC              (number [, integer])      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                              | **BigQuery**                                                             |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `          ABS              (number)       `                     | `          ABS              (number)       `                             |
+| `          ACOS              (number)       `                    | `          ACOS              (number)       `                            |
+| `          ASIN              (number)       `                    | `          ASIN              (number)       `                            |
+| `          ATAN              (number)       `                    | `          ATAN              (number)       `                            |
+| `          ATAN2              (number1, number2)       `         | `          ATAN2              (number1, number2)       `                 |
+| `          CBRT              (number)       `                    | `          POWER              (number, 1/3)       `                      |
+| `          CEIL              (number)       `                    | `          CEIL              (number)       `                            |
+| `          CEILING              (number)       `                 | `          CEILING              (number)       `                         |
+| `          CHECKSUM              (expression)       `            | `          FARM_FINGERPRINT              (expression)       `            |
+| `          COS              (number)       `                     | `          COS              (number)       `                             |
+| `          COT              (number)       `                     | `        1/               TAN              (number)       `              |
+| `          DEGREES              (number)       `                 | `        number       ` \*180/ `          ACOS              (-1)       ` |
+| `          DEXP              (number)       `                    | `          EXP              (number)       `                             |
+| `          DLOG1              (number)       `                   | `          LN              (number)       `                              |
+| `          DLOG10              (number)       `                  | `          LOG10              (number)       `                           |
+| `          EXP              (number)       `                     | `          EXP              (number)       `                             |
+| `          FLOOR              (number)       `                   | `          FLOOR              (number)       `                           |
+| `          LN              number)       `                       | `          LN              (number)       `                              |
+| `          LOG              (number)       `                     | `          LOG10              (number)       `                           |
+| `          MOD              (number1, number2)       `           | `          MOD              (number1, number2)       `                   |
+| `          PI        `                                           | `          ACOS              (-1)       `                                |
+| `          POWER              (expression1, expression2)       ` | `          POWER              (expression1,         expression2)       ` |
+| `          RADIANS              (number)       `                 | `          ACOS              (-1)*(number/180)       `                   |
+| `          RANDOM              ()       `                        | `          RAND              ()       `                                  |
+| `          ROUND              (number [, integer])       `       | `          ROUND              (number [, integer])       `               |
+| `          SIN              (number)       `                     | `          SIN              (number)       `                             |
+| `          SIGN              (number)       `                    | `          SIGN              (number)       `                            |
+| `          SQRT              (number)       `                    | `          SQRT              (number)       `                            |
+| `          TAN              (number)       `                     | `          TAN              (number)       `                             |
+| `          TO_HEX              (number)       `                  | `          FORMAT              ('%x', number)       `                    |
+| `          TRUNC              (number [, integer])+-+++       `  | `          TRUNC              (number [, integer])       `               |
 
 ### String functions
 
@@ -1463,7 +1204,7 @@ Note: BigQuery and Amazon Redshift differ in how to specify a numeric format str
 </tbody>
 </table>
 
-BigQuery also supports [`  SAFE_CAST  `](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) `  (expression AS typename)  ` , which returns `  NULL  ` if BigQuery is unable to perform a cast; for example, [`  SAFE_CAST  `](/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) `  ("apple" AS INT64)  ` returns `  NULL  ` .
+BigQuery also supports [`  SAFE_CAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) `  (expression AS typename)  ` , which returns `  NULL  ` if BigQuery is unable to perform a cast; for example, [`  SAFE_CAST  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_functions#safe_casting) `  ("apple" AS INT64)  ` returns `  NULL  ` .
 
 ## DML syntax
 
@@ -1473,38 +1214,22 @@ This section addresses differences in data management language syntax between Am
 
 Amazon Redshift offers a configurable `  DEFAULT  ` keyword for columns. In BigQuery, the `  DEFAULT  ` value for nullable columns is `  NULL  ` , and `  DEFAULT  ` is not supported for required columns. Most [Amazon Redshift `  INSERT  ` statements](https://docs.aws.amazon.com/redshift/latest/dg/r_INSERT_30.html) are compatible with BigQuery. The following table shows exceptions.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       INSERT INTO table (column1 [, ...])              DEFAULT VALUES      </code></td>
-<td><code dir="ltr" translate="no">       INSERT [INTO] table (column1 [, ...])              VALUES (DEFAULT [, ...])      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       INSERT INTO table (column1, [,...]) VALUES (              SELECT ...              FROM ...              )      </code></td>
-<td><code dir="ltr" translate="no">       INSERT [INTO] table (column1, [,...])              SELECT ...              FROM ...      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                        | **BigQuery**                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `        INSERT INTO table (column1 [, ...])              DEFAULT VALUES       `                                           | `        INSERT [INTO] table (column1 [, ...])              VALUES (DEFAULT [, ...])       `         |
+| `        INSERT INTO table (column1, [,...]) VALUES (              SELECT ...              FROM ...              )       ` | `        INSERT [INTO] table (column1, [,...])              SELECT ...              FROM ...       ` |
 
 BigQuery also supports inserting values using a subquery (where one of the values is computed using a subquery), which is not supported in Amazon Redshift. For example:
 
-``` text
-INSERT INTO table (column1, column2)
-VALUES ('value_1', (
-SELECT column2
-FROM table2
-))
-```
+    INSERT INTO table (column1, column2)
+    VALUES ('value_1', (
+    SELECT column2
+    FROM table2
+    ))
 
 ### `     COPY    ` statement
 
-Amazon Redshift's [`  COPY  `](https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) command loads data into a table from data files or from an Amazon DynamoDB table. BigQuery does not use the `  SQL COPY  ` command to load data, but you can use any of several non-SQL tools and options to [load data into BigQuery tables](/bigquery/docs/loading-data) . You can also use data pipeline sinks provided in [Apache Spark](/dataproc/docs/concepts/connectors/cloud-storage#other_sparkhadoop_clusters) or [Apache Beam](https://beam.apache.org/documentation/io/built-in/google-bigquery/#writing-to-bigquery) to write data into BigQuery.
+Amazon Redshift's [`  COPY  `](https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html) command loads data into a table from data files or from an Amazon DynamoDB table. BigQuery does not use the `  SQL COPY  ` command to load data, but you can use any of several non-SQL tools and options to [load data into BigQuery tables](https://docs.cloud.google.com/bigquery/docs/loading-data) . You can also use data pipeline sinks provided in [Apache Spark](https://docs.cloud.google.com/dataproc/docs/concepts/connectors/cloud-storage#other_sparkhadoop_clusters) or [Apache Beam](https://beam.apache.org/documentation/io/built-in/google-bigquery/#writing-to-bigquery) to write data into BigQuery.
 
 ### `     UPDATE    ` statement
 
@@ -1545,7 +1270,7 @@ The `  DELETE  ` and `  TRUNCATE  ` statements are both ways to remove rows from
 
 In Amazon Redshift, the `  TRUNCATE  ` statement is recommended over an unqualified `  DELETE  ` statement because it is faster and does not require `  VACUUM  ` and `  ANALYZE  ` operations afterward. However, you can use `  DELETE  ` statements to achieve the same effect.
 
-In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see the BigQuery [`  DELETE  ` examples](/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) in the DML documentation.
+In BigQuery, the `  DELETE  ` statement must have a `  WHERE  ` clause. For more information about `  DELETE  ` in BigQuery, see the BigQuery [`  DELETE  ` examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/dml-syntax#delete_examples) in the DML documentation.
 
 <table>
 <colgroup>
@@ -1625,28 +1350,11 @@ This section addresses differences in data definition language syntax between Am
 
 In Amazon Redshift, the `  SELECT INTO  ` statement can be used to insert the results of a query into a new table, combining table creation and insertion.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       SELECT expression, ... INTO table              FROM ...      </code></td>
-<td><code dir="ltr" translate="no">       INSERT table              SELECT expression, ...              FROM ...      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       WITH subquery_table AS ( SELECT ...              )              SELECT expression, ... INTO table              FROM subquery_table              ...      </code></td>
-<td><code dir="ltr" translate="no">       INSERT table              WITH subquery_table AS (              SELECT ...              )              SELECT expression, ...              FROM subquery_table              ...      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       SELECT expression              INTO TEMP table              FROM ...               SELECT expression              INTO TEMPORARY table              FROM ...      </code></td>
-<td>BigQuery offers several ways to emulate temporary tables. See the <a href="#temporary_tables">temporary tables</a> section for more information.</td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                                                                           | **BigQuery**                                                                                                                                                                                            |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        SELECT expression, ... INTO table              FROM ...       `                                                                                                      | `        INSERT table              SELECT expression, ...              FROM ...       `                                                                                                                 |
+| `        WITH subquery_table AS ( SELECT ...              )              SELECT expression, ... INTO table              FROM subquery_table              ...       `          | `        INSERT table              WITH subquery_table AS (              SELECT ...              )              SELECT expression, ...              FROM subquery_table              ...       `        |
+| `        SELECT expression              INTO TEMP table              FROM ...               SELECT expression              INTO TEMPORARY table              FROM ...       ` | BigQuery offers several ways to emulate temporary tables. See the [temporary tables](https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql#temporary_tables) section for more information. |
 
 ### `     CREATE TABLE    ` statement
 
@@ -1680,7 +1388,7 @@ Note: BigQuery does not use <code dir="ltr" translate="no">       UNIQUE      </
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       CREATE TABLE table_name              LIKE original_table_name      </code></td>
-<td>Reference <a href="/bigquery/docs/information-schema-tables#example_3">this example</a> to learn how to use the <code dir="ltr" translate="no">       INFORMATION_SCHEMA      </code> tables to copy column names, data types, and <code dir="ltr" translate="no">       NOT NULL      </code> constraints to a new table.</td>
+<td>Reference <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-tables#example_3">this example</a> to learn how to use the <code dir="ltr" translate="no">       INFORMATION_SCHEMA      </code> tables to copy column names, data types, and <code dir="ltr" translate="no">       NOT NULL      </code> constraints to a new table.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       CREATE TABLE table_name              (              col1 data_type1              )              BACKUP NO      </code><br />
@@ -1707,11 +1415,11 @@ BigQuery also supports the DDL statement `  CREATE OR REPLACE TABLE  ` , which o
 
 BigQuery's `  CREATE TABLE  ` statement also supports the following clauses, which do not have an Amazon Redshift equivalent:
 
-  - [`  PARTITION BY partition  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression)
-  - [`  CLUSTER BY clustering_column_list  `](/bigquery/docs/reference/standard-sql/data-definition-language#clustering_column_list)
-  - [`  OPTIONS(table_options_list)  `](/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list)
+  - [`  PARTITION BY partition  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#partition_expression)
+  - [`  CLUSTER BY clustering_column_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#clustering_column_list)
+  - [`  OPTIONS(table_options_list)  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#table_option_list)
 
-For more information about `  CREATE TABLE  ` in BigQuery, see the BigQuery [`  CREATE TABLE  ` examples](/bigquery/docs/reference/standard-sql/data-definition-language#create-table-examples) in the DML documentation.
+For more information about `  CREATE TABLE  ` in BigQuery, see the BigQuery [`  CREATE TABLE  ` examples](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create-table-examples) in the DML documentation.
 
 #### Temporary tables
 
@@ -1721,12 +1429,10 @@ Amazon Redshift supports temporary tables, which are only visible within the cur
 
   - Table TTL: Create a table that has a table-specific short time to live using DDL statements similar to the following:
     
-    ``` text
-    CREATE TABLE
-    temp.name (col1, col2, ...)
-    OPTIONS (expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
-    INTERVAL 1 HOUR));
-    ```
+        CREATE TABLE
+        temp.name (col1, col2, ...)
+        OPTIONS (expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(),
+        INTERVAL 1 HOUR));
 
 ### `     CREATE VIEW    ` statement
 
@@ -1768,7 +1474,7 @@ Creates a new view only if the view does not exist in the specified dataset.</td
 In Amazon Redshift, a late binding view is required in order to reference an external table.</td>
 <td>In BigQuery, to create a view, all referenced objects must already exist.<br />
 <br />
-BigQuery allows you to <a href="/bigquery/external-data-sources">query external data sources.</a></td>
+BigQuery allows you to <a href="https://docs.cloud.google.com/bigquery/external-data-sources">query external data sources.</a></td>
 </tr>
 </tbody>
 </table>
@@ -1777,7 +1483,7 @@ BigQuery allows you to <a href="/bigquery/external-data-sources">query external 
 
 A UDF lets you create functions for custom operations. These functions accept columns of input, perform actions, and return the result of those actions as a value.
 
-Both Amazon Redshift and BigQuery support UDFs using SQL expressions. Additionally, in Amazon Redshift you can create a [Python-based UDF](https://docs.aws.amazon.com/redshift/latest/dg/udf-python-language-support.html) , and in BigQuery you can create a [JavaScript-based UDF](/bigquery/docs/user-defined-functions#javascript-udf-structure) .
+Both Amazon Redshift and BigQuery support UDFs using SQL expressions. Additionally, in Amazon Redshift you can create a [Python-based UDF](https://docs.aws.amazon.com/redshift/latest/dg/udf-python-language-support.html) , and in BigQuery you can create a [JavaScript-based UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#javascript-udf-structure) .
 
 Refer to the [Google Cloud BigQuery utilities GitHub repository](https://github.com/GoogleCloudPlatform/bigquery-utils/tree/master/udfs/community) for a library of common BigQuery UDFs.
 
@@ -1801,7 +1507,7 @@ The following table addresses differences in SQL UDF creation syntax between Ama
 <td><code dir="ltr" translate="no">         CREATE [OR REPLACE] FUNCTION               function_name              ([sql_arg_name sql_arg_data_type[,..]]) RETURNS data_type              IMMUTABLE              AS $$              sql_function_definition              $$ LANGUAGE sql      </code></td>
 <td><code dir="ltr" translate="no">         CREATE [OR REPLACE] FUNCTION               function_name              ([sql_arg_name sql_arg_data_type[,..]]) AS              sql_function_definition      </code><br />
 <br />
-Note: In a BigQuery <a href="/bigquery/docs/user-defined-functions#sql-udf-structure">SQL UDF</a> , a return data type is optional. BigQuery infers the result type of the function from the SQL function body when a query calls the function.</td>
+Note: In a BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure">SQL UDF</a> , a return data type is optional. BigQuery infers the result type of the function from the SQL function body when a query calls the function.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         CREATE [OR REPLACE] FUNCTION               function_name              ([sql_arg_name sql_arg_data_type[,..]]) RETURNS data_type              { VOLATILE | STABLE | IMMUTABLE } AS $$              sql_function_definition              $$ LANGUAGE sql      </code></td>
@@ -1835,16 +1541,16 @@ Note: BigQuery UDFs require all input arguments to be named. The Amazon Redshift
 Note: Amazon Redshift does not support <code dir="ltr" translate="no">       ANY TYPE      </code> for SQL UDFs. However, it supports using the <code dir="ltr" translate="no">         ANYELEMENT       </code> data type in Python-based UDFs.</td>
 <td><code dir="ltr" translate="no">         CREATE [OR REPLACE] FUNCTION               function_name              (x ANY TYPE, y ANY TYPE)              AS              SELECT x + y      </code><br />
 <br />
-Note: BigQuery supports using <code dir="ltr" translate="no">       ANY TYPE      </code> as argument type. The function accepts an input of any type for this argument. For more information, see <a href="/bigquery/docs/user-defined-functions#templated-sql-udf-parameters">templated parameter</a> in BigQuery.</td>
+Note: BigQuery supports using <code dir="ltr" translate="no">       ANY TYPE      </code> as argument type. The function accepts an input of any type for this argument. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#templated-sql-udf-parameters">templated parameter</a> in BigQuery.</td>
 </tr>
 </tbody>
 </table>
 
 BigQuery also supports the `  CREATE FUNCTION IF NOT EXISTS  ` statement, which treats the query as successful and takes no action if a function with the same name already exists.
 
-BigQuery's `  CREATE FUNCTION  ` statement also supports creating [`  TEMPORARY  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) or `  TEMP  ` functions, which do not have an Amazon Redshift equivalent.
+BigQuery's `  CREATE FUNCTION  ` statement also supports creating [`  TEMPORARY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_function_statement) or `  TEMP  ` functions, which do not have an Amazon Redshift equivalent.
 
-See [calling UDFs](/bigquery/docs/reference/standard-sql/syntax#calling_persistent_user-defined_functions_udfs) for details on executing a BigQuery-persistent UDF.
+See [calling UDFs](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/syntax#calling_persistent_user-defined_functions_udfs) for details on executing a BigQuery-persistent UDF.
 
 ### `     DROP FUNCTION    ` syntax
 
@@ -1871,7 +1577,7 @@ Note: BigQuery does not require using the function's signature for deleting the 
 </tbody>
 </table>
 
-BigQuery also supports the [`  DROP FUNCTION IF EXISTS  `](/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement) statement, which deletes the function only if the function exists in the specified dataset.
+BigQuery also supports the [`  DROP FUNCTION IF EXISTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#drop_function_statement) statement, which deletes the function only if the function exists in the specified dataset.
 
 BigQuery requires that you specify the `  project_name  ` if the function is not located in the current project.
 
@@ -1910,13 +1616,13 @@ For a Python UDF, the data type might also be <code dir="ltr" translate="no">   
 <br />
 You must specify a <code dir="ltr" translate="no">       RETURN      </code> data type for both SQL and Python UDFs.<br />
 <br />
-See <a href="#data_types">Data types</a> in this document for equivalents between data types in Amazon Redshift and in BigQuery.</td>
-<td>BigQuery supports a different set of data types for <a href="/bigquery/docs/reference/standard-sql/data-types">SQL</a> and <a href="/bigquery/docs/user-defined-functions#supported-javascript-udf-data-types">JavaScript</a> UDFs.<br />
-For a SQL UDF, the data type might also be <code dir="ltr" translate="no">       ANY TYPE      </code> . For more information, see <a href="/bigquery/docs/user-defined-functions#templated-sql-udf-parameters">templated parameters</a> in BigQuery.<br />
+See <a href="https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql#data_types">Data types</a> in this document for equivalents between data types in Amazon Redshift and in BigQuery.</td>
+<td>BigQuery supports a different set of data types for <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types">SQL</a> and <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#supported-javascript-udf-data-types">JavaScript</a> UDFs.<br />
+For a SQL UDF, the data type might also be <code dir="ltr" translate="no">       ANY TYPE      </code> . For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#templated-sql-udf-parameters">templated parameters</a> in BigQuery.<br />
 <br />
 The <code dir="ltr" translate="no">       RETURN      </code> data type is optional for SQL UDFs.<br />
 <br />
-See <a href="/bigquery/docs/user-defined-functions#supported-javascript-udf-data-types">Supported JavaScript UDF data types</a> for information on how BigQuery data types map to JavaScript data types.</td>
+See <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#supported-javascript-udf-data-types">Supported JavaScript UDF data types</a> for information on how BigQuery data types map to JavaScript data types.</td>
 </tr>
 <tr class="even">
 <td><strong>Definition</strong></td>
@@ -1926,11 +1632,11 @@ For <a href="https://docs.aws.amazon.com/redshift/latest/dg/udf-creating-a-scala
 <code dir="ltr" translate="no">       BY      </code> , <code dir="ltr" translate="no">       ORDER BY      </code> , and <code dir="ltr" translate="no">       LIMIT      </code> clauses.<br />
 <br />
 For <a href="https://docs.aws.amazon.com/redshift/latest/dg/udf-python-language-support.html">Python UDFs</a> , you can write a Python program using the <a href="https://docs.python.org/2/library/index.html">Python 2.7 Standard Library</a> or import your custom modules by creating one using the <code dir="ltr" translate="no">         CREATE LIBRARY       </code> command.</td>
-<td>In BigQuery, you need to enclose the JavaScript code in quotes. See <a href="/bigquery/docs/user-defined-functions#quoting-rules">Quoting</a> <a href="/bigquery/docs/user-defined-functions#quoting-rules">rules</a> for more information.<br />
+<td>In BigQuery, you need to enclose the JavaScript code in quotes. See <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#quoting-rules">Quoting</a> <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#quoting-rules">rules</a> for more information.<br />
 <br />
-For <a href="/bigquery/docs/user-defined-functions#sql-udf-structure">SQL UDFs</a> , you can use any SQL expressions as the function definition. However, BigQuery doesn't support referencing tables, views, or models.<br />
+For <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#sql-udf-structure">SQL UDFs</a> , you can use any SQL expressions as the function definition. However, BigQuery doesn't support referencing tables, views, or models.<br />
 <br />
-For <a href="/bigquery/docs/user-defined-functions#javascript-udf-structure">JavaScript UDFs</a> , you can <a href="/bigquery/docs/user-defined-functions#including-javascript-libraries">include</a> <a href="/bigquery/docs/user-defined-functions#including-javascript-libraries">external code libraries</a> directly using the <code dir="ltr" translate="no">       OPTIONS      </code> section. You can also use the <a href="https://github.com/GoogleCloudPlatform/bigquery-udf-test-tool">BigQuery UDF test tool</a> to test your functions.</td>
+For <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#javascript-udf-structure">JavaScript UDFs</a> , you can <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#including-javascript-libraries">include</a> <a href="https://docs.cloud.google.com/bigquery/docs/user-defined-functions#including-javascript-libraries">external code libraries</a> directly using the <code dir="ltr" translate="no">       OPTIONS      </code> section. You can also use the <a href="https://github.com/GoogleCloudPlatform/bigquery-udf-test-tool">BigQuery UDF test tool</a> to test your functions.</td>
 </tr>
 <tr class="odd">
 <td><strong>Language</strong></td>
@@ -1950,14 +1656,14 @@ Function volatility is not a configurable parameter in BigQuery. All BigQuery UD
 <td><strong>Security and privileges</strong></td>
 <td>To create a UDF, you must have <a href="https://docs.aws.amazon.com/redshift/latest/dg/udf-security-and-privileges.html">permission for usage on language</a> for SQL or plpythonu (Python). By default, <code dir="ltr" translate="no">       USAGE ON LANGUAGE SQL      </code> is granted to <code dir="ltr" translate="no">       PUBLIC      </code> , but you must explicitly grant <code dir="ltr" translate="no">       USAGE ON LANGUAGE PLPYTHONU      </code> to specific users or groups.<br />
 Also, you must be a superuser to replace a UDF.</td>
-<td>Granting explicit permissions for creating or deleting any type of UDF is not necessary in BigQuery. Any user assigned a role of <a href="/bigquery/docs/access-control#bigquery">BigQuery Data Editor</a> (having <code dir="ltr" translate="no">       bigquery.routines.               *       </code> as one of the permissions) can create or delete functions for the specified dataset.<br />
+<td>Granting explicit permissions for creating or deleting any type of UDF is not necessary in BigQuery. Any user assigned a role of <a href="https://docs.cloud.google.com/bigquery/docs/access-control#bigquery">BigQuery Data Editor</a> (having <code dir="ltr" translate="no">       bigquery.routines.               *       </code> as one of the permissions) can create or delete functions for the specified dataset.<br />
 <br />
-BigQuery also supports creating custom roles. This can be managed using <a href="/iam/docs/roles-overview#custom">Cloud IAM</a> .</td>
+BigQuery also supports creating custom roles. This can be managed using <a href="https://docs.cloud.google.com/iam/docs/roles-overview#custom">Cloud IAM</a> .</td>
 </tr>
 <tr class="even">
 <td><strong>Limits</strong></td>
 <td>See <a href="https://docs.aws.amazon.com/redshift/latest/dg/udf-constraints.html">Python UDF limits</a> .</td>
-<td>See <a href="/bigquery/quotas#udf_limits">limits on user-defined functions</a> .</td>
+<td>See <a href="https://docs.cloud.google.com/bigquery/quotas#udf_limits">limits on user-defined functions</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -1978,7 +1684,7 @@ BigQuery also supports creating custom roles. This can be managed using <a href=
 <tbody>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       SELECT * FROM               STL_ANALYZE              WHERE name              = 'T';      </code></td>
-<td>Not used in BigQuery. You don't need to gather statistics in order to improve query performance. To get information about your data distribution, you can use <a href="/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">approximate aggregate functions</a> .</td>
+<td>Not used in BigQuery. You don't need to gather statistics in order to improve query performance. To get information about your data distribution, you can use <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/approximate_aggregate_functions">approximate aggregate functions</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         ANALYZE              [[ table_name[(column_name              [, ...])]]      </code></td>
@@ -1990,30 +1696,30 @@ BigQuery also supports creating custom roles. This can be managed using <a href=
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">         BEGIN TRANSACTION              ; SELECT ...                END TRANSACTION              ;      </code></td>
-<td>BigQuery uses snapshot isolation. For details, see <a href="#consistency_guarantees_and_transaction_isolation">Consistency guarantees</a> .</td>
+<td>BigQuery uses snapshot isolation. For details, see <a href="https://docs.cloud.google.com/bigquery/docs/migration/redshift-sql#consistency_guarantees_and_transaction_isolation">Consistency guarantees</a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         EXPLAIN              ...      </code></td>
 <td>Not used in BigQuery.<br />
 <br />
-Similar features are the <a href="/bigquery/query-plan-explanation">query plan explanation</a> in the BigQuery Google Cloud console, and in <a href="/bigquery/docs/monitoring">audit logging in Cloud Monitoring</a> .</td>
+Similar features are the <a href="https://docs.cloud.google.com/bigquery/query-plan-explanation">query plan explanation</a> in the BigQuery Google Cloud console, and in <a href="https://docs.cloud.google.com/bigquery/docs/monitoring">audit logging in Cloud Monitoring</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       SELECT * FROM               SVV_TABLE_INFO              WHERE              table = 'T';      </code></td>
 <td><code dir="ltr" translate="no">       SELECT * EXCEPT(is_typed) FROM              mydataset.INFORMATION_SCHEMA.TABLES;      </code><br />
 <br />
-For more information see <a href="/bigquery/docs/information-schema-intro">Introduction to BigQuery <code dir="ltr" translate="no">        INFORMATION_SCHEMA       </code></a> .</td>
+For more information see <a href="https://docs.cloud.google.com/bigquery/docs/information-schema-intro">Introduction to BigQuery <code dir="ltr" translate="no">        INFORMATION_SCHEMA       </code></a> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">         VACUUM              [table_name]      </code></td>
-<td>Not used in BigQuery. BigQuery <a href="/bigquery/docs/clustered-tables#automatic_reclustering">clustered tables are automatically sorted</a> .</td>
+<td>Not used in BigQuery. BigQuery <a href="https://docs.cloud.google.com/bigquery/docs/clustered-tables#automatic_reclustering">clustered tables are automatically sorted</a> .</td>
 </tr>
 </tbody>
 </table>
 
 ### Multi-statement and multi-line SQL statements
 
-Both Amazon Redshift and BigQuery support transactions (sessions) and therefore support statements separated by semicolons that are consistently executed together. For more information, see [Multi-statement transactions](/bigquery/docs/transactions) .
+Both Amazon Redshift and BigQuery support transactions (sessions) and therefore support statements separated by semicolons that are consistently executed together. For more information, see [Multi-statement transactions](https://docs.cloud.google.com/bigquery/docs/transactions) .
 
 ## Procedural SQL statements
 
@@ -2077,28 +1783,11 @@ Sets a variable to have the value of the provided expression, or sets multiple v
 
 In Amazon Redshift, an error encountered during the execution of a stored procedure ends the execution flow, ends the transaction, and rolls back the transaction. These results occur because subtransactions are not supported. In an Amazon Redshift-stored procedure, the only supported `  handler_statement  ` is `  RAISE  ` . In BigQuery, error handling is a core feature of the main control flow, similar to what other languages provide with `  TRY ... CATCH  ` blocks.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         BEGIN ... EXCEPTION WHEN OTHERS                THEN       </code></td>
-<td><code dir="ltr" translate="no">         BEGIN ... EXCEPTION WHEN ERROR THEN       </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         RAISE       </code></td>
-<td><code dir="ltr" translate="no">         RAISE       </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [ &lt;&lt;label&gt;&gt; ] [ DECLARE declarations ]              BEGIN              statements EXCEPTION              BEGIN              statements              EXCEPTION              WHEN OTHERS THEN              Handler_statements              END;      </code></td>
-<td><code dir="ltr" translate="no">       BEGIN              BEGIN              ...              EXCEPTION WHEN ERROR THEN SELECT 1/0;              END;               EXCEPTION WHEN ERROR THEN -- The exception thrown from the inner exception handler lands here. END;      </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                                                                                                                                                            | **BigQuery**                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          BEGIN ... EXCEPTION WHEN OTHERS                THEN        `                                                                                                                                                                                        | `          BEGIN ... EXCEPTION WHEN ERROR THEN        `                                                                                                                                                                                           |
+| `          RAISE        `                                                                                                                                                                                                                                      | `          RAISE        `                                                                                                                                                                                                                         |
+| `        [ <<label>> ] [ DECLARE declarations ]              BEGIN              statements EXCEPTION              BEGIN              statements              EXCEPTION              WHEN OTHERS THEN              Handler_statements              END;       ` | `        BEGIN              BEGIN              ...              EXCEPTION WHEN ERROR THEN SELECT 1/0;              END;               EXCEPTION WHEN ERROR THEN -- The exception thrown from the inner exception handler lands here. END;       ` |
 
 ### Cursor declarations and operations
 
@@ -2110,59 +1799,25 @@ Because BigQuery doesn't support cursors or sessions, the following statements a
   - [`  FETCH  `](https://docs.aws.amazon.com/redshift/latest/dg/fetch.html) `  [ NEXT | ALL | {FORWARD [ count | ALL ] } ] FROM cursor_name  `
   - [`  CLOSE  `](https://docs.aws.amazon.com/redshift/latest/dg/close.html) `  cursor_name;  `
 
-If you're using the cursor to return a result set, you can achieve similar behavior using [temporary tables](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) in BigQuery.
+If you're using the cursor to return a result set, you can achieve similar behavior using [temporary tables](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) in BigQuery.
 
 ### Dynamic SQL statements
 
-The [scripting feature](/bigquery/docs/reference/standard-sql/scripting) in BigQuery supports dynamic SQL statements like those shown in the following table.
+The [scripting feature](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/scripting) in BigQuery supports dynamic SQL statements like those shown in the following table.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         EXECUTE       </code></td>
-<td><code dir="ltr" translate="no">         EXECUTE IMMEDIATE       </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**         | **BigQuery**                          |
+| --------------------------- | ------------------------------------- |
+| `          EXECUTE        ` | `          EXECUTE IMMEDIATE        ` |
 
 ### Flow-of-control statements
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         IF..THEN..ELSIF..THEN..ELSE..END IF       </code></td>
-<td><code dir="ltr" translate="no">         IF              condition              THEN stmts              ELSE stmts              END IF      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         name CURSOR [ ( arguments ) ] FOR query       </code></td>
-<td>Cursors or sessions are not used in BigQuery.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [&lt;               &gt;]                 LOOP                 statements                END LOOP [ label ];       </code></td>
-<td><code dir="ltr" translate="no">         LOOP               sql_statement_list END LOOP;      </code></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         WHILE condition LOOP stmts END LOOP       </code></td>
-<td><code dir="ltr" translate="no">         WHILE              condition              DO stmts              END WHILE      </code></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         EXIT       </code></td>
-<td><code dir="ltr" translate="no">         BREAK       </code></td>
-</tr>
-</tbody>
-</table>
+| **Amazon Redshift**                                                                                                      | **BigQuery**                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `          IF..THEN..ELSIF..THEN..ELSE..END IF        `                                                                  | `          IF              condition              THEN stmts              ELSE stmts              END IF       ` |
+| `          name CURSOR [ ( arguments ) ] FOR query        `                                                              | Cursors or sessions are not used in BigQuery.                                                                    |
+| `        [<               >]                 LOOP                 statements                END LOOP [ label ];        ` | `          LOOP               sql_statement_list END LOOP;       `                                               |
+| `          WHILE condition LOOP stmts END LOOP        `                                                                  | `          WHILE              condition              DO stmts              END WHILE       `                     |
+| `          EXIT        `                                                                                                 | `          BREAK        `                                                                                        |
 
 ## Consistency guarantees and transaction isolation
 
@@ -2172,46 +1827,21 @@ Both Amazon Redshift and BigQuery are atomic—that is, ACID-compliant on a per-
 
 Amazon Redshift supports [serializable isolation](https://docs.aws.amazon.com/redshift/latest/dg/r_BEGIN.html#r_BEGIN-synopsis) by default for transactions. Amazon Redshift lets you [specify](https://docs.aws.amazon.com/redshift/latest/dg/r_BEGIN.html#r_BEGIN-parameters) any of the four SQL standard transaction isolation levels but processes all isolation levels as serializable.
 
-BigQuery also [supports transactions](/bigquery/docs/transactions) . BigQuery helps ensure [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit has priority) with [snapshot](https://en.wikipedia.org/wiki/Snapshot_isolation) [isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency on a per-row, per-mutation basis and across rows within the same DML statement, yet avoids deadlocks. In the case of multiple DML updates against the same table, BigQuery switches to [pessimistic concurrency control](/bigquery/docs/data-manipulation-language#dml-limitations) . Load jobs can run completely independently and append to tables.
+BigQuery also [supports transactions](https://docs.cloud.google.com/bigquery/docs/transactions) . BigQuery helps ensure [optimistic concurrency control](https://en.wikipedia.org/wiki/Optimistic_concurrency_control) (first to commit has priority) with [snapshot](https://en.wikipedia.org/wiki/Snapshot_isolation) [isolation](https://en.wikipedia.org/wiki/Snapshot_isolation) , in which a query reads the last committed data before the query starts. This approach guarantees the same level of consistency on a per-row, per-mutation basis and across rows within the same DML statement, yet avoids deadlocks. In the case of multiple DML updates against the same table, BigQuery switches to [pessimistic concurrency control](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#dml-limitations) . Load jobs can run completely independently and append to tables.
 
 ### Rollback
 
 If Amazon Redshift encounters any error while running a stored procedure, it rolls back all changes made in a transaction. Additionally, you can use the `  ROLLBACK  ` transaction control statement in a stored procedure to discard all changes.
 
-In BigQuery, you can use the [`  ROLLBACK TRANSACTION  ` statement](/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) .
+In BigQuery, you can use the [`  ROLLBACK TRANSACTION  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/procedural-language#rollback_transaction) .
 
 ## Database limits
 
-Check the [BigQuery public documentation](/bigquery/quotas) for the latest quotas and limits. Many quotas for large-volume users can be raised by contacting the Cloud support team. The following table shows a comparison of the Amazon Redshift and BigQuery database limits.
+Check the [BigQuery public documentation](https://docs.cloud.google.com/bigquery/quotas) for the latest quotas and limits. Many quotas for large-volume users can be raised by contacting the Cloud support team. The following table shows a comparison of the Amazon Redshift and BigQuery database limits.
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Limit</strong></th>
-<th><strong>Amazon Redshift</strong></th>
-<th><strong>BigQuery</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Tables in each database for large and xlarge cluster node types</td>
-<td>9,900</td>
-<td>Unrestricted</td>
-</tr>
-<tr class="even">
-<td>Tables in each database for 8xlarge cluster node types</td>
-<td>20,000</td>
-<td>Unrestricted</td>
-</tr>
-<tr class="odd">
-<td>User-defined databases you can create for each cluster</td>
-<td>60</td>
-<td>Unrestricted</td>
-</tr>
-<tr class="even">
-<td>Maximum row size</td>
-<td>4 MB</td>
-<td>100 MB</td>
-</tr>
-</tbody>
-</table>
+| **Limit**                                                       | **Amazon Redshift** | **BigQuery** |
+| --------------------------------------------------------------- | ------------------- | ------------ |
+| Tables in each database for large and xlarge cluster node types | 9,900               | Unrestricted |
+| Tables in each database for 8xlarge cluster node types          | 20,000              | Unrestricted |
+| User-defined databases you can create for each cluster          | 60                  | Unrestricted |
+| Maximum row size                                                | 4 MB                | 100 MB       |

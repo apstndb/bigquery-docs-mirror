@@ -2,16 +2,16 @@
 
 This document describes the `  ML.QUANTILE_BUCKETIZE  ` function, which lets you break a continuous numerical feature into buckets based on quantiles.
 
-When used in the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the same quantiles are automatically used in prediction.
+When used in the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) , the same quantiles are automatically used in prediction.
 
-You can use this function with models that support [manual feature preprocessing](/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
+You can use this function with models that support [manual feature preprocessing](https://docs.cloud.google.com/bigquery/docs/manual-preprocessing) . For more information, see the following documents:
 
-  - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-  - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+  - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+  - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER()
 ```
 
@@ -19,7 +19,7 @@ ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER(
 
 `  ML.QUANTILE_BUCKETIZE  ` takes the following arguments:
 
-  - `  numerical_expression  ` : the [numerical](/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to bucketize.
+  - `  numerical_expression  ` : the [numerical](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#numeric_types) expression to bucketize.
   - `  num_buckets  ` : an `  INT64  ` value that specifies the number of buckets to split `  numerical_expression  ` into.
   - `  output_format  ` : a `  STRING  ` value that specifies the output format of the bucket. Valid output formats are as follows:
       - `  bucket_names  ` : returns a `  STRING  ` value in the format `  bin_<bucket_index>  ` . For example, `  bin_3  ` . The `  bucket_index  ` value starts at 1. This is the default bucket format.
@@ -34,7 +34,7 @@ ML.QUANTILE_BUCKETIZE(numerical_expression, num_buckets [, output_format]) OVER(
 
 The following example breaks a numerical expression of five elements into three buckets:
 
-``` text
+``` notranslate
 SELECT
   f,
   ML.QUANTILE_BUCKETIZE(f, 3) OVER() AS bucket,
@@ -61,4 +61,4 @@ The output looks similar to the following:
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

@@ -20,20 +20,20 @@ However, there are limitations to exporting BigQuery data as Protobuf columns:
 
 If these limitations apply to the export workflow, you might consider other methods of exporting BigQuery data:
 
-  - Use [scheduled queries](/bigquery/docs/scheduling-queries) with [`  EXPORT DATA  ` statements](/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
-  - Use [Dataflow](/dataflow/docs/overview) to export BigQuery data in either the Avro or CSV file format.
+  - Use [scheduled queries](https://docs.cloud.google.com/bigquery/docs/scheduling-queries) with [`  EXPORT DATA  ` statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/other-statements#export_data_statement) to sort the exported BigQuery data by date or time, and to schedule exports on a recurring basis. BigQuery supports exporting data into Avro, CSV, JSON, and Parquet formats.
+  - Use [Dataflow](https://docs.cloud.google.com/dataflow/docs/overview) to export BigQuery data in either the Avro or CSV file format.
 
 ## Required roles
 
 To get the permissions that you need to export BigQuery data as Protobuf columns, ask your administrator to grant you the following IAM roles on your project:
 
-  - Create a user-defined function: [BigQuery Data Editor](/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
-  - Export data from a BigQuery table: [BigQuery Data Viewer](/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
-  - Read and upload files to Cloud Storage: [Storage Object Creator](/iam/docs/roles-permissions/storage#storage.objectCreator) ( `  roles/storage.objectCreator  ` )
+  - Create a user-defined function: [BigQuery Data Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataEditor) ( `  roles/bigquery.dataEditor  ` )
+  - Export data from a BigQuery table: [BigQuery Data Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.dataViewer) ( `  roles/bigquery.dataViewer  ` )
+  - Read and upload files to Cloud Storage: [Storage Object Creator](https://docs.cloud.google.com/iam/docs/roles-permissions/storage#storage.objectCreator) ( `  roles/storage.objectCreator  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Create a UDF
 
@@ -41,15 +41,11 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
 
 1.  In a command line, clone the `  bigquery-utils.git  ` repository:
     
-    ``` text
-    git clone https://github.com/GoogleCloudPlatform/bigquery-utils.git
-    ```
+        git clone https://github.com/GoogleCloudPlatform/bigquery-utils.git
 
 2.  Navigate to the Protobuf export folder:
     
-    ``` text
-    cd bigquery-utils/tools/protobuf_export
-    ```
+        cd bigquery-utils/tools/protobuf_export
 
 3.  Use the [`  cp  ` command](https://man7.org/linux/man-pages/man1/cp.1.html) or your operating system's file browser to copy your proto file to the `  ./protos  ` child folder.
     
@@ -57,32 +53,28 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
 
 4.  Install the necessary packages from the GitHub repository:
     
-    ``` text
-    npm install
-    ```
+        npm install
 
 5.  Bundle the package by using webpack:
     
-    ``` text
-    npx webpack --config webpack.config.js --stats-error-details
-    ```
+        npx webpack --config webpack.config.js --stats-error-details
 
-6.  Locate the `  pbwrapper.js  ` file in the `  ./dist  ` child folder, and then [upload the file to a Cloud Storage bucket](/storage/docs/uploading-objects) .
+6.  Locate the `  pbwrapper.js  ` file in the `  ./dist  ` child folder, and then [upload the file to a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/uploading-objects) .
 
 7.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 8.  Using the query editor, create a UDF named `  toMyProtoMessage  ` that builds a Protobuf column from existing BigQuery table columns:
     
-    ``` text
-    CREATE FUNCTION
-      DATASET_ID.toMyProtoMessage(input STRUCT<INPUT_FIELDS>)
-      RETURNS BYTES
-        LANGUAGE js OPTIONS ( library=["gs://BUCKET_NAME/pbwrapper.js"]
-    ) AS r"""
-    let message = pbwrapper.setup("PROTO_PACKAGE.PROTO_MESSAGE")
-    return pbwrapper.parse(message, input)
-      """;
-    ```
+        CREATE FUNCTION
+          DATASET_ID.toMyProtoMessage(input STRUCT<INPUT_FIELDS>)
+          RETURNS BYTES
+            LANGUAGE js OPTIONS ( library=["gs://BUCKET_NAME/pbwrapper.js"]
+        ) AS r"""
+        let message = pbwrapper.setup("PROTO_PACKAGE.PROTO_MESSAGE")
+        return pbwrapper.parse(message, input)
+          """;
     
     Replace the following:
     
@@ -92,12 +84,10 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
         
         You must translate any message type fields that use underscores to use [camel case](https://en.wikipedia.org/wiki/Camel_case) instead. For example, if the message type looks like the following, then the input fields value must be `  itemId int64, itemDescription string  ` :
         
-        ``` text
-        message ThisMessage {
-          int64 item_id = 1;
-          string item_description = 2;
-        }
-        ```
+            message ThisMessage {
+              int64 item_id = 1;
+              string item_description = 2;
+            }
     
       - `  BUCKET_NAME  ` : the name of the Cloud Storage bucket that contains the `  pbwrapper.js  ` file.
     
@@ -107,22 +97,20 @@ Create a UDF that converts a BigQuery `  STRUCT  ` data type into a Protobuf col
     
     For example, if you use the provided `  dummy.proto  ` file, the `  CREATE FUNCTION  ` statement looks as follows:
     
-    ``` text
-    CREATE OR REPLACE FUNCTION
-      mydataset.toMyProtoMessage(input STRUCT<dummyField STRING>)
-      RETURNS BYTES
-        LANGUAGE js OPTIONS ( library=["gs://mybucket/pbwrapper.js"]
-    ) AS r"""
-    let message = pbwrapper.setup("dummypackage.DummyMessage")
-    return pbwrapper.parse(message, input)
-      """;
-    ```
+        CREATE OR REPLACE FUNCTION
+          mydataset.toMyProtoMessage(input STRUCT<dummyField STRING>)
+          RETURNS BYTES
+            LANGUAGE js OPTIONS ( library=["gs://mybucket/pbwrapper.js"]
+        ) AS r"""
+        let message = pbwrapper.setup("dummypackage.DummyMessage")
+        return pbwrapper.parse(message, input)
+          """;
 
 ## Format columns as Protobuf values
 
 Run the `  toMyProtoMessage  ` UDF to format BigQuery table columns as Protobuf values:
 
-``` text
+``` 
   SELECT
     UDF_DATASET_ID.toMyProtoMessage(STRUCT(INPUT_COLUMNS)) AS protoResult
   FROM
@@ -141,13 +129,11 @@ Replace the following:
 
 For example, if you use a `  toMyProtoMessage  ` UDF based on `  dummy.proto  ` , the following `  SELECT  ` statement works:
 
-``` text
-SELECT
-  mydataset.toMyProtoMessage(STRUCT(word)) AS protoResult
-FROM
-  `bigquery-public-data.samples.shakespeare`
-LIMIT 100;
-```
+    SELECT
+      mydataset.toMyProtoMessage(STRUCT(word)) AS protoResult
+    FROM
+      `bigquery-public-data.samples.shakespeare`
+    LIMIT 100;
 
 ## Work with Protobuf values
 
@@ -157,188 +143,182 @@ The following code samples provide several examples of ways that you can process
 
 ### Go
 
-``` go
-// package Main queries Google BigQuery.
-package main
-
-import (
- "context"
- "fmt"
- "io"
- "log"
- "os"
-
- "cloud.google.com/go/bigquery"
- "google.golang.org/api/iterator"
- "google.golang.org/Protobuf/proto"
-
- pb "path/to/proto/file_proto"
-)
-
-const (
- projectID = "your-project-id"
-)
-
-// Row contains returned row data from bigquery.
-type Row struct {
- RowKey string `bigquery:"RowKey"`
- Proto  []byte `bigquery:"ProtoResult"`
-}
-
-func main() {
- ctx := context.Background()
-
- client, err := bigquery.NewClient(ctx, projectID)
- if err != nil {
-     log.Fatalf("bigquery.NewClient: %v", err)
- }
- defer client.Close()
-
- rows, err := query(ctx, client)
- if err != nil {
-     log.Fatal(err)
- }
- if err := printResults(os.Stdout, rows); err != nil {
-     log.Fatal(err)
- }
-}
-
-// query returns a row iterator suitable for reading query results.
-func query(ctx context.Context, client *bigquery.Client) (*bigquery.RowIterator, error) {
-
- query := client.Query(
-     `SELECT 
-  concat(word, ":", corpus) as RowKey, 
-  <dataset-id>.toMyProtoMessage(
-    STRUCT(
-      word, 
-      CAST(word_count AS BIGNUMERIC)
+    // package Main queries Google BigQuery.
+    package main
+    
+    import (
+     "context"
+     "fmt"
+     "io"
+     "log"
+     "os"
+    
+     "cloud.google.com/go/bigquery"
+     "google.golang.org/api/iterator"
+     "google.golang.org/Protobuf/proto"
+    
+     pb "path/to/proto/file_proto"
     )
-  ) AS ProtoResult 
-FROM 
-  ` + "` bigquery - public - data.samples.shakespeare `" + ` 
-LIMIT 
-  100;
-`)
- return query.Read(ctx)
-}
-
-// printResults prints results from a query.
-func printResults(w io.Writer, iter *bigquery.RowIterator) error {
- for {
-     var row Row
-     err := iter.Next(&row)
-     if err == iterator.Done {
-         return nil
-     }
+    
+    const (
+     projectID = "your-project-id"
+    )
+    
+    // Row contains returned row data from bigquery.
+    type Row struct {
+     RowKey string `bigquery:"RowKey"`
+     Proto  []byte `bigquery:"ProtoResult"`
+    }
+    
+    func main() {
+     ctx := context.Background()
+    
+     client, err := bigquery.NewClient(ctx, projectID)
      if err != nil {
-         return fmt.Errorf("error iterating through results: %w", err)
+         log.Fatalf("bigquery.NewClient: %v", err)
      }
-     message := &pb.TestMessage{}
-     if err = proto.Unmarshal(row.Proto, message); err != nil {
-         return err
+     defer client.Close()
+    
+     rows, err := query(ctx, client)
+     if err != nil {
+         log.Fatal(err)
      }
-     fmt.Fprintf(w, "rowKey: %s, message: %v\n", row.RowKey, message)
- }
-}
-```
+     if err := printResults(os.Stdout, rows); err != nil {
+         log.Fatal(err)
+     }
+    }
+    
+    // query returns a row iterator suitable for reading query results.
+    func query(ctx context.Context, client *bigquery.Client) (*bigquery.RowIterator, error) {
+    
+     query := client.Query(
+         `SELECT 
+      concat(word, ":", corpus) as RowKey, 
+      <dataset-id>.toMyProtoMessage(
+        STRUCT(
+          word, 
+          CAST(word_count AS BIGNUMERIC)
+        )
+      ) AS ProtoResult 
+    FROM 
+      ` + "` bigquery - public - data.samples.shakespeare `" + ` 
+    LIMIT 
+      100;
+    `)
+     return query.Read(ctx)
+    }
+    
+    // printResults prints results from a query.
+    func printResults(w io.Writer, iter *bigquery.RowIterator) error {
+     for {
+         var row Row
+         err := iter.Next(&row)
+         if err == iterator.Done {
+             return nil
+         }
+         if err != nil {
+             return fmt.Errorf("error iterating through results: %w", err)
+         }
+         message := &pb.TestMessage{}
+         if err = proto.Unmarshal(row.Proto, message); err != nil {
+             return err
+         }
+         fmt.Fprintf(w, "rowKey: %s, message: %v\n", row.RowKey, message)
+     }
+    }
 
 ### Java
 
-``` java
-package proto;
-
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.FieldValueList;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobId;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.QueryJobConfiguration;
-import com.google.cloud.bigquery.TableResult;
-import path.to.proto.TestMessage;
-import java.util.UUID;
-
-/** Queries Google BigQuery */
-public final class Main {
-  public static void main(String[] args) throws Exception {
-    String projectId = "your-project-id";
-    BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId(projectId).build().getService();
-
-    QueryJobConfiguration queryConfig =
-        QueryJobConfiguration.newBuilder(
-                " SELECT "
-                    + "concat(word , \":\",corpus) as RowKey,"
-                    + "<dataset-id>.toMyProtoMessage(STRUCT(word, "
-                    + "CAST(word_count AS BIGNUMERIC))) AS ProtoResult "
-                    + "FROM "
-                    + "`bigquery-public-data.samples.shakespeare` "
-                    + "ORDER BY word_count DESC "
-                    + "LIMIT 20")
-            .setUseLegacySql(false)
-            .build();
-
-    // Create a job ID so that we can safely retry.
-    JobId jobId = JobId.of(UUID.randomUUID().toString());
-    Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
-
-    // Wait for the query to complete.
-    queryJob = queryJob.waitFor();
-
-    // Check for errors
-    if (queryJob == null) {
-      throw new RuntimeException("Job no longer exists");
-    } else if (queryJob.getStatus().getError() != null) {
-      // You can also look at queryJob.getStatus().getExecutionErrors() for all
-      // errors, not just the latest one.
-      throw new RuntimeException(queryJob.getStatus().getError().toString());
+    package proto;
+    
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.FieldValueList;
+    import com.google.cloud.bigquery.Job;
+    import com.google.cloud.bigquery.JobId;
+    import com.google.cloud.bigquery.JobInfo;
+    import com.google.cloud.bigquery.QueryJobConfiguration;
+    import com.google.cloud.bigquery.TableResult;
+    import path.to.proto.TestMessage;
+    import java.util.UUID;
+    
+    /** Queries Google BigQuery */
+    public final class Main {
+      public static void main(String[] args) throws Exception {
+        String projectId = "your-project-id";
+        BigQuery bigquery = BigQueryOptions.newBuilder().setProjectId(projectId).build().getService();
+    
+        QueryJobConfiguration queryConfig =
+            QueryJobConfiguration.newBuilder(
+                    " SELECT "
+                        + "concat(word , \":\",corpus) as RowKey,"
+                        + "<dataset-id>.toMyProtoMessage(STRUCT(word, "
+                        + "CAST(word_count AS BIGNUMERIC))) AS ProtoResult "
+                        + "FROM "
+                        + "`bigquery-public-data.samples.shakespeare` "
+                        + "ORDER BY word_count DESC "
+                        + "LIMIT 20")
+                .setUseLegacySql(false)
+                .build();
+    
+        // Create a job ID so that we can safely retry.
+        JobId jobId = JobId.of(UUID.randomUUID().toString());
+        Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
+    
+        // Wait for the query to complete.
+        queryJob = queryJob.waitFor();
+    
+        // Check for errors
+        if (queryJob == null) {
+          throw new RuntimeException("Job no longer exists");
+        } else if (queryJob.getStatus().getError() != null) {
+          // You can also look at queryJob.getStatus().getExecutionErrors() for all
+          // errors, not just the latest one.
+          throw new RuntimeException(queryJob.getStatus().getError().toString());
+        }
+    
+        // Get the results.
+        TableResult result = queryJob.getQueryResults();
+    
+        // Print all pages of the results.
+        for (FieldValueList row : result.iterateAll()) {
+          String key = row.get("RowKey").getStringValue();
+          byte[] message = row.get("ProtoResult").getBytesValue();
+          TestMessage testMessage = TestMessage.parseFrom(message);
+          System.out.printf("rowKey: %s, message: %s\n", key, testMessage);
+        }
+      }
     }
-
-    // Get the results.
-    TableResult result = queryJob.getQueryResults();
-
-    // Print all pages of the results.
-    for (FieldValueList row : result.iterateAll()) {
-      String key = row.get("RowKey").getStringValue();
-      byte[] message = row.get("ProtoResult").getBytesValue();
-      TestMessage testMessage = TestMessage.parseFrom(message);
-      System.out.printf("rowKey: %s, message: %s\n", key, testMessage);
-    }
-  }
-}
-```
 
 ### Python
 
-``` python
-"""Queries Google BigQuery."""
-
-from google.cloud import bigquery
-from path.to.proto import awesome_pb2
-
-
-def main():
-  project_id = "your-project-id"
-  client = bigquery.Client(project=project_id)
-  query_job = client.query(query="""
-               SELECT
-            concat(word , ":",corpus) as RowKey,
-            <dataset-id>.toMyProtoMessage(
-                STRUCT(
-                  word, 
-                  CAST(word_count AS BIGNUMERIC)
-                )
-              ) AS ProtoResult 
-        FROM
-                  `bigquery-public-data.samples.shakespeare`
-        ORDER BY word_count DESC
-        LIMIT 20
-    """)
-  rows = query_job.result()
-  for row in rows:
-    message = awesome_pb2.TestMessage()
-    message.ParseFromString(row.get("ProtoResult"))
-    print(
-        "rowKey: {}, message: {}".format(row.get("RowKey"), message)
-    )
-```
+    """Queries Google BigQuery."""
+    
+    from google.cloud import bigquery
+    from path.to.proto import awesome_pb2
+    
+    
+    def main():
+      project_id = "your-project-id"
+      client = bigquery.Client(project=project_id)
+      query_job = client.query(query="""
+                   SELECT
+                concat(word , ":",corpus) as RowKey,
+                <dataset-id>.toMyProtoMessage(
+                    STRUCT(
+                      word, 
+                      CAST(word_count AS BIGNUMERIC)
+                    )
+                  ) AS ProtoResult 
+            FROM
+                      `bigquery-public-data.samples.shakespeare`
+            ORDER BY word_count DESC
+            LIMIT 20
+        """)
+      rows = query_job.result()
+      for row in rows:
+        message = awesome_pb2.TestMessage()
+        message.ParseFromString(row.get("ProtoResult"))
+        print(
+            "rowKey: {}, message: {}".format(row.get("RowKey"), message)
+        )

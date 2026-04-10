@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To get support or provide feedback for this feature, contact <bigquery-permission-migration-support@google.com> .
 
@@ -38,15 +38,15 @@ To install the `  dwh-migration-dumper  ` tool, follow these steps:
     
     ### Bash
     
-    ``` text
+    ``` notranslate
     sha256sum --check SHA256SUMS.txt
     ```
     
-    If verification fails, see [Troubleshooting](#corrupted_zip_file) .
+    If verification fails, see [Troubleshooting](https://docs.cloud.google.com/bigquery/docs/hadoop-metadata#corrupted_zip_file) .
     
     ### Windows PowerShell
     
-    ``` text
+    ``` notranslate
     (Get-FileHash RELEASE_ZIP_FILENAME).Hash -eq ((Get-Content SHA256SUMS.txt) -Split " ")[0]
     ```
     
@@ -66,20 +66,18 @@ Select one of the following options to learn how to extract metadata for your da
 
 ### Apache Hive
 
-Perform the steps in the Apache Hive section [Extract metadata and query logs from your data warehouse](/bigquery/docs/migration-assessment#apache-hive) to extract your Apache Hive metadata. You can then upload the metadata to your Cloud Storage bucket containing your migration files.
+Perform the steps in the Apache Hive section [Extract metadata and query logs from your data warehouse](https://docs.cloud.google.com/bigquery/docs/migration-assessment#apache-hive) to extract your Apache Hive metadata. You can then upload the metadata to your Cloud Storage bucket containing your migration files.
 
 ### HDFS
 
 Run the following command to extract extract metadata from HDFS using the `  dwh-migration-dumper  ` tool.
 
-``` text
-dwh-migration-dumper \
-  --connector hdfs \
-  --host HDFS-HOST \
-  --port HDFS-PORT \
-  --output gs://MIGRATION-BUCKET/hdfs-dumper-output.zip \
-  --assessment \
-```
+    dwh-migration-dumper \
+      --connector hdfs \
+      --host HDFS-HOST \
+      --port HDFS-PORT \
+      --output gs://MIGRATION-BUCKET/hdfs-dumper-output.zip \
+      --assessment \
 
 Replace the following:
 
@@ -98,17 +96,15 @@ There are several known limitations when extracting metadata from HDFS:
 
 Run the following command to extract extract metadata from Apache Ranger using the `  dwh-migration-dumper  ` tool.
 
-``` text
-dwh-migration-dumper \
-  --connector ranger \
-  --host RANGER-HOST \
-  --port 6080 \
-  --user RANGER-USER \
-  --password RANGER-PASSWORD \
-  --ranger-scheme RANGER-SCHEME \
-  --output gs://MIGRATION-BUCKET/ranger-dumper-output.zip \
-  --assessment \
-```
+    dwh-migration-dumper \
+      --connector ranger \
+      --host RANGER-HOST \
+      --port 6080 \
+      --user RANGER-USER \
+      --password RANGER-PASSWORD \
+      --ranger-scheme RANGER-SCHEME \
+      --output gs://MIGRATION-BUCKET/ranger-dumper-output.zip \
+      --assessment \
 
 Replace the following:
 
@@ -129,17 +125,15 @@ This command extracts metadata from Apache Ranger to a file named `  ranger-dump
 
 Run the following command to extract metadata from Cloudera using the `  dwh-migration-dumper  ` tool.
 
-``` text
-dwh-migration-dumper \
-  --connector cloudera-manager \
-  --url CLOUDERA-URL \
-  --user CLOUDERA-USER \
-  --password CLOUDERA-PASSWORD \
-  --output gs://MIGRATION-BUCKET/cloudera-dumper-output.zip \
-  --yarn-application-types APPLICATION-TYPES \
-  --pagination-page-size PAGE-SIZE \
-  --assessment \
-```
+    dwh-migration-dumper \
+      --connector cloudera-manager \
+      --url CLOUDERA-URL \
+      --user CLOUDERA-USER \
+      --password CLOUDERA-PASSWORD \
+      --output gs://MIGRATION-BUCKET/cloudera-dumper-output.zip \
+      --yarn-application-types APPLICATION-TYPES \
+      --pagination-page-size PAGE-SIZE \
+      --assessment \
 
 Replace the following:
 
@@ -154,11 +148,11 @@ This command extracts metadata from Cloudera to a file named `  dwh-migration-cl
 
 ### Apache Hive query logs
 
-Perform the steps in the Apache Hive section [Extract query logs with the `  hadoop-migration-assessment  ` logging hook](/bigquery/docs/migration-assessment#apache-hive) to extract your Apache Hive query logs. You can then upload the logs to your Cloud Storage bucket containing your migration files.
+Perform the steps in the Apache Hive section [Extract query logs with the `  hadoop-migration-assessment  ` logging hook](https://docs.cloud.google.com/bigquery/docs/migration-assessment#apache-hive) to extract your Apache Hive query logs. You can then upload the logs to your Cloud Storage bucket containing your migration files.
 
 ## What's next
 
 With your extracted metadata from Hadoop, you can use these metadata files to do the following:
 
-  - [Migrate permissions from Hadoop](/bigquery/docs/hadoop-permissions-migration)
-  - [Schedule a Hadoop transfer](/bigquery/docs/hadoop-transfer)
+  - [Migrate permissions from Hadoop](https://docs.cloud.google.com/bigquery/docs/hadoop-permissions-migration)
+  - [Schedule a Hadoop transfer](https://docs.cloud.google.com/bigquery/docs/hadoop-transfer)

@@ -1,10 +1,10 @@
 # The ML.CENTROIDS function
 
-This document describes the `  ML.CENTROIDS  ` function, which lets you return information about the [centroids](https://developers.google.com/machine-learning/glossary/#centroid) in a [k-means model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) .
+This document describes the `  ML.CENTROIDS  ` function, which lets you return information about the [centroids](https://developers.google.com/machine-learning/glossary/#centroid) in a [k-means model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-kmeans) .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.CENTROIDS(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   STRUCT([, STANDARDIZE AS standardize]))
@@ -50,7 +50,7 @@ The following examples show how to use `  ML.CENTROIDS  ` with and without the `
 
 The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. This model only contains numerical features.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -78,7 +78,7 @@ This query returns results like the following:
 
 The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. This model contains categorical features.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -125,7 +125,7 @@ The following are the results from the same query against a k-means model with b
 
 The following example retrieves centroid information from the model `  mydataset.my_kmeans_model  ` in your default project. The query in this example assumes that all features have a mean of `  0  ` and a standard deviation of `  1  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -135,5 +135,5 @@ FROM
 
 ## What's next
 
-  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](/bigquery/docs/weights-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model weights support in BigQuery ML, see [BigQuery ML model weights overview](https://docs.cloud.google.com/bigquery/docs/weights-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

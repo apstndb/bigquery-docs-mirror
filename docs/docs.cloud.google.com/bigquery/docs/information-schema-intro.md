@@ -131,7 +131,7 @@ The BigQuery `  INFORMATION_SCHEMA  ` views are read-only, system-defined views 
 
 <sup>†</sup> For `  *BY_PROJECT  ` views, the `  BY_PROJECT  ` suffix is optional. For example, querying `  INFORMATION_SCHEMA.JOBS_BY_PROJECT  ` and `  INFORMATION_SCHEMA.JOBS  ` return the same results.
 
-**Note:** Not all `  INFORMATION_SCHEMA  ` views are supported for [BigQuery Omni system tables](/bigquery/docs/omni-introduction#limitations) . You can view resource metadata with `  INFORMATION_SCHEMA  ` for [Amazon S3](/bigquery/docs/omni-aws-create-external-table#view_resource_metadata) and [Azure Storage](/bigquery/docs/omni-azure-create-external-table#view_resource_metadata_with_information_schema) .
+**Note:** Not all `  INFORMATION_SCHEMA  ` views are supported for [BigQuery Omni system tables](https://docs.cloud.google.com/bigquery/docs/omni-introduction#limitations) . You can view resource metadata with `  INFORMATION_SCHEMA  ` for [Amazon S3](https://docs.cloud.google.com/bigquery/docs/omni-aws-create-external-table#view_resource_metadata) and [Azure Storage](https://docs.cloud.google.com/bigquery/docs/omni-azure-create-external-table#view_resource_metadata_with_information_schema) .
 
 ## Pricing
 
@@ -147,20 +147,16 @@ You are not charged storage fees for the `  INFORMATION_SCHEMA  ` views.
 
 An `  INFORMATION_SCHEMA  ` view needs to be qualified with a dataset or region.
 
-**Note:** You must [specify a location](/bigquery/docs/locations#specify_locations) to query an `  INFORMATION_SCHEMA  ` view. Querying an `  INFORMATION_SCHEMA  ` view fails with the following error if the location of the query execution doesn't match the location of the dataset or regional qualifier used:  
+**Note:** You must [specify a location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) to query an `  INFORMATION_SCHEMA  ` view. Querying an `  INFORMATION_SCHEMA  ` view fails with the following error if the location of the query execution doesn't match the location of the dataset or regional qualifier used:  
 
-``` text
-Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
-```
+    Table myproject: region-us.INFORMATION_SCHEMA.[VIEW] not found in location US
 
 ### Dataset qualifier
 
 When present, a dataset qualifier restricts results to the specified dataset. For example:
 
-``` text
--- Returns metadata for tables in a single dataset.
-SELECT * FROM myDataset.INFORMATION_SCHEMA.TABLES;
-```
+    -- Returns metadata for tables in a single dataset.
+    SELECT * FROM myDataset.INFORMATION_SCHEMA.TABLES;
 
 The following `  INFORMATION_SCHEMA  ` views support dataset qualifiers:
 
@@ -177,41 +173,37 @@ The following `  INFORMATION_SCHEMA  ` views support dataset qualifiers:
 
 ### Region qualifier
 
-Region qualifiers are represented using a `  region- REGION  ` syntax. Any [dataset location name](/bigquery/docs/locations) can be used for `  REGION  ` . For example, the following region qualifiers are valid:
+Region qualifiers are represented using a `  region- REGION  ` syntax. Any [dataset location name](https://docs.cloud.google.com/bigquery/docs/locations) can be used for `  REGION  ` . For example, the following region qualifiers are valid:
 
   - `  region-us  `
   - `  region-asia-east2  `
   - `  region-europe-north1  `
 
-When present, a region qualifier restricts results to the specified location. [Region qualifiers](/bigquery/docs/locations#locations_and_regions) aren't hierarchical, which means the EU multi-region does not include `  europe-*  ` regions nor does the US multi-region include the `  us-*  ` regions. For example, the following query returns metadata for all datasets in the `  US  ` multi-region for the project in which the query is executing, but doesn't include datasets in the `  us-west1  ` region:
+When present, a region qualifier restricts results to the specified location. [Region qualifiers](https://docs.cloud.google.com/bigquery/docs/locations#locations_and_regions) aren't hierarchical, which means the EU multi-region does not include `  europe-*  ` regions nor does the US multi-region include the `  us-*  ` regions. For example, the following query returns metadata for all datasets in the `  US  ` multi-region for the project in which the query is executing, but doesn't include datasets in the `  us-west1  ` region:
 
-``` text
--- Returns metadata for all datasets in the US multi-region.
-SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA;
-```
+    -- Returns metadata for all datasets in the US multi-region.
+    SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA;
 
 The following `  INFORMATION_SCHEMA  ` views don't support region qualifiers:
 
-  - [`  INFORMATION_SCHEMA.PARTITIONS  `](/bigquery/docs/information-schema-partitions#scope_and_syntax)
-  - [`  INFORMATION_SCHEMA.SEARCH_INDEXES  `](/bigquery/docs/information-schema-indexes#scope_and_syntax)
-  - [`  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS  `](/bigquery/docs/information-schema-index-columns)
-  - [`  INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS  `](/bigquery/docs/information-schema-index-options)
+  - [`  INFORMATION_SCHEMA.PARTITIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions#scope_and_syntax)
+  - [`  INFORMATION_SCHEMA.SEARCH_INDEXES  `](https://docs.cloud.google.com/bigquery/docs/information-schema-indexes#scope_and_syntax)
+  - [`  INFORMATION_SCHEMA.SEARCH_INDEX_COLUMNS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-index-columns)
+  - [`  INFORMATION_SCHEMA.SEARCH_INDEX_OPTIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-index-options)
 
 If neither a region qualifier nor a dataset qualifier is specified, you will receive an error.
 
-Queries against a region-qualified `  INFORMATION_SCHEMA  ` view run in the region that you specify, which means that you can't write a single query to join data from views in different regions. To combine `  INFORMATION_SCHEMA  ` views from multiple regions, read and combine the query results locally, or [copy](/bigquery/docs/managing-tables#copy_tables_across_regions) the resulting tables to a common region.
+Queries against a region-qualified `  INFORMATION_SCHEMA  ` view run in the region that you specify, which means that you can't write a single query to join data from views in different regions. To combine `  INFORMATION_SCHEMA  ` views from multiple regions, read and combine the query results locally, or [copy](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy_tables_across_regions) the resulting tables to a common region.
 
 ### Project qualifier
 
 When present, a project qualifier restricts results to the specified project. For example:
 
-``` text
--- Returns metadata for the specified project and region.
-SELECT * FROM myProject.`region-us`.INFORMATION_SCHEMA.TABLES;
-
--- Returns metadata for the specified project and dataset.
-SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
-```
+    -- Returns metadata for the specified project and region.
+    SELECT * FROM myProject.`region-us`.INFORMATION_SCHEMA.TABLES;
+    
+    -- Returns metadata for the specified project and dataset.
+    SELECT * FROM myProject.myDataset.INFORMATION_SCHEMA.TABLES;
 
 All `  INFORMATION_SCHEMA  ` views support project qualifiers. If a project qualifier is not specified, the view will default to the project in which the query is executing.
 
@@ -222,6 +214,6 @@ Specifying a project qualifier for organization-level views (for example, `  STR
   - BigQuery `  INFORMATION_SCHEMA  ` queries must be in GoogleSQL syntax. `  INFORMATION_SCHEMA  ` does not support legacy SQL.
   - `  INFORMATION_SCHEMA  ` query results are not cached.
   - `  INFORMATION_SCHEMA  ` views cannot be used in DDL statements.
-  - `  INFORMATION_SCHEMA  ` views don't contain information about [hidden datasets](/bigquery/docs/datasets#hidden_datasets) .
-  - `  INFORMATION_SCHEMA  ` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](/bigquery/docs/restore-deleted-datasets) .
-  - When you list resources from an `  INFORMATION_SCHEMA  ` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.
+  - `  INFORMATION_SCHEMA  ` views don't contain information about [hidden datasets](https://docs.cloud.google.com/bigquery/docs/datasets#hidden_datasets) .
+  - `  INFORMATION_SCHEMA  ` queries with region qualifiers might include metadata from resources in that region from [deleted datasets that are within your time travel window](https://docs.cloud.google.com/bigquery/docs/restore-deleted-datasets) .
+  - When you list resources from an `  INFORMATION_SCHEMA  ` view, the permissions are checked only at the parent level, not at an individual row level. Therefore, any [deny policy](https://docs.cloud.google.com/bigquery/docs/control-access-to-resources-iam#deny_access_to_a_resource) ( [preview](https://cloud.google.com/products#product-launch-stages) ) that conditionally targets an individual row using tags is ignored.

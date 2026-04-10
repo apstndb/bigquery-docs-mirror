@@ -1,8 +1,8 @@
 # Create materialized views
 
-**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](/bigquery/docs/editions-intro) .
+**Note:** This feature may not be available when using reservations that are created with certain BigQuery editions. For more information about which features are enabled in each edition, see [Introduction to BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .
 
-This document describes how to create materialized views in BigQuery. Before you read this document, familiarize yourself with [Introduction to materialized views](/bigquery/docs/materialized-views-intro) .
+This document describes how to create materialized views in BigQuery. Before you read this document, familiarize yourself with [Introduction to materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) .
 
 ## Before you begin
 
@@ -18,7 +18,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  bigquery.dataOwner  `
   - `  bigquery.admin  `
 
-For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery Identity and Access Management (IAM), see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Create materialized views
 
@@ -26,13 +26,15 @@ To create a materialized view, select one of the following options:
 
 ### SQL
 
-Use the [`  CREATE MATERIALIZED VIEW  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement) . The following example creates a materialized view for the number of clicks for each product ID:
+Use the [`  CREATE MATERIALIZED VIEW  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_materialized_view_statement) . The following example creates a materialized view for the number of clicks for each product ID:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE MATERIALIZED VIEW PROJECT_ID.DATASET.MATERIALIZED_VIEW_NAME AS (
       QUERY_EXPRESSION
     );
@@ -41,19 +43,19 @@ Use the [`  CREATE MATERIALIZED VIEW  ` statement](/bigquery/docs/reference/stan
     Replace the following:
     
       - `  PROJECT_ID  ` : the name of your project in which you want to create the materialized view—for example, `  myproject  ` .
-      - `  DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view in—for example, `  mydataset  ` . If you are creating a materialized view over an Amazon Simple Storage Service (Amazon S3) BigLake table ( [preview](https://cloud.google.com/products#product-launch-stages) ), make sure the dataset is in a [supported region](/bigquery/docs/omni-introduction#locations) .
+      - `  DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view in—for example, `  mydataset  ` . If you are creating a materialized view over an Amazon Simple Storage Service (Amazon S3) BigLake table ( [preview](https://cloud.google.com/products#product-launch-stages) ), make sure the dataset is in a [supported region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
       - `  MATERIALIZED_VIEW_NAME  ` : the name of the materialized view that you want to create—for example, `  my_mv  ` .
       - `  QUERY_EXPRESSION  ` : the GoogleSQL query expression that defines the materialized view—for example, `  SELECT product_id, SUM(clicks) AS sum_clicks FROM mydataset.my_source_table  ` .
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 **Example**
 
 The following example creates a materialized view for the number of clicks for each product ID:
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW myproject.mydataset.my_mv_table AS (
   SELECT
     product_id,
@@ -69,13 +71,13 @@ CREATE MATERIALIZED VIEW myproject.mydataset.my_mv_table AS (
 
 Use the [`  google_bigquery_table  `](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/bigquery_table) resource.
 
-**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](/resource-manager/reference/rest) .
+**Note:** To create BigQuery objects using Terraform, you must enable the [Cloud Resource Manager API](https://docs.cloud.google.com/resource-manager/reference/rest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
 The following example creates a view named `  my_materialized_view  ` :
 
-``` terraform
+``` lang-terraform
 resource "google_bigquery_dataset" "default" {
   dataset_id                      = "mydataset"
   default_partition_expiration_ms = 2592000000  # 30 days
@@ -114,9 +116,7 @@ To apply your Terraform configuration in a Google Cloud project, complete the st
     
     You only need to run this command once per project, and you can run it in any directory.
     
-    ``` text
-    export GOOGLE_CLOUD_PROJECT=PROJECT_ID
-    ```
+        export GOOGLE_CLOUD_PROJECT=PROJECT_ID
     
     Environment variables are overridden if you set explicit values in the Terraform configuration file.
 
@@ -126,9 +126,7 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 1.  In [Cloud Shell](https://shell.cloud.google.com/) , create a directory and a new file within that directory. The filename must have the `  .tf  ` extension—for example `  main.tf  ` . In this tutorial, the file is referred to as `  main.tf  ` .
     
-    ``` text
-    mkdir DIRECTORY && cd DIRECTORY && touch main.tf
-    ```
+        mkdir DIRECTORY && cd DIRECTORY && touch main.tf
 
 2.  If you are following a tutorial, you can copy the sample code in each section or step.
     
@@ -142,31 +140,23 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 5.  Initialize Terraform. You only need to do this once per directory.
     
-    ``` text
-    terraform init
-    ```
+        terraform init
     
     Optionally, to use the latest Google provider version, include the `  -upgrade  ` option:
     
-    ``` text
-    terraform init -upgrade
-    ```
+        terraform init -upgrade
 
 ## Apply the changes
 
 1.  Review the configuration and verify that the resources that Terraform is going to create or update match your expectations:
     
-    ``` text
-    terraform plan
-    ```
+        terraform plan
     
     Make corrections to the configuration as necessary.
 
 2.  Apply the Terraform configuration by running the following command and entering `  yes  ` at the prompt:
     
-    ``` text
-    terraform apply
-    ```
+        terraform apply
     
     Wait until Terraform displays the "Apply complete\!" message.
 
@@ -176,26 +166,24 @@ Each Terraform configuration file must have its own directory (also called a *ro
 
 ### API
 
-Call the [`  tables.insert  ` method](/bigquery/docs/reference/rest/v2/tables/insert) and pass in a [`  Table  ` resource](/bigquery/docs/reference/rest/v2/tables#Table) with a defined `  materializedView  ` field:
+Call the [`  tables.insert  ` method](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) and pass in a [`  Table  ` resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table) with a defined `  materializedView  ` field:
 
-``` text
-{
-  "kind": "bigquery#table",
-  "tableReference": {
-    "projectId": "PROJECT_ID",
-    "datasetId": "DATASET",
-    "tableId": "MATERIALIZED_VIEW_NAME"
-  },
-  "materializedView": {
-    "query": "QUERY_EXPRESSION"
-  }
-}
-```
+    {
+      "kind": "bigquery#table",
+      "tableReference": {
+        "projectId": "PROJECT_ID",
+        "datasetId": "DATASET",
+        "tableId": "MATERIALIZED_VIEW_NAME"
+      },
+      "materializedView": {
+        "query": "QUERY_EXPRESSION"
+      }
+    }
 
 Replace the following:
 
   - `  PROJECT_ID  ` : the name of your project in which you want to create the materialized view—for example, `  myproject  ` .
-  - `  DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view in—for example, `  mydataset  ` . If you are creating a materialized view over an Amazon Simple Storage Service (Amazon S3) BigLake table ( [preview](https://cloud.google.com/products#product-launch-stages) ), make sure the dataset is in a [supported region](/bigquery/docs/omni-introduction#locations) .
+  - `  DATASET  ` : the name of the BigQuery dataset that you want to create the materialized view in—for example, `  mydataset  ` . If you are creating a materialized view over an Amazon Simple Storage Service (Amazon S3) BigLake table ( [preview](https://cloud.google.com/products#product-launch-stages) ), make sure the dataset is in a [supported region](https://docs.cloud.google.com/bigquery/docs/omni-introduction#locations) .
   - `  MATERIALIZED_VIEW_NAME  ` : the name of the materialized view that you want to create—for example, `  my_mv  ` .
   - `  QUERY_EXPRESSION  ` : the GoogleSQL query expression that defines the materialized view—for example, `  SELECT product_id, SUM(clicks) AS sum_clicks FROM mydataset.my_source_table  ` .
 
@@ -203,85 +191,83 @@ Replace the following:
 
 The following example creates a materialized view for the number of clicks for each product ID:
 
-``` text
-{
-  "kind": "bigquery#table",
-  "tableReference": {
-    "projectId": "myproject",
-    "datasetId": "mydataset",
-    "tableId": "my_mv"
-  },
-  "materializedView": {
-    "query": "select product_id,sum(clicks) as
-                sum_clicks from myproject.mydataset.my_source_table
-                group by 1"
-  }
-}
-```
+    {
+      "kind": "bigquery#table",
+      "tableReference": {
+        "projectId": "myproject",
+        "datasetId": "mydataset",
+        "tableId": "my_mv"
+      },
+      "materializedView": {
+        "query": "select product_id,sum(clicks) as
+                    sum_clicks from myproject.mydataset.my_source_table
+                    group by 1"
+      }
+    }
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.MaterializedViewDefinition;
-import com.google.cloud.bigquery.TableId;
-import com.google.cloud.bigquery.TableInfo;
-
-// Sample to create materialized view
-public class CreateMaterializedView {
-
-  public static void main(String[] args) {
-    // TODO(developer): Replace these variables before running the sample.
-    String datasetName = "MY_DATASET_NAME";
-    String tableName = "MY_TABLE_NAME";
-    String materializedViewName = "MY_MATERIALIZED_VIEW_NAME";
-    String query =
-        String.format(
-            "SELECT MAX(TimestampField) AS TimestampField, StringField, "
-                + "MAX(BooleanField) AS BooleanField "
-                + "FROM %s.%s GROUP BY StringField",
-            datasetName, tableName);
-    createMaterializedView(datasetName, materializedViewName, query);
-  }
-
-  public static void createMaterializedView(
-      String datasetName, String materializedViewName, String query) {
-    try {
-      // Initialize client that will be used to send requests. This client only needs to be created
-      // once, and can be reused for multiple requests.
-      BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-
-      TableId tableId = TableId.of(datasetName, materializedViewName);
-
-      MaterializedViewDefinition materializedViewDefinition =
-          MaterializedViewDefinition.newBuilder(query).build();
-
-      bigquery.create(TableInfo.of(tableId, materializedViewDefinition));
-      System.out.println("Materialized view created successfully");
-    } catch (BigQueryException e) {
-      System.out.println("Materialized view was not created. \n" + e.toString());
+    import com.google.cloud.bigquery.BigQuery;
+    import com.google.cloud.bigquery.BigQueryException;
+    import com.google.cloud.bigquery.BigQueryOptions;
+    import com.google.cloud.bigquery.MaterializedViewDefinition;
+    import com.google.cloud.bigquery.TableId;
+    import com.google.cloud.bigquery.TableInfo;
+    
+    // Sample to create materialized view
+    public class CreateMaterializedView {
+    
+      public static void main(String[] args) {
+        // TODO(developer): Replace these variables before running the sample.
+        String datasetName = "MY_DATASET_NAME";
+        String tableName = "MY_TABLE_NAME";
+        String materializedViewName = "MY_MATERIALIZED_VIEW_NAME";
+        String query =
+            String.format(
+                "SELECT MAX(TimestampField) AS TimestampField, StringField, "
+                    + "MAX(BooleanField) AS BooleanField "
+                    + "FROM %s.%s GROUP BY StringField",
+                datasetName, tableName);
+        createMaterializedView(datasetName, materializedViewName, query);
+      }
+    
+      public static void createMaterializedView(
+          String datasetName, String materializedViewName, String query) {
+        try {
+          // Initialize client that will be used to send requests. This client only needs to be created
+          // once, and can be reused for multiple requests.
+          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+    
+          TableId tableId = TableId.of(datasetName, materializedViewName);
+    
+          MaterializedViewDefinition materializedViewDefinition =
+              MaterializedViewDefinition.newBuilder(query).build();
+    
+          bigquery.create(TableInfo.of(tableId, materializedViewDefinition));
+          System.out.println("Materialized view created successfully");
+        } catch (BigQueryException e) {
+          System.out.println("Materialized view was not created. \n" + e.toString());
+        }
+      }
     }
-  }
-}
-```
 
 After the materialized view is successfully created, it appears in the **Explorer** pane of BigQuery in the Google Cloud console. The following example shows a materialized view schema:
 
-Unless you disable [automatic refresh](/bigquery/docs/materialized-views-manage#automatic-refresh) , BigQuery starts an asynchronous full refresh for the materialized view. The query finishes quickly, but the initial refresh might continue to run.
+![Materialized view schema in Google Cloud console](https://docs.cloud.google.com/static/bigquery/images/mv_schema_ui.png)
+
+Unless you disable [automatic refresh](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) , BigQuery starts an asynchronous full refresh for the materialized view. The query finishes quickly, but the initial refresh might continue to run.
 
 **Note:** Each base table is limited to 100 materialized views within the same project, and 500 materialized views within the same organization.
 
 ## Access control
 
-You can grant access to a materialized view at the [dataset level](/bigquery/docs/dataset-access-controls) , the [view level](/bigquery/docs/authorized-views) , or the [column level](/bigquery/docs/column-level-security-intro) . You can also set access at a higher level in the [IAM resource hierarchy](/iam/docs/resource-hierarchy-access-control) .
+You can grant access to a materialized view at the [dataset level](https://docs.cloud.google.com/bigquery/docs/dataset-access-controls) , the [view level](https://docs.cloud.google.com/bigquery/docs/authorized-views) , or the [column level](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) . You can also set access at a higher level in the [IAM resource hierarchy](https://docs.cloud.google.com/iam/docs/resource-hierarchy-access-control) .
 
-Querying a materialized view requires access to the view as well as its base tables. To share a materialized view, you can grant permissions to the base tables or configure a materialized view as an authorized view. For more information, see [Authorized views](/bigquery/docs/authorized-views) .
+Querying a materialized view requires access to the view as well as its base tables. To share a materialized view, you can grant permissions to the base tables or configure a materialized view as an authorized view. For more information, see [Authorized views](https://docs.cloud.google.com/bigquery/docs/authorized-views) .
 
 ### Access control restrictions
 
@@ -293,26 +279,24 @@ Querying a materialized view requires access to the view as well as its base tab
 
 Materialized views use a restricted SQL syntax. Queries must use the following pattern:
 
-``` text
-[ WITH cte [, …]]
-SELECT  [{ ALL | DISTINCT }]
-  expression [ [ AS ] alias ] [, ...]
-FROM from_item [, ...]
-[ WHERE bool_expression ]
-[ GROUP BY expression [, ...] ]
-
-from_item:
-    {
-      table_name [ as_alias ]
-      | { join_operation | ( join_operation ) }
-      | field_path
-      | unnest_operator
-      | cte_name [ as_alias ]
-    }
-
-as_alias:
-    [ AS ] alias
-```
+    [ WITH cte [, …]]
+    SELECT  [{ ALL | DISTINCT }]
+      expression [ [ AS ] alias ] [, ...]
+    FROM from_item [, ...]
+    [ WHERE bool_expression ]
+    [ GROUP BY expression [, ...] ]
+    
+    from_item:
+        {
+          table_name [ as_alias ]
+          | { join_operation | ( join_operation ) }
+          | field_path
+          | unnest_operator
+          | cte_name [ as_alias ]
+        }
+    
+    as_alias:
+        [ AS ] alias
 
 ## Query limitations
 
@@ -322,7 +306,7 @@ Incremental materialized views have the following limitations.
 
 Aggregates in the materialized view query must be outputs. Computing, filtering, or joining based on an aggregated value is not supported. For example, creating a view from the following query is not supported because it produces a value computed from an aggregate, `  COUNT(*) / 10 as cnt  ` .
 
-``` text
+``` notranslate
 SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, COUNT(*) / 10 AS cnt
 FROM mydataset.mytable
 GROUP BY ts_hour;
@@ -352,33 +336,33 @@ Only the following aggregation functions are supported:
 
 The following SQL features are not supported in materialized views:
 
-  - `  UNION ALL  ` . ( [Support in science Preview](#left-union) )
-  - `  LEFT OUTER JOIN  ` ( [Support in science Preview](#left-union) )
+  - `  UNION ALL  ` . ( [Support in science Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
+  - `  LEFT OUTER JOIN  ` ( [Support in science Preview](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#left-union) )
   - `  RIGHT/FULL OUTER JOIN  ` .
   - Self-joins, also known as using a `  JOIN  ` on the same table more than once.
-  - [Window functions](/bigquery/docs/reference/standard-sql/window-function-calls) .
+  - [Window functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/window-function-calls) .
   - `  ARRAY  ` subqueries.
   - Non-deterministic functions such as `  RAND()  ` , `  CURRENT_DATE()  ` , `  SESSION_USER()  ` , or `  CURRENT_TIME()  ` .
-  - [User-defined functions (UDFs)](/bigquery/docs/user-defined-functions) .
+  - [User-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions) .
   - `  TABLESAMPLE  ` .
   - `  FOR SYSTEM_TIME AS OF  ` .
-  - [Generative AI functions](/bigquery/docs/generative-ai-overview) .
+  - [Generative AI functions](https://docs.cloud.google.com/bigquery/docs/generative-ai-overview) .
 
 #### `     LEFT OUTER JOIN    ` and `     UNION ALL    ` support
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send an email to <bq-mv-help@google.com> .
 
-Incremental materialized views support `  LEFT OUTER JOIN  ` and `  UNION ALL  ` . Materialized views with `  LEFT OUTER JOIN  ` and `  UNION ALL  ` statements share the limitations of other incremental materialized views. In addition, [smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join.
+Incremental materialized views support `  LEFT OUTER JOIN  ` and `  UNION ALL  ` . Materialized views with `  LEFT OUTER JOIN  ` and `  UNION ALL  ` statements share the limitations of other incremental materialized views. In addition, [smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) is not supported for materialized views with union all or left outer join.
 
 ##### Examples
 
 The following example creates an aggregate incremental materialized view with a `  LEFT JOIN  ` . This view is incrementally updated when data appends to the left table.
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW dataset.mv
 AS (
   SELECT
@@ -393,9 +377,9 @@ AS (
 );
 ```
 
-The following example creates an aggregate incremental materialized view with a `  UNION ALL  ` . This view is incrementally updated when data appends to either or both tables. For more information about incremental updates, see [Incremental Updates](/bigquery/docs/materialized-views-use#incremental_updates) .
+The following example creates an aggregate incremental materialized view with a `  UNION ALL  ` . This view is incrementally updated when data appends to either or both tables. For more information about incremental updates, see [Incremental Updates](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#incremental_updates) .
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW dataset.mv PARTITION BY DATE(ts_hour)
 AS (
   SELECT
@@ -415,7 +399,7 @@ Materialized views support `  WITH  ` clauses and common table expressions. Mate
 
 The following example shows a materialized view using a `  WITH  ` clause:
 
-``` text
+``` notranslate
 WITH tmp AS (
   SELECT TIMESTAMP_TRUNC(ts, HOUR) AS ts_hour, *
   FROM mydataset.mytable
@@ -427,7 +411,7 @@ GROUP BY ts_hour;
 
 The following example shows a materialized view using a `  WITH  ` clause that is not supported because it contains two `  GROUP BY  ` clauses:
 
-``` text
+``` notranslate
 WITH tmp AS (
   SELECT city, COUNT(*) AS population
   FROM mydataset.mytable
@@ -439,22 +423,22 @@ GROUP BY population;
 
 ### Materialized views over BigLake tables
 
-**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](/biglake/docs/introduction) .
+**Important:** The term "BigLake" on this page refers to an access delegation functionality for external tables in BigQuery. For information about BigLake, the stand-alone Google Cloud product that includes BigLake metastore, the Apache Iceberg REST catalog, and BigLake tables for Apache Iceberg see [BigLake overview](https://docs.cloud.google.com/biglake/docs/introduction) .
 
-To create [materialized views over BigLake tables](/bigquery/docs/materialized-views-intro#biglake) , the BigLake table must have [metadata caching enabled](/bigquery/docs/biglake-intro#metadata_caching_for_performance) over Cloud Storage data and the materialized view must have a [`  max_staleness  `](#max_staleness) option value greater than the base table. Materialized views over BigLake tables support the [same set of queries](/bigquery/docs/materialized-views-create#query_limitations) as other materialized views.
+To create [materialized views over BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) , the BigLake table must have [metadata caching enabled](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) over Cloud Storage data and the materialized view must have a [`  max_staleness  `](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#max_staleness) option value greater than the base table. Materialized views over BigLake tables support the [same set of queries](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#query_limitations) as other materialized views.
 
 #### Example
 
 Creation of an aggregate view using a BigLake base table:
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW sample_dataset.sample_mv
     OPTIONS (max_staleness=INTERVAL "0:30:0" HOUR TO SECOND)
 AS SELECT COUNT(*) cnt
 FROM dataset.biglake_base_table;
 ```
 
-For details about the limitations of materialized views over BigLake tables, see [materialized views over BigLake tables](/bigquery/docs/materialized-views-intro#biglake) .
+For details about the limitations of materialized views over BigLake tables, see [materialized views over BigLake tables](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#biglake) .
 
 ### Materialized views over Apache Iceberg external tables
 
@@ -464,7 +448,7 @@ You can reference large Iceberg tables in materialized views instead of migratin
 
 The following example creates a partition-aligned materialized view over a partitioned base Iceberg table:
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW mydataset.myicebergmv
   PARTITION BY DATE_TRUNC(birth_month, MONTH)
 AS
@@ -473,7 +457,7 @@ AS
 
 The underlying base Iceberg table `  myicebergtable  ` must have a [partition spec](https://iceberg.apache.org/spec/#partition-specs) like the following:
 
-``` text
+``` 
   "partition-specs" : [ {
     "spec-id" : 0,
     "fields" : [ {
@@ -487,7 +471,7 @@ The underlying base Iceberg table `  myicebergtable  ` must have a [partition sp
 
 #### Limitations
 
-In addition to the [limitations](/bigquery/docs/iceberg-external-tables#limitations) of standard Iceberg tables, materialized views over Iceberg tables have the following limitations:
+In addition to the [limitations](https://docs.cloud.google.com/bigquery/docs/iceberg-external-tables#limitations) of standard Iceberg tables, materialized views over Iceberg tables have the following limitations:
 
   - You can create a materialized view that is partition aligned with the base table. However, the materialized view only supports time-based [partition transformation](https://iceberg.apache.org/spec/#partition-transforms) , for example, `  YEAR  ` , `  MONTH  ` , `  DAY  ` , and `  HOUR  ` .
   - The granularity of the materialized view's partition cannot be finer than the granularity of the base table's partition. For example, if you partition the base table yearly using the `  birth_date  ` column, creating a materialized view with `  PARTITION BY DATE_TRUNC(birth_date, MONTH)  ` isn't supported.
@@ -496,7 +480,7 @@ In addition to the [limitations](/bigquery/docs/iceberg-external-tables#limitati
   - There must be at least one snapshot in the base table.
   - The Iceberg table must be a BigLake table, for example, an authorized external table.
   - The query over the materialized view might fail if the `  metadata.json  ` file of your Iceberg table is corrupted.
-  - If [VPC Service Controls](/vpc-service-controls/docs/overview) is enabled, service accounts of the authorized external table must be added to your ingress rules, otherwise, VPC Service Controls blocks automatic background refresh for the materialized view.
+  - If [VPC Service Controls](https://docs.cloud.google.com/vpc-service-controls/docs/overview) is enabled, service accounts of the authorized external table must be added to your ingress rules, otherwise, VPC Service Controls blocks automatic background refresh for the materialized view.
 
 The `  metadata.json  ` file of your Iceberg table must have the following specifications. Without these specifications, your queries scan the base table, failing to use the materialized result.
 
@@ -517,13 +501,13 @@ The `  metadata.json  ` file of your Iceberg table must have the following speci
 
 ## Partitioned materialized views
 
-Materialized views on partitioned tables can be partitioned. Partitioning a materialized view is similar to partitioning a normal table, in that it provides benefit when queries often access a subset of the partitions. In addition, partitioning a materialized view can improve the view's behavior when data in the base table or tables is modified or deleted. For more information, see [Partition alignment](/bigquery/docs/materialized-views-use#partition_alignment) .
+Materialized views on partitioned tables can be partitioned. Partitioning a materialized view is similar to partitioning a normal table, in that it provides benefit when queries often access a subset of the partitions. In addition, partitioning a materialized view can improve the view's behavior when data in the base table or tables is modified or deleted. For more information, see [Partition alignment](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#partition_alignment) .
 
 If the base table is partitioned, then you can partition a materialized view on the same partitioning column. For time-based partitions, the granularity must match (hourly, daily, monthly, or yearly). For integer-range partitions, the range specification must exactly match. You cannot partition a materialized view over a non-partitioned base table.
 
 If the base table is partitioned by ingestion time, then a materialized view can group by the `  _PARTITIONDATE  ` column of the base table, and also partition by it. If you don't explicitly specify partitioning when you create the materialized view, then the materialized view is unpartitioned.
 
-If the base table is partitioned, consider partitioning your materialized view as well to reduce [refresh job maintenance](/bigquery/docs/materialized-views-manage) cost and query cost.
+If the base table is partitioned, consider partitioning your materialized view as well to reduce [refresh job maintenance](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage) cost and query cost.
 
 ### Partition expiration
 
@@ -535,7 +519,7 @@ Partition expiration can't be set on materialized views. A materialized view imp
 
 In this example, the base table is partitioned on the `  transaction_time  ` column with daily partitions. The materialized view is partitioned on the same column and clustered on the `  employee_id  ` column.
 
-``` text
+``` notranslate
 CREATE TABLE my_project.my_dataset.my_base_table(
   employee_id INT64,
   transaction_time TIMESTAMP)
@@ -561,7 +545,7 @@ AS (
 
 In this example, the base table is partitioned by ingestion time with daily partitions. The materialized view selects the ingestion time as a column named `  date  ` . The materialized view is grouped by the `  date  ` column and partitioned by the same column.
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
   PARTITION BY date
   CLUSTER BY employee_id
@@ -580,7 +564,7 @@ AS (
 
 #### Example 3
 
-In this example, the base table is partitioned on a `  TIMESTAMP  ` column named `  transaction_time  ` , with daily partitions. The materialized view defines a column named `  transaction_hour  ` , using the [`  TIMESTAMP_TRUNC  `](/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc) function to truncate the value to the nearest hour. The materialized view is grouped by `  transaction_hour  ` and also partitioned by it.
+In this example, the base table is partitioned on a `  TIMESTAMP  ` column named `  transaction_time  ` , with daily partitions. The materialized view defines a column named `  transaction_hour  ` , using the [`  TIMESTAMP_TRUNC  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/timestamp_functions#timestamp_trunc) function to truncate the value to the nearest hour. The materialized view is grouped by `  transaction_hour  ` and also partitioned by it.
 
 Note the following:
 
@@ -590,7 +574,7 @@ Note the following:
 
 <!-- end list -->
 
-``` text
+``` notranslate
 CREATE TABLE my_project.my_dataset.my_base_table (
   employee_id INT64,
   transaction_time TIMESTAMP)
@@ -613,21 +597,21 @@ AS (
 
 ## Cluster materialized views
 
-You can cluster materialized views by their output columns, subject to the BigQuery [clustered table limitations](/bigquery/docs/clustered-tables#limitations) . Aggregate output columns cannot be used as clustering columns. Adding clustering columns to materialized views can improve the performance of queries that include filters on those columns.
+You can cluster materialized views by their output columns, subject to the BigQuery [clustered table limitations](https://docs.cloud.google.com/bigquery/docs/clustered-tables#limitations) . Aggregate output columns cannot be used as clustering columns. Adding clustering columns to materialized views can improve the performance of queries that include filters on those columns.
 
 ### Reference logical views
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 To request feedback or support for this feature, send email to <bq-mv-help@google.com> .
 
 Materialized view queries can reference logical views but are subject to the following limitations:
 
-  - [Materialized view limitations apply](/bigquery/docs/materialized-views-intro#limitations) .
+  - [Materialized view limitations apply](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#limitations) .
   - If the logical view changes, then the materialized view becomes invalid and must be fully refreshed.
-  - [Smart tuning](/bigquery/docs/materialized-views-use#smart_tuning) is not supported.
+  - [Smart tuning](https://docs.cloud.google.com/bigquery/docs/materialized-views-use#smart_tuning) is not supported.
 
 ## Best practices when creating materialized views
 
@@ -641,7 +625,7 @@ For example, consider a query on a table where users often filter by the columns
 
 As another example, you can use deterministic date filters, either by specific date, such as `  WHERE order_date = '2019-10-01'  ` , or date range, such as `  WHERE order_date BETWEEN '2019-10-01' AND '2019-10-31'  ` . Add a date range filter in the materialized view that covers expected date ranges in the query:
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW ...
   ...
   WHERE date > '2019-01-01'
@@ -660,7 +644,7 @@ Ensure that the largest or most frequently changing table is the first or leftmo
 
 Materialized views with joins work best in cases where the data is heavily aggregated or the original join query is expensive. For selective queries, BigQuery is often already able to perform the join efficiently and no materialized view is needed. For example consider the following materialized view definitions.
 
-``` text
+``` notranslate
 CREATE MATERIALIZED VIEW dataset.mv
   CLUSTER BY s_market_id
 AS (
@@ -678,7 +662,7 @@ AS (
 
 Suppose `  store_sales  ` is clustered on `  ss_store_sk  ` and you often run queries like the following:
 
-``` text
+``` notranslate
 SELECT
   SUM(ss_net_paid)
 FROM dataset.store_sales
@@ -710,10 +694,12 @@ Select one of the following options:
 To create a materialized view with the `  max_staleness  ` option, add an `  OPTIONS  ` clause to the DDL statement when you create the materialized view:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE MATERIALIZED VIEW  project-id.my_dataset.my_mv_table
       OPTIONS (enable_refresh = true, refresh_interval_minutes = 60,
         max_staleness = INTERVAL "4:0:0" HOUR TO SECOND)
@@ -737,28 +723,26 @@ To create a materialized view with the `  max_staleness  ` option, add an `  OPT
     
       - Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### API
 
-Call the [`  tables.insert  `](/bigquery/docs/reference/rest/v2/tables/insert) method with a defined `  materializedView  ` resource as part of your API request. The `  materializedView  ` resource contains a `  query  ` field. For example:
+Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined `  materializedView  ` resource as part of your API request. The `  materializedView  ` resource contains a `  query  ` field. For example:
 
-``` text
-{
-  "kind": "bigquery#table",
-  "tableReference": {
-    "projectId": "project-id",
-    "datasetId": "my_dataset",
-    "tableId": "my_mv_table"
-  },
-  "materializedView": {
-    "query": "select product_id,sum(clicks) as
-                sum_clicks from project-id.my_dataset.my_base_table
-                group by 1"
-  }
-  "maxStaleness": "4:0:0"
-}
-```
+    {
+      "kind": "bigquery#table",
+      "tableReference": {
+        "projectId": "project-id",
+        "datasetId": "my_dataset",
+        "tableId": "my_mv_table"
+      },
+      "materializedView": {
+        "query": "select product_id,sum(clicks) as
+                    sum_clicks from project-id.my_dataset.my_base_table
+                    group by 1"
+      }
+      "maxStaleness": "4:0:0"
+    }
 
 Replace the following:
 
@@ -774,11 +758,9 @@ Replace the following:
 
 You can apply this parameter to existing materialized views by using the `  ALTER MATERIALIZED VIEW  ` statement. For example:
 
-``` text
-ALTER MATERIALIZED VIEW project-id.my_dataset.my_mv_table
-SET OPTIONS (enable_refresh = true, refresh_interval_minutes = 120,
-  max_staleness = INTERVAL "8:0:0" HOUR TO SECOND);
-```
+    ALTER MATERIALIZED VIEW project-id.my_dataset.my_mv_table
+    SET OPTIONS (enable_refresh = true, refresh_interval_minutes = 120,
+      max_staleness = INTERVAL "8:0:0" HOUR TO SECOND);
 
 ### Query with `     max_staleness    `
 
@@ -786,9 +768,7 @@ You can query materialized views with the `  max_staleness  ` option as you woul
 
 For example:
 
-``` text
-SELECT * FROM  project-id.my_dataset.my_mv_table
-```
+    SELECT * FROM  project-id.my_dataset.my_mv_table
 
 This query returns data from the last refresh if the data is not older than the `  max_staleness  ` parameter. If the materialized view has not been refreshed within the `  max_staleness  ` interval, BigQuery merges the results of the latest available refresh with the base table changes to return results within the `  max_staleness  ` interval.
 
@@ -798,13 +778,13 @@ If you stream data into the base tables of a materialized view with the `  max_s
 
 #### Streaming data and time travel limitations
 
-While BigQuery datasets have a default [time travel window](/bigquery/docs/time-travel) of 7 days, the **streaming storage buffer** only retains data for 3 days. This creates the following limitation for materialized views:
+While BigQuery datasets have a default [time travel window](https://docs.cloud.google.com/bigquery/docs/time-travel) of 7 days, the **streaming storage buffer** only retains data for 3 days. This creates the following limitation for materialized views:
 
   - **Query failure:** If a materialized view uses the `  max_staleness  ` option and hasn't been refreshed for more than 3 days, queries against the view fail with the the error message `  Streaming data from <materialized_view_name> is temporarily unavailable  ` .
 
   - **Cause:** The failure occurs because the query rewrite process attempts to read incremental changes (deltas) from the streaming storage buffer. If the required data is older than the 3-day retention period, the system can't retrieve the deltas needed for the incremental rewrite.
 
-To avoid these errors, ensure your [refresh policy](/bigquery/docs/materialized-views-manage#automatic-refresh) updates the materialized view at least once every 3 days.
+To avoid these errors, ensure your [refresh policy](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) updates the materialized view at least once every 3 days.
 
 ### Smart tuning and the `     max_staleness    ` option
 
@@ -816,27 +796,25 @@ You should set `  max_staleness  ` based on your requirements. To avoid reading 
 
 For example, if one hour is required to refresh your materialized view and you want a one-hour buffer for growth, then you should set the refresh interval to two hours. This configuration ensures that the refresh occurs within your report's four-hour maximum for staleness.
 
-``` text
-CREATE MATERIALIZED VIEW project-id.my_dataset.my_mv_table
-OPTIONS (enable_refresh = true, refresh_interval_minutes = 120, max_staleness =
-INTERVAL "4:0:0" HOUR TO SECOND)
-AS SELECT
-  employee_id,
-  DATE(transaction_time),
-  COUNT(1) AS cnt
-FROM my_dataset.my_base_table
-GROUP BY 1, 2;
-```
+    CREATE MATERIALIZED VIEW project-id.my_dataset.my_mv_table
+    OPTIONS (enable_refresh = true, refresh_interval_minutes = 120, max_staleness =
+    INTERVAL "4:0:0" HOUR TO SECOND)
+    AS SELECT
+      employee_id,
+      DATE(transaction_time),
+      COUNT(1) AS cnt
+    FROM my_dataset.my_base_table
+    GROUP BY 1, 2;
 
 ## Non-incremental materialized views
 
-Non-incremental materialized views support most SQL queries, including `  OUTER JOIN  ` , `  UNION  ` , and `  HAVING  ` clauses, and analytic functions. To determine whether a materialized view was used in your query, check the cost estimates by using a [dry run](/bigquery/docs/materialized-views-intro#interaction) . In scenarios where data staleness is acceptable, for example for batch data processing or reporting, non-incremental materialized views can improve query performance and reduce cost. By using the `  max_staleness  ` option, you can build arbitrary, complex materialized views that are automatically maintained and have built-in staleness guarantees.
+Non-incremental materialized views support most SQL queries, including `  OUTER JOIN  ` , `  UNION  ` , and `  HAVING  ` clauses, and analytic functions. To determine whether a materialized view was used in your query, check the cost estimates by using a [dry run](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#interaction) . In scenarios where data staleness is acceptable, for example for batch data processing or reporting, non-incremental materialized views can improve query performance and reduce cost. By using the `  max_staleness  ` option, you can build arbitrary, complex materialized views that are automatically maintained and have built-in staleness guarantees.
 
 ### Use non-incremental materialized views
 
-You can create non-incremental materialized views by using the `  allow_non_incremental_definition  ` option. This option must be accompanied by the `  max_staleness  ` option. To ensure a periodic refresh of the materialized view, you should also configure a [refresh policy](/bigquery/docs/materialized-views-manage#enable_and_disable_automatic_refresh) . Without a refresh policy, you must manually refresh the materialized view.
+You can create non-incremental materialized views by using the `  allow_non_incremental_definition  ` option. This option must be accompanied by the `  max_staleness  ` option. To ensure a periodic refresh of the materialized view, you should also configure a [refresh policy](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#enable_and_disable_automatic_refresh) . Without a refresh policy, you must manually refresh the materialized view.
 
-The materialized view always represents the state of the base tables within the `  max_staleness  ` interval. If the last refresh is too stale and doesn't represent the base tables within the `  max_staleness  ` interval, then the query reads the base tables. To learn more about possible performance implications, see [Data staleness](#data_staleness) .
+The materialized view always represents the state of the base tables within the `  max_staleness  ` interval. If the last refresh is too stale and doesn't represent the base tables within the `  max_staleness  ` interval, then the query reads the base tables. To learn more about possible performance implications, see [Data staleness](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#data_staleness) .
 
 ### Create with `     allow_non_incremental_definition    `
 
@@ -847,10 +825,12 @@ To create a materialized view with the `  allow_non_incremental_definition  ` op
 Add an `  OPTIONS  ` clause to the DDL statement when you create the materialized view:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, enter the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE MATERIALIZED VIEW my_project.my_dataset.my_mv_table
     OPTIONS (
       enable_refresh = true, refresh_interval_minutes = 60,
@@ -876,35 +856,33 @@ Add an `  OPTIONS  ` clause to the DDL statement when you create the materialize
 
 3.  Click play\_circle **Run** .
 
-For more information about how to run queries, see [Run an interactive query](/bigquery/docs/running-queries#queries) .
+For more information about how to run queries, see [Run an interactive query](https://docs.cloud.google.com/bigquery/docs/running-queries#queries) .
 
 ### API
 
-Call the [`  tables.insert  `](/bigquery/docs/reference/rest/v2/tables/insert) method with a defined `  materializedView  ` resource as part of your API request. The `  materializedView  ` resource contains a `  query  ` field. For example:
+Call the [`  tables.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/insert) method with a defined `  materializedView  ` resource as part of your API request. The `  materializedView  ` resource contains a `  query  ` field. For example:
 
-``` text
-{
-  "kind": "bigquery#table",
-  "tableReference": {
-    "projectId": "my_project",
-    "datasetId": "my_dataset",
-    "tableId": "my_mv_table"
-  },
-  "materializedView": {
-    "query": "`SELECT`
-        s_store_sk,
-        SUM(ss_net_paid) AS sum_sales,
-        APPROX_QUANTILES(ss_net_paid, 2)[safe_offset(1)] median
-      FROM my_project.my_dataset.store
-      LEFT OUTER JOIN my_project.my_dataset.store_sales
-        ON ss_store_sk = s_store_sk
-      GROUP BY s_store_sk
-      HAVING median < 40 OR median is NULL`",
-    "allowNonIncrementalDefinition": true
-  }
-  "maxStaleness": "4:0:0"
-}
-```
+    {
+      "kind": "bigquery#table",
+      "tableReference": {
+        "projectId": "my_project",
+        "datasetId": "my_dataset",
+        "tableId": "my_mv_table"
+      },
+      "materializedView": {
+        "query": "`SELECT`
+            s_store_sk,
+            SUM(ss_net_paid) AS sum_sales,
+            APPROX_QUANTILES(ss_net_paid, 2)[safe_offset(1)] median
+          FROM my_project.my_dataset.store
+          LEFT OUTER JOIN my_project.my_dataset.store_sales
+            ON ss_store_sk = s_store_sk
+          GROUP BY s_store_sk
+          HAVING median < 40 OR median is NULL`",
+        "allowNonIncrementalDefinition": true
+      }
+      "maxStaleness": "4:0:0"
+    }
 
 Replace the following:
 
@@ -915,11 +893,11 @@ Replace the following:
 
 ### Create materialized views over Spanner external datasets
 
-Before you proceed, you must create the underlying Spanner external dataset using a [`  CLOUD_RESOURCE  ` connection](/bigquery/docs/spanner-external-datasets#use_a_cloud_resource_connection) .
+Before you proceed, you must create the underlying Spanner external dataset using a [`  CLOUD_RESOURCE  ` connection](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets#use_a_cloud_resource_connection) .
 
-You can create non-incremental materialized views that reference [Spanner external dataset tables](/bigquery/docs/spanner-external-datasets) by using the `  allow_non_incremental_definition  ` option. The following example uses a base Spanner external dataset table:
+You can create non-incremental materialized views that reference [Spanner external dataset tables](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) by using the `  allow_non_incremental_definition  ` option. The following example uses a base Spanner external dataset table:
 
-``` text
+``` notranslate
 /*
   You must create the spanner_external_dataset with a CLOUD_RESOURCE connection.
 */
@@ -938,22 +916,20 @@ You can query non-incremental materialized views as you would query any other ma
 
 For example:
 
-``` text
-SELECT * FROM  my_project.my_dataset.my_mv_table
-```
+    SELECT * FROM  my_project.my_dataset.my_mv_table
 
-If the data is not older than the `  max_staleness  ` parameter, then this query returns data from the last refresh. For details about the staleness and freshness of data, see [data staleness](#data_staleness) .
+If the data is not older than the `  max_staleness  ` parameter, then this query returns data from the last refresh. For details about the staleness and freshness of data, see [data staleness](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#data_staleness) .
 
 ### Limitations specific to non-incremental materialized views
 
-The following limitations only apply to materialized views with the `  allow_non_incremental_definition  ` option. With the exception of limitations on supported query syntax, all [materialized view limitations](/bigquery/docs/materialized-views-intro#limitations) still apply.
+The following limitations only apply to materialized views with the `  allow_non_incremental_definition  ` option. With the exception of limitations on supported query syntax, all [materialized view limitations](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#limitations) still apply.
 
   - Smart tuning is not applied to the materialized views that include the `  allow_non_incremental_definition  ` option. The only way to benefit from materialized views with the `  allow_non_incremental_definition  ` option is to query them directly.
   - Materialized views without the `  allow_non_incremental_definition  ` option can incrementally refresh a subset of their data. Materialized views with the `  allow_non_incremental_definition  ` option must be refreshed in their entirety.
-  - Materialized views with `  max_staleness  ` option validates presence of the column-level security constraints during query execution. See more details about this in [column-level access control](/bigquery/docs/column-level-security-intro#time-travel)
+  - Materialized views with `  max_staleness  ` option validates presence of the column-level security constraints during query execution. See more details about this in [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#time-travel)
   - For materialized views over Spanner external dataset tables, if the last refresh of a non-incremental materialized view occurred outside the `  max_staleness  ` interval, then queries read the base Spanner external dataset tables, even if the base table hasn't changed. For example, if your `  max_staleness  ` interval is 4 hours and the last refresh occurred 7 hours ago, then the query will read the base Spanner external dataset tables.
 
 ## What's next
 
-  - [Manage materialized views](/bigquery/docs/materialized-views-manage) .
-  - [Use materialized views](/bigquery/docs/materialized-views-use) .
+  - [Manage materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage) .
+  - [Use materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-use) .

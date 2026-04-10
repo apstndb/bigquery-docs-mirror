@@ -1,39 +1,18 @@
 # Monitor BI Engine
 
-[BigQuery BI Engine](/bigquery/docs/bi-engine-intro) accelerates BigQuery for BI scenarios using memory cache and faster execution. Acceleration details can be monitored using [INFORMATION\_SCHEMA](/bigquery/docs/information-schema-jobs) and [Cloud Monitoring metrics](/bigquery/docs/monitoring) .
+[BigQuery BI Engine](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) accelerates BigQuery for BI scenarios using memory cache and faster execution. Acceleration details can be monitored using [INFORMATION\_SCHEMA](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) and [Cloud Monitoring metrics](https://docs.cloud.google.com/bigquery/docs/monitoring) .
 
 ## Cloud Monitoring
 
-You can monitor and configure alerts for BigQuery BI Engine with Cloud Monitoring. To learn how to create dashboard for BI Engine metrics, see [Creating charts](/monitoring/charts) .
+You can monitor and configure alerts for BigQuery BI Engine with Cloud Monitoring. To learn how to create dashboard for BI Engine metrics, see [Creating charts](https://docs.cloud.google.com/monitoring/charts) .
 
 The following metrics are provided for BigQuery BI Engine:
 
-<table>
-<thead>
-<tr class="header">
-<th>Resource</th>
-<th>Metric</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>BigQuery Project</td>
-<td>Reservation Total Bytes</td>
-<td>Total capacity allocated to one Google Cloud project</td>
-</tr>
-<tr class="even">
-<td>BigQuery Project</td>
-<td>Reservation Used Bytes</td>
-<td>Total capacity used in one Google Cloud project</td>
-</tr>
-<tr class="odd">
-<td>BigQuery Project</td>
-<td>BI Engine Top Tables Cached Bytes</td>
-<td>Cache usage per table. This metric displays the top <em>N</em> tables per region report usage.</td>
-</tr>
-</tbody>
-</table>
+| Resource         | Metric                            | Details                                                                                 |
+| ---------------- | --------------------------------- | --------------------------------------------------------------------------------------- |
+| BigQuery Project | Reservation Total Bytes           | Total capacity allocated to one Google Cloud project                                    |
+| BigQuery Project | Reservation Used Bytes            | Total capacity used in one Google Cloud project                                         |
+| BigQuery Project | BI Engine Top Tables Cached Bytes | Cache usage per table. This metric displays the top *N* tables per region report usage. |
 
 ## Query statistics for BI Engine
 
@@ -50,20 +29,20 @@ With BI Engine acceleration enabled, your query can run in any one of these four
 </colgroup>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>BI_ENGINE_DISABLED</code></pre></td>
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>BI_ENGINE_DISABLED</code></pre></td>
 <td>BI Engine disabled the acceleration. <code dir="ltr" translate="no">       biEngineReasons      </code> specifies a more detailed reason. The query was run using the BigQuery execution engine.</td>
 </tr>
 <tr class="even">
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>PARTIAL_INPUT</code></pre></td>
-<td>Part of the query input was accelerated using BI Engine. As described in <a href="/bigquery/docs/bi-engine-query#query_optimization_and_acceleration">Query optimization and acceleration</a> , a query plan is generally broken down into multiple input stages. BI Engine supports the common types of subquery patterns that are typically used in dashboarding. If the query consists of multiple input stages, only a few of which fall under the supported use cases, then BI Engine runs the unsupported stages using the normal BigQuery engine without acceleration. In this situation, BI Engine returns a <code dir="ltr" translate="no">       PARTIAL      </code> acceleration code, and uses <code dir="ltr" translate="no">       biEngineReasons      </code> to populate the reason for not accelerating other input stages.</td>
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code>PARTIAL_INPUT</code></pre></td>
+<td>Part of the query input was accelerated using BI Engine. As described in <a href="https://docs.cloud.google.com/bigquery/docs/bi-engine-query#query_optimization_and_acceleration">Query optimization and acceleration</a> , a query plan is generally broken down into multiple input stages. BI Engine supports the common types of subquery patterns that are typically used in dashboarding. If the query consists of multiple input stages, only a few of which fall under the supported use cases, then BI Engine runs the unsupported stages using the normal BigQuery engine without acceleration. In this situation, BI Engine returns a <code dir="ltr" translate="no">       PARTIAL      </code> acceleration code, and uses <code dir="ltr" translate="no">       biEngineReasons      </code> to populate the reason for not accelerating other input stages.</td>
 </tr>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code> FULL_INPUT
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code> FULL_INPUT
  </code></pre></td>
 <td>All input stages of the query were accelerated using BI Engine. Cached data is reused across queries, and the computation that follows immediately after reading the data is accelerated.</td>
 </tr>
 <tr class="even">
-<td><pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code> FULL_QUERY
+<td><pre dir="ltr" data-is-upgraded="" translate="no"><code> FULL_QUERY
  </code></pre></td>
 <td>The entire query was accelerated using BI Engine.</td>
 </tr>
@@ -76,13 +55,11 @@ Detailed statistics on BI Engine are available through the BigQuery API.
 
 To fetch the statistics associated with BI Engine accelerated queries, run the following bq command-line tool command:
 
-``` text
-bq show --format=prettyjson -j job_id
-```
+    bq show --format=prettyjson -j job_id
 
 If the project is enabled for BI Engine acceleration, then the output produces a new field, `  biEngineStatistics  ` . Here is a sample job report:
 
-``` text
+``` 
  "statistics": {
     "creationTime": "1602175128902",
     "endTime": "1602175130700",
@@ -98,42 +75,38 @@ If the project is enabled for BI Engine acceleration, then the output produces a
       },
 ```
 
-For more information about the `  BiEngineStatistics  ` field, see the [Job reference](/bigquery/docs/reference/rest/v2/Job#bienginestatistics) .
+For more information about the `  BiEngineStatistics  ` field, see the [Job reference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#bienginestatistics) .
 
 ### BigQuery information schema statistics
 
-BI Engine acceleration statistics are included in the [BigQuery `  INFORMATION_SCHEMA  `](/bigquery/docs/information-schema-intro) views as part of the `  INFORMATION_SCHEMA.JOBS_BY_*  ` views in the [`  bi_engine_statistics  `](/bigquery/docs/information-schema-jobs#schema) column. For example, this query returns the `  bi_engine_statistics  ` for all of the current projects' jobs for the last 24 hours:
+BI Engine acceleration statistics are included in the [BigQuery `  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-intro) views as part of the `  INFORMATION_SCHEMA.JOBS_BY_*  ` views in the [`  bi_engine_statistics  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs#schema) column. For example, this query returns the `  bi_engine_statistics  ` for all of the current projects' jobs for the last 24 hours:
 
-``` text
-SELECT
-  creation_time,
-  job_id,
-  bi_engine_statistics
-FROM
-  `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
-WHERE
-  creation_time >
-     TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
-  AND job_type = "QUERY"
-```
+    SELECT
+      creation_time,
+      job_id,
+      bi_engine_statistics
+    FROM
+      `region-us`.INFORMATION_SCHEMA.JOBS_BY_PROJECT
+    WHERE
+      creation_time >
+         TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+      AND job_type = "QUERY"
 
-Use the following format to specify [regionality](/bigquery/docs/information-schema-views#scope_and_syntax) for the `  project-id  ` , `  region  ` , and `  views  ` in the `  INFORMATION_SCHEMA  ` view:
+Use the following format to specify [regionality](https://docs.cloud.google.com/bigquery/docs/information-schema-views#scope_and_syntax) for the `  project-id  ` , `  region  ` , and `  views  ` in the `  INFORMATION_SCHEMA  ` view:
 
-``` text
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
-```
+    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.VIEW
 
-**Logging slot metrics:** Although slot metrics for BI Engine are reported, accelerated BI Engine input stages are not counted towards slot reservations. For more information, see the [pricing](/bigquery/pricing#bi-engine-pricing) page.
+**Logging slot metrics:** Although slot metrics for BI Engine are reported, accelerated BI Engine input stages are not counted towards slot reservations. For more information, see the [pricing](https://docs.cloud.google.com/bigquery/pricing#bi-engine-pricing) page.
 
 ### View Looker Studio information schema details
 
-You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`  INFORMATION_SCHEMA.JOBS  ` view](/bigquery/docs/information-schema-jobs) . Every Looker Studio query in BigQuery creates an entry with `  report_id  ` and `  datasource_id  ` labels. Those IDs appear at the end of Looker Studio URL when opening a report or data source page. For example, a report with URL `  https://lookerstudio.google.com/navigation/reporting/my-report-id-123  ` has a report ID of `  "my-report-id-123"  ` .
+You can track which Looker Studio reports and data sources are used by BigQuery by viewing the [`  INFORMATION_SCHEMA.JOBS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Every Looker Studio query in BigQuery creates an entry with `  report_id  ` and `  datasource_id  ` labels. Those IDs appear at the end of Looker Studio URL when opening a report or data source page. For example, a report with URL `  https://lookerstudio.google.com/navigation/reporting/my-report-id-123  ` has a report ID of `  "my-report-id-123"  ` .
 
 The following examples show how to view reports and data sources:
 
 #### Find report and data source URL for each Looker Studio BigQuery job
 
-``` text
+``` notranslate
 -- Standard labels used by Looker Studio.
 DECLARE requestor_key STRING DEFAULT 'requestor';
 DECLARE requestor_value STRING DEFAULT 'looker_studio';
@@ -168,7 +141,7 @@ LIMIT
 
 #### View jobs produced by using a report and data source
 
-``` text
+``` notranslate
 -- Specify report and data source id, which can be found at the end of Looker Studio URLs.
 DECLARE user_report_id STRING DEFAULT '*report id here*';
 DECLARE user_datasource_id STRING DEFAULT '*datasource id here*';
@@ -204,7 +177,7 @@ BI Engine acceleration is part of BigQuery job processing. To inspect BigQuery j
 
 ## What's next
 
-  - Learn more about [Cloud Monitoring](/monitoring/docs) .
-  - Learn more about Monitoring [charts](/monitoring/charts) .
-  - Learn more about Monitoring [alerts](/monitoring/alerts) .
-  - Learn more about [Cloud Logging](/logging/docs) .
+  - Learn more about [Cloud Monitoring](https://docs.cloud.google.com/monitoring/docs) .
+  - Learn more about Monitoring [charts](https://docs.cloud.google.com/monitoring/charts) .
+  - Learn more about Monitoring [alerts](https://docs.cloud.google.com/monitoring/alerts) .
+  - Learn more about [Cloud Logging](https://docs.cloud.google.com/logging/docs) .

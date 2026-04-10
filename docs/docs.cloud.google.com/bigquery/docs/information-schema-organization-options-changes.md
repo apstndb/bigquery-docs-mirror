@@ -4,11 +4,11 @@ You can query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES  ` view to 
 
 ## Required permissions
 
-To get the permission that you need to get the configuration changes, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to get the configuration changes, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.config.update  ` permission, which is required to get the configuration changes.
 
-You might also be able to get this permission with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Schema
 
@@ -16,42 +16,13 @@ When you query the `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES  ` view, t
 
 The `  INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES  ` view has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th>Column name</th>
-<th>Data type</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       update_time      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>The time the configuration change occurred.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       username      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>For first-party users, it's their user email. For third-party users, it's the name that users set in the third-party identity provider.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       updated_options      </code></td>
-<td><code dir="ltr" translate="no">       JSON      </code></td>
-<td>A JSON object of the configuration options users updated in the change, containing the previous and the new values of updated fields.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       project_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The project ID. This field is empty for organization-level configuration changes.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       project_number      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>The project number. This field is empty for the organization-level configuration changes.</td>
-</tr>
-</tbody>
-</table>
+| Column name                      | Data type                  | Value                                                                                                                                   |
+| -------------------------------- | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `        update_time       `     | `        TIMESTAMP       ` | The time the configuration change occurred.                                                                                             |
+| `        username       `        | `        STRING       `    | For first-party users, it's their user email. For third-party users, it's the name that users set in the third-party identity provider. |
+| `        updated_options       ` | `        JSON       `      | A JSON object of the configuration options users updated in the change, containing the previous and the new values of updated fields.   |
+| `        project_id       `      | `        STRING       `    | The project ID. This field is empty for organization-level configuration changes.                                                       |
+| `        project_number       `  | `        INTEGER       `   | The project number. This field is empty for the organization-level configuration changes.                                               |
 
 For stability, we recommend that you explicitly list columns in your information schema queries instead of using a wildcard ( `  SELECT *  ` ). Explicitly listing columns prevents queries from breaking if the underlying schema changes.
 
@@ -61,34 +32,21 @@ This view contains sessions that are running, and the history of sessions comple
 
 ## Scope and syntax
 
-Queries against this view must have a [region qualifier](/bigquery/docs/information-schema-intro#syntax) .
+Queries against this view must have a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) .
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       `region-               REGION              `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES      </code></td>
-<td>Configuration changes within the specified organization.</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                       | Resource scope                                           | Region scope               |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | -------------------------- |
+| ``        `region-               REGION              `.INFORMATION_SCHEMA.ORGANIZATION_OPTIONS_CHANGES       `` | Configuration changes within the specified organization. | `          REGION        ` |
 
 Replace the following:
 
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, `  US  ` , or `  us-west2  ` .
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  US  ` , or `  us-west2  ` .
 
 ## Examples
 
 The following example retrieves all changes of the `  default_query_job_timeout_ms option  ` option:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -101,12 +59,10 @@ WHERE
 
 The result is similar to the following:
 
-``` text
-+----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
-| project_number | project_id | update_time             | username        | updated_options                                                                                                  |
-|----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-| 4471534625     | myproject1 | 2023-08-22 06:57:49 UTC | user1@gmail.com | {"default_query_job_timeout_ms":{"new":0,"old":1860369},"default_time_zone":{"new":"America/New_York","old":""}} |
-|----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
-| 5027725474     | myproject2 | 2022-08-01 00:00:00 UTC | user2@gmail.com | {"default_query_job_timeout_ms":{"new":1860369,"old":1860008}}                                                   |
-+----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
-```
+    +----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+
+    | project_number | project_id | update_time             | username        | updated_options                                                                                                  |
+    |----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
+    | 4471534625     | myproject1 | 2023-08-22 06:57:49 UTC | user1@gmail.com | {"default_query_job_timeout_ms":{"new":0,"old":1860369},"default_time_zone":{"new":"America/New_York","old":""}} |
+    |----------------|------------|-------------------------|-----------------|------------------------------------------------------------------------------------------------------------------|
+    | 5027725474     | myproject2 | 2022-08-01 00:00:00 UTC | user2@gmail.com | {"default_query_job_timeout_ms":{"new":1860369,"old":1860008}}                                                   |
+    +----------------+------------+-------------------------+-----------------+------------------------------------------------------------------------------------------------------------------+

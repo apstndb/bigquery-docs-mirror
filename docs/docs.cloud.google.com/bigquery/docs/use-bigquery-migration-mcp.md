@@ -2,7 +2,7 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) , and the [Additional Terms for Generative AI Preview Products](https://cloud.google.com/trustedtester/aitos) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 This document shows you how to use the BigQuery remote Model Context Protocol (MCP) server to connect with AI applications including Gemini CLI, ChatGPT, Claude, and custom applications you are developing. You can BigQuery Migration Service Model Context Protocol (MCP) server to perform tasks such as translating SQL queries into GoogleSQL syntax, generating DDL statements from SQL input queries, and getting explanations of SQL translations..
 
@@ -28,16 +28,18 @@ For information about other MCP servers and information about security and gover
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquerymigration.googleapis.com)
 
 ### Required roles
 
 To get the permissions that you need to enable the BigQuery Migration Service MCP server, ask your administrator to grant you the following IAM roles on the project where you want to enable the BigQuery Migration Service MCP server:
 
-  - Make MCP tool calls: [MCP Tool User](/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
-  - Use the BigQuery Migration Service: [Migration Workflow Editor](/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` )
+  - Make MCP tool calls: [MCP Tool User](https://docs.cloud.google.com/iam/docs/roles-permissions/mcp#mcp.toolUser) ( `  roles/mcp.toolUser  ` )
+  - Use the BigQuery Migration Service: [Migration Workflow Editor](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration#bigquerymigration.editor) ( `  roles/bigquerymigration.editor  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 These predefined roles contain the permissions required to enable the BigQuery Migration Service MCP server. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -54,13 +56,13 @@ The following permissions are required to enable the BigQuery Migration Service 
       - `  bigquerymigration.subtasks.get  `
       - `  bigquerymigration.subtasks.list  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-Additional BigQuery Migration Service permissions might be required depending on the task. For information about BigQuery Migration Service roles and permissions, see [BigQuery Migration Service roles and permissions](/iam/docs/roles-permissions/bigquerymigration) .
+Additional BigQuery Migration Service permissions might be required depending on the task. For information about BigQuery Migration Service roles and permissions, see [BigQuery Migration Service roles and permissions](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquerymigration) .
 
 ## Authentication and authorization
 
-BigQuery Migration Service MCP servers use the [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) protocol with [Identity and Access Management (IAM)](/iam/docs/overview) for authentication and authorization. All [Google Cloud identities](/docs/authentication/identity-products) are supported for authentication to MCP servers.
+BigQuery Migration Service MCP servers use the [OAuth 2.0](https://developers.google.com/identity/protocols/oauth2) protocol with [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam/docs/overview) for authentication and authorization. All [Google Cloud identities](https://docs.cloud.google.com/docs/authentication/identity-products) are supported for authentication to MCP servers.
 
 The BigQuery Migration Service MCP server doesn't accept API keys.
 
@@ -70,24 +72,10 @@ OAuth 2.0 uses scopes and credentials to determine if an authenticated principal
 
 BigQuery Migration Service has the following MCP tool OAuth scopes:
 
-<table>
-<thead>
-<tr class="header">
-<th>Scope URI for gcloud CLI</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       https://www.googleapis.com/auth/bigquerymigration      </code></td>
-<td>View and manage your workflows in BigQuery Migration Service and see the email address for your Google Account.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       https://www.googleapis.com/auth/devstorage.read_only      </code></td>
-<td>This scope is required for query translations that read data from Cloud Storage.</td>
-</tr>
-</tbody>
-</table>
+| Scope URI for gcloud CLI                                              | Description                                                                                                     |
+| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `        https://www.googleapis.com/auth/bigquerymigration       `    | View and manage your workflows in BigQuery Migration Service and see the email address for your Google Account. |
+| `        https://www.googleapis.com/auth/devstorage.read_only       ` | This scope is required for query translations that read data from Cloud Storage.                                |
 
 Resources accessed during a tool call might require additional scopes.
 
@@ -118,22 +106,20 @@ For more general guidance, see [Connect to remote MCP servers](https://modelcont
 
 ## Available tools
 
-To view details of available MCP tools and their descriptions for the BigQuery Migration Service MCP server, see the [BigQuery Migration Service MCP reference](/bigquery/docs/reference/migration/mcp) .
+To view details of available MCP tools and their descriptions for the BigQuery Migration Service MCP server, see the [BigQuery Migration Service MCP reference](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp) .
 
 ### List tools
 
 Use the [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector) to list tools, or send a `  tools/list  ` HTTP request directly to the BigQuery Migration Service MCP server. The `  tools/list  ` method doesn't require authentication.
 
-``` text
-POST /mcp HTTP/1.1
-Host: bigquerymigration.googleapis.com
-Content-Type: application/json
-
-{
-  "jsonrpc": "2.0",
-  "method": "tools/list",
-}
-```
+    POST /mcp HTTP/1.1
+    Host: bigquerymigration.googleapis.com
+    Content-Type: application/json
+    
+    {
+      "jsonrpc": "2.0",
+      "method": "tools/list",
+    }
 
 ## Sample use cases
 
@@ -163,28 +149,26 @@ You can use the following sample prompts to create and manage BigQuery Migration
 
   - Explain the translation.
     
-    When you use this prompt, the MCP client calls the `  explain_translation  ` tool to get an explanation of the translation. If the translation logs contain `  RelationNotFound  ` or `  AttributeNotFound  ` errors, the MCP client should suggest that you [create a metadata package](/bigquery/docs/generate-metadata) . If you can't generate the metadata, you can send a prompt that requests the DDL statement.
+    When you use this prompt, the MCP client calls the `  explain_translation  ` tool to get an explanation of the translation. If the translation logs contain `  RelationNotFound  ` or `  AttributeNotFound  ` errors, the MCP client should suggest that you [create a metadata package](https://docs.cloud.google.com/bigquery/docs/generate-metadata) . If you can't generate the metadata, you can send a prompt that requests the DDL statement.
     
     A sample response looks like the following:
     
-    ``` text
-    The translated code converts Teradata-specific features into their
-    BigQuery equivalents. Here's a breakdown of the key changes:
-    * `MACRO` to `PROCEDURE`: The `YourMacroName` macro was converted
-    into a BigQuery stored procedure because
-    BigQuery doesn't support macros.
-    * `SELECT INTO` to `SET`:
-      * For setting multiple `OUT` parameters in `YourStoredProcedureName`, the
-        `SELECT ... INTO` is changed to `SET (...) = (SELECT STRUCT(...))`.
-      * For single variable assignment in `YourOtherProcedureName`,
-        `SELECT ... INTO` is replaced by `SET variable = (SELECT ...)` which is
-        the standard in BigQuery.
-    * Atomic Operations to `MERGE: The BEGIN REQUEST ... END REQUEST` blocks in
-      the `ProcedureA`, `ProcedureB`, and `ProcedureC` procedures,
-      which perform atomic "update or insert" operations, are translated into
-      standard SQL `MERGE` statements. This is the correct and modern way to
-      handle this logic in BigQuery.
-    ```
+        The translated code converts Teradata-specific features into their
+        BigQuery equivalents. Here's a breakdown of the key changes:
+        * `MACRO` to `PROCEDURE`: The `YourMacroName` macro was converted
+        into a BigQuery stored procedure because
+        BigQuery doesn't support macros.
+        * `SELECT INTO` to `SET`:
+          * For setting multiple `OUT` parameters in `YourStoredProcedureName`, the
+            `SELECT ... INTO` is changed to `SET (...) = (SELECT STRUCT(...))`.
+          * For single variable assignment in `YourOtherProcedureName`,
+            `SELECT ... INTO` is replaced by `SET variable = (SELECT ...)` which is
+            the standard in BigQuery.
+        * Atomic Operations to `MERGE: The BEGIN REQUEST ... END REQUEST` blocks in
+          the `ProcedureA`, `ProcedureB`, and `ProcedureC` procedures,
+          which perform atomic "update or insert" operations, are translated into
+          standard SQL `MERGE` statements. This is the correct and modern way to
+          handle this logic in BigQuery.
 
   - Generate DDL for this input query.
     
@@ -203,8 +187,8 @@ In the prompts, replace the following:
   - `  DIALECT  ` : The dialect of the SQL query you're translating.
   - `  QUERY  ` : The query you're translating.
   - `  FILENAME  ` : The file that contains the query you're translating.
-  - `  PROJECT_NUMBER  ` : Your Google Cloud [project number](/resource-manager/docs/creating-managing-projects#before_you_begin) .
-  - `  LOCATION  ` : The location of the [SQL translator](/bigquery/docs/locations#sql-translator-loc) .
+  - `  PROJECT_NUMBER  ` : Your Google Cloud [project number](https://docs.cloud.google.com/resource-manager/docs/creating-managing-projects#before_you_begin) .
+  - `  LOCATION  ` : The location of the [SQL translator](https://docs.cloud.google.com/bigquery/docs/locations#sql-translator-loc) .
 
 ## Optional security and safety configurations
 
@@ -214,9 +198,9 @@ For more information about MCP security and governance, see [AI security and saf
 
 ### Use Model Armor
 
-[Model Armor](/model-armor/overview) is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you are deploying AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
+[Model Armor](https://docs.cloud.google.com/model-armor/overview) is a Google Cloud service designed to enhance the security and safety of your AI applications. It works by proactively screening LLM prompts and responses, protecting against various risks and supporting responsible AI practices. Whether you are deploying AI in your cloud environment, or on external cloud providers, Model Armor can help you prevent malicious input, verify content safety, protect sensitive data, maintain compliance, and enforce your AI safety and security policies consistently across your diverse AI landscape.
 
-Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, then Model Armor isn't called and the content is not scanned by Model Armor. For more information, see [Model Armor locations](/model-armor/locations) .
+Model Armor is only available in specific regional locations. If Model Armor is enabled for a project, and a call to that project comes from an unsupported region, then Model Armor isn't called and the content is not scanned by Model Armor. For more information, see [Model Armor locations](https://docs.cloud.google.com/model-armor/locations) .
 
 **Caution:** If a request fails, Model Armor logs the entire payload. This might expose sensitive information in the logs.
 
@@ -230,7 +214,9 @@ You must enable Model Armor APIs before you can use Model Armor.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=modelarmor.googleapis.com)
 
 2.  Select the project where you want to activate Model Armor.
 
@@ -240,13 +226,13 @@ Before you begin, follow these steps using the Google Cloud CLI with the Model A
 
 1.  In the Google Cloud console, activate Cloud Shell.
     
-    At the bottom of the Google Cloud console, a [Cloud Shell](/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
+    
+    At the bottom of the Google Cloud console, a [Cloud Shell](https://docs.cloud.google.com/shell/docs/how-cloud-shell-works) session starts and displays a command-line prompt. Cloud Shell is a shell environment with the Google Cloud CLI already installed and with values already set for your current project. It can take a few seconds for the session to initialize.
 
 2.  Run the following command to set the API endpoint for the Model Armor service.
     
-    ``` text
-    gcloud config set api_endpoint_overrides/modelarmor "https://modelarmor.LOCATION.rep.googleapis.com/"
-    ```
+        gcloud config set api_endpoint_overrides/modelarmor "https://modelarmor.LOCATION.rep.googleapis.com/"
     
     Replace `  LOCATION  ` with the region where you want to use Model Armor.
 
@@ -262,16 +248,14 @@ Set up a Model Armor floor setting with MCP sanitization enabled. For more infor
 
 See the following example command:
 
-``` text
-gcloud model-armor floorsettings update \
---full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
---enable-floor-setting-enforcement=TRUE \
---add-integrated-services=GOOGLE_MCP_SERVER \
---google-mcp-server-enforcement-type=INSPECT_AND_BLOCK \
---enable-google-mcp-server-cloud-logging \
---malicious-uri-filter-settings-enforcement=ENABLED \
---add-rai-settings-filters='[{"confidenceLevel": "MEDIUM_AND_ABOVE", "filterType": "DANGEROUS"}]'
-```
+    gcloud model-armor floorsettings update \
+    --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+    --enable-floor-setting-enforcement=TRUE \
+    --add-integrated-services=GOOGLE_MCP_SERVER \
+    --google-mcp-server-enforcement-type=INSPECT_AND_BLOCK \
+    --enable-google-mcp-server-cloud-logging \
+    --malicious-uri-filter-settings-enforcement=ENABLED \
+    --add-rai-settings-filters='[{"confidenceLevel": "MEDIUM_AND_ABOVE", "filterType": "DANGEROUS"}]'
 
 Replace `  PROJECT_ID  ` with your Google Cloud project ID.
 
@@ -285,11 +269,9 @@ Note the following settings:
 
 If you want to stop scanning Google MCP traffic with Model Armor, run the following command:
 
-``` text
-gcloud model-armor floorsettings update \
-  --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
-  --remove-integrated-services=GOOGLE_MCP_SERVER
-```
+    gcloud model-armor floorsettings update \
+      --full-uri='projects/PROJECT_ID/locations/global/floorSetting' \
+      --remove-integrated-services=GOOGLE_MCP_SERVER
 
 Replace `  PROJECT_ID  ` with the Google Cloud project ID.
 
@@ -297,7 +279,7 @@ Model Armor won't scan MCP traffic in the project.
 
 ### Control MCP use with IAM deny policies
 
-[Identity and Access Management (IAM) deny policies](/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
+[Identity and Access Management (IAM) deny policies](https://docs.cloud.google.com/iam/docs/deny-overview) help you secure Google Cloud remote MCP servers. Configure these policies to block unwanted MCP tool access.
 
 For example, you can deny or allow access based on:
 
@@ -305,16 +287,16 @@ For example, you can deny or allow access based on:
   - Tool properties like read-only
   - The application's OAuth client ID
 
-For more information, see [Control MCP use with Identity and Access Management](/mcp/control-mcp-use-iam) .
+For more information, see [Control MCP use with Identity and Access Management](https://docs.cloud.google.com/mcp/control-mcp-use-iam) .
 
 ## Quotas and limits
 
 The BigQuery Migration Service MCP server doesn't have its own quotas. There is no limit on the number of calls you can make to the MCP server.
 
-You are still subject to the quotas that the APIs called by the MCP server tools enforce. For more information, see [BigQuery Migration Service API](/bigquery/quotas#migration-api-limits) on the Quotas and limits page.
+You are still subject to the quotas that the APIs called by the MCP server tools enforce. For more information, see [BigQuery Migration Service API](https://docs.cloud.google.com/bigquery/quotas#migration-api-limits) on the Quotas and limits page.
 
 ## What's next
 
-  - Read the [BigQuery Migration Service MCP reference documentation](/bigquery/docs/reference/migration/mcp) .
+  - Read the [BigQuery Migration Service MCP reference documentation](https://docs.cloud.google.com/bigquery/docs/reference/migration/mcp) .
   - Learn more about [Google Cloud MCP servers](https://docs.cloud.google.com/mcp/overview) .
-  - See the MCP [supported products](/mcp/supported-products) .
+  - See the MCP [supported products](https://docs.cloud.google.com/mcp/supported-products) .

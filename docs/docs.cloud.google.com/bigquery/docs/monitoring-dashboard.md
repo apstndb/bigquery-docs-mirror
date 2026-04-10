@@ -9,7 +9,7 @@ Before you use Cloud Monitoring, ensure that you have the following:
   - A Cloud Billing account.
   - A BigQuery project with billing enabled.
 
-One way to ensure that you have both is to complete the [Quickstart using the Google Cloud console](/bigquery/docs/quickstarts/quickstart-web-ui) .
+One way to ensure that you have both is to complete the [Quickstart using the Google Cloud console](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-web-ui) .
 
 ## View and create dashboards, charts, and alerts
 
@@ -18,16 +18,22 @@ One way to ensure that you have both is to complete the [Quickstart using the Go
 To use Cloud Monitoring to monitor your BigQuery project:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
+    
+    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select the name of your project if it is not already selected at the top of the page.
 
 3.  To view BigQuery resources, select **Dashboards \> BigQuery** . On this page you see a list of tables, events, and incident reporting that are user-configurable as well as charts of project metrics or dataset metrics.
+    
+    ![BigQuery dashboard.](https://docs.cloud.google.com/static/bigquery/images/stackdriver-dashboards-menu-bigquery.png)
 
 ### Visualize slots available and slots allocated
 
-To visualize the slots available and slots allocated to your project, go to the dashboard for BigQuery described in [Viewing the Cloud Monitoring dashboard](#view-dashboards) :
+To visualize the slots available and slots allocated to your project, go to the dashboard for BigQuery described in [Viewing the Cloud Monitoring dashboard](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#view-dashboards) :
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
+    
+    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select **Dashboards \> BigQuery** .
 
@@ -40,10 +46,14 @@ The **Slot Utilization** chart appears on both the main Cloud Monitoring default
 Display the metrics collected by Cloud Monitoring in your own charts and dashboards:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
+    
+    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  Select **Dashboards \> Create Dashboard** .
 
 3.  Click **Add Chart** . You see the Add Chart page:
+    
+    ![Add chart page.](https://docs.cloud.google.com/static/bigquery/images/stackdriver-add-chart.png)
 
 4.  In the **Find resource type and metric** panel fields:
     
@@ -59,6 +69,8 @@ Display the metrics collected by Cloud Monitoring in your own charts and dashboa
 In Cloud Monitoring, you can view metrics for quota usage and limits:
 
 1.  In the Google Cloud console, go to the **Monitoring** page.
+    
+    [Go to Monitoring](https://console.cloud.google.com/monitoring)
 
 2.  In the navigation pane, select bar\_chart **Metrics explorer** .
 
@@ -71,18 +83,22 @@ In Cloud Monitoring, you can view metrics for quota usage and limits:
 6.  Click add\_box **Add filter** , and then in the **Label** menu, select **limit\_name** .
 
 7.  In the **Value** menu, select the quota for which you want to view the metrics.
+    
+    ![Metrics explorer.](https://docs.cloud.google.com/static/bigquery/images/stackdriver-metrics-explorer.png)
 
-**Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API's](/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
+**Note:** You can view metrics for quota usage and limits only for the [BigQuery Storage Write API's](https://docs.cloud.google.com/bigquery/quotas#write-api-limits) concurrent connections and throughput quotas.
 
 ### Create an alert
 
-To create an alerting policy that triggers when the 99th percentile of the execution time of a [BigQuery](/bigquery/docs) query exceeds a user-defined limit, use the following settings.
+To create an alerting policy that triggers when the 99th percentile of the execution time of a [BigQuery](https://docs.cloud.google.com/bigquery/docs) query exceeds a user-defined limit, use the following settings.
 
-#### Steps to create an [alerting policy](/monitoring/alerts/using-alerting-ui#create-policy) .
+#### Steps to create an [alerting policy](https://docs.cloud.google.com/monitoring/alerts/using-alerting-ui#create-policy) .
 
 To create an alerting policy, do the following:
 
 1.  In the Google Cloud console, go to the *notifications* **Alerting** page:
+    
+    [Go to **Alerting**](https://console.cloud.google.com/monitoring/alerting)
     
     If you use the search bar to find this page, then select the result whose subheading is **Monitoring** .
 
@@ -284,9 +300,7 @@ While the alerting policy monitors the total bytes scanned, you can set a thresh
 
 You can use the following formula to convert your cost threshold into bytes:
 
-``` text
-Threshold in Bytes = (Target Amount / (price per TiB)) * 1,000,000,000,000
-```
+    Threshold in Bytes = (Target Amount / (price per TiB)) * 1,000,000,000,000
 
 #### Example: Trigger an alert when usage exceeds $100
 
@@ -415,7 +429,7 @@ Slots used across projects in reservations
 
 Slots
 
-Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`  INFORMATION_SCHEMA  `](/bigquery/docs/information-schema-reservations) . To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are viewing the dashboard.
+Number of BigQuery slots allocated across projects in the reservation. Note that the metric data is only reported while at least one project has been assigned to the reservation and is consuming slots. As an alternative, consider querying reservations information from [`  INFORMATION_SCHEMA  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) . To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are viewing the dashboard.
 
 BigQuery
 
@@ -423,7 +437,7 @@ Slots used by project in reservation
 
 Slots
 
-Number of BigQuery slots allocated for project in the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](/monitoring/settings) of the project where you are viewing the dashboard.
+Number of BigQuery slots allocated for project in the reservation. To view slot usage metrics for all projects consuming from a reservation, you must explicitly add those consuming projects to the [metrics scope](https://docs.cloud.google.com/monitoring/settings) of the project where you are viewing the dashboard.
 
 BigQuery continuous job
 
@@ -513,7 +527,7 @@ Rows per minute
 
 Number of records uploaded to any table in the dataset.
 
-For a complete list of available Google Cloud metrics, see [Google Cloud metrics](/monitoring/api/metrics_gcp#gcp-bigquerybiengine) .
+For a complete list of available Google Cloud metrics, see [Google Cloud metrics](https://docs.cloud.google.com/monitoring/api/metrics_gcp#gcp-bigquerybiengine) .
 
 ## Known issues
 

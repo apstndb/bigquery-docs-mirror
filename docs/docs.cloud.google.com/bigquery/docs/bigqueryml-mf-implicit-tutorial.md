@@ -1,16 +1,16 @@
-This tutorial teaches you how to create a [matrix factorization model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the Google Analytics 360 user session data in the public [`  GA360_test.ga_sessions_sample  ` table](https://console.cloud.google.com/bigquery?p=cloud-training-demos&d=GA360_test&t=ga_sessions_sample&page=table) . You then use the matrix factorization model to generate content recommendations for site users.
+This tutorial teaches you how to create a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) and train it on the Google Analytics 360 user session data in the public [`  GA360_test.ga_sessions_sample  ` table](https://console.cloud.google.com/bigquery?p=cloud-training-demos&d=GA360_test&t=ga_sessions_sample&page=table) . You then use the matrix factorization model to generate content recommendations for site users.
 
 Using indirect customer preference information, like user session duration, to train the model is called training with *implicit feedback* . Matrix factorization models are trained using the [Weighted-Alternating Least Squares algorithm](http://yifanhu.net/PUB/cf.pdf) when you use implicit feedback as training data.
 
-**Important:** You must have a reservation in order to use a matrix factorization model. For more information, see [Pricing](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .
+**Important:** You must have a reservation in order to use a matrix factorization model. For more information, see [Pricing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization#pricing) .
 
 ## Objectives
 
 This tutorial guides you through completing the following tasks:
 
   - Creating a matrix factorization model by using the `  CREATE MODEL  ` statement.
-  - Evaluating the model by using the [`  ML.EVALUATE  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
-  - Generating content recommendations for users by using the model with the [`  ML.RECOMMEND  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
+  - Evaluating the model by using the [`  ML.EVALUATE  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate) .
+  - Generating content recommendations for users by using the model with the [`  ML.RECOMMEND  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-recommend) .
 
 ## Costs
 
@@ -31,7 +31,9 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery)
 
 ## Required Permissions
 
@@ -49,7 +51,7 @@ For more information about BigQuery ML costs, see [BigQuery ML pricing](https://
       - `  bigquery.models.getData  `
       - `  bigquery.jobs.create  `
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Create a dataset
 
@@ -58,6 +60,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -73,11 +77,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -86,15 +90,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -109,10 +113,12 @@ Transform the data from the `  GA360_test.ga_sessions_sample  ` table into a bet
 Follow these steps to create the training data table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Create the training data table. In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE `bqml_tutorial.analytics_session_data`
     AS
     WITH
@@ -162,7 +168,7 @@ Follow these steps to create the training data table:
 
 3.  View a subset of the training data. In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT * FROM `bqml_tutorial.analytics_session_data` LIMIT 5;
     ```
     
@@ -197,10 +203,12 @@ The following `  CREATE MODEL  ` statement uses these columns to generate recomm
 <!-- end list -->
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL `bqml_tutorial.mf_implicit`
       OPTIONS (
         MODEL_TYPE = 'matrix_factorization',
@@ -230,8 +238,12 @@ A machine learning algorithm builds a model by creating many iterations of the m
 Follow these steps to view the model's training statistics:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -268,10 +280,12 @@ Evaluate the performance of the model by using the `  ML.EVALUATE  ` function. T
 Follow these steps to evaluate the model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -288,7 +302,7 @@ Follow these steps to evaluate the model:
     +------------------------+-----------------------+---------------------------------------+---------------------+
     ```
     
-    For more information about the `  ML.EVALUATE  ` function output, see [Output](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
+    For more information about the `  ML.EVALUATE  ` function output, see [Output](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) .
 
 ## Get the predicted ratings for a subset of visitor-content pairs
 
@@ -297,10 +311,12 @@ Use the `  ML.RECOMMEND  ` to get the predicted rating for each piece of content
 Follow these steps to get predicted ratings:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       *
     FROM
@@ -338,10 +354,12 @@ Use the predicted ratings to generate the top five recommended content IDs for e
 Follow these steps to generate recommendations:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  Write the predicted ratings to a table. In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE `bqml_tutorial.recommend_content`
     AS
     SELECT
@@ -352,7 +370,7 @@ Follow these steps to generate recommendations:
 
 3.  Select the top five results per visitor. In the query editor, paste in the following query and click **Run** :
     
-    ``` text
+    ``` notranslate
     SELECT
       visitorId,
       ARRAY_AGG(
@@ -399,6 +417,8 @@ To avoid incurring charges to your Google Cloud account for the resources used i
 Deleting your project removes all datasets and all tables in the project. If you prefer to reuse the project, you can delete the dataset you created in this tutorial:
 
 1.  If necessary, open the BigQuery page in the Google Cloud console.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation, click the **bqml\_tutorial** dataset you created.
 
@@ -419,12 +439,14 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
 
 ## What's next
 
-  - Try [creating a matrix factorization model based on explicit feedback](/bigquery/docs/bigqueryml-mf-explicit-tutorial) .
-  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](/bigquery/docs/bqml-introduction) .
+  - Try [creating a matrix factorization model based on explicit feedback](https://docs.cloud.google.com/bigquery/docs/bigqueryml-mf-explicit-tutorial) .
+  - For an overview of BigQuery ML, see [Introduction to BigQuery ML](https://docs.cloud.google.com/bigquery/docs/bqml-introduction) .
   - To learn more about machine learning, see the [Machine learning crash course](https://developers.google.com/machine-learning/crash-course/) .

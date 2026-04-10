@@ -6,26 +6,24 @@ Loads data from one or more files into a table. The statement can create a new t
 
 ### Syntax
 
-``` text
-LOAD DATA {OVERWRITE|INTO}  [{TEMP|TEMPORARY} TABLE]
-[[project_name.]dataset_name.]table_name
-[(
-  column_list
-)]
-[[OVERWRITE] PARTITIONS (partition_column_name=partition_value)]
-[PARTITION BY partition_expression]
-[CLUSTER BY clustering_column_list]
-[OPTIONS (table_option_list)]
-FROM FILES(load_option_list)
-[WITH PARTITION COLUMNS
-  [(partition_column_list)]
-]
-[WITH CONNECTION connection_name]
-
-column_list: column[, ...]
-
-partition_column_list: partition_column_name, partition_column_type[, ...]
-```
+    LOAD DATA {OVERWRITE|INTO}  [{TEMP|TEMPORARY} TABLE]
+    [[project_name.]dataset_name.]table_name
+    [(
+      column_list
+    )]
+    [[OVERWRITE] PARTITIONS (partition_column_name=partition_value)]
+    [PARTITION BY partition_expression]
+    [CLUSTER BY clustering_column_list]
+    [OPTIONS (table_option_list)]
+    FROM FILES(load_option_list)
+    [WITH PARTITION COLUMNS
+      [(partition_column_list)]
+    ]
+    [WITH CONNECTION connection_name]
+    
+    column_list: column[, ...]
+    
+    partition_column_list: partition_column_name, partition_column_type[, ...]
 
 ### Arguments
 
@@ -41,7 +39,7 @@ partition_column_list: partition_column_name, partition_column_type[, ...]
 
   - `  table_name  ` : The name of the table.
 
-  - `  column_list  ` : Contains the table's schema information as a list of table columns. For more information about table schemas, see [Specifying a schema](/bigquery/docs/schemas) . If you don't specify a schema, BigQuery uses [schema auto-detection](/bigquery/docs/schema-detect) to infer the schema.
+  - `  column_list  ` : Contains the table's schema information as a list of table columns. For more information about table schemas, see [Specifying a schema](https://docs.cloud.google.com/bigquery/docs/schemas) . If you don't specify a schema, BigQuery uses [schema auto-detection](https://docs.cloud.google.com/bigquery/docs/schema-detect) to infer the schema.
     
     When you load hive-partitioned data into a new table or overwrite an existing table, then that table schema contains the hive-partitioned columns and the columns in the `  column_list  ` .
     
@@ -55,23 +53,23 @@ partition_column_list: partition_column_name, partition_column_type[, ...]
 
   - `  partition_column_name  ` : The name of the partitioned column to write to. If you use both the `  PARTITIONS  ` and the `  PARTITION BY  ` clauses, then the column names must match.
 
-  - `  partition_value  ` : The `  partition_id  ` of the partition to append or overwrite. To find the `  partition_id  ` values of a table, query the [`  INFORMATION_SCHEMA.PARTITIONS  ` view](/bigquery/docs/information-schema-partitions) . You can't set the `  partition_value  ` to `  __NULL__  ` or `  __UNPARTITIONED__  ` . You can only append to or overwrite one partition. If your data contains values that belong to multiple partitions, then the statement fails with an error. This `  partition_value  ` must be literal value.
+  - `  partition_value  ` : The `  partition_id  ` of the partition to append or overwrite. To find the `  partition_id  ` values of a table, query the [`  INFORMATION_SCHEMA.PARTITIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-partitions) . You can't set the `  partition_value  ` to `  __NULL__  ` or `  __UNPARTITIONED__  ` . You can only append to or overwrite one partition. If your data contains values that belong to multiple partitions, then the statement fails with an error. This `  partition_value  ` must be literal value.
 
   - `  partition_expression  ` : Specifies the table partitioning when creating a new table.
 
   - `  clustering_column_list  ` : Specifies table clustering when creating a new table. The value is a comma-separated list of column names, with up to four columns.
 
-  - [`  table_option_list  `](#table_option_list) : Specifies options for creating the table. If you include this clause and the table already exists, then the options must match the existing table specification.
+  - [`  table_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#table_option_list) : Specifies options for creating the table. If you include this clause and the table already exists, then the options must match the existing table specification.
 
   - `  partition_column_list  ` : A list of external partitioning columns.
 
-  - `  connection_name  ` : The connection name that is used to read the source files from an [external data source](/bigquery/external-data-sources) .
+  - `  connection_name  ` : The connection name that is used to read the source files from an [external data source](https://docs.cloud.google.com/bigquery/external-data-sources) .
 
-  - [`  load_option_list  `](#load_option_list) : Specifies options for loading the data.
+  - [`  load_option_list  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements#load_option_list) : Specifies options for loading the data.
 
 If no table exists with the specified name, then the statement creates a new table. If a table already exists with the specified name, then the behavior depends on the `  INTO  ` or `  OVERWRITE  ` keyword. The `  INTO  ` keyword appends the data to the table, and the `  OVERWRITE  ` keyword overwrites the table.
 
-If your external data uses a [hive-partitioned layout](/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) , then include the `  WITH PARTITION COLUMNS  ` clause. If you include the `  WITH PARTITION COLUMNS  ` clause without `  partition_column_list  ` , then BigQuery infers the partitioning from the data layout. If you include both `  column_list  ` and `  WITH PARTITION COLUMNS  ` , then `  partition_column_list  ` is required.
+If your external data uses a [hive-partitioned layout](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) , then include the `  WITH PARTITION COLUMNS  ` clause. If you include the `  WITH PARTITION COLUMNS  ` clause without `  partition_column_list  ` , then BigQuery infers the partitioning from the data layout. If you include both `  column_list  ` and `  WITH PARTITION COLUMNS  ` , then `  partition_column_list  ` is required.
 
 You can't use the `  LOAD DATA  ` statement to load data into a temporary table.
 
@@ -81,59 +79,55 @@ You can't use the `  LOAD DATA  ` statement to load data into a temporary table.
 
 **Note:** Constraints cannot be specified on `  ARRAY  ` or `  STRUCT  ` elements.
 
-``` text
-column :=
-  column_name column_schema
+    column :=
+      column_name column_schema
+    
+    column_schema :=
+       {
+         simple_type
+         | STRUCT<field_list>
+         | ARRAY<array_element_schema>
+       }
+       [PRIMARY KEY NOT ENFORCED | REFERENCES table_name(column_name) NOT ENFORCED]
+       [ DEFAULT default_expression |
+         GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list) ]
+       [NOT NULL]
+       [OPTIONS(column_option_list)]
+    
+    simple_type :=
+      { data_type | STRING COLLATE collate_specification }
+    
+    field_list :=
+      field_name column_schema [, ...]
+    
+    array_element_schema :=
+      { simple_type | STRUCT<field_list> }
+      [NOT NULL]
 
-column_schema :=
-   {
-     simple_type
-     | STRUCT<field_list>
-     | ARRAY<array_element_schema>
-   }
-   [PRIMARY KEY NOT ENFORCED | REFERENCES table_name(column_name) NOT ENFORCED]
-   [ DEFAULT default_expression |
-     GENERATED ALWAYS AS (generation_expression) STORED OPTIONS(generation_option_list) ]
-   [NOT NULL]
-   [OPTIONS(column_option_list)]
-
-simple_type :=
-  { data_type | STRING COLLATE collate_specification }
-
-field_list :=
-  field_name column_schema [, ...]
-
-array_element_schema :=
-  { simple_type | STRUCT<field_list> }
-  [NOT NULL]
-```
-
-  - [`  column_name  `](/bigquery/docs/schemas#column_names) is the name of the column. A column name:
+  - [`  column_name  `](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) is the name of the column. A column name:
     
       - Must contain only letters (a-z, A-Z), numbers (0-9), or underscores (\_)
       - Must start with a letter or underscore
       - Can be up to 300 characters
 
-  - `  column_schema  ` : Similar to a [data type](/bigquery/docs/schemas#standard_sql_data_types) , but supports an optional `  NOT NULL  ` constraint for types other than `  ARRAY  ` . `  column_schema  ` also supports options on top-level columns and `  STRUCT  ` fields.
+  - `  column_schema  ` : Similar to a [data type](https://docs.cloud.google.com/bigquery/docs/schemas#standard_sql_data_types) , but supports an optional `  NOT NULL  ` constraint for types other than `  ARRAY  ` . `  column_schema  ` also supports options on top-level columns and `  STRUCT  ` fields.
     
     `  column_schema  ` can be used only in the column definition list of `  CREATE TABLE  ` statements. It cannot be used as a type in expressions.
 
-  - `  simple_type  ` : Any [supported data type](/bigquery/docs/reference/standard-sql/data-types) aside from `  STRUCT  ` and `  ARRAY  ` .
+  - `  simple_type  ` : Any [supported data type](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types) aside from `  STRUCT  ` and `  ARRAY  ` .
     
-    If `  simple_type  ` is a `  STRING  ` , it supports an additional clause for [collation](/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) , which defines how a resulting `  STRING  ` can be compared and sorted. The syntax looks like this:
+    If `  simple_type  ` is a `  STRING  ` , it supports an additional clause for [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts#collate_spec_details) , which defines how a resulting `  STRING  ` can be compared and sorted. The syntax looks like this:
     
-    ``` text
-    STRING COLLATE collate_specification
-    ```
+        STRING COLLATE collate_specification
     
     If you have `  DEFAULT COLLATE collate_specification  ` assigned to the table, the collation specification for a column overrides the specification for the table.
 
-  - `  default_expression  ` : The [default value](/bigquery/docs/default-values) assigned to the column. You cannot specify `  DEFAULT  ` if `  GENERATED ALWAYS AS  ` is specified.
+  - `  default_expression  ` : The [default value](https://docs.cloud.google.com/bigquery/docs/default-values) assigned to the column. You cannot specify `  DEFAULT  ` if `  GENERATED ALWAYS AS  ` is specified.
 
-  - `  generation_expression  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `  generation_expression  ` syntax is a call to the [`  AI.EMBED  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
+  - `  generation_expression  ` : ( [Preview](https://cloud.google.com/products#product-launch-stages) ) An expression for an automatically generated embedding column. Setting this field enables [autonomous embedding generation](https://docs.cloud.google.com/bigquery/docs/autonomous-embedding-generation) on the table. The only supported `  generation_expression  ` syntax is a call to the [`  AI.EMBED  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-ai-embed) .
     
       - You can't specify `  GENERATED ALWAYS AS  ` if `  DEFAULT  ` is specified.
-      - The `  connection_id  ` argument to `  AI.EMBED  ` is required when used in a generation expression.
+      - If you specify an `  endpoint  ` argument to `  AI.EMBED  ` , then the `  connection_id  ` argument is also required when used in a generation expression.
       - The type of the column must be `  STRUCT<result ARRAY<FLOAT64>, status STRING>  ` .
 
   - `  generation_option_list  ` : The options for a generated column. The only supported option is `  asynchronous = TRUE  ` .
@@ -174,25 +168,25 @@ Specify a column option list in the following format:
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a unique id"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.description">schema.fields[].description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
+<p>This specifies the <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to a <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type column or <code dir="ltr" translate="no">        STRUCT       </code> field. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.25 is rounded to 2.3, and -2.25 is rounded to -2.3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.25 is rounded to 2.2 and -2.25 is rounded to -2.2.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableFieldSchema.FIELDS.rounding_mode"><code dir="ltr" translate="no">         roundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       data_policies      </code></td>
 <td><code dir="ltr" translate="no">       ARRAY&lt;STRING&gt;      </code></td>
-<td><p>Applies a <a href="/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
+<td><p>Applies a <a href="https://docs.cloud.google.com/bigquery/docs/column-data-masking#create_data_policies">data policy</a> to a column in a table.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies = ["{'name':'myproject.region-us.data_policy_name1'}",                                           "{'name':'myproject.region-us.data_policy_name2'}"]       </code></p>
-<p>The <a href="/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
+<p>The <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_column_set_data_type_statement"><code dir="ltr" translate="no">         ALTER TABLE ALTER COLUMN        </code></a> statement supports the <code dir="ltr" translate="no">        =       </code> and <code dir="ltr" translate="no">        +=       </code> operators to add data policies to a specific column.</p>
 <p>Example: <code dir="ltr" translate="no">        data_policies +=["data_policy1", "data_policy2"]       </code></p></td>
 </tr>
 </tbody>
@@ -222,7 +216,7 @@ Setting the `  VALUE  ` replaces the existing value of that option for the colum
 
 ### `     partition_expression    `
 
-`  PARTITION BY  ` is an optional clause that controls [table](/bigquery/docs/partitioned-tables) and [vector index](/bigquery/docs/vector-index#partitions) partitioning. `  partition_expression  ` is an expression that determines how to partition the table or vector index. The partition expression can contain the following values:
+`  PARTITION BY  ` is an optional clause that controls [table](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) and [vector index](https://docs.cloud.google.com/bigquery/docs/vector-index#partitions) partitioning. `  partition_expression  ` is an expression that determines how to partition the table or vector index. The partition expression can contain the following values:
 
   - `  _PARTITIONDATE  ` . Partition by ingestion time with daily partitions. This syntax cannot be used with the `  AS query_statement  ` clause.
 
@@ -248,7 +242,7 @@ Setting the `  VALUE  ` replaces the existing value of that option for the colum
 
 ### `     table_option_list    `
 
-The option list lets you set table options such as a [label](/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
+The option list lets you set table options such as a [label](https://docs.cloud.google.com/bigquery/docs/labels) and an expiration time. You can include multiple options using a comma-separated list.
 
 Specify a table option list in the following format:
 
@@ -274,65 +268,65 @@ Specify a table option list in the following format:
 <td><code dir="ltr" translate="no">       expiration_timestamp      </code></td>
 <td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
 <td><p>Example: <code dir="ltr" translate="no">        expiration_timestamp=TIMESTAMP "2025-01-01 00:00:00 UTC"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.expiration_time">expirationTime</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       partition_expiration_days      </code></td>
 <td><p><code dir="ltr" translate="no">        FLOAT64       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        partition_expiration_days=7       </code></p>
-<p>Sets the partition expiration in days. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
+<p>Sets the partition expiration in days. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#partition-expiration">Set the partition expiration</a> . By default, partitions don't expire.</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.expiration_ms">timePartitioning.expirationMs</a> table resource property but uses days instead of milliseconds. One day is equivalent to 86400000 milliseconds, or 24 hours.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       require_partition_filter      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        require_partition_filter=true       </code></p>
-<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
+<p>Specifies whether queries on this table must include a predicate filter that filters on the partitioning column. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/managing-partitioned-tables#require-filter">Set partition filter requirements</a> . The default value is <code dir="ltr" translate="no">        false       </code> .</p>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TimePartitioning.FIELDS.require_partition_filter">timePartitioning.requirePartitionFilter</a> table resource property.</p>
 <p>This property can only be set if the table is partitioned.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       friendly_name      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        friendly_name="my_table"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.friendly_name">friendlyName</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       description      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        description="a table that expires in 2025"       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.description">description</a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       labels      </code></td>
 <td><p><code dir="ltr" translate="no">        ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        labels=[("org_unit", "development")]       </code></p>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.labels">labels</a> table resource property.</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       default_rounding_mode      </code></td>
 <td><p><code dir="ltr" translate="no">        STRING       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        default_rounding_mode = "ROUND_HALF_EVEN"       </code></p>
-<p>This specifies the default <a href="/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
+<p>This specifies the default <a href="https://docs.cloud.google.com/bigquery/docs/schemas#rounding_mode">rounding mode</a> that's used for values written to any new <code dir="ltr" translate="no">        NUMERIC       </code> or <code dir="ltr" translate="no">        BIGNUMERIC       </code> type columns or <code dir="ltr" translate="no">        STRUCT       </code> fields in the table. It does not impact existing fields in the table. The following values are supported:</p>
 <ul>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_AWAY_FROM_ZERO"        </code> : Halfway cases are rounded away from zero. For example, 2.5 is rounded to 3.0, and -2.5 is rounded to -3.</li>
 <li><code dir="ltr" translate="no">         "ROUND_HALF_EVEN"        </code> : Halfway cases are rounded towards the nearest even digit. For example, 2.5 is rounded to 2.0 and -2.5 is rounded to -2.0.</li>
 </ul>
-<p>This property is equivalent to the <a href="/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
+<p>This property is equivalent to the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#Table.FIELDS.default_rounding_mode"><code dir="ltr" translate="no">         defaultRoundingMode        </code></a> table resource property.</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       enable_change_history      </code></td>
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_change_history=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> in order to capture <a href="https://docs.cloud.google.com/bigquery/docs/change-history">change history</a> on the table, which you can then view by using the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/time-series-functions#changes"><code dir="ltr" translate="no">         CHANGES        </code> function</a> . Enabling this table option has an impact on costs; for more information see <a href="https://docs.cloud.google.com/bigquery/docs/change-history#pricing_and_costs">Pricing and costs</a> . The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       max_staleness      </code></td>
 <td><p><code dir="ltr" translate="no">        INTERVAL       </code></p></td>
 <td><p>Example: <code dir="ltr" translate="no">        max_staleness=INTERVAL "4:0:0" HOUR TO SECOND       </code></p>
-<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
+<p>The maximum interval behind the current time where it's acceptable to read stale data. For example, with <a href="https://docs.cloud.google.com/bigquery/docs/change-data-capture">change data capture</a> , when this option is set, the table copy operation is denied if data is more stale than the <code dir="ltr" translate="no">        max_staleness       </code> value.</p>
 <p><code dir="ltr" translate="no">        max_staleness       </code> is disabled by default.</p></td>
 </tr>
 <tr class="even">
@@ -340,7 +334,7 @@ Specify a table option list in the following format:
 <td><p><code dir="ltr" translate="no">        BOOL       </code></p></td>
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        enable_fine_grained_mutations=TRUE       </code></p>
-<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
+<p>Set this property to <code dir="ltr" translate="no">        TRUE       </code> to enable <a href="https://docs.cloud.google.com/bigquery/docs/data-manipulation-language#fine-grained_dml">fine-grained DML optimization</a> on the table. The default is <code dir="ltr" translate="no">        FALSE       </code> .</p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       storage_uri      </code></td>
@@ -348,7 +342,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        storage_uri=                 gs:                //                 BUCKET_DIRECTORY                /                 TABLE_DIRECTORY                /       </code></p>
 <p>A fully qualified location prefix for the external folder where data is stored. Supports <code dir="ltr" translate="no">        gs:       </code> buckets.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p></td>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       file_format      </code></td>
@@ -356,7 +350,7 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        file_format=PARQUET       </code></p>
 <p>The open-source file format in which the table data is stored. Only <code dir="ltr" translate="no">        PARQUET       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        PARQUET       </code> .</p></td>
 </tr>
 <tr class="odd">
@@ -365,13 +359,13 @@ Specify a table option list in the following format:
 <td><p>In <a href="https://cloud.google.com/products/#product-launch-stages">preview</a> .</p>
 <p>Example: <code dir="ltr" translate="no">        table_format=ICEBERG       </code></p>
 <p>The open table format in which metadata-only snapshots are stored. Only <code dir="ltr" translate="no">        ICEBERG       </code> is supported.</p>
-<p>Required for <a href="/bigquery/docs/managed-tables">managed tables</a> .</p>
+<p>Required for <a href="https://docs.cloud.google.com/bigquery/docs/managed-tables">managed tables</a> .</p>
 <p>The default is <code dir="ltr" translate="no">        ICEBERG       </code> .</p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       tags      </code></td>
 <td><code dir="ltr" translate="no">       &lt;ARRAY&lt;STRUCT&lt;STRING, STRING&gt;&gt;&gt;      </code></td>
-<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="/iam/docs/tags-access-control#definitions">short name</a> .</td>
+<td>An array of IAM tags for the table, expressed as key-value pairs. The key should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">namespaced key name</a> , and the value should be the <a href="https://docs.cloud.google.com/iam/docs/tags-access-control#definitions">short name</a> .</td>
 </tr>
 </tbody>
 </table>
@@ -436,9 +430,9 @@ Defines the scope of supported column name characters and the handling behavior 
 
 Supported values include:
 
-  - `  STRICT  ` . Enables [flexible column names](/bigquery/docs/schemas#flexible-column-names) . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the [`  default_column_name_character_map  `](/bigquery/docs/default-configuration) configuration setting.
-  - `  V1  ` . Column names can only contain [standard column name characters](/bigquery/docs/schemas#column_names) . Unsupported characters (except [periods in Parquet file column names](/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores. This is the default behavior for tables created before the introduction of `  column_name_character_map  ` .
-  - `  V2  ` . Besides [standard column name characters](/bigquery/docs/schemas#column_names) , it also supports [flexible column names](/bigquery/docs/schemas#flexible-column-names) . Unsupported characters (except [periods in Parquet file column names](/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores.
+  - `  STRICT  ` . Enables [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . This is the default value. Load jobs with unsupported characters in column names fail with an error message. To configure the replacement of unsupported characters with underscores so that the load job succeeds, specify the [`  default_column_name_character_map  `](https://docs.cloud.google.com/bigquery/docs/default-configuration) configuration setting.
+  - `  V1  ` . Column names can only contain [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores. This is the default behavior for tables created before the introduction of `  column_name_character_map  ` .
+  - `  V2  ` . Besides [standard column name characters](https://docs.cloud.google.com/bigquery/docs/schemas#column_names) , it also supports [flexible column names](https://docs.cloud.google.com/bigquery/docs/schemas#flexible-column-names) . Unsupported characters (except [periods in Parquet file column names](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-parquet#limitations_2) ) are replaced with underscores.
 
 `  compression  `
 
@@ -452,7 +446,7 @@ Applies to CSV and JSON data.
 
 `  ARRAY<STRING>  `
 
-Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
+Determines how to convert a `  Decimal  ` type. Equivalent to [ExternalDataConfiguration.decimal\_target\_types](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#ExternalDataConfiguration.FIELDS.decimal_target_types)
 
 Example: `  ["NUMERIC", "BIGNUMERIC"]  ` .
 
@@ -468,7 +462,7 @@ Applies to Parquet data.
 
 `  BOOL  `
 
-If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
+If `  true  ` , convert Avro logical types into their corresponding SQL types. For more information, see [Logical types](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-avro#logical_types) .
 
 Applies to Avro data.
 
@@ -500,9 +494,9 @@ Applies to CSV data.
 
 `  STRING  `
 
-The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+The format of the external data. Supported values for [`  CREATE EXTERNAL TABLE  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_external_table_statement) include: `  AVRO  ` , `  CLOUD_BIGTABLE  ` , `  CSV  ` , `  DATASTORE_BACKUP  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ), `  GOOGLE_SHEETS  ` , `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
-Supported values for [`  LOAD DATA  `](/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
+Supported values for [`  LOAD DATA  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/load-statements) include: `  AVRO  ` , `  CSV  ` , `  DELTA_LAKE  ` ( [preview](https://cloud.google.com/products/#product-launch-stages) ) `  NEWLINE_DELIMITED_JSON  ` (or `  JSON  ` ), `  ORC  ` , `  PARQUET  ` .
 
 The value `  JSON  ` is equivalent to `  NEWLINE_DELIMITED_JSON  ` .
 
@@ -544,7 +538,7 @@ Applies to CSV and JSON data.
 For JSON data, indicates a particular JSON interchange format. If not specified, BigQuery reads the data as generic JSON records.
 
 Supported values include:  
-`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](/bigquery/docs/geospatial-data#external-geojson) .
+`  GEOJSON  ` . Newline-delimited GeoJSON data. For more information, see [Creating an external table from a newline-delimited GeoJSON file](https://docs.cloud.google.com/bigquery/docs/geospatial-data#external-geojson) .
 
 `  max_bad_records  `
 
@@ -558,13 +552,13 @@ Applies to: CSV, JSON, and Google Sheets data.
 
 `  INTERVAL  `
 
-Applicable for [BigLake tables](/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
+Applicable for [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro#metadata_caching_for_performance) and [object tables](https://docs.cloud.google.com/bigquery/docs/object-table-introduction#metadata_caching_for_performance) .
 
 Specifies whether cached metadata is used by operations against the table, and how fresh the cached metadata must be in order for the operation to use it.
 
 To disable metadata caching, specify 0. This is the default.
 
-To enable metadata caching, specify an [interval literal](/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
+To enable metadata caching, specify an [interval literal](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#interval_literals) value between 30 minutes and 7 days. For example, specify `  INTERVAL 4 HOUR  ` for a 4 hour staleness interval. With this value, operations against the table use cached metadata if it has been refreshed within the past 4 hours. If the cached metadata is older than that, the operation falls back to retrieving metadata from Cloud Storage instead.
 
 `  null_marker  `
 
@@ -588,7 +582,7 @@ Applies to CSV data.
 
 `  STRING  `
 
-Only required when creating an [object table](/bigquery/docs/object-table-introduction) .
+Only required when creating an [object table](https://docs.cloud.google.com/bigquery/docs/object-table-introduction) .
 
 Set the value of this option to `  SIMPLE  ` when creating an object table.
 
@@ -633,7 +627,7 @@ Supported values include:
 
 `  <ARRAY<STRUCT<STRING, STRING>>>  `
 
-An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](/iam/docs/tags-access-control#definitions) , and the value should be the [short name](/iam/docs/tags-access-control#definitions) .
+An array of IAM tags for the table, expressed as key-value pairs. The key should be the [namespaced key name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) , and the value should be the [short name](https://docs.cloud.google.com/iam/docs/tags-access-control#definitions) .
 
 `  time_zone  `
 
@@ -641,7 +635,7 @@ An array of IAM tags for the table, expressed as key-value pairs. The key should
 
 Default time zone that will apply when parsing timestamp values that have no specific time zone.
 
-Check [valid time zone names](/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
+Check [valid time zone names](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-types#time_zone_name) .
 
 If this value is not present, the timestamp values without specific time zone is parsed using default time zone UTC.
 
@@ -651,11 +645,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATE values are formatted in the input files (for example, `  MM/DD/YYYY  ` ).
 
-If this value is present, this format is the only compatible DATE format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATE format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATE column type based on this format instead of the existing format.
 
-If this value is not present, the DATE field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATE field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -663,11 +657,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the DATETIME values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible DATETIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide DATETIME column type based on this format instead of the existing format.
 
-If this value is not present, the DATETIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the DATETIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -675,11 +669,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIME values are formatted in the input files (for example, `  HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIME format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIME format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIME column type based on this format instead of the existing format.
 
-If this value is not present, the TIME field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIME field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -687,11 +681,11 @@ Applies to CSV and JSON data.
 
 `  STRING  `
 
-[Format elements](/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
+[Format elements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/format-elements#format_string_as_datetime) that define how the TIMESTAMP values are formatted in the input files (for example, `  MM/DD/YYYY HH24:MI:SS.FF3  ` ).
 
-If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
+If this value is present, this format is the only compatible TIMESTAMP format. [Schema autodetection](https://docs.cloud.google.com/bigquery/docs/schema-detect#date_and_time_values) will also decide TIMESTAMP column type based on this format instead of the existing format.
 
-If this value is not present, the TIMESTAMP field is parsed with the [default formats](/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
+If this value is not present, the TIMESTAMP field is parsed with the [default formats](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv#data_types) .
 
 Applies to CSV and JSON data.
 
@@ -701,7 +695,7 @@ For external tables, including object tables, that aren't Bigtable tables:
 
 `  ARRAY<STRING>  `
 
-An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
+An array of fully qualified URIs for the external data locations. Each URI can contain one asterisk ( `  *  ` ) [wildcard character](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage#load-wildcards) , which must come after the bucket name. When you specify `  uris  ` values that target multiple files, all of those files must share a compatible schema.
 
 The following examples show valid `  uris  ` values:
 
@@ -719,7 +713,7 @@ The URI identifying the Bigtable table to use as a data source. You can only spe
 
 Example: `  https://googleapis.com/bigtable/projects/ project_id /instances/ instance_id [/appProfiles/ app_profile ]/tables/ table_name  `
 
-For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
+For more information on constructing a Bigtable URI, see [Retrieve the Bigtable URI](https://docs.cloud.google.com/bigquery/docs/create-bigtable-external-table#bigtable-uri) .
 
 ### Examples
 
@@ -729,7 +723,7 @@ The following examples show common use cases for the `  LOAD DATA  ` statement.
 
 The following example loads an Avro file into a table. Avro is a self-describing format, so BigQuery infers the schema.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   FROM FILES(
     format='AVRO',
@@ -739,7 +733,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example loads two CSV files into a table, using schema autodetection.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   FROM FILES(
     format='CSV',
@@ -751,7 +745,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example loads a CSV file into a table, using a specified table schema.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1(x INT64, y STRING)
   FROM FILES(
     skip_leading_rows=1,
@@ -764,7 +758,7 @@ LOAD DATA INTO mydataset.table1(x INT64, y STRING)
 
 The following example creates a new table with a description and an expiration time.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   OPTIONS(
     description="my table",
@@ -780,7 +774,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example overwrites an existing table.
 
-``` text
+``` notranslate
 LOAD DATA OVERWRITE mydataset.table1
   FROM FILES(
     format='AVRO',
@@ -792,7 +786,7 @@ LOAD DATA OVERWRITE mydataset.table1
 
 The following example loads an Avro file into a temporary table.
 
-``` text
+``` notranslate
 LOAD DATA INTO TEMP TABLE mydataset.table1
   FROM FILES(
     format='AVRO',
@@ -804,7 +798,7 @@ LOAD DATA INTO TEMP TABLE mydataset.table1
 
 The following example creates a table that is partitioned by the `  transaction_date  ` field and clustered by the `  customer_id  ` field. It also configures the partitions to expire after three days.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   PARTITION BY transaction_date
   CLUSTER BY customer_id
@@ -821,7 +815,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example loads data into a selected partition of an ingestion-time partitioned table:
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
 PARTITIONS(_PARTITIONTIME = TIMESTAMP '2016-01-01')
   PARTITION BY _PARTITIONTIME
@@ -833,9 +827,9 @@ PARTITIONS(_PARTITIONTIME = TIMESTAMP '2016-01-01')
 
 #### Load a file that is externally partitioned
 
-The following example loads a set of external files that use a [hive partitioning](/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) layout.
+The following example loads a set of external files that use a [hive partitioning](https://docs.cloud.google.com/bigquery/docs/hive-partitioned-queries-gcs#supported_data_layouts) layout.
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   FROM FILES(
     format='AVRO',
@@ -850,7 +844,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example infers the partitioning layout:
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.table1
   FROM FILES(
     format='AVRO',
@@ -862,7 +856,7 @@ LOAD DATA INTO mydataset.table1
 
 If you include both `  column_list  ` and `  WITH PARTITION COLUMNS  ` , then you must explicitly list the partitioning columns. For example, the following query returns an error:
 
-``` text
+``` notranslate
 -- This query returns an error.
 LOAD DATA INTO mydataset.table1
   (
@@ -883,7 +877,7 @@ LOAD DATA INTO mydataset.table1
 
 The following example loads a parquet file named `  sample.parquet  ` from an Amazon S3 bucket into the `  test_parquet  ` table with an auto-detect schema:
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.testparquet
   FROM FILES (
     uris = ['s3://test-bucket/sample.parquet'],
@@ -896,7 +890,7 @@ LOAD DATA INTO mydataset.testparquet
 
 The following example loads a CSV file with the prefix `  sampled*  ` from your Blob Storage into the `  test_csv  ` table with predefined column partitioning by time:
 
-``` text
+``` notranslate
 LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
   PARTITION BY Time
   FROM FILES (
@@ -910,7 +904,7 @@ LOAD DATA INTO mydataset.test_csv (Number INT64, Name STRING, Time DATE)
 
 The following example overwrites the existing table `  test_parquet  ` with data from a file named `  sample.parquet  ` with an auto-detect schema:
 
-``` text
+``` notranslate
 LOAD DATA OVERWRITE mydataset.testparquet
   FROM FILES (
     uris = ['s3://test-bucket/sample.parquet'],

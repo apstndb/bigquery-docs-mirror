@@ -1,4 +1,4 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/ListTransferResourcesResponse#SCHEMA_REPRESENTATION)
 
 Response for the `  transferResources.list  ` RPC.
 
@@ -13,7 +13,7 @@ Response for the `  transferResources.list  ` RPC.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;transferResources&quot;: [
     {
       object (TransferResource)

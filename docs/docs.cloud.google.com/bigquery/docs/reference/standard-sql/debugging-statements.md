@@ -2,9 +2,7 @@ GoogleSQL for BigQuery supports the following debugging statements.
 
 ## `     ASSERT    `
 
-``` text
-ASSERT expression [AS description]
-```
+    ASSERT expression [AS description]
 
 **Description**
 
@@ -24,34 +22,26 @@ An `  ASSERT  ` statement is billed in the same way as the query `  SELECT expre
 
 The following examples assert that the data source contains more than a specific number of rows.
 
-``` text
--- This query succeeds and no error is produced.
-ASSERT (
-  (SELECT COUNT(*) > 5 FROM UNNEST([1, 2, 3, 4, 5, 6]))
-) AS 'Table must contain more than 5 rows.';
-```
+    -- This query succeeds and no error is produced.
+    ASSERT (
+      (SELECT COUNT(*) > 5 FROM UNNEST([1, 2, 3, 4, 5, 6]))
+    ) AS 'Table must contain more than 5 rows.';
 
-``` text
--- Error: Table must contain more than 10 rows.
-ASSERT (
-  (SELECT COUNT(*) > 10 FROM UNNEST([1, 2, 3, 4, 5, 6]))
-) AS 'Table must contain more than 10 rows.';
-```
+    -- Error: Table must contain more than 10 rows.
+    ASSERT (
+      (SELECT COUNT(*) > 10 FROM UNNEST([1, 2, 3, 4, 5, 6]))
+    ) AS 'Table must contain more than 10 rows.';
 
 The following examples assert that the data source contains a particular value.
 
-``` text
--- This query succeeds and no error is produced.
-ASSERT
-  EXISTS(
-    (SELECT X FROM UNNEST([7877, 7879, 7883, 7901, 7907]) AS X WHERE X = 7907))
-AS 'Column X must contain the value 7907.';
-```
+    -- This query succeeds and no error is produced.
+    ASSERT
+      EXISTS(
+        (SELECT X FROM UNNEST([7877, 7879, 7883, 7901, 7907]) AS X WHERE X = 7907))
+    AS 'Column X must contain the value 7907.';
 
-``` text
--- Error: Column X must contain the value 7919.
-ASSERT
-  EXISTS(
-    (SELECT X FROM UNNEST([7877, 7879, 7883, 7901, 7907]) AS X WHERE X = 7919))
-AS 'Column X must contain the value 7919';
-```
+    -- Error: Column X must contain the value 7919.
+    ASSERT
+      EXISTS(
+        (SELECT X FROM UNNEST([7877, 7879, 7883, 7901, 7907]) AS X WHERE X = 7919))
+    AS 'Column X must contain the value 7919';

@@ -1,14 +1,14 @@
 # The CREATE MODEL statement for boosted trees models using XGBoost
 
-This document describes the `  CREATE MODEL  ` statement for creating [boosted trees](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. Boosted trees models are trained using the [XGBoost library](https://xgboost.readthedocs.io/en/latest/) .
+This document describes the `  CREATE MODEL  ` statement for creating [boosted trees](https://xgboost.readthedocs.io/en/stable/tutorials/model.html) models in BigQuery by using SQL. Alternatively, you can use the Google Cloud console user interface to [create a model by using a UI](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model-console) ( [Preview](https://cloud.google.com/products#product-launch-stages) ) instead of constructing the SQL statement yourself. Boosted trees models are trained using the [XGBoost library](https://xgboost.readthedocs.io/en/latest/) .
 
-You can use boosted trees regressor models with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform [regression](/bigquery/docs/regression-overview) , and you can use boosted trees classifier models with the `  ML.PREDICT  ` function to perform [classification](/bigquery/docs/classification-overview) . You can use both types of boosted trees models with the `  ML.PREDICT  ` function to perform [anomaly detection](/bigquery/docs/anomaly-detection-overview) .
+You can use boosted trees regressor models with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) to perform [regression](https://docs.cloud.google.com/bigquery/docs/regression-overview) , and you can use boosted trees classifier models with the `  ML.PREDICT  ` function to perform [classification](https://docs.cloud.google.com/bigquery/docs/classification-overview) . You can use both types of boosted trees models with the `  ML.PREDICT  ` function to perform [anomaly detection](https://docs.cloud.google.com/bigquery/docs/anomaly-detection-overview) .
 
-For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about supported SQL statements and functions for this model, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## `     CREATE MODEL    ` syntax
 
-``` sql
+``` lang-sql
 {CREATE MODEL | CREATE MODEL IF NOT EXISTS | CREATE OR REPLACE MODEL} model_name
 OPTIONS(model_option_list)
 AS query_statement
@@ -83,9 +83,7 @@ For example, \`myproject.mydataset.mymodel\`.
 
 **Syntax**
 
-``` text
-MODEL_TYPE = { 'BOOSTED_TREE_CLASSIFIER' | 'BOOSTED_TREE_REGRESSOR' }
-```
+    MODEL_TYPE = { 'BOOSTED_TREE_CLASSIFIER' | 'BOOSTED_TREE_REGRESSOR' }
 
 **Description**
 
@@ -95,9 +93,7 @@ Specifies the model type. This option is required.
 
 **Syntax**
 
-``` text
-APPROX_GLOBAL_FEATURE_CONTRIB = { TRUE | FALSE }
-```
+    APPROX_GLOBAL_FEATURE_CONTRIB = { TRUE | FALSE }
 
 **Description**
 
@@ -113,13 +109,11 @@ A `  BOOL  ` value. The default value is `  TRUE  ` when `  ENABLE_GLOBAL_EXPLAI
 
 **Syntax**
 
-``` text
-CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'TARGET_ENCODING' | 'LABEL_ENCODING' }
-```
+    CATEGORY_ENCODING_METHOD = { 'ONE_HOT_ENCODING' | 'TARGET_ENCODING' | 'LABEL_ENCODING' }
 
 **Description**
 
-Specifies which encoding method to use on non-numeric features. For more information about supported encoding methods, see [BigQuery ML auto preprocessing](/bigquery/docs/auto-preprocessing) .
+Specifies which encoding method to use on non-numeric features. For more information about supported encoding methods, see [BigQuery ML auto preprocessing](https://docs.cloud.google.com/bigquery/docs/auto-preprocessing) .
 
 **Arguments**
 
@@ -464,9 +458,7 @@ A `  STRING  ` value.
 
 **Syntax**
 
-``` text
-XGBOOST_VERSION = { '0.9' | '1.1' }
-```
+    XGBOOST_VERSION = { '0.9' | '1.1' }
 
 **Description**
 
@@ -483,9 +475,7 @@ This option accepts the following values:
 
 **Syntax**
 
-``` text
-AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
-```
+    AUTO_CLASS_WEIGHTS = { TRUE | FALSE }
 
 **Description**
 
@@ -497,9 +487,7 @@ By default, the training data used to create the model is unweighted. If the lab
 
 To balance every class, set this option to `  TRUE  ` . Balance is accomplished using the following formula:
 
-``` text
-total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
-```
+    total_input_rows / (input_rows_for_class_n * number_of_unique_classes)
 
 **Arguments**
 
@@ -513,7 +501,7 @@ A `  BOOL  ` value. The default value is `  FALSE  ` .
 
 **Description**
 
-The weights to use for each class label. You can't specify this option if [`  AUTO_CLASS_WEIGHTS  `](#auto_class_weights) is `  TRUE  ` .
+The weights to use for each class label. You can't specify this option if [`  AUTO_CLASS_WEIGHTS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#auto_class_weights) is `  TRUE  ` .
 
 **Arguments**
 
@@ -521,23 +509,19 @@ An `  ARRAY  ` of `  STRUCT  ` values. Each `  STRUCT  ` contains a `  STRING  `
 
 A `  CLASS_WEIGHTS  ` value might look like the following example:
 
-``` text
-CLASS_WEIGHTS = [STRUCT('example_label', .2)]
-```
+    CLASS_WEIGHTS = [STRUCT('example_label', .2)]
 
 ### `     ENABLE_GLOBAL_EXPLAIN    `
 
 **Syntax**
 
-``` text
-ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE }
-```
+    ENABLE_GLOBAL_EXPLAIN = { TRUE | FALSE }
 
 **Description**
 
-Determines whether to compute global explanations by using [explainable AI](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) to evaluate the importance of global features to the model.
+Determines whether to compute global explanations by using [explainable AI](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) to evaluate the importance of global features to the model.
 
-Global explanations are computed when you create the model. This option must be `  TRUE  ` if you want to use the [`  ML.GLOBAL_EXPLAIN  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) to retrieve the global explanations after the model is created.
+Global explanations are computed when you create the model. This option must be `  TRUE  ` if you want to use the [`  ML.GLOBAL_EXPLAIN  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-global-explain) to retrieve the global explanations after the model is created.
 
 **Arguments**
 
@@ -547,13 +531,11 @@ A `  BOOL  ` value. The default value is `  FALSE  ` .
 
 **Syntax**
 
-``` text
-EARLY_STOP = { TRUE | FALSE }
-```
+    EARLY_STOP = { TRUE | FALSE }
 
 **Description**
 
-Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](#min_rel_progress) .
+Determines whether training should stop after the first iteration in which the relative loss improvement is less than the value specified for [`  MIN_REL_PROGRESS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#min_rel_progress) .
 
 **Arguments**
 
@@ -567,7 +549,7 @@ A `  BOOL  ` value. The default value is `  TRUE  ` .
 
 **Description**
 
-The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
+The minimum relative loss improvement that is necessary to continue training when [`  EARLY_STOP  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#early_stop) is set to `  TRUE  ` . For example, a value of `  0.01  ` specifies that each iteration must reduce the loss by 1% for training to continue.
 
 **Arguments**
 
@@ -605,9 +587,7 @@ An `  INT64  ` value. The default value is `  20  ` .
 
 **Syntax**
 
-``` text
-DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
-```
+    DATA_SPLIT_METHOD = { 'AUTO_SPLIT' | 'RANDOM' | 'CUSTOM' | 'SEQ' | 'NO_SPLIT' }
 
 **Description**
 
@@ -618,7 +598,7 @@ The percentage sizes of the data sets produced by the various arguments for this
 You can see the model's data split information in the following ways:
 
   - The data split method and percentage are shown in the **Training Options** section of the model's **Details** page on the BigQuery page of the Google Cloud console.
-  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
+  - Links to temporary tables that contain the split data are available in the **Model Details** section of the model's **Details** page on the BigQuery of the Google Cloud console. You can also return this information from the [`  DataSplitResult  ` field](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/models#datasplitresult) in the BigQuery API. These tables are saved for 48 hours. If you need this information for more than 48 hours, then you should export this data or copy it to permanent tables.
 
 **Arguments**
 
@@ -641,20 +621,20 @@ This option accepts the following values:
     
       - 80% is used as training data
         
-        For more information, see [Data split](/bigquery/docs/hp-tuning-overview#data_split) .
+        For more information, see [Data split](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#data_split) .
 
-  - `  RANDOM  ` : Data is randomized before being split into sets. You can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) and [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `  AUTO_SPLIT  ` option.
+  - `  RANDOM  ` : Data is randomized before being split into sets. You can use this option with the [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_eval_fraction) and [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_test_fraction) options to customize the data split. If you don't specify either of those options, data is split in the same way as for the `  AUTO_SPLIT  ` option.
     
     A random split is deterministic: different training runs produce the same split results if the same underlying training data is used.
     
-    **Note:** A random split is based on the [FARM\_FINGERPRINT](/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
+    **Note:** A random split is based on the [FARM\_FINGERPRINT](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/hash_functions#farm_fingerprint) of the data (including the column name and schema), so tables with the same content but different column names and schemas may get different splitting and different evaluation metrics.
 
   - `  CUSTOM  ` : Split data using the value in a specified column:
     
       - If you aren't running hyperparameter tuning, then you must provide the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, rows with a value of `  FALSE  ` are used as training data.
       - If you are running hyperparameter tuning, then you must provide the name of a column of type `  STRING  ` . Rows with a value of `  TRAIN  ` are used as training data, rows with a value of `  EVAL  ` are used as evaluation data, and rows with a value of `  TEST  ` are used as test data.
     
-    Use the [`  DATA_SPLIT_COL  ` option](#data_split_col) to identify the column that contains the data split information.
+    Use the [`  DATA_SPLIT_COL  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_col) to identify the column that contains the data split information.
 
   - `  SEQ  ` : Split data sequentially by using the value in a specified column of one of the following types:
     
@@ -683,9 +663,9 @@ This option accepts the following values:
 
 **Description**
 
-The fraction of the data to use as evaluation data. Use when you are specifying `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) .
+The fraction of the data to use as evaluation data. Use when you are specifying `  RANDOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_method) .
 
-If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
+If you are running hyperparameter tuning and you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_test_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -699,9 +679,9 @@ A `  FLOAT64  ` value. The default is `  0.2  ` . The service maintains the accu
 
 **Description**
 
-The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `  RANDOM  ` or `  SEQ  ` as value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) .
+The fraction of the data to use as test data. Use this option when you are running hyperparameter tuning and specifying either `  RANDOM  ` or `  SEQ  ` as value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_method) .
 
-If you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
+If you specify a value for this option, you must also specify a value for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_eval_fraction) . In this case, the training dataset is `  1 - eval_fraction - test_fraction  ` . For example, if you specify `  20.00  ` for `  DATA_SPLIT_EVAL_FRACTION  ` and `  8.0  ` for `  DATA_SPLIT_TEST_FRACTION  ` , your training dataset is 72% of the input data.
 
 **Arguments**
 
@@ -715,11 +695,11 @@ A `  FLOAT64  ` value. The default is `  0  ` . The service maintains the accura
 
 **Description**
 
-The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `  CUSTOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](#data_split_method) :
+The name of the column to use to sort input data into the training, evaluation, or test set. Use when you are specifying `  CUSTOM  ` or `  SEQ  ` as the value for the [`  DATA_SPLIT_METHOD  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_method) :
 
-  - If you aren't running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The remaining rows are used as training data.
+  - If you aren't running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_eval_fraction) . The remaining rows are used as training data.
   - If you aren't running hyperparameter tuning and you are specifying `  CUSTOM  ` as the value for `  DATA_SPLIT_METHOD  ` , then you must provide the name of a column of type `  BOOL  ` . Rows with a value of `  TRUE  ` or `  NULL  ` are used as evaluation data, rows with a value of `  FALSE  ` are used as training data.
-  - If you are running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](#data_split_eval_fraction) . The next m rows are used as test data, where m is the value specified for [`  DATA_SPLIT_TEST_FRACTION  `](#data_split_test_fraction) . The remaining rows are used as training data.
+  - If you are running hyperparameter tuning and you are specifying `  SEQ  ` as the value for `  DATA_SPLIT_METHOD  ` , then the data is first sorted smallest to largest based on the specified column. The last n rows are used as evaluation data, where n is the value specified for [`  DATA_SPLIT_EVAL_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_eval_fraction) . The next m rows are used as test data, where m is the value specified for [`  DATA_SPLIT_TEST_FRACTION  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#data_split_test_fraction) . The remaining rows are used as training data.
   - If you are running hyperparameter tuning and you are specifying `  CUSTOM  ` as the value for `  DATA_SPLIT_METHOD  ` , then you must provide the name of a column of type `  STRING  ` . Rows with a value of `  TRAIN  ` are used as training data, rows with a value of `  EVAL  ` are used as evaluation data, and rows with a value of `  TEST  ` are used as test data.
 
 The column you specify for `  DATA_SPLIT_COL  ` can't be used as a feature or label, and is excluded from features automatically.
@@ -752,31 +732,29 @@ An `  INT64  ` value between `  1  ` and `  100  ` , inclusive.
 
 **Description**
 
-The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The maximum number of trials to run at the same time. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#num_trials) .
 
 **Arguments**
 
 An `  INT64  ` value between `  1  ` and `  5  ` , inclusive. The default value is `  1  ` .
 
-**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
+**Note:** Although specifying larger `  MAX_PARALLEL_TRIALS  ` values can accelerate the hyperparameter tuning process, acceleration can undermine the final model quality when you specify `  VIZIER_DEFAULT  ` as the [`  HPARAM_TUNING_ALGORITHM  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#hparam_tuning_algorithm) value. This is because the parallel trials can't benefit from concurrent training results.
 
 ### `     HPARAM_TUNING_ALGORITHM    `
 
 **Syntax**
 
-``` text
-HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
-```
+    HPARAM_TUNING_ALGORITHM = { 'VIZIER_DEFAULT' | 'RANDOM_SEARCH' | 'GRID_SEARCH' }
 
 **Description**
 
-The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+The algorithm used to tune the hyperparameters. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#num_trials) .
 
 **Arguments**
 
 Specify one of the following values:
 
-  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
+  - `  VIZIER_DEFAULT  ` : Use the default algorithm in Vertex AI Vizier to tune hyperparameters. This algorithm is the most powerful algorithm of those offered. It performs a mixture of advanced search algorithms, including [Bayesian optimization](https://en.wikipedia.org/wiki/Bayesian_optimization) with [Gaussian processes](https://en.wikipedia.org/wiki/Gaussian_process) . It also uses [transfer learning](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning#transfer_learning) to take advantage of previously tuned models. This is the default, and also the recommended approach.
 
   - `  RANDOM_SEARCH  ` : Use [random search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Random_search) to explore the search space.
 
@@ -788,21 +766,17 @@ Specify one of the following values:
 
 For `  BOOSTED_TREE_CLASSIFIER  ` models:
 
-``` text
-HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
-```
+    HPARAM_TUNING_OBJECTIVES = { 'PRECISION' | 'RECALL' | 'ACCURACY' | 'F1_SCORE' | 'LOG_LOSS' | 'ROC_AUC' }
 
 For `  BOOSTED_TREE_REGRESSOR  ` models:
 
-``` text
-HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
-```
+    HPARAM_TUNING_OBJECTIVES = { 'MEAN_ABSOLUTE_ERROR' | 'MEAN_SQUARED_ERROR' | 'MEAN_SQUARED_LOG_ERROR' | 'MEDIAN_ABSOLUTE_ERROR' | 'R2_SCORE' | 'EXPLAINED_VARIANCE' }
 
-**Description** The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](#num_trials) .
+**Description** The hyperparameter tuning objective for the model; only one objective is supported. If you specify a value for this option, you must also specify a value for [`  NUM_TRIALS  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#num_trials) .
 
 **Arguments**
 
-The possible objectives are a subset of the [model evaluation metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the default objective is used. For `  BOOSTED_TREE_CLASSIFIER  ` models, the default is `  ROC_AUC  ` . For `  BOOSTED_TREE_REGRESSOR  ` models, the default is `  R2_SCORE  ` .
+The possible objectives are a subset of the [model evaluation metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-evaluate#output) for the model type. If you aren't running hyperparameter tuning, or if you are and you don't specify an objective, the default objective is used. For `  BOOSTED_TREE_CLASSIFIER  ` models, the default is `  ROC_AUC  ` . For `  BOOSTED_TREE_REGRESSOR  ` models, the default is `  R2_SCORE  ` .
 
 ### `     KMS_KEY_NAME    `
 
@@ -812,37 +786,33 @@ The possible objectives are a subset of the [model evaluation metrics](/bigquery
 
 **Description**
 
-The Cloud Key Management Service [customer-managed encryption key (CMEK)](/kms/docs/cmek) to use to encrypt the model.
+The Cloud Key Management Service [customer-managed encryption key (CMEK)](https://docs.cloud.google.com/kms/docs/cmek) to use to encrypt the model.
 
 **Arguments**
 
 A `  STRING  ` value containing the fully-qualified name of the CMEK. For example,
 
-``` text
-'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
-```
+    'projects/my_project/locations/my_location/keyRings/my_ring/cryptoKeys/my_key'
 
 ### Internal parameter defaults
 
 BigQuery ML uses the following default values when building models:
 
-``` text
-loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
-
-batch_norm = False
-```
+    loss_reduction = losses_utils.ReductionV2.SUM_OVER_BATCH_SIZE
+    
+    batch_norm = False
 
 ## hyperparameter tuning
 
-Boosted trees classification and regression models support [hyperparameter tuning](/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
+Boosted trees classification and regression models support [hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview) , which you can use to improve model performance for your data. To use hyperparameter tuning, set the [`  NUM_TRIALs  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#num_trials) to the number of trials that you want to run. BigQuery ML then trains the model the number of times that you specify, using different hyperparameter values, and returns the model that performs the best.
 
-Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](#hparam_tuning_objectives) to tune for a different metric if you need to.
+Hyperparameter tuning defaults to improving the key performance metric for the given model type. You can use the [`  HPARAM_TUNING_OBJECTIVES  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree#hparam_tuning_objectives) to tune for a different metric if you need to.
 
-For more information about the training objectives and hyperparameters supported for boosted trees classification models, see [`  BOOSTED_TREE_CLASSIFIER  `](/bigquery/docs/hp-tuning-overview#boosted_tree_classifier) . For more information about the training objectives and hyperparameters supported for boosted trees regression models, see [`  BOOSTED_TREE_REGRESSOR  `](/bigquery/docs/hp-tuning-overview#boosted_tree_regressor) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](/bigquery/docs/hyperparameter-tuning-tutorial) .
+For more information about the training objectives and hyperparameters supported for boosted trees classification models, see [`  BOOSTED_TREE_CLASSIFIER  `](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#boosted_tree_classifier) . For more information about the training objectives and hyperparameters supported for boosted trees regression models, see [`  BOOSTED_TREE_REGRESSOR  `](https://docs.cloud.google.com/bigquery/docs/hp-tuning-overview#boosted_tree_regressor) . To try a tutorial that walks you through hyperparameter tuning, see [Improve model performance with hyperparameter tuning](https://docs.cloud.google.com/bigquery/docs/hyperparameter-tuning-tutorial) .
 
 ## Locations
 
-For information about supported locations, see [Locations for non-remote models](/bigquery/docs/locations#locations-for-non-remote-models) .
+For information about supported locations, see [Locations for non-remote models](https://docs.cloud.google.com/bigquery/docs/locations#locations-for-non-remote-models) .
 
 ## Limitations
 
@@ -854,7 +824,7 @@ For information about supported locations, see [Locations for non-remote models]
 
 The following example trains a boosted trees classifier model against `  'mytable'  ` with `  'mylabel'  ` as the label column.
 
-``` text
+``` notranslate
 CREATE MODEL `project_id.mydataset.mymodel`
 OPTIONS(MODEL_TYPE='BOOSTED_TREE_CLASSIFIER',
         BOOSTER_TYPE = 'GBTREE',
@@ -871,7 +841,7 @@ AS SELECT * FROM `project_id.mydataset.mytable`;
 
 The following example creates and trains a boosted trees regression model. It uses hyperparameter tuning to improve model performance.
 
-``` text
+``` notranslate
 CREATE MODEL
   `mydataset.mymodel`
 OPTIONS
@@ -890,4 +860,4 @@ FROM
 
 ## Supported regions
 
-Training boosted trees models is not supported in all BigQuery ML regions. For a complete list of supported regions and multi-regions, see [BigQuery ML locations](/bigquery/docs/locations#bqml-loc) .
+Training boosted trees models is not supported in all BigQuery ML regions. For a complete list of supported regions and multi-regions, see [BigQuery ML locations](https://docs.cloud.google.com/bigquery/docs/locations#bqml-loc) .

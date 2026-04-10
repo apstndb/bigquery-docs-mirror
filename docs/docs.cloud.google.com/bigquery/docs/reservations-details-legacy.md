@@ -4,27 +4,27 @@
 
 BigQuery offers the following capacity commitment plans:
 
-  - [Flex slots commitment](#flex_slots)
-  - [Monthly commitment](#monthly-commitments)
-  - [Annual commitment](#annual-commitments)
+  - [Flex slots commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#flex_slots)
+  - [Monthly commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#monthly-commitments)
+  - [Annual commitment](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#annual-commitments)
 
-The minimum commitment size is 100 slots, and commitments are available in 100-slot increments, up to your [slot quota](/bigquery/docs/slots#slot_quotas_and_limits) . There is no limit on the number of commitments that you can create. You are charged from the moment your commitment purchase is successful. For information about BigQuery costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
+The minimum commitment size is 100 slots, and commitments are available in 100-slot increments, up to your [slot quota](https://docs.cloud.google.com/bigquery/docs/slots#slot_quotas_and_limits) . There is no limit on the number of commitments that you can create. You are charged from the moment your commitment purchase is successful. For information about BigQuery costs, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
 **Note:** Customers who use on-demand billing typically have 2000 slots or more available for query processing. Allocating 100 slots might reduce the query performance.
 
-To learn more about capacity commitments and reservations, see [Introduction to reservations](/bigquery/docs/reservations-intro) .
+To learn more about capacity commitments and reservations, see [Introduction to reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
 
-Purchasing a capacity commitment is optional when purchasing slots associated with [BigQuery editions](/bigquery/docs/editions-intro) , but can save on costs.
+Purchasing a capacity commitment is optional when purchasing slots associated with [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) , but can save on costs.
 
 ### Flex slots commitment plans
 
-Flex slots are a way to purchase BigQuery capacity for **60 seconds** . When you purchase a flex slots commitment, you can delete the commitment 60 seconds after the commitment becomes active. This service bills by the second. You can convert a flex slots commitment plan to a [monthly](#monthly-commitments) or an [annual](#annual-commitments) commitment plan.
+Flex slots are a way to purchase BigQuery capacity for **60 seconds** . When you purchase a flex slots commitment, you can delete the commitment 60 seconds after the commitment becomes active. This service bills by the second. You can convert a flex slots commitment plan to a [monthly](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#monthly-commitments) or an [annual](https://docs.cloud.google.com/bigquery/docs/reservations-details-legacy#annual-commitments) commitment plan.
 
 For example, if you purchase a commitment at 6:00 PM, you start being charged at that second. You can delete the commitment after 6:01 PM, 60 seconds after the commitment begins; this results in 60 seconds of billed usage. You are billed for each second the commitment is active.
 
 ## Monthly commitment plans
 
-**Note:** Support for monthly commitments ended in August, 2023, when monthly commitments were converted to either annual commitments or baseline slots. For more information about commitments and renewal, see [Slot commitments](/bigquery/docs/reservations-workload-management#slot_commitments) .
+**Note:** Support for monthly commitments ended in August, 2023, when monthly commitments were converted to either annual commitments or baseline slots. For more information about commitments and renewal, see [Slot commitments](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#slot_commitments) .
 
 ## Annual commitment plans
 
@@ -45,7 +45,7 @@ If you are on a flat-rate capacity model, you can change the renewal plan before
 
 **Note:** Starting on July 5, 2023, BigQuery customers will no longer be able to purchase flat-rate annual, flat-rate monthly, and flex slots commitments. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing#flat-rate_compute_analysis_pricing) .
 
-For information about purchasing and renewing commitments if you are not on a flat-rate capacity model, see [Create a capacity commitment](/bigquery/docs/reservations-commitments#create_a_capacity_commitment) .
+For information about purchasing and renewing commitments if you are not on a flat-rate capacity model, see [Create a capacity commitment](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#create_a_capacity_commitment) .
 
 For example, suppose you purchased an annual commitment at 6:00 PM on October 5, 2019. You start being charged at that second. Expiration or renewal of the commitment happens after 6:00 PM on October 4, 2020, noting that 2020 is a leap year.
 
@@ -89,13 +89,13 @@ After you create a commitment, you can delete it only after the commitment expir
 
 To delete an annual commitment, set its renewal plan to flex slots. After the annual commitment expires and is renewed as a flex slots commitment, you can delete it.
 
-For instructions on how to delete a commitment, see [Commitment expiration](/bigquery/docs/reservations-commitments#commitment_expiration) .
+For instructions on how to delete a commitment, see [Commitment expiration](https://docs.cloud.google.com/bigquery/docs/reservations-commitments#commitment_expiration) .
 
-If you accidentally purchased a commitment or made a mistake when you configured your commitment, contact [Cloud Billing Support](/support/billing) for help.
+If you accidentally purchased a commitment or made a mistake when you configured your commitment, contact [Cloud Billing Support](https://docs.cloud.google.com/support/billing) for help.
 
 ## What's next
 
-  - Learn about [reservations, its limitations, quotas, and pricing](/bigquery/docs/reservations-intro) .
-  - Learn about [slots](/bigquery/docs/slots) .
-  - Learn how to [purchase and manage slot capacity](/bigquery/docs/reservations-commitments) .
-  - Learn about [BigQuery editions](/bigquery/docs/editions-intro) .
+  - Learn about [reservations, its limitations, quotas, and pricing](https://docs.cloud.google.com/bigquery/docs/reservations-intro) .
+  - Learn about [slots](https://docs.cloud.google.com/bigquery/docs/slots) .
+  - Learn how to [purchase and manage slot capacity](https://docs.cloud.google.com/bigquery/docs/reservations-commitments) .
+  - Learn about [BigQuery editions](https://docs.cloud.google.com/bigquery/docs/editions-intro) .

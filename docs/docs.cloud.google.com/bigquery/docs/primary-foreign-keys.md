@@ -13,21 +13,21 @@ Primary and foreign keys are typically used to ensure data integrity and enable 
 
 Primary and foreign key relationships can be created and managed through the following DDL statements:
 
-  - Create primary and foreign key constraints when you create a table by using the [`  CREATE TABLE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
-  - Add a primary key constraint to an existing table by using the [`  ALTER TABLE ADD PRIMARY KEY  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement) .
-  - Add a foreign key constraint to an existing table by using the [`  ALTER TABLE ADD FOREIGN KEY  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_foreign_key_statement) .
-  - Drop a primary key constraint from a table by using the [`  ALTER TABLE DROP PRIMARY KEY  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_primary_key_statement) .
-  - Drop a foreign key constraint from a table by using the [`  ALTER TABLE DROP CONSTRAINT  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_constraint_statement) .
+  - Create primary and foreign key constraints when you create a table by using the [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
+  - Add a primary key constraint to an existing table by using the [`  ALTER TABLE ADD PRIMARY KEY  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_primary_key_statement) .
+  - Add a foreign key constraint to an existing table by using the [`  ALTER TABLE ADD FOREIGN KEY  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_add_foreign_key_statement) .
+  - Drop a primary key constraint from a table by using the [`  ALTER TABLE DROP PRIMARY KEY  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_primary_key_statement) .
+  - Drop a foreign key constraint from a table by using the [`  ALTER TABLE DROP CONSTRAINT  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#alter_table_drop_constraint_statement) .
 
-You can also manage table constraints through the BigQuery API by updating the [`  TableConstraints  ` object](/bigquery/docs/reference/rest/v2/tables#TableConstraints) .
+You can also manage table constraints through the BigQuery API by updating the [`  TableConstraints  ` object](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables#TableConstraints) .
 
 ## View constraints
 
 The following views give you information about your table constraints:
 
-  - The [`  INFORMATION_SCHEMA.TABLE_CONSTRAINTS  ` view](/bigquery/docs/information-schema-table-constraints) contains information about all of the primary and foreign key constraints on tables within a dataset.
-  - The [`  INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE  ` view](/bigquery/docs/information-schema-constraint-column-usage) contains information about each table's primary key columns and columns referenced by foreign keys from other tables within a dataset.
-  - The [`  INFORMATION_SCHEMA.KEY_COLUMN_USAGE  ` view](/bigquery/docs/information-schema-key-column-usage) contains information about each table's columns that are constrained as primary or foreign keys.
+  - The [`  INFORMATION_SCHEMA.TABLE_CONSTRAINTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-table-constraints) contains information about all of the primary and foreign key constraints on tables within a dataset.
+  - The [`  INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-constraint-column-usage) contains information about each table's primary key columns and columns referenced by foreign keys from other tables within a dataset.
+  - The [`  INFORMATION_SCHEMA.KEY_COLUMN_USAGE  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-key-column-usage) contains information about each table's columns that are constrained as primary or foreign keys.
 
 ## Optimize queries
 
@@ -39,51 +39,41 @@ In a production environment, you might create views that join many fact and dime
 
 The examples in the following sections reference the `  store_sales  ` and `  customer  ` tables with constraints:
 
-``` text
-CREATE TABLE mydataset.customer (customer_name STRING PRIMARY KEY NOT ENFORCED);
-
-CREATE TABLE mydataset.store_sales (
-    item STRING PRIMARY KEY NOT ENFORCED,
-    sales_customer STRING REFERENCES mydataset.customer(customer_name) NOT ENFORCED,
-    category STRING);
-```
+    CREATE TABLE mydataset.customer (customer_name STRING PRIMARY KEY NOT ENFORCED);
+    
+    CREATE TABLE mydataset.store_sales (
+        item STRING PRIMARY KEY NOT ENFORCED,
+        sales_customer STRING REFERENCES mydataset.customer(customer_name) NOT ENFORCED,
+        category STRING);
 
 ### Eliminate inner joins
 
 Consider the following query that contains an `  INNER JOIN  ` :
 
-``` text
-SELECT ss.*
-FROM mydataset.store_sales AS ss
-    INNER JOIN mydataset.customer AS c
-    ON ss.sales_customer = c.customer_name;
-```
+    SELECT ss.*
+    FROM mydataset.store_sales AS ss
+        INNER JOIN mydataset.customer AS c
+        ON ss.sales_customer = c.customer_name;
 
 The `  customer_name  ` column is a primary key on the `  customer  ` table, so each row from the `  store_sales  ` table has either a single match, or no match if `  sales_customer  ` is `  NULL  ` . Since the query only selects columns from the `  store_sales  ` table, the query optimizer can eliminate the join and rewrite the query as the following:
 
-``` text
-SELECT *
-FROM mydataset.store_sales
-WHERE sales_customer IS NOT NULL;
-```
+    SELECT *
+    FROM mydataset.store_sales
+    WHERE sales_customer IS NOT NULL;
 
 ### Eliminate outer joins
 
 To remove a `  LEFT OUTER JOIN  ` , the join keys on the right side must be unique and only columns from the left side are selected. Consider the following query:
 
-``` text
-SELECT ss.*
-FROM mydataset.store_sales ss
-    LEFT OUTER JOIN mydataset.customer c
-    ON ss.category = c.customer_name;
-```
+    SELECT ss.*
+    FROM mydataset.store_sales ss
+        LEFT OUTER JOIN mydataset.customer c
+        ON ss.category = c.customer_name;
 
 In this example, there is no relationship between `  category  ` and `  customer_name  ` . The selected columns only come from the `  store_sales  ` table and the join key `  customer_name  ` is a primary key on the `  customer  ` table, so each value is unique. This means that there is exactly one (possibly `  NULL  ` ) match in the `  customer  ` table for each row in the `  store_sales  ` table and the `  LEFT OUTER JOIN  ` can be eliminated:
 
-``` text
-SELECT ss.*
-FROM mydataset.store_sales;
-```
+    SELECT ss.*
+    FROM mydataset.store_sales;
 
 ### Reorder joins
 
@@ -103,8 +93,8 @@ Primary keys and foreign keys are subject to the following limitations:
   - A table can have up to 64 foreign keys.
   - A foreign key can't refer to a column in the same table.
   - Fields that are part of primary key constraints or foreign key constraints can't be renamed, or have their type changed.
-  - If you [copy](/bigquery/docs/managing-tables#copy-table) , [clone](/bigquery/docs/table-clones-create) , [restore](/bigquery/docs/table-snapshots-restore) , or [snapshot](/bigquery/docs/table-snapshots-create) a table without the `  -a  ` or `  --append_table  ` option, the source table constraints are copied and overwritten to the destination table. If you use the `  -a  ` or `  --append_table  ` option, only the source table records are added to the destination table without the table constraints.
+  - If you [copy](https://docs.cloud.google.com/bigquery/docs/managing-tables#copy-table) , [clone](https://docs.cloud.google.com/bigquery/docs/table-clones-create) , [restore](https://docs.cloud.google.com/bigquery/docs/table-snapshots-restore) , or [snapshot](https://docs.cloud.google.com/bigquery/docs/table-snapshots-create) a table without the `  -a  ` or `  --append_table  ` option, the source table constraints are copied and overwritten to the destination table. If you use the `  -a  ` or `  --append_table  ` option, only the source table records are added to the destination table without the table constraints.
 
 ## What's next
 
-  - Learn more about how to [Optimize query computation](/bigquery/docs/best-practices-performance-compute) .
+  - Learn more about how to [Optimize query computation](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-compute) .

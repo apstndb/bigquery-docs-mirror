@@ -1,12 +1,12 @@
 # Get data insights from a contribution analysis model using a summable metric
 
-In this tutorial, you use a [contribution analysis](/bigquery/docs/contribution-analysis) model to analyze sales changes between 2020 and 2021 in the Iowa liquor sales dataset. This tutorial guides you through performing the following tasks:
+In this tutorial, you use a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model to analyze sales changes between 2020 and 2021 in the Iowa liquor sales dataset. This tutorial guides you through performing the following tasks:
 
   - Create an input table based on publicly available Iowa liquor data.
-  - Create a [contribution analysis model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) that uses a [summable metric](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) . This type of model summarizes a given metric for a combination of one or more dimensions in the data, to determine how those dimensions contribute to the metric value.
-  - Get the metric insights from the model by using the [`  ML.GET_INSIGHTS  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) .
+  - Create a [contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) that uses a [summable metric](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) . This type of model summarizes a given metric for a combination of one or more dimensions in the data, to determine how those dimensions contribute to the metric value.
+  - Get the metric insights from the model by using the [`  ML.GET_INSIGHTS  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights) .
 
-Before starting this tutorial, you should be familiar with the [contribution analysis](/bigquery/docs/contribution-analysis) use case.
+Before starting this tutorial, you should be familiar with the [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) use case.
 
 ## Required permissions
 
@@ -30,9 +30,9 @@ In this document, you use the following billable components of Google Cloud:
 
   - **BigQuery ML** : You incur costs for the data that you process in BigQuery.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information about BigQuery pricing, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) in the BigQuery documentation.
 
@@ -43,17 +43,21 @@ For more information about BigQuery pricing, see [BigQuery pricing](https://clou
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
+    
+    [Go to project selector](https://console.cloud.google.com/projectselector2/home/dashboard)
 
-2.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+2.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 3.  Enable the BigQuery API.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the API](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com)
 
 ## Create a dataset
 
@@ -62,6 +66,8 @@ Create a BigQuery dataset to store your ML model.
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to the BigQuery page](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, click your project name.
 
@@ -77,11 +83,11 @@ Create a BigQuery dataset to store your ML model.
 
 ### bq
 
-To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
+To create a new dataset, use the [`  bq mk --dataset  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) .
 
 1.  Create a dataset named `  bqml_tutorial  ` with the data location set to `  US  ` .
     
-    ``` text
+    ``` notranslate
     bq mk --dataset \
       --location=US \
       --description "BigQuery ML tutorial dataset." \
@@ -90,15 +96,15 @@ To create a new dataset, use the [`  bq mk --dataset  ` command](/bigquery/docs/
 
 2.  Confirm that the dataset was created:
     
-    ``` text
+    ``` notranslate
     bq ls
     ```
 
 ### API
 
-Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](/bigquery/docs/reference/rest/v2/datasets) .
+Call the [`  datasets.insert  `](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets/insert) method with a defined [dataset resource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets) .
 
-``` text
+``` notranslate
 {
   "datasetReference": {
      "datasetId": "bqml_tutorial"
@@ -111,10 +117,12 @@ Call the [`  datasets.insert  `](/bigquery/docs/reference/rest/v2/datasets/inser
 Create a table that contains test and control data to analyze. The test table contains liquor data from 2021 and the control table contains liquor data from 2020. The following query combines the test and control data into a single input table:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE TABLE bqml_tutorial.iowa_liquor_sales_sum_data AS (
       (SELECT
         store_name,
@@ -147,10 +155,12 @@ Create a table that contains test and control data to analyze. The test table co
 Create a contribution analysis model:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following statement:
     
-    ``` text
+    ``` notranslate
     CREATE OR REPLACE MODEL bqml_tutorial.iowa_liquor_sales_sum_model
       OPTIONS(
         model_type='CONTRIBUTION_ANALYSIS',
@@ -170,10 +180,12 @@ The query takes approximately 60 seconds to complete, after which the model `  i
 Get insights generated by the contribution analysis model by using the `  ML.GET_INSIGHTS  ` function.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
-
-2.  In the query editor, run the following statement to select columns from the [output for a summable metric contribution analysis model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_metric_contribution_analysis_models) :
     
-    ``` text
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
+
+2.  In the query editor, run the following statement to select columns from the [output for a summable metric contribution analysis model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_metric_contribution_analysis_models) :
+    
+    ``` notranslate
     SELECT
       contributors,
       metric_test,
@@ -191,80 +203,15 @@ Get insights generated by the contribution analysis model by using the `  ML.GET
 
 The first several rows of the output should look similar to the following. The values are truncated to improve readability.
 
-<table>
-<thead>
-<tr class="header">
-<th>contributors</th>
-<th>metric_test</th>
-<th>metric_control</th>
-<th>difference</th>
-<th>relative_difference</th>
-<th>unexpected_difference</th>
-<th>relative_unexpected_difference</th>
-<th>apriori_support</th>
-<th>contribution</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>all</td>
-<td>428068179</td>
-<td>396472956</td>
-<td>31595222</td>
-<td>0.079</td>
-<td>31595222</td>
-<td>0.079</td>
-<td>1.0</td>
-<td>31595222</td>
-</tr>
-<tr class="even">
-<td>vendor_name=SAZERAC COMPANY INC</td>
-<td>52327307</td>
-<td>38864734</td>
-<td>13462573</td>
-<td>0.346</td>
-<td>11491923</td>
-<td>0.281</td>
-<td>0.122</td>
-<td>13462573</td>
-</tr>
-<tr class="odd">
-<td>city=DES MOINES</td>
-<td>49521322</td>
-<td>41746773</td>
-<td>7774549</td>
-<td>0.186</td>
-<td>4971158</td>
-<td>0.111</td>
-<td>0.115</td>
-<td>7774549</td>
-</tr>
-<tr class="even">
-<td>vendor_name=DIAGEO AMERICAS</td>
-<td>84681073</td>
-<td>77259259</td>
-<td>7421814</td>
-<td>0.096</td>
-<td>1571126</td>
-<td>0.018</td>
-<td>0.197</td>
-<td>7421814</td>
-</tr>
-<tr class="odd">
-<td>category_name=100% AGAVE TEQUILA</td>
-<td>23915100</td>
-<td>17252174</td>
-<td>6662926</td>
-<td>0.386</td>
-<td>5528662</td>
-<td>0.3</td>
-<td>0.055</td>
-<td>6662926</td>
-</tr>
-</tbody>
-</table>
+| contributors                      | metric\_test | metric\_control | difference | relative\_difference | unexpected\_difference | relative\_unexpected\_difference | apriori\_support | contribution |
+| --------------------------------- | ------------ | --------------- | ---------- | -------------------- | ---------------------- | -------------------------------- | ---------------- | ------------ |
+| all                               | 428068179    | 396472956       | 31595222   | 0.079                | 31595222               | 0.079                            | 1.0              | 31595222     |
+| vendor\_name=SAZERAC COMPANY INC  | 52327307     | 38864734        | 13462573   | 0.346                | 11491923               | 0.281                            | 0.122            | 13462573     |
+| city=DES MOINES                   | 49521322     | 41746773        | 7774549    | 0.186                | 4971158                | 0.111                            | 0.115            | 7774549      |
+| vendor\_name=DIAGEO AMERICAS      | 84681073     | 77259259        | 7421814    | 0.096                | 1571126                | 0.018                            | 0.197            | 7421814      |
+| category\_name=100% AGAVE TEQUILA | 23915100     | 17252174        | 6662926    | 0.386                | 5528662                | 0.3                              | 0.055            | 6662926      |
 
-The output is automatically sorted by contribution, or `  ABS(difference)  ` , in descending order. In the `  all  ` row, the `  difference  ` column shows there was a $31,595,222 increase in total sales from 2020 to 2021, a 7.9% increase as indicated by the `  relative_difference  ` column. In the second row, with `  vendor_name=SAZERAC COMPANY INC  ` , there was an `  unexpected_difference  ` of $11,491,923, meaning this segment of data grew 28% more than the growth rate of the data as a whole, as seen from the `  relative_unexpected_difference  ` column. For more information, see the [summable metric output columns](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_metric_contribution_analysis_models) .
+The output is automatically sorted by contribution, or `  ABS(difference)  ` , in descending order. In the `  all  ` row, the `  difference  ` column shows there was a $31,595,222 increase in total sales from 2020 to 2021, a 7.9% increase as indicated by the `  relative_difference  ` column. In the second row, with `  vendor_name=SAZERAC COMPANY INC  ` , there was an `  unexpected_difference  ` of $11,491,923, meaning this segment of data grew 28% more than the growth rate of the data as a whole, as seen from the `  relative_unexpected_difference  ` column. For more information, see the [summable metric output columns](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-get-insights#output_for_summable_metric_contribution_analysis_models) .
 
 ## Clean up
 
@@ -276,6 +223,8 @@ The output is automatically sorted by contribution, or `  ABS(difference)  ` , i
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

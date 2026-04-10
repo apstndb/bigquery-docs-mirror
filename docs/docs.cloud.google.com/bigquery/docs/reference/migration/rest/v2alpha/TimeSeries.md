@@ -1,10 +1,10 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [Point](#Point)
-      - [JSON representation](#Point.SCHEMA_REPRESENTATION)
-  - [TimeInterval](#TimeInterval)
-      - [JSON representation](#TimeInterval.SCHEMA_REPRESENTATION)
-  - [TypedValue](#TypedValue)
-      - [JSON representation](#TypedValue.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#SCHEMA_REPRESENTATION)
+  - [Point](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#Point)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#Point.SCHEMA_REPRESENTATION)
+  - [TimeInterval](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#TimeInterval)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#TimeInterval.SCHEMA_REPRESENTATION)
+  - [TypedValue](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#TypedValue)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/TimeSeries#TypedValue.SCHEMA_REPRESENTATION)
 
 The metrics object for a SubTask.
 
@@ -19,7 +19,7 @@ The metrics object for a SubTask.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;metric&quot;: string,
   &quot;valueType&quot;: enum (ValueType),
   &quot;metricKind&quot;: enum (MetricKind),
@@ -80,7 +80,7 @@ A single data point in a time series.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;interval&quot;: {
     object (TimeInterval)
   },
@@ -121,7 +121,7 @@ A time interval extending just after a start time through an end time. If the st
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;startTime&quot;: string,
   &quot;endTime&quot;: string
 }</code></pre></td>
@@ -158,7 +158,7 @@ A single strongly-typed value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field value can be only one of the following:
   &quot;boolValue&quot;: boolean,

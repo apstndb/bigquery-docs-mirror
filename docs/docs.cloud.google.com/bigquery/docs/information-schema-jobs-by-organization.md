@@ -4,15 +4,15 @@ The `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view contains near real-time m
 
 ## Required role
 
-To get the permission that you need to query the `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view, ask your administrator to grant you the [BigQuery Resource Viewer](/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `  roles/bigquery.resourceViewer  ` ) IAM role on your organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permission that you need to query the `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view, ask your administrator to grant you the [BigQuery Resource Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.resourceViewer) ( `  roles/bigquery.resourceViewer  ` ) IAM role on your organization. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the `  bigquery.jobs.listAll  ` permission, which is required to query the `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view.
 
-You might also be able to get this permission with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get this permission with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 The schema table is only available to users with defined Google Cloud organizations.
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -42,7 +42,7 @@ The `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view has the following schema:
 <tr class="even">
 <td><code dir="ltr" translate="no">       cache_hit      </code></td>
 <td><code dir="ltr" translate="no">       BOOLEAN      </code></td>
-<td>Whether the query results of this job were from a cache. If you have a <a href="/bigquery/docs/multi-statement-queries">multi-query statement job</a> , <code dir="ltr" translate="no">       cache_hit      </code> for your parent query is <code dir="ltr" translate="no">       NULL      </code> .</td>
+<td>Whether the query results of this job were from a cache. If you have a <a href="https://docs.cloud.google.com/bigquery/docs/multi-statement-queries">multi-query statement job</a> , <code dir="ltr" translate="no">       cache_hit      </code> for your parent query is <code dir="ltr" translate="no">       NULL      </code> .</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       creation_time      </code></td>
@@ -76,7 +76,7 @@ The `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view has the following schema:
 Possible values are:
 <ul>
 <li><code dir="ltr" translate="no">         REQUESTED        </code> : job creation was requested.</li>
-<li><code dir="ltr" translate="no">         LONG_RUNNING        </code> : the query request ran beyond a system defined timeout specified by the <a href="/bigquery/docs/reference/rest/v2/jobs/query#queryrequest">timeoutMs field in the <code dir="ltr" translate="no">          QueryRequest         </code></a> . As a result it was considered a long running operation for which a job was created.</li>
+<li><code dir="ltr" translate="no">         LONG_RUNNING        </code> : the query request ran beyond a system defined timeout specified by the <a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest">timeoutMs field in the <code dir="ltr" translate="no">          QueryRequest         </code></a> . As a result it was considered a long running operation for which a job was created.</li>
 <li><code dir="ltr" translate="no">         LARGE_RESULTS        </code> : the results from the query cannot fit in the in-line response.</li>
 <li><code dir="ltr" translate="no">         OTHER        </code> : the system has determined that the query needs to be executed as a job.</li>
 </ul></td>
@@ -90,7 +90,7 @@ Possible values are:
 <td><code dir="ltr" translate="no">       job_stages      </code></td>
 <td><code dir="ltr" translate="no">       RECORD      </code></td>
 <td><a href="https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#ExplainQueryStage">Query stages</a> of the job.
-<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
+<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       job_type      </code></td>
@@ -141,7 +141,7 @@ In this output:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       edition      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The edition associated with the reservation assigned to this job. For more information about editions, see <a href="/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
+<td>The edition associated with the reservation assigned to this job. For more information about editions, see <a href="https://docs.cloud.google.com/bigquery/docs/editions-intro">Introduction to BigQuery editions</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       session_info      </code></td>
@@ -172,13 +172,13 @@ In this output:
 <td><code dir="ltr" translate="no">       total_bytes_billed      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
 <td>If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">on-demand pricing</a> , then this field contains the total bytes billed for the job. If the project is configured to use <a href="https://cloud.google.com/bigquery/pricing#analysis_pricing_models">flat-rate pricing</a> , then you are not billed for bytes and this field is informational only.
-<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
+<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       total_bytes_processed      </code></td>
 <td><code dir="ltr" translate="no">       INTEGER      </code></td>
 <td><p>Total bytes processed by the job.</p>
-<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
+<p><strong>Note</strong> : This column's values are empty for queries that read from tables with row-level access policies. For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/best-practices-row-level-security">best practices for row-level security in BigQuery.</a></p></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       total_modified_partitions      </code></td>
@@ -220,7 +220,7 @@ A successful query job can have the <code dir="ltr" translate="no">       resour
 <td><code dir="ltr" translate="no">       query_info.query_hashes.normalized_literals      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
 <td>Contains the hash value of the query. <code dir="ltr" translate="no">       normalized_literals      </code> is a hexadecimal <code dir="ltr" translate="no">       STRING      </code> hash that ignores comments, parameter values, UDFs, and literals. The hash value will differ when underlying views change, or if the query implicitly references columns, such as <code dir="ltr" translate="no">       SELECT *      </code> , and the table schema changes.<br />
-This field appears for successful <a href="/bigquery/docs/reference/standard-sql/query-syntax">GoogleSQL</a> queries that are not cache hits.</td>
+This field appears for successful <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax">GoogleSQL</a> queries that are not cache hits.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       query_info.performance_insights      </code></td>
@@ -230,7 +230,7 @@ This field appears for successful <a href="/bigquery/docs/reference/standard-sql
 <tr class="even">
 <td><code dir="ltr" translate="no">       query_info.optimization_details      </code></td>
 <td><code dir="ltr" translate="no">       STRUCT      </code></td>
-<td>The <a href="/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">       JOBS_BY_PROJECT      </code> view has this column.</td>
+<td>The <a href="https://docs.cloud.google.com/bigquery/docs/history-based-optimizations">history-based optimizations</a> for the job. Only the <code dir="ltr" translate="no">       JOBS_BY_PROJECT      </code> view has this column.</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       transferred_bytes      </code></td>
@@ -240,17 +240,17 @@ This field appears for successful <a href="/bigquery/docs/reference/standard-sql
 <tr class="even">
 <td><code dir="ltr" translate="no">       materialized_view_statistics      </code></td>
 <td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics">Statistics of materialized views</a> considered in a query job. ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#MaterializedViewStatistics">Statistics of materialized views</a> considered in a query job. ( <a href="https://cloud.google.com/products#product-launch-stages">Preview</a> )</td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       metadata_cache_statistics      </code></td>
 <td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics">Statistics for metadata column index usage for tables</a> referenced in a query job.</td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#metadatacachestatistics">Statistics for metadata column index usage for tables</a> referenced in a query job.</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       search_statistics      </code></td>
 <td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/Job#SearchStatistics">Statistics for a search query.</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#SearchStatistics">Statistics for a search query.</a></td>
 </tr>
 <tr class="odd">
 <td><code dir="ltr" translate="no">       query_dialect      </code></td>
@@ -264,7 +264,7 @@ This field appears for successful <a href="/bigquery/docs/reference/standard-sql
 <li><code dir="ltr" translate="no">         DEFAULT_GOOGLE_SQL        </code> : No query dialect was specified in the job request. BigQuery used the default value of GoogleSQL.</li>
 </ul>
 <br />
-This field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</td>
+This field is only populated for query jobs. The default selection of query dialect can be controlled by the <a href="https://docs.cloud.google.com/bigquery/docs/default-configuration#configuration-settings">configuration settings</a> .</td>
 </tr>
 <tr class="even">
 <td><code dir="ltr" translate="no">       continuous      </code></td>
@@ -279,7 +279,7 @@ This field is only populated for query jobs. The default selection of query dial
 <tr class="even">
 <td><code dir="ltr" translate="no">       vector_search_statistics      </code></td>
 <td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td><a href="/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics">Statistics for a vector search query.</a></td>
+<td><a href="https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/Job#VectorSearchStatistics">Statistics for a vector search query.</a></td>
 </tr>
 </tbody>
 </table>
@@ -292,30 +292,17 @@ This view displays running jobs along with job history for the past 180 days. If
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION      </code></td>
-<td>Organization that contains the specified project</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View name                                                                                                                                         | Resource scope                                   | Region scope               |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------- |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION       `` | Organization that contains the specified project | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 **Note:** When you query `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` to find a summary cost of query jobs, exclude the `  SCRIPT  ` statement type, otherwise some values might be counted twice. The `  SCRIPT  ` row includes summary values for all child jobs that were executed as part of this job.
 
@@ -327,9 +314,7 @@ The `  INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION  ` view includes jobs run by proj
 
 To run the query against a project other than your default project, add the project ID in the following format:
 
-``` text
-`PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
-```
+    `PROJECT_ID`.`region-REGION_NAME`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
 
 Replace the following:
 
@@ -342,7 +327,7 @@ For example, ``  `myproject`.`region-us`.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION
 
 The following example demonstrates how to find the five jobs that scanned the most bytes in an organization for the current day. You can filter further on `  statement_type  ` to query for additional information such as loads, exports, and queries.
 
-``` text
+``` notranslate
 SELECT
   job_id,
   user_email,
@@ -360,41 +345,37 @@ LIMIT 5;
 
 The result is similar to the following:
 
-``` text
-+--------------+--------------+---------------------------+
-| job_id       |  user_email  |  total_bytes_billed       |
-+--------------+--------------+---------------------------+
-| bquxjob_1    |  abc@xyz.com |    999999                 |
-| bquxjob_2    |  def@xyz.com |    888888                 |
-| bquxjob_3    |  ghi@xyz.com |    777777                 |
-+--------------+--------------+---------------------------+
-```
+    +--------------+--------------+---------------------------+
+    | job_id       |  user_email  |  total_bytes_billed       |
+    +--------------+--------------+---------------------------+
+    | bquxjob_1    |  abc@xyz.com |    999999                 |
+    | bquxjob_2    |  def@xyz.com |    888888                 |
+    | bquxjob_3    |  ghi@xyz.com |    777777                 |
+    +--------------+--------------+---------------------------+
 
 ### Aggregate Connected Sheets usage by user at the organization level
 
 The following query provides a summary of the top Connected Sheets users in your organization over the last 30 days, ranked by their total billed data. The query aggregates the total number of queries, total bytes billed, and total slot milliseconds for each user. This information is useful for understanding adoption and for identifying top consumers of resources.
 
-``` text
-SELECT
-  user_email,
-  COUNT(*) AS total_queries,
-  SUM(total_bytes_billed) AS total_bytes_billed,
-  SUM(total_slot_ms) AS total_slot_ms
-FROM
-  `region-REGION_NAME.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`
-WHERE
-  -- Filter for jobs created in the last 30 days
-  creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
-  -- Filter for jobs originating from Connected Sheets
-  AND job_id LIKE 'sheets_dataconnector%'
-  -- Filter for completed jobs
-  AND state = 'DONE'
-  AND (statement_type IS NULL OR statement_type <> 'SCRIPT')
-GROUP BY
-  1
-ORDER BY
-  total_bytes_billed DESC;
-```
+    SELECT
+      user_email,
+      COUNT(*) AS total_queries,
+      SUM(total_bytes_billed) AS total_bytes_billed,
+      SUM(total_slot_ms) AS total_slot_ms
+    FROM
+      `region-REGION_NAME.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`
+    WHERE
+      -- Filter for jobs created in the last 30 days
+      creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
+      -- Filter for jobs originating from Connected Sheets
+      AND job_id LIKE 'sheets_dataconnector%'
+      -- Filter for completed jobs
+      AND state = 'DONE'
+      AND (statement_type IS NULL OR statement_type <> 'SCRIPT')
+    GROUP BY
+      1
+    ORDER BY
+      total_bytes_billed DESC;
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
 
@@ -402,38 +383,34 @@ Replace `  REGION_NAME  ` with the region for your project. For example, `  regi
 
 The result looks similar to the following:
 
-``` text
-+---------------------+---------------+--------------------+-----------------+
-| user_email          | total_queries | total_bytes_billed | total_slot_ms   |
-+---------------------+---------------+--------------------+-----------------+
-| alice@example.com   | 152           | 12000000000        | 3500000         |
-| bob@example.com     | 45            | 8500000000         | 2100000         |
-| charles@example.com | 210           | 1100000000         | 1800000         |
-+---------------------+---------------+--------------------+-----------------+
-```
+    +---------------------+---------------+--------------------+-----------------+
+    | user_email          | total_queries | total_bytes_billed | total_slot_ms   |
+    +---------------------+---------------+--------------------+-----------------+
+    | alice@example.com   | 152           | 12000000000        | 3500000         |
+    | bob@example.com     | 45            | 8500000000         | 2100000         |
+    | charles@example.com | 210           | 1100000000         | 1800000         |
+    +---------------------+---------------+--------------------+-----------------+
 
 ### Find job logs of Connected Sheets queries at the organization-level
 
 The following query provides a detailed log of every individual job run by Connected Sheets. This information is useful for auditing and identifying specific high-cost queries.
 
-``` text
-SELECT
-  job_id,
-  creation_time,
-  user_email,
-  project_id,
-  total_bytes_billed,
-  total_slot_ms
-FROM
-  `region-REGION_NAME.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`
-WHERE
-  creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
-  AND job_id LIKE 'sheets_dataconnector%'
-  AND state = 'DONE'
-  AND (statement_type IS NULL OR statement_type <> 'SCRIPT')
-ORDER BY
-  creation_time DESC;
-```
+    SELECT
+      job_id,
+      creation_time,
+      user_email,
+      project_id,
+      total_bytes_billed,
+      total_slot_ms
+    FROM
+      `region-REGION_NAME.INFORMATION_SCHEMA.JOBS_BY_ORGANIZATION`
+    WHERE
+      creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY)
+      AND job_id LIKE 'sheets_dataconnector%'
+      AND state = 'DONE'
+      AND (statement_type IS NULL OR statement_type <> 'SCRIPT')
+    ORDER BY
+      creation_time DESC;
 
 Replace `  REGION_NAME  ` with the region for your project. For example, `  region-us  ` .
 
@@ -441,12 +418,10 @@ Replace `  REGION_NAME  ` with the region for your project. For example, `  regi
 
 The result looks similar to the following:
 
-``` text
-+---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
-| job_id                          | creation_time                   | user_email      | project_id | total_bytes_billed | total_slot_ms |
-+---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
-| sheets_dataconnector_bquxjob_1  | 2025-11-06 00:26:53.077000 UTC  | abc@example.com | my_project | 12000000000        | 3500000       |
-| sheets_dataconnector_bquxjob_2  | 2025-11-06 00:24:04.294000 UTC  | xyz@example.com | my_project | 8500000000         | 2100000       |
-| sheets_dataconnector_bquxjob_3  | 2025-11-03 23:17:25.975000 UTC  | bob@example.com | my_project | 1100000000         | 1800000       |
-+---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
-```
+    +---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
+    | job_id                          | creation_time                   | user_email      | project_id | total_bytes_billed | total_slot_ms |
+    +---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+
+    | sheets_dataconnector_bquxjob_1  | 2025-11-06 00:26:53.077000 UTC  | abc@example.com | my_project | 12000000000        | 3500000       |
+    | sheets_dataconnector_bquxjob_2  | 2025-11-06 00:24:04.294000 UTC  | xyz@example.com | my_project | 8500000000         | 2100000       |
+    | sheets_dataconnector_bquxjob_3  | 2025-11-03 23:17:25.975000 UTC  | bob@example.com | my_project | 1100000000         | 1800000       |
+    +---------------------------------+---------------------------------+-----------------+------------+--------------------+---------------+

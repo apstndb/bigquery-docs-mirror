@@ -1,12 +1,12 @@
 # Load Campaign Manager data into BigQuery
 
-You can load data from Campaign Manager to BigQuery using the [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) for Campaign Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Campaign Manager to BigQuery.
+You can load data from Campaign Manager to BigQuery using the [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) for Campaign Manager connector. With the BigQuery Data Transfer Service, you can schedule recurring transfer jobs that add your latest data from your Campaign Manager to BigQuery.
 
 ## Connector overview
 
 The BigQuery Data Transfer Service for the Campaign Manager connector supports the following options for your data transfer.
 
-For information on how Campaign Manager reports are transformed into BigQuery tables and views, see [Campaign Manager report transformations](/bigquery/docs/doubleclick-campaign-transformation) .
+For information on how Campaign Manager reports are transformed into BigQuery tables and views, see [Campaign Manager report transformations](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transformation) .
 
 <table>
 <colgroup>
@@ -39,11 +39,11 @@ By default, Campaign Manager data transfers are scheduled at the time when the d
 <td>Refresh window</td>
 <td>The Campaign Manager connector retrieves Campaign Manager data from up to 2 days at the time the data transfer is run. You cannot configure the refresh window for this connector.<br />
 <br />
-For more information, see <a href="#refresh">Refresh windows</a> .</td>
+For more information, see <a href="https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#refresh">Refresh windows</a> .</td>
 </tr>
 <tr class="even">
 <td>Backfill data availability</td>
-<td><a href="/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
+<td><a href="https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer">Run a data backfill</a> to retrieve data outside of your scheduled data transfer. You can retrieve data as far back as the data retention policy on your data source allows.<br />
 <br />
 For information about the data retention policy for Display &amp; Video 360, see <a href="https://support.google.com/campaignmanager/answer/10769131">Data deletion and retention controls</a> .</td>
 </tr>
@@ -60,15 +60,15 @@ A *refresh window* is the number of days that a data transfer retrieves data whe
 
 When you run a data transfer for the first time, the data transfer retrieves all source data available within the refresh window. For example, if the refresh window is three days and you run the data transfer for the first time, the BigQuery Data Transfer Service retrieves all source data within three days.
 
-To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
+To retrieve data outside the refresh window, such as historical data, or to recover data from any transfer outages or gaps, you can initiate or schedule a [backfill run](https://docs.cloud.google.com/bigquery/docs/working-with-transfers#manually_trigger_a_transfer) .
 
 ## Before you begin
 
 Before you create a Campaign Manager data transfer:
 
-  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](/bigquery/docs/enable-transfer-service) .
+  - Verify that you have completed all actions required to [enable the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service) .
 
-  - [Create a BigQuery dataset](/bigquery/docs/datasets) to store the Campaign Manager data.
+  - [Create a BigQuery dataset](https://docs.cloud.google.com/bigquery/docs/datasets) to store the Campaign Manager data.
 
   - **Ensure that your organization has access to Campaign Manager Data Transfer** **v2 (Campaign Manager DTv2) files.** These files are delivered by the Campaign Manager team to a Cloud Storage bucket. To gain access to Campaign Manager DTv2 files, your next step depends on if you have a direct contract with Campaign Manager. In both cases, additional charges might apply.
     
@@ -81,7 +81,7 @@ Before you create a Campaign Manager data transfer:
     
     The Google Cloud team doesn't have the ability to generate or grant access to Campaign Manager DTv2 files on your behalf. Contact Campaign Manager [support](https://support.google.com/campaignmanager/answer/9026876?&ref_topic=2834087&visit_id=1-636444821343154346-869320595&rd=2) , your agency, or your Campaign Manager reseller for access to Campaign Manager DTv2 files.
 
-  - If you intend to set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](/bigquery/docs/transfer-run-notifications) .
+  - If you intend to set up transfer run notifications for Pub/Sub, you must have `  pubsub.topics.setIamPolicy  ` permissions. For more information, see [BigQuery Data Transfer Service run notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) .
 
 ## Required permissions
 
@@ -89,7 +89,7 @@ Ensure that you have granted the following permissions.
 
 ### Required BigQuery roles
 
-To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create a BigQuery Data Transfer Service data transfer, ask your administrator to grant you the [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` ) IAM role on your project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create a BigQuery Data Transfer Service data transfer. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -107,9 +107,9 @@ The following permissions are required to create a BigQuery Data Transfer Servic
       - `  bigquery.datasets.setIamPolicy  `
       - `  bigquery.jobs.create  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information, see [Grant `  bigquery.admin  ` access](/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
+For more information, see [Grant `  bigquery.admin  ` access](https://docs.cloud.google.com/bigquery/docs/enable-transfer-service#grant_bigqueryadmin_access) .
 
 ### Required Campaign Manager roles
 
@@ -119,7 +119,7 @@ Grant read access to the Campaign Manager DTv2 files stored in Cloud Storage. Ac
 
 Setting up a Campaign Manager data transfer requires a:
 
-  - **Cloud Storage bucket** : The Cloud Storage bucket URI for your Campaign Manager DTv2 files as described in [Before you begin](/bigquery/docs/doubleclick-campaign-transfer#before_you_begin) . The bucket name should look like the following:
+  - **Cloud Storage bucket** : The Cloud Storage bucket URI for your Campaign Manager DTv2 files as described in [Before you begin](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#before_you_begin) . The bucket name should look like the following:
     
     `  dcdt_-dcm_account123456  `
 
@@ -150,14 +150,20 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
 ### Console
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
 3.  On the **Create Transfer** page:
     
       - In the **Source type** section, for **Source** , choose **Campaign Manager** .
+        
+        ![Transfer source](https://docs.cloud.google.com/static/bigquery/images/dcm-transfer-source.png)
     
       - In the **Transfer config name** section, for **Display name** , enter a name for the data transfer such as `  My Transfer  ` . The transfer name can be any value that lets you identify the transfer if you need to modify it later.
+        
+        ![Transfer name](https://docs.cloud.google.com/static/bigquery/images/transfer-name.png)
     
       - In the **Schedule options** section, for **Schedule** , leave the default value ( **Start now** ) or click **Start at a set time** .
         
@@ -165,17 +171,21 @@ Contact [Campaign Manager support](https://support.google.com/campaignmanager/an
           - For **Start date and run time** , enter the date and time to start the data transfer. If you choose **Start now** , this option is disabled.
     
       - In the **Destination settings** section, for **Destination dataset** , choose the dataset you created to store your data.
+        
+        ![Transfer dataset](https://docs.cloud.google.com/static/bigquery/images/transfer-dataset.png)
     
       - In the **Data source details** section:
         
           - For **Cloud Storage bucket** , enter or browse for the name of the Cloud Storage bucket that stores your Data Transfer V2.0 files. When you enter the bucket name, don't include `  gs://  ` .
           - For **DoubleClick ID** , enter the appropriate Campaign Manager ID.
-          - (Optional) If your files have [standard names like these examples](/bigquery/docs/doubleclick-campaign-transfer#find-id) , leave the **File name prefix** field blank. Specify a [filename prefix](/bigquery/docs/doubleclick-campaign-transfer#filename-prefix) if the files in your Cloud Storage bucket have custom file names.
+          - (Optional) If your files have [standard names like these examples](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#find-id) , leave the **File name prefix** field blank. Specify a [filename prefix](https://docs.cloud.google.com/bigquery/docs/doubleclick-campaign-transfer#filename-prefix) if the files in your Cloud Storage bucket have custom file names.
+        
+        ![Campaign Manager source details](https://docs.cloud.google.com/static/bigquery/images/dcm-source-details-console.png)
     
       - (Optional) In the **Notification options** section:
         
           - Click the toggle to enable email notifications. When you enable this option, the transfer administrator receives an email notification when a transfer run fails.
-          - For **Select a Pub/Sub topic** , choose your [topic](/pubsub/docs/overview) name or click **Create a topic** . This option configures Pub/Sub run [notifications](/bigquery/docs/transfer-run-notifications) for your transfer.
+          - For **Select a Pub/Sub topic** , choose your [topic](https://docs.cloud.google.com/pubsub/docs/overview) name or click **Create a topic** . This option configures Pub/Sub run [notifications](https://docs.cloud.google.com/bigquery/docs/transfer-run-notifications) for your transfer.
 
 4.  Click **Save** .
 
@@ -190,7 +200,7 @@ Enter the `  bq mk  ` command and supply the transfer creation flag — `  --tra
 
 <!-- end list -->
 
-``` text
+``` notranslate
 bq mk --transfer_config \
 --project_id=project_id \
 --target_dataset=dataset \
@@ -215,13 +225,11 @@ For example, the following command creates a Campaign Manager data transfer name
 
 The data transfer is created in the default project:
 
-``` text
-bq mk --transfer_config \
---target_dataset=mydataset \
---display_name='My Transfer' \
---params='{"bucket": "dcdt_-dcm_account123456","network_id": "123456","file_name_prefix":"YYY"}' \
---data_source=dcm_dt
-```
+    bq mk --transfer_config \
+    --target_dataset=mydataset \
+    --display_name='My Transfer' \
+    --params='{"bucket": "dcdt_-dcm_account123456","network_id": "123456","file_name_prefix":"YYY"}' \
+    --data_source=dcm_dt
 
 After running the command, you receive a message like the following:
 
@@ -233,86 +241,84 @@ Follow the instructions and paste the authentication code on the command line.
 
 ### API
 
-Use the [`  projects.locations.transferConfigs.create  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
+Use the [`  projects.locations.transferConfigs.create  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs/create) method and supply an instance of the [`  TransferConfig  `](https://docs.cloud.google.com/bigquery/docs/reference/datatransfer/rest/v1/projects.locations.transferConfigs#TransferConfig) resource.
 
 ### Java
 
-Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](/java/docs/reference/google-cloud-bigquery/latest/overview) .
+Before trying this sample, follow the Java setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Java API reference documentation](https://docs.cloud.google.com/java/docs/reference/google-cloud-bigquery/latest/overview) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` java
-import com.google.api.gax.rpc.ApiException;
-import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
-import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
-import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
-import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
-import com.google.protobuf.Struct;
-import com.google.protobuf.Value;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-// Sample to create campaign manager transfer config
-public class CreateCampaignmanagerTransfer {
-
-  public static void main(String[] args) throws IOException {
-    // TODO(developer): Replace these variables before running the sample.
-    final String projectId = "MY_PROJECT_ID";
-    String datasetId = "MY_DATASET_ID";
-    String bucket = "gs://cloud-sample-data";
-    // the network_id only allows digits
-    String networkId = "7878";
-    String fileNamePrefix = "test_";
-    Map<String, Value> params = new HashMap<>();
-    params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
-    params.put("network_id", Value.newBuilder().setStringValue(networkId).build());
-    params.put("file_name_prefix", Value.newBuilder().setStringValue(fileNamePrefix).build());
-    TransferConfig transferConfig =
-        TransferConfig.newBuilder()
-            .setDestinationDatasetId(datasetId)
-            .setDisplayName("Your Campaignmanager Config Name")
-            .setDataSourceId("dcm_dt")
-            .setParams(Struct.newBuilder().putAllFields(params).build())
-            .build();
-    createCampaignmanagerTransfer(projectId, transferConfig);
-  }
-
-  public static void createCampaignmanagerTransfer(String projectId, TransferConfig transferConfig)
-      throws IOException {
-    try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
-      ProjectName parent = ProjectName.of(projectId);
-      CreateTransferConfigRequest request =
-          CreateTransferConfigRequest.newBuilder()
-              .setParent(parent.toString())
-              .setTransferConfig(transferConfig)
-              .build();
-      TransferConfig config = client.createTransferConfig(request);
-      System.out.println("Campaignmanager transfer created successfully :" + config.getName());
-    } catch (ApiException ex) {
-      System.out.print("Campaignmanager transfer was not created." + ex.toString());
+    import com.google.api.gax.rpc.ApiException;
+    import com.google.cloud.bigquery.datatransfer.v1.CreateTransferConfigRequest;
+    import com.google.cloud.bigquery.datatransfer.v1.DataTransferServiceClient;
+    import com.google.cloud.bigquery.datatransfer.v1.ProjectName;
+    import com.google.cloud.bigquery.datatransfer.v1.TransferConfig;
+    import com.google.protobuf.Struct;
+    import com.google.protobuf.Value;
+    import java.io.IOException;
+    import java.util.HashMap;
+    import java.util.Map;
+    
+    // Sample to create campaign manager transfer config
+    public class CreateCampaignmanagerTransfer {
+    
+      public static void main(String[] args) throws IOException {
+        // TODO(developer): Replace these variables before running the sample.
+        final String projectId = "MY_PROJECT_ID";
+        String datasetId = "MY_DATASET_ID";
+        String bucket = "gs://cloud-sample-data";
+        // the network_id only allows digits
+        String networkId = "7878";
+        String fileNamePrefix = "test_";
+        Map<String, Value> params = new HashMap<>();
+        params.put("bucket", Value.newBuilder().setStringValue(bucket).build());
+        params.put("network_id", Value.newBuilder().setStringValue(networkId).build());
+        params.put("file_name_prefix", Value.newBuilder().setStringValue(fileNamePrefix).build());
+        TransferConfig transferConfig =
+            TransferConfig.newBuilder()
+                .setDestinationDatasetId(datasetId)
+                .setDisplayName("Your Campaignmanager Config Name")
+                .setDataSourceId("dcm_dt")
+                .setParams(Struct.newBuilder().putAllFields(params).build())
+                .build();
+        createCampaignmanagerTransfer(projectId, transferConfig);
+      }
+    
+      public static void createCampaignmanagerTransfer(String projectId, TransferConfig transferConfig)
+          throws IOException {
+        try (DataTransferServiceClient client = DataTransferServiceClient.create()) {
+          ProjectName parent = ProjectName.of(projectId);
+          CreateTransferConfigRequest request =
+              CreateTransferConfigRequest.newBuilder()
+                  .setParent(parent.toString())
+                  .setTransferConfig(transferConfig)
+                  .build();
+          TransferConfig config = client.createTransferConfig(request);
+          System.out.println("Campaignmanager transfer created successfully :" + config.getName());
+        } catch (ApiException ex) {
+          System.out.print("Campaignmanager transfer was not created." + ex.toString());
+        }
+      }
     }
-  }
-}
-```
 
 **Warning:** If you change the schema of a report, all files on that day must have the same schema, or the data transfer for the entire day will fail.
 
 ## Troubleshoot Campaign Manager transfer setup
 
-If you are having issues setting up your data transfer, see [Campaign Manager transfer issues](/bigquery/docs/transfer-troubleshooting#campaign_manager_transfer_issues) in [Troubleshooting transfer configurations](/bigquery/docs/transfer-troubleshooting) .
+If you are having issues setting up your data transfer, see [Campaign Manager transfer issues](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting#campaign_manager_transfer_issues) in [Troubleshooting transfer configurations](https://docs.cloud.google.com/bigquery/docs/transfer-troubleshooting) .
 
 ## Query your data
 
-When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 ## Campaign Manager sample queries
 
 You can use the following Campaign Manager sample queries to analyze your transferred data. You can also use the queries in a visualization tool such as [Looker Studio](https://www.google.com/analytics/data-studio/) . These queries are provided to help you get started on querying your Campaign Manager data with BigQuery. For additional questions on what you can do with these reports, contact your Campaign Manager technical representative.
 
-**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+**Note:** If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 In each of the following queries, replace the variables like dataset with your values.
 
@@ -320,7 +326,7 @@ In each of the following queries, replace the variables like dataset with your v
 
 The following SQL sample query retrieves the latest campaigns.
 
-``` text
+``` notranslate
 SELECT
   Campaign,
   Campaign_ID
@@ -334,7 +340,7 @@ WHERE
 
 The following SQL sample query analyzes the number of impressions and distinct users by campaign over the past 30 days.
 
-``` text
+``` notranslate
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
 # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
   SELECT
@@ -356,7 +362,7 @@ The following SQL sample query analyzes the number of impressions and distinct u
 
 The following SQL sample query analyzes the latest campaigns in the past 30 days, ordered by campaign and date.
 
-``` text
+``` notranslate
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
 # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
 SELECT
@@ -388,7 +394,7 @@ ORDER BY
 
 The following SQL sample query analyzes the number of impressions and distinct users by campaign between start\_date and end\_date .
 
-``` text
+``` notranslate
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
 # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
 SELECT
@@ -443,7 +449,7 @@ ORDER BY
 
 The following SQL sample query analyzes the number of impressions, clicks, activities, and distinct users by campaign over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
-``` text
+``` notranslate
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
 # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
 SELECT
@@ -538,7 +544,7 @@ ORDER BY
 
 The following SQL sample query analyzes campaign activity over the past 30 days. In this query, replace the variables like campaign\_list with your values. For example, replace campaign\_list with a comma-separated list of all the Campaign Manager campaigns of interest within the scope of the query.
 
-``` text
+``` notranslate
 # START_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -31 DAY)
 # END_DATE = DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
 SELECT

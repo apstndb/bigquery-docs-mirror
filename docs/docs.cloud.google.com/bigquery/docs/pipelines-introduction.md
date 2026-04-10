@@ -4,13 +4,13 @@ You can use BigQuery pipelines to automate and streamline your BigQuery data pro
 
 ## Overview
 
-Pipelines are powered by [Dataform](/dataform/docs/overview) .
+Pipelines are powered by [Dataform](https://docs.cloud.google.com/dataform/docs/overview) .
 
 A pipeline consists of one or more of the following code assets:
 
-  - [Notebooks](/bigquery/docs/notebooks-introduction)
-  - [SQL queries](/bigquery/docs/reference/standard-sql/query-syntax)
-  - [Data preparations](/bigquery/docs/data-prep-introduction)
+  - [Notebooks](https://docs.cloud.google.com/bigquery/docs/notebooks-introduction)
+  - [SQL queries](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+  - [Data preparations](https://docs.cloud.google.com/bigquery/docs/data-prep-introduction)
 
 You can use pipelines to schedule the execution of code assets. For example, you can schedule a SQL query to run daily and update a table with the most recent source data, which can then power a dashboard.
 
@@ -20,10 +20,10 @@ In a pipeline with multiple code assets, you define the execution sequence. For 
 
 You can do the following in a pipeline:
 
-  - [Create new or import existing](/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries or notebooks into a pipeline.
-  - [Schedule a pipeline](/bigquery/docs/schedule-pipelines) to automatically run at a specified time and frequency.
-  - [Share a pipeline](/bigquery/docs/create-pipelines#share_a_pipeline) with users or groups you specify.
-  - [Share a link to a pipeline](/bigquery/docs/create-pipelines#share_a_link_to_a_pipeline) .
+  - [Create new or import existing](https://docs.cloud.google.com/bigquery/docs/create-pipelines#add_a_pipeline_task) SQL queries or notebooks into a pipeline.
+  - [Schedule a pipeline](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) to automatically run at a specified time and frequency.
+  - [Share a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_pipeline) with users or groups you specify.
+  - [Share a link to a pipeline](https://docs.cloud.google.com/bigquery/docs/create-pipelines#share_a_link_to_a_pipeline) .
 
 ## Limitations
 
@@ -43,6 +43,8 @@ If this is the first time you are creating a code asset, you should set the defa
 All code assets in BigQuery Studio use the same default region. To set the default region for code assets, follow these steps:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** pane, find the project in which you have enabled code assets.
 
@@ -52,11 +54,11 @@ All code assets in BigQuery Studio use the same default region. To set the defau
 
 5.  Click **Select** .
 
-For a list of supported regions, see [BigQuery Studio locations](/bigquery/docs/locations#bqstudio-loc) .
+For a list of supported regions, see [BigQuery Studio locations](https://docs.cloud.google.com/bigquery/docs/locations#bqstudio-loc) .
 
 ## Supported regions
 
-All code assets are stored in your [default region for code assets](/bigquery/docs/enable-assets#set_the_default_region_for_code_assets) . Updating the default region changes the region for all code assets created after that point.
+All code assets are stored in your [default region for code assets](https://docs.cloud.google.com/bigquery/docs/enable-assets#set_the_default_region_for_code_assets) . Updating the default region changes the region for all code assets created after that point.
 
 The following table lists the regions where pipelines are available:
 
@@ -82,13 +84,13 @@ Dallas
 
 `  us-south1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -106,7 +108,7 @@ Montréal
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 North Virginia
 
@@ -116,13 +118,13 @@ Oklahoma
 
 `  us-central2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -132,13 +134,13 @@ Santiago
 
 `  southamerica-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 South Carolina
 
@@ -148,7 +150,7 @@ Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Asia Pacific**
 
@@ -206,7 +208,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -216,7 +218,7 @@ Finland
 
 `  europe-north1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Frankfurt
 
@@ -226,13 +228,13 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Madrid
 
 `  europe-southwest1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Milan
 
@@ -242,19 +244,19 @@ Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Paris
 
 `  europe-west9  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Stockholm
 
 `  europe-north2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Turin
 
@@ -268,7 +270,7 @@ Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Middle East**
 
@@ -286,18 +288,18 @@ Tel Aviv
 
 ## Quotas and limits
 
-BigQuery pipelines are subject to [Dataform quotas and limits](/dataform/docs/quotas) .
+BigQuery pipelines are subject to [Dataform quotas and limits](https://docs.cloud.google.com/dataform/docs/quotas) .
 
 ## Pricing
 
 The execution of BigQuery pipeline tasks incurs compute and storage charges in BigQuery. For more information, see [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
 
-Pipelines containing notebooks incur Colab Enterprise runtime charges based on the [default machine type](/colab/docs/runtimes#default_runtime_specifications) . For pricing details, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
+Pipelines containing notebooks incur Colab Enterprise runtime charges based on the [default machine type](https://docs.cloud.google.com/colab/docs/runtimes#default_runtime_specifications) . For pricing details, see [Colab Enterprise pricing](https://cloud.google.com/colab/pricing) .
 
-Each BigQuery pipeline run is logged using [Cloud Logging](/logging/docs) . Logging is automatically enabled for BigQuery pipeline runs, which can incur Cloud Logging billing charges. For more information, see [Cloud Logging pricing](https://cloud.google.com/logging/pricing) .
+Each BigQuery pipeline run is logged using [Cloud Logging](https://docs.cloud.google.com/logging/docs) . Logging is automatically enabled for BigQuery pipeline runs, which can incur Cloud Logging billing charges. For more information, see [Cloud Logging pricing](https://cloud.google.com/logging/pricing) .
 
 ## What's next
 
-  - Learn how to [create pipelines](/bigquery/docs/create-pipelines) .
-  - Learn how to [manage pipelines](/bigquery/docs/manage-pipelines) .
-  - Learn how to [schedule pipelines](/bigquery/docs/schedule-pipelines) .
+  - Learn how to [create pipelines](https://docs.cloud.google.com/bigquery/docs/create-pipelines) .
+  - Learn how to [manage pipelines](https://docs.cloud.google.com/bigquery/docs/manage-pipelines) .
+  - Learn how to [schedule pipelines](https://docs.cloud.google.com/bigquery/docs/schedule-pipelines) .

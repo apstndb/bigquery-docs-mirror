@@ -1,7 +1,7 @@
-  - [Resource: MigrationSubtask](#MigrationSubtask)
-      - [JSON representation](#MigrationSubtask.SCHEMA_REPRESENTATION)
-  - [State](#State)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: MigrationSubtask](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks#MigrationSubtask)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks#MigrationSubtask.SCHEMA_REPRESENTATION)
+  - [State](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks#State)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/migration/rest/v2alpha/projects.locations.workflows.subtasks#METHODS_SUMMARY)
 
 ## Resource: MigrationSubtask
 
@@ -18,7 +18,7 @@ A subtask for a migration which carries details about the configuration of the s
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;taskId&quot;: string,
   &quot;type&quot;: string,

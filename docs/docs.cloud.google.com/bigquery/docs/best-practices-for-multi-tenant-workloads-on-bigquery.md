@@ -2,14 +2,14 @@
 
 This document provides techniques and best practices for common patterns that are used in multi-tenant data platforms and enterprise data marts.
 
-Commercial enterprises, software as a service (SaaS) vendors, and government organizations must often securely host both internal and third-party data across geographic and administrative boundaries. [BigQuery](/bigquery) is a powerful tool that can consistently address multi-tenant platform requirements for exabytes of data and hundreds of thousands of data consumers across disparate business units. This document is for organizations that deploy multi-tenant platforms on BigQuery and who want to understand the available [access controls](/bigquery/docs/data-governance) and [performance management features](/bigquery/docs/best-practices-performance-overview) .
+Commercial enterprises, software as a service (SaaS) vendors, and government organizations must often securely host both internal and third-party data across geographic and administrative boundaries. [BigQuery](https://docs.cloud.google.com/bigquery) is a powerful tool that can consistently address multi-tenant platform requirements for exabytes of data and hundreds of thousands of data consumers across disparate business units. This document is for organizations that deploy multi-tenant platforms on BigQuery and who want to understand the available [access controls](https://docs.cloud.google.com/bigquery/docs/data-governance) and [performance management features](https://docs.cloud.google.com/bigquery/docs/best-practices-performance-overview) .
 
 Multi-tenant platform builders often need to balance considerations for the following:
 
   - **Data isolation** : Implement strong controls to prevent data leakage across tenants.
-  - **Consistent performance** : Configure and apportion [BigQuery reservations](/bigquery/docs/reservations-intro) to maintain consistent performance across tenants.
+  - **Consistent performance** : Configure and apportion [BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-intro) to maintain consistent performance across tenants.
   - **Resource management** : Plan for the impact of quotas and limits.
-  - **Geographic distribution** : Locate data in designated and required [geographic locations](/bigquery/docs/locations#multi-regions) . For compliance-related concerns, see Google Cloud's [compliance offerings](https://cloud.google.com/security/compliance/offerings) .
+  - **Geographic distribution** : Locate data in designated and required [geographic locations](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) . For compliance-related concerns, see Google Cloud's [compliance offerings](https://cloud.google.com/security/compliance/offerings) .
   - **Auditing and security** : Safeguard tenant data from inappropriate access and exfiltration.
   - **Cost management** : Ensure consistent BigQuery costs to host each tenant.
   - **Operational Complexity** : Minimize the amount of system variability that is required to host new tenants.
@@ -26,9 +26,11 @@ A dataset-per-tenant design helps to mitigate the following concerns that an org
 
 ### Configure datasets for each tenant
 
-Within a project that is dedicated to storing customer data, each customer's data is separated by BigQuery datasets. Within the host organization, you use a second project to deploy analytics and machine learning on combined customer data. You can then configure the data processing engine, [Dataflow](/dataflow) , to dual-write incoming data to the internal and tenant-specific tables. The Dataflow configuration uses fully written tables instead of authorized views. Using fully written tables allows uniform handling of geographic distribution and helps to avoid reaching [authorized view limits](/bigquery/quotas#view_limits) when the number of tenants scales.
+Within a project that is dedicated to storing customer data, each customer's data is separated by BigQuery datasets. Within the host organization, you use a second project to deploy analytics and machine learning on combined customer data. You can then configure the data processing engine, [Dataflow](https://docs.cloud.google.com/dataflow) , to dual-write incoming data to the internal and tenant-specific tables. The Dataflow configuration uses fully written tables instead of authorized views. Using fully written tables allows uniform handling of geographic distribution and helps to avoid reaching [authorized view limits](https://docs.cloud.google.com/bigquery/quotas#view_limits) when the number of tenants scales.
 
-BigQuery's separation of storage and [compute](/bigquery/docs/slots) lets you configure fewer projects compared to cluster-based warehouses to handle problems such as service tiers and data isolation. When you don't need to configure tenants with additional [dedicated cloud](#saas-dedicated) resources, we recommend that you consider default configuration of a dedicated dataset for each tenant. The following diagram shows an example project configuration based on this recommended design:
+BigQuery's separation of storage and [compute](https://docs.cloud.google.com/bigquery/docs/slots) lets you configure fewer projects compared to cluster-based warehouses to handle problems such as service tiers and data isolation. When you don't need to configure tenants with additional [dedicated cloud](https://docs.cloud.google.com/bigquery/docs/best-practices-for-multi-tenant-workloads-on-bigquery#saas-dedicated) resources, we recommend that you consider default configuration of a dedicated dataset for each tenant. The following diagram shows an example project configuration based on this recommended design:
+
+![A default configuration with dedicated projects for each tenant.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-saas.svg)
 
 **Figure 1.** A constant number of projects handles data and processing needs as the number of tenants grows.
 
@@ -37,12 +39,12 @@ The project configuration in figure 1 includes the following projects:
   - **Data pipeline project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
   - **Combined tenant data project** : the core data project that maintains a dataset per customer. Tenant data is expected to be accessed through compute tier projects.
   - **Internal development projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
-  - **End-user application projects** : projects that contain resources that are designed to interact with end users. We recommend that you use tenant-scoped service accounts to access tenant datasets and use a robust and secure [build pipeline](/kubernetes-engine/docs/tutorials/gitops-cloud-build) to deploy applications.
+  - **End-user application projects** : projects that contain resources that are designed to interact with end users. We recommend that you use tenant-scoped service accounts to access tenant datasets and use a robust and secure [build pipeline](https://docs.cloud.google.com/kubernetes-engine/docs/tutorials/gitops-cloud-build) to deploy applications.
   - **Reservation compute tier projects** : the projects that map tenant query activity to BigQuery reservations.
 
 ### Share reservations
 
-Reservations in this approach rely on the [fair scheduling](/bigquery/docs/slots#fair_scheduling_in_bigquery) algorithm that is built into BigQuery reservations. Each compute tier reservation is assigned to a single project. Tenant queries use fair scheduling slots that are available to each compute tier project, and unused slots from any tier are automatically reused in another tier. If a tenant has specific timing requirements, you can use a project-reservation pair that is dedicated to providing an exact number of slots.
+Reservations in this approach rely on the [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) algorithm that is built into BigQuery reservations. Each compute tier reservation is assigned to a single project. Tenant queries use fair scheduling slots that are available to each compute tier project, and unused slots from any tier are automatically reused in another tier. If a tenant has specific timing requirements, you can use a project-reservation pair that is dedicated to providing an exact number of slots.
 
 ### Configure VPC Service Controls perimeters
 
@@ -50,16 +52,16 @@ In this configuration, we recommend VPC Service Controls perimeters to prevent a
 
 #### Perimeters
 
-In this configuration, we recommend that you create the following [service perimeters](/vpc-service-controls/docs/create-service-perimeters) :
+In this configuration, we recommend that you create the following [service perimeters](https://docs.cloud.google.com/vpc-service-controls/docs/create-service-perimeters) :
 
   - **Data pipeline** : a perimeter around the data pipeline projects should enforce all services that don't need to receive tenant data.
   - **Tenant data** : a perimeter around the tenant dataset project and around the tenant BigQuery compute projects. Enforce all services to prevent access from outside of the organization.
-  - **Internal applications** : enforce all services and use [access levels](/vpc-service-controls/docs/use-access-levels#using_access_levels) to grant resource access to department teams.
+  - **Internal applications** : enforce all services and use [access levels](https://docs.cloud.google.com/vpc-service-controls/docs/use-access-levels#using_access_levels) to grant resource access to department teams.
   - **External applications** : a perimeter around your SaaS applications. Enforce all services that aren't necessary for the applications to function.
 
 #### Perimeter bridges
 
-In this configuration, we recommend that you create the following [perimeter bridges](/vpc-service-controls/docs/create-perimeter-bridges) :
+In this configuration, we recommend that you create the following [perimeter bridges](https://docs.cloud.google.com/vpc-service-controls/docs/create-perimeter-bridges) :
 
   - **Data pipeline and tenant data** : allow the pipeline to write data into tenant datasets.
   - **Data pipeline and internal applications** : allow the pipeline to write data into the cross-customer dataset.
@@ -78,16 +80,18 @@ A dedicated tenant infrastructure design addresses the following common concerns
 
 #### Colocate datasets with dedicated resources
 
-When you deploy dedicated tenant infrastructure, we recommend that you create a parent [folder](/resource-manager/docs/cloud-platform-resource-hierarchy#folders) for the tenant-specific projects. Then colocate the tenant's BigQuery datasets in projects with the dedicated resources that access that data on behalf of the tenant. To minimize end-to-end latency for tenant data, Dataflow pipelines insert data directly into the tenant datasets.
+When you deploy dedicated tenant infrastructure, we recommend that you create a parent [folder](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#folders) for the tenant-specific projects. Then colocate the tenant's BigQuery datasets in projects with the dedicated resources that access that data on behalf of the tenant. To minimize end-to-end latency for tenant data, Dataflow pipelines insert data directly into the tenant datasets.
 
 This design handles upstream data processing and distribution, similar to the preceding shared infrastructure design. However, tenant data and applications that access tenant data are organized under tenant-specific projects (and optionally organized under tenant-dedicated folders) to simplify the billing and resource management. The following diagram shows an example project configuration based on this recommended design:
+
+![A project configuration that has tenant-specific projects.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-saas-dedicated-infrastructure.svg)
 
 **Figure 2.** A data pipelines project handles data for a single tenant from several other projects.
 
 The project configuration in figure 2 includes the following projects:
 
   - **Data pipelines project** : the core infrastructure components that receive, process, and distribute tenant data are all packaged into a single project.
-  - **Dedicated tenant projects** : projects that contain all cloud resources that are dedicated to a single tenant, including BigQuery datasets. We recommend that you use [Identity and Access Management (IAM)](/iam) to greatly limit the scope of which accounts and service accounts can access the customer datasets.
+  - **Dedicated tenant projects** : projects that contain all cloud resources that are dedicated to a single tenant, including BigQuery datasets. We recommend that you use [Identity and Access Management (IAM)](https://docs.cloud.google.com/iam) to greatly limit the scope of which accounts and service accounts can access the customer datasets.
   - **Internal analytics projects** : projects that represent the self-managed resources that analytics teams use to evaluate tenant data and build new features.
   - **External networking project** : project that handles and routes tenant requests to their dedicated backends.
 
@@ -97,7 +101,7 @@ Reservations in this approach rely on the fair scheduling algorithm that is buil
 
 #### Use IAM controls and disable key creation
 
-VPC Service Controls perimeters might not be appropriate for this scenario. Project-related [limits](/vpc-service-controls/quotas#limits) prevent an organization from using perimeter boundaries around projects that interact with the tenant projects. Instead, we recommend that you use strict IAM controls and [disable key creation](/resource-manager/docs/organization-policy/restricting-service-accounts#disable_service_account_key_creation) to help protect against undesired external access.
+VPC Service Controls perimeters might not be appropriate for this scenario. Project-related [limits](https://docs.cloud.google.com/vpc-service-controls/quotas#limits) prevent an organization from using perimeter boundaries around projects that interact with the tenant projects. Instead, we recommend that you use strict IAM controls and [disable key creation](https://docs.cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts#disable_service_account_key_creation) to help protect against undesired external access.
 
 ## Data mart with central authority
 
@@ -111,9 +115,11 @@ A data mart design in BigQuery addresses the following needs:
 
 ### Use a centrally administered repository
 
-In this design, core data is captured in a centrally administered repository. Authorized views, [authorized user-defined functions (UDFs)](/bigquery/docs/user-defined-functions#authorize_routines) , and column policies are frequently used together to share data with lines of business while preventing accidental distribution of sensitive data.
+In this design, core data is captured in a centrally administered repository. Authorized views, [authorized user-defined functions (UDFs)](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#authorize_routines) , and column policies are frequently used together to share data with lines of business while preventing accidental distribution of sensitive data.
 
 Teams in tenant projects can access centrally governed datasets based on their account permissions. Teams use slots allocated to their own projects to build reports and derived datasets. The core data team uses authorized views to maintain full ownership of the access control to the data mart's assets. In this configuration, we recommend that you avoid building multiple layers of views on top of the objects that the core data project presents. The following diagram shows an example project configuration based on this recommended design:
+
+![A project configuration that uses a centrally administered repository.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-data-mart-tenants.svg)
 
 **Figure 3.** A core data project maintains a centralized data mart that is accessible from across the organization.
 
@@ -125,7 +131,7 @@ The project configuration in figure 3 includes the following projects:
 
 ### Use a two-tier reservation design
 
-When working with data marts, we recommend that you use a two-tier design. In a two-tier design, you assign the [organization resource](/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) a reservation that has a small number of slots to cover general usage. If teams have greater needs, assign reservations at the project or folder level.
+When working with data marts, we recommend that you use a two-tier design. In a two-tier design, you assign the [organization resource](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) a reservation that has a small number of slots to cover general usage. If teams have greater needs, assign reservations at the project or folder level.
 
 ### Configure VPC Service Controls perimeters
 
@@ -148,7 +154,9 @@ In this configuration, we recommend that you create the following perimeter brid
 
 ### Copy datasets for multiregional configurations
 
-Because BigQuery disallows cross-regional queries, you can't use the strategy of segmenting data with authorized views when data marts must exist across multiple regions. Instead, you can use [BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) to copy relevant datasets into another region. In this scenario, you create column policies within the data catalog for each additional region that the data resides in. The following diagram shows a multiregional configuration:
+Because BigQuery disallows cross-regional queries, you can't use the strategy of segmenting data with authorized views when data marts must exist across multiple regions. Instead, you can use [BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) to copy relevant datasets into another region. In this scenario, you create column policies within the data catalog for each additional region that the data resides in. The following diagram shows a multiregional configuration:
+
+![A multiregional project configuration uses column policies.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-mutilregional-data-mart.svg)
 
 **Figure 4.** A multiregional configuration uses the BigQuery Data Transfer Service to copy datasets across regions.
 
@@ -158,11 +166,11 @@ The project configuration in figure 4 includes the following projects.
   - **ETL infrastructure** : infrastructure for processing upstream data sources into the core data. Depending on administrative separation needs, you might choose to deploy the ETL infrastructure as its own project or as a part of the core data project.
   - **Analytics team projects** : consumers of the data mart use these projects, and use their own provisioned infrastructure to process data within regional datasets of the data mart. Analytics team projects are expected to be able to build derived datasets for local use.
 
-[BigQuery Data Transfer Service](/bigquery/docs/dts-introduction) is an additional scheduled component with some limitations. The built-in service scheduler is limited to a minimum interval time of 15 minutes and it must copy all the tables from the source dataset. There is no way to embed additional scripts to create region-specific data subsets into the BigQuery Data Transfer Service scheduler.
+[BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction) is an additional scheduled component with some limitations. The built-in service scheduler is limited to a minimum interval time of 15 minutes and it must copy all the tables from the source dataset. There is no way to embed additional scripts to create region-specific data subsets into the BigQuery Data Transfer Service scheduler.
 
 If your organization needs more flexibility, the following options are available:
 
-  - **Cloud Composer jobs** : you can schedule [Cloud Composer](/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
+  - **Cloud Composer jobs** : you can schedule [Cloud Composer](https://docs.cloud.google.com/composer) jobs to issue ETL jobs that create regional subsets before triggering the BigQuery Data Transfer Service through its [client API](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . If your organization can support additional latency, we recommend this option.
   - **ETL infrastructure** : ETL infrastructure, such as Dataflow, can dual-write regional subsets into target regions. If your organization requires minimal data latency between regions, we recommend this option.
 
 ## Data marts with decentralized authority
@@ -177,23 +185,25 @@ A decentralized data mart has the following different concerns compared to a sta
 
 ### Delegate core data administration
 
-This design is different from a conventional data mart approach because decentralized authority delegates core data administration decisions to component subgroups of the organization. When you use decentralized authority, you maintain central control of security and BigQuery capacity by using [Cloud Key Management Service (Cloud KMS)](/security-key-management) , column policies, VPC Service Controls, and reservations. Therefore, you avoid the data sprawl that's common with self-managed warehouses. The following diagram shows an architecture that uses decentralized authority:
+This design is different from a conventional data mart approach because decentralized authority delegates core data administration decisions to component subgroups of the organization. When you use decentralized authority, you maintain central control of security and BigQuery capacity by using [Cloud Key Management Service (Cloud KMS)](https://docs.cloud.google.com/security-key-management) , column policies, VPC Service Controls, and reservations. Therefore, you avoid the data sprawl that's common with self-managed warehouses. The following diagram shows an architecture that uses decentralized authority:
+
+![An architecture uses decentralized authority to delegate core data administration decisions.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-decentralized-data-marts.svg)
 
 **Figure 5.** A core governance project helps to ensure consistent security, while individual groups maintain their data operations.
 
 The project configuration in figure 5 includes the following projects:
 
-  - **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations admininistration project](/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
+  - **Core governance project** : the project that is responsible for cross-organization management concerns. In this project, you create security resources like Cloud KMS key rings and data catalog column policies. This project acts as the BigQuery [reservations admininistration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) , enabling organization-wide sharing of slots.
   - **Organizational unit data projects** : the owners of self-managed data marts within the broader organization. The core governance project manages restricted scope for the organizational unit data projects.
   - **Analytics team projects** : the projects that are used by consumers of the data marts. These projects use their own provisioned infrastructure and slots to access and process data within the data mart.
 
 ### Use a two-tier reservation design
 
-We recommend that your decentralized data marts use [the same two-tier design](#data-marts-central-reservation) as standard data marts. In this configuration, you assign the [organization resource](/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) a reservation that has a small number of slots to cover general usage. If teams have greater needs, assign reservations at the project or folder level.
+We recommend that your decentralized data marts use [the same two-tier design](https://docs.cloud.google.com/bigquery/docs/best-practices-for-multi-tenant-workloads-on-bigquery#data-marts-central-reservation) as standard data marts. In this configuration, you assign the [organization resource](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy#organizations) a reservation that has a small number of slots to cover general usage. If teams have greater needs, assign reservations at the project or folder level.
 
 ### Use a data catalog
 
-A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Dataplex's discovery automatically creates [metadata entries](/dataplex/docs/catalog-overview) for all new BigQuery tables across your organization. Dataplex's capabilities help also data governance admins quickly identify new data assets and apply appropriate controls.
+A data catalog provides organization-wide discovery, metadata tagging, and column policy configuration. Dataplex's discovery automatically creates [metadata entries](https://docs.cloud.google.com/dataplex/docs/catalog-overview) for all new BigQuery tables across your organization. Dataplex's capabilities help also data governance admins quickly identify new data assets and apply appropriate controls.
 
 ### Configure VPC Service Controls perimeters
 
@@ -230,12 +240,14 @@ The multi-organizational data sharing design focuses on protecting the organizat
 
 Queries that initiate from the external project use the invoking project's compute resources. If all queried datasets share the same Google Cloud region, these queries can join data across organizations. The following diagram shows how datasets are shared in a multi-organizational project configuration:
 
+![A multi-organizational project configuration uses a shared dataset project to protect internal projects.](https://docs.cloud.google.com/static/bigquery/images/best-practices-for-multi-tenant-workloads-on-bigquery-multi-organization-sharing.svg)
+
 **Figure 6.** An external organization queries data from multiple datasets in shared projects.
 
 The project configuration in figure 6 includes the following projects:
 
   - **Organization internal project** : the project that contains sensitive internal data. The internal project can share data externally by copying sanitized data into the datasets of the shared data project. The internal project should own the service account that is responsible for updating the shared data.
-  - **Shared data project** : the project that contains the sanitized information that is copied from the internal project. Use external users [groups](/iam/docs/groups-in-cloud-console) to manage access by external parties. In this scenario, you manage group membership as an administrative function and you give external accounts the viewer permission so that they can access the dataset through these groups.
+  - **Shared data project** : the project that contains the sanitized information that is copied from the internal project. Use external users [groups](https://docs.cloud.google.com/iam/docs/groups-in-cloud-console) to manage access by external parties. In this scenario, you manage group membership as an administrative function and you give external accounts the viewer permission so that they can access the dataset through these groups.
 
 ### Configure VPC Service Controls perimeters
 
@@ -285,7 +297,7 @@ To manage tenant access to subsets of large fact tables, you can use tenant-spec
 <tbody>
 <tr class="odd">
 <td>Number of tenants supported</td>
-<td>There is a hard limit of <a href="/bigquery/quotas#dataset_limits">2500 authorized resources</a> per dataset.</td>
+<td>There is a hard limit of <a href="https://docs.cloud.google.com/bigquery/quotas#dataset_limits">2500 authorized resources</a> per dataset.</td>
 <td>Authorized resources include authorized views, authorized datasets, and authorized functions.There are no limits on the number of datasets in a project or tables in a dataset.</td>
 </tr>
 <tr class="even">
@@ -297,7 +309,7 @@ To manage tenant access to subsets of large fact tables, you can use tenant-spec
 <tr class="odd">
 <td>Regionalization</td>
 <td>Authorized views cannot cross regions and must be in the Google Cloud region of the base table. Regionalization affects geographically remote tenants.</td>
-<td>Subset tables can exist in the region that's most appropriate for the tenant. Additional <a href="/bigquery/docs/copying-datasets#pricing">costs</a> might apply.</td>
+<td>Subset tables can exist in the region that's most appropriate for the tenant. Additional <a href="https://docs.cloud.google.com/bigquery/docs/copying-datasets#pricing">costs</a> might apply.</td>
 </tr>
 <tr class="even">
 <td>Column policy enforcement</td>
@@ -325,33 +337,33 @@ To prevent unauthorized access to data, BigQuery offers several additional featu
 
 Client data encryption covers cases in which a hosting organization stores and processes data on a tenant's behalf, but is prevented from accessing some of the data contents. For example, the hosting organization might be prevented from accessing personal or device data that is considered sensitive.
 
-We recommend that the data sender uses AEAD encryption keys, from the open source [Tink library](https://github.com/google/tink) , to encrypt sensitive data. The Tink library AEAD encryption keys are compatible with the [BigQuery AEAD functions](/bigquery/docs/reference/standard-sql/aead_encryption_functions) . The tenant can then decrypt the data either by accessing the key material in an [authorized UDF](/bigquery/docs/user-defined-functions#authorize_routines) or by passing the key material as a [query parameter](/bigquery/docs/parameterized-queries#bq) to BigQuery, where the host organization cannot log the key.
+We recommend that the data sender uses AEAD encryption keys, from the open source [Tink library](https://github.com/google/tink) , to encrypt sensitive data. The Tink library AEAD encryption keys are compatible with the [BigQuery AEAD functions](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/aead_encryption_functions) . The tenant can then decrypt the data either by accessing the key material in an [authorized UDF](https://docs.cloud.google.com/bigquery/docs/user-defined-functions#authorize_routines) or by passing the key material as a [query parameter](https://docs.cloud.google.com/bigquery/docs/parameterized-queries#bq) to BigQuery, where the host organization cannot log the key.
 
 #### Column access policies
 
 In multi-tenant data marts, column policies are frequently used to prevent sensitive content from accidentally leaking between collaborating teams. Authorized views are the preferred mechanism to share data between teams in a data mart scenario. Authorized views cannot grant access to a protected column.
 
-When you set the policy to enforce access control, you prevent access to users who have not been granted the [fine-grained reader](/bigquery/docs/column-level-security#fine_grained_reader) role to the policy. Even when the policy isn't enforced, the policy logs all user access to the categorized column.
+When you set the policy to enforce access control, you prevent access to users who have not been granted the [fine-grained reader](https://docs.cloud.google.com/bigquery/docs/column-level-security#fine_grained_reader) role to the policy. Even when the policy isn't enforced, the policy logs all user access to the categorized column.
 
 #### Sensitive Data Protection
 
-[Sensitive Data Protection](/sensitive-data-protection) provides APIs and scanning utilities that help you identify and mitigate sensitive content that is stored inside BigQuery or [Cloud Storage](/storage) datasets. Organizations in multi-tenant scenarios frequently use the DLP API (part of Sensitive Data Protection) to identify and optionally tokenize sensitive data before it's stored.
+[Sensitive Data Protection](https://docs.cloud.google.com/sensitive-data-protection) provides APIs and scanning utilities that help you identify and mitigate sensitive content that is stored inside BigQuery or [Cloud Storage](https://docs.cloud.google.com/storage) datasets. Organizations in multi-tenant scenarios frequently use the DLP API (part of Sensitive Data Protection) to identify and optionally tokenize sensitive data before it's stored.
 
 ### Slots reservation management
 
 Reservation management in multi-tenant systems helps to control costs as tenants scale up and ensures performance guarantees for each tenant.
 
-To manage reservations, we recommend that you create a single reservation administrative project. Slot commitments that are purchased within the same administrative project are shareable across all [reservations](/bigquery/docs/reservations-workload-management#admin-project) that originate from the administrative project. A project that uses slot commitments can only be assigned to one reservation at a time. All queries that [originate from a project](/bigquery/docs/reference/rest/v2/jobs/insert#path-parameters) share slots based on available resources.
+To manage reservations, we recommend that you create a single reservation administrative project. Slot commitments that are purchased within the same administrative project are shareable across all [reservations](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that originate from the administrative project. A project that uses slot commitments can only be assigned to one reservation at a time. All queries that [originate from a project](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/insert#path-parameters) share slots based on available resources.
 
-To ensure that tenant service level objectives (SLOs) are met, you can [monitor](/bigquery/docs/reservations-monitoring) reservations through Cloud Logging and the BigQuery [information schema](/bigquery/docs/information-schema-jobs) . Organizations that experience busy periods from analyst activity or priority jobs can allocate extra capacity using [flex slots](https://cloud.google.com/bigquery/pricing#flex-slots-pricing) .
+To ensure that tenant service level objectives (SLOs) are met, you can [monitor](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) reservations through Cloud Logging and the BigQuery [information schema](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) . Organizations that experience busy periods from analyst activity or priority jobs can allocate extra capacity using [flex slots](https://cloud.google.com/bigquery/pricing#flex-slots-pricing) .
 
 #### Reservations as tenant compute tiers
 
 SaaS vendors who have dozens up to many thousands of tenants commonly configure a finite number of BigQuery reservations as shared resources.
 
-If you are an SaaS vendor who has shared tenant infrastructure, we recommend that you dedicate each reservation to a single project and group tenants to share that project for BigQuery compute. This design reduces the administrative overhead of having thousands of additional projects and reservations, while allowing your organization to allocate a minimum [slot capacity](/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations) necessary to meet anticipated performance needs for the reservation.
+If you are an SaaS vendor who has shared tenant infrastructure, we recommend that you dedicate each reservation to a single project and group tenants to share that project for BigQuery compute. This design reduces the administrative overhead of having thousands of additional projects and reservations, while allowing your organization to allocate a minimum [slot capacity](https://docs.cloud.google.com/bigquery/docs/reference/reservations/rest/v1/projects.locations.reservations) necessary to meet anticipated performance needs for the reservation.
 
-If [ELT data processing](https://wikipedia.org/wiki/Extract,_transform,_load#Vs._ELT) timeliness is a top priority, we recommend that you allocate a reservation to handle the processing. To prevent using extra slots that could be used for ad hoc workloads, set the reservation to [ignore idle slots](/bigquery/docs/slots#idle_slots) .
+If [ELT data processing](https://wikipedia.org/wiki/Extract,_transform,_load#Vs._ELT) timeliness is a top priority, we recommend that you allocate a reservation to handle the processing. To prevent using extra slots that could be used for ad hoc workloads, set the reservation to [ignore idle slots](https://docs.cloud.google.com/bigquery/docs/slots#idle_slots) .
 
 Following is an example of how to configure reservations as tenant compute tiers:
 
@@ -364,7 +376,7 @@ If your tenants operate on dedicated infrastructure, we recommend that you assig
 
 #### Reservations per team
 
-When you work with teams in a data mart setting, we recommend that you create a reservation for each team that requires additional compute. Then assign that reservation to the parent folder that contains the team's projects. All new projects for that team use [fair scheduling](/bigquery/docs/slots#fair_scheduling_in_bigquery) slots from the same allocation of resources.
+When you work with teams in a data mart setting, we recommend that you create a reservation for each team that requires additional compute. Then assign that reservation to the parent folder that contains the team's projects. All new projects for that team use [fair scheduling](https://docs.cloud.google.com/bigquery/docs/slots#fair_scheduling_in_bigquery) slots from the same allocation of resources.
 
 Following is an example of how to configure reservations per team:
 
@@ -383,4 +395,4 @@ For guidance on adhering to regulatory requirements, consult with your sales rep
 
 ## What's next
 
-  - Learn about [IAM best practices](/iam/docs/recommender-best-practices) .
+  - Learn about [IAM best practices](https://docs.cloud.google.com/iam/docs/recommender-best-practices) .

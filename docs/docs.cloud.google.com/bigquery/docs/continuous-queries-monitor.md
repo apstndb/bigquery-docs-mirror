@@ -1,11 +1,11 @@
 # Monitor continuous queries
 
-You can monitor BigQuery [continuous queries](/bigquery/docs/continuous-queries-introduction) by using the following BigQuery tools:
+You can monitor BigQuery [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries-introduction) by using the following BigQuery tools:
 
-  - [`  INFORMATION_SCHEMA  ` views](/bigquery/docs/information-schema-intro)
-  - [Query execution graphs](/bigquery/docs/query-insights#view_query_performance_insights)
-  - [Job history](/bigquery/docs/managing-jobs#view-job)
-  - [Administrative jobs explorer](/bigquery/docs/admin-jobs-explorer)
+  - [`  INFORMATION_SCHEMA  ` views](https://docs.cloud.google.com/bigquery/docs/information-schema-intro)
+  - [Query execution graphs](https://docs.cloud.google.com/bigquery/docs/query-insights#view_query_performance_insights)
+  - [Job history](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job)
+  - [Administrative jobs explorer](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer)
 
 Due to the long running nature of a BigQuery continuous query, metrics that are usually generated upon the completion of a SQL query might be absent or inaccurate.
 
@@ -17,15 +17,17 @@ You can use a number of the `  INFORMATION_SCHEMA  ` views to monitor continuous
 
 ### View job details
 
-You can use the [`  JOBS  `](/bigquery/docs/information-schema-jobs) view to get continuous query job metadata.
+You can use the [`  JOBS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs) view to get continuous query job metadata.
 
 The following query returns the metadata for all active continuous queries. The metadata includes the output watermark timestamp, which represents the point up to which the continuous query has successfully processed data.
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     SELECT
       start_time,
       job_id,
@@ -46,19 +48,21 @@ The following query returns the metadata for all active continuous queries. The 
     Replace the following:
     
       - `  PROJECT_ID  ` : the ID of the project.
-      - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, `  region-us  ` .
+      - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, `  region-us  ` .
 
 ### View reservation assignment details
 
-You can use the [`  ASSIGNMENTS  `](/bigquery/docs/information-schema-assignments) and [`  RESERVATIONS  `](/bigquery/docs/information-schema-reservations) views to get continuous query reservation assignment details.
+You can use the [`  ASSIGNMENTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) and [`  RESERVATIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) views to get continuous query reservation assignment details.
 
 Return reservation assignment details for continuous queries:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     SELECT
       reservation.reservation_name,
       reservation.slot_capacity
@@ -76,21 +80,23 @@ Return reservation assignment details for continuous queries:
     
     Replace the following:
     
-      - `  ADMIN_PROJECT_ID  ` : the ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation.
+      - `  ADMIN_PROJECT_ID  ` : the ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation.
       - `  LOCATION  ` : the location of the reservation.
       - `  PROJECT_ID  ` : the ID of the project that is assigned to the reservation. Only information about continuous queries running in this project is returned.
 
 ### View slot consumption information
 
-You can use the [`  ASSIGNMENTS  `](/bigquery/docs/information-schema-assignments) , [`  RESERVATIONS  `](/bigquery/docs/information-schema-reservations) , and [`  JOBS_TIMELINE  `](/bigquery/docs/information-schema-jobs-timeline) views to get continuous query slot consumption information.
+You can use the [`  ASSIGNMENTS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-assignments) , [`  RESERVATIONS  `](https://docs.cloud.google.com/bigquery/docs/information-schema-reservations) , and [`  JOBS_TIMELINE  `](https://docs.cloud.google.com/bigquery/docs/information-schema-jobs-timeline) views to get continuous query slot consumption information.
 
 Return slot consumption information for continuous queries:
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, run the following query:
     
-    ``` text
+    ``` notranslate
     SELECT
       jobs.period_start,
       reservation.reservation_name,
@@ -120,37 +126,39 @@ Return slot consumption information for continuous queries:
     
     Replace the following:
     
-      - `  ADMIN_PROJECT_ID  ` : the ID of the [administration project](/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation.
+      - `  ADMIN_PROJECT_ID  ` : the ID of the [administration project](https://docs.cloud.google.com/bigquery/docs/reservations-workload-management#admin-project) that owns the reservation.
       - `  LOCATION  ` : the location of the reservation.
       - `  PROJECT_ID  ` : the ID of the project that is assigned to the reservation. Only information about continuous queries running in this project is returned.
 
-You can also monitor continuous query reservations using other tools such as [Metrics Explorer](/monitoring/charts/metrics-explorer) and [administrative resource charts](/bigquery/docs/admin-resource-charts#view-resource-utilization) . For more information, see [Monitor BigQuery reservations](/bigquery/docs/reservations-monitoring) .
+You can also monitor continuous query reservations using other tools such as [Metrics Explorer](https://docs.cloud.google.com/monitoring/charts/metrics-explorer) and [administrative resource charts](https://docs.cloud.google.com/bigquery/docs/admin-resource-charts#view-resource-utilization) . For more information, see [Monitor BigQuery reservations](https://docs.cloud.google.com/bigquery/docs/reservations-monitoring) .
 
 ## Use the query execution graph
 
-You can use the [query execution graph](/bigquery/docs/query-insights#view_query_performance_insights) to get performance insights and general statistics for a continuous query. For more information, see [View query performance insights](/bigquery/docs/query-insights#view_query_performance_insights) .
+You can use the [query execution graph](https://docs.cloud.google.com/bigquery/docs/query-insights#view_query_performance_insights) to get performance insights and general statistics for a continuous query. For more information, see [View query performance insights](https://docs.cloud.google.com/bigquery/docs/query-insights#view_query_performance_insights) .
 
 ## View job history
 
-You can view continuous query job details in your personal job history or the project's job history. For more information, see [View job details](/bigquery/docs/managing-jobs#view-job) .
+You can view continuous query job details in your personal job history or the project's job history. For more information, see [View job details](https://docs.cloud.google.com/bigquery/docs/managing-jobs#view-job) .
 
 Be aware that the historical list of jobs is sorted by the job start time, so continuous queries that have been running for a while might not be close to the start of the list.
 
 ## Use the administrative jobs explorer
 
-In the administrative jobs explorer, [filter your jobs](/bigquery/docs/admin-jobs-explorer#filter-jobs) to show continuous queries by setting the **Job category** filter to **Continuous query** .
+In the administrative jobs explorer, [filter your jobs](https://docs.cloud.google.com/bigquery/docs/admin-jobs-explorer#filter-jobs) to show continuous queries by setting the **Job category** filter to **Continuous query** .
 
 ## Use Cloud Monitoring
 
-You can view metrics specific to BigQuery continuous queries by using Cloud Monitoring. For more information, see [Create dashboards, charts, and alerts](/bigquery/docs/monitoring-dashboard) and read about the [metrics available for visualization](/bigquery/docs/monitoring-dashboard#metrics) .
+You can view metrics specific to BigQuery continuous queries by using Cloud Monitoring. For more information, see [Create dashboards, charts, and alerts](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard) and read about the [metrics available for visualization](https://docs.cloud.google.com/bigquery/docs/monitoring-dashboard#metrics) .
 
 ## Alert on failed queries
 
-Instead of routinely checking whether your continuous queries have failed, it can be helpful to create an alert to notify you of failure. One way to do this is to create a custom [Cloud Logging log-based metric](/logging/docs/logs-based-metrics/counter-metrics) with a filter for your jobs, and a [Cloud Monitoring alerting policy](/monitoring/alerts/using-alerting-ui) based on that metric:
+Instead of routinely checking whether your continuous queries have failed, it can be helpful to create an alert to notify you of failure. One way to do this is to create a custom [Cloud Logging log-based metric](https://docs.cloud.google.com/logging/docs/logs-based-metrics/counter-metrics) with a filter for your jobs, and a [Cloud Monitoring alerting policy](https://docs.cloud.google.com/monitoring/alerts/using-alerting-ui) based on that metric:
 
-1.  When you create a continuous query, use a [custom job ID prefix](/bigquery/docs/continuous-queries#custom-job-id) . Multiple continuous queries can share the same prefix. For example, you might use the prefix `  prod-  ` to indicate a production query.
+1.  When you create a continuous query, use a [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) . Multiple continuous queries can share the same prefix. For example, you might use the prefix `  prod-  ` to indicate a production query.
 
 2.  In the Google Cloud console, go to the **Log-based Metrics** page.
+    
+    [Go to Log-based Metrics](https://console.cloud.google.com/logs/metrics)
 
 3.  Click **Create metric** . The **Create logs metric** panel appears.
 
@@ -160,7 +168,7 @@ Instead of routinely checking whether your continuous queries have failed, it ca
 
 6.  In the **Filter selection** section, enter the following into the **Build filter** editor:
     
-    ``` text
+    ``` lang-none
     resource.type = "bigquery_project"
     protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
     severity = ERROR
@@ -169,7 +177,7 @@ Instead of routinely checking whether your continuous queries have failed, it ca
     Replace the following:
     
       - `  PROJECT_ID  ` : the name of your project.
-      - `  CUSTOM_JOB_ID_PREFIX  ` : the name of the [custom job ID prefix](/bigquery/docs/continuous-queries#custom-job-id) that you set for your continuous query.
+      - `  CUSTOM_JOB_ID_PREFIX  ` : the name of the [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) that you set for your continuous query.
 
 7.  Click **Create metric** .
 
@@ -196,9 +204,9 @@ Retrying a failed continuous query might help avoid situations where a continuou
 
 One possible approach to automating query retry is the following:
 
-1.  Create a [Cloud Logging sink](/logging/docs/export/configure_export_v2#creating_sink) based on an inclusion filter matching the following criteria to route logs to a Pub/Sub topic:
+1.  Create a [Cloud Logging sink](https://docs.cloud.google.com/logging/docs/export/configure_export_v2#creating_sink) based on an inclusion filter matching the following criteria to route logs to a Pub/Sub topic:
     
-    ``` text
+    ``` lang-none
     resource.type = "bigquery_project"
     protoPayload.resourceName : "projects/PROJECT_ID/jobs/CUSTOM_JOB_ID_PREFIX"
     severity = ERROR
@@ -207,9 +215,9 @@ One possible approach to automating query retry is the following:
     Replace the following:
     
       - `  PROJECT_ID  ` : the name of your project.
-      - `  CUSTOM_JOB_ID_PREFIX  ` : the name of the [custom job ID prefix](/bigquery/docs/continuous-queries#custom-job-id) that you set for your continuous query.
+      - `  CUSTOM_JOB_ID_PREFIX  ` : the name of the [custom job ID prefix](https://docs.cloud.google.com/bigquery/docs/continuous-queries#custom-job-id) that you set for your continuous query.
 
-2.  Create a [Cloud Run function](/functions/docs/calling) that is triggered in response to the Pub/Sub receiving logs matching your filter.
+2.  Create a [Cloud Run function](https://docs.cloud.google.com/functions/docs/calling) that is triggered in response to the Pub/Sub receiving logs matching your filter.
     
     The Cloud Run function could accept the data payload from the Pub/Sub message and attempt to start a new continuous query using the same SQL syntax as the failed query, but at beginning just after the previous job stopped.
 
@@ -217,127 +225,125 @@ For example, you can use a function similar to the following:
 
 ### Python
 
-Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](/python/docs/reference/bigquery/latest) .
+Before trying this sample, follow the Python setup instructions in the [BigQuery quickstart using client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries) . For more information, see the [BigQuery Python API reference documentation](https://docs.cloud.google.com/python/docs/reference/bigquery/latest) .
 
-To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](/bigquery/docs/authentication#client-libs) .
+To authenticate to BigQuery, set up Application Default Credentials. For more information, see [Set up authentication for client libraries](https://docs.cloud.google.com/bigquery/docs/authentication#client-libs) .
 
-``` python
-import base64
-import json
-import logging
-import re
-import uuid
-
-import google.auth
-import google.auth.transport.requests
-import requests
-
-
-def retry_continuous_query(event, context):
-    logging.info("Cloud Function started.")
-
-    if "data" not in event:
-        logging.info("No data in Pub/Sub message.")
-        return
-
-    try:
-        # Decode and parse the Pub/Sub message data
-        log_entry = json.loads(base64.b64decode(event["data"]).decode("utf-8"))
-
-        # Extract the SQL query and other necessary data
-        proto_payload = log_entry.get("protoPayload", {})
-        metadata = proto_payload.get("metadata", {})
-        job_change = metadata.get("jobChange", {})
-        job = job_change.get("job", {})
-        job_config = job.get("jobConfig", {})
-        query_config = job_config.get("queryConfig", {})
-        sql_query = query_config.get("query")
-        job_stats = job.get("jobStats", {})
-        end_timestamp = job_stats.get("endTime")
-        failed_job_id = job.get("jobName")
-
-        # Check if required fields are missing
-        if not all([sql_query, failed_job_id, end_timestamp]):
-            logging.error("Required fields missing from log entry.")
+    import base64
+    import json
+    import logging
+    import re
+    import uuid
+    
+    import google.auth
+    import google.auth.transport.requests
+    import requests
+    
+    
+    def retry_continuous_query(event, context):
+        logging.info("Cloud Function started.")
+    
+        if "data" not in event:
+            logging.info("No data in Pub/Sub message.")
             return
-
-        logging.info(f"Retrying failed job: {failed_job_id}")
-
-        # Adjust the timestamp in the SQL query
-        timestamp_match = re.search(
-            r"\s*TIMESTAMP\(('.*?')\)(\s*\+ INTERVAL 1 MICROSECOND)?", sql_query
-        )
-
-        if timestamp_match:
-            original_timestamp = timestamp_match.group(1)
-            new_timestamp = f"'{end_timestamp}'"
-            sql_query = sql_query.replace(original_timestamp, new_timestamp)
-        elif "CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE" in sql_query:
-            new_timestamp = f"TIMESTAMP('{end_timestamp}') + INTERVAL 1 MICROSECOND"
-            sql_query = sql_query.replace(
-                "CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE", new_timestamp
+    
+        try:
+            # Decode and parse the Pub/Sub message data
+            log_entry = json.loads(base64.b64decode(event["data"]).decode("utf-8"))
+    
+            # Extract the SQL query and other necessary data
+            proto_payload = log_entry.get("protoPayload", {})
+            metadata = proto_payload.get("metadata", {})
+            job_change = metadata.get("jobChange", {})
+            job = job_change.get("job", {})
+            job_config = job.get("jobConfig", {})
+            query_config = job_config.get("queryConfig", {})
+            sql_query = query_config.get("query")
+            job_stats = job.get("jobStats", {})
+            end_timestamp = job_stats.get("endTime")
+            failed_job_id = job.get("jobName")
+    
+            # Check if required fields are missing
+            if not all([sql_query, failed_job_id, end_timestamp]):
+                logging.error("Required fields missing from log entry.")
+                return
+    
+            logging.info(f"Retrying failed job: {failed_job_id}")
+    
+            # Adjust the timestamp in the SQL query
+            timestamp_match = re.search(
+                r"\s*TIMESTAMP\(('.*?')\)(\s*\+ INTERVAL 1 MICROSECOND)?", sql_query
             )
-
-        # Get access token
-        credentials, project = google.auth.default(
-            scopes=["https://www.googleapis.com/auth/cloud-platform"]
-        )
-        request = google.auth.transport.requests.Request()
-        credentials.refresh(request)
-        access_token = credentials.token
-
-        # API endpoint
-        url = f"https://bigquery.googleapis.com/bigquery/v2/projects/{project}/jobs"
-
-        # Request headers
-        headers = {
-            "Authorization": f"Bearer {access_token}",
-            "Content-Type": "application/json",
-        }
-
-        # Generate a random UUID
-        random_suffix = str(uuid.uuid4())[:8]  # Take the first 8 characters of the UUID
-
-        # Combine the prefix and random suffix
-        job_id = f"CUSTOM_JOB_ID_PREFIX{random_suffix}"
-
-        # Request payload
-        data = {
-            "configuration": {
-                "query": {
-                    "query": sql_query,
-                    "useLegacySql": False,
-                    "continuous": True,
-                    "connectionProperties": [
-                        {"key": "service_account", "value": "SERVICE_ACCOUNT"}
-                    ],
-                    # ... other query parameters ...
+    
+            if timestamp_match:
+                original_timestamp = timestamp_match.group(1)
+                new_timestamp = f"'{end_timestamp}'"
+                sql_query = sql_query.replace(original_timestamp, new_timestamp)
+            elif "CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE" in sql_query:
+                new_timestamp = f"TIMESTAMP('{end_timestamp}') + INTERVAL 1 MICROSECOND"
+                sql_query = sql_query.replace(
+                    "CURRENT_TIMESTAMP() - INTERVAL 10 MINUTE", new_timestamp
+                )
+    
+            # Get access token
+            credentials, project = google.auth.default(
+                scopes=["https://www.googleapis.com/auth/cloud-platform"]
+            )
+            request = google.auth.transport.requests.Request()
+            credentials.refresh(request)
+            access_token = credentials.token
+    
+            # API endpoint
+            url = f"https://bigquery.googleapis.com/bigquery/v2/projects/{project}/jobs"
+    
+            # Request headers
+            headers = {
+                "Authorization": f"Bearer {access_token}",
+                "Content-Type": "application/json",
+            }
+    
+            # Generate a random UUID
+            random_suffix = str(uuid.uuid4())[:8]  # Take the first 8 characters of the UUID
+    
+            # Combine the prefix and random suffix
+            job_id = f"CUSTOM_JOB_ID_PREFIX{random_suffix}"
+    
+            # Request payload
+            data = {
+                "configuration": {
+                    "query": {
+                        "query": sql_query,
+                        "useLegacySql": False,
+                        "continuous": True,
+                        "connectionProperties": [
+                            {"key": "service_account", "value": "SERVICE_ACCOUNT"}
+                        ],
+                        # ... other query parameters ...
+                    },
+                    "labels": {"bqux_job_id_prefix": "CUSTOM_JOB_ID_PREFIX"},
                 },
-                "labels": {"bqux_job_id_prefix": "CUSTOM_JOB_ID_PREFIX"},
-            },
-            "jobReference": {
-                "projectId": project,
-                "jobId": job_id,  # Use the generated job ID here
-            },
-        }
-
-        # Make the API request
-        response = requests.post(url, headers=headers, json=data)
-
-        # Handle the response
-        if response.status_code == 200:
-            logging.info("Query job successfully created.")
-        else:
-            logging.error(f"Error creating query job: {response.text}")
-
-    except Exception as e:
-        logging.error(
-            f"Error processing log entry or retrying query: {e}", exc_info=True
-        )
-
-    logging.info("Cloud Function finished.")
-```
+                "jobReference": {
+                    "projectId": project,
+                    "jobId": job_id,  # Use the generated job ID here
+                },
+            }
+    
+            # Make the API request
+            response = requests.post(url, headers=headers, json=data)
+    
+            # Handle the response
+            if response.status_code == 200:
+                logging.info("Query job successfully created.")
+            else:
+                logging.error(f"Error creating query job: {response.text}")
+    
+        except Exception as e:
+            logging.error(
+                f"Error processing log entry or retrying query: {e}", exc_info=True
+            )
+    
+        logging.info("Cloud Function finished.")
 
 ## What's next
 
-  - Learn how to create and run [continuous queries](/bigquery/docs/continuous-queries) .
+  - Learn how to create and run [continuous queries](https://docs.cloud.google.com/bigquery/docs/continuous-queries) .

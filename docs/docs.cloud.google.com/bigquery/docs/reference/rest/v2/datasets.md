@@ -1,20 +1,20 @@
-  - [Resource: Dataset](#Dataset)
-      - [JSON representation](#Dataset.SCHEMA_REPRESENTATION)
-  - [DatasetReference](#DatasetReference)
-      - [JSON representation](#DatasetReference.SCHEMA_REPRESENTATION)
-  - [LinkedDatasetSource](#LinkedDatasetSource)
-      - [JSON representation](#LinkedDatasetSource.SCHEMA_REPRESENTATION)
-  - [LinkedDatasetMetadata](#LinkedDatasetMetadata)
-      - [JSON representation](#LinkedDatasetMetadata.SCHEMA_REPRESENTATION)
-  - [LinkState](#LinkState)
-  - [ExternalDatasetReference](#ExternalDatasetReference)
-      - [JSON representation](#ExternalDatasetReference.SCHEMA_REPRESENTATION)
-  - [ExternalCatalogDatasetOptions](#ExternalCatalogDatasetOptions)
-      - [JSON representation](#ExternalCatalogDatasetOptions.SCHEMA_REPRESENTATION)
-  - [GcpTag](#GcpTag)
-      - [JSON representation](#GcpTag.SCHEMA_REPRESENTATION)
-  - [StorageBillingModel](#StorageBillingModel)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: Dataset](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#Dataset.SCHEMA_REPRESENTATION)
+  - [DatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#DatasetReference.SCHEMA_REPRESENTATION)
+  - [LinkedDatasetSource](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetSource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetSource.SCHEMA_REPRESENTATION)
+  - [LinkedDatasetMetadata](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetMetadata)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkedDatasetMetadata.SCHEMA_REPRESENTATION)
+  - [LinkState](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#LinkState)
+  - [ExternalDatasetReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalDatasetReference.SCHEMA_REPRESENTATION)
+  - [ExternalCatalogDatasetOptions](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalCatalogDatasetOptions)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#ExternalCatalogDatasetOptions.SCHEMA_REPRESENTATION)
+  - [GcpTag](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#GcpTag)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#GcpTag.SCHEMA_REPRESENTATION)
+  - [StorageBillingModel](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#StorageBillingModel)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/datasets#METHODS_SUMMARY)
 
 ## Resource: Dataset
 
@@ -31,7 +31,7 @@ Represents a BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;id&quot;: string,
@@ -399,7 +399,7 @@ Identifier for a dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;datasetId&quot;: string,
   &quot;projectId&quot;: string
 }</code></pre></td>
@@ -436,7 +436,7 @@ A dataset source type which refers to another BigQuery dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceDataset&quot;: {
     object (DatasetReference)
   }
@@ -468,7 +468,7 @@ Metadata about the Linked Dataset.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;linkState&quot;: enum (LinkState)
 }</code></pre></td>
 </tr>
@@ -516,7 +516,7 @@ Configures the access a dataset defined in an external metadata storage.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;externalSource&quot;: string,
   &quot;connection&quot;: string
 }</code></pre></td>
@@ -555,7 +555,7 @@ Options defining open source compatible datasets living in the BigQuery catalog.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parameters&quot;: {
     string: string,
     ...
@@ -595,7 +595,7 @@ A global tag managed by Resource Manager. <https://cloud.google.com/iam/docs/tag
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;tagKey&quot;: string,
   &quot;tagValue&quot;: string
 }</code></pre></td>

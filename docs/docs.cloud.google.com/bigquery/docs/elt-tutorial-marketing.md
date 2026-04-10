@@ -4,7 +4,7 @@ This tutorial shows you how to set up an ELT workflow that extracts, loads, and 
 
 A typical ELT workflow periodically extracts new customer data from your data source and loads it into BigQuery. The unstructured data is then processed into meaningful metrics. In this tutorial, you create an ELT workflow by setting up a marketing analytics data transfer by using the BigQuery Data Transfer Service. Then, you schedule Dataform to run periodic transformations on the data.
 
-In this tutorial, you use Google Ads as your data source, but you can use any of the [data sources supported by the BigQuery Data Transfer Service](/bigquery/docs/dts-introduction#supported_data_sources) .
+In this tutorial, you use Google Ads as your data source, but you can use any of the [data sources supported by the BigQuery Data Transfer Service](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) .
 
 ## Before you begin
 
@@ -12,20 +12,22 @@ In this tutorial, you use Google Ads as your data source, but you can use any of
 
 To get the permissions that you need to complete this tutorial, ask your administrator to grant you the following IAM roles on the project:
 
-  - [BigQuery Admin](/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
-  - [Dataform Admin](/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` )
+  - [BigQuery Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/bigquery#bigquery.admin) ( `  roles/bigquery.admin  ` )
+  - [Dataform Admin](https://docs.cloud.google.com/iam/docs/roles-permissions/dataform#dataform.admin) ( `  roles/dataform.admin  ` )
 
-For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
-You might also be able to get the required permissions through [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get the required permissions through [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
 ## Schedule recurring data transfers
 
 To keep BigQuery up to date with the latest marketing data from your data source, set up recurring data transfers using the BigQuery Data Transfer Service to extract and load data on a schedule.
 
-In this tutorial, you use Google Ads as the example data source. For a full list of data sources supported by the BigQuery Data Transfer Service, see [Supported data sources](/bigquery/docs/dts-introduction#supported_data_sources) .
+In this tutorial, you use Google Ads as the example data source. For a full list of data sources supported by the BigQuery Data Transfer Service, see [Supported data sources](https://docs.cloud.google.com/bigquery/docs/dts-introduction#supported_data_sources) .
 
 1.  Go to the Data transfers page in the Google Cloud console.
+    
+    [Go to Data transfers](https://console.cloud.google.com/bigquery/transfers)
 
 2.  Click add **Create transfer** .
 
@@ -34,7 +36,7 @@ In this tutorial, you use Google Ads as the example data source. For a full list
 4.  In the **Data source details** section:
     
     1.  For **Customer ID** , enter your Google Ads customer ID.
-    2.  For **Report type** , select **Standard** . The standard report includes the standard set of reports and fields as detailed in [Google Ads report transformation](/bigquery/docs/google-ads-transformation) .
+    2.  For **Report type** , select **Standard** . The standard report includes the standard set of reports and fields as detailed in [Google Ads report transformation](https://docs.cloud.google.com/bigquery/docs/google-ads-transformation) .
           - For **Refresh window** , enter `  5  ` .
 
 5.  In the **Destination settings** section, for **Dataset** , select the dataset that you created to store your data.
@@ -50,13 +52,13 @@ In this tutorial, you use Google Ads as the example data source. For a full list
 
 After you save the configuration, the BigQuery Data Transfer Service begins the data transfer. Based on the settings in the transfer configuration, the data transfer runs once every day at 8:00 AM UTC and extracts data from Google Ads from the past five days.
 
-You can [monitor ongoing transfer jobs](/bigquery/docs/dts-monitor) to check the status of each data transfer.
+You can [monitor ongoing transfer jobs](https://docs.cloud.google.com/bigquery/docs/dts-monitor) to check the status of each data transfer.
 
 ## Query table data
 
-When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](/bigquery/docs/partitioned-tables) .
+When your data is transferred to BigQuery, the data is written to ingestion-time partitioned tables. For more information, see [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) .
 
-If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](/bigquery/docs/querying-partitioned-tables) .
+If you query your tables directly instead of using the auto-generated views, you must use the `  _PARTITIONTIME  ` pseudocolumn in your query. For more information, see [Querying partitioned tables](https://docs.cloud.google.com/bigquery/docs/querying-partitioned-tables) .
 
 The following sections show sample queries that you can use to examine your transferred data.
 
@@ -66,7 +68,7 @@ The following sample query analyzes Google Ads campaign performance for the past
 
 ### Console
 
-``` text
+``` notranslate
 SELECT
   c.customer_id,
   c.campaign_name,
@@ -92,7 +94,7 @@ ORDER BY
 
 ### bq
 
-``` text
+``` notranslate
   bq query --use_legacy_sql=false '
   SELECT
     c.customer_id,
@@ -128,7 +130,7 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### Console
 
-``` text
+``` 
   SELECT
     c.campaign_status AS CampaignStatus,
     a.ad_group_status AS AdGroupStatus,
@@ -153,7 +155,7 @@ The following sample query analyzes keywords by campaign, ad group, and keyword 
 
 ### bq
 
-``` text
+``` notranslate
   bq query --use_legacy_sql=false '
   SELECT
     c.campaign_status AS CampaignStatus,
@@ -186,9 +188,11 @@ Replace the following:
 
 After you create the data transfer configuration to transfer the latest data from Google Ads, set up Dataform to regularly transform your marketing analytics data. Dataform lets you schedule regular data transformations, and it lets you define these transformations with SQL while collaborating with other data analysts.
 
-Create a Dataform repository to store the [SQLX queries](/dataform/docs/overview#dataform-core) that make up your transformation code.
+Create a Dataform repository to store the [SQLX queries](https://docs.cloud.google.com/dataform/docs/overview#dataform-core) that make up your transformation code.
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click add **Create repository** .
 
@@ -200,13 +204,15 @@ Create a Dataform repository to store the [SQLX queries](/dataform/docs/overview
 
 The `  marketing-tutorial-repository  ` repository now appears in your Dataform repositories list.
 
-For more information about Dataform repositories, see [About Dataform repositories](/dataform/docs/create-repository#about-repositories) .
+For more information about Dataform repositories, see [About Dataform repositories](https://docs.cloud.google.com/dataform/docs/create-repository#about-repositories) .
 
 ## Create and initialize a Dataform development workspace
 
 Create a Dataform development workspace so that you can work on the transformation code within your repository before you commit and push your changes to your repository.
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click `  marketing-tutorial-repository  ` .
 
@@ -223,7 +229,7 @@ Create a Dataform development workspace so that you can work on the transformati
 
 The `  marketing-tutorial-workspace  ` development workspace now appears in your `  marketing-tutorial-repository  ` repository under the **Development Workspaces** tab, along with two example files in the `  definitions  ` directory called `  *first_view.sqlx  ` and `  *second_view.sqlx  ` .
 
-For more information about Dataform development workspaces, see [Overview of development workspaces](/dataform/docs/create-workspace#overview-workspaces) .
+For more information about Dataform development workspaces, see [Overview of development workspaces](https://docs.cloud.google.com/dataform/docs/create-workspace#overview-workspaces) .
 
 ## Declare your Google Ads table as table source
 
@@ -234,6 +240,8 @@ Connect your newly-transferred Google Ads table to Dataform by declaring it as a
 In Dataform, you declare a data source destination by creating a SQLX file in the `  definitions/  ` directory:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `  marketing-tutorial-repository  ` .
 
@@ -256,7 +264,7 @@ Edit the `  definitions/googleads-declaration.sqlx  ` to declare a transferred G
 
 2.  In the file, enter the following code snippet:
     
-    ``` text
+    ``` 
         config {
             type: "declaration",
             database: "PROJECT_ID",
@@ -281,7 +289,7 @@ Define your data transformations by create a SQLX file in the `  definitions/  `
 
 2.  Select `  daily_performance.sqlx  ` , then enter the following query:
     
-    ``` text
+    ``` 
         config {
             type: "table",
             schema: "reporting",
@@ -322,6 +330,8 @@ After you have defined your data transformation file, schedule the data transfor
 A production release in Dataform ensures that your environment is consistently updated with the results of your data transformations. The following steps show you how to specify the `  main  ` branch of the `  marketing-tutorial-repository  ` repository to store your data transformations:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `  marketing-tutorial-repository  ` .
 
@@ -342,6 +352,8 @@ A production release in Dataform ensures that your environment is consistently u
 Once you have created a production release, you can then create a workflow configuration that runs your data transformations on a specified schedule in your repository. The following steps show you how to schedule daily transformations from the `  transformations  ` file:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to the Dataform page](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Select `  marketing-tutorial-repository  ` .
 
@@ -357,12 +369,10 @@ Once you have created a production release, you can then create a workflow confi
 
 8.  In the **Schedule frequency** section, do the following:
     
-    ``` text
-    1. Select **Repeat**.
-    1. For **Repeats**, select `Daily`.
-    1. For **At time**, enter `10:00 AM`.
-    1. For **Timezone**, select `Coordinated Universal Time (UTC)`.
-    ```
+        1. Select **Repeat**.
+        1. For **Repeats**, select `Daily`.
+        1. For **At time**, enter `10:00 AM`.
+        1. For **Timezone**, select `Coordinated Universal Time (UTC)`.
 
 9.  Click **Selection of tags** .
 
@@ -381,6 +391,8 @@ To avoid incurring charges to your Google Cloud account for the resources used o
 To avoid incurring charges for BigQuery assets, delete the dataset called `  dataform  ` .
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Explorer** panel, expand your project and select `  dataform  ` .
 
@@ -393,6 +405,8 @@ To avoid incurring charges for BigQuery assets, delete the dataset called `  dat
 Dataform development workspace creation incurs no costs, but to delete the development workspace you can follow these steps:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  Click `  quickstart-repository  ` .
 
@@ -411,6 +425,8 @@ Dataform development workspace creation incurs no costs, but to delete the devel
 Dataform repository creation incurs no costs, but to delete the repository you can follow these steps:
 
 1.  In the Google Cloud console, go to the **Dataform** page.
+    
+    [Go to Dataform](https://console.cloud.google.com/bigquery/dataform)
 
 2.  By `  quickstart-repository  ` , click the more\_vert **More** menu, and then select **Delete** .
 

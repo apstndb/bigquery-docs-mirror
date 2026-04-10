@@ -8,24 +8,24 @@ Federated queries let you send a query statement to AlloyDB, Spanner, or Cloud S
 
 You can use federated queries with the following data stores:
 
-  - [Spanner](/bigquery/docs/spanner-federated-queries)
-  - [Cloud SQL](/bigquery/docs/cloud-sql-federated-queries)
-  - [AlloyDB](/bigquery/docs/alloydb-federated-queries)
-  - [SAP Datasphere](/bigquery/docs/sap-datasphere-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
+  - [Spanner](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries)
+  - [Cloud SQL](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries)
+  - [AlloyDB](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries)
+  - [SAP Datasphere](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries) ( [Preview](https://cloud.google.com/products/#product-launch-stages) )
 
 ## Workflow
 
   - Identify the Google Cloud project that includes the data source that you want to query.
   - A `  bigquery.admin  ` user creates a connection resource in BigQuery.
-  - The admin user [grants permission to use the connection resource](/bigquery/docs/working-with-connections#share-connections) to user B.
+  - The admin user [grants permission to use the connection resource](https://docs.cloud.google.com/bigquery/docs/working-with-connections#share-connections) to user B.
       - If the admin and user B are the same person, there is no need to grant permission.
-  - User B writes a query in BigQuery with the new [`  EXTERNAL_QUERY  `](/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) SQL function.
+  - User B writes a query in BigQuery with the new [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) SQL function.
 
 **Caution:** The performance of federated queries might be lower than queries that read data residing in BigQuery storage.
 
 ## Alternatives to federated queries: external tables and datasets
 
-Another option to query operational databases such as Bigtable, Spanner, Cloud Storage, Google Drive, and Salesforce Data Cloud, is to use external tables and datasets. External datasets and tables let you view tables and their schemas and query them without using an [`  EXTERNAL_QUERY  `](/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) SQL function. You don't have to bring data back into BigQuery and you can use the BigQuery syntax instead of writing in the specific SQL database dialect of SQL.
+Another option to query operational databases such as Bigtable, Spanner, Cloud Storage, Google Drive, and Salesforce Data Cloud, is to use external tables and datasets. External datasets and tables let you view tables and their schemas and query them without using an [`  EXTERNAL_QUERY  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#external_query) SQL function. You don't have to bring data back into BigQuery and you can use the BigQuery syntax instead of writing in the specific SQL database dialect of SQL.
 
 ## Supported regions
 
@@ -35,9 +35,9 @@ For a list of supported locations, see the following sections:
 
 Federated queries are only supported in regions that support both the external data source and BigQuery.
 
-  - [Cloud SQL instance location](/sql/docs/mysql/locations) .
-  - [AlloyDB locations](/alloydb/docs/locations) .
-  - [BigQuery dataset locations](/bigquery/docs/locations) .
+  - [Cloud SQL instance location](https://docs.cloud.google.com/sql/docs/mysql/locations) .
+  - [AlloyDB locations](https://docs.cloud.google.com/alloydb/docs/locations) .
+  - [BigQuery dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 You can create a connection and run a federated query across regions according to the following rules:
 
@@ -45,11 +45,11 @@ You can create a connection and run a federated query across regions according t
 
 A BigQuery single region can only query a resource in the same region.
 
-For example, if your dataset is in `  us-east4  ` , you can query Cloud SQL instances or AlloyDB instances that are located in `  us-east4  ` . The [query processing location](/bigquery/docs/locations#specify_locations) is the BigQuery single region.
+For example, if your dataset is in `  us-east4  ` , you can query Cloud SQL instances or AlloyDB instances that are located in `  us-east4  ` . The [query processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) is the BigQuery single region.
 
 **Multi-regions**
 
-A BigQuery multi-region can query any data source region in the same large geographic area (US, EU). [Multi-regional locations](/sql/docs/mysql/locations) aren't available for Cloud SQL instances, because these are only used for backups.
+A BigQuery multi-region can query any data source region in the same large geographic area (US, EU). [Multi-regional locations](https://docs.cloud.google.com/sql/docs/mysql/locations) aren't available for Cloud SQL instances, because these are only used for backups.
 
   - A query that runs in the BigQuery US multi-region can query any single region in the US geographic area, such as `  us-central1  ` , `  us-east4  ` , or `  us-west2  ` .
     
@@ -63,24 +63,24 @@ A BigQuery multi-region can query any data source region in the same large geogr
 
 The query performance varies based on the proximity between the dataset and the external data source. For example, a federated query between a dataset in the US multi-region and a Cloud SQL instance in `  us-central1  ` is fast. However, if you run the same query between the US multi-region and a Cloud SQL instance in `  us-east4  ` , the performance might be slower.
 
-The [query processing location](/bigquery/docs/locations#specify_locations) is the multi-region location, either `  US  ` or `  EU  ` .
+The [query processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) is the multi-region location, either `  US  ` or `  EU  ` .
 
 ### Spanner
 
-For [Spanner, both regional and multi-regional configurations](/spanner/docs/instance-configurations) are supported. A BigQuery single region/multi-region can query a Spanner instance in any supported Spanner region. For more details refer to [cross region queries](/bigquery/docs/spanner-federated-queries#cross_region_queries) .
+For [Spanner, both regional and multi-regional configurations](https://docs.cloud.google.com/spanner/docs/instance-configurations) are supported. A BigQuery single region/multi-region can query a Spanner instance in any supported Spanner region. For more details refer to [cross region queries](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries#cross_region_queries) .
 
 ## Data type mappings
 
-When you execute a federated query, the data from the external data source is converted to GoogleSQL types. For more information, see [Cloud SQL federated queries](/bigquery/docs/cloud-sql-federated-queries) .
+When you execute a federated query, the data from the external data source is converted to GoogleSQL types. For more information, see [Cloud SQL federated queries](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) .
 
 ## Quotas and limits
 
-  - **Cross-region federated querying** . If the [BigQuery query processing location](/bigquery/docs/locations#specify_locations) and the external data source location are different, this is a cross-region query. You can run up to 1 TB in cross-region queries per project per day. The following is an example of a cross-region query.
+  - **Cross-region federated querying** . If the [BigQuery query processing location](https://docs.cloud.google.com/bigquery/docs/locations#specify_locations) and the external data source location are different, this is a cross-region query. You can run up to 1 TB in cross-region queries per project per day. The following is an example of a cross-region query.
       - The Cloud SQL instance is in `  us-west1  ` while the BigQuery connection is based in the US multi-region. The BigQuery query processing location is `  US  ` .
   - **Quota** . Users should control query quota in the external data source, such as Cloud SQL or AlloyDB. There is no extra quota setting for federated querying. To achieve workload isolation, it's recommended to only query a database read replica.
   - **Maximum bytes billed allowed** . This field isn't supported for federated queries. Calculating the bytes billed before actually executing the federated queries isn't possible.
   - **Number of connections** . A federated query can have at most 10 unique connections.
-  - **Cloud SQL [MySQL](/sql/docs/mysql/quotas) and [PostgreSQL](/sql/docs/postgres/quotas)** . Quotas and limitations apply.
+  - **Cloud SQL [MySQL](https://docs.cloud.google.com/sql/docs/mysql/quotas) and [PostgreSQL](https://docs.cloud.google.com/sql/docs/postgres/quotas)** . Quotas and limitations apply.
 
 ## Limitations
 
@@ -88,7 +88,7 @@ Federated queries are subject to the following limitations:
 
   - **Performance** . A federated query is likely to not be as fast as querying only BigQuery storage. BigQuery needs to wait for the source database to execute the external query and temporarily move data from the external data source to BigQuery. Also, the source database might not be optimized for complex analytical queries.
     
-    The query performance also varies based on the proximity between the dataset and the external data source. For more information, see [Supported regions](/bigquery/docs/federated-queries-intro#supported_regions) .
+    The query performance also varies based on the proximity between the dataset and the external data source. For more information, see [Supported regions](https://docs.cloud.google.com/bigquery/docs/federated-queries-intro#supported_regions) .
 
   - **Federated queries are read-only** . The external query that is executed in the source database must be read-only. Therefore, DML or DDL statements are not supported.
 
@@ -108,7 +108,7 @@ Federated queries are subject to the optimization technique known as SQL pushdow
 
 When you use the `  EXTERNAL_QUERY  ` function, SQL pushdowns work by rewriting the original query. In the following example, the `  EXTERNAL_QUERY  ` function is used to communicate with a Cloud SQL database:
 
-``` text
+``` notranslate
 SELECT COUNT(*)
 FROM (
   SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
@@ -120,7 +120,7 @@ Replace `  CONNECTION_ID  ` with the ID of the BigQuery connection.
 
 Without SQL pushdowns, the following query is sent to Cloud SQL:
 
-``` text
+``` notranslate
 SELECT *
 FROM operations_table
 ```
@@ -129,7 +129,7 @@ When this query is executed, the entire table is sent back to BigQuery, even tho
 
 With SQL pushdowns, the following query is sent to Cloud SQL:
 
-``` text
+``` notranslate
 SELECT `a`, `b`
 FROM (
   SELECT * FROM operations_table) t
@@ -138,9 +138,9 @@ WHERE ((`a` = 'Y') AND (NOT `b` IN ('COMPLETE', 'CANCELLED')))
 
 When this query is executed, only two columns and the rows that match the filtering predicate are sent back to BigQuery.
 
-SQL pushdowns are also applied when running federated queries with [Spanner external datasets](/bigquery/docs/spanner-external-datasets) .
+SQL pushdowns are also applied when running federated queries with [Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
 
-You can examine applied pushdowns (if any) in the [query plan](/bigquery/docs/query-plan-explanation#explanation_for_federated_queries) .
+You can examine applied pushdowns (if any) in the [query plan](https://docs.cloud.google.com/bigquery/docs/query-plan-explanation#explanation_for_federated_queries) .
 
 ### Limitations
 
@@ -185,7 +185,7 @@ The following are supported SQL functions by data source. No functions are suppo
 
   - **Arithmetic operators:** `  +  ` , `  -  ` , `  *  ` , `  /  ` (only for `  INT64  ` , `  FLOAT64  ` , `  NUMERIC  ` ).
 
-  - When using [external datasets](/bigquery/docs/spanner-external-datasets) , additionally:
+  - When using [external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) , additionally:
     
       - **Compute** pushdown
       - **Partial Aggregate** pushdown
@@ -198,16 +198,16 @@ The following are supported SQL functions by data source. No functions are suppo
     
       - `  NULL  ` values sort first in ascending order by default, unlike PostgreSQL where they sort last by default.
     
-      - PostgreSQL `  NUMERIC  ` values read from Spanner are handled in accordance with the [Spanner to BigQuery type mapping](/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping) . For example, if a numeric column has the `  1.1234567891  ` value, then the following query returns 0 rows:
+      - PostgreSQL `  NUMERIC  ` values read from Spanner are handled in accordance with the [Spanner to BigQuery type mapping](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/federated_query_functions#spanner-mapping) . For example, if a numeric column has the `  1.1234567891  ` value, then the following query returns 0 rows:
         
-        ``` text
+        ``` notranslate
         SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "SELECT * from
         operations_table where numeric_col = 1.123456789")
         ```
         
         However the following statement returns 1 row based on GoogleSQL semantics:
         
-        ``` text
+        ``` notranslate
         SELECT * from operations_table where numeric_col = 1.123456789
         ```
     
@@ -219,7 +219,7 @@ The following are supported SQL functions by data source. No functions are suppo
   - **Comparison operators:** `  =  ` , `  >  ` , `  >=  ` , `  <  ` , `  <=  ` , `  <>  ` , `  IN  ` , `  BETWEEN  ` , `  IS NULL  ` .
   - **Arithmetic operators:** `  +  ` , `  -  ` , `  *  ` , `  /  ` (only for `  INT64  ` , `  FLOAT64  ` , `  NUMERIC  ` ).
   - **Safe arithmetic operators:** `  SAFE_ADD  ` , `  SAFE_SUBTRACT  ` , `  SAFE_MULTIPLY  ` , `  SAFE_DIVIDE  ` (only for `  INT64  ` , `  FLOAT64  ` , `  NUMERIC  ` ).
-  - When using [external datasets](/bigquery/docs/spanner-external-datasets) , additionally:
+  - When using [external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) , additionally:
       - **Compute** pushdown,
       - **Partial Aggregate** pushdown,
       - **String** functions,
@@ -233,7 +233,7 @@ An external data source might have a collation set on a column (for example, cas
 
 Consider the following example where you have a `  flag  ` column with a case-insensitive collation in the external data source:
 
-``` text
+``` notranslate
 SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table where flag = 'Y'")
 ```
 
@@ -243,7 +243,7 @@ The preceding query returns rows where `  flag  ` is `  y  ` or `  Y  ` because 
 
 However, for query federation with Cloud SQL, SAP Datasphere, or AlloyDB data sources, if you add a filter on your main query, the query is executed on the BigQuery side with the default collation. See the following query:
 
-``` text
+``` notranslate
 SELECT * FROM
   (
     SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
@@ -251,9 +251,9 @@ SELECT * FROM
 WHERE flag = 'Y'
 ```
 
-Due to the default case-sensitive [collation](/bigquery/docs/reference/standard-sql/collation-concepts) in BigQuery, the preceding query only returns rows where the flag is `  Y  ` and filters out rows where the flag is `  y  ` . To make your `  WHERE  ` clause case-insensitive, specify the collation in the query:
+Due to the default case-sensitive [collation](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/collation-concepts) in BigQuery, the preceding query only returns rows where the flag is `  Y  ` and filters out rows where the flag is `  y  ` . To make your `  WHERE  ` clause case-insensitive, specify the collation in the query:
 
-``` text
+``` notranslate
 SELECT * FROM
   (
     SELECT * FROM EXTERNAL_QUERY("CONNECTION_ID", "select * from operations_table")
@@ -263,8 +263,8 @@ WHERE COLLATE(flag, 'und:ci') = 'Y'
 
 ## What's next
 
-  - Learn how to [query Spanner data](/bigquery/docs/spanner-federated-queries) .
-  - Learn how to [create Spanner external datasets](/bigquery/docs/spanner-external-datasets) .
-  - Learn how to [query Cloud SQL data](/bigquery/docs/cloud-sql-federated-queries) .
-  - Learn how to [query AlloyDB data](/bigquery/docs/alloydb-federated-queries) .
-  - Learn how to [query SAP Datasphere data](/bigquery/docs/sap-datasphere-federated-queries)
+  - Learn how to [query Spanner data](https://docs.cloud.google.com/bigquery/docs/spanner-federated-queries) .
+  - Learn how to [create Spanner external datasets](https://docs.cloud.google.com/bigquery/docs/spanner-external-datasets) .
+  - Learn how to [query Cloud SQL data](https://docs.cloud.google.com/bigquery/docs/cloud-sql-federated-queries) .
+  - Learn how to [query AlloyDB data](https://docs.cloud.google.com/bigquery/docs/alloydb-federated-queries) .
+  - Learn how to [query SAP Datasphere data](https://docs.cloud.google.com/bigquery/docs/sap-datasphere-federated-queries)

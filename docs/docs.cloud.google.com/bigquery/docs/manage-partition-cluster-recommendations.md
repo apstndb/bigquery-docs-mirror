@@ -4,38 +4,17 @@ This document describes how the partition and cluster recommender works, how to 
 
 ## How the recommender works
 
-The BigQuery partitioning and clustering recommender generates [partition](/bigquery/docs/partitioned-tables) or [cluster](/bigquery/docs/clustered-tables) recommendations to optimize your BigQuery tables. The recommender analyzes workflows on your BigQuery tables and offers recommendations to better optimize your workflows and query costs using either table partitioning or table clustering.
+The BigQuery partitioning and clustering recommender generates [partition](https://docs.cloud.google.com/bigquery/docs/partitioned-tables) or [cluster](https://docs.cloud.google.com/bigquery/docs/clustered-tables) recommendations to optimize your BigQuery tables. The recommender analyzes workflows on your BigQuery tables and offers recommendations to better optimize your workflows and query costs using either table partitioning or table clustering.
 
-For more information about the Recommender service, see the [Recommender overview](/recommender/docs/overview) .
+For more information about the Recommender service, see the [Recommender overview](https://docs.cloud.google.com/recommender/docs/overview) .
 
 The partitioning and clustering recommender uses your organization's workload execution data from up to 30 days in the past to analyze each BigQuery table for suboptimal partitioning and clustering configurations. The recommender also uses machine learning to predict how much the workload execution could be optimized with different partitioning or clustering configurations. If the recommender finds that partitioning or clustering a table yields significant savings, the recommender generates a recommendation. The partitioning and clustering recommender generates the following types of recommendations:
 
-<table>
-<thead>
-<tr class="header">
-<th>Existing table type</th>
-<th>Recommendation subtype</th>
-<th>Recommendation example</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Non-partitioned, non-clustered</td>
-<td>Partition</td>
-<td>"Save about 64 slot hours per month by partitioning on column_C by DAY"</td>
-</tr>
-<tr class="even">
-<td>Non-partitioned, non-clustered</td>
-<td>Cluster</td>
-<td>"Save about 64 slot hours per month by clustering on column_C"</td>
-</tr>
-<tr class="odd">
-<td>Partitioned, non-clustered</td>
-<td>Cluster</td>
-<td>"Save about 64 slot hours per month by clustering on column_C"</td>
-</tr>
-</tbody>
-</table>
+| Existing table type            | Recommendation subtype | Recommendation example                                                   |
+| ------------------------------ | ---------------------- | ------------------------------------------------------------------------ |
+| Non-partitioned, non-clustered | Partition              | "Save about 64 slot hours per month by partitioning on column\_C by DAY" |
+| Non-partitioned, non-clustered | Cluster                | "Save about 64 slot hours per month by clustering on column\_C"          |
+| Partitioned, non-clustered     | Cluster                | "Save about 64 slot hours per month by clustering on column\_C"          |
 
 Each recommendation consists of three parts:
 
@@ -45,17 +24,17 @@ Each recommendation consists of three parts:
 
 To calculate potential workload savings, the recommender assumes that the historical execution workload data from the past 30 days represents the future workload.
 
-**Note:** In some cases, the estimated savings might be overestimated. For more information, see [Overestimation of savings](#overestimation) .
+**Note:** In some cases, the estimated savings might be overestimated. For more information, see [Overestimation of savings](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#overestimation) .
 
-The recommender API also returns table workload information in the form of *insights* . [Insights](/recommender/docs/insights/using-insights) are findings that help you understand your project's workload, providing more context on how a partition or cluster recommendation might improve workload costs.
+The recommender API also returns table workload information in the form of *insights* . [Insights](https://docs.cloud.google.com/recommender/docs/insights/using-insights) are findings that help you understand your project's workload, providing more context on how a partition or cluster recommendation might improve workload costs.
 
 ## Limitations
 
   - The partitioning and clustering recommender does not support BigQuery tables with legacy SQL. When generating a recommendation, the recommender excludes any legacy SQL queries in its analysis. Additionally, applying partition recommendations on BigQuery tables with legacy SQL breaks any legacy SQL workflows in that table.
     
-    Before you apply partition recommendations, [migrate your legacy SQL workflows into GoogleSQL](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) .
+    Before you apply partition recommendations, [migrate your legacy SQL workflows into GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql) .
 
-  - BigQuery does not support changing the partitioning scheme of a table in place. You can only change the partitioning of a table on a copy of the table. For more information, see [Apply partition recommendations](#apply_partition_recommendations) .
+  - BigQuery does not support changing the partitioning scheme of a table in place. You can only change the partitioning of a table on a copy of the table. For more information, see [Apply partition recommendations](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#apply_partition_recommendations) .
 
   - The partitioning and clustering recommender runs daily. However, if the run takes longer than 24 hours to complete, the following day's run is skipped.
 
@@ -117,7 +96,7 @@ Belgium
 
 `  europe-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Berlin
 
@@ -135,19 +114,19 @@ London
 
 `  europe-west2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Netherlands
 
 `  europe-west4  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Zürich
 
 `  europe-west6  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 **Americas**
 
@@ -155,7 +134,7 @@ Iowa
 
 `  us-central1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Las Vegas
 
@@ -169,7 +148,7 @@ Montréal
 
 `  northamerica-northeast1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Northern Virginia
 
@@ -179,7 +158,7 @@ Oregon
 
 `  us-west1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Salt Lake City
 
@@ -189,13 +168,13 @@ São Paulo
 
 `  southamerica-east1  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 Toronto
 
 `  northamerica-northeast2  `
 
-[Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
+![leaf icon](https://cloud.google.com/sustainability/region-carbon/gleaf.svg) [Low CO <sub>2</sub>](https://cloud.google.com/sustainability/region-carbon#region-picker)
 
 US multi-region
 
@@ -203,11 +182,11 @@ US multi-region
 
 ## Before you begin
 
-  - [Enable the Recommender API](/recommender/docs/enable-api) .
+  - [Enable the Recommender API](https://docs.cloud.google.com/recommender/docs/enable-api) .
 
 ### Required permissions
 
-To get the permissions that you need to access partition and cluster recommendations, ask your administrator to grant you the [BigQuery Partitioning Clustering Recommender Viewer](/iam/docs/roles-permissions/recommender#recommender.bigqueryPartitionClusterViewer) ( `  roles/recommender.bigqueryPartitionClusterViewer  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to access partition and cluster recommendations, ask your administrator to grant you the [BigQuery Partitioning Clustering Recommender Viewer](https://docs.cloud.google.com/iam/docs/roles-permissions/recommender#recommender.bigqueryPartitionClusterViewer) ( `  roles/recommender.bigqueryPartitionClusterViewer  ` ) IAM role. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to access partition and cluster recommendations. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -218,21 +197,23 @@ The following permissions are required to access partition and cluster recommend
   - `  recommender.bigqueryPartitionClusterRecommendations.get  `
   - `  recommender.bigqueryPartitionClusterRecommendations.list  `
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](/bigquery/docs/access-control) .
+For more information about IAM roles and permissions in BigQuery, see [Introduction to IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## View recommendations
 
 This section describes how to view partition and cluster recommendations and insights using the Google Cloud console, the Google Cloud CLI, or the Recommender API.
 
-**Note:** You can also export recommendations to BigQuery using the BigQuery Data Transfer Service. For more information, see [Export recommendations to BigQuery](/recommender/docs/bq-export/export-recommendations-to-bq) .
+**Note:** You can also export recommendations to BigQuery using the BigQuery Data Transfer Service. For more information, see [Export recommendations to BigQuery](https://docs.cloud.google.com/recommender/docs/bq-export/export-recommendations-to-bq) .
 
 Select one of the following options:
 
 ### Console
 
 1.  In the Google Cloud console, go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the navigation menu, click **Recommendations** .
     
@@ -241,133 +222,75 @@ Select one of the following options:
 3.  In the **Optimize BigQuery workload cost** panel, click **View all** .
     
     The cost recommendation table lists all recommendations generated for the current project. For example, the following screenshot shows that the recommender analyzed the `  example_table  ` table, and then recommended clustering the `  example_column  ` column to save an approximate amount of bytes and slots.
+    
+    ![Recommendation table with partitioning and clustering recommendations.](https://docs.cloud.google.com/static/bigquery/images/rec-table-example.png)
 
 4.  To see more information about the table insight and recommendation, click a recommendation.
 
 ### gcloud
 
-To view partition or cluster recommendations for a specific project, use the [`  gcloud recommender recommendations list  ` command](/sdk/gcloud/reference/recommender/recommendations/list) :
+To view partition or cluster recommendations for a specific project, use the [`  gcloud recommender recommendations list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/recommendations/list) :
 
-``` text
-gcloud recommender recommendations list \
-    --project=PROJECT_NAME \
-    --location=REGION_NAME \
-    --recommender=google.bigquery.table.PartitionClusterRecommender \
-    --format=FORMAT_TYPE \
-```
+    gcloud recommender recommendations list \
+        --project=PROJECT_NAME \
+        --location=REGION_NAME \
+        --recommender=google.bigquery.table.PartitionClusterRecommender \
+        --format=FORMAT_TYPE \
 
 Replace the following:
 
   - `  PROJECT_NAME  ` : the name of the project that contains your BigQuery table
   - `  REGION_NAME  ` : the region that your project is in
-  - `  FORMAT_TYPE  ` : a supported [gcloud CLI output format](/sdk/gcloud/reference#--format) —for example, JSON
+  - `  FORMAT_TYPE  ` : a supported [gcloud CLI output format](https://docs.cloud.google.com/sdk/gcloud/reference#--format) —for example, JSON
 
 The following table describes the important fields from the recommender API response:
 
-<table>
-<thead>
-<tr class="header">
-<th>Property</th>
-<th>Relevant for subtype</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         recommenderSubtype        </code></td>
-<td>Partition or cluster</td>
-<td>Indicates the type of recommendation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.overview.partitionColumn        </code></td>
-<td>Partition</td>
-<td>Recommended partitioning column name.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.overview.partitionTimeUnit        </code></td>
-<td>Partition</td>
-<td>Recommended partitioning time unit. For example, <code dir="ltr" translate="no">         DAY        </code> means the recommendation is to have daily partitions on the recommended column.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.overview.clusterColumns        </code></td>
-<td>Cluster</td>
-<td>Recommended clustering column names.</td>
-</tr>
-</tbody>
-</table>
+| Property                                                | Relevant for subtype | Description                                                                                                                                               |
+| ------------------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          recommenderSubtype         `                 | Partition or cluster | Indicates the type of recommendation.                                                                                                                     |
+| `          content.overview.partitionColumn         `   | Partition            | Recommended partitioning column name.                                                                                                                     |
+| `          content.overview.partitionTimeUnit         ` | Partition            | Recommended partitioning time unit. For example, `          DAY         ` means the recommendation is to have daily partitions on the recommended column. |
+| `          content.overview.clusterColumns         `    | Cluster              | Recommended clustering column names.                                                                                                                      |
 
-  - For more information about other fields in the recommender response, see [REST Resource: `  projects.locations.recommendersrecommendation  `](/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
-  - For more information about using the Recommender API, see [Using the API - Recommendations](/recommender/docs/using-api) .
+  - For more information about other fields in the recommender response, see [REST Resource: `  projects.locations.recommendersrecommendation  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
+  - For more information about using the Recommender API, see [Using the API - Recommendations](https://docs.cloud.google.com/recommender/docs/using-api) .
 
-To view table insights using the gcloud CLI, use the [`  gcloud recommender insights list  ` command](/sdk/gcloud/reference/recommender/insights/list) :
+To view table insights using the gcloud CLI, use the [`  gcloud recommender insights list  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/recommender/insights/list) :
 
-``` text
-gcloud recommender insights list \
-    --project=PROJECT_NAME \
-    --location=REGION_NAME \
-    --insight-type=google.bigquery.table.StatsInsight \
-    --format=FORMAT_TYPE \
-```
+    gcloud recommender insights list \
+        --project=PROJECT_NAME \
+        --location=REGION_NAME \
+        --insight-type=google.bigquery.table.StatsInsight \
+        --format=FORMAT_TYPE \
 
 Replace the following:
 
   - `  PROJECT_NAME  ` : the name of the project that contains your BigQuery table
   - `  REGION_NAME  ` : the region that your project is in
-  - `  FORMAT_TYPE  ` : a supported [gcloud CLI output format](/sdk/gcloud/reference#--format) —for example, JSON
+  - `  FORMAT_TYPE  ` : a supported [gcloud CLI output format](https://docs.cloud.google.com/sdk/gcloud/reference#--format) —for example, JSON
 
 The following table describes the important fields from the insights API response:
 
-<table>
-<thead>
-<tr class="header">
-<th>Property</th>
-<th>Relevant for subtype</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.existingPartitionColumn        </code></td>
-<td>Cluster</td>
-<td>Existing partitioning column, if any</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.tableSizeTb        </code></td>
-<td>All</td>
-<td>Size of the table in terabytes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.bytesReadMonthly        </code></td>
-<td>All</td>
-<td>Monthly bytes read from the table</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.slotMsConsumedMonthly        </code></td>
-<td>All</td>
-<td>Monthly slot milliseconds consumed by the workload running on the table</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.queryJobsCountMonthly        </code></td>
-<td>All</td>
-<td>Monthly count of jobs running on the table</td>
-</tr>
-</tbody>
-</table>
+| Property                                             | Relevant for subtype | Description                                                             |
+| ---------------------------------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `          content.existingPartitionColumn         ` | Cluster              | Existing partitioning column, if any                                    |
+| `          content.tableSizeTb         `             | All                  | Size of the table in terabytes                                          |
+| `          content.bytesReadMonthly         `        | All                  | Monthly bytes read from the table                                       |
+| `          content.slotMsConsumedMonthly         `   | All                  | Monthly slot milliseconds consumed by the workload running on the table |
+| `          content.queryJobsCountMonthly         `   | All                  | Monthly count of jobs running on the table                              |
 
-  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
-  - For more information about using insights, see [Using the API - Insights](/recommender/docs/insights/using-api) .
+  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
+  - For more information about using insights, see [Using the API - Insights](https://docs.cloud.google.com/recommender/docs/insights/using-api) .
 
 ### REST API
 
-To view partition or cluster recommendations for a specific project, use the REST API. With each command, you must provide an authentication token, which you can get using the gcloud CLI. For more information about getting an authentication token, see [Methods for getting an ID token](/docs/authentication/get-id-token) .
+To view partition or cluster recommendations for a specific project, use the REST API. With each command, you must provide an authentication token, which you can get using the gcloud CLI. For more information about getting an authentication token, see [Methods for getting an ID token](https://docs.cloud.google.com/docs/authentication/get-id-token) .
 
 You can use the `  curl list  ` request to view all recommendations for a specific project:
 
-``` text
-curl
-    -H "Authorization: Bearer $GCLOUD_AUTH_TOKEN"
-    -H "x-goog-user-project: PROJECT_NAME" https://recommender.googleapis.com/v1/projects/my-project/locations/us/recommenders/google.bigquery.table.PartitionClusterRecommender/recommendations
-```
+    curl
+        -H "Authorization: Bearer $GCLOUD_AUTH_TOKEN"
+        -H "x-goog-user-project: PROJECT_NAME" https://recommender.googleapis.com/v1/projects/my-project/locations/us/recommenders/google.bigquery.table.PartitionClusterRecommender/recommendations
 
 Replace the following:
 
@@ -376,48 +299,21 @@ Replace the following:
 
 The following table describes the important fields from the recommender API response:
 
-<table>
-<thead>
-<tr class="header">
-<th>Property</th>
-<th>Relevant for subtype</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         recommenderSubtype        </code></td>
-<td>Partition or cluster</td>
-<td>Indicates the type of recommendation.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.overview.partitionColumn        </code></td>
-<td>Partition</td>
-<td>Recommended partitioning column name.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.overview.partitionTimeUnit        </code></td>
-<td>Partition</td>
-<td>Recommended partitioning time unit. For example, <code dir="ltr" translate="no">         DAY        </code> means the recommendation is to have daily partitions on the recommended column.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.overview.clusterColumns        </code></td>
-<td>Cluster</td>
-<td>Recommended clustering column names.</td>
-</tr>
-</tbody>
-</table>
+| Property                                                | Relevant for subtype | Description                                                                                                                                               |
+| ------------------------------------------------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `          recommenderSubtype         `                 | Partition or cluster | Indicates the type of recommendation.                                                                                                                     |
+| `          content.overview.partitionColumn         `   | Partition            | Recommended partitioning column name.                                                                                                                     |
+| `          content.overview.partitionTimeUnit         ` | Partition            | Recommended partitioning time unit. For example, `          DAY         ` means the recommendation is to have daily partitions on the recommended column. |
+| `          content.overview.clusterColumns         `    | Cluster              | Recommended clustering column names.                                                                                                                      |
 
-  - For more information about other fields in the recommender response, see [REST Resource: `  projects.locations.recommendersrecommendation  `](/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
-  - For more information about using the Recommender API, see [Using the API - Recommendations](/recommender/docs/using-api) .
+  - For more information about other fields in the recommender response, see [REST Resource: `  projects.locations.recommendersrecommendation  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.recommenders.recommendations#resource:-recommendation) .
+  - For more information about using the Recommender API, see [Using the API - Recommendations](https://docs.cloud.google.com/recommender/docs/using-api) .
 
 To view table insights using the REST API, run the following command:
 
-``` text
-curl
--H "Authorization: Bearer $GCLOUD_AUTH_TOKEN"
--H "x-goog-user-project: PROJECT_NAME" https://recommender.googleapis.com/v1/projects/my-project/locations/us/insightTypes/google.bigquery.table.StatsInsight/insights
-```
+    curl
+    -H "Authorization: Bearer $GCLOUD_AUTH_TOKEN"
+    -H "x-goog-user-project: PROJECT_NAME" https://recommender.googleapis.com/v1/projects/my-project/locations/us/insightTypes/google.bigquery.table.StatsInsight/insights
 
 Replace the following:
 
@@ -426,105 +322,72 @@ Replace the following:
 
 The following table describes the important fields from the insights API response:
 
-<table>
-<thead>
-<tr class="header">
-<th>Property</th>
-<th>Relevant for subtype</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.existingPartitionColumn        </code></td>
-<td>Cluster</td>
-<td>Existing partitioning column, if any</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.tableSizeTb        </code></td>
-<td>All</td>
-<td>Size of the table in terabytes</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.bytesReadMonthly        </code></td>
-<td>All</td>
-<td>Monthly bytes read from the table</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         content.slotMsConsumedMonthly        </code></td>
-<td>All</td>
-<td>Monthly slot milliseconds consumed by the workload running on the table</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         content.queryJobsCountMonthly        </code></td>
-<td>All</td>
-<td>Monthly count of jobs running on the table</td>
-</tr>
-</tbody>
-</table>
+| Property                                             | Relevant for subtype | Description                                                             |
+| ---------------------------------------------------- | -------------------- | ----------------------------------------------------------------------- |
+| `          content.existingPartitionColumn         ` | Cluster              | Existing partitioning column, if any                                    |
+| `          content.tableSizeTb         `             | All                  | Size of the table in terabytes                                          |
+| `          content.bytesReadMonthly         `        | All                  | Monthly bytes read from the table                                       |
+| `          content.slotMsConsumedMonthly         `   | All                  | Monthly slot milliseconds consumed by the workload running on the table |
+| `          content.queryJobsCountMonthly         `   | All                  | Monthly count of jobs running on the table                              |
 
-  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
-  - For more information about using insights, see [Using the API - Insights](/recommender/docs/insights/using-api) .
+  - For more information about other fields in the insights response, see [REST Resource: `  projects.locations.insightTypes.insights  `](https://docs.cloud.google.com/recommender/docs/reference/rest/v1/projects.locations.insightTypes.insights#resource:-insight) .
+  - For more information about using insights, see [Using the API - Insights](https://docs.cloud.google.com/recommender/docs/insights/using-api) .
 
 ### View recommendations with `     INFORMATION_SCHEMA    `
 
 You can also view your recommendations and insights using `  INFORMATION_SCHEMA  ` views. For example, you can use the `  INFORMATION_SCHEMA.RECOMMENDATIONS  ` view to view your top three recommendations based on slots savings, as seen in the following example:
 
-``` text
-SELECT
-   recommender,
-   target_resources,
-   LAX_INT64(additional_details.overview.bytesSavedMonthly) / POW(1024, 3) as est_gb_saved_monthly,
-   LAX_INT64(additional_details.overview.slotMsSavedMonthly) / (1000 * 3600) as slot_hours_saved_monthly,
-  last_updated_time
-FROM
-  `region-us`.INFORMATION_SCHEMA.RECOMMENDATIONS
-WHERE
-   primary_impact.category = 'COST'
-AND
-   state = 'ACTIVE'
-ORDER by
-   slot_hours_saved_monthly DESC
-LIMIT 3;
-```
+    SELECT
+       recommender,
+       target_resources,
+       LAX_INT64(additional_details.overview.bytesSavedMonthly) / POW(1024, 3) as est_gb_saved_monthly,
+       LAX_INT64(additional_details.overview.slotMsSavedMonthly) / (1000 * 3600) as slot_hours_saved_monthly,
+      last_updated_time
+    FROM
+      `region-us`.INFORMATION_SCHEMA.RECOMMENDATIONS
+    WHERE
+       primary_impact.category = 'COST'
+    AND
+       state = 'ACTIVE'
+    ORDER by
+       slot_hours_saved_monthly DESC
+    LIMIT 3;
 
 **Note:** `  INFORMATION_SCHEMA  ` view names are case sensitive.
 
 The result is similar to the following:
 
-``` text
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------+
-|                    recommender                    |   target_resources      | est_gb_saved_monthly | slot_hours_saved_monthly |  last_updated_time
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------+
-| google.bigquery.materializedview.Recommender      | ["project_resource"]    | 140805.38289248943   |        9613.139166666666 |  2024-07-01 13:00:00
-| google.bigquery.table.PartitionClusterRecommender | ["table_resource_1"]    | 4393.7416711859405   |        56.61476777777777 |  2024-07-01 13:00:00
-| google.bigquery.table.PartitionClusterRecommender | ["table_resource_2"]    |   3934.07264107652   |       10.499466666666667 |  2024-07-01 13:00:00
-+---------------------------------------------------+--------------------------------------------------------------------------------------------------+
-```
+    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+    |                    recommender                    |   target_resources      | est_gb_saved_monthly | slot_hours_saved_monthly |  last_updated_time
+    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
+    | google.bigquery.materializedview.Recommender      | ["project_resource"]    | 140805.38289248943   |        9613.139166666666 |  2024-07-01 13:00:00
+    | google.bigquery.table.PartitionClusterRecommender | ["table_resource_1"]    | 4393.7416711859405   |        56.61476777777777 |  2024-07-01 13:00:00
+    | google.bigquery.table.PartitionClusterRecommender | ["table_resource_2"]    |   3934.07264107652   |       10.499466666666667 |  2024-07-01 13:00:00
+    +---------------------------------------------------+--------------------------------------------------------------------------------------------------+
 
 For more information, see the following resources:
 
-  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS  ` view](/bigquery/docs/information-schema-recommendations)
-  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION  ` view](/bigquery/docs/information-schema-recommendations-by-org)
-  - [`  INFORMATION_SCHEMA.INSIGHTS  ` view](/bigquery/docs/information-schema-insights)
+  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations)
+  - [`  INFORMATION_SCHEMA.RECOMMENDATIONS_BY_ORGANIZATION  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-recommendations-by-org)
+  - [`  INFORMATION_SCHEMA.INSIGHTS  ` view](https://docs.cloud.google.com/bigquery/docs/information-schema-insights)
 
 ## Apply cluster recommendations
 
 To apply cluster recommendations, do one of the following:
 
-  - [Apply clusters directly to the original table](#apply_clusters_directly_to_the_original_table)
-  - [Apply clusters to a copied table](#apply_clusters_to_a_copied_table)
-  - [Apply clusters in a materialized view](#apply_clusters_in_a_materialized_view)
+  - [Apply clusters directly to the original table](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#apply_clusters_directly_to_the_original_table)
+  - [Apply clusters to a copied table](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#apply_clusters_to_a_copied_table)
+  - [Apply clusters in a materialized view](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#apply_clusters_in_a_materialized_view)
 
 ### Apply clusters directly to the original table
 
-You can apply cluster recommendations directly to an existing BigQuery table. This method is quicker than [applying recommendations to a copied table](#apply_clusters_to_a_copied_table) , but it does not preserve a backup table.
+You can apply cluster recommendations directly to an existing BigQuery table. This method is quicker than [applying recommendations to a copied table](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#apply_clusters_to_a_copied_table) , but it does not preserve a backup table.
 
 Follow these steps to apply a new clustering specification to unpartitioned or partitioned tables.
 
 1.  In the bq tool, update the clustering specification of your table to match the new clustering:
     
-    ``` text
+    ``` 
      bq update --clustering_fields=CLUSTER_COLUMN DATASET.ORIGINAL_TABLE 
     ```
     
@@ -534,11 +397,11 @@ Follow these steps to apply a new clustering specification to unpartitioned or p
       - `  DATASET  ` : the name of the dataset containing the table—for example, `  mydataset  `
       - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `  mytable  `
     
-    You can also call the `  tables.update  ` or `  tables.patch  ` API method to [modify the clustering specification](/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+    You can also call the `  tables.update  ` or `  tables.patch  ` API method to [modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
 2.  To cluster all rows according to the new clustering specification, run the following `  UPDATE  ` statement:
     
-    ``` text
+    ``` notranslate
     UPDATE DATASET.ORIGINAL_TABLE SET CLUSTER_COLUMN=CLUSTER_COLUMN WHERE true
     ```
     
@@ -551,10 +414,12 @@ When you apply cluster recommendations to a BigQuery table, you can first copy t
 You can use this method to apply cluster recommendations to both unpartitioned and partitioned tables.
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the query editor, create an empty table with the same metadata (including the clustering specifications) of the original table by using the `  LIKE  ` operator:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE DATASET.COPIED_TABLE
     LIKE DATASET.ORIGINAL_TABLE
     ```
@@ -566,20 +431,22 @@ You can use this method to apply cluster recommendations to both unpartitioned a
       - `  ORIGINAL_TABLE  ` : the name of your original table—for example, `  mytable  `
 
 3.  In the Google Cloud console, open the Cloud Shell Editor.
+    
+    [Activate Cloud Shell](https://console.cloud.google.com/bigquery?cloudshell=true)
 
 4.  In the Cloud Shell Editor, update the clustering specification of the copied table to match the recommended clustering by using the `  bq update  ` command:
     
-    ``` text
+    ``` 
      bq update --clustering_fields=CLUSTER_COLUMN DATASET.COPIED_TABLE 
     ```
     
     Replace `  CLUSTER_COLUMN  ` with the column you are clustering on—for example, `  mycolumn  ` .
     
-    You can also call the `  tables.update  ` or `  tables.patch  ` API method to [modify the clustering specification](/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
+    You can also call the `  tables.update  ` or `  tables.patch  ` API method to [modify the clustering specification](https://docs.cloud.google.com/bigquery/docs/manage-clustered-tables#modifying-cluster-spec) .
 
 5.  In the query editor, retrieve the table schema with the partitioning and clustering configuration of the original table, if any partitioning or clustering exists. You can retrieve the schema by viewing the `  INFORMATION_SCHEMA.TABLES  ` view of the original table:
     
-    ``` text
+    ``` notranslate
     SELECT
       ddl
     FROM
@@ -588,7 +455,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
       table_name = 'ORIGINAL_TABLE'
     ```
     
-    The output is the full data definition language (DDL) statement of ORIGINAL\_TABLE , including the `  PARTITION BY  ` clause. For more information about the arguments in your DDL output, see [`  CREATE TABLE  ` statement](/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
+    The output is the full data definition language (DDL) statement of ORIGINAL\_TABLE , including the `  PARTITION BY  ` clause. For more information about the arguments in your DDL output, see [`  CREATE TABLE  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#create_table_statement) .
     
     The DDL output indicates the type of partitioning in the original table:
     
@@ -598,7 +465,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
     
       - If the original table is non-partitioned or partitioned by a table column, ingest the data from the original table to the copied table:
         
-        ``` text
+        ``` notranslate
         INSERT INTO DATASET.COPIED_TABLE
         SELECT * FROM DATASET.ORIGINAL_TABLE
         ```
@@ -607,7 +474,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
         
         1.  Retrieve the list of columns to form the data ingestion expression by using the `  INFORMATION_SCHEMA.COLUMNS  ` view:
             
-            ``` text
+            ``` notranslate
             SELECT
             ARRAY_TO_STRING((
             SELECT
@@ -624,7 +491,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
         
         2.  Ingest the data from the original table to the copied table:
             
-            ``` text
+            ``` notranslate
             INSERT DATASET.COPIED_TABLE (COLUMN_NAMES, _PARTITIONTIME)
             SELECT *, _PARTITIONTIME FROM DATASET.ORIGINAL_TABLE
             ```
@@ -635,7 +502,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 7.  Rename the original table to a backup table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE DATASET.ORIGINAL_TABLE
     RENAME TO BACKUP_TABLE
     ```
@@ -644,7 +511,7 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 8.  Rename the copied table to the original table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE DATASET.COPIED_TABLE
     RENAME TO ORIGINAL_TABLE
     ```
@@ -653,30 +520,30 @@ You can use this method to apply cluster recommendations to both unpartitioned a
 
 We recommend that you review the clustered table to ensure that all table functions work as intended. Many table functions are likely tied to the table ID and not the table name, so it is best to review the following table functions before proceeding:
 
-  - Access and permissions, such as [IAM permissions](/bigquery/docs/access-control#bq-permissions) , [row-level access,](/bigquery/docs/row-level-security-intro) or [column-level access](/bigquery/docs/column-level-security-intro) .
-  - Table artifacts such as [table clones](/bigquery/docs/table-clones-intro) , [table snapshots](/bigquery/docs/table-snapshots-intro) , or [search indexes](/bigquery/docs/search-index) .
-  - The status of any ongoing table processes, such as any [materialized views](/bigquery/docs/materialized-views-intro) or any jobs that ran when you copied the table.
-  - The ability to access historical table data using [time travel](/bigquery/docs/time-travel) .
-  - Any metadata associated with the original table—for example, `  table_option_list  ` or `  column_option_list  ` . For more information, see [Data definition language statements](/bigquery/docs/reference/standard-sql/data-definition-language) .
+  - Access and permissions, such as [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) , [row-level access,](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) or [column-level access](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .
+  - Table artifacts such as [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or [search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) .
+  - The status of any ongoing table processes, such as any [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) or any jobs that ran when you copied the table.
+  - The ability to access historical table data using [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+  - Any metadata associated with the original table—for example, `  table_option_list  ` or `  column_option_list  ` . For more information, see [Data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
 
 If any issues arise, you must manually migrate the affected artifacts to the new table.
 
 After reviewing the clustered table, you can optionally delete the backup table with the following command:
 
-``` text
+``` notranslate
     DROP TABLE DATASET.BACKUP_TABLE
     
 ```
 
 ### Apply clusters in a materialized view
 
-You can create a materialized view of the table to store data from the original table with the recommendation applied. Using materialized views to apply recommendations ensures that the clustered data is kept up to date using [automatic refreshes](/bigquery/docs/materialized-views-manage#automatic-refresh) . There are [pricing considerations](/bigquery/docs/materialized-views-intro#materialized_views_pricing) when you query, maintain, and store materialized views. To learn how to create a clustered materialized view, see [Clustered materialized views](/bigquery/docs/materialized-views-create#cluster_materialized_views) .
+You can create a materialized view of the table to store data from the original table with the recommendation applied. Using materialized views to apply recommendations ensures that the clustered data is kept up to date using [automatic refreshes](https://docs.cloud.google.com/bigquery/docs/materialized-views-manage#automatic-refresh) . There are [pricing considerations](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro#materialized_views_pricing) when you query, maintain, and store materialized views. To learn how to create a clustered materialized view, see [Clustered materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-create#cluster_materialized_views) .
 
 ## Apply partition recommendations
 
 To apply partition recommendations, you must apply it to a copy of the original table. BigQuery does not support the changing of a partitioning scheme of a table in place, such as changing an unpartitioned table to a partitioned table, changing the partitioning scheme of a table, or creating a materialized view with a different partitioning scheme from the base table. You can only change the partitioning of a table on a copy of the table.
 
-**Caution:** Migrate your legacy SQL workflows to GoogleSQL before applying partition recommendations. For more information, see [Limitations](/bigquery/docs/manage-partition-cluster-recommendations#limitations) .
+**Caution:** Migrate your legacy SQL workflows to GoogleSQL before applying partition recommendations. For more information, see [Limitations](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#limitations) .
 
 ### Apply partition recommendations to a copied table
 
@@ -686,7 +553,7 @@ The following procedure uses an example recommendation to partition a table by t
 
 1.  Create a copied table using the partition recommendations:
     
-    ``` text
+    ``` notranslate
     CREATE TABLE DATASET.COPIED_TABLE
     PARTITION BY DATE_TRUNC(PARTITION_COLUMN, DAY)
     AS SELECT * FROM DATASET.ORIGINAL_TABLE
@@ -698,11 +565,11 @@ The following procedure uses an example recommendation to partition a table by t
       - `  COPIED_TABLE  ` : a name for your copied table—for example, `  copy_mytable  `
       - `  PARTITION_COLUMN  ` : the column you are partitioning on—for example, `  mycolumn  `
     
-    For more information about creating partitioned tables, see [Creating partitioned tables](/bigquery/docs/creating-partitioned-tables) .
+    For more information about creating partitioned tables, see [Creating partitioned tables](https://docs.cloud.google.com/bigquery/docs/creating-partitioned-tables) .
 
 2.  Rename the original table to a backup table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE DATASET.ORIGINAL_TABLE
     RENAME TO BACKUP_TABLE
     ```
@@ -711,7 +578,7 @@ The following procedure uses an example recommendation to partition a table by t
 
 3.  Rename the copied table to the original table:
     
-    ``` text
+    ``` notranslate
     ALTER TABLE DATASET.COPIED_TABLE
     RENAME TO ORIGINAL_TABLE
     ```
@@ -720,18 +587,18 @@ The following procedure uses an example recommendation to partition a table by t
 
 We recommend that you review the partitioned table to ensure that all table functions work as intended. Many table functions are likely tied to the table ID and not the table name, so it is best to review the following table functions before proceeding:
 
-  - Access and permissions, such as [IAM permissions](/bigquery/docs/access-control#bq-permissions) , [row-level access,](/bigquery/docs/row-level-security-intro) or [column-level access](/bigquery/docs/column-level-security-intro) .
-  - Table artifacts such as [table clones](/bigquery/docs/table-clones-intro) , [table snapshots](/bigquery/docs/table-snapshots-intro) , or [search indexes](/bigquery/docs/search-index) .
-  - The status of any ongoing table processes, such as any [materialized views](/bigquery/docs/materialized-views-intro) or any jobs that ran when you copied the table.
-  - The ability to access historical table data using [time travel](/bigquery/docs/time-travel) .
-  - Any metadata associated with the original table—for example, `  table_option_list  ` or `  column_option_list  ` . For more information, see [Data definition language statements](/bigquery/docs/reference/standard-sql/data-definition-language) .
-  - Ability to use legacy SQL to write query results into partitioned tables. The use of legacy SQL is [not fully supported in partitioned tables](/bigquery/docs/partitioned-tables#limitations) . One solution is to [migrate your legacy SQL workflows into GoogleSQL](/bigquery/docs/partitioned-tables#limitations) before applying a partition recommendation.
+  - Access and permissions, such as [IAM permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) , [row-level access,](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) or [column-level access](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) .
+  - Table artifacts such as [table clones](https://docs.cloud.google.com/bigquery/docs/table-clones-intro) , [table snapshots](https://docs.cloud.google.com/bigquery/docs/table-snapshots-intro) , or [search indexes](https://docs.cloud.google.com/bigquery/docs/search-index) .
+  - The status of any ongoing table processes, such as any [materialized views](https://docs.cloud.google.com/bigquery/docs/materialized-views-intro) or any jobs that ran when you copied the table.
+  - The ability to access historical table data using [time travel](https://docs.cloud.google.com/bigquery/docs/time-travel) .
+  - Any metadata associated with the original table—for example, `  table_option_list  ` or `  column_option_list  ` . For more information, see [Data definition language statements](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language) .
+  - Ability to use legacy SQL to write query results into partitioned tables. The use of legacy SQL is [not fully supported in partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#limitations) . One solution is to [migrate your legacy SQL workflows into GoogleSQL](https://docs.cloud.google.com/bigquery/docs/partitioned-tables#limitations) before applying a partition recommendation.
 
 If any issues arise, you must manually migrate the affected artifacts to the new table.
 
 After reviewing the partitioned table, you can optionally delete the backup table with the following command:
 
-``` text
+``` notranslate
     DROP TABLE DATASET.BACKUP_TABLE
     
 ```
@@ -759,7 +626,7 @@ If you have a specific clustering recommendation that you want to verify, you ca
 
 This query searches your job history for instances where a single job scans the same table across more than 10 distinct execution stages.
 
-``` text
+``` notranslate
 SELECT
   job_id,
   project_id,
@@ -823,10 +690,10 @@ Cluster recommendations might not appear for tables that meet these criteria:
 
 Both partition and cluster recommendations might be suppressed when:
 
-  - The table has a high write cost from [data manipulation language (DML) operations](/bigquery/docs/data-manipulation-language) .
+  - The table has a high write cost from [data manipulation language (DML) operations](https://docs.cloud.google.com/bigquery/docs/data-manipulation-language) .
   - The table was not read in the past 30 days.
   - The estimated monthly savings is too insignificant (less than 1 slot hour of savings).
 
 **Issue:** The estimated savings appear disproportionately large.
 
-Estimated monthly savings might be overestimated if your workload involves complex queries that reference the same table multiple times across many distinct execution stages. For more information, see [Overestimation of savings](#overestimation) .
+Estimated monthly savings might be overestimated if your workload involves complex queries that reference the same table multiple times across many distinct execution stages. For more information, see [Overestimation of savings](https://docs.cloud.google.com/bigquery/docs/manage-partition-cluster-recommendations#overestimation) .

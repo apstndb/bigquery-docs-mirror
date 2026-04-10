@@ -1,10 +1,10 @@
-  - [Resource: DataPolicy](#DataPolicy)
-      - [JSON representation](#DataPolicy.SCHEMA_REPRESENTATION)
-  - [DataMaskingPolicy](#DataMaskingPolicy)
-      - [JSON representation](#DataMaskingPolicy.SCHEMA_REPRESENTATION)
-  - [PredefinedExpression](#PredefinedExpression)
-  - [DataPolicyType](#DataPolicyType)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: DataPolicy](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#DataPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#DataPolicy.SCHEMA_REPRESENTATION)
+  - [DataMaskingPolicy](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#DataMaskingPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#DataMaskingPolicy.SCHEMA_REPRESENTATION)
+  - [PredefinedExpression](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#PredefinedExpression)
+  - [DataPolicyType](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#DataPolicyType)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/bigquerydatapolicy/rest/v1beta1/projects.locations.dataPolicies#METHODS_SUMMARY)
 
 ## Resource: DataPolicy
 
@@ -21,7 +21,7 @@ Represents the label-policy binding.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;dataPolicyType&quot;: enum (DataPolicyType),
   &quot;dataPolicyId&quot;: string,
@@ -91,7 +91,7 @@ The data masking policy that is used to specify data masking rule.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field masking_expression can be only one of the following:
   &quot;predefinedExpression&quot;: enum (PredefinedExpression)

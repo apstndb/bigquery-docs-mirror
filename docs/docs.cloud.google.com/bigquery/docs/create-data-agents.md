@@ -2,27 +2,29 @@
 
 **Preview**
 
-This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
+This feature is subject to the "Pre-GA Offerings Terms" in the General Service Terms section of the [Service Specific Terms](https://docs.cloud.google.com/terms/service-terms#1) . Pre-GA features are available "as is" and might have limited support. For more information, see the [launch stage descriptions](https://cloud.google.com/products/#product-launch-stages) .
 
 **Note:** To provide feedback or request support for this feature, send an email to <bqca-feedback-external@google.com> .
 
 This document describes how to create, edit, manage, and delete data agents in BigQuery.
 
-In BigQuery, you can have [conversations](/bigquery/docs/ca/create-conversations) with data agents to ask questions about BigQuery data using natural language. Data agents contain table metadata and use-case-specific query processing instructions that define the best way to answer user questions about a set of knowledge sources, such as tables, views, or user-defined functions (UDFs) that you select.
+In BigQuery, you can have [conversations](https://docs.cloud.google.com/bigquery/docs/ca/create-conversations) with data agents to ask questions about BigQuery data using natural language. Data agents contain table metadata and use-case-specific query processing instructions that define the best way to answer user questions about a set of knowledge sources, such as tables, views, or user-defined functions (UDFs) that you select.
 
 ## Before you begin
 
-1.  [Verify that billing is enabled for your Google Cloud project](/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
+1.  [Verify that billing is enabled for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/verify-billing-enabled#confirm_billing_is_enabled_on_a_project) .
 
 2.  Enable the BigQuery, Gemini Data Analytics, and Gemini for Google Cloud APIs.
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
+    
+    [Enable the APIs](https://console.cloud.google.com/flows/enableapi?apiid=bigquery.googleapis.com,geminidataanalytics.googleapis.com,cloudaicompanion.googleapis.com)
 
 ### Required roles
 
-To work with data agents, you must have one of the following [Conversational Analytics API Identity and Access Management roles](/gemini/docs/conversational-analytics-api/access-control) :
+To work with data agents, you must have one of the following [Conversational Analytics API Identity and Access Management roles](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control) :
 
   - Create, edit, share, and delete all data agents in the project: Gemini Data Analytics Data Agent Owner ( `  roles/geminidataanalytics.dataAgentOwner  ` ) on the project.
   - Create, edit, share, and delete your own data agents in the project: Gemini Data Analytics Data Agent Creator ( `  roles/geminidataanalytics.dataAgentCreator  ` ) on the project. This role automatically grants you the Gemini Data Analytics Data Agent Owner role on the data agents that you create.
@@ -34,11 +36,11 @@ Additionally, you must have the following roles to create or edit a data agent:
   - Gemini Data Analytics Stateless Chat User ( `  roles/geminidataanalytics.dataAgentStatelessUser  ` ).
   - BigQuery Data Viewer ( `  roles/bigquery.dataViewer  ` ) on any table that the data agent uses as a knowledge source.
   - Data Catalog Viewer ( `  roles/datacatalog.catalogViewer  ` ) on the project
-  - If a data table uses [column-level access control](/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](/bigquery/docs/column-level-security-intro#roles) .
-  - If a data table uses [row-level access control](/bigquery/docs/row-level-security-intro) , you must have the row-level access policy on that table. For more information, see [Create or update row-level access policies](/bigquery/docs/managing-row-level-security#create-policy) .
-  - If a data table uses [data masking](/bigquery/docs/column-data-masking-intro) , Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) on the appropriate data policy. For more information, see [Roles for querying masked data](/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
+  - If a data table uses [column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro) , Fine-Grained Reader ( `  roles/datacatalog.categoryFineGrainedReader  ` ) on the appropriate policy tag. For more information, see [Roles used with column-level access control](https://docs.cloud.google.com/bigquery/docs/column-level-security-intro#roles) .
+  - If a data table uses [row-level access control](https://docs.cloud.google.com/bigquery/docs/row-level-security-intro) , you must have the row-level access policy on that table. For more information, see [Create or update row-level access policies](https://docs.cloud.google.com/bigquery/docs/managing-row-level-security#create-policy) .
+  - If a data table uses [data masking](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro) , Masked Reader ( `  roles/bigquerydatapolicy.maskedReader  ` ) on the appropriate data policy. For more information, see [Roles for querying masked data](https://docs.cloud.google.com/bigquery/docs/column-data-masking-intro#roles_for_querying_masked_data) .
 
-To work with BigQuery resources, such as viewing tables or running queries, see [BigQuery roles](/bigquery/docs/access-control#bigquery-roles) .
+To work with BigQuery resources, such as viewing tables or running queries, see [BigQuery roles](https://docs.cloud.google.com/bigquery/docs/access-control#bigquery-roles) .
 
 ## Best practices
 
@@ -52,7 +54,7 @@ To prevent this issue, consider size when selecting knowledge sources, and when 
 
 ### Generate insights
 
-You can optionally [generate data insights](/dataplex/docs/data-insights) in Dataplex Universal Catalog for any table that you want to use as a knowledge source.
+You can optionally [generate data insights](https://docs.cloud.google.com/dataplex/docs/data-insights) in Dataplex Universal Catalog for any table that you want to use as a knowledge source.
 
 Generated insights provide table metadata that the data agent can use to help generate responses to your questions.
 
@@ -65,6 +67,8 @@ If you're unfamiliar with configuring agents for conversational analytics, you c
 To view the sample agent, do the following:
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent catalog** tab.
 
@@ -74,13 +78,15 @@ To view the sample agent, do the following:
 
 The following sections describe how to create a data agent.
 
-After you create an agent, you can [edit its settings](#edit-agent) .
+After you create an agent, you can [edit its settings](https://docs.cloud.google.com/bigquery/docs/create-data-agents#edit-agent) .
 
-**Note:** If you're in a conversation with a data source, you can also [create an agent](/bigquery/docs/create-conversations#create-agent-from-conversation) from that conversation.
+**Note:** If you're in a conversation with a data source, you can also [create an agent](https://docs.cloud.google.com/bigquery/docs/create-conversations#create-agent-from-conversation) from that conversation.
 
 ### Configure basics
 
 1.  In the Google Cloud console, go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent catalog** tab.
 
@@ -231,7 +237,7 @@ To create a verified query for the data agent, formerly known as a *golden query
 
 You can create BigQuery custom glossary terms local to an agent, or review business glossary terms imported from Dataplex Universal Catalog that apply to the knowledge sources that you selected for an agent.
 
-  - Because business glossary terms from Dataplex Universal Catalog apply globally to BigQuery resources, if you use Dataplex Universal Catalog, [create and manage](/dataplex/docs/manage-glossaries) business glossary terms in Dataplex Universal Catalog instead of for individual agents.
+  - Because business glossary terms from Dataplex Universal Catalog apply globally to BigQuery resources, if you use Dataplex Universal Catalog, [create and manage](https://docs.cloud.google.com/dataplex/docs/manage-glossaries) business glossary terms in Dataplex Universal Catalog instead of for individual agents.
   - If you need to modify business glossary terms imported from Dataplex Universal Catalog, you must edit them in Dataplex Universal Catalog and return to conversational analytics to see them.
   - BigQuery custom glossary terms stay in BigQuery. They don't appear in Dataplex Universal Catalog.
   - If you're not using Dataplex Universal Catalog, you can create BigQuery custom glossary terms for terms that you need to define for a specific agent.
@@ -257,7 +263,7 @@ Follow these steps to view business glossary terms imported from Dataplex Univer
 
 In the **Settings** section, you can configure the following optional settings:
 
-1.  Create [labels](/bigquery/docs/labels-intro) to help you organize your Google Cloud resources. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
+1.  Create [labels](https://docs.cloud.google.com/bigquery/docs/labels-intro) to help you organize your Google Cloud resources. Labels are key-value pairs that let you group related objects together or with other Google Cloud resources.
     
     1.  In the **Settings** section, click **Manage labels** .
     2.  Click **Add label** .
@@ -270,14 +276,12 @@ In the **Settings** section, you can configure the following optional settings:
 
 <!-- end list -->
 
-``` text
-Value error. In BigQuery on-demand pricing charges are
-rounded up to the nearest MB, with a minimum of 10 MB of data processed
-per query. So, max bytes billed must be set to greater or equal to
-10485760.
-```
+    Value error. In BigQuery on-demand pricing charges are
+    rounded up to the nearest MB, with a minimum of 10 MB of data processed
+    per query. So, max bytes billed must be set to greater or equal to
+    10485760.
 
-If you don't specify a value, `  maximum bytes billed  ` defaults to the project's [query usage per day quota](/bigquery/quotas#query_jobs) . The usage per day quota is unlimited unless you have specified a [custom quota](/bigquery/docs/custom-quotas) .
+If you don't specify a value, `  maximum bytes billed  ` defaults to the project's [query usage per day quota](https://docs.cloud.google.com/bigquery/quotas#query_jobs) . The usage per day quota is unlimited unless you have specified a [custom quota](https://docs.cloud.google.com/bigquery/docs/custom-quotas) .
 
 Continue to the next section to place the agent in draft mode or publish the agent.
 
@@ -291,7 +295,7 @@ Continue to the next section to place the agent in draft mode or publish the age
     
     To publish your agent, remain on the agent creation page and proceed to the next step.
 
-4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio, and [by using Looker Studio Pro](/looker/docs/studio/conversational-data-agents#start-a-conversation-with-an-agent) if you have a [Looker Studio subscription](/looker/docs/studio/about-looker-studio-pro#how-to-get-looker-studio-pro) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API.
+4.  Click **Publish** to publish the data agent and make it available for use in the project. You can create conversations with the data agent by using BigQuery Studio, and [by using Looker Studio Pro](https://docs.cloud.google.com/looker/docs/studio/conversational-data-agents#start-a-conversation-with-an-agent) if you have a [Looker Studio subscription](https://docs.cloud.google.com/looker/docs/studio/about-looker-studio-pro#how-to-get-looker-studio-pro) . You can also build your own interface to chat with the data agent by using the Conversational Analytics API.
 
 5.  Optional: In the **Your agent has been published** dialog, click **Share** to share the data agent with other users.
     
@@ -324,6 +328,8 @@ You can find existing agents in the **Agent Catalog** tab, which consists of thr
 Follow these steps to edit a data agent:
 
 1.  Go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -335,15 +341,19 @@ Follow these steps to edit a data agent:
 
 6.  To save your changes without publishing, click **Save** .
 
-7.  To publish your changes, click **Publish** . In the **Share** dialog, you can either [share](#share-a-data-agent) the agent with others, or click **Cancel** .
+7.  To publish your changes, click **Publish** . In the **Share** dialog, you can either [share](https://docs.cloud.google.com/bigquery/docs/create-data-agents#share-a-data-agent) the agent with others, or click **Cancel** .
 
 8.  To return to the **Agents** pane, click arrow\_back **Go back** .
+    
+    ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
 ### Share a data agent
 
 Follow these steps to share a published data agent. You can't share draft agents.
 
 1.  Go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -370,10 +380,14 @@ Follow these steps to share a published data agent. You can't share draft agents
 11. To return to the agent editing page, click **Close** .
 
 12. To return to the **Agents** pane, click arrow\_back **Go back** .
+    
+    ![Go back icon to return to the Agents page from the agent editing page.](https://docs.cloud.google.com/static/bigquery/images/ca-go-back.png)
 
 ### Delete a data agent
 
 1.  Go to the BigQuery **Agents** page.
+    
+    [Go to Agents](https://console.cloud.google.com/bigquery/agents_hub)
 
 2.  Select the **Agent Catalog** tab.
 
@@ -389,7 +403,7 @@ Conversational analytics operates globally; you can't choose which region to use
 
 ## What's next
 
-  - Learn more about [conversational analytics in BigQuery](/bigquery/docs/ca/conversational-analytics) .
-  - Learn more about the [Conversational Analytics API](/gemini/docs/conversational-analytics-api/overview) .
-  - [Analyze data with conversations](/bigquery/docs/ca/create-conversations) .
-  - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` )](/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.
+  - Learn more about [conversational analytics in BigQuery](https://docs.cloud.google.com/bigquery/docs/ca/conversational-analytics) .
+  - Learn more about the [Conversational Analytics API](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/overview) .
+  - [Analyze data with conversations](https://docs.cloud.google.com/bigquery/docs/ca/create-conversations) .
+  - Learn more about how the [Gemini Data Analytics Data Agent Viewer ( `  roles/geminidataanalytics.dataAgentViewer  ` )](https://docs.cloud.google.com/gemini/docs/conversational-analytics-api/access-control#predefined-roles) role gives permission to view the data agent.

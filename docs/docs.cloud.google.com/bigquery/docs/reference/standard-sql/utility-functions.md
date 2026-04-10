@@ -2,30 +2,14 @@ GoogleSQL for BigQuery supports the following utility functions.
 
 ## Function list
 
-<table>
-<thead>
-<tr class="header">
-<th>Name</th>
-<th>Summary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="/bigquery/docs/reference/standard-sql/utility-functions#generate_uuid"><code dir="ltr" translate="no">        GENERATE_UUID       </code></a></td>
-<td>Produces a random universally unique identifier (UUID) as a <code dir="ltr" translate="no">       STRING      </code> value.</td>
-</tr>
-<tr class="even">
-<td><a href="/bigquery/docs/reference/standard-sql/utility-functions#typeof"><code dir="ltr" translate="no">        TYPEOF       </code></a></td>
-<td>Gets the name of the data type for an expression.</td>
-</tr>
-</tbody>
-</table>
+| Name                                                                                                                                   | Summary                                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [`         GENERATE_UUID        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions#generate_uuid) | Produces a random universally unique identifier (UUID) as a `        STRING       ` value. |
+| [`         TYPEOF        `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/utility-functions#typeof)               | Gets the name of the data type for an expression.                                          |
 
 ## `     GENERATE_UUID    `
 
-``` text
-GENERATE_UUID()
-```
+    GENERATE_UUID()
 
 **Description**
 
@@ -39,21 +23,17 @@ STRING
 
 The following query generates a random UUID.
 
-``` text
-SELECT GENERATE_UUID() AS uuid;
-
-/*--------------------------------------+
- | uuid                                 |
- +--------------------------------------+
- | 4192bff0-e1e0-43ce-a4db-912808c32493 |
- +--------------------------------------*/
-```
+    SELECT GENERATE_UUID() AS uuid;
+    
+    /*--------------------------------------+
+     | uuid                                 |
+     +--------------------------------------+
+     | 4192bff0-e1e0-43ce-a4db-912808c32493 |
+     +--------------------------------------*/
 
 ## `     TYPEOF    `
 
-``` text
-TYPEOF(expression)
-```
+    TYPEOF(expression)
 
 **Description**
 
@@ -65,46 +45,40 @@ Takes an expression and gets the name of the data type for that expression.
 
 **Examples**
 
-The following example produces the name of the data type for the expression passed into the `  TYPEOF  ` function. When `  NULL  ` is passed in, the [supertype](/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) , `  INT64  ` , is produced.
+The following example produces the name of the data type for the expression passed into the `  TYPEOF  ` function. When `  NULL  ` is passed in, the [supertype](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#supertypes) , `  INT64  ` , is produced.
 
-``` text
-SELECT
-  TYPEOF(NULL) AS A,
-  TYPEOF('hello') AS B,
-  TYPEOF(12+1) AS C,
-  TYPEOF(4.7) AS D
-
-/*-------+--------+-------+--------+
- | A     | B      | C     | D      |
- +-------+--------+-------+--------+
- | INT64 | STRING | INT64 | FLOAT64 |
- +-------+--------+-------+--------*/
-```
+    SELECT
+      TYPEOF(NULL) AS A,
+      TYPEOF('hello') AS B,
+      TYPEOF(12+1) AS C,
+      TYPEOF(4.7) AS D
+    
+    /*-------+--------+-------+--------+
+     | A     | B      | C     | D      |
+     +-------+--------+-------+--------+
+     | INT64 | STRING | INT64 | FLOAT64 |
+     +-------+--------+-------+--------*/
 
 The following example produces the name of the data type for field `  y  ` in a struct.
 
-``` text
-SELECT
-  TYPEOF(STRUCT<x INT64, y STRING>(25, 'apples')) AS struct_type,
-  TYPEOF(STRUCT<x INT64, y STRING>(25, 'apples').y) AS field_type;
-
-/*---------------------------+------------+
- | struct_type               | field_type |
- +---------------------------+------------+
- | STRUCT<x INT64, y STRING> | STRING     |
- +---------------------------+------------*/
-```
+    SELECT
+      TYPEOF(STRUCT<x INT64, y STRING>(25, 'apples')) AS struct_type,
+      TYPEOF(STRUCT<x INT64, y STRING>(25, 'apples').y) AS field_type;
+    
+    /*---------------------------+------------+
+     | struct_type               | field_type |
+     +---------------------------+------------+
+     | STRUCT<x INT64, y STRING> | STRING     |
+     +---------------------------+------------*/
 
 The following example produces the name of the data type for elements in an array.
 
-``` text
-SELECT
-  TYPEOF(ARRAY<INT64>[25, 32]) AS array_type,
-  TYPEOF(ARRAY<INT64>[25, 32][0]) AS element_type;
-
-/*--------------+--------------+
- | array_type   | element_type |
- +--------------+--------------+
- | ARRAY<INT64> | INT64        |
- +--------------+--------------*/
-```
+    SELECT
+      TYPEOF(ARRAY<INT64>[25, 32]) AS array_type,
+      TYPEOF(ARRAY<INT64>[25, 32][0]) AS element_type;
+    
+    /*--------------+--------------+
+     | array_type   | element_type |
+     +--------------+--------------+
+     | ARRAY<INT64> | INT64        |
+     +--------------+--------------*/

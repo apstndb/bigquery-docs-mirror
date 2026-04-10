@@ -1,10 +1,10 @@
 # The ML.GET\_INSIGHTS function
 
-This document describes the `  ML.GET_INSIGHTS  ` function, which you can use to retrieve information about changes to key metrics in your multi-dimensional data from a [contribution analysis](/bigquery/docs/contribution-analysis) model. You can use a [`  CREATE MODEL  ` statement](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) to create a contribution analysis model in BigQuery.
+This document describes the `  ML.GET_INSIGHTS  ` function, which you can use to retrieve information about changes to key metrics in your multi-dimensional data from a [contribution analysis](https://docs.cloud.google.com/bigquery/docs/contribution-analysis) model. You can use a [`  CREATE MODEL  ` statement](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis) to create a contribution analysis model in BigQuery.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.GET_INSIGHTS(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`
 )
@@ -24,7 +24,7 @@ Some of the `  ML.GET_INSIGHTS  ` output columns contain metrics that compare th
 
 ### Output for summable metric contribution analysis models
 
-`  ML.GET_INSIGHTS  ` returns the following output columns for contribution analysis models that use [summable metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) , in addition to the dimension columns:
+`  ML.GET_INSIGHTS  ` returns the following output columns for contribution analysis models that use [summable metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_metric) , in addition to the dimension columns:
 
   - `  contributors  ` : an `  ARRAY<STRING>  ` value that contains the dimension values for a given segment. The other output metrics that are returned in the same row apply to the segment described by these dimensions.
 
@@ -74,14 +74,12 @@ Some of the `  ML.GET_INSIGHTS  ` output columns contain metrics that compare th
 
   - `  apriori_support  ` : a numeric value that contains the apriori support value for the segment. The apriori support value is either the ratio between the `  metric_test  ` value for the segment and the `  metric_test  ` value for the population, or the ratio between the `  metric_control  ` value for the segment and the `  metric_control  ` value for the population, whichever is greater. The calculation is expressed as the following:
     
-    ``` text
-    GREATEST(
-      metric_test / SUM(metric_test for the population),
-      metric_control / SUM(metric_control for the population)
-    )
-    ```
+        GREATEST(
+          metric_test / SUM(metric_test for the population),
+          metric_control / SUM(metric_control for the population)
+        )
     
-    If the `  apriori_support  ` value is less than the [apriori support threshold](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) value specified in the model, then the segment is considered too small to be of interest and is excluded by the model.
+    If the `  apriori_support  ` value is less than the [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) value specified in the model, then the segment is considered too small to be of interest and is excluded by the model.
 
   - `  contribution  ` : a numeric value that contains the absolute value of the `  difference  ` value: `  ABS(difference)  ` .
 
@@ -89,15 +87,15 @@ Insights are automatically ordered by contribution in descending order to determ
 
 ### Output for summable ratio metric contribution analysis models
 
-`  ML.GET_INSIGHTS  ` returns the following output columns for contribution analysis models that use [summable ratio metrics](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) , in addition to the dimension columns:
+`  ML.GET_INSIGHTS  ` returns the following output columns for contribution analysis models that use [summable ratio metrics](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_a_summable_ratio_metric) , in addition to the dimension columns:
 
   - `  contributors  ` : an `  ARRAY<STRING>  ` value that contains the dimension values for a given segment. The other output metrics that are returned in the same row apply to the segment described by these dimensions.
 
-  - `  metric_test  ` : a numeric value that contains the ratio between the two metrics that you are evaluating, in the test dataset for the given metric. These two metrics are specified in the [`  CONTRIBUTION_METRIC  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) of the contribution analysis model. The `  metric_test  ` value is calculated as the following:
+  - `  metric_test  ` : a numeric value that contains the ratio between the two metrics that you are evaluating, in the test dataset for the given metric. These two metrics are specified in the [`  CONTRIBUTION_METRIC  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) of the contribution analysis model. The `  metric_test  ` value is calculated as the following:
     
     `  sum(numerator_metric_column_name) / sum(denominator_metric_column_name) WHERE is_test_col = TRUE  `
 
-  - `  metric_control  ` : a numeric value that contains the ratio between the two metrics that you are evaluating, in the control dataset for the given metric. These two metrics are specified in the [`  CONTRIBUTION_METRIC  ` option](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) of the contribution analysis model. The `  metric_control  ` value is calculated as the following:
+  - `  metric_control  ` : a numeric value that contains the ratio between the two metrics that you are evaluating, in the control dataset for the given metric. These two metrics are specified in the [`  CONTRIBUTION_METRIC  ` option](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#contribution_metric) of the contribution analysis model. The `  metric_control  ` value is calculated as the following:
     
     `  SUM(numerator_metric_column_name) / SUM(denominator_metric_column_name) WHERE is_test_col = FALSE  `
 
@@ -197,7 +195,7 @@ Insights are automatically ordered by contribution in descending order to determ
     
     `  numerator column value for the given segment / SUM(numerator column value for the population)  `
     
-    If the `  apriori_support  ` value is less than the [apriori support threshold](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) value specified in the model, then the segment is considered too small to be of interest and is excluded by the model.
+    If the `  apriori_support  ` value is less than the [apriori support threshold](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-contribution-analysis#use_an_apriori_support_threshold) value specified in the model, then the segment is considered too small to be of interest and is excluded by the model.
 
   - `  contribution  ` : a numeric value that contains the absolute value of the `  aumann_shapley_attribution  ` :
     
@@ -245,12 +243,10 @@ Insights are automatically ordered by contribution in descending order to determ
 
   - `  apriori_support  ` : a numeric value that contains the apriori support value for the segment. To calculate apriori support, the `  sum_metric_column  ` is used to compute the segment size relative to the population for both the test and control datasets and `  apriori_support  ` is selected as the greater of the two values. The calculation is expressed as the following:
     
-    ``` text
-    GREATEST(
-      SUM(sum_column_name test) / SUM(sum_column_name test for the population),
-      SUM(sum_column_name control) / SUM(sum_column_name control for the population)
-    )
-    ```
+        GREATEST(
+          SUM(sum_column_name test) / SUM(sum_column_name test for the population),
+          SUM(sum_column_name control) / SUM(sum_column_name control for the population)
+        )
     
     If the `  apriori_support  ` value is less than the apriori support threshold value specified in the model, then the segment is considered too small to be of interest and is excluded by the model.
 
@@ -260,4 +256,4 @@ Insights are automatically ordered by contribution in descending order to quickl
 
 ## What's next
 
-[Get data insights from a contribution analysis model](/bigquery/docs/get-contribution-analysis-insights) .
+[Get data insights from a contribution analysis model](https://docs.cloud.google.com/bigquery/docs/get-contribution-analysis-insights) .

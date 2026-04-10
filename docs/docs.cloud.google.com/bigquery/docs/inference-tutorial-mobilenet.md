@@ -52,9 +52,9 @@ In this document, you use the following billable components of Google Cloud:
   - **BigQuery ML** : You incur costs for the model you create and the inference you perform in BigQuery ML.
   - **Cloud Storage** : You incur costs for the objects you store in Cloud Storage.
 
-To generate a cost estimate based on your projected usage, use the [pricing calculator](/products/calculator) .
+To generate a cost estimate based on your projected usage, use the [pricing calculator](https://docs.cloud.google.com/products/calculator) .
 
-New Google Cloud users might be eligible for a [free trial](/free) .
+New Google Cloud users might be eligible for a [free trial](https://docs.cloud.google.com/free) .
 
 For more information on BigQuery storage pricing, see [Storage pricing](https://cloud.google.com/bigquery/pricing#storage) in the BigQuery documentation.
 
@@ -66,7 +66,7 @@ For more information on Cloud Storage pricing, see the [Cloud Storage pricing](h
 
 ### Create a reservation
 
-To use an [imported model](/bigquery/docs/reference/standard-sql/inference-overview#inference_using_imported_models) with an object table, you must [create a reservation](/bigquery/docs/reservations-tasks#create_reservations) that uses the BigQuery [Enterprise or Enterprise Plus edition](/bigquery/docs/editions-intro) , and then [create a reservation assignment](/bigquery/docs/reservations-assignments#create_reservation_assignments) that uses the `  QUERY  ` job type.
+To use an [imported model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/inference-overview#inference_using_imported_models) with an object table, you must [create a reservation](https://docs.cloud.google.com/bigquery/docs/reservations-tasks#create_reservations) that uses the BigQuery [Enterprise or Enterprise Plus edition](https://docs.cloud.google.com/bigquery/docs/editions-intro) , and then [create a reservation assignment](https://docs.cloud.google.com/bigquery/docs/reservations-assignments#create_reservation_assignments) that uses the `  QUERY  ` job type.
 
 ## Create a dataset
 
@@ -75,10 +75,12 @@ Create a dataset named `  mobilenet_inference_test  ` :
 ### SQL
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE SCHEMA `PROJECT_ID.mobilenet_inference_test`;
     ```
     
@@ -87,10 +89,12 @@ Create a dataset named `  mobilenet_inference_test  ` :
 ### bq
 
 1.  In the Google Cloud console, activate Cloud Shell.
-
-2.  Run the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
     
-    ``` text
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
+
+2.  Run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-dataset) to create the dataset:
+    
+    ``` notranslate
     bq mk --dataset --location=us PROJECT_ID:resnet_inference_test
     ```
     
@@ -103,8 +107,12 @@ Create a connection named `  lake-connection  ` :
 ### Console
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -128,28 +136,24 @@ Create a connection named `  lake-connection  ` :
 
 10. In the **Explorer** pane, expand your project, click **Connections** , and select the `  us.lake-connection  ` connection.
 
-11. In the **Connection info** pane, copy the value from the **Service account id** field. You need this information to [grant permission](#grant-permissions) to the connection's service account on the Cloud Storage bucket that you create in the next step.
+11. In the **Connection info** pane, copy the value from the **Service account id** field. You need this information to [grant permission](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet#grant-permissions) to the connection's service account on the Cloud Storage bucket that you create in the next step.
 
 ### bq
 
-1.  In Cloud Shell, run the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-connection) to create the connection:
+1.  In Cloud Shell, run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-connection) to create the connection:
     
-    ``` text
-    bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
-    lake-connection
-    ```
+        bq mk --connection --location=us --connection_type=CLOUD_RESOURCE \
+        lake-connection
 
-2.  Run the [`  bq show  ` command](/bigquery/docs/reference/bq-cli-reference#bq_show) to retrieve information about the connection:
+2.  Run the [`  bq show  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#bq_show) to retrieve information about the connection:
     
-    ``` text
-    bq show --connection us.lake-connection
-    ```
+        bq show --connection us.lake-connection
 
-3.  From the `  properties  ` column, copy the value of the `  serviceAccountId  ` property and save it somewhere. You need this information to [grant permissions](#grant-permissions) to the connection's service account.
+3.  From the `  properties  ` column, copy the value of the `  serviceAccountId  ` property and save it somewhere. You need this information to [grant permissions](https://docs.cloud.google.com/bigquery/docs/inference-tutorial-mobilenet#grant-permissions) to the connection's service account.
 
 ## Create a Cloud Storage bucket
 
-1.  [Create a Cloud Storage bucket](/storage/docs/creating-buckets) .
+1.  [Create a Cloud Storage bucket](https://docs.cloud.google.com/storage/docs/creating-buckets) .
 2.  [Create two folders](https://cloud.google.com/storage/docs/folders#tools) in the bucket, one named `  mobilenet  ` for the model files and one named `  flowers  ` for the dataset.
 
 ## Grant permissions to the connection's service account
@@ -157,6 +161,8 @@ Create a connection named `  lake-connection  ` :
 ### Console
 
 1.  Go to the **IAM & Admin** page.
+    
+    [Go to IAM & Admin](https://console.cloud.google.com/project/_/iam-admin)
 
 2.  Click **Grant Access** .
     
@@ -170,9 +176,9 @@ Create a connection named `  lake-connection  ` :
 
 ### gcloud
 
-In Cloud Shell, run the [`  gcloud storage buckets add-iam-policy-binding  ` command](/sdk/gcloud/reference/storage/buckets/add-iam-policy-binding) :
+In Cloud Shell, run the [`  gcloud storage buckets add-iam-policy-binding  ` command](https://docs.cloud.google.com/sdk/gcloud/reference/storage/buckets/add-iam-policy-binding) :
 
-``` text
+``` notranslate
 gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 --member=serviceAccount:MEMBER \
 --role=roles/storage.objectViewer
@@ -180,7 +186,7 @@ gcloud storage buckets add-iam-policy-binding gs://BUCKET_NAME \
 
 Replace `  MEMBER  ` with the service account ID that you copied earlier. Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 
-For more information, see [Add a principal to a bucket-level policy](/storage/docs/access-control/using-iam-permissions#bucket-add) .
+For more information, see [Add a principal to a bucket-level policy](https://docs.cloud.google.com/storage/docs/access-control/using-iam-permissions#bucket-add) .
 
 **Note:** There can be a delay of up to a minute before new permissions take effect.
 
@@ -190,7 +196,7 @@ Get the dataset files and make them available in Cloud Storage:
 
 1.  [Download](https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz) the flowers dataset to your local machine.
 2.  Unzip the `  flower_photos.tgz  ` file.
-3.  [Upload](/storage/docs/uploading-objects) the `  flower_photos  ` folder to the `  flowers  ` folder in the bucket you previously created.
+3.  [Upload](https://docs.cloud.google.com/storage/docs/uploading-objects) the `  flower_photos  ` folder to the `  flowers  ` folder in the bucket you previously created.
 4.  Once the upload has completed, delete the `  LICENSE.txt  ` file in the `  flower_photos  ` folder.
 
 ## Create an object table
@@ -200,10 +206,12 @@ Create an object table named `  sample_images  ` based on the flowers dataset yo
 ### SQL
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE EXTERNAL TABLE mobilenet_inference_test.sample_images
     WITH CONNECTION `us.lake-connection`
     OPTIONS(
@@ -215,9 +223,9 @@ Create an object table named `  sample_images  ` based on the flowers dataset yo
 
 ### bq
 
-In Cloud Shell, run the [`  bq mk  ` command](/bigquery/docs/reference/bq-cli-reference#mk-table) to create the connection:
+In Cloud Shell, run the [`  bq mk  ` command](https://docs.cloud.google.com/bigquery/docs/reference/bq-cli-reference#mk-table) to create the connection:
 
-``` text
+``` notranslate
 bq mk --table \
 --external_table_definition='gs://BUCKET_NAME/flowers/*@us.lake-connection' \
 --object_metadata=SIMPLE \
@@ -231,15 +239,17 @@ Replace `  BUCKET_NAME  ` with the name of the bucket you previously created.
 Get the model files and make them available in Cloud Storage:
 
 1.  [Download](https://tfhub.dev/google/imagenet/mobilenet_v3_small_075_224/feature_vector/5?tf-hub-format=compressed) the MobileNet V3 model to your local machine. This gives you a `  saved_model.pb  ` file and a `  variables  ` folder for the model.
-2.  [Upload](/storage/docs/uploading-objects) the `  saved_model.pb  ` file and the `  variables  ` folder to the `  mobilenet  ` folder in the bucket you previously created.
+2.  [Upload](https://docs.cloud.google.com/storage/docs/uploading-objects) the `  saved_model.pb  ` file and the `  variables  ` folder to the `  mobilenet  ` folder in the bucket you previously created.
 
 ## Load the model into BigQuery ML
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     CREATE MODEL `mobilenet_inference_test.mobilenet`
     OPTIONS(
       model_type = 'TENSORFLOW',
@@ -253,8 +263,12 @@ Get the model files and make them available in Cloud Storage:
 Inspect the uploaded model to see what its input and output fields are:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, expand your project, click **Datasets** , and then click the `  mobilenet_inference_test  ` dataset.
 
@@ -273,10 +287,12 @@ Inspect the uploaded model to see what its input and output fields are:
 Run inference on the `  sample_images  ` object table using the `  mobilenet  ` model:
 
 1.  Go to the **BigQuery** page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the **Editor** pane, run the following SQL statement:
     
-    ``` text
+    ``` notranslate
     SELECT *
     FROM ML.PREDICT(
       MODEL `mobilenet_inference_test.mobilenet`,
@@ -287,19 +303,17 @@ Run inference on the `  sample_images  ` object table using the `  mobilenet  ` 
     
     The results should look similar to the following:
     
-    ``` text
-    --------------------------------------------------------------------------------------------------------------
-    | feature_vector         | uri                                                        | inputs               |
-    —-------------------------------------------------------------------------------------------------------------
-    | 0.850297749042511      | gs://mybucket/flowers/dandelion/3844111216_742ea491a0.jpg  | 0.29019609093666077  |
-    —-------------------------------------------------------------------------------------------------------------
-    | -0.27427938580513      |                                                            | 0.31372550129890442  |
-    —-------------------------                                                            ------------------------
-    | -0.23189745843410492   |                                                            | 0.039215687662363052 |
-    —-------------------------                                                            ------------------------
-    | -0.058292809873819351  |                                                            | 0.29985997080802917  |
-    —-------------------------------------------------------------------------------------------------------------
-    ```
+        --------------------------------------------------------------------------------------------------------------
+        | feature_vector         | uri                                                        | inputs               |
+        —-------------------------------------------------------------------------------------------------------------
+        | 0.850297749042511      | gs://mybucket/flowers/dandelion/3844111216_742ea491a0.jpg  | 0.29019609093666077  |
+        —-------------------------------------------------------------------------------------------------------------
+        | -0.27427938580513      |                                                            | 0.31372550129890442  |
+        —-------------------------                                                            ------------------------
+        | -0.23189745843410492   |                                                            | 0.039215687662363052 |
+        —-------------------------                                                            ------------------------
+        | -0.058292809873819351  |                                                            | 0.29985997080802917  |
+        —-------------------------------------------------------------------------------------------------------------
 
 ## Clean up
 
@@ -311,6 +325,8 @@ Run inference on the `  sample_images  ` object table using the `  mobilenet  ` 
 If you plan to explore multiple architectures, tutorials, or quickstarts, reusing projects can help you avoid exceeding project quota limits.
 
 In the Google Cloud console, go to the **Manage resources** page.
+
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
 
 In the project list, select the project that you want to delete, and then click **Delete** .
 

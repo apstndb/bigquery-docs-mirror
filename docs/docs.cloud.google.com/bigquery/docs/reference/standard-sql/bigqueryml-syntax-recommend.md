@@ -1,12 +1,12 @@
 # The ML.RECOMMEND function
 
-This document describes the `  ML.RECOMMEND  ` function, which lets you generate a predicted rating for every user-item row combination for a [matrix factorization model](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) . Because the input data for a matrix factorization model tends to be a sparse matrix with missing values, `  ML.RECOMMEND  ` can return the predictions for those missing values without requiring specification of each entry.
+This document describes the `  ML.RECOMMEND  ` function, which lets you generate a predicted rating for every user-item row combination for a [matrix factorization model](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) . Because the input data for a matrix factorization model tends to be a sparse matrix with missing values, `  ML.RECOMMEND  ` can return the predictions for those missing values without requiring specification of each entry.
 
 **Note:** `  ML.RECOMMEND  ` can generate large outputs. Consider saving the output to a table for analysis.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.RECOMMEND(
   MODEL `PROJECT_ID.DATASET.MODEL_NAME`,
   [, { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) }]
@@ -25,13 +25,13 @@ ML.RECOMMEND(
 
   - `  TABLE  ` : The name of the input table that contains the user and item data.
     
-    If you specify input data by using either the `  TABLE  ` or `  QUERY_STATEMENT  ` argument, the user and item columns must match the user and item columns in the model, and their types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If you specify input data by using either the `  TABLE  ` or `  QUERY_STATEMENT  ` argument, the user and item columns must match the user and item columns in the model, and their types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
     If the input table does not contain both the user and item column, the input table can only contain one column. If the table contains both the user and item columns, then the non-user or item columns are passed through and available for use in the query.
 
-  - `  QUERY_STATEMENT  ` : The GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : The GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
-    If you specify input data by using either the `  TABLE  ` or `  QUERY_STATEMENT  ` argument, the user and item columns must match the user and item columns in the model, and their types must be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If you specify input data by using either the `  TABLE  ` or `  QUERY_STATEMENT  ` argument, the user and item columns must match the user and item columns in the model, and their types must be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
 
   - `  TRIAL_ID  ` : an `  INT64  ` value that identifies the hyperparameter tuning trial that you want the function to evaluate. The function uses the optimal trial by default. Only specify this argument if you ran hyperparameter tuning when creating the model.
 
@@ -67,7 +67,7 @@ The following examples show how to use the `  ML.RECOMMEND  ` function.
 
 The following example generates predicted ratings for every user-item pair in the inputs of `  mymodel  ` because there is no input data specified.
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -78,7 +78,7 @@ FROM
 
 The following example generates predicted ratings for each user-item row in `  mydataset.mytable  ` assuming that `  mydataset.mymodel  ` was trained using the user column `  user  ` and item column `  item  ` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -93,5 +93,5 @@ FROM
 
 ## What's next
 
-  - For more information about model inference, see [Model inference overview](/bigquery/docs/inference-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about model inference, see [Model inference overview](https://docs.cloud.google.com/bigquery/docs/inference-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

@@ -1,6 +1,6 @@
 # Facebook Ads report transformation
 
-This document describes how your Facebook Ads reports are transformed when you [run a Facebook Ads transfer to BigQuery](/bigquery/docs/facebook-ads-transfer) .
+This document describes how your Facebook Ads reports are transformed when you [run a Facebook Ads transfer to BigQuery](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer) .
 
 ## Table mapping for Facebook Ads reports
 
@@ -8,168 +8,33 @@ When your Facebook Ads reports are transferred to BigQuery, the reports are tran
 
 ### `     AdAccounts    ` report
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Meta API field name</strong></th>
-<th><strong>Mapped BigQuery field name</strong></th>
-<th><strong>Type</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       id      </code></td>
-<td>ID [KEY]</td>
-<td><em>String</em></td>
-<td>The Id of Ad Account.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no"></code></td>
-<td>Target</td>
-<td><em>String</em></td>
-<td>The target used to get ad accounts from. This value is `null` - to get all ad accounts.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       account_id      </code></td>
-<td>AccountId</td>
-<td><em>String</em></td>
-<td>The Id of the Ad Account when viewed directly in Facebook.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       account_status      </code></td>
-<td>AccountStatus</td>
-<td><em>Integer</em></td>
-<td>Status of the account. 1 = Active, 2 = Disabled, 3 = Unsettled, 7 = Pending Review, 9 = in Grace Period, 101 = temporarily unavailable, 100 = pending closure.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       age      </code></td>
-<td>Age</td>
-<td><em>Double</em></td>
-<td>Amount of time the ad account has been open, in days.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       amount_spent      </code></td>
-<td>AmountSpent</td>
-<td><em>Integer</em></td>
-<td>Current total amount spent by the account. This can be reset.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       balance      </code></td>
-<td>Balance</td>
-<td><em>Integer</em></td>
-<td>Bill amount due.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       business_city      </code></td>
-<td>BusinessCity</td>
-<td><em>String</em></td>
-<td>City for business address.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       business_country_code      </code></td>
-<td>BusinessCountryCode</td>
-<td><em>String</em></td>
-<td>Country code for the business address.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       business_name      </code></td>
-<td>BusinessName</td>
-<td><em>String</em></td>
-<td>The business name for the account.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       business_state      </code></td>
-<td>BusinessState</td>
-<td><em>String</em></td>
-<td>State abbreviation for business address.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       business_street      </code></td>
-<td>BusinessStreet</td>
-<td><em>String</em></td>
-<td>First line of the business street address for the account.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       business_street2      </code></td>
-<td>BusinessStreet2</td>
-<td><em>String</em></td>
-<td>Second line of the business street address for the account.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       business_zip      </code></td>
-<td>BusinessZip</td>
-<td><em>String</em></td>
-<td>Zip code for business address.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       capabilities      </code></td>
-<td>Capabilities</td>
-<td><em>String</em></td>
-<td>Capabilities allowed for this ad account.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       created_time      </code></td>
-<td>CreatedTime</td>
-<td><em>Datetime</em></td>
-<td>The time the account was created.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       currency      </code></td>
-<td>Currency</td>
-<td><em>String</em></td>
-<td>The currency used for the account, based on the corresponding value in the account settings.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       min_campaign_group_spend_cap      </code></td>
-<td>MinCampaignGroupSpendCap</td>
-<td><em>String</em></td>
-<td>The minimum campaign group spend limit.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       name      </code></td>
-<td>Name</td>
-<td><em>String</em></td>
-<td>Name of the account; note that many accounts are unnamed, so this field may be empty.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       offsite_pixels_tos_accepted      </code></td>
-<td>OffsitePixelsTosAccepted</td>
-<td><em>String</em></td>
-<td>Indicates whether the offsite pixel Terms Of Service contract was signed.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       owner      </code></td>
-<td>OwnerId</td>
-<td><em>String</em></td>
-<td>Facebook ID of the owner for the Ad Account.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       spend_cap      </code></td>
-<td>SpendCap</td>
-<td><em>Integer</em></td>
-<td>The maximum that can be spent by this account after which campaigns will be paused. A value of 0 signifies no spending-cap.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       timezone_id      </code></td>
-<td>TimezoneId</td>
-<td><em>String</em></td>
-<td>ID for the timezone.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       timezone_name      </code></td>
-<td>TimezoneName</td>
-<td><em>String</em></td>
-<td>Name for the timezone.</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       timezone_offset_hours_utc      </code></td>
-<td>TimezoneOffsetHoursUTC</td>
-<td><em>Double</em></td>
-<td>Time Zone difference from UTC.</td>
-</tr>
-</tbody>
-</table>
+| **Meta API field name**                       | **Mapped BigQuery field name** | **Type**   | **Description**                                                                                                                                                |
+| --------------------------------------------- | ------------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        id       `                           | ID \[KEY\]                     | *String*   | The Id of Ad Account.                                                                                                                                          |
+| `  `                                          | Target                         | *String*   | The target used to get ad accounts from. This value is \`null\` - to get all ad accounts.                                                                      |
+| `        account_id       `                   | AccountId                      | *String*   | The Id of the Ad Account when viewed directly in Facebook.                                                                                                     |
+| `        account_status       `               | AccountStatus                  | *Integer*  | Status of the account. 1 = Active, 2 = Disabled, 3 = Unsettled, 7 = Pending Review, 9 = in Grace Period, 101 = temporarily unavailable, 100 = pending closure. |
+| `        age       `                          | Age                            | *Double*   | Amount of time the ad account has been open, in days.                                                                                                          |
+| `        amount_spent       `                 | AmountSpent                    | *Integer*  | Current total amount spent by the account. This can be reset.                                                                                                  |
+| `        balance       `                      | Balance                        | *Integer*  | Bill amount due.                                                                                                                                               |
+| `        business_city       `                | BusinessCity                   | *String*   | City for business address.                                                                                                                                     |
+| `        business_country_code       `        | BusinessCountryCode            | *String*   | Country code for the business address.                                                                                                                         |
+| `        business_name       `                | BusinessName                   | *String*   | The business name for the account.                                                                                                                             |
+| `        business_state       `               | BusinessState                  | *String*   | State abbreviation for business address.                                                                                                                       |
+| `        business_street       `              | BusinessStreet                 | *String*   | First line of the business street address for the account.                                                                                                     |
+| `        business_street2       `             | BusinessStreet2                | *String*   | Second line of the business street address for the account.                                                                                                    |
+| `        business_zip       `                 | BusinessZip                    | *String*   | Zip code for business address.                                                                                                                                 |
+| `        capabilities       `                 | Capabilities                   | *String*   | Capabilities allowed for this ad account.                                                                                                                      |
+| `        created_time       `                 | CreatedTime                    | *Datetime* | The time the account was created.                                                                                                                              |
+| `        currency       `                     | Currency                       | *String*   | The currency used for the account, based on the corresponding value in the account settings.                                                                   |
+| `        min_campaign_group_spend_cap       ` | MinCampaignGroupSpendCap       | *String*   | The minimum campaign group spend limit.                                                                                                                        |
+| `        name       `                         | Name                           | *String*   | Name of the account; note that many accounts are unnamed, so this field may be empty.                                                                          |
+| `        offsite_pixels_tos_accepted       `  | OffsitePixelsTosAccepted       | *String*   | Indicates whether the offsite pixel Terms Of Service contract was signed.                                                                                      |
+| `        owner       `                        | OwnerId                        | *String*   | Facebook ID of the owner for the Ad Account.                                                                                                                   |
+| `        spend_cap       `                    | SpendCap                       | *Integer*  | The maximum that can be spent by this account after which campaigns will be paused. A value of 0 signifies no spending-cap.                                    |
+| `        timezone_id       `                  | TimezoneId                     | *String*   | ID for the timezone.                                                                                                                                           |
+| `        timezone_name       `                | TimezoneName                   | *String*   | Name for the timezone.                                                                                                                                         |
+| `        timezone_offset_hours_utc       `    | TimezoneOffsetHoursUTC         | *Double*   | Time Zone difference from UTC.                                                                                                                                 |
 
 ### `     AdInsights    ` report
 
@@ -769,7 +634,7 @@ The product Id advertised in the Ad.
 
 ### `     AdInsightsActions    ` report
 
-`  ACTION_COLLECTION  ` refers to the types of actions people have taken in response to your ad. For a full list of action collections, see [Action collections](/bigquery/docs/facebook-ads-transfer#action_collections) .
+`  ACTION_COLLECTION  ` refers to the types of actions people have taken in response to your ad. For a full list of action collections, see [Action collections](https://docs.cloud.google.com/bigquery/docs/facebook-ads-transfer#action_collections) .
 
 **Meta API field name**
 

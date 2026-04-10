@@ -1,6 +1,6 @@
 # Legacy SQL Syntax, Functions and Operators
 
-This document details legacy SQL query syntax, functions and operators. The preferred query syntax for BigQuery is [GoogleSQL syntax](/bigquery/docs/reference/standard-sql/query-syntax) . For more information, see [Legacy SQL feature availability](/bigquery/docs/legacy-sql-feature-availability) .
+This document details legacy SQL query syntax, functions and operators. The preferred query syntax for BigQuery is [GoogleSQL syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax) . For more information, see [Legacy SQL feature availability](https://docs.cloud.google.com/bigquery/docs/legacy-sql-feature-availability) .
 
 ## Query syntax
 
@@ -8,105 +8,91 @@ This document details legacy SQL query syntax, functions and operators. The pref
 
 ### SELECT clause
 
-The `  SELECT  ` clause specifies a list of expressions to be computed. Expressions in the `  SELECT  ` clause can contain field names, literals, and [function calls](#functions) (including [aggregate functions](#aggfunctions) and [window functions](#windowfunctions) ) as well as combinations of the three. The expression list is comma-separated.
+The `  SELECT  ` clause specifies a list of expressions to be computed. Expressions in the `  SELECT  ` clause can contain field names, literals, and [function calls](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#functions) (including [aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#aggfunctions) and [window functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#windowfunctions) ) as well as combinations of the three. The expression list is comma-separated.
 
 Each expression can be given an alias by adding a space followed by an identifier after the expression. The optional `  AS  ` keyword can be added between the expression and the alias for improved readability. Aliases defined in a `  SELECT  ` clause can be referenced in the `  GROUP BY  ` , `  HAVING  ` , and `  ORDER BY  ` clauses of the query, but not by the `  FROM  ` , `  WHERE  ` , or `  OMIT RECORD IF  ` clauses nor by other expressions in the same `  SELECT  ` clause.
 
 **Notes:**
 
-  - If you use an [aggregate function](#aggfunctions) in your `  SELECT  ` clause, you must either use an aggregate function in all expressions or your query must have a `  GROUP BY  ` clause which includes all non-aggregated fields in your `  SELECT  ` clause as grouping keys. For example:
+  - If you use an [aggregate function](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#aggfunctions) in your `  SELECT  ` clause, you must either use an aggregate function in all expressions or your query must have a `  GROUP BY  ` clause which includes all non-aggregated fields in your `  SELECT  ` clause as grouping keys. For example:
     
-    ``` text
-    #legacySQL
-    SELECT
-      word,
-      corpus,
-      COUNT(word)
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th"
-    GROUP BY
-      word,
-      corpus; /* Succeeds because all non-aggregated fields are group keys. */
-    ```
+        #legacySQL
+        SELECT
+          word,
+          corpus,
+          COUNT(word)
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th"
+        GROUP BY
+          word,
+          corpus; /* Succeeds because all non-aggregated fields are group keys. */
     
-    ``` text
-    #legacySQL
-    SELECT
-      word,
-      corpus,
-      COUNT(word)
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th"
-    GROUP BY
-      word; /* Fails because corpus is not aggregated nor is it a group key. */
-    ```
+        #legacySQL
+        SELECT
+          word,
+          corpus,
+          COUNT(word)
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th"
+        GROUP BY
+          word; /* Fails because corpus is not aggregated nor is it a group key. */
 
-  - You can use square brackets to escape [reserved words](/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) so that you can use them as field name and aliases. For example, if you have a column named "partition", which is a reserved word in BigQuery syntax, the queries referencing that field fail with obscure error messages unless you escape it with square brackets:
+  - You can use square brackets to escape [reserved words](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/lexical#reserved_keywords) so that you can use them as field name and aliases. For example, if you have a column named "partition", which is a reserved word in BigQuery syntax, the queries referencing that field fail with obscure error messages unless you escape it with square brackets:
     
-    ``` text
-    SELECT [partition] FROM ...
-    ```
+        SELECT [partition] FROM ...
 
 ##### Example
 
 This example defines aliases in the `  SELECT  ` clause and then references one of them in the `  ORDER BY  ` clause. Notice that the *word* column can not be referenced using the *word\_alias* in the `  WHERE  ` clause; it must be referenced by name. The *len* alias also is not visible in the `  WHERE  ` clause. It would be visible to a `  HAVING  ` clause.
 
-``` text
-#legacySQL
-SELECT
-  word AS word_alias,
-  LENGTH(word) AS len
-FROM
-  [bigquery-public-data:samples.shakespeare]
-WHERE
-  word CONTAINS 'th'
-ORDER BY
-  len;
-```
+    #legacySQL
+    SELECT
+      word AS word_alias,
+      LENGTH(word) AS len
+    FROM
+      [bigquery-public-data:samples.shakespeare]
+    WHERE
+      word CONTAINS 'th'
+    ORDER BY
+      len;
 
 #### WITHIN modifier for aggregate functions
 
-``` text
-aggregate_function WITHIN RECORD [ [ AS ] alias ]
-```
+    aggregate_function WITHIN RECORD [ [ AS ] alias ]
 
 The `  WITHIN  ` keyword causes the aggregate function to aggregate across repeated values within each record. For every input record, exactly one aggregated output will be produced. This type of aggregation is referred to as *scoped aggregation* . Since scoped aggregation produces output for every record, non-aggregated expressions can be selected alongside scoped-aggregated expressions without using a `  GROUP BY  ` clause.
 
-Most commonly you will use the `  RECORD  ` scope when using scoped aggregation. If you have a very complex nested, repeated schema, you may find a need to perform aggregations within sub-record scopes. This can be done by replacing the `  RECORD  ` keyword in the syntax above with the name of the node in your schema where you want the aggregation to be performed. For more information about that advanced behavior, see [Dealing with data](/bigquery/docs/data#within) .
+Most commonly you will use the `  RECORD  ` scope when using scoped aggregation. If you have a very complex nested, repeated schema, you may find a need to perform aggregations within sub-record scopes. This can be done by replacing the `  RECORD  ` keyword in the syntax above with the name of the node in your schema where you want the aggregation to be performed. For more information about that advanced behavior, see [Dealing with data](https://docs.cloud.google.com/bigquery/docs/data#within) .
 
 ##### Example
 
 This example performs a scoped `  COUNT  ` aggregation and then filters and sorts the records by the aggregated value.
 
-``` text
-#legacySQL
-SELECT
-  repository.url,
-  COUNT(payload.pages.page_name) WITHIN RECORD AS page_count
-FROM
-  [bigquery-public-data:samples.github_nested]
-HAVING
-  page_count > 80
-ORDER BY
-  page_count DESC;
-```
+    #legacySQL
+    SELECT
+      repository.url,
+      COUNT(payload.pages.page_name) WITHIN RECORD AS page_count
+    FROM
+      [bigquery-public-data:samples.github_nested]
+    HAVING
+      page_count > 80
+    ORDER BY
+      page_count DESC;
 
 ### FROM clause
 
-``` text
-FROM
-  [project_name:]datasetId.tableId [ [ AS ] alias ] |
-  (subquery) [ [ AS ] alias ] |
-  JOIN clause |
-  FLATTEN clause |
-  table wildcard function
-```
+    FROM
+      [project_name:]datasetId.tableId [ [ AS ] alias ] |
+      (subquery) [ [ AS ] alias ] |
+      JOIN clause |
+      FLATTEN clause |
+      table wildcard function
 
-The `  FROM  ` clause specifies the source data to be queried. BigQuery queries can execute directly over tables, over subqueries, over joined tables, and over tables modified by special-purpose operators described below. Combinations of these data sources can be queried using the [comma](#comma_as_union_all) , which is the `  UNION ALL  ` operator in BigQuery.
+The `  FROM  ` clause specifies the source data to be queried. BigQuery queries can execute directly over tables, over subqueries, over joined tables, and over tables modified by special-purpose operators described below. Combinations of these data sources can be queried using the [comma](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#comma_as_union_all) , which is the `  UNION ALL  ` operator in BigQuery.
 
 #### Referencing tables
 
@@ -114,9 +100,7 @@ When referencing a table, both *datasetId* and *tableId* must be specified; *pro
 
 ##### Example
 
-``` text
-[my-dashed-project:dataset1.tableName]
-```
+    [my-dashed-project:dataset1.tableName]
 
 Tables can be given an alias by adding a space followed by an identifier after the table name. The optional `  AS  ` keyword can be added between the *tableId* and the alias for improved readability.
 
@@ -126,33 +110,27 @@ When referencing columns from a table, you can use the simple column name or you
 
 This example references a column with no table prefix.
 
-``` text
-#legacySQL
-SELECT
-  word
-FROM
-  [bigquery-public-data:samples.shakespeare];
-```
+    #legacySQL
+    SELECT
+      word
+    FROM
+      [bigquery-public-data:samples.shakespeare];
 
 This example prefixes the column name with the *datasetId* and *tableId* . Notice that the *project\_name* cannot be included in this example. This method will only work if the dataset is in your current default project.
 
-``` text
-#legacySQL
-SELECT
-  samples.shakespeare.word
-FROM
-  samples.shakespeare;
-```
+    #legacySQL
+    SELECT
+      samples.shakespeare.word
+    FROM
+      samples.shakespeare;
 
 This example prefixes the column name with a table alias.
 
-``` text
-#legacySQL
-SELECT
-  t.word
-FROM
-  [bigquery-public-data:samples.shakespeare] AS t;
-```
+    #legacySQL
+    SELECT
+      t.word
+    FROM
+      [bigquery-public-data:samples.shakespeare] AS t;
 
 #### Integer-range partitioned tables
 
@@ -160,13 +138,11 @@ Legacy SQL supports using table decorators to address a specific partition in an
 
 The following example queries the range partition that starts with 30:
 
-``` text
-#legacySQL
-SELECT
-  *
-FROM
-  dataset.table$30;
-```
+    #legacySQL
+    SELECT
+      *
+    FROM
+      dataset.table$30;
 
 Note that you cannot use legacy SQL to query across an entire integer-range partitioned table. Instead, the query returns an error like the following:
 
@@ -174,7 +150,7 @@ Note that you cannot use legacy SQL to query across an entire integer-range part
 
 #### Using subqueries
 
-A *subquery* is a nested `  SELECT  ` statement wrapped in parentheses. The expressions computed in the `  SELECT  ` clause of the subquery are available to the outer query just as columns of a [table](#from_tables) would be available.
+A *subquery* is a nested `  SELECT  ` statement wrapped in parentheses. The expressions computed in the `  SELECT  ` clause of the subquery are available to the outer query just as columns of a [table](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#from_tables) would be available.
 
 Subqueries can be used to compute aggregations and other expressions. The full range of SQL operators are available in the subquery. This means a subquery can itself contain other subqueries, subqueries can perform joins and grouping aggregations, etc.
 
@@ -182,38 +158,34 @@ Subqueries can be used to compute aggregations and other expressions. The full r
 
 Unlike GoogleSQL, legacy SQL uses the comma as a `  UNION ALL  ` operator rather than a `  CROSS JOIN  ` operator. This is a legacy behavior that evolved because historically BigQuery did not support `  CROSS JOIN  ` and BigQuery users regularly needed to write `  UNION ALL  ` queries. In GoogleSQL, queries that perform unions are particularly verbose. Using the comma as the union operator allows such queries to be written much more efficiently. For example, this query can be used to run a single query over logs from multiple days.
 
-``` text
-#legacySQL
-SELECT
-  FORMAT_UTC_USEC(event.timestamp_in_usec) AS time,
-  request_url
-FROM
-  [applogs.events_20120501],
-  [applogs.events_20120502],
-  [applogs.events_20120503]
-WHERE
-  event.username = 'root' AND
-  NOT event.source_ip.is_internal;
-```
+    #legacySQL
+    SELECT
+      FORMAT_UTC_USEC(event.timestamp_in_usec) AS time,
+      request_url
+    FROM
+      [applogs.events_20120501],
+      [applogs.events_20120502],
+      [applogs.events_20120503]
+    WHERE
+      event.username = 'root' AND
+      NOT event.source_ip.is_internal;
 
 Queries that union a large number of tables typically run more slowly than queries that process the same amount of data from a single table. The difference in performance can be up to 50 ms per additional table. A single query can union at most 1,000 tables.
 
 #### Table wildcard functions
 
-The term *table wildcard function* refers to a special type of function unique to BigQuery. These functions are used in the `  FROM  ` clause to match a collection of table names using one of several types of filters. For example, the `  TABLE_DATE_RANGE  ` function can be used to query only a specific set of daily tables. For more information on these functions, see [Table wildcard functions](#tablewildcardfunctions) .
+The term *table wildcard function* refers to a special type of function unique to BigQuery. These functions are used in the `  FROM  ` clause to match a collection of table names using one of several types of filters. For example, the `  TABLE_DATE_RANGE  ` function can be used to query only a specific set of daily tables. For more information on these functions, see [Table wildcard functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tablewildcardfunctions) .
 
-#### FLATTEN operator
+#### <span id="flatten"></span> FLATTEN operator
 
-``` text
-(FLATTEN([project_name:]datasetId.tableId, field_to_be_flattened))
-(FLATTEN((subquery), field_to_be_flattened))
-```
+    (FLATTEN([project_name:]datasetId.tableId, field_to_be_flattened))
+    (FLATTEN((subquery), field_to_be_flattened))
 
 Unlike typical SQL-processing systems, BigQuery is designed to handle repeated data. Because of this, BigQuery users sometimes need to write queries that manipulate the structure of repeated records. One way to do this is by using the `  FLATTEN  ` operator.
 
 `  FLATTEN  ` converts one node in the schema from repeated to optional. Given a record with one or more values for a repeated field, `  FLATTEN  ` will create multiple records, one for each value in the repeated field. All other fields selected from the record are duplicated in each new output record. `  FLATTEN  ` can be applied repeatedly in order to remove multiple levels of repetition.
 
-For more information and examples, see [Dealing with data](/bigquery/docs/data#flatten) .
+For more information and examples, see [Dealing with data](https://docs.cloud.google.com/bigquery/docs/data#flatten) .
 
 #### JOIN operator
 
@@ -223,7 +195,7 @@ BigQuery supports multiple `  JOIN  ` operators in each `  FROM  ` clause. Subse
 
 BigQuery supports `  INNER  ` , `  [FULL|RIGHT|LEFT] OUTER  ` and `  CROSS JOIN  ` operations. If left unspecified, the default is `  INNER  ` .
 
-`  CROSS JOIN  ` operations do not allow `  ON  ` clauses. `  CROSS JOIN  ` can return a large amount of data and might result in a slow and inefficient query or in a query that exceeds the maximum allowed per-query resources. Such queries will fail with an error. When possible, prefer queries that do not use `  CROSS JOIN  ` . For example, `  CROSS JOIN  ` is often used in places where [window functions](#windowfunctions) would be more efficient.
+`  CROSS JOIN  ` operations do not allow `  ON  ` clauses. `  CROSS JOIN  ` can return a large amount of data and might result in a slow and inefficient query or in a query that exceeds the maximum allowed per-query resources. Such queries will fail with an error. When possible, prefer queries that do not use `  CROSS JOIN  ` . For example, `  CROSS JOIN  ` is often used in places where [window functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#windowfunctions) would be more efficient.
 
 ##### EACH modifier
 
@@ -239,63 +211,30 @@ In addition to supporting `  JOIN  ` in the `  FROM  ` clause, BigQuery also sup
 
 The following query uses a semi-join to find ngrams where the first word in the ngram is also the second word in another ngram that has "AND" as the third word in the ngram.
 
-``` text
-#legacySQL
-SELECT
-  ngram
-FROM
-  [bigquery-public-data:samples.trigrams]
-WHERE
-  first IN (SELECT
-              second
-            FROM
-              [bigquery-public-data:samples.trigrams]
-            WHERE
-              third = "AND")
-LIMIT 10;
-```
+    #legacySQL
+    SELECT
+      ngram
+    FROM
+      [bigquery-public-data:samples.trigrams]
+    WHERE
+      first IN (SELECT
+                  second
+                FROM
+                  [bigquery-public-data:samples.trigrams]
+                WHERE
+                  third = "AND")
+    LIMIT 10;
 
 The following query uses a semi-join to return the number of women over age 50 who gave birth in the 10 states with the most births.
 
-``` text
-#legacySQL
-SELECT
-  mother_age,
-  COUNT(mother_age) total
-FROM
-  [bigquery-public-data:samples.natality]
-WHERE
-  state IN (SELECT
-              state
-            FROM
-              (SELECT
-                 state,
-                 COUNT(state) total
-               FROM
-                 [bigquery-public-data:samples.natality]
-               GROUP BY
-                 state
-               ORDER BY
-                 total DESC
-               LIMIT 10))
-  AND mother_age > 50
-GROUP BY
-  mother_age
-ORDER BY
-  mother_age DESC
-```
-
-To see the numbers for the other 40 states, you can use an anti-join. The following query is nearly identical to the previous example, but uses `  NOT IN  ` instead of `  IN  ` to return the number of women over age 50 who gave birth in the 40 states with the least births.
-
-``` text
-#legacySQL
-SELECT
-  mother_age,
-  COUNT(mother_age) total
-FROM
-  [bigquery-public-data:samples.natality]
-WHERE
-  state NOT IN (SELECT
+    #legacySQL
+    SELECT
+      mother_age,
+      COUNT(mother_age) total
+    FROM
+      [bigquery-public-data:samples.natality]
+    WHERE
+      state IN (SELECT
                   state
                 FROM
                   (SELECT
@@ -308,12 +247,39 @@ WHERE
                    ORDER BY
                      total DESC
                    LIMIT 10))
-  AND mother_age > 50
-GROUP BY
-  mother_age
-ORDER BY
-  mother_age DESC
-```
+      AND mother_age > 50
+    GROUP BY
+      mother_age
+    ORDER BY
+      mother_age DESC
+
+To see the numbers for the other 40 states, you can use an anti-join. The following query is nearly identical to the previous example, but uses `  NOT IN  ` instead of `  IN  ` to return the number of women over age 50 who gave birth in the 40 states with the least births.
+
+    #legacySQL
+    SELECT
+      mother_age,
+      COUNT(mother_age) total
+    FROM
+      [bigquery-public-data:samples.natality]
+    WHERE
+      state NOT IN (SELECT
+                      state
+                    FROM
+                      (SELECT
+                         state,
+                         COUNT(state) total
+                       FROM
+                         [bigquery-public-data:samples.natality]
+                       GROUP BY
+                         state
+                       ORDER BY
+                         total DESC
+                       LIMIT 10))
+      AND mother_age > 50
+    GROUP BY
+      mother_age
+    ORDER BY
+      mother_age DESC
 
 Notes:
 
@@ -325,44 +291,40 @@ Notes:
 
 The `  WHERE  ` clause, sometimes called the predicate, filters records produced by the `  FROM  ` clause using a boolean expression. Multiple conditions can be joined by boolean `  AND  ` and `  OR  ` clauses, optionally surrounded by parentheses—()— to group them. The fields listed in a `  WHERE  ` clause do not need to be selected in the corresponding `  SELECT  ` clause and the `  WHERE  ` clause expression cannot reference expressions computed in the `  SELECT  ` clause of the query to which the `  WHERE  ` clause belongs.
 
-**Note:** Aggregate functions cannot be used in the `  WHERE  ` clause. Use a [`  HAVING  `](#having) clause and an outer query if you need to filter on the output of an aggregate function.
+**Note:** Aggregate functions cannot be used in the `  WHERE  ` clause. Use a [`  HAVING  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#having) clause and an outer query if you need to filter on the output of an aggregate function.
 
 ##### Example
 
 The following example uses a disjunction of boolean expressions in the `  WHERE  ` clause—the two expressions joined by an `  OR  ` operator. An input record will pass through the `  WHERE  ` filter if either of the expressions returns `  true  ` .
 
-``` text
-#legacySQL
-SELECT
-  word
-FROM
-  [bigquery-public-data:samples.shakespeare]
-WHERE
-  (word CONTAINS 'prais' AND word CONTAINS 'ing') OR
-  (word CONTAINS 'laugh' AND word CONTAINS 'ed');
-```
+    #legacySQL
+    SELECT
+      word
+    FROM
+      [bigquery-public-data:samples.shakespeare]
+    WHERE
+      (word CONTAINS 'prais' AND word CONTAINS 'ing') OR
+      (word CONTAINS 'laugh' AND word CONTAINS 'ed');
 
 ### OMIT RECORD IF clause
 
 The `  OMIT RECORD IF  ` clause is a construct that is unique to BigQuery. It is particularly useful for dealing with nested, repeated schemas. It is similar to a `  WHERE  ` clause, but different in two important ways. First, it uses an exclusionary condition, which means that records are omitted if the expression returns `  true  ` , but kept if the expression returns `  false  ` or `  null  ` . Second, the `  OMIT RECORD IF  ` clause can (and usually does) use scoped aggregate functions in its condition.
 
-In addition to filtering full records, `  OMIT...IF  ` can specify a more narrow scope to filter just portions of a record. This is done by using the name of a non-leaf node in your schema rather than `  RECORD  ` in your `  OMIT...IF  ` clause. This functionality is rarely used by BigQuery users. You can find more documentation about this advanced behavior linked from the [`  WITHIN  `](#within) documentation above.
+In addition to filtering full records, `  OMIT...IF  ` can specify a more narrow scope to filter just portions of a record. This is done by using the name of a non-leaf node in your schema rather than `  RECORD  ` in your `  OMIT...IF  ` clause. This functionality is rarely used by BigQuery users. You can find more documentation about this advanced behavior linked from the [`  WITHIN  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#within) documentation above.
 
-If you use [`  OMIT...IF  `](/bigquery/docs/reference/legacy-sql#omit) to exclude a portion of a record in a repeating field, and the query also selects other independently repeating fields, BigQuery omits a portion of the other repeated records in the query. If you see the error `  Cannot perform OMIT IF on repeated scope <scope> with independently repeating pass through field <field>,  ` we recommend that you switch to GoogleSQL. For information about migrating `  OMIT...IF  ` statements to GoogleSQL, see [Migrating to GoogleSQL](/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#filtering_rows_with_omit_record_if) .
+If you use [`  OMIT...IF  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#omit) to exclude a portion of a record in a repeating field, and the query also selects other independently repeating fields, BigQuery omits a portion of the other repeated records in the query. If you see the error `  Cannot perform OMIT IF on repeated scope <scope> with independently repeating pass through field <field>,  ` we recommend that you switch to GoogleSQL. For information about migrating `  OMIT...IF  ` statements to GoogleSQL, see [Migrating to GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#filtering_rows_with_omit_record_if) .
 
 ##### Example
 
 Referring back to the example used for the `  WITHIN  ` modifier, `  OMIT RECORD IF  ` can be used to accomplish the same thing `  WITHIN  ` and `  HAVING  ` were used to do in that example.
 
-``` text
-#legacySQL
-SELECT
-  repository.url
-FROM
-  [bigquery-public-data:samples.github_nested]
-OMIT RECORD IF
-  COUNT(payload.pages.page_name) <= 80;
-```
+    #legacySQL
+    SELECT
+      repository.url
+    FROM
+      [bigquery-public-data:samples.github_nested]
+    OMIT RECORD IF
+      COUNT(payload.pages.page_name) <= 80;
 
 ### GROUP BY clause
 
@@ -372,21 +334,19 @@ The `  GROUP BY  ` clause lets you group rows that have the same values for a gi
 
 This query finds the top ten most common *first words* in the trigrams sample dataset. In addition to demonstrating the use of the `  GROUP BY  ` clause, it demonstrates how positional indexes can be used instead of field names in the `  GROUP BY  ` and `  ORDER BY  ` clauses.
 
-``` text
-#legacySQL
-SELECT
-  first,
-  COUNT(ngram)
-FROM
-  [bigquery-public-data:samples.trigrams]
-GROUP BY
-  1
-ORDER BY
-  2 DESC
-LIMIT 10;
-```
+    #legacySQL
+    SELECT
+      first,
+      COUNT(ngram)
+    FROM
+      [bigquery-public-data:samples.trigrams]
+    GROUP BY
+      1
+    ORDER BY
+      2 DESC
+    LIMIT 10;
 
-Aggregation performed using a `  GROUP BY  ` clause is called *grouped aggregation* . Unlike [scoped aggregation](#scopedaggregation) , grouped aggregation is common in most SQL processing systems.
+Aggregation performed using a `  GROUP BY  ` clause is called *grouped aggregation* . Unlike [scoped aggregation](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#scopedaggregation) , grouped aggregation is common in most SQL processing systems.
 
 #### The `     EACH    ` modifier
 
@@ -402,42 +362,38 @@ When the `  ROLLUP  ` function is used, BigQuery adds extra rows to the query re
 
 This query generates per-year counts of male and female births from the sample natality dataset.
 
-``` text
-#legacySQL
-SELECT
-  year,
-  is_male,
-  COUNT(1) as count
-FROM
-  [bigquery-public-data:samples.natality]
-WHERE
-  year >= 2000
-  AND year <= 2002
-GROUP BY
-  ROLLUP(year, is_male)
-ORDER BY
-  year,
-  is_male;
-```
+    #legacySQL
+    SELECT
+      year,
+      is_male,
+      COUNT(1) as count
+    FROM
+      [bigquery-public-data:samples.natality]
+    WHERE
+      year >= 2000
+      AND year <= 2002
+    GROUP BY
+      ROLLUP(year, is_male)
+    ORDER BY
+      year,
+      is_male;
 
 These are the results of the query. Notice that there are rows where one or both of the group keys are `  NULL  ` . These rows are the *rollup* rows.
 
-``` text
-+------+---------+----------+
-| year | is_male |  count   |
-+------+---------+----------+
-| NULL |    NULL | 12122730 |
-| 2000 |    NULL |  4063823 |
-| 2000 |   false |  1984255 |
-| 2000 |    true |  2079568 |
-| 2001 |    NULL |  4031531 |
-| 2001 |   false |  1970770 |
-| 2001 |    true |  2060761 |
-| 2002 |    NULL |  4027376 |
-| 2002 |   false |  1966519 |
-| 2002 |    true |  2060857 |
-+------+---------+----------+
-```
+    +------+---------+----------+
+    | year | is_male |  count   |
+    +------+---------+----------+
+    | NULL |    NULL | 12122730 |
+    | 2000 |    NULL |  4063823 |
+    | 2000 |   false |  1984255 |
+    | 2000 |    true |  2079568 |
+    | 2001 |    NULL |  4031531 |
+    | 2001 |   false |  1970770 |
+    | 2001 |    true |  2060761 |
+    | 2002 |    NULL |  4027376 |
+    | 2002 |   false |  1966519 |
+    | 2002 |    true |  2060857 |
+    +------+---------+----------+
 
 When using the `  ROLLUP  ` function, you can use the `  GROUPING  ` function to distinguish between rows that were added because of the `  ROLLUP  ` function and rows that actually have a `  NULL  ` value for the group key.
 
@@ -445,124 +401,112 @@ When using the `  ROLLUP  ` function, you can use the `  GROUPING  ` function to
 
 This query adds the `  GROUPING  ` function to the previous example to better identify the rows added because of the `  ROLLUP  ` function.
 
-``` text
-#legacySQL
-SELECT
-  year,
-  GROUPING(year) as rollup_year,
-  is_male,
-  GROUPING(is_male) as rollup_gender,
-  COUNT(1) as count
-FROM
-  [bigquery-public-data:samples.natality]
-WHERE
-  year >= 2000
-  AND year <= 2002
-GROUP BY
-  ROLLUP(year, is_male)
-ORDER BY
-  year,
-  is_male;
-```
+    #legacySQL
+    SELECT
+      year,
+      GROUPING(year) as rollup_year,
+      is_male,
+      GROUPING(is_male) as rollup_gender,
+      COUNT(1) as count
+    FROM
+      [bigquery-public-data:samples.natality]
+    WHERE
+      year >= 2000
+      AND year <= 2002
+    GROUP BY
+      ROLLUP(year, is_male)
+    ORDER BY
+      year,
+      is_male;
 
 These are the result the new query returns.
 
-``` text
-+------+-------------+---------+---------------+----------+
-| year | rollup_year | is_male | rollup_gender |  count   |
-+------+-------------+---------+---------------+----------+
-| NULL |           1 |    NULL |             1 | 12122730 |
-| 2000 |           0 |    NULL |             1 |  4063823 |
-| 2000 |           0 |   false |             0 |  1984255 |
-| 2000 |           0 |    true |             0 |  2079568 |
-| 2001 |           0 |    NULL |             1 |  4031531 |
-| 2001 |           0 |   false |             0 |  1970770 |
-| 2001 |           0 |    true |             0 |  2060761 |
-| 2002 |           0 |    NULL |             1 |  4027376 |
-| 2002 |           0 |   false |             0 |  1966519 |
-| 2002 |           0 |    true |             0 |  2060857 |
-+------+-------------+---------+---------------+----------+
-```
+    +------+-------------+---------+---------------+----------+
+    | year | rollup_year | is_male | rollup_gender |  count   |
+    +------+-------------+---------+---------------+----------+
+    | NULL |           1 |    NULL |             1 | 12122730 |
+    | 2000 |           0 |    NULL |             1 |  4063823 |
+    | 2000 |           0 |   false |             0 |  1984255 |
+    | 2000 |           0 |    true |             0 |  2079568 |
+    | 2001 |           0 |    NULL |             1 |  4031531 |
+    | 2001 |           0 |   false |             0 |  1970770 |
+    | 2001 |           0 |    true |             0 |  2060761 |
+    | 2002 |           0 |    NULL |             1 |  4027376 |
+    | 2002 |           0 |   false |             0 |  1966519 |
+    | 2002 |           0 |    true |             0 |  2060857 |
+    +------+-------------+---------+---------------+----------+
 
 **Notes:**
 
   - Non-aggregated fields in the `  SELECT  ` clause *must* be listed in the `  GROUP BY  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-      word,
-      corpus,
-      COUNT(word)
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th"
-    GROUP BY
-      word,
-      corpus; /* Succeeds because all non-aggregated fields are group keys. */
-    ```
+        #legacySQL
+        SELECT
+          word,
+          corpus,
+          COUNT(word)
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th"
+        GROUP BY
+          word,
+          corpus; /* Succeeds because all non-aggregated fields are group keys. */
     
-    ``` text
-    #legacySQL
-    SELECT
-      word,
-      corpus,
-      COUNT(word)
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th"
-    GROUP BY
-      word;  /* Fails because corpus is not aggregated nor is it a group key. */
-    ```
+        #legacySQL
+        SELECT
+          word,
+          corpus,
+          COUNT(word)
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th"
+        GROUP BY
+          word;  /* Fails because corpus is not aggregated nor is it a group key. */
 
   - Expressions computed in the `  SELECT  ` clause cannot be used in the corresponding `  GROUP BY  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-      word,
-      corpus,
-      COUNT(word) word_count
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th"
-    GROUP BY
-      word,
-      corpus,
-      word_count;  /* Fails because word_count is not visible to this GROUP BY clause. */
-    ```
+        #legacySQL
+        SELECT
+          word,
+          corpus,
+          COUNT(word) word_count
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th"
+        GROUP BY
+          word,
+          corpus,
+          word_count;  /* Fails because word_count is not visible to this GROUP BY clause. */
 
   - Grouping by float and double values is not supported, because the equality function for those types is not well-defined.
 
-  - Because the system is interactive, queries that produce a large number of groups might fail. The use of the `  TOP  ` [function](#top-function) instead of `  GROUP BY  ` might solve some scaling problems.
+  - Because the system is interactive, queries that produce a large number of groups might fail. The use of the `  TOP  ` [function](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#top-function) instead of `  GROUP BY  ` might solve some scaling problems.
 
 ### HAVING clause
 
-The `  HAVING  ` clause behaves exactly like the [`  WHERE  `](#where) clause except that it is evaluated after the `  SELECT  ` clause so the results of all computed expressions are visible to the `  HAVING  ` clause. The HAVING clause can only refer to outputs of the corresponding `  SELECT  ` clause.
+The `  HAVING  ` clause behaves exactly like the [`  WHERE  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#where) clause except that it is evaluated after the `  SELECT  ` clause so the results of all computed expressions are visible to the `  HAVING  ` clause. The HAVING clause can only refer to outputs of the corresponding `  SELECT  ` clause.
 
 ##### Example
 
 This query computes the most common *first* words in the ngram sample dataset that contain the letter a and occur at most 10,000 times.
 
-``` text
-#legacySQL
-SELECT
-  first,
-  COUNT(ngram) ngram_count
-FROM
-  [bigquery-public-data:samples.trigrams]
-GROUP BY
-  1
-HAVING
-  first contains "a"
-  AND ngram_count < 10000
-ORDER BY
-  2 DESC
-LIMIT 10;
-```
+    #legacySQL
+    SELECT
+      first,
+      COUNT(ngram) ngram_count
+    FROM
+      [bigquery-public-data:samples.trigrams]
+    GROUP BY
+      1
+    HAVING
+      first contains "a"
+      AND ngram_count < 10000
+    ORDER BY
+      2 DESC
+    LIMIT 10;
 
 ### ORDER BY clause
 
@@ -581,54 +525,52 @@ The `  LIMIT  ` clause limits the number of rows in the returned result set. Sin
   - The `  LIMIT  ` clause cannot contain any functions; it takes only a numeric constant.
   - When the `  LIMIT  ` clause is used, the total bytes processed and the bytes billed can vary for the same query.
 
-## Query grammar
+## <span id="query-grammar"></span> Query grammar
 
-The individual clauses of BigQuery `  SELECT  ` statements are described in detail [above](#select-syntax) . Here we present the full grammar of `  SELECT  ` statements in a compact form with links back to the individual sections.
+The individual clauses of BigQuery `  SELECT  ` statements are described in detail [above](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#select-syntax) . Here we present the full grammar of `  SELECT  ` statements in a compact form with links back to the individual sections.
 
-``` text
-query:
-    SELECT { * | field_path.* | expression } [ [ AS ] alias ] [ , ... ]
-    [ FROM from_body
-      [ WHERE bool_expression ]
-      [ OMIT RECORD IF bool_expression]
-      [ GROUP [ EACH ] BY [ ROLLUP ] { field_name_or_alias } [ , ... ] ]
-      [ HAVING bool_expression ]
-      [ ORDER BY field_name_or_alias [ { DESC | ASC } ] [, ... ] ]
-      [ LIMIT n ]
-    ];
-
-from_body:
-    {
-      from_item [, ...] |  # Warning: Comma means UNION ALL here
-      from_item [ join_type ] JOIN [ EACH ] from_item [ ON join_predicate ] |
-      (FLATTEN({ table_name | (query) }, field_name_or_alias)) |
-      table_wildcard_function
-    }
-
-from_item:
-    { table_name | (query) } [ [ AS ] alias ]
-
-join_type:
-    { INNER | [ FULL ] [ OUTER ] | RIGHT [ OUTER ] | LEFT [ OUTER ] | CROSS }
-
-join_predicate:
-    field_from_one_side_of_the_join = field_from_the_other_side_of_the_join [ AND ...]
-
-expression:
-    {
-      literal_value |
-      field_name_or_alias |
-      function_call
-    }
-
-bool_expression:
-    {
-      expression_which_results_in_a_boolean_value |
-      bool_expression AND bool_expression |
-      bool_expression OR bool_expression |
-      NOT bool_expression
-    }
-```
+    query:
+        SELECT { * | field_path.* | expression } [ [ AS ] alias ] [ , ... ]
+        [ FROM from_body
+          [ WHERE bool_expression ]
+          [ OMIT RECORD IF bool_expression]
+          [ GROUP [ EACH ] BY [ ROLLUP ] { field_name_or_alias } [ , ... ] ]
+          [ HAVING bool_expression ]
+          [ ORDER BY field_name_or_alias [ { DESC | ASC } ] [, ... ] ]
+          [ LIMIT n ]
+        ];
+    
+    from_body:
+        {
+          from_item [, ...] |  # Warning: Comma means UNION ALL here
+          from_item [ join_type ] JOIN [ EACH ] from_item [ ON join_predicate ] |
+          (FLATTEN({ table_name | (query) }, field_name_or_alias)) |
+          table_wildcard_function
+        }
+    
+    from_item:
+        { table_name | (query) } [ [ AS ] alias ]
+    
+    join_type:
+        { INNER | [ FULL ] [ OUTER ] | RIGHT [ OUTER ] | LEFT [ OUTER ] | CROSS }
+    
+    join_predicate:
+        field_from_one_side_of_the_join = field_from_the_other_side_of_the_join [ AND ...]
+    
+    expression:
+        {
+          literal_value |
+          field_name_or_alias |
+          function_call
+        }
+    
+    bool_expression:
+        {
+          expression_which_results_in_a_boolean_value |
+          bool_expression AND bool_expression |
+          bool_expression OR bool_expression |
+          NOT bool_expression
+        }
 
 **Notation:**
 
@@ -642,666 +584,664 @@ bool_expression:
 
 Most `  SELECT  ` statement clauses support functions. Fields referenced in a function don't need to be listed in any `  SELECT  ` clause. Therefore, the following query is valid, even though the `  clicks  ` field is not displayed directly:
 
-``` text
-#legacySQL
-SELECT country, SUM(clicks) FROM table GROUP BY country;
-```
+    #legacySQL
+    SELECT country, SUM(clicks) FROM table GROUP BY country;
 
 Aggregate functions
 
-[`  AVG()  `](#avg)
+[`  AVG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#avg)
 
 Returns the average of the values for a group of rows ...
 
-[`  BIT_AND()  `](#bit_and)
+[`  BIT_AND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_and)
 
 Returns the result of a bitwise AND operation ...
 
-[`  BIT_OR()  `](#bit_or)
+[`  BIT_OR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_or)
 
 Returns the result of a bitwise OR operation ...
 
-[`  BIT_XOR()  `](#bit_xor)
+[`  BIT_XOR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_xor)
 
 Returns the result of a bitwise XOR operation ...
 
-[`  CORR()  `](#corr)
+[`  CORR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#corr)
 
 Returns the Pearson correlation coefficient of a set of number pairs.
 
-[`  COUNT()  `](#count)
+[`  COUNT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#count)
 
 Returns the total number of values ...
 
-[`  COUNT([DISTINCT])  `](#countdistinct)
+[`  COUNT([DISTINCT])  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#countdistinct)
 
 Returns the total number of non-NULL values ...
 
-[`  COVAR_POP()  `](#covar_pop)
+[`  COVAR_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#covar_pop)
 
 Computes the population covariance of the values ...
 
-[`  COVAR_SAMP()  `](#covar_samp)
+[`  COVAR_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#covar_samp)
 
 Computes the sample covariance of the values ...
 
-[`  EXACT_COUNT_DISTINCT()  `](#exact_count_distinct)
+[`  EXACT_COUNT_DISTINCT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#exact_count_distinct)
 
 Returns the exact number of non-NULL, distinct values for the specified field.
 
-[`  FIRST()  `](#first)
+[`  FIRST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#first)
 
 Returns the first sequential value in the scope of the function.
 
-[`  GROUP_CONCAT()  `](#group_concat)
+[`  GROUP_CONCAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#group_concat)
 
 Concatenates multiple strings into a single string ...
 
-[`  GROUP_CONCAT_UNQUOTED()  `](#group_concat_unquoted)
+[`  GROUP_CONCAT_UNQUOTED()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#group_concat_unquoted)
 
 Concatenates multiple strings into a single string ... will not add double quotes ...
 
-[`  LAST()  `](#last)
+[`  LAST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#last)
 
 Returns the last sequential value ...
 
-[`  MAX()  `](#max)
+[`  MAX()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#max)
 
 Returns the maximum value ...
 
-[`  MIN()  `](#min)
+[`  MIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#min)
 
 Returns the minimum value ...
 
-[`  NEST()  `](#nest)
+[`  NEST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nest)
 
 Aggregates all values in the current aggregation scope into a repeated field.
 
-[`  NTH()  `](#nth)
+[`  NTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nth)
 
 Returns the nth sequential value ...
 
-[`  QUANTILES()  `](#quantiles)
+[`  QUANTILES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#quantiles)
 
 Computes approximate minimum, maximum, and quantiles ...
 
-[`  STDDEV()  `](#stddev)
+[`  STDDEV()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev)
 
 Returns the standard deviation ...
 
-[`  STDDEV_POP()  `](#stddev_pop)
+[`  STDDEV_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev_pop)
 
 Computes the population standard deviation ...
 
-[`  STDDEV_SAMP()  `](#stddev_samp)
+[`  STDDEV_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev_samp)
 
 Computes the sample standard deviation ...
 
-[`  SUM()  `](#sum)
+[`  SUM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sum)
 
 Returns the sum total of the values ...
 
-[`  TOP() ... COUNT(*)  `](#top)
+[`  TOP() ... COUNT(*)  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#top)
 
 Returns the top max\_records records by frequency.
 
-[`  UNIQUE()  `](#unique)
+[`  UNIQUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#unique)
 
 Returns the set of unique, non-NULL values ...
 
-[`  VARIANCE()  `](#variance)
+[`  VARIANCE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#variance)
 
 Computes the variance of the values ...
 
-[`  VAR_POP()  `](#var_pop)
+[`  VAR_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#var_pop)
 
 Computes the population variance of the values ...
 
-[`  VAR_SAMP()  `](#var_samp)
+[`  VAR_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#var_samp)
 
 Computes the sample variance of the values ...
 
 Arithmetic operators
 
-[`  +  `](#arithmeticoperators)
+[`  +  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators)
 
 Addition
 
-[`  -  `](#arithmeticoperators)
+[`  -  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators)
 
 Subtraction
 
-[`  *  `](#arithmeticoperators)
+[`  *  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators)
 
 Multiplication
 
-[`  /  `](#arithmeticoperators)
+[`  /  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators)
 
 Division
 
-[`  %  `](#arithmeticoperators)
+[`  %  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators)
 
 Modulo
 
 Bitwise functions
 
-[`  &  `](#bitwisefunctions)
+[`  &  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise AND
 
-[`  |  `](#bitwisefunctions)
+[`  |  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise OR
 
-[`  ^  `](#bitwisefunctions)
+[`  ^  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise XOR
 
-[`  <<  `](#bitwisefunctions)
+[`  <<  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise shift left
 
-[`  >>  `](#bitwisefunctions)
+[`  >>  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise shift right
 
-[`  ~  `](#bitwisefunctions)
+[`  ~  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Bitwise NOT
 
-[`  BIT_COUNT()  `](#bitwisefunctions)
+[`  BIT_COUNT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bitwisefunctions)
 
 Returns the number of bits ...
 
 Casting functions
 
-[`  BOOLEAN()  `](#boolean)
+[`  BOOLEAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#boolean)
 
 Cast to boolean.
 
-[`  BYTES()  `](#bytes)
+[`  BYTES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bytes)
 
 Cast to bytes.
 
-[`  CAST(expr AS type)  `](#cast)
+[`  CAST(expr AS type)  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cast)
 
 Converts `  expr  ` into a variable of type `  type  ` .
 
-[`  FLOAT()  `](#float)
+[`  FLOAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#float)
 
 Cast to double.
 
-[`  HEX_STRING()  `](#hex_string)
+[`  HEX_STRING()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hex_string)
 
 Cast to hexadecimal string.
 
-[`  INTEGER()  `](#integer)
+[`  INTEGER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#integer)
 
 Cast to integer.
 
-[`  STRING()  `](#string)
+[`  STRING()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#string)
 
 Cast to string.
 
 Comparison functions
 
-[`  expr1 = expr2  `](#equals)
+[`  expr1 = expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#equals)
 
 Returns `  true  ` if the expressions are equal.
 
 [`  expr1 != expr2  `  
-`  expr1 <> expr2  `](#not-equals)
+`  expr1 <> expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#not-equals)
 
 Returns `  true  ` if the expressions are not equal.
 
-[`  expr1 > expr2  `](#greater-than)
+[`  expr1 > expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greater-than)
 
 Returns `  true  ` if `  expr1  ` is greater than `  expr2  ` .
 
-[`  expr1 < expr2  `](#less-than)
+[`  expr1 < expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#less-than)
 
 Returns `  true  ` if `  expr1  ` is less than `  expr2  ` .
 
-[`  expr1 >= expr2  `](#greater-or-equal)
+[`  expr1 >= expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greater-or-equal)
 
 Returns `  true  ` if `  expr1  ` is greater than or equal to `  expr2  ` .
 
-[`  expr1 <= expr2  `](#less-or-equal)
+[`  expr1 <= expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#less-or-equal)
 
 Returns `  true  ` if `  expr1  ` is less than or equal to `  expr2  ` .
 
-[`  expr1 BETWEEN expr2 AND expr3  `](#between)
+[`  expr1 BETWEEN expr2 AND expr3  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#between)
 
 Returns `  true  ` if the value of `  expr1  ` is between `  expr2  ` and `  expr3  ` , inclusive.
 
-[`  expr IS NULL  `](#is-null)
+[`  expr IS NULL  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is-null)
 
 Returns `  true  ` if `  expr  ` is NULL.
 
-[`  expr IN()  `](#in)
+[`  expr IN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#in)
 
 Returns `  true  ` if `  expr  ` matches `  expr1  ` , `  expr2  ` , or any value in the parentheses.
 
-[`  COALESCE()  `](#coalesce)
+[`  COALESCE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#coalesce)
 
 Returns the first argument that isn't NULL.
 
-[`  GREATEST()  `](#greatest)
+[`  GREATEST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greatest)
 
 Returns the largest `  numeric_expr  ` parameter.
 
-[`  IFNULL()  `](#ifnull)
+[`  IFNULL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ifnull)
 
 If argument is not null, returns the argument.
 
-[`  IS_INF()  `](#is_inf)
+[`  IS_INF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_inf)
 
 Returns `  true  ` if positive or negative infinity.
 
-[`  IS_NAN()  `](#is_nan)
+[`  IS_NAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_nan)
 
 Returns `  true  ` if argument is `  NaN  ` .
 
-[`  IS_EXPLICITLY_DEFINED()  `](#is_explicitly_defined)
+[`  IS_EXPLICITLY_DEFINED()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_explicitly_defined)
 
 deprecated: Use `  expr IS NOT NULL  ` instead.
 
-[`  LEAST()  `](#least)
+[`  LEAST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#least)
 
 Returns the smallest argument `  numeric_expr  ` parameter.
 
-[`  NVL()  `](#nvl)
+[`  NVL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nvl)
 
 If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_default  ` .
 
 Date and time functions
 
-[`  CURRENT_DATE()  `](#current_date)
+[`  CURRENT_DATE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_date)
 
 Returns current date in the format `  %Y-%m-%d  ` .
 
-[`  CURRENT_TIME()  `](#current_time)
+[`  CURRENT_TIME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_time)
 
 Returns the server's current time in the format `  %H:%M:%S  ` .
 
-[`  CURRENT_TIMESTAMP()  `](#current_timestamp)
+[`  CURRENT_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_timestamp)
 
 Returns the server's current time in the format `  %Y-%m-%d %H:%M:%S  ` .
 
-[`  DATE()  `](#date)
+[`  DATE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#date)
 
 Returns the date in the format `  %Y-%m-%d  ` .
 
-[`  DATE_ADD()  `](#date_add)
+[`  DATE_ADD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#date_add)
 
 Adds the specified interval to a TIMESTAMP data type.
 
-[`  DATEDIFF()  `](#datediff)
+[`  DATEDIFF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#datediff)
 
 Returns the number of days between two TIMESTAMP data types.
 
-[`  DAY()  `](#day)
+[`  DAY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#day)
 
 Returns the day of the month as an integer between 1 and 31.
 
-[`  DAYOFWEEK()  `](#dayofweek)
+[`  DAYOFWEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dayofweek)
 
 Returns the day of the week as an integer between 1 (Sunday) and 7 (Saturday).
 
-[`  DAYOFYEAR()  `](#dayofyear)
+[`  DAYOFYEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dayofyear)
 
 Returns the day of the year as an integer between 1 and 366.
 
-[`  FORMAT_UTC_USEC()  `](#format_utc_usec)
+[`  FORMAT_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format_utc_usec)
 
 Returns a UNIX timestamp in the format `  YYYY-MM-DD HH:MM:SS.uuuuuu  ` .
 
-[`  HOUR()  `](#hour)
+[`  HOUR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hour)
 
 Returns the hour of a TIMESTAMP as an integer between 0 and 23.
 
-[`  MINUTE()  `](#minute)
+[`  MINUTE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#minute)
 
 Returns the minutes of a TIMESTAMP as an integer between 0 and 59.
 
-[`  MONTH()  `](#month)
+[`  MONTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#month)
 
 Returns the month of a TIMESTAMP as an integer between 1 and 12.
 
-[`  MSEC_TO_TIMESTAMP()  `](#msec_to_timestamp)
+[`  MSEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#msec_to_timestamp)
 
 Converts a UNIX timestamp in milliseconds to a TIMESTAMP.
 
-[`  NOW()  `](#now)
+[`  NOW()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#now)
 
 Returns the current UNIX timestamp in microseconds.
 
-[`  PARSE_UTC_USEC()  `](#parse_utc_usec)
+[`  PARSE_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse_utc_usec)
 
 Converts a date string to a UNIX timestamp in microseconds.
 
-[`  QUARTER()  `](#quarter)
+[`  QUARTER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#quarter)
 
 Returns the quarter of the year of a TIMESTAMP as an integer between 1 and 4.
 
-[`  SEC_TO_TIMESTAMP()  `](#sec_to_timestamp)
+[`  SEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sec_to_timestamp)
 
 Converts a UNIX timestamp in seconds to a TIMESTAMP.
 
-[`  SECOND()  `](#second)
+[`  SECOND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#second)
 
 Returns the seconds of a TIMESTAMP as an integer between 0 and 59.
 
-[`  STRFTIME_UTC_USEC()  `](#strftime_utc_usec)
+[`  STRFTIME_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#strftime_utc_usec)
 
 Returns a date string in the format *date\_format\_str* .
 
-[`  TIME()  `](#time)
+[`  TIME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#time)
 
 Returns a TIMESTAMP in the format `  %H:%M:%S  ` .
 
-[`  TIMESTAMP()  `](#timestamp)
+[`  TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp)
 
 Convert a date string to a TIMESTAMP.
 
-[`  TIMESTAMP_TO_MSEC()  `](#timestamp_to_msec)
+[`  TIMESTAMP_TO_MSEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_msec)
 
 Converts a TIMESTAMP to a UNIX timestamp in milliseconds.
 
-[`  TIMESTAMP_TO_SEC()  `](#timestamp_to_sec)
+[`  TIMESTAMP_TO_SEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_sec)
 
 Converts a TIMESTAMP to a UNIX timestamp in seconds.
 
-[`  TIMESTAMP_TO_USEC()  `](#timestamp_to_usec)
+[`  TIMESTAMP_TO_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_usec)
 
 Converts a TIMESTAMP to a UNIX timestamp in microseconds.
 
-[`  USEC_TO_TIMESTAMP()  `](#usec_to_timestamp)
+[`  USEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#usec_to_timestamp)
 
 Converts a UNIX timestamp in microseconds to a TIMESTAMP.
 
-[`  UTC_USEC_TO_DAY()  `](#utc_usec_to_day)
+[`  UTC_USEC_TO_DAY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_day)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the day it occurs in.
 
-[`  UTC_USEC_TO_HOUR()  `](#utc_usec_to_hour)
+[`  UTC_USEC_TO_HOUR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_hour)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the hour it occurs in.
 
-[`  UTC_USEC_TO_MONTH()  `](#utc_usec_to_month)
+[`  UTC_USEC_TO_MONTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_month)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the month it occurs in.
 
-[`  UTC_USEC_TO_WEEK()  `](#utc_usec_to_week)
+[`  UTC_USEC_TO_WEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_week)
 
 Returns a UNIX timestamp in microseconds that represents a day in the week.
 
-[`  UTC_USEC_TO_YEAR()  `](#utc_usec_to_year)
+[`  UTC_USEC_TO_YEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_year)
 
 Returns a UNIX timestamp in microseconds that represents the year.
 
-[`  WEEK()  `](#week)
+[`  WEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#week)
 
 Returns the week of a TIMESTAMP as an integer between 1 and 53.
 
-[`  YEAR()  `](#year)
+[`  YEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#year)
 
 Returns the year of a TIMESTAMP.
 
 IP functions
 
-[`  FORMAT_IP()  `](#format_ip)
+[`  FORMAT_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format_ip)
 
 Converts 32 least significant bits of `  integer_value  ` to human-readable IPv4 address string.
 
-[`  PARSE_IP()  `](#parse_ip)
+[`  PARSE_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse_ip)
 
 Converts a string representing IPv4 address to unsigned integer value.
 
-[`  FORMAT_PACKED_IP()  `](#format-packed-ip)
+[`  FORMAT_PACKED_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format-packed-ip)
 
 Returns a human-readable IP address in the form `  10.1.5.23  ` or `  2620:0:1009:1:216:36ff:feef:3f  ` .
 
-[`  PARSE_PACKED_IP()  `](#parse-packed-ip)
+[`  PARSE_PACKED_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse-packed-ip)
 
-Returns an IP address in [BYTES](/bigquery/data-types#bytes-type) .
+Returns an IP address in [BYTES](https://docs.cloud.google.com/bigquery/data-types#bytes-type) .
 
 JSON functions
 
-[`  JSON_EXTRACT()  `](#json_extract)
+[`  JSON_EXTRACT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#json_extract)
 
 Selects a value according to the JSONPath expression and returns a JSON string.
 
-[`  JSON_EXTRACT_SCALAR()  `](#json_extract_scalar)
+[`  JSON_EXTRACT_SCALAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#json_extract_scalar)
 
 Selects a value according to the JSONPath expression and returns a JSON scalar.
 
 Logical operators
 
-[`  expr AND expr  `](#and)
+[`  expr AND expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#and)
 
 Returns `  true  ` if both expressions are true.
 
-[`  expr OR expr  `](#or)
+[`  expr OR expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#or)
 
 Returns `  true  ` if one or both expressions are true.
 
-[`  NOT expr  `](#not)
+[`  NOT expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#not)
 
 Returns `  true  ` if the expression is false.
 
 Mathematical functions
 
-[`  ABS()  `](#abs)
+[`  ABS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#abs)
 
 Returns the absolute value of the argument.
 
-[`  ACOS()  `](#acos)
+[`  ACOS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#acos)
 
 Returns the arc cosine of the argument.
 
-[`  ACOSH()  `](#acosh)
+[`  ACOSH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#acosh)
 
 Returns the arc hyperbolic cosine of the argument.
 
-[`  ASIN()  `](#asin)
+[`  ASIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#asin)
 
 Returns the arc sine of the argument.
 
-[`  ASINH()  `](#asinh)
+[`  ASINH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#asinh)
 
 Returns the arc hyperbolic sine of the argument.
 
-[`  ATAN()  `](#atan)
+[`  ATAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atan)
 
 Returns the arc tangent of the argument.
 
-[`  ATANH()  `](#atanh)
+[`  ATANH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atanh)
 
 Returns the arc hyperbolic tangent of the argument.
 
-[`  ATAN2()  `](#atan2)
+[`  ATAN2()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atan2)
 
 Returns the arc tangent of the two arguments.
 
-[`  CEIL()  `](#ceil)
+[`  CEIL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ceil)
 
 Rounds the argument up to the nearest whole number and returns the rounded value.
 
-[`  COS()  `](#cos)
+[`  COS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cos)
 
 Returns the cosine of the argument.
 
-[`  COSH()  `](#cosh)
+[`  COSH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cosh)
 
 Returns the hyperbolic cosine of the argument.
 
-[`  DEGREES()  `](#degrees)
+[`  DEGREES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#degrees)
 
 Converts from radians to degrees.
 
-[`  EXP()  `](#exp)
+[`  EXP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#exp)
 
 Returns `  e  ` to the power of the argument.
 
-[`  FLOOR()  `](#floor)
+[`  FLOOR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#floor)
 
 Rounds the argument down to the nearest whole number.
 
 [`  LN()  `  
-`  LOG()  `](#ln)
+`  LOG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ln)
 
 Returns the natural logarithm of the argument.
 
-[`  LOG2()  `](#log2)
+[`  LOG2()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#log2)
 
 Returns the Base-2 logarithm of the argument.
 
-[`  LOG10()  `](#log10)
+[`  LOG10()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#log10)
 
 Returns the Base-10 logarithm of the argument.
 
-[`  PI()  `](#pi)
+[`  PI()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#pi)
 
 Returns the constant π.
 
-[`  POW()  `](#pow)
+[`  POW()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#pow)
 
 Returns first argument to the power of the second argument.
 
-[`  RADIANS()  `](#radians)
+[`  RADIANS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#radians)
 
 Converts from degrees to radians.
 
-[`  RAND()  `](#rand)
+[`  RAND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rand)
 
 Returns a random float value in the range 0.0 \<= value \< 1.0.
 
-[`  ROUND()  `](#round)
+[`  ROUND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#round)
 
 Rounds the argument either up or down to the nearest whole number.
 
-[`  SIN()  `](#sin)
+[`  SIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sin)
 
 Returns the sine of the argument.
 
-[`  SINH()  `](#sinh)
+[`  SINH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sinh)
 
 Returns the hyperbolic sine of the argument.
 
-[`  SQRT()  `](#sqrt)
+[`  SQRT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sqrt)
 
 Returns the square root of the expression.
 
-[`  TAN()  `](#tan)
+[`  TAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tan)
 
 Returns the tangent of the argument.
 
-[`  TANH()  `](#tanh)
+[`  TANH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tanh)
 
 Returns the hyperbolic tangent of the argument.
 
 Regular expression functions
 
-[`  REGEXP_MATCH()  `](#regexp_match)
+[`  REGEXP_MATCH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_match)
 
 Returns true if the argument matches the regular expression.
 
-[`  REGEXP_EXTRACT()  `](#regexp_extract)
+[`  REGEXP_EXTRACT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_extract)
 
 Returns the portion of the argument that matches the capturing group within the regular expression.
 
-[`  REGEXP_REPLACE()  `](#regexp_replace)
+[`  REGEXP_REPLACE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_replace)
 
 Replaces a substring that matches a regular expression.
 
 String functions
 
-[`  CONCAT()  `](#concat)
+[`  CONCAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#concat)
 
 Returns the concatenation of two or more strings, or NULL if any of the values are NULL.
 
-[`  expr CONTAINS ' str '  `](#contains)
+[`  expr CONTAINS ' str '  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#contains)
 
 Returns `  true  ` if `  expr  ` contains the specified string argument.
 
-[`  INSTR()  `](#instr)
+[`  INSTR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#instr)
 
 Returns the one-based index of the first occurrence of a string.
 
-[`  LEFT()  `](#left)
+[`  LEFT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#left)
 
 Returns the leftmost characters of a string.
 
-[`  LENGTH()  `](#length)
+[`  LENGTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#length)
 
 Returns the length of the string.
 
-[`  LOWER()  `](#lower)
+[`  LOWER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lower)
 
 Returns the original string with all characters in lower case.
 
-[`  LPAD()  `](#lpad)
+[`  LPAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lpad)
 
 Inserts characters to the left of a string.
 
-[`  LTRIM()  `](#ltrim)
+[`  LTRIM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ltrim)
 
 Removes characters from the left side of a string.
 
-[`  REPLACE()  `](#replace)
+[`  REPLACE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#replace)
 
 Replaces all occurrences of a substring.
 
-[`  RIGHT()  `](#right)
+[`  RIGHT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#right)
 
 Returns the rightmost characters of a string.
 
-[`  RPAD()  `](#rpad)
+[`  RPAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rpad)
 
 Inserts characters to the right side of a string.
 
-[`  RTRIM()  `](#rtrim)
+[`  RTRIM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rtrim)
 
 Removes trailing characters from the right side of a string.
 
-[`  SPLIT()  `](#split)
+[`  SPLIT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#split)
 
 Splits a string into repeated substrings.
 
-[`  SUBSTR()  `](#substr)
+[`  SUBSTR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#substr)
 
 Returns a substring ...
 
-[`  UPPER()  `](#upper)
+[`  UPPER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#upper)
 
 Returns the original string with all characters in upper case.
 
 Table wildcard functions
 
-[`  TABLE_DATE_RANGE()  `](#table-date-range)
+[`  TABLE_DATE_RANGE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range)
 
 Queries multiple daily tables that span a date range.
 
-[`  TABLE_DATE_RANGE_STRICT()  `](#table-date-range-strict)
+[`  TABLE_DATE_RANGE_STRICT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range-strict)
 
 Queries multiple daily tables that span a date range, with no missing dates.
 
-[`  TABLE_QUERY()  `](#table-query)
+[`  TABLE_QUERY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-query)
 
 Queries tables whose names match a specified predicate.
 
 URL functions
 
-[`  HOST()  `](#host)
+[`  HOST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)
 
 Given a URL, returns the host name as a string.
 
-[`  DOMAIN()  `](#domain)
+[`  DOMAIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#domain)
 
 Given a URL, returns the domain as a string.
 
-[`  TLD()  `](#tld)
+[`  TLD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)
 
 Given a URL, returns the top level domain plus any country domain in the URL.
 
@@ -1314,109 +1254,109 @@ Window functions
 `  MIN()  `  
 `  STDDEV()  `  
 `  SUM()  `  
-](#analytics)
+](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#analytics)
 
-The same operation as the corresponding [Aggregate functions](#aggfunctions) , but are computed over a window defined by the OVER clause.
+The same operation as the corresponding [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#aggfunctions) , but are computed over a window defined by the OVER clause.
 
-[`  CUME_DIST()  `](#cume_dist)
+[`  CUME_DIST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cume_dist)
 
 Returns a double that indicates the cumulative distribution of a value in a group of values ...
 
-[`  DENSE_RANK()  `](#dense_rank)
+[`  DENSE_RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dense_rank)
 
 Returns the integer rank of a value in a group of values.
 
-[`  FIRST_VALUE()  `](#first_value)
+[`  FIRST_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#first_value)
 
 Returns the first value of the specified field in the window.
 
-[`  LAG()  `](#lag)
+[`  LAG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lag)
 
 Enables you to read data from a previous row within a window.
 
-[`  LAST_VALUE()  `](#last_value)
+[`  LAST_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#last_value)
 
 Returns the last value of the specified field in the window.
 
-[`  LEAD()  `](#lead)
+[`  LEAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lead)
 
 Enables you to read data from a following row within a window.
 
-[`  NTH_VALUE()  `](#nthvalue)
+[`  NTH_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nthvalue)
 
 Returns the value of `  <expr>  ` at position `  <n>  ` of the window frame ...
 
-[`  NTILE()  `](#ntile)
+[`  NTILE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ntile)
 
 Divides the window into the specified number of buckets.
 
-[`  PERCENT_RANK()  `](#percent_rank)
+[`  PERCENT_RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percent_rank)
 
 Returns the rank of the current row, relative to the other rows in the partition.
 
-[`  PERCENTILE_CONT()  `](#percentile_cont)
+[`  PERCENTILE_CONT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percentile_cont)
 
 Returns an interpolated value that would map to the percentile argument with respect to the window ...
 
-[`  PERCENTILE_DISC()  `](#percentile_disc)
+[`  PERCENTILE_DISC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percentile_disc)
 
 Returns the value nearest the percentile of the argument over the window.
 
-[`  RANK()  `](#rank)
+[`  RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rank)
 
 Returns the integer rank of a value in a group of values.
 
-[`  RATIO_TO_REPORT()  `](#ratio-to-report)
+[`  RATIO_TO_REPORT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ratio-to-report)
 
 Returns the ratio of each value to the sum of the values.
 
-[`  ROW_NUMBER()  `](#row-number)
+[`  ROW_NUMBER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#row-number)
 
 Returns the current row number of the query result over the window.
 
 Other functions
 
-[`  CASE WHEN ... THEN  `](#case_when)
+[`  CASE WHEN ... THEN  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#case_when)
 
 Use CASE to choose among two or more alternate expressions in your query.
 
-[`  CURRENT_USER()  `](#current_user)
+[`  CURRENT_USER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_user)
 
 Returns the email address of the user running the query.
 
-[`  EVERY()  `](#every)
+[`  EVERY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#every)
 
 Returns true if the argument is true for all of its inputs.
 
-[`  FROM_BASE64()  `](#from-base64)
+[`  FROM_BASE64()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#from-base64)
 
 Converts the base-64 encoded input string into BYTES format.
 
-[`  HASH()  `](#hash)
+[`  HASH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hash)
 
 Computes and returns a 64-bit signed hash value ...
 
-[`  FARM_FINGERPRINT()  `](#farm_fingerprint)
+[`  FARM_FINGERPRINT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#farm_fingerprint)
 
 Computes and returns a 64-bit signed fingerprint value ...
 
-[`  IF()  `](#if)
+[`  IF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#if)
 
 If first argument is true, returns second argument; otherwise returns third argument.
 
-[`  POSITION()  `](#position)
+[`  POSITION()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#position)
 
 Returns the one-based, sequential position of the argument.
 
-[`  SHA1()  `](#sha1)
+[`  SHA1()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sha1)
 
 Returns a [SHA1](https://www.w3.org/PICS/DSig/SHA1_1_0.html) hash, in BYTES format.
 
-[`  SOME()  `](#some)
+[`  SOME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#some)
 
 Returns true if argument is true for at least one of its inputs.
 
-[`  TO_BASE64()  `](#to-base64)
+[`  TO_BASE64()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#to-base64)
 
 Converts the BYTES argument to a base-64 encoded string.
 
@@ -1436,12 +1376,12 @@ Aggregate functions return values that represent summaries of larger sets of dat
     
     `  SELECT COUNT(f1) FROM ds.Table GROUP BY b1;  `
     
-    The [TOP](/bigquery/docs/query-reference#top-function) function represents a specialized case of group aggregation.
+    The [TOP](https://docs.cloud.google.com/bigquery/docs/query-reference#top-function) function represents a specialized case of group aggregation.
 
-  - Scoped aggregation
+  - <span id="scopedaggregation"></span> Scoped aggregation
     
-    *This feature applies only to tables that have [nested fields](/bigquery/docs/data#nested) .  
-    * Uses an aggregate function and the [`  WITHIN  `](/bigquery/docs/data#within) keyword to aggregate repeated values within a defined scope. For example:
+    *This feature applies only to tables that have [nested fields](https://docs.cloud.google.com/bigquery/docs/data#nested) .  
+    * Uses an aggregate function and the [`  WITHIN  `](https://docs.cloud.google.com/bigquery/docs/data#within) keyword to aggregate repeated values within a defined scope. For example:
     
     `  SELECT COUNT(m1.f2) WITHIN RECORD FROM Table;  `
     
@@ -1451,25 +1391,21 @@ You can apply a restriction to an aggregate function using one of the following 
 
   - An alias in a subselect query. The restriction is specified in the outer `  WHERE  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT corpus, count_corpus_words
-    FROM
-      (SELECT corpus, count(word) AS count_corpus_words
-      FROM [bigquery-public-data:samples.shakespeare]
-      GROUP BY corpus) AS sub_shakespeare
-    WHERE count_corpus_words > 4000
-    ```
+        #legacySQL
+        SELECT corpus, count_corpus_words
+        FROM
+          (SELECT corpus, count(word) AS count_corpus_words
+          FROM [bigquery-public-data:samples.shakespeare]
+          GROUP BY corpus) AS sub_shakespeare
+        WHERE count_corpus_words > 4000
 
-  - An alias in a [HAVING clause](/bigquery/query-reference#having) .
+  - An alias in a [HAVING clause](https://docs.cloud.google.com/bigquery/query-reference#having) .
     
-    ``` text
-    #legacySQL
-    SELECT corpus, count(word) AS count_corpus_words
-    FROM [bigquery-public-data:samples.shakespeare]
-    GROUP BY corpus
-    HAVING count_corpus_words > 4000;
-    ```
+        #legacySQL
+        SELECT corpus, count(word) AS count_corpus_words
+        FROM [bigquery-public-data:samples.shakespeare]
+        GROUP BY corpus
+        HAVING count_corpus_words > 4000;
 
 You can also refer to an alias in the `  GROUP BY  ` or `  ORDER BY  ` clauses.
 
@@ -1477,115 +1413,115 @@ You can also refer to an alias in the `  GROUP BY  ` or `  ORDER BY  ` clauses.
 
 Aggregate functions
 
-[`  AVG()  `](#avg)
+[`  AVG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#avg)
 
 Returns the average of the values for a group of rows ...
 
-[`  BIT_AND()  `](#bit_and)
+[`  BIT_AND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_and)
 
 Returns the result of a bitwise AND operation ...
 
-[`  BIT_OR()  `](#bit_or)
+[`  BIT_OR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_or)
 
 Returns the result of a bitwise OR operation ...
 
-[`  BIT_XOR()  `](#bit_xor)
+[`  BIT_XOR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bit_xor)
 
 Returns the result of a bitwise XOR operation ...
 
-[`  CORR()  `](#corr)
+[`  CORR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#corr)
 
 Returns the Pearson correlation coefficient of a set of number pairs.
 
-[`  COUNT()  `](#count)
+[`  COUNT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#count)
 
 Returns the total number of values ...
 
-[`  COUNT([DISTINCT])  `](#countdistinct)
+[`  COUNT([DISTINCT])  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#countdistinct)
 
 Returns the total number of non-NULL values ...
 
-[`  COVAR_POP()  `](#covar_pop)
+[`  COVAR_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#covar_pop)
 
 Computes the population covariance of the values ...
 
-[`  COVAR_SAMP()  `](#covar_samp)
+[`  COVAR_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#covar_samp)
 
 Computes the sample covariance of the values ...
 
-[`  EXACT_COUNT_DISTINCT()  `](#exact_count_distinct)
+[`  EXACT_COUNT_DISTINCT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#exact_count_distinct)
 
 Returns the exact number of non-NULL, distinct values for the specified field.
 
-[`  FIRST()  `](#first)
+[`  FIRST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#first)
 
 Returns the first sequential value in the scope of the function.
 
-[`  GROUP_CONCAT()  `](#group_concat)
+[`  GROUP_CONCAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#group_concat)
 
 Concatenates multiple strings into a single string ...
 
-[`  GROUP_CONCAT_UNQUOTED()  `](#group_concat_unquoted)
+[`  GROUP_CONCAT_UNQUOTED()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#group_concat_unquoted)
 
 Concatenates multiple strings into a single string ... will not add double quotes ...
 
-[`  LAST()  `](#last)
+[`  LAST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#last)
 
 Returns the last sequential value ...
 
-[`  MAX()  `](#max)
+[`  MAX()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#max)
 
 Returns the maximum value ...
 
-[`  MIN()  `](#min)
+[`  MIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#min)
 
 Returns the minimum value ...
 
-[`  NEST()  `](#nest)
+[`  NEST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nest)
 
 Aggregates all values in the current aggregation scope into a repeated field.
 
-[`  NTH()  `](#nth)
+[`  NTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nth)
 
 Returns the nth sequential value ...
 
-[`  QUANTILES()  `](#quantiles)
+[`  QUANTILES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#quantiles)
 
 Computes approximate minimum, maximum, and quantiles ...
 
-[`  STDDEV()  `](#stddev)
+[`  STDDEV()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev)
 
 Returns the standard deviation ...
 
-[`  STDDEV_POP()  `](#stddev_pop)
+[`  STDDEV_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev_pop)
 
 Computes the population standard deviation ...
 
-[`  STDDEV_SAMP()  `](#stddev_samp)
+[`  STDDEV_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stddev_samp)
 
 Computes the sample standard deviation ...
 
-[`  SUM()  `](#sum)
+[`  SUM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sum)
 
 Returns the sum total of the values ...
 
-[`  TOP() ... COUNT(*)  `](#top)
+[`  TOP() ... COUNT(*)  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#top)
 
 Returns the top max\_records records by frequency.
 
-[`  UNIQUE()  `](#unique)
+[`  UNIQUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#unique)
 
 Returns the set of unique, non-NULL values ...
 
-[`  VARIANCE()  `](#variance)
+[`  VARIANCE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#variance)
 
 Computes the variance of the values ...
 
-[`  VAR_POP()  `](#var_pop)
+[`  VAR_POP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#var_pop)
 
 Computes the population variance of the values ...
 
-[`  VAR_SAMP()  `](#var_samp)
+[`  VAR_SAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#var_samp)
 
 Computes the sample variance of the values ...
 
@@ -1616,7 +1552,7 @@ Computes the sample variance of the values ...
     
     If you require greater accuracy from `  COUNT(DISTINCT)  ` , you can specify a second parameter, `  n  ` , which gives the threshold below which exact results are guaranteed. By default, `  n  ` is 1000, but if you give a larger `  n  ` , you will get exact results for `  COUNT(DISTINCT)  ` up to that value of `  n  ` . However, giving larger values of `  n  ` will reduce scalability of this operator and may substantially increase query execution time or cause the query to fail.
     
-    To compute the exact number of distinct values, use [EXACT\_COUNT\_DISTINCT](#exact_count_distinct) . Or, for a more scalable approach, consider using `  GROUP EACH BY  ` on the relevant field(s) and then applying `  COUNT(*)  ` . The `  GROUP EACH BY  ` approach is more scalable but might incur a slight up-front performance penalty.
+    To compute the exact number of distinct values, use [EXACT\_COUNT\_DISTINCT](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#exact_count_distinct) . Or, for a more scalable approach, consider using `  GROUP EACH BY  ` on the relevant field(s) and then applying `  COUNT(*)  ` . The `  GROUP EACH BY  ` approach is more scalable but might incur a slight up-front performance penalty.
 
   - `  COVAR_POP( numeric_expr1 , numeric_expr2 )  `  
     Computes the **population** covariance of the values computed by `  numeric_expr1  ` and `  numeric_expr2  ` .
@@ -1625,7 +1561,7 @@ Computes the sample variance of the values ...
     Computes the **sample** covariance of the values computed by `  numeric_expr1  ` and `  numeric_expr2  ` .
 
   - `  EXACT_COUNT_DISTINCT( field )  `  
-    Returns the exact number of non-NULL, distinct values for the specified field. For better scalability and performance, use [COUNT(DISTINCT *field* )](#countdistinct) .
+    Returns the exact number of non-NULL, distinct values for the specified field. For better scalability and performance, use [COUNT(DISTINCT *field* )](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#countdistinct) .
 
   - `  FIRST( expr )  `  
     Returns the first sequential value in the scope of the function.
@@ -1637,17 +1573,15 @@ Computes the sample variance of the values ...
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      GROUP_CONCAT(x)
-    FROM (
-      SELECT
-        'a"b' AS x),
-      (
-      SELECT
-        'cd' AS x);
-    ```
+        #legacySQL
+        SELECT
+          GROUP_CONCAT(x)
+        FROM (
+          SELECT
+            'a"b' AS x),
+          (
+          SELECT
+            'cd' AS x);
 
   - `  GROUP_CONCAT_UNQUOTED( 'str' [, separator ])  `  
     Concatenates multiple strings into a single string, where each value is separated by the optional `  separator  ` parameter. If `  separator  ` is omitted, BigQuery returns a comma-separated string.
@@ -1656,17 +1590,15 @@ Computes the sample variance of the values ...
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      GROUP_CONCAT_UNQUOTED(x)
-    FROM (
-      SELECT
-        'a"b' AS x),
-      (
-      SELECT
-        'cd' AS x);
-    ```
+        #legacySQL
+        SELECT
+          GROUP_CONCAT_UNQUOTED(x)
+        FROM (
+          SELECT
+            'a"b' AS x),
+          (
+          SELECT
+            'cd' AS x);
 
   - `  LAST( field )  `  
     Returns the last sequential value in the scope of the function.
@@ -1690,14 +1622,12 @@ Computes the sample variance of the values ...
     
     The fractional error per quantile is epsilon = 1 / `  buckets  ` , which means that the error decreases as the number of buckets increases. For example:
     
-    ``` text
-    QUANTILES(<expr>, 2) # computes min and max with 50% error.
-    QUANTILES(<expr>, 3) # computes min, median, and max with 33% error.
-    QUANTILES(<expr>, 5) # computes quartiles with 25% error.
-    QUANTILES(<expr>, 11) # computes deciles with 10% error.
-    QUANTILES(<expr>, 21) # computes vigintiles with 5% error.
-    QUANTILES(<expr>, 101) # computes percentiles with 1% error.
-    ```
+        QUANTILES(<expr>, 2) # computes min and max with 50% error.
+        QUANTILES(<expr>, 3) # computes min, median, and max with 33% error.
+        QUANTILES(<expr>, 5) # computes quartiles with 25% error.
+        QUANTILES(<expr>, 11) # computes deciles with 10% error.
+        QUANTILES(<expr>, 21) # computes vigintiles with 5% error.
+        QUANTILES(<expr>, 101) # computes percentiles with 1% error.
     
     The `  NTH  ` function can be used to pick a particular quantile, but remember that `  NTH  ` is 1-based, and that `  QUANTILES  ` returns the minimum ("0th" quantile) in the first position, and the maximum ("100th" percentile or "Nth" N-tile) in the last position. For example, `  NTH(11, QUANTILES(expr, 21))  ` estimates the median of `  expr  ` , whereas `  NTH(20, QUANTILES(expr, 21))  ` estimates the 19th vigintile (95th percentile) of `  expr  ` . Both estimates have a 5% margin of error.
     
@@ -1716,7 +1646,7 @@ Computes the sample variance of the values ...
     Returns the sum total of the values in the scope of the function. For use with numerical data types only.
 
   - `  TOP( field | alias [, max_values ][, multiplier ]) ... COUNT(*)  `  
-    Returns the top *max\_records* records by frequency. See the [TOP description below](/bigquery/docs/query-reference#top-function) for details.
+    Returns the top *max\_records* records by frequency. See the [TOP description below](https://docs.cloud.google.com/bigquery/docs/query-reference#top-function) for details.
 
   - `  UNIQUE( expr )  `  
     Returns the set of unique, non-NULL values in the scope of the function in an undefined order. Similar to a large `  GROUP BY  ` clause without the `  EACH  ` keyword, the query will fail with a "Resources Exceeded" error if there are too many distinct values. Unlike `  GROUP BY  ` , however, the `  UNIQUE  ` function can be applied with scoped aggregation, allowing efficient operation on nested fields with a limited number of values.
@@ -1734,9 +1664,7 @@ Computes the sample variance of the values ...
 
 TOP is a function that is an alternative to the GROUP BY clause. It is used as simplified syntax for `  GROUP BY ... ORDER BY ... LIMIT ...  ` . Generally, the TOP function performs faster than the full `  ... GROUP BY ... ORDER BY ... LIMIT ...  ` query, but may only return approximate results. The following is the syntax for the TOP function:
 
-``` text
-TOP(field|alias[, max_values][,multiplier]) ... COUNT(*)
-```
+    TOP(field|alias[, max_values][,multiplier]) ... COUNT(*)
 
 When using TOP in a `  SELECT  ` clause, you must include `  COUNT(*)  ` as one of the fields.
 
@@ -1757,27 +1685,23 @@ A query that uses the TOP() function can return only two fields: the TOP field, 
     
     **Example 1:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      TOP(word, 10) as word, COUNT(*) as cnt
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      word CONTAINS "th";
-    ```
+        #legacySQL
+        SELECT
+          TOP(word, 10) as word, COUNT(*) as cnt
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          word CONTAINS "th";
     
     **Example 2:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      word, left(word, 3)
-    FROM
-      (SELECT TOP(word, 10) AS word, COUNT(*)
-         FROM [bigquery-public-data:samples.shakespeare]
-         WHERE word CONTAINS "th");
-    ```
+        #legacySQL
+        SELECT
+          word, left(word, 3)
+        FROM
+          (SELECT TOP(word, 10) AS word, COUNT(*)
+             FROM [bigquery-public-data:samples.shakespeare]
+             WHERE word CONTAINS "th");
 
   - **Compare `  TOP()  ` to `  GROUP BY...ORDER BY...LIMIT  `**
     
@@ -1785,31 +1709,27 @@ A query that uses the TOP() function can return only two fields: the TOP field, 
     
     **Example without `  TOP()  ` :**
     
-    ``` text
-    #legacySQL
-    SELECT
-      word, COUNT(*) AS cnt
-    FROM
-      ds.Table
-    WHERE
-      word CONTAINS 'th'
-    GROUP BY
-      word
-    ORDER BY
-      cnt DESC LIMIT 10;
-    ```
+        #legacySQL
+        SELECT
+          word, COUNT(*) AS cnt
+        FROM
+          ds.Table
+        WHERE
+          word CONTAINS 'th'
+        GROUP BY
+          word
+        ORDER BY
+          cnt DESC LIMIT 10;
     
     **Example with `  TOP()  ` :**
     
-    ``` text
-    #legacySQL
-    SELECT
-      TOP(word, 10), COUNT(*)
-    FROM
-      ds.Table
-    WHERE
-      word contains 'th';
-    ```
+        #legacySQL
+        SELECT
+          TOP(word, 10), COUNT(*)
+        FROM
+          ds.Table
+        WHERE
+          word contains 'th';
 
   - **Using the `  multiplier  ` parameter.**
     
@@ -1817,51 +1737,43 @@ A query that uses the TOP() function can return only two fields: the TOP field, 
     
     **Example without the `  multiplier  ` parameter:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      TOP(month,3) as month, COUNT(*) as cnt
-    FROM
-      [bigquery-public-data:samples.natality]
-    WHERE
-      state = "WY";
-    ```
+        #legacySQL
+        SELECT
+          TOP(month,3) as month, COUNT(*) as cnt
+        FROM
+          [bigquery-public-data:samples.natality]
+        WHERE
+          state = "WY";
     
     **Returns:**
     
-    ``` text
-    +-------+-------+
-    | month |  cnt  |
-    +-------+-------+
-    |   7   | 19594 |
-    |   5   | 19038 |
-    |   8   | 19030 |
-    +-------+-------+
-    ```
+        +-------+-------+
+        | month |  cnt  |
+        +-------+-------+
+        |   7   | 19594 |
+        |   5   | 19038 |
+        |   8   | 19030 |
+        +-------+-------+
     
     **Example with the `  multiplier  ` parameter:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      TOP(month,3,100) as month, COUNT(*) as cnt
-    FROM
-      [bigquery-public-data:samples.natality]
-    WHERE
-      state = "WY";
-    ```
+        #legacySQL
+        SELECT
+          TOP(month,3,100) as month, COUNT(*) as cnt
+        FROM
+          [bigquery-public-data:samples.natality]
+        WHERE
+          state = "WY";
     
     **Returns:**
     
-    ``` text
-    +-------+---------+
-    | month |   cnt   |
-    +-------+---------+
-    |   7   | 1959400 |
-    |   5   | 1903800 |
-    |   8   | 1903000 |
-    +-------+---------+
-    ```
+        +-------+---------+
+        | month |   cnt   |
+        +-------+---------+
+        |   7   | 1959400 |
+        |   5   | 1903800 |
+        |   8   | 1903000 |
+        +-------+---------+
 
 **Note:** You must include `  COUNT(*)  ` in the `  SELECT  ` clause to use `  TOP  ` .
 
@@ -1873,23 +1785,21 @@ A query that uses the TOP() function can return only two fields: the TOP field, 
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      cigarette_use,
-      /* Finds average and standard deviation */
-      AVG(weight_pounds) baby_weight,
-      STDDEV(weight_pounds) baby_weight_stdev,
-      AVG(mother_age) mother_age
-    FROM
-      [bigquery-public-data:samples.natality]
-    WHERE
-      year=2003 AND state='OH'
-    /* Group the result values by those */
-    /* who smoked and those who didn't.  */
-    GROUP BY
-      cigarette_use;
-    ```
+        #legacySQL
+        SELECT
+          cigarette_use,
+          /* Finds average and standard deviation */
+          AVG(weight_pounds) baby_weight,
+          STDDEV(weight_pounds) baby_weight_stdev,
+          AVG(mother_age) mother_age
+        FROM
+          [bigquery-public-data:samples.natality]
+        WHERE
+          year=2003 AND state='OH'
+        /* Group the result values by those */
+        /* who smoked and those who didn't.  */
+        GROUP BY
+          cigarette_use;
 
   - **Filter query results using an aggregated value**
     
@@ -1897,43 +1807,39 @@ A query that uses the TOP() function can return only two fields: the TOP field, 
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      state,
-      /* If 'is_male' is True, return 'Male', */
-      /* otherwise return 'Female' */
-      IF (is_male, 'Male', 'Female') AS sex,
-      /* The count value is aliased as 'cnt' */
-      /* and used in the HAVING clause below. */
-      COUNT(*) AS cnt
-    FROM
-      [bigquery-public-data:samples.natality]
-    WHERE
-      state != ''
-    GROUP BY
-      state, sex
-    HAVING
-      cnt > 3000000
-    ORDER BY
-      cnt DESC
-    ```
+        #legacySQL
+        SELECT
+          state,
+          /* If 'is_male' is True, return 'Male', */
+          /* otherwise return 'Female' */
+          IF (is_male, 'Male', 'Female') AS sex,
+          /* The count value is aliased as 'cnt' */
+          /* and used in the HAVING clause below. */
+          COUNT(*) AS cnt
+        FROM
+          [bigquery-public-data:samples.natality]
+        WHERE
+          state != ''
+        GROUP BY
+          state, sex
+        HAVING
+          cnt > 3000000
+        ORDER BY
+          cnt DESC
     
     **Returns:**
     
-    ``` text
-    +-------+--------+---------+
-    | state |  sex   |   cnt   |
-    +-------+--------+---------+
-    | CA    | Male   | 7060826 |
-    | CA    | Female | 6733288 |
-    | TX    | Male   | 5107542 |
-    | TX    | Female | 4879247 |
-    | NY    | Male   | 4442246 |
-    | NY    | Female | 4227891 |
-    | IL    | Male   | 3089555 |
-    +-------+--------+---------+
-    ```
+        +-------+--------+---------+
+        | state |  sex   |   cnt   |
+        +-------+--------+---------+
+        | CA    | Male   | 7060826 |
+        | CA    | Female | 6733288 |
+        | TX    | Male   | 5107542 |
+        | TX    | Female | 4879247 |
+        | NY    | Male   | 4442246 |
+        | NY    | Female | 4227891 |
+        | IL    | Male   | 3089555 |
+        +-------+--------+---------+
 
 ## Arithmetic operators
 
@@ -1992,7 +1898,7 @@ Arithmetic operators take numeric arguments and return a numeric result. Each ar
 
 Bitwise functions operate at the level of individual bits and require numerical arguments. For more information about bitwise functions, see [Bitwise operation](https://en.wikipedia.org/wiki/Bitwise_operation) .
 
-Three additional bitwise functions, `  BIT_AND  ` , `  BIT_OR  ` and `  BIT_XOR  ` , are documented in [aggregate functions](/bigquery/query-reference#aggfunctions) .
+Three additional bitwise functions, `  BIT_AND  ` , `  BIT_OR  ` and `  BIT_XOR  ` , are documented in [aggregate functions](https://docs.cloud.google.com/bigquery/query-reference#aggfunctions) .
 
 ### Syntax
 
@@ -2063,31 +1969,31 @@ Casting functions change the data type of a numeric expression. Casting function
 
 Casting functions
 
-[`  BOOLEAN()  `](#boolean)
+[`  BOOLEAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#boolean)
 
 Cast to boolean.
 
-[`  BYTES()  `](#bytes)
+[`  BYTES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#bytes)
 
 Cast to bytes.
 
-[`  CAST(expr AS type)  `](#cast)
+[`  CAST(expr AS type)  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cast)
 
 Converts `  expr  ` into a variable of type `  type  ` .
 
-[`  FLOAT()  `](#float)
+[`  FLOAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#float)
 
 Cast to double.
 
-[`  HEX_STRING()  `](#hex_string)
+[`  HEX_STRING()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hex_string)
 
 Cast to hexadecimal string.
 
-[`  INTEGER()  `](#integer)
+[`  INTEGER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#integer)
 
 Cast to integer.
 
-[`  STRING()  `](#string)
+[`  STRING()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#string)
 
 Cast to string.
 
@@ -2133,72 +2039,72 @@ You can use either numeric or string expressions as arguments for comparison fun
 
 Comparison functions
 
-[`  expr1 = expr2  `](#equals)
+[`  expr1 = expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#equals)
 
 Returns `  true  ` if the expressions are equal.
 
 [`  expr1 != expr2  `  
-`  expr1 <> expr2  `](#not-equals)
+`  expr1 <> expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#not-equals)
 
 Returns `  true  ` if the expressions are not equal.
 
-[`  expr1 > expr2  `](#greater-than)
+[`  expr1 > expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greater-than)
 
 Returns `  true  ` if `  expr1  ` is greater than `  expr2  ` .
 
-[`  expr1 < expr2  `](#less-than)
+[`  expr1 < expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#less-than)
 
 Returns `  true  ` if `  expr1  ` is less than `  expr2  ` .
 
-[`  expr1 >= expr2  `](#greater-or-equal)
+[`  expr1 >= expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greater-or-equal)
 
 Returns `  true  ` if `  expr1  ` is greater than or equal to `  expr2  ` .
 
-[`  expr1 <= expr2  `](#less-or-equal)
+[`  expr1 <= expr2  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#less-or-equal)
 
 Returns `  true  ` if `  expr1  ` is less than or equal to `  expr2  ` .
 
-[`  expr1 BETWEEN expr2 AND expr3  `](#between)
+[`  expr1 BETWEEN expr2 AND expr3  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#between)
 
 Returns `  true  ` if the value of `  expr1  ` is between `  expr2  ` and `  expr3  ` , inclusive.
 
-[`  expr IS NULL  `](#is-null)
+[`  expr IS NULL  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is-null)
 
 Returns `  true  ` if `  expr  ` is NULL.
 
-[`  expr IN()  `](#in)
+[`  expr IN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#in)
 
 Returns `  true  ` if `  expr  ` matches `  expr1  ` , `  expr2  ` , or any value in the parentheses.
 
-[`  COALESCE()  `](#coalesce)
+[`  COALESCE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#coalesce)
 
 Returns the first argument that isn't NULL.
 
-[`  GREATEST()  `](#greatest)
+[`  GREATEST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#greatest)
 
 Returns the largest `  numeric_expr  ` parameter.
 
-[`  IFNULL()  `](#ifnull)
+[`  IFNULL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ifnull)
 
 If argument is not null, returns the argument.
 
-[`  IS_INF()  `](#is_inf)
+[`  IS_INF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_inf)
 
 Returns `  true  ` if positive or negative infinity.
 
-[`  IS_NAN()  `](#is_nan)
+[`  IS_NAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_nan)
 
 Returns `  true  ` if argument is `  NaN  ` .
 
-[`  IS_EXPLICITLY_DEFINED()  `](#is_explicitly_defined)
+[`  IS_EXPLICITLY_DEFINED()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#is_explicitly_defined)
 
 deprecated: Use `  expr IS NOT NULL  ` instead.
 
-[`  LEAST()  `](#least)
+[`  LEAST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#least)
 
 Returns the smallest argument `  numeric_expr  ` parameter.
 
-[`  NVL()  `](#nvl)
+[`  NVL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nvl)
 
 If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_default  ` .
 
@@ -2228,7 +2134,7 @@ If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_defaul
     Returns `  true  ` if `  expr  ` is NULL.
 
   - `  expr IN( expr1 , expr2, ...)  `  
-    Returns `  true  ` if `  expr  ` matches `  expr1  ` , `  expr2  ` , or any value in the parentheses. The `  IN  ` keyword is an efficient shorthand for `  (expr = expr1 || expr = expr2 || ...)  ` . The expressions used with the `  IN  ` keyword must be constants and they must match the data type of `  expr  ` . The `  IN  ` clause can also be used to create semi-joins and anti-joins. For more information, see [Semi-join and Anti-join](#semi-joins) .
+    Returns `  true  ` if `  expr  ` matches `  expr1  ` , `  expr2  ` , or any value in the parentheses. The `  IN  ` keyword is an efficient shorthand for `  (expr = expr1 || expr = expr2 || ...)  ` . The expressions used with the `  IN  ` keyword must be constants and they must match the data type of `  expr  ` . The `  IN  ` clause can also be used to create semi-joins and anti-joins. For more information, see [Semi-join and Anti-join](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#semi-joins) .
 
   - `  COALESCE( <expr1> , <expr2> , ...)  `  
     Returns the first argument that isn't NULL.
@@ -2238,9 +2144,7 @@ If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_defaul
     
     To ignore `  NULL  ` values, use the `  IFNULL  ` function to change `  NULL  ` values to a value that doesn't affect the comparison. In the following code example, the `  IFNULL  ` function is used to change `  NULL  ` values to `  -1  ` , which doesn't affect the comparison between positive numbers.
     
-    ``` text
-    SELECT GREATEST(IFNULL(a,-1), IFNULL(b,-1)) FROM (SELECT 1 as a, NULL as b);
-    ```
+        SELECT GREATEST(IFNULL(a,-1), IFNULL(b,-1)) FROM (SELECT 1 as a, NULL as b);
 
   - `  IFNULL( expr , null_default )  `  
     If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_default  ` .
@@ -2262,7 +2166,7 @@ If `  expr  ` is not null, returns `  expr  ` , otherwise returns `  null_defaul
 
 ## Date and time functions
 
-The following functions enable date and time manipulation for UNIX timestamps, date strings and TIMESTAMP data types. For more information about working with the TIMESTAMP data type, see [Using TIMESTAMP](/bigquery/docs/timestamp) .
+The following functions enable date and time manipulation for UNIX timestamps, date strings and TIMESTAMP data types. For more information about working with the TIMESTAMP data type, see [Using TIMESTAMP](https://docs.cloud.google.com/bigquery/docs/timestamp) .
 
 Date and time functions that work with UNIX timestamps operate on [UNIX time](https://en.wikipedia.org/wiki/Unix_time) . Date and time functions return values based upon the UTC time zone.
 
@@ -2270,135 +2174,135 @@ Date and time functions that work with UNIX timestamps operate on [UNIX time](ht
 
 Date and time functions
 
-[`  CURRENT_DATE()  `](#current_date)
+[`  CURRENT_DATE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_date)
 
 Returns current date in the format `  %Y-%m-%d  ` .
 
-[`  CURRENT_TIME()  `](#current_time)
+[`  CURRENT_TIME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_time)
 
 Returns the server's current time in the format `  %H:%M:%S  ` .
 
-[`  CURRENT_TIMESTAMP()  `](#current_timestamp)
+[`  CURRENT_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_timestamp)
 
 Returns the server's current time in the format `  %Y-%m-%d %H:%M:%S  ` .
 
-[`  DATE()  `](#date)
+[`  DATE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#date)
 
 Returns the date in the format `  %Y-%m-%d  ` .
 
-[`  DATE_ADD()  `](#date_add)
+[`  DATE_ADD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#date_add)
 
 Adds the specified interval to a TIMESTAMP data type.
 
-[`  DATEDIFF()  `](#datediff)
+[`  DATEDIFF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#datediff)
 
 Returns the number of days between two TIMESTAMP data types.
 
-[`  DAY()  `](#day)
+[`  DAY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#day)
 
 Returns the day of the month as an integer between 1 and 31.
 
-[`  DAYOFWEEK()  `](#dayofweek)
+[`  DAYOFWEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dayofweek)
 
 Returns the day of the week as an integer between 1 (Sunday) and 7 (Saturday).
 
-[`  DAYOFYEAR()  `](#dayofyear)
+[`  DAYOFYEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dayofyear)
 
 Returns the day of the year as an integer between 1 and 366.
 
-[`  FORMAT_UTC_USEC()  `](#format_utc_usec)
+[`  FORMAT_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format_utc_usec)
 
 Returns a UNIX timestamp in the format `  YYYY-MM-DD HH:MM:SS.uuuuuu  ` .
 
-[`  HOUR()  `](#hour)
+[`  HOUR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hour)
 
 Returns the hour of a TIMESTAMP as an integer between 0 and 23.
 
-[`  MINUTE()  `](#minute)
+[`  MINUTE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#minute)
 
 Returns the minutes of a TIMESTAMP as an integer between 0 and 59.
 
-[`  MONTH()  `](#month)
+[`  MONTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#month)
 
 Returns the month of a TIMESTAMP as an integer between 1 and 12.
 
-[`  MSEC_TO_TIMESTAMP()  `](#msec_to_timestamp)
+[`  MSEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#msec_to_timestamp)
 
 Converts a UNIX timestamp in milliseconds to a TIMESTAMP.
 
-[`  NOW()  `](#now)
+[`  NOW()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#now)
 
 Returns the current UNIX timestamp in microseconds.
 
-[`  PARSE_UTC_USEC()  `](#parse_utc_usec)
+[`  PARSE_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse_utc_usec)
 
 Converts a date string to a UNIX timestamp in microseconds.
 
-[`  QUARTER()  `](#quarter)
+[`  QUARTER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#quarter)
 
 Returns the quarter of the year of a TIMESTAMP as an integer between 1 and 4.
 
-[`  SEC_TO_TIMESTAMP()  `](#sec_to_timestamp)
+[`  SEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sec_to_timestamp)
 
 Converts a UNIX timestamp in seconds to a TIMESTAMP.
 
-[`  SECOND()  `](#second)
+[`  SECOND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#second)
 
 Returns the seconds of a TIMESTAMP as an integer between 0 and 59.
 
-[`  STRFTIME_UTC_USEC()  `](#strftime_utc_usec)
+[`  STRFTIME_UTC_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#strftime_utc_usec)
 
 Returns a date string in the format *date\_format\_str* .
 
-[`  TIME()  `](#time)
+[`  TIME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#time)
 
 Returns a TIMESTAMP in the format `  %H:%M:%S  ` .
 
-[`  TIMESTAMP()  `](#timestamp)
+[`  TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp)
 
 Convert a date string to a TIMESTAMP.
 
-[`  TIMESTAMP_TO_MSEC()  `](#timestamp_to_msec)
+[`  TIMESTAMP_TO_MSEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_msec)
 
 Converts a TIMESTAMP to a UNIX timestamp in milliseconds.
 
-[`  TIMESTAMP_TO_SEC()  `](#timestamp_to_sec)
+[`  TIMESTAMP_TO_SEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_sec)
 
 Converts a TIMESTAMP to a UNIX timestamp in seconds.
 
-[`  TIMESTAMP_TO_USEC()  `](#timestamp_to_usec)
+[`  TIMESTAMP_TO_USEC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_usec)
 
 Converts a TIMESTAMP to a UNIX timestamp in microseconds.
 
-[`  USEC_TO_TIMESTAMP()  `](#usec_to_timestamp)
+[`  USEC_TO_TIMESTAMP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#usec_to_timestamp)
 
 Converts a UNIX timestamp in microseconds to a TIMESTAMP.
 
-[`  UTC_USEC_TO_DAY()  `](#utc_usec_to_day)
+[`  UTC_USEC_TO_DAY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_day)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the day it occurs in.
 
-[`  UTC_USEC_TO_HOUR()  `](#utc_usec_to_hour)
+[`  UTC_USEC_TO_HOUR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_hour)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the hour it occurs in.
 
-[`  UTC_USEC_TO_MONTH()  `](#utc_usec_to_month)
+[`  UTC_USEC_TO_MONTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_month)
 
 Shifts a UNIX timestamp in microseconds to the beginning of the month it occurs in.
 
-[`  UTC_USEC_TO_WEEK()  `](#utc_usec_to_week)
+[`  UTC_USEC_TO_WEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_week)
 
 Returns a UNIX timestamp in microseconds that represents a day in the week.
 
-[`  UTC_USEC_TO_YEAR()  `](#utc_usec_to_year)
+[`  UTC_USEC_TO_YEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#utc_usec_to_year)
 
 Returns a UNIX timestamp in microseconds that represents the year.
 
-[`  WEEK()  `](#week)
+[`  WEEK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#week)
 
 Returns the week of a TIMESTAMP as an integer between 1 and 53.
 
-[`  YEAR()  `](#year)
+[`  YEAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#year)
 
 Returns the year of a TIMESTAMP.
 
@@ -2570,7 +2474,7 @@ Returns: **1359685811687920**
 
 Converts a date string to a UNIX timestamp in microseconds. `  date_string  ` must have the format `  YYYY-MM-DD HH:MM:SS[.uuuuuu]  ` . The fractional part of the second can be up to 6 digits long or can be omitted.
 
-[TIMESTAMP\_TO\_USEC](#timestamp_to_usec) is an equivalent function that converts a TIMESTAMP data type argument instead of a date string.
+[TIMESTAMP\_TO\_USEC](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#timestamp_to_usec) is an equivalent function that converts a TIMESTAMP data type argument instead of a date string.
 
 **Example:**
 
@@ -2670,7 +2574,7 @@ Returns: **1349053323**
 
 Converts a TIMESTAMP data type to a UNIX timestamp in microseconds.
 
-[PARSE\_UTC\_USEC](#parse_utc_usec) is an equivalent function that converts a data string argument instead of a TIMESTAMP data type.
+[PARSE\_UTC\_USEC](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse_utc_usec) is an equivalent function that converts a data string argument instead of a TIMESTAMP data type.
 
 **Example:**
 
@@ -2782,31 +2686,27 @@ Returns: **2012**
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      /* Multiply timestamp by 1000000 and convert */
-      /* into a more human-readable format. */
-      TOP (FORMAT_UTC_USEC(timestamp * 1000000), 5)
-        AS top_revision_time,
-      COUNT (*) AS revision_count
-    FROM
-      [bigquery-public-data:samples.wikipedia];
-    ```
+        #legacySQL
+        SELECT
+          /* Multiply timestamp by 1000000 and convert */
+          /* into a more human-readable format. */
+          TOP (FORMAT_UTC_USEC(timestamp * 1000000), 5)
+            AS top_revision_time,
+          COUNT (*) AS revision_count
+        FROM
+          [bigquery-public-data:samples.wikipedia];
     
     **Returns:**
     
-    ``` text
-    +----------------------------+----------------+
-    |     top_revision_time      | revision_count |
-    +----------------------------+----------------+
-    | 2002-02-25 15:51:15.000000 |          20976 |
-    | 2002-02-25 15:43:11.000000 |          15974 |
-    | 2010-02-02 03:34:51.000000 |              3 |
-    | 2010-02-02 01:04:59.000000 |              3 |
-    | 2010-02-01 23:55:05.000000 |              3 |
-    +----------------------------+----------------+
-    ```
+        +----------------------------+----------------+
+        |     top_revision_time      | revision_count |
+        +----------------------------+----------------+
+        | 2002-02-25 15:51:15.000000 |          20976 |
+        | 2002-02-25 15:43:11.000000 |          15974 |
+        | 2010-02-02 03:34:51.000000 |              3 |
+        | 2010-02-02 01:04:59.000000 |              3 |
+        | 2010-02-01 23:55:05.000000 |              3 |
+        +----------------------------+----------------+
 
   - **Bucketing Results by Timestamp**
     
@@ -2814,46 +2714,42 @@ Returns: **2012**
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      contributor_username,
-      /* Return the timestamp shifted to the
-       * start of the month, formatted in
-       * a human-readable format. Uses the
-       * 'LEFT()' string function to return only
-       * the first 7 characters of the formatted timestamp.
-       */
-      LEFT (FORMAT_UTC_USEC(
-        UTC_USEC_TO_MONTH(timestamp * 1000000)),7)
-        AS month,
-      SUM(LENGTH(comment)) as total_chars_used
-    FROM
-      [bigquery-public-data:samples.wikipedia]
-    WHERE
-      (contributor_username != '' AND
-       contributor_username IS NOT NULL)
-      AND timestamp > 1133395200
-      AND timestamp < 1157068800
-    GROUP BY
-      contributor_username, month
-    ORDER BY
-      total_chars_used DESC;
-    ```
+        #legacySQL
+        SELECT
+          contributor_username,
+          /* Return the timestamp shifted to the
+           * start of the month, formatted in
+           * a human-readable format. Uses the
+           * 'LEFT()' string function to return only
+           * the first 7 characters of the formatted timestamp.
+           */
+          LEFT (FORMAT_UTC_USEC(
+            UTC_USEC_TO_MONTH(timestamp * 1000000)),7)
+            AS month,
+          SUM(LENGTH(comment)) as total_chars_used
+        FROM
+          [bigquery-public-data:samples.wikipedia]
+        WHERE
+          (contributor_username != '' AND
+           contributor_username IS NOT NULL)
+          AND timestamp > 1133395200
+          AND timestamp < 1157068800
+        GROUP BY
+          contributor_username, month
+        ORDER BY
+          total_chars_used DESC;
     
     **Returns (truncated):**
     
-    ``` text
-    +--------------------------------+---------+-----------------------+
-    |      contributor_username      |  month  | total_chars_used      |
-    +--------------------------------+---------+-----------------------+
-    | Kingbotk                       | 2006-08 |              18015066 |
-    | SmackBot                       | 2006-03 |               7838365 |
-    | SmackBot                       | 2006-05 |               5148863 |
-    | Tawkerbot2                     | 2006-05 |               4434348 |
-    | Cydebot                        | 2006-06 |               3380577 |
-    etc ...
-    ```
+        +--------------------------------+---------+-----------------------+
+        |      contributor_username      |  month  | total_chars_used      |
+        +--------------------------------+---------+-----------------------+
+        | Kingbotk                       | 2006-08 |              18015066 |
+        | SmackBot                       | 2006-03 |               7838365 |
+        | SmackBot                       | 2006-05 |               5148863 |
+        | Tawkerbot2                     | 2006-05 |               4434348 |
+        | Cydebot                        | 2006-06 |               3380577 |
+        etc ...
 
 ## IP functions
 
@@ -2863,21 +2759,21 @@ IP functions convert IP addresses to and from human-readable form.
 
 IP functions
 
-[`  FORMAT_IP()  `](#format_ip)
+[`  FORMAT_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format_ip)
 
 Converts 32 least significant bits of `  integer_value  ` to human-readable IPv4 address string.
 
-[`  PARSE_IP()  `](#parse_ip)
+[`  PARSE_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse_ip)
 
 Converts a string representing IPv4 address to unsigned integer value.
 
-[`  FORMAT_PACKED_IP()  `](#format-packed-ip)
+[`  FORMAT_PACKED_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#format-packed-ip)
 
 Returns a human-readable IP address in the form `  10.1.5.23  ` or `  2620:0:1009:1:216:36ff:feef:3f  ` .
 
-[`  PARSE_PACKED_IP()  `](#parse-packed-ip)
+[`  PARSE_PACKED_IP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#parse-packed-ip)
 
-Returns an IP address in [BYTES](/bigquery/data-types#bytes-type) .
+Returns an IP address in [BYTES](https://docs.cloud.google.com/bigquery/data-types#bytes-type) .
 
   - `  FORMAT_IP( integer_value )  `  
     Converts 32 least significant bits of `  integer_value  ` to human-readable IPv4 address string. For example, `  FORMAT_IP(1)  ` will return string `  '0.0.0.1'  ` .
@@ -2895,7 +2791,7 @@ BigQuery supports writing IPv4 and IPv6 addresses in packed strings, as 4- or 16
       - `  FORMAT_PACKED_IP('0123')  ` returns `  '48.49.50.51'  `
 
   - `  PARSE_PACKED_IP( readable_ip )  `  
-    Returns an IP address in [BYTES](/bigquery/data-types#bytes-type) . If the input string is not a valid IPv4 or IPv6 address, `  PARSE_PACKED_IP  ` will return `  NULL  ` . **Examples:**
+    Returns an IP address in [BYTES](https://docs.cloud.google.com/bigquery/data-types#bytes-type) . If the input string is not a valid IPv4 or IPv6 address, `  PARSE_PACKED_IP  ` will return `  NULL  ` . **Examples:**
     
       - `  PARSE_PACKED_IP('48.49.50.51')  ` returns `  'MDEyMw=='  `
       - `  PARSE_PACKED_IP('3031:3233:3435:3637:3839:4041:4243:4445')  ` returns `  'MDEyMzQ1Njc4OUBBQkNERQ=='  `
@@ -2906,17 +2802,17 @@ BigQuery's JSON functions give you the ability to find values within your stored
 
 Storing JSON data can be more flexible than declaring all of your individual fields in your table schema, but can lead to higher costs. When you select data from a JSON string, you are charged for scanning the entire string, which is more expensive than if each field is in a separate column. The query is also slower since the entire string needs to be parsed at query time. But for ad-hoc or rapidly-changing schemas, the flexibility of JSON can be worth the extra cost.
 
-Use JSON functions instead of BigQuery's [regular expression functions](#regularexpressionfunctions) if working with structured data, as JSON functions are easier to use.
+Use JSON functions instead of BigQuery's [regular expression functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regularexpressionfunctions) if working with structured data, as JSON functions are easier to use.
 
 ### Syntax
 
 JSON functions
 
-[`  JSON_EXTRACT()  `](#json_extract)
+[`  JSON_EXTRACT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#json_extract)
 
 Selects a value according to the JSONPath expression and returns a JSON string.
 
-[`  JSON_EXTRACT_SCALAR()  `](#json_extract_scalar)
+[`  JSON_EXTRACT_SCALAR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#json_extract_scalar)
 
 Selects a value according to the JSONPath expression and returns a JSON scalar.
 
@@ -2934,15 +2830,15 @@ Logical operators perform binary or ternary logic on expressions. Binary logic r
 
 Logical operators
 
-[`  expr AND expr  `](#and)
+[`  expr AND expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#and)
 
 Returns `  true  ` if both expressions are true.
 
-[`  expr OR expr  `](#or)
+[`  expr OR expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#or)
 
 Returns `  true  ` if one or both expressions are true.
 
-[`  NOT expr  `](#not)
+[`  NOT expr  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#not)
 
 Returns `  true  ` if the expression is false.
 
@@ -2974,112 +2870,112 @@ Mathematical functions take numeric arguments and return a numeric result. Each 
 
 Mathematical functions
 
-[`  ABS()  `](#abs)
+[`  ABS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#abs)
 
 Returns the absolute value of the argument.
 
-[`  ACOS()  `](#acos)
+[`  ACOS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#acos)
 
 Returns the arc cosine of the argument.
 
-[`  ACOSH()  `](#acosh)
+[`  ACOSH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#acosh)
 
 Returns the arc hyperbolic cosine of the argument.
 
-[`  ASIN()  `](#asin)
+[`  ASIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#asin)
 
 Returns the arc sine of the argument.
 
-[`  ASINH()  `](#asinh)
+[`  ASINH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#asinh)
 
 Returns the arc hyperbolic sine of the argument.
 
-[`  ATAN()  `](#atan)
+[`  ATAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atan)
 
 Returns the arc tangent of the argument.
 
-[`  ATANH()  `](#atanh)
+[`  ATANH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atanh)
 
 Returns the arc hyperbolic tangent of the argument.
 
-[`  ATAN2()  `](#atan2)
+[`  ATAN2()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#atan2)
 
 Returns the arc tangent of the two arguments.
 
-[`  CEIL()  `](#ceil)
+[`  CEIL()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ceil)
 
 Rounds the argument up to the nearest whole number and returns the rounded value.
 
-[`  COS()  `](#cos)
+[`  COS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cos)
 
 Returns the cosine of the argument.
 
-[`  COSH()  `](#cosh)
+[`  COSH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cosh)
 
 Returns the hyperbolic cosine of the argument.
 
-[`  DEGREES()  `](#degrees)
+[`  DEGREES()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#degrees)
 
 Converts from radians to degrees.
 
-[`  EXP()  `](#exp)
+[`  EXP()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#exp)
 
 Returns `  e  ` to the power of the argument.
 
-[`  FLOOR()  `](#floor)
+[`  FLOOR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#floor)
 
 Rounds the argument down to the nearest whole number.
 
 [`  LN()  `  
-`  LOG()  `](#ln)
+`  LOG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ln)
 
 Returns the natural logarithm of the argument.
 
-[`  LOG2()  `](#log2)
+[`  LOG2()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#log2)
 
 Returns the Base-2 logarithm of the argument.
 
-[`  LOG10()  `](#log10)
+[`  LOG10()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#log10)
 
 Returns the Base-10 logarithm of the argument.
 
-[`  PI()  `](#pi)
+[`  PI()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#pi)
 
 Returns the constant π.
 
-[`  POW()  `](#pow)
+[`  POW()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#pow)
 
 Returns first argument to the power of the second argument.
 
-[`  RADIANS()  `](#radians)
+[`  RADIANS()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#radians)
 
 Converts from degrees to radians.
 
-[`  RAND()  `](#rand)
+[`  RAND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rand)
 
 Returns a random float value in the range 0.0 \<= value \< 1.0.
 
-[`  ROUND()  `](#round)
+[`  ROUND()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#round)
 
 Rounds the argument either up or down to the nearest whole number.
 
-[`  SIN()  `](#sin)
+[`  SIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sin)
 
 Returns the sine of the argument.
 
-[`  SINH()  `](#sinh)
+[`  SINH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sinh)
 
 Returns the hyperbolic sine of the argument.
 
-[`  SQRT()  `](#sqrt)
+[`  SQRT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sqrt)
 
 Returns the square root of the expression.
 
-[`  TAN()  `](#tan)
+[`  TAN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tan)
 
 Returns the tangent of the argument.
 
-[`  TANH()  `](#tanh)
+[`  TANH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tanh)
 
 Returns the hyperbolic tangent of the argument.
 
@@ -3147,27 +3043,25 @@ Returns the hyperbolic tangent of the argument.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      year, month,
-      AVG(mean_temp) avg_temp,
-      MIN(min_temperature) min_temp,
-      MAX(max_temperature) max_temp
-    FROM
-      [weather_geo.table]
-    WHERE
-      /* Return values between a pair of */
-      /* latitude and longitude coordinates */
-      lat / 1000 > 37.46 AND
-      lat / 1000 < 37.65 AND
-      long / 1000 > -122.50 AND
-      long / 1000 < -122.30
-    GROUP BY
-      year, month
-    ORDER BY
-      year, month ASC;
-    ```
+        #legacySQL
+        SELECT
+          year, month,
+          AVG(mean_temp) avg_temp,
+          MIN(min_temperature) min_temp,
+          MAX(max_temperature) max_temp
+        FROM
+          [weather_geo.table]
+        WHERE
+          /* Return values between a pair of */
+          /* latitude and longitude coordinates */
+          lat / 1000 > 37.46 AND
+          lat / 1000 < 37.65 AND
+          long / 1000 > -122.50 AND
+          long / 1000 < -122.30
+        GROUP BY
+          year, month
+        ORDER BY
+          year, month ASC;
 
   - **Approximate Bounding Circle Query**
     
@@ -3177,32 +3071,30 @@ Returns the hyperbolic tangent of the argument.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      distance, lat, long, temp
-    FROM
-      (SELECT
-        ((ACOS(SIN(39.73756700 * PI() / 180) *
-               SIN((lat/1000) * PI() / 180) +
-               COS(39.73756700 * PI() / 180) *
-               COS((lat/1000) * PI() / 180) *
-               COS((-104.98471790 -
-               (long/1000)) * PI() / 180)) *
-               180 / PI()) * 60 * 1.1515)
-          AS distance,
-         AVG(mean_temp) AS temp,
-         AVG(lat/1000) lat, AVG(long/1000) long
-    FROM
-      [weather_geo.table]
-    WHERE
-      month=1 GROUP BY distance)
-    WHERE
-      distance < 100
-    ORDER BY
-      distance ASC
-    LIMIT 100;
-    ```
+        #legacySQL
+        SELECT
+          distance, lat, long, temp
+        FROM
+          (SELECT
+            ((ACOS(SIN(39.73756700 * PI() / 180) *
+                   SIN((lat/1000) * PI() / 180) +
+                   COS(39.73756700 * PI() / 180) *
+                   COS((lat/1000) * PI() / 180) *
+                   COS((-104.98471790 -
+                   (long/1000)) * PI() / 180)) *
+                   180 / PI()) * 60 * 1.1515)
+              AS distance,
+             AVG(mean_temp) AS temp,
+             AVG(lat/1000) lat, AVG(long/1000) long
+        FROM
+          [weather_geo.table]
+        WHERE
+          month=1 GROUP BY distance)
+        WHERE
+          distance < 100
+        ORDER BY
+          distance ASC
+        LIMIT 100;
 
 ## Regular expression functions
 
@@ -3214,107 +3106,95 @@ Note that the regular expressions are global matches; to start matching at the b
 
 Regular expression functions
 
-[`  REGEXP_MATCH()  `](#regexp_match)
+[`  REGEXP_MATCH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_match)
 
 Returns true if the argument matches the regular expression.
 
-[`  REGEXP_EXTRACT()  `](#regexp_extract)
+[`  REGEXP_EXTRACT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_extract)
 
 Returns the portion of the argument that matches the capturing group within the regular expression.
 
-[`  REGEXP_REPLACE()  `](#regexp_replace)
+[`  REGEXP_REPLACE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regexp_replace)
 
 Replaces a substring that matches a regular expression.
 
   - `  REGEXP_MATCH(' str ', 'reg_exp' )  `  
-    Returns true if *str* matches the regular expression. For string matching without regular expressions, use [CONTAINS](#stringfunctions) instead of REGEXP\_MATCH.
+    Returns true if *str* matches the regular expression. For string matching without regular expressions, use [CONTAINS](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#stringfunctions) instead of REGEXP\_MATCH.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       COUNT(word) AS count
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       (REGEXP_MATCH(word,r'\w\w\'\w\w'))
-    GROUP BY word
-    ORDER BY count DESC
-    LIMIT 3;
-    ```
+        #legacySQL
+        SELECT
+           word,
+           COUNT(word) AS count
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           (REGEXP_MATCH(word,r'\w\w\'\w\w'))
+        GROUP BY word
+        ORDER BY count DESC
+        LIMIT 3;
     
     **Returns:**
     
-    ``` text
-    +-------+-------+
-    | word  | count |
-    +-------+-------+
-    | ne'er |    42 |
-    | we'll |    35 |
-    | We'll |    33 |
-    +-------+-------+
-    ```
+        +-------+-------+
+        | word  | count |
+        +-------+-------+
+        | ne'er |    42 |
+        | we'll |    35 |
+        | We'll |    33 |
+        +-------+-------+
 
   - `  REGEXP_EXTRACT(' str ', ' reg_exp ')  `  
     Returns the portion of *str* that matches the capturing group within the regular expression.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-       REGEXP_EXTRACT(word,r'(\w\w\'\w\w)') AS fragment
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    GROUP BY fragment
-    ORDER BY fragment
-    LIMIT 3;
-    ```
+        #legacySQL
+        SELECT
+           REGEXP_EXTRACT(word,r'(\w\w\'\w\w)') AS fragment
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        GROUP BY fragment
+        ORDER BY fragment
+        LIMIT 3;
     
     **Returns:**
     
-    ``` text
-    +----------+
-    | fragment |
-    +----------+
-    | NULL     |
-    | Al'ce    |
-    | As'es    |
-    +----------+
-    ```
+        +----------+
+        | fragment |
+        +----------+
+        | NULL     |
+        | Al'ce    |
+        | As'es    |
+        +----------+
 
   - `  REGEXP_REPLACE(' orig_str ', ' reg_exp ', 'replace_str')  `  
     Returns a string where any substring of *orig\_str* that matches *reg\_exp* is replaced with *replace\_str* . For example, REGEXP\_REPLACE ('Hello', 'lo', 'p') returns Help.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      REGEXP_REPLACE(word, r'ne\'er', 'never') AS expanded_word
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    WHERE
-      REGEXP_MATCH(word, r'ne\'er')
-    GROUP BY expanded_word
-    ORDER BY expanded_word
-    LIMIT 5;
-    ```
+        #legacySQL
+        SELECT
+          REGEXP_REPLACE(word, r'ne\'er', 'never') AS expanded_word
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        WHERE
+          REGEXP_MATCH(word, r'ne\'er')
+        GROUP BY expanded_word
+        ORDER BY expanded_word
+        LIMIT 5;
     
     **Returns:**
     
-    ``` text
-    +---------------+
-    | expanded_word |
-    +---------------+
-    | Whenever      |
-    | never         |
-    | nevertheless  |
-    | whenever      |
-    +---------------+
-    ```
+        +---------------+
+        | expanded_word |
+        +---------------+
+        | Whenever      |
+        | never         |
+        | nevertheless  |
+        | whenever      |
+        +---------------+
 
 ### Advanced examples
 
@@ -3324,27 +3204,25 @@ Replaces a substring that matches a regular expression.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      /* Replace white spaces in the title with underscores. */
-      REGEXP_REPLACE(title, r'\s+', '_') AS regexp_title, revisions
-    FROM
-      (SELECT title, COUNT(revision_id) as revisions
-      FROM
-        [bigquery-public-data:samples.wikipedia]
-      WHERE
-        wp_namespace=0
-        /* Match titles that start with 'G', end with
-         * 'e', and contain at least two 'o's.
-         */
-        AND REGEXP_MATCH(title, r'^G.*o.*o.*e$')
-      GROUP BY
-        title
-      ORDER BY
-        revisions DESC
-      LIMIT 100);
-    ```
+        #legacySQL
+        SELECT
+          /* Replace white spaces in the title with underscores. */
+          REGEXP_REPLACE(title, r'\s+', '_') AS regexp_title, revisions
+        FROM
+          (SELECT title, COUNT(revision_id) as revisions
+          FROM
+            [bigquery-public-data:samples.wikipedia]
+          WHERE
+            wp_namespace=0
+            /* Match titles that start with 'G', end with
+             * 'e', and contain at least two 'o's.
+             */
+            AND REGEXP_MATCH(title, r'^G.*o.*o.*e$')
+          GROUP BY
+            title
+          ORDER BY
+            revisions DESC
+          LIMIT 100);
 
   - **Using regular expressions on integer or float data**
     
@@ -3352,94 +3230,92 @@ Replaces a substring that matches a regular expression.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      corpus_date,
-      /* Cast the corpus_date to a string value  */
-      REGEXP_REPLACE(STRING(corpus_date),
-        '^16',
-        'Written in the sixteen hundreds, in the year \''
-        ) AS date_string
-    FROM [bigquery-public-data:samples.shakespeare]
-    /* Cast the corpus_date to string, */
-    /* match values that begin with '16' */
-    WHERE
-      REGEXP_MATCH(STRING(corpus_date), '^16')
-    GROUP BY
-      corpus_date, date_string
-    ORDER BY
-      date_string DESC
-    LIMIT 5;
-    ```
+        #legacySQL
+        SELECT
+          corpus_date,
+          /* Cast the corpus_date to a string value  */
+          REGEXP_REPLACE(STRING(corpus_date),
+            '^16',
+            'Written in the sixteen hundreds, in the year \''
+            ) AS date_string
+        FROM [bigquery-public-data:samples.shakespeare]
+        /* Cast the corpus_date to string, */
+        /* match values that begin with '16' */
+        WHERE
+          REGEXP_MATCH(STRING(corpus_date), '^16')
+        GROUP BY
+          corpus_date, date_string
+        ORDER BY
+          date_string DESC
+        LIMIT 5;
 
 ## String functions
 
 String functions operate on string data. String constants must be enclosed with single or double quotes. String functions are case-sensitive by default. You can append `  IGNORE CASE  ` to the end of a query to enable case- insensitive matching. `  IGNORE CASE  ` works only on ASCII characters and only at the top level of the query.
 
-Wildcards are not supported in these functions; for regular expression functionality, use [regular expression functions](#regularexpressionfunctions) .
+Wildcards are not supported in these functions; for regular expression functionality, use [regular expression functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#regularexpressionfunctions) .
 
 ### Syntax
 
 String functions
 
-[`  CONCAT()  `](#concat)
+[`  CONCAT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#concat)
 
 Returns the concatenation of two or more strings, or NULL if any of the values are NULL.
 
-[`  expr CONTAINS ' str '  `](#contains)
+[`  expr CONTAINS ' str '  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#contains)
 
 Returns `  true  ` if `  expr  ` contains the specified string argument.
 
-[`  INSTR()  `](#instr)
+[`  INSTR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#instr)
 
 Returns the one-based index of the first occurrence of a string.
 
-[`  LEFT()  `](#left)
+[`  LEFT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#left)
 
 Returns the leftmost characters of a string.
 
-[`  LENGTH()  `](#length)
+[`  LENGTH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#length)
 
 Returns the length of the string.
 
-[`  LOWER()  `](#lower)
+[`  LOWER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lower)
 
 Returns the original string with all characters in lower case.
 
-[`  LPAD()  `](#lpad)
+[`  LPAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lpad)
 
 Inserts characters to the left of a string.
 
-[`  LTRIM()  `](#ltrim)
+[`  LTRIM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ltrim)
 
 Removes characters from the left side of a string.
 
-[`  REPLACE()  `](#replace)
+[`  REPLACE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#replace)
 
 Replaces all occurrences of a substring.
 
-[`  RIGHT()  `](#right)
+[`  RIGHT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#right)
 
 Returns the rightmost characters of a string.
 
-[`  RPAD()  `](#rpad)
+[`  RPAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rpad)
 
 Inserts characters to the right side of a string.
 
-[`  RTRIM()  `](#rtrim)
+[`  RTRIM()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rtrim)
 
 Removes trailing characters from the right side of a string.
 
-[`  SPLIT()  `](#split)
+[`  SPLIT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#split)
 
 Splits a string into repeated substrings.
 
-[`  SUBSTR()  `](#substr)
+[`  SUBSTR()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#substr)
 
 Returns a substring ...
 
-[`  UPPER()  `](#upper)
+[`  UPPER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#upper)
 
 Returns the original string with all characters in upper case.
 
@@ -3510,17 +3386,15 @@ To escape special characters, use one of the following methods:
 
 Some examples of escaping:
 
-``` text
-'this is a space: \x20'
-'this string has \'single quote\' inside it'
-'first line \n second line'
-"double quotes are also ok"
-'\070' -> ERROR: octal escaping is not supported
-```
+    'this is a space: \x20'
+    'this string has \'single quote\' inside it'
+    'first line \n second line'
+    "double quotes are also ok"
+    '\070' -> ERROR: octal escaping is not supported
 
 ## Table wildcard functions
 
-Table wildcard functions are a convenient way to query data from a specific set of tables. A table wildcard function is equivalent to a comma-separated union of all the tables matched by the wildcard function. When you use a table wildcard function, BigQuery only accesses and charges you for tables that match the wildcard. Table wildcard functions are specified in the query's [FROM clause](/bigquery/query-reference#from) .
+Table wildcard functions are a convenient way to query data from a specific set of tables. A table wildcard function is equivalent to a comma-separated union of all the tables matched by the wildcard function. When you use a table wildcard function, BigQuery only accesses and charges you for tables that match the wildcard. Table wildcard functions are specified in the query's [FROM clause](https://docs.cloud.google.com/bigquery/query-reference#from) .
 
 If you use table wildcard functions in a query, the functions no longer need to be contained in parentheses. For example, some of the following examples use parentheses, whereas others don't.
 
@@ -3530,15 +3404,15 @@ Cached results are not supported for queries against multiple tables using a wil
 
 Table wildcard functions
 
-[`  TABLE_DATE_RANGE()  `](#table-date-range)
+[`  TABLE_DATE_RANGE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range)
 
 Queries multiple daily tables that span a date range.
 
-[`  TABLE_DATE_RANGE_STRICT()  `](#table-date-range-strict)
+[`  TABLE_DATE_RANGE_STRICT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-date-range-strict)
 
 Queries multiple daily tables that span a date range, with no missing dates.
 
-[`  TABLE_QUERY()  `](#table-query)
+[`  TABLE_QUERY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#table-query)
 
 Queries tables whose names match a specified predicate.
 
@@ -3547,7 +3421,7 @@ Queries tables whose names match a specified predicate.
     
     Table names must have the following format: `  <prefix><day>  ` , where `  <day>  ` is in the format `  YYYYMMDD  ` .
     
-    You can use [date and time functions](/bigquery/query-reference#datetimefunctions) to generate the timestamp parameters. For example:
+    You can use [date and time functions](https://docs.cloud.google.com/bigquery/query-reference#datetimefunctions) to generate the timestamp parameters. For example:
     
       - `  TIMESTAMP('2012-10-01 02:03:04')  `
       - `  DATE_ADD(CURRENT_TIMESTAMP(), -7, 'DAY')  `
@@ -3562,17 +3436,15 @@ Queries tables whose names match a specified predicate.
     
     <!-- end list -->
     
-    ``` text
-    #legacySQL
-    SELECT
-      name
-    FROM
-      TABLE_DATE_RANGE([myproject-1234:mydata.people],
-                        TIMESTAMP('2014-03-25'),
-                        TIMESTAMP('2014-03-27'))
-    WHERE
-      age >= 35
-    ```
+        #legacySQL
+        SELECT
+          name
+        FROM
+          TABLE_DATE_RANGE([myproject-1234:mydata.people],
+                            TIMESTAMP('2014-03-25'),
+                            TIMESTAMP('2014-03-27'))
+        WHERE
+          age >= 35
     
     Matches the following tables:
     
@@ -3590,17 +3462,15 @@ Queries tables whose names match a specified predicate.
     
     <!-- end list -->
     
-    ``` text
-    #legacySQL
-    SELECT
-      name
-    FROM
-      (TABLE_DATE_RANGE([myproject-1234:mydata.people],
-                        DATE_ADD(CURRENT_TIMESTAMP(), -2, 'DAY'),
-                        CURRENT_TIMESTAMP()))
-    WHERE
-      age >= 35
-    ```
+        #legacySQL
+        SELECT
+          name
+        FROM
+          (TABLE_DATE_RANGE([myproject-1234:mydata.people],
+                            DATE_ADD(CURRENT_TIMESTAMP(), -2, 'DAY'),
+                            CURRENT_TIMESTAMP()))
+        WHERE
+          age >= 35
     
     Matches the following tables:
     
@@ -3620,16 +3490,14 @@ Queries tables whose names match a specified predicate.
     
     <!-- end list -->
     
-    ``` text
-    #legacySQL
-    SELECT
-      name
-    FROM
-      (TABLE_DATE_RANGE_STRICT([myproject-1234:mydata.people],
-                        TIMESTAMP('2014-03-25'),
-                        TIMESTAMP('2014-03-27')))
-    WHERE age >= 35
-    ```
+        #legacySQL
+        SELECT
+          name
+        FROM
+          (TABLE_DATE_RANGE_STRICT([myproject-1234:mydata.people],
+                            TIMESTAMP('2014-03-25'),
+                            TIMESTAMP('2014-03-27')))
+        WHERE age >= 35
     
     The above example returns an error "Not Found" for the table "people20140326".
 
@@ -3647,13 +3515,11 @@ Queries tables whose names match a specified predicate.
     
     <!-- end list -->
     
-    ``` text
-    #legacySQL
-    SELECT
-      speed
-    FROM (TABLE_QUERY([myproject-1234:mydata],
-                      'table_id CONTAINS "oo" AND length(table_id) >= 4'))
-    ```
+        #legacySQL
+        SELECT
+          speed
+        FROM (TABLE_QUERY([myproject-1234:mydata],
+                          'table_id CONTAINS "oo" AND length(table_id) >= 4'))
     
     Matches the following tables:
     
@@ -3672,14 +3538,12 @@ Queries tables whose names match a specified predicate.
     
     <!-- end list -->
     
-    ``` text
-    #legacySQL
-    SELECT
-      speed
-    FROM
-      TABLE_QUERY([myproject-1234:mydata],
-                   'REGEXP_MATCH(table_id, r"^boo[\d]{3,5}")')
-    ```
+        #legacySQL
+        SELECT
+          speed
+        FROM
+          TABLE_QUERY([myproject-1234:mydata],
+                       'REGEXP_MATCH(table_id, r"^boo[\d]{3,5}")')
     
     Matches the following tables:
     
@@ -3692,15 +3556,15 @@ Queries tables whose names match a specified predicate.
 
 URL functions
 
-[`  HOST()  `](#host)
+[`  HOST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#host)
 
 Given a URL, returns the host name as a string.
 
-[`  DOMAIN()  `](#domain)
+[`  DOMAIN()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#domain)
 
 Given a URL, returns the domain as a string.
 
-[`  TLD()  `](#tld)
+[`  TLD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#tld)
 
 Given a URL, returns the top level domain plus any country domain in the URL.
 
@@ -3724,70 +3588,62 @@ This query uses the `  DOMAIN()  ` function to return the most popular domains l
 
 **Examples:**
 
-``` text
-#legacySQL
-SELECT
-  DOMAIN(repository_homepage) AS user_domain,
-  COUNT(*) AS activity_count
-FROM
-  [bigquery-public-data:samples.github_timeline]
-GROUP BY
-  user_domain
-HAVING
-  user_domain IS NOT NULL AND user_domain != ''
-ORDER BY
-  activity_count DESC
-LIMIT 5;
-```
+    #legacySQL
+    SELECT
+      DOMAIN(repository_homepage) AS user_domain,
+      COUNT(*) AS activity_count
+    FROM
+      [bigquery-public-data:samples.github_timeline]
+    GROUP BY
+      user_domain
+    HAVING
+      user_domain IS NOT NULL AND user_domain != ''
+    ORDER BY
+      activity_count DESC
+    LIMIT 5;
 
 **Returns:**
 
-``` text
-+-----------------+----------------+
-|   user_domain   | activity_count |
-+-----------------+----------------+
-| github.com      |         281879 |
-| google.com      |          34769 |
-| khanacademy.org |          17316 |
-| sourceforge.net |          15103 |
-| mozilla.org     |          14091 |
-+-----------------+----------------+
-```
+    +-----------------+----------------+
+    |   user_domain   | activity_count |
+    +-----------------+----------------+
+    | github.com      |         281879 |
+    | google.com      |          34769 |
+    | khanacademy.org |          17316 |
+    | sourceforge.net |          15103 |
+    | mozilla.org     |          14091 |
+    +-----------------+----------------+
 
 To look specifically at TLD information, use the `  TLD()  ` function. This example displays the top TLDs that are not in a list of common examples.
 
-``` text
-#legacySQL
-SELECT
-  TLD(repository_homepage) AS user_tld,
-  COUNT(*) AS activity_count
-FROM
-  [bigquery-public-data:samples.github_timeline]
-GROUP BY
-  user_tld
-HAVING
-  /* Only consider TLDs that are NOT NULL */
-  /* or in our list of common TLDs */
-  user_tld IS NOT NULL AND NOT user_tld
-  IN ('','.com','.net','.org','.info','.edu')
-ORDER BY
-  activity_count DESC
-LIMIT 5;
-```
+    #legacySQL
+    SELECT
+      TLD(repository_homepage) AS user_tld,
+      COUNT(*) AS activity_count
+    FROM
+      [bigquery-public-data:samples.github_timeline]
+    GROUP BY
+      user_tld
+    HAVING
+      /* Only consider TLDs that are NOT NULL */
+      /* or in our list of common TLDs */
+      user_tld IS NOT NULL AND NOT user_tld
+      IN ('','.com','.net','.org','.info','.edu')
+    ORDER BY
+      activity_count DESC
+    LIMIT 5;
 
 **Returns:**
 
-``` text
-+----------+----------------+
-| user_tld | activity_count |
-+----------+----------------+
-| .de      |          22934 |
-| .io      |          17528 |
-| .me      |          13652 |
-| .fr      |          12895 |
-| .co.uk   |           9135 |
-+----------+----------------+
-```
+    +----------+----------------+
+    | user_tld | activity_count |
+    +----------+----------------+
+    | .de      |          22934 |
+    | .io      |          17528 |
+    | .me      |          13652 |
+    | .fr      |          12895 |
+    | .co.uk   |           9135 |
+    +----------+----------------+
 
 ## Window functions
 
@@ -3795,35 +3651,31 @@ Window functions, also known as analytic functions, enable calculations on a spe
 
 Each window function requires an `  OVER  ` clause that specifies the window top and bottom. The three components of the `  OVER  ` clause (partitioning, ordering, and framing) provide additional control over the window. Partitioning enables you to divide the input data into logical groups that have a common characteristic. Ordering enables you to order the results within a partition. Framing enables you to create a sliding window frame within a partition that moves relative to the current row. You can configure the size of the moving window frame based on a number of rows or a range of values, such as a time interval.
 
-``` text
-#legacySQL
-SELECT <window_function>
-  OVER (
-      [PARTITION BY <expr>]
-      [ORDER BY <expr> [ASC | DESC]]
-      [<window-frame-clause>]
-     )
-```
+    #legacySQL
+    SELECT <window_function>
+      OVER (
+          [PARTITION BY <expr>]
+          [ORDER BY <expr> [ASC | DESC]]
+          [<window-frame-clause>]
+         )
 
   - `  PARTITION BY  `  
     Defines the base partition over which this function operates. Specify one or more comma-separated column names; one partition will be created for each distinct set of values for these columns, similar to a `  GROUP BY  ` clause. If `  PARTITION BY  ` is omitted, the base partition is all rows in the input to the window function.
     
     The `  PARTITION BY  ` clause also allows window functions to partition data and parallelize execution. If you wish to use a window function with `  allowLargeResults  ` , or if you intend to apply further joins or aggregations to the output of your window function, use `  PARTITION BY  ` to parallelize execution.
     
-    `  JOIN EACH  ` and `  GROUP EACH BY  ` clauses can't be used on the output of window functions. To generate [large query results](/bigquery/docs/writing-results#large-results) when using window functions, you must use `  PARTITION BY  ` .
+    `  JOIN EACH  ` and `  GROUP EACH BY  ` clauses can't be used on the output of window functions. To generate [large query results](https://docs.cloud.google.com/bigquery/docs/writing-results#large-results) when using window functions, you must use `  PARTITION BY  ` .
 
   - `  ORDER BY  `  
     Sorts the partition. If `  ORDER BY  ` is absent, there is no guarantee of any default sorting order. Sorting occurs at the partition level, before any window frame clause is applied. If you specify a `  RANGE  ` window, you should add an `  ORDER BY  ` clause. Default order is `  ASC  ` .
     
-    `  ORDER BY  ` is optional in some cases, but certain window functions, such as [rank()](#rank) or [dense\_rank()](#dense_rank) , require the clause.
+    `  ORDER BY  ` is optional in some cases, but certain window functions, such as [rank()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rank) or [dense\_rank()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dense_rank) , require the clause.
     
     If you use `  ORDER BY  ` without specifying `  ROWS  ` or `  RANGE  ` , `  ORDER BY  ` implies that the window extends from the beginning of the partition to the current row. In the absence of an `  ORDER BY  ` clause, the window is the entire partition.
 
   - `  <window-frame-clause>  `
     
-    ``` text
-    {ROWS | RANGE} {BETWEEN <start> AND <end> | <start> | <end>}
-    ```
+        {ROWS | RANGE} {BETWEEN <start> AND <end> | <start> | <end>}
     
     A subset of the partition over which to operate. This can be the same size as the partition or smaller. If you use `  ORDER BY  ` without a `  window-frame-clause  ` , the default window frame is `  RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW  ` . If you omit both `  ORDER BY  ` and the `  window-frame-clause  ` , the default window frame is the entire partition.
     
@@ -3835,79 +3687,67 @@ SELECT <window_function>
     
       - `  <start>  ` - Specifies the start offset for this window, relative to the current row. The following options are supported:
         
-        ``` text
-        {UNBOUNDED PRECEDING | CURRENT ROW | <expr> PRECEDING | <expr> FOLLOWING}
-        ```
+            {UNBOUNDED PRECEDING | CURRENT ROW | <expr> PRECEDING | <expr> FOLLOWING}
         
         where `  <expr>  ` is a positive integer, `  PRECEDING  ` indicates a preceding row number or range value, and `  FOLLOWING  ` indicates a following row number or range value. `  UNBOUNDED PRECEDING  ` means the first row of the partition. If the start precedes the window, it will be set to the first row of the partition.
     
       - `  <end>  ` - Specifies the end offset for this window, relative to the current row. The following options are supported:
         
-        ``` text
-        {UNBOUNDED FOLLOWING | CURRENT ROW | <expr> PRECEDING | <expr> FOLLOWING}
-        ```
+            {UNBOUNDED FOLLOWING | CURRENT ROW | <expr> PRECEDING | <expr> FOLLOWING}
         
         where `  <expr>  ` is a positive integer, `  PRECEDING  ` indicates a preceding row number or range value, and `  FOLLOWING  ` indicates a following row number or range value. `  UNBOUNDED FOLLOWING  ` means the last row of the partition. If end is beyond the end of the window, it will be set to the last row of the partition.
 
 Unlike aggregation functions, which collapse many input rows into one output row, window functions return one row of output for each row of input. This feature makes it easier to create queries that calculate running totals and moving averages. For example, the following query returns a running total for a small dataset of five rows defined by `  SELECT  ` statements:
 
-``` text
-#legacySQL
-SELECT name, value, SUM(value) OVER (ORDER BY value) AS RunningTotal
-FROM
-  (SELECT "a" AS name, 0 AS value),
-  (SELECT "b" AS name, 1 AS value),
-  (SELECT "c" AS name, 2 AS value),
-  (SELECT "d" AS name, 3 AS value),
-  (SELECT "e" AS name, 4 AS value);
-```
+    #legacySQL
+    SELECT name, value, SUM(value) OVER (ORDER BY value) AS RunningTotal
+    FROM
+      (SELECT "a" AS name, 0 AS value),
+      (SELECT "b" AS name, 1 AS value),
+      (SELECT "c" AS name, 2 AS value),
+      (SELECT "d" AS name, 3 AS value),
+      (SELECT "e" AS name, 4 AS value);
 
 Return value:
 
-``` text
-+------+-------+--------------+
-| name | value | RunningTotal |
-+------+-------+--------------+
-| a    |     0 |            0 |
-| b    |     1 |            1 |
-| c    |     2 |            3 |
-| d    |     3 |            6 |
-| e    |     4 |           10 |
-+------+-------+--------------+
-```
+    +------+-------+--------------+
+    | name | value | RunningTotal |
+    +------+-------+--------------+
+    | a    |     0 |            0 |
+    | b    |     1 |            1 |
+    | c    |     2 |            3 |
+    | d    |     3 |            6 |
+    | e    |     4 |           10 |
+    +------+-------+--------------+
 
 The following example calculates a moving average of the values in the current row and the row preceding it. The window frame comprises two rows that move with the current row.
 
-``` text
-#legacySQL
-SELECT
-  name,
-  value,
-  AVG(value)
-    OVER (ORDER BY value
-          ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)
-    AS MovingAverage
-FROM
-  (SELECT "a" AS name, 0 AS value),
-  (SELECT "b" AS name, 1 AS value),
-  (SELECT "c" AS name, 2 AS value),
-  (SELECT "d" AS name, 3 AS value),
-  (SELECT "e" AS name, 4 AS value);
-```
+    #legacySQL
+    SELECT
+      name,
+      value,
+      AVG(value)
+        OVER (ORDER BY value
+              ROWS BETWEEN 1 PRECEDING AND CURRENT ROW)
+        AS MovingAverage
+    FROM
+      (SELECT "a" AS name, 0 AS value),
+      (SELECT "b" AS name, 1 AS value),
+      (SELECT "c" AS name, 2 AS value),
+      (SELECT "d" AS name, 3 AS value),
+      (SELECT "e" AS name, 4 AS value);
 
 Return value:
 
-``` text
-+------+-------+---------------+
-| name | value | MovingAverage |
-+------+-------+---------------+
-| a    |     0 |           0.0 |
-| b    |     1 |           0.5 |
-| c    |     2 |           1.5 |
-| d    |     3 |           2.5 |
-| e    |     4 |           3.5 |
-+------+-------+---------------+
-```
+    +------+-------+---------------+
+    | name | value | MovingAverage |
+    +------+-------+---------------+
+    | a    |     0 |           0.0 |
+    | b    |     1 |           0.5 |
+    | c    |     2 |           1.5 |
+    | d    |     3 |           2.5 |
+    | e    |     4 |           3.5 |
+    +------+-------+---------------+
 
 ### Syntax
 
@@ -3920,63 +3760,63 @@ Window functions
 `  MIN()  `  
 `  STDDEV()  `  
 `  SUM()  `  
-](#analytics)
+](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#analytics)
 
-The same operation as the corresponding [Aggregate functions](#aggfunctions) , but are computed over a window defined by the OVER clause.
+The same operation as the corresponding [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#aggfunctions) , but are computed over a window defined by the OVER clause.
 
-[`  CUME_DIST()  `](#cume_dist)
+[`  CUME_DIST()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#cume_dist)
 
 Returns a double that indicates the cumulative distribution of a value in a group of values ...
 
-[`  DENSE_RANK()  `](#dense_rank)
+[`  DENSE_RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dense_rank)
 
 Returns the integer rank of a value in a group of values.
 
-[`  FIRST_VALUE()  `](#first_value)
+[`  FIRST_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#first_value)
 
 Returns the first value of the specified field in the window.
 
-[`  LAG()  `](#lag)
+[`  LAG()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lag)
 
 Enables you to read data from a previous row within a window.
 
-[`  LAST_VALUE()  `](#last_value)
+[`  LAST_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#last_value)
 
 Returns the last value of the specified field in the window.
 
-[`  LEAD()  `](#lead)
+[`  LEAD()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#lead)
 
 Enables you to read data from a following row within a window.
 
-[`  NTH_VALUE()  `](#nthvalue)
+[`  NTH_VALUE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#nthvalue)
 
 Returns the value of `  <expr>  ` at position `  <n>  ` of the window frame ...
 
-[`  NTILE()  `](#ntile)
+[`  NTILE()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ntile)
 
 Divides the window into the specified number of buckets.
 
-[`  PERCENT_RANK()  `](#percent_rank)
+[`  PERCENT_RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percent_rank)
 
 Returns the rank of the current row, relative to the other rows in the partition.
 
-[`  PERCENTILE_CONT()  `](#percentile_cont)
+[`  PERCENTILE_CONT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percentile_cont)
 
 Returns an interpolated value that would map to the percentile argument with respect to the window ...
 
-[`  PERCENTILE_DISC()  `](#percentile_disc)
+[`  PERCENTILE_DISC()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#percentile_disc)
 
 Returns the value nearest the percentile of the argument over the window.
 
-[`  RANK()  `](#rank)
+[`  RANK()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rank)
 
 Returns the integer rank of a value in a group of values.
 
-[`  RATIO_TO_REPORT()  `](#ratio-to-report)
+[`  RATIO_TO_REPORT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#ratio-to-report)
 
 Returns the ratio of each value to the sum of the values.
 
-[`  ROW_NUMBER()  `](#row-number)
+[`  ROW_NUMBER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#row-number)
 
 Returns the current row number of the query result over the window.
 
@@ -3988,13 +3828,13 @@ Returns the current row number of the query result over the window.
     `  STDDEV( numeric_expr )  `  
     `  SUM( field )  `  
       
-    These window functions perform the same operation as the corresponding [Aggregate functions](#aggfunctions) , but are computed over a window defined by the OVER clause.
+    These window functions perform the same operation as the corresponding [Aggregate functions](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#aggfunctions) , but are computed over a window defined by the OVER clause.
     
     Another significant difference is that the `  COUNT([DISTINCT] field )  ` function produces exact results when used as a window function, with behavior similar to the `  EXACT_COUNT_DISTINCT()  ` aggregate function.
     
     In the example query, the `  ORDER BY  ` clause causes the window to be computed from the start of the partition to the current row, which generates a cumulative sum for that year.
     
-    ``` text
+    ``` 
     #legacySQL
     SELECT
        corpus_date,
@@ -4014,344 +3854,162 @@ Returns the current row number of the query result over the window.
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>corpus_date</th>
-    <th>corpus</th>
-    <th>word_count</th>
-    <th>annual_total</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>0</td>
-    <td>various</td>
-    <td>37</td>
-    <td>37</td>
-    </tr>
-    <tr class="even">
-    <td>0</td>
-    <td>sonnets</td>
-    <td>157</td>
-    <td>194</td>
-    </tr>
-    <tr class="odd">
-    <td>1590</td>
-    <td>2kinghenryvi</td>
-    <td>18</td>
-    <td>18</td>
-    </tr>
-    <tr class="even">
-    <td>1590</td>
-    <td>1kinghenryvi</td>
-    <td>24</td>
-    <td>42</td>
-    </tr>
-    <tr class="odd">
-    <td>1590</td>
-    <td>3kinghenryvi</td>
-    <td>40</td>
-    <td>82</td>
-    </tr>
-    </tbody>
-    </table>
+    | corpus\_date | corpus       | word\_count | annual\_total |
+    | ------------ | ------------ | ----------- | ------------- |
+    | 0            | various      | 37          | 37            |
+    | 0            | sonnets      | 157         | 194           |
+    | 1590         | 2kinghenryvi | 18          | 18            |
+    | 1590         | 1kinghenryvi | 24          | 42            |
+    | 1590         | 3kinghenryvi | 40          | 82            |
+    
 
   - `  CUME_DIST()  `  
     Returns a double that indicates the cumulative distribution of a value in a group of values, calculated using the formula `  <number of rows preceding or tied with the current row> / <total rows>  ` . Tied values return the same cumulative distribution value.
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       CUME_DIST() OVER (PARTITION BY corpus ORDER BY word_count DESC) cume_dist,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           CUME_DIST() OVER (PARTITION BY corpus ORDER BY word_count DESC) cume_dist,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>cume_dist</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>0.2</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>0.4</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>0.8</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>0.8</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>1.0</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | cume\_dist |
+    | ------------ | ----------- | ---------- |
+    | handkerchief | 29          | 0.2        |
+    | satisfaction | 5           | 0.4        |
+    | displeasure  | 4           | 0.8        |
+    | instruments  | 4           | 0.8        |
+    | circumstance | 3           | 1.0        |
+    
 
   - `  DENSE_RANK()  `  
     Returns the integer rank of a value in a group of values. The rank is calculated based on comparisons with other values in the group.
     
-    Tied values display as the same rank. The rank of the next value is incremented by 1. For example, if two values tie for rank 2, the next ranked value is 3. If you prefer a gap in the ranking list, use [rank()](#rank) .
+    Tied values display as the same rank. The rank of the next value is incremented by 1. For example, if two values tie for rank 2, the next ranked value is 3. If you prefer a gap in the ranking list, use [rank()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#rank) .
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       DENSE_RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) dense_rank,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           DENSE_RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) dense_rank,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>dense_rank</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>1</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>2</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>3</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>3</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>4</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | dense\_rank |
+    | ------------ | ----------- | ----------- |
+    | handkerchief | 29          | 1           |
+    | satisfaction | 5           | 2           |
+    | displeasure  | 4           | 3           |
+    | instruments  | 4           | 3           |
+    | circumstance | 3           | 4           |
+    
 
   - `  FIRST_VALUE( <field_name> )  `  
     Returns the first value of `  <field_name>  ` in the window.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       FIRST_VALUE(word) OVER (PARTITION BY corpus ORDER BY word_count DESC) fv,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 1
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           FIRST_VALUE(word) OVER (PARTITION BY corpus ORDER BY word_count DESC) fv,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 1
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>fv</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>imperfectly</td>
-    <td>1</td>
-    <td>imperfectly</td>
-    </tr>
-    </tbody>
-    </table>
+    | word        | word\_count | fv          |
+    | ----------- | ----------- | ----------- |
+    | imperfectly | 1           | imperfectly |
+    
 
   - `  LAG( <expr> [, <offset> [, <default_value> ]])  `  
     Enables you to read data from a previous row within a window. Specifically, `  LAG()  ` returns the value of `  <expr>  ` for the row located `  <offset>  ` rows before the current row. If the row doesn't exist, `  <default_value>  ` returns.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       LAG(word, 1) OVER (PARTITION BY corpus ORDER BY word_count DESC) lag,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           LAG(word, 1) OVER (PARTITION BY corpus ORDER BY word_count DESC) lag,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>lag</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>null</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>handkerchief</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>satisfaction</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>displeasure</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>instruments</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | lag          |
+    | ------------ | ----------- | ------------ |
+    | handkerchief | 29          | null         |
+    | satisfaction | 5           | handkerchief |
+    | displeasure  | 4           | satisfaction |
+    | instruments  | 4           | displeasure  |
+    | circumstance | 3           | instruments  |
+    
 
   - `  LAST_VALUE( <field_name> )  `  
     Returns the last value of `  <field_name>  ` in the window.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       LAST_VALUE(word) OVER (PARTITION BY corpus ORDER BY word_count DESC) lv,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 1
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           LAST_VALUE(word) OVER (PARTITION BY corpus ORDER BY word_count DESC) lv,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 1
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>lv</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>imperfectly</td>
-    <td>1</td>
-    <td>imperfectly</td>
-    </tr>
-    </tbody>
-    </table>
+    | word        | word\_count | lv          |
+    | ----------- | ----------- | ----------- |
+    | imperfectly | 1           | imperfectly |
+    
 
   - `  LEAD( <expr> [, <offset> [, <default_value> ]])  `  
     Enables you to read data from a following row within a window. Specifically, `  LEAD()  ` returns the value of `  <expr>  ` for the row located `  <offset>  ` rows after the current row. If the row doesn't exist, `  <default_value>  ` returns.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       LEAD(word, 1) OVER (PARTITION BY corpus ORDER BY word_count DESC) lead,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           LEAD(word, 1) OVER (PARTITION BY corpus ORDER BY word_count DESC) lead,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>lead</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>satisfaction</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>displeasure</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>instruments</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>circumstance</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>null</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | lead         |
+    | ------------ | ----------- | ------------ |
+    | handkerchief | 29          | satisfaction |
+    | satisfaction | 5           | displeasure  |
+    | displeasure  | 4           | instruments  |
+    | instruments  | 4           | circumstance |
+    | circumstance | 3           | null         |
+    
 
   - `  NTH_VALUE( <expr> , <n> )  `  
     Returns the value of `  <expr>  ` at position `  <n>  ` of the window frame, where `  <n>  ` is a one-based index.
@@ -4359,114 +4017,54 @@ Returns the current row number of the query result over the window.
   - `  NTILE( <num_buckets> )  `  
     Divides a sequence of rows into `  <num_buckets>  ` buckets and assigns a corresponding bucket number, as an integer, with each row. The `  ntile()  ` function assigns the bucket numbers as equally as possible and returns a value from 1 to `  <num_buckets>  ` for each row.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       NTILE(2) OVER (PARTITION BY corpus ORDER BY word_count DESC) ntile,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           NTILE(2) OVER (PARTITION BY corpus ORDER BY word_count DESC) ntile,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>ntile</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>1</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>1</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>1</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>2</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>2</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | ntile |
+    | ------------ | ----------- | ----- |
+    | handkerchief | 29          | 1     |
+    | satisfaction | 5           | 1     |
+    | displeasure  | 4           | 1     |
+    | instruments  | 4           | 2     |
+    | circumstance | 3           | 2     |
+    
 
   - `  PERCENT_RANK()  `  
     Returns the rank of the current row, relative to the other rows in the partition. Returned values range between 0 and 1, inclusively. The first value returned is 0.0.
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       PERCENT_RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) p_rank,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           PERCENT_RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) p_rank,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>p_rank</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>0.0</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>0.25</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>0.5</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>0.5</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>1.0</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | p\_rank |
+    | ------------ | ----------- | ------- |
+    | handkerchief | 29          | 0.0     |
+    | satisfaction | 5           | 0.25    |
+    | displeasure  | 4           | 0.5     |
+    | instruments  | 4           | 0.5     |
+    | circumstance | 3           | 1.0     |
+    
 
   - `  PERCENTILE_CONT( <percentile> )  `  
     Returns an interpolated value that would map to the percentile argument with respect to the window, after ordering them per the `  ORDER BY  ` clause.
@@ -4475,57 +4073,27 @@ Returns the current row number of the query result over the window.
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       PERCENTILE_CONT(0.5) OVER (PARTITION BY corpus ORDER BY word_count DESC) p_cont,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           PERCENTILE_CONT(0.5) OVER (PARTITION BY corpus ORDER BY word_count DESC) p_cont,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>p_cont</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>4</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>4</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>4</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>4</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>4</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | p\_cont |
+    | ------------ | ----------- | ------- |
+    | handkerchief | 29          | 4       |
+    | satisfaction | 5           | 4       |
+    | displeasure  | 4           | 4       |
+    | instruments  | 4           | 4       |
+    | circumstance | 3           | 4       |
+    
 
   - `  PERCENTILE_DISC( <percentile> )  `  
     Returns the value nearest the percentile of the argument over the window.
@@ -4534,226 +4102,106 @@ Returns the current row number of the query result over the window.
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       PERCENTILE_DISC(0.5) OVER (PARTITION BY corpus ORDER BY word_count DESC) p_disc,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           PERCENTILE_DISC(0.5) OVER (PARTITION BY corpus ORDER BY word_count DESC) p_disc,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>p_disc</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>4</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>4</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>4</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>4</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>4</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | p\_disc |
+    | ------------ | ----------- | ------- |
+    | handkerchief | 29          | 4       |
+    | satisfaction | 5           | 4       |
+    | displeasure  | 4           | 4       |
+    | instruments  | 4           | 4       |
+    | circumstance | 3           | 4       |
+    
 
   - `  RANK()  `  
     Returns the integer rank of a value in a group of values. The rank is calculated based on comparisons with other values in the group.
     
-    Tied values display as the same rank. The rank of the next value is incremented according to how many tied values occurred before it. For example, if two values tie for rank 2, the next ranked value is 4, not 3. If you prefer no gaps in the ranking list, use [dense\_rank()](#dense_rank) .
+    Tied values display as the same rank. The rank of the next value is incremented according to how many tied values occurred before it. For example, if two values tie for rank 2, the next ranked value is 4, not 3. If you prefer no gaps in the ranking list, use [dense\_rank()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#dense_rank) .
     
     This window function requires `  ORDER BY  ` in the `  OVER  ` clause.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) rank,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           RANK() OVER (PARTITION BY corpus ORDER BY word_count DESC) rank,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>rank</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>1</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>2</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>3</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>3</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>5</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | rank |
+    | ------------ | ----------- | ---- |
+    | handkerchief | 29          | 1    |
+    | satisfaction | 5           | 2    |
+    | displeasure  | 4           | 3    |
+    | instruments  | 4           | 3    |
+    | circumstance | 3           | 5    |
+    
 
   - `  RATIO_TO_REPORT( <column> )  `  
     Returns the ratio of each value to the sum of the values, as a double between 0 and 1.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       RATIO_TO_REPORT(word_count) OVER (PARTITION BY corpus ORDER BY word_count DESC) r_to_r,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           RATIO_TO_REPORT(word_count) OVER (PARTITION BY corpus ORDER BY word_count DESC) r_to_r,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>r_to_r</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>0.6444444444444445</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>0.1111111111111111</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>0.08888888888888889</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>0.08888888888888889</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>0.06666666666666667</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | r\_to\_r            |
+    | ------------ | ----------- | ------------------- |
+    | handkerchief | 29          | 0.6444444444444445  |
+    | satisfaction | 5           | 0.1111111111111111  |
+    | displeasure  | 4           | 0.08888888888888889 |
+    | instruments  | 4           | 0.08888888888888889 |
+    | circumstance | 3           | 0.06666666666666667 |
+    
 
   - `  ROW_NUMBER()  `  
     Returns the current row number of the query result over the window, starting with 1.
     
-    ``` text
-    #legacySQL
-    SELECT
-       word,
-       word_count,
-       ROW_NUMBER() OVER (PARTITION BY corpus ORDER BY word_count DESC) row_num,
-    FROM
-       [bigquery-public-data:samples.shakespeare]
-    WHERE
-       corpus='othello' and length(word) > 10
-    LIMIT 5
-    ```
+        #legacySQL
+        SELECT
+           word,
+           word_count,
+           ROW_NUMBER() OVER (PARTITION BY corpus ORDER BY word_count DESC) row_num,
+        FROM
+           [bigquery-public-data:samples.shakespeare]
+        WHERE
+           corpus='othello' and length(word) > 10
+        LIMIT 5
     
     **Returns:**
     
-    <table>
-    <thead>
-    <tr class="header">
-    <th>word</th>
-    <th>word_count</th>
-    <th>row_num</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr class="odd">
-    <td>handkerchief</td>
-    <td>29</td>
-    <td>1</td>
-    </tr>
-    <tr class="even">
-    <td>satisfaction</td>
-    <td>5</td>
-    <td>2</td>
-    </tr>
-    <tr class="odd">
-    <td>displeasure</td>
-    <td>4</td>
-    <td>3</td>
-    </tr>
-    <tr class="even">
-    <td>instruments</td>
-    <td>4</td>
-    <td>4</td>
-    </tr>
-    <tr class="odd">
-    <td>circumstance</td>
-    <td>3</td>
-    <td>5</td>
-    </tr>
-    </tbody>
-    </table>
+    | word         | word\_count | row\_num |
+    | ------------ | ----------- | -------- |
+    | handkerchief | 29          | 1        |
+    | satisfaction | 5           | 2        |
+    | displeasure  | 4           | 3        |
+    | instruments  | 4           | 4        |
+    | circumstance | 3           | 5        |
+    
 
 ## Other functions
 
@@ -4761,47 +4209,47 @@ Returns the current row number of the query result over the window.
 
 Other functions
 
-[`  CASE WHEN ... THEN  `](#case_when)
+[`  CASE WHEN ... THEN  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#case_when)
 
 Use CASE to choose among two or more alternate expressions in your query.
 
-[`  CURRENT_USER()  `](#current_user)
+[`  CURRENT_USER()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#current_user)
 
 Returns the email address of the user running the query.
 
-[`  EVERY()  `](#every)
+[`  EVERY()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#every)
 
 Returns true if the argument is true for all of its inputs.
 
-[`  FROM_BASE64()  `](#from-base64)
+[`  FROM_BASE64()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#from-base64)
 
 Converts the base-64 encoded input string into BYTES format.
 
-[`  HASH()  `](#hash)
+[`  HASH()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#hash)
 
 Computes and returns a 64-bit signed hash value ...
 
-[`  FARM_FINGERPRINT()  `](#farm_fingerprint)
+[`  FARM_FINGERPRINT()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#farm_fingerprint)
 
 Computes and returns a 64-bit signed fingerprint value ...
 
-[`  IF()  `](#if)
+[`  IF()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#if)
 
 If first argument is true, returns second argument; otherwise returns third argument.
 
-[`  POSITION()  `](#position)
+[`  POSITION()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#position)
 
 Returns the one-based, sequential position of the argument.
 
-[`  SHA1()  `](#sha1)
+[`  SHA1()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#sha1)
 
 Returns a [SHA1](https://www.w3.org/PICS/DSig/SHA1_1_0.html) hash, in BYTES format.
 
-[`  SOME()  `](#some)
+[`  SOME()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#some)
 
 Returns true if argument is true for at least one of its inputs.
 
-[`  TO_BASE64()  `](#to-base64)
+[`  TO_BASE64()  `](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#to-base64)
 
 Converts the BYTES argument to a base-64 encoded string.
 
@@ -4815,7 +4263,7 @@ Converts the BYTES argument to a base-64 encoded string.
     Returns `  true  ` if `  condition  ` is true for all of its inputs. When used with the `  OMIT IF  ` clause, this function is useful for queries that involve repeated fields.
 
   - `  FROM_BASE64( <str> )  `  
-    Converts the base64-encoded input string `  str  ` into [BYTES](/bigquery/data-types#bytes-type) format. To convert BYTES to a base64-encoded string, use [TO\_BASE64()](#to-base64) .
+    Converts the base64-encoded input string `  str  ` into [BYTES](https://docs.cloud.google.com/bigquery/data-types#bytes-type) format. To convert BYTES to a base64-encoded string, use [TO\_BASE64()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#to-base64) .
 
   - `  HASH( expr )  `  
     Computes and returns a 64-bit signed hash value of the bytes of `  expr  ` as defined by the [CityHash](https://github.com/google/cityhash) library (version 1.0.3). Any string or integer expression is supported and the function respects `  IGNORE CASE  ` for strings, returning case invariant values.
@@ -4832,33 +4280,29 @@ Converts the BYTES argument to a base-64 encoded string.
   - `  SHA1( <str> )  `  
     Returns a [SHA1](https://www.w3.org/PICS/DSig/SHA1_1_0.html) hash, in BYTES format, of the input string `  str  ` . You can convert the result to base64 using TO\_BASE64(). For example:
     
-    ``` text
-    #legacySQL
-    SELECT
-      TO_BASE64(SHA1(corpus))
-    FROM
-      [bigquery-public-data:samples.shakespeare]
-    LIMIT
-      100;
-    ```
+        #legacySQL
+        SELECT
+          TO_BASE64(SHA1(corpus))
+        FROM
+          [bigquery-public-data:samples.shakespeare]
+        LIMIT
+          100;
 
   - `  SOME( <condition> )  `  
     Returns `  true  ` if `  condition  ` is true for at least one of its inputs. When used with the `  OMIT IF  ` clause, this function is useful for queries that involve repeated fields.
 
   - `  TO_BASE64( <bin_data> )  `  
-    Converts the [BYTES](/bigquery/data-types#bytes-type) input `  bin_data  ` to a base64-encoded string. For example:
+    Converts the [BYTES](https://docs.cloud.google.com/bigquery/data-types#bytes-type) input `  bin_data  ` to a base64-encoded string. For example:
     
-    ``` text
-    #legacySQL
-    SELECT
-      TO_BASE64(SHA1(title))
-    FROM
-      [bigquery-public-data:samples.wikipedia]
-    LIMIT
-      100;
-    ```
+        #legacySQL
+        SELECT
+          TO_BASE64(SHA1(title))
+        FROM
+          [bigquery-public-data:samples.wikipedia]
+        LIMIT
+          100;
     
-    To convert a base64-encoded string to BYTES, use [FROM\_BASE64()](#from-base64) .
+    To convert a base64-encoded string to BYTES, use [FROM\_BASE64()](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#from-base64) .
 
 ### Advanced examples
 
@@ -4868,57 +4312,53 @@ Converts the BYTES argument to a base-64 encoded string.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      CASE
-        WHEN state IN ('WA', 'OR', 'CA', 'AK', 'HI', 'ID',
-                       'MT', 'WY', 'NV', 'UT', 'CO', 'AZ', 'NM')
-          THEN 'West'
-        WHEN state IN ('OK', 'TX', 'AR', 'LA', 'TN', 'MS', 'AL',
-                       'KY', 'GA', 'FL', 'SC', 'NC', 'VA', 'WV',
-                       'MD', 'DC', 'DE')
-          THEN 'South'
-        WHEN state IN ('ND', 'SD', 'NE', 'KS', 'MN', 'IA',
-                       'MO', 'WI', 'IL', 'IN', 'MI', 'OH')
-          THEN 'Midwest'
-        WHEN state IN ('NY', 'PA', 'NJ', 'CT',
-                       'RI', 'MA', 'VT', 'NH', 'ME')
-          THEN 'Northeast'
-        ELSE 'None'
-      END as region,
-      average_mother_age,
-      average_father_age,
-      state, year
-    FROM
-      (SELECT
-         year, state,
-         SUM(mother_age)/COUNT(mother_age) as average_mother_age,
-         SUM(father_age)/COUNT(father_age) as average_father_age
-       FROM
-         [bigquery-public-data:samples.natality]
-       WHERE
-         father_age < 99
-       GROUP BY
-         year, state)
-    ORDER BY
-      year
-    LIMIT 5;
-    ```
+        #legacySQL
+        SELECT
+          CASE
+            WHEN state IN ('WA', 'OR', 'CA', 'AK', 'HI', 'ID',
+                           'MT', 'WY', 'NV', 'UT', 'CO', 'AZ', 'NM')
+              THEN 'West'
+            WHEN state IN ('OK', 'TX', 'AR', 'LA', 'TN', 'MS', 'AL',
+                           'KY', 'GA', 'FL', 'SC', 'NC', 'VA', 'WV',
+                           'MD', 'DC', 'DE')
+              THEN 'South'
+            WHEN state IN ('ND', 'SD', 'NE', 'KS', 'MN', 'IA',
+                           'MO', 'WI', 'IL', 'IN', 'MI', 'OH')
+              THEN 'Midwest'
+            WHEN state IN ('NY', 'PA', 'NJ', 'CT',
+                           'RI', 'MA', 'VT', 'NH', 'ME')
+              THEN 'Northeast'
+            ELSE 'None'
+          END as region,
+          average_mother_age,
+          average_father_age,
+          state, year
+        FROM
+          (SELECT
+             year, state,
+             SUM(mother_age)/COUNT(mother_age) as average_mother_age,
+             SUM(father_age)/COUNT(father_age) as average_father_age
+           FROM
+             [bigquery-public-data:samples.natality]
+           WHERE
+             father_age < 99
+           GROUP BY
+             year, state)
+        ORDER BY
+          year
+        LIMIT 5;
     
     **Returns:**
     
-    ``` text
-    +--------+--------------------+--------------------+-------+------+
-    | region | average_mother_age | average_father_age | state | year |
-    +--------+--------------------+--------------------+-------+------+
-    | South  | 24.342600163532296 | 27.683769419460344 | AR    | 1969 |
-    | West   | 25.185041908446163 | 28.268214055448098 | AK    | 1969 |
-    | West   | 24.780776677578217 | 27.831181063905248 | CA    | 1969 |
-    | West   | 25.005834769924412 | 27.942978384829598 | AZ    | 1969 |
-    | South  | 24.541730952905738 | 27.686430093306885 | AL    | 1969 |
-    +--------+--------------------+--------------------+-------+------+
-    ```
+        +--------+--------------------+--------------------+-------+------+
+        | region | average_mother_age | average_father_age | state | year |
+        +--------+--------------------+--------------------+-------+------+
+        | South  | 24.342600163532296 | 27.683769419460344 | AR    | 1969 |
+        | West   | 25.185041908446163 | 28.268214055448098 | AK    | 1969 |
+        | West   | 24.780776677578217 | 27.831181063905248 | CA    | 1969 |
+        | West   | 25.005834769924412 | 27.942978384829598 | AZ    | 1969 |
+        | South  | 24.541730952905738 | 27.686430093306885 | AL    | 1969 |
+        +--------+--------------------+--------------------+-------+------+
 
   - 
     
@@ -4930,42 +4370,38 @@ Converts the BYTES argument to a base-64 encoded string.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      page_title,
-      /* Populate these columns as True or False, */
-      /*  depending on the condition */
-      IF (page_title CONTAINS 'search',
-          INTEGER(total), 0) AS search,
-      IF (page_title CONTAINS 'Earth' OR
-          page_title CONTAINS 'Maps', INTEGER(total), 0) AS geo,
-    FROM
-      /* Subselect to return top revised Wikipedia articles */
-      /* containing 'Google', followed by additional text. */
-      (SELECT
-        TOP (title, 5) as page_title,
-        COUNT (*) as total
-       FROM
-         [bigquery-public-data:samples.wikipedia]
-       WHERE
-         REGEXP_MATCH (title, r'^Google.+') AND wp_namespace = 0
-      );
-    ```
+        #legacySQL
+        SELECT
+          page_title,
+          /* Populate these columns as True or False, */
+          /*  depending on the condition */
+          IF (page_title CONTAINS 'search',
+              INTEGER(total), 0) AS search,
+          IF (page_title CONTAINS 'Earth' OR
+              page_title CONTAINS 'Maps', INTEGER(total), 0) AS geo,
+        FROM
+          /* Subselect to return top revised Wikipedia articles */
+          /* containing 'Google', followed by additional text. */
+          (SELECT
+            TOP (title, 5) as page_title,
+            COUNT (*) as total
+           FROM
+             [bigquery-public-data:samples.wikipedia]
+           WHERE
+             REGEXP_MATCH (title, r'^Google.+') AND wp_namespace = 0
+          );
     
     **Returns:**
     
-    ``` text
-    +---------------+--------+------+
-    |  page_title   | search | geo  |
-    +---------------+--------+------+
-    | Google search |   4261 |    0 |
-    | Google Earth  |      0 | 3874 |
-    | Google Chrome |      0 |    0 |
-    | Google Maps   |      0 | 2617 |
-    | Google bomb   |      0 |    0 |
-    +---------------+--------+------+
-    ```
+        +---------------+--------+------+
+        |  page_title   | search | geo  |
+        +---------------+--------+------+
+        | Google search |   4261 |    0 |
+        | Google Earth  |      0 | 3874 |
+        | Google Chrome |      0 |    0 |
+        | Google Maps   |      0 | 2617 |
+        | Google bomb   |      0 |    0 |
+        +---------------+--------+------+
     
     </div>
 
@@ -4977,22 +4413,20 @@ Converts the BYTES argument to a base-64 encoded string.
     
     Some queries can provide a useful result using random subsampling of the result set. To retrieve a random sampling of values, use the `  HASH  ` function to return results in which the modulo "n" of the hash equals zero.
     
-    For example, the following query will find the `  HASH()  ` of the "title" value, and then checks if that value modulo "2" is zero. This should result in about 50% of the values being labeled as "sampled." To sample fewer values, increase the value of the modulo operation from "2" to something larger. The query uses the `  ABS  ` function in combination with `  HASH  ` , because `  HASH  ` can return negative values, and the [modulo operator](#arithmeticoperators) on a negative value yields a negative value.
+    For example, the following query will find the `  HASH()  ` of the "title" value, and then checks if that value modulo "2" is zero. This should result in about 50% of the values being labeled as "sampled." To sample fewer values, increase the value of the modulo operation from "2" to something larger. The query uses the `  ABS  ` function in combination with `  HASH  ` , because `  HASH  ` can return negative values, and the [modulo operator](https://docs.cloud.google.com/bigquery/docs/reference/legacy-sql#arithmeticoperators) on a negative value yields a negative value.
     
     **Example:**
     
-    ``` text
-    #legacySQL
-    SELECT
-      title,
-      HASH(title) AS hash_value,
-      IF(ABS(HASH(title)) % 2 == 1, 'True', 'False')
-        AS included_in_sample
-    FROM
-      [bigquery-public-data:samples.wikipedia]
-    WHERE
-      wp_namespace = 0
-    LIMIT 5;
-    ```
+        #legacySQL
+        SELECT
+          title,
+          HASH(title) AS hash_value,
+          IF(ABS(HASH(title)) % 2 == 1, 'True', 'False')
+            AS included_in_sample
+        FROM
+          [bigquery-public-data:samples.wikipedia]
+        WHERE
+          wp_namespace = 0
+        LIMIT 5;
     
     </div>

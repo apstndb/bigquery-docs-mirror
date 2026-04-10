@@ -1,6 +1,6 @@
 # Use the BigQuery Storage Read API to read table data
 
-The BigQuery Storage Read API provides fast access to BigQuery-managed storage by using an [rpc-based](/bigquery/docs/reference/storage/rpc) protocol.
+The BigQuery Storage Read API provides fast access to BigQuery-managed storage by using an [rpc-based](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) protocol.
 
 ## Background
 
@@ -30,7 +30,7 @@ The Storage Read API is distinct from the BigQuery API, and shows up separately 
 
 ## Permissions
 
-To get the permissions that you need to create and update read sessions, ask your administrator to grant you the Read Session User ( `  bigquery.readSessionUser  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](/iam/docs/granting-changing-revoking-access) .
+To get the permissions that you need to create and update read sessions, ask your administrator to grant you the Read Session User ( `  bigquery.readSessionUser  ` ) IAM role on the project. For more information about granting roles, see [Manage access to projects, folders, and organizations](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
 
 This predefined role contains the permissions required to create and update read sessions. To see the exact permissions that are required, expand the **Required permissions** section:
 
@@ -42,13 +42,13 @@ The following permissions are required to create and update read sessions:
   - `  bigquery.readsessions.getData  ` on the table or higher
   - `  bigquery.readsessions.update  ` on the table or higher
 
-You might also be able to get these permissions with [custom roles](/iam/docs/creating-custom-roles) or other [predefined roles](/iam/docs/roles-overview#predefined) .
+You might also be able to get these permissions with [custom roles](https://docs.cloud.google.com/iam/docs/creating-custom-roles) or other [predefined roles](https://docs.cloud.google.com/iam/docs/roles-overview#predefined) .
 
-For more information about BigQuery roles and permissions, see [BigQuery IAM roles and permissions](/bigquery/docs/access-control) .
+For more information about BigQuery roles and permissions, see [BigQuery IAM roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Basic API flow
 
-This section describes the basic flow of using the Storage Read API. For examples, see the [libraries and samples page](/bigquery/docs/reference/storage/samples) .
+This section describes the basic flow of using the Storage Read API. For examples, see the [libraries and samples page](https://docs.cloud.google.com/bigquery/docs/reference/storage/samples) .
 
 ### Create a session
 
@@ -62,7 +62,7 @@ The `  ReadSession  ` response contains a reference schema for the session and a
 
 Data from a given stream is retrieved by invoking the `  ReadRows  ` streaming RPC. Once the read request for a `  Stream  ` is initiated, the backend will begin transmitting blocks of serialized row data. RPC flow control ensures that the server does not transmit more data when the client is not ready to receive. If the client does not request data for more than 1 hour, then the server suspects that the stream is stalled and closes it to free up resources for other streams. If there is an error, you can restart reading a stream at a particular point by supplying the row offset when you call `  ReadRows  ` .
 
-To support dynamic work rebalancing, the Storage Read API provides an additional method to split a `  Stream  ` into two child `  Stream  ` instances whose contents are, together, equal to the contents of the parent `  Stream  ` . For more information, see the [API reference](/bigquery/docs/reference/storage/rpc) .
+To support dynamic work rebalancing, the Storage Read API provides an additional method to split a `  Stream  ` into two child `  Stream  ` instances whose contents are, together, equal to the contents of the parent `  Stream  ` . For more information, see the [API reference](https://docs.cloud.google.com/bigquery/docs/reference/storage/rpc) .
 
 ### Decode row blocks
 
@@ -207,7 +207,7 @@ To represent nullable columns, unions with the Avro `  NULL  ` type are used.
 </ul>
 <p><code dir="ltr" translate="no">        AVRO_TYPE(T)       </code> is the Avro type representation for the range element type <code dir="ltr" translate="no">        T       </code> . A null field denotes an unbounded range boundary.</p>
 <p>The first <code dir="ltr" translate="no">        RANGE       </code> field of type <code dir="ltr" translate="no">        T       </code> (for example, <code dir="ltr" translate="no">        range_date_1       </code> ) specifies the full Avro record structure under the namespace <code dir="ltr" translate="no">        google.sqlType       </code> and with the name <code dir="ltr" translate="no">        RANGE_T       </code> (for example, <code dir="ltr" translate="no">        RANGE_DATE       </code> ). Subsequent <code dir="ltr" translate="no">        RANGE       </code> fields of the same type <code dir="ltr" translate="no">        T       </code> (for example, <code dir="ltr" translate="no">        range_date_2       </code> ) references the corresponding Avro record structure by using the full resolution name, <code dir="ltr" translate="no">        google.sqlType.RANGE_T       </code> (for example, <code dir="ltr" translate="no">        google.sqlType.RANGE_DATE       </code> ).</p>
-<pre class="text" dir="ltr" data-is-upgraded="" translate="no"><code>{
+<pre dir="ltr" data-is-upgraded="" translate="no"><code>{
     &quot;name&quot;: &quot;range_date_1&quot;,
     &quot;type&quot;: {
         &quot;type&quot;: &quot;record&quot;,
@@ -245,7 +245,7 @@ If you're working in an older version of the Storage Read API, then use the appr
   - v1beta1: Arrow 0.14 and earlier
   - v1: Arrow 0.15 and later
 
-Regardless of API version, to access API functions, we recommend that you use the [BigQuery Storage API client libraries](./libraries) . The libraries can be used with any version of Arrow and don't obstruct its updates.
+Regardless of API version, to access API functions, we recommend that you use the [BigQuery Storage API client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) . The libraries can be used with any version of Arrow and don't obstruct its updates.
 
 <table>
 <colgroup>
@@ -361,29 +361,29 @@ Regardless of API version, to access API functions, we recommend that you use th
 
 ## Limitations
 
-  - Because the Storage Read API operates on storage, you cannot use the Storage Read API to directly read from logical or materialized views. As a workaround, you can execute a BigQuery query over the view and use the Storage Read API to read from the resulting table. Some connectors, including the [Spark-BigQuery connector](/dataproc/docs/tutorials/bigquery-connector-spark-example) , support this workflow natively.
+  - Because the Storage Read API operates on storage, you cannot use the Storage Read API to directly read from logical or materialized views. As a workaround, you can execute a BigQuery query over the view and use the Storage Read API to read from the resulting table. Some connectors, including the [Spark-BigQuery connector](https://docs.cloud.google.com/dataproc/docs/tutorials/bigquery-connector-spark-example) , support this workflow natively.
 
-  - Reading [external tables](/bigquery/docs/external-tables) is not supported. To use the Storage Read API with external data sources, use [BigLake tables](/bigquery/docs/biglake-intro) .
+  - Reading [external tables](https://docs.cloud.google.com/bigquery/docs/external-tables) is not supported. To use the Storage Read API with external data sources, use [BigLake tables](https://docs.cloud.google.com/bigquery/docs/biglake-intro) .
 
 ## Supported regions
 
-The Storage Read API is supported in the same regions as BigQuery. See the [Dataset locations](/bigquery/docs/locations) page for a complete list of supported regions and multi-regions.
+The Storage Read API is supported in the same regions as BigQuery. See the [Dataset locations](https://docs.cloud.google.com/bigquery/docs/locations) page for a complete list of supported regions and multi-regions.
 
 ### Data locality
 
 Data locality is the process of moving the computation closer to the location where the data resides. Data locality impacts both the peak throughput and consistency of performance.
 
-BigQuery determines the location to run your load, query, or extract jobs based on the datasets referenced in the request. For information about location considerations, see [BigQuery locations](/bigquery/docs/locations) .
+BigQuery determines the location to run your load, query, or extract jobs based on the datasets referenced in the request. For information about location considerations, see [BigQuery locations](https://docs.cloud.google.com/bigquery/docs/locations) .
 
 ## Troubleshoot errors
 
 The following are common errors encountered when using the Storage Read API:
 
   - Error: `  Stream removed  `  
-    **Resolution:** Retry the Storage Read API request. This is likely a transient error that can be resolved by retrying the request. If the problem persists, [contact support](/bigquery/docs/getting-support) .
+    **Resolution:** Retry the Storage Read API request. This is likely a transient error that can be resolved by retrying the request. If the problem persists, [contact support](https://docs.cloud.google.com/bigquery/docs/getting-support) .
 
   - Error: `  Stream expired  `  
-    **Cause:** This error occurs when the Storage Read API session reaches the [6 hour timeout](#create_a_session) .
+    **Cause:** This error occurs when the Storage Read API session reaches the [6 hour timeout](https://docs.cloud.google.com/bigquery/docs/reference/storage#create_a_session) .
     
     **Resolution:**
 
@@ -395,35 +395,18 @@ The following are common errors encountered when using the Storage Read API:
 
 ## Quotas and limits
 
-For Storage Read API quotas and limits, see [Storage Read API limits](/bigquery/quotas#storage-limits) .
+For Storage Read API quotas and limits, see [Storage Read API limits](https://docs.cloud.google.com/bigquery/quotas#storage-limits) .
 
 ## Monitor Storage Read API use
 
-To monitor the data egress and processing associated with the Storage Read API, specific fields are available in the [BigQuery AuditLogs](/bigquery/docs/reference/auditlogs) . These logs provide a detailed view of the bytes scanned and the bytes returned to the client.
+To monitor the data egress and processing associated with the Storage Read API, specific fields are available in the [BigQuery AuditLogs](https://docs.cloud.google.com/bigquery/docs/reference/auditlogs) . These logs provide a detailed view of the bytes scanned and the bytes returned to the client.
 
 The relevant API method for these logs is `  google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows  ` .
 
-<table>
-<thead>
-<tr class="header">
-<th>Field name</th>
-<th>Data type</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       serialized_response_bytes      </code></td>
-<td>INT64</td>
-<td>The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress.</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       scanned_bytes      </code></td>
-<td>INT64</td>
-<td>The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation.</td>
-</tr>
-</tbody>
-</table>
+| Field name                                 | Data type | Notes                                                                                                                                                    |
+| ------------------------------------------ | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `        serialized_response_bytes       ` | INT64     | The total number of bytes sent to the client over the network, after serialization. This field helps you track data egress.                              |
+| `        scanned_bytes       `             | INT64     | The total number of bytes scanned from BigQuery storage to fulfill the request. This value is used to calculate the analysis cost of the read operation. |
 
 ## Pricing
 

@@ -15,7 +15,7 @@ The following sample demonstrate how to use `  curl  ` to invoke the `  get_tabl
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
+<td><pre dir="ltr" data-is-upgraded="" data-syntax="Bash" translate="no"><code>                  
 curl --location &#39;https://bigquery.googleapis.com/mcp&#39; \
 --header &#39;content-type: application/json&#39; \
 --header &#39;accept: application/json, text/event-stream&#39; \
@@ -52,7 +52,7 @@ Request for a table.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string
@@ -96,7 +96,7 @@ Required. Table ID of the table request.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;id&quot;: string,
@@ -544,7 +544,7 @@ Optional. The partition information for all table formats, including managed par
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string
@@ -586,7 +586,7 @@ Required. The ID of the table. The ID can contain Unicode characters in category
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -614,7 +614,7 @@ The string value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>
@@ -645,7 +645,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     {
       object (TableFieldSchema)
@@ -686,7 +686,7 @@ Optional. Specifies metadata of the foreign data type definition in field schema
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;type&quot;: string,
   &quot;mode&quot;: string,
@@ -887,7 +887,7 @@ Optional. Definition of the foreign data type. Only valid for top-level schema f
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;names&quot;: [
     string
   ]
@@ -917,7 +917,7 @@ A list of policy tag resource names. For example, "projects/1/locations/eu/taxon
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field _name can be only one of the following:
   &quot;name&quot;: string
@@ -952,7 +952,7 @@ Data policy resource name in the form of projects/project\_id/locations/location
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -980,7 +980,7 @@ The int64 value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string
 }</code></pre></td>
 </tr>
@@ -1008,7 +1008,7 @@ Required. The type of a field element. For more information, see `  TableFieldSc
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;typeSystem&quot;: enum (TypeSystem)
 }</code></pre></td>
 </tr>
@@ -1036,7 +1036,7 @@ Required. Specifies the system which defines the foreign data type.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: string,
   &quot;expirationMs&quot;: string,
   &quot;field&quot;: string,
@@ -1087,7 +1087,7 @@ If set to true, queries over this table require a partition filter that can be u
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -1115,7 +1115,7 @@ The bool value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;field&quot;: string,
   &quot;range&quot;: {
     object (Range)
@@ -1152,7 +1152,7 @@ Defines the ranges for range partitioning.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;start&quot;: string,
   &quot;end&quot;: string,
   &quot;interval&quot;: string
@@ -1194,7 +1194,7 @@ Required. The width of each interval. This field is an INT64 value represented a
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fields&quot;: [
     string
   ]
@@ -1226,7 +1226,7 @@ For additional information, see [Introduction to clustered tables](https://cloud
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;partitionedColumn&quot;: [
     {
       object (PartitionedColumn)
@@ -1262,7 +1262,7 @@ In this case the values must be \['city', 'state'\] in that order.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field _field can be only one of the following:
   &quot;field&quot;: string
@@ -1297,7 +1297,7 @@ Required. The name of the partition column.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -1325,7 +1325,7 @@ The uint64 value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;userDefinedFunctionResources&quot;: [
     {
@@ -1400,7 +1400,7 @@ Optional. Foreign view representations.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;resourceUri&quot;: string,
   &quot;inlineCode&quot;: string
 }</code></pre></td>
@@ -1435,7 +1435,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field privacy_policy can be only one of the following:
   &quot;aggregationThresholdPolicy&quot;: {
@@ -1495,7 +1495,7 @@ Optional. Join restriction policy is outside of the one of policies, since this 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;privacyUnitColumns&quot;: [
     string
   ],
@@ -1539,7 +1539,7 @@ Optional. The threshold for the "aggregation threshold" policy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
 
   // Union field _max_epsilon_per_query can be only one of the following:
   &quot;maxEpsilonPerQuery&quot;: number
@@ -1672,7 +1672,7 @@ Output only. The delta budget remaining. If budget is exhausted, no more queries
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;joinAllowedColumns&quot;: [
     string
   ],
@@ -1716,7 +1716,7 @@ Optional. Specifies if a join is required or not on queries for the view. Defaul
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;dialect&quot;: string
 }</code></pre></td>
@@ -1751,7 +1751,7 @@ Optional. Represents the dialect of the query.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;query&quot;: string,
   &quot;lastRefreshTime&quot;: string,
   &quot;enableRefresh&quot;: boolean,
@@ -1807,7 +1807,7 @@ Optional. This option declares the intention to construct a materialized view th
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;refreshWatermark&quot;: string,
   &quot;lastRefreshStatus&quot;: {
     object (ErrorProto)
@@ -1846,7 +1846,7 @@ Output only. Error result of the last automatic refresh. If present, indicates t
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;seconds&quot;: string,
   &quot;nanos&quot;: integer
 }</code></pre></td>
@@ -1881,7 +1881,7 @@ Non-negative fractions of a second at nanosecond resolution. This field is the n
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;reason&quot;: string,
   &quot;location&quot;: string,
   &quot;debugInfo&quot;: string,
@@ -1930,7 +1930,7 @@ A human-readable description of the error.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceUris&quot;: [
     string
   ],
@@ -2224,7 +2224,7 @@ Optional. Format used to parse TIMESTAMP values. Supports C-style and SQL-style 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: integer
 }</code></pre></td>
 </tr>
@@ -2252,7 +2252,7 @@ The int32 value.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;fieldDelimiter&quot;: string,
   &quot;skipLeadingRows&quot;: string,
   &quot;quote&quot;: string,
@@ -2351,7 +2351,7 @@ Optional. Controls the strategy used to match loaded columns to the schema. If n
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;encoding&quot;: string
 }</code></pre></td>
 </tr>
@@ -2379,7 +2379,7 @@ Optional. The character encoding of the data. The supported values are UTF-8, UT
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columnFamilies&quot;: [
     {
       object (BigtableColumnFamily)
@@ -2432,7 +2432,7 @@ Optional. If field is true, then each column family will be read as a single JSO
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;familyId&quot;: string,
   &quot;type&quot;: string,
   &quot;encoding&quot;: string,
@@ -2510,7 +2510,7 @@ Optional. Protobuf-specific configurations, only takes effect when the encoding 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;qualifierEncoded&quot;: string,
   &quot;qualifierString&quot;: string,
   &quot;fieldName&quot;: string,
@@ -2591,7 +2591,7 @@ Optional. Protobuf-specific configurations, only takes effect when the encoding 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;value&quot;: string
 }</code></pre></td>
 </tr>
@@ -2621,7 +2621,7 @@ A base64-encoded string.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;schemaBundleId&quot;: string,
   &quot;protoMessageName&quot;: string
 }</code></pre></td>
@@ -2656,7 +2656,7 @@ Optional. The fully qualified proto message name of the protobuf. In the format 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;skipLeadingRows&quot;: string,
   &quot;range&quot;: string
 }</code></pre></td>
@@ -2691,7 +2691,7 @@ Optional. Range of a sheet to query from. Only used when non-empty. Typical form
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;mode&quot;: string,
   &quot;sourceUriPrefix&quot;: string,
   &quot;requirePartitionFilter&quot;: boolean,
@@ -2770,7 +2770,7 @@ Output only. For permanent external tables, this field is populated with the hiv
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;useAvroLogicalTypes&quot;: boolean
 }</code></pre></td>
 </tr>
@@ -2798,7 +2798,7 @@ Optional. If sourceFormat is set to "AVRO", indicates whether to interpret logic
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;enumAsString&quot;: boolean,
   &quot;enableListInference&quot;: boolean,
   &quot;mapTargetType&quot;: enum (MapTargetType)
@@ -2840,7 +2840,7 @@ Optional. Indicates how to represent a Parquet map if present.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;connectionId&quot;: string,
   &quot;storageUri&quot;: string,
   &quot;fileFormat&quot;: enum (FileFormat),
@@ -2889,7 +2889,7 @@ Optional. The table format the metadata only snapshots are stored in.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;estimatedBytes&quot;: string,
   &quot;estimatedRows&quot;: string,
   &quot;oldestEntryTime&quot;: string
@@ -2931,7 +2931,7 @@ Output only. Contains the timestamp of the oldest entry in the streaming buffer,
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kmsKeyName&quot;: string
 }</code></pre></td>
 </tr>
@@ -2959,7 +2959,7 @@ Optional. Describes the Cloud KMS encryption key that will be used to protect de
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;baseTableReference&quot;: {
     object (TableReference)
   },
@@ -2998,7 +2998,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;baseTableReference&quot;: {
     object (TableReference)
   },
@@ -3037,7 +3037,7 @@ Uses RFC 3339, where generated output will always be Z-normalized and use 0, 3, 
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;type&quot;: enum (RestrictionType)
 }</code></pre></td>
 </tr>
@@ -3065,7 +3065,7 @@ Output only. Specifies the type of dataset/table restriction.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;primaryKey&quot;: {
     object (PrimaryKey)
   },
@@ -3106,7 +3106,7 @@ Optional. Present only if the table has a foreign key. The foreign key is not en
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;columns&quot;: [
     string
   ]
@@ -3136,7 +3136,7 @@ Required. The columns that are composed of the primary key constraint.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;referencedTable&quot;: {
     object (TableReference)
@@ -3184,7 +3184,7 @@ Required. The columns that compose the foreign key.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;referencingColumn&quot;: string,
   &quot;referencedColumn&quot;: string
 }</code></pre></td>
@@ -3219,7 +3219,7 @@ Required. The column in the primary key that are referenced by the referencing\_
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>
@@ -3250,7 +3250,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;sourceTable&quot;: {
     object (TableReference)
   },
@@ -3310,7 +3310,7 @@ Optional. Output only. Replication error that will permanently stopped table rep
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;parameters&quot;: {
     string: string,
     ...
@@ -3359,7 +3359,7 @@ Optional. A connection ID that specifies the credentials to be used to read exte
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>
@@ -3390,7 +3390,7 @@ Fields
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;locationUri&quot;: string,
   &quot;inputFormat&quot;: string,
   &quot;outputFormat&quot;: string,
@@ -3441,7 +3441,7 @@ Optional. Serializer and deserializer information.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;serializationLibrary&quot;: string,
   &quot;parameters&quot;: {
@@ -3488,7 +3488,7 @@ An object containing a list of `  "key": value  ` pairs. Example: `  { "name": "
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;key&quot;: string,
   &quot;value&quot;: string
 }</code></pre></td>

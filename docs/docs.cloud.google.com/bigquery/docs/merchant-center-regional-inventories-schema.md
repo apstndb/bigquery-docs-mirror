@@ -10,93 +10,18 @@ The data is written to a table named `  RegionalInventories_ MERCHANT_ID  ` if y
 
 The `  RegionalInventories_  ` table has the following schema:
 
-<table>
-<thead>
-<tr class="header">
-<th><strong>Column</strong></th>
-<th><strong>BigQuery data type</strong></th>
-<th><strong>Description</strong></th>
-<th><strong>Example data</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">         product_id       </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Content API's REST ID of the product in the form: <code dir="ltr" translate="no">       channel:content_language:feed_label:offer_id      </code> . This field is a primary key.</td>
-<td>online:en:AU:666840730</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">         merchant_id       </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Merchant account ID. This field is a primary key.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       aggregator_id      </code></td>
-<td><code dir="ltr" translate="no">       INTEGER      </code></td>
-<td>Aggregator account ID for multi-client accounts.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       region_id      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Region ID of the inventory.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       price      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Regional price of the item.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       price.value      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td>Regional price of the item.</td>
-<td>99</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       price.currency      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Currency of the regional price of the item.</td>
-<td>CHF</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       sale_price      </code></td>
-<td><code dir="ltr" translate="no">       RECORD      </code></td>
-<td>Regional sale price of the item.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sale_price.value      </code></td>
-<td><code dir="ltr" translate="no">       NUMERIC      </code></td>
-<td>Regional sale price of the item.</td>
-<td>49</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       sale_price.currency      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Currency of the regional sale price of the item.</td>
-<td>CHF</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       sale_price_effective_start_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>Start date and time when the item is on sale in the region.</td>
-<td>2021-03-30 00:00:00 UTC</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       sale_price_effective_end_date      </code></td>
-<td><code dir="ltr" translate="no">       TIMESTAMP      </code></td>
-<td>End date and time when the item is on sale in the region.</td>
-<td>2021-04-14 00:00:00 UTC</td>
-</tr>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       availability      </code></td>
-<td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>Regional availability status of the item.</td>
-<td>out of stock</td>
-</tr>
-</tbody>
-</table>
+| **Column**                                       | **BigQuery data type**     | **Description**                                                                                                                                | **Example data**        |
+| ------------------------------------------------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `          product_id        `                   | `        STRING       `    | Content API's REST ID of the product in the form: `        channel:content_language:feed_label:offer_id       ` . This field is a primary key. | online:en:AU:666840730  |
+| `          merchant_id        `                  | `        INTEGER       `   | Merchant account ID. This field is a primary key.                                                                                              |                         |
+| `        aggregator_id       `                   | `        INTEGER       `   | Aggregator account ID for multi-client accounts.                                                                                               |                         |
+| `        region_id       `                       | `        STRING       `    | Region ID of the inventory.                                                                                                                    |                         |
+| `        price       `                           | `        RECORD       `    | Regional price of the item.                                                                                                                    |                         |
+| `        price.value       `                     | `        NUMERIC       `   | Regional price of the item.                                                                                                                    | 99                      |
+| `        price.currency       `                  | `        STRING       `    | Currency of the regional price of the item.                                                                                                    | CHF                     |
+| `        sale_price       `                      | `        RECORD       `    | Regional sale price of the item.                                                                                                               |                         |
+| `        sale_price.value       `                | `        NUMERIC       `   | Regional sale price of the item.                                                                                                               | 49                      |
+| `        sale_price.currency       `             | `        STRING       `    | Currency of the regional sale price of the item.                                                                                               | CHF                     |
+| `        sale_price_effective_start_date       ` | `        TIMESTAMP       ` | Start date and time when the item is on sale in the region.                                                                                    | 2021-03-30 00:00:00 UTC |
+| `        sale_price_effective_end_date       `   | `        TIMESTAMP       ` | End date and time when the item is on sale in the region.                                                                                      | 2021-04-14 00:00:00 UTC |
+| `        availability       `                    | `        STRING       `    | Regional availability status of the item.                                                                                                      | out of stock            |

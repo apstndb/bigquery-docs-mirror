@@ -13,7 +13,7 @@ Each of the following predefined IAM roles includes the permissions that you nee
   - `  roles/bigquery.dataOwner  `
   - `  roles/bigquery.dataViewer  `
 
-For more information about BigQuery permissions, see [Access control with IAM](/bigquery/docs/access-control) .
+For more information about BigQuery permissions, see [Access control with IAM](https://docs.cloud.google.com/bigquery/docs/access-control) .
 
 ## Schema
 
@@ -48,7 +48,7 @@ The `  INFORMATION_SCHEMA.SCHEMATA_OPTIONS  ` view has the following schema:
 <tr class="odd">
 <td><code dir="ltr" translate="no">       option_name      </code></td>
 <td><code dir="ltr" translate="no">       STRING      </code></td>
-<td>The name of the option. For a list of supported options, see the <a href="/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list">schema options list</a> .
+<td>The name of the option. For a list of supported options, see the <a href="https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#schema_option_list">schema options list</a> .
 <p>The <code dir="ltr" translate="no">        storage_billing_model       </code> option is only displayed for datasets that have been updated after December 1, 2022. For datasets that were last updated before that date, the storage billing model is <code dir="ltr" translate="no">        LOGICAL       </code> .</p></td>
 </tr>
 <tr class="even">
@@ -68,42 +68,23 @@ For stability, we recommend that you explicitly list columns in your information
 
 ## Scope and syntax
 
-Queries against this view must include a [region qualifier](/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from the US region. The following table explains the region scope for this view:
+Queries against this view must include a [region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#syntax) . If you do not specify a regional qualifier, metadata is retrieved from the US region. The following table explains the region scope for this view:
 
-<table>
-<thead>
-<tr class="header">
-<th>View Name</th>
-<th>Resource scope</th>
-<th>Region scope</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]INFORMATION_SCHEMA.SCHEMATA_OPTIONS      </code></td>
-<td>Project level</td>
-<td>US region</td>
-</tr>
-<tr class="even">
-<td><code dir="ltr" translate="no">       [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.SCHEMATA_OPTIONS      </code></td>
-<td>Project level</td>
-<td><code dir="ltr" translate="no">         REGION       </code></td>
-</tr>
-</tbody>
-</table>
+| View Name                                                                                                                                     | Resource scope | Region scope               |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | -------------------------- |
+| `        [               PROJECT_ID              .]INFORMATION_SCHEMA.SCHEMATA_OPTIONS       `                                                | Project level  | US region                  |
+| ``        [               PROJECT_ID              .]`region-               REGION              `.INFORMATION_SCHEMA.SCHEMATA_OPTIONS       `` | Project level  | `          REGION        ` |
 
 Replace the following:
 
   - Optional: `  PROJECT_ID  ` : the ID of your Google Cloud project. If not specified, the default project is used.
-  - `  REGION  ` : any [dataset region name](/bigquery/docs/locations) . For example, ``  `region-us`  `` .
-    **Note:** You must use [a region qualifier](/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
+  - `  REGION  ` : any [dataset region name](https://docs.cloud.google.com/bigquery/docs/locations) . For example, ``  `region-us`  `` .
+    **Note:** You must use [a region qualifier](https://docs.cloud.google.com/bigquery/docs/information-schema-intro#region_qualifier) to query `  INFORMATION_SCHEMA  ` views. The location of the query execution must match the region of the `  INFORMATION_SCHEMA  ` view.
 
 **Example**
 
-``` text
--- Returns metadata for datasets in a region.
-SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
-```
+    -- Returns metadata for datasets in a region.
+    SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
 
 ## Examples
 
@@ -111,13 +92,11 @@ SELECT * FROM region-us.INFORMATION_SCHEMA.SCHEMATA_OPTIONS;
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format:
 
-``` text
-`PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-```
+    `PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
 
 for example, ``  `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS  `` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -130,7 +109,7 @@ WHERE
 
 The result is similar to the following:
 
-``` text
+``` 
   +----------------+---------------+-------------------------------+-------------+---------------------+
   |  catalog_name  |  schema_name  |          option_name          | option_type |    option_value     |
   +----------------+---------------+-------------------------------+-------------+---------------------+
@@ -147,13 +126,11 @@ The result is similar to the following:
 
 To run the query against a project other than your default project, add the project ID to the dataset in the following format:
 
-``` text
-`PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
-```
+    `PROJECT_ID`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS
 
 ; for example, ``  `myproject`.INFORMATION_SCHEMA.SCHEMATA_OPTIONS  `` .
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -166,7 +143,7 @@ WHERE
 
 The result is similar to the following:
 
-``` text
+``` 
   +----------------+---------------+-------------+---------------------------------+------------------------+
   |  catalog_name  |  schema_name  | option_name |          option_type            |      option_value      |
   +----------------+---------------+-------------+---------------------------------+------------------------+

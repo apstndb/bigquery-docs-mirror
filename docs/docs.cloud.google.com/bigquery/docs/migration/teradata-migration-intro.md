@@ -38,7 +38,7 @@ The following table compares the features and concepts in Teradata to equivalent
 <tr class="odd">
 <td>Teradata (On-premises, Cloud, Hybrid)</td>
 <td>BigQuery (Unified, AI Data Platform). BigQuery provides a large set of additional capabilities relative to a conventional data warehouse.</td>
-<td>BigQuery is a fully managed, cloud-native data warehouse on Google Cloud. Teradata offers on-premises, cloud, and hybrid options. BigQuery is serverless and available on all clouds as <a href="/bigquery/docs/omni-introduction">BQ Omni.</a></td>
+<td>BigQuery is a fully managed, cloud-native data warehouse on Google Cloud. Teradata offers on-premises, cloud, and hybrid options. BigQuery is serverless and available on all clouds as <a href="https://docs.cloud.google.com/bigquery/docs/omni-introduction">BQ Omni.</a></td>
 </tr>
 <tr class="even">
 <td>Teradata Tools (Teradata Studio, BTEQ)</td>
@@ -63,20 +63,20 @@ The following table compares the features and concepts in Teradata to equivalent
 <tr class="even">
 <td>Primary Key</td>
 <td>Primary Key (unenforced in GoogleSQL)</td>
-<td>BigQuery supports unenforced <a href="/bigquery/docs/primary-foreign-keys">primary keys</a> in GoogleSQL. These are primarily for helping with query optimization.</td>
+<td>BigQuery supports unenforced <a href="https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys">primary keys</a> in GoogleSQL. These are primarily for helping with query optimization.</td>
 </tr>
 <tr class="odd">
 <td>Foreign Key</td>
 <td>Foreign Key (unenforced in GoogleSQL)</td>
-<td>BigQuery supports unenforced <a href="/bigquery/docs/primary-foreign-keys">foreign keys</a> in GoogleSQL. These are primarily for helping with query optimization.</td>
+<td>BigQuery supports unenforced <a href="https://docs.cloud.google.com/bigquery/docs/primary-foreign-keys">foreign keys</a> in GoogleSQL. These are primarily for helping with query optimization.</td>
 </tr>
 <tr class="even">
 <td>Index</td>
 <td>Clustering, Search Indexes, Vector Indexes (automatic or managed)</td>
 <td>Teradata allows for explicit index creation.<br />
 <br />
-We recommend <a href="/bigquery/docs/clustered-tables">clustering in BigQuery</a> . While not equivalent to Database indexes, clustering helps store the data ordered on disk and this helps optimize with data retrieval when clustered columns are used as predicates.<br />
-BigQuery supports <a href="/bigquery/docs/search-index">Search Indexes</a> and <a href="/bigquery/docs/vector-index">Vector Indexes</a> .</td>
+We recommend <a href="https://docs.cloud.google.com/bigquery/docs/clustered-tables">clustering in BigQuery</a> . While not equivalent to Database indexes, clustering helps store the data ordered on disk and this helps optimize with data retrieval when clustered columns are used as predicates.<br />
+BigQuery supports <a href="https://docs.cloud.google.com/bigquery/docs/search-index">Search Indexes</a> and <a href="https://docs.cloud.google.com/bigquery/docs/vector-index">Vector Indexes</a> .</td>
 </tr>
 <tr class="odd">
 <td>Partitioning</td>
@@ -188,7 +188,7 @@ The following sections summarize the Teradata to BigQuery migration process:
 
 ### Run a migration assessment
 
-In your Teradata to BigQuery migration, we recommend that you start by running the [BigQuery migration assessment tool](/bigquery/docs/migration-assessment) to assess the feasibility and potential benefits of moving your data warehouse from Teradata to BigQuery. This tool provides a structured approach to understanding your current Teradata environment and estimating the effort involved in a successful migration.
+In your Teradata to BigQuery migration, we recommend that you start by running the [BigQuery migration assessment tool](https://docs.cloud.google.com/bigquery/docs/migration-assessment) to assess the feasibility and potential benefits of moving your data warehouse from Teradata to BigQuery. This tool provides a structured approach to understanding your current Teradata environment and estimating the effort involved in a successful migration.
 
 Running the BigQuery migration assessment tool produces an assessment report that contains the following sections:
 
@@ -196,13 +196,13 @@ Running the BigQuery migration assessment tool produces an assessment report tha
   - BigQuery steady state transformation suggestions: shows what the system will look like on BigQuery after migration. It includes suggestions for optimizing workloads on BigQuery and avoiding wastage.
   - Migration plan: provides information about the migration effort itself. For example, getting from the existing system to the BigQuery steady state. This section includes the count of queries that were automatically translated and the expected time to move each table into BigQuery.
 
-For more information about the results of a migration assessment, see [Review the Looker Studio report](/bigquery/docs/migration-assessment#review_the_data_studio_report) .
+For more information about the results of a migration assessment, see [Review the Looker Studio report](https://docs.cloud.google.com/bigquery/docs/migration-assessment#review_the_data_studio_report) .
 
 ### Migrate schema and data from Teradata
 
-Once you've reviewed the results of your migration assessment, you can start your Teradata migration by [preparing BigQuery for the migration](/bigquery/docs/migration/teradata#before_you_begin) , then [setting up a data transfer job](/bigquery/docs/migration/teradata#set_up_a_transfer) .
+Once you've reviewed the results of your migration assessment, you can start your Teradata migration by [preparing BigQuery for the migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata#before_you_begin) , then [setting up a data transfer job](https://docs.cloud.google.com/bigquery/docs/migration/teradata#set_up_a_transfer) .
 
-For more information about the Teradata migration process, see [Migrate schema and data from Teradata](/bigquery/docs/migration/teradata) .
+For more information about the Teradata migration process, see [Migrate schema and data from Teradata](https://docs.cloud.google.com/bigquery/docs/migration/teradata) .
 
 ### Validate your migration
 
@@ -212,4 +212,4 @@ You can access the DVT in the [DVT public GitHub repository](https://github.com/
 
 ## What's next
 
-  - Try a [test migration](/bigquery/docs/migration/teradata-tutorial) of Teradata to BigQuery.
+  - Try a [test migration](https://docs.cloud.google.com/bigquery/docs/migration/teradata-tutorial) of Teradata to BigQuery.

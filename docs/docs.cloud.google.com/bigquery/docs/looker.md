@@ -14,19 +14,23 @@ Looker supports hosting in Google Cloud. Because Looker is platform independent,
 
 You don't need Looker to use BigQuery. However, if your BigQuery use case includes business intelligence, data applications, or embedded analytics you might want to review Looker as a provider of these services.
 
-If you already have a Looker instance running, see the [instructions for connecting Looker to BigQuery](/looker/docs/db-config-google-bigquery) .
+If you already have a Looker instance running, see the [instructions for connecting Looker to BigQuery](https://docs.cloud.google.com/looker/docs/db-config-google-bigquery) .
 
 ## Get started with Looker and BigQuery
 
-The BI Engine seamlessly integrates with any business intelligence (BI) tools, including Looker. For more information, see [BI Engine overview](/bigquery/docs/bi-engine-intro) .
+The BI Engine seamlessly integrates with any business intelligence (BI) tools, including Looker. For more information, see [BI Engine overview](https://docs.cloud.google.com/bigquery/docs/bi-engine-intro) .
 
 ## Create a BigQuery dataset
 
 The first step is to create a BigQuery dataset to store your BI Engine-managed table. To create your dataset, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
     
     If you don't see the left pane, click last\_page **Expand left pane** to open the pane.
 
@@ -38,15 +42,17 @@ The first step is to create a BigQuery dataset to store your BI Engine-managed t
     
       - For **Dataset ID** , enter `  biengine_tutorial  ` .
     
-      - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](/bigquery/docs/locations#multi-regions) where public datasets are stored.
+      - For **Data location** , choose **us (multiple regions in United States)** , the [multi-region location](https://docs.cloud.google.com/bigquery/docs/locations#multi-regions) where public datasets are stored.
     
       - For this tutorial, you can select **Enable table expiration** , and then specify the number of days before the table expires.
+        
+        ![Create dataset page](https://docs.cloud.google.com/static/bigquery/images/create-dataset-biengine.png)
 
 6.  Leave all of the other default settings in place and click **Create dataset** .
 
 ## Create a table by copying data from a public dataset
 
-This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](/bigquery/public-data) . Public datasets are datasets that BigQuery hosts for you to access and integrate into your applications.
+This tutorial uses a dataset available through the [Google Cloud Public Dataset Program](https://docs.cloud.google.com/bigquery/public-data) . Public datasets are datasets that BigQuery hosts for you to access and integrate into your applications.
 
 In this section, you create a table by copying data from the [San Francisco 311 service requests](https://console.cloud.google.com/marketplace/details/san-francisco-public-data/sf-311?filter=solution-type:dataset) dataset. You can explore the dataset by using the [Google Cloud console](https://console.cloud.google.com/bigquery?p=bigquery-public-data&d=san_francisco_311&page=dataset) .
 
@@ -55,8 +61,12 @@ In this section, you create a table by copying data from the [San Francisco 311 
 To create your table, follow these steps:
 
 1.  In the Google Cloud console, go to the BigQuery page.
+    
+    [Go to BigQuery](https://console.cloud.google.com/bigquery)
 
 2.  In the left pane, click explore **Explorer** :
+    
+    ![Highlighted button for the Explorer pane.](https://docs.cloud.google.com/static/bigquery/images/explorer-tab.png)
 
 3.  In the **Explorer** pane, search for the `  san_francisco_311  ` dataset.
 
@@ -65,6 +75,8 @@ To create your table, follow these steps:
 5.  Click the `  311_service_requests  ` table.
 
 6.  In the toolbar, click **Copy** .
+    
+    ![Highlight of the copy option.](https://docs.cloud.google.com/static/bigquery/images/looker-311-table-copy.png)
 
 7.  In the **Copy table** dialog, in the **Destination** section, do the following:
     
@@ -73,6 +85,8 @@ To create your table, follow these steps:
       - For **Dataset** , select **biengine\_tutorial** .
     
       - For **Table** , enter `  311_service_requests_copy  ` .
+        
+        ![The copy table window with destination options](https://docs.cloud.google.com/static/bigquery/images/copy-311-table.png)
 
 8.  Click **Copy** .
 
@@ -82,6 +96,8 @@ To create your table, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
     
+    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
+    
     **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  Click add **Create reservation** .
@@ -90,9 +106,11 @@ To create your table, follow these steps:
     
       - In the **Project** list, verify your Google Cloud project.
     
-      - In the **Location** list, select a location. The location should match the [location of the datasets](/bigquery/docs/locations) that you're querying.
+      - In the **Location** list, select a location. The location should match the [location of the datasets](https://docs.cloud.google.com/bigquery/docs/locations) that you're querying.
     
       - Adjust the **GiB of Capacity** slider to the amount of memory capacity that you're reserving. The following example sets the capacity to 2 GiB. The maximum is 250 GiB.
+        
+        ![BI Engine capacity location](https://docs.cloud.google.com/static/bigquery/images/step-1.png)
 
 4.  Click **Next** .
 
@@ -112,6 +130,8 @@ To create your table, follow these steps:
 
 After you confirm your reservation, the details are displayed on the **Reservations** page.
 
+![Confirmed reservation](https://docs.cloud.google.com/static/bigquery/images/reservation.png)
+
 ## Connect using Looker
 
 **Shortcut:** If you already have a Looker model using a BigQuery dataset with a service account, in a project that is BI Engine-enabled, then no additional configuration is required.
@@ -122,18 +142,18 @@ The following instructions show you how to set up Looker with BigQuery.
 
 2.  In the Looker documentation about BigQuery, complete the following sections:
     
-    1.  [Creating a service account](/looker/docs/db-config-google-bigquery#creating_a_service_account_and_downloading_the_json_credentials_certificate) .
-    2.  [Configure an OAuth for a BigQuery connection in Looker](/looker/docs/db-config-google-bigquery#configuring_oauth_for_a_bigquery_connection) .
+    1.  [Creating a service account](https://docs.cloud.google.com/looker/docs/db-config-google-bigquery#creating_a_service_account_and_downloading_the_json_credentials_certificate) .
+    2.  [Configure an OAuth for a BigQuery connection in Looker](https://docs.cloud.google.com/looker/docs/db-config-google-bigquery#configuring_oauth_for_a_bigquery_connection) .
     
     **Note:** Ensure that the service account you create uses the same billing project as the project for which you enabled a BI Engine reservation.
 
 3.  Click the **Develop** tab and select **Development Mode** .
 
-4.  Generate a LookML model and project for your dataset. For more information, see the [instructions for connecting Looker to your database](/looker/docs/connecting-to-your-db) .
+4.  Generate a LookML model and project for your dataset. For more information, see the [instructions for connecting Looker to your database](https://docs.cloud.google.com/looker/docs/connecting-to-your-db) .
 
 5.  Using the **Explore** menu, navigate to an explore associate with the new model file name **Explore 311\_service\_requests\_copy** (or whatever you named your explore).
 
-You have successfully connected Looker to BigQuery. You can use the System Activity feature in Looker to generate a Looker usage report and analyze the performance of your queries against BigQuery-specific performance metrics. To explore various BigQuery BI Engine query performance metrics, see [BigQuery BI Engine metrics](/looker/docs/query-performance-metrics#bigquery_bi_engine_metrics) .
+You have successfully connected Looker to BigQuery. You can use the System Activity feature in Looker to generate a Looker usage report and analyze the performance of your queries against BigQuery-specific performance metrics. To explore various BigQuery BI Engine query performance metrics, see [BigQuery BI Engine metrics](https://docs.cloud.google.com/looker/docs/query-performance-metrics#bigquery_bi_engine_metrics) .
 
 ## Clean up
 
@@ -153,6 +173,8 @@ To delete the project:
 <!-- end list -->
 
 1.  In the Google Cloud console, go to the **Manage resources** page.
+    
+    [Go to the BI Engine page](https://console.cloud.google.com/cloud-resource-manager)
 
 2.  In the project list, select the project that you want to delete, and then click **Delete** .
 
@@ -166,6 +188,8 @@ To delete your reservation, follow these steps:
 
 1.  In the Google Cloud console, under **Administration** go to the **BI Engine** page.
     
+    [Go to the BI Engine page](https://console.cloud.google.com/bigquery/admin/bi-engine)
+    
     **Note:** If prompted to enable **BigQuery Reservation API** , click **Enable** .
 
 2.  In the **Reservations** section, locate your reservation.
@@ -178,6 +202,6 @@ To delete your reservation, follow these steps:
 
 There are many additional options related to administering Looker, customizing its data model, and exposing data to users. For more information, see the following resources:
 
-  - [Looker documentation](/looker/docs)
-  - [Looker best practices](/looker/docs/best-practices/home)
+  - [Looker documentation](https://docs.cloud.google.com/looker/docs)
+  - [Looker best practices](https://docs.cloud.google.com/looker/docs/best-practices/home)
   - [Looker training](https://www.cloudskillsboost.google/journeys/28)

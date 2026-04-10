@@ -1,5 +1,7 @@
 # BigQuery documentation
 
+[Read product documentation](https://docs.cloud.google.com/bigquery/docs/introduction)
+
 BigQuery is Google Cloud's fully managed, petabyte-scale, and cost-effective analytics data warehouse that lets you run analytics over vast amounts of data in near real time. With BigQuery, there's no infrastructure to set up or manage, letting you focus on finding meaningful insights using GoogleSQL and taking advantage of flexible pricing models across on-demand and flat-rate options.
 
 [Go to the BigQuery product page for more.](https://cloud.google.com/bigquery)
@@ -12,55 +14,55 @@ format\_list\_numbered
 
 ### Guides
 
-  - Quickstarts: [Console](/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](/bigquery/docs/quickstarts/load-data-bq) , or [Client libraries](/bigquery/docs/quickstarts/quickstart-client-libraries)
+  - Quickstarts: [Console](https://docs.cloud.google.com/bigquery/docs/quickstarts/query-public-dataset-console) , [Command line](https://docs.cloud.google.com/bigquery/docs/quickstarts/load-data-bq) , or [Client libraries](https://docs.cloud.google.com/bigquery/docs/quickstarts/quickstart-client-libraries)
 
-  - [Creating and using tables](/bigquery/docs/tables)
+  - [Creating and using tables](https://docs.cloud.google.com/bigquery/docs/tables)
 
-  - [Introduction to partitioned tables](/bigquery/docs/partitioned-tables)
+  - [Introduction to partitioned tables](https://docs.cloud.google.com/bigquery/docs/partitioned-tables)
 
-  - [Introduction to BigQuery AI](/bigquery/docs/ai-introduction)
+  - [Introduction to BigQuery AI](https://docs.cloud.google.com/bigquery/docs/ai-introduction)
 
-  - [Predefined roles and permissions](/bigquery/docs/access-control)
+  - [Predefined roles and permissions](https://docs.cloud.google.com/bigquery/docs/access-control)
 
-  - [Introduction to loading data](/bigquery/docs/loading-data)
+  - [Introduction to loading data](https://docs.cloud.google.com/bigquery/docs/loading-data)
 
-  - [Loading CSV data from Cloud Storage](/bigquery/docs/loading-data-cloud-storage-csv)
+  - [Loading CSV data from Cloud Storage](https://docs.cloud.google.com/bigquery/docs/loading-data-cloud-storage-csv)
 
-  - [Exporting table data](/bigquery/docs/exporting-data)
+  - [Exporting table data](https://docs.cloud.google.com/bigquery/docs/exporting-data)
 
-  - [Create machine learning models in BigQuery ML](/bigquery/docs/create-machine-learning-model)
+  - [Create machine learning models in BigQuery ML](https://docs.cloud.google.com/bigquery/docs/create-machine-learning-model)
 
-  - [Querying external data sources](/bigquery/external-data-sources)
+  - [Querying external data sources](https://docs.cloud.google.com/bigquery/external-data-sources)
 
-  - [Introduction to vector search](/bigquery/docs/vector-search-intro)
+  - [Introduction to vector search](https://docs.cloud.google.com/bigquery/docs/vector-search-intro)
 
 find\_in\_page
 
 ### Reference
 
-  - [Functions in GoogleSQL](/bigquery/docs/reference/standard-sql/functions-all)
+  - [Functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/functions-all)
 
-  - [Operators in GoogleSQL](/bigquery/docs/reference/standard-sql/operators)
+  - [Operators in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/operators)
 
-  - [Conditional expressions in GoogleSQL](/bigquery/docs/reference/standard-sql/conditional_expressions)
+  - [Conditional expressions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conditional_expressions)
 
-  - [Date functions in GoogleSQL](/bigquery/docs/reference/standard-sql/date_functions)
+  - [Date functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/date_functions)
 
-  - [Query syntax in GoogleSQL](/bigquery/docs/reference/standard-sql/query-syntax)
+  - [Query syntax in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
 
-  - [String functions in GoogleSQL](/bigquery/docs/reference/standard-sql/string_functions)
+  - [String functions in GoogleSQL](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/string_functions)
 
-  - [Using the bq command-line tool](/bigquery/docs/bq-command-line-tool)
+  - [Using the bq command-line tool](https://docs.cloud.google.com/bigquery/docs/bq-command-line-tool)
 
-  - [End-to-end journey for machine learning models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
+  - [End-to-end journey for machine learning models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-e2e-journey)
 
-  - [BigQuery API Client Libraries](/bigquery/docs/reference/libraries)
+  - [BigQuery API Client Libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries)
 
-  - [Creating and training models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create)
+  - [Creating and training models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create)
 
-  - [Public datasets](/bigquery/public-data)
+  - [Public datasets](https://docs.cloud.google.com/bigquery/public-data)
 
-  - [Feature preprocessing](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-preprocess-overview)
+  - [Feature preprocessing](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-preprocess-overview)
 
 info
 
@@ -68,21 +70,21 @@ info
 
   - [Pricing](https://cloud.google.com/bigquery/pricing)
 
-  - [Release notes](/bigquery/docs/release-notes)
+  - [Release notes](https://docs.cloud.google.com/bigquery/docs/release-notes)
 
-  - [Locations](/bigquery/docs/locations)
+  - [Locations](https://docs.cloud.google.com/bigquery/docs/locations)
 
-  - [Getting support](/bigquery/docs/getting-support)
+  - [Getting support](https://docs.cloud.google.com/bigquery/docs/getting-support)
 
-  - [Quotas and limits](/bigquery/quotas)
+  - [Quotas and limits](https://docs.cloud.google.com/bigquery/quotas)
 
-  - [Controlling costs](/bigquery/docs/controlling-costs)
+  - [Controlling costs](https://docs.cloud.google.com/bigquery/docs/controlling-costs)
 
-  - [Creating custom cost controls](/bigquery/docs/custom-quotas)
+  - [Creating custom cost controls](https://docs.cloud.google.com/bigquery/docs/custom-quotas)
 
-  - [Troubleshooting BigQuery quota errors](/bigquery/docs/troubleshoot-quotas)
+  - [Troubleshooting BigQuery quota errors](https://docs.cloud.google.com/bigquery/docs/troubleshoot-quotas)
 
-  - [Billing questions](/bigquery/docs/billing-questions)
+  - [Billing questions](https://docs.cloud.google.com/bigquery/docs/billing-questions)
 
 ## Related resources
 
@@ -146,7 +148,7 @@ Use case
 
 Use cases
 
-### [Migrating data warehouses to BigQuery](/solutions/migration/dw2bq/dw-bq-migration-overview)
+### [Migrating data warehouses to BigQuery](https://docs.cloud.google.com/solutions/migration/dw2bq/dw-bq-migration-overview)
 
 Learn patterns and recommendations for transitioning your on-premises data warehouse to BigQuery.
 
@@ -156,7 +158,7 @@ Use case
 
 Use cases
 
-### [Visualizing BigQuery data in a Jupyter notebook](/bigquery/docs/visualize-jupyter)
+### [Visualizing BigQuery data in a Jupyter notebook](https://docs.cloud.google.com/bigquery/docs/visualize-jupyter)
 
 Use the BigQuery Python client library and Pandas in a Jupyter notebook to visualize data in a BigQuery sample table.
 
@@ -164,7 +166,7 @@ Code sample
 
 Code Samples
 
-### [Client: Create credentials with scopes](/bigquery/docs/samples/bigquery-auth-drive-scope)
+### [Client: Create credentials with scopes](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-auth-drive-scope)
 
 Create credentials with Drive and BigQuery API scopes.
 
@@ -172,7 +174,7 @@ Code sample
 
 Code Samples
 
-### [Client: Create credentials with application default credentials](/bigquery/docs/samples/bigquery-client-default-credentials)
+### [Client: Create credentials with application default credentials](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-client-default-credentials)
 
 Create a BigQuery client using application default credentials.
 
@@ -180,7 +182,7 @@ Code sample
 
 Code Samples
 
-### [Client: Create with service account key](/bigquery/docs/samples/bigquery-client-json-credentials)
+### [Client: Create with service account key](https://docs.cloud.google.com/bigquery/docs/samples/bigquery-client-json-credentials)
 
 Create a BigQuery client using a service account key file.
 
@@ -220,7 +222,7 @@ Code sample
 
 Code Samples
 
-### [All samples](/bigquery/docs/samples)
+### [All samples](https://docs.cloud.google.com/bigquery/docs/samples)
 
 Browse all samples for BigQuery
 

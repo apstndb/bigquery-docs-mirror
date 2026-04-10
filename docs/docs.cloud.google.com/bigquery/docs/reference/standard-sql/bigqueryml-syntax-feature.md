@@ -2,11 +2,11 @@
 
 This document describes the `  ML.FEATURE_INFO  ` function, which lets you see information about the input features that are used to train a model.
 
-For more information about which models support this function, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+For more information about which models support this function, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.FEATURE_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
 ```
 
@@ -32,23 +32,23 @@ ML.FEATURE_INFO(MODEL `PROJECT_ID.DATASET.MODEL_NAME`)
   - `  null_count  ` : an `  INT64  ` value that contains the number of `  NULL  ` values in the `  input  ` column.
   - `  dimension  ` : an `  INT64  ` value that contains the dimension of the `  input  ` column if the `  input  ` column has a `  ARRAY<STRUCT>  ` type. `  dimension  ` is `  NULL  ` for non- `  ARRAY<STRUCT>  ` columns.
 
-For [matrix factorization](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models, only `  category_count  ` is calculated for the `  user  ` and `  item  ` columns.
+For [matrix factorization](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-matrix-factorization) models, only `  category_count  ` is calculated for the `  user  ` and `  item  ` columns.
 
-If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, `  ML.FEATURE_INFO  ` outputs the information of the pre-transform columns from the `  query_statement  ` argument.
+If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, `  ML.FEATURE_INFO  ` outputs the information of the pre-transform columns from the `  query_statement  ` argument.
 
 ## Permissions
 
-You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  ` [Identity and Access Management (IAM) permissions](/bigquery/docs/access-control#bq-permissions) in order to run `  ML.FEATURE_INFO  ` .
+You must have the `  bigquery.models.create  ` and `  bigquery.models.getData  ` [Identity and Access Management (IAM) permissions](https://docs.cloud.google.com/bigquery/docs/access-control#bq-permissions) in order to run `  ML.FEATURE_INFO  ` .
 
 ## Limitations
 
-`  ML.FEATURE_INFO  ` doesn't support [imported TensorFlow models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
+`  ML.FEATURE_INFO  ` doesn't support [imported TensorFlow models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-tensorflow) .
 
 ## Example
 
 The following example retrieves feature information from the model `  mydataset.mymodel  ` in your default project:
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -57,4 +57,4 @@ FROM
 
 ## What's next
 
-  - For information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .

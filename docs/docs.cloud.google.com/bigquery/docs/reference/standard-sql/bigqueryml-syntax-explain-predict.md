@@ -1,10 +1,10 @@
 # The ML.EXPLAIN\_PREDICT function
 
-This document describes the `  ML.EXPLAIN_PREDICT  ` function, which lets you generate a predicted value and a set of feature attributions for each instance of the input data. Feature attributions indicate how much each feature in your model contributed to the final prediction for each given instance. `  ML.EXPLAIN_PREDICT  ` is essentially an extended version of [`  ML.PREDICT  `](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
+This document describes the `  ML.EXPLAIN_PREDICT  ` function, which lets you generate a predicted value and a set of feature attributions for each instance of the input data. Feature attributions indicate how much each feature in your model contributed to the final prediction for each given instance. `  ML.EXPLAIN_PREDICT  ` is essentially an extended version of [`  ML.PREDICT  `](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) .
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.EXPLAIN_PREDICT(
   MODEL `PROJECT_ID.DATASET.MODEL`,
   { TABLE `PROJECT_ID.DATASET.TABLE` | (QUERY_STATEMENT) },
@@ -29,17 +29,17 @@ ML.EXPLAIN_PREDICT(
 
   - `  TABLE  ` : the name of the input table that contains the data to be evaluated.
     
-    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  TABLE  ` is specified, the input column names in the table must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
     If there are unused columns from the table, they are passed through to the output columns.
 
-  - `  QUERY_STATEMENT  ` : the GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
+  - `  QUERY_STATEMENT  ` : the GoogleSQL query that is used to generate the evaluation data. For the supported SQL syntax for the `  QUERY_STATEMENT  ` clause in GoogleSQL, see [Query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax#sql_syntax) .
     
-    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
+    If `  QUERY_STATEMENT  ` is specified, the input column names from the query must match the column names in the model, and their types should be compatible according to BigQuery [implicit coercion rules](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/conversion_rules#coercion) .
     
     If there are unused columns from the table, they are passed through to the output columns.
     
-    If you used the [`  TRANSFORM  ` clause](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause can appear in `  QUERY_STATEMENT  ` .
+    If you used the [`  TRANSFORM  ` clause](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create#transform) in the `  CREATE MODEL  ` statement that created the model, then only the input columns present in the `  TRANSFORM  ` clause can appear in `  QUERY_STATEMENT  ` .
 
   - `  TOP_K_FEATURES  ` : an `  INT64  ` value that specifies how many top feature attribution pairs are generated for each row of input data. The features are ranked by the absolute values of their attributions.
     
@@ -49,11 +49,11 @@ ML.EXPLAIN_PREDICT(
     
     The `  THRESHOLD  ` value must be between `  0.0  ` and `  1.0  ` . The default value is `  0.5  ` .
 
-  - `  INTEGRATED_GRADIENTS_NUM_STEPS  ` : an `  INT64  ` value that specifies the number of steps to sample between the example being explained and its baseline. This value is used to approximate the integral in [integrated gradients](/vertex-ai/docs/explainable-ai/overview#integrated-gradients) attribution methods. Increasing the value improves the precision of feature attributions, but can be slower and more computationally expensive.
+  - `  INTEGRATED_GRADIENTS_NUM_STEPS  ` : an `  INT64  ` value that specifies the number of steps to sample between the example being explained and its baseline. This value is used to approximate the integral in [integrated gradients](https://docs.cloud.google.com/vertex-ai/docs/explainable-ai/overview#integrated-gradients) attribution methods. Increasing the value improves the precision of feature attributions, but can be slower and more computationally expensive.
     
-    This option only applies to [deep neural network (DNN) models](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) , which use integrated gradients attribution methods. The default value is `  15  ` .
+    This option only applies to [deep neural network (DNN) models](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-dnn-models) , which use integrated gradients attribution methods. The default value is `  15  ` .
 
-  - `  APPROX_FEATURE_CONTRIB  ` : a `  BOOL  ` value that indicates whether to use an approximate feature contribution method in the XGBoost model explanation. This option applies only to [boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) and [random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) models.
+  - `  APPROX_FEATURE_CONTRIB  ` : a `  BOOL  ` value that indicates whether to use an approximate feature contribution method in the XGBoost model explanation. This option applies only to [boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree) and [random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest) models.
     
     This capability is provided by the XGBoost library; BigQuery ML only passes this option through to it. For more information, see [Package 'xgboost'](https://cran.r-project.org/web/packages/xgboost/xgboost.pdf) and search for `  approxcontrib  ` .
     
@@ -91,9 +91,9 @@ ML.EXPLAIN_PREDICT(
         
         Because of this explanation of the contributions to the predicted value, there is no approximation error for these types of methods, and this column value is `  0  ` . Exact attribution methods are used for the following types of models:
         
-          - [Linear & logistic regression](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
-          - [Boosted tree](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
-          - [Random forest](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
+          - [Linear & logistic regression](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-glm)
+          - [Boosted tree](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+          - [Random forest](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-random-forest)
     
       - Integrated gradients is an approximated attribution method that is defined as follows:
         
@@ -120,7 +120,7 @@ Assume a linear regression model stored in `  mydataset.mymodel  ` was trained w
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -152,7 +152,7 @@ Assume a boosted tree or a random forest binary classification model stored in `
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -184,7 +184,7 @@ Assume a DNN classifier is stored in `  mydataset.mymodel  ` and trained with th
 
 <!-- end list -->
 
-``` text
+``` notranslate
 SELECT
   *
 FROM
@@ -203,5 +203,5 @@ FROM
 
 ## What's next
 
-  - For more information about Explainable AI, see [BigQuery Explainable AI overview](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
-  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey) .
+  - For more information about Explainable AI, see [BigQuery Explainable AI overview](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-xai-overview) .
+  - For more information about supported SQL statements and functions for ML models, see [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey) .

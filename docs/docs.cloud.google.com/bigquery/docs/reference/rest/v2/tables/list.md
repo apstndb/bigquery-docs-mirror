@@ -1,12 +1,12 @@
-  - [HTTP request](#body.HTTP_TEMPLATE)
-  - [Path parameters](#body.PATH_PARAMETERS)
-  - [Query parameters](#body.QUERY_PARAMETERS)
-  - [Request body](#body.request_body)
-  - [Response body](#body.response_body)
-      - [JSON representation](#body.TableList.SCHEMA_REPRESENTATION)
-          - [JSON representation](#body.TableList.SCHEMA_REPRESENTATION.tables.SCHEMA_REPRESENTATION)
-  - [Authorization scopes](#body.aspect)
-  - [Try it\!](#try-it)
+  - [HTTP request](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.HTTP_TEMPLATE)
+  - [Path parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.PATH_PARAMETERS)
+  - [Query parameters](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.QUERY_PARAMETERS)
+  - [Request body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.request_body)
+  - [Response body](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.response_body)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.TableList.SCHEMA_REPRESENTATION)
+          - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.TableList.SCHEMA_REPRESENTATION.tables.SCHEMA_REPRESENTATION)
+  - [Authorization scopes](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#body.aspect)
+  - [Try it\!](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/tables/list#try-it)
 
 Lists all tables in the specified dataset. Requires the READER dataset role.
 
@@ -69,7 +69,7 @@ If successful, the response body contains data with the following structure:
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;kind&quot;: string,
   &quot;etag&quot;: string,
   &quot;nextPageToken&quot;: string,
@@ -252,4 +252,4 @@ Requires one of the following OAuth scopes:
   - `  https://www.googleapis.com/auth/bigquery.readonly  `
   - `  https://www.googleapis.com/auth/cloud-platform.read-only  `
 
-For more information, see the [Authentication Overview](/docs/authentication#authorization-gcp) .
+For more information, see the [Authentication Overview](https://docs.cloud.google.com/docs/authentication#authorization-gcp) .

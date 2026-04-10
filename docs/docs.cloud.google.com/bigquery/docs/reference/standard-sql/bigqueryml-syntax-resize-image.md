@@ -1,10 +1,10 @@
 # The ML.RESIZE\_IMAGE function
 
-This document describes the `  ML.RESIZE_IMAGE  ` scalar function, which lets you resize images by using [bilinear interpolation](https://en.wikipedia.org/wiki/Bilinear_interpolation) . You can use `  ML.RESIZE_IMAGE  ` with the [`  ML.PREDICT  ` function](/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
+This document describes the `  ML.RESIZE_IMAGE  ` scalar function, which lets you resize images by using [bilinear interpolation](https://en.wikipedia.org/wiki/Bilinear_interpolation) . You can use `  ML.RESIZE_IMAGE  ` with the [`  ML.PREDICT  ` function](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-predict) or chain it with other functions or subqueries.
 
 ## Syntax
 
-``` sql
+``` lang-sql
 ML.RESIZE_IMAGE(image, target_height, target_width, preserve_aspect_ratio)
 ```
 
@@ -45,7 +45,7 @@ The first array in the struct represents the dimensions of the image, and the se
 
 The following example resizes input images to have a height and width of 240 pixels:
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `mydataset.results`
 AS (
   SELECT uri, prediction_results
@@ -64,7 +64,7 @@ AS (
 
 The following example resizes input images while preserving the aspect ratio. With the settings shown, the function returns an image with dimensions of `  (10, 100)  ` for an input image with dimensions of `  (20, 200)  ` .
 
-``` text
+``` notranslate
 CREATE OR REPLACE TABLE `mydataset.results`
 AS (
   SELECT uri, prediction_results
@@ -81,12 +81,12 @@ AS (
 
 ## What's next
 
-  - For more information about feature preprocessing, see [Feature preprocessing overview](/bigquery/docs/preprocess-overview) .
+  - For more information about feature preprocessing, see [Feature preprocessing overview](https://docs.cloud.google.com/bigquery/docs/preprocess-overview) .
 
   - For more information about supported SQL statements and functions for each model type, see the following documents:
     
-      - [End-to-end user journeys for generative AI models](/bigquery/docs/e2e-journey-genai)
-      - [End-to-end user journeys for time series forecasting models](/bigquery/docs/e2e-journey-forecast)
-      - [End-to-end user journeys for ML models](/bigquery/docs/e2e-journey)
-      - [End-to-end user journeys for imported models](/bigquery/docs/e2e-journey-import)
-      - [Contribution analysis user journey](/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)
+      - [End-to-end user journeys for generative AI models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-genai)
+      - [End-to-end user journeys for time series forecasting models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-forecast)
+      - [End-to-end user journeys for ML models](https://docs.cloud.google.com/bigquery/docs/e2e-journey)
+      - [End-to-end user journeys for imported models](https://docs.cloud.google.com/bigquery/docs/e2e-journey-import)
+      - [Contribution analysis user journey](https://docs.cloud.google.com/bigquery/docs/contribution-analysis#contribution_analysis_user_journey)

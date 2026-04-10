@@ -1,8 +1,8 @@
-  - [Resource: RowAccessPolicy](#RowAccessPolicy)
-      - [JSON representation](#RowAccessPolicy.SCHEMA_REPRESENTATION)
-  - [RowAccessPolicyReference](#RowAccessPolicyReference)
-      - [JSON representation](#RowAccessPolicyReference.SCHEMA_REPRESENTATION)
-  - [Methods](#METHODS_SUMMARY)
+  - [Resource: RowAccessPolicy](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicy)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicy.SCHEMA_REPRESENTATION)
+  - [RowAccessPolicyReference](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicyReference)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#RowAccessPolicyReference.SCHEMA_REPRESENTATION)
+  - [Methods](https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/rowAccessPolicies#METHODS_SUMMARY)
 
 ## Resource: RowAccessPolicy
 
@@ -19,7 +19,7 @@ Represents access on a subset of rows on the specified table, defined by its fil
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;etag&quot;: string,
   &quot;rowAccessPolicyReference&quot;: {
     object (RowAccessPolicyReference)
@@ -99,7 +99,7 @@ Id path of a row access policy.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;projectId&quot;: string,
   &quot;datasetId&quot;: string,
   &quot;tableId&quot;: string,

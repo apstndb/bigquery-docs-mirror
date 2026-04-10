@@ -2,21 +2,39 @@
 
 Learn how to query a public dataset with the BigQuery client libraries.
 
+-----
+
 To follow step-by-step guidance for this task directly in the Google Cloud console, select your preferred programming language:
 
 ### C\#
 
+[Take the C\# tour](https://console.cloud.google.com/?walkthrough_id=bigquery--csharp-client-library)
+
 ### Go
+
+[Take the Go tour](https://console.cloud.google.com/?walkthrough_id=bigquery--go-client-library)
 
 ### Java
 
+[Take the Java tour](https://console.cloud.google.com/?walkthrough_id=bigquery--java-client-library)
+
 ### Node.js
+
+[Take the Node.js tour](https://console.cloud.google.com/?walkthrough_id=bigquery--node-client-library)
 
 ### PHP
 
+[Take the PHP tour](https://console.cloud.google.com/?walkthrough_id=bigquery--php-client-library)
+
 ### Python
 
+[Take the Python tour](https://console.cloud.google.com/?walkthrough_id=bigquery--python-client-library)
+
 ### Ruby
+
+[Take the Ruby tour](https://console.cloud.google.com/?walkthrough_id=bigquery--ruby-client-library)
+
+-----
 
 ## Before you begin
 
@@ -25,35 +43,29 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     **Roles required to select or create a project**
     
       - **Select a project** : Selecting a project doesn't require a specific IAM role—you can select any project that you've been granted a role on.
-      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+      - **Create a project** : To create a project, you need the Project Creator role ( `  roles/resourcemanager.projectCreator  ` ), which contains the `  resourcemanager.projects.create  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
     **Note** : If you don't plan to keep the resources that you create in this procedure, create a project instead of selecting an existing project. After you finish these steps, you can delete the project, removing all resources associated with the project.
     
       - Create a Google Cloud project:
         
-        ``` text
-        gcloud projects create PROJECT_ID
-        ```
+            gcloud projects create PROJECT_ID
         
         Replace `  PROJECT_ID  ` with a name for the Google Cloud project you are creating.
     
       - Select the Google Cloud project that you created:
         
-        ``` text
-        gcloud config set project PROJECT_ID
-        ```
+            gcloud config set project PROJECT_ID
         
         Replace `  PROJECT_ID  ` with your Google Cloud project name.
 
-2.  Choose whether to [use the BigQuery sandbox at no charge](/bigquery/docs/sandbox) , or to [enable billing for your Google Cloud project](/billing/docs/how-to/modify-project) .
+2.  Choose whether to [use the BigQuery sandbox at no charge](https://docs.cloud.google.com/bigquery/docs/sandbox) , or to [enable billing for your Google Cloud project](https://docs.cloud.google.com/billing/docs/how-to/modify-project) .
     
     If you do not enable billing for a project, you automatically work in the BigQuery sandbox. The BigQuery sandbox lets you learn BigQuery with a limited set of BigQuery features at no charge. If you do not plan to use your project beyond this document, we recommend that you use the BigQuery sandbox.
 
 3.  Grant roles to your user account. Run the following command once for each of the following IAM roles: `  roles/serviceusage.serviceUsageAdmin, roles/bigquery.jobUser  `
     
-    ``` text
-    gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
-    ```
+        gcloud projects add-iam-policy-binding PROJECT_ID --member="user:USER_IDENTIFIER" --role=ROLE
     
     Replace the following:
     
@@ -65,21 +77,19 @@ To follow step-by-step guidance for this task directly in the Google Cloud conso
     
     **Roles required to enable APIs**
     
-    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](/iam/docs/granting-changing-revoking-access) .
+    To enable APIs, you need the Service Usage Admin IAM role ( `  roles/serviceusage.serviceUsageAdmin  ` ), which contains the `  serviceusage.services.enable  ` permission. [Learn how to grant roles](https://docs.cloud.google.com/iam/docs/granting-changing-revoking-access) .
     
-    ``` text
-    gcloud services enable bigquery
-    ```
+        gcloud services enable bigquery
     
     For new projects, the BigQuery API is automatically enabled.
 
 5.  In the Google Cloud console, activate Cloud Shell.
+    
+    [Activate Cloud Shell](https://console.cloud.google.com/?cloudshell=true)
 
 6.  Activate your Google Cloud project in Cloud Shell:
     
-    ``` text
-    gcloud config set project PROJECT_ID
-    ```
+        gcloud config set project PROJECT_ID
     
     Replace PROJECT\_ID with the project that you selected for this walkthrough.
     
@@ -97,7 +107,7 @@ Select one of the following languages:
 
 1.  In Cloud Shell, create a new C\# project and file:
     
-    ``` text
+    ``` notranslate
     dotnet new console -n BigQueryCsharpDemo
     ```
     
@@ -116,7 +126,7 @@ Select one of the following languages:
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace BigQueryCsharpDemo
     ```
 
@@ -124,13 +134,13 @@ Select one of the following languages:
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd BigQueryCsharpDemo
     ```
 
 5.  Install the BigQuery client library for C\#:
     
-    ``` text
+    ``` notranslate
     dotnet add package Google.Cloud.BigQuery.V2
     ```
     
@@ -146,7 +156,7 @@ Select one of the following languages:
 
 6.  Set the variable `  GOOGLE_PROJECT_ID  ` to the value `  GOOGLE_CLOUD_PROJECT  ` and export the variable:
     
-    ``` text
+    ``` notranslate
     export GOOGLE_PROJECT_ID=$GOOGLE_CLOUD_PROJECT
     ```
 
@@ -158,42 +168,40 @@ Select one of the following languages:
 
 10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, replace the contents of the file with the following code:
     
-    ``` csharp
-    using System;
-    using Google.Cloud.BigQuery.V2;
-    
-    namespace GoogleCloudSamples
-    {
-        public class Program
+        using System;
+        using Google.Cloud.BigQuery.V2;
+        
+        namespace GoogleCloudSamples
         {
-            public static void Main(string[] args)
+            public class Program
             {
-                string projectId = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ID");
-                var client = BigQueryClient.Create(projectId);
-                string query = @"SELECT
-                    CONCAT(
-                        'https://stackoverflow.com/questions/',
-                        CAST(id as STRING)) as url, view_count
-                    FROM `bigquery-public-data.stackoverflow.posts_questions`
-                    WHERE tags like '%google-bigquery%'
-                    ORDER BY view_count DESC
-                    LIMIT 10";
-                var result = client.ExecuteQuery(query, parameters: null);
-                Console.Write("\nQuery Results:\n------------\n");
-                foreach (var row in result)
+                public static void Main(string[] args)
                 {
-                    Console.WriteLine($"{row["url"]}: {row["view_count"]} views");
+                    string projectId = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ID");
+                    var client = BigQueryClient.Create(projectId);
+                    string query = @"SELECT
+                        CONCAT(
+                            'https://stackoverflow.com/questions/',
+                            CAST(id as STRING)) as url, view_count
+                        FROM `bigquery-public-data.stackoverflow.posts_questions`
+                        WHERE tags like '%google-bigquery%'
+                        ORDER BY view_count DESC
+                        LIMIT 10";
+                    var result = client.ExecuteQuery(query, parameters: null);
+                    Console.Write("\nQuery Results:\n------------\n");
+                    foreach (var row in result)
+                    {
+                        Console.WriteLine($"{row["url"]}: {row["view_count"]} views");
+                    }
                 }
             }
         }
-    }
-    ```
 
 11. Click **Open Terminal** .
 
 12. In the terminal, run the `  Program.cs  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     dotnet run
     ```
     
@@ -220,7 +228,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 1.  In Cloud Shell, create a new Go project and file:
     
-    ``` text
+    ``` notranslate
     mkdir bigquery-go-quickstart \
         && touch \
         bigquery-go-quickstart/app.go
@@ -230,7 +238,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-go-quickstart
     ```
 
@@ -238,13 +246,13 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd bigquery-go-quickstart
     ```
 
 5.  Create a `  go.mod  ` file:
     
-    ``` text
+    ``` notranslate
     go mod init quickstart
     ```
     
@@ -258,7 +266,7 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 6.  Install the BigQuery client library for Go:
     
-    ``` text
+    ``` notranslate
     go get cloud.google.com/go/bigquery
     ```
     
@@ -280,89 +288,87 @@ You have successfully queried a public dataset with the BigQuery C\# client libr
 
 10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.go  ` file:
     
-    ``` go
-    // Command simpleapp queries the Stack Overflow public dataset in Google BigQuery.
-    package main
-    
-    import (
-     "context"
-     "fmt"
-     "io"
-     "log"
-     "os"
-    
-     "cloud.google.com/go/bigquery"
-     "google.golang.org/api/iterator"
-    )
-    
-    
-    func main() {
-     projectID := os.Getenv("GOOGLE_CLOUD_PROJECT")
-     if projectID == "" {
-         fmt.Println("GOOGLE_CLOUD_PROJECT environment variable must be set.")
-         os.Exit(1)
-     }
-    
-     ctx := context.Background()
-    
-     client, err := bigquery.NewClient(ctx, projectID)
-     if err != nil {
-         log.Fatalf("bigquery.NewClient: %v", err)
-     }
-     defer client.Close()
-    
-     rows, err := query(ctx, client)
-     if err != nil {
-         log.Fatal(err)
-     }
-     if err := printResults(os.Stdout, rows); err != nil {
-         log.Fatal(err)
-     }
-    }
-    
-    // query returns a row iterator suitable for reading query results.
-    func query(ctx context.Context, client *bigquery.Client) (*bigquery.RowIterator, error) {
-    
-     query := client.Query(
-         `SELECT
-             CONCAT(
-                 'https://stackoverflow.com/questions/',
-                 CAST(id as STRING)) as url,
-             view_count
-         FROM ` + "`bigquery-public-data.stackoverflow.posts_questions`" + `
-         WHERE tags like '%google-bigquery%'
-         ORDER BY view_count DESC
-         LIMIT 10;`)
-     return query.Read(ctx)
-    }
-    
-    type StackOverflowRow struct {
-     URL       string `bigquery:"url"`
-     ViewCount int64  `bigquery:"view_count"`
-    }
-    
-    // printResults prints results from a query to the Stack Overflow public dataset.
-    func printResults(w io.Writer, iter *bigquery.RowIterator) error {
-     for {
-         var row StackOverflowRow
-         err := iter.Next(&row)
-         if err == iterator.Done {
-             return nil
+        // Command simpleapp queries the Stack Overflow public dataset in Google BigQuery.
+        package main
+        
+        import (
+         "context"
+         "fmt"
+         "io"
+         "log"
+         "os"
+        
+         "cloud.google.com/go/bigquery"
+         "google.golang.org/api/iterator"
+        )
+        
+        
+        func main() {
+         projectID := os.Getenv("GOOGLE_CLOUD_PROJECT")
+         if projectID == "" {
+             fmt.Println("GOOGLE_CLOUD_PROJECT environment variable must be set.")
+             os.Exit(1)
          }
+        
+         ctx := context.Background()
+        
+         client, err := bigquery.NewClient(ctx, projectID)
          if err != nil {
-             return fmt.Errorf("error iterating through results: %w", err)
+             log.Fatalf("bigquery.NewClient: %v", err)
          }
-    
-         fmt.Fprintf(w, "url: %s views: %d\n", row.URL, row.ViewCount)
-     }
-    }
-    ```
+         defer client.Close()
+        
+         rows, err := query(ctx, client)
+         if err != nil {
+             log.Fatal(err)
+         }
+         if err := printResults(os.Stdout, rows); err != nil {
+             log.Fatal(err)
+         }
+        }
+        
+        // query returns a row iterator suitable for reading query results.
+        func query(ctx context.Context, client *bigquery.Client) (*bigquery.RowIterator, error) {
+        
+         query := client.Query(
+             `SELECT
+                 CONCAT(
+                     'https://stackoverflow.com/questions/',
+                     CAST(id as STRING)) as url,
+                 view_count
+             FROM ` + "`bigquery-public-data.stackoverflow.posts_questions`" + `
+             WHERE tags like '%google-bigquery%'
+             ORDER BY view_count DESC
+             LIMIT 10;`)
+         return query.Read(ctx)
+        }
+        
+        type StackOverflowRow struct {
+         URL       string `bigquery:"url"`
+         ViewCount int64  `bigquery:"view_count"`
+        }
+        
+        // printResults prints results from a query to the Stack Overflow public dataset.
+        func printResults(w io.Writer, iter *bigquery.RowIterator) error {
+         for {
+             var row StackOverflowRow
+             err := iter.Next(&row)
+             if err == iterator.Done {
+                 return nil
+             }
+             if err != nil {
+                 return fmt.Errorf("error iterating through results: %w", err)
+             }
+        
+             fmt.Fprintf(w, "url: %s views: %d\n", row.URL, row.ViewCount)
+         }
+        }
 
 11. Click **Open Terminal** .
 
 12. In the terminal, run the `  app.go  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     go run app.go
     ```
     
@@ -387,7 +393,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
 1.  In Cloud Shell, create a new Java project using Apache Maven:
     
-    ``` text
+    ``` notranslate
     mvn archetype:generate \
         -DgroupId=com.google.app \
         -DartifactId=bigquery-java-quickstart \
@@ -407,11 +413,11 @@ You have successfully queried a public dataset with the BigQuery Go client libra
     ...
     ```
     
-    There are many dependency management systems that you can use other than Maven. For more information, learn how to [set up a Java development environment](/java/docs/setup) to use with client libraries.
+    There are many dependency management systems that you can use other than Maven. For more information, learn how to [set up a Java development environment](https://docs.cloud.google.com/java/docs/setup) to use with client libraries.
 
 2.  Rename the `  App.java  ` file that Maven creates by default:
     
-    ``` text
+    ``` notranslate
     mv \
         bigquery-java-quickstart/src/main/java/com/google/app/App.java \
         bigquery-java-quickstart/src/main/java/com/google/app/SimpleApp.java
@@ -419,7 +425,7 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
 3.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-java-quickstart
     ```
 
@@ -437,102 +443,96 @@ You have successfully queried a public dataset with the BigQuery Go client libra
 
 7.  Inside the `  <dependencies>  ` tag, add the following dependency after any existing ones. Do not replace any existing dependencies.
     
-    ``` text
-    <dependency>
-      <groupId>com.google.cloud</groupId>
-      <artifactId>google-cloud-bigquery</artifactId>
-    </dependency>
-    ```
+        <dependency>
+          <groupId>com.google.cloud</groupId>
+          <artifactId>google-cloud-bigquery</artifactId>
+        </dependency>
 
 8.  On the line following the closing tag ( `  </dependencies>  ` ), add the following:
     
-    ``` text
-    <dependencyManagement>
-      <dependencies>
-        <dependency>
-          <groupId>com.google.cloud</groupId>
-          <artifactId>libraries-bom</artifactId>
-          <version>26.1.5</version>
-          <type>pom</type>
-          <scope>import</scope>
-        </dependency>
-      </dependencies>
-    </dependencyManagement>
-    ```
+        <dependencyManagement>
+          <dependencies>
+            <dependency>
+              <groupId>com.google.cloud</groupId>
+              <artifactId>libraries-bom</artifactId>
+              <version>26.1.5</version>
+              <type>pom</type>
+              <scope>import</scope>
+            </dependency>
+          </dependencies>
+        </dependencyManagement>
 
 9.  In the **Explorer** pane, in your `  BIGQUERY-JAVA-QUICKSTART  ` project, click **src \> main/java/com/google/app \> SimpleApp.java** . The file opens.
 
 10. To create a query against the `  bigquery-public-data.stackoverflow  ` dataset, leave the first line of the file ( `  package com.google.app;  ` ), and replace the remaining contents of the file with the following code:
     
-    ``` java
-    import com.google.cloud.bigquery.BigQuery;
-    import com.google.cloud.bigquery.BigQueryException;
-    import com.google.cloud.bigquery.BigQueryOptions;
-    import com.google.cloud.bigquery.FieldValueList;
-    import com.google.cloud.bigquery.Job;
-    import com.google.cloud.bigquery.JobId;
-    import com.google.cloud.bigquery.JobInfo;
-    import com.google.cloud.bigquery.QueryJobConfiguration;
-    import com.google.cloud.bigquery.TableResult;
-    
-    
-    public class SimpleApp {
-    
-      public static void main(String... args) throws Exception {
-        // TODO(developer): Replace these variables before running the app.
-        String projectId = "MY_PROJECT_ID";
-        simpleApp(projectId);
-      }
-    
-      public static void simpleApp(String projectId) {
-        try {
-          BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
-          QueryJobConfiguration queryConfig =
-              QueryJobConfiguration.newBuilder(
-                      "SELECT CONCAT('https://stackoverflow.com/questions/', "
-                          + "CAST(id as STRING)) as url, view_count "
-                          + "FROM `bigquery-public-data.stackoverflow.posts_questions` "
-                          + "WHERE tags like '%google-bigquery%' "
-                          + "ORDER BY view_count DESC "
-                          + "LIMIT 10")
-                  // Use standard SQL syntax for queries.
-                  // See: https://cloud.google.com/bigquery/sql-reference/
-                  .setUseLegacySql(false)
-                  .build();
-    
-          JobId jobId = JobId.newBuilder().setProject(projectId).build();
-          Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
-    
-          // Wait for the query to complete.
-          queryJob = queryJob.waitFor();
-    
-          // Check for errors
-          if (queryJob == null) {
-            throw new RuntimeException("Job no longer exists");
-          } else if (queryJob.getStatus().getExecutionErrors() != null
-              && queryJob.getStatus().getExecutionErrors().size() > 0) {
-            // TODO(developer): Handle errors here. An error here do not necessarily mean that the job
-            // has completed or was unsuccessful.
-            // For more details: https://cloud.google.com/bigquery/troubleshooting-errors
-            throw new RuntimeException("An unhandled error has occurred");
+        import com.google.cloud.bigquery.BigQuery;
+        import com.google.cloud.bigquery.BigQueryException;
+        import com.google.cloud.bigquery.BigQueryOptions;
+        import com.google.cloud.bigquery.FieldValueList;
+        import com.google.cloud.bigquery.Job;
+        import com.google.cloud.bigquery.JobId;
+        import com.google.cloud.bigquery.JobInfo;
+        import com.google.cloud.bigquery.QueryJobConfiguration;
+        import com.google.cloud.bigquery.TableResult;
+        
+        
+        public class SimpleApp {
+        
+          public static void main(String... args) throws Exception {
+            // TODO(developer): Replace these variables before running the app.
+            String projectId = "MY_PROJECT_ID";
+            simpleApp(projectId);
           }
-    
-          // Get the results.
-          TableResult result = queryJob.getQueryResults();
-    
-          // Print all pages of the results.
-          for (FieldValueList row : result.iterateAll()) {
-            // String type
-            String url = row.get("url").getStringValue();
-            String viewCount = row.get("view_count").getStringValue();
-            System.out.printf("%s : %s views\n", url, viewCount);
+        
+          public static void simpleApp(String projectId) {
+            try {
+              BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
+              QueryJobConfiguration queryConfig =
+                  QueryJobConfiguration.newBuilder(
+                          "SELECT CONCAT('https://stackoverflow.com/questions/', "
+                              + "CAST(id as STRING)) as url, view_count "
+                              + "FROM `bigquery-public-data.stackoverflow.posts_questions` "
+                              + "WHERE tags like '%google-bigquery%' "
+                              + "ORDER BY view_count DESC "
+                              + "LIMIT 10")
+                      // Use standard SQL syntax for queries.
+                      // See: https://cloud.google.com/bigquery/sql-reference/
+                      .setUseLegacySql(false)
+                      .build();
+        
+              JobId jobId = JobId.newBuilder().setProject(projectId).build();
+              Job queryJob = bigquery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
+        
+              // Wait for the query to complete.
+              queryJob = queryJob.waitFor();
+        
+              // Check for errors
+              if (queryJob == null) {
+                throw new RuntimeException("Job no longer exists");
+              } else if (queryJob.getStatus().getExecutionErrors() != null
+                  && queryJob.getStatus().getExecutionErrors().size() > 0) {
+                // TODO(developer): Handle errors here. An error here do not necessarily mean that the job
+                // has completed or was unsuccessful.
+                // For more details: https://cloud.google.com/bigquery/troubleshooting-errors
+                throw new RuntimeException("An unhandled error has occurred");
+              }
+        
+              // Get the results.
+              TableResult result = queryJob.getQueryResults();
+        
+              // Print all pages of the results.
+              for (FieldValueList row : result.iterateAll()) {
+                // String type
+                String url = row.get("url").getStringValue();
+                String viewCount = row.get("view_count").getStringValue();
+                System.out.printf("%s : %s views\n", url, viewCount);
+              }
+            } catch (BigQueryException | InterruptedException e) {
+              System.out.println("Simple App failed due to error: \n" + e.toString());
+            }
           }
-        } catch (BigQueryException | InterruptedException e) {
-          System.out.println("Simple App failed due to error: \n" + e.toString());
         }
-      }
-    }
-    ```
     
     The query returns the top 10 most viewed Stack Overflow pages and their view counts.
 
@@ -559,7 +559,7 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 1.  In Cloud Shell, create a new Node.js project and file:
     
-    ``` text
+    ``` notranslate
     mkdir bigquery-node-quickstart \
         && touch \
         bigquery-node-quickstart/app.js
@@ -569,7 +569,7 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-node-quickstart
     ```
 
@@ -577,13 +577,13 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd bigquery-node-quickstart
     ```
 
 5.  Install the BigQuery client library for Node.js:
     
-    ``` text
+    ``` notranslate
     npm install @google-cloud/bigquery
     ```
     
@@ -601,51 +601,49 @@ You have successfully queried a public dataset with the BigQuery Java client lib
 
 9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.js  ` file:
     
-    ``` javascript
-    // Import the Google Cloud client library
-    const {BigQuery} = require('@google-cloud/bigquery');
-    
-    async function queryStackOverflow() {
-      // Queries a public Stack Overflow dataset.
-    
-      // Create a client
-      const bigqueryClient = new BigQuery();
-    
-      // The SQL query to run
-      const sqlQuery = `SELECT
-        CONCAT(
-          'https://stackoverflow.com/questions/',
-          CAST(id as STRING)) as url,
-        view_count
-        FROM \`bigquery-public-data.stackoverflow.posts_questions\`
-        WHERE tags like '%google-bigquery%'
-        ORDER BY view_count DESC
-        LIMIT 10`;
-    
-      const options = {
-        query: sqlQuery,
-        // Location must match that of the dataset(s) referenced in the query.
-        location: 'US',
-      };
-    
-      // Run the query
-      const [rows] = await bigqueryClient.query(options);
-    
-      console.log('Query Results:');
-      rows.forEach(row => {
-        const url = row['url'];
-        const viewCount = row['view_count'];
-        console.log(`url: ${url}, ${viewCount} views`);
-      });
-    }
-    queryStackOverflow();
-    ```
+        // Import the Google Cloud client library
+        const {BigQuery} = require('@google-cloud/bigquery');
+        
+        async function queryStackOverflow() {
+          // Queries a public Stack Overflow dataset.
+        
+          // Create a client
+          const bigqueryClient = new BigQuery();
+        
+          // The SQL query to run
+          const sqlQuery = `SELECT
+            CONCAT(
+              'https://stackoverflow.com/questions/',
+              CAST(id as STRING)) as url,
+            view_count
+            FROM \`bigquery-public-data.stackoverflow.posts_questions\`
+            WHERE tags like '%google-bigquery%'
+            ORDER BY view_count DESC
+            LIMIT 10`;
+        
+          const options = {
+            query: sqlQuery,
+            // Location must match that of the dataset(s) referenced in the query.
+            location: 'US',
+          };
+        
+          // Run the query
+          const [rows] = await bigqueryClient.query(options);
+        
+          console.log('Query Results:');
+          rows.forEach(row => {
+            const url = row['url'];
+            const viewCount = row['view_count'];
+            console.log(`url: ${url}, ${viewCount} views`);
+          });
+        }
+        queryStackOverflow();
 
 10. Click **Open Terminal** .
 
 11. In the terminal, run the `  app.js  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     node app.js
     ```
     
@@ -671,7 +669,7 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 1.  In Cloud Shell, create a new PHP project and file:
     
-    ``` text
+    ``` notranslate
     mkdir bigquery-php-quickstart \
         && touch \
         bigquery-php-quickstart/app.php
@@ -681,7 +679,7 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-php-quickstart
     ```
 
@@ -689,13 +687,13 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd bigquery-php-quickstart
     ```
 
 5.  Install the BigQuery client library for PHP:
     
-    ``` text
+    ``` notranslate
     composer require google/cloud-bigquery
     ```
     
@@ -718,48 +716,46 @@ You have successfully queried a public dataset with the BigQuery Node.js client 
 
 9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.php  ` file:
     
-    ``` php
-    <?php
-    # ...
-    
-    require __DIR__ . '/vendor/autoload.php';
-    
-    use Google\Cloud\BigQuery\BigQueryClient;
-    
-    
-    $bigQuery = new BigQueryClient();
-    $query = <<<ENDSQL
-    SELECT
-      CONCAT(
-        'https://stackoverflow.com/questions/',
-        CAST(id as STRING)) as url,
-      view_count
-    FROM `bigquery-public-data.stackoverflow.posts_questions`
-    WHERE tags like '%google-bigquery%'
-    ORDER BY view_count DESC
-    LIMIT 10;
-    ENDSQL;
-    $queryJobConfig = $bigQuery->query($query);
-    $queryResults = $bigQuery->runQuery($queryJobConfig);
-    
-    if ($queryResults->isComplete()) {
-        $i = 0;
-        $rows = $queryResults->rows();
-        foreach ($rows as $row) {
-            printf('--- Row %s ---' . PHP_EOL, ++$i);
-            printf('url: %s, %s views' . PHP_EOL, $row['url'], $row['view_count']);
+        <?php
+        # ...
+        
+        require __DIR__ . '/vendor/autoload.php';
+        
+        use Google\Cloud\BigQuery\BigQueryClient;
+        
+        
+        $bigQuery = new BigQueryClient();
+        $query = <<<ENDSQL
+        SELECT
+          CONCAT(
+            'https://stackoverflow.com/questions/',
+            CAST(id as STRING)) as url,
+          view_count
+        FROM `bigquery-public-data.stackoverflow.posts_questions`
+        WHERE tags like '%google-bigquery%'
+        ORDER BY view_count DESC
+        LIMIT 10;
+        ENDSQL;
+        $queryJobConfig = $bigQuery->query($query);
+        $queryResults = $bigQuery->runQuery($queryJobConfig);
+        
+        if ($queryResults->isComplete()) {
+            $i = 0;
+            $rows = $queryResults->rows();
+            foreach ($rows as $row) {
+                printf('--- Row %s ---' . PHP_EOL, ++$i);
+                printf('url: %s, %s views' . PHP_EOL, $row['url'], $row['view_count']);
+            }
+            printf('Found %s row(s)' . PHP_EOL, $i);
+        } else {
+            throw new Exception('The query failed to complete');
         }
-        printf('Found %s row(s)' . PHP_EOL, $i);
-    } else {
-        throw new Exception('The query failed to complete');
-    }
-    ```
 
 10. Click **Open Terminal** .
 
 11. In the terminal, run the `  app.php  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     php app.php
     ```
     
@@ -795,7 +791,7 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 1.  In Cloud Shell, create a new Python project and file:
     
-    ``` text
+    ``` notranslate
     mkdir bigquery-python-quickstart \
         && touch \
         bigquery-python-quickstart/app.py
@@ -805,7 +801,7 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-python-quickstart
     ```
 
@@ -813,13 +809,13 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd bigquery-python-quickstart
     ```
 
 5.  Install the BigQuery client library for Python:
     
-    ``` text
+    ``` notranslate
     pip install --upgrade google-cloud-bigquery
     ```
     
@@ -840,39 +836,37 @@ You have successfully queried a public dataset with the BigQuery PHP client libr
 
 9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.py  ` file:
     
-    ``` python
-    from google.cloud import bigquery
-    
-    
-    
-    def query_stackoverflow() -> None:
-        client = bigquery.Client()
-        results = client.query_and_wait(
-            """
-            SELECT
-              CONCAT(
-                'https://stackoverflow.com/questions/',
-                CAST(id as STRING)) as url,
-              view_count
-            FROM `bigquery-public-data.stackoverflow.posts_questions`
-            WHERE tags like '%google-bigquery%'
-            ORDER BY view_count DESC
-            LIMIT 10"""
-        )  # Waits for job to complete.
-    
-        for row in results:
-            print("{} : {} views".format(row.url, row.view_count))
-    
-    
-    if __name__ == "__main__":
-        query_stackoverflow()
-    ```
+        from google.cloud import bigquery
+        
+        
+        
+        def query_stackoverflow() -> None:
+            client = bigquery.Client()
+            results = client.query_and_wait(
+                """
+                SELECT
+                  CONCAT(
+                    'https://stackoverflow.com/questions/',
+                    CAST(id as STRING)) as url,
+                  view_count
+                FROM `bigquery-public-data.stackoverflow.posts_questions`
+                WHERE tags like '%google-bigquery%'
+                ORDER BY view_count DESC
+                LIMIT 10"""
+            )  # Waits for job to complete.
+        
+            for row in results:
+                print("{} : {} views".format(row.url, row.view_count))
+        
+        
+        if __name__ == "__main__":
+            query_stackoverflow()
 
 10. Click **Open Terminal** .
 
 11. In the terminal, run the `  app.py  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     python app.py
     ```
     
@@ -897,7 +891,7 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 1.  In Cloud Shell, create a new Ruby project and file:
     
-    ``` text
+    ``` notranslate
     mkdir bigquery-ruby-quickstart \
         && touch \
         bigquery-ruby-quickstart/app.rb
@@ -907,7 +901,7 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 2.  Open the Cloud Shell Editor:
     
-    ``` text
+    ``` notranslate
     cloudshell workspace bigquery-ruby-quickstart
     ```
 
@@ -915,13 +909,13 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 4.  Open your project directory:
     
-    ``` text
+    ``` notranslate
     cd bigquery-ruby-quickstart
     ```
 
 5.  Install the BigQuery client library for Ruby:
     
-    ``` text
+    ``` notranslate
     gem install google-cloud-bigquery
     ```
     
@@ -939,30 +933,28 @@ You have successfully queried a public dataset with the BigQuery Python client l
 
 9.  To create a query against the `  bigquery-public-data.stackoverflow  ` dataset that returns the top 10 most viewed Stack Overflow pages and their view counts, copy the following code into the `  app.rb  ` file:
     
-    ``` ruby
-    require "google/cloud/bigquery"
-    
-    # This uses Application Default Credentials to authenticate.
-    # @see https://cloud.google.com/bigquery/docs/authentication/getting-started
-    bigquery = Google::Cloud::Bigquery.new
-    
-    sql     = "SELECT " \
-              "CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url, view_count " \
-              "FROM `bigquery-public-data.stackoverflow.posts_questions` " \
-              "WHERE tags like '%google-bigquery%' " \
-              "ORDER BY view_count DESC LIMIT 10"
-    results = bigquery.query sql
-    
-    results.each do |row|
-      puts "#{row[:url]}: #{row[:view_count]} views"
-    end
-    ```
+        require "google/cloud/bigquery"
+        
+        # This uses Application Default Credentials to authenticate.
+        # @see https://cloud.google.com/bigquery/docs/authentication/getting-started
+        bigquery = Google::Cloud::Bigquery.new
+        
+        sql     = "SELECT " \
+                  "CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url, view_count " \
+                  "FROM `bigquery-public-data.stackoverflow.posts_questions` " \
+                  "WHERE tags like '%google-bigquery%' " \
+                  "ORDER BY view_count DESC LIMIT 10"
+        results = bigquery.query sql
+        
+        results.each do |row|
+          puts "#{row[:url]}: #{row[:view_count]} views"
+        end
 
 10. Click **Open Terminal** .
 
 11. In the terminal, run the `  app.rb  ` script. If you are prompted to authorize Cloud Shell and agree to the terms, click **Authorize** .
     
-    ``` text
+    ``` notranslate
     ruby app.rb
     ```
     
@@ -1002,6 +994,8 @@ If you plan to explore multiple architectures, tutorials, or quickstarts, reusin
 
 In the Google Cloud console, go to the **Manage resources** page.
 
+[Go to Manage resources](https://console.cloud.google.com/iam-admin/projects)
+
 In the project list, select the project that you want to delete, and then click **Delete** .
 
 In the dialog, type the project ID, and then click **Shut down** to delete the project.
@@ -1014,13 +1008,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  BigQueryCsharpDemo  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R BigQueryCsharpDemo
     ```
     
@@ -1030,13 +1024,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-go-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-go-quickstart
     ```
     
@@ -1046,13 +1040,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-java-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-java-quickstart
     ```
     
@@ -1062,13 +1056,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-node-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-node-quickstart
     ```
     
@@ -1078,13 +1072,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-php-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-php-quickstart
     ```
     
@@ -1094,13 +1088,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-python-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-python-quickstart
     ```
     
@@ -1110,13 +1104,13 @@ If you used an existing project, delete the resources that you created:
 
 1.  In Cloud Shell, move up a directory:
     
-    ``` text
+    ``` notranslate
     cd ..
     ```
 
 2.  Delete the `  bigquery-ruby-quickstart  ` folder that you created:
     
-    ``` text
+    ``` notranslate
     rm -R bigquery-ruby-quickstart
     ```
     
@@ -1124,10 +1118,10 @@ If you used an existing project, delete the resources that you created:
 
 ## What's next
 
-  - Learn more about using the [BigQuery client libraries](/bigquery/docs/reference/libraries) .
-  - Learn more about [BigQuery public datasets](/bigquery/public-data) .
-  - Learn how to [load data into BigQuery](/bigquery/docs/loading-data) .
-  - Learn more about [querying data in BigQuery](/bigquery/docs/query-overview) .
-  - Get [updates about BigQuery](/bigquery/docs/release-notes) .
+  - Learn more about using the [BigQuery client libraries](https://docs.cloud.google.com/bigquery/docs/reference/libraries) .
+  - Learn more about [BigQuery public datasets](https://docs.cloud.google.com/bigquery/public-data) .
+  - Learn how to [load data into BigQuery](https://docs.cloud.google.com/bigquery/docs/loading-data) .
+  - Learn more about [querying data in BigQuery](https://docs.cloud.google.com/bigquery/docs/query-overview) .
+  - Get [updates about BigQuery](https://docs.cloud.google.com/bigquery/docs/release-notes) .
   - Learn about [BigQuery pricing](https://cloud.google.com/bigquery/pricing) .
-  - Learn about [BigQuery quotas and limits](/bigquery/quotas) .
+  - Learn about [BigQuery quotas and limits](https://docs.cloud.google.com/bigquery/quotas) .

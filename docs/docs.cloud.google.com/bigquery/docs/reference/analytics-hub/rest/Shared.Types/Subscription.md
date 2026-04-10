@@ -1,10 +1,10 @@
-  - [JSON representation](#SCHEMA_REPRESENTATION)
-  - [LinkedResource](#LinkedResource)
-      - [JSON representation](#LinkedResource.SCHEMA_REPRESENTATION)
-  - [CommercialInfo](#CommercialInfo)
-      - [JSON representation](#CommercialInfo.SCHEMA_REPRESENTATION)
-  - [GoogleCloudMarketplaceInfo](#GoogleCloudMarketplaceInfo)
-      - [JSON representation](#GoogleCloudMarketplaceInfo.SCHEMA_REPRESENTATION)
+  - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#SCHEMA_REPRESENTATION)
+  - [LinkedResource](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#LinkedResource)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#LinkedResource.SCHEMA_REPRESENTATION)
+  - [CommercialInfo](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#CommercialInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#CommercialInfo.SCHEMA_REPRESENTATION)
+  - [GoogleCloudMarketplaceInfo](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#GoogleCloudMarketplaceInfo)
+      - [JSON representation](https://docs.cloud.google.com/bigquery/docs/reference/analytics-hub/rest/Shared.Types/Subscription#GoogleCloudMarketplaceInfo.SCHEMA_REPRESENTATION)
 
 A subscription represents a subscribers' access to a particular set of published data. It contains references to associated listings, data exchanges, and linked datasets.
 
@@ -19,7 +19,7 @@ A subscription represents a subscribers' access to a particular set of published
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;name&quot;: string,
   &quot;creationTime&quot;: string,
   &quot;lastModifyTime&quot;: string,
@@ -175,7 +175,7 @@ Reference to a linked resource tracked by this Subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;listing&quot;: string,
 
   // Union field reference can be only one of the following:
@@ -226,7 +226,7 @@ Commercial info metadata for this subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;cloudMarketplace&quot;: {
     object (GoogleCloudMarketplaceInfo)
   }
@@ -258,7 +258,7 @@ Cloud Marketplace commercial metadata for this subscription.
 </thead>
 <tbody>
 <tr class="odd">
-<td><pre class="text" dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
+<td><pre dir="ltr" data-is-upgraded="" style="border: 0;margin: 0;" translate="no"><code>{
   &quot;order&quot;: string
 }</code></pre></td>
 </tr>
